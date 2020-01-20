@@ -181,6 +181,52 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_Plani_HistorialDeduccionesTableAdapter" GeneratorDataComponentClassName="V_Plani_HistorialDeduccionesTableAdapter" Name="V_Plani_HistorialDeducciones" UserDataComponentName="V_Plani_HistorialDeduccionesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT emp_Id, hipa_IdHistorialDePago, hidp_IdHistorialdeDeduPago, hipa_TotalISR, hipa_AFP, cde_DescripcionDeduccion, hidp_Total, cpla_IdPlanilla, hipa_FechaPago, TotalDeducciones FROM Plani.V_Plani_HistorialDeducciones</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
+              <Mapping SourceColumn="hipa_IdHistorialDePago" DataSetColumn="hipa_IdHistorialDePago" />
+              <Mapping SourceColumn="hidp_IdHistorialdeDeduPago" DataSetColumn="hidp_IdHistorialdeDeduPago" />
+              <Mapping SourceColumn="hipa_TotalISR" DataSetColumn="hipa_TotalISR" />
+              <Mapping SourceColumn="hipa_AFP" DataSetColumn="hipa_AFP" />
+              <Mapping SourceColumn="cde_DescripcionDeduccion" DataSetColumn="cde_DescripcionDeduccion" />
+              <Mapping SourceColumn="hidp_Total" DataSetColumn="hidp_Total" />
+              <Mapping SourceColumn="cpla_IdPlanilla" DataSetColumn="cpla_IdPlanilla" />
+              <Mapping SourceColumn="hipa_FechaPago" DataSetColumn="hipa_FechaPago" />
+              <Mapping SourceColumn="TotalDeducciones" DataSetColumn="TotalDeducciones" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_Plani_HistorialIngresoTableAdapter" GeneratorDataComponentClassName="V_Plani_HistorialIngresoTableAdapter" Name="V_Plani_HistorialIngreso" UserDataComponentName="V_Plani_HistorialIngresoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_Plani_HistorialIngreso" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT emp_Id, hipa_IdHistorialDePago, cin_DescripcionIngreso, hip_TotalPagar, hipa_FechaPago, cpla_IdPlanilla FROM Plani.V_Plani_HistorialIngreso</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
+              <Mapping SourceColumn="hipa_IdHistorialDePago" DataSetColumn="hipa_IdHistorialDePago" />
+              <Mapping SourceColumn="cin_DescripcionIngreso" DataSetColumn="cin_DescripcionIngreso" />
+              <Mapping SourceColumn="hip_TotalPagar" DataSetColumn="hip_TotalPagar" />
+              <Mapping SourceColumn="hipa_FechaPago" DataSetColumn="hipa_FechaPago" />
+              <Mapping SourceColumn="cpla_IdPlanilla" DataSetColumn="cpla_IdPlanilla" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -189,7 +235,7 @@
   <xs:element name="ReportesPlanillaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportesPlanillaDS" msprop:Generator_UserDSName="ReportesPlanillaDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="V_Deducciones_RPT" msprop:Generator_TableClassName="V_Deducciones_RPTDataTable" msprop:Generator_TableVarName="tableV_Deducciones_RPT" msprop:Generator_TablePropName="V_Deducciones_RPT" msprop:Generator_RowDeletingName="V_Deducciones_RPTRowDeleting" msprop:Generator_RowChangingName="V_Deducciones_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_Deducciones_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Deducciones_RPTRowDeleted" msprop:Generator_UserTableName="V_Deducciones_RPT" msprop:Generator_RowChangedName="V_Deducciones_RPTRowChanged" msprop:Generator_RowEvArgName="V_Deducciones_RPTRowChangeEvent" msprop:Generator_RowClassName="V_Deducciones_RPTRow">
+        <xs:element name="V_Deducciones_RPT" msprop:Generator_TableClassName="V_Deducciones_RPTDataTable" msprop:Generator_TableVarName="tableV_Deducciones_RPT" msprop:Generator_RowChangedName="V_Deducciones_RPTRowChanged" msprop:Generator_TablePropName="V_Deducciones_RPT" msprop:Generator_RowDeletingName="V_Deducciones_RPTRowDeleting" msprop:Generator_RowChangingName="V_Deducciones_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_Deducciones_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Deducciones_RPTRowDeleted" msprop:Generator_RowClassName="V_Deducciones_RPTRow" msprop:Generator_UserTableName="V_Deducciones_RPT" msprop:Generator_RowEvArgName="V_Deducciones_RPTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
@@ -230,7 +276,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_Ingresos_RPT" msprop:Generator_TableClassName="V_Ingresos_RPTDataTable" msprop:Generator_TableVarName="tableV_Ingresos_RPT" msprop:Generator_TablePropName="V_Ingresos_RPT" msprop:Generator_RowDeletingName="V_Ingresos_RPTRowDeleting" msprop:Generator_RowChangingName="V_Ingresos_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_Ingresos_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Ingresos_RPTRowDeleted" msprop:Generator_UserTableName="V_Ingresos_RPT" msprop:Generator_RowChangedName="V_Ingresos_RPTRowChanged" msprop:Generator_RowEvArgName="V_Ingresos_RPTRowChangeEvent" msprop:Generator_RowClassName="V_Ingresos_RPTRow">
+        <xs:element name="V_Ingresos_RPT" msprop:Generator_TableClassName="V_Ingresos_RPTDataTable" msprop:Generator_TableVarName="tableV_Ingresos_RPT" msprop:Generator_RowChangedName="V_Ingresos_RPTRowChanged" msprop:Generator_TablePropName="V_Ingresos_RPT" msprop:Generator_RowDeletingName="V_Ingresos_RPTRowDeleting" msprop:Generator_RowChangingName="V_Ingresos_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_Ingresos_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Ingresos_RPTRowDeleted" msprop:Generator_RowClassName="V_Ingresos_RPTRow" msprop:Generator_UserTableName="V_Ingresos_RPT" msprop:Generator_RowEvArgName="V_Ingresos_RPTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
@@ -271,7 +317,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_ReportesVarios" msprop:Generator_TableClassName="V_ReportesVariosDataTable" msprop:Generator_TableVarName="tableV_ReportesVarios" msprop:Generator_TablePropName="V_ReportesVarios" msprop:Generator_RowDeletingName="V_ReportesVariosRowDeleting" msprop:Generator_RowChangingName="V_ReportesVariosRowChanging" msprop:Generator_RowEvHandlerName="V_ReportesVariosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_ReportesVariosRowDeleted" msprop:Generator_UserTableName="V_ReportesVarios" msprop:Generator_RowChangedName="V_ReportesVariosRowChanged" msprop:Generator_RowEvArgName="V_ReportesVariosRowChangeEvent" msprop:Generator_RowClassName="V_ReportesVariosRow">
+        <xs:element name="V_ReportesVarios" msprop:Generator_TableClassName="V_ReportesVariosDataTable" msprop:Generator_TableVarName="tableV_ReportesVarios" msprop:Generator_RowChangedName="V_ReportesVariosRowChanged" msprop:Generator_TablePropName="V_ReportesVarios" msprop:Generator_RowDeletingName="V_ReportesVariosRowDeleting" msprop:Generator_RowChangingName="V_ReportesVariosRowChanging" msprop:Generator_RowEvHandlerName="V_ReportesVariosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_ReportesVariosRowDeleted" msprop:Generator_RowClassName="V_ReportesVariosRow" msprop:Generator_UserTableName="V_ReportesVarios" msprop:Generator_RowEvArgName="V_ReportesVariosRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="per_Id" msprop:Generator_ColumnVarNameInTable="columnper_Id" msprop:Generator_ColumnPropNameInRow="per_Id" msprop:Generator_ColumnPropNameInTable="per_IdColumn" msprop:Generator_UserColumnName="per_Id" type="xs:int" />
@@ -331,7 +377,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_DecimoTercerMes_RPT" msprop:Generator_TableClassName="V_DecimoTercerMes_RPTDataTable" msprop:Generator_TableVarName="tableV_DecimoTercerMes_RPT" msprop:Generator_RowChangedName="V_DecimoTercerMes_RPTRowChanged" msprop:Generator_TablePropName="V_DecimoTercerMes_RPT" msprop:Generator_RowDeletingName="V_DecimoTercerMes_RPTRowDeleting" msprop:Generator_RowChangingName="V_DecimoTercerMes_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_DecimoTercerMes_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_DecimoTercerMes_RPTRowDeleted" msprop:Generator_RowClassName="V_DecimoTercerMes_RPTRow" msprop:Generator_UserTableName="V_DecimoTercerMes_RPT" msprop:Generator_RowEvArgName="V_DecimoTercerMes_RPTRowChangeEvent">
+        <xs:element name="V_DecimoTercerMes_RPT" msprop:Generator_TableClassName="V_DecimoTercerMes_RPTDataTable" msprop:Generator_TableVarName="tableV_DecimoTercerMes_RPT" msprop:Generator_TablePropName="V_DecimoTercerMes_RPT" msprop:Generator_RowDeletingName="V_DecimoTercerMes_RPTRowDeleting" msprop:Generator_RowChangingName="V_DecimoTercerMes_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_DecimoTercerMes_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_DecimoTercerMes_RPTRowDeleted" msprop:Generator_UserTableName="V_DecimoTercerMes_RPT" msprop:Generator_RowChangedName="V_DecimoTercerMes_RPTRowChanged" msprop:Generator_RowEvArgName="V_DecimoTercerMes_RPTRowChangeEvent" msprop:Generator_RowClassName="V_DecimoTercerMes_RPTRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="dtm_IdDecimoTercerMes" msprop:Generator_ColumnVarNameInTable="columndtm_IdDecimoTercerMes" msprop:Generator_ColumnPropNameInRow="dtm_IdDecimoTercerMes" msprop:Generator_ColumnPropNameInTable="dtm_IdDecimoTercerMesColumn" msprop:Generator_UserColumnName="dtm_IdDecimoTercerMes" type="xs:int" />
@@ -377,7 +423,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_DecimoCuartoMes_RPT" msprop:Generator_TableClassName="V_DecimoCuartoMes_RPTDataTable" msprop:Generator_TableVarName="tableV_DecimoCuartoMes_RPT" msprop:Generator_RowChangedName="V_DecimoCuartoMes_RPTRowChanged" msprop:Generator_TablePropName="V_DecimoCuartoMes_RPT" msprop:Generator_RowDeletingName="V_DecimoCuartoMes_RPTRowDeleting" msprop:Generator_RowChangingName="V_DecimoCuartoMes_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_DecimoCuartoMes_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_DecimoCuartoMes_RPTRowDeleted" msprop:Generator_RowClassName="V_DecimoCuartoMes_RPTRow" msprop:Generator_UserTableName="V_DecimoCuartoMes_RPT" msprop:Generator_RowEvArgName="V_DecimoCuartoMes_RPTRowChangeEvent">
+        <xs:element name="V_DecimoCuartoMes_RPT" msprop:Generator_TableClassName="V_DecimoCuartoMes_RPTDataTable" msprop:Generator_TableVarName="tableV_DecimoCuartoMes_RPT" msprop:Generator_TablePropName="V_DecimoCuartoMes_RPT" msprop:Generator_RowDeletingName="V_DecimoCuartoMes_RPTRowDeleting" msprop:Generator_RowChangingName="V_DecimoCuartoMes_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_DecimoCuartoMes_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_DecimoCuartoMes_RPTRowDeleted" msprop:Generator_UserTableName="V_DecimoCuartoMes_RPT" msprop:Generator_RowChangedName="V_DecimoCuartoMes_RPTRowChanged" msprop:Generator_RowEvArgName="V_DecimoCuartoMes_RPTRowChangeEvent" msprop:Generator_RowClassName="V_DecimoCuartoMes_RPTRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="dcm_IdDecimoCuartoMes" msprop:Generator_ColumnVarNameInTable="columndcm_IdDecimoCuartoMes" msprop:Generator_ColumnPropNameInRow="dcm_IdDecimoCuartoMes" msprop:Generator_ColumnPropNameInTable="dcm_IdDecimoCuartoMesColumn" msprop:Generator_UserColumnName="dcm_IdDecimoCuartoMes" type="xs:int" />
@@ -423,7 +469,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_ReporteInstitucionesFinancieras_RPT" msprop:Generator_TableClassName="V_ReporteInstitucionesFinancieras_RPTDataTable" msprop:Generator_TableVarName="tableV_ReporteInstitucionesFinancieras_RPT" msprop:Generator_TablePropName="V_ReporteInstitucionesFinancieras_RPT" msprop:Generator_RowDeletingName="V_ReporteInstitucionesFinancieras_RPTRowDeleting" msprop:Generator_RowChangingName="V_ReporteInstitucionesFinancieras_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_ReporteInstitucionesFinancieras_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_ReporteInstitucionesFinancieras_RPTRowDeleted" msprop:Generator_UserTableName="V_ReporteInstitucionesFinancieras_RPT" msprop:Generator_RowChangedName="V_ReporteInstitucionesFinancieras_RPTRowChanged" msprop:Generator_RowEvArgName="V_ReporteInstitucionesFinancieras_RPTRowChangeEvent" msprop:Generator_RowClassName="V_ReporteInstitucionesFinancieras_RPTRow">
+        <xs:element name="V_ReporteInstitucionesFinancieras_RPT" msprop:Generator_TableClassName="V_ReporteInstitucionesFinancieras_RPTDataTable" msprop:Generator_TableVarName="tableV_ReporteInstitucionesFinancieras_RPT" msprop:Generator_RowChangedName="V_ReporteInstitucionesFinancieras_RPTRowChanged" msprop:Generator_TablePropName="V_ReporteInstitucionesFinancieras_RPT" msprop:Generator_RowDeletingName="V_ReporteInstitucionesFinancieras_RPTRowDeleting" msprop:Generator_RowChangingName="V_ReporteInstitucionesFinancieras_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_ReporteInstitucionesFinancieras_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_ReporteInstitucionesFinancieras_RPTRowDeleted" msprop:Generator_RowClassName="V_ReporteInstitucionesFinancieras_RPTRow" msprop:Generator_UserTableName="V_ReporteInstitucionesFinancieras_RPT" msprop:Generator_RowEvArgName="V_ReporteInstitucionesFinancieras_RPTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="deif_IdDeduccionInstFinanciera" msprop:Generator_ColumnVarNameInTable="columndeif_IdDeduccionInstFinanciera" msprop:Generator_ColumnPropNameInRow="deif_IdDeduccionInstFinanciera" msprop:Generator_ColumnPropNameInTable="deif_IdDeduccionInstFinancieraColumn" msprop:Generator_UserColumnName="deif_IdDeduccionInstFinanciera" type="xs:int" />
@@ -474,6 +520,46 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="V_Plani_HistorialDeducciones" msprop:Generator_TableClassName="V_Plani_HistorialDeduccionesDataTable" msprop:Generator_TableVarName="tableV_Plani_HistorialDeducciones" msprop:Generator_TablePropName="V_Plani_HistorialDeducciones" msprop:Generator_RowDeletingName="V_Plani_HistorialDeduccionesRowDeleting" msprop:Generator_RowChangingName="V_Plani_HistorialDeduccionesRowChanging" msprop:Generator_RowEvHandlerName="V_Plani_HistorialDeduccionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Plani_HistorialDeduccionesRowDeleted" msprop:Generator_UserTableName="V_Plani_HistorialDeducciones" msprop:Generator_RowChangedName="V_Plani_HistorialDeduccionesRowChanged" msprop:Generator_RowEvArgName="V_Plani_HistorialDeduccionesRowChangeEvent" msprop:Generator_RowClassName="V_Plani_HistorialDeduccionesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
+              <xs:element name="hipa_IdHistorialDePago" msprop:Generator_ColumnVarNameInTable="columnhipa_IdHistorialDePago" msprop:Generator_ColumnPropNameInRow="hipa_IdHistorialDePago" msprop:Generator_ColumnPropNameInTable="hipa_IdHistorialDePagoColumn" msprop:Generator_UserColumnName="hipa_IdHistorialDePago" type="xs:int" />
+              <xs:element name="hidp_IdHistorialdeDeduPago" msprop:Generator_ColumnVarNameInTable="columnhidp_IdHistorialdeDeduPago" msprop:Generator_ColumnPropNameInRow="hidp_IdHistorialdeDeduPago" msprop:Generator_ColumnPropNameInTable="hidp_IdHistorialdeDeduPagoColumn" msprop:Generator_UserColumnName="hidp_IdHistorialdeDeduPago" type="xs:int" />
+              <xs:element name="hipa_TotalISR" msprop:Generator_ColumnVarNameInTable="columnhipa_TotalISR" msprop:Generator_ColumnPropNameInRow="hipa_TotalISR" msprop:Generator_ColumnPropNameInTable="hipa_TotalISRColumn" msprop:Generator_UserColumnName="hipa_TotalISR" type="xs:decimal" />
+              <xs:element name="hipa_AFP" msprop:Generator_ColumnVarNameInTable="columnhipa_AFP" msprop:Generator_ColumnPropNameInRow="hipa_AFP" msprop:Generator_ColumnPropNameInTable="hipa_AFPColumn" msprop:Generator_UserColumnName="hipa_AFP" type="xs:decimal" />
+              <xs:element name="cde_DescripcionDeduccion" msprop:Generator_ColumnVarNameInTable="columncde_DescripcionDeduccion" msprop:Generator_ColumnPropNameInRow="cde_DescripcionDeduccion" msprop:Generator_ColumnPropNameInTable="cde_DescripcionDeduccionColumn" msprop:Generator_UserColumnName="cde_DescripcionDeduccion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="hidp_Total" msprop:Generator_ColumnVarNameInTable="columnhidp_Total" msprop:Generator_ColumnPropNameInRow="hidp_Total" msprop:Generator_ColumnPropNameInTable="hidp_TotalColumn" msprop:Generator_UserColumnName="hidp_Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cpla_IdPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_IdPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_IdPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_IdPlanillaColumn" msprop:Generator_UserColumnName="cpla_IdPlanilla" type="xs:int" />
+              <xs:element name="hipa_FechaPago" msprop:Generator_ColumnVarNameInTable="columnhipa_FechaPago" msprop:Generator_ColumnPropNameInRow="hipa_FechaPago" msprop:Generator_ColumnPropNameInTable="hipa_FechaPagoColumn" msprop:Generator_UserColumnName="hipa_FechaPago" type="xs:dateTime" />
+              <xs:element name="TotalDeducciones" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalDeducciones" msprop:Generator_ColumnPropNameInRow="TotalDeducciones" msprop:Generator_ColumnPropNameInTable="TotalDeduccionesColumn" msprop:Generator_UserColumnName="TotalDeducciones" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="V_Plani_HistorialIngreso" msprop:Generator_TableClassName="V_Plani_HistorialIngresoDataTable" msprop:Generator_TableVarName="tableV_Plani_HistorialIngreso" msprop:Generator_TablePropName="V_Plani_HistorialIngreso" msprop:Generator_RowDeletingName="V_Plani_HistorialIngresoRowDeleting" msprop:Generator_RowChangingName="V_Plani_HistorialIngresoRowChanging" msprop:Generator_RowEvHandlerName="V_Plani_HistorialIngresoRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Plani_HistorialIngresoRowDeleted" msprop:Generator_UserTableName="V_Plani_HistorialIngreso" msprop:Generator_RowChangedName="V_Plani_HistorialIngresoRowChanged" msprop:Generator_RowEvArgName="V_Plani_HistorialIngresoRowChangeEvent" msprop:Generator_RowClassName="V_Plani_HistorialIngresoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
+              <xs:element name="hipa_IdHistorialDePago" msprop:Generator_ColumnVarNameInTable="columnhipa_IdHistorialDePago" msprop:Generator_ColumnPropNameInRow="hipa_IdHistorialDePago" msprop:Generator_ColumnPropNameInTable="hipa_IdHistorialDePagoColumn" msprop:Generator_UserColumnName="hipa_IdHistorialDePago" type="xs:int" />
+              <xs:element name="cin_DescripcionIngreso" msprop:Generator_ColumnVarNameInTable="columncin_DescripcionIngreso" msprop:Generator_ColumnPropNameInRow="cin_DescripcionIngreso" msprop:Generator_ColumnPropNameInTable="cin_DescripcionIngresoColumn" msprop:Generator_UserColumnName="cin_DescripcionIngreso">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="hip_TotalPagar" msprop:Generator_ColumnVarNameInTable="columnhip_TotalPagar" msprop:Generator_ColumnPropNameInRow="hip_TotalPagar" msprop:Generator_ColumnPropNameInTable="hip_TotalPagarColumn" msprop:Generator_UserColumnName="hip_TotalPagar" type="xs:decimal" minOccurs="0" />
+              <xs:element name="hipa_FechaPago" msprop:Generator_ColumnVarNameInTable="columnhipa_FechaPago" msprop:Generator_ColumnPropNameInRow="hipa_FechaPago" msprop:Generator_ColumnPropNameInTable="hipa_FechaPagoColumn" msprop:Generator_UserColumnName="hipa_FechaPago" type="xs:dateTime" />
+              <xs:element name="cpla_IdPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_IdPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_IdPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_IdPlanillaColumn" msprop:Generator_UserColumnName="cpla_IdPlanilla" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
