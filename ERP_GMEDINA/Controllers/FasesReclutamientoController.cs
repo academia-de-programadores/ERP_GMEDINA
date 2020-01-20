@@ -55,6 +55,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbFasesReclutamiento.fare_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {

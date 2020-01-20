@@ -45,7 +45,7 @@ namespace ERP_GMEDINA.Controllers
                             per_FechaCrea = p.per_FechaCrea,
                             per_FechaModifica = p.per_FechaModifica,
                             per_UsuarioCrea = p.tbUsuario.usu_NombreUsuario,
-                            per_UsuarioModifica = p.tbUsuario.usu_NombreUsuario
+                            per_UsuarioModifica = p.tbUsuario1.usu_NombreUsuario
                         })
                         .Where(x => x.per_Id == id).ToList();
                     return Json(tbPersonas, JsonRequestBehavior.AllowGet);
