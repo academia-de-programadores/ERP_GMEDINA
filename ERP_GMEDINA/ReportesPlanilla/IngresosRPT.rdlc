@@ -647,7 +647,6 @@
                         <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -680,7 +679,6 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
-        <Top>1.18225cm</Top>
         <Left>0.43391cm</Left>
         <Height>1.2cm</Height>
         <Width>24.9678cm</Width>
@@ -691,7 +689,7 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>3.06093cm</Top>
+        <Top>4.39839cm</Top>
         <Left>0.43391cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
@@ -726,7 +724,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>3.23732cm</Top>
+        <Top>4.57478cm</Top>
         <Left>3.7101cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
@@ -742,7 +740,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.51076in</Height>
+    <Height>2.03732in</Height>
     <Style />
   </Body>
   <Width>10.01109in</Width>
@@ -781,8 +779,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>3.69662cm</Top>
-          <Left>0.00955cm</Left>
+          <Top>3.52023cm</Top>
+          <Left>0.03601cm</Left>
           <Height>0.6cm</Height>
           <Width>25.39216cm</Width>
           <Style>
@@ -815,8 +813,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
-          <Top>2.99079cm</Top>
-          <Left>0.00955cm</Left>
+          <Top>2.8144cm</Top>
+          <Left>0.03601cm</Left>
           <Height>0.6cm</Height>
           <Width>25.39216cm</Width>
           <ZIndex>1</ZIndex>
@@ -835,7 +833,7 @@
           <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.25721cm</Top>
-          <Left>23.25274cm</Left>
+          <Left>21.57732cm</Left>
           <Height>1.92246cm</Height>
           <Width>1.93834cm</Width>
           <ZIndex>2</ZIndex>
@@ -933,6 +931,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>0cm</Top>
           <Left>17.89961cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>

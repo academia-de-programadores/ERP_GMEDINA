@@ -1856,6 +1856,7 @@
     <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasParametros.cshtml" />
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
