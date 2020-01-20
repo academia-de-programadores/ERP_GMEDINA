@@ -13,7 +13,7 @@
           </div>
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateInstFin" }))
         {
           <div class="ibox-content">
             @Html.AntiForgeryToken()
@@ -27,8 +27,8 @@
                               <label class="" id="AsteriscoDescripcion">*</label>
                           </div>
                           <div class="col-md-8">
-                              @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger" })
+                              @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control", @id = "insf_DescInstitucionFinanc" } })
+                              @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "validacionDescripcion" })
                           </div>
                       </div>
                   
@@ -38,8 +38,8 @@
                           <label class="" id="AsteriscoContacto">*</label>
                       </div>   
                           <div class="col-md-8">
-                              @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger" })
+                              @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", @id = "insf_Contacto" } })
+                              @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "validacionContacto" })
                           </div>
                       </div>
 
@@ -50,7 +50,7 @@
                       </div>
                           <div class="col-md-8">
                               @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "phone", @id = "phone" } })
-                              @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger" })
+                              @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validacionTelefono" })
 
                           </div>
                       </div>
@@ -61,14 +61,14 @@
                           <label class="" id="AsteriscoCorreo">*</label>
                       </div>
                           <div class="col-md-8">
-                              @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control" }, @type = "email" })
-                              @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" })
+                              @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control" }, @type = "email", @id = "insf_Correo" })
+                              @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "validacionCorreo" })
                           </div>
                       </div>
 
                   <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                      <input type="submit" value="Guardar" class="btn btn-primary" />
+                      <input type="submit" value="Guardar" id="btnAgregarInstFin" class="btn btn-primary" />
       	            @Html.ActionLink("Cancelar", "Index", null, new { @class="btn btn-default"})
                     </div>
                   </div>
