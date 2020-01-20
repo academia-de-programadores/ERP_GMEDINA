@@ -34,8 +34,8 @@ function tablaDetalles(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetallesAX").find("#hper_Observacion")["0"].innerText = o;
                 $("#ModalDetallesAX").find("#hper_FechaCrea")["0"].innerText = FechaFormato(obj.hper_FechaCrea);
-                $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio);
-                $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin);
+                $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio).substring(0, 10);
+                $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin).substring(0, 10);
                 $("#ModalDetallesAX").find("#hper_Duracion")["0"].innerText = obj.hper_Duracion;
 
 
@@ -217,10 +217,13 @@ function format(obj) {
     : index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
         div = div
+                    + '<div class="col-md-5"><b>ID: </b>' + index.hper_Id + '</div>'
+
         + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
+
         + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
-        + '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
-        + '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
+        //+ '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
+        //+ '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
         + '<div class="col-md-5"><b>Estado civil: </b>' + EstadoCivil + '</div>'
         + '<div class="col-md-5"><b>Teléfono: </b>' + index.per_Telefono + '</div>'
         + '</div>' +
