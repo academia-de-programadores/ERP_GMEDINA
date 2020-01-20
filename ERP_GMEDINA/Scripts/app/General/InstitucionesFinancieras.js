@@ -90,41 +90,41 @@ function Validacion(
 
     // Descripción Institución Financiera
     if (DescripInstFin.val() != '') {
-        AsteriscoDescripcion.removeClass('text-danger');
-        validacionDescripcion.hide();
+        AsteriscDescrip.removeClass('text-danger');
+        validaDescripcion.hide();
     } else {
-        AsteriscoDescripcion.addClass('text-danger');
-        validacionDescripcion.show();
+        AsteriscDescrip.addClass('text-danger');
+        validaDescripcion.show();
         todoBien = false;
     }
 
     // Contacto
     if (Contact.val() != '') {
-        AsteriscoContacto.removeClass('text-danger');
-        validacionContacto.hide();
+        AsteriscContact.removeClass('text-danger');
+        validaContacto.hide();
     } else {
-        AsteriscoContacto.addClass('text-danger');
-        validacionContacto.show();
+        AsteriscContact.addClass('text-danger');
+        validaContacto.show();
         todoBien = false;
     }
 
     // Telefono
     if (Tel.val() != '') {
-        validacionTelefono.hide();
-        AsteriscoTelefono.removeClass('text-danger');
+        validaTelefono.hide();
+        AsteriscTel.removeClass('text-danger');
     } else {
-        AsteriscoTelefono.addClass('text-danger');
-        validacionTelefono.show();
+        AsteriscTel.addClass('text-danger');
+        validaTelefono.show();
         todoBien = false;
     }
 
     // Correo
     if (Cor.val() != '') {
-        AsteriscoCorreo.removeClass('text-danger');
-        validacionCorreo.hide();
+        AsteriscCorre.removeClass('text-danger');
+        validaCorreo.hide();
     } else {
-        AsteriscoCorreo.addClass('text-danger');
-        validacionCorreo.show();
+        AsteriscCorre.addClass('text-danger');
+        validaCorreo.show();
         todoBien = false;
     }
     return todoBien;
@@ -252,18 +252,108 @@ $('#btnCargarPlanilla').click(function ()
 });
 
 
+//Crear Institución Financiera ya validado
+$(btnAgregar).click(function () {
+    console.clear();
+    if (validaciones(
+    DescripInstFin,
+    Contact,
+    Tel,
+    Cor
+    )) {
+        console.log('Paso las validaciones');
 
-$(document).on("click", "#btnModalActualizarINFS", function () {
-    //  activarID = $(this).data('id');
-    $("#frmActualizarINFS").modal();
+        var data = $("#frmCreateInstFin").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/InstitucionesFinancieras/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+                document.getElementById("btnAgregarInstFin").disabled = true;
+                window.location.href = '/InstitucionesFinancieras/Index';
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+        });
+
+    }
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmCreateInstFin").submit(function (e) {
+        return false;
+    });
+    document.getElementById("btnAgregarInstFin").disabled = false;
+});
 
 
+
+//Editar Institución Financiera ya validado
+$(btnEditarConfirmar).click(function () {
+
+    if (validaciones(
+    DescripInstFin,
+    Contact,
+    Tel,
+    Cor
+    )) {
+        console.log('Paso las validaciones');
+        $("#frmActualizarINFS").modal();
+       }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmEditInstFin").submit(function (e) {
         return false;
     });
+
 });
+
+$(btnEditar).click(function () {
+
+    var data = $("#frmEditInstFin").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/InstitucionesFinancieras/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+                document.getElementById("btnEditarInstFin").disabled = true;
+                window.location.href = '/InstitucionesFinancieras/Index';
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+        });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+        $("#frmEditInstFin").submit(function (e) {
+            return false;
+        });
+        document.getElementById("btnEditarInstFin").disabled = false;
+});
+
 
 
 

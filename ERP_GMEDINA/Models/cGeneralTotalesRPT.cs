@@ -17,14 +17,14 @@ namespace ERP_GMEDINA.Models
     {
 
         [Display(Name = "Fecha Pago")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
         public System.DateTime hipa_FechaPago { get; set; }
 
         [Display(Name = "Codigo Planilla")]
         public int cpla_IdPlanilla { get; set; }
 
         [Display(Name = "Tipo Planilla")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
         public string cpla_DescripcionPlanilla { get; set; }
 
         [Display(Name = "Total ISR")]
