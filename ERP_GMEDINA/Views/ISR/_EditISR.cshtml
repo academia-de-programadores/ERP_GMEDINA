@@ -1,9 +1,8 @@
 ﻿@model ERP_GMEDINA.Models.tbISR
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditISR" }))
 {
+    @Html.AntiForgeryToken()
     <div class="modal-body" id="Editar">
-        @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             @Html.HiddenFor(model => model.isr_Id)
@@ -13,44 +12,47 @@
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="RangoInicialIAsterisco">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @type = "number", @class = "form-control rangoInicial", @min = 0, @step = 0.01 } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "El campo rango inicial es requerido", new { @class = "text-danger messageValidation", @id = "VRangoInicial" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="RangoFinalAsterisco">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @type = "number", @class = "form-control", @min = 0, @step = 0.01 } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "El campo rango final es requerido", new { @class = "text-danger messageValidation", @id = "Validation_RangoFinalEdit" })
+
+                    <span class="text-danger messageValidation" id="validar_rangoMontosEdit">El rango final no puede ser menor o igual que el rango inicial</span>
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="Asteriscotde_IdTipoDeduISREdit">*</label>
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "El campo tipo de deducción es requerido", new { @class = "text-danger messageValidation", @id = "Validation_tde_IdTipoDeduEdit" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="PorcentajeAsterisco">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 100, @step = 0.01 } })
+                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "El campo porcentaje es requerido", new { @class = "text-danger messageValidation", @id = "Validation_PorcentajeEdit" })
+                    <span class="text-danger messageValidation" id="vPorcentaje">El porcentaje no puede ser mayor que 100</span>
                 </div>
             </div>
         </div>

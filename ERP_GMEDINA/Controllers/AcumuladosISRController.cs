@@ -113,10 +113,10 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Edit(int? id)
+        public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbAcumuladosISR tbAcumuladosISRJSON = db.tbAcumuladosISR.Find(id);
+            tbAcumuladosISR tbAcumuladosISRJSON = db.tbAcumuladosISR.Find(ID);
             return Json(tbAcumuladosISRJSON, JsonRequestBehavior.AllowGet);
         }
 

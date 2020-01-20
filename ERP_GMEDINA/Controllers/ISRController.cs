@@ -45,6 +45,7 @@ namespace ERP_GMEDINA.Controllers
                                 tbISR.isr_RangoFinal,
                                 tbISR.isr_Porcentaje,
                                 tbISR.tde_IdTipoDedu,
+                                tde_Descripcion =  tbISR.tbTipoDeduccion.tde_Descripcion,
 
                                 tbISR.isr_UsuarioCrea,
                                 UsuCrea = tbISR.tbUsuario.usu_NombreUsuario,
