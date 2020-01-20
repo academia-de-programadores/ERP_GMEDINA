@@ -89,7 +89,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="IconCerrarEdit"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Editar acumulado ISR</h4>
             </div>            
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -97,12 +96,32 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="EditarAISRConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="ConfirmacionEditar">
+                ¿Esta seguro que desea Editar este registro?
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnUpdateAISR2" value="Si" class="btn btn-primary " />
+                <div style="display:none" class="btn" id="cargandoEditar">
+                </div>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @* MODAL DE CREACIÓN *@
 <div class="modal fade" id="AgregarAcumuladosISR" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="IconCerrarCrear"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Crear acumulado ISR</h4>
             </div>           
                 @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbAcumuladosISR())           

@@ -10,10 +10,10 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 @Html.LabelFor(model => model.adsu_IdAdelantoSueldo, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 @Html.EditorFor(model => model.adsu_IdAdelantoSueldo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                             </div>
                         </div>
@@ -21,20 +21,20 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label><label class="" id="AsteriscoColaborador" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <select id="emp_Id" name="emp_Id" class="form-control"></select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 @Html.LabelFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })<label class="" id="RazonAsterisco" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off" } })
                                 <span class="field-validation-valid text-danger" style="display: none" id="adsu_RazonAdelantoValidacion">Campo Razón requerido</span>
                             </div>
@@ -42,10 +42,10 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 @Html.LabelFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })<label class="" id="MontoAsterisco" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number", @autocomplete = "off" } })
                                 <span class="field-validation-valid text-danger" style="display: none" id="adsu_MontoValidacion">Campo Monto requerido</span>
                                 <span class="field-validation-valid text-danger" style="display: none" id="adsu_MontoValidacion2">El campo Monto debe ser mayor que cero</span>

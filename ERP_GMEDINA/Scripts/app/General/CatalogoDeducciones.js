@@ -401,7 +401,7 @@ $("#btnUpdateDeduccion2").click(function () {
         })
         .done(function (data) {
             if (data != "error") {
-                
+                debugger;
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridDeducciones();
 
@@ -420,8 +420,6 @@ $("#btnUpdateDeduccion2").click(function () {
                     title: 'Error',
                     message: 'No se editó el registro, contacte al administrador',
                 });
-                $("#Editar #Validation_descipcion2").css("display", "");
-                $("#Editar #Validation_descipcion3").css("display", "");
                 $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
             }
         });

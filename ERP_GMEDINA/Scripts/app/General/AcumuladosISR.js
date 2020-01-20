@@ -52,7 +52,7 @@ function cargarGridAcumuladosISR() {
                 var estadoRegistro = ListaAcumuladosISR[i].aisr_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' : '';
+                var botonDetalles = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' : '';
 
                 //variable boton editar
                 var botonEditar = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' : '';
@@ -64,7 +64,7 @@ function cargarGridAcumuladosISR() {
                 $('#tblAcumuladosISR').dataTable().fnAddData([
                     ListaAcumuladosISR[i].aisr_Id,
                     ListaAcumuladosISR[i].aisr_Descripcion,
-                    ListaAcumuladosISR[i].aisr_Monto,
+                    (ListaAcumuladosISR[i].aisr_Monto % 1 == 0) ? ListaAcumuladosISR[i].aisr_Monto + ".00" : ListaAcumuladosISR[i].aisr_Monto,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
@@ -77,16 +77,7 @@ function cargarGridAcumuladosISR() {
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $('#Crear input[type=text], input[type=number]').val('');
-    $("#AgregarAcumuladosISR").modal();
-});
-
-//BOTON ICONCERRAR AGREGAR
-$("#IconCerrarCrear").click(function () {
-    $("#Crear #Validation_descripcion").css("display", "none");
-    $("#Crear #Validation_descripcion2").css("display", "none");
-    $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
-    $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
-
+    $("#AgregarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
 });
 
 //BOTON CERRAR AGREGAR
@@ -105,25 +96,25 @@ $('#btnCreateAcumuladosISR').click(function () {
     var ModelState2 = true;
 
     if (aisr_Descripcion == "" || aisr_Descripcion == " " || aisr_Descripcion == null || isNaN(aisr_Descripcion) == false) {
-        $("#Crear #Validation_descripcion").css("display", "");
+        $("#Crear #Validation_descripcion").css("display", "block");
         $("#Crear #AsteriscoDescripcionAISR").addClass("text-danger");
         ModelState = false;
     }
     else {
         $("#Crear #Validation_descripcion").css("display", "none");
         $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
-        ModelState = true;
+        //ModelState = true;
     }
 
-    if (aisr_Monto == "" || aisr_Monto < 0 || aisr_Monto == null || isNaN(aisr_Monto) == false) {
-        $("#Crear #Validation_descripcion2").css("display", "");
+    if (aisr_Monto == "" || parseInt(aisr_Monto) < 0 || aisr_Monto == null) {
+        $("#Crear #Validation_descripcion2").css("display", "block");
         $("#Crear #AsteriscoMontoAISR").addClass("text-danger");
         ModelState2 = false;
     }
     else {
         $("#Crear #Validation_descripcion2").css("display", "none");
         $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
-        ModelState2 = true;
+        //ModelState2 = true;
     }
 
     
@@ -178,15 +169,17 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                debugger;
+                var montoFormato = (data.aisr_Monto % 1 == 0) ? data.aisr_Monto + ".00" : data.aisr_Monto;
                 $("#Editar #aisr_Id").val(data.aisr_Id);
                 $("#Editar #aisr_FechaCrea").val(data.aisr_FechaCrea);
                 $("#Editar #aisr_UsuarioCrea").val(data.aisr_UsuarioCrea);
-
                 $("#Editar #aisr_Descripcion").val(data.aisr_Descripcion);
-                $("#Editar #aisr_Monto").val(data.aisr_Monto);
-                $(".field-validation-error").css('display', 'none');
+                $("#Editar #aisr_Monto").val(montoFormato);
 
-                $("#EditarAcumuladosISR").modal();
+                $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -205,7 +198,7 @@ $("#btnEditarAcumulado").click(function () {
     var ModelStatee = true;
     var ModelState2e = true;
 
-    if (aisr_Descripcione == "" || aisr_Descripcione == " " || aisr_Descripcione == null || isNaN(aisr_Descripcione) == false) {
+    if (aisr_Descripcione == "" || aisr_Descripcione == " " || aisr_Descripcione == null) {
         $("#Editar #validatione1").css("display", "");
         $("#Editar #AsteriscoDescripcionEditAISR").addClass("text-danger");
         ModelStatee = false;
@@ -216,7 +209,7 @@ $("#btnEditarAcumulado").click(function () {
         ModelStatee = true;
     }
 
-    if (aisr_Montoe == "" || aisr_Montoe < 0 || aisr_Montoe == null || isNaN(aisr_Montoe) == false) {
+    if (aisr_Montoe == "" || aisr_Montoe < 0 || aisr_Montoe == null) {
         $("#Editar #validatione2").css("display", "");
         $("#Editar #AsteriscoMontoEditAISR").addClass("text-danger");
         ModelState2e = false;
@@ -227,38 +220,54 @@ $("#btnEditarAcumulado").click(function () {
         ModelState2e = true;
     }
     if (ModelStatee == false || ModelState2e == false) {
-
+        $("#EditarAISRConfirmacion").modal('hide');
     }
-    else
-    {
-        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-        var data = $("#frmEditAcumuladosISR").serializeArray();
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/AcumuladosISR/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se editó el registro, contacte al administrador',
-                });
-            }
-            else {
-                cargarGridAcumuladosISR();
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarAcumuladosISR").modal('hide');
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            }
-        });
+    else {
+        $("#EditarAISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
 });
+
+
+///
+$("#btnUpdateAISR2").click(function () {
+    var data = $("#frmEditAcumuladosISR").serializeArray();
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/AcumuladosISR/Edit",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data != "error") {
+            debugger;
+            cargarGridAcumuladosISR();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#EditarAcumuladosISR").modal('hide');
+            $("#EditarAISRConfirmacion").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se editó de forma exitosa!',
+            });
+        }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se editó el registro, contacte al administrador',
+            });
+            $("#EditarAISRConfirmacion").modal('hide');
+        }
+    });
+}); 
+
+
+///
+
+
+
+
+
 
 //BOTON ICON CERRAR EDITAR
 $("#IconCerrarEdit").click(function () {
@@ -279,7 +288,7 @@ $("#btnCerrarEditar").click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $(document).on("click", "#btnInactivarAcumuladosISR", function () {
     $("#EditarAcumuladosISR").modal('hide');
-    $("#InactivarAcumuladosISR").modal();
+    $("#InactivarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
 });
 
 //Inactivar registro Techos Deducciones    
@@ -340,7 +349,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
                 $("#Detalles #aisr_UsuarioModifica").html(data.aisr_UsuarioModifica);
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#Detalles #aisr_FechaModifica").html(FechaModifica);
-                $("#DetailsAcumuladosISR").modal();
+                $("#DetailsAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
@@ -391,7 +400,7 @@ $(document).ready(function () {
 var activarID = 0;
 $(document).on("click", "#btnActivarAcumuladosISR", function () {
     activarID = $(this).data('id');
-    $("#ActivarAcumuladosISR").modal();
+    $("#ActivarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
 });
 
 //activar ejecutar
@@ -423,6 +432,6 @@ $("#btnActivarAcumuladosISREjecutar").click(function () {
 
 //Modal editar despues de No Inactivar
 $("#btnNoInactivar").click(function () {
-    $("#EditarAcumuladosISR").modal();
+    $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
     $("#InactivarAcumuladosISR").modal('hide');
 });

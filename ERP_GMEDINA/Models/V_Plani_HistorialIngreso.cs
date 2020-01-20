@@ -18,5 +18,7 @@ namespace ERP_GMEDINA.Models
         public int hipa_IdHistorialDePago { get; set; }
         public string cin_DescripcionIngreso { get; set; }
         public Nullable<decimal> hip_TotalPagar { get; set; }
+        public System.DateTime hipa_FechaPago { get; set; }
+        public int cpla_IdPlanilla { get; set; }
     }
 }

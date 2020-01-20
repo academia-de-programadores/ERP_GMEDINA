@@ -83,8 +83,6 @@ $(document).on("click", "#btnAgregarFormaPago", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #fpa_Descripcion").val('');
     $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
     //CAMBIAR EL ASTERISCO A COLOR NEGRO
     $("#AsteriscoFormaPago").removeClass("text-danger");
     //OCULTAR DATAANNOTATIONS
@@ -159,8 +157,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                     $("#Editar #fpa_Descripcion").val(iter.fpa_Descripcion);
                 });
                 $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -180,7 +176,7 @@ $("#btnUpdateFormaPago").click(function () {
     var Descripcion = $("#Editar #fpa_Descripcion").val();
     if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
         $("#EditarFormaPago").modal('hide');
-        $("#ConfirmarEdicion").modal();
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
     }
     else {
         //MOSTRAR EL DATAANNOTATIONS
@@ -193,7 +189,7 @@ $("#btnUpdateFormaPago").click(function () {
 
 //MOSTRAR EL MODAL DE EDICION AL MOMENTO DE CERRAR EL MODAL CON EL BOTON CERRAR
 $("#InactivarFormaPago #IconCerrar").click(function () {
-    $("#EditarFormaPago").modal();
+    $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //GUARADR LA EDICION DEL REGISTRO
@@ -222,7 +218,7 @@ $("#btnConfirmarEditar2").click(function () {
             }
             else {
                 $("#ConfirmarEdicion").modal('hide');
-                $("#EditarFormaPago").modal();
+                $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
@@ -235,7 +231,6 @@ $("#btnConfirmarEditar2").click(function () {
         //MOSTRAR DATAANNOTATION
         DataAnnotations(false);
         //OCULTAR EL SCROLLVIEW
-        $('body').css("overflow", "hidden");
     }
 });
 
@@ -261,7 +256,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
                 data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#fpa_UsuarioModifica").val(data[0].fpa_UsuarioModifica);
                 $("#fpa_FechaModifica").html(FechaModifica);
-                $("#frmDetailFormaPago").modal();
+                $("#frmDetailFormaPago").modal({ backdrop: 'static', keyboard: false });
 
             }
             else {
@@ -279,7 +274,7 @@ $(document).on("click", "#btnCerrarConfirmarEditar", function () {
     //OCULTAR MODAL DE CONFIRMACIÓN DE EDICION
     $("#ConfirmarEdicion").modal('hide');
     //MOSTRAR MODAL DE EDICION
-    $("#EditarFormaPago").modal();
+    $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //
@@ -290,7 +285,7 @@ $(document).on("click", "#btnInactivarFormaPago", function () {
     //OCULTAR MODAL DE EDICION
     $("#EditarFormaPago").modal('hide');
     //MOSTRAR MODAL DE INACTIVACION
-    $("#InactivarFormaPago").modal();
+    $("#InactivarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //OCULTAR EL MODAL DE INACTIVAR
@@ -300,7 +295,7 @@ $(document).on("click", "#btnCerrarInactivar", function () {
     //OCULTAR MODAL DE INACTIVACION
     $("#InactivarFormaPago").modal('hide');
     //MOSTRAR MODAL DE EDICION
-    $("#EditarFormaPago").modal();
+    $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //CONFORMAR INACTIVACION DEL REGISTRO
@@ -340,7 +335,7 @@ var ActivarID = 0;
 //DESPLEGAR EL MODAL DE ACTIVAR
 $(document).on("click", "#btnActivarFormaPago", function () {
     ActivarID = $(this).data('id');
-    $("#ActivarFormaPago").modal();
+    $("#ActivarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //CONFORMAR ACTIVACION DEL REGISTRO
@@ -420,14 +415,14 @@ $("#frmEditFormaPago").submit(function (event) {
 
 //MOSTRAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnmodalInactivarFormaPago", function () {
-    $("#InactivarFormaPago").modal();
+    $("#InactivarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //******************ACTIVAR*******************//
 
 //MOSTRAR EL MODAL DE ACTIVAR
 $(document).on("click", "#btnmodalActivarFormaPago", function () {
-    $("#InactivarFormaPago").modal();
+    $("#InactivarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //BOTON PARA CERRAR EL MODAL DE ACTIVAR

@@ -58,7 +58,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                @Html.LabelFor(model => model.cc_Pagado, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                @Html.LabelFor(model => model.cc_Pagado, htmlAttributes: new { @class = "control-label col-md-2" } )
             </div>
             <div class="col-md-6">
                 <span id="cc_Pagado">@Html.DisplayFor(model => model.cc_Pagado, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
