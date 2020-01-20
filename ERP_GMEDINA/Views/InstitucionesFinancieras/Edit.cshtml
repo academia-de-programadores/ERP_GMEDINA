@@ -21,34 +21,46 @@
                     @Html.HiddenFor(model => model.insf_IdInstitucionFinanciera)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label" })
+                            <label class="" id="AsteriscDescrip">*</label>
+                        </div>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "validaDescripcion" })
                         </div>
-                    </div>
+                        </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label" })
+                            <label class="" id="AsteriscContact">*</label>
+                        </div>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "validaContacto" })
                         </div>
-                    </div>
+                        </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label" })
+                            <label class="" id="AsteriscTel">*</label>
+                        </div>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @max = "999999999999999", @name = "phone", @id = "phone" } })
-                            @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validaTelefono" })
                         </div>
-                    </div>
+                        </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label" })
+                            <label class="" id="AsteriscCorre">*</label>
+                        </div>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
-                            @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "validaCorreo" })
                         </div>
                     </div>
 
