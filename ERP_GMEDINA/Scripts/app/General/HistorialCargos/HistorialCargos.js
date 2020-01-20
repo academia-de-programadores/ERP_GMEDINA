@@ -11,10 +11,12 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.hcar_Id,
+                   "Número": value.hcar_Id,
                    Encargado: value.Encargado,
                    Anterior: value.car_Anterior,
                    Nuevo: value.car_Nuevo,
-                   Fecha: FechaFormato(value.hcar_Fecha).substring(0,10)
+                   Fecha: FechaFormato(value.hcar_Fecha).substring(0, 10)
+                   //Estado: value.hcar_Estado ? "Activo" : "Inactivo"
                });
            });
            tabla.draw();
