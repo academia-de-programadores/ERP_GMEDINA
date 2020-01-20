@@ -1961,6 +1961,7 @@
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\ISR.js" />
     <Content Include="Scripts\app\General\ISRRPT.js" />
+    <Content Include="Scripts\app\General\Jornadas\Admin.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
