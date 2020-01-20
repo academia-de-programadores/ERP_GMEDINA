@@ -23,5 +23,10 @@ namespace ERP_GMEDINA.Controllers
         {
             return View();
         }
+
+        public ActionResult ErrorConnectionDB()
+        {
+            return View();
+        }
     }
 }

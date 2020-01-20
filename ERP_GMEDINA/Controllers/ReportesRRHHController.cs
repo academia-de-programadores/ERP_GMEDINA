@@ -23,13 +23,20 @@ namespace ERP_GMEDINA.Controllers
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-
-            ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true), "ticn_Id", "ticn_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true), "ticn_Id", "ticn_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult HistorialIncapacidadesRPT(int? ticn_Id, DateTime? FechaInicio, DateTime? FechaFin)
         {
+
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
             reportViewer.SizeToReportContent = false;
@@ -97,32 +104,44 @@ namespace ERP_GMEDINA.Controllers
             }
 
 
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialIncapacidad.TableName);
 
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialIncapacidad.TableName);
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialIncapacidades.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialIncapacidad"]));
+                conx.Close();
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialIncapacidades.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialIncapacidad"]));
-            conx.Close();
+                ViewBag.ReportViewer = reportViewer;
+                //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
 
-            ViewBag.ReportViewer = reportViewer;
-            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
-
-            ViewBag.Titulos = db.tbTipoIncapacidades.Where(x => x.ticn_Id == ticn_Id).Select(x => x.ticn_Descripcion).FirstOrDefault();
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true), "ticn_Id", "ticn_Descripcion");
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            return View();
+                ViewBag.Titulos = db.tbTipoIncapacidades.Where(x => x.ticn_Id == ticn_Id).Select(x => x.ticn_Descripcion).FirstOrDefault();
+                //Cargar DDL del modal (Tipo de planilla a seleccionar)
+                ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true), "ticn_Id", "ticn_Descripcion");
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult HorasTrabajadas()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-
-            ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult HorasTrabajadas(int? tiho_Id, DateTime? Fecha, DateTime? FechaFin)
@@ -193,36 +212,61 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
 
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HorasTrabajadas.TableName);
 
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HorasTrabajadas.TableName);
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HorasTrabajadas.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HorasTrabajadas"]));
+                conx.Close();
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HorasTrabajadas.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HorasTrabajadas"]));
-            conx.Close();
+                ViewBag.ReportViewer = reportViewer;
+                //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
 
-            ViewBag.ReportViewer = reportViewer;
-            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
-
-            ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            return View();
+                ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
+                //Cargar DDL del modal (Tipo de planilla a seleccionar)
+                ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult HistorialContratacionesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult HistorialCargosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+                //Codigo que hace que todo truene
+                //int Cero = 0;
+                //int Uno = 1;
+                //int UnoEntreCero = Uno / Cero;
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
+            
         }
         [HttpPost]
         public ActionResult HistorialCargosRPT(int? car_Id, DateTime? Fecha, DateTime? FechaFin)
@@ -282,20 +326,28 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
 
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialCargos.TableName);
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialCargosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialCargos"]));
-            conx.Close();
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
 
-            ViewBag.ReportViewer = reportViewer;
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialCargos.TableName);
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialCargosRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialCargos"]));
+                conx.Close();
 
-            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+                ViewBag.ReportViewer = reportViewer;
 
-            return View();
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
     }
         [HttpPost]
         public ActionResult HistorialContratacionesRPT(int? car_Id, DateTime? FechaContratacion, DateTime? FechaFin)
@@ -355,29 +407,42 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialContrataciones.TableName);
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialContrataciones.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialContratacionesRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialContrataciones"]));
-            conx.Close();
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialContratacionesRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialContrataciones"]));
+                conx.Close();
 
-            ViewBag.ReportViewer = reportViewer;
+                ViewBag.ReportViewer = reportViewer;
 
-            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
 
-            return View();
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
     }
         public ActionResult HistorialSalidasRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-
-            ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
-            ViewBag.Empleados = new SelectList(db.V_EmpleadoIncapacidades.Where(o => o.emp_Estado == true), "emp_Id", "emp_NombreCompleto");
-            return View();
+            try
+            {
+                ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
+                ViewBag.Empleados = new SelectList(db.V_EmpleadoIncapacidades.Where(o => o.emp_Estado == true), "emp_Id", "emp_NombreCompleto");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult HistorialSalidasRPT(int? tsal_Id, DateTime? FechaSalida, DateTime? fechaFin)
@@ -451,38 +516,52 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaSalida", SqlDbType.DateTime).Value = FechaSalida;
                 command.Parameters.AddWithValue("@fechaFin", SqlDbType.DateTime).Value = fechaFin;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialSalidas.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialSalidasRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialSalidas"]));
-            conx.Close();
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialSalidas.TableName);
+
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialSalidasRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialSalidas"]));
+                conx.Close();
 
 
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
+                ViewBag.ReportViewer = reportViewer;
+                ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
 
-            ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
-            ////ViewBag.Titulos = db.tbHistorialSalidas.Where(x => x.hsal_Id == hsal_Id).Select(x => x.).FirstOrDefault();
-            //////Cargar DDL del modal (Tipo de planilla a seleccionar)
-            //ViewBag.Tiposalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
+                ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
+                ////ViewBag.Titulos = db.tbHistorialSalidas.Where(x => x.hsal_Id == hsal_Id).Select(x => x.).FirstOrDefault();
+                //////Cargar DDL del modal (Tipo de planilla a seleccionar)
+                //ViewBag.Tiposalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
 
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            return View();
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult HistorialVacacionesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
 
+            try
+            {
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "Per_NombreCompleto");
+                ViewBag.Anios = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_AnioVacaciones", "hvac_AnioVacaciones");
+                ViewBag.Mes = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_MesVacaciones", "hvac_MesVacaciones");
 
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "Per_NombreCompleto");
-            ViewBag.Anios = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_AnioVacaciones", "hvac_AnioVacaciones");
-            ViewBag.Mes = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_MesVacaciones", "hvac_MesVacaciones");
-
-            return View();
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult HistorialVacacionesRPT(int? emp_Id, DateTime? hvac_FechaInicio, DateTime? hvac_FechaFin /*,int hvac_AnioVacaciones, int hvac_MesVacaciones*/)
@@ -554,38 +633,51 @@ namespace ERP_GMEDINA.Controllers
                 //command.Parameters.AddWithValue("@hvac_AnioVacaciones", SqlDbType.DateTime).Value = hvac_AnioVacaciones;
                 //command.Parameters.AddWithValue("@hvac_MesVacaciones", SqlDbType.DateTime).Value = hvac_MesVacaciones;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialVacaciones.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialVacacionesRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialVacaciones"]));
-            conx.Close();
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialVacaciones.TableName);
+
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialVacacionesRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialVacaciones"]));
+                conx.Close();
 
 
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "Per_NombreCompleto");
+                ViewBag.ReportViewer = reportViewer;
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "Per_NombreCompleto");
 
-            ViewBag.Anios = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_AnioVacaciones", "hvac_AnioVacaciones");
+                ViewBag.Anios = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_AnioVacaciones", "hvac_AnioVacaciones");
 
-            ViewBag.Mes = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_MesVacaciones", "hvac_MesVacaciones");
-            ////ViewBag.Titulos = db.tbHistorialSalidas.Where(x => x.hsal_Id == hsal_Id).Select(x => x.).FirstOrDefault();
-            //////Cargar DDL del modal (Tipo de planilla a seleccionar)
-            //ViewBag.Tiposalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
+                ViewBag.Mes = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_MesVacaciones", "hvac_MesVacaciones");
+                ////ViewBag.Titulos = db.tbHistorialSalidas.Where(x => x.hsal_Id == hsal_Id).Select(x => x.).FirstOrDefault();
+                //////Cargar DDL del modal (Tipo de planilla a seleccionar)
+                //ViewBag.Tiposalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
 
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            return View();
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult SueldosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-
             //ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-
-            return View();
+            try
+            {
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult SueldosRPT(int? emp_Id, DateTime? fechainicio, DateTime? fechafin)
@@ -647,32 +739,46 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@fechafin", SqlDbType.Date).Value = fechafin;
             }
 
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialSueldos.TableName);
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialSueldos.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SueldosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialSueldos"]));
-            conx.Close();
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SueldosRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialSueldos"]));
+                conx.Close();
 
-            ViewBag.ReportViewer = reportViewer;
-          //  ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                ViewBag.ReportViewer = reportViewer;
+                //  ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
 
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-          //  ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            return View();
+                //Cargar DDL del modal (Tipo de planilla a seleccionar)
+                //  ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult Permisos()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-            return View();
+            try
+            {
+                ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult Permisos(int? emp_Id, DateTime? FechaInicio, DateTime? FechaFin)
@@ -732,32 +838,47 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialPermisos.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\PermisosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPermisosDS", ds.Tables["V_RPT_HistorialPermisos"]));
-            conx.Close();
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialPermisos.TableName);
 
-            ViewBag.ReportViewer = reportViewer;
-            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\PermisosRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPermisosDS", ds.Tables["V_RPT_HistorialPermisos"]));
+                conx.Close();
 
-            //ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
-            ////Cargar DDL del modal (Tipo de planilla a seleccionar)
-            //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-            return View();
+                ViewBag.ReportViewer = reportViewer;
+                //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
+
+                //ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
+                ////Cargar DDL del modal (Tipo de planilla a seleccionar)
+                //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult FaseSeleccionRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true), "fare_Id", "fare_Descripcion");
-            // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true), "fare_Id", "fare_Descripcion");
+                // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult FaseSeleccionRPT(int? fare_Id, DateTime? Fecha)
@@ -793,29 +914,44 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
                 command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_FaseSeleccion.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\FaseSeleccion.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_FaseSeleccion"]));
-            conx.Close();
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_FaseSeleccion.TableName);
 
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.Titulo = db.tbFasesReclutamiento.Where(x => x.fare_Id == fare_Id).Select(x => x.fare_Descripcion).FirstOrDefault();
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true), "fare_Id", "fare_Descripcion");
-            // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
-            return View();
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\FaseSeleccion.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_FaseSeleccion"]));
+                conx.Close();
+
+                ViewBag.ReportViewer = reportViewer;
+                ViewBag.Titulo = db.tbFasesReclutamiento.Where(x => x.fare_Id == fare_Id).Select(x => x.fare_Descripcion).FirstOrDefault();
+                //Cargar DDL del modal (Tipo de planilla a seleccionar)
+                ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true), "fare_Id", "fare_Descripcion");
+                // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         
         public ActionResult Requisicion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Requisicion = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
-            //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.Requisicion = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
+                //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult Requisicion(int? Id_Requisicion, DateTime? Fecha_Contratacion)
@@ -852,30 +988,45 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@Id_Requisicion", SqlDbType.Int).Value = Id_Requisicion;
                 command.Parameters.AddWithValue("@Fecha_Contratacion", SqlDbType.Date).Value = Fecha_Contratacion;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            command.Connection = conx;
-            adp.Fill(ds, ds.V_RPT_Requisiciones.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\RequisicionesRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_Requisiciones"]));
-            conx.Close();
-            ViewBag.ReportViewer = reportViewer;
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                command.Connection = conx;
+                adp.Fill(ds, ds.V_RPT_Requisiciones.TableName);
 
-            ViewBag.ReportViewer = reportViewer;
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\RequisicionesRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_Requisiciones"]));
+                conx.Close();
+                ViewBag.ReportViewer = reportViewer;
 
-            ViewBag.aja = db.tbRequisiciones.Where(o => o.req_Id == Id_Requisicion).Select(o => o.req_Descripcion).FirstOrDefault();
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Requisicion = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
-            // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
-            return View();
+                ViewBag.ReportViewer = reportViewer;
+
+                ViewBag.aja = db.tbRequisiciones.Where(o => o.req_Id == Id_Requisicion).Select(o => o.req_Descripcion).FirstOrDefault();
+                //Cargar DDL del modal (Tipo de planilla a seleccionar)
+                ViewBag.Requisicion = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
+                // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
 
         public ActionResult Empleado()
         {
-            ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
-            ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
+                ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult Empleado(int? habi_Id, int? comp_Id)
@@ -912,33 +1063,54 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@comp_Id", SqlDbType.Date).Value = comp_Id;
 
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_EmpleadoCurriculum.TableName);
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_EmpleadoCurriculum.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadosCurriculumRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EmpleadoCurriculum"]));
-            conx.Close();
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadosCurriculumRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EmpleadoCurriculum"]));
+                conx.Close();
 
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.Titulo = db.tbHabilidades.Where(x => x.habi_Id == habi_Id).Select(x => x.habi_Descripcion).FirstOrDefault();
-            // ViewBag.Titulo1 = db.tbCompetencias.Where(x => x.Comp_Id == Comp_Id).Select(x => x.comp_Descripcion).FirstOrDefault();
-            ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
-            ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
-            return View();
+                ViewBag.ReportViewer = reportViewer;
+                ViewBag.Titulo = db.tbHabilidades.Where(x => x.habi_Id == habi_Id).Select(x => x.habi_Descripcion).FirstOrDefault();
+                // ViewBag.Titulo1 = db.tbCompetencias.Where(x => x.Comp_Id == Comp_Id).Select(x => x.comp_Descripcion).FirstOrDefault();
+                ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
+                ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
 
         public ActionResult HistorialAmonestacionesRPT()
         {
-            ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
-            ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
-            return View();
+            try
+            {
+                ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+                ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult HistorialAudienciaDescargoRPT()
         {
-            ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
-            return View();
+            try
+            {
+                ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult HistorialAmonestacionesRPT(int? tamo_Id, string Identidad)
@@ -964,26 +1136,34 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = Identidad;
                 command.Parameters.AddWithValue("@tamo_Id", SqlDbType.Int).Value = tamo_Id;
             }
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialAmonestaciones.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AmonestacionesRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesAmonestacionesDS", ds.Tables["V_RPT_HistorialAmonestaciones"]));
-            conx.Close();
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_HistorialAmonestaciones.TableName);
+
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AmonestacionesRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesAmonestacionesDS", ds.Tables["V_RPT_HistorialAmonestaciones"]));
+                conx.Close();
 
 
-            ViewBag.ReportViewer = reportViewer;
-            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
+                ViewBag.ReportViewer = reportViewer;
+                //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
 
-            //ViewBag.Titulos = db.tbTipoAmonestaciones.Where(x => x.tamo_Id == tamo_Id).Select(x => x.tamo_Descripcion).FirstOrDefault();
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
+                //ViewBag.Titulos = db.tbTipoAmonestaciones.Where(x => x.tamo_Id == tamo_Id).Select(x => x.tamo_Descripcion).FirstOrDefault();
+                //Cargar DDL del modal (Tipo de planilla a seleccionar)
 
-            ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
-            ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
-            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            return View();
+                ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+                ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
+                //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         //HistorialAudienciaDescargo
         [HttpPost]
@@ -1004,34 +1184,47 @@ namespace ERP_GMEDINA.Controllers
             command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = per_Identidad;
             //command.Parameters.AddWithValue("@fechaAudiencia", SqlDbType.Date).Value = fechaAudiencia;
 
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
 
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
+                ds.EnforceConstraints = false;
+                adp.Fill(ds, ds.V_RPT_HistorialAudienciaDescargo.TableName);
 
-            ds.EnforceConstraints = false;
-            adp.Fill(ds, ds.V_RPT_HistorialAudienciaDescargo.TableName);
-
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AudienciasDescargo.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesAudiencias", ds.Tables["V_RPT_HistorialAudienciaDescargo"]));
-            conx.Close();
-
-
-            ViewBag.ReportViewer = reportViewer;
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AudienciasDescargo.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesAudiencias", ds.Tables["V_RPT_HistorialAudienciaDescargo"]));
+                conx.Close();
 
 
-            ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
-            ViewBag.ReportViewer = reportViewer;
+                ViewBag.ReportViewer = reportViewer;
 
-            return View();
+
+                ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
+                ViewBag.ReportViewer = reportViewer;
+
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         public ActionResult EquipoEmpleadosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
-            ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-            //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
+                ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
         [HttpPost]
         public ActionResult EquipoEmpleadosRPT(int? eqem_Id, DateTime? Fecha, int? Id_Persona)
@@ -1090,20 +1283,26 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
                 command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
             }
+            try
+            {
+                SqlConnection conx = new SqlConnection(connectionString);
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                adp.Fill(ds, ds.V_RPT_EquipoEmpleado.TableName);
 
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_EquipoEmpleado.TableName);
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EquipoEmpleadosRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EquipoEmpleado"]));
+                conx.Close();
+                ViewBag.ReportViewer = reportViewer;
+                ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
+                ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EquipoEmpleadosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EquipoEmpleado"]));
-            conx.Close();
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
-            ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-
-            return View();
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
         }
     }
 }

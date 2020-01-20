@@ -2907,6 +2907,7 @@
     <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
     <Content Include="Views\ReportesRRHH\Requisicion.cshtml" />
     <Content Include="Views\ReportesRRHH\SueldosRPT.cshtml" />
+    <Content Include="Views\ErrorPages\ErrorConnectionDB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
