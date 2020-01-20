@@ -292,7 +292,7 @@ namespace ERP_GMEDINA.Controllers
 
                         foreach (UDP_RRHH_tbPersonas_Insert_Result item in List)
                         {
-                            msj = item.MensajeError + "";
+                            msj = item.MensajeError + " ";
                             //Competencias
                             if(DatosProfesionalesArray.Competencias != null & msj != "-1")
                             {
@@ -457,7 +457,7 @@ namespace ERP_GMEDINA.Controllers
                     var _list = db.UDP_RRHH_tbPersonas_Update(tbPersonas.per_Id,tbPersonas.per_Identidad,tbPersonas.per_Nombres,tbPersonas.per_Apellidos,tbPersonas.per_FechaNacimiento,tbPersonas.per_Sexo,tbPersonas.nac_Id,tbPersonas.per_Direccion,tbPersonas.per_Telefono,tbPersonas.per_CorreoElectronico,tbPersonas.per_EstadoCivil,tbPersonas.per_TipoSangre,1,DateTime.Now);
                     foreach(UDP_RRHH_tbPersonas_Update_Result Update in _list)
                     {
-                        msj = Update.MensajeError + "";
+                        msj = Update.MensajeError + " ";
                         if(msj != "")
                         {
                             var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
