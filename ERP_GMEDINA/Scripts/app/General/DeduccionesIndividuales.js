@@ -131,6 +131,8 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 
 });
 
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
@@ -149,7 +151,7 @@ $("#btnCerrarCrear").click(function () {
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
     $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
+    $("#dei_PagaSiempre").prop('checked', false);
     $("#AgregarDeduccionesIndividuales").modal('hide');
 });
 
@@ -361,6 +363,7 @@ $("#btnCerrarEditar").click(function () {
     $("#Editar #aste5").css("color", "black");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
+
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
