@@ -30,44 +30,49 @@ $("#frmISRCreate").submit(function (e) {
 
 //cargar grid
 function cargarGridISR() {
-    _ajax(null,
-        '/ISR/GetData',
-        'GET',
-        (data) => {
-            if (data.length == 0) {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
+    var esAdministrador = $("#rol_Usuario").val();
+    $.ajax({
+        url: "/ISR/GetData",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+
+        if (data.length == 0) {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se cargó la información, contacte al administrador',
+            });
+        }
+        else {
             var ListaISR = data, template = '';
             //limpiar datatable
             $('#tblISR').DataTable().clear();
             //recorrer data obtenida del backend
-            for (var i = 0; i < ListaISR.length; i++) {                
+            for (var i = 0; i < ListaISR.length; i++) {
 
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaISR[i].isr_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaISR[i].isr_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
-                var botonDetalles = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>' : '';
+                var botonDetalles = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' : '';
+                var botonEditar = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' : '';
 
                 //variable boton activar
-                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISR">Activar</button>' : '' : '';
+                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISR">Activar</button>' : '' : '';
 
                 //agregar el row al datatable
-                $('#tblAcumuladosISR').dataTable().fnAddData([
+                $('#tblISR').dataTable().fnAddData([
                     ListaISR[i].isr_RangoInicial,
                     ListaISR[i].isr_RangoFinal,
                     ListaISR[i].isr_Porcentaje,
-                    ListaISR[i].tde_Descripcion,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
             }
+        }
         });
     FullBody();
 }
@@ -96,8 +101,8 @@ $(document).on("click", "#btnAgregarISR", function () {
     $('#frmISRCreate .messageValidation').css('display', 'none');    
     $('#frmISRCreate .asterisco').removeClass('text-danger');
     $("#AgregarISR").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    //$("html, body").css("overflow", "hidden");
+    //$("html, body").css("overflow", "scroll");
 });
 
 //crear nuevo rango isr
@@ -119,11 +124,11 @@ $('#btnCreateISR').click(function () {
         $("#Crear #Validation_RangoFinal").css('display', '');
         $('#Crear #AsteriscoRangoFinalISR').addClass('text-danger');
     }
-    debugger;
-    if (rangoFinal <= rangoInicial) {
+    if (parseInt(rangoFinal) <= parseInt(rangoInicial) && rangoFinal != '') {
         ModelState = false;
-        $("#Crear #Validation_RangoFinalOtro").css('display', '');
+        $("#validar_rangoMontos").css('display', '');
         $('#Crear #AsteriscoRangoFinalISR').addClass('text-danger');
+        $("#Crear #isr_RangoFinal").focus();
     }
 
     if (tipoDeduccion == null || tipoDeduccion == 0 || tipoDeduccion == '' || tipoDeduccion == undefined) {
@@ -138,14 +143,20 @@ $('#btnCreateISR').click(function () {
         $('#Crear #Asteriscoisr_PorcentajeISR').addClass('text-danger');
     }
 
+    if (parseInt(porcentaje) > 100) {
+        ModelState = false;
+        $("#Crear #porcentajeVali").css('display', '');
+        $('#Crear #Asteriscoisr_PorcentajeISR').addClass("text-danger");
+    }
+
     if (ModelState == true) {
+        $('#btnCreateISR').attr('disabled',true);
         var data = $("#frmISRCreate").serializeArray();
         $.ajax({
             url: "/ISR/Create",
             method: "POST",
             data: data
         }).done(function (data) {
-            $("#AgregarISR").modal('hide');
             //validar respuesta del backend
             if (data == "error") {
                 iziToast.error({
@@ -154,8 +165,8 @@ $('#btnCreateISR').click(function () {
                 });
             }
             else if (data == "bien") {
+                $("#AgregarISR").modal('hide');
                 cargarGridISR();
-                console.log(data);
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
@@ -163,6 +174,7 @@ $('#btnCreateISR').click(function () {
                 });
             }
         });
+        $('#btnCreateISR').attr('disabled', false);
     }
 
 });
@@ -190,6 +202,15 @@ $('#frmISRCreate #isr_RangoFinal').keyup(function () {
         $('#frmISRCreate #AsteriscoRangoFinalISR').addClass("text-danger");
         $("#Crear #Validation_RangoFinal").css('display', '');
     }
+    if (parseInt($("#Crear #isr_RangoFinal").val()) <= parseInt($("#Crear #isr_RangoInicial").val()) && $("#Crear #isr_RangoFinal").val() != '') {
+        $("#validar_rangoMontos").css('display', '');
+        $('#Crear #AsteriscoRangoFinalISR').addClass('text-danger');
+        $("#Crear #isr_RangoFinal").focus();
+    }
+    else {
+        $("#validar_rangoMontos").css('display', 'none');
+        $('#Crear #AsteriscoRangoFinalISR').removeClass('text-danger');
+    }
 });
 
 // validaciones Asteriscotde_IdTipoDeduISR
@@ -214,6 +235,15 @@ $('#frmISRCreate #isr_Porcentaje').keyup(function () {
         $('#frmISRCreate #Asteriscoisr_PorcentajeISR').addClass("text-danger");
         $("#Crear #Validation_Porcentaje").css('display', '');
     }
+
+    if (parseInt($("#frmISRCreate #isr_Porcentaje").val()) > 100) {
+        $("#Crear #porcentajeVali").css('display', '');
+        $('#frmISRCreate #Asteriscoisr_PorcentajeISR').addClass("text-danger");
+    }
+    else if (parseInt($("#frmEditISR #isr_Porcentaje").val()) < 100) {
+        $("#Crear #porcentajeVali").css('display', 'none');
+    }
+
 });
 
 
@@ -225,7 +255,11 @@ $('#frmISRCreate #isr_Porcentaje').keyup(function () {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
     var ID = $(this).data('id');
+    $('#frmEditISR #Validation_tde_IdTipoDedu').css('display', 'none');
+    $('#frmEditISR .messageValidation').css('display', 'none');
+    $('#frmEditISR .asterisco').removeClass('text-danger');
     InactivarID = ID;
+
     $.ajax({
         url: "/ISR/Edit/" + ID,
         method: "GET",
@@ -234,15 +268,14 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 $("#Editar #isr_Id").val(data.isr_Id);
                 $("#Editar #isr_RangoInicial").val(data.isr_RangoInicial);
                 $("#Editar #isr_RangoFinal").val(data.isr_RangoFinal);
                 $("#Editar #isr_Porcentaje").val(data.isr_Porcentaje);
                 $("#Editar #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
-                $(".field-validation-error").css('display', 'none');
-                $("#EditarISR").modal();
+                $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
+                $(".rangoInicial").focus();
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.tde_IdTipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -267,7 +300,7 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No cargó la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -275,16 +308,50 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarISR").click(function () {
-
+    var rangoInicial = $("#Editar #isr_RangoInicial").val().trim();
+    var rangoFinal = $("#Editar #isr_RangoFinal").val().trim();
+    var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val().trim();
+    var porcentaje = $("#Editar #isr_Porcentaje").val().trim();
     var ModelState = true;
-    $("#Editar #isr_Id").val() == "" ? ModelState = false : $("#Editar #isr_Id").val() == "0" ? ModelState = false : $("#Editar #isr_Id").val() == null ? ModelState = false : '';
-    $("#Editar #isr_RangoInicial").val() == "" ? ModelState = false : $("#Editar #isr_RangoInicial").val() == "0.00" ? ModelState = false : $("#Editar #isr_RangoInicial").val() == null ? ModelState = false : '';
-    $("#Editar #isr_RangoFinal").val() == "" ? ModelState = false : $("#Editar #isr_RangoFinal").val() == "0.00" ? ModelState = false : $("#Editar #isr_RangoFinal").val() == null ? ModelState = false : '';
-    $("#Editar #isr_Porcentaje").val() == "" ? ModelState = false : $("#Editar #isr_Porcentaje").val() == "0" ? ModelState = false : $("#Editar #isr_Porcentaje").val() == null ? ModelState = false : '';
-    $("#Editar #tde_IdTipoDedu").val() == "" ? ModelState = false : $("#Editar #tde_IdTipoDedu").val() == "0" ? ModelState = false : $("#Editar #tde_IdTipoDedu").val() == null ? ModelState = false : '';
 
-    if (ModelState) {
-        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    if (rangoInicial == null || rangoInicial == 0 || rangoInicial == '' || rangoInicial == undefined) {
+        ModelState = false;
+        $("#Editar #Validation_RangoInicialEdit").css('display', '');
+        $('#Editar #AsteriscoRangoInicialISREdit').addClass('text-danger');
+    }
+    if (rangoFinal == null || rangoFinal == 0 || rangoFinal == '' || rangoFinal == undefined) {
+        ModelState = false;
+        $("#Editar #Validation_RangoFinalEdit").css('display', '');
+        $('#Editar #AsteriscoRangoFinalISREdit').addClass('text-danger');
+    }
+    if (parseInt(rangoFinal) <= parseInt(rangoInicial) && rangoFinal != '') {
+        ModelState = false;
+        $("#validar_rangoMontosEdit").css('display', '');
+        $('#Editar #AsteriscoRangoFinalISREdit').addClass('text-danger');
+        $("#Editar #isr_RangoFinal").focus();
+    }
+
+    if (tipoDeduccion == null || tipoDeduccion == 0 || tipoDeduccion == '' || tipoDeduccion == undefined) {
+        ModelState = false;
+        $("#Editar #Validation_tde_IdTipoDeduEdit").css('display', '');
+        $('#Editar #Asteriscotde_IdTipoDeduISREdit').addClass('text-danger');
+    }
+
+    if (porcentaje == null || porcentaje == 0 || porcentaje == '' || porcentaje == undefined) {
+        ModelState = false;
+        $("#Editar #Validation_PorcentajeEdit").css('display', '');
+        $('#Editar #Asteriscoisr_PorcentajeISREdit').addClass('text-danger');
+    }
+
+    if (parseInt($("#frmEditISR #isr_Porcentaje").val()) > 100) {
+        ModelState = false;
+        $("#Editar #vPorcentaje").css('display', '');
+        $('#PorcentajeAsterisco').addClass("text-danger");
+    }
+
+    
+    if (ModelState == true) {
+        $('#btnEditarISR').attr('disabled', true);
         var data = $("#frmEditISR").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
@@ -293,15 +360,13 @@ $("#btnEditarISR").click(function () {
             data: data
         }).done(function (data) {
             if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
                 iziToast.error({
                     title: 'Error',
-                    message: 'No editó el registro, contacte al administrador',
+                    message: 'No se editó el registro, contacte al administrador',
                 });
             }
             else {
                 cargarGridISR();
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                 $("#EditarISR").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
@@ -310,8 +375,87 @@ $("#btnEditarISR").click(function () {
                 });
             }
         });
+        $('#btnEditarISR').attr('disabled', false);
     }
 });
+
+
+// validaciones AsteriscoRangoInicialISR
+$('#frmEditISR #isr_RangoInicial').keyup(function () {
+    if ($("#EditarISR #isr_RangoInicial").val().trim() != '') {
+
+        $('#EditarISR #RangoInicialIAsterisco').removeClass('text-danger');
+        $("#VRangoInicial").css('display', 'none');
+    }
+    else {
+        $('#EditarISR #RangoInicialIAsterisco').addClass("text-danger");
+        $("#VRangoInicial").css('display', '');
+    }
+});
+
+// validaciones AsteriscoRangoFinalISR
+$('#frmEditISR #isr_RangoFinal').keyup(function () {
+    
+    if ($("#EditarISR #isr_RangoFinal").val().trim() != '') {
+
+        $("#EditarISR #RangoFinalAsterisco").removeClass('text-danger');
+        $("#frmEditISR #Validation_RangoFinalEdit").css('display', 'none');
+    }
+    else {
+
+        $("#EditarISR #RangoFinalAsterisco").addClass("text-danger");
+        $("#Validation_RangoFinalEdit").css('display', '');
+    }
+
+    if (parseInt($("#frmEditISR #isr_RangoFinal").val()) <= parseInt($("#frmEditISR #isr_RangoInicial").val()) && $("#frmEditISR #isr_RangoFinal").val() != '') {
+
+        $("#validar_rangoMontosEdit").css('display', '');
+        $('#EditarISR #AsteriscoRangoFinalISREdit').addClass('text-danger');
+        $("#EditarISR #isr_RangoFinal").focus();
+    }
+    else {
+
+        $("#validar_rangoMontosEdit").css('display', 'none');
+        $('#EditarISR #AsteriscoRangoFinalISREdit').removeClass('text-danger');
+    }
+});
+
+// validaciones Asteriscotde_IdTipoDeduISR
+$('#frmEditISR #tde_IdTipoDedu').on('change', function () {
+    if (this.value != '0') {
+        $('#frmEditISR #Asteriscotde_IdTipoDeduISREdit').removeClass('text-danger');
+        $('#frmEditISR #Validation_tde_IdTipoDeduEdit').css('display', 'none');
+    }
+    else {
+        $('#frmEditISR #Asteriscotde_IdTipoDeduISREdit').addClass("text-danger");
+        $('#EditarISR #Validation_tde_IdTipoDeduEdit').css('display', '');
+    }
+});
+
+// validaciones Asteriscoisr_PorcentajeISR
+$('#frmEditISR #isr_Porcentaje').keyup(function () {
+    if ($("#frmEditISR #isr_Porcentaje").val().trim() != '') {
+        $('#PorcentajeAsterisco').removeClass('text-danger');
+        $("#Editar #Validation_PorcentajeEdit").css('display', 'none');
+    }
+    else {
+        $("#Validation_PorcentajeEdit").css('display', '');
+        $('#PorcentajeAsterisco').addClass("text-danger");
+        console.log($('#PorcentajeAsterisco'));
+    }
+
+    if (parseInt($("#frmEditISR #isr_Porcentaje").val()) > 100) {
+        $("#Editar #vPorcentaje").css('display', '');
+        $('#PorcentajeAsterisco').addClass("text-danger");
+    }
+    else if (parseInt($("#frmEditISR #isr_Porcentaje").val()) < 100) {
+        $("#Editar #vPorcentaje").css('display', 'none');
+    }
+});
+
+
+
+
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
@@ -336,19 +480,17 @@ $("#btnInactivarISR").click(function () {
     $.ajax({
         url: "/ISR/Inactivar/" + InactivarID,
         method: "POST",
-        data: data
+        data: { id: InactivarID }
     }).done(function (data) {
         if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
                 message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
-            cargarGridISR();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#InactivaISR").modal('hide');
+            $("#InactivarISR").modal('hide');
+            cargarGridISR();            
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -379,7 +521,7 @@ $(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
                 $("#Detalles #isr_RangoInicial").html(data[0].isr_RangoInicial);
                 $("#Detalles #isr_RangoFinal").html(data[0].isr_RangoFinal);
                 $("#Detalles #isr_Porcentaje").html(data[0].isr_Porcentaje);
-                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
+                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_Descripcion);
                 $("#Detalles #isr_UsuarioCrea").html(data[0].isr_UsuarioCrea);
                 $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#FechaCrea").html(FechaCrea);

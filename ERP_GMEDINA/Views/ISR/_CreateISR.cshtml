@@ -9,14 +9,13 @@
             @Html.HiddenFor(model => model.isr_FechaCrea)
             @Html.HiddenFor(model => model.isr_UsuarioCrea)
 
-
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
                     <label class="asterisco" id="AsteriscoRangoInicialISR">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @type = "number" ,@class = "form-control" } })
+                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @type = "number", @class = "form-control", @min = 0, @step = 0.01 } })
                     @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger messageValidation", @id = "Validation_RangoInicial" })
                 </div>
             </div>
@@ -27,9 +26,10 @@
                     <label class="asterisco" id="AsteriscoRangoFinalISR">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger messageValidation", @id = "Validation_RangoFinal"})
-                    @Html.ValidationMessage("El rango final no puede ser menor o igual que el inicial", new { @class = "text-danger messageValidation", @id = "Validation_RangoFinalOtro" })
+                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @type = "number", @class = "form-control", @min = 0, @step = 0.01 } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger messageValidation", @id = "Validation_RangoFinal" })
+
+                    <span class="text-danger messageValidation" id="validar_rangoMontos">El rango final no puede ser menor o igual que el rango inicial</span>
                 </div>
             </div>
 
@@ -50,8 +50,9 @@
                     <label class="asterisco" id="Asteriscoisr_PorcentajeISR">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
+                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @type = "number", @class = "form-control", @min = 0, @max = 100, @step = 0.01 } })
                     @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger messageValidation", @id = "Validation_Porcentaje" })
+                    <span class="text-danger messageValidation" id="porcentajeVali">El porcentaje no puede ser mayor que 100</span>                
                 </div>
             </div>
         </div>
