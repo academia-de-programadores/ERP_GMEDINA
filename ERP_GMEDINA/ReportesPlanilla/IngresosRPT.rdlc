@@ -723,6 +723,7 @@
                               <Value>=Fields!hip_TotalPagar.Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -739,8 +740,10 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
