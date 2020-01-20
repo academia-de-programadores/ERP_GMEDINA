@@ -1,76 +1,77 @@
 ﻿@model ERP_GMEDINA.Models.tbAuxilioDeCesantias
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesAuxCess" }))
 {
-        <div class="ibox-content" style="border-color:#fff;">
+<div class="ibox-content" style="border-color:#fff;">
 
-                <div class="form-horizontal">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-                        <div class="col-md-6">
-                            <span id="aces_IdAuxilioCesantia">@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
-                        </div>
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                     </div>
+                    <div class="col-md-6">
+                        <span id="aces_IdAuxilioCesantia">@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    </div>
+                </div>
 
-			<div class="form-horizontal">
-				<div class="row">
-					<div class="col-md-6">
-						@Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-					</div>
-					<div class="col-md-6">
-						<span id="aces_IdAuxilioCesantia">@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
-					</div>
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-md-6">
+					@Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
 				</div>
+				<div class="col-md-6">
+					<span id="aces_IdAuxilioCesantia">@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+				</div>
+			</div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-                        <div class="col-md-6">
-                            <span id="aces_RangoFinMeses">@Html.DisplayFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-                        <div class="col-md-6">
-                            <span id="aces_DiasAuxilioCesantia">@Html.DisplayFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
-                        </div>
+                    <div class="col-md-6">
+                        <span id="aces_RangoFinMeses">@Html.DisplayFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     </div>
                 </div>
-            </div>
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h4>Auditoría</h4>
-                </div>
-                <div class="ibox-content">
-                    <div class="form-horizontal">
-                        <table class="table table-striped table-bordered dataTable">
-                            <thead>
-                                <tr>
-                                    <th>Acción</th>
-                                    <th>Usuario</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Creado</td>
-                                    @Html.HiddenFor(model => model.aces_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                    <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                    <td><span id="aces_FechaCrea">@Html.DisplayFor(model => model.aces_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Modificado</td>
-                                    @Html.HiddenFor(model => model.aces_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                    <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                    <td><span id="aces_FechaModifica">@Html.DisplayFor(model => model.aces_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                    </div>
+                    <div class="col-md-6">
+                        <span id="aces_DiasAuxilioCesantia">@Html.DisplayFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     </div>
                 </div>
             </div>
-            }
+        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h4>Auditoría</h4>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    <table class="table table-striped table-bordered dataTable">
+                        <thead>
+                            <tr>
+                                <th>Acción</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Creado</td>
+                                @Html.HiddenFor(model => model.aces_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="aces_FechaCrea">@Html.DisplayFor(model => model.aces_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            </tr>
+                            <tr>
+                                <td>Modificado</td>
+                                @Html.HiddenFor(model => model.aces_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="aces_FechaModifica">@Html.DisplayFor(model => model.aces_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

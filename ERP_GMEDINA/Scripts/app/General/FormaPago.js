@@ -83,8 +83,6 @@ $(document).on("click", "#btnAgregarFormaPago", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #fpa_Descripcion").val('');
     $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
     //CAMBIAR EL ASTERISCO A COLOR NEGRO
     $("#AsteriscoFormaPago").removeClass("text-danger");
     //OCULTAR DATAANNOTATIONS
@@ -159,8 +157,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                     $("#Editar #fpa_Descripcion").val(iter.fpa_Descripcion);
                 });
                 $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -235,7 +231,6 @@ $("#btnConfirmarEditar2").click(function () {
         //MOSTRAR DATAANNOTATION
         DataAnnotations(false);
         //OCULTAR EL SCROLLVIEW
-        $('body').css("overflow", "hidden");
     }
 });
 
