@@ -17,20 +17,24 @@ namespace ERP_GMEDINA.Models
         public int aisr_Id { get; set; }
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "Campo {0} requerido")]
-        
         public string aisr_Descripcion { get; set; }
+
         [Display(Name = "Monto")]
-        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Este campo es un decimal requerido.")]
         [Required(ErrorMessage = "Campo {0} es requerido")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales, Ejemplo(2.00, 12.20, etc).")]
         public decimal aisr_Monto { get; set; }
+
         [Display(Name = "Creado por")]
         public int aisr_UsuarioCrea { get; set; }
         [Display(Name = "Fecha creacion")]
+
         public System.DateTime aisr_FechaCrea { get; set; }
         [Display(Name = "Modificado por")]
         public Nullable<int> aisr_UsuarioModifica { get; set; }
+
         [Display(Name = "Fecha modificacion")]
         public Nullable<System.DateTime> aisr_FechaModifica { get; set; }
+
         [Display(Name = "Activo")]
         public bool aisr_Activo { get; set; }
 
