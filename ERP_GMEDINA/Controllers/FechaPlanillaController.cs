@@ -92,6 +92,8 @@ namespace ERP_GMEDINA.Controllers
                     fechaPago = x.hipa_FechaPago
                 });
 
+
+
             //string NombrePdf = db.tbCatalogoDeDeducciones.Where(x => x.cde_IdDeducciones == cde_IdDeducciones).Select(x => x.cde_DescripcionDeduccion).FirstOrDefault();
             string NombrePdf = "comprobante-de-pago";
             return new ActionAsPdf("Report")
