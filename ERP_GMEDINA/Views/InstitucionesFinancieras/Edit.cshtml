@@ -11,7 +11,7 @@
             <h2>Editar Institución Financiera</h2>
         </div>
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditInstFin" }))
         {
             <div class="ibox-content">
                 @Html.AntiForgeryToken()
@@ -84,24 +84,22 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Actualizar</h4>
+                <h4 class="modal-title">Editar</h4>
             </div>
-            <div class="modal-body" id="Actualizar">
-                ¿Está seguro que desea actualizar este registro?
+            <div class="modal-body" id="Editar">
+                ¿Está seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
-                @*<button type="button" class="btn btn-primary" id="btnActualizarINFS">Si</button>*@
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <input type="button" id="btnEditDeduccionAFPConfirmar" value="Si" class="btn btn-primary " />
+                <button type="button" class="btn btn-white" data-dissmiss="modal">No</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @section Scripts 
 {
- @Scripts.Render("~/Scripts/app/General/InstitucionesFinancierasEdit")
+ @Scripts.Render("~/Scripts/app/General/InstitucionesFinancieras")
 }
 
 
