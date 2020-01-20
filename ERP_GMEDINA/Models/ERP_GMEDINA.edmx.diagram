@@ -127,8 +127,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DecimoTercer" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DesplegableHistorialPlanilla" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla" Width="1.5" PointX="10.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" Width="1.5" PointX="16.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_Prueba" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_TipoPlani" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_PlanillaDeducciones" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
@@ -138,7 +136,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ReporteInstitucionesFinancieras_RPT" Width="1.5" PointX="2.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ReportesVarios" Width="1.5" PointX="4.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbAdelantoSueldo" Width="1.5" PointX="6.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbCatalogoDeDeducciones" Width="1.5" PointX="12.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbCatalogoDeDeducciones" Width="1.75" PointX="12.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbCatalogoDeIngresos" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbEmpleadoComisiones" Width="1.5" PointX="20.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_TipoDeduccion" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="true" />

@@ -959,12 +959,6 @@
     <Compile Include="Models\V_Plani_EncabezadoHistorialPlanilla.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_Plani_HistorialDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_Plani_HistorialIngreso.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_Plani_Prueba.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
