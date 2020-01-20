@@ -125,46 +125,59 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
         {
+            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
+            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
+            tbAcumuladosISR.aisr_UsuarioCrea = 1;
+            tbAcumuladosISR.aisr_FechaCrea = DateTime.Now;
+
+
+            //LLENAR DATA DE AUDITORIA
             tbAcumuladosISR.aisr_UsuarioModifica = 1;
             tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
-            tbAcumuladosISR.aisr_Activo = true;
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = "bien";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //Ejecución del procedimiento almacenado
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Update(tbAcumuladosISR.aisr_Id,
-                                                                            tbAcumuladosISR.aisr_Descripcion,
-                                                                            tbAcumuladosISR.aisr_Monto,
-                                                                            tbAcumuladosISR.aisr_UsuarioModifica,
-                                                                            tbAcumuladosISR.aisr_FechaModifica);
-
-                    foreach (UDP_Plani_tbAcumuladosISR_Update_Result Resultado in listAcumuladosISR.ToList())
+                                                                                            tbAcumuladosISR.aisr_Descripcion,
+                                                                                            tbAcumuladosISR.aisr_Monto,
+                                                                                            tbAcumuladosISR.aisr_UsuarioModifica,
+                                                                                            tbAcumuladosISR.aisr_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbAcumuladosISR_Update_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
+
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
                 }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
             }
-            else
-            {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+            else {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+            
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 

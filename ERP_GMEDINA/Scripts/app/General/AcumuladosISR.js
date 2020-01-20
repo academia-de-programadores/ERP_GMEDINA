@@ -169,16 +169,17 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                debugger;
                 var montoFormato = (data.aisr_Monto % 1 == 0) ? data.aisr_Monto + ".00" : data.aisr_Monto;
                 $("#Editar #aisr_Id").val(data.aisr_Id);
                 $("#Editar #aisr_FechaCrea").val(data.aisr_FechaCrea);
                 $("#Editar #aisr_UsuarioCrea").val(data.aisr_UsuarioCrea);
-
                 $("#Editar #aisr_Descripcion").val(data.aisr_Descripcion);
                 $("#Editar #aisr_Monto").val(montoFormato);
-                $(".field-validation-error").css('display', 'none');
 
                 $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -205,7 +206,7 @@ $("#btnEditarAcumulado").click(function () {
     else {
         $("#Editar #validatione1").css("display", "none");
         $("#Editar #AsteriscoDescripcionEditAISR").removeClass("text-danger");
-        //ModelStatee = true;
+        ModelStatee = true;
     }
 
     if (aisr_Montoe == "" || aisr_Montoe < 0 || aisr_Montoe == null) {
@@ -216,37 +217,57 @@ $("#btnEditarAcumulado").click(function () {
     else {
         $("#Editar #validatione2").css("display", "none");
         $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
-        //ModelState2e = true;
+        ModelState2e = true;
     }
-    if (ModelStatee == true && ModelState2e == true) {
-        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-        var data = $("#frmEditAcumuladosISR").serializeArray();
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/AcumuladosISR/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se editó el registro, contacte al administrador',
-                });
-            }
-            else {
-                cargarGridAcumuladosISR();
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarAcumuladosISR").modal('hide');
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            }
-        });
+    if (ModelStatee == false || ModelState2e == false) {
+        $("#EditarAISRConfirmacion").modal('hide');
+    }
+    else {
+        $("#EditarAISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
 });
+
+
+///
+$("#btnUpdateAISR2").click(function () {
+    var data = $("#frmEditAcumuladosISR").serializeArray();
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/AcumuladosISR/Edit",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data != "error") {
+            debugger;
+            cargarGridAcumuladosISR();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#EditarAcumuladosISR").modal('hide');
+            $("#EditarAISRConfirmacion").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se editó de forma exitosa!',
+            });
+        }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se editó el registro, contacte al administrador',
+            });
+            $("#EditarAISRConfirmacion").modal('hide');
+        }
+    });
+}); 
+
+
+///
+
+
+
+
+
 
 //BOTON ICON CERRAR EDITAR
 $("#IconCerrarEdit").click(function () {
