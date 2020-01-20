@@ -145,11 +145,11 @@ namespace ERP_GMEDINA.Controllers
                                         SalarioBase = Math.Round((Decimal)InformacionDelEmpleadoActual.SalarioBase, 2);
 
                                         //para el voucer
-                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        {
-                                            concepto = "Sueldo base",
-                                            monto = SalarioBase
-                                        });
+                                        //ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //{
+                                        //    concepto = "Sueldo base",
+                                        //    monto = SalarioBase
+                                        //});
                                         //Historial de ingresos (salario base)
                                         //lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
                                         //{
@@ -161,33 +161,37 @@ namespace ERP_GMEDINA.Controllers
 
                                         //horas normales trabajadas
                                         horasTrabajadas = db.tbHistorialHorasTrabajadas
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo == 0)
+                                            .Where( x => x.emp_Id == empleadoActual.emp_Id && 
+                                                    x.htra_Estado == true &&
+                                                    x.tbTipoHoras.tiho_Recargo == 0 &&
+                                                    x.htra_Fecha >= fechaInicio &&
+                                                    x.htra_Fecha <= fechaFin)
                                             .Select(x => x.htra_CantidadHoras)
                                             .DefaultIfEmpty(0)
                                             .Sum();
-                                        //para el voucher
-                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        {
-                                            concepto = "Horas trabajadas",
-                                            monto = horasTrabajadas
-                                        });
+                                        ////para el voucher
+                                        //ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //{
+                                        //    concepto = "Horas trabajadas",
+                                        //    monto = horasTrabajadas
+                                        //});
 
                                         //salario por hora
                                         salarioHora = Math.Round((Decimal)SalarioBase / 240, 2);
 
                                         //para el voucher
-                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        {
-                                            concepto = "Sueldo por hora",
-                                            monto = salarioHora
-                                        });
+                                        //ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //{
+                                        //    concepto = "Sueldo por hora",
+                                        //    monto = salarioHora
+                                        //});
 
                                         //total salario
                                         totalSalario = Math.Round((Decimal)salarioHora * horasTrabajadas, 2);
                                         //para el voucer
                                         ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                         {
-                                            concepto = "Total sueldo",
+                                            concepto = "Salario ordinario",
                                             monto = totalSalario
                                         });
                                         //Historial de ingresos (horas normales trabajadas)
@@ -201,7 +205,10 @@ namespace ERP_GMEDINA.Controllers
 
                                         //horas con permiso justificado
                                         List<tbHistorialPermisos> horasConPermiso = db.tbHistorialPermisos
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hper_Estado == true)
+                                            .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                    x.hper_Estado == true &&
+                                                    x.hper_fechaInicio >= fechaInicio &&
+                                                    x.hper_fechaFin <= fechaFin)
                                             .ToList();
 
                                         if (horasConPermiso.Count > 0)
@@ -234,7 +241,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //comisiones
-                                        List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cc_Activo == true && x.cc_Pagado == false).ToList();
+                                        List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones
+                                                                                                .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                        x.cc_Activo == true &&
+                                                                                                        x.cc_Pagado == false &&
+                                                                                                        x.cc_FechaRegistro >= fechaInicio &&
+                                                                                                        x.cc_FechaRegistro <= fechaFin).ToList();
                                         if (oComisionesColaboradores.Count > 0)
                                         {
                                             //sumar todas las comisiones
@@ -274,7 +286,11 @@ namespace ERP_GMEDINA.Controllers
 
                                         //horas extras
                                         horasExtrasTrabajadas = db.tbHistorialHorasTrabajadas
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo > 0)
+                                            .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                    x.htra_Estado == true &&
+                                                    x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                    x.htra_Fecha >= fechaInicio &&
+                                                    x.htra_Fecha <= fechaFin)
                                             .Select(x => x.htra_CantidadHoras)
                                             .DefaultIfEmpty(0)
                                             .Sum();
@@ -291,7 +307,11 @@ namespace ERP_GMEDINA.Controllers
 
                                         //total ingresos horas extras
                                         List<tbHistorialHorasTrabajadas> oHorasExtras = db.tbHistorialHorasTrabajadas
-                                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo > 0)
+                                                                                        .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                x.htra_Estado == true &&
+                                                                                                x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                                                                x.htra_Fecha >= fechaInicio &&
+                                                                                                x.htra_Fecha <= fechaFin)
                                                                                         .ToList();
                                         if (oHorasExtras.Count > 0)
                                         {
@@ -332,7 +352,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //bonos del colaborador
-                                        List<tbEmpleadoBonos> oBonosColaboradores = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Activo == true && x.cb_Pagado == false).ToList();
+                                        List<tbEmpleadoBonos> oBonosColaboradores = db.tbEmpleadoBonos
+                                                                                    .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                            x.cb_Activo == true &&
+                                                                                            x.cb_Pagado == false &&
+                                                                                            x.cb_FechaRegistro >= fechaInicio &&
+                                                                                            x.cb_FechaRegistro <= fechaFin).ToList();
 
                                         if (oBonosColaboradores.Count > 0)
                                         {
@@ -363,7 +388,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //vacaciones
-                                        List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.hvac_DiasPagados == false && x.hvac_Estado == true).ToList();
+                                        List<tbHistorialVacaciones> oVacacionesColaboradores =  db.tbHistorialVacaciones
+                                                                                                .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                        x.hvac_DiasPagados == false &&
+                                                                                                        x.hvac_Estado == true &&
+                                                                                                        x.hvac_FechaInicio >= fechaInicio &&
+                                                                                                        x.hvac_FechaFin <= fechaFin).ToList();
                                         if (oVacacionesColaboradores.Count > 0)
                                         {
                                             //sumar todas las comisiones
@@ -421,8 +451,19 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             if (fechaIterador.DayOfWeek.ToString() != "Sunday")
                                             {
-                                                cantHoras += db.tbHistorialHorasTrabajadas.Where(x => x.htra_Fecha == fechaIterador && x.emp_Id == empleadoActual.emp_Id).Select(x => x.htra_CantidadHoras).FirstOrDefault();
-                                                cantHorasPermiso += db.tbHistorialPermisos.Where(x => x.hper_fechaInicio <= fechaIterador && x.hper_fechaFin >= fechaIterador && x.emp_Id == empleadoActual.emp_Id).Select(x => x.hper_Duracion).FirstOrDefault();
+                                                cantHoras+= db.tbHistorialHorasTrabajadas
+                                                            .Where( x => x.htra_Fecha == fechaIterador &&
+                                                                    x.emp_Id == empleadoActual.emp_Id &&
+                                                                    x.htra_Estado == true)
+                                                            .Select(x => x.htra_CantidadHoras)
+                                                            .FirstOrDefault();
+
+                                                cantHorasPermiso += db.tbHistorialPermisos
+                                                                    .Where( x => x.hper_fechaInicio <= fechaIterador &&
+                                                                            x.hper_fechaFin >= fechaIterador &&
+                                                                            x.emp_Id == empleadoActual.emp_Id)
+                                                                    .Select(x => x.hper_Duracion)
+                                                                    .FirstOrDefault();
 
                                                 if ((cantHoras + (cantHorasPermiso * 8)) >= 48 && contadorSeptimosDias == 7)
                                                 {
@@ -496,7 +537,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //instituciones financieras
-                                        List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras = db.tbDeduccionInstitucionFinanciera.Where(x => x.emp_Id == empleadoActual.emp_Id && x.deif_Activo == true && x.deif_Pagado == false).ToList();
+                                        List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras =  db.tbDeduccionInstitucionFinanciera
+                                                                                                        .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                                x.deif_Activo == true &&
+                                                                                                                x.deif_Pagado == false &&
+                                                                                                                x.deif_FechaCrea >= fechaInicio &&
+                                                                                                                x.deif_FechaCrea <= fechaFin).ToList();
 
                                         if (oDeduInstiFinancieras.Count > 0)
                                         {
@@ -522,7 +568,13 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
                                         //afp
-                                        List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP.Where(af => af.emp_Id == empleadoActual.emp_Id && af.dafp_Pagado == false && af.dafp_Activo == true).ToList();
+                                        List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP
+                                                                            .Where( af => af.emp_Id == empleadoActual.emp_Id &&
+                                                                                    af.dafp_Pagado == false &&
+                                                                                    af.dafp_Activo == true &&
+                                                                                    af.dafp_FechaCrea >= fechaInicio &&
+                                                                                    af.dafp_FechaCrea <= fechaFin)
+                                                                            .ToList();
 
                                         if (oDeduccionAfp.Count > 0)
                                         {
@@ -543,7 +595,10 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //deducciones extras
-                                        List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador = db.tbDeduccionesExtraordinarias.Where(DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id && DEX.dex_MontoRestante > 0 && DEX.dex_Activo == true).ToList();
+                                        List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador =  db.tbDeduccionesExtraordinarias
+                                                                                                            .Where( DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id &&
+                                                                                                                    DEX.dex_MontoRestante > 0 &&
+                                                                                                                    DEX.dex_Activo == true).ToList();
 
                                         if (oDeduccionesExtrasColaborador.Count > 0)
                                         {
@@ -571,7 +626,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //adelantos de sueldo
-                                        List<tbAdelantoSueldo> oAdelantosSueldo = db.tbAdelantoSueldo.Where(x => x.emp_Id == empleadoActual.emp_Id && x.adsu_Activo == true && x.adsu_Deducido == false).ToList();
+                                        List<tbAdelantoSueldo> oAdelantosSueldo  =  db.tbAdelantoSueldo
+                                                                                    .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                            x.adsu_Activo == true && x.adsu_Deducido == false &&
+                                                                                            x.adsu_FechaAdelanto >= fechaInicio &&
+                                                                                            x.adsu_FechaAdelanto <= fechaFin)
+                                                                                    .ToList();
 
                                         if (oAdelantosSueldo.Count > 0)
                                         {
@@ -820,8 +880,8 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         #endregion
-
-                                        netoAPagarColaborador = netoAPagarColaborador - totalISR;
+                                        //Pendiente testeo
+                                        //netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
                                         #region Enviar comprobante de pago por email
                                         if (enviarEmail != null && enviarEmail == true)
