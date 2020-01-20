@@ -131,7 +131,7 @@ namespace ERP_GMEDINA.Controllers
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
+            string response = "bien";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
@@ -159,7 +159,6 @@ namespace ERP_GMEDINA.Controllers
                     //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
                 }
-                response = "bien";
             }
             else
             {
