@@ -19,30 +19,38 @@ namespace ERP_GMEDINA.Models
     {
         [Display(Name = "Número")]
         public int insf_IdInstitucionFinanciera { get; set; }
+
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_DescInstitucionFinanc { get; set; }
+
         [Display(Name = "Nombre Contacto")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Contacto { get; set; }
+
         [Display(Name = "Telefono Contacto")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Favor ingresar solamente números.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         [MaxLength(15, ErrorMessage = "Numero debe ser inferior a 15 digitos.")]
-       
         public string insf_Telefono { get; set; }
+
         [Display(Name = "Correo Electrónico")]
         [EmailAddress(ErrorMessage = "Correo Electrónico inválido.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Correo { get; set; }
+
         [Display(Name = "Usuario Creación")]
         public int insf_UsuarioCrea { get; set; }
+
         [Display(Name = "Fecha Creación")]
         public System.DateTime insf_FechaCrea { get; set; }
+
         [Display(Name = "Usuario Modifica")]
         public Nullable<int> insf_UsuarioModifica { get; set; }
+
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> insf_FechaModifica { get; set; }
+
         [Display(Name = "Estado")]
         public bool insf_Activo { get; set; }
 

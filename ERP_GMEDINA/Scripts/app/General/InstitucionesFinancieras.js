@@ -1,4 +1,36 @@
-﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
+﻿const btnAgregar = $('#btnAgregarInstFin'),
+    DescInstFin = $('#insf_DescInstitucionFinanc'),
+    Contac = $('#insf_Contacto'),
+    Telef = $('#phone'),
+    Corre = $('#insf_Correo'),
+    AsteriscoDescripcion = $('#AsteriscoDescripcion'),
+    AsteriscoContacto = $('#AsteriscoContacto'),
+    AsteriscoTelefono = $('#AsteriscoTelefono'),
+    AsteriscoCorreo = $('#AsteriscoCorreo'),
+    validacionDescripcion = $('#validacionDescripcion'),
+    validacionContacto = $('#validacionContacto'),
+    validacionTelefono = $('#validacionTelefono'),
+    validacionCorreo = $('#validacionCorreo')
+;
+
+
+const btnEditar = $('#btnAgregarInstFin'),
+    DescripInstFin = $('#insf_DescInstitucionFinanc'),
+    Contact = $('#insf_Contacto'),
+    Tel = $('#phone'),
+    Cor = $('#insf_Correo'),
+    AsteriscDescrip = $('#AsteriscoDescripcion'),
+    AsteriscContact = $('#AsteriscoContacto'),
+    AsteriscTel = $('#AsteriscoTelefono'),
+    AsteriscCorre = $('#AsteriscoCorreo'),
+    validaDescripcion = $('#validaDescripcion'),
+    validaContacto = $('#validaContacto'),
+    validaTelefono = $('#validaTelefono'),
+    validaCorreo = $('#validaCorreo')
+;
+
+
+//FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -40,6 +72,10 @@ $('#btnCargarPlanilla').click(function ()
             }
         });
 });
+
+
+
+
 
 
 
