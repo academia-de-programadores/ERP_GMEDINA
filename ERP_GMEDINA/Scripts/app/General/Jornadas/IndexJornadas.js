@@ -64,7 +64,7 @@ function tablaDetalles(ID) {
         });
 }
 function format(obj, jor_Id, estado) {
-    var emerson = estado == 'Inactivo' ? '' : '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)"> Agregar </button>';
+    var emerson = estado == 'Inactivo' ? '' : '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)">Agregar horario</button>';
     var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right">' +
         emerson +
         '</div></div><div class="ibox-content"><div class="row">';
