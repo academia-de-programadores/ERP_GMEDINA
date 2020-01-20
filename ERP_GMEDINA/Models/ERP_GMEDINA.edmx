@@ -2095,6 +2095,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' do
             <PropertyRef Name="hipa_TotalISR" />
             <PropertyRef Name="hipa_AFP" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
@@ -2103,6 +2107,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' do
           <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="TotalDeducciones" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -2112,11 +2120,19 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' does n
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
+            <PropertyRef Name="cpla_IdPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_Prueba' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3138,7 +3154,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' does n
             <PropertyRef Name="Nombre_Empleado" />
             <PropertyRef Name="hvac_CantDias" />
             <PropertyRef Name="hvac_FechaInicio" />
-            <PropertyRef Name="hvac_DiasPagados" />
             <PropertyRef Name="hvac_MesVacaciones" />
             <PropertyRef Name="hvac_anioVacaciones" />
             <PropertyRef Name="hvac_FechaFin" />
@@ -3148,7 +3163,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' does n
           <Property Name="Nombre_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="hvac_CantDias" Type="int" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
-          <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
+          <Property Name="hvac_DiasPagados" Type="varchar" MaxLength="2" />
           <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_anioVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
@@ -9012,6 +9027,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_Plani_HistorialDeducciones].[hipa_AFP] AS [hipa_AFP], 
     [V_Plani_HistorialDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
     [V_Plani_HistorialDeducciones].[hidp_Total] AS [hidp_Total], 
+    [V_Plani_HistorialDeducciones].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+    [V_Plani_HistorialDeducciones].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Plani_HistorialDeducciones].[nombreEmpleado] AS [nombreEmpleado], 
+    [V_Plani_HistorialDeducciones].[identidadEmpleado] AS [identidadEmpleado], 
     [V_Plani_HistorialDeducciones].[TotalDeducciones] AS [TotalDeducciones]
     FROM [Plani].[V_Plani_HistorialDeducciones] AS [V_Plani_HistorialDeducciones]</DefiningQuery>
           </EntitySet>
@@ -9020,7 +9039,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_Plani_HistorialIngreso].[emp_Id] AS [emp_Id], 
     [V_Plani_HistorialIngreso].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
     [V_Plani_HistorialIngreso].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
-    [V_Plani_HistorialIngreso].[hip_TotalPagar] AS [hip_TotalPagar]
+    [V_Plani_HistorialIngreso].[hip_TotalPagar] AS [hip_TotalPagar], 
+    [V_Plani_HistorialIngreso].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Plani_HistorialIngreso].[nombreEmpleado] AS [nombreEmpleado], 
+    [V_Plani_HistorialIngreso].[identidadEmpleado] AS [identidadEmpleado], 
+    [V_Plani_HistorialIngreso].[cpla_IdPlanilla] AS [cpla_IdPlanilla]
     FROM [Plani].[V_Plani_HistorialIngreso] AS [V_Plani_HistorialIngreso]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_Prueba" EntityType="Self.V_Plani_Prueba" store:Type="Views" store:Schema="Plani">
@@ -13491,6 +13514,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="hipa_TotalISR" />
             <PropertyRef Name="hipa_AFP" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
@@ -13500,17 +13527,29 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="TotalDeducciones" Type="Int32" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_Plani_HistorialIngreso">
           <Key>
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
+            <PropertyRef Name="cpla_IdPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_Plani_Prueba">
           <Key>
@@ -14342,28 +14381,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="V_RPT_HistorialVacaciones">
-          <Key>
-            <PropertyRef Name="hvac_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre_Empleado" />
-            <PropertyRef Name="hvac_CantDias" />
-            <PropertyRef Name="hvac_FechaInicio" />
-            <PropertyRef Name="hvac_DiasPagados" />
-            <PropertyRef Name="hvac_MesVacaciones" />
-            <PropertyRef Name="hvac_anioVacaciones" />
-            <PropertyRef Name="hvac_FechaFin" />
-          </Key>
-          <Property Name="hvac_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre_Empleado" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hvac_CantDias" Type="Int32" Nullable="false" />
-          <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
-          <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
-          <Property Name="hvac_anioVacaciones" Type="Int32" Nullable="false" />
-          <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="V_RPT_HorasTrabajadas">
           <Key>
@@ -18017,7 +18034,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="Self.V_RPT_HistorialContrataciones" />
           <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="Self.V_RPT_HistorialIncapacidad" />
           <EntitySet Name="V_RPT_HistorialPermisos" EntityType="Self.V_RPT_HistorialPermisos" />
-          <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="Self.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="Self.V_RPT_HorasTrabajadas" />
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" />
           <EntitySet Name="V_Sueldos" EntityType="Self.V_Sueldos" />
@@ -20847,6 +20863,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
           <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" />
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
+          <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -21437,9 +21454,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbJornadas_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="UDP_RRHH_tbJornadas_Update_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
@@ -21788,6 +21802,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="fechafin" Type="DateTime" Precision="0" />
           <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="V_RPT_HistorialVacaciones">
+          <Key>
+            <PropertyRef Name="hvac_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="hvac_CantDias" />
+            <PropertyRef Name="hvac_FechaInicio" />
+            <PropertyRef Name="hvac_MesVacaciones" />
+            <PropertyRef Name="hvac_anioVacaciones" />
+            <PropertyRef Name="hvac_FechaFin" />
+          </Key>
+          <Property Name="hvac_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="hvac_CantDias" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hvac_DiasPagados" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_anioVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -23737,6 +23775,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_Plani_HistorialDeducciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialDeducciones">
               <MappingFragment StoreEntitySet="V_Plani_HistorialDeducciones">
+                <ScalarProperty Name="identidadEmpleado" ColumnName="identidadEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="hidp_IdHistorialdeDeduPago" ColumnName="hidp_IdHistorialdeDeduPago" />
@@ -23751,6 +23793,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_Plani_HistorialIngreso">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialIngreso">
               <MappingFragment StoreEntitySet="V_Plani_HistorialIngreso">
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="identidadEmpleado" ColumnName="identidadEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
@@ -24388,21 +24434,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_HistorialVacaciones">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialVacaciones">
-              <MappingFragment StoreEntitySet="V_RPT_HistorialVacaciones">
-                <ScalarProperty Name="hvac_Id" ColumnName="hvac_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
-                <ScalarProperty Name="hvac_CantDias" ColumnName="hvac_CantDias" />
-                <ScalarProperty Name="hvac_FechaInicio" ColumnName="hvac_FechaInicio" />
-                <ScalarProperty Name="hvac_DiasPagados" ColumnName="hvac_DiasPagados" />
-                <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
-                <ScalarProperty Name="hvac_anioVacaciones" ColumnName="hvac_anioVacaciones" />
-                <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -26605,6 +26636,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
                 <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialVacaciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialVacaciones">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialVacaciones">
+                <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
+                <ScalarProperty Name="hvac_anioVacaciones" ColumnName="hvac_anioVacaciones" />
+                <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
+                <ScalarProperty Name="hvac_DiasPagados" ColumnName="hvac_DiasPagados" />
+                <ScalarProperty Name="hvac_FechaInicio" ColumnName="hvac_FechaInicio" />
+                <ScalarProperty Name="hvac_CantDias" ColumnName="hvac_CantDias" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hvac_Id" ColumnName="hvac_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

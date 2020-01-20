@@ -24,6 +24,7 @@ namespace ERP_GMEDINA.Models
         public bool jor_Estado { get; set; }
 
         [Display(Name = "Razon Inactivo")]
+
         public string jor_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario crea")]

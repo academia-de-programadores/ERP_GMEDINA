@@ -17,12 +17,16 @@ namespace ERP_GMEDINA.Models
         public int fare_Id { get; set; }
 
         [Display(Name = "Descripción")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string fare_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
         public bool fare_Estado { get; set; }
 
         [Display(Name = "Razon Inactivo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(100, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string fare_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

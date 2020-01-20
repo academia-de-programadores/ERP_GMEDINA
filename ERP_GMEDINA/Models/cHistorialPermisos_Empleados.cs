@@ -23,6 +23,8 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Empleados")]
         public int Id { get; set; }
         [Display(Name = "Razon")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string Razon { get; set; }
         [Display(Name = "Fecha salida")]
         public System.DateTime hper_fechaInicio { get; set; }

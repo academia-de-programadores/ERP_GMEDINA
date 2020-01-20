@@ -20,8 +20,11 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id empleado")]
         public int emp_Id { get; set; }
         [Display(Name = "fecha de inicio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
         public System.DateTime hvac_FechaInicio { get; set; }
         [Display(Name = "Fecha de fin")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public System.DateTime hvac_FechaFin { get; set; }
         [Display(Name = "Cantidad de dias")]
         public Nullable<int> hvac_CantDias { get; set; }

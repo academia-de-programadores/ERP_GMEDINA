@@ -21,7 +21,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.eqem_Fecha, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.eqem_Fecha, new { htmlAttributes = new { @class = "form-contro required valid datepicker", @type = "date" } })
+								@Html.EditorFor(model => model.eqem_Fecha, new { htmlAttributes = new { @class = "form-control required valid datepicker", @type = "date" } })
 								@Html.ValidationMessageFor(model => model.eqem_Fecha, "", new { @class = "text-danger", @id = "erroreqem_Fecha" })
                             </div>
                         </div>

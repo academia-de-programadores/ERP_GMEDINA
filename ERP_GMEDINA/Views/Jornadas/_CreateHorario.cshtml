@@ -15,21 +15,21 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.hor_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.hor_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid" } })
+                                @Html.EditorFor(model => model.hor_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
                                 @Html.ValidationMessageFor(model => model.hor_Descripcion, "", new { @class = "text-danger", @id = "errorhor_Descripcion" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.hor_HoraInicio, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.hor_HoraInicio, new { htmlAttributes = new { @class = "form-contro required valid", @type = "time" } })
+                                @Html.EditorFor(model => model.hor_HoraInicio, new { htmlAttributes = new { @class = "form-control required valid", @type = "time" } })
                                 @Html.ValidationMessageFor(model => model.hor_HoraInicio, "", new { @class = "text-danger", @id = "errorhor_HoraInicio" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.hor_HoraFin, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.hor_HoraFin, new { htmlAttributes = new { @class = "form-contro required valid", @type = "time" } })
+                                @Html.EditorFor(model => model.hor_HoraFin, new { htmlAttributes = new { @class = "form-control required valid", @type = "time" } })
                                 @Html.ValidationMessageFor(model => model.hor_HoraFin, "", new { @class = "text-danger", @id = "errorhor_HoraFin" })
                             </div>
                         </div>

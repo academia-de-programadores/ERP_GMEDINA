@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
         public string Nombre_Empleado { get; set; }
         public int hvac_CantDias { get; set; }
         public System.DateTime hvac_FechaInicio { get; set; }
-        public bool hvac_DiasPagados { get; set; }
+        public string hvac_DiasPagados { get; set; }
         public int hvac_MesVacaciones { get; set; }
         public int hvac_anioVacaciones { get; set; }
         public System.DateTime hvac_FechaFin { get; set; }

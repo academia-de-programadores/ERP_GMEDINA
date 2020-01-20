@@ -19,12 +19,16 @@ namespace ERP_GMEDINA.Models
         public int sue_Id { get; set; }
 
         [Display(Name = "Empleado Id")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int emp_Id { get; set; }
 
         [Display(Name = "Tipo Moneda Id")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int tmon_Id { get; set; }
 
         [Display(Name = "Sueldo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public decimal sue_Cantidad { get; set; }
 
         [Display(Name = "Sueldo Anterior")]
