@@ -190,7 +190,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     $("#Crear #emp_Id").val("0");
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
-    $("#ini_PagaSiempre").val('');
+    $('#Crear #ini_PagaSiempre').prop('checked', false);
 });
 
 
@@ -268,7 +268,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
             if (data != "error") {
                 $("#Crear #ini_Motivo").val('');
                 $("#Crear #ini_Monto").val('');
-                $("#Crear #ini_PagaSiempre").val('');
+                $('#Crear #ini_PagaSiempre').prop('checked', false);
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarIngresosIndividuales").modal('hide');
 
