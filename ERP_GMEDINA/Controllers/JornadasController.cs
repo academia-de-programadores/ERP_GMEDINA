@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class JornadasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         public ActionResult ChildRowData(int? id)
         {
@@ -20,10 +20,11 @@ namespace ERP_GMEDINA.Controllers
             //posteriormente es destruida.
             //List<tbHorarios> lista = new List<tbHorarios> { };
             using (db = new ERP_GMEDINAEntities())
+                
             {
                 try
                 {
-                    var lista = db.V_HorariosDetalles.Where(x => x.jor_Id == id && x.hor_Estado == true)
+                    var lista = db.V_HorariosDetalles.Where(x => x.jor_Id == id)
                         .Select(tabla =>
                         new
                         {
@@ -31,11 +32,12 @@ namespace ERP_GMEDINA.Controllers
                             hor_Id = tabla.hor_Id,
                             hor_HoraInicio = tabla.hor_HoraInicio,
                             hor_HoraFin = tabla.hor_HoraFin,
-                            hor_descripcion = tabla.hor_Descripcion
+                            hor_descripcion = tabla.hor_Descripcion,
+                            hor_Estado = tabla.hor_Estado
                         }).ToList();
                     return Json(lista, JsonRequestBehavior.AllowGet);
                 }
-                catch(Exception EX)
+                catch (Exception EX)
                 {
                     EX.Message.ToString();
 
@@ -52,10 +54,7 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var tbJornadas =
-                        db.tbJornadas
-                        .Select(t => new { jor_Id = t.jor_Id, jor_Descripcion = t.jor_Descripcion, jor_Estado = t.jor_Estado })
-                        .ToList();
+                    var tbJornadas = db.tbJornadas.Select(t => new { jor_Id = t.jor_Id, jor_Descripcion = t.jor_Descripcion, jor_Estado = t.jor_Estado }).ToList();
                     return Json(tbJornadas, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -66,25 +65,11 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        //GET: Jornadas
-
         public ActionResult Index()
         {
-            //var tbJornadas = db.tbJornadas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-            //return View(new List<tbJornadas> { });
-            List<tbJornadas> tbJornadas = new List<Models.tbJornadas> { };
+            //bool Admin = (bool)Session["Admin"];
+            tbJornadas tbJornadas = new tbJornadas { jor_Estado = true};
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbJornadas = db.tbJornadas.Where(x => x.jor_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbJornadas);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbJornadas.Add(new tbJornadas { jor_Id = 0, jor_Descripcion= "Fallo la conexión" });
-
-            }
             return View(tbJornadas);
         }
 
@@ -112,7 +97,6 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         
-
         // POST: Jornadas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -122,9 +106,11 @@ namespace ERP_GMEDINA.Controllers
             string msj = "...";
             if (tbJornadas.jor_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+
                     var list = db.UDP_RRHH_tbJornadas_Insert(tbJornadas.jor_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbJornadas_Insert_Result item in list)
                     {
@@ -153,6 +139,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "...";
             if (tbHorarios.hor_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
@@ -224,8 +211,9 @@ namespace ERP_GMEDINA.Controllers
             tbJornadas tbJornadas = null;
             try
             {
+                db = new ERP_GMEDINAEntities();         
                 tbJornadas = db.tbJornadas.Find(id);
-                if (tbJornadas == null || !tbJornadas.jor_Estado)
+                if (tbJornadas == null)
                 {
                     return HttpNotFound();
                 }
@@ -263,6 +251,7 @@ namespace ERP_GMEDINA.Controllers
             tbHorarios tbHorarios = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbHorarios = db.tbHorarios.Find(id);
                 if (tbHorarios == null || !tbHorarios.hor_Estado)
                 {
@@ -309,6 +298,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbJornadas_Update(id, tbJornadas.jor_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbJornadas_Update_Result item in list)
                     {
@@ -338,7 +328,8 @@ namespace ERP_GMEDINA.Controllers
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
-                {                    
+                {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHorarios_Update(id, tbHorarios.hor_Descripcion, tbHorarios.hor_HoraInicio, tbHorarios.hor_HoraFin, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHorarios_Update_Result item in list)
                     {
@@ -370,6 +361,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbJornadas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbJornadas_Delete_Result item in list)
                     {
@@ -400,6 +392,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHorarios_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHorarios_Delete_Result item in list)
                     {
@@ -419,9 +412,58 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult habilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    //db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbJornadas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbJornadas_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult habilitarHorario(int id)
+        {
+            string result = "";
+            string razon = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    //db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbHorarios_Restore(id, razon,Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHorarios_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db!= null)
             {
                 db.Dispose();
             }
