@@ -122,7 +122,7 @@ $("#InActivar").click(function () {
             }
         });
     } else {
-        MsgWarning(" ", "La eliminación de información debe ser justificada");
+        MsgError(" ", "La eliminación de información debe ser justificada");
     }
 });
 
