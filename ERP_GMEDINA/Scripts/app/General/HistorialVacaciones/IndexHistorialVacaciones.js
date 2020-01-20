@@ -37,7 +37,7 @@ function format(obj) {
                 '<td>' + index.hvac_AnioVacaciones + '</td>' +
                  '<td>' + Estado + '</td>' +
                 '<td>'; if (index.hvac_Estado) {
-                    div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inhactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalle</button>';
+                    div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalle</button>';
                 }
                 else {
                     div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Activar</button>' + '</td>';
