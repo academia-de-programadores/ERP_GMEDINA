@@ -10,41 +10,27 @@
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEditar" }))
                 {
                         <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @*<div class="form-group">
-							@Html.LabelFor(model => model.per_Id, "per_Id", htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-							@Html.DropDownList("per_Id", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.per_Id, "", new { @class = "text-danger", @id = "errorper_Id" })
-                            </div>
-                        </div>*@
-                        @*<div class="form-group">
-							@Html.LabelFor(model => model.fare_Id, "fare_Id", htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-							@Html.DropDownList("fare_Id", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorfare_Id" })
-                            </div>
-                        </div>*@
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })   
                             <div class="form-horizontal">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.tbPersonas.per_Identidad, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
-                                        <input class="form-contro required valid text-box single-line" data-val="true" disabled="disabled" data-val-maxlength="Excedió el número máximo de carácteres" data-val-maxlength-max="50" data-val-required="El campo &quot;Identidad&quot;es requerido" id="tbPersonas_per_Identidad" name="tbPersonas.per_Identidad" type="text" value="">
+                                        <input class="form-control text-box single-line" data-val="true" disabled="disabled" data-val-maxlength="Excedió el número máximo de carácteres" data-val-maxlength-max="50" data-val-required="El campo &quot;Identidad&quot;es requerido" id="tbPersonas_per_Identidad" name="tbPersonas.per_Identidad" type="text" value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.fare_Id, "Fase", htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("fare_Id", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.DropDownList("fare_Id", null, htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorfare_Id" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3" for="scan_Fecha">Fecha</label>
                                 <div class="col-md-8 has-error">
-                                    <input class="form-contro required valid text-box single-line" data-val="true" data-val-date="The field scan_Fecha must be a date." id="scan_Fecha" name="scan_Fecha" type="date" value="2018-01-01">
+                                    <input class="form-control required valid text-box single-line" data-val="true" data-val-date="The field scan_Fecha must be a date." id="scan_Fecha" name="scan_Fecha" type="date" value="2018-01-01">
                                     <span class="field-validation-valid text-danger" data-valmsg-for="scan_Fecha" data-valmsg-replace="true" id="errorscan_Fecha"></span>
                                 </div>
                             </div>
