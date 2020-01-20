@@ -149,6 +149,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
+        //Listo
 		#region reportes varios dinamico
 
 		//parametros del reporte
@@ -228,7 +229,20 @@ namespace ERP_GMEDINA.Controllers
 			SqlDataAdapter adp = new SqlDataAdapter(command);
 			adp.Fill(ds, "tbHistorialDePago");
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["tbHistorialDePago"]));
-			ViewBag.ReportViewer = reportViewer;
+
+            //Setiar parametros del reporte para asignar logo y usuario crea del reporte.
+            reportViewer.LocalReport.EnableExternalImages = true;
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+
+            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.Refresh();
+
+            ViewBag.ReportViewer = reportViewer;
 			ViewBag.Encabezado = encabezadoReporte;
 			//DDLS
 			ViewBag.Deducciones = new SelectList(db.tbCatalogoDeDeducciones.Where(o => o.cde_Activo == true), "cde_IdDeducciones", "cde_DescripcionDeduccion");
