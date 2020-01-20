@@ -70,6 +70,15 @@ namespace ERP_GMEDINA.Controllers
 		public ActionResult DetailsEmpleadoEncablezado(int id)
 		{
             ComprobantePagoSessionViewModel session = Session["HistorialDePago"] as ComprobantePagoSessionViewModel;
+            //Filtrar Historial de Ingresos
+            var historialIngresos = db.V_Plani_HistorialDeducciones
+                .Where(x => x.emp_Id == id && x.cpla_IdPlanilla == session.Id && x.hipa_FechaPago.Year == session.Anio).
+                Select(x => new {
+                    
+                });
+
+            //Filtrar Historial de Deducciones
+
 
             //string NombrePdf = db.tbCatalogoDeDeducciones.Where(x => x.cde_IdDeducciones == cde_IdDeducciones).Select(x => x.cde_DescripcionDeduccion).FirstOrDefault();
             string NombrePdf = "comprobante-de-pago";
