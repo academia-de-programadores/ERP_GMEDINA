@@ -21,6 +21,8 @@ namespace ERP_GMEDINA.Models
         public decimal hipa_AFP { get; set; }
         public string cde_DescripcionDeduccion { get; set; }
         public Nullable<decimal> hidp_Total { get; set; }
+        public int cpla_IdPlanilla { get; set; }
+        public System.DateTime hipa_FechaPago { get; set; }
         public Nullable<int> TotalDeducciones { get; set; }
     }
 }

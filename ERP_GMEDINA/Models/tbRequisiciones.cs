@@ -44,6 +44,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime req_FechaCrea { get; set; }
         public Nullable<int> req_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> req_FechaModifica { get; set; }
+        public int req_VacantesOcupadas { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

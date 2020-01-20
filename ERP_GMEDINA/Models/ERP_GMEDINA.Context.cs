@@ -149,8 +149,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_Plani_DecimoTercer> V_Plani_DecimoTercer { get; set; }
         public virtual DbSet<V_Plani_DesplegableHistorialPlanilla> V_Plani_DesplegableHistorialPlanilla { get; set; }
         public virtual DbSet<V_Plani_EncabezadoHistorialPlanilla> V_Plani_EncabezadoHistorialPlanilla { get; set; }
-        public virtual DbSet<V_Plani_HistorialDeducciones> V_Plani_HistorialDeducciones { get; set; }
-        public virtual DbSet<V_Plani_HistorialIngreso> V_Plani_HistorialIngreso { get; set; }
         public virtual DbSet<V_Plani_Prueba> V_Plani_Prueba { get; set; }
         public virtual DbSet<V_Plani_TipoPlani> V_Plani_TipoPlani { get; set; }
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
@@ -164,6 +162,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
+        public virtual DbSet<V_Plani_HistorialDeducciones> V_Plani_HistorialDeducciones { get; set; }
+        public virtual DbSet<V_Plani_HistorialIngreso> V_Plani_HistorialIngreso { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

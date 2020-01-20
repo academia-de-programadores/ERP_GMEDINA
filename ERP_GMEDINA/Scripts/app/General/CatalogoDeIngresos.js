@@ -158,10 +158,11 @@ $('#Editar #cin_DescripcionIngreso').keyup(function(){
 $("#btnUpdateIngresos").click(function () {
     //descedit es la variable que uso para validar si esta vacio o no
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
-
+    document.getElementById("btnEditarIngresos").disabled = false;
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
         //al validar que no este vacio muestro mi modal de confirmación
         $("#Editar #validareditar").css("display", "none");
+        $("#EditarCatalogoIngresos").modal('hide');
         $("#EditarCatalogoIngresosConfirmacion").modal({ backdrop: 'static', keyboard: false });
         $("html, body").css("overflow", "hidden");
         $("html, body").css("overflow", "scroll");
@@ -180,7 +181,7 @@ $("#btnUpdateIngresos").click(function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarIngresos").click(function () {
-    debugger;
+
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $('input[name$="cin_DescripcionIngreso"').val();
     var id = $('input[name$="cin_IdIngreso"').val();
@@ -190,7 +191,7 @@ $("#btnEditarIngresos").click(function () {
 
     //VALIDAMOS LOS CAMPOS
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
-        mostrarcargandoEditar();
+        document.getElementById("btnEditarIngresos").disabled = true;
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
@@ -203,12 +204,12 @@ $("#btnEditarIngresos").click(function () {
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                 $("#EditarCatalogoIngresos").modal('hide');
                 $("#EditarCatalogoIngresosConfirmacion").modal('hide');
-                cargarGridIngresos();
+                
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro se editó de forma exitosa!',
                 });
-                ocultarcargandoEditar();
+               
             } else {
                 iziToast.error({
                     title: 'Error',
@@ -224,7 +225,14 @@ $("#btnEditarIngresos").click(function () {
         });
     }
 });
+btnEditarNo
 
+$("#btnEditarNo").click(function () {  
+    $("#EditarCatalogoIngresosConfirmacion").modal('hide');
+    $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+});
 const btneditar = $('#btnEditarIngresos'),
     cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 
@@ -242,6 +250,8 @@ function ocultarcargandoEditar() {
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
+
+    document.getElementById("btnInactivarIngresos").disabled = false;
     $("#EditarCatalogoIngresos").modal('hide');
     $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -259,6 +269,7 @@ $("#btnNoInactivar").click(function () {
 
 
 $("#btnInactivarIngresos").click(function () {
+    document.getElementById("btnInactivarIngresos").disabled = true;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmInactivarCatalogoIngresos").serializeArray();
     var ID = InactivarID;
@@ -296,6 +307,7 @@ $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #cin_DescripcionIngreso").val('');
     $('#asteriscoCreate').removeClass('text-danger');
+    document.getElementById("btnCreateRegistroIngresos").disabled = false;
     $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
@@ -315,7 +327,7 @@ $('#btnCreateRegistroIngresos').click(function () {
 
     //VALIDAMOS LOS CAMPOS
     if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
-        mostrarCargandoCrear()
+        document.getElementById("btnCreateRegistroIngresos").disabled = true;
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/CatalogoDeIngresos/Create",
@@ -326,14 +338,14 @@ $('#btnCreateRegistroIngresos').click(function () {
 
             if (data != "error") {
                 $("#AgregarCatalogoIngresos").modal('hide');
-                cargarGridIngresos();
+               
 
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
-                ocultarCargandoCrear()
+                
                 $("#Crear #cin_DescripcionIngreso").val('');
             } else {
                 iziToast.error({
@@ -344,6 +356,7 @@ $('#btnCreateRegistroIngresos').click(function () {
         });
     }
     else {
+        document.getElementById("btnCreateRegistroIngresos").disabled = false;
         $("#descripcioncrear").css("display", "");
         $("#Crear #cin_DescripcionIngreso").focus();
         $('#asteriscoCreate').addClass('text-danger');
@@ -416,6 +429,7 @@ function spinner() {
 //FUNCION: PRIMERA FASE DE ACTIVAR
 
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
+    document.getElementById("btnActivarIngreso").disabled = false;
     //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
     IDActivar = $(this).data('id');
     $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
@@ -426,6 +440,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function
 
 //EJECUTAR LA ACTIVACION DEL REGISTRO
 $("#btnActivarIngreso").click(function () {
+    document.getElementById("btnActivarIngreso").disabled = true;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/CatalogoDeIngresos/Activar/" + IDActivar,

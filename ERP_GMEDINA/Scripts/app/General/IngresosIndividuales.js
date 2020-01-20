@@ -91,7 +91,7 @@ function spinner() {
 
 //Activar
 $(document).on("click", "#IndexTable tbody tr td #btnActivarIngresosIndividuales", function () {
-
+    document.getElementById("btnActivarRegistroIngresoIndividual").disabled = false;
     var id = $(this).closest('tr').data('id');
 
     var id = $(this).attr('iniid');
@@ -101,7 +101,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnActivarIngresosIndividuales
 });
 
 $("#btnActivarRegistroIngresoIndividual").click(function () {
-
+    document.getElementById("btnActivarRegistroIngresoIndividual").disabled = true;
     let id = localStorage.getItem('id')
 
     $.ajax({
@@ -167,6 +167,7 @@ const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
 cargandoCrear = $('#cargandoCrear')
 
 $(document).on("click", "#btnAgregarIngresoIndividual", function () {
+    document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/IngresosIndividuales/EditGetEmpleadoDDL",
@@ -196,7 +197,6 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroIngresoIndividual').click(function () {
-    debugger;
     var TOF = true;
     var ini_PagaSiempre = false;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
@@ -216,6 +216,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
         $("#Crear #validatione1").css("display", "");
         $("#ast1").css("color", "red");
         TOF = false;
+        document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
     }
     else {
         $("#Crear #validatione1").css("display", "none");
@@ -226,6 +227,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
         $("#Crear #validatione2").css("display", "");
         $("#ast2").css("color", "red");
         TOF = false;
+        document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
     }
     else {
         $("#Crear #validatione2").css("display", "none");
@@ -235,6 +237,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
         $("#Crear #validatione3").css("display", "none");
         $("#ast3").css("color", "black");
+        document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
     }
     else {
         $("#Crear #validatione3").css("display", "");
@@ -245,6 +248,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     if (expr.test(ini_Monto)) {
         $("#Crear #validatione3").css("display", "none");
         $("#ast3").css("color", "black");
+        document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
     }
     else {
         $("#Crear #validatione3").css("display", "");
@@ -253,7 +257,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     }
 
     if (TOF) {
-        mostrarCargandoCrear();
+        document.getElementById("btnCreateRegistroIngresoIndividual").disabled = true;
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/IngresosIndividuales/Create",
@@ -262,9 +266,6 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
         }).done(function (data) {
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-
-                cargarGridDeducciones();
-
                 $("#Crear #ini_Motivo").val('');
                 $("#Crear #ini_Monto").val('');
                 $("#Crear #ini_PagaSiempre").val('');
@@ -284,7 +285,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 });
             }
 
-            ocultarCargandoCrear();
+            
         });
     }
 
@@ -397,11 +398,12 @@ $("#btnEditIngresoIndividual").click(function () {
     var ini_Motivo = $("#Editar #ini_Motivo").val();
     var ini_Monto = $("#Editar #ini_Monto").val();
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-    debugger;
+  
     if (ini_Motivo == "" || ini_Motivo == null) {
         $("#Editar #validation1").css("display", "");
         $("#aste1").css("color", "red");
         TOF = false;
+
     }
     else {
         $("#Editar #validation1").css("display", "none");
@@ -433,6 +435,7 @@ $("#btnEditIngresoIndividual").click(function () {
         $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
         $("html, body").css("overflow", "hidden");
         $("html, body").css("overflow", "scroll");
+        document.getElementById("btnEditIngresoIndividual2").disabled = false;
     }
 
     $("#EditarIngresosIndividuales").submit(function (e) {
@@ -460,7 +463,7 @@ $(document).on("click", "#btnReg", function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditIngresoIndividual2").click(function () {
-    debugger;
+    document.getElementById("btnEditIngresoIndividual2").disabled = true;
     var ini_PagaSiempre = false;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var ini_IdIngresosIndividuales = $("#Editar #ini_IdIngresosIndividuales").val();
@@ -474,9 +477,6 @@ $("#btnEditIngresoIndividual2").click(function () {
     else{
         ini_PagaSiempre = false;
     }
-
-        mostrarCargandoEditar();
-
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/IngresosIndividuales/Edit",
@@ -503,8 +503,6 @@ $("#btnEditIngresoIndividual2").click(function () {
                     message: '¡No se editó el registro, contacte al administrador!',
                 });
             }
-
-            ocultarCargandoEditar();
         });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -612,6 +610,7 @@ $(document).on("click", "#btnInactivarIngresoIndividual", function () {
     $("#InactivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
+    document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = false;
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroIngresoIndividual')
@@ -634,7 +633,7 @@ function mostrarCargandoInhabilitar() {
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroIngresoIndividual").click(function () {
-
+    document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = true;
     var data = $("#frmInactivarIngresoIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
