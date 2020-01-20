@@ -22,24 +22,18 @@ namespace ERP_GMEDINA.Models
         [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Texto válido sin Números")]
         [Display(Name = "AFP")]
         public string afp_Descripcion { get; set; }
-
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
+        
         [Required(ErrorMessage = "Campo Aporte Mínimo Requerido")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [DataType(DataType.Currency)]
         [Display(Name = "Aporte Mínimo")]
         public decimal afp_AporteMinimoLps { get; set; }
 
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Interés por Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
         [Required(ErrorMessage = "Campo Interés Aporte Requerido")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [DataType(DataType.Currency)]
         [Display(Name = "Interés por Aporte")]
         public decimal afp_InteresAporte { get; set; }
 
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Interés Anual no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
         [Required(ErrorMessage = "Campo Interés Anual Requerido")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [DataType(DataType.Currency)]
         [Display(Name = "Interés Anual")]
         public decimal afp_InteresAnual { get; set; }

@@ -42,8 +42,9 @@ namespace ERP_GMEDINA.Controllers
             var DDL =
             from Personas in db.tbPersonas
             join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
-            join Cargo in db.tbCargos on Empleados.car_Id equals Cargo.car_Id
-            where Cargo.car_Descripcion == "Vendedor" && Empleados.emp_Estado == true
+            join planillas in db.tbCatalogoDePlanillas on Empleados.cpla_IdPlanilla equals planillas.cpla_IdPlanilla
+            //join Cargo in db.tbCargos on Empleados.car_Id equals Cargo.car_Id
+            where planillas.cpla_RecibeComision == true && Empleados.emp_Estado == true
             select new
             {
                 Id = Empleados.emp_Id,
