@@ -79,6 +79,7 @@ function cargarGridISR() {
 
 //crear isr
 $(document).on("click", "#btnAgregarISR", function () {
+    document.getElementById("btnCreateISR").disabled = false;
     //llenar ddls
     $.ajax({
         url: "/ISR/EditGetDDL",
@@ -108,7 +109,6 @@ $(document).on("click", "#btnAgregarISR", function () {
 //crear nuevo rango isr
 $('#btnCreateISR').click(function () {
     var ModelState = true;
-
     var rangoInicial = $("#Crear #isr_RangoInicial").val().trim();
     var rangoFinal = $("#Crear #isr_RangoFinal").val().trim();
     var tipoDeduccion = $("#Crear #tde_IdTipoDedu").val().trim();
@@ -165,6 +165,7 @@ $('#btnCreateISR').click(function () {
                 });
             }
             else if (data == "bien") {
+                document.getElementById("btnCreateISR").disabled = true;
                 $("#AgregarISR").modal('hide');
                 cargarGridISR();
                 // Mensaje de exito cuando un registro se ha guardado bien
@@ -183,7 +184,7 @@ $('#btnCreateISR').click(function () {
 // validaciones AsteriscoRangoInicialISR
 $('#frmISRCreate #isr_RangoInicial').keyup(function () {
     if ($("#frmISRCreate #isr_RangoInicial").val().trim() != '') {
-        $('#AsteriscoRangoInicialISR').removeClass('text-danger');
+        $('#frmISRCreate AsteriscoRangoInicialISR').removeClass('text-danger');
         $("#Crear #Validation_RangoInicial").css('display', 'none');
     }
     else {
@@ -254,6 +255,7 @@ $('#frmISRCreate #isr_Porcentaje').keyup(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
+    document.getElementById("btnEditarISR").disabled = false;
     var ID = $(this).data('id');
     $('#frmEditISR #Validation_tde_IdTipoDedu').css('display', 'none');
     $('#frmEditISR .messageValidation').css('display', 'none');
@@ -306,7 +308,6 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarISR").click(function () {
     var rangoInicial = $("#Editar #isr_RangoInicial").val().trim();
     var rangoFinal = $("#Editar #isr_RangoFinal").val().trim();
@@ -349,8 +350,23 @@ $("#btnEditarISR").click(function () {
         $('#PorcentajeAsterisco').addClass("text-danger");
     }
 
-    
+
     if (ModelState == true) {
+        $("#EditarISR").modal('hide');
+        $("#EditarISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        document.getElementById("btnEditISR2").disabled = false;
+    }
+
+});
+
+$(document).on("click", "#btnRegresar", function () {
+    $("#EditarISRConfirmacion").modal('hide');
+    document.getElementById("btnEditISR2").disabled = false;
+    $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditISR2").click(function () {
         $('#btnEditarISR').attr('disabled', true);
         var data = $("#frmEditISR").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -366,8 +382,9 @@ $("#btnEditarISR").click(function () {
                 });
             }
             else {
+                document.getElementById("btnEditISR2").disabled = true;
                 cargarGridISR();
-                $("#EditarISR").modal('hide');
+                $("#EditarISRConfirmacion").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
@@ -376,7 +393,6 @@ $("#btnEditarISR").click(function () {
             }
         });
         $('#btnEditarISR').attr('disabled', false);
-    }
 });
 
 
@@ -460,17 +476,21 @@ $('#frmEditISR #isr_Porcentaje').keyup(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarISR").modal('hide');
+    document.getElementById("btnEditISR2").disabled = false;
 });
 
 $(document).on("click", "#btnModalInactivarISR", function () {
     $("#EditarISR").modal('hide');
+    document.getElementById("btnInactivarISR").disabled = false;
     $("#InactivarISR").modal({ backdrop: 'static', keyboard: false });
 });
 
 $(document).on("click", "#btnBack", function () {
     $("#InactivarISR").modal('hide');
+    document.getElementById("btnEditISR2").disabled = false;
     $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
 });
+
 
 
 //Inactivar registro Techos Deducciones    
@@ -489,6 +509,7 @@ $("#btnInactivarISR").click(function () {
             });
         }
         else {
+            document.getElementById("btnInactivarISR").disabled = true;
             $("#InactivarISR").modal('hide');
             cargarGridISR();            
             //Mensaje de exito de la edicion

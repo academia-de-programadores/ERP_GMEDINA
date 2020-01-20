@@ -86,7 +86,7 @@ function spinner() {
 
 //Activar
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
-
+    document.getElementById("btnActivarRegistroAFP").disabled = false;
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('afpid');
@@ -96,7 +96,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 });
 
 $("#btnActivarRegistroAFP").click(function () {
-
+    document.getElementById("btnActivarRegistroAFP").disabled = true;
     let ID = localStorage.getItem('id')
 
     $.ajax({
@@ -127,6 +127,7 @@ $("#btnActivarRegistroAFP").click(function () {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
+    document.getElementById("btnCreateRegistroAFP").disabled = false;
     $("#afp_Descripcion").val('');
     $("#afp_AporteMinimoLps").val('');
     $("#afp_InteresAporte").val('');
@@ -165,6 +166,7 @@ function mostrarCargandoCrear() {
 }
 
 $(document).on("click", "#btnAgregarAFP", function () {
+    document.getElementById("btnCreateRegistroAFP").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/AFP/EditGetTipoDeduccionDDL",
@@ -286,7 +288,6 @@ $('#btnCreateRegistroAFP').click(function () {
     }
 
     if (TOF) {
-        mostrarCargandoCrear();
 
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCreateAFP").serializeArray();
@@ -300,7 +301,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-
+                document.getElementById("btnCreateRegistroAFP").disabled = true;
                 cargarGridDeducciones();
 
                 $("#Crear #afp_Descripcion").val('');
@@ -324,8 +325,6 @@ $('#btnCreateRegistroAFP').click(function () {
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
-
-            ocultarCargandoCrear();
         });
     }
 
@@ -373,6 +372,7 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
+    document.getElementById("btnEditAFPConfirmar").disabled = false;
     var ID = $(this).data('id');
     $.ajax({
         url: "/AFP/Edit/" + ID,
@@ -513,12 +513,12 @@ $(document).on("click", "#btnRegresar", function () {
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
     $("#EditarAFPConfirmacion").modal('hide');
+    document.getElementById("btnEditAFPConfirmar").disabled = false;
 });
 
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditAFPConfirmar").click(function () {
-    mostrarCargandoEditar();
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditarAFP").serializeArray();
@@ -529,12 +529,13 @@ $("#btnEditAFPConfirmar").click(function () {
         data: data
     }).done(function (data) {
         if (data != "error") {
-
+            document.getElementById("btnEditAFPConfirmar").disabled = true;
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarAFPConfirmacion").modal('hide');
             $("#EditarAFP").modal('hide');
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
+
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
@@ -549,7 +550,6 @@ $("#btnEditAFPConfirmar").click(function () {
             });
         }
         
-        ocultarCargandoEditar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -633,6 +633,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
+    document.getElementById("btnInactivarRegistroAFP").disabled = false;
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
@@ -647,6 +648,7 @@ $(document).on("click", "#btnBa", function () {
 });
 
 $(document).on("click", "#btnInactivarAFP", function () {
+    document.getElementById("btnInactivarRegistroAFP").disabled = false;
     $("#EditarAFP").modal('hide');    
     $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -673,7 +675,7 @@ function mostrarCargandoInhabilitar() {
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroAFP").click(function () {
-
+    document.getElementById("btnInactivarRegistroAFP").disabled = true;
     var data = $("#frmInactivarAFP").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -689,10 +691,8 @@ $("#btnInactivarRegistroAFP").click(function () {
             });
         }
         else {
-            mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
-
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarAFP").modal('hide');
             $("#EditarAFP").modal('hide');
@@ -703,7 +703,6 @@ $("#btnInactivarRegistroAFP").click(function () {
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
-        ocultarCargandoInhabilitar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal

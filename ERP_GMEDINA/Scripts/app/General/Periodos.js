@@ -96,6 +96,8 @@ function ValidarForm() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarPeriodo", function () {
+    //DESBLOQUEAR EL BOTON DE CREAR
+    $("#btnCrearPeriodoConfirmar").attr("disabled", false);
     //DESPLEGAR EL MODAL DE PERIODO
     $("#Crear #peri_DescripPeriodo").val('');
     $("#CrearPeriodo").modal();
@@ -110,6 +112,8 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
 //FUNCION: CREAR UN NUEVO REGISTRO
 
 $('#btnCrearPeriodoConfirmar').click(function () {
+    //BLOQUEAR EL BOTON DE CREAR
+    $("#btnCrearPeriodoConfirmar").attr("disabled", true);
 
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
@@ -127,6 +131,8 @@ $('#btnCrearPeriodoConfirmar').click(function () {
           }).done(function (data) {
              //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
               if (data == "error") {
+                  //DESBLOQUEAR EL BOTON DE CREAR
+                  $("#btnCrearPeriodoConfirmar").attr("disabled", false);
                   ocultarCargandoCrear();
                  iziToast.error({
                      title: 'Error',
@@ -209,6 +215,8 @@ $("#btnUpdatePeriodo").click(function () {
     if (desc != '' && desc != null && desc != undefined && isNaN(desc) == true) {
         $("#EditarPeriodo").modal('hide');
         $("#ConfirmarEdicion").modal();
+        //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
+        $("#btnConfirmarEditar").attr("disabled", false);
     }
     else {
         //MOSTRAR DATAANNOTATION
@@ -231,8 +239,11 @@ $("#btnCerrarConfirmarEditar").click(function () {
 
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnConfirmarEditar", function () {
-
+    //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
+    $("#btnConfirmarEditar").attr("disabled", true);
+    //OCULTAR DATAANNOTATIONS
     DataAnnotations(false);
+    //VALIDAR PETICION AL SERVIDOR
     if ($("#Editar #peri_DescripPeriodo").val() != "") {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -245,6 +256,9 @@ $(document).on("click", "#btnConfirmarEditar", function () {
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data != 'error') {
+                //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
+                $("#btnConfirmarEditar").attr("disabled", false);
+                //REFRESCAR EL DATATABLE
                 cargarGridPeriodo();
                 $("#ConfirmarEdicion").modal('hide');
                 // Mensaje de exito cuando un registro se ha guardado bien
@@ -316,6 +330,8 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPeriodo", function () {
+    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+    $("#btnInactivarPeriodoConfirmar").attr("disabled", false);
     //OCULTAR MODAL DE EDICION
     $("#EditarPeriodo").modal('hide');
     //MOSTRAR MODAL DE INACTIVACION
@@ -332,6 +348,8 @@ $(document).on("click", "#btnCerrarInactivar", function () {
 
 //CONFIRMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarPeriodoConfirmar").click(function () {
+    //BLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+    $("#btnInactivarPeriodoConfirmar").attr("disabled", true);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/Periodos/Inactivar/" + IDInactivar,
@@ -339,6 +357,8 @@ $("#btnInactivarPeriodoConfirmar").click(function () {
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
         if (data == "error") {
+            //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+            $("#btnInactivarPeriodoConfirmar").attr("disabled", false);
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
@@ -365,13 +385,17 @@ $("#btnInactivarPeriodoConfirmar").click(function () {
 //ACTIVAR
 var ActivarID = 0;
 $(document).on("click", "#btnActivarPeriodos", function () {
+    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+    $("#btnActivarPeriodoConfirm").attr("disabled", false);
     ActivarID = $(this).data('id');
-//DESPLEGAR EL MODAL DE ACTIVAR
+    //DESPLEGAR EL MODAL DE ACTIVAR
     $("#ActivarPeriodo").modal();
 });
 
 //CONFIRMAR ACTIVACION DEL REGISTRO
 $("#btnActivarPeriodoConfirm").click(function () {
+    //BLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+    $("#btnActivarPeriodoConfirm").attr("disabled", true);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/Periodos/Activar/" + ActivarID,
@@ -379,6 +403,8 @@ $("#btnActivarPeriodoConfirm").click(function () {
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
         if (data == "error") {
+            //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+            $("#btnActivarPeriodoConfirm").attr("disabled", false);
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',

@@ -131,6 +131,8 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 
 });
 
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
@@ -149,29 +151,10 @@ $("#btnCerrarCrear").click(function () {
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
     $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
+    $("#dei_PagaSiempre").prop('checked', false);
     $("#AgregarDeduccionesIndividuales").modal('hide');
 });
 
-$("#btnIconCerrar").click(function () {
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#Crear #ast1").css("color", "black");
-    $("#Crear #ast2").css("color", "black");
-    $("#Crear #ast3").css("color", "black");
-    $("#Crear #ast4").css("color", "black");
-    $("#Crear #ast5").css("color", "black");
-    $("#emp_Id").val("0");
-    $("#dei_Motivo").val('');
-    $("#dei_MontoInicial").val('');
-    $("#dei_MontoRestante").val('');
-    $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
-    $("#AgregarDeduccionesIndividuales").modal('hide');
-});
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -210,13 +193,15 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionesIndividuales").modal();
+    $("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
     $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
+    $('#dei_PagaSiempre').prop('checked', false);
 });
 
 
@@ -319,7 +304,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
 
     if (TOF) {
         document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
-        mostrarCargandoCrear();
+
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/DeduccionesIndividuales/Create",
@@ -336,8 +321,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
                 $("#Crear #dei_MontoInicial").val('');
                 $("#Crear #dei_MontoRestante").val('');
                 $("#Crear #dei_Cuota").val('');
-                $("#Crear #dei_PagaSiempre").val('');
-
+                $('#Crear #dei_PagaSiempre').prop('checked', false);
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarDeduccionesIndividuales").modal('hide');
 
@@ -379,6 +363,7 @@ $("#btnCerrarEditar").click(function () {
     $("#Editar #aste5").css("color", "black");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
+
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -553,6 +538,7 @@ $("#btnEditDeduccionIndividual").click(function () {
 
 
 $(document).on("click", "#btnRegresar", function () {
+    document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -595,7 +581,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
         data: { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_MontoInicial: dei_MontoInicial, dei_MontoRestante: dei_MontoRestante, dei_Cuota: dei_Cuota, dei_PagaSiempre: dei_PagaSiempre }
     }).done(function (data) {
         if (data != "error") {
-            document.getElementById("btnEditDeduccionIndividual2").disabled = false;
+            document.getElementById("btnEditDeduccionIndividual2").disabled = true;
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             $("#EditarDeduccionesIndividuales").modal('hide');

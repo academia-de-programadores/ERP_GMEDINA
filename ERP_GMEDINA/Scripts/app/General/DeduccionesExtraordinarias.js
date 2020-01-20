@@ -213,20 +213,12 @@ $(btnAgregar).click(function () {
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
                 document.getElementById("btnAgregar").disabled = true;
-
-                cargarGridDeducciones();
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
-                equipoEmpId.val("0");
-                montoInicial.val("");
-                montoRestante.val("");
-                observaciones.val("");
-                idDeduccion.val("0");
-                cuota.val("");
             }
             else {
                 iziToast.error({
@@ -315,6 +307,9 @@ function validaciones(equipoEmpId,
     return todoBien;
 }
 
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function mostrarCargandoEditar() {
@@ -332,7 +327,7 @@ function ocultarCargandoEditar() {
 //Editar
 $(btnEditar).click(function () {
     console.clear();
-    if (validaciones(
+    if (validacion(
         MontoInicial,
         MontoRestante,
         Observaciones,
@@ -347,11 +342,10 @@ $(btnEditar).click(function () {
             method: "POST",
             data: data
         }).done(function (data) {
-
+            debugger;
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
+            if (data == "Exito") {
                 document.getElementById("btnEditar").disabled = true;
-                cargarGridDeducciones();
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
