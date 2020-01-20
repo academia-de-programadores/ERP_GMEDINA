@@ -6,21 +6,27 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.31069cm</Width>
+              <Width>4.00289cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.31069cm</Width>
+              <Width>4.00289cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.31069cm</Width>
+              <Width>4.00289cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.31069cm</Width>
+              <Width>4.00289cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.00289cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.00289cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.65292cm</Height>
+              <Height>0.77198cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -32,9 +38,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>emp Id</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -63,16 +67,44 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>cin Descripcion Ingreso</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Value>nombre Empleado</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>identidad Empleado</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -95,16 +127,44 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hipa Fecha Pago</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Value>cin Descripcion Ingreso</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>hipa Fecha Pago</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -128,15 +188,13 @@
                           <TextRuns>
                             <TextRun>
                               <Value>hip Total Pagar</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <rd:DefaultName>Textbox11</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -153,7 +211,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.65292cm</Height>
+              <Height>0.77198cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -172,6 +230,66 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>emp_Id</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="nombreEmpleado">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!nombreEmpleado.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>nombreEmpleado</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="identidadEmpleado">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!identidadEmpleado.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>identidadEmpleado</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -285,6 +403,8 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -297,11 +417,10 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>ReportesPlanillaDS</DataSetName>
-        <Top>1.69333cm</Top>
-        <Left>0.7159cm</Left>
-        <Height>1.30584cm</Height>
-        <Width>25.24276cm</Width>
+        <DataSetName>DataSetHistorialIngresos</DataSetName>
+        <Top>0.17639cm</Top>
+        <Height>1.54396cm</Height>
+        <Width>24.01737cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -309,8 +428,8 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>5.06066cm</Top>
-        <Left>0.7159cm</Left>
+        <Top>3.31597cm</Top>
+        <Left>0.64367cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
         <ZIndex>1</ZIndex>
@@ -344,8 +463,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>5.33705cm</Top>
-        <Left>4.18194cm</Left>
+        <Top>3.49236cm</Top>
+        <Left>4.00289cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>2</ZIndex>
@@ -360,13 +479,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>2.77083in</Height>
+    <Height>2in</Height>
     <Style />
   </Body>
-  <Width>10.21995in</Width>
+  <Width>9.45566in</Width>
   <Page>
     <PageHeader>
-      <Height>4.98019cm</Height>
+      <Height>3.55551cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -374,7 +493,7 @@
           <Source>Embedded</Source>
           <Value>image11</Value>
           <Sizing>FitProportional</Sizing>
-          <Height>4.98019cm</Height>
+          <Height>3.55551cm</Height>
           <Width>10.43286cm</Width>
           <Style>
             <Border>
@@ -387,7 +506,7 @@
           <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.32434cm</Top>
-          <Left>22.97861cm</Left>
+          <Left>21.15299cm</Left>
           <Height>1.92246cm</Height>
           <Width>1.93834cm</Width>
           <ZIndex>1</ZIndex>
@@ -409,6 +528,41 @@
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Fecha de Impresion: </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>0.46729cm</Top>
+          <Left>16.32794cm</Left>
+          <Height>0.6cm</Height>
+          <Width>7.18141cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
         <Textbox Name="Textbox6">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -437,44 +591,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>1.47271cm</Top>
-          <Left>17.73554cm</Left>
+          <Left>19.87336cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.18141cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox9">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Fecha de Impresion: </Value>
-                  <Style />
-                </TextRun>
-                <TextRun>
-                  <Value>=Globals!ExecutionTime</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.46729cm</Top>
-          <Left>17.73554cm</Left>
-          <Height>0.6cm</Height>
-          <Width>7.18141cm</Width>
+          <Width>3.63599cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -509,11 +628,11 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>dc618133-1e23-4234-971e-889d3c22e214</rd:DataSourceID>
+      <rd:DataSourceID>fb35d71e-a58b-4fcf-a25d-fb59d3aa35cd</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ReportesPlanillaDS">
+    <DataSet Name="DataSetHistorialIngresos">
       <Query>
         <DataSourceName>ReportesPlanillaDS</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -538,6 +657,14 @@
         <Field Name="hipa_FechaPago">
           <DataField>hipa_FechaPago</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="nombreEmpleado">
+          <DataField>nombreEmpleado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="identidadEmpleado">
+          <DataField>identidadEmpleado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="cpla_IdPlanilla">
           <DataField>cpla_IdPlanilla</DataField>
@@ -651,5 +778,5 @@ RERERERERERERERERET0J/8f/Nm5nEdBMBsAAAAASUVORK5CYII=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>b53188a0-0687-4214-8b61-95a7d2d4377f</rd:ReportID>
+  <rd:ReportID>607e7389-ea4b-4eb5-8df8-a88a55dd50b0</rd:ReportID>
 </Report>
