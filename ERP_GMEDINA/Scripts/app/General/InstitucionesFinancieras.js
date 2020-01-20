@@ -13,8 +13,8 @@
     validacionCorreo = $('#validacionCorreo')
 ;
 
-
-const btnEditar = $('#btnAgregarInstFin'),
+const btnEditar = $('#btnEditarInstFin');
+const btnEditarConfirmar = $('#btnModalActualizarINFS'),
     DescripInstFin = $('#insf_DescInstitucionFinanc'),
     Contact = $('#insf_Contacto'),
     Tel = $('#phone'),
@@ -77,6 +77,11 @@ $('#btnCargarPlanilla').click(function ()
 
 
 
+
+$(document).on("click", "#btnModalActualizarINFS", function () {
+    //  activarID = $(this).data('id');
+    $("#frmActualizarINFS").modal();
+});
 
 
 // INACTIVAR 
