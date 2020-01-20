@@ -122,13 +122,13 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
+        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
             tbAcumuladosISR.aisr_UsuarioCrea = 1;
             tbAcumuladosISR.aisr_FechaCrea = DateTime.Now;
+            tbAcumuladosISR.aisr_Monto = (decimal)((tbAcumuladosISR.aisr_Monto % 1 == 0) ? Convert.ToDecimal(tbAcumuladosISR.aisr_Monto + ".00") : Convert.ToDecimal(tbAcumuladosISR.aisr_Monto) );
 
 
             //LLENAR DATA DE AUDITORIA

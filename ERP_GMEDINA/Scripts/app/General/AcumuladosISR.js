@@ -155,8 +155,13 @@ $('#btnCreateAcumuladosISR').click(function () {
     }
 });
 
+//VariableGlobal de edicion
+var Data_Edit = "";
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR", function () {
+    //SETEO DE LA VARIABLE GLOBAL DE EDICION
+    Data_Edit = "";
+    //CAPTURA DEL ID
     var ID = $(this).data('id');
     InactivarID = ID;
     $.ajax({
@@ -169,7 +174,13 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                debugger;
+                //PREFORMATO DE FECHA
+                data.aisr_FechaCrea = FechaFormato(data.aisr_FechaCrea);
+                data.aisr_FechaModifica = FechaFormato(data.aisr_FechaModifica);
+                //SETEO DE LA VARIABLE GLOBAL DE EDICION
+                Data_Edit = data;
+                console.log(Data_Edit);
+                //LLENADO DEL FORMULARIO DEL MODAL
                 var montoFormato = (data.aisr_Monto % 1 == 0) ? data.aisr_Monto + ".00" : data.aisr_Monto;
                 $("#Editar #aisr_Id").val(data.aisr_Id);
                 $("#Editar #aisr_FechaCrea").val(data.aisr_FechaCrea);
@@ -232,12 +243,13 @@ $("#btnEditarAcumulado").click(function () {
 
 ///
 $("#btnUpdateAISR2").click(function () {
-    var data = $("#frmEditAcumuladosISR").serializeArray();
+    //var data = $("#frmEditAcumuladosISR").serializeArray();
+    console.log(Data_Edit);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AcumuladosISR/Edit",
         method: "POST",
-        data: data
+        data: Data_Edit
     }).done(function (data) {
         if (data != "error") {
             debugger;
