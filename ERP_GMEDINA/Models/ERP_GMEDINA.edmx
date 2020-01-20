@@ -1302,8 +1302,8 @@
           <Property Name="treq_UsuarioModifica" Type="int" />
           <Property Name="treq_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.EmpleadosVendedores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.EmpleadosVendedores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmpleadosVendedores">
           <Key>
             <PropertyRef Name="Id" />
@@ -1312,8 +1312,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.EmpleadosVendedores' no ti
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="101" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_AFP_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_AFP_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_AFP_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1332,8 +1332,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_AFP_RPT' no tiene defini
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_BonosColaborador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_BonosColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_BonosColaborador">
           <Key>
             <PropertyRef Name="cb_Id" />
@@ -1359,8 +1359,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_BonosColaborador' no tie
           <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_CatalogoDeIngresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_CatalogoDeIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_CatalogoDeIngresos">
           <Key>
             <PropertyRef Name="cin_IdIngreso" />
@@ -1377,8 +1377,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_CatalogoDeIngresos' no t
           <Property Name="cin_FechaModifica" Type="datetime" />
           <Property Name="cin_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_CatalogoDePlanillasConIngresosYDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_CatalogoDePlanillasConIngresosYDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_CatalogoDePlanillasConIngresosYDeducciones">
           <Key>
             <PropertyRef Name="idPlanilla" />
@@ -1393,8 +1393,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_CatalogoDePlanillasConIn
           <Property Name="idDeducciones" Type="int" />
           <Property Name="descripcionDeduccion" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ColaboradoresPorPlanilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ColaboradoresPorPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ColaboradoresPorPlanilla">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -1404,8 +1404,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ColaboradoresPorPlanilla
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CantidadColaboradores" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ComisionesColaborador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ComisionesColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ComisionesColaborador">
           <Key>
             <PropertyRef Name="cc_Id" />
@@ -1431,8 +1431,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ComisionesColaborador' n
           <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoCuartoMes">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1449,8 +1449,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' no tien
           <Property Name="CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="Monto" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_Pagados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_Pagados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoCuartoMes_Pagados">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1469,8 +1469,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_Pagados'
           <Property Name="dcm_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="dcm_FechaPago" Type="date" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoCuartoMes_RPT">
           <Key>
             <PropertyRef Name="dcm_IdDecimoCuartoMes" />
@@ -1493,8 +1493,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' no 
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoTercerMes">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1511,8 +1511,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes' no tien
           <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="dtm_Monto" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_Pagados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes_Pagados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoTercerMes_Pagados">
           <Key>
             <PropertyRef Name="per_Nombres" />
@@ -1530,8 +1530,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_Pagados'
           <Property Name="dtm_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="dtm_FechaPago" Type="date" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoTercerMes_RPT">
           <Key>
             <PropertyRef Name="dtm_IdDecimoTercerMes" />
@@ -1553,8 +1553,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Deducciones_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Deducciones_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Deducciones_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1580,8 +1580,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Deducciones_RPT' no tien
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtraordinarias">
           <Key>
             <PropertyRef Name="per_DeduccionEmpleado" />
@@ -1596,8 +1596,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinari
           <Property Name="dex_Cuota" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Detalles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Detalles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtraordinarias_Detalles">
           <Key>
             <PropertyRef Name="dex_IdDeduccionesExtra" />
@@ -1631,8 +1631,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinari
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtraordinarias_Empleados">
           <Key>
             <PropertyRef Name="dex_IdDeduccionesExtra" />
@@ -1659,8 +1659,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinari
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_EquipoEmpleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_EquipoEmpleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
           <Key>
             <PropertyRef Name="eqem_Id" />
@@ -1673,8 +1673,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinari
           <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="per_EquipoEmpleado" Type="nvarchar" MaxLength="154" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtrasColaboradores">
           <Key>
             <PropertyRef Name="eqtra_Id" />
@@ -1706,8 +1706,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColabor
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesInstitucionesFinancierasColaboradres' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesInstitucionesFinancierasColaboradres' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesInstitucionesFinancierasColaboradres">
           <Key>
             <PropertyRef Name="deif_IdDeduccionInstFinanciera" />
@@ -1732,8 +1732,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesInstituciones
           <Property Name="insf_DescInstitucionFinanc" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_EmpleadoBonos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_EmpleadoBonos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_EmpleadoBonos">
           <Key>
             <PropertyRef Name="cb_Id" />
@@ -1759,8 +1759,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_EmpleadoBonos' no tiene 
           <Property Name="cb_UsuarioModifica" Type="int" />
           <Property Name="cb_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_FormaDePago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_FormaDePago' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_FormaDePago">
           <Key>
             <PropertyRef Name="fpa_IdFormaPago" />
@@ -1777,8 +1777,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_FormaDePago' no tiene de
           <Property Name="fpa_FechaModifica" Type="datetime" />
           <Property Name="fpa_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_GeneralTotales_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_GeneralTotales_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_GeneralTotales_RPT">
           <Key>
             <PropertyRef Name="hipa_FechaPago" />
@@ -1795,8 +1795,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_GeneralTotales_RPT' no t
           <Property Name="cde_TotalINFOP" Type="decimal" Precision="38" Scale="4" />
           <Property Name="cde_OtrasDeducciones" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_HistorialEmpleadosLiquidados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_HistorialEmpleadosLiquidados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialEmpleadosLiquidados">
           <Key>
             <PropertyRef Name="per_Identidad" />
@@ -1815,8 +1815,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_HistorialEmpleadosLiquid
           <Property Name="moli_Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="hdli_MontoTotalLiquidacion" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_IHSS_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_IHSS_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_IHSS_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1842,8 +1842,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_IHSS_RPT' no tiene defin
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_INFOP_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_INFOP_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1869,8 +1869,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene defi
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InformacionColaborador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InformacionColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_InformacionColaborador">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1903,8 +1903,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InformacionColaborador' 
           <Property Name="car_Id" Type="int" />
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Ingresos_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Ingresos_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Ingresos_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1930,8 +1930,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Ingresos_RPT' no tiene d
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_InstitucionesFinancieras_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1957,8 +1957,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ISR_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ISR_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ISR_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1977,8 +1977,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ISR_RPT' no tiene defini
           <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Liquidaciones_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Liquidaciones_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Liquidaciones_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -2004,16 +2004,16 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Liquidaciones_RPT' no ti
           <Property Name="hliq_PorcentajeLiquidacion" Type="int" Nullable="false" />
           <Property Name="hliq_Observaciones" Type="nvarchar" MaxLength="25" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_AnioPlanilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_AnioPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_AnioPlanilla">
           <Key>
             <PropertyRef Name="hipa_Anio" />
           </Key>
           <Property Name="hipa_Anio" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_DecimoCuarto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_DecimoCuarto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_DecimoCuarto">
           <Key>
             <PropertyRef Name="dcm_IdDecimoCuartoMes" />
@@ -2029,8 +2029,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_DecimoCuarto' no t
           <Property Name="dcm_FechaPago" Type="date" Nullable="false" />
           <Property Name="dcm_Monto" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_DecimoTercer' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_DecimoTercer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_DecimoTercer">
           <Key>
             <PropertyRef Name="dtm_IdDecimoTercerMes" />
@@ -2048,8 +2048,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_DecimoTercer' no t
           <Property Name="dtm_FechaPago" Type="date" Nullable="false" />
           <Property Name="dtm_Monto" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_DesplegableHistorialPlanilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_DesplegableHistorialPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_DesplegableHistorialPlanilla">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -2059,8 +2059,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_DesplegableHistori
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="fecha" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlanilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_EncabezadoHistorialPlanilla">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -2085,12 +2085,57 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistoria
           <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_Prueba' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Plani_HistorialDeducciones">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+            <PropertyRef Name="hidp_IdHistorialdeDeduPago" />
+            <PropertyRef Name="hipa_TotalISR" />
+            <PropertyRef Name="hipa_AFP" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
+          <Property Name="hidp_IdHistorialdeDeduPago" Type="int" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="TotalDeducciones" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Plani_HistorialIngreso">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+            <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
+          <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_Prueba' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_Prueba">
           <Key>
             <PropertyRef Name="usu_Id" />
@@ -2108,8 +2153,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_Prueba' no tiene d
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_TipoPlani">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -2118,8 +2163,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' no tien
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PlanillaDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PlanillaDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_PlanillaDeducciones">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -2142,8 +2187,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PlanillaDeducciones' no 
           <Property Name="cde_PorcentajeColaborador" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cde_PorcentajeEmpresa" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PlanillaIngresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PlanillaIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_PlanillaIngresos">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -2160,8 +2205,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PlanillaIngresos' no tie
           <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PreviewPlanilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PreviewPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_PreviewPlanilla">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -2188,8 +2233,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PreviewPlanilla' no tien
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_RAP_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_RAP_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_RAP_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -2215,8 +2260,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_RAP_RPT' no tiene defini
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ReporteInstitucionesFinancieras_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ReporteInstitucionesFinancieras_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ReporteInstitucionesFinancieras_RPT">
           <Key>
             <PropertyRef Name="deif_IdDeduccionInstFinanciera" />
@@ -2243,8 +2288,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ReporteInstitucionesFina
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ReportesVarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ReportesVarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ReportesVarios">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -2299,8 +2344,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ReportesVarios' no tiene
           <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbAdelantoSueldo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbAdelantoSueldo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbAdelantoSueldo">
           <Key>
             <PropertyRef Name="adsu_IdAdelantoSueldo" />
@@ -2332,8 +2377,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbAdelantoSueldo' no tie
           <Property Name="adsu_FechaModifica" Type="datetime" />
           <Property Name="adsu_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbCatalogoDeDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbCatalogoDeDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbCatalogoDeDeducciones">
           <Key>
             <PropertyRef Name="cde_IdDeducciones" />
@@ -2354,8 +2399,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbCatalogoDeDeducciones'
           <Property Name="cde_FechaModifica" Type="datetime" />
           <Property Name="cde_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbCatalogoDeIngresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbCatalogoDeIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbCatalogoDeIngresos">
           <Key>
             <PropertyRef Name="cin_IdIngreso" />
@@ -2372,8 +2417,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbCatalogoDeIngresos' no
           <Property Name="cin_FechaModifica" Type="datetime" />
           <Property Name="cin_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbEmpleadoComisiones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbEmpleadoComisiones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbEmpleadoComisiones">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -2394,8 +2439,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbEmpleadoComisiones' no
           <Property Name="jor_Descripcion" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_TipoDeduccion">
           <Key>
             <PropertyRef Name="tde_IdTipoDedu" />
@@ -6823,6 +6868,34 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
     [V_Plani_EncabezadoHistorialPlanilla].[hipa_SueldoNeto] AS [hipa_SueldoNeto], 
     [V_Plani_EncabezadoHistorialPlanilla].[peri_DescripPeriodo] AS [peri_DescripPeriodo]
     FROM [Plani].[V_Plani_EncabezadoHistorialPlanilla] AS [V_Plani_EncabezadoHistorialPlanilla]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Plani_HistorialDeducciones" EntityType="Self.V_Plani_HistorialDeducciones" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_Plani_HistorialDeducciones].[emp_Id] AS [emp_Id], 
+    [V_Plani_HistorialDeducciones].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
+    [V_Plani_HistorialDeducciones].[hidp_IdHistorialdeDeduPago] AS [hidp_IdHistorialdeDeduPago], 
+    [V_Plani_HistorialDeducciones].[hipa_TotalISR] AS [hipa_TotalISR], 
+    [V_Plani_HistorialDeducciones].[hipa_AFP] AS [hipa_AFP], 
+    [V_Plani_HistorialDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
+    [V_Plani_HistorialDeducciones].[hidp_Total] AS [hidp_Total], 
+    [V_Plani_HistorialDeducciones].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+    [V_Plani_HistorialDeducciones].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Plani_HistorialDeducciones].[nombreEmpleado] AS [nombreEmpleado], 
+    [V_Plani_HistorialDeducciones].[identidadEmpleado] AS [identidadEmpleado], 
+    [V_Plani_HistorialDeducciones].[TotalDeducciones] AS [TotalDeducciones]
+    FROM [Plani].[V_Plani_HistorialDeducciones] AS [V_Plani_HistorialDeducciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Plani_HistorialIngreso" EntityType="Self.V_Plani_HistorialIngreso" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_Plani_HistorialIngreso].[emp_Id] AS [emp_Id], 
+    [V_Plani_HistorialIngreso].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
+    [V_Plani_HistorialIngreso].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
+    [V_Plani_HistorialIngreso].[hip_TotalPagar] AS [hip_TotalPagar], 
+    [V_Plani_HistorialIngreso].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Plani_HistorialIngreso].[nombreEmpleado] AS [nombreEmpleado], 
+    [V_Plani_HistorialIngreso].[identidadEmpleado] AS [identidadEmpleado], 
+    [V_Plani_HistorialIngreso].[cpla_IdPlanilla] AS [cpla_IdPlanilla]
+    FROM [Plani].[V_Plani_HistorialIngreso] AS [V_Plani_HistorialIngreso]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_Prueba" EntityType="Self.V_Plani_Prueba" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -15977,6 +16050,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="V_Plani_HistorialDeducciones" EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" />
+          <EntitySet Name="V_Plani_HistorialIngreso" EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -16278,6 +16353,51 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
         <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="V_Plani_HistorialDeducciones">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+            <PropertyRef Name="hidp_IdHistorialdeDeduPago" />
+            <PropertyRef Name="hipa_TotalISR" />
+            <PropertyRef Name="hipa_AFP" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
+          <Property Name="hidp_IdHistorialdeDeduPago" Type="Int32" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="TotalDeducciones" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_Plani_HistorialIngreso">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+            <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
+          <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19111,6 +19231,38 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_Plani_HistorialDeducciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialDeducciones">
+              <MappingFragment StoreEntitySet="V_Plani_HistorialDeducciones">
+                <ScalarProperty Name="TotalDeducciones" ColumnName="TotalDeducciones" />
+                <ScalarProperty Name="identidadEmpleado" ColumnName="identidadEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
+                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
+                <ScalarProperty Name="hipa_AFP" ColumnName="hipa_AFP" />
+                <ScalarProperty Name="hipa_TotalISR" ColumnName="hipa_TotalISR" />
+                <ScalarProperty Name="hidp_IdHistorialdeDeduPago" ColumnName="hidp_IdHistorialdeDeduPago" />
+                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Plani_HistorialIngreso">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialIngreso">
+              <MappingFragment StoreEntitySet="V_Plani_HistorialIngreso">
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="identidadEmpleado" ColumnName="identidadEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="hip_TotalPagar" ColumnName="hip_TotalPagar" />
+                <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
+                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

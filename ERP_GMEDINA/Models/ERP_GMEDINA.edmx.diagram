@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1122e6eb808044fc8894343bb50a168f" Name="Diagram1">
+      <Diagram DiagramId="1122e6eb808044fc8894343bb50a168f" Name="Diagram1" ZoomLevel="42">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="139.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="101.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRol" Width="1.5" PointX="3" PointY="105.375" IsExpanded="true" />
@@ -407,6 +407,8 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" Width="1.5" PointX="15.375" PointY="19.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" Width="1.5" PointX="9.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
