@@ -13,21 +13,122 @@
     validacionCorreo = $('#validacionCorreo')
 ;
 
+function Validaciones(
+    DescInstFin,
+    Contac,
+    Telef,
+    Corre) {
+
+    var todoBien = true;
+
+    // Descripción Institución Financiera
+    if (DescInstFin.val() != '') {
+        AsteriscoDescripcion.removeClass('text-danger');
+        validacionDescripcion.hide();
+    } else {
+        AsteriscoDescripcion.addClass('text-danger');
+        validacionDescripcion.show();
+        todoBien = false;
+    }
+
+    // Contacto
+    if (Contac.val() != '') {
+        AsteriscoContacto.removeClass('text-danger');
+        validacionContacto.hide();
+    } else {
+        AsteriscoContacto.addClass('text-danger');
+        validacionContacto.show();
+        todoBien = false;
+    }
+
+    // Telefono
+    if (Telef.val() != '') {
+        validacionTelefono.hide();
+        AsteriscoTelefono.removeClass('text-danger');
+    } else {
+        AsteriscoTelefono.addClass('text-danger');
+        validacionTelefono.show();
+        todoBien = false;
+    }
+
+    // Correo
+    if (Corre.val() != '') {
+        AsteriscoCorreo.removeClass('text-danger');
+        validacionCorreo.hide();
+    } else {
+        AsteriscoCorreo.addClass('text-danger');
+        validacionCorreo.show();
+        todoBien = false;
+    }
+    return todoBien;
+}
+
+//////////////////////////////////////////////////////////////////
 const btnEditar = $('#btnEditarInstFin');
 const btnEditarConfirmar = $('#btnModalActualizarINFS'),
     DescripInstFin = $('#insf_DescInstitucionFinanc'),
     Contact = $('#insf_Contacto'),
     Tel = $('#phone'),
     Cor = $('#insf_Correo'),
-    AsteriscDescrip = $('#AsteriscoDescripcion'),
-    AsteriscContact = $('#AsteriscoContacto'),
-    AsteriscTel = $('#AsteriscoTelefono'),
-    AsteriscCorre = $('#AsteriscoCorreo'),
+    AsteriscDescrip = $('#AsteriscDescrip'),
+    AsteriscContact = $('#AsteriscContact'),
+    AsteriscTel = $('#AsteriscTel'),
+    AsteriscCorre = $('#AsteriscCorre'),
     validaDescripcion = $('#validaDescripcion'),
     validaContacto = $('#validaContacto'),
     validaTelefono = $('#validaTelefono'),
     validaCorreo = $('#validaCorreo')
 ;
+
+function Validacion(
+    DescripInstFin,
+    Contact,
+    Tel,
+    Cor) {
+
+    var todoBien = true;
+
+    // Descripción Institución Financiera
+    if (DescripInstFin.val() != '') {
+        AsteriscoDescripcion.removeClass('text-danger');
+        validacionDescripcion.hide();
+    } else {
+        AsteriscoDescripcion.addClass('text-danger');
+        validacionDescripcion.show();
+        todoBien = false;
+    }
+
+    // Contacto
+    if (Contact.val() != '') {
+        AsteriscoContacto.removeClass('text-danger');
+        validacionContacto.hide();
+    } else {
+        AsteriscoContacto.addClass('text-danger');
+        validacionContacto.show();
+        todoBien = false;
+    }
+
+    // Telefono
+    if (Tel.val() != '') {
+        validacionTelefono.hide();
+        AsteriscoTelefono.removeClass('text-danger');
+    } else {
+        AsteriscoTelefono.addClass('text-danger');
+        validacionTelefono.show();
+        todoBien = false;
+    }
+
+    // Correo
+    if (Cor.val() != '') {
+        AsteriscoCorreo.removeClass('text-danger');
+        validacionCorreo.hide();
+    } else {
+        AsteriscoCorreo.addClass('text-danger');
+        validacionCorreo.show();
+        todoBien = false;
+    }
+    return todoBien;
+}
 
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -83,7 +184,7 @@ function cargarGridINFS() {
                 //"@Url.Action("Information", "Admin", new { id = UrlParameter.Optional })"
 
                 //variable donde está el boton activar
-                var botonInactivar = ListaINFS[i].insf_Activo == true ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inctivar</button>' : '' : '';
+                var botonInactivar = ListaINFS[i].insf_Activo == true ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inactivar</button>' : '' : '';
 
                 //variable donde está el boton activar
                 var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
@@ -152,12 +253,16 @@ $('#btnCargarPlanilla').click(function ()
 
 
 
-
-
-
 $(document).on("click", "#btnModalActualizarINFS", function () {
     //  activarID = $(this).data('id');
     $("#frmActualizarINFS").modal();
+
+
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmEditInstFin").submit(function (e) {
+        return false;
+    });
 });
 
 

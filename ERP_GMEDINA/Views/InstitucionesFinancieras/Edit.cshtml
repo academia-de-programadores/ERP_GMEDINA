@@ -26,7 +26,7 @@
                             <label class="" id="AsteriscDescrip">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control", @id = "insf_DescInstitucionFinanc" } })
                             @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "validaDescripcion" })
                         </div>
                         </div>
@@ -37,7 +37,7 @@
                             <label class="" id="AsteriscContact">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", @id = "insf_Contacto" } })
                             @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "validaContacto" })
                         </div>
                         </div>
@@ -59,7 +59,7 @@
                             <label class="" id="AsteriscCorre">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                            @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @type = "email", @id = "insf_Correo" } })
                             @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "validaCorreo" })
                         </div>
                     </div>
@@ -67,8 +67,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @*data-id="@item.insf_IdInstitucionFinanciera"*@
-                            <button type="button" class="btn btn-primary btn-xs" id="btnModalActualizarINFS">Actualizar</button>
-                            @*<input type="submit" value="Guardar" class="btn btn-primary" />*@
+                            <button type="submit" class="btn btn-primary" id="btnModalActualizarINFS">Actualizar</button>
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                         </div>
                     </div>
@@ -90,8 +89,8 @@
                 ¿Está seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
-                <input type="button" id="btnEditDeduccionAFPConfirmar" value="Si" class="btn btn-primary " />
-                <button type="button" class="btn btn-white" data-dissmiss="modal">No</button>
+                <input type="button" id="btnEditarInstFin" value="Si" class="btn btn-primary " />
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
                 </div>
             </div>
         </div>
