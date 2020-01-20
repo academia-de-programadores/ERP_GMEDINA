@@ -55,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
                     var tbJornadas =
                         db.tbJornadas
                         .Select(t => new { jor_Id = t.jor_Id, jor_Descripcion = t.jor_Descripcion, jor_Estado = t.jor_Estado })
-                        .Where(x => x.jor_Estado == true).ToList();
+                        .ToList();
                     return Json(tbJornadas, JsonRequestBehavior.AllowGet);
                 }
             }
