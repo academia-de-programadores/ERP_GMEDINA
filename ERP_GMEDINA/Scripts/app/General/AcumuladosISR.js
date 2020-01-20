@@ -104,7 +104,7 @@ $('#btnCreateAcumuladosISR').click(function () {
     else {
         $("#Crear #Validation_descripcion").css("display", "none");
         $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
-        //ModelState = true;
+        ModelState = true;
     }
 
     if (aisr_Monto == "" || parseInt(aisr_Monto) < 0 || aisr_Monto == null) {
@@ -115,12 +115,12 @@ $('#btnCreateAcumuladosISR').click(function () {
     else {
         $("#Crear #Validation_descripcion2").css("display", "none");
         $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
-        //ModelState2 = true;
+        ModelState2 = true;
     }
 
     
     if (ModelState == false || ModelState2 == false) {
-
+        $('#btnCreateAcumuladosISR').attr('disabled', false);
     }
     else
     {
@@ -202,6 +202,7 @@ $("#btnEditarAcumulado").click(function () {
     var aisr_Montoe = $("#Editar #aisr_Monto").val();
     var ModelStatee = true;
     var ModelState2e = true;
+    var Montoe = aisr_Montoe.split(".");
 
     if (aisr_Descripcione == "" || aisr_Descripcione == " " || aisr_Descripcione == null) {
         $("#Editar #validatione1").css("display", "");
@@ -216,22 +217,32 @@ $("#btnEditarAcumulado").click(function () {
 
     if (aisr_Montoe == "" || aisr_Montoe < 0 || aisr_Montoe == null) {
         $("#Editar #validatione2").css("display", "");
+        $("#Editar #Validation_decimal").css("display", "none");
         $("#Editar #AsteriscoMontoEditAISR").addClass("text-danger");
         ModelState2e = false;
     }
     else {
-        $("#Editar #validatione2").css("display", "none");
-        $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
-        ModelState2e = true;
+        if (Montoe[1] == null || Montoe[1] == undefined) {
+            $("#Editar #Validation_decimal").css("display", "");
+            $("#Editar #validatione2").css("display", "");
+            $("#Editar #AsteriscoMontoEditAISR").addClass("text-danger");
+            ModelState2e = false;
+        }
+        else {
+            $("#Editar #validatione2").css("display", "none");
+            $("#Editar #Validation_decimal").css("display", "none");
+            $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
+            ModelState2e = true;
+            }  
     }
     if (ModelStatee == false || ModelState2e == false) {
         $("#EditarAISRConfirmacion").modal('hide');
+        $('#btnUpdateAISR2').attr('disabled', false);
     }
     else {
         $("#EditarAcumuladosISR").modal('hide');
         $("#EditarAISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        //$("html, body").css("overflow", "hidden");
-        //$("html, body").css("overflow", "scroll");
+        $('#btnUpdateAISR2').attr('disabled', false);
     }
 });
 
@@ -280,8 +291,8 @@ $("#btnCerrarEditar").click(function () {
 $("#btnConfirmacionNOAISR").click(function () {
 
     $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
-    //$("html, body").css("overflow", "hidden");
-    //$("html, body").css("overflow", "scroll");
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
@@ -328,7 +339,6 @@ $("#btnInactivarAcumuladosISREjecutar").click(function () {
 $("#btnNoInactivar").click(function () {
     $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
     $("#InactivarAcumuladosISR").modal('hide');
-    $('#btnNoInactivar').attr('disabled', false);
 });
 
 //DETALLES
