@@ -2,15 +2,15 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonos" }))
 {
     <div class="modal-body" id="Editar">
-        <div class="ibox-content">
+      
             <div class="form-horizontal">
                 @Html.HiddenFor(model => model.cb_Id)
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="pull-left">Número</label>
                         </div>
-                        <div class="col-md-6 pull-right">
+                        <div class="col-md-8 pull-right">
                             @Html.EditorFor(model => model.cb_Id, new { htmlAttributes = new { @class = "form-control", @id = "cb_Id", @disabled = "disabled" } })
 
                             <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
@@ -20,12 +20,12 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             @*@Html.HiddenFor(model => model.emp_Id, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
                             <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label>
                             <label class="" id="AsteriscoEmpleado">*</label>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                          
                             <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                         </div>
@@ -34,12 +34,12 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             @*@Html.HiddenFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
                             <label for="cin_IdIngreso" htmlattributes="{ class = text-box single-line, disabled = disabled }">Bono</label>
                             <label class="" id="AsteriscoBono">*</label>  
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
                         </div>
                     </div>
@@ -47,11 +47,11 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="cb_Monto" htmlattributes="{ class = text-box single-line, disabled = disabled }">Monto</label>           
                             <label class="" id="AsteriscoMonto">*</label> 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger", @id = "Validation_descipcion6" })
                         </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-    </div>
+  
     <div class="modal-footer">
         <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary pull-left" id="btnUpdateBonos">Actualizar</button>

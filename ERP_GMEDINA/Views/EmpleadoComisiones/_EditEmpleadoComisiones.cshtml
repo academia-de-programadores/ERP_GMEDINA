@@ -3,7 +3,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoComisionesEditar" }))
 {
     <div class="modal-body" id="Editar">
-        <div class="ibox-content">
+       
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
@@ -56,8 +56,6 @@
 
                 </div>
             </div>
-        </div>
-
     <div class="modal-footer">
         @*data-dismiss="modal"*@
         <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModaledit">Cerrar</button>

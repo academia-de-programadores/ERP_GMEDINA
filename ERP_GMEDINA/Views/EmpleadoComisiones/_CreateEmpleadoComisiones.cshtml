@@ -3,7 +3,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoComisionesCreate" }))
 {
     <div class="modal-body" id="Crear">
-        <div class="ibox-content">
+       
             @Html.AntiForgeryToken()
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -55,7 +55,7 @@
 
             </div>
         </div>
-    </div>
+    
         <div class="modal-footer">
             <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModal">Cerrar</button>
             <input type="submit" id="btnCreateRegistroComisiones" value="Guardar" class="btn btn-primary pull-left" />
