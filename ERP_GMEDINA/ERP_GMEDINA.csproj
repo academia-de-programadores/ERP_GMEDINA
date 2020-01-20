@@ -1863,6 +1863,7 @@
     <Content Include="Views\ReportesPlanilla\DecimoCuartoParametros.cshtml" />
     <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasParametros.cshtml" />
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
+    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1897,6 +1898,8 @@
     <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\HistorialIngresos.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\HistorialIngresosRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\ReporteAdelantoSueldoRPT.rdlc" />

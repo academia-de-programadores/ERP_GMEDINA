@@ -21,6 +21,7 @@ namespace ERP_GMEDINA.Controllers
 
 		ReportesPlanillaDS ds = new ReportesPlanillaDS();
 
+        //Listo
 		#region deducciones dinamico
 
 		//parametros del reporte
@@ -58,7 +59,21 @@ namespace ERP_GMEDINA.Controllers
 
 			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DeduccionesRPT.rdlc";
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_Deducciones_RPT"]));
-			conx.Close();
+
+            //Setiar parametros del reporte para asignar logo y usuario crea del reporte.
+            reportViewer.LocalReport.EnableExternalImages = true;
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+
+            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.Refresh();
+
+
+            conx.Close();
 
 			ViewBag.ReportViewer = reportViewer;
 			ViewBag.Titulo = db.tbCatalogoDeDeducciones.Where(x => x.cde_IdDeducciones == cde_IdDeducciones).Select(x => x.cde_DescripcionDeduccion).FirstOrDefault();
@@ -70,6 +85,7 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
+        //Listo
 		#region ingresos dinamico
 
 		//parametros del reporte
@@ -114,7 +130,20 @@ namespace ERP_GMEDINA.Controllers
 			ViewBag.Ingresos = new SelectList(db.tbCatalogoDeIngresos.Where(o => o.cin_Activo == true), "cin_IdIngreso", "cin_DescripcionIngreso");
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 			ViewBag.Titulo = db.tbCatalogoDeIngresos.Where(x => x.cin_IdIngreso == cin_IdIngreso).Select(x => x.cin_DescripcionIngreso).FirstOrDefault();
-			conx.Close();
+
+            //Setiar parametros del reporte para asignar logo y usuario crea del reporte.
+            reportViewer.LocalReport.EnableExternalImages = true;
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+
+            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.Refresh();
+
+            conx.Close();
 
 			return View();
 		}
@@ -212,6 +241,7 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
+        //Listo
 		#region decimo tercer mes
 
 		//parametros del reporte
@@ -246,7 +276,19 @@ namespace ERP_GMEDINA.Controllers
 
 			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoTercerRPT.rdlc";
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_DecimoTercerMes_RPT"]));
-			conx.Close();
+
+            //Setiar parametros del reporte para asignar logo y usuario crea del reporte.
+            reportViewer.LocalReport.EnableExternalImages = true;
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+
+            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.Refresh();
+            conx.Close();
 
 			ViewBag.ReportViewer = reportViewer;
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -255,6 +297,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
+        //Listo
 		#region decimo cuarto mes
 
 		//parametros del reporte
@@ -289,7 +332,19 @@ namespace ERP_GMEDINA.Controllers
 
 			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoCuartoRPT.rdlc";
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_DecimoCuartoMes_RPT"]));
-			conx.Close();
+
+            //Setiar parametros del reporte para asignar logo y usuario crea del reporte.
+            reportViewer.LocalReport.EnableExternalImages = true;
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+
+            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.Refresh();
+            conx.Close();
 
 			ViewBag.ReportViewer = reportViewer;
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)

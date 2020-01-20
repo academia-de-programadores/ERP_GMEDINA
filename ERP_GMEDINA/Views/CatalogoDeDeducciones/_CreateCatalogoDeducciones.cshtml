@@ -6,7 +6,7 @@
             <div class="form-group">
                 <div class="col-md-6">
                     Descripción<label class="" id="AsteriscoDescripcionDedu" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id = "cde_DescripcionDeduccionA", @Value = "" } })
+                    @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id = "cde_DescripcionDeduccionA", @Value = "", @autocomplete = "off" } })
                     @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id = "Validation_descipcionA" })
                 </div>
                 <div class="col-md-6">
@@ -19,14 +19,18 @@
             <div class="form-group">
                 <div class="col-md-6">
                     Porcentaje Colaborador<label class="" id="AsteriscoPorcentajeColaborador" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control", @id = "cde_PorcentajeColaboradorA", @Value = "" } })
-                    @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id = "Validation_descipcion3A" })
+                    @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control", @id = "cde_PorcentajeColaboradorA", @Value = "", @autocomplete = "off" } })
+                    @*@Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id = "Validation_descipcion3A" })*@
+                    <label class="text-danger" id="Validation_PorcentajeColaborador" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;"></label>
+                    @*<span class="text-danger" style="" id="Validation_PorcentajeColaborador"></span>*@
                 </div>
 
                 <div class="col-md-6">
                     Porcentaje Empresa<label class="" id="AsteriscoPorcentajeEmpresa" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @id = "cde_PorcentajeEmpresaA", @Value = "" } })
-                    @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id = "Validation_descipcion4A" })
+                    @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @id = "cde_PorcentajeEmpresaA", @Value = "", @autocomplete = "off" } })
+                    @*@Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id = "Validation_descipcion4A" })*@
+                    <label class="text-danger" id="Validation_PorcentajeEmpresa" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;"></label>
+                    @*<label class="text-danger" id="c_Validation_decimal2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>*@
                 </div>
             </div>
         </div>
