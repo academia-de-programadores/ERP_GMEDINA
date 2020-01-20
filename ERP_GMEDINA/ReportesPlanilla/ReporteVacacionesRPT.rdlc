@@ -568,7 +568,7 @@
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Left>1.30363cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.99491cm</Width>
+        <Width>25.99488cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -752,10 +752,10 @@
     </PageFooter>
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
