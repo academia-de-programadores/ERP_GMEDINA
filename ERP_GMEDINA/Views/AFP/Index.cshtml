@@ -120,11 +120,8 @@
             <div class="modal-header">
                 <h4 class="modal-title">Editar AFP</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditAFP", new ERP_GMEDINA.Models.tbAFP())
-            </div>
-
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditAFP", new ERP_GMEDINA.Models.tbAFP())
         </div>
     </div>
 </div>
@@ -141,7 +138,6 @@
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnEditAFPConfirmar" style="margin:3px" value="Si" class="btn btn-primary " />
-                <div style="display:none" class="btn" id="cargandoEditar"></div>
                 <button type="button" class="btn btn-white" id="btnRegresar">No</button>
             </div>
         </div>

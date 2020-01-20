@@ -190,7 +190,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     $("#Crear #emp_Id").val("0");
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
-    $("#ini_PagaSiempre").val('');
+    $('#Crear #ini_PagaSiempre').prop('checked', false);
 });
 
 
@@ -268,7 +268,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
             if (data != "error") {
                 $("#Crear #ini_Motivo").val('');
                 $("#Crear #ini_Monto").val('');
-                $("#Crear #ini_PagaSiempre").val('');
+                $('#Crear #ini_PagaSiempre').prop('checked', false);
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarIngresosIndividuales").modal('hide');
 
@@ -303,6 +303,9 @@ $("#btnCerrarEditar").click(function () {
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
+    $("#aste1").css("color", "black");
+    $("#aste2").css("color", "black");
+    $("#aste3").css("color", "black");
     $("#EditarIngresosIndividuales").modal('hide');
     $("#Editar #ini_IdIngresosIndividuales").val('');
     $("#Editar #ini_Motivo").val('');

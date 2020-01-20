@@ -201,16 +201,21 @@ function getTipoPlanilla(data) {
 
 $(document).on('click', '#btnDetalleCatalogoDeducciones', function(){
     let id  = $(this).data("id");
-
-    _ajax(
-		{ id: id },
-		'/FechaPlanilla/DetailsEmpleadoEncablezado',
-		'POST',
-		(data) => {
-		    console.log(data);
-		},
-		() => { }
-	);
+    var getUrl = window.location, baseUrl =
+        getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1];
+        
+    window.location = baseUrl+'/DetailsEmpleadoEncablezado/?id='+id;
+    //console.log(baseUrl+'/DetailsEmpleadoEncablezado/id='+id);
+    
+    // _ajax(
+	// 	{ id: id },
+	// 	'/FechaPlanilla/DetailsEmpleadoEncablezado',
+	// 	'POST',
+	// 	(data) => {
+	// 	    console.log(data);
+	// 	},
+	// 	() => { }
+	// );
 });
 
 $(document).ready(() => {

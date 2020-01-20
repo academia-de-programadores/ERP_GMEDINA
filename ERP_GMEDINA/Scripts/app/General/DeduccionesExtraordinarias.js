@@ -147,7 +147,7 @@ function ocultarCargandoCrear() {
 
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-
+    document.getElementById("btnActivarDeduccionesExtraordinarias").disabled = false;
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('iddeduccionesextra');
@@ -158,6 +158,7 @@ $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarD
 
 //Activar
 $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
+    document.getElementById("btnActivarRegistroDeduccionesExtraordinarias").disabled = true;
     let ID = localStorage.getItem('id')
     $.ajax({
         url: "/DeduccionesExtraordinarias/Activar",
@@ -193,14 +194,13 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 $(btnAgregar).click(function () {
     console.clear();
     if (validaciones(equipoEmpId,
-        montoInicial,
+        montoInicial,  
         montoRestante,
         observaciones,
         idDeduccion,
         cuota
     )) {
-        console.log('Paso las validaciones')
-        mostrarCargandoCrear();
+        console.log('Paso las validaciones');
 
         var data = $("#frmCreate").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -212,8 +212,7 @@ $(btnAgregar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-
-                cargarGridDeducciones();
+                document.getElementById("btnAgregar").disabled = true;
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -234,6 +233,7 @@ $(btnAgregar).click(function () {
         $("#frmCreate").submit(function (e) {
             return false;
         });
+        document.getElementById("btnAgregar").disabled = false;
 });
 
 function validaciones(equipoEmpId,
@@ -307,6 +307,9 @@ function validaciones(equipoEmpId,
     return todoBien;
 }
 
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function mostrarCargandoEditar() {
@@ -324,14 +327,13 @@ function ocultarCargandoEditar() {
 //Editar
 $(btnEditar).click(function () {
     console.clear();
-    if (validaciones(
+    if (validacion(
         MontoInicial,
         MontoRestante,
         Observaciones,
         Cuota
     )) {
-        console.log('Paso las validaciones')
-        mostrarCargandoEditar();
+        console.log('Paso las validaciones');
 
         var data = $("#frmEditar").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -340,11 +342,10 @@ $(btnEditar).click(function () {
             method: "POST",
             data: data
         }).done(function (data) {
-
+            debugger;
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
-
-                cargarGridDeducciones();
+            if (data == "Exito") {
+                document.getElementById("btnEditar").disabled = true;
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -366,6 +367,7 @@ $(btnEditar).click(function () {
     $("#frmEdit").submit(function (e) {
         return false;
     });
+    document.getElementById("btnEditar").disabled = false;
 });
 
 function validacion(
@@ -422,6 +424,7 @@ function validacion(
 
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
+    document.getElementById("btnInactivar").disabled = false;
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('iddeduccionextra');
@@ -438,6 +441,7 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
+    document.getElementById("btnInactivar").disabled = true;
     let ID = localStorage.getItem('id')
     //Se envia el Formato Json al Controlador para realizar la Inactivación
     $.ajax({

@@ -93,7 +93,7 @@ function spinner() {
 
 //Activar
 $(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividuales", function () {
-
+    document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = false;
     var id = $(this).closest('tr').data('id');
 
     var id = $(this).attr('deiid');
@@ -103,7 +103,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividua
 });
 
 $("#btnActivarRegistroDeduccionIndividual").click(function () {
-
+    document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = true;
     let id = localStorage.getItem('id')
 
     $.ajax({
@@ -131,6 +131,8 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 
 });
 
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
@@ -149,29 +151,10 @@ $("#btnCerrarCrear").click(function () {
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
     $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
+    $("#dei_PagaSiempre").prop('checked', false);
     $("#AgregarDeduccionesIndividuales").modal('hide');
 });
 
-$("#btnIconCerrar").click(function () {
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#Crear #ast1").css("color", "black");
-    $("#Crear #ast2").css("color", "black");
-    $("#Crear #ast3").css("color", "black");
-    $("#Crear #ast4").css("color", "black");
-    $("#Crear #ast5").css("color", "black");
-    $("#emp_Id").val("0");
-    $("#dei_Motivo").val('');
-    $("#dei_MontoInicial").val('');
-    $("#dei_MontoRestante").val('');
-    $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
-    $("#AgregarDeduccionesIndividuales").modal('hide');
-});
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -193,6 +176,7 @@ function mostrarCargandoCrear() {
 }
 
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
+    document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
@@ -209,13 +193,15 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionesIndividuales").modal();
+    $("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
     $("#dei_Cuota").val('');
-    $("#dei_PagaSiempre").val('');
+    $('#dei_PagaSiempre').prop('checked', false);
 });
 
 
@@ -317,7 +303,8 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
 
     if (TOF) {
-        mostrarCargandoCrear();
+        document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
+
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/DeduccionesIndividuales/Create",
@@ -334,8 +321,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
                 $("#Crear #dei_MontoInicial").val('');
                 $("#Crear #dei_MontoRestante").val('');
                 $("#Crear #dei_Cuota").val('');
-                $("#Crear #dei_PagaSiempre").val('');
-
+                $('#Crear #dei_PagaSiempre').prop('checked', false);
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarDeduccionesIndividuales").modal('hide');
 
@@ -351,8 +337,6 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
-
-            ocultarCargandoCrear();
         });
     }
    
@@ -380,6 +364,7 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
 
+
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
@@ -401,6 +386,7 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
+    document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     var id = $(this).data('id');
     $.ajax({
         url: "/DeduccionesIndividuales/Edit/" + id,
@@ -552,6 +538,7 @@ $("#btnEditDeduccionIndividual").click(function () {
 
 
 $(document).on("click", "#btnRegresar", function () {
+    document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -587,8 +574,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
     else {
         dei_PagaSiempre = false;
     }
-
-    mostrarCargandoEditar();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/DeduccionesIndividuales/Edit",
@@ -596,7 +581,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
         data: { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_MontoInicial: dei_MontoInicial, dei_MontoRestante: dei_MontoRestante, dei_Cuota: dei_Cuota, dei_PagaSiempre: dei_PagaSiempre }
     }).done(function (data) {
         if (data != "error") {
-
+            document.getElementById("btnEditDeduccionIndividual2").disabled = true;
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             $("#EditarDeduccionesIndividuales").modal('hide');
@@ -616,8 +601,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
                 message: '¡No se editó el registro, contacte al administrador!',
             });
         }
-
-        ocultarCargandoEditar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -709,6 +692,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
 
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -716,6 +700,7 @@ $(document).on("click", "#btnBack", function () {
 });
 
 $(document).on("click", "#btnBa", function () {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -723,6 +708,7 @@ $(document).on("click", "#btnBa", function () {
 });
 
 $(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#EditarDeduccionesIndividuales").modal('hide');
     $("#InactivarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -749,6 +735,7 @@ function mostrarCargandoInhabilitar() {
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccionIndividual").click(function ()
 {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = true;
     var data = $("#frmInactivarDeduccionIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({

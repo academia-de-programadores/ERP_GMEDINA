@@ -2,12 +2,12 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditarDeduccionIndividual" }))
 {
-    <div class="ibox-content">
-        @Html.HiddenFor(model => model.dei_IdDeduccionesIndividuales, new { htmlAttributes = new { @class = "form-control", @id = "dei_IdDeduccionesIndividuales" } })
+    <div class="modal-body" id="Editar">
+            @Html.HiddenFor(model => model.dei_IdDeduccionesIndividuales, new { htmlAttributes = new { @class = "form-control", @id = "dei_IdDeduccionesIndividuales" } })
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group" >
+                <div class="form-group">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.dei_Motivo)<span id="aste1">*</span>
                     </div>
@@ -60,13 +60,12 @@
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.dei_PagaSiempre)
                     </div>
-                    <div class="col-md-8">    
+                    <div class="col-md-8">
                         <input type="checkbox" class="icheckbox_square-green" name="dei_PagaSiempre" id="dei_PagaSiempre">
                     </div>
                 </div>
 
             </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>

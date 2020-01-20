@@ -220,6 +220,8 @@ function ValidarCamposCrear(val1, val2, val3){
 function OcultarValidacionesCrear() {
     $("#Crear #validatione1d").css("display", "none");
     $("#Crear #validatione2d").css("display", "none");
+    $("#Crear #validatione2d2").css("display", "none");
+    $("#Crear #validatione2d3").css("display", "none");
     $("#Crear #validatione3d").css("display", "none");
     $("#Crear #Asterisco1").removeClass("text-danger");
     $("#Crear #Asterisco2").removeClass("text-danger");

@@ -93,10 +93,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Crear Ingreso Extra</h4>
             </div>
-
             @Html.Partial("_CreateIngresosIndividuales", new ERP_GMEDINA.Models.tbIngresosIndividuales())
-
-
         </div>
     </div>
 </div>
@@ -109,11 +106,8 @@
             <div class="modal-header">
                 <h4 class="modal-title">Editar Ingreso Extra</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditIngresosIndividuales", new ERP_GMEDINA.Models.tbIngresosIndividuales())
-            </div>
-
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditIngresosIndividuales", new ERP_GMEDINA.Models.tbIngresosIndividuales())
         </div>
     </div>
 </div>
@@ -135,7 +129,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 @*Detalles*@
