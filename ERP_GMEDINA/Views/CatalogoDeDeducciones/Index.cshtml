@@ -12,7 +12,7 @@
                 <div class="ibox-title">
                     <h5>Listado de Catálogo de Deducciones</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Registrar Deduccion</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Registrar Deducción</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -96,7 +96,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="IconCerrarEdit"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Editar Deducción</h4>
             </div>
             @Html.Partial("_EditCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
@@ -109,18 +108,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="ConfirmacionEditar">
-                ¿Esta seguro que desea Editar este registro?
+                ¿Esta seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnUpdateDeduccion2" value="Si" class="btn btn-primary " />
                 <div style="display:none" class="btn" id="cargandoEditar">
                 </div>
 
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white" id="btnEditarConfirmacion">No</button>
             </div>
         </div>
     </div>
@@ -131,7 +129,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="IconCerrarCreate"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Crear Deducción</h4>
             </div>
             
@@ -144,7 +141,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Detalle Deducción</h4>
             </div>
             <div class="modal-body" id="Detalles">
@@ -157,11 +153,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Seguro que desea Inactivar el registro?
+                ¿Está seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="btnInactivarRegistroDeduccion">Si</button>
@@ -174,11 +169,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
-                ¿Seguro que desea Activar el registro?
+                ¿Está seguro que desea activar este registro?
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnActivarRegistroDeduccion" value="Si" class="btn btn-primary" />
