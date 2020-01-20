@@ -49,10 +49,10 @@ namespace ERP_GMEDINA.Helpers
 
                     trDeduccionesIngresosTemplate.Append(
                         "<tr>" +
-                            "<td class='col1'>" + conceptoIngreso + "</td>" +
-                            "<td class='col2'>" + montoIngreso + "</td>" +
-                            "<td class='col3'>" + conceptoDeduccion + "</td>" +
-                            "<td class='col4'>" + montoDeduccion + "</td>" +
+                            "<td class='col1'>&nbsp;&nbsp;&nbsp;&nbsp;" + conceptoIngreso + "</td>" +
+                            "<td class='col2'>&nbsp;&nbsp;&nbsp;&nbsp;" + montoIngreso + "</td>" +
+                            "<td class='col3'>&nbsp;&nbsp;&nbsp;&nbsp;" + conceptoDeduccion + "</td>" +
+                            "<td class='col4'>&nbsp;&nbsp;&nbsp;&nbsp;" + montoDeduccion + "</td>" +
                         "</tr>");
                     conceptoIngreso = string.Empty;
                     montoIngreso = string.Empty;
