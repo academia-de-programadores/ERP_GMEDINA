@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
-        
+
         [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Monto Inicial")]

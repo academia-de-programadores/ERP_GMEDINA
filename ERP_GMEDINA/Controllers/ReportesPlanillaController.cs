@@ -85,6 +85,7 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
+        //pendiente
 		#region ingresos dinamico
 
 		//parametros del reporte

@@ -680,7 +680,7 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.49389cm</Top>
-        <Left>0.92604cm</Left>
+        <Left>1.19062cm</Left>
         <Height>1.2cm</Height>
         <Width>24.9678cm</Width>
         <Style>
@@ -691,7 +691,7 @@
       </Tablix>
       <Line Name="Line1">
         <Top>2.92834cm</Top>
-        <Left>0.92604cm</Left>
+        <Left>0.26458cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
         <ZIndex>1</ZIndex>
@@ -726,7 +726,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
         <Top>3.10473cm</Top>
-        <Left>4.20223cm</Left>
+        <Left>3.54077cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>2</ZIndex>
@@ -744,25 +744,13 @@
     <Height>1.45856in</Height>
     <Style />
   </Body>
-  <Width>10.19443in</Width>
+  <Width>10.29859in</Width>
   <Page>
     <PageHeader>
-      <Height>4.98019cm</Height>
+      <Height>4.98361cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Image Name="Image5">
-          <Source>Embedded</Source>
-          <Value>image11</Value>
-          <Sizing>FitProportional</Sizing>
-          <Height>4.98019cm</Height>
-          <Width>10.43286cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
         <Textbox Name="Textbox1">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -792,10 +780,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>3.72848cm</Top>
+          <Top>3.7319cm</Top>
+          <Left>0.26458cm</Left>
           <Height>0.6cm</Height>
           <Width>24.91695cm</Width>
-          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -826,10 +814,11 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
-          <Top>3.02265cm</Top>
+          <Top>3.02607cm</Top>
+          <Left>0.26458cm</Left>
           <Height>0.6cm</Height>
           <Width>24.91695cm</Width>
-          <ZIndex>2</ZIndex>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -844,10 +833,24 @@
           <Source>Embedded</Source>
           <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.28907cm</Top>
-          <Left>22.97861cm</Left>
+          <Top>0.29249cm</Top>
+          <Left>23.24319cm</Left>
           <Height>1.92246cm</Height>
           <Width>1.93834cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Image Name="Image7">
+          <Source>Embedded</Source>
+          <Value>image11</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>0.03528cm</Top>
+          <Height>3.55551cm</Height>
+          <Width>10.43286cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -895,7 +898,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>0.98498cm</Top>
-          <Left>21.41325cm</Left>
+          <Left>21.67783cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
           <Style>
@@ -930,7 +933,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
           <Top>0.17638cm</Top>
-          <Left>17.73554cm</Left>
+          <Left>18.00012cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
@@ -964,7 +967,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
           <Top>0.98498cm</Top>
-          <Left>17.96957cm</Left>
+          <Left>18.23415cm</Left>
           <Height>0.6cm</Height>
           <Width>3.26729cm</Width>
           <ZIndex>2</ZIndex>

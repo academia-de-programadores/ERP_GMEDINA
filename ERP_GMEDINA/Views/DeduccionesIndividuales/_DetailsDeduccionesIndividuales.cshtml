@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm())
 {
-    <div class="ibox-content">
+
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.dei_IdDeduccionesIndividuales)
         <div class="form-horizontal">
@@ -102,7 +102,6 @@
                 </div>
             </div>
         </div>
-    </div>
 }
 
 
