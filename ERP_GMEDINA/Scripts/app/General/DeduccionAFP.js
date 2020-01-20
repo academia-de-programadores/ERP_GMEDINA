@@ -147,7 +147,7 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
+    //$("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
     $("#Crear #emp_Id").val("0");
     $("#dafp_AporteLps").val('');
@@ -299,7 +299,6 @@ $("#Editar #validatione1").css("display", "none");
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     var ID = $(this).data('id');
-    console.log(ID)
     $.ajax({
         url: "/DeduccionAFP/Edit/" + ID,
         method: "GET",
@@ -353,7 +352,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                     });
                 $("#DetallesDeduccionAFP").modal('hide');
                 $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
+                //$("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
 
             }
@@ -369,7 +368,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
 
 //FUNCION: VALIDAR LOS CAMPOS DE EDITAR
 function ValidarCamposEditar(vale3) {
-    console.log('entro en la funcion');
     var pasoValidacion = true;
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
     if (vale3 == "" || vale3 == null || vale3 == undefined) {
@@ -419,11 +417,10 @@ $("#btnEditDeduccionAFP").click(function () {
     var vale3 = $("#Editar #dafp_AporteLps").val();
 
     if (ValidarCamposEditar(vale3)) {
-        console.log('paso la validacion');
         $("#EditarDeduccionAFP").modal('hide');
         document.getElementById("btnEditDeduccionAFPConfirmar").disabled = false;
         $("#EditarDeduccionAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
+        //$("html, body").css("overflow", "hidden");
         $("html, body").css("overflow", "scroll");
     }
 
@@ -435,7 +432,7 @@ $("#btnEditDeduccionAFP").click(function () {
 
 $(document).on("click", "#btnRegresar", function () {
     $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
+    //$("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
     $("#EditarDeduccionAFPConfirmacion").modal('hide');
 });
@@ -572,7 +569,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
     $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
+    //$("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
     $("#InactivarDeduccionAFP").modal('hide');
 });
@@ -581,7 +578,7 @@ $(document).on("click", "#btnInactivarDeduccionAFP", function () {
     $("#EditarDeduccionAFP").modal('hide');
     document.getElementById("btnInactivarRegistroDeduccionAFP").disabled = false;
     $("#InactivarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
+    //$("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
 });
 
