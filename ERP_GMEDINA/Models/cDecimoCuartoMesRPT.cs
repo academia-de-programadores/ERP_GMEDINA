@@ -31,7 +31,9 @@ namespace ERP_GMEDINA.Models
 		public string emp_CuentaBancaria { get; set; }
 		[Display(Name = "Codigo Pago")]
 		public string dcm_CodigoPago { get; set; }
-		public int cpla_IdPlanilla { get; set; }
+        [Display(Name = "Codigo Planilla")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
+        public int cpla_IdPlanilla { get; set; }
 		[Display(Name = "Tipo Planilla")]
 		[Required(ErrorMessage = "Campo {0} requerido.")]
 		public string cpla_DescripcionPlanilla { get; set; }

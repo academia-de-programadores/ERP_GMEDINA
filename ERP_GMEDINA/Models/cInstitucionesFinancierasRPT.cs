@@ -7,55 +7,32 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cInstitucionesFinancierasRPT))]
-    public partial class V_InstitucionesFinancieras_RPT
+    public partial class V_ReporteInstitucionesFinancieras_RPT
     {
 
     }
     public class cInstitucionesFinancierasRPT
     {
-
-		[Display(Name = "Codigo Empleado")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public int emp_Id { get; set; }
-
-		[Display(Name = "Nombres")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public string per_Nombres { get; set; }
-
-		[Display(Name = "Apellidos")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public string per_Apellidos { get; set; }
-
-		[Display(Name = "Codigo Deduccion")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public int cde_IdDeducciones { get; set; }
-
-		[Display(Name = "Deduccion")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public string cde_DescripcionDeduccion { get; set; }
-
-		[Display(Name = "Total a Deducir")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public Nullable<decimal> hidp_Total { get; set; }
-
-		[Display(Name = "Fecha Inicio")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public System.DateTime hipa_FechaInicio { get; set; }
-
-		[Display(Name = "Fecha Fin")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public System.DateTime hipa_FechaFin { get; set; }
-
-		[Display(Name = "Fecha Pago")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public System.DateTime hipa_FechaPago { get; set; }
-
-		[Display(Name = "Codigo Planilla")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public int cpla_IdPlanilla { get; set; }
-
-		[Display(Name = "Planilla")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
-		public string cpla_DescripcionPlanilla { get; set; }
-	}
+        [Display(Name = "Codigo Institucion Financieras")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
+        public int deif_IdDeduccionInstFinanciera { get; set; }
+        public int emp_Id { get; set; }
+        public int per_Id { get; set; }
+        public string per_Nombres { get; set; }
+        [Display(Name = "Codigo Institucion Financieras")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
+        public int insf_IdInstitucionFinanciera { get; set; }
+        public string insf_DescInstitucionFinanc { get; set; }
+        public Nullable<decimal> deif_Monto { get; set; }
+        public string deif_Comentarios { get; set; }
+        public string deif_Pagado { get; set; }
+        public string per_Apellidos { get; set; }
+        [Display(Name = "Codigo Planilla")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
+        public int cpla_IdPlanilla { get; set; }
+        public string cpla_DescripcionPlanilla { get; set; }
+        [Display(Name = "Fecha Pago")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
+        public Nullable<System.DateTime> deif_FechaCrea { get; set; }
+    }
 }

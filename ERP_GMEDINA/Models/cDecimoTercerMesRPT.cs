@@ -34,5 +34,9 @@ namespace ERP_GMEDINA.Models
 		[Display(Name = "Tipo Planilla")]
 		[Required(ErrorMessage = "Campo {0} requerido.")]
 		public string cpla_DescripcionPlanilla { get; set; }
-	}
+
+        [Display(Name = "Codigo Planilla")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
+        public int cpla_IdPlanilla { get; set; }
+    }
 }
