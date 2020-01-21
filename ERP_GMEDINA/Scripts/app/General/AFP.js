@@ -53,11 +53,11 @@ function cargarGridDeducciones() {
                 //agregar row al datatble
                 $('#tblAFP').dataTable().fnAddData([
                     ListaAFP[i].afp_Id,
-                    ListaAFP[i].afp_Descripcion,
-                    ListaAFP[i].afp_AporteMinimoLps,
-                    ListaAFP[i].afp_InteresAporte,
-                    ListaAFP[i].afp_InteresAnual,
-                    ListaAFP[i].tde_Descripcion,
+                    ListaAFP[i].afp_Descripcion,  
+                    (ListaAFP[i].afp_AporteMinimoLps % 1 == 0) ? ListaAFP[i].afp_AporteMinimoLps + ".00" : ListaAFP[i].afp_AporteMinimoLps,
+                    (ListaAFP[i].afp_InteresAporte % 1 == 0) ? ListaAFP[i].afp_InteresAporte + ".00" : ListaAFP[i].afp_InteresAporte,
+                    (ListaAFP[i].afp_InteresAnual % 1 == 0) ? ListaAFP[i].afp_InteresAnual + ".00" : ListaAFP[i].afp_InteresAnual,
+                    ListaAFP[i].tde_Descripcion,     
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
@@ -471,9 +471,9 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
             if (data) {
                 $("#Editar #afp_Id").val(data.afp_Id);
                 $("#Editar #afp_Descripcion").val(data.afp_Descripcion);
-                $("#Editar #afp_AporteMinimoLps").val(data.afp_AporteMinimoLps);
-                $("#Editar #afp_InteresAporte").val(data.afp_InteresAporte);
-                $("#Editar #afp_InteresAnual").val(data.afp_InteresAnual);
+                $("#Editar #afp_AporteMinimoLps").val((data.afp_AporteMinimoLps % 1 == 0) ? data.afp_AporteMinimoLps + ".00" : data.afp_AporteMinimoLps);
+                $("#Editar #afp_InteresAporte").val((data.afp_InteresAporte % 1 == 0) ? data.afp_InteresAporte + ".00" : data.afp_InteresAporte);
+                $("#Editar #afp_InteresAnual").val((data.afp_InteresAnual % 1 == 0) ? data.afp_InteresAnual + ".00" : data.afp_InteresAnual);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.tde_IdTipoDedu;
@@ -757,9 +757,9 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                 $(".field-validation-error").css('display', 'none');
                 $("#Detalles #afp_Id").html(data[0].afp_Id);
                 $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
-                $("#Detalles #afp_AporteMinimoLps").html(data[0].afp_AporteMinimoLps);
-                $("#Detalles #afp_InteresAporte").html(data[0].afp_InteresAporte);
-                $("#Detalles #afp_InteresAnual").html(data[0].afp_InteresAnual);
+                $("#Detalles #afp_AporteMinimoLps").html((data[0].afp_AporteMinimoLps % 1 == 0) ? data[0].afp_AporteMinimoLps + ".00" : data[0].afp_AporteMinimoLps);
+                $("#Detalles #afp_InteresAporte").html((data[0].afp_InteresAporte % 1 == 0) ? data[0].afp_InteresAporte + ".00" : data[0].afp_InteresAporte);
+                $("#Detalles #afp_InteresAnual").html((data[0].afp_InteresAnual % 1 == 0) ? data[0].afp_InteresAnual + ".00" : data[0].afp_InteresAnual);
                 $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#Detalles #afp_UsuarioCrea").html(data[0].afp_UsuarioCrea);
