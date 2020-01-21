@@ -1,9 +1,9 @@
-﻿const btnGuardar = $('#btnCreateRegistroDeduccion')
-const btnGuardarEditar = $('#btnUpdateDeduccion2')
-const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
-cargandoCrearcargandoCrear = $('#cargandoCrear')
-cargandoCrear = $('#cargandoCrear')
-cargandoActivar = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+﻿//const btnGuardar = $('#btnCreateRegistroDeduccion')
+//const btnGuardarEditar = $('#btnUpdateDeduccion2')
+//const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
+//cargandoCrearcargandoCrear = $('#cargandoCrear')
+//cargandoCrear = $('#cargandoCrear')
+//cargandoActivar = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
 
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -253,16 +253,8 @@ $("#frmCatalogoDeduccionesCreate").submit(function (e) {
     return false;
 });
 
-//VALIDAR EDIT//
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR
 $("#btnCerrarEditar").click(function () {
-    OcultarValidacionesEditar();
-});
-
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarEdit").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
     $("#Validation_descipcion3").css("display", "none");
@@ -271,15 +263,17 @@ $("#IconCerrarEdit").click(function () {
     $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
     $("#Editar #AsteriscoTipoDeduEdit").removeClass("text-danger")
 });
-    //FUNCION: CERRAR EL MODAL DE CONFIRMACION Y VOLVER AL MODAL DE EDITAR
-    $("#btnEditarConfirmacion").click(function () {
-        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-        $("#EditarCatalogoDeducciones").modal();
-    });
+
+
+//FUNCION: CERRAR EL MODAL DE CONFIRMACION Y VOLVER AL MODAL DE EDITAR
+$("#btnEditarConfirmacion").click(function () {
+    $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
+    $("#EditarCatalogoDeducciones").modal();
+});
 
 
     //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-    $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
+  $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
     InactivarID = ID;
     $.ajax({
@@ -306,29 +300,17 @@ $("#IconCerrarEdit").click(function () {
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ ID })
-            })
-                .done(function (data) {
-                    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                    $("#Editar #tde_IdTipoDedu").empty();
-                    //LLENAR EL DROPDOWNLIST
-                    $.each(data, function (i, iter) {
-                        $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                    });
+            }).done(function (data) {
+                //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                $("#Editar #tde_IdTipoDedu").empty();
+                //LLENAR EL DROPDOWNLIST
+                $.each(data, function (i, iter) {
+                    $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
                 $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
                 $('#btnUpdateDeduccion2').attr('disabled', false);
 
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-
-
-            $('#btnUpdateDeduccion2').attr('disabled', false);
-
+            });
         }
         else {
             //Mensaje de error si no hay data
@@ -431,7 +413,6 @@ $("#btnUpdateDeduccion2").click(function () {
     })
         .done(function (data) {
             if (data != "error") {
-                debugger;
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridDeducciones();
 
@@ -464,13 +445,11 @@ $("#frmCatalogoDeducciones").submit(function (e) {
 //FUNCTION: MOSTRAR DETALLE
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
     var ID = $(this).data('id');
-    console.log(ID);
     $.ajax({
         url: "/CatalogoDeDeducciones/Details/" + ID,
         method: "GET",
         dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
+        contentType: "application/json; charset=utf-8"
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -578,13 +557,10 @@ $("#btnInactivarRegistroDeduccion").click(function () {
 });
 
 
-    //MOSTRAR MODAL ACTIVAR
-    $(document).on("click", "#btnActivarCatalogoDeducciones", function () {
-        //MOSTRAR EL MODAL DE INACTIVAR
-        $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    });
-
-
+//MOSTRAR MODAL ACTIVAR
+$(document).on("click", "#btnActivarCatalogoDeducciones", function () {
+    //MOSTRAR EL MODAL DE INACTIVAR
+    $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
 });
 
 

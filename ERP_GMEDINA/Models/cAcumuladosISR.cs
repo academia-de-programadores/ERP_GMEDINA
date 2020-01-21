@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Models
         
         public string aisr_Descripcion { get; set; }
         [Display(Name = "Monto")]
-        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Este campo es un decimal requerido.")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Este campo es un decimal requerido.")]
         [Required(ErrorMessage = "Campo {0} es requerido")]
         public decimal aisr_Monto { get; set; }
         [Display(Name = "Creado por")]
