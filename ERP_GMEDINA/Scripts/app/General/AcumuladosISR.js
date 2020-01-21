@@ -75,6 +75,10 @@ function cargarGridAcumuladosISR() {
 
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
+    //OCULTAR SPAN - VALIDACION DECIMALES
+    $("#Crear #Validation_decimal").css("display", "none");
+    //DESBLOQUEAR EL BOTON
+    $('#btnCreateAcumuladosISR').attr('disabled', false);
     //MOSTRAR EL MODAL DE AGREGAR
     $('#Crear input[type=text], input[type=number]').val('');
     $("#AgregarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
@@ -94,6 +98,8 @@ $('#btnCreateAcumuladosISR').click(function () {
     var aisr_Monto = $("#Crear #aisr_Monto").val();
     var ModelState = true;
     var ModelState2 = true;
+    //VALIDAR DECIMALES
+    var Montoe = aisr_Monto.split(".");
 
     if (aisr_Descripcion == "" || aisr_Descripcion == " " || aisr_Descripcion == null || isNaN(aisr_Descripcion) == false) {
         $("#Crear #Validation_descripcion").css("display", "block");
@@ -103,7 +109,6 @@ $('#btnCreateAcumuladosISR').click(function () {
     else {
         $("#Crear #Validation_descripcion").css("display", "none");
         $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
-        ModelState = true;
     }
 
     if (aisr_Monto == "" || parseInt(aisr_Monto) < 0 || aisr_Monto == null) {
@@ -112,9 +117,19 @@ $('#btnCreateAcumuladosISR').click(function () {
         ModelState2 = false;
     }
     else {
+        //OCULTAR DATAANNOTATIONS
         $("#Crear #Validation_descripcion2").css("display", "none");
         $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
-        ModelState2 = true;
+        if (Montoe[1]) {
+            $("#Crear #Validation_decimal").css("display", "none");
+            $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
+        }
+        else {
+            $("#Crear #Validation_decimal").css("display", "block");
+            $("#Crear #AsteriscoMontoAISR").addClass("text-danger");
+            ModelState2e = false;
+        }
+        
     }
 
 
@@ -139,6 +154,9 @@ $('#btnCreateAcumuladosISR').click(function () {
             $("#AgregarAcumuladosISR").modal('hide');
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
+                //DESBLOQUEAR EL BOTON
+                $('#btnCreateAcumuladosISR').attr('disabled', false);
+                //MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
                     message: 'No guardó el registro, contacte al administrador',
@@ -210,7 +228,7 @@ $("#btnEditarAcumulado").click(function () {
     else {
         $("#Editar #validatione1").css("display", "none");
         $("#Editar #AsteriscoDescripcionEditAISR").removeClass("text-danger");
-        ModelStatee = true;
+        //ModelStatee = true;
     }
 
     if (aisr_Montoe == "" || aisr_Montoe < 0 || aisr_Montoe == null) {
@@ -220,27 +238,27 @@ $("#btnEditarAcumulado").click(function () {
         ModelState2e = false;
     }
     else {
-        if (Montoe[1] == null || Montoe[1] == undefined) {
-            $("#Editar #Validation_decimal").css("display", "");
-            $("#Editar #validatione2").css("display", "");
-            $("#Editar #AsteriscoMontoEditAISR").addClass("text-danger");
-            ModelState2e = false;
-        }
-        else {
+        if (Montoe[1]) {
             $("#Editar #validatione2").css("display", "none");
             $("#Editar #Validation_decimal").css("display", "none");
             $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
-            ModelState2e = true;
+        }
+        else {
+            $("#Editar #Validation_decimal").css("display", "block");
+            $("#Editar #validatione2").css("display", "block");
+            $("#Editar #AsteriscoMontoEditAISR").addClass("text-danger");
+            ModelState2e = false;
         }
     }
     if (ModelStatee == false || ModelState2e == false) {
-        $("#EditarAISRConfirmacion").modal('hide');
         $('#btnUpdateAISR2').attr('disabled', false);
     }
     else {
+        //OCULTAR MODAL EDICION
+        $("#EditarAcumuladosISR").modal('hide');
+        //MOSTRAR MODAL DE CONFIRMACION
         $("#EditarAISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
         $('#btnUpdateAISR2').attr('disabled', false);
-
     }
 });
 
