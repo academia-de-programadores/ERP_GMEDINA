@@ -168,29 +168,17 @@ function MsgWarning(Titulo, Mensajes) {
  });
 }
 function limpiarClases(form) {
- var div = null;
- var asterisco = null;
- var span = null;
- $(form).find(".required").each(function (indice, input) {
-  //$(input).val("");
-  div = $(input).closest("div");
-  input.labels[0].children[0].color = 'black';
-  input.nextElementSibling.innerText = '';
-  div.removeClass("has-error has-warning");
-  $(input).removeClass("error warning");
-
-  //$(form).find(".required").each(function (index, value) {
-  //var input = $(modal).find("#" + valor.name)[0];
-  //input.labels[0].children[0].color = "red";
-  //var span = input.offsetParent.children[1];
-  //span.innerText = $(input).data("val-required");
-  //$(input).addClass("error");
-  //$(span).addClass("text-danger");
-  //verificacion = false;
-  //});
-  //var lol = $(form).find("#error" + id);
-  //$(form).find("#error" + id)[0].innerText = '';
- });
+        var div = null;
+        var asterisco = null;
+        var span = null;
+        $(form).find(".required").each(function (indice, input) {
+            div = $(input).closest(".form-group");
+            asterisco = $(div).find("font")[0];
+            input.nextElementSibling.innerText = '';
+            $(div).find("div").removeClass("has-error has-warning");
+            $(input).removeClass("error warning");
+            asterisco.color = 'black';
+        });
 }
 $("#ModalNuevo").on('hidden.bs.modal', function () {
  limpiarClases(this);

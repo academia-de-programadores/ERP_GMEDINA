@@ -92,11 +92,12 @@
  @Scripts.Render("~/plugins/customdataTables")
  @Scripts.Render("~/Scripts/app/general")
  @Scripts.Render("~/Scripts/app/general/EditArea")
- @if ((bool)Session["Admin"])
+ @if (Session["Admin"] != null)
+ {
+    if ((bool)Session["Admin"])
     {
-     <script>
-      Admin = true;
-     </script>
+        @Scripts.Render("~/Scripts/app/general/Cargos/Admin")
+    }
  }
  <script>
   var area_Id=@Html.DisplayFor(model => model.area_Id);

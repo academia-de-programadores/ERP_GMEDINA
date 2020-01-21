@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@if (Session["Admin"]==null)
+{
+    Response.Redirect("/Inicio/index");
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
