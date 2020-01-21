@@ -218,7 +218,7 @@ $("#btnCrear").click(function () {
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
                             //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                            MsgSuccess("¡Exito!", "El registro se agregó de forma exitosao");
+                            MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                             setTimeout(function () { location.href = "/HistorialSalidas/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");
                         } else {
