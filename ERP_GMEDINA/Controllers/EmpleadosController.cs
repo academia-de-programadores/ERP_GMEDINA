@@ -76,6 +76,7 @@ namespace ERP_GMEDINA.Controllers
         }
         public void ArchivoEmpleados()
         {
+            db = new ERP_GMEDINAEntities();
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
             ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Edad = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla = "", fpa_IdFormaPago = "", emp_FechaIngreso = "", emp_CuentaBancaria = "" });
             ExcelPackage Ep = new ExcelPackage();
@@ -232,6 +233,7 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
+                db = new ERP_GMEDINAEntities();
                 if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
                 {//OPEN IF
                     string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
