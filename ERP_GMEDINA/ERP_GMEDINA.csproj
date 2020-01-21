@@ -1917,6 +1917,7 @@
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
+    <Content Include="Scripts\app\General\Empresas\Admin.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\EquipoEmpleados\EquipoEmpleados.js" />
     <Content Include="Scripts\app\General\EquipoTrabajo\Admin.js" />
