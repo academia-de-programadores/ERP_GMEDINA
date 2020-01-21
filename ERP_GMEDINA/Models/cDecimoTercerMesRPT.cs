@@ -34,5 +34,9 @@ namespace ERP_GMEDINA.Models
 		[Display(Name = "Tipo Planilla")]
 		[Required(ErrorMessage = "No puede dejar campos vacios.")]
 		public string cpla_DescripcionPlanilla { get; set; }
-	}
+
+        [Display(Name = "Planilla")]
+        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        public int cpla_IdPlanilla { get; set; }
+    }
 }
