@@ -21,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.dafp_AporteLps)<label class="" id="e_Asterisco2">*</label>
             <div class="col-md-8 pull-right">
-                @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @type = "number", @autocomplete = "off" } })
+                @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @type = "number", @autocomplete = "off", @min = 0.01, @max = 9999999999.99 } })
                 <label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Aporte requerido</label>
                 <label class="text-danger" id="Validation_descripcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Aporte debe ser mayor que cero</label>
                 <label class="text-danger" id="Validation_descripcion3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>

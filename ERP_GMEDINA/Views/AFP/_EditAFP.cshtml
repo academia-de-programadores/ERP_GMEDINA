@@ -34,7 +34,7 @@
                         @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="aste2">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_AporteMinimoLps" } })
+                        @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_AporteMinimoLps", @min = 0.01, @max = 9999999999.99 } })
                         @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger", @id = "validationes2" })
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                         @Html.LabelFor(model => model.afp_InteresAporte)<span id="aste3">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAporte" } })
+                        @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAporte", @min = 0.01, @max = 100.00 } })
                         @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger", @id = "validationes3" })
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         @Html.LabelFor(model => model.afp_InteresAnual)<span id="aste4">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAnual" } })
+                        @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAnual", @min = 0.01, @max = 100.00 } })
                         @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger", @id = "validationes4" })
                     </div>
                 </div>

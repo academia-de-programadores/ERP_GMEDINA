@@ -31,7 +31,7 @@
                         @Html.LabelFor(model => model.dei_MontoInicial)<span id="3editaste">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial" } })
+                        @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial", @min = 0.01, @max = 9999999999.99 } })
                         @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validatione3" })
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         @Html.LabelFor(model => model.dei_MontoRestante)<span id="4editaste">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante" } })
+                        @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante", @min = 0.01, @max = 9999999999.99 } })
                         @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validatione4" })
                         <span id="MontoRestanteEditar" class="text-danger" style="display:none;">El campo rango fin no puede ser mayor que rango inicio</span>
                     </div>
@@ -53,7 +53,7 @@
                         @Html.LabelFor(model => model.dei_Cuota)<span id="5editaste">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota" } })
+                        @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota", @min = 0.01, @max = 9999999999.99 } })
                         @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validatione5" })
                     </div>
                 </div>

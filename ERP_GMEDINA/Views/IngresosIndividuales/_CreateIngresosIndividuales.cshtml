@@ -33,7 +33,7 @@
                     @Html.LabelFor(model => model.ini_Monto)<span id="ast3">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "form-control", @id = "ini_Monto" } })
+                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "form-control", @id = "ini_Monto", @min = 0.01, @max = 9999999999.99 } })
                     @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "validatione3" })
                 </div>
             </div>

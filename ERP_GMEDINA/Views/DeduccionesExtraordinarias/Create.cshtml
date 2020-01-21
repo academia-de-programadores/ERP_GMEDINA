@@ -34,7 +34,7 @@
                                     @Html.LabelFor(model => model.dex_MontoInicial)<span id="asteriscoMontoInicial">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control", @min = 0.01, @max = 9999999999.99 } })
                                     @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger", @id = "validacionMontoInicial" })
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                     @Html.LabelFor(model => model.dex_MontoRestante)<span id="asteriscoMontoRestante">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control", @min = 0.01, @max = 9999999999.99 } })
                                     @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger", @id = "validacionMontoRestante" })
                                     <span id="MontoRestanteCrear" class="text-danger" style="display:none;">Campo monto restante no puede ser mayor que monto incial</span>
                                 </div>
@@ -75,7 +75,7 @@
                                     @Html.LabelFor(model => model.dex_Cuota)<span id="asteriscoCuota">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control", @min = 0.01, @max = 9999999999.99 } })
                                     @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger", @id = "validacionCuota" })
                                 </div>
                             </div>

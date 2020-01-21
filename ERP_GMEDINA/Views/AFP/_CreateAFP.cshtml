@@ -25,7 +25,7 @@
                     @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="ast2">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control", @id = "afp_AporteMinimoLps" } })
+                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control", @id = "afp_AporteMinimoLps", @min = 0.01, @max = 9999999999.99 } })
                     @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger", @id = "validation2" })
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     @Html.LabelFor(model => model.afp_InteresAporte)<span id="ast3">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAporte" } })
+                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAporte", @min = 0.01, @max = 100.00 } })
                     @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger", @id = "validation3" })
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     @Html.LabelFor(model => model.afp_InteresAnual)<span id="ast4">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAnual" } })
+                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAnual", @min = 0.01, @max = 100.00 } })
                     @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger", @id = "validation4" })
                 </div>
             </div>
