@@ -70,15 +70,15 @@
 @Scripts.Render("~/plugins/dataTablesMatutina")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/Cargos")
-@if (Session["Admin"] != null)
-{
+@*@if (Session["Admin"] != null)
+@*{
     @if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/general/Cargos/Admin")
     }
-}
-@*@if (Model.car_Estado)
+}*@
+@if (Model.car_Estado)
 {
     @Scripts.Render("~/Scripts/app/general/Cargos/Admin")
 }
-}*@
+}
