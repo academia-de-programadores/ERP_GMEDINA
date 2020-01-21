@@ -1085,6 +1085,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalHorasPermiso = totalHorasPermiso;
                                         oPlanillaEmpleado.TotalIngresosHorasExtras = totalHorasExtras;
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
+                                        oPlanillaEmpleado.totalIngresosIndivuales = totalIngresosIndivuales;
                                         oPlanillaEmpleado.totalVacaciones = totalVacaciones;
                                         oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
                                         oPlanillaEmpleado.totalISR = totalISR;
@@ -1093,6 +1094,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalInstitucionesFinancieras = totalInstitucionesFinancieras;
                                         oPlanillaEmpleado.otrasDeducciones = Math.Round((decimal)totalOtrasDeducciones, 2);
                                         oPlanillaEmpleado.adelantosSueldo = Math.Round((decimal)adelantosSueldo, 2);
+                                        oPlanillaEmpleado.totalDeduccionesIndividuales = totalDeduccionesIndividuales;
                                         oPlanillaEmpleado.totalDeducciones = Math.Round((decimal)totalDeduccionesEmpleado, 2);
                                         oPlanillaEmpleado.totalAPagar = Math.Round((decimal)netoAPagarColaborador, 2);
                                         reporte.Add(oPlanillaEmpleado);
