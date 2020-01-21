@@ -80,8 +80,8 @@ $(document).on("click", "#btnAgregarTipoDeducciones", function () {
     $("#Crear input[type=text]").val('');
     //$("#AgregarTipoDeducciones").modal();
     $("#AgregarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "auto");
+    
+    
 });
 
 $("#btnCerrarCrear").click(function () {
@@ -161,8 +161,8 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
                     });
                     //$("#EditarTipoDeducciones").modal();
                     $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-                    $("html, body").css("overflow", "hidden");
-                    $("html, body").css("overflow", "scroll");
+                    
+                    
                 }        
                 else {
                     //Mensaje de error si no hay data
@@ -180,8 +180,8 @@ $("#btnUpdateTipoDeducciones").click(function () {
         $("#EditarTipoDeducciones").modal('hide');
         //$("#EditarTipoDeduccionConfirmacion").modal();
         $("#EditarTipoDeduccionConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
     }
     else {
         if (DescripcionE == "") {
@@ -234,8 +234,8 @@ $("#btnEditarTipoDedu").click(function () {
     else {                
         //$("#EditarTipoDeduccionConfirmacion").modal('hide');
         $("#EditarTipoDeduccionConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
     }
 });
 
@@ -332,8 +332,8 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
 
                 //$("#DetailsTipoDeducciones").modal();
                 $("#DetailsTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -350,8 +350,8 @@ $("#btnInactivarTipoDeducciones").click(function () {
     $("#EditarTipoDeducciones").modal('hide');
     //$("#InactivarTipoDeducciones").modal();
     $("#InactivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 
 });
 
@@ -416,8 +416,8 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeduccio
     console.log(activarID);
     //$("#ActivarTipoDeducciones").modal();
     $("#ActivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO

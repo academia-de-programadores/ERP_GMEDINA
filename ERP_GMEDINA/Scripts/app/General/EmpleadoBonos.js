@@ -156,8 +156,8 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #cb_Monto").val("");
     $("#AgregarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -364,8 +364,8 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
 
 
                 $("#EditarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -398,8 +398,8 @@ $("#btnUpdateBonos").click(function () {
         document.getElementById("btnUpdateBonos2").disabled = false;
         $("#Editar #Validation_descipcion6").css("display", "none");
         $("#EditarEmpleadoBonosConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
         $("#Editar #AsteriscoMonto").removeClass("text-danger");       
 }
 });
@@ -545,8 +545,8 @@ $(document).on("click", "#btnmodalInactivarEmpleadoBonos", function () {
     document.getElementById("btCerrarNo").disabled = false;
     $("#EditarEmpleadoBonos").modal('hide');
     $("#InactivarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
@@ -622,8 +622,8 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnActivarEmpleadoBonos"
     document.getElementById("btnActivarRegistroBono").disabled = false;
     document.getElementById("btactivarNO").disabled = false;
     $("#ActivarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //EJECUTAR LA ACTIVACION DEL REGISTRO

@@ -506,8 +506,8 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
     localStorage.setItem('id', ID);
     //Mostrar el Modal
     $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 
 });
 

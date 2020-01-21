@@ -197,8 +197,8 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -459,8 +459,8 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                     });
                
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -566,8 +566,8 @@ $("#btnEditDeduccionIndividual").click(function () {
     if (TOF) {
         $("#EditarDeduccionesIndividuales").modal('hide');
         $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
     }
 
 
@@ -581,16 +581,16 @@ $(document).on("click", "#btnRegresar", function () {
     document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 
 $(document).on("click", "#btnReg", function () {
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 
@@ -735,24 +735,24 @@ $(document).on("click", "#btnBack", function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnBa", function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#EditarDeduccionesIndividuales").modal('hide');
     $("#InactivarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroDeduccionIndividual')

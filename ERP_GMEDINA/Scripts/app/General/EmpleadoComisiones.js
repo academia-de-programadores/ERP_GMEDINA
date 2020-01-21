@@ -147,8 +147,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
                    });
                 $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
                 //$("#DetalleEmpleadoComisiones").modal(hide);
             }
             else {
@@ -283,8 +283,8 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -479,8 +479,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                         });
                     });
                 $("#DetalleEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");    
+                
+                    
             }
             else {
                 //Mensaje de error si no hay data
@@ -498,8 +498,8 @@ $(document).on("click", "#btnInactivarEmpleadoComisiones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#EditarEmpleadoComisiones").modal('hide');
     $("#InactivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 
     document.getElementById("btnInactivarRegistroComisiones").disabled = false;
     document.getElementById("btnInactivarRegistroComisionesNo").disabled = false;
@@ -541,8 +541,8 @@ $("#btnInactivarRegistroComisionesNo").click(function () {
     document.getElementById("btnInactivarRegistroComisionesNo").disabled = true;
     $("#InactivarEmpleadoComisiones").modal('hide');
     $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 
 });
 
@@ -551,8 +551,8 @@ var IDActivar = 0;
 $(document).on("click", "#btnActivarRegistroComisiones", function () {
     IDActivar = $(this).data('id');
     $("#ActivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     document.getElementById("btnActivarRegistroComisionesEjecutar").disabled = false;
 });
 $("#btnActivarRegistroComisionesEjecutar").click(function () {

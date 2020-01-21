@@ -90,8 +90,8 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                 $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
                 $("#Detallar #cin_FechaModifica").val(FechaModifica);
                 $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
 
             }
             else {
@@ -124,8 +124,8 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
                 $('#asteriscoEdit').removeClass('text-danger');
                 $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
 
             }
             else {
@@ -164,8 +164,8 @@ $("#btnUpdateIngresos").click(function () {
         $("#Editar #validareditar").css("display", "none");
         $("#EditarCatalogoIngresos").modal('hide');
         $("#EditarCatalogoIngresosConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
     }
     else {
         $("#descripcioncrear").css("display", "");
@@ -230,8 +230,8 @@ btnEditarNo
 $("#btnEditarNo").click(function () {  
     $("#EditarCatalogoIngresosConfirmacion").modal('hide');
     $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 const btneditar = $('#btnEditarIngresos'),
     cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
@@ -254,16 +254,16 @@ $("#btnModalInactivar").click(function () {
     document.getElementById("btnInactivarIngresos").disabled = false;
     $("#EditarCatalogoIngresos").modal('hide');
     $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //Modal editar despues de No Inactivar
 $("#btnNoInactivar").click(function () {
     $("#validareditar").css("display", "none");
     $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     $("#InactivarCatalogoIngresos").modal('hide');
 });
 
@@ -309,8 +309,8 @@ $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     $('#asteriscoCreate').removeClass('text-danger');
     document.getElementById("btnCreateRegistroIngresos").disabled = false;
     $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $("#frmCatalogoIngresosCreate").submit(function (e) {
@@ -433,8 +433,8 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function
     //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
     IDActivar = $(this).data('id');
     $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 

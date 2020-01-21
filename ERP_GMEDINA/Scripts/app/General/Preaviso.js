@@ -118,8 +118,8 @@ $(document).on("click", "#btnAgregarPreaviso", function () {
     $("#Crear #prea_RangoFinMeses").val('');
     $("#Crear #prea_DiasPreaviso").val('');
     $("#CrearPreaviso").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     DataAnnotations(true);
 });
 
@@ -232,8 +232,8 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
                     $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
                 });
                 $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
         });
 });
@@ -292,8 +292,8 @@ $("#btnUpdatePreaviso").click(function () {
            $("#Editar #AsteriscoDias").removeClass("text-danger");
            $("#EditarPreaviso").modal('hide');
            $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
-           $("html, body").css("overflow", "hidden");
-           $("html, body").css("overflow", "scroll");
+           
+           
        }
 });
 
@@ -346,8 +346,8 @@ $(document).on("click", "#btnInactivarPreaviso", function () {
     $("#EditarPreaviso").modal('hide');
     //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarPreaviso").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //CERRAR EL MODAL DE INACTIVAR
@@ -395,8 +395,8 @@ var activarID = 0;
 $(document).on("click", "#btnActivarPreaviso", function () {
     activarID = $(this).data('id');
     $("#frmActivarPreavis").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //activar ejecutar
@@ -459,8 +459,8 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function
                     $("#Detalles #prea_FechaModifica").html(FechaModifica);
                 });
                 $("#DetallarPreaviso").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
