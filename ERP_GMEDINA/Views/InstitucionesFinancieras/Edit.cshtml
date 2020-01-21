@@ -11,7 +11,7 @@
             <h2>Editar Institución Financiera</h2>
         </div>
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditInstFin" }))
         {
             <div class="ibox-content">
                 @Html.AntiForgeryToken()
@@ -21,41 +21,45 @@
                     @Html.HiddenFor(model => model.insf_IdInstitucionFinanciera)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label" })
+                        <label class="" id="AsteriscDescrip">*</label>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "validaDescripcion" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label" })
+                        <label class="" id="AsteriscContact">*</label>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "validaContacto" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label" })
+                        <label class="" id="AsteriscTel">*</label>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @max = "999999999999999", @name = "phone", @id = "phone" } })
-                            @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validaTelefono" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label" })
+                        <label class="" id="AsteriscCorre">*</label>
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
-                            @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "validaCorreo" })
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @*data-id="@item.insf_IdInstitucionFinanciera"*@
-                            <button type="button" class="btn btn-primary btn-xs" id="btnModalActualizarINFS">Actualizar</button>
+                            <button type="submit" class="btn btn-primary btn-xs" id="btnModalActualizarINFS">Actualizar</button>
                             @*<input type="submit" value="Guardar" class="btn btn-primary" />*@
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                         </div>
@@ -80,7 +84,7 @@
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-primary" id="btnActualizarINFS">Si</button>*@
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" id="btnEditarInstFin" />
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
