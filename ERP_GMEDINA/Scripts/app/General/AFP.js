@@ -1,5 +1,4 @@
-﻿
-$.getScript("../Scripts/app/General/SerializeDate.js")
+﻿$.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
         console.log(textStatus);
     })
@@ -66,16 +65,6 @@ function cargarGridDeducciones() {
         });
 }
 
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
-        <div class="sk-rect1"></div>
-        <div class="sk-rect2"></div>
-        <div class="sk-rect3"></div>
-        <div class="sk-rect4"></div>
-        <div class="sk-rect5"></div>
-        </div>`;
-}
 
 //Activar
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
@@ -128,6 +117,9 @@ $("#btnCerrarCrear").click(function () {
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
     $("#validation4").css("display", "none");
+    $("#validation2d").css("display", "none");
+    $("#validation3d").css("display", "none");
+    $("#validation4d").css("display", "none");
     $("#validation5").css("display", "none");
     $("#Crear #ast1").css("color", "black");
     $("#Crear #ast2").css("color", "black");
@@ -213,15 +205,16 @@ $('#btnCreateRegistroAFP').click(function () {
     }
     else {
         $("#Crear #validation2").css("display", "");
+        $("#Crear #validation2d").css("display", "none");
         $("#Crear #ast2").css("color", "red");
         TOF = false;
     }
     if (expreg.test(val2)) {
-        $("#Crear #validation2").css("display", "none");
+        $("#Crear #validation2d").css("display", "none");
         $("#Crear #ast2").css("color", "black");
     }
     else {
-        $("#Crear #validation2").css("display", "");
+        $("#Crear #validation2d").css("display", "");
         $("#Crear #ast2").css("color", "red");
         TOF = false;
     }
@@ -232,15 +225,16 @@ $('#btnCreateRegistroAFP').click(function () {
     }
     else {
         $("#Crear #validation3").css("display", "");
+        $("#Crear #validation3d").css("display", "none");
         $("#Crear #ast3").css("color", "red");
         TOF = false;
     }
     if (expreg.test(val3)) {
-        $("#Crear #validation3").css("display", "none");
+        $("#Crear #validation3d").css("display", "none");
         $("#Crear #ast3").css("color", "black");
     }
     else {
-        $("#Crear #validation3").css("display", "");
+        $("#Crear #validation3d").css("display", "");
         $("#Crear #ast3").css("color", "red");
         TOF = false;
     }
@@ -251,15 +245,16 @@ $('#btnCreateRegistroAFP').click(function () {
     }
     else {
         $("#Crear #validation4").css("display", "");
+        $("#Crear #validation4d").css("display", "none");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
     }
     if (expreg.test(val4)) {
-        $("#Crear #validation4").css("display", "none");
+        $("#Crear #validation4d").css("display", "none");
         $("#Crear #ast4").css("color", "black");
     }
     else {
-        $("#Crear #validation4").css("display", "");
+        $("#Crear #validation4d").css("display", "");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
     }
@@ -347,19 +342,19 @@ $('#Crear #afp_AporteMinimoLps').keyup(function () {
     }
     else {
         $("#Crear #validation2").css("display", "");
+        $("#Crear #validation2d").css("display", "none");
         $("#Crear #ast2").css("color", "red");
     }
 
     if (expreg.test($(this).val())) {
-        $("#Crear #validation2").css("display", "none");
+        $("#Crear #validation2d").css("display", "none");
         $("#Crear #ast2").css("color", "black");
     }
     else {
-        $("#Crear #validation2").css("display", "");
+        $("#Crear #validation2d").css("display", "");
         $("#Crear #ast2").css("color", "red");
     }
 });
-
 
 $('#Crear #afp_InteresAporte').keyup(function () {
     if ($(this)
@@ -370,15 +365,16 @@ $('#Crear #afp_InteresAporte').keyup(function () {
     }
     else {
         $("#Crear #validation3").css("display", "");
+        $("#Crear #validation3d").css("display", "none");
         $("#Crear #ast3").css("color", "red");
     }
 
     if (expreg.test($(this).val())) {
-        $("#Crear #validation3").css("display", "none");
+        $("#Crear #validation3d").css("display", "none");
         $("#Crear #ast3").css("color", "black");
     }
     else {
-        $("#Crear #validation3").css("display", "");
+        $("#Crear #validation3d").css("display", "");
         $("#Crear #ast3").css("color", "red");
         TOF = false;
     }
@@ -393,15 +389,16 @@ $('#Crear #afp_InteresAnual').keyup(function () {
     }
     else {
         $("#Crear #validation4").css("display", "");
+        $("#Crear #validation4d").css("display", "none");
         $("#Crear #ast4").css("color", "red");
     }
 
     if (expreg.test($(this).val())) {
-        $("#Crear #validation4").css("display", "none");
+        $("#Crear #validation4d").css("display", "none");
         $("#Crear #ast4").css("color", "black");
     }
     else {
-        $("#Crear #validation4").css("display", "");
+        $("#Crear #validation4d").css("display", "");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
     }
@@ -429,6 +426,9 @@ $("#btnCerrarEditar").click(function () {
     $("#validationes2").css("display", "none");
     $("#validationes3").css("display", "none");
     $("#validationes4").css("display", "none");
+    $("#validationes2d").css("display", "none");
+    $("#validationes3d").css("display", "none");
+    $("#validationes4d").css("display", "none");
     $("#Editar #aste1").css("color", "black");
     $("#Editar #aste2").css("color", "black");
     $("#Editar #aste3").css("color", "black");
@@ -529,51 +529,56 @@ $("#btnEditAFP").click(function () {
     }
     else {
         $("#validationes2").css("display", "");
+        $("#validationes2d").css("display", "none");
         $("#Editar #aste2").css("color", "red");
         TOF = false;
     }
     if (expreg.test(vale2)) {
-        $("#validationes2").css("display", "none");
+        $("#validationes2d").css("display", "none");
         $("#Editar #aste2").css("color", "black");
     }
     else {
-        $("#validationes2").css("display", "");
+        $("#validationes2d").css("display", "");
         $("#Editar #aste2").css("color", "red");
         TOF = false;
     }
     //--
     if (vale3 != "" || vale3 != null || vale3 != undefined) {
         $("#Editar #aste3").css("color", "black");
+        $("#validationes3d").css("display", "none");
     }
     else {
         $("#validationes3").css("display", "");
+        $("#validationes3d").css("display", "none");
         $("#Editar #aste3").css("color", "red");
         TOF = false;
     }
     if (expreg.test(vale3)) {
-        $("#validationes3").css("display", "");
+        $("#validationes3d").css("display", "none");
         $("#Editar #aste3").css("color", "black");
     }
     else {
-        $("#validationes3").css("display", "");
+        $("#validationes3d").css("display", "");
         $("#Editar #aste3").css("color", "red");
         TOF = false;
     }
     //--
     if (vale4 != "" || vale4 != null || vale4 != undefined) {
         $("#Editar #aste4").css("color", "black");
+        $("#validationes4").css("display", "none");
     }
     else {
         $("#validationes4").css("display", "");
+        $("#validationes4d").css("display", "none");
         $("#Editar #aste4").css("color", "red");
         TOF = false;
     }
     if (expreg.test(vale4)) {
-        $("#validationes4").css("display", "none");
+        $("#validationes4d").css("display", "none");
         $("#Editar #aste4").css("color", "black");
     }
     else {
-        $("#validationes4").css("display", "");
+        $("#validationes4d").css("display", "");
         $("#Editar #aste4").css("color", "red");
         TOF = false;
     }
@@ -611,20 +616,19 @@ $('#Editar #afp_AporteMinimoLps').keyup(function () {
     }
     else {
         $("#validationes2").css("display", "");
+        $("#validationes2d").css("display", "none");
         $("#Editar #aste2").css("color", "red");
     }
 
     if (expreg.test($(this).val())) {
-        $("#validationes2").css("display", "none");
+        $("#validationes2d").css("display", "none");
         $("#Editar #aste2").css("color", "black");
     }
     else {
-        $("#validationes2").css("display", "");
+        $("#validationes2d").css("display", "");
         $("#Editar #aste2").css("color", "red");
     }
 });
-
-
 
 $('#Editar #afp_InteresAporte').keyup(function () {
     if ($(this)
@@ -634,15 +638,16 @@ $('#Editar #afp_InteresAporte').keyup(function () {
     }
     else {
         $("#validationes3").css("display", "");
+        $("#validationes3d").css("display", "none");
         $("#Editar #aste3").css("color", "red");
     }
 
     if (expreg.test($(this).val())) {
-        $("#validationes3").css("display", "");
+        $("#validationes3d").css("display", "none");
         $("#Editar #aste3").css("color", "black");
     }
     else {
-        $("#validationes3").css("display", "");
+        $("#validationes3d").css("display", "");
         $("#Editar #aste3").css("color", "red");
     }
 });
@@ -655,19 +660,19 @@ $('#Editar #afp_InteresAnual').keyup(function () {
     }
     else {
         $("#validationes4").css("display", "");
+        $("#validationes4d").css("display", "none");
         $("#Editar #aste4").css("color", "red");
     }
 
     if (expreg.test($(this).val())) {
-        $("#validationes4").css("display", "none");
+        $("#validationes4d").css("display", "none");
         $("#Editar #aste4").css("color", "black");
     }
     else {
-        $("#validationes4").css("display", "");
+        $("#validationes4d").css("display", "");
         $("#Editar #aste4").css("color", "red");
     }
 });
-
 
 $('#Crear #tde_IdTipoDedu').on('change', function () {
     if (this.value != 0) {
