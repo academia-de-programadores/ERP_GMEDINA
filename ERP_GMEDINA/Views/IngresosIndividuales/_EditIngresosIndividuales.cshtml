@@ -33,7 +33,8 @@
                     @Html.LabelFor(model => model.ini_Monto)<span id="aste3">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Monto" } })
+                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Monto", @min = "0.01", @max = "9999999999.99" } })
+                    <label class="text-danger" id="validation3d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
                     @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "validation3" })
                 </div>
             </div>

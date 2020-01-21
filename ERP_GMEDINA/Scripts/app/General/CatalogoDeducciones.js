@@ -140,6 +140,7 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
     $("#AgregarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
+    $('#btnCreateRegistroDeduccion').attr('disabled', false);
     $("#Crear #tde_IdTipoDedu").val("0");
 });
 
@@ -201,9 +202,10 @@ $('#btnCreateRegistroDeduccion').click(function () {
     }
 
     if (Correcto == false || Correcto2 == false || Correcto3 == false || Correcto4 == false) {
-
+        $('#btnCreateRegistroDeduccion').attr('disabled', false);
     }
     else {
+        $('#btnCreateRegistroDeduccion').attr('disabled', true);
         $("#Crear #Validation_descipcionA").css("display", "none");
         $("#Crear #Validation_descipcion2A").css("display", "none");
         $("#Crear #Validation_descipcion3A").css("display", "none");
@@ -212,7 +214,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
         $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
         $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-        mostrarCargandoCrear();
+
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
 
@@ -222,12 +224,11 @@ $('#btnCreateRegistroDeduccion').click(function () {
             data: data
         }).done(function (data) {
             if (data != "error") {
-                cargarGridDeducciones();
-
                 $("#Crear #cde_DescripcionDeduccionA").val("");
                 $("#Crear #cde_PorcentajeColaboradorA").val("");
                 $("#Crear #cde_PorcentajeEmpresaA").val("");
                 $("#Crear #tde_IdTipoDedu").val("0");
+                cargarGridDeducciones();
 
                 //ocultar el modal
                 $("#AgregarCatalogoDeducciones").modal('hide');
@@ -244,8 +245,8 @@ $('#btnCreateRegistroDeduccion').click(function () {
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
                 });
+                $('#btnCreateRegistroDeduccion').attr('disabled', false);
             }
-            ocultarCargandoCrear();
         });
     }
 });
@@ -272,12 +273,12 @@ $("#IconCerrarEdit").click(function () {
     $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
     $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
     $("#Editar #AsteriscoTipoDeduEdit").removeClass("text-danger")
-}
+});
     //FUNCION: CERRAR EL MODAL DE CONFIRMACION Y VOLVER AL MODAL DE EDITAR
     $("#btnEditarConfirmacion").click(function () {
         $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
         $("#EditarCatalogoDeducciones").modal();
-    })
+    });
 
 
     //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -404,8 +405,8 @@ $('#btnUpdateDeduccion').click(function () {
             $("#EditarCatalogoDeducciones").modal('hide');
             $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
             $('#btnUpdateDeduccion2').attr('disabled', false);
-            //$("html, body").css("overflow", "hidden");
-            //$("html, body").css("overflow", "scroll");
+            $("html, body").css("overflow", "hidden");
+            $("html, body").css("overflow", "auto");
         }
     });
 
