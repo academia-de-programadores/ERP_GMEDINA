@@ -1,10 +1,4 @@
-﻿//const btnGuardar = $('#btnCreateRegistroDeduccion')
-//const btnGuardarEditar = $('#btnUpdateDeduccion2')
-//const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
-//cargandoCrearcargandoCrear = $('#cargandoCrear')
-//cargandoCrear = $('#cargandoCrear')
-//cargandoActivar = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
-
+﻿
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
@@ -96,7 +90,6 @@ $("#btnCerrarCrear").click(function () {
     $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
     $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
     $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-    ocultarCargandoCrear();
 });
 
 
@@ -114,7 +107,6 @@ $("#IconCerrarCreate").click(function () {
     $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
     $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
     $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-    ocultarCargandoCrear();
 });
 
 
@@ -200,9 +192,10 @@ $('#btnCreateRegistroDeduccion').click(function () {
     }
 
     if (Correcto == false || Correcto2 == false || Correcto3 == false || Correcto4 == false) {
-
+        $('#btnCreateRegistroDeduccion').attr('disabled', false);
     }
     else {
+        $('#btnCreateRegistroDeduccion').attr('disabled', true);
         $("#Crear #Validation_descipcionA").css("display", "none");
         $("#Crear #Validation_descipcion2A").css("display", "none");
         $("#Crear #Validation_descipcion3A").css("display", "none");
@@ -211,7 +204,6 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
         $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
         $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-        mostrarCargandoCrear();
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
 
@@ -221,8 +213,9 @@ $('#btnCreateRegistroDeduccion').click(function () {
             data: data
         }).done(function (data) {
             if (data != "error") {
-                cargarGridDeducciones();
 
+                cargarGridDeducciones();
+                    
                 $("#Crear #cde_DescripcionDeduccionA").val("");
                 $("#Crear #cde_PorcentajeColaboradorA").val("");
                 $("#Crear #cde_PorcentajeEmpresaA").val("");
@@ -242,8 +235,8 @@ $('#btnCreateRegistroDeduccion').click(function () {
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
                 });
+                $('#btnCreateRegistroDeduccion').attr('disabled', false);
             }
-            ocultarCargandoCrear();
         });
     }
 });
