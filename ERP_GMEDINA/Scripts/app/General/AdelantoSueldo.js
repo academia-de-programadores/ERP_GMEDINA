@@ -12,10 +12,10 @@ var MaxSueldoEdit = 0;
 
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-  })
-  .fail(function (jqxhr, settings, exception) {
-  });
+    .done(function (script, textStatus) {
+    })
+    .fail(function (jqxhr, settings, exception) {
+    });
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -76,11 +76,11 @@ function cargarGridAdelantos() {
                     botonDetalles +
                     botonEditar +
                     botonActivar
-                    ]);
+                ]);
             }
             FullBody();
         });
-   
+
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -107,8 +107,6 @@ $(document).on("click", "#btnAgregarAdelanto", function () {
         });
     });
     $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
 });
 
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA CREACION
@@ -137,18 +135,17 @@ $(cmbEmpleado).change(() => {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAdelantos').click(function () {
-    var Razon =  $("#Crear #adsu_RazonAdelanto").val();
+    var Razon = $("#Crear #adsu_RazonAdelanto").val();
     var Monto = $("#Crear #adsu_Monto").val();
     var IdEmp = $("#Crear #emp_IdEmpleado").val();
     var Fecha = $("#Crear #adsu_FechaAdelanto").val();
-    
-    
+
+
     if ($("#Crear #adsu_Monto").val() <= MaxSueldoCreate
         && IdEmp != 0
         && Razon != "" && Razon != null && Razon != undefined
         && Monto != "" && Monto != null && Monto != undefined && Monto > 0
-        && Fecha != "" && Fecha != null && Fecha != undefined)
-    {
+        && Fecha != "" && Fecha != null && Fecha != undefined) {
         //MOSTRAR EL SPINNER DE CARGA
         document.getElementById("btnCreateRegistroAdelantos").disabled = true;
 
@@ -341,8 +338,6 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
 
                 //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
                 $("#EditarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
 
             } else if (data.adsu_Deducido) {
                 iziToast.error({

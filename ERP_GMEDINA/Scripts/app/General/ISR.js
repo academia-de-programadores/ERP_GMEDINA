@@ -101,8 +101,8 @@ $(document).on("click", "#btnAgregarISR", function () {
     $('#frmISRCreate .messageValidation').css('display', 'none');    
     $('#frmISRCreate .asterisco').removeClass('text-danger');
     $("#AgregarISR").modal({ backdrop: 'static', keyboard: false });
-    //$("html, body").css("overflow", "hidden");
-    //$("html, body").css("overflow", "scroll");
+    //
+    //
 });
 
 //crear nuevo rango isr

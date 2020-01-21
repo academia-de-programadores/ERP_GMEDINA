@@ -185,8 +185,8 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     $("#Crear #emp_Id").val("0");
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
@@ -384,8 +384,8 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                         });
                     });
                 $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -437,8 +437,8 @@ $("#btnEditIngresoIndividual").click(function () {
     if (TOF) {
         $("#EditarIngresosIndividuales").modal('hide');
         $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
         document.getElementById("btnEditIngresoIndividual2").disabled = false;
     }
 
@@ -450,15 +450,15 @@ $("#btnEditIngresoIndividual").click(function () {
 $(document).on("click", "#btnRegresar", function () {
     $("#EditarIngresosIndividualesConfirmacion").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnReg", function () {
     $("#EditarIngresosIndividualesConfirmacion").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 
@@ -578,8 +578,8 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
                         });
                     });
                 $("#DetallesIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -598,22 +598,22 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
 $(document).on("click", "#btnBack", function () {
     $("#InactivarIngresosIndividuales").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnBa", function () {
     $("#InactivarIngresosIndividuales").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnInactivarIngresoIndividual", function () {
     $("#EditarIngresosIndividuales").modal('hide');
     $("#InactivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = false;
 });
 

@@ -233,7 +233,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
 
     var val1 = $("#Crear #emp_Id").val();
     var val2 = $("#Crear #dafp_AporteLps").val();
-    var val3 = $("#Crear #afp_Id").val();    
+    var val3 = $("#Crear #afp_Id").val();
 
     if(ValidarCamposCrear(val1, val2, val3)){
         document.getElementById("btnCreateRegistroDeduccionAFP").disabled = true;

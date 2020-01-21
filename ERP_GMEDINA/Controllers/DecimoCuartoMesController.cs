@@ -70,7 +70,15 @@ namespace ERP_GMEDINA.Controllers
 				}
 				catch
 				{
-					dbContextTransaction.Rollback();
+					try
+					{
+						dbContextTransaction.Rollback();
+					}
+					catch (System.Data.Entity.Core.EntityException)
+					{
+						return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+					}
+
 					return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
 				}
 

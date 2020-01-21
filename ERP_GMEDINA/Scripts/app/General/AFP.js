@@ -2,12 +2,12 @@
 //Obtención de Script para Formateo de Fechas
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -91,7 +91,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 
     var ID = $(this).attr('afpid');
     localStorage.setItem('id', ID);
-   //Mostrar el Modal
+    //Mostrar el Modal
     $("#ActivarAFP").modal();
 });
 
@@ -112,7 +112,7 @@ $("#btnActivarRegistroAFP").click(function () {
                 message: '¡No se activó el registro, contacte al administrador!',
             });
         }
-        else{
+        else {
             cargarGridDeducciones();
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
@@ -184,8 +184,6 @@ $(document).on("click", "#btnAgregarAFP", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
 
     $("#afp_Descripcion").val('');
     $("#afp_AporteMinimoLps").val('');
@@ -215,7 +213,7 @@ $('#btnCreateRegistroAFP').click(function () {
         $("#Crear #ast1").css("color", "red");
         TOF = false;
     }
-    else{
+    else {
         $("#Crear #validation1").css("display", "none");
         $("#Crear #ast1").css("color", "black");
     }
@@ -328,7 +326,7 @@ $('#btnCreateRegistroAFP').click(function () {
         });
     }
 
-    
+
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateAFP").submit(function (e) {
         return false;
@@ -410,8 +408,6 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                         });
                     });
                 $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -437,7 +433,7 @@ $("#btnEditAFP").click(function () {
         $("#Editar #aste1").css("color", "red");
         TOF = false;
     }
-    else{
+    else {
         $("#validationes1").css("display", "none");
         $("#Editar #aste1").css("color", "black");
     }
@@ -499,8 +495,6 @@ $("#btnEditAFP").click(function () {
     if (TOF) {
         $("#EditarAFP").modal('hide');
         $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
     }
 
     $("#EditarAFP").submit(function (e) {
@@ -510,8 +504,6 @@ $("#btnEditAFP").click(function () {
 
 $(document).on("click", "#btnRegresar", function () {
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
     $("#EditarAFPConfirmacion").modal('hide');
     document.getElementById("btnEditAFPConfirmar").disabled = false;
 });
@@ -549,7 +541,7 @@ $("#btnEditAFPConfirmar").click(function () {
                 message: '¡No se editó el registro, contacte al administrador!',
             });
         }
-        
+
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -602,7 +594,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
                 })
-                .done(function (data) {
+                    .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //$("#Detalles #tde_IdTipoDedu").empty();
                         //LLENAR EL DROPDOWNLIST
@@ -615,8 +607,6 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                         });
                     });
                 $("#DetallesAFP").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -635,24 +625,23 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 $(document).on("click", "#btnBack", function () {
     document.getElementById("btnInactivarRegistroAFP").disabled = false;
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
     $("#InactivarAFP").modal('hide');
 });
 
 $(document).on("click", "#btnBa", function () {
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+
+    
     $("#InactivarAFP").modal('hide');
 });
 
 $(document).on("click", "#btnInactivarAFP", function () {
     document.getElementById("btnInactivarRegistroAFP").disabled = false;
-    $("#EditarAFP").modal('hide');    
+    $("#EditarAFP").modal('hide');
     $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+
+    
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroAFP')

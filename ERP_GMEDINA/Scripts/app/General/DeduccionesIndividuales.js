@@ -284,7 +284,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
         $("#Crear #validation4").css("display", "");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
-    } 
+    }
 
     if (dei_MontoRestante > dei_MontoInicial) {
         $("#Crear #MontoRestanteCrear").css("display", "");
@@ -294,10 +294,10 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         $("#Crear #MontoRestanteCrear").css("display", "none");
         $("#Crear #ast4").css("color", "black");
-      
+
     }
     //--
-    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) { 
+    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
         $("#Crear #validation5").css("display", "none");
         $("#Crear #ast5").css("color", "black");
     }
@@ -353,7 +353,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
             }
         });
     }
-   
+
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateDeduccionIndividual").submit(function (e) {
@@ -412,14 +412,14 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-              
+
                 if (data.dei_PagaSiempre) {
                     $('#Editar #dei_PagaSiempre').prop('checked', true);
                 }
                 else {
                     $('#Editar #dei_PagaSiempre').prop('checked', false);
                 }
-                
+
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
                 $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
@@ -441,12 +441,12 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST                    
+                        //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
                             $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-               
+
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
             }
             else {
@@ -496,9 +496,9 @@ $("#btnEditDeduccionIndividual").click(function () {
             $("#Editar #aste3").css("color", "red");
             TOF = false;
         }
-        
+
     }
-    
+
     if (vale4 > vale3) {
         $("#Editar #MontoRestanteEditar").css("display", "");
         $("#Editar #aste4").css("color", "red");
