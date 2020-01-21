@@ -9,9 +9,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de Preavisos</h5>
+                    <h5>Configuración de preavisos</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarPreaviso">Registrar Preaviso</button>
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarPreaviso">Registrar preaviso</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -96,7 +96,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">        
-                <h4 class="modal-title">Crear Preaviso</h4>
+                <h4 class="modal-title">Crear preaviso</h4>
             </div>
             @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
         </div>                
@@ -108,7 +108,7 @@
         <div class="modal-content">
             <div class="modal-header">
                
-                <h4 class="modal-title">Editar Preaviso</h4>
+                <h4 class="modal-title">Editar preaviso</h4>
             </div>
             @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
         </div>
@@ -139,7 +139,7 @@
         <div class="modal-content">
             <div class="modal-header">
                
-                <h4 class="modal-title">Detalle Preaviso</h4>
+                <h4 class="modal-title">Detalle preaviso</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_Details", new ERP_GMEDINA.Models.tbPreaviso())
@@ -159,7 +159,7 @@
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                <p><b>¿Esta Seguro Que Desea Inactivar este registro?</b></p>
+                <p><b>¿Está seguro que desea inactivar este registro?</b></p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" id="btnInactivarPreavisoConfirmar">Si</button>

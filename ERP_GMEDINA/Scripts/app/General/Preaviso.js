@@ -2,9 +2,7 @@
 
 const btnGuardar = $('#btnCrearPreavisoConfirmar'),
 cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
-//
-//OBTENER SCRIPT DE FORMATEO DE FECHA
-//
+
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
   })
@@ -70,7 +68,7 @@ function cargarGridPreaviso() {
 }
 
 function DataAnnotations(ToF) {
-    if (ToF) {
+    if (ToF == true) {
         //TRUE PARA OCULTAR DATAANNOTATIONS
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "none");
         $("#Editar #RangoInicio_Validation_descripcion").removeClass("text-danger");
@@ -246,6 +244,7 @@ $("#btnUpdatePreaviso").click(function () {
     debugger;
     if ( prea_RangoInicioMeses == "" || prea_RangoInicioMeses >= 36) {
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
+        $("#Editar #RangoInicio_Validation_descripcion").addClass("text-danger");
         $("#Editar #AsteriscoInicio").addClass("text-danger");
         Error = false;
     }
