@@ -42,12 +42,12 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.dei_MontoRestante)<span id="ast4">*</span>
+                    @Html.LabelFor(model => model.dei_MontoRestante)<span id="asteriscoNo4">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "form-control", @id = "dei_MontoRestante" } })
+                    @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validation4" })
-                    <span id="MontoRestanteCrear" class="text-danger" style="display:none;">El campo monto restante no puede ser menor que monto inicial.</span>
+                    <span id="MontoRestanteCrear" class="text-danger" style="display:none;">El campo monto restante no puede ser mayor que monto inicial.</span>
                 </div>
             </div>
 
