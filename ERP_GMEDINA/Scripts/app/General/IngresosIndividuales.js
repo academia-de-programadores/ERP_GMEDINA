@@ -155,7 +155,6 @@ $("#btnCerrarCrear").click(function () {
     $("#validatione1").css("display", "none");
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
-    $("#validatione3d").css("display", "none");
     $("#AgregarIngresosIndividuales").modal('hide');
     ocultarCargandoCrear();
 });
@@ -242,18 +241,17 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     }
     else {
         $("#Crear #validatione3").css("display", "");
-        $("#Crear #validatione3d").css("display", "none");
         $("#ast3").css("color", "red");
         TOF = false;
     }
     //--
     if (expr.test(ini_Monto)) {
-        $("#Crear #validatione3d").css("display", "none");
+        $("#Crear #validatione3").css("display", "none");
         $("#ast3").css("color", "black");
         document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
     }
     else {
-        $("#Crear #validatione3d").css("display", "");
+        $("#Crear #validatione3").css("display", "");
         $("#ast3").css("color", "red");
         TOF = false;
     }
@@ -306,7 +304,6 @@ $("#btnCerrarEditar").click(function () {
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
-    $("#validation3d").css("display", "none");
     $("#aste1").css("color", "black");
     $("#aste2").css("color", "black");
     $("#aste3").css("color", "black");
@@ -423,17 +420,16 @@ $("#btnEditIngresoIndividual").click(function () {
     }
     else {
         $("#Editar #validation3").css("display", "");
-        $("#Editar #validation3d").css("display", "none");
         $("#aste3").css("color", "red");
         TOF = false;
     }
     //--
     if (expreg.test(ini_Monto)) {
-        $("#Editar #validation3d").css("display", "none");
+        $("#Editar #validation3").css("display", "none");
         $("#aste3").css("color", "black");
     }
     else {
-        $("#Editar #validation3d").css("display", "");
+        $("#Editar #validation3").css("display", "");
         $("#aste3").css("color", "red");
         TOF = false;
     }
