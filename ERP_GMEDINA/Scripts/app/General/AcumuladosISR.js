@@ -182,6 +182,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                 $("#Editar #aisr_Monto").val(montoFormato);
 
                 $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
+                $('#btnUpdateAISR2').attr('disabled', false);
             }
             else {
                 //Mensaje de error si no hay data
@@ -246,6 +247,7 @@ $("#btnEditarAcumulado").click(function () {
 
 ///
 $("#btnUpdateAISR2").click(function () {
+    $('#btnUpdateAISR2').attr('disabled', true);
     var data = $("#frmEditAcumuladosISR").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -269,6 +271,7 @@ $("#btnUpdateAISR2").click(function () {
                 title: 'Error',
                 message: 'No se editó el registro, contacte al administrador',
             });
+            $('#btnUpdateAISR2').attr('disabled', false);
             $("#EditarAISRConfirmacion").modal('hide');
         }
     });
