@@ -260,8 +260,25 @@ $("#btnCerrarEditar").click(function () {
     OcultarValidacionesEditar();
 });
 
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEdit").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Validation_descipcion3").css("display", "none");
+    $("#Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
+    $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
+    $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
+    $("#Editar #AsteriscoTipoDeduEdit").removeClass("text-danger")
+});
+    //FUNCION: CERRAR EL MODAL DE CONFIRMACION Y VOLVER AL MODAL DE EDITAR
+    $("#btnEditarConfirmacion").click(function () {
+        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
+        $("#EditarCatalogoDeducciones").modal();
+    });
+
+
+    //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+  $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
     InactivarID = ID;
     $.ajax({
@@ -296,6 +313,15 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
                     $.each(data, function (i, iter) {
                         $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                     });
+                $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $('#btnUpdateDeduccion2').attr('disabled', false);
+
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
 
@@ -376,16 +402,16 @@ $('#btnUpdateDeduccion').click(function () {
         }
     }
 
-    if (CorrectoEdit == false || CorrectoEdit2 == false || CorrectoEdit3 == false) {
-        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-        $('#btnUpdateDeduccion2').attr('disabled', false);
-    }
-    else {
-        $("#EditarCatalogoDeducciones").modal('hide');
-        $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $('#btnUpdateDeduccion2').attr('disabled', false);
-    }
-});
+        if (CorrectoEdit == false || CorrectoEdit2 == false || CorrectoEdit3 == false) {
+            $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
+            $('#btnUpdateDeduccion2').attr('disabled', false);
+        }
+        else {
+            $("#EditarCatalogoDeducciones").modal('hide');
+            $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+            $('#btnUpdateDeduccion2').attr('disabled', false);
+        }
+    });
 
 
 
@@ -481,28 +507,24 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                         });
                     });
 
-                $("#DetallesCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-                //
-                //
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
-});
+                    $("#DetallesCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    });
 
 
 
-//MOSTRAR MODAL INACTIVAR
-$(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    //
-    //
+    //MOSTRAR MODAL INACTIVAR
+    $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#InactivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
 
     //Ocultar el modal editar
     $("#EditarCatalogoDeducciones").modal('hide');
@@ -555,10 +577,11 @@ $("#btnInactivarRegistroDeduccion").click(function () {
 });
 
 
-//MOSTRAR MODAL ACTIVAR
-$(document).on("click", "#btnActivarCatalogoDeducciones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    //MOSTRAR MODAL ACTIVAR
+    $(document).on("click", "#btnActivarCatalogoDeducciones", function () {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    });
 
 
 });

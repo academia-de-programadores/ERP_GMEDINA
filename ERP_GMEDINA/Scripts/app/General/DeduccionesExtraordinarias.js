@@ -21,7 +21,7 @@ const btnAgregar = $('#btnAgregar'),
     validacionObservaciones = $('#validacionObservaciones'),
     validacionIdDeducciones = $('#validacionIdDeducciones'),
     validacionCuota = $('#validacionCuota');
-   
+
     ;
 
 const btnEditar = $("#btnEditar"),
@@ -157,7 +157,7 @@ $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarD
     var ID = $(this).attr('iddeduccionesextra');
     localStorage.setItem('id', ID);
     //Mostrar el Modal
-    $("#ActivarDeduccionesExtraordinarias").modal();
+    $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
 });
 
 //Activar
@@ -198,7 +198,7 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 $(btnAgregar).click(function () {
     console.clear();
     if (validaciones(equipoEmpId,
-        montoInicial,  
+        montoInicial,
         montoRestante,
         observaciones,
         idDeduccion,
@@ -287,7 +287,7 @@ function validaciones(equipoEmpId,
         asteriscoMontoRestante.addClass('text-danger');
         validacionMontoRestante.show();
         todoBien = false;
-      
+
         if (montoRestante.val() > montoInicial.val()) {
             asteriscoMontoRestante.addClass('text-danger');
             MontoRestanteCrear.show();
@@ -351,7 +351,7 @@ function ocultarCargandoEditar() {
 
 //Editar
 $(btnEditar).click(function () {
-    
+
     if (validacionEditar(
         MontoInicial,
         MontoRestante,
@@ -365,7 +365,7 @@ $(btnEditar).click(function () {
             method: "POST",
             data: data
         }).done(function (data) {
-          
+
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "Exito") {
                 document.getElementById("btnEditar").disabled = true;
@@ -423,7 +423,7 @@ function validacionEditar(
     }
 
     // Monto Restante
-    
+
     if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
         asteriscMontoRestante.removeClass('text-danger');
         validMontoRestante.hide();
@@ -441,11 +441,11 @@ function validacionEditar(
         asteriscMontoRestante.addClass('text-danger');
         validMontoRestante.show();
         todoCorrecto = false;
-        
+
     }
 
-   
-   
+
+
     // Observaciones
     if (Observaciones.val() != '') {
         validObservaciones.hide();
@@ -481,8 +481,6 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
     localStorage.setItem('id', ID);
     //Mostrar el Modal
     $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-    
-    
 
 });
 

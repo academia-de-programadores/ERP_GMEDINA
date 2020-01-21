@@ -99,7 +99,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividua
     var id = $(this).attr('deiid');
     localStorage.setItem('id', id);
     //Mostrar el Modal
-    $("#ActivarDeduccionesIndividuales").modal();
+    $("#ActivarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
 });
 
 $("#btnActivarRegistroDeduccionIndividual").click(function () {
@@ -194,8 +194,6 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
     $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -286,7 +284,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
         $("#Crear #validation4").css("display", "");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
-    } 
+    }
 
     if (dei_MontoRestante > dei_MontoInicial) {
         $("#Crear #MontoRestanteCrear").css("display", "");
@@ -296,10 +294,10 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         $("#Crear #MontoRestanteCrear").css("display", "none");
         $("#Crear #ast4").css("color", "black");
-      
+
     }
     //--
-    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) { 
+    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
         $("#Crear #validation5").css("display", "none");
         $("#Crear #ast5").css("color", "black");
     }
@@ -355,7 +353,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
             }
         });
     }
-   
+
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateDeduccionIndividual").submit(function (e) {
@@ -414,14 +412,14 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-              
+
                 if (data.dei_PagaSiempre) {
                     $('#Editar #dei_PagaSiempre').prop('checked', true);
                 }
                 else {
                     $('#Editar #dei_PagaSiempre').prop('checked', false);
                 }
-                
+
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
                 $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
@@ -443,15 +441,13 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST                    
+                        //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
                             $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-               
+
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-                
-                
             }
             else {
                 //Mensaje de error si no hay data
@@ -500,9 +496,9 @@ $("#btnEditDeduccionIndividual").click(function () {
             $("#Editar #aste3").css("color", "red");
             TOF = false;
         }
-        
+
     }
-    
+
     if (vale4 > vale3) {
         $("#Editar #MontoRestanteEditar").css("display", "");
         $("#Editar #aste4").css("color", "red");
@@ -554,8 +550,6 @@ $("#btnEditDeduccionIndividual").click(function () {
     if (TOF) {
         $("#EditarDeduccionesIndividuales").modal('hide');
         $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        
-        
     }
 
 
@@ -569,16 +563,12 @@ $(document).on("click", "#btnRegresar", function () {
     document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
 });
 
 
 $(document).on("click", "#btnReg", function () {
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
 });
 
 
@@ -703,7 +693,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
                             }
                         });
                     });
-                $("#DetallesDeduccionesIndividuales").modal();
+                $("#DetallesDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
@@ -723,24 +713,18 @@ $(document).on("click", "#btnBack", function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
 });
 
 $(document).on("click", "#btnBa", function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
 });
 
 $(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#EditarDeduccionesIndividuales").modal('hide');
     $("#InactivarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroDeduccionIndividual')
