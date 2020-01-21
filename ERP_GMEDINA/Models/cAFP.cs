@@ -25,19 +25,16 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo Aporte Mínimo Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Aporte Mínimo")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         public decimal afp_AporteMinimoLps { get; set; }
 
         [Required(ErrorMessage = "Campo Interés Aporte Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Interés por Aporte")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         public decimal afp_InteresAporte { get; set; }
 
         [Required(ErrorMessage = "Campo Interés Anual Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Interés Anual")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         public decimal afp_InteresAnual { get; set; }
 
         [Required(ErrorMessage = "Campo Tipo Deducción Requerido")]
