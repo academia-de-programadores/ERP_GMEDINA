@@ -24,6 +24,7 @@
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "form-control", @type="number" } })
                     @Html.ValidationMessageFor(model => model.aisr_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion2" })
+                    <label class="text-danger" id="Validation_decimal" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
                 </div>
             </div>
         </div>
