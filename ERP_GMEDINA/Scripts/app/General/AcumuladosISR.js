@@ -123,6 +123,7 @@ $('#btnCreateAcumuladosISR').click(function () {
     }
     else {
         $('#btnCreateAcumuladosISR').attr('disabled', true);
+
         $("#Crear #Validation_descripcion").css("display", "none");
         $("#Crear #Validation_descripcion2").css("display", "none");
         $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
@@ -159,8 +160,6 @@ $('#btnCreateAcumuladosISR').click(function () {
 var Data_Edit = "";
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR", function () {
-    //SETEO DE LA VARIABLE GLOBAL DE EDICION
-    Data_Edit = "";
     //CAPTURA DEL ID
     var ID = $(this).data('id');
     InactivarID = ID;
@@ -174,12 +173,6 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                //PREFORMATO DE FECHA
-                data.aisr_FechaCrea = FechaFormato(data.aisr_FechaCrea);
-                data.aisr_FechaModifica = FechaFormato(data.aisr_FechaModifica);
-                //SETEO DE LA VARIABLE GLOBAL DE EDICION
-                Data_Edit = data;
-                console.log(Data_Edit);
                 //LLENADO DEL FORMULARIO DEL MODAL
                 var montoFormato = (data.aisr_Monto % 1 == 0) ? data.aisr_Monto + ".00" : data.aisr_Monto;
                 $("#Editar #aisr_Id").val(data.aisr_Id);
@@ -189,6 +182,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                 $("#Editar #aisr_Monto").val(montoFormato);
 
                 $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
+                $('#btnUpdateAISR2').attr('disabled', false);
             }
             else {
                 //Mensaje de error si no hay data
@@ -253,16 +247,15 @@ $("#btnEditarAcumulado").click(function () {
 
 ///
 $("#btnUpdateAISR2").click(function () {
-    //var data = $("#frmEditAcumuladosISR").serializeArray();
-    console.log(Data_Edit);
+    $('#btnUpdateAISR2').attr('disabled', true);
+    var data = $("#frmEditAcumuladosISR").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AcumuladosISR/Edit",
         method: "POST",
-        data: Data_Edit
+        data: data
     }).done(function (data) {
         if (data != "error") {
-            debugger;
             cargarGridAcumuladosISR();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarAcumuladosISR").modal('hide');
@@ -278,6 +271,7 @@ $("#btnUpdateAISR2").click(function () {
                 title: 'Error',
                 message: 'No se editó el registro, contacte al administrador',
             });
+            $('#btnUpdateAISR2').attr('disabled', false);
             $("#EditarAISRConfirmacion").modal('hide');
         }
     });
@@ -285,11 +279,6 @@ $("#btnUpdateAISR2").click(function () {
 
 
 ///
-
-
-
-
-
 
 //BOTON ICON CERRAR EDITAR
 $("#IconCerrarEdit").click(function () {
@@ -303,7 +292,7 @@ $("#IconCerrarEdit").click(function () {
 $("#btnConfirmacionNOAISR").click(function () {
 
     $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
-
+});
     //BOTON CERRAR EDITAR
     $("#btnCerrarEditar").click(function () {
         $("#Editar #validatione1").css("display", "none");
@@ -474,4 +463,3 @@ $("#btnConfirmacionNOAISR").click(function () {
         $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
         $("#InactivarAcumuladosISR").modal('hide');
     });
-});
