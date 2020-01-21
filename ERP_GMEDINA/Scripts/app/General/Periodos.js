@@ -150,15 +150,12 @@ $('#btnCrearPeriodoConfirmar').click(function () {
         });
         //SETEAR EL COLOR DEL ASTERISCO
         $("#AsteriscoPeriodos").removeClass("text-danger");
-        console.log("if");
     } else {
         //MOSTRAR DATAANNOTATIONS
         DataAnnotations(false);
         //SETEAR EL COLOR DEL ASTERISCO
         $("#AsteriscoPeriodos").addClass("text-danger");
     }
-    //BLOQUEAR EL BOTON DE CREAR
-    $("#btnCrearPeriodoConfirmar").attr("disabled", false);
 });
 
 
