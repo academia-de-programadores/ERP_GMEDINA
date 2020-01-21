@@ -21,6 +21,7 @@ const btnAgregar = $('#btnAgregar'),
     validacionObservaciones = $('#validacionObservaciones'),
     validacionIdDeducciones = $('#validacionIdDeducciones'),
     validacionCuota = $('#validacionCuota');
+   
     ;
 
 const btnEditar = $("#btnEditar"),
@@ -28,15 +29,18 @@ MontoInicial = $('#dex_MontoInicial'),
 MontoRestante = $('#dex_MontoRestante'),
 Observaciones = $('#dex_ObservacionesComentarios'),
 Cuota = $('#dex_Cuota'),
-asteriscMontoInicial = $('#asteriscoMontoInicial'),
-asteriscMontoRestante = $('#asteriscoMontoRestante'),
-asteriscObservaciones = $('#asteriscoObservaciones'),
-asteriscCuota = $('#asteriscoCuota'),
+asteriscMontoInicial = $('#asteriscMontoInicial'),
+asteriscMontoRestante = $('#asteriscMontoRestante'),
+asteriscObservaciones = $('#asteriscObservaciones'),
+asteriscCuota = $('#asteriscCuota'),
 validnEquipoEmpleado = $('#validEquipoEmpleado'),
 validMontoInicial = $('#validMontoInicial'),
 validMontoRestante = $('#validMontoRestante'),
 validObservaciones = $('#validObservaciones'),
-validCuota = $('#validCuota');
+validCuota = $('#validCuota'),
+MontoRestanteEditar = $('#MontoRestanteEditar');
+
+
 
 //#endregion
 
@@ -259,6 +263,16 @@ function validaciones(equipoEmpId,
     if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
+
+        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
+            asteriscoMontoInicial.removeClass('text-danger');
+            validacionMontoInicial.hide();
+        }
+        else {
+            asteriscoMontoInicial.addClass('text-danger');
+        validacionMontoInicial.show();
+        todoBien = false;
+        }
     } else {
         asteriscoMontoInicial.addClass('text-danger');
         validacionMontoInicial.show();
@@ -273,6 +287,17 @@ function validaciones(equipoEmpId,
         asteriscoMontoRestante.addClass('text-danger');
         validacionMontoRestante.show();
         todoBien = false;
+      
+        if (montoRestante.val() > montoInicial.val()) {
+            asteriscoMontoRestante.addClass('text-danger');
+            MontoRestanteCrear.show();
+            todoBien = false;
+        }
+        else {
+            asteriscoMontoRestante.removeClass('text-danger');
+            MontoRestanteCrear.hide();
+            todoBien = false;
+        }
     }
 
     // Observaciones
@@ -326,15 +351,13 @@ function ocultarCargandoEditar() {
 
 //Editar
 $(btnEditar).click(function () {
-    console.clear();
-    if (validacion(
+    
+    if (validacionEditar(
         MontoInicial,
         MontoRestante,
         Observaciones,
         Cuota
     )) {
-        console.log('Paso las validaciones');
-
         var data = $("#frmEditar").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -342,7 +365,7 @@ $(btnEditar).click(function () {
             method: "POST",
             data: data
         }).done(function (data) {
-            debugger;
+          
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "Exito") {
                 document.getElementById("btnEditar").disabled = true;
@@ -370,7 +393,7 @@ $(btnEditar).click(function () {
     document.getElementById("btnEditar").disabled = false;
 });
 
-function validacion(
+function validacionEditar(
     MontoInicial,
     MontoRestante,
     Observaciones,
@@ -380,25 +403,49 @@ function validacion(
 
 
     // Monto inicial
-    if (MontoInicial.val() != '' && expreg.test(MontoInicial.val())) {
+    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
         asteriscMontoInicial.removeClass('text-danger');
         validMontoInicial.hide();
+
+        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
+            asteriscMontoInicial.removeClass('text-danger');
+            validMontoInicial.hide();
+        }
+        else {
+            asteriscMontoInicial.addClass('text-danger');
+            validMontoInicial.show();
+            todoBien = false;
+        }
     } else {
         asteriscMontoInicial.addClass('text-danger');
         validMontoInicial.show();
-        todoCorrecto = false;
+        todoBien = false;
     }
 
     // Monto Restante
+    
     if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
         asteriscMontoRestante.removeClass('text-danger');
         validMontoRestante.hide();
+        if (MontoRestante.val() < MontoInicial.val()) {
+            asteriscMontoRestante.removeClass('text-danger');
+            MontoRestanteEditar.hide();
+        }
+        else {
+            asteriscMontoRestante.addClass('text-danger');
+            MontoRestanteEditar.show();
+            todoCorrecto = false;
+        }
+
     } else {
         asteriscMontoRestante.addClass('text-danger');
         validMontoRestante.show();
         todoCorrecto = false;
+        
     }
 
+   
+   
     // Observaciones
     if (Observaciones.val() != '') {
         validObservaciones.hide();
