@@ -260,26 +260,8 @@ $("#btnCerrarEditar").click(function () {
     OcultarValidacionesEditar();
 });
 
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarEdit").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#Validation_descipcion3").css("display", "none");
-    $("#Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
-    $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
-    $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
-    $("#Editar #AsteriscoTipoDeduEdit").removeClass("text-danger")
-}
-    //FUNCION: CERRAR EL MODAL DE CONFIRMACION Y VOLVER AL MODAL DE EDITAR
-    $("#btnEditarConfirmacion").click(function () {
-    $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-    $("#EditarCatalogoDeducciones").modal();
-})
-
-
-    //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-    $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
+//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
     InactivarID = ID;
     $.ajax({
