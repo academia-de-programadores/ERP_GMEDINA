@@ -799,6 +799,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Jornadas").Include(
                 "~/Scripts/app/General/Jornadas/IndexJornadas.js"));
 
+            //App/Admin Jornadas
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/AdminJornadas").Include(
+                "~/Scripts/app/General/Jornadas/Admin.js"));
+
+
             //App/Jornadas
             bundles.Add(new ScriptBundle("~/Scripts/app/General/EquipoEmpleados").Include(
                 "~/Scripts/app/General/EquipoEmpleados/EquipoEmpleados.js"));
