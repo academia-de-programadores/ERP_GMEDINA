@@ -111,9 +111,6 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
 //FUNCION: CREAR UN NUEVO REGISTRO
 
 $('#btnCrearPeriodoConfirmar').click(function () {
-    //BLOQUEAR EL BOTON DE CREAR
-    $("#btnCrearPeriodoConfirmar").attr("disabled", true);
-
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
 
@@ -122,6 +119,8 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if (ValidarForm()) {
+        //BLOQUEAR EL BOTON DE CREAR
+        $("#btnCrearPeriodoConfirmar").attr("disabled", true);
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/Periodos/Create",
@@ -153,12 +152,13 @@ $('#btnCrearPeriodoConfirmar').click(function () {
         $("#AsteriscoPeriodos").removeClass("text-danger");
         console.log("if");
     } else {
-        console.log("Else");
         //MOSTRAR DATAANNOTATIONS
         DataAnnotations(false);
         //SETEAR EL COLOR DEL ASTERISCO
         $("#AsteriscoPeriodos").addClass("text-danger");
     }
+    //BLOQUEAR EL BOTON DE CREAR
+    $("#btnCrearPeriodoConfirmar").attr("disabled", false);
 });
 
 
@@ -235,12 +235,13 @@ $("#btnCerrarConfirmarEditar").click(function () {
 
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnConfirmarEditar", function () {
-    //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
-    $("#btnConfirmarEditar").attr("disabled", true);
+    
     //OCULTAR DATAANNOTATIONS
     DataAnnotations(false);
     //VALIDAR PETICION AL SERVIDOR
     if ($("#Editar #peri_DescripPeriodo").val() != "") {
+        //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
+        $("#btnConfirmarEditar").attr("disabled", true);
 
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditPeriodo").serializeArray();
@@ -275,7 +276,10 @@ $(document).on("click", "#btnConfirmarEditar", function () {
     else {
         //MOSTRAR DATAANNOTATION
         DataAnnotations(false);
-    });
+    }
+    //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
+    $("#btnConfirmarEditar").attr("disabled", false);
+});
 
 
 

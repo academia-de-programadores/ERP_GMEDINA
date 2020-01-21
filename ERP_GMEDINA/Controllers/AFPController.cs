@@ -238,7 +238,6 @@ namespace ERP_GMEDINA.Controllers
 
         #region Inhabilitar AFP
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int afp_Id)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH

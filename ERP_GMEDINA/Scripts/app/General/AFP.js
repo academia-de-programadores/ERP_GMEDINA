@@ -1,6 +1,4 @@
-﻿//
-//Obtención de Script para Formateo de Fechas
-//
+﻿
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
         console.log(textStatus);
@@ -9,8 +7,6 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
         console.log("No se pudo recuperar Script SerializeDate");
     });
 
-
-//FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -30,22 +26,20 @@ function cargarGridDeducciones() {
         'GET',
         (data) => {
             if (data.length == 0) {
-                //Validar si se genera un error al cargar de nuevo el grid
+                // validar errores
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
-            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaAFP = data;
 
-            //LIMPIAR LA DATA DEL DATATABLE
+            //limpiar datatable
             $('#tblAFP').DataTable().clear();
 
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAFP.length; i++) {
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaAFP[i].afp_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaAFP[i].afp_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
                 var botonDetalles = ListaAFP[i].afp_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' : '';
@@ -56,7 +50,7 @@ function cargarGridDeducciones() {
                 //variable donde está el boton activar
                 var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarAFP" afpid="' + ListaAFP[i].afp_Id + '" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
 
-                //AGREGAR EL ROW AL DATATABLE
+                //agregar row al datatble
                 $('#tblAFP').dataTable().fnAddData([
                     ListaAFP[i].afp_Id,
                     ListaAFP[i].afp_Descripcion,
@@ -68,7 +62,6 @@ function cargarGridDeducciones() {
                     botonDetalles + botonEditar + botonActivar
                 ]);
             }
-            //APLICAR EL MAX WIDTH
             FullBody();
         });
 }
@@ -87,7 +80,7 @@ function spinner() {
 //Activar
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
     document.getElementById("btnActivarRegistroAFP").disabled = false;
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
 
     var ID = $(this).attr('afpid');
     localStorage.setItem('id', ID);
@@ -124,8 +117,6 @@ $("#btnActivarRegistroAFP").click(function () {
 
 });
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 $("#btnCerrarCrear").click(function () {
     document.getElementById("btnCreateRegistroAFP").disabled = false;
     $("#afp_Descripcion").val('');
@@ -146,7 +137,6 @@ $("#btnCerrarCrear").click(function () {
     $("#AgregarAFP").modal('hide');
 });
 
-//Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 const btnGuardar = $('#btnCreateRegistroAFP')
 
@@ -167,7 +157,7 @@ function mostrarCargandoCrear() {
 
 $(document).on("click", "#btnAgregarAFP", function () {
     document.getElementById("btnCreateRegistroAFP").disabled = false;
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+    //llenar DDL
     $.ajax({
         url: "/AFP/EditGetTipoDeduccionDDL",
         method: "GET",
@@ -193,11 +183,10 @@ $(document).on("click", "#btnAgregarAFP", function () {
 
 });
 
-
+var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
-    debugger;
     //Para que no entre directamente a hacer la peticion o la acción al servidor
     var TOF = true;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
@@ -285,7 +274,7 @@ $('#btnCreateRegistroAFP').click(function () {
         $("#Crear #ast5").css("color", "black");
     }
 
-    if (TOF) {
+    if (TOF == true) {
 
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCreateAFP").serializeArray();
@@ -334,6 +323,101 @@ $('#btnCreateRegistroAFP').click(function () {
 
 });
 
+// data annotations crear
+
+$('#Crear #afp_Descripcion').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Crear #validation1").css("display", "none");
+        $("#Crear #ast1").css("color", "black");
+    }
+    else {
+        $("#Crear #validation1").css("display", "");
+        $("#Crear #ast1").css("color", "red");
+    }
+});
+
+$('#Crear #afp_AporteMinimoLps').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Crear #validation2").css("display", "none");
+        $("#Crear #ast2").css("color", "black");
+    }
+    else {
+        $("#Crear #validation2").css("display", "");
+        $("#Crear #ast2").css("color", "red");
+    }
+
+    if (expreg.test($(this).val())) {
+        $("#Crear #validation2").css("display", "none");
+        $("#Crear #ast2").css("color", "black");
+    }
+    else {
+        $("#Crear #validation2").css("display", "");
+        $("#Crear #ast2").css("color", "red");
+    }
+});
+
+
+$('#Crear #afp_InteresAporte').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Crear #validation3").css("display", "none");
+        $("#Crear #ast3").css("color", "black");
+    }
+    else {
+        $("#Crear #validation3").css("display", "");
+        $("#Crear #ast3").css("color", "red");
+    }
+
+    if (expreg.test($(this).val())) {
+        $("#Crear #validation3").css("display", "none");
+        $("#Crear #ast3").css("color", "black");
+    }
+    else {
+        $("#Crear #validation3").css("display", "");
+        $("#Crear #ast3").css("color", "red");
+        TOF = false;
+    }
+});
+
+$('#Crear #afp_InteresAnual').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Crear #validation4").css("display", "none");
+        $("#Crear #ast4").css("color", "black");
+    }
+    else {
+        $("#Crear #validation4").css("display", "");
+        $("#Crear #ast4").css("color", "red");
+    }
+
+    if (expreg.test($(this).val())) {
+        $("#Crear #validation4").css("display", "none");
+        $("#Crear #ast4").css("color", "black");
+    }
+    else {
+        $("#Crear #validation4").css("display", "");
+        $("#Crear #ast4").css("color", "red");
+        TOF = false;
+    }
+});
+
+$('#Crear #tde_IdTipoDedu').on('change', function () {
+    if (this.value != 0) {
+        $("#Crear #validation5").css("display", "none");
+        $("#Crear #ast5").css("color", "black");
+        
+    }
+    else {
+        $("#Crear #validation5").css("display", "");
+        $("#Crear #ast5").css("color", "red");
+    }
+});
 
 
 //Editar//
@@ -368,10 +452,13 @@ function mostrarCargandoEditar() {
     cargandoEditar.html(spinner());
     cargandoEditar.show();
 }
+var inactivarID = 0;
+var activarID = 0;
 
 $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
     document.getElementById("btnEditAFPConfirmar").disabled = false;
     var ID = $(this).data('id');
+    inactivarID = ID;
     $.ajax({
         url: "/AFP/Edit/" + ID,
         method: "GET",
@@ -427,7 +514,6 @@ $("#btnEditAFP").click(function () {
     var vale2 = $("#Editar #afp_AporteMinimoLps").val();
     var vale3 = $("#Editar #afp_InteresAporte").val();
     var vale4 = $("#Editar #afp_InteresAnual").val();
-    debugger;
     if (vale1 == "" || vale1 == null) {
         $("#validationes1").css("display", "");
         $("#Editar #aste1").css("color", "red");
@@ -492,7 +578,7 @@ $("#btnEditAFP").click(function () {
         TOF = false;
     }
     //--
-    if (TOF) {
+    if (TOF == true) {
         $("#EditarAFP").modal('hide');
         $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
     }
@@ -501,6 +587,104 @@ $("#btnEditAFP").click(function () {
         return false;
     });
 });
+
+// data annotations editar
+
+$('#Editar #afp_Descripcion').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#validationes1").css("display", "none");
+        $("#Editar #aste1").css("color", "black");
+    }
+    else {
+        $("#validationes1").css("display", "");
+        $("#Editar #aste1").css("color", "red");
+    }
+});
+
+$('#Editar #afp_AporteMinimoLps').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Editar #aste2").css("color", "black");
+    }
+    else {
+        $("#validationes2").css("display", "");
+        $("#Editar #aste2").css("color", "red");
+    }
+
+    if (expreg.test($(this).val())) {
+        $("#validationes2").css("display", "none");
+        $("#Editar #aste2").css("color", "black");
+    }
+    else {
+        $("#validationes2").css("display", "");
+        $("#Editar #aste2").css("color", "red");
+    }
+});
+
+
+
+$('#Editar #afp_InteresAporte').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Editar #aste3").css("color", "black");
+    }
+    else {
+        $("#validationes3").css("display", "");
+        $("#Editar #aste3").css("color", "red");
+    }
+
+    if (expreg.test($(this).val())) {
+        $("#validationes3").css("display", "");
+        $("#Editar #aste3").css("color", "black");
+    }
+    else {
+        $("#validationes3").css("display", "");
+        $("#Editar #aste3").css("color", "red");
+    }
+});
+
+$('#Editar #afp_InteresAnual').keyup(function () {
+    if ($(this)
+        .val()
+        .trim() != '') {
+        $("#Editar #aste4").css("color", "black");
+    }
+    else {
+        $("#validationes4").css("display", "");
+        $("#Editar #aste4").css("color", "red");
+    }
+
+    if (expreg.test($(this).val())) {
+        $("#validationes4").css("display", "none");
+        $("#Editar #aste4").css("color", "black");
+    }
+    else {
+        $("#validationes4").css("display", "");
+        $("#Editar #aste4").css("color", "red");
+    }
+});
+
+
+$('#Crear #tde_IdTipoDedu').on('change', function () {
+    if (this.value != 0) {
+        $("#Crear #validation5").css("display", "none");
+        $("#Crear #ast5").css("color", "black");
+
+    }
+    else {
+        $("#Crear #validation5").css("display", "");
+        $("#Crear #ast5").css("color", "red");
+    }
+});
+
+
+
+
+
 
 $(document).on("click", "#btnRegresar", function () {
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
@@ -665,12 +849,11 @@ function mostrarCargandoInhabilitar() {
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroAFP").click(function () {
     document.getElementById("btnInactivarRegistroAFP").disabled = true;
-    var data = $("#frmInactivarAFP").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AFP/Inactivar",
         method: "POST",
-        data: data
+        data: {afp_Id : inactivarID}
     }).done(function (data) {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
