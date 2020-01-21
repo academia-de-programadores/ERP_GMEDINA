@@ -180,7 +180,6 @@ $("#btnEditarIngresos").click(function () {
     var data = $('input[name$="cin_DescripcionIngreso"').val();
     var id = $('input[name$="cin_IdIngreso"').val();
 
-    console.log(data);
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     //VALIDAMOS LOS CAMPOS

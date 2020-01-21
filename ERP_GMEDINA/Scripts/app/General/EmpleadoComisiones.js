@@ -420,7 +420,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                 var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
                 var FechaCrea = FechaFormato(data[0].cc_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cc_FechaModifica);
-                console.log(data);
                 if (data[0].cc_Pagado) {
                     //$('#Detalles #cb_Pagado').prop('checked', true);
                     $("#Detallar #cc_Pagado").html("Si");

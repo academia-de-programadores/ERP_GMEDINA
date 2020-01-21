@@ -174,7 +174,6 @@ $('#btnCrearPreavisoConfirmar').click(function () {
         if (Fin == "" || Fin <= 0) {
             $("#Crear #Validation_descripcion1").css("display", "block");
             $("#Crear #AsteriscoFin").addClass("text-danger");
-            console.log("Entra");
         }
         else {
             $("#Crear #Validation_descripcion1").css("display", "none");
