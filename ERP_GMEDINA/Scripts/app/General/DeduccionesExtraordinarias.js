@@ -204,7 +204,6 @@ $(btnAgregar).click(function () {
         idDeduccion,
         cuota
     )) {
-        console.log('Paso las validaciones');
 
         var data = $("#frmCreate").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -475,8 +474,6 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('iddeduccionextra');
-
-    console.log(ID)
 
     localStorage.setItem('id', ID);
     //Mostrar el Modal

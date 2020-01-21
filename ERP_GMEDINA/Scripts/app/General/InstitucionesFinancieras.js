@@ -174,7 +174,7 @@ $('#btnCargarPlanilla').click(function ()
             }
             else
             {
-                $("#frmOpcionesINFS").modal();
+                $("#frmOpcionesINFS").modal({ backdrop: 'static', keyboard: false });
             }
         });
 });
@@ -188,7 +188,6 @@ $(btnAgregar).click(function () {
     Telef,
     Corre
     )) {
-        console.log('Paso las validaciones');
         debugger;
         var data = $("#frmCreateInstFin").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -235,8 +234,7 @@ $(btnEditarConfirmar).click(function () {
     Tel,
     Cor
     )) {
-        console.log('Paso las validaciones');
-        $("#frmActualizarINFS").modal();
+        $("#frmActualizarINFS").modal({ backdrop: 'static', keyboard: false });
        }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -287,7 +285,7 @@ $(btnEditar).click(function () {
 // INACTIVAR
 $("#frmInactivarINFS").click(function () {
     //$("#frmEditarAuxCes").modal('hide');
-    $("#frmEliminarAuxCes").modal();
+    $("#frmEliminarAuxCes").modal({ backdrop: 'static', keyboard: false });
 });
 
 $("#btnInactivarINFS").click(function () {
@@ -325,7 +323,7 @@ $("#btnInactivarINFS").click(function () {
 var activarID = 0;
 $(document).on("click", "#btnModalActivarAuxCes", function () {
     activarID = $(this).data('id');
-    $("#frmActivarAuxCes").modal();
+    $("#frmActivarAuxCes").modal({ backdrop: 'static', keyboard: false });
 });
 
 //activar ejecutar

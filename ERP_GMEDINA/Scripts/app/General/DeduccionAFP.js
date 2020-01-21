@@ -297,7 +297,6 @@ $("#Editar #validatione1").css("display", "none");
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     var ID = $(this).data('id');
-    console.log(ID)
     $.ajax({
         url: "/DeduccionAFP/Edit/" + ID,
         method: "GET",
@@ -365,7 +364,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
 
 //FUNCION: VALIDAR LOS CAMPOS DE EDITAR
 function ValidarCamposEditar(vale3) {
-    console.log('entro en la funcion');
     var pasoValidacion = true;
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
     if (vale3 == "" || vale3 == null || vale3 == undefined) {
@@ -415,7 +413,6 @@ $("#btnEditDeduccionAFP").click(function () {
     var vale3 = $("#Editar #dafp_AporteLps").val();
 
     if (ValidarCamposEditar(vale3)) {
-        console.log('paso la validacion');
         $("#EditarDeduccionAFP").modal('hide');
         document.getElementById("btnEditDeduccionAFPConfirmar").disabled = false;
         $("#EditarDeduccionAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });

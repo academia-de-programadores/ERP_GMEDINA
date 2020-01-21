@@ -441,7 +441,6 @@ $('#frmEditISR #isr_Porcentaje').keyup(function () {
     else {
         $("#Validation_PorcentajeEdit").css('display', '');
         $('#PorcentajeAsterisco').addClass("text-danger");
-        console.log($('#PorcentajeAsterisco'));
     }
 
     if (parseInt($("#frmEditISR #isr_Porcentaje").val()) > 100) {

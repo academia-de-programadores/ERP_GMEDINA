@@ -207,7 +207,6 @@ $("#btnConfirmarEditar2").click(function () {
     if ($("#Editar #fpa_Descripcion").val() != "") {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditFormaPago").serializeArray();
-        console.log(data);
         $.ajax({
             url: "/FormaPago/Editar",
             method: "POST",
@@ -254,8 +253,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log(data);
-                console.log(data[0].fpa_Descripcion);
                 var FechaCrea = FechaFormato(data[0].fpa_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].fpa_FechaModifica);
                 $("#frmDetailFormaPago #fpa_Descripcion").html(data[0].fpa_Descripcion);
