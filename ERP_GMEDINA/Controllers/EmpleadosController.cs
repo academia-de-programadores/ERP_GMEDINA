@@ -77,6 +77,7 @@ namespace ERP_GMEDINA.Controllers
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
+            db = new ERP_GMEDINAEntities();
             ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Edad = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla = "", fpa_IdFormaPago = "", emp_FechaIngreso = "", emp_CuentaBancaria = "" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
@@ -237,6 +238,8 @@ namespace ERP_GMEDINA.Controllers
                     string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
                     if (!System.IO.File.Exists(path))
                     {//OPEN IF
+                        db = new ERP_GMEDINAEntities();
+
                         FileUpload.SaveAs(path);
                         Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
                         Microsoft.Office.Interop.Excel.Workbook workbook = application.Workbooks.Open(path);
