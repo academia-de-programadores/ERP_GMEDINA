@@ -30,8 +30,17 @@
                                         <div class="form-group">
                                             <label class="pull-right">campos requeridos (*)</label>
                                         </div>
+
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_Experiencia, htmlAttributes: new { @class = "requerido control-label col-md-2" })
+                                            @Html.LabelFor(model => model.req_Descripcion, htmlAttributes: new { @class = " control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.req_Descripcion, new { htmlAttributes = new { @class = "required form-control required", @maxlength = 50 } })
+                                                @Html.ValidationMessageFor(model => model.req_Descripcion, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.req_Experiencia, htmlAttributes: new { @class = " control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.req_Experiencia, new { htmlAttributes = new { @class = "required form-control required", @maxlength = 100 } })
                                                 @Html.ValidationMessageFor(model => model.req_Experiencia, "", new { @class = "text-danger" })
@@ -46,24 +55,16 @@
                                                        new SelectListItem{ Text="Indiferente", Value = "N" },
                                                        new SelectListItem{ Text="Masculino", Value = "M" },
                                                        new SelectListItem{ Text="Femenino", Value = "F" },
-                                                        }  
+                                                        }
                                            , htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.req_Sexo, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_Descripcion, htmlAttributes: new { @class = "requerido control-label col-md-2"})
+                                            @Html.LabelFor(model => model.req_EdadMinima, htmlAttributes: new { @class = " control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_Descripcion, new { htmlAttributes = new { @class = "required form-control required", @maxlength = 50 } })
-                                                @Html.ValidationMessageFor(model => model.req_Descripcion, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.req_EdadMinima, htmlAttributes: new { @class = "requerido control-label col-md-2"})
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_EdadMinima, new { htmlAttributes = new { @class = "required form-control required", @onchange="SetMinOn_req_EdadMaxima()" } })
+                                                @Html.EditorFor(model => model.req_EdadMinima, new { htmlAttributes = new { @class = "required form-control required", @onchange = "SetMinOn_req_EdadMaxima()" } })
                                                 @Html.ValidationMessageFor(model => model.req_EdadMinima, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -94,20 +95,20 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_EducacionSuperior, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                
-                                                    @Html.EditorFor(model => model.req_EducacionSuperior)
-                                                    @Html.ValidationMessageFor(model => model.req_EducacionSuperior, "", new { @class = "text-danger" })
-                                                
+
+                                                @Html.EditorFor(model => model.req_EducacionSuperior)
+                                                @Html.ValidationMessageFor(model => model.req_EducacionSuperior, "", new { @class = "text-danger" })
+
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_Permanente, htmlAttributes: new { @class = "control-label col-md-2", @onclick = "Req_check()"})
+                                            @Html.LabelFor(model => model.req_Permanente, htmlAttributes: new { @class = "control-label col-md-2", @onclick = "Req_check()" })
                                             <div class="col-md-10">
-                                                
-                                                    @Html.CheckBoxFor(model => model.req_Permanente, htmlAttributes: new { @onclick = "Req_check()" })
-                                                    @Html.ValidationMessageFor(model => model.req_Permanente, "", new { @class = "text-danger" })
-                                                
+
+                                                @Html.CheckBoxFor(model => model.req_Permanente, htmlAttributes: new { @onclick = "Req_check()" })
+                                                @Html.ValidationMessageFor(model => model.req_Permanente, "", new { @class = "text-danger" })
+
                                             </div>
                                         </div>
 
@@ -120,9 +121,9 @@
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_Vacantes, htmlAttributes: new { @class = "requerido control-label col-md-2"})
+                                            @Html.LabelFor(model => model.req_Vacantes, htmlAttributes: new { @class = " control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_Vacantes, new { htmlAttributes = new { @class = "required form-control required", @type = "number", @min ="1" } })
+                                                @Html.EditorFor(model => model.req_Vacantes, new { htmlAttributes = new { @class = "required form-control required", @type = "number", @min = "1" } })
                                                 @Html.ValidationMessageFor(model => model.req_Vacantes, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -136,7 +137,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_FechaContratacion, htmlAttributes: new { @class = "requerido control-label col-md-2" })
+                                            @Html.LabelFor(model => model.req_FechaContratacion, htmlAttributes: new { @class = " control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.TextBoxFor(model => model.req_FechaContratacion, new { @type = "date", @class = "required form-control" })
                                                 @Html.ValidationMessageFor(model => model.req_FechaContratacion, "", new { @class = "text-danger" })

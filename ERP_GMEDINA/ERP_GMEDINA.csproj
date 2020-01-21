@@ -1926,6 +1926,7 @@
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\FechaPlanilla.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\GeneralTotalesRPT.js" />
     <Content Include="Scripts\app\General\Habilidades\Admin.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />

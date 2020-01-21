@@ -180,7 +180,7 @@ function tablaEditar(btn) {
 }
 
 function tablaDetalles(ID) {
-    $('#ModalDetalles').modal('show');
+   
     id = ID;
     _ajax(null,
         '/Requisiciones/Detalles/' + ID,
