@@ -255,7 +255,6 @@ namespace ERP_GMEDINA.Controllers
 
         #region Inhabilitar Deducciones Individuales
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
         {
             //LLENAR DATA DE AUDITORIA
