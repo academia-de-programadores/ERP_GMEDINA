@@ -174,6 +174,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
+            tbDepartamentos = tbDepartamentos == null ? new tbDepartamentos[] { } : tbDepartamentos;
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
