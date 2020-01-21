@@ -260,7 +260,6 @@ $("#btnCerrarEditar").click(function () {
     OcultarValidacionesEditar();
 });
 
-
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconCerrarEdit").click(function () {
     $("#Validation_descipcion").css("display", "none");
@@ -279,7 +278,7 @@ $("#IconCerrarEdit").click(function () {
 
 
     //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-    $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
+  $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
     InactivarID = ID;
     $.ajax({
