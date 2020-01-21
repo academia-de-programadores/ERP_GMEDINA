@@ -31,8 +31,7 @@
                         @Html.LabelFor(model => model.dei_MontoInicial)<span id="aste3">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial", @min = "0.01", @max = "9999999999.99" } })
-                        <label class="text-danger" id="validatione3d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
+                        @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial" } })
                         @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validatione3" })
                     </div>
                 </div>
@@ -42,8 +41,7 @@
                         @Html.LabelFor(model => model.dei_MontoRestante)<span id="aste4">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante", @min = "0.01", @max = "9999999999.99" } })
-                        <label class="text-danger" id="validatione4d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
+                        @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante" } })
                         @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validatione4" })
                         <span id="MontoRestanteEditar" class="text-danger" style="display:none;">El campo rango fin no puede ser mayor que rango inicio</span>
                     </div>
@@ -55,8 +53,7 @@
                         @Html.LabelFor(model => model.dei_Cuota)<span id="aste5">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota", @min = "0.01", @max = "9999999999.99" } })
-                        <label class="text-danger" id="validatione5d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
+                        @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota" } })
                         @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validatione5" })
                     </div>
                 </div>

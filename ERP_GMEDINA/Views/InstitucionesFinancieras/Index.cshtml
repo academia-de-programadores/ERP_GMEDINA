@@ -97,6 +97,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Eliminar">
@@ -104,7 +105,7 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" style="margin:3px" id="btnInactivarINFS">Si</button>
+                <button type="button" class="btn btn-danger " id="btnInactivarINFS">Si</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -115,13 +116,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
                 ¿Está seguro que desea activar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" style="margin:3px" id="btnActivarINFS">Si</button>
+                <button type="button" class="btn btn-primary" id="btnActivarINFS">Si</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -137,5 +139,5 @@
 @section Scripts {
   @Scripts.Render("~/plugins/dataTables")
   @Styles.Render("~/Content/plugins/izitoast/iziToast")
-  @Scripts.Render("~/Scripts/app/General/InstitucionesFinancieras")
+<script src="~/Scripts/app/General/InstitucionesFinancierasIndex.js"></script>
 }
