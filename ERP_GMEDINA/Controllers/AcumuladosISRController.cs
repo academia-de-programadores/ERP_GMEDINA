@@ -128,7 +128,7 @@ namespace ERP_GMEDINA.Controllers
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
             tbAcumuladosISR.aisr_UsuarioCrea = 1;
             tbAcumuladosISR.aisr_FechaCrea = DateTime.Now;
-            //tbAcumuladosISR.aisr_Monto = (decimal)((tbAcumuladosISR.aisr_Monto % 1 == 0) ? Convert.ToDecimal(tbAcumuladosISR.aisr_Monto + ".00") : Convert.ToDecimal(tbAcumuladosISR.aisr_Monto) );
+            tbAcumuladosISR.aisr_Monto = (decimal)((tbAcumuladosISR.aisr_Monto % 1 == 0) ? Convert.ToDecimal(tbAcumuladosISR.aisr_Monto + ".00") : Convert.ToDecimal(tbAcumuladosISR.aisr_Monto) );
 
 
             //LLENAR DATA DE AUDITORIA

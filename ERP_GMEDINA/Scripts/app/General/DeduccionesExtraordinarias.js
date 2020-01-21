@@ -18,11 +18,10 @@ const btnAgregar = $('#btnAgregar'),
     validacionEquipoEmpleado = $('#validacionEquipoEmpleado'),
     validacionMontoInicial = $('#validacionMontoInicial'),
     validacionMontoRestante = $('#validacionMontoRestante'),
-    validacionMontoInicial2 = $('#validacionMontoInicial2'),
-    validacionMontoRestante2 = $('#validacionMontoRestante2'),
     validacionObservaciones = $('#validacionObservaciones'),
     validacionIdDeducciones = $('#validacionIdDeducciones'),
-    validacionCuota2 = $('#validacionCuota2');
+    validacionCuota = $('#validacionCuota');
+   
     ;
 
 const btnEditar = $("#btnEditar"),
@@ -30,17 +29,18 @@ MontoInicial = $('#dex_MontoInicial'),
 MontoRestante = $('#dex_MontoRestante'),
 Observaciones = $('#dex_ObservacionesComentarios'),
 Cuota = $('#dex_Cuota'),
-asteriscMontoInicial = $('#asteriscoMontoInicial'),
-asteriscMontoRestante = $('#asteriscoMontoRestante'),
-asteriscObservaciones = $('#asteriscoObservaciones'),
-asteriscCuota = $('#asteriscoCuota'),
+asteriscMontoInicial = $('#asteriscMontoInicial'),
+asteriscMontoRestante = $('#asteriscMontoRestante'),
+asteriscObservaciones = $('#asteriscObservaciones'),
+asteriscCuota = $('#asteriscCuota'),
 validnEquipoEmpleado = $('#validEquipoEmpleado'),
 validMontoInicial = $('#validMontoInicial'),
 validMontoRestante = $('#validMontoRestante'),
-validMontoInicial2 = $('#validMontoInicial2'),
-validMontoRestante2 = $('#validMontoRestante2'),
 validObservaciones = $('#validObservaciones'),
-validCuota2 = $('#validCuota2');
+validCuota = $('#validCuota'),
+MontoRestanteEditar = $('#MontoRestanteEditar');
+
+
 
 //#endregion
 
@@ -260,45 +260,44 @@ function validaciones(equipoEmpId,
     }
 
     // Monto inicial
-    if (montoInicial.val() != '') {
+    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
+
+        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
+            asteriscoMontoInicial.removeClass('text-danger');
+            validacionMontoInicial.hide();
+        }
+        else {
+            asteriscoMontoInicial.addClass('text-danger');
+        validacionMontoInicial.show();
+        todoBien = false;
+        }
     } else {
         asteriscoMontoInicial.addClass('text-danger');
-        validacionMontoInicial2.hide();
         validacionMontoInicial.show();
         todoBien = false;
     }
 
-    if (expreg.test(montoInicial.val())) {
-        asteriscoMontoInicial.removeClass('text-danger');
-        validacionMontoInicial2.hide();
-    }
-    else {
-        asteriscoMontoInicial.addClass('text-danger');
-        validacionMontoInicial2.show();
-        todoBien = false;
-    }
-
     // Monto Restante
-    if (montoRestante.val() != '') {
+    if (montoRestante.val() != '' && expreg.test(montoRestante.val())) {
         asteriscoMontoRestante.removeClass('text-danger');
         validacionMontoRestante.hide();
     } else {
         asteriscoMontoRestante.addClass('text-danger');
-        validacionMontoRestante2.hide();
         validacionMontoRestante.show();
         todoBien = false;
-    }
-
-    if (expreg.test(montoRestante.val())) {
-        asteriscoMontoRestante.removeClass('text-danger');
-        validacionMontoRestante2.hide();
-    }
-    else {
-        asteriscoMontoRestante.addClass('text-danger');
-        validacionMontoRestante2.show();
-        todoBien = false;
+      
+        if (montoRestante.val() > montoInicial.val()) {
+            asteriscoMontoRestante.addClass('text-danger');
+            MontoRestanteCrear.show();
+            todoBien = false;
+        }
+        else {
+            asteriscoMontoRestante.removeClass('text-danger');
+            MontoRestanteCrear.hide();
+            todoBien = false;
+        }
     }
 
     // Observaciones
@@ -327,21 +326,9 @@ function validaciones(equipoEmpId,
         validacionCuota.hide();
     } else {
         asteriscoCuota.addClass('text-danger');
-        validacionCuota2.hide();
         validacionCuota.show();
         todoBien = false;
     }
-
-    if (expreg.test(cuota.val())) {
-        asteriscoCuota.removeClass('text-danger');
-        validacionCuota2.hide();
-    }
-    else {
-        asteriscoCuota.addClass('text-danger');
-        validacionCuota2.show();
-        todoBien = false;
-    }
-
     return todoBien;
 }
 
@@ -364,15 +351,13 @@ function ocultarCargandoEditar() {
 
 //Editar
 $(btnEditar).click(function () {
-    console.clear();
-    if (validacion(
+    
+    if (validacionEditar(
         MontoInicial,
         MontoRestante,
         Observaciones,
         Cuota
     )) {
-        console.log('Paso las validaciones');
-
         var data = $("#frmEditar").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -380,7 +365,7 @@ $(btnEditar).click(function () {
             method: "POST",
             data: data
         }).done(function (data) {
-            debugger;
+          
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "Exito") {
                 document.getElementById("btnEditar").disabled = true;
@@ -408,7 +393,7 @@ $(btnEditar).click(function () {
     document.getElementById("btnEditar").disabled = false;
 });
 
-function validacion(
+function validacionEditar(
     MontoInicial,
     MontoRestante,
     Observaciones,
@@ -418,47 +403,49 @@ function validacion(
 
 
     // Monto inicial
-    if (MontoInicial.val() != '') {
+    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
         asteriscMontoInicial.removeClass('text-danger');
         validMontoInicial.hide();
+
+        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
+            asteriscMontoInicial.removeClass('text-danger');
+            validMontoInicial.hide();
+        }
+        else {
+            asteriscMontoInicial.addClass('text-danger');
+            validMontoInicial.show();
+            todoBien = false;
+        }
     } else {
         asteriscMontoInicial.addClass('text-danger');
-        validMontoInicial2.hide();
         validMontoInicial.show();
-        todoCorrecto = false;
-    }
-
-    if (expreg.test(MontoInicial.val())) {
-        asteriscMontoInicial.removeClass('text-danger');
-        validMontoInicial2.hide();
-    }
-    else {
-        asteriscMontoInicial.addClass('text-danger');
-        validMontoInicial2.show();
-        todoCorrecto = false;
+        todoBien = false;
     }
 
     // Monto Restante
-    if (MontoRestante.val() != '') {
+    
+    if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
         asteriscMontoRestante.removeClass('text-danger');
         validMontoRestante.hide();
+        if (MontoRestante.val() < MontoInicial.val()) {
+            asteriscMontoRestante.removeClass('text-danger');
+            MontoRestanteEditar.hide();
+        }
+        else {
+            asteriscMontoRestante.addClass('text-danger');
+            MontoRestanteEditar.show();
+            todoCorrecto = false;
+        }
+
     } else {
         asteriscMontoRestante.addClass('text-danger');
-        validMontoRestante2.hide();
         validMontoRestante.show();
         todoCorrecto = false;
+        
     }
 
-    if (expreg.test(MontoRestante.val())) {
-        asteriscMontoRestante.removeClass('text-danger');
-        validMontoRestante2.hide();
-    }
-    else {
-        asteriscMontoRestante.addClass('text-danger');
-        validMontoRestante2.show();
-        todoCorrecto = false;
-    }
-
+   
+   
     // Observaciones
     if (Observaciones.val() != '') {
         validObservaciones.hide();
@@ -475,21 +462,9 @@ function validacion(
         validCuota.hide();
     } else {
         asteriscCuota.addClass('text-danger');
-        validCuota2.hide();
         validCuota.show();
         todoCorrecto = false;
     }
-
-    if (expreg.test(Cuota.val())) {
-        asteriscCuota.removeClass('text-danger');
-        validCuota2.hide();
-    }
-    else {
-        asteriscCuota.addClass('text-danger');
-        validCuota2.show();
-        todoCorrecto = false;
-    }
-
     return todoCorrecto;
 }
 

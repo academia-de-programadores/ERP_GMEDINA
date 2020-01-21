@@ -141,9 +141,6 @@ $("#btnCerrarCrear").click(function () {
     $("#validation3").css("display", "none");
     $("#validation4").css("display", "none");
     $("#validation5").css("display", "none");
-    $("#validation3d").css("display", "none");
-    $("#validation4d").css("display", "none");
-    $("#validation5d").css("display", "none");
     $("#Crear #ast1").css("color", "black");
     $("#Crear #ast2").css("color", "black");
     $("#Crear #ast3").css("color", "black");
@@ -250,18 +247,17 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
 
     //--
     if (expr.test(dei_MontoInicial)) {
-        $("#Crear #validation3d").css("display", "none");
+        $("#Crear #validation3").css("display", "none");
         $("#Crear #ast3").css("color", "black");
     }
     else{
-        $("#Crear #validation3d").css("display", "");
+        $("#Crear #validation3").css("display", "");
         $("#Crear #ast3").css("color", "red");
         TOF = false;
     }
     //////////////////////////////
     if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined || dei_MontoInicial <= 0) {
-        $("#Crear #validation3").css("display", "");
-        $("#Crear #validation3d").css("display", "none");
+        $("#Crear #validation3").css("display", "block");
         $("#Crear #ast3").css("color", "red");
         TOF = false;
         console.log("False");
@@ -279,16 +275,15 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
     else {
         $("#Crear #validation4").css("display", "");
-        $("#Crear #validation4d").css("display", "none");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
     }
     if (expr.test(dei_MontoRestante)) {
-        $("#Crear #validation4d").css("display", "none");
+        $("#Crear #validation4").css("display", "none");
         $("#Crear #ast4").css("color", "black");
     }
     else {
-        $("#Crear #validation4d").css("display", "");
+        $("#Crear #validation4").css("display", "");
         $("#Crear #ast4").css("color", "red");
         TOF = false;
     } 
@@ -301,8 +296,8 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         $("#Crear #MontoRestanteCrear").css("display", "none");
         $("#Crear #ast4").css("color", "black");
+      
     }
-
     //--
     if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) { 
         $("#Crear #validation5").css("display", "none");
@@ -310,16 +305,15 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
     else {
         $("#Crear #validation5").css("display", "");
-        $("#Crear #validation5d").css("display", "none");
         $("#Crear #ast5").css("color", "red");
         TOF = false;
     }
     if (expr.test(dei_Cuota)) {
-        $("#Crear #validation5d").css("display", "none");
+        $("#Crear #validation5").css("display", "none");
         $("#Crear #ast5").css("color", "black");
     }
     else {
-        $("#Crear #validation5d").css("display", "");
+        $("#Crear #validation5").css("display", "");
         $("#Crear #ast5").css("color", "red");
         TOF = false;
     }
@@ -377,10 +371,7 @@ $("#btnCerrarEditar").click(function () {
     $("#validatione1").css("display", "none");
     $("#validatione3").css("display", "none");
     $("#validatione4").css("display", "none");
-    $("#validatione5").css("display", "none");
-    $("#validatione3d").css("display", "none");
-    $("#validatione4d").css("display", "none");
-    $("#validatione5d").css("display", "none");
+    $("#validatione4").css("display", "none");
     $("#Editar #aste1").css("color", "black");
     $("#Editar #aste2").css("color", "black");
     $("#Editar #aste3").css("color", "black");
@@ -493,8 +484,7 @@ $("#btnEditDeduccionIndividual").click(function () {
     //--
 
     if (vale3 == "" || vale3 == null || vale3 == undefined || vale3 <=0) {
-        $("#Editar #validatione3d").css("display", "");
-        $("#Editar #validatione3").css("display", "none");
+        $("#Editar #validatione3").css("display", "block");
         $("#Editar #aste3").css("color", "red");
         TOF = false;
     }
@@ -502,11 +492,11 @@ $("#btnEditDeduccionIndividual").click(function () {
         $("#Editar #validatione3").css("display", "none");
         $("#Editar #aste3").css("color", "black");
         if (expr.test(vale3)) {
-            $("#Editar #validatione3d").css("display", "none");
+            $("#Editar #validatione3").css("display", "none");
             $("#Editar #aste3").css("color", "black");
         }
         else {
-            $("#Editar #validatione3d").css("display", "");
+            $("#Editar #validatione3").css("display", "");
             $("#Editar #aste3").css("color", "red");
             TOF = false;
         }
@@ -529,16 +519,15 @@ $("#btnEditDeduccionIndividual").click(function () {
     }
     else {
         $("#Editar #validatione4").css("display", "");
-        $("#Editar #validatione4d").css("display", "none");
         $("#Editar #aste4").css("color", "red");
         TOF = false;
     }
     if (expr.test(vale4)) {
-        $("#Editar #validatione4d").css("display", "none");
+        $("#Editar #validatione4").css("display", "none");
         $("#Editar #aste4").css("color", "black");
     }
     else {
-        $("#Editar #validatione4d").css("display", "");
+        $("#Editar #validatione4").css("display", "");
         $("#Editar #aste4").css("color", "red");
         TOF = false;
     }
@@ -549,16 +538,15 @@ $("#btnEditDeduccionIndividual").click(function () {
     }
     else {
         $("#Editar #validatione5").css("display", "");
-        $("#Editar #validatione5d").css("display", "none");
         $("#Editar #aste5").css("color", "red");
         TOF = false;
     }
     if (expr.test(vale5)) {
-        $("#Editar #validatione5d").css("display", "none");
+        $("#Editar #validatione5").css("display", "none");
         $("#Editar #aste5").css("color", "black");
     }
     else {
-        $("#Editar #validatione5d").css("display", "");
+        $("#Editar #validatione5").css("display", "");
         $("#Editar #aste5").css("color", "red");
         TOF = false;
     }
