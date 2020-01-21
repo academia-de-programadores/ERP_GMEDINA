@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ERP_GMEDINA.Models
 {
-	[MetadataType(typeof(V_Deducciones_RPT))]
+	[MetadataType(typeof(cDeduccionesRPT))]
 	public partial class V_Deducciones_RPT
 	{
 
