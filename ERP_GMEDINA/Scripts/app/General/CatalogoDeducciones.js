@@ -138,8 +138,6 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
     $("#Crear #tde_IdTipoDedu").val("0");
 });
 
@@ -272,12 +270,12 @@ $("#IconCerrarEdit").click(function () {
     $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
     $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
     $("#Editar #AsteriscoTipoDeduEdit").removeClass("text-danger")
-}
+});
     //FUNCION: CERRAR EL MODAL DE CONFIRMACION Y VOLVER AL MODAL DE EDITAR
     $("#btnEditarConfirmacion").click(function () {
         $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
         $("#EditarCatalogoDeducciones").modal();
-    })
+    });
 
 
     //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -318,8 +316,6 @@ $("#IconCerrarEdit").click(function () {
                         });
                     });
                 $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "auto");
                 $('#btnUpdateDeduccion2').attr('disabled', false);
 
             }
@@ -404,8 +400,6 @@ $('#btnUpdateDeduccion').click(function () {
             $("#EditarCatalogoDeducciones").modal('hide');
             $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
             $('#btnUpdateDeduccion2').attr('disabled', false);
-            //$("html, body").css("overflow", "hidden");
-            //$("html, body").css("overflow", "scroll");
         }
     });
 
@@ -504,8 +498,6 @@ $('#btnUpdateDeduccion').click(function () {
                     });
 
                     $("#DetallesCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-                    //$("html, body").css("overflow", "hidden");
-                    //$("html, body").css("overflow", "scroll");
                 }
                 else {
                     //Mensaje de error si no hay data
@@ -523,8 +515,6 @@ $('#btnUpdateDeduccion').click(function () {
     $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
         //MOSTRAR EL MODAL DE INACTIVAR
         $("#InactivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-        //$("html, body").css("overflow", "hidden");
-        //$("html, body").css("overflow", "scroll");
 
         //Ocultar el modal editar
         $("#EditarCatalogoDeducciones").modal('hide');
@@ -581,8 +571,6 @@ $('#btnUpdateDeduccion').click(function () {
     $(document).on("click", "#btnActivarCatalogoDeducciones", function () {
         //MOSTRAR EL MODAL DE INACTIVAR
         $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
     });
 
 
