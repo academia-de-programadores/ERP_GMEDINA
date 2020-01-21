@@ -34,7 +34,8 @@
                                     @Html.LabelFor(model => model.dex_MontoInicial)<span id="asteriscoMontoInicial">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control", @min = "0.01", @max = "9999999999.99" } })
+                                    <label class="text-danger" id="validacionMontoInicial2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
                                     @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger", @id = "validacionMontoInicial" })
                                 </div>
                             </div>
@@ -44,7 +45,8 @@
                                     @Html.LabelFor(model => model.dex_MontoRestante)<span id="asteriscoMontoRestante">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control", @min = "0.01", @max = "9999999999.99" } })
+                                    <label class="text-danger" id="validacionMontoRestante2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
                                     @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger", @id = "validacionMontoRestante" })
                                 </div>
                             </div>
@@ -74,7 +76,8 @@
                                     @Html.LabelFor(model => model.dex_Cuota)<span id="asteriscoCuota">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control", @min = "0.01", @max = "9999999999.99" } })
+                                    <label class="text-danger" id="validacionCuota2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número Válido con un máximo de 2 decimales.</label>
                                     @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger", @id = "validacionCuota" })
                                 </div>
                             </div>
