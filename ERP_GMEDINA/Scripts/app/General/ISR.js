@@ -529,7 +529,6 @@ $(document).on("click", "#btnBackActivar", function () {
 
 //ACTIVAR REGISTRO 
 $("#btnActivarISR").click(function () {
-    console.log(ActivarID);
     //BLOQUEAR BOTON
     $("#btnActivarISR").attr("disabled", true);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
