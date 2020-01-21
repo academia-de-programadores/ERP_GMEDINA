@@ -13,7 +13,7 @@
           </div>
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateInstFin" }))
         {
           <div class="ibox-content">
             @Html.AntiForgeryToken()
@@ -67,7 +67,7 @@
 
                   <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                      <input type="submit" value="Guardar" class="btn btn-primary" />
+                      <input type="submit" value="Guardar" id="btnAgregarInstFin" class="btn btn-primary" />
       	            @Html.ActionLink("Cancelar", "Index", null, new { @class="btn btn-default"})
                     </div>
                   </div>

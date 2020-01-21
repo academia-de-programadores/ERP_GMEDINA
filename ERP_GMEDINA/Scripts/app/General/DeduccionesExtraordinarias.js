@@ -18,9 +18,11 @@ const btnAgregar = $('#btnAgregar'),
     validacionEquipoEmpleado = $('#validacionEquipoEmpleado'),
     validacionMontoInicial = $('#validacionMontoInicial'),
     validacionMontoRestante = $('#validacionMontoRestante'),
+    validacionMontoInicial2 = $('#validacionMontoInicial2'),
+    validacionMontoRestante2 = $('#validacionMontoRestante2'),
     validacionObservaciones = $('#validacionObservaciones'),
     validacionIdDeducciones = $('#validacionIdDeducciones'),
-    validacionCuota = $('#validacionCuota');
+    validacionCuota2 = $('#validacionCuota2');
     ;
 
 const btnEditar = $("#btnEditar"),
@@ -35,8 +37,10 @@ asteriscCuota = $('#asteriscoCuota'),
 validnEquipoEmpleado = $('#validEquipoEmpleado'),
 validMontoInicial = $('#validMontoInicial'),
 validMontoRestante = $('#validMontoRestante'),
+validMontoInicial2 = $('#validMontoInicial2'),
+validMontoRestante2 = $('#validMontoRestante2'),
 validObservaciones = $('#validObservaciones'),
-validCuota = $('#validCuota');
+validCuota2 = $('#validCuota2');
 
 //#endregion
 
@@ -256,22 +260,44 @@ function validaciones(equipoEmpId,
     }
 
     // Monto inicial
-    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
+    if (montoInicial.val() != '') {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
     } else {
         asteriscoMontoInicial.addClass('text-danger');
+        validacionMontoInicial2.hide();
         validacionMontoInicial.show();
         todoBien = false;
     }
 
+    if (expreg.test(montoInicial.val())) {
+        asteriscoMontoInicial.removeClass('text-danger');
+        validacionMontoInicial2.hide();
+    }
+    else {
+        asteriscoMontoInicial.addClass('text-danger');
+        validacionMontoInicial2.show();
+        todoBien = false;
+    }
+
     // Monto Restante
-    if (montoRestante.val() != '' && expreg.test(montoRestante.val())) {
+    if (montoRestante.val() != '') {
         asteriscoMontoRestante.removeClass('text-danger');
         validacionMontoRestante.hide();
     } else {
         asteriscoMontoRestante.addClass('text-danger');
+        validacionMontoRestante2.hide();
         validacionMontoRestante.show();
+        todoBien = false;
+    }
+
+    if (expreg.test(montoRestante.val())) {
+        asteriscoMontoRestante.removeClass('text-danger');
+        validacionMontoRestante2.hide();
+    }
+    else {
+        asteriscoMontoRestante.addClass('text-danger');
+        validacionMontoRestante2.show();
         todoBien = false;
     }
 
@@ -301,9 +327,21 @@ function validaciones(equipoEmpId,
         validacionCuota.hide();
     } else {
         asteriscoCuota.addClass('text-danger');
+        validacionCuota2.hide();
         validacionCuota.show();
         todoBien = false;
     }
+
+    if (expreg.test(cuota.val())) {
+        asteriscoCuota.removeClass('text-danger');
+        validacionCuota2.hide();
+    }
+    else {
+        asteriscoCuota.addClass('text-danger');
+        validacionCuota2.show();
+        todoBien = false;
+    }
+
     return todoBien;
 }
 
@@ -380,22 +418,44 @@ function validacion(
 
 
     // Monto inicial
-    if (MontoInicial.val() != '' && expreg.test(MontoInicial.val())) {
+    if (MontoInicial.val() != '') {
         asteriscMontoInicial.removeClass('text-danger');
         validMontoInicial.hide();
     } else {
         asteriscMontoInicial.addClass('text-danger');
+        validMontoInicial2.hide();
         validMontoInicial.show();
         todoCorrecto = false;
     }
 
+    if (expreg.test(MontoInicial.val())) {
+        asteriscMontoInicial.removeClass('text-danger');
+        validMontoInicial2.hide();
+    }
+    else {
+        asteriscMontoInicial.addClass('text-danger');
+        validMontoInicial2.show();
+        todoCorrecto = false;
+    }
+
     // Monto Restante
-    if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
+    if (MontoRestante.val() != '') {
         asteriscMontoRestante.removeClass('text-danger');
         validMontoRestante.hide();
     } else {
         asteriscMontoRestante.addClass('text-danger');
+        validMontoRestante2.hide();
         validMontoRestante.show();
+        todoCorrecto = false;
+    }
+
+    if (expreg.test(MontoRestante.val())) {
+        asteriscMontoRestante.removeClass('text-danger');
+        validMontoRestante2.hide();
+    }
+    else {
+        asteriscMontoRestante.addClass('text-danger');
+        validMontoRestante2.show();
         todoCorrecto = false;
     }
 
@@ -415,9 +475,21 @@ function validacion(
         validCuota.hide();
     } else {
         asteriscCuota.addClass('text-danger');
+        validCuota2.hide();
         validCuota.show();
         todoCorrecto = false;
     }
+
+    if (expreg.test(Cuota.val())) {
+        asteriscCuota.removeClass('text-danger');
+        validCuota2.hide();
+    }
+    else {
+        asteriscCuota.addClass('text-danger');
+        validCuota2.show();
+        todoCorrecto = false;
+    }
+
     return todoCorrecto;
 }
 
