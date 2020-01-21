@@ -289,7 +289,7 @@ $("#IconCerrarEdit").click(function () {
 $("#btnConfirmacionNOAISR").click(function () {
 
     $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
-
+});
     //BOTON CERRAR EDITAR
     $("#btnCerrarEditar").click(function () {
         $("#Editar #validatione1").css("display", "none");
@@ -460,4 +460,3 @@ $("#btnConfirmacionNOAISR").click(function () {
         $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
         $("#InactivarAcumuladosISR").modal('hide');
     });
-});
