@@ -55,19 +55,19 @@ function cargarGridISR() {
                 var estadoRegistro = ListaISR[i].isr_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
-                var botonDetalles = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>' : '';
+                var botonDetalles = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>' : '';
 
                 //variable boton editar
                 var botonEditar = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' : '';
 
                 //variable boton activar
-                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISR">Activar</button>' : '' : '';
+                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISRModal">Activar</button>' : '' : '';
 
                 //agregar el row al datatable
                 $('#tblISR').dataTable().fnAddData([
-                    ListaISR[i].isr_RangoInicial,
-                    ListaISR[i].isr_RangoFinal,
-                    ListaISR[i].isr_Porcentaje,
+                    (ListaISR[i].isr_RangoInicial % 1 == 0) ? ListaISR[i].isr_RangoInicial + ".00" : ListaISR[i].isr_RangoInicial,
+                    (ListaISR[i].isr_RangoFinal % 1 == 0) ? ListaISR[i].isr_RangoFinal + ".00" : ListaISR[i].isr_RangoFinal,
+                    (ListaISR[i].isr_Porcentaje % 1 == 0) ? ListaISR[i].isr_Porcentaje + ".00" : ListaISR[i].isr_Porcentaje,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
@@ -270,9 +270,9 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
         .done(function (data) {
             if (data) {
                 $("#Editar #isr_Id").val(data.isr_Id);
-                $("#Editar #isr_RangoInicial").val(data.isr_RangoInicial);
-                $("#Editar #isr_RangoFinal").val(data.isr_RangoFinal);
-                $("#Editar #isr_Porcentaje").val(data.isr_Porcentaje);
+                $("#Editar #isr_RangoInicial").val((data.isr_RangoInicial % 1 == 0) ? data.isr_RangoInicial + ".00" : data.isr_RangoInicial);
+                $("#Editar #isr_RangoFinal").val((data.isr_RangoFinal % 1 == 0) ? data.isr_RangoFinal + ".00" : data.isr_RangoFinal); 
+                $("#Editar #isr_Porcentaje").val((data.isr_Porcentaje % 1 == 0) ? data.isr_Porcentaje + ".00" : data.isr_Porcentaje); 
                 $("#Editar #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
                 $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
                 $(".rangoInicial").focus();
@@ -453,27 +453,33 @@ $('#frmEditISR #isr_Porcentaje').keyup(function () {
 });
 
 
-
-
-
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarISR").modal('hide');
 });
 
+//DESPLEGAR MODAL DE INACTIVACION
 $(document).on("click", "#btnModalInactivarISR", function () {
+    //DESBLOQUEAR BOTON
+    $("#btnInactivarISR").attr("disabled", false);
+    //OCULTAR EL MODAL DE EDICION
     $("#EditarISR").modal('hide');
+    //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarISR").modal({ backdrop: 'static', keyboard: false });
 });
 
+//CERRAR MODAL DE INACTIVACION
 $(document).on("click", "#btnBack", function () {
+    //OCULTAR MODAL DE INACTIVACION
     $("#InactivarISR").modal('hide');
+    //MOSTRAR MODAL DE EDICION
     $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
 });
 
-
 //Inactivar registro Techos Deducciones    
 $("#btnInactivarISR").click(function () {
+    //BLOQUEAR BOTON
+    $("#btnInactivarISR").attr("disabled", true);
     var data = $("#frmInactivarISR").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -482,6 +488,9 @@ $("#btnInactivarISR").click(function () {
         data: { id: InactivarID }
     }).done(function (data) {
         if (data == "error") {
+            //DESBLOQUEAR BOTON
+            $("#btnInactivarISR").attr("disabled", false);
+            //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
                 message: 'No se inactivó el registro, contacte al administrador',
@@ -500,6 +509,56 @@ $("#btnInactivarISR").click(function () {
     InactivarID = 0;
 });
 
+//DECLARAR LA VARIABLE DE ACTIVACION
+var ActivarID = 0;
+//DESPLEGAR MODAL DE ACTIVACION
+$(document).on("click", "#tblISR tbody tr td #btnActivarISRModal", function () {
+    //CAPTURAR EL ID DEL REGISTRO
+    ActivarID = $(this).data('id');
+    //DESBLOQUEAR BOTON
+    $("#btnActivarISR").attr("disabled", false);
+    //MOSTRAR MODAL DE ACTIVACION
+    $("#ActivarISR").modal({ backdrop: 'static', keyboard: false });
+});
+
+//CERRAR MODAL DE ACTIVACION
+$(document).on("click", "#btnBackActivar", function () {
+    //OCULTAR MODAL DE INACTIVACION
+    $("#ActivarISR").modal('hide');
+});
+
+//ACTIVAR REGISTRO 
+$("#btnActivarISR").click(function () {
+    console.log(ActivarID);
+    //BLOQUEAR BOTON
+    $("#btnActivarISR").attr("disabled", true);
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/ISR/Activar/" + ActivarID,
+        method: "POST",
+        data: { id: ActivarID }
+    }).done(function (data) {
+        if (data == "error") {
+            //DESBLOQUEAR BOTON
+            $("#btnActivarISR").attr("disabled", false);
+            //MOSTRAR MENSAJE DE ERROR
+            iziToast.error({
+                title: 'Error',
+                message: 'No se activó el registro, contacte al administrador',
+            });
+        }
+        else {
+            $("#ActivarISR").modal('hide');
+            cargarGridISR();
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se activó de forma exitosa!',
+            });
+        }
+    });
+    ActivarID = 0;
+});
 
 //DETALLES
 $(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
@@ -517,9 +576,9 @@ $(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
                 var FechaCrea = FechaFormato(data[0].isr_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].isr_FechaModifica);
                 $("#Detalles #isr_Id").html(data[0].isr_Id);
-                $("#Detalles #isr_RangoInicial").html(data[0].isr_RangoInicial);
-                $("#Detalles #isr_RangoFinal").html(data[0].isr_RangoFinal);
-                $("#Detalles #isr_Porcentaje").html(data[0].isr_Porcentaje);
+                $("#Detalles #isr_RangoInicial").html((data[0].isr_RangoInicial % 1 == 0) ? data[0].isr_RangoInicial + ".00" : data[0].isr_RangoInicial);
+                $("#Detalles #isr_RangoFinal").html((data[0].isr_RangoFinal % 1 == 0) ? data[0].isr_RangoFinal + ".00" : data[0].isr_RangoFinal);
+                $("#Detalles #isr_Porcentaje").html((data[0].isr_Porcentaje % 1 == 0) ? data[0].isr_Porcentaje + ".00" : data[0].isr_Porcentaje);
                 $("#Detalles #tde_IdTipoDedu").html(data[0].tde_Descripcion);
                 $("#Detalles #isr_UsuarioCrea").html(data[0].isr_UsuarioCrea);
                 $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);

@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: ISR
         public ActionResult Index()
         {
-            var tbISR = db.tbISR.OrderByDescending(t => t.isr_FechaCrea).Where(d => d.isr_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
+            var tbISR = db.tbISR.OrderByDescending(t => t.isr_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
             return View(tbISR.ToList());
         }
         [HttpGet]
@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var otbISR = db.tbISR
-                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, isr_Id = c.isr_Id, isr_RangoInicial = c.isr_RangoInicial, isr_RangoFinal = c.isr_RangoFinal, isr_Porcentaje = c.isr_Porcentaje, isr_Activo = c.isr_Activo, isr_FechaCrea = c.isr_FechaCrea }).Where(c => c.isr_Activo == true).OrderByDescending(c => c.isr_FechaCrea)
+                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, isr_Id = c.isr_Id, isr_RangoInicial = c.isr_RangoInicial, isr_RangoFinal = c.isr_RangoFinal, isr_Porcentaje = c.isr_Porcentaje, isr_Activo = c.isr_Activo, isr_FechaCrea = c.isr_FechaCrea }).OrderByDescending(c => c.isr_FechaCrea)
                         .ToList();
 
             //RETORNAR JSON AL LADO DEL CLIENTE
