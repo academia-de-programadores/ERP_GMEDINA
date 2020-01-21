@@ -691,7 +691,7 @@
       </Tablix>
       <Line Name="Line1">
         <Top>2.92834cm</Top>
-        <Left>0.26458cm</Left>
+        <Left>1.19062cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
         <ZIndex>1</ZIndex>
@@ -726,7 +726,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
         <Top>3.10473cm</Top>
-        <Left>3.54077cm</Left>
+        <Left>4.46681cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>2</ZIndex>
@@ -848,7 +848,6 @@
           <Source>Embedded</Source>
           <Value>image11</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.03528cm</Top>
           <Height>3.55551cm</Height>
           <Width>10.43286cm</Width>
           <ZIndex>3</ZIndex>
