@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Models
         public int car_Id { get; set; }
         [Display(Name = "Sucursal")]
         public int suc_Id { get; set; }
-        [Display(Name = "Area")]
+        [Display(Name = "Área")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string area_Descripcion { get; set; }

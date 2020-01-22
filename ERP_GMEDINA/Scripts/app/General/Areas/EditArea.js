@@ -154,6 +154,7 @@ $(document).ready(function () {
   }
  }
  ChildTable = $(ChildDataTable).DataTable({
+     "language": language,
   pageLength: 3,
   lengthChange: false,
   columns:
