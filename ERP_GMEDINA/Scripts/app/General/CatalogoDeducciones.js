@@ -96,7 +96,6 @@ $("#btnCerrarCrear").click(function () {
     $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
     $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
     $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-    ocultarCargandoCrear();
 });
 
 
@@ -256,9 +255,20 @@ $("#frmCatalogoDeduccionesCreate").submit(function (e) {
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarEditar").click(function () {
-    OcultarValidacionesEditar();
+    //span
+    $("#Editar #Validation_descipcion3").css("display", "none");
+    $("#Editar #Validation_descipcion2").css("display", "none");
+    $("#Editar #Validation_descipcion").css("display", "none");
+
+    //Asteriscos
+    $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
+    $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
+    $("#Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
 });
 
+$('#btnCerrarInhabilitar, #confirmacionEditarNo').click(function () {
+    $('#EditarCatalogoDeducciones').modal();
+});
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconCerrarEdit").click(function () {
@@ -537,7 +547,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
         if (data == "error") {
             $("#InactivarCatalogoDeducciones").modal('hide');
             $("#EditarCatalogoDeducciones").modal('hide');
-            OcultarValidacionesEditar();
+
             document.getElementById('btnInactivarRegistroDeduccion').disabled = false;
 
             //Cuando traiga un error del backend al guardar la edicion
@@ -552,7 +562,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarCatalogoDeducciones").modal('hide');
             $("#EditarCatalogoDeducciones").modal('hide');
-            OcultarValidacionesEditar();
+            // OcultarValidacionesEditar();
             document.getElementById('btnInactivarRegistroDeduccion').disabled = false;
             //Mensaje de exito de la edicion
             iziToast.success({
