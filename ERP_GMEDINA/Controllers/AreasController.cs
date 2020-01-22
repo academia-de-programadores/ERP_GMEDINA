@@ -187,7 +187,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var list = db.UDP_RRHH_tbAreas_Insert(
                         tbAreas.suc_Id,
-                        tbAreas.tbCargos.car_Descripcion,
+                        tbAreas.car_Descripcion,
                         tbAreas.area_Descripcion,
                         Usuario.usu_Id,
                         DateTime.Now);
