@@ -217,6 +217,5 @@ $(document).on('click', '#btnDetalleCatalogoDeducciones2', function () {
 });
 
 $(document).ready(() => {
-    console.log('carfgdsgsdg');
     listar();
 }); 
