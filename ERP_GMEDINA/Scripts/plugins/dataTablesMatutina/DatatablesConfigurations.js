@@ -10,7 +10,7 @@ var htmlSpiner =
                 <div class="sk-rect4"></div>
                 <div class="sk-rect5"></div>
              </div>`;
-var language= {
+var language={
     "sProcessing": "Procesando...",
     "sLengthMenu": "Mostrar _MENU_ registros",
     "sZeroRecords": "No se encontraron resultados",
@@ -28,7 +28,7 @@ var language= {
         "sLast": "Último",
         "sNext": "Siguiente",
         "sPrevious": "Anterior"
-    }
+    }};
 $(document).ready(function () {
  var columnas = [];
  var col = 0;
