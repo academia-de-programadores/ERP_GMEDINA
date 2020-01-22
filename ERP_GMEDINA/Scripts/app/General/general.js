@@ -45,20 +45,23 @@ function serializar(data) {
  var verificacion = true;
  $.each(data, function (index, valor) {
   var value = valor.value.trim();
-  if (value != "") {
+  if (value != "" && value!="0") {
    Data[valor.name] = value;
   } else {
    if (primerInput) {
     primerInput = false;
     $(modal).find("#" + valor.name).focus();
    }
-   var input = $(modal).find("#" + valor.name)[0];
-   input.labels[0].children[0].color = "red";
-   var span = input.offsetParent.children[1];
-   span.innerText = $(input).data("val-required");
-   $(input).addClass("error");
-   $(span).addClass("text-danger");
-   verificacion = false;
+        var input = $(modal).find("#" + valor.name)[0];
+        input.labels[0].children[0].color = "red";
+        var span = input.offsetParent.children[1];
+        span.innerText = $(input).data("val-required");
+        $(input).addClass("error");
+        $(span).addClass("text-danger");
+        verificacion = false;
+        if (input.type=="select-one") {
+            primerInput = true;
+        }
   }
  });
  if (verificacion) {
