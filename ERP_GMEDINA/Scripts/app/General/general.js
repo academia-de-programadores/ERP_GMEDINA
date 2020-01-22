@@ -29,9 +29,13 @@ function _ajax(params, uri, type, callback) {
  });
 }
 function serializar(data) {
- var Modals = $(".modal");
+    var Modals = $(".modal");
+    var modal;
+    if (Modals.length==0) {
+        Modals = $("form");
+        modal = Modals[0];
+    }
  var primerInput = true;
- var modal;
  $.each(Modals, function (indice, valor) {
   if (valor.style.display == "block") {
    modal = valor;
