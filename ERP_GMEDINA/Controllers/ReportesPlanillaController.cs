@@ -236,7 +236,7 @@ namespace ERP_GMEDINA.Controllers
 			List<ReportParameter> parameters = new List<ReportParameter>();
 			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)Session["sesionUsuario"];
 			string nombreUsuario = oUsuario.usu_NombreUsuario;
 			parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
