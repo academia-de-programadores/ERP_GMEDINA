@@ -7,7 +7,7 @@
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<span class="clear">
 							<span class="block m-t-xs">								
-									<strong class="font-bold">Modulo de Planillas</strong>								
+									<strong class="font-bold">Módulo de Planillas</strong>								
 							</span> 
 						</span>
 					</a>					
@@ -26,8 +26,8 @@
 				<a href="#"><i class="fa fa-group"></i> <span class="nav-label" data-i18n="nav.dashboard">Planilla</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "CatalogoDePlanillas", cssClass: "in") @Html.IsSelected(controller: "DecimoCuartoMes", cssClass: "in") @Html.IsSelected(controller: "DecimoTercerMes", cssClass: "in") @Html.IsSelected(controller: "Planilla", cssClass: "in")">
 					<li class="@Html.IsSelected(controller: "Planilla")"><a href="@Url.Action("index", "Planilla")">Generar Planillas</a></li>
-					<li class="@Html.IsSelected(controller: "DecimoTercerMes")"><a href="@Url.Action("index", "DecimoTercerMes")">Generar Decimo Tercer</a></li>
-					<li class="@Html.IsSelected(controller: "DecimoCuartoMes")"><a href="@Url.Action("index", "DecimoCuartoMes")">Generar Decimo Cuarto</a></li>
+					<li class="@Html.IsSelected(controller: "DecimoTercerMes")"><a href="@Url.Action("index", "DecimoTercerMes")">Generar Decimotercer mes</a></li>
+					<li class="@Html.IsSelected(controller: "DecimoCuartoMes")"><a href="@Url.Action("index", "DecimoCuartoMes")">Generar Decimocuarto mes</a></li>
 					<li class="@Html.IsSelected(controller: "CatalogoDePlanillas")"><a href="@Url.Action(null, "CatalogoDePlanillas")">Gestionar Planillas</a></li>           
 					<li class="@Html.IsSelected(controller: "FechaPlanilla")"><a href="@Url.Action("Index", "FechaPlanilla")">Historial de Pagos</a></li>
 					<li class="@Html.IsSelected(controller: "Liquidacion")"><a href="@Url.Action("Index", "Liquidacion")">Liquidar Colaborador</a></li>
@@ -48,7 +48,7 @@
 			<li class="@Html.IsSelected(controller: "CatalogoDeDeducciones") @Html.IsSelected(controller: "DeduccionesExtraordinarias") @Html.IsSelected(controller: "DeduccionAFP") @Html.IsSelected(controller: "DeduccionesIndividuales")">
 				<a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-money"></i> <span class="nav-label" data-i18n="nav.dashboard">Deducciones</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
-					<li class="@Html.IsSelected(controller: "CatalogoDeDeducciones")"><a href="@Url.Action("Index", "CatalogoDeDeducciones")">Catálogo Deducciones</a></li>
+					<li class="@Html.IsSelected(controller: "CatalogoDeDeducciones")"><a href="@Url.Action("Index", "CatalogoDeDeducciones")">Catálogo de Deducciones</a></li>
 					<li class="@Html.IsSelected(controller: "DeduccionAFP")"><a href="@Url.Action("Index", "DeduccionAFP")">Deducciones AFP</a></li>
 					<li class="@Html.IsSelected(controller: "DeduccionesIndividuales")"><a href="@Url.Action("Index", "DeduccionesIndividuales")">Deducciones Extras</a></li>
 					<li class="@Html.IsSelected(controller: "DeduccionesExtraordinarias")"><a href="@Url.Action("Index", "DeduccionesExtraordinarias")">Deducciones Equipo de Trabajo</a></li>
@@ -60,11 +60,11 @@
 				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
 					<li class="@Html.IsSelected(controller: "AcumuladosISR")"><a href="@Url.Action("Index", "AcumuladosISR")">Acumulados ISR</a></li>
 					<li class="@Html.IsSelected(controller: "AFP")"><a href="@Url.Action("Index", "AFP")">AFP</a></li>
-					<li class="@Html.IsSelected(controller: "AuxilioDeCesantias")"><a href="@Url.Action("Index", "AuxilioDeCesantias")">Auxilio de Cesantias</a></li>			
+					<li class="@Html.IsSelected(controller: "AuxilioDeCesantias")"><a href="@Url.Action("Index", "AuxilioDeCesantias")">Auxilio de Cesantías</a></li>			
 					<li class="@Html.IsSelected(controller: "FormaPago")"><a href="@Url.Action("Index", "FormaPago")">Formas de Pago</a></li>					
 					<li class="@Html.IsSelected(controller: "InstitucionesFinancieras")"><a href="@Url.Action("Index", "InstitucionesFinancieras")">Instituciones Financieras</a></li>
 					<li class="@Html.IsSelected(controller: "ISR")"><a href="@Url.Action("Index", "ISR")">ISR</a></li>
-					<li class="@Html.IsSelected(controller: "Periodos")"><a href="@Url.Action("Index", "Periodos")">Periodos de Pago</a></li>
+					<li class="@Html.IsSelected(controller: "Periodos")"><a href="@Url.Action("Index", "Periodos")">Períodos de Pago</a></li>
 					<li class="@Html.IsSelected(controller: "Preaviso")"><a href="@Url.Action("Index", "Preaviso")">Preaviso</a></li>
 					<li class="@Html.IsSelected(controller: "TechosDeducciones")"><a href="@Url.Action("Index", "TechosDeducciones")">Techos de Deducciones</a></li>
 					<li class="@Html.IsSelected(controller: "TipoDeducciones")"><a href="@Url.Action("Index", "TipoDeducciones")">Tipo de Deducciones</a></li>

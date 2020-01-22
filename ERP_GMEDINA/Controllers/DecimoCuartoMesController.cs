@@ -40,8 +40,8 @@ namespace ERP_GMEDINA.Controllers
 					if (DecimoCuarto.Count == 0)
 						return Json("No hay registros en el objeto", JsonRequestBehavior.AllowGet);
 					int CantidadRegistros = DecimoCuarto.Count;
-					//Declaración y validación del numero de lotes
-					int numeroLotes = (CantidadRegistros <= 1) ? 1 :
+					//Declaración y validación del Número de lotes
+					int NúmeroLotes = (CantidadRegistros <= 1) ? 1 :
 									  (CantidadRegistros <= 10) ? 5 :
 									  (CantidadRegistros <= 50) ? 10 :
 									  (CantidadRegistros <= 100) ? 20 :
@@ -62,7 +62,7 @@ namespace ERP_GMEDINA.Controllers
 						if (MessageError.StartsWith("-1"))
 							return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
 
-						if (i % numeroLotes == 0)
+						if (i % NúmeroLotes == 0)
 							db.SaveChanges();
 					}
 

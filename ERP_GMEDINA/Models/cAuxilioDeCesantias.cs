@@ -26,13 +26,13 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Auxilio Cesantia (Dias)")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public int aces_DiasAuxilioCesantia { get; set; }
-        [Display(Name = "Usuario Creacion")]
+        [Display(Name = "Usuario Creación")]
         public int aces_UsuarioCrea { get; set; }
-        [Display(Name = "Fecha Creacion")]
+        [Display(Name = "Fecha Creación")]
         public System.DateTime aces_FechaCrea { get; set; }
-        [Display(Name = "Usuario Modificacion")]
+        [Display(Name = "Usuario Modificación")]
         public Nullable<int> aces_UsuarioModifica { get; set; }
-        [Display(Name = "Fecha Modificacion")]
+        [Display(Name = "Fecha Modificación")]
         public Nullable<System.DateTime> aces_FechaModifica { get; set; }
         [Display(Name = "Estado")]
         public bool aces_Activo { get; set; }

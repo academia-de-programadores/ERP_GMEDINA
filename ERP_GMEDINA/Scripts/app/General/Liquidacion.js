@@ -212,7 +212,7 @@ function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
 		    mostrarDatosColaborador(
 				data.consulta[0].nombreEmpleado,
 				data.consulta[0].apellidoEmpleado,
-				data.consulta[0].numeroIdentidad,
+				data.consulta[0].NúmeroIdentidad,
 				data.consulta[0].sexoEmpleado,
 				data.consulta[0].edadEmpleado,
 				data.consulta[0].cantidadSueldo,
@@ -288,7 +288,7 @@ function validarCampos() {
 function mostrarDatosColaborador(
 	nombreEmpleado = '',
 	apellidoEmpleado = '',
-	numeroIdentidad = '',
+	NúmeroIdentidad = '',
 	sexoEmpleado = '',
 	edadEmpleado = '',
 	cantidadSueldo = '',
@@ -318,7 +318,7 @@ function mostrarDatosColaborador(
     spanEdadEmpleado.html(edadEmpleado);
     spanSexoEmpleado.html(sexoEmpleado);
     spanDepartamentoEmpleado.html(descripcionDepartamento);
-    spanIdentidadEmpleado.html(numeroIdentidad);
+    spanIdentidadEmpleado.html(NúmeroIdentidad);
     spanSueldoEmpleado.html(cantidadSueldo + ' ' + descripcionMoneda);
     spanCargoEmpleado.html(descripcionCargo);
     spanFechaIngresoEmpleado.html(fechaIngreso);

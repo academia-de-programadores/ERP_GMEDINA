@@ -28,10 +28,10 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Contacto { get; set; }
 
-        [Display(Name = "Telefono Contacto")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$", ErrorMessage = "Número de Teléfono Inválido.")]
+        [Display(Name = "Teléfono Contacto")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$", ErrorMessage = "Número de Telefono Inválido.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
-        [MaxLength(15, ErrorMessage = "Numero debe ser inferior a 15 digitos.")]
+        [MaxLength(15, ErrorMessage = "Número debe ser inferior a 15 digitos.")]
         public string insf_Telefono { get; set; }
 
         [Display(Name = "Correo Electrónico")]

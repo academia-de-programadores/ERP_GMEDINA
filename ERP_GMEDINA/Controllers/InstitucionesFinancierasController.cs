@@ -382,7 +382,7 @@ namespace ERP_GMEDINA.Controllers
                                 var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
                                 var iddeducfin = sql + 1;
 
-                                //Validamos si encontro empleados que correspondan a los numeros de identidad proporcionados, de lo contrario mostrara error.
+                                //Validamos si encontro empleados que correspondan a los Números de identidad proporcionados, de lo contrario mostrara error.
                                 if (IdEmpleado != null)
                                 {
                                     var IdEmple = IdEmpleado.empleadoID;

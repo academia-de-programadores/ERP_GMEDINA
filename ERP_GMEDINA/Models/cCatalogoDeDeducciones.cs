@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripción Deducción")]
         [Required(ErrorMessage = "Campo {0} requerido")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "El Campo {0} debe tener una longitud minima de 2")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "El Campo {0} debe tener una longitud mínima de 2")]
         public string cde_DescripcionDeduccion { get; set; }
 
         [Display(Name = "Tipo Deducción")]
@@ -41,13 +41,13 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Creado por")]
         public int cde_UsuarioCrea { get; set; }
 
-        [Display(Name = "Fecha de Creacion")]
+        [Display(Name = "Fecha de Creación")]
         public System.DateTime cde_FechaCrea { get; set; }
 
         [Display(Name = "Modificado por")]
         public Nullable<int> cde_UsuarioModifica { get; set; }
 
-        [Display(Name = "Fecha Modificacion")]
+        [Display(Name = "Fecha Modificación")]
         public Nullable<System.DateTime> cde_FechaModifica { get; set; }
 
         [Display(Name = "Activo")]
