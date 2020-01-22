@@ -161,6 +161,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 $("#btnActualizar").click(function () {
     var data = $('#FormEditar').serializeArray();
     data = serializar(data);
+    data.sue_Cantidad = parseFloat(data.sue_Cantidad);
     if (data != null) {
 
         data = JSON.stringify({ tbsueldos: data });
