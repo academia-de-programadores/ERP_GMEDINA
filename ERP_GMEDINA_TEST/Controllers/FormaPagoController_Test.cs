@@ -17,6 +17,12 @@ namespace ERP_GMEDINA_TEST.Controllers
         //ACT     : ACTUAR
         //ASSERT  : AFIRMAR
 
+
+        //Instancia del controlador
+        FormaPagoController _FormaPagoController = new FormaPagoController();
+        //Instancia de la clase
+        tbFormaPago tbFormaPago = new tbFormaPago();
+
         [TestMethod]
         public void Create()
         {
@@ -24,13 +30,11 @@ namespace ERP_GMEDINA_TEST.Controllers
             //ARRANGE
             //
 
-            //Instancia del controlador
-            FormaPagoController _FormaPagoController = new FormaPagoController();
-            //Instancia de la clase
-            tbFormaPago tbFormaPago = new tbFormaPago();
+            //Seteo de las propiedades del modelo solicitadas por el método
             tbFormaPago.fpa_Descripcion = "TestProject";
             tbFormaPago.fpa_UsuarioCrea = 1;
             tbFormaPago.fpa_FechaCrea = DateTime.Now;
+
             //Variable para capturar el valor de retorno
             string ReturnValue = string.Empty;
 
@@ -40,6 +44,34 @@ namespace ERP_GMEDINA_TEST.Controllers
 
             //Seteo de la variable para capturar el valor de retorno
             ReturnValue = (string)(_FormaPagoController.Create(tbFormaPago)).Data;
+
+            //
+            //ASSERT
+            //
+            Assert.IsTrue(ReturnValue == "bien");
+
+        }
+
+        [TestMethod]
+        public void Editar()
+        {
+            //
+            //ARRANGE
+            //
+            
+            //Seteo de las propiedades del modelo solicitadas por el método
+            tbFormaPago.fpa_IdFormaPago = 1;
+            tbFormaPago.fpa_Descripcion = "TestProject";
+
+            //Variable para capturar el valor de retorno
+            string ReturnValue = string.Empty;
+
+            //
+            //ACT
+            //
+
+            //Seteo de la variable para capturar el valor de retorno
+            ReturnValue = (string)(_FormaPagoController.Editar(tbFormaPago)).Data;
 
             //
             //ASSERT
