@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id")]
         public int hor_Id { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres")]
         public string hor_Descripcion { get; set; }
 
@@ -32,13 +32,13 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Estado")]
         public bool hor_Estado { get; set; }
 
-        [Display(Name = "Razon Inactivo")]
+        [Display(Name = "Razón Inactivo")]
         public string hor_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario crea")]
         public int hor_UsuarioCrea { get; set; }
 
-        [Display(Name = "Fecha creacion")]
+        [Display(Name = "Fecha creación")]
         public System.DateTime hor_FechaCrea { get; set; }
 
         [Display(Name = "Usuario Modifica")]
