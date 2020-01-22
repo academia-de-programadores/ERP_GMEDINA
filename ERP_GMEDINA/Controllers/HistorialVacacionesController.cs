@@ -274,9 +274,9 @@ namespace ERP_GMEDINA.Controllers
                             hvac_Estado = p.hvac_Estado,
                             hvac_RazonInactivo = p.hvac_RazonInactivo,
                             hvac_FechaCrea = p.hvac_FechaCrea,
-                            hvac_FechaModifca = p.hvac_FechaModifica,
+                            hvac_FechaModifica = p.hvac_FechaModifica,
                             hvac_UsuarioCrea = p.tbUsuario.usu_Nombres,
-                            hvac_UsuarioModifica = p.tbUsuario.usu_Nombres
+                            hvac_UsuarioModifica = p.tbUsuario1.usu_Nombres
                         })
                         .Where(x => x.hvac_Id == id).ToList();
                     return Json(tbHistorialVacaciones, JsonRequestBehavior.AllowGet);
