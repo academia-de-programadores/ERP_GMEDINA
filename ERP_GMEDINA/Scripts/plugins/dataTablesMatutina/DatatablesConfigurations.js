@@ -10,7 +10,7 @@ var htmlSpiner =
                 <div class="sk-rect4"></div>
                 <div class="sk-rect5"></div>
              </div>`;
-var language={
+var language= n={
     "sProcessing": "Procesando...",
     "sLengthMenu": "Mostrar _MENU_ registros",
     "sZeroRecords": "No se encontraron resultados",
@@ -28,7 +28,10 @@ var language={
         "sLast": "Último",
         "sNext": "Siguiente",
         "sPrevious": "Anterior"
-    }};
+    },"oAria": {
+    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+}};
 $(document).ready(function () {
  var columnas = [];
  var col = 0;
@@ -87,11 +90,6 @@ $(document).ready(function () {
  });
  tabla = $('#IndexTable').DataTable({
      "language": language,
-   "oAria": {
-    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-   }
-  },
   responsive: true,
   "scrollX": true,
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
