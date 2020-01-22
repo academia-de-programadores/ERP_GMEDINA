@@ -661,29 +661,37 @@
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox12">
+        <Textbox Name="Textbox6">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Usuario:</Value>
+                  <Value>Página: </Value>
                   <Style />
                 </TextRun>
                 <TextRun>
-                  <Value>=Parameters!usuario.Value</Value>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value> de </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value>=Globals!TotalPages</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox11</rd:DefaultName>
+          <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>1.3743cm</Top>
-          <Left>18.74929cm</Left>
+          <Left>13.75116cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.26729cm</Width>
+          <Width>3.5037cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -716,7 +724,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
           <Top>0.5657cm</Top>
-          <Left>18.51526cm</Left>
+          <Left>10.07346cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
@@ -730,37 +738,29 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox6">
+        <Textbox Name="Textbox12">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Página: </Value>
+                  <Value>Usuario:</Value>
                   <Style />
                 </TextRun>
                 <TextRun>
-                  <Value>=Globals!PageNumber</Value>
-                  <Style />
-                </TextRun>
-                <TextRun>
-                  <Value> de </Value>
-                  <Style />
-                </TextRun>
-                <TextRun>
-                  <Value>=Globals!TotalPages</Value>
+                  <Value>=Parameters!usuario.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox6</rd:DefaultName>
+          <rd:DefaultName>Textbox11</rd:DefaultName>
           <Top>1.3743cm</Top>
-          <Left>22.19297cm</Left>
+          <Left>10.30748cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.5037cm</Width>
+          <Width>3.26729cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -937,6 +937,12 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="logo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
     <ReportParameter Name="usuario">
       <DataType>String</DataType>
       <Nullable>true</Nullable>

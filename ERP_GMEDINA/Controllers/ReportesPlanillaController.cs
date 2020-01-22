@@ -124,21 +124,21 @@ namespace ERP_GMEDINA.Controllers
 
 			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\IngresosRPT.rdlc";
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_Ingresos_RPT"]));
-			//Setiar parametros del reporte para asignar logo y usuario crea del reporte.
-			reportViewer.LocalReport.EnableExternalImages = true;
-			List<ReportParameter> parameters = new List<ReportParameter>();
-			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+            //Setiar parametros del reporte para asignar logo y usuario crea del reporte.
+            reportViewer.LocalReport.EnableExternalImages = true;
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-			string nombreUsuario = oUsuario.usu_NombreUsuario;
-			parameters.Add(new ReportParameter("usuario", nombreUsuario));
+            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
-			reportViewer.LocalReport.SetParameters(parameters);
-			reportViewer.LocalReport.Refresh();
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.Refresh();
 
-			ViewBag.ReportViewer = reportViewer;
-			//Cargar DDL del modal (Tipo de planilla a seleccionar)
-			ViewBag.Ingresos = new SelectList(db.tbCatalogoDeIngresos.Where(o => o.cin_Activo == true), "cin_IdIngreso", "cin_DescripcionIngreso");
+            ViewBag.ReportViewer = reportViewer;
+            //Cargar DDL del modal (Tipo de planilla a seleccionar)
+            ViewBag.Ingresos = new SelectList(db.tbCatalogoDeIngresos.Where(o => o.cin_Activo == true), "cin_IdIngreso", "cin_DescripcionIngreso");
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 			ViewBag.Titulo = db.tbCatalogoDeIngresos.Where(x => x.cin_IdIngreso == cin_IdIngreso).Select(x => x.cin_DescripcionIngreso).FirstOrDefault();
 
@@ -426,5 +426,6 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         #endregion
+
     }
 }
