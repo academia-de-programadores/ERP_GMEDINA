@@ -288,6 +288,31 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        public ActionResult DiasRestantes(int? id, int? annio)
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbHistorialVacaciones = db.V_HVacacionesEmpleados
+                        .Select(
+                        p => new
+                        {
+                            hvac_Id = p.emp_Id,
+                            hvac_DiasRestantes = p.DiasTotales,
+                            hvac_Annio = p.Annio
+
+                        })
+                        .Where(x => x.hvac_Id == id).Where(x => x.hvac_Annio == annio).ToList();
+                    return Json(tbHistorialVacaciones, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
 
         [HttpPost]
