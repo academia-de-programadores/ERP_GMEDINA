@@ -14,7 +14,8 @@
                     <h5>Listado de Instituciones Financieras</h5>
                     <div class="ibox-tools">
                         @Html.ActionLink("Cargar Planilla Deducción", "CargaDocumento", null, new { @class = "btn btn-primary btn-xs" })
-                       @Html.ActionLink("Registrar Institución Financiera", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                       @*@Html.ActionLink("Registrar Institución Financiera", "Create", null, new { @class = "btn btn-primary btn-xs"})*@
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarInstitucion">Agregar Institución Financiera</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -68,11 +69,8 @@
                                 @{
                                     if (item.insf_Activo == true)
                                     {
-                                        @*<button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnModalDetalles">Detalles</button>
-                                                <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-default btn-xs" id="btnModalEdit">Editar</button>*@
-                                                @Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
-                                        <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-danger btn-xs" id="btnModalInactivarINFS">Inactivar</button>
+                                                <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-primary btn-xs" id="btnModalDetallesINFS">Detalles</button>
+                                                <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-default btn-xs" id="btnModalEditarINFS">Editar</button>
                                     }
                                     if (oUsuario.usu_EsAdministrador == true && item.insf_Activo == false)
                                     {
@@ -93,6 +91,63 @@
  </div>
 
 
+
+<div class="modal fade" id="CrearInstitucion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Crear Institución Financiera</h4>
+            </div>
+            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbInstitucionesFinancieras())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditarInstitucion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Institución Financiera</h4>
+            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbInstitucionesFinancieras())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Institución Financiera</h4>
+            </div>
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar2">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="frmDetailInstitucion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalle Institución Financiera</h4>
+            </div>
+            <div class="modal-body" id="Detalles">
+                @*@Html.Partial("_Details", new ERP_GMEDINA.Models.tbFormaPago())*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="frmInactivarINFS" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -100,8 +155,8 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Inactivar</h4>
             </div>
-            <div class="modal-body" id="Eliminar">
-                ¿Está seguro que desea Inactivar este registro?
+            <div class="modal-body" id="Inactivar">
+                ¿Está seguro que desea inactivar este registro?
                 
             </div>
             <div class="modal-footer">

@@ -17,13 +17,15 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: InstitucionesFinancieras
+        #region GET: INDEX
         public ActionResult Index()
         {
             var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbInstitucionesFinancieras.ToList());
         }
+        #endregion
 
+        #region GET: GETDATA
         public ActionResult GetData()
         {
             var tbInstitucionesFinancieras1 = db.tbInstitucionesFinancieras
@@ -44,39 +46,18 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
-        // GET: InstitucionesFinancieras/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
-            if (tbInstitucionesFinancieras == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbInstitucionesFinancieras);
-        }
-
-        // GET: InstitucionesFinancieras/Create
-        public ActionResult Create()
-        {
-            ViewBag.insf_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.insf_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            return View();
-        }
-
+        #region POST: CREATE
         [HttpPost]
-        public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
+        public JsonResult Create([Bind(Include = "insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbInstitucionesFinancieras.insf_UsuarioCrea = 1;
             tbInstitucionesFinancieras.insf_FechaCrea = DateTime.Now;
             tbInstitucionesFinancieras.insf_Activo = true;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listInstitucionesFinancieras = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
@@ -86,12 +67,12 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listInstitucionesFinancieras = db.UDP_Plani_tbInstitucionesFinancieras_Insert(tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
-                                                                                            tbInstitucionesFinancieras.insf_Contacto,
-                                                                                            tbInstitucionesFinancieras.insf_Telefono,
-                                                                                            tbInstitucionesFinancieras.insf_Correo,
-                                                                                            tbInstitucionesFinancieras.insf_UsuarioCrea,
-                                                                                            tbInstitucionesFinancieras.insf_FechaCrea,
-                                                                                            tbInstitucionesFinancieras.insf_Activo);
+                                                                                                  tbInstitucionesFinancieras.insf_Contacto,
+                                                                                                  tbInstitucionesFinancieras.insf_Telefono,
+                                                                                                  tbInstitucionesFinancieras.insf_Correo,
+                                                                                                  tbInstitucionesFinancieras.insf_UsuarioCrea,
+                                                                                                  tbInstitucionesFinancieras.insf_FechaCrea,
+                                                                                                  tbInstitucionesFinancieras.insf_Activo);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Insert_Result Resultado in listInstitucionesFinancieras)
                         MensajeError = Resultado.MensajeError;
@@ -107,50 +88,59 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception Ex)
                 {
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    Ex.Message.ToString();
+                    response = "error";
+                    return Json(Response, JsonRequestBehavior.AllowGet);
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
-
             }
             else
             {
                 //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                 response = "error";
             }
-
-            // ViewBag.insf_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioCrea);
-            // ViewBag.insf_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioModifica);
-            // return View(tbInstitucionesFinancieras);
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // GET: InstitucionesFinancieras/Edit/5
-        public ActionResult Edit(int? id)
+        #region GET: EDIT
+        public JsonResult Edit(int? id)
         {
-
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Where(d => d.insf_IdInstitucionFinanciera == id)
+                        .Select(c => new { insf_Descripcion = c.insf_DescInstitucionFinanc,
+                                           insf_Contacto = c.insf_Contacto,
+                                           insf_Telefono = c.insf_Telefono,
+                                           insf_Correo = c.insf_Correo,
+                                           insf_UsuarioCrea = c.insf_UsuarioCrea,
+                                           insf_FechaCrea = c.insf_FechaCrea,
+                                           insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
+                                           insf_UsuarioModifica = c.insf_UsuarioModifica,
+                                           insf_FechaModifica = c.insf_FechaModifica,
+                                           insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
+                                           insf_Activo = c.insf_Activo }).ToList();
+
+            //RETORNAR JSON AL LADO DEL CLIENTE              
             if (tbInstitucionesFinancieras == null)
             {
-                return HttpNotFound();
+                return Json("error", JsonRequestBehavior.AllowGet);
             }
-            ViewBag.insf_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioCrea);
-            ViewBag.insf_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioModifica);
-            return View(tbInstitucionesFinancieras);
-        }
 
+            return Json(tbInstitucionesFinancieras, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region POST: EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
+        public JsonResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             tbInstitucionesFinancieras.insf_UsuarioModifica = 1;
             tbInstitucionesFinancieras.insf_FechaModifica = DateTime.Now;
             IEnumerable<object> listInFs = null;
+            string response = "bien";
             string MensajeError = "";
             if (ModelState.IsValid)
             {
@@ -172,45 +162,58 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo mdoficar el registro, contacte al administrador");
-                        return View(tbInstitucionesFinancieras);
+                        response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
                     Ex.Message.ToString();
+                    response = "error";
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
             }
-            //ViewBag.insf_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioCrea);
-            //ViewBag.insf_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioModifica);
-            return Json(Response, JsonRequestBehavior.AllowGet);
+            else
+            {
+                //RETORNAR ERROR AL NO SER UN MODELO VALIDO
+                response = "error";
+            }
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // GET: InstitucionesFinancieras/Delete/5
-        public ActionResult Delete(int? id)
+        #region GET: DETAILS
+        public JsonResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Where(d => d.insf_IdInstitucionFinanciera == id)
+                        .Select(c => new {
+                            insf_Descripcion = c.insf_DescInstitucionFinanc,
+                            insf_Contacto = c.insf_Contacto,
+                            insf_Telefono = c.insf_Telefono,
+                            insf_Correo = c.insf_Correo,
+                            insf_UsuarioCrea = c.insf_UsuarioCrea,
+                            insf_FechaCrea = c.insf_FechaCrea,
+                            insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
+                            insf_UsuarioModifica = c.insf_UsuarioModifica,
+                            insf_FechaModifica = c.insf_FechaModifica,
+                            insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
+                            insf_Activo = c.insf_Activo
+                        }).ToList();
+
+            //RETORNAR JSON AL LADO DEL CLIENTE              
             if (tbInstitucionesFinancieras == null)
             {
-                return HttpNotFound();
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            return View(tbInstitucionesFinancieras);
-        }
 
-        // POST: InstitucionesFinancieras/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
-            db.tbInstitucionesFinancieras.Remove(tbInstitucionesFinancieras);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(tbInstitucionesFinancieras, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region POST: INACTIVAR
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult Inactivar(int ID)
@@ -248,7 +251,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region POST: INACTIVAR
         public ActionResult Activar(int id)
         {
             IEnumerable<object> listINFS = null;
@@ -285,9 +290,9 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-
+        #region DISPOSE
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -296,7 +301,9 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
 
+        #region GET: CARGAR DOCUMENTO
         public ActionResult CargaDocumento()
         {
             try
@@ -320,7 +327,9 @@ namespace ERP_GMEDINA.Controllers
 
             return View("CargaDocumento");
         }
+        #endregion
 
+        #region POST: CARGAR DOCUMENTO
         [HttpPost]
         public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS,string cboIdDeduccion)
         {
@@ -382,7 +391,7 @@ namespace ERP_GMEDINA.Controllers
                                 var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
                                 var iddeducfin = sql + 1;
 
-                                //Validamos si encontro empleados que correspondan a los Números de identidad proporcionados, de lo contrario mostrara error.
+                                //Validamos si encontro empleados que correspondan a los numeros de identidad proporcionados, de lo contrario mostrara error.
                                 if (IdEmpleado != null)
                                 {
                                     var IdEmple = IdEmpleado.empleadoID;
@@ -443,6 +452,7 @@ namespace ERP_GMEDINA.Controllers
 
             return View("CargaDocumento");
         }
+        #endregion
 
     }
 }

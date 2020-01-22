@@ -1,0 +1,74 @@
+﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateInstitucionFinanciera" }))
+{
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.insf_UsuarioCrea)
+            @Html.HiddenFor(model => model.insf_FechaCrea)
+
+            <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, htmlAttributes: new { @class = "control-label" })
+                        <label class="" id="Asterisco_insf_IdInstitucionFinanciera">*</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.insf_IdInstitucionFinanciera, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger", @id = "Span_insf_IdInstitucionFinanciera" })
+                    </div>
+                </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="Asterisco_insf_DescInstitucionFinanc">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "Span_insf_DescInstitucionFinanc" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="Asterisco_insf_Contacto">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "Span_insf_Contacto" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="Asterisco_insf_Telefono">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "Span_insf_Telefono" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="Asterisco_insf_Correo">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "Span_insf_Correo" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default pull-right" />
+        <input type="submit" value="Actualizar" id="btnModalActualizarINFS" class="btn btn-primary pull-left" />
+        <input type="button" value="Inactivar" id="btnModalInactivarINFS" class="btn btn-danger pull-left" />
+    </div>
+}

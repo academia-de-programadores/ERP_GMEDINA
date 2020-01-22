@@ -1171,9 +1171,7 @@
     <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\IngresosIndividuales.js" />
-    <Content Include="Scripts\app\General\InstitucionesFinancierasEdit.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasIndex.js" />
-    <Content Include="Scripts\app\General\InstitucionesFinancieras.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\ISR.js" />
     <Content Include="Scripts\app\General\ISRRPT.js" />
@@ -1781,12 +1779,6 @@
     <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\CargaDocumento.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
     <Content Include="Views\DecimoCuartoMes\FechaEspecifica.cshtml" />
     <Content Include="Views\DecimoCuartoMes\Index.cshtml" />
     <Content Include="Views\DecimoCuartoMes\_FechasDecimoCuarto.cshtml" />
@@ -1868,6 +1860,14 @@
     <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\CargaDocumento.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\_Create.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\_Details.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
