@@ -1901,6 +1901,7 @@
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\HistorialIngresos.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\ReporteAdelantoSueldoRPT.rdlc" />

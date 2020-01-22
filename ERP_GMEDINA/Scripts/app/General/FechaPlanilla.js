@@ -1,10 +1,10 @@
 ﻿$.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 //Funcion generica para reutilizar AJAX
 function _ajax(params, uri, type, callback, enviar) {
@@ -45,13 +45,13 @@ function listar() {
             dataType: 'json'
         },
         'columns': [
-			{
-			    //Columna 1: el boton de desplegar
-			    orderable: false,
-			    className: 'details-control', //Estos estilos estan en: Content/app/General
-			    data: null,
-			    defaultContent: ''
-			},
+            {
+                //Columna 1: el boton de desplegar
+                orderable: false,
+                className: 'details-control', //Estos estilos estan en: Content/app/General
+                data: null,
+                defaultContent: ''
+            },
             {
                 'data': 'Anio'
             },
@@ -62,7 +62,7 @@ function listar() {
             sZeroRecords: 'No se encontraron resultados',
             sEmptyTable: 'Ningún dato disponible en esta tabla',
             sInfo:
-				'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
             sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
             sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
             sInfoPostFix: '',
@@ -74,45 +74,45 @@ function listar() {
                 sFirst: 'Primero',
                 sLast: 'Último',
                 sNext:
-					'Siguiente',
+                    'Siguiente',
                 sPrevious:
-					'Anterior'
+                    'Anterior'
             },
             oAria: {
                 sSortAscending:
-					': Activar para ordenar la columna de manera ascendente',
+                    ': Activar para ordenar la columna de manera ascendente',
                 sSortDescending:
-					': Activar para ordenar la columna de manera descendente'
+                    ': Activar para ordenar la columna de manera descendente'
             }
         }, //Con esto se hace la traducción al español del datatables
         responsive: false,
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgtpi', //Darle los elementos del DOM que deseo
         buttons: [
-			//Poner los botones que quiero que aparezcan
-			{
-			    extend: 'copy',
-			    title: 'Fecha de Planilla',
-			    titleAttr: 'Copiar',
-			    exportOptions: {
-			        columns: [1]
-			    },
-			    className: 'btn btn-primary'
-			}
+            //Poner los botones que quiero que aparezcan
+            {
+                extend: 'copy',
+                title: 'Fecha de Planilla',
+                titleAttr: 'Copiar',
+                exportOptions: {
+                    columns: [1]
+                },
+                className: 'btn btn-primary'
+            }
         ]
     });
 }
 
-function obtenerDetalles(id, handleData) {   
+function obtenerDetalles(id, handleData) {
     _ajax(
-		{ anio: id },
-		'/FechaPlanilla/getTipoPlanilla',
-		'POST',
-		(data) => {
-		    handleData(data);
-		},
-		() => { }
-	);
+        { anio: id },
+        '/FechaPlanilla/getTipoPlanilla',
+        'POST',
+        (data) => {
+            handleData(data);
+        },
+        () => { }
+    );
 }
 
 //Cuando de click en el botón de detalles
@@ -134,25 +134,25 @@ $(document).on('click', 'td.details-control', function () {
 
         // Obtener los datos para el detalle
         obtenerDetalles(
-			anio,
-			(data) => {
+            anio,
+            (data) => {
                 console.table(data);
-			    //Mostrar el detalle con sus datos
-			    row.child([getTipoPlanilla(data)]).show();
-			    tr.addClass('shown');
-			},
-			() => { }
-		);
+                //Mostrar el detalle con sus datos
+                row.child([getTipoPlanilla(data)]).show();
+                tr.addClass('shown');
+            },
+            () => { }
+        );
     }
 });
 
 
-$(document).on('click', '#btnDetalle', function(){
+$(document).on('click', '#btnDetalle', function () {
     console.log(this);
 })
 
 $(document).on('submit', '#btnDetalle', function () {
-    let data = $(this).data("idplanilla"); 
+    let data = $(this).data("idplanilla");
     let anio = $(this).data("anioplanilla");
     console.log(data);
     console.log(anio);
@@ -177,13 +177,13 @@ function getTipoPlanilla(data) {
     $.each(data.data, function (index, val) {
         console.log("Id:" + val.idPlanilla + " Desc: " + val.DescripcionPlanilla);
         ingresosPlanillas +=
-			`  <tr>
+            `  <tr>
                     <td>
                          <form method="POST" action="FechaPlanilla/ComprobanteEmpleadoEncabezado">
-                            <input name="ID" id="idPlanilla" value="`+ val.idPlanilla +`" hidden>
+                            <input name="ID" id="idPlanilla" value="`+ val.idPlanilla + `" hidden>
                             <input name="anio" id="anioPlanilla" value="` + val.anioPlanilla + `" hidden>
                             ` + val.DescripcionPlanilla + `
-                            <input type="submit" class ="btn btn-primary btn-xs pull-right" data-idPlanilla= "`+ val.idPlanilla + `"  data-anioPlanilla= "`+ data.fecha + `"  id="btnDetalle" value="Detalle"/>
+                            <input type="submit" class ="btn btn-primary btn-xs pull-right" data-idPlanilla= "`+ val.idPlanilla + `"  data-anioPlanilla= "` + data.fecha + `"  id="btnDetalle" value="Detalle"/>
                      </form>
                     </td>
                 </tr>
@@ -199,26 +199,24 @@ function getTipoPlanilla(data) {
 }
 
 
-$(document).on('click', '#btnDetalleCatalogoDeducciones', function(){
-    let id  = $(this).data("id");
+$(document).on('click', '#btnDetalleCatalogoDeducciones', function () {
+    let id = $(this).data("id");
     var getUrl = window.location, baseUrl =
         getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1];
-        
-    window.location = baseUrl+'/DetailsEmpleadoEncablezado/?id='+id;
-    //console.log(baseUrl+'/DetailsEmpleadoEncablezado/id='+id);
-    
-    // _ajax(
-	// 	{ id: id },
-	// 	'/FechaPlanilla/DetailsEmpleadoEncablezado',
-	// 	'POST',
-	// 	(data) => {
-	// 	    console.log(data);
-	// 	},
-	// 	() => { }
-	// );
+
+    window.location = baseUrl + '/ReporteDeHistorialDeIngresos/?id=' + id;
+});
+
+$(document).on('click', '#btnDetalleCatalogoDeducciones2', function () {
+    let id = $(this).data("id");
+    var getUrl = window.location, baseUrl =
+        getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1];
+
+    window.location = baseUrl + '/ReporteDeHistorialDeDeducciones/?id=' + id;
+
 });
 
 $(document).ready(() => {
     console.log('carfgdsgsdg');
     listar();
-});
+}); 

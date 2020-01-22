@@ -110,7 +110,7 @@ namespace ERP_GMEDINA.Controllers
                 SqlDataAdapter adp = new SqlDataAdapter(commandHistorialIngresos);
                 adp.Fill(ds, "V_Plani_HistorialIngreso");
                 HistorialIngresos.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\HistorialIngresos.rdlc";
-                HistorialIngresos.LocalReport.DataSources.Add(new ReportDataSource("DataSetHistorialDeIngresos", ds.Tables["V_Plani_HistorialIngreso"]));
+                HistorialIngresos.LocalReport.DataSources.Add(new ReportDataSource("DataSetHistorialIngresos", ds.Tables["V_Plani_HistorialIngreso"]));
                 ViewBag.ReportViewerIgresos = HistorialIngresos;
                 #endregion
                 conx.Close();
@@ -152,7 +152,7 @@ namespace ERP_GMEDINA.Controllers
                 SqlDataAdapter adp2 = new SqlDataAdapter(commandHistoriaDeducciones);
                 adp2.Fill(ds, "V_Plani_HistorialDeducciones");
                 HistorialDeducciones.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\HistorialDeduccionesRPT.rdlc";
-                HistorialDeducciones.LocalReport.DataSources.Add(new ReportDataSource("DataSetHistorialDedducciones", ds.Tables["V_Plani_HistorialDeducciones"]));
+                HistorialDeducciones.LocalReport.DataSources.Add(new ReportDataSource("DataSetHistorialDeducciones", ds.Tables["V_Plani_HistorialDeducciones"]));
                 ViewBag.ReportViewerDeducciones = HistorialDeducciones;
             }
             #endregion
