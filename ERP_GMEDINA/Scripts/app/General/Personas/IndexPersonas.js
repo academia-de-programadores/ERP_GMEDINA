@@ -24,17 +24,17 @@ function format(obj) {
             Tit += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
     });
     if (Comp.length == 0)
-        Comp += '<label>Sin datos que mostrar.*</label>';
+        Comp += '<label style="color:#585858">Sin datos que mostrar.*</label>';
     if (Hab.length == 0)
-        Hab += '<label>Sin datos que mostrar.*</label>';
+        Hab += '<label style="color:#585858">Sin datos que mostrar.*</label>';
     if (Idi.length == 0)
-        Idi += '<label>Sin datos que mostrar.*</label>';
+        Idi += '<label style="color:#585858">Sin datos que mostrar.*</label>';
     if (ReEs.length == 0)
-        ReEs += '<label>Sin datos que mostrar.*</label>';
+        ReEs += '<label style="color:#585858">Sin datos que mostrar.*</label>';
     if (Tit.length == 0)
-        Tit += '<label>Sin datos que mostrar.*</label>';
+        Tit += '<label style="color:#585858">Sin datos que mostrar.*</label>';
     var TodoPersona = [Comp, Hab, Idi, ReEs, Tit];
-    var Encabezados = ['Competencias', 'Habilidades', 'Idiomas', 'Requerimientos_Especiales', 'Titulos'];
+    var Encabezados = ['Competencias', 'Habilidades', 'Idiomas', 'Requerimientos_Especiales', 'Títulos'];
     for (i = 0 ; i < TodoPersona.length ; i++) {
         div += '<div class="panel panel-default">';
         div += '<div class="panel-heading" data-toggle="collapse" data-parent="#accordion' + Id + '" href="#' + Encabezados[i] + Id + '" class="collapsed" aria-expanded="false">';
@@ -104,7 +104,7 @@ function llenarTabla() {
                    ID: value.Id,
                    Identidad: value.Identidad,
                    NombreCompleto: value.Nombre,
-                   CorreoElectronico: value.CorreoElectronico,
+                   CorreoElectrónico: value.CorreoElectronico,
                    Acciones: Acciones
                });
            });

@@ -61,6 +61,28 @@ $(document).ready(function () {
     id = sessionStorage.getItem("IdPersona");
     $("#per_FechaNacimiento").attr("max", Mayor18());
     _ajax(null,
+    '/Personas/Edit/' + id,
+    'GET',
+    function (obj) {
+        if (obj != "-1" && obj != "-2" && obj != "-3") {
+            var fecha = FechaFormatoSimple(obj[0].per_FechaNacimiento);
+            console.log(fecha);
+            $("#tbPersonas").find("#per_Id").val(obj[0].per_Id);
+            $("#tbPersonas").find("#per_Identidad").val(obj[0].per_Identidad);
+            $("#tbPersonas").find("#per_Nombres").val(obj[0].per_Nombres);
+            $("#tbPersonas").find("#per_Apellidos").val(obj[0].per_Apellidos);
+            $("#tbPersonas").find("#per_FechaNacimiento").val(FechaFormatoSimple(obj[0].per_FechaNacimiento));
+            $("#tbPersonas").find("#per_Sexo").val(obj[0].per_Sexo);
+            $("#tbPersonas").find("#per_Edad").val(obj[0].per_Edad);
+            $("#tbPersonas").find("#nac_Id").val(obj[0].nac_Id);
+            $("#tbPersonas").find("#per_Direccion").val(obj[0].per_Direccion);
+            $("#tbPersonas").find("#per_Telefono").val(obj[0].per_Telefono);
+            $("#tbPersonas").find("#per_CorreoElectronico").val(obj[0].per_CorreoElectronico);
+            $("#tbPersonas").find("#per_EstadoCivil").val(obj[0].per_EstadoCivil);
+            $("#tbPersonas").find("#per_TipoSangre").val(obj[0].per_TipoSangre);
+        }
+    });
+    _ajax(null,
             '/Personas/DualListBoxData/'+ id,
             'GET',
             function (obj) {
@@ -70,28 +92,7 @@ $(document).ready(function () {
             })
 
         id = sessionStorage.getItem("IdPersona");
-        _ajax(null,
-            '/Personas/Edit/' + id,
-            'GET',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    var fecha = FechaFormatoSimple(obj[0].per_FechaNacimiento);
-                    console.log(fecha);
-                    $("#tbPersonas").find("#per_Id").val(obj[0].per_Id);
-                    $("#tbPersonas").find("#per_Identidad").val(obj[0].per_Identidad);
-                    $("#tbPersonas").find("#per_Nombres").val(obj[0].per_Nombres);
-                    $("#tbPersonas").find("#per_Apellidos").val(obj[0].per_Apellidos);
-                    $("#tbPersonas").find("#per_FechaNacimiento").val(FechaFormatoSimple(obj[0].per_FechaNacimiento));
-                    $("#tbPersonas").find("#per_Sexo").val(obj[0].per_Sexo);
-                    $("#tbPersonas").find("#per_Edad").val(obj[0].per_Edad);
-                    $("#tbPersonas").find("#nac_Id").val(obj[0].nac_Id);
-                    $("#tbPersonas").find("#per_Direccion").val(obj[0].per_Direccion);
-                    $("#tbPersonas").find("#per_Telefono").val(obj[0].per_Telefono);
-                    $("#tbPersonas").find("#per_CorreoElectronico").val(obj[0].per_CorreoElectronico);
-                    $("#tbPersonas").find("#per_EstadoCivil").val(obj[0].per_EstadoCivil);
-                    $("#tbPersonas").find("#per_TipoSangre").val(obj[0].per_TipoSangre);
-                }
-            });
+
 
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
@@ -106,6 +107,7 @@ $(document).ready(function () {
             return Form.valid();
         },
         onFinished: function () {
+            $("#finish").attr("href", " ");
             var SlctCompetencias = $(".SlctCompetencias");
             var SlctHabilidades = $(".SlctHabilidades");
             var SlctIdiomas = $(".SlctIdiomas");
@@ -131,11 +133,13 @@ $(document).ready(function () {
                                 setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
                             } else {
                                 MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                                $("#finish").attr("href", "#finish");
                             }
                         });
                     }
                     else {
                         MsgError("Error", "Correo Electronico invalido");
+                        $("#finish").attr("href", "#finish");
                     }
             }
             else {
