@@ -25,24 +25,7 @@
               <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-
-
-
-
-                 
-
-
-
-
-                     
-
-
                   <div  class="form-group">
-
-                     
-
-
                           <div align="right" class="col-md-9">
                               <div align="left" class="col-md-9">
                                   <div class="ibox">
@@ -114,7 +97,7 @@
                           @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
                               @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker required valid", @type = "date", @id = "hinc_FechaInicio" })
-                            
+                            @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger" })
                               
                           </div>
                       </div>
@@ -123,7 +106,7 @@
                           @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
                               @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker required valid", @type = "date", @id = "hinc_FechaFin" })
-                          
+                          @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger" })
                           </div>
                       </div>
 
