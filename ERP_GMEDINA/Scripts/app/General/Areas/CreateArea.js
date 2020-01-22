@@ -138,14 +138,8 @@ $("#FormCreate").submit(function (e) {
 });
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    var tbAreas = $("#FormCreate").serializeArray();
+    var tbAreas = $("#FormNuevo").serializeArray();
     tbAreas = serializar(tbAreas);
-//var tbAreas =
-//    {
-//        suc_Id: $("#Sucursales").val(),
-//        area_Descripcion: $("#area_Descripcion").val(),
-//        tbCargos:{car_Descripcion: $("#car_Descripcion").val()},
-//    };
 var lista = getJson();
 
     if (tbAreas != null) {

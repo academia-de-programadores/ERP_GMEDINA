@@ -135,7 +135,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
             var result = new Dictionary<string, object>();
-            result.Add("Sucursales", Sucursales);
+            result.Add("suc_Id", Sucursales);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Details/5

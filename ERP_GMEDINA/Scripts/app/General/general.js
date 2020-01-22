@@ -54,8 +54,10 @@ function serializar(data) {
    }
         var input = $(modal).find("#" + valor.name)[0];
         input.labels[0].children[0].color = "red";
+        var txtlabel = input.labels[0].innerText;
         var span = input.offsetParent.children[1];
-        span.innerText = $(input).data("val-required");
+        var txtRequired=$(input).data("val-required")
+        span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerirido' : txtRequired;
         $(input).addClass("error");
         $(span).addClass("text-danger");
         verificacion = false;
@@ -225,12 +227,14 @@ $(".required").each(function (indice, input) {
    span.text(txt_required);
    $(span).addClass("text-danger");
   } else {
-   asterisco.color = "black";
-   $(span).closest("div").removeClass("has-error");
-   $(span).removeClass("text-danger");
+      $(input).removeClass("error");
+       asterisco.color = "black";
+       $(span).closest("div").removeClass("has-error");
+       $(span).removeClass("text-danger");
   }
  });
- function key(event) {  
+ function key(event) {
+    $(input).removeClass("error");
   asterisco.color = "black";
   var lol = $(form).find("#error" + id);
   $(form).find("#error" + id)[0].innerText = '';
