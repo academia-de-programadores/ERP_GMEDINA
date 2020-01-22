@@ -1,0 +1,12 @@
+esto lo reemplazas 
+bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialVacaciones").Include(
+               "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js"));
+
+
+por esto
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialVacaciones").Include(
+               "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js",
+               "~/Scripts/app/General/HistorialVacaciones/DateDiff.js"));
+
+
+es un script combinado :)

@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿/// <reference path="IndexHistorialVacaciones.js" />
+/// <reference path="IndexHistorialVacaciones.js" />
+/// <reference path="IndexHistorialVacaciones.js" />
+$(document).ready(function () {
     fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
@@ -177,40 +180,76 @@ $("#InActivar").click(function () {
 });
 
 
+
+
 $("#btnGuardar").click(function () {
     var fechaInicio = $("#hvac_FechaInicio").val();
     var fechaFinal = $("#hvac_FechaFin").val();
 
-    if (fechaInicio <= fechaFinal) {
-        var data = $("#FormNuevo").serializeArray();
-        data = serializar(data);
 
-        if (data != null) {
-            data = JSON.stringify({ tbHistorialVacaciones: data });
-            _ajax(data,
-                '/HistorialVacaciones/Create',
-                'POST',
-                function (obj) {
-                    if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        CierraPopups();
-                        llenarTabla();
-                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+    var fecha1 = moment(fechaInicio);
+    var fecha2 = moment(fechaFinal);
+    var diasRestantes = 0;
+
+    var diasTomados = fecha2.diff(fecha1, 'days') +1;
+
+
+
+    _ajax({     id: parseInt($("#emp_Id").val()),
+                annio: parseInt(fechaInicio.substring(0, 4))},
+    '/HistorialVacaciones/DiasRestantes',
+    'GET',
+    function (obj) {
+        if (obj != "-1" && obj != "-2" && obj != "-3") {
+            var permiso = true;
+            debugger
+
+            if (obj.length > 0)
+            {
+                diasRestantes = obj[0].hvac_DiasRestantes;
+                if (diasRestantes - diasTomados < 0)
+                {
+                    validar = false
+                }
+            }
+
+            if (permiso)
+            {
+                if (fechaInicio <= fechaFinal) {
+                    var data = $("#FormNuevo").serializeArray();
+                    data = serializar(data);
+
+                    if (data != null) {
+                        data = JSON.stringify({ tbHistorialVacaciones: data });
+                        _ajax(data,
+                            '/HistorialVacaciones/Create',
+                            'POST',
+                            function (obj) {
+                                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                                    CierraPopups();
+                                    llenarTabla();
+                                    LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+                                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                                } else {
+                                    MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+                                }
+                            });
                     } else {
-                        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+                        MsgError("Error", "por favor llene todas las cajas de texto");
                     }
-                });
-        } else {
-            MsgError("Error", "por favor llene todas las cajas de texto");
-        }
-    }
-    else
-    {
-        MsgError("Error", "por favor ingrese un rango de fecha positivo");
-    }
+                }
+                else {
+                    MsgError("Error", "por favor ingrese un rango de fecha positivo");
+                }
+            }
+            else
+            {
+                MsgError("Error", "Esta tratando de ingresar mas días de los respectivos");
+            }
 
+            }
+    });
 
-    
 });
 
 
