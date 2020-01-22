@@ -59,7 +59,7 @@ function llenarTabla() {
         Estado: value.habi_Estado ? 'Activo' : 'Inactivo',
         "Número": value.habi_Id,
         ID: value.habi_Id,
-        Descripcion: value.habi_Descripcion,
+        Descripción: value.habi_Descripcion,
         Acciones: Acciones
        });
       });
