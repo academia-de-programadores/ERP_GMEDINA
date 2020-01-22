@@ -1,6 +1,37 @@
 //
 var modal = ["ModalNuevo", "ModalEditar", "ModalInactivar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
+var htmlSpiner =
+    `<div id="ibox1" class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
+             </div>`;
+var language = n = {
+    "sProcessing": "Procesando...",
+    "sLengthMenu": "Mostrar _MENU_ registros",
+    "sZeroRecords": "No se encontraron resultados",
+    "sEmptyTable": htmlSpiner,
+    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix": "",
+    "sSearch": "Buscar:",
+    "sUrl": "",
+    "sInfoThousands": ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+    }, "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+};
 function CierraPopups() {
  $.each(modal, function (index, valor) {
   $("#" + valor).modal('hide');//ocultamos el modal
@@ -322,3 +353,24 @@ function FechaFormatoSimple(pFecha) {
  }
  return '';
 };
+function validarDT(obj) {
+    if (obj == "-2") {
+        //$("#ibox1").find(".ibox-content").hide();
+        //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+        var ventana = $('#IndexTable tbody td.dataTables_empty');
+        ventana[0].innerHTML = "verifique su conexion a internet.(Sí el problema persiste contacte al administrador)";
+        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+        return true;
+    } else {
+        if (obj.Length == 0) {
+            RestaurarDT();
+        } else {
+            return false;
+        }
+        return true;
+    }
+}
+function RestaurarDT() {
+    $("#ibox1").find(".ibox-content").hide();
+    $(".dataTables_empty").append('No hay registros para mostrar.');
+}

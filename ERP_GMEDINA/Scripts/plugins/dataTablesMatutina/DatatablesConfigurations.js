@@ -2,36 +2,6 @@
 var Admin=false;
 var textoBoton = 'Mostrar activos';
 var botones = [];
-var htmlSpiner =
-    `<div class="sk-spinner sk-spinner-wave">
-                <div class="sk-rect1"></div>
-                <div class="sk-rect2"></div>
-                <div class="sk-rect3"></div>
-                <div class="sk-rect4"></div>
-                <div class="sk-rect5"></div>
-             </div>`;
-var language= n={
-    "sProcessing": "Procesando...",
-    "sLengthMenu": "Mostrar _MENU_ registros",
-    "sZeroRecords": "No se encontraron resultados",
-    "sEmptyTable": htmlSpiner,
-    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "sInfoPostFix": "",
-    "sSearch": "Buscar:",
-    "sUrl": "",
-    "sInfoThousands": ",",
-    "sLoadingRecords": "Cargando...",
-    "oPaginate": {
-        "sFirst": "Primero",
-        "sLast": "Último",
-        "sNext": "Siguiente",
-        "sPrevious": "Anterior"
-    },"oAria": {
-    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-}};
 $(document).ready(function () {
  var columnas = [];
  var col = 0;
@@ -119,22 +89,4 @@ function CallEditar(btn) {
  var row = tabla.row(tr);
  var id = row.data().ID;
  tablaEditar(id);
-}
-function validarDT(obj) {
- if (obj == "-2") {
-  //$("#ibox1").find(".ibox-content").hide();
-  //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
-  var ventana = $('#IndexTable tbody td.dataTables_empty');
-  ventana[0].innerHTML = "verifique su conexion a internet.(Sí el problema persiste contacte al administrador)";
-  MsgError("Error", "No se pudo cargar la información, contacte al administrador");
-  return true;
- } else {
-  if (obj.Length == 0) {
-   $("#ibox1").find(".ibox-content").hide();
-   $("#ibox1").append('No hay registros para mostrar.');
-  } else {
-   return false;
-  }
-  return true;
- }
 }
