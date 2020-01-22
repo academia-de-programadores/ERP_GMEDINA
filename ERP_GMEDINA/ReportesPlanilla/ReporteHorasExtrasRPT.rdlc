@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.46188cm</Width>
+              <Width>2.6638cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.0175cm</Width>
+              <Width>3.21942cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.54667cm</Width>
+              <Width>3.74859cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.59959cm</Width>
+              <Width>3.80151cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.30855cm</Width>
+              <Width>3.51047cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.88521cm</Width>
+              <Width>3.08713cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.38792cm</Width>
+              <Width>3.58984cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.65251cm</Width>
+              <Width>3.85443cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -515,10 +515,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!hipa_TotalHorasExtras.Value</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Format>'L'0.00;('L'0.00)</Format>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -534,7 +531,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -567,9 +563,9 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.03528cm</Top>
-        <Left>0.73527cm</Left>
+        <Left>0.039cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.85983cm</Width>
+        <Width>27.47519cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -750,12 +746,12 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>21cm</PageHeight>
-    <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>0cm</LeftMargin>
-    <RightMargin>0cm</RightMargin>
-    <TopMargin>0cm</TopMargin>
-    <BottomMargin>0cm</BottomMargin>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
