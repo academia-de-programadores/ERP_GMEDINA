@@ -115,8 +115,8 @@ function tablaDetalles(ID) {
              var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
              $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
              var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormatoSimple(obj.empr_FechaCrea);
-             $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-             var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormatoSimple(obj.empr_FechaModifica);
+             $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+             var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormatoSimple(obj.empr_FechaModifica);
        //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
        $('#ModalDetalles').modal('show');
       }
@@ -212,7 +212,7 @@ $("#btnActualizar").click(function () {
      MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
     } else if (obj != "-1" && obj != "-2" && obj != "-3") {
      llenarTabla();
-     MsgSuccess("Exito", "Archivo subido exitosamente");
+     MsgSuccess( "¡Exito!","El registro se editó de forma exitosa");
      $("#ModalEditar").modal('hide');//ocultamos el modal
      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
      $('.modal-backdrop').remove();//eliminamos el
@@ -237,7 +237,7 @@ $("#InActivar").click(function () {
         CierraPopups();
         llenarTabla();
         LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
-        MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+        MsgSuccess("¡Exito!", "El registro se ha inhabilitado  de forma exitosa");
        } else {
         MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
        }

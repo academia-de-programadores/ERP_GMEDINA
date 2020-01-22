@@ -33,7 +33,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["suc_Id", "suc_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se ha inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
