@@ -48,9 +48,10 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                // console.log(value.car_Descripcion);
                 var Acciones = value.car_Estado == 1
-                   ?null:
+                   ? null :
                    "<div>" +
                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                    "</div>";
                 if (value.car_Estado > fill) {
                     tabla.row.add({

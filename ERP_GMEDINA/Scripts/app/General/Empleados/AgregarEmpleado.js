@@ -45,6 +45,9 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
             llenarTabla();
             $('#ModalNuevo').modal('hide');
         }
+        else if (res == "-4") {
+            MsgError("Error", "Debe Agregar el archivo de excel correspondiente");
+        }
     });
 });
 

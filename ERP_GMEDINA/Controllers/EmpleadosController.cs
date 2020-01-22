@@ -335,6 +335,10 @@ namespace ERP_GMEDINA.Controllers
                         return Json(-3, JsonRequestBehavior.AllowGet);
                     }
                 }//CLOSE IF
+                else
+                {
+                    return Json(-4, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {

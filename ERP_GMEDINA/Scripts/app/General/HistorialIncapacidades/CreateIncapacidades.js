@@ -21,7 +21,7 @@
     $("#hinc_FechaFin").attr("min", Fecha());
  
 
-    debugger
+    
     var fecha1 = $("#hinc_FechaInicio").val;
 
     var fecha2 = $("#hinc_FechaFin").val;
@@ -55,7 +55,6 @@
 
 
     $("#btnGuardar").click(function () {
-        debugger
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
         if(compare_dates())

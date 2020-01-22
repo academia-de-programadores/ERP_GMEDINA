@@ -22,7 +22,7 @@ function tablaEditar(ID) {
         });
 }
 function tablaDetalles(ID) {
-    id = ID;
+    //id = ID;
     _ajax(null,
         '/TipoHoras/Edit/' + ID,
         'GET',
@@ -52,6 +52,7 @@ function llenarTabla() {
                        ?null:Admin?
                        "<div>" +
                            "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                            
                        "</div>":"";
           
                 tabla.row.add({
