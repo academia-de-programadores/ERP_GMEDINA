@@ -35,11 +35,11 @@ $.extend($.jgrid,{
 		bExit : "Cancel",
 	    msg: {
 	        required:"Campo obrigat�rio",
-	        number:"Por favor, introduza um numero",
+	        number:"Por favor, introduza um Número",
 	        minValue:"O valor deve ser maior ou igual que",
 	        maxValue:"O valor deve ser menor ou igual a",
 	        email: "N�o � um endere�o de email v�lido",
-	        integer: "Por favor, introduza um numero inteiro",
+	        integer: "Por favor, introduza um Número inteiro",
 			url: "is not a valid URL. Prefix required ('http://' or 'https://')",
 			nodefined : " is not defined!",
 			novalue : " return value is required!",

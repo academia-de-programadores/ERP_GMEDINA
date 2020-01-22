@@ -219,7 +219,7 @@ function format(obj) {
         div = div
                     + '<div class="col-md-5"><b>ID: </b>' + index.hper_Id + '</div>'
 
-        + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
+        + '<div class="col-md-5"><b>Número de identidad: </b>' + index.per_Identidad + '</div>'
 
         + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
         //+ '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'

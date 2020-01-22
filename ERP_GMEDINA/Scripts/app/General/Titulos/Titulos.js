@@ -9,7 +9,7 @@ var id = 0;
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
-    '/Titulos/Edit/' + ID,
+    '/Títulos/Edit/' + ID,
     'GET',
     function (obj) {
         if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -22,7 +22,7 @@ function tablaEditar(ID) {
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
-        '/Titulos/Edit/' + ID,
+        '/Títulos/Edit/' + ID,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -39,7 +39,7 @@ function tablaDetalles(ID) {
 
 function llenarTabla() {
     _ajax(null,
-        '/Titulos/llenarTabla',
+        '/Títulos/llenarTabla',
         'POST',
         function (Lista) {
             tabla.clear();
@@ -58,7 +58,7 @@ function llenarTabla() {
                     tabla.row.add({
                         ID: value.titu_Id,
                         "Número": value.titu_Id,
-                        Titulos: value.titu_Descripcion,
+                        Títulos: value.titu_Descripcion,
                         Acciones: Acciones,
                         Estado: value.titu_Estado ? "Activo" : "Inactivo"
 
@@ -83,7 +83,7 @@ $("#btnAgregar").click(function () {
 
 $("#btnEditar").click(function () {
     _ajax(null,
-        '/Titulos/Edit/' + id,
+        '/Títulos/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -108,9 +108,9 @@ $("#btnGuardar").click(function() {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data = JSON.stringify({ tbTitulos: data });
+        data = JSON.stringify({ tbTítulos: data });
         _ajax(data,
-            '/Titulos/Create',
+            '/Títulos/Create',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -133,9 +133,9 @@ $("#InActivar").click(function () {
     data = serializar(data);
     if (data != null) {
         data.titu_Id = id;
-        data = JSON.stringify({ tbTitulos: data });
+        data = JSON.stringify({ tbTítulos: data });
         _ajax(data,
-            '/Titulos/Delete',
+            '/Títulos/Delete',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -157,9 +157,9 @@ $("#btnActualizar").click(function () {
     data = serializar(data);
     if (data != null) {
         data.titu_Id = id;
-        data = JSON.stringify({ tbTitulos: data });
+        data = JSON.stringify({ tbTítulos: data });
         _ajax(data,
-            '/Titulos/Edit',
+            '/Títulos/Edit',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {

@@ -13,7 +13,7 @@ function hablilitar(btn) {
 $("#btnActivar").click(function () {
     var Id = $("#txtIdRestore").val();
     _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
-        '/Titulos/hablilitar/',
+        '/Títulos/hablilitar/',
         'POST',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
