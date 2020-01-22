@@ -502,7 +502,7 @@
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Left>1.21864cm</Left>
         <Height>1.2cm</Height>
-        <Width>26.78769cm</Width>
+        <Width>26.78768cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -681,7 +681,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.11667cm</Height>
+      <Height>1.53884cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -712,8 +712,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.51667cm</Top>
-          <Left>19.87597cm</Left>
+          <Top>0.91443cm</Top>
+          <Left>24.50262cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
           <Style>
@@ -747,8 +747,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.70807cm</Top>
-          <Left>16.19826cm</Left>
+          <Top>0.10583cm</Top>
+          <Left>20.82491cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
@@ -781,8 +781,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>1.51667cm</Top>
-          <Left>16.43229cm</Left>
+          <Top>0.91443cm</Top>
+          <Left>21.05894cm</Left>
           <Height>0.6cm</Height>
           <Width>3.26729cm</Width>
           <ZIndex>2</ZIndex>
@@ -805,10 +805,10 @@
     </PageFooter>
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

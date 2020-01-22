@@ -6,31 +6,31 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.85199cm</Width>
+              <Width>2.71405cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.53449cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.53449cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.53449cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.53449cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.53449cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.53449cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.07576cm</Width>
+              <Width>3.93782cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.83311cm</Width>
+              <Width>2.69517cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -46,7 +46,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cod. Empleado</Value>
+                              <Value>No. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -151,7 +151,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Deduccion</Value>
+                              <Value>Descripción Deducción</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -291,7 +291,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Planilla</Value>
+                              <Value>Descripción Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -334,7 +334,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -679,10 +679,9 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
-        <Top>0.49389cm</Top>
         <Left>1.19062cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.9678cm</Width>
+        <Width>23.72633cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -690,7 +689,7 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>2.92834cm</Top>
+        <Top>2.96296cm</Top>
         <Left>1.19062cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
@@ -725,7 +724,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>3.10473cm</Top>
+        <Top>3.13935cm</Top>
         <Left>4.46681cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
@@ -741,7 +740,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.45856in</Height>
+    <Height>1.47219in</Height>
     <Style />
   </Body>
   <Width>10.29859in</Width>

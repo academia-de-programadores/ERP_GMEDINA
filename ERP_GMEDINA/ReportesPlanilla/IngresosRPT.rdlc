@@ -191,7 +191,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Ingreso</Value>
+                              <Value>Descripción Ingreso</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -223,7 +223,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Planilla</Value>
+                              <Value>Descripción Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -784,7 +784,7 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>2.81402cm</Top>
+        <Top>2.47061cm</Top>
         <Left>1.28081cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
@@ -819,7 +819,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>3.15743cm</Top>
+        <Top>2.81402cm</Top>
         <Left>4.64003cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
@@ -835,7 +835,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.4793in</Height>
+    <Height>1.3441in</Height>
     <Style />
   </Body>
   <Width>11.69964in</Width>
@@ -856,7 +856,7 @@
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
-                    <TextDecoration>Underline</TextDecoration>
+                    <TextDecoration>None</TextDecoration>
                   </Style>
                 </TextRun>
                 <TextRun>
@@ -864,7 +864,7 @@
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
-                    <TextDecoration>Underline</TextDecoration>
+                    <TextDecoration>None</TextDecoration>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -957,7 +957,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.4086cm</Height>
+      <Height>1.95601cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -988,7 +988,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>0.8086cm</Top>
+          <Top>0.80859cm</Top>
           <Left>24.47055cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
@@ -1023,7 +1023,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0cm</Top>
+          <Top>-0.00001cm</Top>
           <Left>20.79284cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
@@ -1057,7 +1057,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>0.8086cm</Top>
+          <Top>0.80859cm</Top>
           <Left>21.02687cm</Left>
           <Height>0.6cm</Height>
           <Width>3.26729cm</Width>

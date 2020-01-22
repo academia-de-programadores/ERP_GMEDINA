@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.4895cm</Width>
+              <Width>2.37342cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.04193cm</Width>
+              <Width>2.92585cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.04193cm</Width>
+              <Width>2.92585cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.04193cm</Width>
+              <Width>2.92585cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.82696cm</Width>
+              <Width>3.71088cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33268cm</Width>
+              <Width>3.2166cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.04193cm</Width>
+              <Width>2.92585cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.51858cm</Width>
+              <Width>2.4025cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -64,7 +64,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -172,7 +171,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Planilla</Value>
+                              <Value>Descripción Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -236,7 +235,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Codigo del Pago</Value>
+                              <Value>Código del Pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -570,7 +569,7 @@
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Left>0.61058cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.33544cm</Width>
+        <Width>23.40679cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -767,7 +766,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.49373cm</Top>
+          <Top>0.49372cm</Top>
           <Left>17.10054cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
@@ -808,7 +807,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.49915cm</Top>
+          <Top>1.49914cm</Top>
           <Left>20.64596cm</Left>
           <Height>0.6cm</Height>
           <Width>3.63599cm</Width>
@@ -842,7 +841,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox12</rd:DefaultName>
-          <Top>1.49915cm</Top>
+          <Top>1.49914cm</Top>
           <Left>17.41804cm</Left>
           <Height>0.6cm</Height>
           <Width>3.36903cm</Width>

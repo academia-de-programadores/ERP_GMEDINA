@@ -171,7 +171,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Planilla</Value>
+                              <Value>Descripción Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -235,7 +235,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Codigo del Pago</Value>
+                              <Value>Código del Pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
