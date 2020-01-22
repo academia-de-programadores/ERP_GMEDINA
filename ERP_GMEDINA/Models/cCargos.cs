@@ -24,7 +24,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Estado")]
         public bool car_Estado { get; set; }
 
-        [Display(Name = "Razon Inacativo")]
+        [Display(Name = "Razón Inactivo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(100, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string car_RazonInactivo { get; set; }
