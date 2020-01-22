@@ -172,7 +172,7 @@ $("#btnActualizar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["sue_Id", "sue_Cantidad"]);
-                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }

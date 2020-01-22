@@ -94,12 +94,12 @@ $("#btnGuardar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    MsgSuccess("¡Exito!", "Se ah contratado el candidato");
+                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                     sessionStorage.clear();
                     $(location).attr('href', "/SeleccionCandidatos/Index");
 
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {

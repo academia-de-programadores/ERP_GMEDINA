@@ -173,7 +173,7 @@ $("#btnGuardar").click(function () {
                     llenarTabla();
                     LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
 
-                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }

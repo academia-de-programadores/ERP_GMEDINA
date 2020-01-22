@@ -2879,11 +2879,11 @@
     <Content Include="Views\TipoSalidas\_Delete.cshtml" />
     <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
     <Content Include="Views\TipoSalidas\_Edit.cshtml" />
-    <Content Include="Views\Titulos\Index.cshtml" />
-    <Content Include="Views\Titulos\_Create.cshtml" />
-    <Content Include="Views\Titulos\_Delete.cshtml" />
-    <Content Include="Views\Titulos\_Detalles.cshtml" />
-    <Content Include="Views\Titulos\_Edit.cshtml" />
+    <Content Include="Views\Títulos\Index.cshtml" />
+    <Content Include="Views\Títulos\_Create.cshtml" />
+    <Content Include="Views\Títulos\_Delete.cshtml" />
+    <Content Include="Views\Títulos\_Detalles.cshtml" />
+    <Content Include="Views\Títulos\_Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
     <Content Include="Views\Jornadas\_Create.cshtml" />
     <Content Include="Views\Jornadas\_CreateHorario.cshtml" />
