@@ -6,19 +6,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.75869cm</Width>
+              <Width>2.58237cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.68473cm</Width>
+              <Width>3.50841cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.24036cm</Width>
+              <Width>4.06404cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.34078cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.42015cm</Width>
+              <Width>3.24383cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -27,7 +27,7 @@
               <Width>3.55244cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.95473cm</Width>
+              <Width>4.77841cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -164,14 +164,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox9">
+                    <Textbox Name="Textbox13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Monto</Value>
+                              <Value>Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -180,7 +180,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -260,14 +260,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox13">
+                    <Textbox Name="Textbox18">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Planilla</Value>
+                              <Value>Monto</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -276,7 +276,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -417,21 +417,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="deif_Monto">
+                    <Textbox Name="cpla_DescripcionPlanilla">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!deif_Monto.Value</Value>
+                              <Value>=Fields!cpla_DescripcionPlanilla.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>deif_Monto</rd:DefaultName>
+                      <rd:DefaultName>cpla_DescripcionPlanilla</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -507,21 +507,24 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="cpla_DescripcionPlanilla">
+                    <Textbox Name="deif_Monto">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!cpla_DescripcionPlanilla.Value</Value>
-                              <Style />
+                              <Value>=Fields!deif_Monto.Value</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>cpla_DescripcionPlanilla</rd:DefaultName>
+                      <rd:DefaultName>deif_Monto</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -531,6 +534,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -562,22 +566,74 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
+        <Left>0.86365cm</Left>
         <Height>1.2cm</Height>
-        <Width>28.45188cm</Width>
+        <Width>27.972cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Line Name="Line1">
+        <Top>3.43986cm</Top>
+        <Left>1.47405cm</Left>
+        <Height>0cm</Height>
+        <Width>8.40021cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Firma</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox10</rd:DefaultName>
+        <Top>3.74854cm</Top>
+        <Left>4.83327cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>0.47244in</Height>
+    <Height>1.71202in</Height>
     <Style />
   </Body>
-  <Width>11.49853in</Width>
+  <Width>11.69964in</Width>
   <Page>
     <PageHeader>
-      <Height>4.98019cm</Height>
+      <Height>3.66134cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -608,10 +664,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>3.51879cm</Top>
-          <Left>9.18954cm</Left>
+          <Top>2.44426cm</Top>
           <Height>0.9175cm</Height>
-          <Width>10.86083cm</Width>
+          <Width>29.71709cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -622,12 +677,14 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Image Name="Image5">
+        <Image Name="Image6">
           <Source>Embedded</Source>
-          <Value>image11</Value>
+          <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
-          <Height>4.98019cm</Height>
-          <Width>10.43286cm</Width>
+          <Top>0.46689cm</Top>
+          <Left>26.3234cm</Left>
+          <Height>1.92246cm</Height>
+          <Width>1.93834cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -635,14 +692,12 @@
             </Border>
           </Style>
         </Image>
-        <Image Name="Image6">
+        <Image Name="Image7">
           <Source>Embedded</Source>
-          <Value>payrollicon</Value>
+          <Value>image11</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.32434cm</Top>
-          <Left>26.06799cm</Left>
-          <Height>1.92246cm</Height>
-          <Width>1.93834cm</Width>
+          <Height>3.55551cm</Height>
+          <Width>10.43286cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -650,6 +705,40 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Sistema de Planillas</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox7</rd:DefaultName>
+          <Top>1.58359cm</Top>
+          <Height>0.6cm</Height>
+          <Width>29.71709cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -678,60 +767,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox16</rd:DefaultName>
           <Top>0.75833cm</Top>
-          <Left>25.64082cm</Left>
+          <Left>25.89623cm</Left>
           <Height>0.6cm</Height>
           <Width>2.93942cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Line Name="Line1">
-          <Top>1.34028cm</Top>
-          <Left>1.21864cm</Left>
-          <Height>0cm</Height>
-          <Width>8.40021cm</Width>
-          <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>Solid</Style>
-            </Border>
-          </Style>
-        </Line>
-        <Textbox Name="Textbox10">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Firma</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>1.51667cm</Top>
-          <Left>4.57786cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -751,10 +789,10 @@
     </PageFooter>
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

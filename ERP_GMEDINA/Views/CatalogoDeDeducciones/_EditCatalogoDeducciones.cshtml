@@ -63,20 +63,20 @@
             </div>
         </div>
     </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary pull-left" id="btnUpdateDeduccion">Actualizar</button>
-            <button type="button" class="btn btn-danger col-md-2" id="btnmodalInactivarCatalogoDeducciones">Inactivar</button>
-            <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarEditar">Cerrar</button>
-        </div>
-        }
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesInactivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.cde_IdDeducciones)
-        }
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary pull-left" id="btnUpdateDeduccion">Actualizar</button>
+        <button type="button" class="btn btn-danger col-md-2" id="btnmodalInactivarCatalogoDeducciones">Inactivar</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarEditar">Cerrar</button>
+    </div>
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesInactivar" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cde_IdDeducciones)
+}
 
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesActivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.cde_IdDeducciones)
-        }
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesActivar" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cde_IdDeducciones)
+}

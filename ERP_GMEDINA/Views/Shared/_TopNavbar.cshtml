@@ -8,7 +8,7 @@
 			
 			@{ 
 				var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
-				string nombreUsuario = oUsuario.usu_NombreUsuario;
+				string nombreUsuario = oUsuario?.usu_NombreUsuario;
 			}			
 		
 
