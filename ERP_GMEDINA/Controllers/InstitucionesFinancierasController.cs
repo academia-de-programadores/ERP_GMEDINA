@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
                 //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                 response = "error";
             }
-            return Json(Response, JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
