@@ -2,12 +2,12 @@
 //Obtención de Script para Formateo de Fechas
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 var inactivarID = 0;
 
@@ -133,21 +133,33 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 
 });
 
+function limpiarAsteriscosCrear() {
+    $("#Crear #astMotivo").css("color", "black");
+    $("#Crear #astEmpId").css("color", "black");
+    $("#Crear #astMontoInicial").css("color", "black");
+    $("#Crear #astMontoRestante").css("color", "black");
+    $("#Crear #astCuota").css("color", "black");
+}
 
+function limpiarSpanCrear() {
+    $("#Crear #valMotivo").css("display", "none");
+    $("#Crear #dei_Motivo").css("display", "none");
+    $("#Crear #valMontoInicial").css("display", "none");
+    $("#Crear #valMontoInicial").css("display", "none");
+    $("#Crear #validation4").css("display", "none");
+    $("#Crear #valMontoRestante").css("display", "none");
+    $("#Crear #valCuota").css("display", "none");
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#Crear #ast1").css("color", "black");
-    $("#Crear #ast2").css("color", "black");
-    $("#Crear #ast3").css("color", "black");
-    $("#Crear #ast4").css("color", "black");
-    $("#Crear #ast5").css("color", "black");
+    //Ocultar validaciones span
+    limpiarSpanCrear();
+    //Asteriscos
+    limpiarAsteriscosCrear();
+
+
     $("#emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -226,96 +238,94 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
     //----
 
-    if (dei_Motivo == "" || dei_Motivo == null) {
-        $("#Crear #validation1").css("display", "");
-        $("#Crear #ast1").css("color", "red");
+    if (dei_Motivo == null || dei_Motivo == "") {
+        $("#Crear #valMotivo").css("display", "");
+        $("#Crear #astMotivo").css("color", "red");
         TOF = false;
     }
     else {
-        $("#Crear #validation1").css("display", "none");
-        $("#Crear #ast1").css("color", "black");
+        $("#Crear #valMotivo").css("display", "none");
+        $("#Crear #astMotivo").css("color", "black");
     }
     //--
     if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
-        $("#Crear #validation2").css("display", "");
-        $("#Crear #ast2").css("color", "red");
+        $("#Crear #valEmpId").css("display", "");
+        $("#Crear #astEmpId").css("color", "red");
         TOF = false;
     }
     else {
-        $("#Crear #validation2").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
+        $("#Crear #valEmpId").css("display", "none");
+        $("#Crear #astEmpId").css("color", "black");
     }
 
     //--
     if (expr.test(dei_MontoInicial)) {
-        $("#Crear #validation3").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
+        $("#Crear #valMontoInicial").css("display", "none");
+        $("#Crear #astMontoInicial").css("color", "black");
     }
     else {
-        $("#Crear #validation3").css("display", "");
-        $("#Crear #ast3").css("color", "red");
+        $("#Crear #valMontoInicial").css("display", "");
+        $("#Crear #astMontoInicial").css("color", "red");
         TOF = false;
     }
     //////////////////////////////
     if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined || dei_MontoInicial <= 0) {
-        $("#Crear #validation3").css("display", "block");
-        $("#Crear #ast3").css("color", "red");
+        $("#Crear #valMontoInicial").css("display", "block");
+        $("#Crear #astMontoInicial").css("color", "red");
         TOF = false;
-        console.log("False");
     }
     else {
-        $("#Crear #validation3").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
-        console.log("true");
+        $("#Crear #valMontoInicial").css("display", "none");
+        $("#Crear #astMontoInicial").css("color", "black");
     }
 
     //--
     if (dei_MontoRestante != 0) {
-        $("#Crear #validation4").css("display", "none");
-        $("#asteriscoNo4").css("color", "black");
+        $("#Crear #valMontoRestante").css("display", "none");
+        $("#astMontoRestante").css("color", "black");
     }
     else {
-        $("#Crear #validation4").css("display", "");
-        $("#asteriscoNo4").css("color", "red");
+        $("#Crear #valMontoRestante").css("display", "");
+        $("#astMontoRestante").css("color", "red");
         TOF = false;
     }
     if (expr.test(dei_MontoRestante)) {
-        $("#Crear #validation4").css("display", "none");
-        $("#asteriscoNo4").css("color", "black");
+        $("#Crear #valMontoRestante").css("display", "none");
+        $("#astMontoInicial").css("color", "black");
     }
     else {
-        $("#Crear #validation4").css("display", "");
-        $("#Crear #ast4").css("color", "red");
+        $("#Crear #valMontoRestante").css("display", "");
+        $("#Crear #astMontoInicial").css("color", "red");
         TOF = false;
     }
 
     if (dei_MontoRestante > dei_MontoInicial) {
-        $("#Crear #MontoRestanteCrear").css("display", "");
-        $("#Crear #ast4").css("color", "red");
+        $("#Crear #valMontoRestante").css("display", "");
+        $("#Crear #astMontoInicial").css("color", "red");
         TOF = false;
     }
     else {
-        $("#Crear #MontoRestanteCrear").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
+        $("#Crear #valMontoRestante").css("display", "none");
+        $("#Crear #astMontoInicial").css("color", "black");
 
     }
     //--
     if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
-        $("#Crear #validation5").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
+        $("#Crear #valCuota").css("display", "none");
+        $("#Crear #astCuota").css("color", "black");
     }
     else {
-        $("#Crear #validation5").css("display", "");
-        $("#Crear #ast5").css("color", "red");
+        $("#Crear #valCuota").css("display", "");
+        $("#Crear #astCuota").css("color", "red");
         TOF = false;
     }
     if (expr.test(dei_Cuota)) {
-        $("#Crear #validation5").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
+        $("#Crear #valCuota").css("display", "none");
+        $("#Crear #astCuota").css("color", "black");
     }
     else {
-        $("#Crear #validation5").css("display", "");
-        $("#Crear #ast5").css("color", "red");
+        $("#Crear #valCuota").css("display", "");
+        $("#Crear #astCuota").css("color", "red");
         TOF = false;
     }
 
@@ -753,7 +763,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ id })
-                    })
+                })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //$("#Detalles #tde_IdTipoDedu").empty();
@@ -826,7 +836,7 @@ $("#btnInactivarRegistroDeduccionIndividual").click(function () {
     $.ajax({
         url: "/DeduccionesIndividuales/Inactivar",
         method: "POST",
-        data:data
+        data: data
     }).done(function (data) {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
