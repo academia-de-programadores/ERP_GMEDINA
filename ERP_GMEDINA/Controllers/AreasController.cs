@@ -16,8 +16,16 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
-            tbAreas tbAreas = new tbAreas { area_Estado = Admin };
+            //bool Admin = false;
+            //try
+            //{
+            //    Admin = (bool)Session["Admin"];
+            //}
+            //catch (Exception)
+            //{
+            //    Response.Redirect("~/Inicio/index");
+            //}
+            tbAreas tbAreas = new tbAreas {  };
             return View(tbAreas);
         }
         public ActionResult llenarTabla()
@@ -166,6 +174,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
+            tbDepartamentos = tbDepartamentos == null ? new tbDepartamentos[] { } : tbDepartamentos;
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
@@ -437,6 +446,11 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
+            if(Session["Admin"] == null)
+            {
+                Response.Redirect("/Inicio");
+            }
+
             if (disposing && db != null)
             {
                 db.Dispose();

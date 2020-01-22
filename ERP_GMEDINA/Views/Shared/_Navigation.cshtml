@@ -40,7 +40,7 @@
                     <li class="@Html.IsSelected(controller:"Nacionalidades",action: "Index")"><a href="@Url.Action("Index", "Nacionalidades")">Nacionalidades</a></li>
                     <li class="@Html.IsSelected(controller:"Jornadas")"><a href="@Url.Action("Index", "Jornadas")">Jornadas y Horarios</a></li>
                     <li class="@Html.IsSelected(controller:"Areas")"><a href="@Url.Action("Index", "Areas")">Departamentos y Areas</a></li>
-                    <li class="@Html.IsSelected(controller:"TipoHoras")"><a href="@Url.Action("Index", "TipoHoras")">Listado de Horarios</a></li>
+                    <li class="@Html.IsSelected(controller:"TipoHoras")"><a href="@Url.Action("Index", "TipoHoras")">Tipo de Horas</a></li>
 
                 </ul>
             </li>
@@ -88,7 +88,7 @@
 
             @*Salidas*@
             <li id="Salidas" class="@Html.IsSelected(action: "Dashboard_5")">
-                <a href="@Url.Action("General", "General")"><i class="fa fa-external-link"></i> <span class="nav-label" data-i18n="nav.dashboard">Finalizacion Laboral</span> <span class="fa arrow"></span></a>
+                <a href="@Url.Action("General", "General")"><i class="fa fa-external-link"></i> <span class="nav-label" data-i18n="nav.dashboard">Finalización Laboral</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level Salidas">
                     <li class="@Html.IsSelected(controller:"RazonSalidas")">
                         <a href="@Url.Action("Index", "RazonSalidas")">Razones de Salidas</a>
@@ -176,7 +176,7 @@
                     </li>
 
                     <li class="@Html.IsSelected(controller:"RequerimientosEspeciales")">
-                        <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requisiciones Especiales</a>
+                        <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requerimientos Especiales</a>
                     </li>
                 </ul>
             </li>

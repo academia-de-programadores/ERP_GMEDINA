@@ -9,23 +9,75 @@ function Remove(Id, lista) {
     });
     return list;
 }
+
+$(document).ready(function () {
+    $("#ddlEmpleados").select2();
+
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+    $("#hper_fechaInicio").attr("value", today);
+    //var today = new Date();
+    //var dd = today.getDate();
+    //var mm = today.getMonth() + 1; //January is 0!
+    //var yyyy = today.getFullYear();
+    //if (dd < 10) {
+    //    dd = '0' + dd
+    //}
+    //if (mm < 10) {
+    //    mm = '0' + mm
+    //}
+    //today = yyyy + '-' + mm + '-' + dd;
+    //$("#hsal_FechaSalida").attr("max", today);
+
+    llenarDropDowlistEmpleados();
+    llenarDropDowlistTipoPermisos();
+    //llenarDropDowlistRazonSalida();
+
+    ChildTable = $(ChildDataTable).DataTable({
+        pageLength: 3,
+        lengthChange: false,
+        columns:
+            [
+                { data: 'Empleados' },
+                {
+                    data: 'emp_Id',
+                    "visible": false
+                },
+               {
+                   data: 'Acciones',
+                   defaultContent: '<div>' +
+                                   '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
+                               '</div>'
+               }
+            ],
+        order: [[0, 'asc']]
+    });
+});
 //alert("a");
-function Add(Empleados,ver) {
+function Add(Empleados, ver) {
     if (Empleados.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
             if (Fila.Empleados == '0' || Fila.Empleados == ver) {
-                var span = $("#FormEmpleados").find("#errorddlEmpleados");
-                    $(span).addClass("text-warning");
-                    $(span).closest("div").addClass("has-warning");
-                    span.text('Seleccione otra opción');
-                    $("#FormEmpleados").find("#ddlEmpleados").focus();
+                var span = $("#FormEmpleados").find("#errorEmpleados");
+                $(span).addClass("text-warning");
+                $(span).closest("div").addClass("has-warning");
+                span.text('Seleccione otra opción');
+                $("#FormEmpleados").find("#ddlEmpleados").focus();
                 return null;
             }
             else {
-                    var span = $("#FormEmpleados").find("#errorddlEmpleados");
-                    $(span).removeClass("text-warning");
-                    span.text('');
+                var span = $("#FormEmpleados").find("#errorddlEmpleados");
+                $(span).removeClass("text-warning");
+                span.text('');
             }
         }
         ChildTable.row.add(
@@ -121,45 +173,6 @@ function llenarDropDowlistEmpleados() {
 //           .draw();
 //}
 //Llamamos los dropdowns
-$(document).ready(function () {
-    $("#ddlEmpleados").select2();
-    //var today = new Date();
-    //var dd = today.getDate();
-    //var mm = today.getMonth() + 1; //January is 0!
-    //var yyyy = today.getFullYear();
-    //if (dd < 10) {
-    //    dd = '0' + dd
-    //}
-    //if (mm < 10) {
-    //    mm = '0' + mm
-    //}
-    //today = yyyy + '-' + mm + '-' + dd;
-    //$("#hsal_FechaSalida").attr("max", today);
-
-    llenarDropDowlistEmpleados();
-    llenarDropDowlistTipoPermisos();
-    //llenarDropDowlistRazonSalida();
-
-    ChildTable = $(ChildDataTable).DataTable({
-        pageLength: 3,
-        lengthChange: false,
-        columns:
-            [
-                { data: 'Empleados' },
-                {
-                    data: 'emp_Id',
-                    "visible": false
-                },
-               {
-                   data: 'Acciones',
-                   defaultContent: '<div>' +
-                                   '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
-                               '</div>'
-               }
-            ],
-        order: [[0, 'asc']]
-    });
-});
 $("#add").click(function () {
     var Id = $("#FormEmpleados").find("#ddlEmpleados").val();
     if (Id == 0) {
@@ -168,6 +181,7 @@ $("#add").click(function () {
         $(span).closest("div").addClass("has-warning");
         span.text('Seleccione otra opción');
         $("#FormEmpleados").find("#ddlEmpleados").focus();
+        alert();
     }
         //hsal_FechaSalida: $("#hsal_FechaSalida").val()
     else {
@@ -191,34 +205,43 @@ $("#add").click(function () {
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
 });
+
+$("#hper_PorcentajeIndemnizado").focusout(function () {
+    if ($("#hper_PorcentajeIndemnizado").val() > 100) {
+        $("#hper_PorcentajeIndemnizado").val(100);
+    }
+});
+
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    if ($("#TipoPermisos").val() == 0) {
-        MsgWarning("Error", "Es nesesario seleccionar el tipo de la salida"); 
+    if ($("#hper_fechaFin").val() <= $("#hper_fechaInicio").val()) {
+        MsgError("Error", "Seleccione una fecha de regreso distinta");
+    } else if ($("#TipoPermisos").val() == 0) {
+        MsgError("Error", "Es nesesario seleccionar el tipo de permiso");
     } else if ($("#hper_PorcentajeIndemnizado").val() == "") {
-        MsgWarning("Error", "Es nesesario especificar el porcentaje del sueldo del cual el colaborador gozara durante la duración del permiso"); 
+        MsgError("Error", "Es nesesario especificar el porcentaje del sueldo del cual el colaborador gozara durante la duración del permiso");
     } else {
         //declaramos el objeto principal de nuestra tabla y asignamos sus valores
         var tbHistorialPermisos =
         {
             tper_Id: $("#TipoPermisos").val(),
             hper_Observacion: $("#hper_Observacion").val(),
-            hper_PorcentajeIndemnizado: $("#hper_PorcentajeIndemnizado").val(), 
+            hper_PorcentajeIndemnizado: $("#hper_PorcentajeIndemnizado").val(),
             hper_fechaInicio: $("#hper_fechaInicio").val(),
-            hper_fechaFin : $("#hper_fechaFin").val(),
-            hper_Justificado : $("#hper_Justificado").val()
+            hper_fechaFin: $("#hper_fechaFin").val(),
+            hper_Justificado: $("#hper_Justificado").val()
         };
         var lista = getJson();
         if (lista == "") {
-            MsgWarning("Error", "Es nesesario seleccionar al menos 1 colaborador");
+            MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador");
         }
-        //else if ($("#hper_PorcentajeIndemnizado").val() < '0' || $("#hper_PorcentajeIndemnizado").val() == "") {
-        //    MsgWarning("Error", "Es nesesario especificar el porcenaje del suelo del cual gozara el colaborador durante laduración del permiso");
-        //}
+            //else if ($("#hper_PorcentajeIndemnizado").val() < '0' || $("#hper_PorcentajeIndemnizado").val() == "") {
+            //    MsgError("Error", "Es nesesario especificar el porcenaje del suelo del cual gozara el colaborador durante laduración del permiso");
+            //}
         else if ($("#hper_fechaInicio").val() == "") {
-            MsgWarning("Error", "Es nesesario seleccionar la fecha de salida");
+            MsgError("Error", "Es nesesario seleccionar la fecha de salida");
         } else if ($("#hper_fechaFin").val() == "") {
-            MsgWarning("Error", "Es nesesario seleccionar la fecha de regreso");
+            MsgError("Error", "Es nesesario seleccionar la fecha de regreso");
         }
         else {
             if (tbHistorialPermisos != null) {
