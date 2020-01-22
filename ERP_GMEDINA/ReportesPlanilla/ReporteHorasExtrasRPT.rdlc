@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.6638cm</Width>
+              <Width>2.44863cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.21942cm</Width>
+              <Width>3.00425cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.74859cm</Width>
+              <Width>3.53342cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.80151cm</Width>
+              <Width>3.58634cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.51047cm</Width>
+              <Width>3.2953cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.08713cm</Width>
+              <Width>2.87196cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.58984cm</Width>
+              <Width>3.37467cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.85443cm</Width>
+              <Width>3.63926cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -515,7 +515,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!hipa_TotalHorasExtras.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -531,6 +534,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -563,9 +567,9 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.03528cm</Top>
-        <Left>0.039cm</Left>
+        <Left>0.74031cm</Left>
         <Height>1.2cm</Height>
-        <Width>27.47519cm</Width>
+        <Width>25.7538cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -737,7 +741,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.54cm</Height>
+      <Height>1.89016cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -768,8 +772,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.3743cm</Top>
-          <Left>13.8441cm</Left>
+          <Top>0.84388cm</Top>
+          <Left>23.15789cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
           <Style>
@@ -803,8 +807,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.5657cm</Top>
-          <Left>10.16639cm</Left>
+          <Top>0.03528cm</Top>
+          <Left>19.48018cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
@@ -837,8 +841,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>1.3743cm</Top>
-          <Left>10.40042cm</Left>
+          <Top>0.84388cm</Top>
+          <Left>19.71421cm</Left>
           <Height>0.6cm</Height>
           <Width>3.26729cm</Width>
           <ZIndex>2</ZIndex>
@@ -859,12 +863,12 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
