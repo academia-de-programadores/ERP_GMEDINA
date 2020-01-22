@@ -328,7 +328,7 @@ namespace ERP_GMEDINA.Controllers
 
                             }//CLOSE ELSE
                         }//CLOSE FOR
-
+                        System.IO.File.Delete(path);
                     }//CLOSE IF
                     else
                     {
