@@ -191,7 +191,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Ingreso</Value>
+                              <Value>Descripción Ingreso</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -223,7 +223,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Planilla</Value>
+                              <Value>Descripción Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -723,6 +723,7 @@
                               <Value>=Fields!hip_TotalPagar.Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -739,6 +740,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -773,10 +775,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
-        <Top>0.10583cm</Top>
+        <Top>0.17639cm</Top>
         <Left>0.81509cm</Left>
         <Height>1.2cm</Height>
-        <Width>27.57101cm</Width>
+        <Width>27.571cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -784,7 +786,7 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>1.83561cm</Top>
+        <Top>2.8161cm</Top>
         <Left>1.28081cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
@@ -819,7 +821,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>2.012cm</Top>
+        <Top>2.99249cm</Top>
         <Left>4.64003cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
@@ -835,7 +837,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.02835in</Height>
+    <Height>1.41437in</Height>
     <Style />
   </Body>
   <Width>11.69964in</Width>
