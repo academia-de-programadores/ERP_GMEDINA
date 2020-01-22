@@ -58,7 +58,7 @@ function llenarTabla() {
                         ID: value.nac_Id,
                         "Número": value.nac_Id,
                         Estado: value.nac_Estado ? "Activo" : "Inactivo",
-                        Descripcion: value.nac_Descripcion,
+                        "Descripción": value.nac_Descripcion,
                         Acciones: Acciones
                     })
                 }
