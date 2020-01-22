@@ -85,7 +85,7 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
-        //Listo
+        //pendiente
 		#region ingresos dinamico
 
 		//parametros del reporte
@@ -125,18 +125,6 @@ namespace ERP_GMEDINA.Controllers
 			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\IngresosRPT.rdlc";
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_Ingresos_RPT"]));
 
-			//Setiar parametros del reporte para asignar logo y usuario crea del reporte.
-			reportViewer.LocalReport.EnableExternalImages = true;
-			List<ReportParameter> parameters = new List<ReportParameter>();
-			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
-
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-			string nombreUsuario = oUsuario.usu_NombreUsuario;
-			parameters.Add(new ReportParameter("usuario", nombreUsuario));
-
-			reportViewer.LocalReport.SetParameters(parameters);
-			reportViewer.LocalReport.Refresh();
-
 			ViewBag.ReportViewer = reportViewer;
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Ingresos = new SelectList(db.tbCatalogoDeIngresos.Where(o => o.cin_Activo == true), "cin_IdIngreso", "cin_DescripcionIngreso");
@@ -148,7 +136,6 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		//Listo
 		#region reportes varios dinamico
 
 		//parametros del reporte
@@ -228,19 +215,6 @@ namespace ERP_GMEDINA.Controllers
 			SqlDataAdapter adp = new SqlDataAdapter(command);
 			adp.Fill(ds, "tbHistorialDePago");
 			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["tbHistorialDePago"]));
-
-			//Setiar parametros del reporte para asignar logo y usuario crea del reporte.
-			reportViewer.LocalReport.EnableExternalImages = true;
-			List<ReportParameter> parameters = new List<ReportParameter>();
-			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
-
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-			string nombreUsuario = oUsuario.usu_NombreUsuario;
-			parameters.Add(new ReportParameter("usuario", nombreUsuario));
-
-			reportViewer.LocalReport.SetParameters(parameters);
-			reportViewer.LocalReport.Refresh();
-
 			ViewBag.ReportViewer = reportViewer;
 			ViewBag.Encabezado = encabezadoReporte;
 			//DDLS
@@ -366,12 +340,22 @@ namespace ERP_GMEDINA.Controllers
 		}
         #endregion
 
-		//Listo
         #region instituciones financieras
 
         //parametros del reporte
         public ActionResult InstitucionesFinancierasParametros()
-        {          
+        {
+            var empleados =
+            from Emp in db.tbEmpleados
+            join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
+            where Emp.emp_Estado == true
+            select new
+            {
+                emp_Id = Emp.emp_Id,
+                Nombres = Per.per_Nombres + " " + Per.per_Apellidos
+            };
+
+            ViewBag.Empleados = new SelectList(empleados, "emp_Id", "Nombres");
             ViewBag.Instituciones = new SelectList(db.tbInstitucionesFinancieras.Where(o => o.insf_Activo == true), "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
             ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
@@ -379,7 +363,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         //parametros del reporte
-        public ActionResult InstitucionesFinancierasParametros( int? insf_IdInstitucionFinanciera, int cpla_IdPlanilla, DateTime deif_FechaCrea)
+        public ActionResult InstitucionesFinancierasParametros(int? emp_Id, int? insf_IdInstitucionFinanciera, int cpla_IdPlanilla)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -392,9 +376,9 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM Plani.V_ReporteInstitucionesFinancieras_RPT where deif_FechaCrea = @deif_FechaCrea and insf_IdInstitucionFinanciera = @insf_IdInstitucionFinanciera and cpla_IdPlanilla = @cpla_IdPlanilla";
+            command.CommandText = "SELECT * FROM Plani.V_ReporteInstitucionesFinancieras_RPT where emp_Id = @emp_Id and insf_IdInstitucionFinanciera = @insf_IdInstitucionFinanciera and cpla_IdPlanilla = @cpla_IdPlanilla";
             command.Parameters.AddWithValue("@cpla_IdPlanilla", SqlDbType.Int).Value = cpla_IdPlanilla;
-            command.Parameters.AddWithValue("@deif_FechaCrea", SqlDbType.DateTime).Value = deif_FechaCrea;
+            command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
             command.Parameters.AddWithValue("@insf_IdInstitucionFinanciera", SqlDbType.Int).Value = insf_IdInstitucionFinanciera;
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
@@ -404,23 +388,20 @@ namespace ERP_GMEDINA.Controllers
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\InstitucionesFinancierasRPT.rdlc";
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["tbInstitucionesFinancieras"]));
 
-			//Setiar parametros del reporte para asignar logo y usuario crea del reporte.
-			reportViewer.LocalReport.EnableExternalImages = true;
-			List<ReportParameter> parameters = new List<ReportParameter>();
-			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
-
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-			string nombreUsuario = oUsuario.usu_NombreUsuario;
-			parameters.Add(new ReportParameter("usuario", nombreUsuario));
-
-			reportViewer.LocalReport.SetParameters(parameters);
-			reportViewer.LocalReport.Refresh();
-
-
-			ViewBag.ReportViewer = reportViewer;            
+            ViewBag.ReportViewer = reportViewer;            
             conx.Close();
 
-          
+            var empleados =
+            from Emp in db.tbEmpleados
+            join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
+            where Emp.emp_Estado == true
+            select new
+            {
+                emp_Id = Emp.emp_Id,
+                Nombres = Per.per_Nombres + " " + Per.per_Apellidos
+            };
+
+            ViewBag.Empleados = new SelectList(empleados, "emp_Id", "Nombres");
             ViewBag.Instituciones = new SelectList(db.tbInstitucionesFinancieras.Where(o => o.insf_Activo == true), "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
             ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
