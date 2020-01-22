@@ -766,6 +766,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -957,7 +958,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.95601cm</Height>
+      <Height>1.95602cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -988,7 +989,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>0.80859cm</Top>
+          <Top>0.8086cm</Top>
           <Left>24.47055cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
@@ -1023,7 +1024,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>-0.00001cm</Top>
           <Left>20.79284cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>

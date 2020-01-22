@@ -559,6 +559,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -569,7 +570,7 @@
         <Top>0.03528cm</Top>
         <Left>1.12957cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.42355cm</Width>
+        <Width>25.42352cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
