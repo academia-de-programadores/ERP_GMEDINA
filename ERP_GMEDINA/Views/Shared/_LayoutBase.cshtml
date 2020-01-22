@@ -53,14 +53,40 @@
     @Scripts.Render("~/plugins/slimScroll")
     @Scripts.Render("~/bundles/inspinia")
     @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/plugins/mascarasDeEntrada")
     @Scripts.Render("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations")
 
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
-	<script>
+    <script>
 		$('#menuDesplegar').click(function () {
 			$('#menulateral').removeClass("custom-scrollbar");
 		});
+
+
+		$(document).ready(function () {
+
+        $(".MascaraCantidad").inputmask("decimal",{
+          alias:'numeric',
+          groupSeparator: '',
+          digits: 2,
+          digitsOptional: false,
+          placeholder: '0',
+          radixPoint: ".",
+          autoGroup: true
+        });
+
+        $(".MascaraCantidadIndex").inputmask("decimal", {
+            alias: 'numeric',
+            groupSeparator: ',',
+            digits: 2,
+            digitsOptional: false,
+            placeholder: '0',
+            radixPoint: ".",
+            autoGroup: true
+        });
+
+      });
 	</script>
 </body>
 </html>

@@ -551,6 +551,10 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/FechaPlanilla.js"));
             #endregion
 
+            //mascaras de entrada
+            bundles.Add(new ScriptBundle("~/plugins/mascarasDeEntrada").Include(
+                 "~/Scripts/plugins/mascarasDeEntrada/js/jquery.inputmask.bundle.js"));
+
             //DataAnnotations
             bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
                 "~/Scripts/Scripts_Base/jquery.validate.js",

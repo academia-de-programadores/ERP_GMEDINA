@@ -1181,6 +1181,12 @@
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
     <Content Include="Scripts\app\General\Periodos.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
+    <Content Include="Scripts\plugins\mascarasDeEntrada\js\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\plugins\mascarasDeEntrada\js\jquery.inputmask.custom.extensions.js" />
+    <Content Include="Scripts\plugins\mascarasDeEntrada\js\jquery.inputmask.date.extensions.js" />
+    <Content Include="Scripts\plugins\mascarasDeEntrada\js\jquery.inputmask.extensions.js" />
+    <Content Include="Scripts\plugins\mascarasDeEntrada\js\jquery.inputmask.js" />
+    <Content Include="Scripts\plugins\mascarasDeEntrada\js\jquery.inputmask.numeric.extensions.js" />
     <Content Include="Scripts\Scripts_Base\Planilla.js" />
     <Content Include="Scripts\app\General\Preaviso.js" />
     <Content Include="Scripts\app\General\RAPRPT.js" />
