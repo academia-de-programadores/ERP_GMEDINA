@@ -1,4 +1,4 @@
-﻿////FUNCION GENERICA PARA REUTILIZAR AJAX
+﻿// funcion generica de AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -11,7 +11,7 @@ function _ajax(params, uri, type, callback) {
 }
 var InactivarID = 0;
 
-//OBTENER SCRIPT DE FORMATEO DE FECHA
+// script formatos fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
         console.log(textStatus);
@@ -20,7 +20,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
         console.log("No se pudo recuperar Script SerializeDate");
     });
 
-// EVITAR POSTBACK DE FORMULARIOS
+// evitar postbacks
 $("#frmEditAcumuladosISR").submit(function (e) {
     e.preventDefault();
 });
@@ -28,7 +28,7 @@ $("#frmAcumuladosISRCreate").submit(function (e) {
     e.preventDefault();
 });
 
-//FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
+// Cargar grid
 function cargarGridAcumuladosISR() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
@@ -73,35 +73,87 @@ function cargarGridAcumuladosISR() {
     FullBody();
 }
 
-//Modal Create Techos Deducciones
+
+// ------ validaciones create ------ //
+
+// descripcion  
+$('#Crear #aisr_Descripcion').keyup(function () {
+
+    var descripcion = $("#Crear #aisr_Descripcion").val();
+
+    if (descripcion.trim() != '') {
+
+        $('#AsteriscoDescripcionAISR').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoDescripcionAISR').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+    }
+
+    if (isNaN($("#Crear #aisr_Descripcion").val()) == false) {
+
+        $('#AsteriscoDescripcionAISR').addClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+    }
+    else if (isNaN($("#Crear #aisr_Descripcion").val()) == true && $("#Crear #aisr_Descripcion").val().trim() == '') {
+        $('#AsteriscoDescripcionAISR').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+    }
+});
+
+// monto 
+$('#Crear #aisr_Monto').keyup(function () {
+
+    if (parseInt($("#Crear #aisr_Monto").val()) > 0) {
+
+        $('#AsteriscoMontoAISR').removeClass('text-danger');
+        $("#Crear #validation_MontoMayorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoMontoAISR').addClass("text-danger");
+        $("#Crear #validation_MontoMayorACero").css('display', '');
+    }
+});
+
+
+//Modal create techos deducciones
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
-    //OCULTAR SPAN - VALIDACION DECIMALES
-    $("#Crear #Validation_decimal").css("display", "none");
-    //DESBLOQUEAR EL BOTON
-    $('#btnCreateAcumuladosISR').attr('disabled', false);
-    //MOSTRAR EL MODAL DE AGREGAR
+
+    // * descripcion 
+    $('#AsteriscoDescripcionAISR').removeClass('text-danger');
+
+    // mesanje descripcion requerida
+    $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+
+    // mesanje descripcion no es numerico
+    $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+
+    // * monto
+    $('#AsteriscoMontoAISR').removeClass('text-danger');
+
+    // mensaje monto debe ser mayo que cero
+    $("#Crear #validation_MontoMayorACero").css('display', 'none');
+
+    // vaciar cajas de texto
     $('#Crear input[type=text], input[type=number]').val('');
+
+    //mostrar modal
     $("#AgregarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
 });
 
-//BOTON CERRAR AGREGAR
-$("#btnCerrarCrear").click(function () {
-    $("#Crear #Validation_descripcion").css("display", "none");
-    $("#Crear #Validation_descripcion2").css("display", "none");
-    $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
-    $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
-});
 
 //FUNCION: CREAR EL NUEVO REGISTRO TECHOS DEDUCCIONES
 $('#btnCreateAcumuladosISR').click(function () {
-    var aisr_Descripcion = $("#Crear #aisr_Descripcion").val();
+    var aisr_Descripcion = $("#Crear #aisr_Descripcion").val().trim();
     var aisr_Monto = $("#Crear #aisr_Monto").val();
     var ModelState = true;
     var ModelState2 = true;
     //VALIDAR DECIMALES
     var Montoe = aisr_Monto.split(".");
 
-    if (aisr_Descripcion == "" || aisr_Descripcion == " " || aisr_Descripcion == null || isNaN(aisr_Descripcion) == false) {
+    // descripcion requerida
+    if (aisr_Descripcion == '' || aisr_Descripcion == null || isNaN(aisr_Descripcion) == true) {
         $("#Crear #Validation_descripcion").css("display", "block");
         $("#Crear #AsteriscoDescripcionAISR").addClass("text-danger");
         ModelState = false;
