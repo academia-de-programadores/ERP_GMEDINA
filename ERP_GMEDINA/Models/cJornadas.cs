@@ -23,14 +23,14 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Estado")]
         public bool jor_Estado { get; set; }
 
-        [Display(Name = "Razon Inactivo")]
+        [Display(Name = "Razón Inactivo")]
 
         public string jor_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario crea")]
         public int jor_UsuarioCrea { get; set; }
 
-        [Display(Name = "Fecha creacion")]
+        [Display(Name = "Fecha creación")]
         public System.DateTime jor_FechaCrea { get; set; }
 
         [Display(Name = "Usuario Modifica")]
