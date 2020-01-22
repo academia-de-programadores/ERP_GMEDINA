@@ -23,6 +23,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal> hidp_Total { get; set; }
         public int cpla_IdPlanilla { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
+        public string nombreEmpleado { get; set; }
+        public string identidadEmpleado { get; set; }
         public Nullable<int> TotalDeducciones { get; set; }
     }
 }

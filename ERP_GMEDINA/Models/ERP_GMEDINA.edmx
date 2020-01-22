@@ -2097,6 +2097,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeduccion
             <PropertyRef Name="cde_DescripcionDeduccion" />
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
@@ -2107,6 +2109,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeduccion
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="TotalDeducciones" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
@@ -2117,6 +2121,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' 
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="cin_DescripcionIngreso" />
             <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
             <PropertyRef Name="cpla_IdPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
@@ -2124,6 +2130,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' 
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
@@ -6872,6 +6880,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
     [V_Plani_HistorialDeducciones].[hidp_Total] AS [hidp_Total], 
     [V_Plani_HistorialDeducciones].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
     [V_Plani_HistorialDeducciones].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Plani_HistorialDeducciones].[nombreEmpleado] AS [nombreEmpleado], 
+    [V_Plani_HistorialDeducciones].[identidadEmpleado] AS [identidadEmpleado], 
     [V_Plani_HistorialDeducciones].[TotalDeducciones] AS [TotalDeducciones]
     FROM [Plani].[V_Plani_HistorialDeducciones] AS [V_Plani_HistorialDeducciones]</DefiningQuery>
           </EntitySet>
@@ -6882,6 +6892,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
     [V_Plani_HistorialIngreso].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
     [V_Plani_HistorialIngreso].[hip_TotalPagar] AS [hip_TotalPagar], 
     [V_Plani_HistorialIngreso].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Plani_HistorialIngreso].[nombreEmpleado] AS [nombreEmpleado], 
+    [V_Plani_HistorialIngreso].[identidadEmpleado] AS [identidadEmpleado], 
     [V_Plani_HistorialIngreso].[cpla_IdPlanilla] AS [cpla_IdPlanilla]
     FROM [Plani].[V_Plani_HistorialIngreso] AS [V_Plani_HistorialIngreso]</DefiningQuery>
           </EntitySet>
@@ -16351,6 +16363,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <PropertyRef Name="cde_DescripcionDeduccion" />
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
@@ -16361,6 +16375,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="TotalDeducciones" Type="Int32" />
         </EntityType>
         <EntityType Name="V_Plani_HistorialIngreso">
@@ -16369,6 +16385,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="cin_DescripcionIngreso" />
             <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="nombreEmpleado" />
+            <PropertyRef Name="identidadEmpleado" />
             <PropertyRef Name="cpla_IdPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
@@ -16376,6 +16394,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
@@ -19215,6 +19235,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialDeducciones">
               <MappingFragment StoreEntitySet="V_Plani_HistorialDeducciones">
                 <ScalarProperty Name="TotalDeducciones" ColumnName="TotalDeducciones" />
+                <ScalarProperty Name="identidadEmpleado" ColumnName="identidadEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
                 <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
                 <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
@@ -19231,6 +19253,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialIngreso">
               <MappingFragment StoreEntitySet="V_Plani_HistorialIngreso">
                 <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="identidadEmpleado" ColumnName="identidadEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
                 <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
                 <ScalarProperty Name="hip_TotalPagar" ColumnName="hip_TotalPagar" />
                 <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />

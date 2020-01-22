@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\GitHub\Academia\Vespertina\Proyecto_ERP_GMEDINA\ERP_GMEDINA\Models\ERP_GMEDINA.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\GitHub\Academia\Vespertina\2daGenVespertina\ERP_GMEDINA\Models\ERP_GMEDINA.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.
