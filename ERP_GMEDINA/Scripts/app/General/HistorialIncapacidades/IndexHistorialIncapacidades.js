@@ -14,7 +14,7 @@ function format(obj) {
         + '<thead>'
         + '<tr> <th> Número   </th>'
         + '<th>Incapacidad</th>'
-        + '<th>Dias de retiro</th>'
+        + '<th>Días de retiro</th>'
         + '<th>Centro Medico</th> '
          + '<th>Diagnostico</th> '
          + '<th>Fecha Inicio</th> '
@@ -232,7 +232,6 @@ function tablaEditar(ID) {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    debugger
     if (data != null) {
         data = JSON.stringify({ tbHistorialIncapacidades: data });
         _ajax(data,
@@ -323,7 +322,7 @@ $("#btnActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hinc_Id"]);
-                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                    
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
