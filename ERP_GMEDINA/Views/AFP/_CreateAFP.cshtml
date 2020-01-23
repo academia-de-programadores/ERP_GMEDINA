@@ -12,53 +12,54 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_Descripcion)<span id="ast1">*</span>
+                    @Html.LabelFor(model => model.afp_Descripcion)<span id="asiteriscoDescripcion">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @id = "afp_Descripcion" } })
-                    @Html.ValidationMessageFor(model => model.afp_Descripcion, "", new { @class = "text-danger", @id = "validation1" })                </div>
+                    <span class="text-danger" id="validation_DescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                    <span class="text-danger" id="validation_DescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
+                </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="ast2">*</span>
+                    @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="astericosAporteMinimoLps">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control", @id = "afp_AporteMinimoLps", @min = 0.01, @max = 9999999999.99 } })
-                    @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger", @id = "validation2" })
-                    <label class="text-danger" id="validation2d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
+                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off", @id = "afp_AporteMinimoLps", @min = 0.01, @max = 9999999999.99 } })
+                    <span class="text-danger" id="validation_AporteMinimoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAporte)<span id="ast3">*</span>
+                    @Html.LabelFor(model => model.afp_InteresAporte)<span id="astericoInteresAporte">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAporte", @min = 0.01, @max = 100.00 } })
-                    @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger", @id = "validation3" })
-                    <label class="text-danger" id="validation3d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
+                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off",  @id = "afp_InteresAporte", @min = 0.00, @max = 100.00 } })
+                    <span class="text-danger" id="validation_InteresAporteMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser menor a cero</span>
+                    <span class="text-danger" id="validation_InteresAporteMenorACien" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser mayor a cién</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAnual)<span id="ast4">*</span>
+                    @Html.LabelFor(model => model.afp_InteresAnual)<span id="astericosInteresAnual">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAnual", @min = 0.01, @max = 100.00 } })
-                    @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger", @id = "validation4" })
-                    <label class="text-danger" id="validation4d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
+                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off", @id = "afp_InteresAnual", @min = 0.00, @max = 100.00 } })
+                    <span class="text-danger" id="validation_InteresAnualMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser menor a cero</span>
+                    <span class="text-danger" id="validation_InteresAnualMenorACien" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser mayor a cién</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.tde_IdTipoDedu)<span id="ast5">*</span>
+                    @Html.LabelFor(model => model.tde_IdTipoDedu)<span id="astericosTipoDeduccion">*</span>
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                    <label class="text-danger" id="validation5" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Tipo Deducción es Requerido.</label>
+                    <span class="text-danger" id="validation_TipoDeduccionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                 </div>
             </div>
 
@@ -68,7 +69,6 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>
             <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroAFP">Guardar</button>
-            <div style="display:none" class="btn pull-left" id="cargandoCrear"></div>
         </div>
 }
 

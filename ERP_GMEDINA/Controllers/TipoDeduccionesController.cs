@@ -26,12 +26,10 @@ namespace ERP_GMEDINA.Controllers
         #region GET: DATA
         public ActionResult GetData()
         {
+            // evitar refernecias circulares
             db.Configuration.ProxyCreationEnabled = false;
-			//var tbTipoDeducciones = db.tbTipoDeduccion.ToList().Where(p => p.tde_Activo == true);
-
-			//var tbPidoDedu = from d in db.tbTipoDeduccion
-			//                 where
-
+            
+            // obtener data para refrescar datatable
 			var tbTipoDeducciones = db.tbTipoDeduccion
 				.Select(c => new
 				{
@@ -45,90 +43,85 @@ namespace ERP_GMEDINA.Controllers
 					tde_FechaModifica = c.tde_FechaModifica,
 					tde_IdTipoDedu = c.tde_IdTipoDedu,
 					tde_Activo = c.tde_Activo
-				});
-                //.OrderByDescending(c => c.tde_FechaCrea).ToList();
+				})
+                .OrderBy(c => c.tde_FechaCrea)
+                .ToList();
 
+            // retornar data
             return new JsonResult { Data = tbTipoDeducciones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
 
         #region POST: CREATE
 
-        // POST: TipoDeduccion/Create REALIZAR LA INSERCIÓN
-        // GET: TipoDeducciones/Create
         [HttpPost]
         public ActionResult Create([Bind(Include = "tde_Descripcion, tde_UsuarioCrea, tde_FechaCrea")] tbTipoDeduccion tbTipoDeduccion)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            // data de auditoria
             tbTipoDeduccion.tde_UsuarioCrea = 1;
             tbTipoDeduccion.tde_FechaCrea = DateTime.Now;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            
+            // vairables de resultados
             string response = String.Empty;
             IEnumerable<object> listTipoDeduccion = null;
             String MessageError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+            
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar PA
                     listTipoDeduccion = db.UDP_Plani_tbTipoDeduccion_Insert(tbTipoDeduccion.tde_Descripcion,
                                                                             tbTipoDeduccion.tde_UsuarioCrea,
                                                                             tbTipoDeduccion.tde_FechaCrea);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP                                                  
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbTipoDeduccion_Insert_Result resultado in listTipoDeduccion)
                         MessageError = Convert.ToString(resultado);
 
                     if (MessageError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                    response = "error" + Ex.Message.ToString();
+                    response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
-            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
-            ViewBag.tde_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoDeduccion.tde_UsuarioCrea);
-            ViewBag.tde_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoDeduccion.tde_UsuarioModifica);
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region GET: Editar 
-        // GET: TipoDeducciones/Edit/5
         public ActionResult Edit(int? id)
         {
+            // validar si se recibió el id
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new JsonResult { Data = "Error", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
+
+            // obtener registro con el id recibido
             var tbTipoDeduccion = db.tbTipoDeduccion.Where(d => d.tde_IdTipoDedu == id)
                         .Select(c => new { tde_Descripcion = c.tde_Descripcion, tde_IdTipoDedu = c.tde_IdTipoDedu, tde_UsuarioCrea = c.tde_UsuarioCrea, tde_FechaCrea = c.tde_FechaCrea, tde_UsuarioModifica = c.tde_UsuarioModifica, tde_FechaModifica = c.tde_FechaModifica, tde_Activo = c.tde_Activo })
                         .ToList();
 
-            //db.Configuration.ProxyCreationEnabled = false;
-            //tbTipoDeduccion tbTipoDeduccion = db.tbTipoDeduccion.Find(id);
-            //RETORNAR JSON AL LADO DEL CLIENTE              
-            if (tbTipoDeduccion == null)
-            {
-                return HttpNotFound();
-            }
-            //ViewBag.tde_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoDeduccion.tde_UsuarioCrea);
-            //ViewBag.tde_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoDeduccion.tde_UsuarioModifica);
+            // retornar registro en formato JSON
             return new JsonResult { Data = tbTipoDeduccion, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
@@ -136,6 +129,7 @@ namespace ERP_GMEDINA.Controllers
         #region GET: Details
         public JsonResult Details(int? ID)
         {
+            // obtener registro con el ID recibido
             var tbTechosDeduccionesJSON = from tbTipoDeducciones in db.tbTipoDeduccion
                                           where tbTipoDeducciones.tde_IdTipoDedu == ID
                                           select new
@@ -152,73 +146,68 @@ namespace ERP_GMEDINA.Controllers
                                               tde_FechaModifica = tbTipoDeducciones.tde_FechaModifica
                                           };
 
+            // evitar referencias circulares
             db.Configuration.ProxyCreationEnabled = false;
 
+            // retornar registro en formato JSON
             return Json(tbTechosDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
 
         #region POST: Editar
-        // POST: TipoDeducciones/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tde_IdTipoDedu,tde_Descripcion,tde_UsuarioCrea,tde_FechaCrea,tde_UsuarioModifica,tde_FechaModifica,tde_Activo")] tbTipoDeduccion tbTipoDeduccion)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
+            // data de auditoria
             tbTipoDeduccion.tde_UsuarioCrea = 1;
             tbTipoDeduccion.tde_FechaCrea = DateTime.Now;
 
-            //LLENAR DATA DE AUDITORIA
-            tbTipoDeduccion.tde_UsuarioCrea = 1;
-            tbTipoDeduccion.tde_FechaCrea = DateTime.Now;
-
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            // vairable de resultados
             string response = String.Empty;
             IEnumerable<object> listTipoDeduccion = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-
+                    // ejecutar PA
                     listTipoDeduccion = db.UDP_Plani_tbTipoDeduccion_Update(tbTipoDeduccion.tde_IdTipoDedu,
                                                                             tbTipoDeduccion.tde_Descripcion,
                                                                             1,
                                                                             DateTime.Now);
 
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbTipoDeduccion_Update_Result resultado in listTipoDeduccion)
                         MensajeError = resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    Ex.Message.ToString();
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                     response = "error";
                 }
-                //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador");
                 response = "error";
             }
-            ViewBag.tde_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoDeduccion.tde_UsuarioCrea);
-            ViewBag.tde_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoDeduccion.tde_UsuarioModifica);
-            // RETORNAR MENSAJE AL LADO DEL CLIENTE
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -226,30 +215,41 @@ namespace ERP_GMEDINA.Controllers
         #region Inactivar
         public JsonResult Inactivar(int? ID)
         {
+            // validar si se recibó el ID
+            if (ID == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+
+            // variables de resultado 
             string response = String.Empty;
             IEnumerable<object> listTipoDeduccion = null;
             string MensajeError = "";
+
             try
             {
+                // ejecutar PA
                 listTipoDeduccion = db.UDP_Plani_tbTipoDeduccion_Inactivar(ID, 1, DateTime.Now);
 
+                // obtener resultado del PA
                 foreach (UDP_Plani_tbTipoDeduccion_Inactivar_Result resultado in listTipoDeduccion.ToList())
                     MensajeError = resultado.MensajeError;
 
                 if (MensajeError.StartsWith("-1"))
                 {
+                    // el PA falló
                     ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador");
                     response = "error";
                 }
             }
             catch (Exception Ex)
             {
-                Ex.Message.ToString();
-                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // se generó una excepción
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
-            db.Configuration.ProxyCreationEnabled = false;
+
+            // retornar resultado del proceso
             tbTipoDeduccion tbTipoDeduccionesJSON = db.tbTipoDeduccion.Find(ID);
             return Json(tbTipoDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
@@ -258,31 +258,40 @@ namespace ERP_GMEDINA.Controllers
         #region Activar
         public JsonResult Activar(int? ID)
         {
+            //validar si se recibió el ID 
+            if (ID == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+
+            // variables de resultado
             string response = String.Empty;
             IEnumerable<object> listTipoDeduccion = null;
             string MensajeError = "";
+
             try
             {
+                // ejecutar PA
                 listTipoDeduccion = db.UDP_Plani_tbTipoDeduccion_Activar(ID, 1, DateTime.Now);
 
+                // obtener resultado del PA
                 foreach (UDP_Plani_tbTipoDeduccion_Activar_Result resultado in listTipoDeduccion.ToList())
                     MensajeError = resultado.MensajeError;
 
                 if (MensajeError.StartsWith("-1"))
                 {
+                    // el PA falló
                     ModelState.AddModelError("", "No se pudo activar el registro, contacte al administrador");
                     response = "error";
                 }
             }
             catch (Exception Ex)
             {
-                Ex.Message.ToString();
-                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                ModelState.AddModelError("", "No se pudo activar el registro, contacte al administrador.");
+                // se generó una excepción
                 response = "error";
             }
-            db.Configuration.ProxyCreationEnabled = false;
-            //tbTipoDeduccion tbTipoDeduccionesJSON = db.tbTipoDeduccion.Find(ID);
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion

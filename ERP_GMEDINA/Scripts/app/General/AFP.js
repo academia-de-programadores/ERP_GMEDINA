@@ -1,23 +1,4 @@
-﻿$.getScript("../Scripts/app/General/SerializeDate.js")
-    .done(function (script, textStatus) {
-        console.log(textStatus);
-    })
-    .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
-    });
-
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data) {
-            callback(data);
-        }
-    });
-}
-
-//FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
+﻿// cargar grid, refrescar datatable
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
@@ -52,11 +33,11 @@ function cargarGridDeducciones() {
                 //agregar row al datatble
                 $('#tblAFP').dataTable().fnAddData([
                     ListaAFP[i].afp_Id,
-                    ListaAFP[i].afp_Descripcion,  
+                    ListaAFP[i].afp_Descripcion,
                     (ListaAFP[i].afp_AporteMinimoLps % 1 == 0) ? ListaAFP[i].afp_AporteMinimoLps + ".00" : ListaAFP[i].afp_AporteMinimoLps,
                     (ListaAFP[i].afp_InteresAporte % 1 == 0) ? ListaAFP[i].afp_InteresAporte + ".00" : ListaAFP[i].afp_InteresAporte,
                     (ListaAFP[i].afp_InteresAnual % 1 == 0) ? ListaAFP[i].afp_InteresAnual + ".00" : ListaAFP[i].afp_InteresAnual,
-                    ListaAFP[i].tde_Descripcion,     
+                    ListaAFP[i].tde_Descripcion,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
@@ -66,28 +47,45 @@ function cargarGridDeducciones() {
 }
 
 
-//Activar
-$(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
-    document.getElementById("btnActivarRegistroAFP").disabled = false;
-    var ID = $(this).data('id');
+// --- activar --- //
 
-    var ID = $(this).attr('afpid');
+var activarID = 0;
+
+// activar 1
+$(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
+
+    // habilitar boton inactivar
+    $("#btnActivarRegistroAFP").attr('disabled', false);
+
+    // obtener ID
+    var ID = $(this).data('id');
+    activarID = ID;
+
+    // guardar ID en local storage
     localStorage.setItem('id', ID);
-    //Mostrar el Modal
+
+    //mostrar el Modal activar
     $("#ActivarAFP").modal();
 });
 
+// activar 2
 $("#btnActivarRegistroAFP").click(function () {
-    document.getElementById("btnActivarRegistroAFP").disabled = true;
-    let ID = localStorage.getItem('id')
+
+    // inhabilitar el boton
+    $("#btnActivarRegistroAFP").attr('disabled',false);
+    let ID = activarID;
+
 
     $.ajax({
         url: "/AFP/Activar",
         method: "POST",
         data: { id: ID }
-    }).done(function (data) {
+    })
+    .done(function (data) {
+
         $("#ActivarAFP").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+
+        // validar errores
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
@@ -95,60 +93,32 @@ $("#btnActivarRegistroAFP").click(function () {
             });
         }
         else {
+
+            // refrescar datatable
             cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
+            
+            // mensaje de exito
             iziToast.success({
                 title: 'Exito',
                 message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
+    activarID = 0;
 
 });
 
+// --- crear --- //
+
+// cerrar modal create
 $("#btnCerrarCrear").click(function () {
-    document.getElementById("btnCreateRegistroAFP").disabled = false;
-    $("#afp_Descripcion").val('');
-    $("#afp_AporteMinimoLps").val('');
-    $("#afp_InteresAporte").val('');
-    $("#afp_InteresAnual").val('');
-    $("#Crear #tde_IdTipoDedu").val("0");
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation2d").css("display", "none");
-    $("#validation3d").css("display", "none");
-    $("#validation4d").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#Crear #ast1").css("color", "black");
-    $("#Crear #ast2").css("color", "black");
-    $("#Crear #ast3").css("color", "black");
-    $("#Crear #ast4").css("color", "black");
-    $("#Crear #ast5").css("color", "black");
+
     $("#AgregarAFP").modal('hide');
 });
 
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-const btnGuardar = $('#btnCreateRegistroAFP')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
+// crear 1 mostrar modal
 $(document).on("click", "#btnAgregarAFP", function () {
-    document.getElementById("btnCreateRegistroAFP").disabled = false;
+
     //llenar DDL
     $.ajax({
         url: "/AFP/EditGetTipoDeduccionDDL",
@@ -156,152 +126,247 @@ $(document).on("click", "#btnAgregarAFP", function () {
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
+
+            // limpiar DDL
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+
+            // setear DDL
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
 
-    $("#afp_Descripcion").val('');
-    $("#afp_AporteMinimoLps").val('');
-    $("#afp_InteresAporte").val('');
-    $("#afp_InteresAnual").val('');
-    $("#Crear #tde_IdTipoDedu").val("0");
+    //--
+    // * descripcion 
+    $('#asiteriscoDescripcion').removeClass('text-danger');
+
+    // mesanje descripcion requerida
+    $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+
+    // mesanje descripcion no es numerico
+    $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+
+    //--
+    // * aporte minimo LPIS
+    $('#astericosAporteMinimoLps').removeClass('text-danger');
+
+    // mensaje aporte minimo debe ser mayor que cero
+    $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
+
+    //--
+    // * interes aporte 
+    $('#astericoInteresAporte').removeClass('text-danger');
+
+    // mensaje interes aporte no puede ser menor que cero
+    $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
+
+    // mensaje interes aporte no puede ser mayor que cién
+    $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
+
+    // -- 
+    // * interes anual 
+    $('#astericosInteresAnual').removeClass('text-danger');
+
+    // mensaje interes anual no puede ser menor que cero
+    $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
+
+    // mensaje interes anual no puede ser mayor que cién
+    $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
+
+    //--
+    // * tipo de deduccion
+    $('#astericosTipoDeduccion').removeClass('text-danger');
+
+    // mensaje interes aporte no puede ser menor que cero
+    $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+
+
+    //--
+
+    // vaciar cajas de texto
+    $('#Crear input[type=text], input[type=number]').val('');
+
+    // habilitar boton 
+    $("#btnCreateRegistroAFP").attr('disabled', false);
+
+    //mostrar modal
+    $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
 
 });
 
-var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
-//FUNCION: CREAR EL NUEVO REGISTRO
+// crear 2 ejecutar
 $('#btnCreateRegistroAFP').click(function () {
-    //Para que no entre directamente a hacer la peticion o la acción al servidor
-    var TOF = true;
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-    var val1 = $("#Crear #afp_Descripcion").val();
-    var val2 = $("#Crear #afp_AporteMinimoLps").val();
-    var val3 = $("#Crear #afp_InteresAporte").val();
-    var val4 = $("#Crear #afp_InteresAnual").val();
-    var val5 = $("#Crear #tde_IdTipoDedu").val();
 
-    if (val1 == "" || val1 == null) {
-        $("#Crear #validation1").css("display", "");
-        $("#Crear #ast1").css("color", "red");
-        TOF = false;
+    // deshabilitar el boton
+    $("#btnCreateRegistroAFP").attr('disabled', true);
+
+    var modalState = true;
+    var descripcion = $("#Crear #afp_Descripcion").val();
+
+    // validar descripción
+    if (descripcion.trim() != '') {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
     }
     else {
-        $("#Crear #validation1").css("display", "none");
-        $("#Crear #ast1").css("color", "black");
-    }
-    //--
-    if (val2 != "" || val2 != null || val2 != undefined) {
-        $("#Crear #validation2").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
-    }
-    else {
-        $("#Crear #validation2").css("display", "");
-        $("#Crear #validation2d").css("display", "none");
-        $("#Crear #ast2").css("color", "red");
-        TOF = false;
-    }
-    if (expreg.test(val2)) {
-        $("#Crear #validation2d").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
-    }
-    else {
-        $("#Crear #validation2d").css("display", "");
-        $("#Crear #ast2").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (val3 != "" || val3 != null || val3 != undefined) {
-        $("#Crear #validation3").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
-    }
-    else {
-        $("#Crear #validation3").css("display", "");
-        $("#Crear #validation3d").css("display", "none");
-        $("#Crear #ast3").css("color", "red");
-        TOF = false;
-    }
-    if (expreg.test(val3)) {
-        $("#Crear #validation3d").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
-    }
-    else {
-        $("#Crear #validation3d").css("display", "");
-        $("#Crear #ast3").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (val4 != "" || val4 != null || val4 != undefined) {
-        $("#Crear #validation4").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
-    }
-    else {
-        $("#Crear #validation4").css("display", "");
-        $("#Crear #validation4d").css("display", "none");
-        $("#Crear #ast4").css("color", "red");
-        TOF = false;
-    }
-    if (expreg.test(val4)) {
-        $("#Crear #validation4d").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
-    }
-    else {
-        $("#Crear #validation4d").css("display", "");
-        $("#Crear #ast4").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (val5 == "" || val5 == 0 || val5 == "0" || val5 == null) {
-        $("#Crear #validation5").css("display", "");
-        $("#Crear #ast5").css("color", "red");
-        TOF = false;
-    }
-    else {
-        $("#Crear #validation5").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+        modalState = false;
     }
 
-    if (TOF == true) {
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
 
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+        modalState = false;
+    }
+    // si no es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
+    //--
+
+    // validar aporte minimo lps
+
+    // si es menor o igual que cero
+    if (parseInt($("#Crear #afp_AporteMinimoLps").val()) > 0) {
+
+        $('#astericosAporteMinimoLps').removeClass('text-danger');
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
+    }
+    else {
+        $('#astericosAporteMinimoLps').addClass("text-danger");
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', '');
+        modalState = false;
+    }
+
+    //--
+
+    // validar interes aporte
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
+
+        $('#astericoInteresAporte').removeClass('text-danger');
+        $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
+    }
+    else {
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // si es mayor que cién
+    var interesAporteSinComas = $("#Crear #afp_InteresAporte").val();
+    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
+            $('#astericoInteresAporte').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAporteSinComas).toFixed(2) > 100.00) {
+
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACien").css('display', '');
+        modalState = false;
+    }
+
+    //--
+
+    // validar interes anual
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0) {
+
+        $('#astericosInteresAnual').removeClass('text-danger');
+        $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
+    }
+    else {
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // si es mayor que cién
+    var interesAnualSinComas = $("#Crear #afp_InteresAnual").val();
+    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0)
+            $('#astericosInteresAnual').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAnualSinComas).toFixed(2) > 100.00) {
+
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACien").css('display', '');
+        modalState = false;
+    }
+
+    //--
+
+    // validar tipo de deduccion create 
+    if ($("#Crear #tde_IdTipoDedu").val() != 0) {
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+        $("#Crear #astericosTipoDeduccion").removeClass('text-danger');
+
+    }
+    else {
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', '');
+        $("#Crear #astericosTipoDeduccion").addClass("text-danger");
+        modalState = false;
+    }
+
+
+    if (modalState == true) {
+
+        debugger;
+        // serializar formulario
         var data = $("#frmCreateAFP").serializeArray();
 
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        // quitar comas de los montos
+        var aporteMinimoComas = data[3].value;
+        data[3].value = aporteMinimoComas.replace(/,/, '');
+
+        // peticion
         $.ajax({
             url: "/AFP/Create",
             method: "POST",
             data: data
         }).done(function (data) {
 
-            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            // validar resultado del proceso
             if (data != "error") {
-                document.getElementById("btnCreateRegistroAFP").disabled = true;
+                
                 cargarGridDeducciones();
 
-                $("#Crear #afp_Descripcion").val('');
-                $("#Crear #afp_AporteMinimoLps").val('');
-                $("#Crear #afp_InteresAporte").val('');
-                $("#Crear #afp_InteresAnual").val('');
-                $("#Crear #tde_IdTipoDedu").val("0");
-
-                //CERRAR EL MODAL DE AGREGAR
+                // cerrar modal
                 $("#AgregarAFP").modal('hide');
 
-                // Mensaje de exito cuando un registro se ha guardado bien
+                // mensaje de exito
                 iziToast.success({
                     title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
             else {
+
+                $("#btnCreateRegistroAFP").attr('disabled', false);
+                // mensaje de error
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
@@ -309,130 +374,144 @@ $('#btnCreateRegistroAFP').click(function () {
             }
         });
     }
-
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmCreateAFP").submit(function (e) {
-        return false;
-    });
-
 });
 
-// data annotations crear
+// validaciones key up create
 
+// validar descripcion create
 $('#Crear #afp_Descripcion').keyup(function () {
-    if ($(this)
-        .val()
-        .trim() != '') {
-        $("#Crear #validation1").css("display", "none");
-        $("#Crear #ast1").css("color", "black");
+
+    var descripcion = $("#Crear #afp_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
     }
     else {
-        $("#Crear #validation1").css("display", "");
-        $("#Crear #ast1").css("color", "red");
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
     }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
 });
 
+//validar aporte minimo create
 $('#Crear #afp_AporteMinimoLps').keyup(function () {
-    if ($(this)
-        .val()
-        .trim() != '') {
-        $("#Crear #validation2").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
+
+    // si es menor o igual que cero
+    if (parseInt($("#Crear #afp_AporteMinimoLps").val()) > 0) {
+
+        $('#astericosAporteMinimoLps').removeClass('text-danger');
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
     }
     else {
-        $("#Crear #validation2").css("display", "");
-        $("#Crear #validation2d").css("display", "none");
-        $("#Crear #ast2").css("color", "red");
+        $('#astericosAporteMinimoLps').addClass("text-danger");
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', '');
     }
 
-    if (expreg.test($(this).val())) {
-        $("#Crear #validation2d").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
-    }
-    else {
-        $("#Crear #validation2d").css("display", "");
-        $("#Crear #ast2").css("color", "red");
-    }
 });
 
+// validar interes aporte create
 $('#Crear #afp_InteresAporte').keyup(function () {
-    if ($(this)
-        .val()
-        .trim() != '') {
-        $("#Crear #validation3").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
+
+        $('#astericoInteresAporte').removeClass('text-danger');
+        $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
     }
     else {
-        $("#Crear #validation3").css("display", "");
-        $("#Crear #validation3d").css("display", "none");
-        $("#Crear #ast3").css("color", "red");
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACero").css('display', '');
     }
 
-    if (expreg.test($(this).val())) {
-        $("#Crear #validation3d").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
+    // si es mayor que cién
+    var interesAporteSinComas = $("#Crear #afp_InteresAporte").val();
+    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
+
+        if(parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
+            $('#astericoInteresAporte').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
     }
-    else {
-        $("#Crear #validation3d").css("display", "");
-        $("#Crear #ast3").css("color", "red");
-        TOF = false;
+    else if (parseFloat(interesAporteSinComas).toFixed(2) > 100.00) {
+
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACien").css('display', '');
     }
+
 });
 
+// validar interes anual create
 $('#Crear #afp_InteresAnual').keyup(function () {
-    if ($(this)
-        .val()
-        .trim() != '') {
-        $("#Crear #validation4").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0) {
+
+        $('#astericosInteresAnual').removeClass('text-danger');
+        $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
     }
     else {
-        $("#Crear #validation4").css("display", "");
-        $("#Crear #validation4d").css("display", "none");
-        $("#Crear #ast4").css("color", "red");
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACero").css('display', '');
     }
 
-    if (expreg.test($(this).val())) {
-        $("#Crear #validation4d").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
+    // si es mayor que cién
+    var interesAnualSinComas = $("#Crear #afp_InteresAnual").val();
+    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0)
+            $('#astericosInteresAnual').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
     }
-    else {
-        $("#Crear #validation4d").css("display", "");
-        $("#Crear #ast4").css("color", "red");
-        TOF = false;
+    else if (parseFloat(interesAnualSinComas).toFixed(2) > 100.00) {
+
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACien").css('display', '');
     }
+
 });
 
+// validar tipo de deduccion create 
 $('#Crear #tde_IdTipoDedu').on('change', function () {
+    
     if (this.value != 0) {
-        $("#Crear #validation5").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
-        
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+        $("#Crear #astericosTipoDeduccion").removeClass('text-danger');
+
     }
     else {
-        $("#Crear #validation5").css("display", "");
-        $("#Crear #ast5").css("color", "red");
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', '');
+        $("#Crear #astericosTipoDeduccion").addClass("text-danger");
     }
 });
 
 
-//Editar//
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+// --- Editar ---//
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
-    $("#validationes1").css("display", "none");
-    $("#validationes2").css("display", "none");
-    $("#validationes3").css("display", "none");
-    $("#validationes4").css("display", "none");
-    $("#validationes2d").css("display", "none");
-    $("#validationes3d").css("display", "none");
-    $("#validationes4d").css("display", "none");
-    $("#Editar #aste1").css("color", "black");
-    $("#Editar #aste2").css("color", "black");
-    $("#Editar #aste3").css("color", "black");
-    $("#Editar #aste4").css("color", "black");
+
     $("#EditarAFP").modal('hide');
 });
 
@@ -485,7 +564,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #tde_IdTipoDedu").empty();
@@ -782,7 +861,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //$("#Detalles #tde_IdTipoDedu").empty();
@@ -814,14 +893,14 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 $(document).on("click", "#btnBack", function () {
     document.getElementById("btnInactivarRegistroAFP").disabled = false;
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    
+
     $("#InactivarAFP").modal('hide');
 });
 
 $(document).on("click", "#btnBa", function () {
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
 
-    
+
     $("#InactivarAFP").modal('hide');
 });
 
@@ -830,7 +909,7 @@ $(document).on("click", "#btnInactivarAFP", function () {
     $("#EditarAFP").modal('hide');
     $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
 
-    
+
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroAFP')
@@ -858,7 +937,7 @@ $("#btnInactivarRegistroAFP").click(function () {
     $.ajax({
         url: "/AFP/Inactivar",
         method: "POST",
-        data: {afp_Id : inactivarID}
+        data: { afp_Id: inactivarID }
     }).done(function (data) {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
@@ -887,4 +966,31 @@ $("#btnInactivarRegistroAFP").click(function () {
         return false;
     });
 
+});
+
+
+// obtener script serialize date
+$.getScript("../Scripts/app/General/SerializeDate.js")
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
+
+// funcion generica ajax
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+                success: function (data) {
+                    callback(data);
+                }
+    });
+}
+
+// Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+$("#frmCreateAFP").submit(function (e) {
+    return false;
 });

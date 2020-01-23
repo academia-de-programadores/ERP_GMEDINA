@@ -117,14 +117,15 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Dropdownlist
-        //Función: Para llenar los Dropdownlist para Agregar y Editar
         public JsonResult EditGetTipoDeduccionDDL()
         {
+            // obtener data para refrescar datatable
             var DDL =
                 from TipoDedu in db.tbTipoDeduccion
                 where TipoDedu.tde_Activo == true
                 select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
 
+            // retornar data
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
         #endregion

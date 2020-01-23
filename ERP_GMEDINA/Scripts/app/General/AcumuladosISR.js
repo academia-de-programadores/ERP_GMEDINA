@@ -188,7 +188,6 @@ $('#btnCreateAcumuladosISR').click(function () {
 
         //serializar formulario
         var data = $("#frmAcumuladosISRCreate").serializeArray();
-        console.log(data[0])
         // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
         var stringDecimal = data[5].value;
         data[5].value = stringDecimal.replace(/,/, '');

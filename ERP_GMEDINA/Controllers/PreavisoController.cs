@@ -15,7 +15,6 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region INDEX
-        // GET: Preaviso
         public ActionResult Index()
         {
             var tbPreaviso = db.tbPreaviso.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.prea_IdPreaviso);
@@ -26,9 +25,10 @@ namespace ERP_GMEDINA.Controllers
         #region DATA PARA RECARGAR EL DATATABLE
         public ActionResult GetData()
         {
+            // evitar referencias circulares
             db.Configuration.ProxyCreationEnabled = false;
 
-
+            // obtener data para refrescar datatable
             var tbPreaviso = db.tbPreaviso
                 .Select(c => new
                 {
@@ -45,17 +45,21 @@ namespace ERP_GMEDINA.Controllers
                     prea_Activo = c.prea_Activo
                 }).OrderBy(x => x.prea_IdPreaviso).ToList();
 
+            // retornar data
             return new JsonResult { Data = tbPreaviso, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
 
         #region GET: DETAILS
-        // GET: Preaviso/Details/5
         public JsonResult Details(int? id)
         {
+            // validar si se recibió el ID
+            if(id == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+
             var tbCatalogoPreavisoJSON = from tbPreavi in db.tbPreaviso
-                                             //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
-                                             //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
                                          where tbPreavi.prea_Activo == true && tbPreavi.prea_IdPreaviso == id
                                          select new
                                          {
@@ -72,10 +76,10 @@ namespace ERP_GMEDINA.Controllers
                                              tbPreavi.prea_FechaModifica
                                          };
 
-
-
+            // evitar referencias circulares
             db.Configuration.ProxyCreationEnabled = false;
-            //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
+
+            // retornar registro con el ID recibido
             return Json(tbCatalogoPreavisoJSON, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -85,68 +89,78 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso,prea_UsuarioCrea,prea_FechaCrea,prea_Activo")] tbPreaviso tbPreaviso)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            // data de auditoria
             tbPreaviso.prea_UsuarioCrea = 1;
             tbPreaviso.prea_FechaCrea = DateTime.Now;
             tbPreaviso.prea_Activo = true;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+
+            // variables de resultados 
             string response = "bien";
             IEnumerable<object> listPreaviso = null;
             String MessageError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar PA
                     listPreaviso = db.UDP_Plani_tbPreaviso_Insert(tbPreaviso.prea_RangoInicioMeses,
                                                                             tbPreaviso.prea_RangoFinMeses,
                                                                             tbPreaviso.prea_DiasPreaviso,
                                                                             tbPreaviso.prea_UsuarioCrea,
                                                                             tbPreaviso.prea_FechaCrea);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO                                                
+                    
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Insert_Result resultado in listPreaviso)
                         MessageError = Convert.ToString(resultado);
 
                     if (MessageError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                    response = "error" + Ex.Message.ToString();
+                    response = "error";
                 }
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region GET: EDIT
-        // GET: Periodos/Edit/5
         public JsonResult Edit(int? id)
         {
+            // validar si se recibió el ID
             if (id == null)
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
+
+            // obtener registro con el ID recibido  
             var tbPreaviso = db.tbPreaviso.Where(d => d.prea_IdPreaviso == id)
                         .Select(c => new { prea_IdPreaviso = c.prea_IdPreaviso, prea_RangoInicioMeses = c.prea_RangoInicioMeses, prea_RangoFinMeses = c.prea_RangoFinMeses, prea_DiasPreaviso = c.prea_DiasPreaviso, prea_UsuarioCrea = c.prea_UsuarioCrea, prea_FechaCrea = c.prea_FechaCrea, prea_UsuarioModifica = c.prea_UsuarioModifica, prea_FechaModifica = c.prea_FechaModifica, prea_Activo = c.prea_Activo })
                         .ToList();
 
+            // validar si habia registro con el ID recibido
             if (tbPreaviso == null)
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
+
+            // retornar objeto
             return Json(tbPreaviso, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -156,91 +170,97 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Editar([Bind(Include = "prea_IdPreaviso,prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso")] tbPreaviso tbPreaviso)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            // data de auditoria
             tbPreaviso.prea_UsuarioModifica = 1;
             tbPreaviso.prea_FechaModifica = DateTime.Now;
             tbPreaviso.prea_Activo = true;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            
+            // variable de resultados
             string response = "bien";
             IEnumerable<object> listPeriodo = null;
             String MessageError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar PA
                     listPeriodo = db.UDP_Plani_tbPreaviso_Update(tbPreaviso.prea_IdPreaviso,
                                                                     tbPreaviso.prea_RangoInicioMeses,
                                                                     tbPreaviso.prea_RangoFinMeses,
                                                                     tbPreaviso.prea_DiasPreaviso,
                                                                     tbPreaviso.prea_UsuarioModifica,
                                                                     tbPreaviso.prea_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO                                               
+                    
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Update_Result resultado in listPeriodo)
                         MessageError = Convert.ToString(resultado);
 
                     if (MessageError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                    response = "error" + Ex.Message.ToString();
+                    response = "error";
                 }
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region POST: INACTIVAR
-        // POST: Periodos/Delete/5
         [HttpPost]
         public ActionResult Inactivar(int? id)
         {
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            // variables de resultado
             string response = "bien";
             IEnumerable<object> listPreaviso = null;
             string MensajeError = "";
-            //VALIDAR QUE EL ID NO LLEGUE NULL
+
+            // validar que se recibió el ID
             if (id == null)
             {
                 response = "error";
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
-            //INSTANCIA DEL MODELO
+
+            // objeto 
             tbPreaviso tbPeaviso = new tbPreaviso();
-            //LLENAR DATA DE AUDITORIA
             tbPeaviso.prea_IdPreaviso = (int)id;
             tbPeaviso.prea_UsuarioModifica = 1;
             tbPeaviso.prea_FechaModifica = DateTime.Now;
-            //VALIDAR SI EL ID ES VÁLIDO
+            
+            // validar si el ID es válido
             if (tbPeaviso.prea_IdPreaviso > 0)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar PA
                     listPreaviso = db.UDP_Plani_tbPreaviso_Inactivar(tbPeaviso.prea_IdPreaviso,
                                                                                tbPeaviso.prea_UsuarioModifica,
                                                                                tbPeaviso.prea_FechaModifica);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Inactivar_Result Resultado in listPreaviso)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -248,18 +268,18 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepción
+                    response = "error";
                 }
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el ID no es válido
                 ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
                 response = "error";
             }
 
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -268,39 +288,41 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Activar(int? Id)
         {
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            // variables de resultado
             string response = "bien";
             IEnumerable<object> listPreaviso = null;
             string MensajeError = "";
-            //VALIDAR QUE EL ID NO LLEGUE NULL
+
+            // validar que el id se recibió
             if (Id == null)
             {
                 response = "error";
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
-            //INSTANCIA DEL MODELO
+
+            // objeto
             tbPreaviso tbPreaviso = new tbPreaviso();
-            //LLENAR DATA DE AUDITORIA
             tbPreaviso.prea_IdPreaviso = (int)Id;
             tbPreaviso.prea_UsuarioModifica = 1;
             tbPreaviso.prea_FechaModifica = DateTime.Now;
-            //VALIDAR SI EL ID ES VÁLIDO
+            
+            // validar que el ID es válido
             if (tbPreaviso.prea_IdPreaviso > 0)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar PA
                     listPreaviso = db.UDP_Plani_tbPreaviso_Activar(tbPreaviso.prea_IdPreaviso,
                                                                      tbPreaviso.prea_UsuarioModifica,
                                                                      tbPreaviso.prea_FechaModifica);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Activar_Result Resultado in listPreaviso)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -308,18 +330,18 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepción
+                    response = "error";
                 }
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el ID no es válido
                 ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
                 response = "error";
             }
 
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion

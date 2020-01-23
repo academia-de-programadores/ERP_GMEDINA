@@ -26,6 +26,8 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: GETDATA
+
+        // data para refrescar el datatable
         public ActionResult GetData()
         {
             var tbInstitucionesFinancieras1 = db.tbInstitucionesFinancieras
@@ -41,9 +43,9 @@ namespace ERP_GMEDINA.Controllers
                             insf_FechaModifica = c.insf_FechaModifica,
                             insf_Activo = c.insf_Activo
                         })
-                                           //.OrderByDescending(x => x.insf_FechaCrea)
-                                           /*.Where(x => x.aces_Activo == true)*/.ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
+                        .ToList();
+            
+            // retornar data obtenida 
             return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
@@ -52,20 +54,22 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Create([Bind(Include = "insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            // data de auditoria
             tbInstitucionesFinancieras.insf_UsuarioCrea = 1;
             tbInstitucionesFinancieras.insf_FechaCrea = DateTime.Now;
             tbInstitucionesFinancieras.insf_Activo = true;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            
+            // variables de resultados
             string response = "bien";
             IEnumerable<object> listInstitucionesFinancieras = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+            
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimiento almacenado
                     listInstitucionesFinancieras = db.UDP_Plani_tbInstitucionesFinancieras_Insert(tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
                                                                                                   tbInstitucionesFinancieras.insf_Contacto,
                                                                                                   tbInstitucionesFinancieras.insf_Telefono,
@@ -73,13 +77,14 @@ namespace ERP_GMEDINA.Controllers
                                                                                                   tbInstitucionesFinancieras.insf_UsuarioCrea,
                                                                                                   tbInstitucionesFinancieras.insf_FechaCrea,
                                                                                                   tbInstitucionesFinancieras.insf_Activo);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    
+                    // obtener resultado del procedimiento almacendo
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Insert_Result Resultado in listInstitucionesFinancieras)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -87,17 +92,17 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    Ex.Message.ToString();
+                    // se generó una excepción
                     response = "error";
-                    return Json(Response, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -105,29 +110,35 @@ namespace ERP_GMEDINA.Controllers
         #region GET: EDIT
         public JsonResult Edit(int? id)
         {
+            // validar si se recibió algún ID
             if (id == null)
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Where(d => d.insf_IdInstitucionFinanciera == id)
-                        .Select(c => new { insf_Descripcion = c.insf_DescInstitucionFinanc,
-                                           insf_Contacto = c.insf_Contacto,
-                                           insf_Telefono = c.insf_Telefono,
-                                           insf_Correo = c.insf_Correo,
-                                           insf_UsuarioCrea = c.insf_UsuarioCrea,
-                                           insf_FechaCrea = c.insf_FechaCrea,
-                                           insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
-                                           insf_UsuarioModifica = c.insf_UsuarioModifica,
-                                           insf_FechaModifica = c.insf_FechaModifica,
-                                           insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
-                                           insf_Activo = c.insf_Activo }).ToList();
 
-            //RETORNAR JSON AL LADO DEL CLIENTE              
+            // obtener objeto con el ID recibido
+            var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras
+                                                .Where(d => d.insf_IdInstitucionFinanciera == id)
+                                                .Select(c => new { insf_Descripcion = c.insf_DescInstitucionFinanc,
+                                                                   insf_Contacto = c.insf_Contacto,
+                                                                   insf_Telefono = c.insf_Telefono,
+                                                                   insf_Correo = c.insf_Correo,
+                                                                   insf_UsuarioCrea = c.insf_UsuarioCrea,
+                                                                   insf_FechaCrea = c.insf_FechaCrea,
+                                                                   insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
+                                                                   insf_UsuarioModifica = c.insf_UsuarioModifica,
+                                                                   insf_FechaModifica = c.insf_FechaModifica,
+                                                                   insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
+                                                                   insf_Activo = c.insf_Activo })
+                                                .ToList();
+
+            // si no existe un registro con ese ID, retornar error
             if (tbInstitucionesFinancieras == null)
             {
                 return Json("error", JsonRequestBehavior.AllowGet);
             }
 
+            // retornar objeto
             return Json(tbInstitucionesFinancieras, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -137,15 +148,21 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
+            // variables de auditoria
             tbInstitucionesFinancieras.insf_UsuarioModifica = 1;
             tbInstitucionesFinancieras.insf_FechaModifica = DateTime.Now;
+            
+            // variables de resultado
             IEnumerable<object> listInFs = null;
             string response = "bien";
             string MensajeError = "";
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // ejecutar procedimiento almacenado
                     listInFs = db.UDP_Plani_tbInstitucionesFinancieras_Update(
                                                         tbInstitucionesFinancieras.insf_IdInstitucionFinanciera,
                                                         tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
@@ -156,27 +173,31 @@ namespace ERP_GMEDINA.Controllers
                                                         tbInstitucionesFinancieras.insf_FechaModifica,
                                                         tbInstitucionesFinancieras.insf_Activo);
 
+                    // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Update_Result Resultado in listInFs)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo mdoficar el registro, contacte al administrador");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    Ex.Message.ToString();
+                    // se generó una excepción
                     response = "error";
                     return Json(response, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                //RETORNAR ERROR AL NO SER UN MODELO VALIDO
+                // el modelo no es válido
                 response = "error";
             }
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -184,71 +205,73 @@ namespace ERP_GMEDINA.Controllers
         #region GET: DETAILS
         public JsonResult Details(int? id)
         {
+            // validar si se recibió el ID
             if (id == null)
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Where(d => d.insf_IdInstitucionFinanciera == id)
-                        .Select(c => new {
-                            insf_Descripcion = c.insf_DescInstitucionFinanc,
-                            insf_Contacto = c.insf_Contacto,
-                            insf_Telefono = c.insf_Telefono,
-                            insf_Correo = c.insf_Correo,
-                            insf_UsuarioCrea = c.insf_UsuarioCrea,
-                            insf_FechaCrea = c.insf_FechaCrea,
-                            insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
-                            insf_UsuarioModifica = c.insf_UsuarioModifica,
-                            insf_FechaModifica = c.insf_FechaModifica,
-                            insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
-                            insf_Activo = c.insf_Activo
-                        }).ToList();
 
-            //RETORNAR JSON AL LADO DEL CLIENTE              
-            if (tbInstitucionesFinancieras == null)
-            {
-                return Json("Error", JsonRequestBehavior.AllowGet);
-            }
+            // obtener objeto con el ID recibido
+            var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras
+                                                .Where(d => d.insf_IdInstitucionFinanciera == id)
+                                                .Select(c => new {
+                                                    insf_Descripcion = c.insf_DescInstitucionFinanc,
+                                                    insf_Contacto = c.insf_Contacto,
+                                                    insf_Telefono = c.insf_Telefono,
+                                                    insf_Correo = c.insf_Correo,
+                                                    insf_UsuarioCrea = c.insf_UsuarioCrea,
+                                                    insf_FechaCrea = c.insf_FechaCrea,
+                                                    insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
+                                                    insf_UsuarioModifica = c.insf_UsuarioModifica,
+                                                    insf_FechaModifica = c.insf_FechaModifica,
+                                                    insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
+                                                    insf_Activo = c.insf_Activo
+                                                }).ToList();            
 
+            // retornar objeto
             return Json(tbInstitucionesFinancieras, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region POST: INACTIVAR
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Inactivar(int ID)
         {
+            // variables de resultado
             string response = String.Empty;
             IEnumerable<object> listINFS = null;
             string MensajeError = "";
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimiento almacenad
                     listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Inactivar(ID, 1, DateTime.Now);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result Resultado in listINFS)
                         MensajeError = Resultado.MensajeError;
 
-                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
+                    // el proceso fue exitoso
                     response = "bien";
                 }
                 catch (Exception)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
                     response = "error";
                 }
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
                 response = "error";
             }
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -256,39 +279,47 @@ namespace ERP_GMEDINA.Controllers
         #region POST: INACTIVAR
         public ActionResult Activar(int id)
         {
+            // variables de resultado
             IEnumerable<object> listINFS = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
+
+            // validar si el modelo es valido
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // ejecutar procedimiento almacenado
                     listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Activar(id, 1, DateTime.Now);
 
+                    // validar respuesta del procedimiento almacenado
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Activar1_Result Resultado in listINFS)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
+                    // se generó una excepción
                     response = "error";
                 }
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // el modelo no es válido
                 response = "error";
             }
 
-            return Json(JsonRequestBehavior.AllowGet);
+            // retornar resultado del proceso
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
