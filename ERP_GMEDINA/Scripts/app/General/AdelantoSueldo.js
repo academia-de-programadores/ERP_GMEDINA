@@ -342,6 +342,26 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ id: ID })
     }).done(function (data) {
+
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
+        $.ajax({
+            url: "/AdelantoSueldo/GetSueldoNetoProm",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: data.emp_Id })
+        }).done(function (data) {
+            //ACCIONES EN CASO DE EXITO
+            MaxSueldoCreate = data;
+        }).fail(function (data) {
+            //ACCIONES EN CASO DE ERROR
+            $("#AgregarAdelantos").modal('hide');
+            iziToast.error({
+                title: 'Error',
+                message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
+            });
+        });
+
         idEmpSelect = data.emp_Id;
         NombreSelect = data.per_Nombres;
         //LLENAR EL DROPDOWNLIST
@@ -587,6 +607,24 @@ function ValidarCamposEditar(colaborador, razon, monto) {
         }
         //FORMATEAR A DECIMAL
         MontoFormateado = parseFloat(MontoFormateado);
+
+        //VALIDACIONES QUE EL MONTO NO SEA MAYOR QUE EL SUELDO NETO PROMEDIO
+        if (MontoFormateado > MaxSueldoCreate) {
+
+            //MOSTRAR VALIDACIONES
+            var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
+            console.log("El monto máximo de adelanto es " + Decimal_Sueldo);
+            $("#Editar #SueldoPromedioEditar").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
+            $("#Editar #SueldoPromedioEditar").show();
+            //$("#Crear #AsteriscoMonto").css("display", "");
+            $("#Editar #MontoAsterisco").addClass("text-danger");
+
+        } else {
+            //OCULTAR VALIDACIONES
+            $("#Editar #MontoAsterisco").removeClass("text-danger");
+            $("#Editar #SueldoPromedioEditar").hide();
+
+        }
 
         //VALIDACIONES
         if (MontoFormateado == null || MontoFormateado == '' || MontoFormateado == undefined) {
