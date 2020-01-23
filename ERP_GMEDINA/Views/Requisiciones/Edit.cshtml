@@ -14,7 +14,9 @@
                     <h2>Editar</h2>
                 </div>
 
-
+                @Html.Hidden("SexVal", Model.req_Sexo.Trim(), new { @id = "SexVal" })
+                @Html.Hidden("CiVal", Model.req_EstadoCivil.Trim(), new { @id = "CiVal" })
+                @Html.Hidden("Duration", Model.req_Duracion, new { @id = "Duration" })
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormRequisicion" }))
                 {
 
@@ -41,13 +43,8 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.DropDownList("req_Sexo", new List<SelectListItem>
-                                                    {
-                                                       new SelectListItem{ Text="Indiferente", Value = "N" },
-                                                       new SelectListItem{ Text="Masculino", Value = "M" },
-                                                       new SelectListItem{ Text="Femenino", Value = "F" },
-                                                        }
-                                           , htmlAttributes: new { @class = "form-control" })
+                                                @Html.DropDownListFor(model => model.req_Sexo, (IEnumerable<SelectListItem>)ViewBag.SexoDDL
+                                                , htmlAttributes: new { @class = "form-control", @value = Model.req_Sexo.Trim() })
                                                 @Html.ValidationMessageFor(model => model.req_Sexo, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -83,8 +80,8 @@
                                                 @Html.DropDownList("req_EstadoCivil", new List<SelectListItem>
                                                     {
                                                        new SelectListItem{ Text="Indiferente", Value = "N" },
-                                                       new SelectListItem{ Text="Casado", Value = "C" },
-                                                       new SelectListItem{ Text="Soltero", Value = "S" },
+                                                       new SelectListItem{ Text="Casado(a)", Value = "C" },
+                                                       new SelectListItem{ Text="Soltero(a)", Value = "S" },
                                                     }
                                            , htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.req_EstadoCivil, "", new { @class = "text-danger" })
@@ -94,10 +91,10 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_EducacionSuperior, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                
-                                                    @Html.EditorFor(model => model.req_EducacionSuperior)
-                                                    @Html.ValidationMessageFor(model => model.req_EducacionSuperior, "", new { @class = "text-danger" })
-                                                
+
+                                                @Html.EditorFor(model => model.req_EducacionSuperior)
+                                                @Html.ValidationMessageFor(model => model.req_EducacionSuperior, "", new { @class = "text-danger" })
+
                                             </div>
                                         </div>
 
@@ -173,7 +170,7 @@
                         </div>
                     </div>
                 }
-                </div>
+            </div>
             </div>
         </div>
     </div>
