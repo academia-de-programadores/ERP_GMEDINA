@@ -98,15 +98,13 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    llenarTabla();                    
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
-                } else {
+                }
+                else {
                     MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 
