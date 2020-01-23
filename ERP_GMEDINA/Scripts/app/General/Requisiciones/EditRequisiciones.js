@@ -140,8 +140,20 @@ $(document).ready(function () {
     var sexo = $("#SexVal").val();
     var EstCivil = $("#CiVal").val();
     var Duration = $("#Duration").val();
+    var ReqDate = $("#ReqDate").val().substring(0,10);
+    var ConDate = $("#ConDate").val().substring(0, 10);
+
+    var _ReqDate = moment(ReqDate, "DD/MM/YYYY", true).format();
+    var _ConDate = moment(ConDate, "DD/MM/YYYY", true).format();
+
+    var _ReqDate = _ReqDate.substring(0,10);
+    var _ConDate = _ConDate.substring(0,10);
+
+
     $("#req_Sexo").val(sexo).change();
     $("#req_EstadoCivil").val(EstCivil).change();
+    $("#req_FechaRequisicion").val(_ReqDate);
+    $("#req_FechaContratacion").val(_ConDate);
 
     var ischecked = $("#req_Permanente").is(':checked');
     var req_Duracion = $("#req_Duracion");
