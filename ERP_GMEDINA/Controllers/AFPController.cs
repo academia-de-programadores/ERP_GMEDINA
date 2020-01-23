@@ -52,35 +52,31 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Crear AFP
-        // GET: AFP/Create
+
         public ActionResult Create()
         {
-            /*
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
-            */
             return View();
         }
 
-        // POST: AFP/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea")] tbAFP tbAFP)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            // data de auditoria
             tbAFP.afp_UsuarioCrea = 1;
             tbAFP.afp_FechaCrea = DateTime.Now;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+
+            // variables para validar resultados
             string response = String.Empty;
             IEnumerable<object> listAFP = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar modelo
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimientos almacenados
                     listAFP = db.UDP_Plani_tbAFP_Insert(tbAFP.afp_Descripcion,
                                                         tbAFP.afp_AporteMinimoLps,
                                                         tbAFP.afp_InteresAporte,
@@ -88,13 +84,14 @@ namespace ERP_GMEDINA.Controllers
                                                         tbAFP.tde_IdTipoDedu,
                                                         tbAFP.afp_UsuarioCrea,
                                                         tbAFP.afp_FechaCrea);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+
+                    // verificar resultado del PA
                     foreach (UDP_Plani_tbAFP_Insert_Result Resultado in listAFP)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -102,20 +99,19 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepción
+                    response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
-
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbAFP.tde_IdTipoDedu);
+            
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -142,32 +138,25 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: AFP/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "afp_Id,afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea,afp_UsuarioModifica,afp_FechaModifica")] tbAFP tbAFP)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            /*
-            tbDeduccionAFP.cde_UsuarioCrea = 1;
-            tbDeduccionAFP.cde_FechaCrea = DateTime.Now;
-            */
-            //LLENAR DATA DE AUDITORIA
+            // data de auditoria
             tbAFP.afp_UsuarioModifica = 1;
             tbAFP.afp_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+
+            // variables de resultados
             string response = String.Empty;
             IEnumerable<object> listAFP = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar modelo
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimiento almacenado
                     listAFP = db.UDP_Plani_tbAFP_Update(tbAFP.afp_Id,
                                                         tbAFP.afp_Descripcion,
                                                         tbAFP.afp_AporteMinimoLps,
@@ -176,13 +165,14 @@ namespace ERP_GMEDINA.Controllers
                                                         tbAFP.tde_IdTipoDedu,
                                                         tbAFP.afp_UsuarioModifica,
                                                         tbAFP.afp_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+
+                    // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Update_Result Resultado in listAFP)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // falló el procedimiento almacenado
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -190,21 +180,21 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepción
+                    response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+
+                // el resultado fue exitoso
                 response = "bien";
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
 
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            // retornar resultado 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -240,35 +230,32 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Inactivar(int afp_Id)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
-
-
-            //LLENAR DATA DE AUDITORIA
+            // data de auditoria
             int afp_UsuarioModifica = 1;
             DateTime afp_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            
+            // variables de resultados
             string response = String.Empty;
             IEnumerable<object> listAFP = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar modelo
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimiento almacenado
                     listAFP = db.UDP_Plani_tbAFP_Inactivar(afp_Id,
                                                            afp_UsuarioModifica,
                                                            afp_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+
+                    // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Inactivar_Result Resultado in listAFP)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -276,21 +263,21 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepción
+                    response = response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
                 response = "error";
             }
 
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -299,29 +286,32 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Activar(int id)
         {
-            //LLENAR DATA DE AUDITORIA
+            // data de auditoria
             int afp_UsuarioModifica = 1;
             DateTime afp_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+
+            //variables de resultados
             string response = String.Empty;
             IEnumerable<object> listAFP = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar modelo
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimiento almacenado
                     listAFP = db.UDP_Plani_tbAFP_Activar(id,
                                                          afp_UsuarioModifica,
                                                          afp_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+
+                    // validar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Activar_Result Resultado in listAFP)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                         response = "error";
                     }
@@ -329,21 +319,21 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepció
+                    response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
                 response = "error";
             }
 
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 

@@ -163,7 +163,7 @@ $('#btnCreateAcumuladosISR').click(function () {
         $("#Crear #aisr_Descripcion").focus();
         ModelState = false;
     }
-        // si no es un número
+    // si no es un número
     else if (isNaN(descripcion) == true) {
 
         $('#AsteriscoDescripcionAISR').removeClass('text-danger');
