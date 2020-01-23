@@ -206,7 +206,7 @@ $('#dex_Cuota').blur(function () {
             $("#asteriscoCuota").removeClass('text-danger');
         }
 
-        let cuotaFloat = parseFloat(montoRestante);
+        let cuotaFloat = parseFloat(cuota);
         let floatMontoInicial = parseFloat(montoInicial)
 
         if (esMayorCero)
