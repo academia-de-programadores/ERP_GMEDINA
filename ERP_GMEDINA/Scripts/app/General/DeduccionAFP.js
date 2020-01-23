@@ -152,67 +152,91 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
     $("#Crear #afp_Id").val("0");
 });
 
-//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREACION
-function ValidarCamposCrear(val1, val2, val3){
-    var pasoValidacion = true;
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
-    //VALIDAR EL DDL DE EMPLEADO ID
-    if (val1 == "" || val1 == 0 || val1 == "0") {
-        pasoValidacion = false;
-        $("#Crear #validatione1d").css("display", "");
-        $("#Crear #Asterisco1").addClass("text-danger");
-    }
-    else {
-        $("#Crear #validatione1d").css("display", "none");
-        $("#Crear #Asterisco1").removeClass("text-danger");
-    }
-
-    //VALIDAR EL DDL DE AFP
-    if (val3 == "" || val3 == 0 || val3 == "0") {
-        pasoValidacion = false;
-        $("#Crear #validatione3d").css("display", "");
-        $("#Crear #Asterisco3").addClass("text-danger");
-    } else {
-        $("#Crear #validatione3d").css("display", "none");
-        $("#Crear #Asterisco3").removeClass("text-danger");
-    }
-
-    //VALIDAR EL CAMPO APORTE
-    if (val2 == "" || val2 == null || val2 == undefined) {
-        pasoValidacion = false;
-        $("#Crear #validatione2d").css("display", "");
-        $("#Crear #validatione2d2").css("display", "none");
-        $("#Crear #validatione2d3").css("display", "none");
-        $("#Crear #Asterisco2").addClass("text-danger");
-    } else {
-        $("#Crear #validatione2d").css("display", "none");
-        $("#Crear #Asterisco2").removeClass("text-danger");
-        if (val2 <= 0) {
-            pasoValidacion = false;
-            $("#Crear #validatione2d3").css("display", "");
-            $("#Crear #validatione2d").css("display", "none");
-            $("#Crear #validatione2d2").css("display", "none");
-            $("#Crear #Asterisco2").addClass("text-danger");
+function ValidarCamposCrear(empId, Aporte, AFP) {
+    //VALIDACIONES DEL CAMPO FECHA
+    if (Aporte != "-1") {
+        if (Aporte == "" || Aporte == null || Aporte == undefined) {
+            $("#Crear #validatione2d, #Editar #Validation_descripcion1").css("display", "");
+            $("#Crear #validatione2d2, #Editar #Validation_descripcion2").css("display", "none");
+            $("#Crear #validatione2d3, #Editar #Validation_descripcion3").css("display", "none");
+            $("#Crear #Asterisco2, #Editar #e_Asterisco2").css("color", "red");
         } else {
-            $("#Crear #validatione2d3").css("display", "none");
+            $("#Crear #validatione2d, #Editar #Validation_descripcion1").css("display", "none");
+            $("#Crear #Asterisco2, #Editar #e_Asterisco2").css("color", "#676a6c");
+        }
+        if (Aporte <= "0" || Aporte == 0.00) {
+            $("#Crear #Asterisco2").addClass("text-danger");
+            $("#Crear #validatione2d3").css("display", "");
+            $("#Crear #validatione2d3, #Editar #Validation_descripcion3").css("display", "");
+        } else {
             $("#Crear #Asterisco2").removeClass("text-danger");
-            if (expreg.test(val2)) {
-                $("#Crear #validatione2d").css("display", "none");
-                $("#Crear #validatione2d2").css("display", "none");
-                $("#Crear #validatione2d3").css("display", "none");
-                $("#Crear #Asterisco2").removeClass("text-danger");
-            } else {
-                pasoValidacion = false;
-                $("#Crear #validatione2d2").css("display", "");
-                $("#Crear #validatione2d").css("display", "none");
-                $("#Crear #validatione2d3").css("display", "none");
-                $("#Crear #Asterisco2").addClass("text-danger");
-            }
+            $("#Crear #validatione2d3").css("display", "none");
         }
     }
-    return pasoValidacion;
+    if (empId == 0 || empId == "0") {
+        $("#Crear #validatione1d, #Editar #e_validatione1d").css("display", "");
+        $("#Crear #Asterisco1, #Editar #e_Asterisco1").css("color", "red");
+    } else {
+        $("#Crear #validatione1d, #Editar #e_validatione1d").css("display", "none");
+        $("#Crear #Asterisco1, #Editar #e_Asterisco1").css("color", "#676a6c");
+    }
+    if (AFP == "" || AFP == 0 || AFP == "0") {
+        $("#Crear #validatione3d, #Editar #Validation_AFPEdit").css("display", "");
+        $("#Crear #Asterisco3, #Editar #e_Asterisco3").css("color", "red");
+    } else {
+        $("#Crear #validatione3d, #Editar #Validation_AFPEdit").css("display", "none");
+        $("#Crear #Asterisco3, #Editar #e_Asterisco3").css("color", "#676a6c");
+    }
 }
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREACIÓN Y EDICIÓN
+//$('#Crear #emp_Id, #Editar #emp_Id').blur(function () {
+//    if ($(this).val().trim() == '' || $(this).val() == 0) {
+//        $("#Crear #validatione1d, #Editar #e_validatione1d").css("display", "");
+//        $("#Crear #Asterisco1, #Editar #e_Asterisco1").css("color", "red");
+//    } else {
+//        $("#Crear #validatione1d, #Editar #e_validatione1d").css("display", "none");
+//        $("#Crear #Asterisco1, #Editar #e_Asterisco1").css("color", "#676a6c");
+//    }
+//});
+
+//$('#Crear #dafp_AporteLps, #Editar #dafp_AporteLps').blur(function () {    
+//    var HayAlgo = false;
+//    if ($(this).val() == "" || $(this).val() == null || $(this).val() == undefined) {
+//        $("#Crear #validatione2d, #Editar #Validation_descripcion1").css("display", "");
+//        $("#Crear #validatione2d2, #Editar #Validation_descripcion2").css("display", "none");
+//        $("#Crear #validatione2d3, #Editar #Validation_descripcion3").css("display", "none");
+//        $("#Crear #Asterisco2, #Editar #e_Asterisco2").css("color", "red");
+//    } else {
+//        HayAlgo = true;
+//        $("#Crear #validatione2d, #Editar #Validation_descripcion1").css("display", "none");
+//        $("#Crear #Asterisco2, #Editar #e_Asterisco2").css("color", "#676a6c");
+//    }
+//    if (HayAlgo) {        
+//        if ($(this).val() < 0 || $(this).val() == 0.00) {            
+//            $("#Crear #validatione2d3, #Editar #Validation_descripcion3").css("display", "");
+//            $("#Crear #validatione2d, #Editar #Validation_descripcion1").css("display", "none");
+//            $("#Crear #validatione2d2, #Editar #Validation_descripcion2").css("display", "none");
+//            $("#Crear #Asterisco2, #Editar #e_Asterisco2").css("color", "red");
+//        } else {
+//            $("#Crear #validatione2d3, #Editar #Validation_descripcion3").css("display", "none");
+//            $("#Crear #Asterisco2, #Editar #e_Asterisco2").css("color", "#676a6c");
+//        }
+//    }
+//});
+
+//$("#Crear #afp_Id, #Editar #afp_Id").blur(function () {
+//    if ($(this).val() == "" || $(this).val() == 0 || $(this).val() == "0") {
+//        pasoValidacion = false;
+//        $("#Crear #validatione3d, #Editar #Validation_AFPEdit").css("display", "");
+//        $("#Crear #Asterisco3, #Editar #e_Asterisco3").css("color", "red");
+//    } else {
+//        $("#Crear #validatione3d, #Editar #Validation_AFPEdit").css("display", "none");
+//        $("#Crear #Asterisco3, #Editar #e_Asterisco3").css("color", "#676a6c");
+//    }
+//});
+
 
 //FUNCION: OCULTAR LAS VALIDACIONES DEL MODAL DE CREAR
 function OcultarValidacionesCrear() {
@@ -221,62 +245,63 @@ function OcultarValidacionesCrear() {
     $("#Crear #validatione2d2").css("display", "none");
     $("#Crear #validatione2d3").css("display", "none");
     $("#Crear #validatione3d").css("display", "none");
-    $("#Crear #Asterisco1").removeClass("text-danger");
-    $("#Crear #Asterisco2").removeClass("text-danger");
-    $("#Crear #Asterisco3").removeClass("text-danger");
+    $("#Crear #Asterisco1").css("color", "#676a6c");
+    $("#Crear #Asterisco2").css("color", "#676a6c");
+    $("#Crear #Asterisco3").css("color", "#676a6c");
+};
 
-}
+function OcultarValidacionesEdit() {
+    $("#Editar #Validation_descripcion1").css("display", "none");
+    $("#Editar #Validation_descripcion2").css("display", "none");
+    $("#Editar #Validation_descripcion3").css("display", "none");
+    $("#Editar #validatione2d3").css("display", "none");
+    $("#Editar #validatione3d").css("display", "none");
+    $("#Editar #e_Asterisco1").css("color", "#676a6c");
+    $("#Editar #e_Asterisco2").css("color", "#676a6c");
+    $("#Editar #e_Asterisco3").css("color", "#676a6c");
+};
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var data = $("#frmCreateDeduccionAFP").serializeArray();
 
-    var val1 = $("#Crear #emp_Id").val();
-    var val2 = $("#Crear #dafp_AporteLps").val();
-    var val3 = $("#Crear #afp_Id").val();
+    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+    $.ajax({
+        url: "/DeduccionAFP/Create",
+        method: "POST",
+        data: data
+    }).done(function (data) {
 
-    if(ValidarCamposCrear(val1, val2, val3)){
-        document.getElementById("btnCreateRegistroDeduccionAFP").disabled = true;
+        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        if (data != "error") {
 
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-        var data = $("#frmCreateDeduccionAFP").serializeArray();
+            cargarGridDeducciones();
 
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/DeduccionAFP/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
+            $("#Crear #dafp_AporteLps").val('');
 
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarDeduccionAFP").modal('hide');
+            document.getElementById("btnCreateRegistroDeduccionAFP").disabled = false;
 
-                cargarGridDeducciones();
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se agregó de forma exitosa!',
+            });
 
-                $("#Crear #dafp_AporteLps").val('');
-
-                //CERRAR EL MODAL DE AGREGAR
-                $("#AgregarDeduccionAFP").modal('hide');
-                document.getElementById("btnCreateRegistroDeduccionAFP").disabled = false;
-
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se agregó de forma exitosa!',
-                });
-
-                $("#Crear #emp_Id").val("0");
-                $("#Crear #dafp_AporteLps").val('');
-                $("#Crear #afp_Id").val("0");
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se guardó el registro, contacte al administrador',
-                });
-            }
-        });
-    }
+            $("#Crear #emp_Id").val("0");
+            $("#Crear #dafp_AporteLps").val('');
+            $("#Crear #afp_Id").val("0");
+        }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se guardó el registro, contacte al administrador',
+            });
+        }
+    });
 });
 
 // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -290,12 +315,14 @@ $("#btnCerrarAgregar").click(function () {
     $("#dafp_AporteLps").val('');
     $("#afp_Id").val("0");
     OcultarValidacionesCrear();
+    OcultarValidacionesEdit();
 });
-
 $("#Editar #validatione1").css("display", "none");
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
+    OcultarValidacionesCrear();
+    OcultarValidacionesEdit();
     var ID = $(this).data('id');
     $.ajax({
         url: "/DeduccionAFP/Edit/" + ID,
@@ -320,7 +347,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_Id").empty();
@@ -339,7 +366,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #afp_Id").empty();
@@ -362,51 +389,14 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
         });
 });
 
-//FUNCION: VALIDAR LOS CAMPOS DE EDITAR
-function ValidarCamposEditar(vale3) {
-    var pasoValidacion = true;
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-    if (vale3 == "" || vale3 == null || vale3 == undefined) {
-        pasoValidacion = false;
-        $("#Editar #Validation_descripcion1").css("display", "");
-        $("#Editar #Validation_descripcion2").css("display", "none");
-        $("#Editar #Validation_descripcion3").css("display", "none");
-        $("#Editar #e_Asterisco2").addClass("text-danger");
-    } else {
-        $("#Editar #Validation_descripcion1").css("display", "none");
-        $("#Editar #e_Asterisco2").removeClass("text-danger");
-        if (vale3 <= 0) {
-            pasoValidacion = false;
-            $("#Editar #Validation_descripcion2").css("display", "");
-            $("#Editar #Validation_descripcion1").css("display", "none");
-            $("#Editar #Validation_descripcion3").css("display", "none");
-            $("#Editar #e_Asterisco2").addClass("text-danger");
-        } else {
-            $("#Editar #Validation_descripcion2").css("display", "none");
-            $("#Editar #e_Asterisco2").removeClass("text-danger");
-            if (expreg.test(vale3)) {
-                $("#Editar #Validation_descripcion1").css("display", "none");
-                $("#Editar #Validation_descripcion2").css("display", "none");
-                $("#Editar #Validation_descripcion3").css("display", "none");
-                $("#Editar #e_Asterisco2").removeClass("text-danger");
-            } else {
-                pasoValidacion = false;
-                $("#Editar #Validation_descripcion3").css("display", "");
-                $("#Editar #Validation_descripcion1").css("display", "none");
-                $("#Editar #Validation_descripcion2").css("display", "none");
-                $("#Editar #e_Asterisco2").addClass("text-danger");
-            }
-        }
-    }
-    return pasoValidacion;
-}
-
 //FUNCION: OCULTAR VALIDACIONES EDITAR
 function OcultarValidacionesEditar() {
     $("#Editar #Validation_descripcion1").css("display", "none");
     $("#Editar #Validation_descripcion2").css("display", "none");
     $("#Editar #Validation_descripcion3").css("display", "none");
-    $("#Editar #e_Asterisco2").removeClass("text-danger");
+    $("#Editar #e_Asterisco1").css("color", "#676a6c");
+    $("#Editar #e_Asterisco2").css("color", "#676a6c");
+    $("#Editar #e_Asterisco3").css("color", "#676a6c");
 }
 
 $("#btnEditDeduccionAFP").click(function () {
@@ -476,6 +466,7 @@ $("#btnEditDeduccionAFPConfirmar").click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     OcultarValidacionesEditar();
+    OcultarValidacionesCrear();
     $("#EditarDeduccionAFP").modal('hide');
 });
 
@@ -516,7 +507,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //LLENAR EL DROPDOWNLIST
@@ -535,7 +526,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {

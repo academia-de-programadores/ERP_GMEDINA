@@ -670,24 +670,57 @@ $('#Crear #tde_IdTipoDedu').blur(function () {
 
 $('#Crear #cde_PorcentajeColaboradorA, #Editar #cde_PorcentajeColaborador').blur(function () {
     let valor = $(this).val();
-    if (valor == "" || valor == null || valor == undefined || valor == 0 || valor == 0.00 || valor < 0) {
+    let hayAlgo = true;
+    debugger;
+    if (valor == "" || valor == null || valor == undefined) {
+        $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('Campo Porcentaje Colaborador requerido.');
         $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "block");
         $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
-
-    } else {
+        hayAlgo = false;
+    }
+    else {
+        $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('');
         $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "none");
         $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
+    }
+    if (hayAlgo) {
+        if (valor <= "0" || valor <= 0) {
+            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('Campo Porcentaje Colaborador no puede ser menor o igual a cero.');
+            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "block");
+            $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
+        }
+        else {
+            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('');
+            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "none");
+            $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
+        }
     }
 });
 
 $('#Crear #cde_PorcentajeEmpresaA, #Editar #cde_PorcentajeEmpresa').blur(function () {
     let valor = $(this).val();
-    if (valor == "" || valor == null || valor == undefined || valor == 0 || valor == 0.00 || valor < 0) {
+    let hayAlgo = true;
+    if (valor == "" || valor == null || valor == undefined) {
+        $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").html('Campo Porcentaje Empresa requerido.');
         $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").css("display", "block");
         $("#Crear #AsteriscoPorcentajeEmpresa, #Editar #AsteriscoPorcentajeEmpresaEdit").addClass("text-danger");
-
-    } else {
+        hayAlgo = false;
+    }
+    else {
+        $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").html('');
         $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").css("display", "none");
         $("#Crear #AsteriscoPorcentajeEmpresa, #Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
+    }
+    if (hayAlgo) {
+        if (valor <= "0" || valor <= 0) {
+            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").html('Campo Porcentaje Empresa no puede ser menor o igual a cero.');
+            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").css("display", "block");
+            $("#Crear #AsteriscoPorcentajeEmpresa, #Editar #AsteriscoPorcentajeEmpresaEdit").addClass("text-danger");
+        }
+        else {
+            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").html('');
+            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").css("display", "none");
+            $("#Crear #AsteriscoPorcentajeEmpresa, #Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
+        }
     }
 });
