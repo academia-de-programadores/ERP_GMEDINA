@@ -110,7 +110,7 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "No se guardó el registro, contacte al administrador");
+                    MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
             });
     } else {
@@ -132,9 +132,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
             });
     } else {

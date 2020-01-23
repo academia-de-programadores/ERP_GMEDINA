@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             db = new ERP_GMEDINAEntities();
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            bool Admin = (bool)Session["Admin"];
             var tbEquipoEmpleados = new List<tbEquipoEmpleados> { };
             var equipoe = db.tbEquipoEmpleados.Where(e => e.eqem_Estado == true).Select(ee => new { eqtra_Id = ee.eqtra_Id });
             ViewBag.eqtra_Id = new SelectList(db.tbEquipoTrabajo.Where(x => x.eqtra_Estado == true).Select(x => new { eqtra_Id = x.eqtra_Id, eqtra_Descripcion = x.eqtra_Descripcion }), "eqtra_Id", "eqtra_Descripcion");
@@ -147,8 +147,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
 
             if (tbEquipoEmpleados.eqem_Id != 0)
-            {
-
+            {                
                 try
                 {
                     db = new ERP_GMEDINAEntities();

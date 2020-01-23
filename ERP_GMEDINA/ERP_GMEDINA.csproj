@@ -310,6 +310,7 @@
     <Compile Include="Models\cEmpleadoComisiones.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
+    <Compile Include="Models\cEquipoEmpleados.cs" />
     <Compile Include="Models\cEquipoTrabajo.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cFormaPago.cs" />
@@ -1544,6 +1545,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_EquipoTrabajoDetalles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_FaseSeleccion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_FormaDePago.cs">
@@ -2970,7 +2974,9 @@
     <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Downloadable files\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

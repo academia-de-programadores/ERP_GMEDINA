@@ -1,6 +1,37 @@
 //
 var modal = ["ModalNuevo", "ModalEditar", "ModalInactivar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
+var htmlSpiner =
+    `<div id="ibox1" class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
+             </div>`;
+var language = n = {
+    "sProcessing": "Procesando...",
+    "sLengthMenu": "Mostrar _MENU_ registros",
+    "sZeroRecords": "No se encontraron resultados",
+    "sEmptyTable": htmlSpiner,
+    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix": "",
+    "sSearch": "Buscar:",
+    "sUrl": "",
+    "sInfoThousands": ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+    }, "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+};
 function CierraPopups() {
  $.each(modal, function (index, valor) {
   $("#" + valor).modal('hide');//ocultamos el modal
@@ -14,6 +45,15 @@ $(document).on('ready', function () {
 $(".modal").on("load", function () {
  alert("lolis");
 });
+
+function _POST(params, uri, callback) {
+    $.post(uri, params)
+    .done(callback)
+    .error(function (e) {
+        CierraPopups()
+        MsgError("Error", "Verifique su conexion a internet. (si el problema persiste contacte al administrador.)");
+    });
+}
 
 function _ajax(params, uri, type, callback) {
  $.ajax({
@@ -127,6 +167,22 @@ function FechaFormatoSimple(pFecha) {
  return '';
 }
 
+function FechaFormatoSimpleAlt(pFecha) {
+    if (pFecha != null && pFecha != undefined) {
+        var fechaString = pFecha.substr(6);
+        var fechaActual = new Date(parseInt(fechaString));
+        var mes = pad2(fechaActual.getMonth() + 1);
+        var dia = pad2(fechaActual.getDate());
+        var anio = fechaActual.getFullYear();
+        var hora = pad2(fechaActual.getHours());
+        var minutos = pad2(fechaActual.getMinutes());
+        var segundos = pad2(fechaActual.getSeconds().toString());
+        var FechaFinal = dia + "/" + mes + "/" + anio;
+        return FechaFinal;
+    }
+    return '';
+}
+
 function pad2(number) {
  return (number < 10 ? '0' : '') + number
 }
@@ -162,7 +218,7 @@ function MsgInfo(Titulo, Mensajes) {
 }
 function MsgSuccess(Titulo, Mensajes) {
  iziToast.success({
-  title: "Éxito",//Titulo,
+     title: "¡Éxito!",//Titulo,
   message: Mensajes,
  });
 }
@@ -172,7 +228,7 @@ function MsgWarning(Titulo, Mensajes) {
  //    message: Mensajes,
  //});
  iziToast.success({
-  title: Titulo,
+     title: "¡Éxito!",
   message: Mensajes,
  });
 }
@@ -322,3 +378,24 @@ function FechaFormatoSimple(pFecha) {
  }
  return '';
 };
+function validarDT(obj) {
+    if (obj == "-2") {
+        //$("#ibox1").find(".ibox-content").hide();
+        //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+        var ventana = $('#IndexTable tbody td.dataTables_empty');
+        ventana[0].innerHTML = "verifique su conexion a internet.(Sí el problema persiste contacte al administrador)";
+        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+        return true;
+    } else {
+        if (obj.Length == 0) {
+            RestaurarDT();
+        } else {
+            return false;
+        }
+        return true;
+    }
+}
+function RestaurarDT() {
+    $("#ibox1").find(".ibox-content").hide();
+    $(".dataTables_empty").append('No hay registros para mostrar.');
+}

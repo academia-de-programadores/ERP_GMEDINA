@@ -1,7 +1,7 @@
 ﻿@model ERP_GMEDINA.Models.tbAreas
 
 @{
-    ViewBag.Title = "Area";
+    ViewBag.Title = "Área";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -9,9 +9,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de Areas</h5>
+                    <h5>Listado de Áreas</h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar Area", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                       @Html.ActionLink("Registrar Área", "Create", null, new { @class = "btn btn-primary btn-xs"})
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -45,7 +45,8 @@
     @Scripts.Render("~/plugins/dataTablesMatutina")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/IndexArea")
-    @if (Model.area_Estado){
+    @if ((bool)Session["Admin"])
+    {
         @Scripts.Render("~/Scripts/app/general/Admin")
     }
 }
