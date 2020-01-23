@@ -100,7 +100,7 @@ $('#dex_MontoRestante').blur(function () {
     let montoInicial = $('#dex_MontoInicial').val().replace(/,/, '');
 
     if (montoRestante == "" || montoRestante == null || montoRestante == undefined) {
-        $("#valMontoRestante").html('Campo Monto Inicial Requerido');
+        $("#valMontoRestante").html('Campo Monto Restante Requerido');
         $("#valMontoRestante").show();
         $("#asteriscoMontoRestante").addClass('text-danger');
     } else {
@@ -146,8 +146,8 @@ $('#dex_MontoRestante').blur(function () {
 
 $('#dex_ObservacionesComentarios').blur(function () {
     let observaciones = $(this)
-    .val()
-    .trim();
+        .val()
+        .trim();
     if (
         observaciones == ""
     ) {
@@ -178,8 +178,8 @@ $('#dex_Cuota').blur(function () {
     let cuota = $(this).val().replace(/,/, '');
     let hayAlgo = false;
     let montoInicial = $('#dex_MontoInicial').val().replace(/,/, '');
-    
-    if (cuota == null || cuota == "" || cuota == 0 || cuota == "0") {
+
+    if (cuota == null || cuota == "") {
         $("#valCuota").html('Campo Cuota Requerido');
         $("#valCuota").show();
         $("#asteriscoCuota").addClass('text-danger');
@@ -304,36 +304,40 @@ function validaciones(equipoEmpId,
     idDeduccion,
     cuota) {
     var todoBien = true;
-    let equipoEmpleadoId = $(this).val();
+    let equipoEmpleadoId = equipoEmpId.val();
 
     //Equipo Empleado
     if (equipoEmpleadoId == null || equipoEmpleadoId == "" || equipoEmpleadoId == 0 || equipoEmpleadoId == "0") {
         asteriscoEquipoEmpleado.removeClass('text-danger');
         validacionEquipoEmpleado.hide();
-    } else {
         asteriscoEquipoEmpleado.addClass('text-danger');
         validacionEquipoEmpleado.show();
         todoBien = false;
+    } else {
+        asteriscoEquipoEmpleado.removeClass('text-danger');
+        validacionEquipoEmpleado.hide();
     }
 
-    //let montoInicial = montoInicial.val();
+    montoInicial = montoInicial.val();
     let hayAlgoMontoInicial = false;
     // Monto inicial
     if (montoInicial == "" || montoInicial == null || montoInicial == undefined) {
+        $("#valMontoInicial").html('Campo Monto Inicial no puede ser menor o igual que cero.');
+        $("#valMontoInicial").show();
+        $("#asteriscoMontoInicial").addClass('text-danger');
+        todoBien = false;
+    } else {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
         hayAlgoMontoInicial = true;
-    } else {
-        asteriscoMontoInicial.addClass('text-danger');
-        validacionMontoInicial.show();
-        todoBien = false;
     }
 
-    if(hayAlgoMontoInicial){
+    if (hayAlgoMontoInicial) {
         if (montoInicial == 0.00 || montoInicial < 0) {
             $("#valMontoInicial").html('Campo Monto Inicial no puede ser menor o igual que cero.');
             $("#valMontoInicial").show();
             $("#asteriscoMontoInicial").addClass('text-danger');
+            todoBien = false;
         }
         else {
             $("#valMontoInicial").html('');
@@ -341,56 +345,102 @@ function validaciones(equipoEmpId,
             $("#asteriscoMontoInicial").removeClass('text-danger');
         }
     }
-
+    let hayAlgoMontoRestante = false;
     // Monto Restante
-    if (montoRestante.val() != '' && expreg.test(montoRestante.val())) {
-        asteriscoMontoRestante.removeClass('text-danger');
-        validacionMontoRestante.hide();
+    if (montoRestante.val() != '') {
+        $("#valMontoRestante").html('');
+        $("#valMontoRestante").hide();
+        hayAlgoMontoRestante = true
+        $("#asteriscoMontoRestante").removeClass('text-danger');
     } else {
-        asteriscoMontoRestante.addClass('text-danger');
-        validacionMontoRestante.show();
+        $("#valMontoRestante").html('Campo Monto Restante Requerido');
+        $("#valMontoRestante").show();
+        $("#asteriscoMontoRestante").addClass('text-danger');
         todoBien = false;
 
-        if (montoRestante.val() > montoInicial.val()) {
-            asteriscoMontoRestante.addClass('text-danger');
-            MontoRestanteCrear.show();
-            todoBien = false;
-        }
-        else {
-            asteriscoMontoRestante.removeClass('text-danger');
-            MontoRestanteCrear.hide();
-            todoBien = false;
-        }
+        if (hayAlgoMontoRestante)
+            if (montoRestante.val() > montoInicial.val()) {
+                $("#valMontoRestante").html('El campo Monto Restante no puede ser mayor que Monto Inicial.');
+                $("#valMontoRestante").show();
+                $("#asteriscoMontoRestante").addClass('text-danger')
+                todoBien = false;
+            }
+            else {
+                $("#valMontoRestante").html('');
+                $("#valMontoRestante").hide();
+                $("#asteriscoMontoRestante").removeClass('text-danger');
+            }
     }
 
     // Observaciones
-    if (observaciones.val() != '') {
-        validacionObservaciones.hide();
-        asteriscoObservaciones.removeClass('text-danger');
+    if (observaciones.val().trim() != '') {
+        $('#validacionObservaciones').hide();
+        $('#asteriscoObservaciones').removeClass('text-danger');
     } else {
-        asteriscoObservaciones.addClass('text-danger');
-        validacionObservaciones.show();
+        $('#validacionObservaciones').html('Campo Observaciones Requerido');
+        $('#validacionObservaciones').show();
+        $('#asteriscoObservaciones').addClass('text-danger');
         todoBien = false;
     }
 
     // Id deduccion
     if (idDeduccion.val() != '') {
-        asteriscoIdDeducciones.removeClass('text-danger');
-        validacionIdDeducciones.hide();
+        $("#validacionIdDeducciones").html('');
+        $("#validacionIdDeducciones").hide();
+        $("#asteriscoIdDeducciones").removeClass('text-danger');
     } else {
-        asteriscoIdDeducciones.addClass('text-danger');
-        validacionIdDeducciones.show();
+        $("#validacionIdDeducciones").html('Campo Deducción Requerido');
+        $("#validacionIdDeducciones").show();
+        $("#asteriscoIdDeducciones").addClass('text-danger');
         todoBien = false;
     }
 
+    let hayAlgoCuota = false;
     // Cuota
     if (cuota.val() != '') {
-        asteriscoCuota.removeClass('text-danger');
-        validacionCuota.hide();
+        hayAlgoCuota = true;
+        $("#valCuota").html('');
+        $("#valCuota").hide()
+        $("#asteriscoCuota").removeClass('text-danger');
     } else {
-        asteriscoCuota.addClass('text-danger');
-        validacionCuota.show();
+        $("#valCuota").html('El campo Cuota no puede ser menor o igual que cero.');
+        $("#valCuota").show();
+        $("#asteriscoCuota").addClass('text-danger');
         todoBien = false;
+    }
+
+    if (hayAlgoCuota) {
+        let esMayorCero = false;
+        if (cuota.val() == 0.00 || cuota.val() < 0) {
+            $("#valCuota").html('El campo Cuota no puede ser menor o igual que cero.');
+            $("#valCuota").show();
+            $("#asteriscoCuota").addClass('text-danger');
+            todoBien = false;
+        }
+        else {
+            esMayorCero = true;
+            $("#valCuota").html('');
+            $("#valCuota").hide()
+            $("#asteriscoCuota").removeClass('text-danger');
+        }
+
+        let cuotaFloat = parseFloat(cuota.val());
+        let floatMontoInicial = parseFloat(montoInicial);
+
+        if (esMayorCero)
+            if (cuotaFloat > floatMontoInicial) {
+                $("#valCuota").html('El campo Cuota no puede ser mayor que Monto Inicial.');
+                $("#valCuota").show();
+                $("#asteriscoCuota").addClass('text-danger');
+                todoBien = false;
+                hayAlgo = false;
+            }
+            else {
+                hayAlgo = false;
+                $("#valCuota").html('');
+                $("#valCuota").hide()
+                $("#asteriscoCuota").removeClass('text-danger');
+            }
     }
     return todoBien;
 }
@@ -528,7 +578,6 @@ $("#btnCerrarCreate").click(function () {
 
 
 $(btnAgregar).click(function () {
-    console.clear();
     if (validaciones(equipoEmpId,
         montoInicial,
         montoRestante,
@@ -536,8 +585,8 @@ $(btnAgregar).click(function () {
         idDeduccion,
         cuota
     )) {
-
         var data = $("#frmCreate").serializeArray();
+        
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/DeduccionesExtraordinarias/Create",

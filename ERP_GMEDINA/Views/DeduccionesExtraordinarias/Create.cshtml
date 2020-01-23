@@ -74,7 +74,7 @@
                                     @Html.LabelFor(model => model.dex_Cuota)<span id="asteriscoCuota">*</span>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @min = 0.01, @max = 9999999999.99 } })
+                                    @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad" } })
                                     <label class="text-danger" id="valCuota" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Cuota Requerido.</label>
                                 </div>
                             </div>
