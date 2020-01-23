@@ -17,7 +17,7 @@ function format(obj) {
             '<tr>' +
                 '<th>' + 'Fecha inicio' + '</th>' +
                 '<th>' + 'Fecha fin' + '</th>' +
-                '<th>' + 'Cantidad dias' + '</th>' +
+                '<th>' + 'Cantidad días' + '</th>' +
                 '<th>' + 'Mes vacaciones' + '</th>' +
                 '<th>' + 'Año vacaciones' + '</th>' +
                 '<th>' + 'Estado' + '</th>' +
@@ -67,10 +67,10 @@ function llenarTabla() {
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento,
-                   FechaContratacion: FechaFormatoSimple(value.FechaContratacion),
-                   DiasTotales: value.DiasTotales,
-                   DiasTomados: value.DiasTomados,
-                   DiasRestantes: value.DiasRestantes,
+                   "FechaContratación": FechaFormatoSimple(value.FechaContratacion),
+                   "DíasTotales": value.DiasTotales,
+                   "DíasTomados": value.DiasTomados,
+                   "DíasRestantes": value.DiasRestantes,
                    Año: value.Año
                });
            });
@@ -169,9 +169,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
             });
     } else {

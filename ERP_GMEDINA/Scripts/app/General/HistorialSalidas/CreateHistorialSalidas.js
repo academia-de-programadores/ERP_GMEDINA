@@ -140,6 +140,30 @@ $(document).ready(function () {
     llenarDropDowlistRazonSalida();
 
     ChildTable = $(ChildDataTable).DataTable({
+  "language": {
+   "sProcessing": "Procesando...",
+   "sLengthMenu": "Mostrar _MENU_ registros",
+   "sZeroRecords": "No se encontraron resultados",
+   "sEmptyTable": "•Es necesario agregar al menos un empleado para liquidar",
+   "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+   "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 colaboradores por liquidar",
+   "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+   "sInfoPostFix": "",
+   "sSearch": "Buscar:",
+   "sUrl": "",
+   "sInfoThousands": ",",
+   "sLoadingRecords": "Cargando...",
+   "oPaginate": {
+    "sFirst": "Primero",
+    "sLast": "Último",
+    "sNext": "Siguiente",
+    "sPrevious": "Anterior"
+   },
+   "oAria": {
+    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+   }
+  },
         pageLength: 4,
         lengthChange: false,
      columns:
@@ -222,7 +246,7 @@ $("#btnCrear").click(function () {
                             setTimeout(function () { location.href = "/HistorialSalidas/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");
                         } else {
-                            MsgError("Error", "No se guardó el registro, contacte al administrador");
+                            MsgError("Error", "No se agrego el registro, contacte al administrador");
                         }
                     });
             } else {

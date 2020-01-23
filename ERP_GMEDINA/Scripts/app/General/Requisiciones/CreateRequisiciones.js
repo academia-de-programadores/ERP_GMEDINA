@@ -107,7 +107,7 @@ $(document).ready(function () {
                         $("#finish").attr("href", " ");
                         setTimeout(function () { window.location.href = "/Requisiciones/Index"; }, 3000);
                     } else {
-                        MsgError("Error", "No se guardó el registro, contacte al administrador");
+                        MsgError("Error", "No se agrego el registro, contacte al administrador");
                     }
                 });
             }

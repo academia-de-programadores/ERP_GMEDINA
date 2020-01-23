@@ -260,7 +260,7 @@ $("#btnCrear").click(function () {
                             setTimeout(function () { location.href = "/HistorialPermisos/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");
                         } else {
-                            MsgError("Error", "No se guardó el registro, contacte al administrador");
+                            MsgError("Error", "No se agrego el registro, contacte al administrador");
                         }
                     });
             } else {

@@ -33,7 +33,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha Inicio</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaSalida, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaSalida", @id = "FechaSalida" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaSalida, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaSalida", @id = "fechaInicio" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.FechaSalida, "", new { @class = "text-danger" })
                             </div>
@@ -42,7 +42,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha Fin</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechafin", @id = "fechafin" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechafin", @id = "fechaFin" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.fechafin, "", new { @class = "text-danger", @name = "fechafin", @id = "fechafin" })
                             </div>
@@ -86,5 +86,6 @@
         </div>
     </div>
 </div>
-
-
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/general_Fechas")
+}

@@ -1087,6 +1087,8 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+
+        //mios
         public ActionResult HistorialAmonestacionesRPT()
         {
             try
@@ -1112,8 +1114,9 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+
         [HttpPost]
-        public ActionResult HistorialAmonestacionesRPT(int? tamo_Id, string Identidad)
+        public ActionResult HistorialAmonestacionesRPT(int? tamo_Id, string Identidad, DateTime? Fecha, DateTime? FechaAnterior)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -1135,6 +1138,22 @@ namespace ERP_GMEDINA.Controllers
                 command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAmonestaciones WHERE  tamo_Id = @tamo_Id and Identidad like '%'+ @Identidad + '%' ";
                 command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = Identidad;
                 command.Parameters.AddWithValue("@tamo_Id", SqlDbType.Int).Value = tamo_Id;
+            }
+            if (FechaAnterior != null && Fecha != null)
+            {
+                command.CommandText += " and Fecha between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaAnterior;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = Fecha;
+            }
+            else if (FechaAnterior != null && Fecha == null)
+            {
+                command.CommandText += " and Fecha <= @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaAnterior;
+            }
+            else if (Fecha != null && FechaAnterior == null)
+            {
+                command.CommandText += " and Fecha >= @FechaInicio ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = Fecha;
             }
 
             try
@@ -1167,7 +1186,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //HistorialAudienciaDescargo
         [HttpPost]
-        public ActionResult HistorialAudienciaDescargoRPT(string per_Identidad ,DateTime? fechaAudiencia)
+        public ActionResult HistorialAudienciaDescargoRPT(string per_Identidad, DateTime? fechaAudiencia, DateTime? fecha)
         {
 
             ReportViewer reportViewer = new ReportViewer();
@@ -1181,8 +1200,23 @@ namespace ERP_GMEDINA.Controllers
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
             command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAudienciaDescargo WHERE per_identidad like '%'+@Identidad+'%'";
-            command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = per_Identidad;
-            //command.Parameters.AddWithValue("@fechaAudiencia", SqlDbType.Date).Value = fechaAudiencia;
+
+            command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = per_Identidad; if (fecha != null && fechaAudiencia != null)
+            {
+                command.CommandText += " and fechaAudiencia between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = fecha;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = fechaAudiencia;
+            }
+            else if (fecha != null && fechaAudiencia == null)
+            {
+                command.CommandText += " and fechaAudiencia <= @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = fecha;
+            }
+            else if (fechaAudiencia != null && fecha == null)
+            {
+                command.CommandText += " and fechaAudiencia >= @FechaInicio ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = fechaAudiencia;
+            }
 
             try
             {
@@ -1211,6 +1245,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+
         public ActionResult EquipoEmpleadosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)

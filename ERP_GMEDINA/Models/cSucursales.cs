@@ -59,7 +59,7 @@ namespace ERP_GMEDINA.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres")]
-        [Display(Name = "Razon Inactivo")]
+        [Display(Name = "Razón Inactivo")]
         public string suc_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

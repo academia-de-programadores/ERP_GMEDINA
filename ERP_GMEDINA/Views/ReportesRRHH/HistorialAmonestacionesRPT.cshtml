@@ -33,13 +33,28 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Colaborador</label>
 
-                                @Html.DropDownList("Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAMON, "(Opcional) seleccione el colaborador", new {@id = "Identidad", @class = "form-control" })
+                                @Html.DropDownList("Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAMON, "Seleccione el colaborador", new {@id = "Identidad", @class = "form-control" })
 
                                     @Html.ValidationMessageFor(model => model.Identidad, "", new { @class = "text-danger" })
                             </div>
-
-
-                          
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha Inicio</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha", @id = "fechaInicio" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha Fin</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaAnterior, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaAnterior", @id = "fechaFin" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FechaAnterior, "", new { @class = "text-danger" })
+                            </div>
                         </div>
 
                         </div>
@@ -59,14 +74,14 @@
 }
 
 <div class="row" style="display:@visibilidadPreview;">
-    <div class="col-lg-12">
-        <div class="float-e-margins">
+    <div class="col-lg-12  ibox-content">
+        <div class="float-e-margins ">
             <div class="ibox-title">
                 <h5>Previsualización de reporte</h5>
                 <div class="ibox-tools">
                 </div>
             </div>
-            <div class="ibox-content">
+            <div class="col-lg-10 col-md-offset-1">
                 @{
                     if (ViewBag.ReportViewer != null)
                     {
@@ -83,11 +98,16 @@
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
     @Styles.Render("~/plugins/select2Styles")
+    @Styles.Render("~/plugins/dateRangeStyles")
 }
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general_Fechas")
     @Scripts.Render("~/Scripts/app/General/Reporteria/HistorialAmonestaciones")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/plugins/select2")
+    @Scripts.Render("~/plugins/dateRange")
+    @Scripts.Render("~/plugins/dateRange")
+    @Scripts.Render("~/Scripts/app/general_Fechas")
 }
