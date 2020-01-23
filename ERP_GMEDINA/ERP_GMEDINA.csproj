@@ -310,6 +310,7 @@
     <Compile Include="Models\cEmpleadoComisiones.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
+    <Compile Include="Models\cEquipoEmpleados.cs" />
     <Compile Include="Models\cEquipoTrabajo.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cFormaPago.cs" />
