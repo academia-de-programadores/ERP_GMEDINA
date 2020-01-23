@@ -49,11 +49,10 @@
 									<td>
                                         @Html.DisplayFor(modelItem => item.aisr_Descripcion)
                                     </td>
-                                    <td class="MascaraCantidadIndex">
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.aisr_Monto)
                                     </td>
                                     <td>
-                                        <!-- variable del estado del registro creada arriba-->
                                         @estadoISR
                                     </td>
                                     <td>
@@ -101,17 +100,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="ConfirmacionEditar">
-                ¿Esta seguro que desea Editar este registro?
+                ¿Esta seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnUpdateAISR2" value="Si" class="btn btn-primary " />
-                <div style="display:none" class="btn" id="cargandoEditar">
-                </div>
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white" id="btnNoConfirmarEditAISR" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
