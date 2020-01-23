@@ -191,7 +191,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(cSueldos tbsueldos)
         {
             string msj = "";
-            if (tbsueldos.sue_Id!=0 && tbsueldos.emp_Id != 0  && tbsueldos.tmon_Id != 0  && int.Parse(tbsueldos.sue_Cantidad) != 0 )
+            if (tbsueldos.sue_Id!=0 && tbsueldos.emp_Id != 0  && tbsueldos.tmon_Id != 0  && decimal.Parse(tbsueldos.sue_Cantidad) != 0 )
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try

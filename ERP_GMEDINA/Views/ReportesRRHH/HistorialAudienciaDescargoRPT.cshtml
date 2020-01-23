@@ -21,13 +21,31 @@
                         <div class="form-group">
                             <div class="col-md-6">
                                 <label class="font-normal">Colaborador</label>
-                                @Html.DropDownList("per_Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAUDE, "(Opcional) seleccione el colaborador", new { @id = "per_Identidad", @class = "form-control" })
+                                @Html.DropDownList("per_Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAUDE, "Seleccione el colaborador", new { @id = "per_Identidad", @class = "form-control" })
 
                                 @Html.ValidationMessageFor(model => model.per_Identidad, "", new { @class = "text-danger" })
                             </div>
                             
                         </div>
-                    <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha Inicio</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechaAudiencia, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaInicio", @id = "fechaInicio" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.fechaAudiencia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha Fin</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaFin", @id = "fechaFin"} })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.fechaAudiencia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizar">Previsualizar</button>
                     </div>
 
                 </div>
@@ -42,15 +60,16 @@
     string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
 }
 
+
 <div class="row" style="display:@visibilidadPreview;">
-    <div class="col-lg-12">
-        <div class="float-e-margins">
+    <div class="col-lg-12  ibox-content">
+        <div class="float-e-margins ">
             <div class="ibox-title">
                 <h5>Previsualización de reporte</h5>
                 <div class="ibox-tools">
                 </div>
             </div>
-            <div class="ibox-content">
+            <div class="col-lg-10 col-md-offset-1">
                 @{
                     if (ViewBag.ReportViewer != null)
                     {
@@ -61,3 +80,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/general_Fechas")
+}

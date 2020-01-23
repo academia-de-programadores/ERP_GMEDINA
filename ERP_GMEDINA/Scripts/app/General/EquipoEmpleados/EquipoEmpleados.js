@@ -54,6 +54,7 @@ function ShowModalCreate(btn) {
     modalnuevo.modal('show');
     $(modalnuevo).find("#eqtra_Id").focus();
     $(modalnuevo).find("#eqtra_Id").val("");
+    $(modalnuevo).find("#eqem_Fecha").val("");
 }
 
 $("#btnGuardar").click(function () {
