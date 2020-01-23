@@ -26,58 +26,57 @@
                         </div>
                         <div class="col-md-6">
                             @Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.eqem_Id, "", new { @class = "text-danger" })
+                            <label class="text-danger" id="validacionEquipoEmpleado" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Equipo Empleado Requerido</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_MontoInicial)<span id="asteriscMontoInicial">*</span>
+                            @Html.LabelFor(model => model.dex_MontoInicial)<span id="asteriscoMontoInicial">*</span>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control", @min = 0.01, @max = 9999999999.99 } })
-                            @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger", @id = "validMontoInicial" })
+                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @min = 0.01, @max = 9999999999.99 } })
+                            <label class="text-danger" id="valMontoInicial" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto Inicial Requerido</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_MontoRestante)<span id="asteriscMontoRestante">*</span>
+                            @Html.LabelFor(model => model.dex_MontoRestante)<span id="asteriscoMontoRestante">*</span>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control", @min = 0.01, @max = 9999999999.99 } })
-                            @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger", @id = "validMontoRestante" })
-                            <span id="MontoRestanteEditar" class="text-danger" style="display:none;">El campo rango fin no puede ser mayor que rango inicio</span>
+                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @min = 0.01, @max = 9999999999.99 } })
+                            <label class="text-danger" id="valMontoRestante" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto Restante Requerido</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_ObservacionesComentarios)<span id="asteriscObservaciones">*</span>
+                            @Html.LabelFor(model => model.dex_ObservacionesComentarios)<span id="asteriscoObservaciones">*</span>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_ObservacionesComentarios, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.dex_ObservacionesComentarios, "", new { @class = "text-danger", @id = "validObservaciones" })
+                            <label class="text-danger" id="validacionObservaciones" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Observaciones Requerido</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.cde_IdDeducciones)<span>*</span>
+                            @Html.LabelFor(model => model.cde_IdDeducciones)<span id="asteriscoIdDeducciones">*</span>
                         </div>
                         <div class="col-md-6">
                             @Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
+                            <label class="text-danger" id="validacionIdDeducciones" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Deducción Requerido.</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_Cuota)<span id="asteriscCuota">*</span>
+                            @Html.LabelFor(model => model.dex_Cuota)<span id="asteriscoCuota">*</span>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control", @min = 0.01, @max = 9999999999.99 } })
-                            @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger", @id = "validCuota" })
+                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @min = 0.01, @max = 9999999999.99 } })
+                            <label class="text-danger" id="valCuota" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Cuota Requerido.</label>
                         </div>
                     </div>
 

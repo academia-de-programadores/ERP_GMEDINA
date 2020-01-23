@@ -190,7 +190,6 @@ $('#dex_Cuota').blur(function () {
         $("#valCuota").hide();
         $("#asteriscoCuota").removeClass('text-danger');
     }
-    debugger;
 
     if (hayAlgo) {
         let esMayorCero = false;
