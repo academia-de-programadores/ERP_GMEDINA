@@ -652,7 +652,7 @@
         <DataSetName>DataSetHistorialDeducciones</DataSetName>
         <Left>1.071cm</Left>
         <Height>1.59688cm</Height>
-        <Width>26.01685cm</Width>
+        <Width>26.01686cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -768,7 +768,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>1.47072cm</Top>
+          <Top>0.83572cm</Top>
           <Height>0.61408cm</Height>
           <Width>28.23544cm</Width>
           <ZIndex>2</ZIndex>
@@ -802,7 +802,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>2.34652cm</Top>
+          <Top>1.71152cm</Top>
           <Height>0.76746cm</Height>
           <Width>28.23544cm</Width>
           <ZIndex>3</ZIndex>

@@ -561,6 +561,44 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox14">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>No hay datos en los filtros seleccionados.</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>Red</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox14</rd:DefaultName>
+        <Top>1.50795cm</Top>
+        <Height>0.6cm</Height>
+        <Width>29.20625cm</Width>
+        <ZIndex>3</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(CountRows("ReportesPlanillaDS") = 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>1.42358in</Height>
     <Style />
@@ -599,7 +637,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>2.12797cm</Top>
+          <Top>1.81047cm</Top>
           <Height>0.9175cm</Height>
           <Width>29.20625cm</Width>
           <Style>
@@ -660,7 +698,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>1.3375cm</Top>
+          <Top>1.02cm</Top>
           <Height>0.61408cm</Height>
           <Width>29.20625cm</Width>
           <ZIndex>3</ZIndex>

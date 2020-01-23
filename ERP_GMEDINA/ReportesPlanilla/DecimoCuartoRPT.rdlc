@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.7788cm</Width>
+              <Width>2.64195cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.7788cm</Width>
+              <Width>2.64195cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.7788cm</Width>
+              <Width>2.64195cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.51964cm</Width>
+              <Width>3.38279cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.3603cm</Width>
+              <Width>3.22345cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.20755cm</Width>
+              <Width>4.0707cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.7788cm</Width>
+              <Width>2.64195cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.81079cm</Width>
+              <Width>2.67394cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -43,7 +43,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No. Empeado</Value>
+                              <Value>No. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -568,9 +568,9 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.03528cm</Top>
-        <Left>1.39563cm</Left>
+        <Left>2.05011cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.01348cm</Width>
+        <Width>23.91868cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -578,8 +578,8 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>2.22504cm</Top>
-        <Left>1.39563cm</Left>
+        <Top>2.84774cm</Top>
+        <Left>2.05011cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
         <ZIndex>1</ZIndex>
@@ -613,11 +613,49 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>2.50143cm</Top>
-        <Left>4.86167cm</Left>
+        <Top>3.12413cm</Top>
+        <Left>5.51615cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox16">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>No hay datos en los filtros seleccionados.</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>Red</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox14</rd:DefaultName>
+        <Top>1.5797cm</Top>
+        <Height>0.6cm</Height>
+        <Width>27.0054cm</Width>
+        <ZIndex>3</ZIndex>
+        <Visibility>
+          <Hidden>=Microsoft.VisualBasic.Interaction.IIf(CountRows() = 0, False, True)</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -632,7 +670,7 @@
     <Height>1.48008in</Height>
     <Style />
   </Body>
-  <Width>10.39729in</Width>
+  <Width>10.63205in</Width>
   <Page>
     <PageHeader>
       <Height>3.5779cm</Height>
@@ -644,7 +682,7 @@
           <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.32434cm</Top>
-          <Left>22.97861cm</Left>
+          <Left>23.63309cm</Left>
           <Height>1.92246cm</Height>
           <Width>1.93834cm</Width>
           <Style>
@@ -673,7 +711,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>2.42319cm</Top>
+          <Top>1.71994cm</Top>
+          <Left>0.65448cm</Left>
           <Height>0.76746cm</Height>
           <Width>26.35092cm</Width>
           <ZIndex>1</ZIndex>
@@ -707,7 +746,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>1.71994cm</Top>
+          <Top>1.01669cm</Top>
+          <Left>0.65448cm</Left>
           <Height>0.61408cm</Height>
           <Width>26.35092cm</Width>
           <ZIndex>2</ZIndex>
@@ -769,7 +809,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
           <Top>0.14111cm</Top>
-          <Left>17.73554cm</Left>
+          <Left>18.39002cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <Style>
@@ -810,7 +850,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>1.235cm</Top>
-          <Left>21.28096cm</Left>
+          <Left>21.93544cm</Left>
           <Height>0.6cm</Height>
           <Width>3.63599cm</Width>
           <ZIndex>1</ZIndex>
@@ -844,7 +884,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox12</rd:DefaultName>
           <Top>1.235cm</Top>
-          <Left>18.05304cm</Left>
+          <Left>18.70752cm</Left>
           <Height>0.6cm</Height>
           <Width>3.36903cm</Width>
           <ZIndex>2</ZIndex>
@@ -868,9 +908,9 @@
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
     <LeftMargin>0cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
+    <RightMargin>0cm</RightMargin>
     <TopMargin>0cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

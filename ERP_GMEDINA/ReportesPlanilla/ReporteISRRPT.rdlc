@@ -636,6 +636,8 @@
               <TextRun>
                 <Value>No hay datos en los filtros seleccionados.</Value>
                 <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                   <Color>Red</Color>
                 </Style>
               </TextRun>
@@ -646,7 +648,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>1.7859cm</Top>
+        <Top>1.4684cm</Top>
         <Height>0.6cm</Height>
         <Width>27.71808cm</Width>
         <ZIndex>3</ZIndex>
@@ -721,7 +723,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>1.71349cm</Top>
+          <Top>1.07849cm</Top>
           <Height>0.61408cm</Height>
           <Width>27.51419cm</Width>
           <ZIndex>2</ZIndex>
@@ -755,7 +757,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>2.41674cm</Top>
+          <Top>1.78174cm</Top>
           <Height>0.76746cm</Height>
           <Width>27.51419cm</Width>
           <ZIndex>3</ZIndex>
