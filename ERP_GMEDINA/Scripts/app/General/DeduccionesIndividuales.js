@@ -121,24 +121,131 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 });
 //#endregion
 
+//#region blur
+
+$('#Crear #dei_Motivo, #Editar #dei_Motivo').blur(function () {
+    if (
+        $(this)
+            .val()
+            .trim() == ''
+    ) {
+        $("#Crear #valMotivo, #Editar #valMotivo").css("display", "");
+        $("#Crear #astMotivo, #Editar #astMotivo").css("color", "red");
+
+    } else {
+        $("#Crear #valMotivo, #Editar #valMotivo").css("display", "none");
+        $("#Crear #astMotivo, #Editar #astMotivo").css("color", "black");
+    }
+});
+
+$('#Crear #emp_Id, #Editar #emp_Id').blur(function () {
+    let emp_Id = $(this).val();
+    if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
+        $("#Crear #valEmpId, #Editar #valEmpId").css("display", "");
+        $("#Crear #astEmpId, #Editar #astEmpId").css("color", "red");
+
+    } else {
+        $("#Crear #valEmpId, #Editar #valEmpId").css("display", "none");
+        $("#Crear #astEmpId, #Editar #astEmpId").css("color", "black");
+    }
+});
+
+$('#Crear #dei_MontoInicial, #Editar #dei_MontoInicial').blur(function () {
+    let dei_MontoInicial = $(this).val();
+    let hayAlgo = false;
+    if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined) {
+        $("#Crear #valMontoInicialRequerido, #Editar #valMontoInicialRequerido").css("display", "");
+        $("#Crear #astMontoInicial, #Editar #astMontoInicial").css("color", "red");
+
+    } else {
+        hayAlgo = true;
+        $("#Crear #valMontoInicialRequerido, #Editar #valMontoInicialRequerido").css("display", "none");
+        $("#Crear #astMontoInicial, #Editar #astMontoInicial").css("color", "black");
+    }
+
+    if (hayAlgo)
+        if (dei_MontoInicial == 0.00 || dei_MontoInicial < 0) {
+            $("#Crear #valMontoInicial, #Editar #valMontoInicial").css("display", "block");
+            $("#Crear #astMontoInicial, #Editar #astMontoInicial").css("color", "red");
+            estaBien = false;
+        }
+        else {
+            $("#Crear #valMontoInicial, #Editar #valMontoInicial").css("display", "none");
+            $("#Crear #astMontoInicial, #Editar #astMontoInicial").css("color", "black");
+        }
+});
+
+$('#Crear #dei_MontoRestante, #Editar #dei_MontoRestante').blur(function () {
+    let dei_MontoRestante = $(this).val();
+    let hayAlgo = false;
+
+    if (dei_MontoRestante == "" || dei_MontoRestante == null || dei_MontoRestante == undefined) {
+        $("#Crear #valMontoRestanteRequerido, #Editar #valMontoRestanteRequerido").html('Campo Monto Restante Requerido');
+        $("#Crear #valMontoRestanteRequerido, #Editar #valMontoRestanteRequerido").css("display", "");
+        $("#Crear #astMontoRestante, #Editar #astMontoRestante").css("color", "red");
+    } else {
+        hayAlgo = true
+        $("#Crear #valMontoRestanteRequerido, #Editar #valMontoRestanteRequerido").css("display", "none");
+        $("#Crear #astMontoRestante, #Editar #astMontoRestante").css("color", "black");
+    }
+
+    if (hayAlgo)
+        if (dei_MontoRestante == 0.00 || dei_MontoRestante < 0) {
+            $("#Crear #valMontoRestanteMayor, #Editar #valMontoRestanteMayor").html('El campo Monto restante no puede ser menor o igual que cero.');
+            $("#Crear #valMontoRestanteMayor, #Editar #valMontoRestanteMayor").css("display", "block");
+            $("#Crear #astMontoRestante, #Editar #astMontoRestante").css("color", "red");
+            estaBien = false;
+        }
+        else {
+            $("#Crear #valMontoRestanteMayor, #Editar #valMontoRestanteMayor").css("display", "none");
+            $("#Crear #astMontoRestante, #Editar #astMontoRestante").css("color", "black");
+        }
+});
+
+$('#Crear #dei_Cuota, #Editar #dei_Cuota').blur(function () {
+    let valor = $(this).val(), hayAlgo = false;
+    if (valor == "" || valor == null || valor == undefined) {
+        $("#Crear #valCuota, #Editar #valCuota").css("display", "");
+        $("#Crear #astCuota, #Editar #astCuota").css("color", "red");
+
+    } else {
+        hayAlgo = true;
+        $("#Crear #valCuota, #Editar #valCuota").css("display", "none");
+        $("#Crear #astCuota, #Editar #astCuota").css("color", "black");
+    }
+
+    if (hayAlgo)
+        if (valor <= 0) {
+            $("#Crear #valCuota, #Editar #valCuota").html('Campo Cuota no puede ser mayor o igual que cero');
+            $("#Crear #valCuota, #Editar #valCuota").css("display", "");
+            $("#Crear #astCuota, #Editar #astCuota").css("color", "red");
+
+        } else {
+            $("#Crear #valCuota, #Editar #valCuota").css("display", "none");
+            $("#Crear #astCuota, #Editar #astCuota").css("color", "black");
+        }
+});
+
+//#endregion
+
 //#region Funciones
 
-function limpiarAsteriscosCrear() {
-    $("#Crear #astMotivo").css("color", "black");
-    $("#Crear #astEmpId").css("color", "black");
-    $("#Crear #astMontoInicial").css("color", "black");
-    $("#Crear #astMontoRestante").css("color", "black");
-    $("#Crear #astCuota").css("color", "black");
+function limpiarAsteriscos(modal) {
+    $("#" + modal + " #astMotivo").css("color", "black");
+    $("#" + modal + " #astEmpId").css("color", "black");
+    $("#" + modal + " #astMontoInicial").css("color", "black");
+    $("#" + modal + " #astMontoRestante").css("color", "black");
+    $("#" + modal + " #astCuota").css("color", "black");
 }
 
-function limpiarSpanCrear() {
-    $("#Crear #valMotivo").css("display", "none");
-    $("#Crear #dei_Motivo").css("display", "none");
-    $("#Crear #valMontoInicial").css("display", "none");
-    $("#Crear #valMontoInicial").css("display", "none");
-    $("#Crear #validation4").css("display", "none");
-    $("#Crear #valMontoRestante").css("display", "none");
-    $("#Crear #valCuota").css("display", "none");
+function limpiarSpan(modal) {
+    $("#" + modal + " #valMotivo").css("display", "none");
+    $("#" + modal + " #valEmpId").css("display", "none");
+    $("#" + modal + " #valMontoInicial").css("display", "none");
+    $("#" + modal + " #valMontoInicialRequerido").css("display", "none");
+    $("#" + modal + " #valMontoRestanteRequerido").css("display", "none");
+    $("#" + modal + " #valMontoRestanteMayor").css("display", "none");
+    $("#" + modal + " #valCuota").css("display", "none");
 }
 
 function estaTodoValidado(modal) {
@@ -151,8 +258,8 @@ function estaTodoValidado(modal) {
     let emp_Id = $("#Crear #emp_Id").val();
     //#endregion
 
-    //#region Validar DDL Motivo 
-    if (dei_Motivo == null || dei_Motivo == "") {
+    //#region Validar Motivo 
+    if (dei_Motivo == "" || dei_Motivo.trim() == "") {
         $("#" + modal + " #valMotivo").css("display", "");
         $("#" + modal + " #astMotivo").css("color", "red");
         estaBien = false;
@@ -177,7 +284,7 @@ function estaTodoValidado(modal) {
 
     //#region Validar monto Inicial
     let hayAlgoEnMontoInicial = false;
-    if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined || dei_MontoInicial <= 0) {
+    if (dei_MontoInicial == "") {
         $("#" + modal + " #valMontoInicialRequerido").css("display", "block");
         $("#" + modal + " #astMontoInicial").css("color", "red");
         estaBien = false;
@@ -214,10 +321,11 @@ function estaTodoValidado(modal) {
         $("#astMontoRestante").css("color", "red");
         estaBien = false;
     }
-    debugger;
+
     //Validar si monto restante es mayor que monto inicial
     if (hayAlgoEnMontoInicial && hayAlgoEnMontoRestante)
         if (dei_MontoRestante > dei_MontoInicial) {
+            $("#" + modal + " #valMontoRestanteMayor").html('El campo monto restante no puede ser mayor que monto inicial.');
             $("#" + modal + " #valMontoRestanteMayor").show();
             $("#" + modal + " #astMontoRestante").css("color", "red");
             estaBien = false;
@@ -228,18 +336,32 @@ function estaTodoValidado(modal) {
 
         }
     //#endregion
-
-
+    debugger;
+    let hayAlgoCuota = false;
     //#region Validar cuota
     if (dei_Cuota != "") {
+        hayAlgoCuota = true;
         $("#" + modal + " #valCuota").css("display", "none");
         $("#" + modal + " #astCuota").css("color", "black");
     }
     else {
+        $("#" + modal + " #valCuota").html('Campo Cuota Requerido');
         $("#" + modal + " #valCuota").css("display", "");
         $("#" + modal + " #astCuota").css("color", "red");
         estaBien = false;
     }
+
+    if (hayAlgoCuota)
+        if (!(dei_Cuota <= 0)) {
+            $("#" + modal + " #valCuota").css("display", "none");
+            $("#" + modal + " #astCuota").css("color", "black");
+        }
+        else {
+            $("#" + modal + " #valCuota").html('Campo Cuota no puede ser mayor o igual que cero');
+            $("#" + modal + " #valCuota").css("display", "");
+            $("#" + modal + " #astCuota").css("color", "red");
+            estaBien = false;
+        }
     //#endregion
 
     return estaBien;
@@ -250,11 +372,9 @@ function estaTodoValidado(modal) {
 //#region Crear
 $("#btnCerrarCrear").click(function () {
     //Ocultar validaciones span
-    limpiarSpanCrear();
+    limpiarSpan("Crear");
     //Asteriscos
-    limpiarAsteriscosCrear();
-
-
+    limpiarAsteriscos("Crear");
     $("#emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -270,6 +390,10 @@ $("#btnCerrarCrear").click(function () {
 
 //Pedir data para llenar el DDL
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
+    //Ocultar validaciones span
+    limpiarSpan("Crear");
+    //Asteriscos
+    limpiarAsteriscos("Crear");
     document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
@@ -411,20 +535,15 @@ $('#frmCreateDeduccionIndividual #dei_Cuota').keyup(function () {
 //#region Editar
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#validatione3").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#Editar #aste1").css("color", "black");
-    $("#Editar #aste2").css("color", "black");
-    $("#Editar #aste3").css("color", "black");
-    $("#Editar #aste4").css("color", "black");
-    $("#Editar #aste5").css("color", "black");
+    limpiarAsteriscos("Editar");
+    limpiarSpan("Editar");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
 
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
+    limpiarAsteriscos("Editar");
+    limpiarSpan("Editar");
     document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     var id = $(this).data('id');
     inactivarID = id;
@@ -486,93 +605,6 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
 });
 
 $("#btnEditDeduccionIndividual").click(function () {
-    var TOF = true;
-    var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-
-    var vale2 = $("#Editar #dei_Motivo").val();
-    var vale3 = $("#Editar #dei_MontoInicial").val();
-    var vale4 = $("#Editar #dei_MontoRestante").val();
-    var vale5 = $("#Editar #dei_Cuota").val();
-
-    if (vale2 == "" || vale2 == null || vale2 == 0 || vale2 == 0.00) {
-        $("#Editar #validatione1").css("display", "");
-        $("#Editar #1editaste").css("color", "red");
-        TOF = false;
-    }
-    else {
-        $("#Editar #validatione1").css("display", "none");
-        $("#Editar #1editaste").css("color", "black");
-    }
-    //--
-
-    if (vale3 == "" || vale3 == null || vale3 == undefined || vale3 <= 0) {
-        $("#Editar #validatione3").css("display", "block");
-        $("#Editar #3editaste").css("color", "red");
-        TOF = false;
-    }
-    else {
-        $("#Editar #validatione3").css("display", "none");
-        $("#Editar #3editaste").css("color", "black");
-        if (expr.test(vale3)) {
-            $("#Editar #validatione3").css("display", "none");
-            $("#Editar #3editaste").css("color", "black");
-        }
-        else {
-            $("#Editar #validatione3").css("display", "");
-            $("#Editar #3editaste").css("color", "red");
-            TOF = false;
-        }
-
-    }
-
-    if (vale4 > vale3) {
-        $("#Editar #MontoRestanteEditar").css("display", "");
-        $("#Editar #4editaste").css("color", "red");
-        TOF = false;
-    }
-    else {
-        $("#Editar #MontoRestanteEditar").css("display", "none");
-        $("#Editar #4editaste").css("color", "black");
-    }
-    //--
-    if (vale4 != "" || vale4 != null || vale4 != undefined) {
-        $("#Editar #validatione4").css("display", "none");
-        $("#Editar #4editaste").css("color", "black");
-    }
-    else {
-        $("#Editar #validatione4").css("display", "");
-        $("#Editar #4editaste").css("color", "red");
-        TOF = false;
-    }
-    if (expr.test(vale4)) {
-        $("#Editar #validatione4").css("display", "none");
-        $("#Editar #4editaste").css("color", "black");
-    }
-    else {
-        $("#Editar #validatione4").css("display", "");
-        $("#Editar #4editaste").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (vale5 != "" || vale5 != null || vale5 != undefined) {
-        $("#Editar #validatione5").css("display", "none");
-        $("#Editar #5editaste").css("color", "black");
-    }
-    else {
-        $("#Editar #validatione5").css("display", "");
-        $("#Editar #5editaste").css("color", "red");
-        TOF = false;
-    }
-    if (expr.test(vale5)) {
-        $("#Editar #validatione5").css("display", "none");
-        $("#Editar #5editaste").css("color", "black");
-    }
-    else {
-        $("#Editar #validatione5").css("display", "");
-        $("#Editar #5editaste").css("color", "red");
-        TOF = false;
-    }
-
     if (TOF) {
         $("#EditarDeduccionesIndividuales").modal('hide');
         $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
@@ -790,7 +822,6 @@ $(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccionIndividual").click(function () {
     document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = true;
-    debugger;
     var data = { dei_IdDeduccionesIndividuales: inactivarID }
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
