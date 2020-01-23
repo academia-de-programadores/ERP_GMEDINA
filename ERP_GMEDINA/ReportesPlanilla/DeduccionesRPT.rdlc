@@ -46,7 +46,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No. Empleado</Value>
+                              <Value>Num. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -186,7 +186,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Inicio</Value>
+                              <Value>Fecha inicio</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -221,7 +221,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Fin</Value>
+                              <Value>Fecha fin</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -256,7 +256,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Pago</Value>
+                              <Value>Fecha pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -291,7 +291,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripción Planilla</Value>
+                              <Value>Descripción planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -326,7 +326,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total a Deducir</Value>
+                              <Value>Total a deducir</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>

@@ -43,7 +43,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No. Empleado</Value>
+                              <Value>Num. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -139,7 +139,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha de Pago</Value>
+                              <Value>Fecha de pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -171,7 +171,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripción Planilla</Value>
+                              <Value>Descripción planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -203,7 +203,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cuenta Bancaria</Value>
+                              <Value>Cuenta bancaria</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -235,7 +235,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Código del Pago</Value>
+                              <Value>Código del pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -790,7 +790,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Fecha de Impresion: </Value>
+                  <Value>Fecha de Impresión: </Value>
                   <Style />
                 </TextRun>
                 <TextRun>

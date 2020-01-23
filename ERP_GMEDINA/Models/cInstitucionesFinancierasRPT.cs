@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
         public int per_Id { get; set; }
         public string per_Nombres { get; set; }
-        [Display(Name = "Codigo Institucion Financiera")]
+        [Display(Name = "Código Institucion Financiera")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public int insf_IdInstitucionFinanciera { get; set; }
         public string insf_DescInstitucionFinanc { get; set; }
@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
         public string deif_Comentarios { get; set; }
         public string deif_Pagado { get; set; }
         public string per_Apellidos { get; set; }
-        [Display(Name = "Codigo Planilla")]
+        [Display(Name = "Código Planilla")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public int cpla_IdPlanilla { get; set; }
         public string cpla_DescripcionPlanilla { get; set; }
