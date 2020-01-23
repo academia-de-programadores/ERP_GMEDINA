@@ -2971,7 +2971,9 @@
     <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Downloadable files\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
