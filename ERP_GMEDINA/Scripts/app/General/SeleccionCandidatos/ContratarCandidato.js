@@ -99,7 +99,7 @@ $("#btnGuardar").click(function () {
                     $(location).attr('href', "/SeleccionCandidatos/Index");
 
                 } else {
-                    MsgError("Error", "No se guardó el registro, contacte al administrador");
+                    MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
             });
     } else {

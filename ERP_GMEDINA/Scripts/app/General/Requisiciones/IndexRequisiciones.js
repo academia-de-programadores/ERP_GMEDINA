@@ -320,7 +320,7 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "No se guardó el registro, contacte al administrador");
+                    MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
             });
     } else {
@@ -341,9 +341,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
             });
     } else {

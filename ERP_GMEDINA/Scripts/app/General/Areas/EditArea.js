@@ -291,7 +291,7 @@ $("#ModalInactivar").find("#InActivar").on("click", function () {
         //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
         $(location).attr('href', '/Areas');
        } else {
-        MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+        MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
        }
       });
  }
