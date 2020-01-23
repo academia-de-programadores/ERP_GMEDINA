@@ -2,10 +2,8 @@
 var fill = 0;
 //Funciones GET
 function tablaEditar(id) {
- //var tr=$(btn).closest("tr");
- //var row = tabla.row(tr);
- //id = row.data().id;
-    _POST(JSON.stringify({ id: id }),
+    var data = { id: id };
+    _POST(data,
      '/Habilidades/Datos/',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -16,11 +14,8 @@ function tablaEditar(id) {
      });
 }
 function tablaDetalles(id) {
- //var tr = $(btn).closest("tr");
- //var row = tabla.row(tr);
- //id = row.data().id;
-
-    _POST(JSON.stringify({ id: id }),
+    var data = { id: id };
+    _POST(data,
      '/Habilidades/Datos/',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
