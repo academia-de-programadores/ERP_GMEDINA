@@ -49,6 +49,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+
         // POST: Habilidades/Create
         [HttpPost]
         public JsonResult Create(tbHabilidades tbHabilidades)
@@ -78,9 +79,8 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
         // GET: Habilidades/Edit/5
-        [HttpPost]
-        [ActionName("Datos")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -119,6 +119,7 @@ namespace ERP_GMEDINA.Controllers
             };
             return Json(habilidad, JsonRequestBehavior.AllowGet);
         }
+
         // POST: Habilidades/Edit/5
         [HttpPost]
         public JsonResult Edit(tbHabilidades tbHabilidades)
@@ -150,6 +151,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
         // GET: Habilidades/Delete/5
         [HttpPost]
         public ActionResult Delete(tbHabilidades tbHabilidades)
@@ -183,7 +185,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
         public JsonResult hablilitar(int id)
         {
             string result = "";

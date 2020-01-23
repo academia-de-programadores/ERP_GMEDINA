@@ -19,6 +19,5 @@ namespace ERP_GMEDINA.Models
         public string per_Identidad { get; set; }
         public string aude_Descripcion { get; set; }
         public System.DateTime fechaAudiencia { get; set; }
-        public System.DateTime fecha { get; set; }
     }
 }

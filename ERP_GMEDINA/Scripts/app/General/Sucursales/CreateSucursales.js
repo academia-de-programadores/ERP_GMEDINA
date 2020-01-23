@@ -12,7 +12,7 @@
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                     setTimeout(function () { window.location.href = "/Sucursales/Index"; }, 3000);
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {

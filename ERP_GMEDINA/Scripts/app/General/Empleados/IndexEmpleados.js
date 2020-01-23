@@ -36,8 +36,8 @@ function llenarTabla() {
                    Departamento: value.depto_Descripcion,
                    Sexo: value.per_Sexo,
                   Estado:value.Estado ? "Activo":"Inactivo",
-                   "Teléfono": value.per_Telefono,
-                   "CorreoElectrónico": value.per_CorreoElectronico
+                   Telefono: value.per_Telefono,
+                   Correo: value.per_CorreoElectronico
 
                });
            });

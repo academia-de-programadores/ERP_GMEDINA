@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha Inicio</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaContratacion, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaContratacion", @id = "fechaInicio" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaContratacion, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaContratacion", @id = "FechaContratacion" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.FechaContratacion, "", new { @class = "text-danger" })
                             </div>
@@ -39,7 +39,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha Fin</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaFin", @id = "fechaFin" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaFin", @id = "FechaFin" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
                             </div>
@@ -81,6 +81,3 @@
 <br />
 <br />
 
-@section Scripts {
-    @Scripts.Render("~/Scripts/app/general_Fechas")
-}

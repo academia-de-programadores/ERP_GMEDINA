@@ -232,7 +232,7 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["jor_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
@@ -255,7 +255,7 @@ $("#btnGuardarHorario").click(function () {
                     LimpiarControles(["hor_Descripcion", "hor_HoraInicio", "hor_HoraFin"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
@@ -322,9 +322,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["jor_Descripcion", "jor_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -347,9 +347,9 @@ $("#InActivarHorario").click(function () {
                     $('.modal-backdrop').remove();//eliminamos el backdrop del modal
                     llenarTabla();
                     LimpiarControles(["hor_Descripcion", "hor_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

@@ -61,7 +61,7 @@ function llenarTabla() {
                     Estado:value.area_Estado?'Activo':'Inactivo',
                     "Número":value.area_Id,
                     ID: value.area_Id,
-                    "Área": value.area_Descripcion,
+                    Area: value.area_Descripcion,
                     Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
                     Sucursales: value.Sucursales,
                     Acciones: Acciones

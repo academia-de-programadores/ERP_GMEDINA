@@ -7,7 +7,7 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cSueldos))]
-    public partial class tbSueldos
+    public partial class TbSueldos
     {
     }
     public class cSueldos
@@ -29,7 +29,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Sueldo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
-        public string sue_Cantidad { get;set; }
+        public decimal sue_Cantidad { get; set; }
 
         [Display(Name = "Sueldo Anterior")]
         public Nullable<int> sue_SueldoAnterior { get; set; }

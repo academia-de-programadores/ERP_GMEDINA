@@ -2,9 +2,12 @@
 var fill = 0;
 //Funciones GET
 function tablaEditar(id) {
-    var data = { id: id };
-    _POST(data,
-     '/Habilidades/Datos/',
+ //var tr=$(btn).closest("tr");
+ //var row = tabla.row(tr);
+ //id = row.data().id;
+ _ajax(null,
+     '/Habilidades/Edit/' + id,
+     'GET',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        ID = obj.habi_Id;
@@ -14,9 +17,13 @@ function tablaEditar(id) {
      });
 }
 function tablaDetalles(id) {
-    var data = { id: id };
-    _POST(data,
-     '/Habilidades/Datos/',
+ //var tr = $(btn).closest("tr");
+ //var row = tabla.row(tr);
+ //id = row.data().id;
+
+ _ajax(null,
+     '/Habilidades/Edit/' + id,
+     'GET',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        ID = obj.habi_Id;
@@ -52,7 +59,7 @@ function llenarTabla() {
         Estado: value.habi_Estado ? 'Activo' : 'Inactivo',
         "Número": value.habi_Id,
         ID: value.habi_Id,
-        Descripción: value.habi_Descripcion,
+        Descripcion: value.habi_Descripcion,
         Acciones: Acciones
        });
       });
@@ -107,7 +114,7 @@ $("#btnGuardar").click(function () {
         LimpiarControles(["habi_Descripcion"]);
         MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
        } else {
-        MsgError("Error", "No se agrego el registro, contacte al administrador");
+        MsgError("Error", "No se guardó el registro, contacte al administrador");
        }
       });
  } else {
@@ -129,9 +136,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

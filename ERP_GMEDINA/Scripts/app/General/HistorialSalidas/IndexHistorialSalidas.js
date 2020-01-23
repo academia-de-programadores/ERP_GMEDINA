@@ -116,9 +116,9 @@ $("#InActivar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
-                MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
             }
         });
     } else {
@@ -156,7 +156,7 @@ function format(obj) {
     : index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
         div = div
-        + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
+        + '<div class="col-md-5"><b>Número de identidad: </b>' + index.per_Identidad + '</div>'
         + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
         //+ '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
         //+ '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'

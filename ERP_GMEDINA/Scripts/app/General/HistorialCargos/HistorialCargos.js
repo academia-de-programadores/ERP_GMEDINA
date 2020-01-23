@@ -67,7 +67,7 @@ $("#btnGuardar").click(function () {
 
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {

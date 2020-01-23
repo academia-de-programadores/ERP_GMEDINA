@@ -115,7 +115,6 @@ $(document).ready(function () {
       ],
         order: [[0, 'asc']]
     });
-    RestaurarDT();
 });
 $("#add").click(function () {
     var depto_Descripcion=$("#FormDepartamentos").find("#depto_Descripcion").data("val-maxlength-max");

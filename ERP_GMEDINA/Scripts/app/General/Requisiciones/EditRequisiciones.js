@@ -62,8 +62,7 @@ function Req_check() {
 
 $(document).ready(function () {
 
-   
-
+    
     id = sessionStorage.getItem("IdRequisicion");
     _ajax(null,
             '/Requisiciones/DualListBoxData/' + id,
@@ -75,32 +74,56 @@ $(document).ready(function () {
             })
 
     id = sessionStorage.getItem("IdRequisicion");
+    /*
+    _ajax(null,
+        '/Requisiciones/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                var fecha = FechaFormatoSimple(obj[0].req_FechaNacimiento);
+                console.log(fecha);
+                $("#tbRequisiciones").find("#req_Id").val(obj[0].req_Id);
+                $("#tbRequisiciones").find("#req_Identidad").val(obj[0].req_Identidad);
+                $("#tbRequisiciones").find("#req_Nombres").val(obj[0].req_Nombres);
+                $("#tbRequisiciones").find("#req_Apellidos").val(obj[0].req_Apellidos);
+                $("#tbRequisiciones").find("#req_FechaNacimiento").val(FechaFormatoSimple(obj[0].req_FechaNacimiento));
+                $("#tbRequisiciones").find("#req_Sexo").val(obj[0].req_Sexo);
+                $("#tbRequisiciones").find("#req_Edad").val(obj[0].req_Edad);
+                $("#tbRequisiciones").find("#nac_Id").val(obj[0].nac_Id);
+                $("#tbRequisiciones").find("#req_Direccion").val(obj[0].req_Direccion);
+                $("#tbRequisiciones").find("#req_Telefono").val(obj[0].req_Telefono);
+                $("#tbRequisiciones").find("#req_CorreoElectronico").val(obj[0].req_CorreoElectronico);
+                $("#tbRequisiciones").find("#req_EstadoCivil").val(obj[0].req_EstadoCivil);
+                $("#tbRequisiciones").find("#req_TipoSangre").val(obj[0].req_TipoSangre);
+            }
+        });
+    */
 
-    //_ajax(null,
-    //    '/Requisiciones/Edit/' + id,
-    //    'GET',
-    //    function (obj) {
-    //        var req_Duracion = $("#req_Duracion");
-    //        if (obj != "-1" && obj != "-2" && obj != "-3") {
-    //            $("#tbRequisiciones").find("#req_Experiencia").val(obj[0].req_Experiencia);
-    //            $("#tbRequisiciones").find("#req_Sexo").val($.trim(obj[0].req_Sexo));
-    //            $("#tbRequisiciones").find("#req_Descripcion").val(obj[0].req_Descripcion);
-    //            $("#tbRequisiciones").find("#req_EdadMinima").val(obj[0].req_EdadMinima);
-    //            $("#tbRequisiciones").find("#req_EdadMaxima").val(obj[0].req_EdadMaxima);
-    //            $("#tbRequisiciones").find("#req_EstadoCivil").val($.trim(obj[0].req_EstadoCivil));
-    //            $("#tbRequisiciones").find("#req_EducacionSuperior").prop("checked", obj[0].req_EducacionSuperior);
-    //            $("#tbRequisiciones").find("#req_Permanente").prop("checked", obj[0].req_Permanente);
-    //            $("#tbRequisiciones").find("#req_Duracion").val(obj[0].req_Duracion);
-    //            $("#tbRequisiciones").find("#req_Vacantes").val(obj[0].req_Vacantes);
-    //            $("#tbRequisiciones").find("#req_FechaRequisicion").val(FechaFormatoSimple(obj[0].req_FechaRequisicion));
-    //            $("#tbRequisiciones").find("#req_FechaContratacion").val(FechaFormatoSimple(obj[0].req_FechaContratacion));
+    _ajax(null,
+        '/Requisiciones/Edit/' + id,
+        'GET',
+        function (obj) {
+            var req_Duracion = $("#req_Duracion");
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#tbRequisiciones").find("#req_Experiencia").val(obj[0].req_Experiencia);
+                $("#tbRequisiciones").find("#req_Sexo").val($.trim(obj[0].req_Sexo));
+                $("#tbRequisiciones").find("#req_Descripcion").val(obj[0].req_Descripcion);
+                $("#tbRequisiciones").find("#req_EdadMinima").val(obj[0].req_EdadMinima);
+                $("#tbRequisiciones").find("#req_EdadMaxima").val(obj[0].req_EdadMaxima);
+                $("#tbRequisiciones").find("#req_EstadoCivil").val($.trim(obj[0].req_EstadoCivil));
+                $("#tbRequisiciones").find("#req_EducacionSuperior").prop("checked", obj[0].req_EducacionSuperior);
+                $("#tbRequisiciones").find("#req_Permanente").prop("checked", obj[0].req_Permanente);
+                $("#tbRequisiciones").find("#req_Duracion").val(obj[0].req_Duracion);
+                $("#tbRequisiciones").find("#req_Vacantes").val(obj[0].req_Vacantes);
+                $("#tbRequisiciones").find("#req_FechaRequisicion").val(FechaFormatoSimple(obj[0].req_FechaRequisicion));
+                $("#tbRequisiciones").find("#req_FechaContratacion").val(FechaFormatoSimple(obj[0].req_FechaContratacion));
 
-    //            if(obj[0].req_Permanente == true)
-    //            {
-    //                req_Duracion.prop("disabled", false);
-    //            }
-    //        }
-    //    });
+                if(obj[0].req_Permanente == true)
+                {
+                    req_Duracion.prop("disabled", false);
+                }
+            }
+        });
 
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
@@ -128,7 +151,7 @@ $(document).ready(function () {
                         $("#finish").attr("href", " ");
                         setTimeout(function () { window.location.href = "/Requisiciones/Index"; }, 3000);
                     } else {
-                        MsgError("Error", "No se agrego el registro, contacte al administrador");
+                        MsgError("Error", "No se guardó el registro, contacte al administrador");
                     }
                 });
             }
@@ -137,32 +160,4 @@ $(document).ready(function () {
             }
         },
     });
-    var sexo = $("#SexVal").val();
-    var EstCivil = $("#CiVal").val();
-    var Duration = $("#Duration").val();
-    var ReqDate = $("#ReqDate").val().substring(0,10);
-    var ConDate = $("#ConDate").val().substring(0, 10);
-
-    var _ReqDate = moment(ReqDate, "DD/MM/YYYY", true).format();
-    var _ConDate = moment(ConDate, "DD/MM/YYYY", true).format();
-
-    var _ReqDate = _ReqDate.substring(0,10);
-    var _ConDate = _ConDate.substring(0,10);
-
-
-    $("#req_Sexo").val(sexo).change();
-    $("#req_EstadoCivil").val(EstCivil).change();
-    $("#req_FechaRequisicion").val(_ReqDate);
-    $("#req_FechaContratacion").val(_ConDate);
-
-    var ischecked = $("#req_Permanente").is(':checked');
-    var req_Duracion = $("#req_Duracion");
-    if (ischecked) {
-        req_Duracion.prop("disabled", false);
-        req_Duracion.val(Duration);
-    }
-    else {
-        req_Duracion.prop("disabled", true);
-        req_Duracion.val("N/A");
-    }
 });

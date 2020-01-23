@@ -72,7 +72,7 @@ namespace ERP_GMEDINA.Controllers
                         req_FechaCrea = x.req_FechaCrea,
                         req_FechaModifica = x.req_FechaModifica,
                         req_UsuarioCrea = x.tbUsuario.usu_Nombres,
-                        req_UsuarioModifica = x.tbUsuario1.usu_Nombres
+                        req_UsuarioModifica = x.tbUsuario.usu_Nombres
                     }).Where(x => x.req_Id == id).ToList();
                     return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
                 }
@@ -440,34 +440,41 @@ namespace ERP_GMEDINA.Controllers
         // GET: Requisiciones/Edit/5
         public ActionResult Edit(int? id)
         {
-            
             try
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
                     if (id == null)
                     {
-                        tbRequisiciones tbReq = null;
-                        return View(tbReq);
+                        return View("Edit");
                     }
                     else
-                    {   
-                        tbRequisiciones tbRequisiciones = db.tbRequisiciones.Where(x => x.req_Id == id).FirstOrDefault();
-                        ViewBag.SexoDDL = new SelectList(
-                                    new List<SelectListItem>
-                                    {
-                                        new SelectListItem{ Text="Indiferente", Value = "N" },
-                                        new SelectListItem{ Text="Masculino", Value = "M"},
-                                        new SelectListItem{ Text="Femenino", Value = "F" },
-                                    }, "Value", "Text", tbRequisiciones.req_Sexo.Trim());
-
-                        return View(tbRequisiciones);
+                    {
+                        var tbPersonas = db.tbRequisiciones
+                        .Select(
+                        x => new
+                        {
+                            req_Id = x.req_Id,
+                            req_Experiencia = x.req_Experiencia,
+                            req_Sexo = x.req_Sexo,
+                            req_Descripcion = x.req_Descripcion,
+                            req_EdadMinima = x.req_EdadMinima,
+                            req_EdadMaxima = x.req_EdadMaxima,
+                            req_EstadoCivil = x.req_EstadoCivil,
+                            req_EducacionSuperior = x.req_EducacionSuperior,
+                            req_Permanente = x.req_Permanente,
+                            req_Duracion = x.req_Duracion,
+                            req_Vacantes = x.req_Vacantes,
+                            req_FechaRequisicion = x.req_FechaRequisicion,
+                            req_FechaContratacion = x.req_FechaContratacion
+                        })
+                        .Where(x => x.req_Id == id).ToList();
+                        return Json(tbPersonas, JsonRequestBehavior.AllowGet);
                     }
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                ex.Message.ToString();
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }

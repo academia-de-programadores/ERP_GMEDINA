@@ -21,19 +21,19 @@ namespace ERP_GMEDINA.Models
         public string req_Experiencia { get; set; }
         [Display(Name = "Sexo")]
         public string req_Sexo { get; set; }
-        [Display(Name = "Descripción")]
+        [Display(Name = "Descripcion")]
         public string req_Descripcion { get; set; }
-        [Display(Name = "Edad mínima")]
+        [Display(Name = "Edad Minima")]
         public int req_EdadMinima { get; set; }
-        [Display(Name = "Edad máxima")]
+        [Display(Name = "Edad Maxima")]
         public int req_EdadMaxima { get; set; }
         [Display(Name = "Estado Civil")]
         public string req_EstadoCivil { get; set; }
-        [Display(Name = "Educación superior")]
+        [Display(Name = "Educacion Superior")]
         public bool req_EducacionSuperior { get; set; }
         [Display(Name = "Temporal")]
         public bool req_Permanente { get; set; }
-        [Display(Name = "Duración")]
+        [Display(Name = "Duracion")]
         public string req_Duracion { get; set; }
         [Display(Name = "Estado")]
         public bool req_Estado { get; set; }
@@ -41,9 +41,9 @@ namespace ERP_GMEDINA.Models
         public string req_RazonInactivo { get; set; }
         [Display(Name = "Vacantes")]
         public string req_Vacantes { get; set; }
-        [Display(Name = "Fecha Requisición")]
+        [Display(Name = "Fecha Requisicion")]
         public Nullable<System.DateTime> req_FechaRequisicion { get; set; }
-        [Display(Name = "Fecha contratación")]
+        [Display(Name = "Fecha Contratacion")]
         public Nullable<System.DateTime> req_FechaContratacion { get; set; }
         [Display(Name = "Usuario crea")]
         public int req_UsuarioCrea { get; set; }

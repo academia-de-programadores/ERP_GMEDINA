@@ -188,19 +188,19 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#req_Experiencia")["0"].innerText = obj[0].req_Experiencia;
-                $("#ModalDetalles").find("#req_Sexo")["0"].innerText = obj[0].req_Sexo == "N" ? "Indiferente" : obj[0].req_Sexo == "M" ? "Masulino" : "Femenino";
+                $("#ModalDetalles").find("#req_Sexo")["0"].innerText = obj[0].req_Sexo;
                 $("#ModalDetalles").find("#req_Descripcion")["0"].innerText = obj[0].req_Descripcion;
                 $("#ModalDetalles").find("#req_EdadMinima")["0"].innerText = obj[0].req_EdadMinima;
                 $("#ModalDetalles").find("#req_EdadMaxima")["0"].innerText = obj[0].req_EdadMaxima;
-                $("#ModalDetalles").find("#req_EstadoCivil")["0"].innerText = obj[0].req_EstadoCivil == "N" ? "Indiferente" : obj[0].req_Sexo == "C" ? "Casado(a)" : "Soltero(a)";
-                $("#ModalDetalles").find("#req_EducacionSuperior")["0"].innerText = obj[0].req_EducacionSuperior == "true" ? "Si" : "No";
-                $("#ModalDetalles").find("#req_Permanente")["0"].innerText = obj[0].req_Permanente == "true" ? "Si" : "No";
-                $("#ModalDetalles").find("#req_Duracion")["0"].innerText = obj[0].req_Duracion == null ? "N/A" : obj[0].req_Duracion;
+                $("#ModalDetalles").find("#req_EstadoCivil")["0"].innerText = obj[0].req_EstadoCivil;
+                $("#ModalDetalles").find("#req_EducacionSuperior")["0"].innerText = obj[0].req_EducacionSuperior;
+                $("#ModalDetalles").find("#req_Permanente")["0"].innerText = obj[0].req_Permanente;
+                $("#ModalDetalles").find("#req_Duracion")["0"].innerText = obj[0].req_Duracion;
                 $("#ModalDetalles").find("#req_Vacantes")["0"].innerText = obj[0].req_Vacantes;
-                $("#ModalDetalles").find("#req_FechaRequisicion")["0"].innerText = FechaFormatoSimpleAlt(obj[0].req_FechaRequisicion);
-                $("#ModalDetalles").find("#req_FechaContratacion")["0"].innerText = FechaFormatoSimpleAlt(obj[0].req_FechaContratacion);
-                $("#ModalDetalles").find("#req_FechaCrea")["0"].innerText = FechaFormatoSimpleAlt(obj[0].req_FechaCrea);
-                $("#ModalDetalles").find("#req_FechaModifica")["0"].innerText = FechaFormatoSimpleAlt(obj[0].req_FechaModifica);
+                $("#ModalDetalles").find("#req_FechaRequisicion")["0"].innerText = FechaFormato(obj[0].req_FechaRequisicion);
+                $("#ModalDetalles").find("#req_FechaContratacion")["0"].innerText = FechaFormato(obj[0].req_FechaContratacion);
+                $("#ModalDetalles").find("#req_FechaCrea")["0"].innerText = FechaFormato(obj[0].req_FechaCrea);
+                $("#ModalDetalles").find("#req_FechaModifica")["0"].innerText = FechaFormato(obj[0].req_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioCrea;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioModifica;
 
@@ -231,16 +231,16 @@ function llenarTabla() {
                         "Número": value.req_Id,
                         Experiencia: value.req_Experiencia,
                         Sexo: value.req_Sexo,
-                        "Descripción": value.req_Descripcion,
+                        Descripcion: value.req_Descripcion,
                         EdadMinima: value.req_EdadMinima,
                         EdadMaxima: value.req_EdadMaxima,
                         EstadoCivil: value.req_EstadoCivil,
                         EducacionSuperior: value.req_EducacionSuperior ? "Si" : "No",
                         Temporal: value.req_Permanente ? "Si" : "No",
-                        "Duración": value.req_Duracion == null ? "N/A" : value.req_Duracion,
+                        Duracion: value.req_Duracion == null ? "N/A" : value.req_Duracion,
                         Vacantes: value.req_Vacantes,
-                        FechaRequisicion: FechaFormatoSimpleAlt(value.req_FechaRequisicion),
-                        "FechaContratación" : FechaFormatoSimpleAlt(value.req_FechaContratacion),
+                        FechaRequisicion: FechaFormatoSimple(value.req_FechaRequisicion),
+                        FechaContratacion: FechaFormatoSimple(value.req_FechaContratacion),
                         Acciones: Acciones,
                         Estado: value.req_Estado ? "Activo" : "Inactivo"
                     });
@@ -274,28 +274,28 @@ $("#btnAgregar").click(function () {
 });
 
 $("#btnEditar").click(function () {
-    //_ajax(null,
-    //    '/Requisiciones/Edit/' + id,
-    //    'GET',
-    //    function (obj) {
-    //        if (obj != "-1" && obj != "-2" && obj != "-3") {
-    //            CierraPopups();
-    //            $('#ModalEditar').modal('show');
-    //            $("#ModalEditar").find("#req_Experiencia").val(obj.req_Experiencia);
-    //            $("#ModalEditar").find("#req_Experiencia").focus();
-    //            $("#ModalEditar").find("#req_Sexo").val(obj.req_Sexo);
-    //            $("#ModalEditar").find("#req_Descripcion").val(obj.req_Descripcion);
-    //            $("#ModalEditar").find("#req_EdadMinima").val(obj.req_EdadMinima);
-    //            $("#ModalEditar").find("#req_EdadMaxima").val(obj.req_EdadMaxima);
-    //            $("#ModalEditar").find("#req_EstadoCivil").val(obj.req_EstadoCivil);
-    //            $("#ModalEditar").find("#req_EducacionSuperior").val(obj.req_EducacionSuperior);
-    //            $("#ModalEditar").find("#req_Permanente").val(obj.req_Permanente);
-    //            $("#ModalEditar").find("#req_Duracion").val(obj.req_Duracion);
-    //            $("#ModalEditar").find("#req_Vacantes").val(obj.req_Vacantes);
-    //            $("#ModalEditar").find("#req_FechaRequisicion").val(obj.req_FechaRequisicion);
-    //            $("#ModalEditar").find("#req_FechaContratacion").val(obj.req_FechaContratacion);
-    //        }
-    //    });
+    _ajax(null,
+        '/Requisiciones/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                $('#ModalEditar').modal('show');
+                $("#ModalEditar").find("#req_Experiencia").val(obj.req_Experiencia);
+                $("#ModalEditar").find("#req_Experiencia").focus();
+                $("#ModalEditar").find("#req_Sexo").val(obj.req_Sexo);
+                $("#ModalEditar").find("#req_Descripcion").val(obj.req_Descripcion);
+                $("#ModalEditar").find("#req_EdadMinima").val(obj.req_EdadMinima);
+                $("#ModalEditar").find("#req_EdadMaxima").val(obj.req_EdadMaxima);
+                $("#ModalEditar").find("#req_EstadoCivil").val(obj.req_EstadoCivil);
+                $("#ModalEditar").find("#req_EducacionSuperior").val(obj.req_EducacionSuperior);
+                $("#ModalEditar").find("#req_Permanente").val(obj.req_Permanente);
+                $("#ModalEditar").find("#req_Duracion").val(obj.req_Duracion);
+                $("#ModalEditar").find("#req_Vacantes").val(obj.req_Vacantes);
+                $("#ModalEditar").find("#req_FechaRequisicion").val(obj.req_FechaRequisicion);
+                $("#ModalEditar").find("#req_FechaContratacion").val(obj.req_FechaContratacion);
+            }
+        });
 });
 $("#btnInactivar").click(function () {
     CierraPopups();
@@ -320,7 +320,7 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
@@ -341,9 +341,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -377,7 +377,7 @@ $("#btnActualizar").click(function () {
 function tablaEditar(ID) {
     id = ID;
     sessionStorage.setItem("IdRequisicion", id);
-    window.location.href = "/Requisiciones/Edit/" + id;
+    window.location.href = "/Requisiciones/Edit";
 };
 
 

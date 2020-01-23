@@ -54,7 +54,6 @@ function ShowModalCreate(btn) {
     modalnuevo.modal('show');
     $(modalnuevo).find("#eqtra_Id").focus();
     $(modalnuevo).find("#eqtra_Id").val("");
-    $(modalnuevo).find("#eqem_Fecha").val("");
 }
 
 $("#btnGuardar").click(function () {
@@ -99,13 +98,15 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();                    
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
-                }
-                else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    llenarTabla();
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                } else {
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 

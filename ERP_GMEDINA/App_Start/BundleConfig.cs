@@ -924,10 +924,6 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo/Admin").Include(
                 "~/Scripts/app/general/EquipoTrabajo/Admin.js"));
-
-            bundles.Add(new ScriptBundle("~/Scripts/app/general_Fechas").Include(
-             "~/Scripts/app/general/general_Fechas.js"));
-
             #endregion
 
             #region Optimizaciones

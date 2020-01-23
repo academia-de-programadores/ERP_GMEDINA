@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>4.60109cm</Width>
+              <Width>4.95828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.35755cm</Width>
+              <Width>3.34432cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.43151cm</Width>
+              <Width>2.41828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.43151cm</Width>
+              <Width>2.41828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.19339cm</Width>
+              <Width>3.29141cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.43151cm</Width>
+              <Width>2.41828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33109cm</Width>
+              <Width>3.31786cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.59026cm</Width>
+              <Width>3.76766cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -618,28 +618,58 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesAmonestacionesDS</DataSetName>
-        <Top>1.9903cm</Top>
-        <Left>0.50272cm</Left>
+        <Top>1.69333cm</Top>
+        <Left>0.37042cm</Left>
         <Height>1.2cm</Height>
-        <Width>23.36791cm</Width>
+        <Width>25.93437cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Textbox Name="Textbox8">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Reporte de Amonestaciones</Value>
+                <Style>
+                  <FontSize>20pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox8</rd:DefaultName>
+        <Top>0.31432cm</Top>
+        <Left>5.51625cm</Left>
+        <Height>0.97042cm</Height>
+        <Width>14.96187cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>1.53125in</Height>
-    <Style>
-      <Border>
-        <Style>None</Style>
-      </Border>
-    </Style>
+    <Height>2.83333in</Height>
+    <Style />
   </Body>
-  <Width>9.39789in</Width>
+  <Width>10.46777in</Width>
   <Page>
     <PageHeader>
-      <Height>1.83328cm</Height>
+      <Height>1.13771cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -658,44 +688,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.25549cm</Top>
-          <Left>20.86791cm</Left>
+          <Top>0.25563cm</Top>
+          <Left>23.30208cm</Left>
           <Height>0.6cm</Height>
           <Width>3.00271cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox8">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Reporte de Amonestaciones</Value>
-                  <Style>
-                    <FontSize>20pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.25549cm</Top>
-          <Left>5.51625cm</Left>
-          <Height>0.97042cm</Height>
-          <Width>14.96187cm</Width>
-          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -734,7 +730,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.17639cm</Top>
-          <Left>20.86791cm</Left>
+          <Left>23.30208cm</Left>
           <Height>0.6cm</Height>
           <Width>3.00271cm</Width>
           <Style>

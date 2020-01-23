@@ -3,9 +3,9 @@ function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" onclick="redireccionar()">Audiencia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
-                '<th>' + 'Tipo Amonestación' + '</th>' +
+                '<th>' + 'Tipo Amonestacion' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
-                '<th>' + 'Obsevarción' + '</th>' +
+                '<th>' + 'Obsevarcion' + '</th>' +
                  '<th>' + 'Estado' + '</th>' +
                 '<th>' + 'Acciones' + '</th>' +
                 '</tr>' +
