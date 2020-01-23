@@ -141,105 +141,87 @@ function limpiarSpanCrear() {
     $("#Crear #valCuota").css("display", "none");
 }
 
-function estaTodoValidado() {
+function estaTodoValidado(modal) {
+    //#region Declaracion de variables
     var estaBien = true;
+    let dei_Motivo = $("#" + modal + " #dei_Motivo").val();
+    let dei_MontoInicial = $("#" + modal + " #dei_MontoInicial").val();
+    let dei_MontoRestante = $("#" + modal + " #dei_MontoRestante").val();
+    let dei_Cuota = $("#" + modal + " #dei_Cuota").val();
+    //#endregion
 
-    let emp_sId = $("#Crear #emp_Id").val();
-    let dei_Motivo = $("#Crear #dei_Motivo").val();
-    let dei_MontoInicial = $("#Crear #dei_MontoInicial").val();
-    let dei_MontoRestante = $("#frmCreateDeduccionIndividual #dei_MontoRestante").val();
-    let dei_Cuota = $("#Crear #dei_Cuota").val();
-
+    //#region Validar DDL Motivo 
     if (dei_Motivo == null || dei_Motivo == "") {
-        $("#Crear #valMotivo").css("display", "");
-        $("#Crear #astMotivo").css("color", "red");
+        $("#" + modal + " #valMotivo").css("display", "");
+        $("#" + modal + " #astMotivo").css("color", "red");
         estaBien = false;
     }
     else {
-        $("#Crear #valMotivo").css("display", "none");
-        $("#Crear #astMotivo").css("color", "black");
+        $("#" + modal + " #valMotivo").css("display", "none");
+        $("#" + modal + " #astMotivo").css("color", "black");
     }
-    //--
+    //#endregion
+
+    //#region Validar DDL Empleados
     if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
-        $("#Crear #valEmpId").css("display", "");
-        $("#Crear #astEmpId").css("color", "red");
+        $("#" + modal + " #valEmpId").css("display", "");
+        $("#" + modal + " #astEmpId").css("color", "red");
         estaBien = false;
     }
     else {
-        $("#Crear #valEmpId").css("display", "none");
-        $("#Crear #astEmpId").css("color", "black");
+        $("#" + modal + " #valEmpId").css("display", "none");
+        $("#" + modal + " #astEmpId").css("color", "black");
     }
+    //#endregion
 
-    //--
-    if (expr.test(dei_MontoInicial)) {
-        $("#Crear #valMontoInicial").css("display", "none");
-        $("#Crear #astMontoInicial").css("color", "black");
-    }
-    else {
-        $("#Crear #valMontoInicial").css("display", "");
-        $("#Crear #astMontoInicial").css("color", "red");
-        estaBien = false;
-    }
-    //////////////////////////////
+    //#region Validar monto Inicial
     if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined || dei_MontoInicial <= 0) {
-        $("#Crear #valMontoInicial").css("display", "block");
-        $("#Crear #astMontoInicial").css("color", "red");
+        $("#" + modal + " #valMontoInicial").css("display", "block");
+        $("#" + modal + " #astMontoInicial").css("color", "red");
         estaBien = false;
     }
     else {
-        $("#Crear #valMontoInicial").css("display", "none");
-        $("#Crear #astMontoInicial").css("color", "black");
+        $("#" + modal + " #valMontoInicial").css("display", "none");
+        $("#" + modal + " #astMontoInicial").css("color", "black");
     }
+    //#endregion
 
-    //--
+    //#region Validar monto Restante
     if (dei_MontoRestante != 0) {
-        $("#Crear #valMontoRestante").css("display", "none");
-        $("#astMontoRestante").css("color", "black");
+        $("#" + modal + " #valMontoRestante").css("display", "none");
+        $("#" + modal + " #astMontoRestante").css("color", "black");
     }
     else {
         $("#Crear #valMontoRestante").css("display", "");
         $("#astMontoRestante").css("color", "red");
         estaBien = false;
     }
-    if (expr.test(dei_MontoRestante)) {
-        $("#Crear #valMontoRestante").css("display", "none");
-        $("#astMontoInicial").css("color", "black");
-    }
-    else {
-        $("#Crear #valMontoRestante").css("display", "");
-        $("#Crear #astMontoInicial").css("color", "red");
-        estaBien = false;
-    }
+    //#endregion
 
+    //#region Validar si monto restante es mayor que monto inicial
     if (dei_MontoRestante > dei_MontoInicial) {
-        $("#Crear #valMontoRestante").css("display", "");
-        $("#Crear #astMontoInicial").css("color", "red");
+        $("#" + modal + "#valMontoRestante").css("display", "");
+        $("#" + modal + "#astMontoInicial").css("color", "red");
         estaBien = false;
     }
     else {
-        $("#Crear #valMontoRestante").css("display", "none");
-        $("#Crear #astMontoInicial").css("color", "black");
+        $("#" + modal + "#valMontoRestante").css("display", "none");
+        $("#" + modal + "#astMontoInicial").css("color", "black");
 
     }
-    //--
+    //#endregion
+
+    //#region Validar cuota
     if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
-        $("#Crear #valCuota").css("display", "none");
-        $("#Crear #astCuota").css("color", "black");
+        $("#" + modal + " #valCuota").css("display", "none");
+        $("#" + modal + " #astCuota").css("color", "black");
     }
     else {
-        $("#Crear #valCuota").css("display", "");
-        $("#Crear #astCuota").css("color", "red");
+        $("#" + modal + " #valCuota").css("display", "");
+        $("#" + modal + " #astCuota").css("color", "red");
         estaBien = false;
     }
-    if (expr.test(dei_Cuota)) {
-        $("#Crear #valCuota").css("display", "none");
-        $("#Crear #astCuota").css("color", "black");
-    }
-    else {
-        $("#Crear #valCuota").css("display", "");
-        $("#Crear #astCuota").css("color", "red");
-        estaBien = false;
-    }
+    //#endregion
 
     return estaBien;
 }
@@ -266,11 +248,8 @@ $("#btnCerrarCrear").click(function () {
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-const btnGuardar = $('#btnCreateRegistroDeduccionIndividual')
 
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
+//Pedir data para llenar el DDL
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
     document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
@@ -299,7 +278,7 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
     $("#Crear #MontoRestanteCrear").css("display", "none");
 });
 
-//FUNCION: CREAR EL NUEVO REGISTRO
+//Create POST
 $('#btnCreateRegistroDeduccionIndividual').click(function () {
 
     //#region Declaracion de variables
