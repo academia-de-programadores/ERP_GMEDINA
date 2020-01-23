@@ -105,34 +105,19 @@ namespace ERP_GMEDINA.Controllers
 					DateTime hipa_FechaFin = Convert.ToDateTime(hipa_FechaInicio + "/12" + "/31");
 
 					//Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.				
-					var ConsultaFechas = from HP in db.tbHistorialDePago
-										 join P in db.tbPersonas on HP.emp_Id equals P.per_Id
-										 join E in db.tbEmpleados on P.per_Id equals E.emp_Id
-										 join C in db.tbCargos on E.car_Id equals C.car_Id
-										 join CP in db.tbCatalogoDePlanillas on E.cpla_IdPlanilla equals CP.cpla_IdPlanilla
+					var ConsultaFechas = from HP in db.V_DecimoTercerMesFE									 
 										 where
 										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
-										 HP.hipa_FechaPago <= hipa_FechaFin) &&									
-
-										 CP.cpla_IdPlanilla != 2
-										 group HP by new
+										 HP.hipa_FechaPago <= hipa_FechaFin) 															 
+										 select new 
 										 {
-											 HP.emp_Id,
-											 P.per_Nombres,
-											 P.per_Apellidos,
-											 C.car_Descripcion,
-											 CP.cpla_DescripcionPlanilla,
-											 E.emp_CuentaBancaria
-										 } into PagoDT
-										 select new ViewModelDecimoTercerMes
-										 {
-											 emp_Id = PagoDT.Key.emp_Id,
-											 per_Nombres = PagoDT.Key.per_Nombres,
-											 per_Apellidos = PagoDT.Key.per_Apellidos,
-											 car_Descripcion = PagoDT.Key.car_Descripcion,
-											 cpla_DescripcionPlanilla = PagoDT.Key.cpla_DescripcionPlanilla,
-											 emp_CuentaBancaria = PagoDT.Key.emp_CuentaBancaria,
-											 dtm_Monto = (PagoDT.Sum(x => x.hipa_SueldoNeto) / 360 * 30)
+											 emp_Id = HP.emp_Id,
+											 per_Nombres = HP.per_Nombres,
+											 per_Apellidos = HP.per_Apellidos,
+											 car_Descripcion = HP.car_Descripcion,
+											 cpla_DescripcionPlanilla = HP.cpla_DescripcionPlanilla,
+											 emp_CuentaBancaria = HP.emp_CuentaBancaria,
+											 dtm_Monto = HP.dtm_Monto
 										 };
 					//La consulta LINQ se almacena en un viewbag y se convierte a list la cual vamos a recorrer con un foreach en la vista.
 					ViewBag.ConsultasFechas = ConsultaFechas.ToList();

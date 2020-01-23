@@ -13,7 +13,7 @@
                     Descripción<label class="" id="AsteriscoDescripcionAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "form-control" , @autocomplete = "off" } })
                     <span class="text-danger" id="validation_DescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                     <span class="text-danger" id="validation_DescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                 </div>
@@ -23,7 +23,7 @@
                     Monto<label class="" id="AsteriscoMontoAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "form-control MascaraCantidad" } })
+                    @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off" } })
                     <span class="text-danger" id="validation_MontoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                 </div>
             </div>
