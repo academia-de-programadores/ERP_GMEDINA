@@ -151,7 +151,6 @@ function estaTodoValidado(modal) {
     let emp_Id = $("#Crear #emp_Id").val();
     //#endregion
 
-    debugger;
     //#region Validar DDL Motivo 
     if (dei_Motivo == null || dei_Motivo == "") {
         $("#" + modal + " #valMotivo").css("display", "");
@@ -177,44 +176,62 @@ function estaTodoValidado(modal) {
     //#endregion
 
     //#region Validar monto Inicial
+    let hayAlgoEnMontoInicial = false;
     if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined || dei_MontoInicial <= 0) {
-        $("#" + modal + " #valMontoInicial").css("display", "block");
+        $("#" + modal + " #valMontoInicialRequerido").css("display", "block");
         $("#" + modal + " #astMontoInicial").css("color", "red");
         estaBien = false;
     }
     else {
-        $("#" + modal + " #valMontoInicial").css("display", "none");
+        hayAlgoEnMontoInicial = true;
+        $("#" + modal + " #valMontoInicialRequerido").css("display", "none");
         $("#" + modal + " #astMontoInicial").css("color", "black");
     }
+
+    if (hayAlgoEnMontoInicial)
+        if (dei_MontoInicial == 0.00 || dei_MontoInicial < 0) {
+            $("#" + modal + " #valMontoInicial").css("display", "block");
+            $("#" + modal + " #astMontoInicial").css("color", "red");
+            estaBien = false;
+        }
+        else {
+            hayAlgoEnMontoInicial = true;
+            $("#" + modal + " #valMontoInicial").css("display", "none");
+            $("#" + modal + " #astMontoInicial").css("color", "black");
+        }
     //#endregion
 
+
     //#region Validar monto Restante
+    let hayAlgoEnMontoRestante = false;
     if (dei_MontoRestante != 0) {
-        $("#" + modal + " #valMontoRestante").css("display", "none");
+        hayAlgoEnMontoRestante = true;
+        $("#" + modal + " #valMontoRestanteRequerido").css("display", "none");
         $("#" + modal + " #astMontoRestante").css("color", "black");
     }
     else {
-        $("#Crear #valMontoRestante").css("display", "");
+        $("#Crear #valMontoRestanteRequerido").css("display", "");
         $("#astMontoRestante").css("color", "red");
         estaBien = false;
     }
+    debugger;
+    //Validar si monto restante es mayor que monto inicial
+    if (hayAlgoEnMontoInicial && hayAlgoEnMontoRestante)
+        if (dei_MontoRestante > dei_MontoInicial) {
+            $("#" + modal + " #valMontoRestanteMayor").show();
+            $("#" + modal + " #astMontoRestante").css("color", "red");
+            estaBien = false;
+        }
+        else {
+            $("#" + modal + "#valMontoRestanteMayor").css("display", "none");
+            $("#" + modal + "#astMontoInicial").css("color", "black");
+
+        }
     //#endregion
 
-    //#region Validar si monto restante es mayor que monto inicial
-    if (dei_MontoRestante > dei_MontoInicial) {
-        $("#" + modal + "#valMontoRestante").css("display", "");
-        $("#" + modal + "#astMontoInicial").css("color", "red");
-        estaBien = false;
-    }
-    else {
-        $("#" + modal + "#valMontoRestante").css("display", "none");
-        $("#" + modal + "#astMontoInicial").css("color", "black");
-
-    }
-    //#endregion
 
     //#region Validar cuota
-    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
+    if (dei_Cuota != "") {
         $("#" + modal + " #valCuota").css("display", "none");
         $("#" + modal + " #astCuota").css("color", "black");
     }

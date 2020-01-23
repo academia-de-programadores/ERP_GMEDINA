@@ -35,8 +35,8 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "dei_MontoInicial", @min = 1, @max = 9999999999.99 } })
-                    @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "valMontoInicial" })
                     <span id="valMontoInicial" class="text-danger" style="display:none;">El campo Monto inicial no puede ser menor o igual que cero.</span>
+                    <span id="valMontoInicialRequerido" class="text-danger" style="display:none;">Campo Monto inicial Requerido</span>
                 </div>
             </div>
 
@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @min = 0.01, @max = 9999999999.99 } })
-                    @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validation4" })
-                    <span id="valMontoRestante" class="text-danger" style="display:none;">El campo monto restante no puede ser mayor que monto inicial.</span>
+                    <span id="valMontoRestanteRequerido" class="text-danger" style="display:none;">Campo Monto inicial Requerido</span>
+                    <span id="valMontoRestanteMayor" class="text-danger" style="display:none;">El campo monto restante no puede ser mayor que monto inicial.</span>
                 </div>
             </div>
 
