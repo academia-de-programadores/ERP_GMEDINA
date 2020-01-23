@@ -409,6 +409,8 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" Width="1.5" PointX="15.375" PointY="19.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" Width="1.5" PointX="9.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" Width="1.5" PointX="17.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" Width="1.5" PointX="19.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
