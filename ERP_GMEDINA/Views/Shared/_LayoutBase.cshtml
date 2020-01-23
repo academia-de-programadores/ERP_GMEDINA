@@ -1,6 +1,6 @@
-﻿@if (Session["Admin"]==null)
+﻿@if (Session["Admin"]==null || Session["Usuario"] == null)
 {
-    Response.Redirect("/Inicio/index");
+ Response.Redirect("/Inicio/index");
 }
 <!DOCTYPE html>
 <html>
