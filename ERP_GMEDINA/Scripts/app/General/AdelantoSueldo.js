@@ -85,8 +85,9 @@ function cargarGridAdelantos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
+    //DESBLOQUEAR EL BOTON DE CREAR
+    $("#btnCreateRegistroAdelantos").attr("disabled", false);
 
-    document.getElementById("btnCreateRegistroAdelantos").disabled = false;
     $("#Crear #adsu_RazonAdelanto").val("");
     $("#Crear #adsu_Monto").val("");
     $("#Crear #emp_IdEmpleado").val(0);
@@ -146,8 +147,8 @@ $('#btnCreateRegistroAdelantos').click(function () {
         && Razon != "" && Razon != null && Razon != undefined
         && Monto != "" && Monto != null && Monto != undefined && Monto > 0
         && Fecha != "" && Fecha != null && Fecha != undefined) {
-        //MOSTRAR EL SPINNER DE CARGA
-        document.getElementById("btnCreateRegistroAdelantos").disabled = true;
+        //BLOQUEAR EL BOTON
+        $("#btnCreateRegistroAdelantos").attr("disabled", true);
 
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoAdelantos").serializeArray();
@@ -189,70 +190,113 @@ $('#btnCreateRegistroAdelantos').click(function () {
 
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
 function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
-    if ($("#Crear #adsu_Monto").val() > MaxSueldoCreate
-        && $("#Crear #adsu_Monto").val() != '' && $("#Crear #adsu_Monto").val() != undefined && $("#Crear #adsu_Monto").val() != null
-        && IdEmp != 0) {
-        //MENSAJE DE ERROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
-        iziToast.error({
-            title: 'Error',
-            message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
-        });
-        //IGUALAR EL MONTO AL SUELDO PROMEDIO
-        $("#Crear #adsu_Monto").val('');
-        $("#Crear #SueldoPromedioCrear").html('El sueldo promedio es ' + MaxSueldoCreate);
+    console.log("KeyUp");
+
+    //VALIDAR MONTO POR COLABORADOR
+    if (IdEmp == 0)
+        $("#Crear #adsu_Monto").attr("disabled", true);   //DESBLOQUEAR EL CAMPO MONTO
+    else
+        $("#Crear #adsu_Monto").attr("disabled", false);  //DESBLOQUEAR EL CAMPO MONTO
+
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Crear #adsu_Monto").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateado = parseFloat(MontoFormateado);
+    //VALIDACIONES DE ENTRADA POR EL CAMPO MONTO
+    if (MontoFormateado > MaxSueldoCreate && MontoFormateado != '' && MontoFormateado != undefined && MontoFormateado != null  && IdEmp != 0) {
+        
+        //MOSTRAR VALIDACIONES
+        var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
+        console.log("El monto máximo de adelanto es " + Decimal_Sueldo);
+        $("#Crear #SueldoPromedioCrear").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
         $("#Crear #SueldoPromedioCrear").show();
         //$("#Crear #AsteriscoMonto").css("display", "");
         $("#Crear #AsteriscoMonto").addClass("text-danger");
 
     } else {
-        //.removeClass("checked");
-        //$("#Crear #AsteriscoMonto").css("display", "none");
+        //OCULTAR VALIDACIONES
         $("#Crear #AsteriscoMonto").removeClass("text-danger");
         $("#Crear #SueldoPromedioCrear").hide();
+        
     }
 
-    if (IdEmp == 0) {
+    //VALIDACIONES DEL CAMPO EMP_ID
+    if (IdEmp != "-1") {
+        if (IdEmp == 0) {
 
-        $("#Crear #AsteriscoColaborador").addClass("text-danger");
-        $("#Crear #Validation_descripcion0").css("display", "");
-    } else {
-        $("#Crear #AsteriscoColaborador").removeClass("text-danger");
-        $("#Crear #Validation_descripcion0").css("display", "none");
-    }
-
-    if (Razon == "" || Razon == null || Razon == undefined) {
-        $("#Crear #AsteriscoRazon").addClass("text-danger");
-        $("#Crear #Validation_descripcion1").css("display", "");
-    } else {
-        $("#Crear #AsteriscoRazon").removeClass("text-danger");
-        $("#Crear #Validation_descripcion1").css("display", "none");
-    }
-    if (Monto == "" || Monto == null || Monto == undefined) {
-        $("#Crear #AsteriscoMonto").removeClass("text-danger");
-        $("#Crear #Validation_descripcion4").css("display", "none");
-
-        $("#Crear #AsteriscoMonto").addClass("text-danger");
-        //$('#AsteriscoMonto').show();
-        $("#Crear #Validation_descripcion2").css("display", "");
-    } else {
-        $("#Crear #AsteriscoMonto").removeClass("text-danger");
-        $("#Crear #Validation_descripcion2").css("display", "none");
-        if (Monto <= 0) {
-
-            $("#Crear #AsteriscoMonto").addClass("text-danger");
-            $("#Crear #Validation_descripcion4").css("display", "");
-        } else {
-            $("#Crear #AsteriscoMonto").removeClass("text-danger");
-            $("#Crear #Validation_descripcion4").css("display", "none");
+            $("#Crear #AsteriscoColaborador").addClass("text-danger");
+            $("#Crear #Validation_descripcion0").css("display", "");
+        }
+        else {
+            $("#Crear #AsteriscoColaborador").removeClass("text-danger");
+            $("#Crear #Validation_descripcion0").css("display", "none");
         }
     }
 
-    if (Fecha == "" || Fecha == null || Fecha == undefined) {
-        $("#Crear #AsteriscoFecha").addClass("text-danger");
-        $("#Crear #Validation_descripcion3").css("display", "");
-    } else {
-        $("#Crear #AsteriscoFecha").removeClass("text-danger");
-        $("#Crear #Validation_descripcion3").css("display", "none");
+    //VALIDACIONES DEL CAMPO RAZON
+    if (Razon != "-1") {
+        var LengthString = Razon.length;
+        if (LengthString > 1)
+        {
+            var FirstChar = LengthString - 2;
+            var LastChar = Razon.substring(FirstChar, LengthString);
+            console.log(LastChar);
+        }
+        if (LastChar == "  ")
+        {
+            $("#Crear #adsu_RazonAdelanto").val(Razon.substring(0, FirstChar + 1));
+        }
+        if (Razon == "" || Razon == " " || Razon == "  " || Razon == null || Razon == undefined) {
+            if (Razon == ' ')
+                $("#Crear #adsu_RazonAdelanto").val("");
+            $("#Crear #AsteriscoRazon").addClass("text-danger");
+            $("#Crear #Validation_descripcion1").css("display", "");
+        
+        } else {
+            $("#Crear #AsteriscoRazon").removeClass("text-danger");
+            $("#Crear #Validation_descripcion1").css("display", "none");
+        }
+    }
+    //VALIDACIONES DEL CAMPO MONTO
+    if (Monto != "-1") {
+        if (Monto == "" || Monto == null || Monto == undefined) {
+            $("#Crear #AsteriscoMonto").removeClass("text-danger");
+            $("#Crear #Validation_descripcion4").css("display", "none");
+
+            $("#Crear #AsteriscoMonto").addClass("text-danger");
+            //$('#AsteriscoMonto').show();
+            $("#Crear #Validation_descripcion2").css("display", "");
+        } else {
+            $("#Crear #AsteriscoMonto").removeClass("text-danger");
+            $("#Crear #Validation_descripcion2").css("display", "none");
+            if (Monto <= 0) {
+                $("#Crear #AsteriscoMonto").addClass("text-danger");
+                $("#Crear #Validation_descripcion4").css("display", "");
+            } else {
+                $("#Crear #AsteriscoMonto").removeClass("text-danger");
+                $("#Crear #Validation_descripcion4").css("display", "none");
+            }
+        }
+    }
+
+    //VALIDACIONES DEL CAMPO FECHA
+    if (Fecha != "-1") {
+        if (Fecha == "" || Fecha == null || Fecha == undefined) {
+
+            $("#Crear #AsteriscoFecha").addClass("text-danger");
+            $("#Crear #Validation_descripcion3").css("display", "");
+
+        } else {
+            $("#Crear #AsteriscoFecha").removeClass("text-danger");
+            $("#Crear #Validation_descripcion3").css("display", "none");
+        }
     }
 }
 
@@ -487,53 +531,86 @@ $("#btnConfirmarEditar").click(function () {
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
 function ValidarCamposEditar(colaborador, razon, monto) {
     var pasoValidacion = true;
-    var SuelPromedio;
 
-    if (colaborador.val() == '') {
-        pasoValidacion = false;
-        //Codigo para mostrar el span de validacion
-        //Hacerle focus al input
-        $("#ConfirmarEdicion").modal('hide');
-        iziToast.error({
-            title: 'Error',
-            message: 'Ha ocurrido un problema con el campo colaborador',
-        });
+    if (colaborador != "-1")
+    {
 
-        $(colaborador).focus();
-    }
-
-    if (razon == null || razon.val() == '') {
-        pasoValidacion = false;
-        $('#adsu_RazonAdelantoValidacion').show();
-        $("#Editar #RazonAsterisco").addClass("text-danger");
-        razon.focus();
-    } else {
-        $('#adsu_RazonAdelantoValidacion').hide();
-        $("#Editar #RazonAsterisco").removeClass("text-danger");
-    }
-
-    if (monto == null || monto.val() == '' || monto.val() == undefined) {
-        pasoValidacion = false;
-        $('#SueldoPromedio').hide();
-        $('#adsu_MontoValidacion2').hide();
-        $('#adsu_MontoValidacion').show();
-        $("#Editar #MontoAsterisco").addClass("text-danger");
-        monto.focus();
-    } else {
-        $('#adsu_MontoValidacion').hide();
-        $("#Editar #MontoAsterisco").removeClass("text-danger");
-        if (monto.val() <= 0) {
+        if (colaborador <= 0 || isNaN(colaborador)) {
             pasoValidacion = false;
-            $('#SueldoPromedio').hide();
-            $('#adsu_MontoValidacion').hide();
-            $("#Editar #MontoAsterisco").addClass("text-danger");
-            $('#adsu_MontoValidacion2').show();
-            monto.focus();
+            console.log("IF");
+            $('#Editar #Span_emp_Id').css("display", "block");
+            $("#Editar #AsteriscoColaborador").addClass("text-danger");
+            //razon.focus();
         } else {
-            $("#Editar #MontoAsterisco").removeClass("text-danger");
-            $('#adsu_MontoValidacion2').hide();
+            //OCULTAR VALIDACIONES
+            $('#Editar #Span_emp_Id').css("display", "none");
+            $("#Editar #AsteriscoColaborador").removeClass("text-danger");
         }
     }
+
+    if(razon != "-1")
+    {
+        var LengthString = razon.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = razon.substring(FirstChar, LengthString);
+            console.log(LastChar);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #adsu_RazonAdelanto").val(razon.substring(0, FirstChar + 1));
+        }
+        if (razon == null || razon == '' || razon == ' ' || razon == '  ') {
+            pasoValidacion = false;
+            if (razon == ' ')
+                $("#Editar #adsu_RazonAdelanto").val("");
+            $('#adsu_RazonAdelantoValidacion').show();
+            $("#Editar #RazonAsterisco").addClass("text-danger");
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#adsu_RazonAdelantoValidacion').hide();
+            $("#Editar #RazonAsterisco").removeClass("text-danger");
+        }
+    }
+
+
+    //VALIDACION DEL MONTO
+    if(monto != "-1")
+    {
+        //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+        var indices = monto.split(",");
+        //VARIABLE CONTENEDORA DEL MONTO
+        var MontoFormateado = "";
+        //ITERAR LOS INDICES DEL ARRAY MONTO
+        for (var i = 0; i < indices.length; i++) {
+            //SETEAR LA VARIABLE DE MONTO
+            MontoFormateado += indices[i];
+        }
+        //FORMATEAR A DECIMAL
+        MontoFormateado = parseFloat(MontoFormateado);
+
+        //VALIDACIONES
+        if (MontoFormateado == null || MontoFormateado == '' || MontoFormateado == undefined) {
+            pasoValidacion = false;
+            $('#SueldoPromedio').hide();
+            $('#adsu_MontoValidacion2').hide();
+            $('#adsu_MontoValidacion').show();
+            $("#Editar #MontoAsterisco").addClass("text-danger");
+        } else {
+            $('#adsu_MontoValidacion').hide();
+            $("#Editar #MontoAsterisco").removeClass("text-danger");
+            if (MontoFormateado <= 0) {
+                pasoValidacion = false;
+                $('#SueldoPromedio').hide();
+                $('#adsu_MontoValidacion').hide();
+                $("#Editar #MontoAsterisco").addClass("text-danger");
+                $('#adsu_MontoValidacion2').show();
+            } else {
+                $("#Editar #MontoAsterisco").removeClass("text-danger");
+                $('#adsu_MontoValidacion2').hide();
+            }
+        }
+    }
+
     return pasoValidacion;
 }
 

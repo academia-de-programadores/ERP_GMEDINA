@@ -1,16 +1,27 @@
 ﻿@model ERP_GMEDINA.Models.tbCatalogoDeIngresos
 <div class="modal-body" id="Editar">
+
+    @Html.HiddenFor(model => model.cin_FechaCrea)
+    @Html.HiddenFor(model => model.cin_UsuarioCrea)
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-5">
+                @Html.LabelFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+            </div>
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            </div>
+        </div>
+    </div>
+
 	<div class="form-group">
 		<div class="row">
-			<div class="col-md-6">
-				@Html.HiddenFor(model => model.cin_IdIngreso)
-				@Html.HiddenFor(model => model.cin_FechaCrea)
-				@Html.HiddenFor(model => model.cin_UsuarioCrea)
+			<div class="col-md-5">
 				@Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "" }) <label class="" id="asteriscoEdit">*</label>
 			</div>
-			<div class="col-md-6">
-				@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @maxlength = "50" } }) 
-				@Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "validareditar" })
+			<div class="col-md-7">
+				@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @maxlength = "50", @onkeyup = "ValidarCamposEditar(this.value)" } }) 
+                <span class="field-validation-valid text-danger" style="display: none" id="DescripcionEditar">El campo Descripción Ingreso es Requerido</span>
 			</div>
 		</div>
 	</div>

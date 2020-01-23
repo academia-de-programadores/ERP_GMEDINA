@@ -134,22 +134,59 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
         });
 });
 
-$('#frmCatalogoIngresosCreate #cin_DescripcionIngreso').keyup(function () {
-    if ($(this)
-        .val()
-        .trim() != '') {
-        $('#asteriscoCreate').removeClass('text-danger');
-    }
-});
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposCrear(Descripcion) {
+    console.log("KeyUp");
+    //VALIDACIONES DEL CAMPO DESCRIPCION
+    if (Descripcion != "-1") {
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+            console.log(LastChar);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #cin_DescripcionIngreso").val(Descripcion.substring(0, FirstChar + 1));
+        }
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Crear #cin_DescripcionIngreso").val("");
+            $("#Crear #asteriscoCreate").addClass("text-danger");
+            $("#Crear #DescripcionCrear").css("display", "");
 
-$('#Editar #cin_DescripcionIngreso').keyup(function () {
-    if ($(this)
-        .val()
-        .trim() != '') {
-        $('#validareditar').hide();
-        $('#asteriscoEdit').removeClass('text-danger');
+        } else {
+            $("#Crear #asteriscoCreate").removeClass("text-danger");
+            $("#Crear #DescripcionCrear").css("display", "none");
+        }
     }
-});
+}
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposEditar(Descripcion) {
+    console.log("KeyUp");
+    //VALIDACIONES DEL CAMPO DESCRIPCION
+    if (Descripcion != "-1") {
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+            console.log(LastChar);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #cin_DescripcionIngreso").val(Descripcion.substring(0, FirstChar + 1));
+        }
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Editar #cin_DescripcionIngreso").val("");
+            $("#Editar #asteriscoEdit").addClass("text-danger");
+            $("#Editar #DescripcionEditar").css("display", "");
+
+        } else {
+            $("#Editar #asteriscoEdit").removeClass("text-danger");
+            $("#Editar #DescripcionEditar").css("display", "none");
+        }
+    }
+}
 
 $("#btnUpdateIngresos").click(function () {
     //descedit es la variable que uso para validar si esta vacio o no
@@ -193,9 +230,10 @@ $("#btnEditarIngresos").click(function () {
         }).done(function (data) {
 
             if (data != "error") {
-
+                //REFRESCAR LA DATA DEL DATATBLE
+                cargarGridIngresos();
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarCatalogoIngresos").modal('hide');
+                //$("#EditarCatalogoIngresos").modal('hide');
                 $("#EditarCatalogoIngresosConfirmacion").modal('hide');
 
                 iziToast.success({
@@ -276,6 +314,7 @@ $("#btnInactivarIngresos").click(function () {
         else {
             $("#InactivarCatalogoIngresos").modal('hide');
             $("#EditarCatalogoIngresos").modal('hide');
+            //REFRESCAR LA DATA DEL DATATBLE
             cargarGridIngresos();
             //Mensaje de exito de la edicion
             iziToast.success({
@@ -322,6 +361,9 @@ $('#btnCreateRegistroIngresos').click(function () {
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
 
             if (data != "error") {
+                //REFRESCAR LA DATA DEL DATATBLE
+                cargarGridIngresos();
+                //OCULTAR EL MODAL DE CREACION
                 $("#AgregarCatalogoIngresos").modal('hide');
 
 
@@ -380,39 +422,9 @@ $("#IconCerrarEditar").click(function () {
 });
 //#endregion
 
-
-const btnGuardar = $('#btnCreateRegistroIngresos'),
-
-    cargandoCrearcargandoCrear = $('#cargandoCrear'),
-
-    cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
-
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-
 //FUNCION: PRIMERA FASE DE ACTIVAR
 
+var IDActivar = 0;
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
     document.getElementById("btnActivarIngreso").disabled = false;
     //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
