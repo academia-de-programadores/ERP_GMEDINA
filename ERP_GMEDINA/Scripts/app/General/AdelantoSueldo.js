@@ -69,7 +69,7 @@ function cargarGridAdelantos() {
                     ListaAdelantos[i].adsu_IdAdelantoSueldo,
                     ListaAdelantos[i].empleadoNombre,
                     ListaAdelantos[i].adsu_RazonAdelanto,
-                    ListaAdelantos[i].adsu_Monto,
+                    (ListaAdelantos[i].adsu_Monto % 1 == 0) ? ListaAdelantos[i].adsu_Monto + ".00" : ListaAdelantos[i].adsu_Monto,
                     FechaAdelanto,
                     Deducido,
                     Activo,
@@ -142,16 +142,29 @@ $('#btnCreateRegistroAdelantos').click(function () {
     var Fecha = $("#Crear #adsu_FechaAdelanto").val();
 
 
-    if ($("#Crear #adsu_Monto").val() <= MaxSueldoCreate
-        && IdEmp != 0
-        && Razon != "" && Razon != null && Razon != undefined
-        && Monto != "" && Monto != null && Monto != undefined && Monto > 0
-        && Fecha != "" && Fecha != null && Fecha != undefined) {
+    if (ValidarCamposCrear(Razon, Monto, IdEmp, Fecha)) {
         //BLOQUEAR EL BOTON
         $("#btnCreateRegistroAdelantos").attr("disabled", true);
 
+        //SEGMENTAR LA CADENA DE MONTO
+        var indices = $("#Crear #adsu_Monto").val().split(",");
+        //VARIABLE CONTENEDORA DEL MONTO
+        var MontoFormateado = "";
+        //ITERAR LOS INDICES DEL ARRAY MONTO
+        for (var i = 0; i <= indices.length; i++) {
+            //SETEAR LA VARIABLE DE MONTO
+            MontoFormateado += indices[i];
+        }
+        //FORMATEAR A DECIMAL
+        MontoFormateado = parseFloat(MontoFormateado);
+
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-        var data = $("#frmEmpleadoAdelantos").serializeArray();
+        var data = {
+            emp_Id: IdEmp,
+            adsu_FechaAdelanto: Fecha,
+            adsu_RazonAdelanto: Razon,
+            adsu_Monto: MontoFormateado
+        };
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/AdelantoSueldo/Create",
@@ -166,10 +179,10 @@ $('#btnCreateRegistroAdelantos').click(function () {
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
                 });
-                document.getElementById("btnCreateRegistroAdelantos").disabled = false;
+                //DESBLOQUEAR EL BOTON DE CREAR
+                $("#btnCreateRegistroAdelantos").attr("disabled", false);
             }
             else {
-                OcultarValidaciones();
                 cargarGridAdelantos();
                 //Setear la variable de SueldoAdelantoMaximo a cero 
                 MaxSueldoCreate = 0;
@@ -181,17 +194,11 @@ $('#btnCreateRegistroAdelantos').click(function () {
             }
         });
     }
-    else {
-        document.getElementById("btnCreateRegistroAdelantos").disabled = false;
-        //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
-        ValidarCamposCrear(Razon, Monto, IdEmp, Fecha);
-    }
 });
 
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
 function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
-    console.log("KeyUp");
-
+    var Local_modelState = true;
     //VALIDAR MONTO POR COLABORADOR
     if (IdEmp == 0)
         $("#Crear #adsu_Monto").attr("disabled", true);   //DESBLOQUEAR EL CAMPO MONTO
@@ -203,7 +210,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
     //VARIABLE CONTENEDORA DEL MONTO
     var MontoFormateado = "";
     //ITERAR LOS INDICES DEL ARRAY MONTO
-    for (var i = 0; i < indices.length; i++) {
+    for (var i = 0; i <= indices.length; i++) {
         //SETEAR LA VARIABLE DE MONTO
         MontoFormateado += indices[i];
     }
@@ -214,7 +221,6 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
         
         //MOSTRAR VALIDACIONES
         var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
-        console.log("El monto máximo de adelanto es " + Decimal_Sueldo);
         $("#Crear #SueldoPromedioCrear").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
         $("#Crear #SueldoPromedioCrear").show();
         //$("#Crear #AsteriscoMonto").css("display", "");
@@ -230,7 +236,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
     //VALIDACIONES DEL CAMPO EMP_ID
     if (IdEmp != "-1") {
         if (IdEmp == 0) {
-
+            Local_modelState = false;
             $("#Crear #AsteriscoColaborador").addClass("text-danger");
             $("#Crear #Validation_descripcion0").css("display", "");
         }
@@ -242,20 +248,23 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
     //VALIDACIONES DEL CAMPO RAZON
     if (Razon != "-1") {
+
+        //VALIDACION DE DOBLE ESPACIO
         var LengthString = Razon.length;
         if (LengthString > 1)
         {
             var FirstChar = LengthString - 2;
             var LastChar = Razon.substring(FirstChar, LengthString);
-            console.log(LastChar);
         }
         if (LastChar == "  ")
         {
             $("#Crear #adsu_RazonAdelanto").val(Razon.substring(0, FirstChar + 1));
-        }
+        }//FIN DE VALIDACION DE DOBLE ESPACIO
+
         if (Razon == "" || Razon == " " || Razon == "  " || Razon == null || Razon == undefined) {
             if (Razon == ' ')
                 $("#Crear #adsu_RazonAdelanto").val("");
+            Local_modelState = false;
             $("#Crear #AsteriscoRazon").addClass("text-danger");
             $("#Crear #Validation_descripcion1").css("display", "");
         
@@ -270,6 +279,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
             $("#Crear #AsteriscoMonto").removeClass("text-danger");
             $("#Crear #Validation_descripcion4").css("display", "none");
 
+            Local_modelState = false;
             $("#Crear #AsteriscoMonto").addClass("text-danger");
             //$('#AsteriscoMonto').show();
             $("#Crear #Validation_descripcion2").css("display", "");
@@ -279,6 +289,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
             if (Monto <= 0) {
                 $("#Crear #AsteriscoMonto").addClass("text-danger");
                 $("#Crear #Validation_descripcion4").css("display", "");
+                Local_modelState = false;
             } else {
                 $("#Crear #AsteriscoMonto").removeClass("text-danger");
                 $("#Crear #Validation_descripcion4").css("display", "none");
@@ -292,38 +303,28 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
             $("#Crear #AsteriscoFecha").addClass("text-danger");
             $("#Crear #Validation_descripcion3").css("display", "");
+            Local_modelState = false;
 
         } else {
             $("#Crear #AsteriscoFecha").removeClass("text-danger");
             $("#Crear #Validation_descripcion3").css("display", "none");
         }
     }
+    return Local_modelState;
 }
 
-//FUNCION: OCULTAR LOS LABEL DE MENSAJE DE ERROR EN MODAL DE CREAR
-function OcultarValidaciones() {
-    $("#Crear #Validation_descripcion0").css("display", "none");
-    $("#Crear #Validation_descripcion1").css("display", "none");
-    $("#Crear #Validation_descripcion2").css("display", "none");
-    $("#Crear #Validation_descripcion3").css("display", "none");
-    $("#Crear #Validation_descripcion4").css("display", "none");
-    $("#Crear #AsteriscoColaborador").removeClass("text-danger");
-    $("#Crear #AsteriscoRazon").removeClass("text-danger");
-    $("#Crear #AsteriscoMonto").removeClass("text-danger");
-    $("#Crear #AsteriscoFecha").removeClass("text-danger");
-    $("#Crear #SueldoPromedioCrear").hide();
-}
-
-//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION DEL MODAL DE CREAR
+//FUNCION: OCULTAR EL MODAL DE CREAR
 $('#btnCerrarCrearAdelanto').click(function () {
-    OcultarValidaciones()
+    //OCULTAR MODAL DE CREACION
+    $("#AgregarAdelantos").modal("hide");
 });
-$('#IconCerrar').click(function () {
-    OcultarValidaciones();
-});
-$("#AgregarAdelantos").on('hidden.bs.modal', function () {
-    OcultarValidaciones()
-});
+
+//$('#IconCerrar').click(function () {
+//    OcultarValidaciones();
+//});
+//$("#AgregarAdelantos").on('hidden.bs.modal', function () {
+//    OcultarValidaciones()
+//});
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -450,7 +451,7 @@ $("#btnUpdateAdelantos").click(function () {
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
     var monto = $('#EditarAdelantoSueldo #adsu_Monto');
 
-    if (ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto'))) {
+    if (ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id').val(), $('#EditarAdelantoSueldo #adsu_RazonAdelanto').val(), $('#EditarAdelantoSueldo #adsu_Monto').val())) {
         $.ajax({
             url: "/AdelantoSueldo/GetSueldoNetoProm",
             method: "POST",
@@ -493,6 +494,26 @@ $("#btnUpdateAdelantos").click(function () {
 //FUNCION: EJECUTAR EDICION DE REGISTROS
 $("#btnConfirmarEditar").click(function () {
     document.getElementById("btnConfirmarEditar").disabled = true;
+
+    ////SEGMENTAR LA CADENA DE MONTO
+    //var indices = $("#Crear #adsu_Monto").val().split(",");
+    ////VARIABLE CONTENEDORA DEL MONTO
+    //var MontoFormateado = "";
+    ////ITERAR LOS INDICES DEL ARRAY MONTO
+    //for (var i = 0; i <= indices.length; i++) {
+    //    //SETEAR LA VARIABLE DE MONTO
+    //    MontoFormateado += indices[i];
+    //}
+    ////FORMATEAR A DECIMAL
+    //MontoFormateado = parseFloat(MontoFormateado);
+
+    ////SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    //var data = {
+    //    emp_Id: IdEmp,
+    //    adsu_FechaAdelanto: Fecha,
+    //    adsu_RazonAdelanto: Razon,
+    //    adsu_Monto: MontoFormateado
+    //};
 
     $.ajax({
         url: "/AdelantoSueldo/Edit/" + IDInactivar,
@@ -557,7 +578,6 @@ function ValidarCamposEditar(colaborador, razon, monto) {
 
         if (colaborador <= 0 || isNaN(colaborador)) {
             pasoValidacion = false;
-            console.log("IF");
             $('#Editar #Span_emp_Id').css("display", "block");
             $("#Editar #AsteriscoColaborador").addClass("text-danger");
             //razon.focus();
@@ -574,7 +594,6 @@ function ValidarCamposEditar(colaborador, razon, monto) {
         if (LengthString > 1) {
             var FirstChar = LengthString - 2;
             var LastChar = razon.substring(FirstChar, LengthString);
-            console.log(LastChar);
         }
         if (LastChar == "  ") {
             $("#Editar #adsu_RazonAdelanto").val(razon.substring(0, FirstChar + 1));
@@ -613,7 +632,6 @@ function ValidarCamposEditar(colaborador, razon, monto) {
 
             //MOSTRAR VALIDACIONES
             var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
-            console.log("El monto máximo de adelanto es " + Decimal_Sueldo);
             $("#Editar #SueldoPromedioEditar").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
             $("#Editar #SueldoPromedioEditar").show();
             //$("#Crear #AsteriscoMonto").css("display", "");

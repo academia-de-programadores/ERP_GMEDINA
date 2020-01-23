@@ -130,7 +130,6 @@ namespace ERP_GMEDINA.Controllers
 
         //FUNCION: CREAR UN NUEVO REGISTRO
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "emp_Id, adsu_FechaAdelanto, adsu_RazonAdelanto, adsu_Monto")] tbAdelantoSueldo tbAdelantoSueldo)
         {
             //Para llenar los campos de auditoría
