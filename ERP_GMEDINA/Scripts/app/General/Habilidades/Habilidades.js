@@ -5,9 +5,8 @@ function tablaEditar(id) {
  //var tr=$(btn).closest("tr");
  //var row = tabla.row(tr);
  //id = row.data().id;
- _ajax(null,
-     '/Habilidades/Edit/' + id,
-     'GET',
+    _POST(JSON.stringify({ id: id }),
+     '/Habilidades/Datos/',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        ID = obj.habi_Id;
@@ -21,9 +20,8 @@ function tablaDetalles(id) {
  //var row = tabla.row(tr);
  //id = row.data().id;
 
- _ajax(null,
-     '/Habilidades/Edit/' + id,
-     'GET',
+    _POST(JSON.stringify({ id: id }),
+     '/Habilidades/Datos/',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        ID = obj.habi_Id;
