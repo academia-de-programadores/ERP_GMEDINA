@@ -12,13 +12,12 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class V_RPT_HistorialAudienciaDescargo
+    public partial class V_FaseSeleccion
     {
-        public int aude_Id { get; set; }
-        public string nombre { get; set; }
-        public string per_Identidad { get; set; }
-        public string aude_Descripcion { get; set; }
-        public System.DateTime fechaAudiencia { get; set; }
-        public System.DateTime fecha { get; set; }
+        public int per_Id { get; set; }
+        public int scan_Id { get; set; }
+        public int fsel_Id { get; set; }
+        public string Fase { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     }
 }
