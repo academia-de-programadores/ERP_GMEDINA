@@ -46,6 +46,15 @@ $(".modal").on("load", function () {
  alert("lolis");
 });
 
+function _POST(params, uri, callback) {
+    $.post(uri, params)
+    .done(callback)
+    .error(function (e) {
+        CierraPopups()
+        MsgError("Error", "Verifique su conexion a internet. (si el problema persiste contacte al administrador.)");
+    });
+}
+
 function _ajax(params, uri, type, callback) {
  $.ajax({
   url: uri,
