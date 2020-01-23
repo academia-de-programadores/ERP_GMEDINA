@@ -50,6 +50,184 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
     });
 //#endregion
 
+//#region Blur
+
+$('#eqemp_Id').blur(function () {
+    let equipoEmpleadoId = $(this).val();
+    if (equipoEmpleadoId == null || equipoEmpleadoId == "" || equipoEmpleadoId == 0 || equipoEmpleadoId == "0") {
+        $("#validacionEquipoEmpleado").html('Campo Equipo Empleado Requerido');
+        $("#validacionEquipoEmpleado").show();
+        $("#asteriscoEquipoEmpleado").addClass('text-danger');
+
+    } else {
+        $("#validacionEquipoEmpleado").html('');
+        $("#validacionEquipoEmpleado").hide();
+        $("#asteriscoEquipoEmpleado").removeClass('text-danger');
+    }
+});
+
+$('#dex_MontoInicial').blur(function () {
+    let montoInicial = $(this).val();
+    let hayAlgo = false;
+
+    if (montoInicial == "" || montoInicial == null || montoInicial == undefined) {
+        $("#valMontoInicial").html('Campo Monto Inicial Requerido');
+        $("#valMontoInicial").show();
+        $("#asteriscoMontoInicial").addClass('text-danger');
+    } else {
+        hayAlgo = true;
+        $("#valMontoInicial").html('');
+        $("#valMontoInicial").hide();
+        $("#asteriscoMontoInicial").removeClass('text-danger');
+    }
+
+    if (hayAlgo)
+        if (montoInicial == 0.00 || montoInicial < 0) {
+            $("#valMontoInicial").html('Campo Monto Inicial no puede ser menor o igual que cero.');
+            $("#valMontoInicial").show();
+            $("#asteriscoMontoInicial").addClass('text-danger');
+        }
+        else {
+            $("#valMontoInicial").html('');
+            $("#valMontoInicial").hide();
+            $("#asteriscoMontoInicial").removeClass('text-danger');
+        }
+});
+
+$('#dex_MontoRestante').blur(function () {
+    let montoRestante = $(this).val().replace(/,/, '');
+    let hayAlgo = false;
+    let montoInicial = $('#dex_MontoInicial').val().replace(/,/, '');
+
+    if (montoRestante == "" || montoRestante == null || montoRestante == undefined) {
+        $("#valMontoRestante").html('Campo Monto Inicial Requerido');
+        $("#valMontoRestante").show();
+        $("#asteriscoMontoRestante").addClass('text-danger');
+    } else {
+        hayAlgo = true
+        $("#valMontoRestante").html('');
+        $("#valMontoRestante").hide();
+        $("#asteriscoMontoRestante").removeClass('text-danger');
+    }
+
+    if (hayAlgo) {
+        let esMayorCero = false;
+        if (montoRestante == 0.00 || montoRestante < 0) {
+            $("#valMontoRestante").html('El campo Monto Restante no puede ser menor o igual que cero.');
+            $("#valMontoRestante").show();
+            $("#asteriscoMontoRestante").addClass('text-danger');
+        }
+        else {
+            esMayorCero = true;
+            $("#valMontoRestante").html('');
+            $("#valMontoRestante").hide()
+            $("#asteriscoMontoRestante").removeClass('text-danger');
+        }
+
+        let floatMontoRestante = parseFloat(montoRestante);
+        let floatMontoInicial = parseFloat(montoInicial)
+
+        if (esMayorCero)
+            if (floatMontoRestante > floatMontoInicial) {
+                $("#valMontoRestante").html('El campo Monto Restante no puede ser mayor que Monto Inicial.');
+                $("#valMontoRestante").show();
+                $("#asteriscoMontoRestante").addClass('text-danger');
+                hayAlgo = false;
+            }
+            else {
+                hayAlgo = false;
+                $("#valMontoRestante").html('');
+                $("#valMontoRestante").hide()
+                $("#asteriscoMontoRestante").removeClass('text-danger');
+            }
+
+    }
+});
+
+$('#dex_ObservacionesComentarios').blur(function () {
+    let observaciones = $(this)
+    .val()
+    .trim();
+    if (
+        observaciones == ""
+    ) {
+        $('#validacionObservaciones').html('Campo Observaciones Requerido');
+        $('#validacionObservaciones').show();
+        $('#asteriscoObservaciones').addClass('text-danger');
+    } else {
+        $('#validacionObservaciones').hide();
+        $('#asteriscoObservaciones').removeClass('text-danger');
+    }
+});
+
+$('#cde_Id').blur(function () {
+    let deduccion = $(this).val();
+    if (deduccion == null || deduccion == "" || deduccion == 0 || deduccion == "0") {
+        $("#validacionIdDeducciones").html('Campo Deducción Requerido');
+        $("#validacionIdDeducciones").show();
+        $("#asteriscoIdDeducciones").addClass('text-danger');
+
+    } else {
+        $("#validacionIdDeducciones").html('');
+        $("#validacionIdDeducciones").hide();
+        $("#asteriscoIdDeducciones").removeClass('text-danger');
+    }
+});
+
+$('#dex_Cuota').blur(function () {
+    let cuota = $(this).val().replace(/,/, '');
+    let hayAlgo = false;
+    let montoInicial = $('#dex_MontoInicial').val().replace(/,/, '');
+    
+    if (cuota == null || cuota == "" || cuota == 0 || cuota == "0") {
+        $("#valCuota").html('Campo Cuota Requerido');
+        $("#valCuota").show();
+        $("#asteriscoCuota").addClass('text-danger');
+
+    } else {
+        hayAlgo = true;
+        $("#valCuota").html('');
+        $("#valCuota").hide();
+        $("#asteriscoCuota").removeClass('text-danger');
+    }
+    debugger;
+
+    if (hayAlgo) {
+        let esMayorCero = false;
+        if (cuota == 0.00 || cuota < 0) {
+            $("#valCuota").html('El campo Cuota no puede ser menor o igual que cero.');
+            $("#valCuota").show();
+            $("#asteriscoCuota").addClass('text-danger');
+        }
+        else {
+            esMayorCero = true;
+            $("#valCuota").html('');
+            $("#valCuota").hide()
+            $("#asteriscoCuota").removeClass('text-danger');
+        }
+
+        let cuotaFloat = parseFloat(montoRestante);
+        let floatMontoInicial = parseFloat(montoInicial)
+
+        if (esMayorCero)
+            if (cuotaFloat > floatMontoInicial) {
+                $("#valCuota").html('El campo Cuota no puede ser mayor que Monto Inicial.');
+                $("#valCuota").show();
+                $("#asteriscoCuota").addClass('text-danger');
+                hayAlgo = false;
+            }
+            else {
+                hayAlgo = false;
+                $("#valCuota").html('');
+                $("#valCuota").hide()
+                $("#asteriscoCuota").removeClass('text-danger');
+            }
+
+    }
+});
+
+//#endregion
+
 //#region Funciones
 //Funció Genérica para utilizar Ajax
 function _ajax(params, uri, type, callback) {
@@ -337,6 +515,13 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 //#endregion
 
 //#region Create
+
+//Ocultar Modal de Create
+$("#btnCerrarCreate").click(function () {
+    $("#AgregarDeduccionesExtraordinarias").modal('hide');
+});
+
+
 $(btnAgregar).click(function () {
     console.clear();
     if (validaciones(equipoEmpId,
@@ -382,6 +567,7 @@ $(btnAgregar).click(function () {
 });
 //#endregion
 
+//#region Editar
 //Editar
 $(btnEditar).click(function () {
 
@@ -425,7 +611,9 @@ $(btnEditar).click(function () {
     });
     document.getElementById("btnEditar").disabled = false;
 });
+//#endregion
 
+//#region Inactivar
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
     document.getElementById("btnInactivar").disabled = false;
@@ -475,12 +663,9 @@ $("#btnInactivar").click(function () {
 
 
 });
+//#endregion
 
-//Ocultar Modal de Create
-$("#btnCerrarCreate").click(function () {
-    $("#AgregarDeduccionesExtraordinarias").modal('hide');
-});
-
+//#region Otras
 //Ocultar Modal de Details
 $("#btnCerrarDetails").click(function () {
     $("#DetailsDeduccionesExtraordinarias").modal('hide');
@@ -495,3 +680,4 @@ $("#btnCerrarEdit").click(function () {
 $("#btnCerrarInactivar").click(function () {
     $("#InactivarDeduccionesExtraordinarias").modal('hide');
 });
+//#endregion
