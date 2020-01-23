@@ -316,16 +316,30 @@ function validaciones(equipoEmpId,
         todoBien = false;
     }
 
-    let montoInicial = montoInicial.val();
+    //let montoInicial = montoInicial.val();
     let hayAlgoMontoInicial = false;
     // Monto inicial
     if (montoInicial == "" || montoInicial == null || montoInicial == undefined) {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
+        hayAlgoMontoInicial = true;
     } else {
         asteriscoMontoInicial.addClass('text-danger');
         validacionMontoInicial.show();
         todoBien = false;
+    }
+
+    if(hayAlgoMontoInicial){
+        if (montoInicial == 0.00 || montoInicial < 0) {
+            $("#valMontoInicial").html('Campo Monto Inicial no puede ser menor o igual que cero.');
+            $("#valMontoInicial").show();
+            $("#asteriscoMontoInicial").addClass('text-danger');
+        }
+        else {
+            $("#valMontoInicial").html('');
+            $("#valMontoInicial").hide();
+            $("#asteriscoMontoInicial").removeClass('text-danger');
+        }
     }
 
     // Monto Restante
