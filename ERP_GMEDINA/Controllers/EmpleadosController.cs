@@ -127,6 +127,10 @@ namespace ERP_GMEDINA.Controllers
             int row = 2;
             foreach (var item in ExcelEmpleados)
             {
+                //Sheet.Cells["A5:T1000"].AutoFitColumns();
+                //double rowHeight = 15;
+               //Sheet.Row(5).Height = rowHeight;
+                //Sheet.Column(5).AutoFit();
                 Sheet.Cells[string.Format("A{0}", row)].Value = item.per_Identidad;
                 Sheet.Cells[string.Format("B{0}", row)].Value = item.per_Nombres;
                 Sheet.Cells[string.Format("C{0}", row)].Value = item.per_Apellidos;
@@ -157,7 +161,16 @@ namespace ERP_GMEDINA.Controllers
                 per_EstadoCivil.Formula.Values.Add("D");
                 per_EstadoCivil.Formula.Values.Add("V");
                 //Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
-                Sheet.Cells[string.Format("L{0}", row)].Value = item.per_TipoSangre;
+                //Sheet.Cells[string.Format("L{0}", row)].Value = item.per_TipoSangre;
+                var per_TipoSangre = Sheet.DataValidations.AddListValidation("L5:L1000");
+                per_TipoSangre.Formula.Values.Add("A+");
+                per_TipoSangre.Formula.Values.Add("A-");
+                per_TipoSangre.Formula.Values.Add("AB+");
+                per_TipoSangre.Formula.Values.Add("AB-");
+                per_TipoSangre.Formula.Values.Add("B+");
+                per_TipoSangre.Formula.Values.Add("B-");
+                per_TipoSangre.Formula.Values.Add("O+");
+                per_TipoSangre.Formula.Values.Add("O-");
 
                 var Cargos = db.tbCargos
                     .Select(tabla => tabla.car_Descripcion)
@@ -232,12 +245,12 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult UploadEmpleados(HttpPostedFileBase FileUpload)
         {
+            string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
             try
             {
                 db = new ERP_GMEDINAEntities();
                 if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
                 {//OPEN IF
-                    string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
                     if (!System.IO.File.Exists(path))
                     {//OPEN IF
                         db = new ERP_GMEDINAEntities();
@@ -328,15 +341,16 @@ namespace ERP_GMEDINA.Controllers
 
                             }//CLOSE ELSE
                         }//CLOSE FOR
-                        System.IO.File.Delete(path);
                     }//CLOSE IF
                     else
                     {
+                        System.IO.File.Delete(path);
                         return Json(-3, JsonRequestBehavior.AllowGet);
                     }
                 }//CLOSE IF
                 else
                 {
+                    System.IO.File.Delete(path);
                     return Json(-4, JsonRequestBehavior.AllowGet);
                 }
             }

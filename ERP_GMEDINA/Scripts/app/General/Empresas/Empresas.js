@@ -237,9 +237,9 @@ $("#InActivar").click(function () {
         CierraPopups();
         llenarTabla();
         LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
-        MsgSuccess("¡Exito!", "El registro se ha inhabilitado  de forma exitosa");
+        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
        } else {
-        MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+        MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
        }
       });
  } else {
