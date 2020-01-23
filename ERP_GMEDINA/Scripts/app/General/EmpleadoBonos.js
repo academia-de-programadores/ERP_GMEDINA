@@ -247,6 +247,256 @@ $('#btnCreateRegistroBonos').click(function () {
     } 
 });
 
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
+    console.log("KeyUp");
+
+    //VALIDAR MONTO POR COLABORADOR
+    if (IdEmp == 0)
+        $("#Crear #adsu_Monto").attr("disabled", true);   //DESBLOQUEAR EL CAMPO MONTO
+    else
+        $("#Crear #adsu_Monto").attr("disabled", false);  //DESBLOQUEAR EL CAMPO MONTO
+
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Crear #adsu_Monto").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateado = parseFloat(MontoFormateado);
+    //VALIDACIONES DE ENTRADA POR EL CAMPO MONTO
+    if (MontoFormateado > MaxSueldoCreate && MontoFormateado != '' && MontoFormateado != undefined && MontoFormateado != null  && IdEmp != 0) {
+        
+        //MOSTRAR VALIDACIONES
+        var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
+        console.log("El monto máximo de adelanto es " + Decimal_Sueldo);
+        $("#Crear #SueldoPromedioCrear").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
+        $("#Crear #SueldoPromedioCrear").show();
+        //$("#Crear #AsteriscoMonto").css("display", "");
+        $("#Crear #AsteriscoMonto").addClass("text-danger");
+
+    } else {
+        //OCULTAR VALIDACIONES
+        $("#Crear #AsteriscoMonto").removeClass("text-danger");
+        $("#Crear #SueldoPromedioCrear").hide();
+        
+    }
+
+    //VALIDACIONES DEL CAMPO EMP_ID
+    if (IdEmp != "-1") {
+        if (IdEmp == 0) {
+
+            $("#Crear #AsteriscoColaborador").addClass("text-danger");
+            $("#Crear #Validation_descripcion0").css("display", "");
+        }
+        else {
+            $("#Crear #AsteriscoColaborador").removeClass("text-danger");
+            $("#Crear #Validation_descripcion0").css("display", "none");
+        }
+    }
+
+    //VALIDACIONES DEL CAMPO RAZON
+    if (Razon != "-1") {
+        var LengthString = Razon.length;
+        if (LengthString > 1)
+        {
+            var FirstChar = LengthString - 2;
+            var LastChar = Razon.substring(FirstChar, LengthString);
+            console.log(LastChar);
+        }
+        if (LastChar == "  ")
+        {
+            $("#Crear #adsu_RazonAdelanto").val(Razon.substring(0, FirstChar + 1));
+        }
+        if (Razon == "" || Razon == " " || Razon == "  " || Razon == null || Razon == undefined) {
+            if (Razon == ' ')
+                $("#Crear #adsu_RazonAdelanto").val("");
+            $("#Crear #AsteriscoRazon").addClass("text-danger");
+            $("#Crear #Validation_descripcion1").css("display", "");
+        
+        } else {
+            $("#Crear #AsteriscoRazon").removeClass("text-danger");
+            $("#Crear #Validation_descripcion1").css("display", "none");
+        }
+    }
+    //VALIDACIONES DEL CAMPO MONTO
+    if (Monto != "-1") {
+        if (Monto == "" || Monto == null || Monto == undefined) {
+            $("#Crear #AsteriscoMonto").removeClass("text-danger");
+            $("#Crear #Validation_descripcion4").css("display", "none");
+
+            $("#Crear #AsteriscoMonto").addClass("text-danger");
+            //$('#AsteriscoMonto').show();
+            $("#Crear #Validation_descripcion2").css("display", "");
+        } else {
+            $("#Crear #AsteriscoMonto").removeClass("text-danger");
+            $("#Crear #Validation_descripcion2").css("display", "none");
+            if (Monto <= 0) {
+                $("#Crear #AsteriscoMonto").addClass("text-danger");
+                $("#Crear #Validation_descripcion4").css("display", "");
+            } else {
+                $("#Crear #AsteriscoMonto").removeClass("text-danger");
+                $("#Crear #Validation_descripcion4").css("display", "none");
+            }
+        }
+    }
+
+    //VALIDACIONES DEL CAMPO FECHA
+    if (Fecha != "-1") {
+        if (Fecha == "" || Fecha == null || Fecha == undefined) {
+
+            $("#Crear #AsteriscoFecha").addClass("text-danger");
+            $("#Crear #Validation_descripcion3").css("display", "");
+
+        } else {
+            $("#Crear #AsteriscoFecha").removeClass("text-danger");
+            $("#Crear #Validation_descripcion3").css("display", "none");
+        }
+    }
+}
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
+function ValidarCamposCrear(colaborador, Ingreso, monto) {
+    var pasoValidacion = true;
+
+    if (colaborador != "-1") {
+
+        if (colaborador <= 0 || isNaN(colaborador || colaborador == "0")) {
+            pasoValidacion = false;
+            //MOSTRAR VALIDACIONES
+            $('#Crear #Validation_IdEmpleado').css("display", "block");
+            $("#Crear #AsteriscoEmpleado").addClass("text-danger");
+            //razon.focus();
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#Crear #Validation_IdEmpleado').css("display", "none");
+            $("#Crear #AsteriscoEmpleado").removeClass("text-danger");
+        }
+    }
+
+    if (Ingreso != "-1") {
+
+        if (Ingreso <= 0 || isNaN(Ingreso) || Ingreso == "0") {
+            pasoValidacion = false;
+            //MOSTRAR VALIDACIONES
+            $('#Crear #Validation_IdIngreso').css("display", "block");
+            $("#Crear #AsteriscoBono").addClass("text-danger");
+            //razon.focus();
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#Crear #Validation_IdIngreso').css("display", "none");
+            $("#Crear #AsteriscoBono").removeClass("text-danger");
+        }
+    }
+
+    if (monto != "-1") {
+        var LengthString = monto.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = monto.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #cb_Monto").val(monto.substring(0, FirstChar + 1));
+        }
+
+        //console.log(monto);
+        //console.log(monto.substring(0, 1));
+        ////VALIDAR QUE EL MONTO SEA MAYOR QUE CERO
+        //if (monto == "0.00" || parseFloat(monto) == 0.00) {
+        //    $('#Crear #Validation_Monto').empty();
+        //    $('#Crear #Validation_Monto').html("El campo monto debe ser mayor que cero");
+        //    $('#Crear #Validation_Monto').show();
+        //    $("#Crear #AsteriscoMonto").addClass("text-danger");
+        //}
+        //else {
+        //    $('#Crear #Validation_Monto').empty();
+        //    $('#Crear #Validation_Monto').html("El campo monto es requerido");
+        //    $("#Crear #AsteriscoMonto").removeClass("text-danger");
+        //}
+
+        if (monto == null || monto == '' || monto == ' ' || monto == '  ') {
+            pasoValidacion = false;
+            if (monto == ' ')
+                $("#Crear #cb_Monto").val("");
+
+            $('#Crear #Validation_Monto').show();
+            $("#Crear #AsteriscoMonto").addClass("text-danger");
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#Crear #Validation_Monto').hide();
+            $("#Crear #AsteriscoMonto").removeClass("text-danger");
+        }
+    }
+
+    return pasoValidacion;
+}
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
+function ValidarCamposEditar(colaborador, Ingreso, monto) {
+    var pasoValidacion = true;
+
+    console.log("entra");
+    if (colaborador != "-1") {
+
+        if (colaborador <= 0 || isNaN(colaborador)) {
+            pasoValidacion = false;
+            //MOSTRAR VALIDACIONES
+            $('#Editar #Validation_IdEmpleado').css("display", "block");
+            $("#Editar #AsteriscoEmpleado").addClass("text-danger");
+            //razon.focus();
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#Editar #Validation_IdEmpleado').css("display", "none");
+            $("#Editar #AsteriscoEmpleado").removeClass("text-danger");
+        }
+    }
+
+    if (Ingreso != "-1") {
+
+        if (Ingreso <= 0 || isNaN(Ingreso)) {
+            pasoValidacion = false;
+            //MOSTRAR VALIDACIONES
+            $('#Editar #Validation_IdIngreso').css("display", "block");
+            $("#Editar #AsteriscoBono").addClass("text-danger");
+            //razon.focus();
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#Editar #Validation_IdIngreso').css("display", "none");
+            $("#Editar #AsteriscoBono").removeClass("text-danger");
+        }
+    }
+
+    if (monto != "-1") {
+        var LengthString = monto.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = monto.substring(FirstChar, LengthString);
+            console.log(LastChar);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #cb_Monto").val(monto.substring(0, FirstChar + 1));
+        }
+        if (monto == null || monto == '' || monto == ' ' || monto == '  ') {
+            pasoValidacion = false;
+            if (monto == ' ')
+                $("#Editar #cb_Monto").val("");
+            $('#Editar #Validation_Monto').show();
+            $("#Editar #AsteriscoMonto").addClass("text-danger");
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#Editar #Validation_Monto').hide();
+            $("#Editar #AsteriscoMonto").removeClass("text-danger");
+        }
+    }
+
+    return pasoValidacion;
+}
+
+
 $("#btnCerrarCrearBono").click(function () {
     $("#Crear #Validation_descipcion1").hidden = true;
     $("#Crear #Validation_descipcion1").css("display", "none");
