@@ -304,10 +304,10 @@ function validaciones(equipoEmpId,
     idDeduccion,
     cuota) {
     var todoBien = true;
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+    let equipoEmpleadoId = $(this).val();
 
     //Equipo Empleado
-    if (equipoEmpId.val() != '') {
+    if (equipoEmpleadoId == null || equipoEmpleadoId == "" || equipoEmpleadoId == 0 || equipoEmpleadoId == "0") {
         asteriscoEquipoEmpleado.removeClass('text-danger');
         validacionEquipoEmpleado.hide();
     } else {
@@ -316,20 +316,12 @@ function validaciones(equipoEmpId,
         todoBien = false;
     }
 
+    let montoInicial = montoInicial.val();
+    let hayAlgoMontoInicial = false;
     // Monto inicial
-    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
+    if (montoInicial == "" || montoInicial == null || montoInicial == undefined) {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
-
-        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
-            asteriscoMontoInicial.removeClass('text-danger');
-            validacionMontoInicial.hide();
-        }
-        else {
-            asteriscoMontoInicial.addClass('text-danger');
-            validacionMontoInicial.show();
-            todoBien = false;
-        }
     } else {
         asteriscoMontoInicial.addClass('text-danger');
         validacionMontoInicial.show();
