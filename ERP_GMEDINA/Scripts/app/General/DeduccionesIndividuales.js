@@ -9,6 +9,8 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 //#endregion
 var inactivarID = 0;
 
+//TODO: Validar Cuotas
+//var campo
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {

@@ -22,39 +22,35 @@ const btnAgregar = $('#btnAgregar'),
     validacionIdDeducciones = $('#validacionIdDeducciones'),
     validacionCuota = $('#validacionCuota');
 
-    ;
-
 const btnEditar = $("#btnEditar"),
-MontoInicial = $('#dex_MontoInicial'),
-MontoRestante = $('#dex_MontoRestante'),
-Observaciones = $('#dex_ObservacionesComentarios'),
-Cuota = $('#dex_Cuota'),
-asteriscMontoInicial = $('#asteriscMontoInicial'),
-asteriscMontoRestante = $('#asteriscMontoRestante'),
-asteriscObservaciones = $('#asteriscObservaciones'),
-asteriscCuota = $('#asteriscCuota'),
-validnEquipoEmpleado = $('#validEquipoEmpleado'),
-validMontoInicial = $('#validMontoInicial'),
-validMontoRestante = $('#validMontoRestante'),
-validObservaciones = $('#validObservaciones'),
-validCuota = $('#validCuota'),
-MontoRestanteEditar = $('#MontoRestanteEditar');
+    MontoInicial = $('#dex_MontoInicial'),
+    MontoRestante = $('#dex_MontoRestante'),
+    Observaciones = $('#dex_ObservacionesComentarios'),
+    Cuota = $('#dex_Cuota'),
+    asteriscMontoInicial = $('#asteriscMontoInicial'),
+    asteriscMontoRestante = $('#asteriscMontoRestante'),
+    asteriscObservaciones = $('#asteriscObservaciones'),
+    asteriscCuota = $('#asteriscCuota'),
+    validnEquipoEmpleado = $('#validEquipoEmpleado'),
+    validMontoInicial = $('#validMontoInicial'),
+    validMontoRestante = $('#validMontoRestante'),
+    validObservaciones = $('#validObservaciones'),
+    validCuota = $('#validCuota'),
+    MontoRestanteEditar = $('#MontoRestanteEditar');
 
 
 
 //#endregion
 
-//
-//Obtención de Script para Formateo de Fechas
-//
+//#region Obtención de Script para Formateo de Fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
     })
     .fail(function (jqxhr, settings, exception) {
     });
+//#endregion
 
 //#region Funciones
-
 //Funció Genérica para utilizar Ajax
 function _ajax(params, uri, type, callback) {
     $.ajax({
@@ -124,121 +120,6 @@ function cargarGridDeducciones() {
         });
 }
 
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-function mostrarCargandoCrear() {
-    btnAgregar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnAgregar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-//#endregion
-
-//Activar
-$(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-    document.getElementById("btnActivarDeduccionesExtraordinarias").disabled = false;
-    var ID = $(this).closest('tr').data('id');
-
-    var ID = $(this).attr('iddeduccionesextra');
-    localStorage.setItem('id', ID);
-    //Mostrar el Modal
-    $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-});
-
-//Activar
-$("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
-    document.getElementById("btnActivarRegistroDeduccionesExtraordinarias").disabled = true;
-    let ID = localStorage.getItem('id')
-    $.ajax({
-        url: "/DeduccionesExtraordinarias/Activar",
-        method: "POST",
-        data: { id: ID }
-    }).done(function (data) {
-        $("#ActivarDeduccionesExtraordinarias").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: '¡No se activó el registro, contacte al administrador!',
-            });
-        }
-        else {
-            cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: '¡El registro se activó de forma exitosa!',
-            });
-        }
-    });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#ActivarDeduccionesExtraordinarias").submit(function (e) {
-        return false;
-    });
-
-});
-
-
-$(btnAgregar).click(function () {
-    console.clear();
-    if (validaciones(equipoEmpId,
-        montoInicial,
-        montoRestante,
-        observaciones,
-        idDeduccion,
-        cuota
-    )) {
-
-        var data = $("#frmCreate").serializeArray();
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/DeduccionesExtraordinarias/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-
-            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
-                document.getElementById("btnAgregar").disabled = true;
-                window.location.href = '/DeduccionesExtraordinarias/Index';
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se agregó de forma exitosa!',
-                });
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se guardó el registro, contacte al administrador!',
-                });
-            }
-        });
-
-    }
-        // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-        $("#frmCreate").submit(function (e) {
-            return false;
-        });
-        document.getElementById("btnAgregar").disabled = false;
-});
-
 function validaciones(equipoEmpId,
     montoInicial,
     montoRestante,
@@ -269,8 +150,8 @@ function validaciones(equipoEmpId,
         }
         else {
             asteriscoMontoInicial.addClass('text-danger');
-        validacionMontoInicial.show();
-        todoBien = false;
+            validacionMontoInicial.show();
+            todoBien = false;
         }
     } else {
         asteriscoMontoInicial.addClass('text-danger');
@@ -330,67 +211,6 @@ function validaciones(equipoEmpId,
     }
     return todoBien;
 }
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function mostrarCargandoEditar() {
-    btnEditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
-function ocultarCargandoEditar() {
-    btnEditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
-
-//Editar
-$(btnEditar).click(function () {
-
-    if (validacionEditar(
-        MontoInicial,
-        MontoRestante,
-        Observaciones,
-        Cuota
-    )) {
-        var data = $("#frmEditar").serializeArray();
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/DeduccionesExtraordinarias/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-
-            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data == "Exito") {
-                document.getElementById("btnEditar").disabled = true;
-                window.location.href = '/DeduccionesExtraordinarias/Index';
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se editó el registro, contacte al administrador!',
-                });
-            }
-
-        });
-
-    }
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmEdit").submit(function (e) {
-        return false;
-    });
-    document.getElementById("btnEditar").disabled = false;
-});
 
 function validacionEditar(
     MontoInicial,
@@ -467,6 +287,144 @@ function validacionEditar(
     return todoCorrecto;
 }
 
+//#endregion
+
+//#region Activar
+//Activar
+$(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
+    document.getElementById("btnActivarDeduccionesExtraordinarias").disabled = false;
+    var ID = $(this).closest('tr').data('id');
+
+    var ID = $(this).attr('iddeduccionesextra');
+    localStorage.setItem('id', ID);
+    //Mostrar el Modal
+    $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+});
+
+//Activar
+$("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
+    document.getElementById("btnActivarRegistroDeduccionesExtraordinarias").disabled = true;
+    let ID = localStorage.getItem('id')
+    $.ajax({
+        url: "/DeduccionesExtraordinarias/Activar",
+        method: "POST",
+        data: { id: ID }
+    }).done(function (data) {
+        $("#ActivarDeduccionesExtraordinarias").modal('hide');
+        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: '¡No se activó el registro, contacte al administrador!',
+            });
+        }
+        else {
+            cargarGridDeducciones();
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Exito',
+                message: '¡El registro se activó de forma exitosa!',
+            });
+        }
+    });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#ActivarDeduccionesExtraordinarias").submit(function (e) {
+        return false;
+    });
+
+});
+//#endregion
+
+//#region Create
+$(btnAgregar).click(function () {
+    console.clear();
+    if (validaciones(equipoEmpId,
+        montoInicial,
+        montoRestante,
+        observaciones,
+        idDeduccion,
+        cuota
+    )) {
+
+        var data = $("#frmCreate").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/DeduccionesExtraordinarias/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+                document.getElementById("btnAgregar").disabled = true;
+                window.location.href = '/DeduccionesExtraordinarias/Index';
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+        });
+
+    }
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmCreate").submit(function (e) {
+        return false;
+    });
+    document.getElementById("btnAgregar").disabled = false;
+});
+//#endregion
+
+//Editar
+$(btnEditar).click(function () {
+
+    if (validacionEditar(
+        MontoInicial,
+        MontoRestante,
+        Observaciones,
+        Cuota
+    )) {
+        var data = $("#frmEditar").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/DeduccionesExtraordinarias/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "Exito") {
+                document.getElementById("btnEditar").disabled = true;
+                window.location.href = '/DeduccionesExtraordinarias/Index';
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se editó el registro, contacte al administrador!',
+                });
+            }
+
+        });
+
+    }
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmEdit").submit(function (e) {
+        return false;
+    });
+    document.getElementById("btnEditar").disabled = false;
+});
 
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {

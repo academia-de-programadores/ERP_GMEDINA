@@ -26,12 +26,10 @@ namespace ERP_GMEDINA.Models
         public int cde_IdDeducciones { get; set; }
 
         [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
         
         [Required(ErrorMessage = "Campo Monto Restante Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Monto Restante")]
         public decimal dex_MontoRestante { get; set; }
 
@@ -42,7 +40,6 @@ namespace ERP_GMEDINA.Models
 
         
         [Required(ErrorMessage = "Campo Cuota Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Cuota")]
         public decimal dex_Cuota { get; set; }
 
