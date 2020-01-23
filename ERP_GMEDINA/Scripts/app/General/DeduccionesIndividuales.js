@@ -148,8 +148,10 @@ function estaTodoValidado(modal) {
     let dei_MontoInicial = $("#" + modal + " #dei_MontoInicial").val();
     let dei_MontoRestante = $("#" + modal + " #dei_MontoRestante").val();
     let dei_Cuota = $("#" + modal + " #dei_Cuota").val();
+    let emp_Id = $("#Crear #emp_Id").val();
     //#endregion
 
+    debugger;
     //#region Validar DDL Motivo 
     if (dei_Motivo == null || dei_Motivo == "") {
         $("#" + modal + " #valMotivo").css("display", "");
@@ -299,7 +301,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
 
     //#region  POST Create
-    if (estaTodoValidado()) {
+    if (estaTodoValidado("Crear")) {
         document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN

@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Models
         public int dei_IdDeduccionesIndividuales { get; set; }
 
         [StringLength(100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
-        [Required(ErrorMessage = "Campo Motivo Requerido")]
         [Display(Name = "Motivo")]
         public string dei_Motivo { get; set; }
 
@@ -27,17 +26,15 @@ namespace ERP_GMEDINA.Models
 
 
         [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
-        [DataType(DataType.Currency)]
+        //[DataType(DataType.Currency)]
         [Display(Name = "Monto Inicial")]
         public decimal dei_MontoInicial { get; set; }
 
         [Required(ErrorMessage = "Campo Monto Restante Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Monto Restante")]
         public decimal dei_MontoRestante { get; set; }
 
         [Required(ErrorMessage = "Campo Cuota Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Cuota")]
         public decimal dei_Cuota { get; set; }
 
