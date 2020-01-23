@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Models
         public string per_Apellidos { get; set; }
 
 
-		[Display(Name = "Código Deduccion")]
+		[Display(Name = "Código Deducción")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int cde_IdDeducciones { get; set; }
 

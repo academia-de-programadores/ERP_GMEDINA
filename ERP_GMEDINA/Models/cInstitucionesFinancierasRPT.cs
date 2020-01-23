@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
         public int per_Id { get; set; }
         public string per_Nombres { get; set; }
-        [Display(Name = "Código Institucion Financiera")]
+        [Display(Name = "Código Institución Financiera")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public int insf_IdInstitucionFinanciera { get; set; }
         public string insf_DescInstitucionFinanc { get; set; }
