@@ -43,7 +43,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No. Empleado</Value>
+                              <Value>Num. empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -628,6 +628,44 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox14">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>No hay datos en los filtros seleccionados.</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>Red</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox14</rd:DefaultName>
+        <Top>1.42713cm</Top>
+        <Height>0.6cm</Height>
+        <Width>28.37013cm</Width>
+        <ZIndex>3</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(CountRows("ReportesPlanillaDS") = 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>1.60994in</Height>
     <Style />
@@ -686,7 +724,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>2.22089cm</Top>
+          <Top>1.58589cm</Top>
           <Height>0.76746cm</Height>
           <Width>28.37013cm</Width>
           <ZIndex>2</ZIndex>
@@ -720,7 +758,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>1.51764cm</Top>
+          <Top>0.88264cm</Top>
           <Height>0.61408cm</Height>
           <Width>28.37013cm</Width>
           <ZIndex>3</ZIndex>
@@ -742,7 +780,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.4086cm</Height>
+      <Height>1.85841cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -773,8 +811,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>0.8086cm</Top>
-          <Left>24.08006cm</Left>
+          <Top>0.98499cm</Top>
+          <Left>23.04939cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
           <Style>
@@ -794,7 +832,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Fecha de Impresion: </Value>
+                  <Value>Fecha de Impresión: </Value>
                   <Style />
                 </TextRun>
                 <TextRun>
@@ -808,7 +846,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Left>20.40235cm</Left>
+          <Top>0.17639cm</Top>
+          <Left>19.37168cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
@@ -841,8 +880,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>0.8086cm</Top>
-          <Left>20.63638cm</Left>
+          <Top>0.98499cm</Top>
+          <Left>19.60571cm</Left>
           <Height>0.6cm</Height>
           <Width>3.26729cm</Width>
           <ZIndex>2</ZIndex>

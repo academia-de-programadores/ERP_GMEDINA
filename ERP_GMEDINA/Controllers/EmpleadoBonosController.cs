@@ -79,7 +79,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: EmpleadoBonos/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cb_Monto, cb_FechaRegistro, cb_Pagado, cb_UsuarioCrea, cb_FechaCrea")] tbEmpleadoBonos tbEmpleadoBonos)
+        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cb_Monto")] tbEmpleadoBonos tbEmpleadoBonos)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbEmpleadoBonos.cb_FechaRegistro = DateTime.Now;
@@ -87,7 +87,7 @@ namespace ERP_GMEDINA.Controllers
             tbEmpleadoBonos.cb_UsuarioCrea = 1;
             tbEmpleadoBonos.cb_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listEmpleadoBonos = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
@@ -118,11 +118,10 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception Ex)
                 {
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    Ex.Message.ToString();
+                    response = "error";
+                    return Json(response, JsonRequestBehavior.AllowGet);
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
             }
             else
             {
@@ -146,17 +145,15 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult edit([Bind(Include = "cb_Id, emp_Id, cin_IdIngreso, cb_Monto, cb_FechaRegistro, cb_Pagado, cb_UsuarioModifica, cb_FechaModifica")] tbEmpleadoBonos tbEmpleadoBonos)
+        public ActionResult edit([Bind(Include = "cb_Id, emp_Id, cin_IdIngreso, cb_Monto")] tbEmpleadoBonos tbEmpleadoBonos)
         {
             tbEmpleadoBonos.cb_UsuarioModifica = 1;
             tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
-
+            DateTime FechaRegistro = db.tbEmpleadoBonos.Where(x => x.cb_Id == tbEmpleadoBonos.cb_Id).Select(c => c.cb_FechaRegistro).FirstOrDefault();
+            tbEmpleadoBonos.cb_FechaRegistro = (FechaRegistro == null) ? DateTime.Now : FechaRegistro;
             IEnumerable<object> listEmpleadoBonos = null;
-
             string MensajeError = "";
-
-            string response = string.Empty;
-
+            string response = "bien";
 
             if (ModelState.IsValid)
             {
@@ -197,7 +194,6 @@ namespace ERP_GMEDINA.Controllers
                 ModelState.AddModelError("", "no se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
-            //viewbag.tde_idtipodedu = new selectlist(db.tbtipodeduccion, "tde_idtipodedu", "tde_descripcion", tbcatalogodededucciones.tde_idtipodedu);
 
             //retornar mensaje al lado del cliente
             return Json(response, JsonRequestBehavior.AllowGet);

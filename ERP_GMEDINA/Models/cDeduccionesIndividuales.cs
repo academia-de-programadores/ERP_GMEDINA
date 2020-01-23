@@ -26,7 +26,6 @@ namespace ERP_GMEDINA.Models
 
 
         [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
-        //[DataType(DataType.Currency)]
         [Display(Name = "Monto Inicial")]
         public decimal dei_MontoInicial { get; set; }
 

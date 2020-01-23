@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
 	}
 	public class cIngresosRPT
 	{
-		[Display(Name = "Codigo Empleado")]
+		[Display(Name = "Código Empleado")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int emp_Id { get; set; }
 
@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public string per_Apellidos { get; set; }
 
-		[Display(Name = "Codigo Ingreso")]
+		[Display(Name = "Código Ingreso")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int cin_IdIngreso { get; set; }
 
@@ -49,7 +49,7 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public System.DateTime hipa_FechaPago { get; set; }
 
-		[Display(Name = "Codigo Planilla")]
+		[Display(Name = "Código Planilla")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int cpla_IdPlanilla { get; set; }
 

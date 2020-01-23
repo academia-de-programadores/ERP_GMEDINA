@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
 	}
 	public class cDeduccionesRPT
 	{
-		[Display(Name = "Codigo Empleado")]
+		[Display(Name = "Código Empleado")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int emp_Id { get; set; }
 
@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Models
         public string per_Apellidos { get; set; }
 
 
-		[Display(Name = "Codigo Deduccion")]
+		[Display(Name = "Código Deducción")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int cde_IdDeducciones { get; set; }
 
@@ -58,7 +58,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hipa_FechaPago { get; set; }
 
 
-		[Display(Name = "Codigo Planilla")]
+		[Display(Name = "Código Planilla")]
         [Required(ErrorMessage = "Campo {0} es requerido.")]
         public int cpla_IdPlanilla { get; set; }
 
