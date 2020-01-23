@@ -116,9 +116,9 @@ $("#InActivar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
-                MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
             } else {
-                MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
             }
         });
     } else {

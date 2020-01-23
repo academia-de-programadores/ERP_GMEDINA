@@ -209,7 +209,7 @@ function MsgInfo(Titulo, Mensajes) {
 }
 function MsgSuccess(Titulo, Mensajes) {
  iziToast.success({
-  title: "Éxito",//Titulo,
+     title: "¡Éxito!",//Titulo,
   message: Mensajes,
  });
 }
@@ -219,7 +219,7 @@ function MsgWarning(Titulo, Mensajes) {
  //    message: Mensajes,
  //});
  iziToast.success({
-  title: Titulo,
+     title: "¡Éxito!",
   message: Mensajes,
  });
 }
