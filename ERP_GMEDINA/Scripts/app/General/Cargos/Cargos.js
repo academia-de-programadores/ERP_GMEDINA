@@ -5,6 +5,7 @@
 
 var fill = 0;
 var id = 0;
+
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -18,6 +19,7 @@ function tablaEditar(ID) {
             }
         });
 }
+
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
@@ -108,9 +110,9 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se ha agregado de forma exitosa");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se pudo agregar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -142,8 +144,6 @@ $("#InActivar").click(function () {
     }
 });
 
-
-
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
@@ -157,7 +157,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se ha editado de forma exitosa");
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

@@ -151,12 +151,12 @@ $("#FormNuevo").on("submit", function (event) {
       MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
      } else if (obj != "-1" && obj != "-2" && obj != "-3") {
       llenarTabla();
-      MsgSuccess("Exito", "Archivo subido exitosamente");
+      MsgSuccess("¡Exito!", "El registro se ha agregado de forma exitosa");
       $("#ModalNuevo").modal('hide');//ocultamos el modal
       $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
       $('.modal-backdrop').remove();//eliminamos el
      } else {
-      MsgError("Error", "No se pudo crear la empresa, contacte al administrador");
+      MsgError("Error", "No se pudo agregar el registro, contacte al administrador");
      }
     });
   }
@@ -184,7 +184,7 @@ $("#btnActualizar").click(function () {
      MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
     } else if (obj != "-1" && obj != "-2" && obj != "-3") {
      llenarTabla();
-     MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+     MsgSuccess("¡Exito!", "El registro se ha editado de forma exitosa");
      $("#ModalEditar").modal('hide');//ocultamos el modal
      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
      $('.modal-backdrop').remove();//eliminamos el

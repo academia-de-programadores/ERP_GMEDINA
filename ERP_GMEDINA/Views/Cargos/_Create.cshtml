@@ -14,7 +14,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.car_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
+								@Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)", @autocomplete = "off" } })
 								@Html.ValidationMessageFor(model => model.car_Descripcion, "", new { @class = "text-danger", @id = "errorcar_Descripcion" })
                             </div>
                         </div>
