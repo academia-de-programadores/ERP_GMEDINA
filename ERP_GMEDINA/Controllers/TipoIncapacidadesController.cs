@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-           tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado=true };
+            tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
@@ -50,7 +50,7 @@ namespace ERP_GMEDINA.Controllers
                     }
 
                     ).ToList();
-            return Json(tbTipoIncapacidades, JsonRequestBehavior.AllowGet);
+                return Json(tbTipoIncapacidades, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -103,8 +103,8 @@ namespace ERP_GMEDINA.Controllers
 
             try
             {
-                tbTipoIncapacidades= db.tbTipoIncapacidades.Find(id);
-                if (tbTipoIncapacidades== null || !tbTipoIncapacidades.ticn_Estado)
+                tbTipoIncapacidades = db.tbTipoIncapacidades.Find(id);
+                if (tbTipoIncapacidades == null || !tbTipoIncapacidades.ticn_Estado)
                 {
                     return HttpNotFound();
                 }
@@ -126,7 +126,7 @@ namespace ERP_GMEDINA.Controllers
                 ticn_UsuarioModifica = tbTipoIncapacidades.ticn_UsuarioModifica,
                 ticn_FechaModifica = tbTipoIncapacidades.ticn_FechaModifica,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoIncapacidades.tbUsuario).usu_NombreUsuario },
-                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoIncapacidades.tbUsuario).usu_NombreUsuario }
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoIncapacidades.tbUsuario1).usu_NombreUsuario }
             };
             return Json(TipoIncapacidades, JsonRequestBehavior.AllowGet);
         }

@@ -66,6 +66,7 @@ function llenarTabla() {
                         ID: value.comp_Id,
                         "Número": value.comp_Id,
                         Descripcion: value.comp_Descripcion,
+                        "Descripción": value.comp_Descripcion,
                         Estado: value.comp_Estado ? "Activo" : "Inactivo",
                         Acciones: Acciones
                     }).draw();

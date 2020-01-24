@@ -60,6 +60,8 @@ function llenarTabla() {
                         "Número": value.tamo_Id,
                         Estado: value.tamo_Estado ?"Activo":"Inactivo",
                         Descripcion: value.tamo_Descripcion,
+                        "Descripción": value.tamo_Descripcion,
+
                         Acciones:Acciones
                     })
                 }

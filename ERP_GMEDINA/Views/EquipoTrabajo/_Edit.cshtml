@@ -12,7 +12,7 @@
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-							@Html.LabelFor(model => model.eqtra_Codigo, htmlAttributes: new { @class = "control-label col-md-3" })
+							@Html.LabelFor(model => model.eqtra_Codigo, "Código", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								@Html.EditorFor(model => model.eqtra_Codigo, new { htmlAttributes = new { @class = "form-control required valid" } })
 								@Html.ValidationMessageFor(model => model.eqtra_Codigo, "", new { @class = "text-danger", @id = "erroreqtra_Codigo" })
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-							@Html.LabelFor(model => model.eqtra_Observacion, htmlAttributes: new { @class = "control-label col-md-3" })
+							@Html.LabelFor(model => model.eqtra_Observacion, "Observación", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								@Html.EditorFor(model => model.eqtra_Observacion, new { htmlAttributes = new { @class = "form-control required valid" } })
 								@Html.ValidationMessageFor(model => model.eqtra_Observacion, "", new { @class = "text-danger", @id = "erroreqtra_Observacion" })

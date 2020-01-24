@@ -28,7 +28,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.sue_Cantidad, "Cantidad", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.sue_Cantidad, new { htmlAttributes = new { @class = "form-control required valid", @min = 1,@pattern = "^[0-9]+" } })
+                                @Html.EditorFor(model => model.sue_Cantidad, new { htmlAttributes = new { @class = "form-control required valid", @min = 1, @pattern = "^[0-9]+", @onkeypress = "return Numericos(event)" } })
                                 @Html.ValidationMessageFor(model => model.sue_Cantidad, "", new { @class = "text-danger", @id = "errorCantidad" })
                             </div>
                         </div>
