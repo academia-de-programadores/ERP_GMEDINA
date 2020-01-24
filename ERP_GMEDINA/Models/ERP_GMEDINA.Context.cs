@@ -74,7 +74,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
         public virtual DbSet<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
         public virtual DbSet<tbEquipoTrabajo> tbEquipoTrabajo { get; set; }
-        public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
         public virtual DbSet<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
@@ -209,6 +208,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_FaseSeleccion> V_FaseSeleccion { get; set; }
         public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
         public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
+        public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

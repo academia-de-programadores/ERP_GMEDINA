@@ -52,7 +52,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpresas" Width="1.5" PointX="3" PointY="185.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEquipoEmpleados" Width="1.5" PointX="10.5" PointY="173" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEquipoTrabajo" Width="1.5" PointX="3" PointY="189.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbFaseSeleccion" Width="1.5" PointX="3" PointY="172.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbFasesReclutamiento" Width="1.5" PointX="3" PointY="197.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHabilidades" Width="1.5" PointX="3" PointY="201.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHabilidadesPersona" Width="1.5" PointX="8.25" PointY="179.125" IsExpanded="true" />
@@ -268,8 +267,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoEmpleados_eqem_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" ManuallyRouted="false" />
@@ -413,7 +410,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpresas_empr_Id_rrhh_tbSucursales_empr_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEquipoTrabajo_eqtra_Id_rrhh_tbEquipoEmpleados_eqtra_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesRequisicion_habi_Id" ManuallyRouted="false" />
@@ -454,6 +450,11 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_FaseSeleccion" Width="1.5" PointX="15.375" PointY="30.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="29.375" PointY="28.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="29.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbFaseSeleccion" Width="1.5" PointX="16.5" PointY="177.25" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

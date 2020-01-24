@@ -6,9 +6,6 @@
 });
 
 function llenarDropDownList() {
-
-
-
     _ajax(null,
    '/HistorialCargos/llenarDropDowlistRequisicion',
    'POST',
@@ -30,7 +27,7 @@ function llenarDropDownList() {
 
 $("#btnGuardar").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    
+    debugger
     try
     {
 
@@ -45,10 +42,9 @@ $("#btnGuardar").click(function () {
             emp_Fechaingreso: $("#emp_Fechaingreso").val(),
         };
 
-    var tbSueldos =
-        {
-            sue_Cantidad: $("#sue_Cantidad").val(),
-        };
+
+    var sue_Cantidad = $("#sue_Cantidad").val();
+
     var tbRequisiciones =
         {
             req_Id: $("#req_Id").val(),
@@ -61,10 +57,12 @@ $("#btnGuardar").click(function () {
     }
     if (tbEmpleados.car_Id != null && tbEmpleados.area_Id != null && tbEmpleados.depto_Id != null && tbEmpleados.jor_Id != null &&
         tbEmpleados.area_Id != "" && tbEmpleados.emp_Fechaingreso != "" &&
-        tbSueldos.sue_Cantidad != "" && tbSueldos.sue_Cantidad >= 0 && tbRequisiciones.req_Id != null) {
+        sue_Cantidad != "" && tbRequisiciones.req_Id != null) {
+        if(sue_Cantidad >= 0)
+        {
         data = JSON.stringify({
             tbEmpleados: tbEmpleados,
-            tbSueldos: tbSueldos,
+            sue_Cantidad: sue_Cantidad,
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,
@@ -80,7 +78,12 @@ $("#btnGuardar").click(function () {
                     MsgError("Error", "Codigo:" + obj + ". No se promovió el registro, contacte con el administrador");
                 }
             });
-    } else {
+        }         
+        else {
+            MsgError("Error", "Sueldo no puede ser negativo");
+        }
+    }
+    else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });

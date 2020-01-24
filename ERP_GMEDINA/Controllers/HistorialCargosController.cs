@@ -160,7 +160,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, tbSueldos tbSueldos, tbRequisiciones tbRequisiciones)
+        public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, int sue_Cantidad, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
@@ -171,7 +171,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                         var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
-                        tbEmpleados.jor_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, 1, DateTime.Now);
+                        tbEmpleados.jor_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, 1, DateTime.Now);
                         foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";

@@ -15,7 +15,7 @@ function llenarTabla() {
                    Hora: value.tiho_Descripcion,
                    Cantidad:value.Cantidad,
                    Recargo: value.tiho_Recargo,
-                   Fecha: FechaFormato(value.Fecha)
+                   Fecha: FechaFormato(value.Fecha).substring(0, 10)
                    
                });
            });

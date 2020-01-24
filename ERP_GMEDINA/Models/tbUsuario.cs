@@ -104,8 +104,6 @@ namespace ERP_GMEDINA.Models
             this.tbEquipoEmpleados1 = new HashSet<tbEquipoEmpleados>();
             this.tbEquipoTrabajo = new HashSet<tbEquipoTrabajo>();
             this.tbEquipoTrabajo1 = new HashSet<tbEquipoTrabajo>();
-            this.tbFaseSeleccion = new HashSet<tbFaseSeleccion>();
-            this.tbFaseSeleccion1 = new HashSet<tbFaseSeleccion>();
             this.tbFasesReclutamiento = new HashSet<tbFasesReclutamiento>();
             this.tbFasesReclutamiento1 = new HashSet<tbFasesReclutamiento>();
             this.tbHabilidades = new HashSet<tbHabilidades>();
@@ -186,6 +184,8 @@ namespace ERP_GMEDINA.Models
             this.tbMotivoLiquidacion1 = new HashSet<tbMotivoLiquidacion>();
             this.tbPorcentajeMotivoLiquidacion = new HashSet<tbPorcentajeMotivoLiquidacion>();
             this.tbPorcentajeMotivoLiquidacion1 = new HashSet<tbPorcentajeMotivoLiquidacion>();
+            this.tbFaseSeleccion = new HashSet<tbFaseSeleccion>();
+            this.tbFaseSeleccion1 = new HashSet<tbFaseSeleccion>();
         }
     
         public int usu_Id { get; set; }
@@ -374,10 +374,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEquipoTrabajo> tbEquipoTrabajo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFasesReclutamiento> tbFasesReclutamiento1 { get; set; }
@@ -537,5 +533,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion1 { get; set; }
     }
 }

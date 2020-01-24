@@ -149,7 +149,7 @@ $("#btnActualizar").click(function () {
 function format(obj) {
     var EstadoCivil = '';
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ];
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Informacion personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Información personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         index.per_EstadoCivil.toUpperCase() == ('S') ? EstadoCivil = 'Soltero(a)'
     : index.per_EstadoCivil.toUpperCase() == ('C') ? EstadoCivil = 'Casado(a)'
@@ -157,7 +157,7 @@ function format(obj) {
     : index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
         div = div
-        + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
+        + '<div class="col-md-5"><b>Número de identidad: </b>' + index.per_Identidad + '</div>'
         + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
         //+ '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
         //+ '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
@@ -167,7 +167,7 @@ function format(obj) {
         '</div>' +
         '</div>'
     });
-    div += '<div class="ibox"><div class="ibox-title"><h5>Informacion sobre la salida: </h5></div><div class="ibox-content"><div class="row">';
+    div += '<div class="ibox"><div class="ibox-title"><h5>Información sobre la salida: </h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         fecha = new Date(parseInt(index.hsal_FechaSalida.replace("/Date(", "").replace(")/", ""), 10));
         var dia = fecha.getDate();
@@ -178,7 +178,7 @@ function format(obj) {
         var observa = index.hsal_Observacion == null ? "Ninguna" : index.hsal_Observacion;
         div = div
             + '<div class="col-md-2"><b>Tipo de salida: </b></div><div class="col-md-10">' + index.rsal_Descripcion + '</div>'
-            + '<div class="col-md-2"><b>Razon salida: </b></div><div class="col-md-10">' + index.tsal_Descripcion + '</div>'
+            + '<div class="col-md-2"><b>Razón salida: </b></div><div class="col-md-10">' + index.tsal_Descripcion + '</div>'
             + '<div class="col-md-2"><b>Observaciones: </b></div><div class="col-md-10">' + observa + '</div>'
             + '<div class="col-md-2"><b>Fecha salida: </b></div><div class="col-md-10">' + fechamnsj + '</div>'
             + '</div>' +
