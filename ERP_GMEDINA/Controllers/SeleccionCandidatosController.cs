@@ -116,12 +116,12 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_SeleccionCandidatos> lista = new List<V_SeleccionCandidatos> { };
+            dynamic lista = null;
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    lista = db.V_SeleccionCandidatos.Where(x => x.Id == id).ToList();
+                    lista = db.tbFaseSeleccion.Where(x => x.scan_Id == id).Select(x => new { scan_Id = x.scan_Id, fsel_Id = x.fsel_Id , Fase_Id = x.fare_Id,Fase = (db.tbFasesReclutamiento.Where(fr => fr.fare_Id == x.fare_Id).Select(fr => fr.fare_Descripcion) ),Fecha = x.fsel_FechaCrea} ).ToList();
                 }
                 catch
                 {
@@ -382,7 +382,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados, int sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
+        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados, tbSueldos tbSueldos, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
@@ -404,7 +404,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -415,7 +415,7 @@ namespace ERP_GMEDINA.Controllers
                         //Si el candidato ah sido empleado se recontratara
                         var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, true, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, true, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
 
                         foreach (UDP_RRHH_tbEmpleados_Recontratar_Result item in list)
                         {
