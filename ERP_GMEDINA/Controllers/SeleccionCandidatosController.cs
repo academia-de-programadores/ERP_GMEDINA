@@ -382,7 +382,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados, int sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
+        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados, Decimal sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)

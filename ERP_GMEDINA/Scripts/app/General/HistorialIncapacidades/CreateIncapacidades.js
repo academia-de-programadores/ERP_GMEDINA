@@ -17,8 +17,24 @@
         return today = yyyy + '-' + mm + '-' + dd;
     }
 
-    $("#hinc_FechaInicio").attr("min", Fecha());
-    $("#hinc_FechaFin").attr("min", Fecha());
+
+
+ 
+    //var ddl = $("#ticn_Id").val;
+    //if (ddl <= 0)
+    //{
+    //    $("#valiticn_Id").attr("hidden", "true");
+    //}
+    //else
+    //{
+    //    $("#valiticn_Id").attr("hidden", "false");
+    //}
+ 
+  
+
+
+    //$("#hinc_FechaInicio").attr("min", Fecha());
+    //$("#hinc_FechaFin").attr("min", Fecha());
  
 
     
@@ -46,12 +62,6 @@
         }
 
     }
-
-
-
-
-
-
 
 
     $("#btnGuardar").click(function () {

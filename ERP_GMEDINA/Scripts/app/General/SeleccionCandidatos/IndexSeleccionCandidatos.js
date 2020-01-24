@@ -65,7 +65,7 @@ function llenarTabla() {
                          "Número": value.Id,
                          Identidad: value.Identidad,
                          Nombre: value.Nombre,
-                         Fase: value.Fase,
+                         Fase_Actual: value.Fase,
                          Plaza_Solicitada: value.Plaza_Solicitada,
                          Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
                          Estado: value.Estado ? "Activo" : "Inactivo",
