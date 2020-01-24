@@ -159,10 +159,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 $("#btnActualizar").click(function () {
-    if ($.isNumeric($('#sue_Cantidad').val())) {
-        if ($('#sue_Cantidad').val() < 1) {
-            $('#sue_Cantidad').focus();
-        } else {
+    if ( $('#sue_Cantidad').val() > 0) {
             var data = $('#FormEditar').serializeArray();
             data = serializar(data);
             data.sue_Cantidad = parseFloat(data.sue_Cantidad);
@@ -185,8 +182,7 @@ $("#btnActualizar").click(function () {
             } else {
                 MsgError("Error", "por favor llene todas las cajas de texto");
             }
-        }
-    } else {
+        } else {
         MsgError("Error", "Por favor ingrese una cantidad númerica");
     }
 });
