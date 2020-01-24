@@ -47,8 +47,8 @@ function llenarTabla() {
        var Acciones = value.habi_Estado == 1
                    ? null : Admin ?
                    "<div>" +
-                       //"<a class='btn btn-default btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
        tabla.row.add({
         Estado: value.habi_Estado ? 'Activo' : 'Inactivo',

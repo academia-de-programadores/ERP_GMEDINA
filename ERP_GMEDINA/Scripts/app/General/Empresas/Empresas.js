@@ -54,9 +54,9 @@ function llenarTabla() {
       $.each(Lista, function (index, value) {
        var Acciones = value.empr_Estado == 1
                    ? null : Admin ?
-                   "<div>" +
-                       //"<a class='btn btn-default btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                    "<div>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
        tabla.row.add({
         ID: value.empr_Id,
@@ -69,6 +69,7 @@ function llenarTabla() {
      });
 }
 function tablaEditar(ID) {
+    id = ID;
  _ajax(JSON.stringify({ id: ID }),
      '/Empresas/Datos/',
      'POST',
