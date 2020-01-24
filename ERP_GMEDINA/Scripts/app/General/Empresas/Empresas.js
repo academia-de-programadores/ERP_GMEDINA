@@ -9,7 +9,6 @@ function init() {
  var inputFile = document.getElementById('UPempr_Logo');
  inputFile.addEventListener('change', mostrarImagen, false);
 }
-
 function mostrarImagen(event) {
  var file = event.target.files[0];
  var reader = new FileReader();
@@ -21,7 +20,6 @@ function mostrarImagen(event) {
  }
  reader.readAsDataURL(file);
 }
-
 window.addEventListener('load', init, false);
 $("#empr_Logo").change(function () {
  var fileExtension = ['png', 'jpeg', 'jpg'];
@@ -31,27 +29,6 @@ $("#empr_Logo").change(function () {
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
   $("#ModalNuevo").data("res", false);
  } else {
-  //var formData = new FormData();
-  //formData.append('file', $('#empr_Logo')[0].files[0]);
-  // $.ajax({
-  //  url: "/Empresas/Upload",
-  //  type: "post",
-  //  dataType: "html",
-  //  data: formData,
-  //  cache: false,
-  //  contentType: false,
-  //  processData: false
-  // })
-  //.done(function (res) {
-  // if (res == "true") {
-  //     MsgSuccess("Exito","Archivo subido exitosamente");
-  //    } else {
-  //           MsgError("Error", "Cambiar el nombre del archivo");
-  //           var img = document.getElementById('img1');
-  //           img.src = "";
-  //           $("#ModalNuevo").data("res", false);
-  //    }
-  //});
   $("#ModalNuevo").data("res", true);
  }
 });
@@ -76,11 +53,11 @@ function llenarTabla() {
       tabla.draw();
       $.each(Lista, function (index, value) {
        var Acciones = value.empr_Estado == 1
-                   ? null :
+                   ? null : Admin ?
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                   "</div>";
+                       //"<a class='btn btn-default btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>" : '';
        tabla.row.add({
         ID: value.empr_Id,
         "Número": value.empr_Id,
@@ -109,20 +86,18 @@ function tablaDetalles(ID) {
      '/Empresas/Datos/',
      'POST',
      function (obj) {
-         if (obj != "-1" && obj != "-2" && obj != "-3") {
-             $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
-             var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
-             $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-             var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
-             $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-             var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
+      if (obj != "-1" && obj != "-2" && obj != "-3") {
+       $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
+       var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
+       $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+       var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
+       $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+       var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
        //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
        $('#ModalDetalles').modal('show');
       }
      });
 }
-
-
 //Botones GET
 $("#btnAgregar").click(function () {
  var modalnuevo = $('#ModalNuevo');
@@ -131,8 +106,7 @@ $("#btnAgregar").click(function () {
  $(modalnuevo).find("#empr_Nombre").focus();
  $(modalnuevo).find("#empr_Logo").val(null);
  $("#ModalNuevo").find("#img1")[0].src = '';
-})
-
+});
 $("#btnEditar").click(function () {
  _ajax(null,
      '/Empresas/Edit/' + id,
@@ -146,7 +120,6 @@ $("#btnEditar").click(function () {
       }
      });
 });
-
 $("#btnInactivar").click(function () {
  CierraPopups();
  $('#ModalInactivar').modal('show');
@@ -190,7 +163,6 @@ $("#FormNuevo").on("submit", function (event) {
   MsgError("Error", "por favor, seleccione una imagen");
  }
 });
-
 $("#btnActualizar").click(function () {
  var img = $("#img2")[0].innerText;
  if (ModalEditar != '') {
@@ -211,7 +183,7 @@ $("#btnActualizar").click(function () {
      MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
     } else if (obj != "-1" && obj != "-2" && obj != "-3") {
      llenarTabla();
-     MsgSuccess( "¡Exito!","El registro se editó de forma exitosa");
+     MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
      $("#ModalEditar").modal('hide');//ocultamos el modal
      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
      $('.modal-backdrop').remove();//eliminamos el
@@ -221,7 +193,6 @@ $("#btnActualizar").click(function () {
    });
  }
 });
-
 $("#InActivar").click(function () {
  var data = $("#FormInactivar").serializeArray();
  data = serializar(data);

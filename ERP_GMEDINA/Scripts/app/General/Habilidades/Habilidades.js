@@ -1,34 +1,35 @@
 ﻿var ID = 0;
 var fill = 0;
+var Admin = false;
 //Funciones GET
 function tablaEditar(id) {
-    var data = { id: id };
-    _POST(data,
-     '/Habilidades/Datos/',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       ID = obj.habi_Id;
-       $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
-       $('#ModalEditar').modal('show');
-      }
-     });
+ var data = { id: id };
+ _POST(data,
+  '/Habilidades/Datos/',
+  function (obj) {
+   if (obj != "-1" && obj != "-2" && obj != "-3") {
+    ID = obj.habi_Id;
+    $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
+    $('#ModalEditar').modal('show');
+   }
+  });
 }
 function tablaDetalles(id) {
-    var data = { id: id };
-    _POST(data,
-     '/Habilidades/Datos/',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       ID = obj.habi_Id;
-       $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
-       $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
-       $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
-       $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-       $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-       //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-       $('#ModalDetalles').modal('show');
-      }
-     });
+ var data = { id: id };
+ _POST(data,
+  '/Habilidades/Datos/',
+  function (obj) {
+   if (obj != "-1" && obj != "-2" && obj != "-3") {
+    ID = obj.habi_Id;
+    $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
+    $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
+    $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
+    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+    $('#ModalDetalles').modal('show');
+   }
+  });
 }
 //fill = -1 para cargar toda la data
 //fill = 0 para cargar solo los activos
@@ -44,11 +45,11 @@ function llenarTabla() {
       tabla.draw();
       $.each(Lista, function (index, value) {
        var Acciones = value.habi_Estado == 1
-                   ? null :
+                   ? null : Admin ?
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                   "</div>";
+                       //"<a class='btn btn-default btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>" : '';
        tabla.row.add({
         Estado: value.habi_Estado ? 'Activo' : 'Inactivo',
         "Número": value.habi_Id,
@@ -86,10 +87,10 @@ $("#btnEditar").click(function () {
      });
 });
 $("#btnInactivar").click(function () {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#habi_RazonInactivo").val("");
-    $("#ModalInactivar").find("#habi_RazonInactivo").focus();
+ CierraPopups();
+ $('#ModalInactivar').modal('show');
+ $("#ModalInactivar").find("#habi_RazonInactivo").val("");
+ $("#ModalInactivar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
 
@@ -117,27 +118,27 @@ $("#btnGuardar").click(function () {
 });
 
 $("#InActivar").click(function () {
-    var data = $("#FormInactivar").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        data.habi_Id = ID;
-        data = JSON.stringify({ tbHabilidades: data });
-        _ajax(data,
-            '/Habilidades/Delete',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
-                } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
+ var data = $("#FormInactivar").serializeArray();
+ data = serializar(data);
+ if (data != null) {
+  data.habi_Id = ID;
+  data = JSON.stringify({ tbHabilidades: data });
+  _ajax(data,
+      '/Habilidades/Delete',
+      'POST',
+      function (obj) {
+       if (obj != "-1" && obj != "-2" && obj != "-3") {
+        CierraPopups();
+        llenarTabla();
+        LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+       } else {
+        MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+       }
+      });
+ } else {
+  MsgError("Error", "por favor llene todas las cajas de texto");
+ }
 });
 
 $("#btnActualizar").click(function () {
