@@ -446,9 +446,9 @@ $('#btnCreateTechoDeducciones').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     if (validacionCrear()) {
         var data = $("#frmTechosDeduccionesCreate").serializeArray();
-        data[5].value = data[5].value.replace(/,/g, '');;
-        data[6].value = data[6].value.replace(/,/g, '');;
-        data[7].value = data[7].value.replace(/,/g, '');;
+        data[5].value = data[5].value.replace(/,/g, '');
+        data[6].value = data[6].value.replace(/,/g, '');
+        data[7].value = data[7].value.replace(/,/g, '');
         console.log(data);
         $.ajax({
             url: "/TechosDeducciones/Create",
@@ -538,6 +538,10 @@ $("#btnEditarTecho").click(function () {
     if (validacionEditar()) {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditTechosDeducciones").serializeArray();
+        console.log(data);
+        data[5].value = data[5].value.replace(/,/g, '');
+        data[6].value = data[6].value.replace(/,/g, '');
+        data[7].value = data[7].value.replace(/,/g, '');
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/TechosDeducciones/Edit",
