@@ -50,7 +50,7 @@ namespace ERP_GMEDINA.Controllers
                             per_Telefono = x.tbPersonas.per_Telefono,
                             per_CorreoElectronico = x.tbPersonas.per_CorreoElectronico
                         })
-                        .ToList();
+                        .Where(x=>x.Estado==true).ToList();
                     return Json(tbEmpleados, JsonRequestBehavior.AllowGet);
                 }
             }
