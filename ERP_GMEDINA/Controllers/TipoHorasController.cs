@@ -45,7 +45,7 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.ToString();
-                throw;
+                return Json(-2, JsonRequestBehavior.AllowGet);
             }
         }
 
