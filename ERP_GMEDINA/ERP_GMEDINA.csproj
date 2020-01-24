@@ -1870,6 +1870,12 @@
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\style.css" />
+    <Content Include="DataSets\ReportesRRHH.xsc">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReportesRRHH.xss">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -2093,17 +2099,11 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
-    <Content Include="DataSets\ReportesRRHH.xsc">
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Content>
     <None Include="DataSets\ReportesRRHH.xsd">
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ReportesRRHH1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </None>
-    <Content Include="DataSets\ReportesRRHH.xss">
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

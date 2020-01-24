@@ -263,29 +263,6 @@
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialSueldosTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialSueldosTableAdapter" Name="V_RPT_HistorialSueldos" UserDataComponentName="V_RPT_HistorialSueldosTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT sue_Id, NombreEmp, emp_Id, sue_Cantidad, tmon_Descripcion, FechaInicio, fechafin, car_Descripcion FROM rrhh.V_RPT_HistorialSueldos</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="sue_Id" DataSetColumn="sue_Id" />
-              <Mapping SourceColumn="NombreEmp" DataSetColumn="NombreEmp" />
-              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
-              <Mapping SourceColumn="sue_Cantidad" DataSetColumn="sue_Cantidad" />
-              <Mapping SourceColumn="tmon_Descripcion" DataSetColumn="tmon_Descripcion" />
-              <Mapping SourceColumn="FechaInicio" DataSetColumn="FechaInicio" />
-              <Mapping SourceColumn="fechafin" DataSetColumn="fechafin" />
-              <Mapping SourceColumn="car_Descripcion" DataSetColumn="car_Descripcion" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_EmpleadoCurriculumTableAdapter" GeneratorDataComponentClassName="V_RPT_EmpleadoCurriculumTableAdapter" Name="V_RPT_EmpleadoCurriculum" UserDataComponentName="V_RPT_EmpleadoCurriculumTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_EmpleadoCurriculum" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -337,6 +314,30 @@
               <Mapping SourceColumn="per_Identidad" DataSetColumn="per_Identidad" />
               <Mapping SourceColumn="aude_Descripcion" DataSetColumn="aude_Descripcion" />
               <Mapping SourceColumn="fechaAudiencia" DataSetColumn="fechaAudiencia" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialSueldosTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialSueldosTableAdapter" Name="V_RPT_HistorialSueldos" UserDataComponentName="V_RPT_HistorialSueldosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select * from rrhh.V_rpt_historialsueldos</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="sue_Id" DataSetColumn="sue_Id" />
+              <Mapping SourceColumn="NombreEmp" DataSetColumn="NombreEmp" />
+              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
+              <Mapping SourceColumn="sue_Cantidad" DataSetColumn="sue_Cantidad" />
+              <Mapping SourceColumn="tmon_Descripcion" DataSetColumn="tmon_Descripcion" />
+              <Mapping SourceColumn="FechaInicio" DataSetColumn="FechaInicio" />
+              <Mapping SourceColumn="fechafin" DataSetColumn="fechafin" />
+              <Mapping SourceColumn="car_Descripcion" DataSetColumn="car_Descripcion" />
+              <Mapping SourceColumn="car_Id" DataSetColumn="car_Id" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -775,38 +776,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialSueldos" msprop:Generator_TableClassName="V_RPT_HistorialSueldosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSueldos" msprop:Generator_TablePropName="V_RPT_HistorialSueldos" msprop:Generator_RowDeletingName="V_RPT_HistorialSueldosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSueldosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSueldosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSueldosRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialSueldos" msprop:Generator_RowChangedName="V_RPT_HistorialSueldosRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialSueldosRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialSueldosRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="sue_Id" msprop:Generator_ColumnVarNameInTable="columnsue_Id" msprop:Generator_ColumnPropNameInRow="sue_Id" msprop:Generator_ColumnPropNameInTable="sue_IdColumn" msprop:Generator_UserColumnName="sue_Id" type="xs:int" />
-              <xs:element name="NombreEmp" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombreEmp" msprop:Generator_ColumnPropNameInRow="NombreEmp" msprop:Generator_ColumnPropNameInTable="NombreEmpColumn" msprop:Generator_UserColumnName="NombreEmp" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="101" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
-              <xs:element name="sue_Cantidad" msprop:Generator_ColumnVarNameInTable="columnsue_Cantidad" msprop:Generator_ColumnPropNameInRow="sue_Cantidad" msprop:Generator_ColumnPropNameInTable="sue_CantidadColumn" msprop:Generator_UserColumnName="sue_Cantidad" type="xs:decimal" />
-              <xs:element name="tmon_Descripcion" msprop:Generator_ColumnVarNameInTable="columntmon_Descripcion" msprop:Generator_ColumnPropNameInRow="tmon_Descripcion" msprop:Generator_ColumnPropNameInTable="tmon_DescripcionColumn" msprop:Generator_UserColumnName="tmon_Descripcion">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="FechaInicio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaInicio" msprop:Generator_ColumnPropNameInRow="FechaInicio" msprop:Generator_ColumnPropNameInTable="FechaInicioColumn" msprop:Generator_UserColumnName="FechaInicio" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="fechafin" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfechafin" msprop:Generator_ColumnPropNameInRow="fechafin" msprop:Generator_ColumnPropNameInTable="fechafinColumn" msprop:Generator_UserColumnName="fechafin" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="car_Descripcion" msprop:Generator_ColumnVarNameInTable="columncar_Descripcion" msprop:Generator_ColumnPropNameInRow="car_Descripcion" msprop:Generator_ColumnPropNameInTable="car_DescripcionColumn" msprop:Generator_UserColumnName="car_Descripcion">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="V_RPT_EmpleadoCurriculum" msprop:Generator_TableClassName="V_RPT_EmpleadoCurriculumDataTable" msprop:Generator_TableVarName="tableV_RPT_EmpleadoCurriculum" msprop:Generator_RowChangedName="V_RPT_EmpleadoCurriculumRowChanged" msprop:Generator_TablePropName="V_RPT_EmpleadoCurriculum" msprop:Generator_RowDeletingName="V_RPT_EmpleadoCurriculumRowDeleting" msprop:Generator_RowChangingName="V_RPT_EmpleadoCurriculumRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_EmpleadoCurriculumRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_EmpleadoCurriculumRowDeleted" msprop:Generator_RowClassName="V_RPT_EmpleadoCurriculumRow" msprop:Generator_UserTableName="V_RPT_EmpleadoCurriculum" msprop:Generator_RowEvArgName="V_RPT_EmpleadoCurriculumRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
@@ -917,6 +886,39 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="fechaAudiencia" msprop:Generator_ColumnVarNameInTable="columnfechaAudiencia" msprop:Generator_ColumnPropNameInRow="fechaAudiencia" msprop:Generator_ColumnPropNameInTable="fechaAudienciaColumn" msprop:Generator_UserColumnName="fechaAudiencia" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="V_RPT_HistorialSueldos" msprop:Generator_TableClassName="V_RPT_HistorialSueldosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSueldos" msprop:Generator_TablePropName="V_RPT_HistorialSueldos" msprop:Generator_RowDeletingName="V_RPT_HistorialSueldosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSueldosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSueldosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSueldosRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialSueldos" msprop:Generator_RowChangedName="V_RPT_HistorialSueldosRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialSueldosRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialSueldosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sue_Id" msprop:Generator_ColumnVarNameInTable="columnsue_Id" msprop:Generator_ColumnPropNameInRow="sue_Id" msprop:Generator_ColumnPropNameInTable="sue_IdColumn" msprop:Generator_UserColumnName="sue_Id" type="xs:int" />
+              <xs:element name="NombreEmp" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombreEmp" msprop:Generator_ColumnPropNameInRow="NombreEmp" msprop:Generator_ColumnPropNameInTable="NombreEmpColumn" msprop:Generator_UserColumnName="NombreEmp" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
+              <xs:element name="sue_Cantidad" msprop:Generator_ColumnVarNameInTable="columnsue_Cantidad" msprop:Generator_ColumnPropNameInRow="sue_Cantidad" msprop:Generator_ColumnPropNameInTable="sue_CantidadColumn" msprop:Generator_UserColumnName="sue_Cantidad" type="xs:decimal" />
+              <xs:element name="tmon_Descripcion" msprop:Generator_ColumnVarNameInTable="columntmon_Descripcion" msprop:Generator_ColumnPropNameInRow="tmon_Descripcion" msprop:Generator_ColumnPropNameInTable="tmon_DescripcionColumn" msprop:Generator_UserColumnName="tmon_Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaInicio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaInicio" msprop:Generator_ColumnPropNameInRow="FechaInicio" msprop:Generator_ColumnPropNameInTable="FechaInicioColumn" msprop:Generator_UserColumnName="FechaInicio" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="fechafin" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfechafin" msprop:Generator_ColumnPropNameInRow="fechafin" msprop:Generator_ColumnPropNameInTable="fechafinColumn" msprop:Generator_UserColumnName="fechafin" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="car_Descripcion" msprop:Generator_ColumnVarNameInTable="columncar_Descripcion" msprop:Generator_ColumnPropNameInRow="car_Descripcion" msprop:Generator_ColumnPropNameInTable="car_DescripcionColumn" msprop:Generator_UserColumnName="car_Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="car_Id" msprop:Generator_ColumnVarNameInTable="columncar_Id" msprop:Generator_ColumnPropNameInRow="car_Id" msprop:Generator_ColumnPropNameInTable="car_IdColumn" msprop:Generator_UserColumnName="car_Id" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
