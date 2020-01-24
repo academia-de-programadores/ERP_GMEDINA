@@ -53,15 +53,13 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Use el siguiente boton para descargar el archivo que contiene los campos que debe llenar para la adicion de los empleados.
-                </p>
+                    Use el siguiente botón para descargar el archivo que contiene los campos que debe llenar para la adición de los empleados.                </p>
 
                 @Html.ActionLink("Descargar Archivo", "ArchivoEmpleados", null, new { @class = "btn btn-primary " })
 
 
                 <p>
-                    Al terminar de ingresar los datos en el Archivo, use el siguiente boton para subir y guardar los datos.
-                </p>
+                    Al terminar de ingresar los datos en el Archivo, use el siguiente botón para subir y guardar los datos.                </p>
                 @using (Html.BeginForm("UploadEmpleados", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data", @Id = "FormEmpleados" }))
                 {
                     <div class="row">
