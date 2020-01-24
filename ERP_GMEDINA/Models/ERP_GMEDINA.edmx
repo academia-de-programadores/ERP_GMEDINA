@@ -2631,14 +2631,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EquipoTrabajoDetalles' does not
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_FaseSeleccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_FaseSeleccion">
           <Key>
-            <PropertyRef Name="per_Id" />
             <PropertyRef Name="scan_Id" />
             <PropertyRef Name="fsel_Id" />
+            <PropertyRef Name="per_Id" />
             <PropertyRef Name="Fase" />
           </Key>
-          <Property Name="per_Id" Type="int" Nullable="false" />
           <Property Name="scan_Id" Type="int" Nullable="false" />
           <Property Name="fsel_Id" Type="int" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
           <Property Name="Fase" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha" Type="date" />
         </EntityType>
@@ -2953,6 +2953,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' does not ha
             <PropertyRef Name="Nombre_Completo" />
             <PropertyRef Name="Descripcion_del_Equipo" />
             <PropertyRef Name="Fecha" />
+            <PropertyRef Name="eqtra_Descripcion" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="fechaFin" />
           </Key>
           <Property Name="eqem_Id" Type="int" Nullable="false" />
           <Property Name="Id_Persona" Type="int" Nullable="false" />
@@ -2960,6 +2964,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' does not ha
           <Property Name="Nombre_Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="Descripcion_del_Equipo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="eqtra_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="eqtra_Observacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="fechaFin" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_FaseSeleccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3153,6 +3162,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos' does not 
             <PropertyRef Name="sue_Cantidad" />
             <PropertyRef Name="tmon_Descripcion" />
             <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="car_Id" />
           </Key>
           <Property Name="sue_Id" Type="int" Nullable="false" />
           <Property Name="NombreEmp" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -3162,6 +3172,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos' does not 
           <Property Name="FechaInicio" Type="date" />
           <Property Name="fechafin" Type="date" />
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5670,18 +5681,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
-          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla">
           <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="1" />
           <End Role="tbTipoPlanillaDetalleDeduccion" Type="Self.tbTipoPlanillaDetalleDeduccion" Multiplicity="*" />
@@ -5714,6 +5713,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               <PropertyRef Name="cpla_IdPlanilla" />
             </Principal>
             <Dependent Role="tbEmpleados">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
+          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbDecimoTercerMes">
               <PropertyRef Name="cpla_IdPlanilla" />
             </Dependent>
           </ReferentialConstraint>
@@ -5778,6 +5789,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Plani_tbTipoDeduccion_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
+          <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="1" />
+          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoDeduccion">
+              <PropertyRef Name="tde_IdTipoDedu" />
+            </Principal>
+            <Dependent Role="tbCatalogoDeDeducciones">
+              <PropertyRef Name="tde_IdTipoDedu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbAFP_tde_IdTipoDedu">
           <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="1" />
           <End Role="tbAFP" Type="Self.tbAFP" Multiplicity="*" />
@@ -5786,18 +5809,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               <PropertyRef Name="tde_IdTipoDedu" />
             </Principal>
             <Dependent Role="tbAFP">
-              <PropertyRef Name="tde_IdTipoDedu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
-          <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="1" />
-          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_IdTipoDedu" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
               <PropertyRef Name="tde_IdTipoDedu" />
             </Dependent>
           </ReferentialConstraint>
@@ -9364,9 +9375,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </EntitySet>
           <EntitySet Name="V_FaseSeleccion" EntityType="Self.V_FaseSeleccion" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
-    [V_FaseSeleccion].[per_Id] AS [per_Id], 
     [V_FaseSeleccion].[scan_Id] AS [scan_Id], 
     [V_FaseSeleccion].[fsel_Id] AS [fsel_Id], 
+    [V_FaseSeleccion].[per_Id] AS [per_Id], 
     [V_FaseSeleccion].[Fase] AS [Fase], 
     [V_FaseSeleccion].[Fecha] AS [Fecha]
     FROM [rrhh].[V_FaseSeleccion] AS [V_FaseSeleccion]</DefiningQuery>
@@ -9571,7 +9582,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_EquipoEmpleado].[Identidad] AS [Identidad], 
     [V_RPT_EquipoEmpleado].[Nombre_Completo] AS [Nombre_Completo], 
     [V_RPT_EquipoEmpleado].[Descripcion_del_Equipo] AS [Descripcion_del_Equipo], 
-    [V_RPT_EquipoEmpleado].[Fecha] AS [Fecha]
+    [V_RPT_EquipoEmpleado].[Fecha] AS [Fecha], 
+    [V_RPT_EquipoEmpleado].[eqtra_Descripcion] AS [eqtra_Descripcion], 
+    [V_RPT_EquipoEmpleado].[eqtra_Codigo] AS [eqtra_Codigo], 
+    [V_RPT_EquipoEmpleado].[eqtra_Observacion] AS [eqtra_Observacion], 
+    [V_RPT_EquipoEmpleado].[FechaInicio] AS [FechaInicio], 
+    [V_RPT_EquipoEmpleado].[fechaFin] AS [fechaFin]
     FROM [rrhh].[V_RPT_EquipoEmpleado] AS [V_RPT_EquipoEmpleado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_FaseSeleccion" EntityType="Self.V_RPT_FaseSeleccion" store:Type="Views" store:Schema="rrhh">
@@ -9692,7 +9708,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_HistorialSueldos].[tmon_Descripcion] AS [tmon_Descripcion], 
     [V_RPT_HistorialSueldos].[FechaInicio] AS [FechaInicio], 
     [V_RPT_HistorialSueldos].[fechafin] AS [fechafin], 
-    [V_RPT_HistorialSueldos].[car_Descripcion] AS [car_Descripcion]
+    [V_RPT_HistorialSueldos].[car_Descripcion] AS [car_Descripcion], 
+    [V_RPT_HistorialSueldos].[car_Id] AS [car_Id]
     FROM [rrhh].[V_RPT_HistorialSueldos] AS [V_RPT_HistorialSueldos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="Self.V_RPT_HistorialVacaciones" store:Type="Views" store:Schema="rrhh">
@@ -10636,10 +10653,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
             <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoTercerMes_cpla_IdPlanilla" Association="Self.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" Association="Self.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla">
             <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
             <End Role="tbTipoPlanillaDetalleDeduccion" EntitySet="tbTipoPlanillaDetalleDeduccion" />
@@ -10651,6 +10664,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" Association="Self.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
             <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" Association="Self.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
           </AssociationSet>
           <AssociationSet Name="FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" Association="Self.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago">
             <End Role="tbFormaPago" EntitySet="tbFormaPago" />
@@ -10672,13 +10689,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbPeriodos" EntitySet="tbPeriodos" />
             <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbTipoDeduccion_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" Association="Self.FK_Plani_tbTipoDeduccion_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
+            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
+            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbAFP_tde_IdTipoDedu" Association="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbAFP_tde_IdTipoDedu">
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
             <End Role="tbAFP" EntitySet="tbAFP" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" Association="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu" Association="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu">
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
@@ -14290,6 +14307,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="Nombre_Completo" />
             <PropertyRef Name="Descripcion_del_Equipo" />
             <PropertyRef Name="Fecha" />
+            <PropertyRef Name="eqtra_Descripcion" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="fechaFin" />
           </Key>
           <Property Name="eqem_Id" Type="Int32" Nullable="false" />
           <Property Name="Id_Persona" Type="Int32" Nullable="false" />
@@ -14297,6 +14318,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Nombre_Completo" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripcion_del_Equipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="eqtra_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="V_RPT_FaseSeleccion">
           <Key>
@@ -20890,10 +20916,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialAudienciaDescargo_empleados" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" />
           <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
           <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" />
-          <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_FaseSeleccion" EntityType="ERP_GMEDINAModel.V_FaseSeleccion" />
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
+          <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -21785,24 +21811,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="fechaAudiencia" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="V_RPT_HistorialSueldos">
-          <Key>
-            <PropertyRef Name="sue_Id" />
-            <PropertyRef Name="NombreEmp" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="sue_Cantidad" />
-            <PropertyRef Name="tmon_Descripcion" />
-            <PropertyRef Name="car_Descripcion" />
-          </Key>
-          <Property Name="sue_Id" Type="Int32" Nullable="false" />
-          <Property Name="NombreEmp" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="tmon_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="fechafin" Type="DateTime" Precision="0" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
@@ -21872,6 +21880,26 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Idiomas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Requerimientos_Especiales" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialSueldos">
+          <Key>
+            <PropertyRef Name="sue_Id" />
+            <PropertyRef Name="NombreEmp" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="sue_Cantidad" />
+            <PropertyRef Name="tmon_Descripcion" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="car_Id" />
+          </Key>
+          <Property Name="sue_Id" Type="Int32" Nullable="false" />
+          <Property Name="NombreEmp" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="tmon_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="fechafin" Type="DateTime" Precision="0" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -24387,6 +24415,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_RPT_EquipoEmpleado">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EquipoEmpleado">
               <MappingFragment StoreEntitySet="V_RPT_EquipoEmpleado">
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="eqtra_Observacion" ColumnName="eqtra_Observacion" />
+                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
+                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
                 <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
                 <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
@@ -26647,20 +26680,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_HistorialSueldos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSueldos">
-              <MappingFragment StoreEntitySet="V_RPT_HistorialSueldos">
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="fechafin" ColumnName="fechafin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
-                <ScalarProperty Name="sue_Cantidad" ColumnName="sue_Cantidad" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
-                <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialVacaciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialVacaciones">
               <MappingFragment StoreEntitySet="V_RPT_HistorialVacaciones">
@@ -26709,6 +26728,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
                 <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
                 <ScalarProperty Name="Id_Requisicion" ColumnName="Id_Requisicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialSueldos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSueldos">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialSueldos">
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="fechafin" ColumnName="fechafin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
+                <ScalarProperty Name="sue_Cantidad" ColumnName="sue_Cantidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
+                <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
