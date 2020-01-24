@@ -15,14 +15,14 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" , @id="aude_Descripcion1"} })
+								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
 								@Html.ValidationMessageFor(model => model.aude_Descripcion, "", new { @class = "text-danger", @id = "erroraude_Descripcion" })
                             </div>
                         </div>
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_FechaAudiencia, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-                                @Html.TextBoxFor(model => model.aude_FechaAudiencia, new { @class = "form-control datepicker", @type = "date", @id = "aude_FechaAudiencia1" })
+                                @Html.TextBoxFor(model => model.aude_FechaAudiencia, new { @class = "form-control datepicker required", @type = "date" })
 								@Html.ValidationMessageFor(model => model.aude_FechaAudiencia, "", new { @class = "text-danger", @id = "erroraude_FechaAudiencia" })
                             </div>
                         </div>
@@ -30,7 +30,7 @@
 							@Html.LabelFor(model => model.aude_Testigo, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								<div class="checkbox">
-    								@Html.EditorFor(model => model.aude_Testigo,  new { htmlAttributes = new { @id = "aude_Testigo1" } })
+    								@Html.EditorFor(model => model.aude_Testigo,  new { htmlAttributes = new {  } })
     								@Html.ValidationMessageFor(model => model.aude_Testigo, "", new { @class = "text-danger", @id = "erroraude_Testigo" })
 									</div>
                             </div>
@@ -38,12 +38,12 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_DireccionArchivo, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_DireccionArchivo, new { htmlAttributes = new { @class = "form-control required valid" , @id = "aude_DireccionArchivo1"} })
+								@Html.EditorFor(model => model.aude_DireccionArchivo, new { htmlAttributes = new { @class = "form-control required valid" } })
 								@Html.ValidationMessageFor(model => model.aude_DireccionArchivo, "", new { @class = "text-danger", @id = "erroraude_DireccionArchivo" })
                             </div>
 
                             <div hidden="hidden" class="col-md-8">
-                                <input class="form-control required valid text-box single-line" data-val="true" id="emp_Id" name="emp_Id" type="text" value="">
+                                <input class="form-control text-box single-line" data-val="true" id="emp_Id" name="emp_Id" type="text" value="">
                             </div>
                         </div>
 					</div>

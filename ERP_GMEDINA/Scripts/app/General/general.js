@@ -93,16 +93,22 @@ function serializar(data) {
     $(modal).find("#" + valor.name).focus();
    }
         var input = $(modal).find("#" + valor.name)[0];
-        input.labels[0].children[0].color = "red";
-        var txtlabel = input.labels[0].innerText;
-        var span = input.offsetParent.children[1];
-        var txtRequired=$(input).data("val-required")
-        span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerirido' : txtRequired;
-        $(input).addClass("error");
-        $(span).addClass("text-danger");
-        verificacion = false;
-        if (input.type=="select-one") {
-            primerInput = true;
+        if ($(input).hasClass("required")) {
+          var div = $(input).closest(".form-group");
+          var asterisco=$(div).find("font");
+          var label=$(div).find("label")[0];
+          var span=$(input).closest("div").find("span")[0];
+          asterisco[0].color = "red";
+          var txtlabel =label.innerText;
+          //var span = input.offsetParent.children[1];
+          var txtRequired=$(input).data("val-required")
+          span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerirido' : txtRequired;
+          $(input).addClass("error");
+          $(span).addClass("text-danger");
+          verificacion = false;
+          if (input.type=="select-one") {
+              primerInput = true;
+          }
         }
   }
  });
