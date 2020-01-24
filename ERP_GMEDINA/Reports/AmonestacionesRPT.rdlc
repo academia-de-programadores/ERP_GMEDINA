@@ -6,13 +6,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>4.60109cm</Width>
+              <Width>3.79883cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.35755cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.43151cm</Width>
+              <Width>3.82851cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.43151cm</Width>
@@ -27,7 +27,7 @@
               <Width>3.33109cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.59026cm</Width>
+              <Width>4.00843cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -43,7 +43,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Empleado</Value>
+                              <Value>Colaborador</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -223,7 +223,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Anterior</Value>
+                              <Value>Descripción Anterior</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -259,7 +259,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Observacion Anterior</Value>
+                              <Value>Observación Anterior</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -611,17 +611,20 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesAmonestacionesDS</DataSetName>
-        <Top>1.9903cm</Top>
-        <Left>0.50272cm</Left>
+        <Top>0.31813cm</Top>
+        <Left>0.50273cm</Left>
         <Height>1.2cm</Height>
-        <Width>23.36791cm</Width>
+        <Width>25.38082cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -629,17 +632,17 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.53125in</Height>
+    <Height>0.67292in</Height>
     <Style>
       <Border>
         <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>9.39789in</Width>
+  <Width>10.19037in</Width>
   <Page>
     <PageHeader>
-      <Height>1.83328cm</Height>
+      <Height>1.40995cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -659,9 +662,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.25549cm</Top>
-          <Left>20.86791cm</Left>
+          <Left>21.0796cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.00271cm</Width>
+          <Width>4.20921cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -714,7 +717,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.97896cm</Height>
+      <Height>0.77639cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -733,10 +736,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.17639cm</Top>
-          <Left>20.86791cm</Left>
+          <Top>0.14111cm</Top>
+          <Left>21.88393cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.00271cm</Width>
+          <Width>3.40488cm</Width>
           <Style>
             <Border>
               <Style>None</Style>

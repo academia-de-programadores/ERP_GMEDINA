@@ -611,14 +611,16 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>1.07542cm</Top>
+        <Top>0.17639cm</Top>
         <Left>0.82021cm</Left>
         <Height>1.2cm</Height>
         <Width>24.24624cm</Width>
@@ -628,25 +630,29 @@
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox1">
+      <Textbox Name="Textbox6">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Globals!ExecutionTime</Value>
-                <Style />
+                <Value>No hay datos</Value>
+                <Style>
+                  <FontFamily>Arial Narrow</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.17639cm</Top>
-        <Left>21.05671cm</Left>
+        <rd:DefaultName>Textbox6</rd:DefaultName>
+        <Top>1.82358cm</Top>
+        <Left>10.44333cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.00974cm</Width>
+        <Width>2.5cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -659,13 +665,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.15625in</Height>
+    <Height>1.19583in</Height>
     <Style />
   </Body>
-  <Width>10.10827in</Width>
+  <Width>9.89994in</Width>
   <Page>
     <PageHeader>
-      <Height>1.99912cm</Height>
+      <Height>1.68162cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -692,6 +698,36 @@
           <Left>6.88177cm</Left>
           <Height>1.12917cm</Height>
           <Width>9.98193cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.55245cm</Top>
+          <Left>21.05671cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.00974cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -729,8 +765,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.10583cm</Top>
-          <Left>23.17501cm</Left>
+          <Top>0.46566cm</Top>
+          <Left>22.56645cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>

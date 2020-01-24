@@ -12,10 +12,10 @@
               <Width>4.90963cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>7.95234cm</Width>
+              <Width>7.402cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.86213cm</Width>
+              <Width>6.7723cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Empleado</Value>
+                              <Value>Colaborador</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -286,7 +286,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>fechaAudiencia</rd:DefaultName>
@@ -319,17 +321,21 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <FixedColumnHeaders>true</FixedColumnHeaders>
+        <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesAudiencias</DataSetName>
         <Top>0.10583cm</Top>
-        <Left>0.29106cm</Left>
+        <Left>0.57564cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.06248cm</Width>
+        <Width>25.42231cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -337,13 +343,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>0.68333in</Height>
     <Style />
   </Body>
-  <Width>10.09375in</Width>
+  <Width>10.23542in</Width>
   <Page>
     <PageHeader>
-      <Height>2.2666cm</Height>
+      <Height>1.0365cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -362,10 +368,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.36594cm</Top>
-          <Left>22.35083cm</Left>
+          <Top>0.38467cm</Top>
+          <Left>21.35628cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.00271cm</Width>
+          <Width>3.99726cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -383,7 +389,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Audiencias de descargo</Value>
+                  <Value>Reporte de audiencias de descargo</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>
@@ -395,10 +401,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.18955cm</Top>
           <Left>7.14406cm</Left>
-          <Height>1.89184cm</Height>
-          <Width>11.17833cm</Width>
+          <Height>0.96594cm</Height>
+          <Width>14.03583cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>

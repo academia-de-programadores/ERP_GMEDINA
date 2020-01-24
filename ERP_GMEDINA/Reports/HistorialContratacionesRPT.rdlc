@@ -6,21 +6,21 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.59115in</Width>
+              <Width>2.54948in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.59115in</Width>
+              <Width>2.09115in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.59115in</Width>
+              <Width>2.30782in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.59115in</Width>
+              <Width>2.04948in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.35938in</Height>
+              <Height>0.3316in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -139,7 +139,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Contratacion</Value>
+                              <Value>Fecha Contratación</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -169,7 +169,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.35938in</Height>
+              <Height>0.3316in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -286,7 +286,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>FechaContratacion</rd:DefaultName>
@@ -319,60 +321,33 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Detalles" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.30556in</Top>
-        <Left>0.34396cm</Left>
-        <Height>0.71876in</Height>
-        <Width>6.36458in</Width>
+        <Top>0.19444in</Top>
+        <Left>1.82563cm</Left>
+        <Height>0.6632in</Height>
+        <Width>8.99793in</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox9">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Globals!ExecutionTime</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Left>5.5in</Left>
-        <Height>0.25in</Height>
-        <Width>1in</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
     </ReportItems>
-    <Height>1.15974in</Height>
+    <Height>0.99653in</Height>
     <Style />
   </Body>
-  <Width>6.6875in</Width>
+  <Width>9.71668in</Width>
   <Page>
     <PageHeader>
-      <Height>1in</Height>
+      <Height>0.4925in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -395,10 +370,40 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.13417in</Top>
-          <Left>1.72656in</Left>
-          <Height>0.70833in</Height>
-          <Width>2.95969in</Width>
+          <Top>0.0925in</Top>
+          <Left>2.58251in</Left>
+          <Height>0.4in</Height>
+          <Width>3.8064in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox9">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox9</rd:DefaultName>
+          <Top>0.34079cm</Top>
+          <Left>8in</Left>
+          <Height>0.25in</Height>
+          <Width>1.55in</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -436,8 +441,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>0.04166in</Top>
-          <Left>5.5in</Left>
+          <Top>0.05556in</Top>
+          <Left>8.55in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <Style>

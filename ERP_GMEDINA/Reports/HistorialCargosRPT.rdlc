@@ -34,7 +34,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre</Value>
+                              <Value>Colaborador</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -392,15 +392,17 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Detalles" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.13542in</Top>
-        <Left>0.10417in</Left>
+        <Left>0.41667in</Left>
         <Height>0.5in</Height>
         <Width>5in</Width>
         <Style>
@@ -410,13 +412,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.15625in</Height>
+    <Height>0.81458in</Height>
     <Style />
   </Body>
-  <Width>5.52084in</Width>
+  <Width>5.42917in</Width>
   <Page>
     <PageHeader>
-      <Height>0.875in</Height>
+      <Height>0.50917in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -470,7 +472,7 @@
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.13542in</Top>
           <Left>1.23833in</Left>
-          <Height>0.58208in</Height>
+          <Height>0.37375in</Height>
           <Width>2.69792in</Width>
           <ZIndex>1</ZIndex>
           <Style>
@@ -510,8 +512,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.06944in</Top>
-          <Left>4.10417in</Left>
+          <Top>0.05556in</Top>
+          <Left>4.41667in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <Style>

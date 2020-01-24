@@ -9,13 +9,13 @@
               <Width>4.55988cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.55988cm</Width>
+              <Width>6.27438cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.93935cm</Width>
+              <Width>6.42102cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.55988cm</Width>
+              <Width>4.83505cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -187,7 +187,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Identidad</rd:DefaultName>
@@ -220,7 +222,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Nombre_Completo</rd:DefaultName>
@@ -253,7 +257,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Descripcion_del_Equipo</rd:DefaultName>
@@ -286,7 +292,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Fecha</rd:DefaultName>
@@ -319,17 +327,19 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Detalles" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.34396cm</Top>
-        <Left>0.19744cm</Left>
+        <Top>0.41663cm</Top>
+        <Left>2.12879cm</Left>
         <Height>1.2cm</Height>
-        <Width>18.61899cm</Width>
+        <Width>22.09033cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -337,13 +347,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>0.66425in</Height>
     <Style />
   </Body>
-  <Width>7.57675in</Width>
+  <Width>9.63981in</Width>
   <Page>
     <PageHeader>
-      <Height>2.54cm</Height>
+      <Height>1.44349cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -362,10 +372,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.84349cm</Top>
-          <Left>15.60724cm</Left>
+          <Top>0.52917cm</Top>
+          <Left>19.86692cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.00271cm</Width>
+          <Width>4.07703cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -395,10 +405,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>0.52917cm</Top>
-          <Left>4.9303cm</Left>
-          <Height>1.83444cm</Height>
-          <Width>9.32625cm</Width>
+          <Top>0.35278cm</Top>
+          <Left>6.34846cm</Left>
+          <Height>0.91432cm</Height>
+          <Width>12.05675cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -418,7 +428,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.54cm</Height>
+      <Height>1.10067cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -437,8 +447,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.65828cm</Top>
-          <Left>16.10995cm</Left>
+          <Top>0.31961cm</Top>
+          <Left>21.44395cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
