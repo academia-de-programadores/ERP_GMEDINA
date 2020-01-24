@@ -13,34 +13,37 @@ function format(obj) {
                 '<th>' + 'Número' + '</th>' +
                 '<th>' + 'Fase de Reclutamiento' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
-                 //'<th>' + 'Estado' + '</th>' +
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
-        //var Estado = "";
-        //if (index.hamo_Estado == false)
-        //    Estado = "Inactivo";
-        //else
-        //    Estado = "Activo";
-        //var MostrarBoton = index.hamo_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>';
-        //if (value.hamo_Estado > fill) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
                 '<td>' + index.fsel_Id+ '</td>' +
                 '<td>' + index.Fase + '</td>' +
                 '<td>' + FechaFormato(index.Fecha).substring(0, 10)+ '</td>' +
-                //'<td>' + Estado + '</td>' +
                 '<td>';
 
         div += '</tr>' +
                     '</tbody>'
         '</table>'
-        //}
     });
     return div + '</div></div>';
 }
+//VALIDACIÓN FECHA
 
+
+function compare_dates() {
+    var Fecha = $("#scan_Fecha").val();
+    var fechalimite = '01/01/1900';
+
+    if (Date.parse(Fecha) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fecha no valida");
+    }
+    else {
+        return true;
+    }
+}
 
 //LLENAR INDEX////////////////////////////////////////////////////////////////////////////////////////
 var scan_Id = 0;
@@ -145,8 +148,10 @@ function CallEditar(btn) {
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
+    if (compare_dates())
     if (data != null) {
         data = JSON.stringify({ tbSeleccionCandidatos: data });
+        if (compare_dates()){
         _ajax(data,
             '/SeleccionCandidatos/Edit',
             'POST',
@@ -159,6 +164,7 @@ $("#btnActualizar").click(function () {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
+        }
     } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
@@ -197,23 +203,26 @@ function btnAgregar() {
 $("#btnGuardar").click(function () {
     var data1 = $("#FormNuevo").serializeArray();
     data = serializar(data1);
+    if(compare_dates())
     if (data != null) {
         data = JSON.stringify({ tbSeleccionCandidatos: data });
-        _ajax(data,
-            '/SeleccionCandidatos/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalNuevo").find("#per_Id").find("option[value='" + $("#ModalNuevo").find("#per_Id").val() + "']").remove();
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
+        if (compare_dates()) {
+            _ajax(data,
+                '/SeleccionCandidatos/Create',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        $("#ModalNuevo").find("#per_Id").find("option[value='" + $("#ModalNuevo").find("#per_Id").val() + "']").remove();
+                        CierraPopups();
+                        llenarTabla();
+                        LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
 
-                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                    } else {
+                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    }
+                });
+        }
     } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }

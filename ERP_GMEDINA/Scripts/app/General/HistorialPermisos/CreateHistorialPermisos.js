@@ -10,6 +10,31 @@ function Remove(Id, lista) {
     return list;
 }
 
+function compare_dates() {
+
+    var fecha1 = $("#hper_FechaInicio").val();
+    var fecha2 = $("#hper_FechaFin").val();
+    var fechalimite = '01/01/1900';
+
+
+
+    if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fechas no son validas");
+    }
+
+    else if (Date.parse(fecha1) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fecha inicio no es valida");
+    }
+    else if (Date.parse(fecha2) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fecha fin no es valida");
+    }
+
+    else {
+
+        return true;
+    }
+}
+
 $(document).ready(function () {
     $("#ddlEmpleados").select2();
 

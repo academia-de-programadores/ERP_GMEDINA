@@ -180,6 +180,30 @@ $("#InActivar").click(function () {
 });
 
 
+function compare_dates() {
+
+    var fecha1 = $("#hvac_FechaInicio").val();
+    var fecha2 = $("#hvac_FechaFin").val();
+    var fechalimite = '01/01/1900';
+
+
+    
+    if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fechas no son validas");
+    }
+
+    else if (Date.parse(fecha1) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fecha inicio no es valida");
+    }
+    else if (Date.parse(fecha2) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fecha fin no es valida");
+    }
+
+    else {
+
+        return true;
+    }
+}
 
 
 $("#btnGuardar").click(function () {
@@ -209,7 +233,7 @@ $("#btnGuardar").click(function () {
                 diasRestantes = obj[0].hvac_DiasRestantes;
                 if (diasRestantes - diasTomados < 0)
                 {
-                    validar = false
+                    permiso = false
                 }
             }
 
@@ -220,20 +244,23 @@ $("#btnGuardar").click(function () {
                     data = serializar(data);
 
                     if (data != null) {
-                        data = JSON.stringify({ tbHistorialVacaciones: data });
-                        _ajax(data,
-                            '/HistorialVacaciones/Create',
-                            'POST',
-                            function (obj) {
-                                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                                    CierraPopups();
-                                    llenarTabla();
-                                    LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-                                } else {
-                                    MsgError("Error", "No se pudo cargar la información, contacte al administrador");
-                                }
-                            });
+                       
+                            data = JSON.stringify({ tbHistorialVacaciones: data });
+                        if (compare_dates()) {
+                            _ajax(data,
+                                '/HistorialVacaciones/Create',
+                                'POST',
+                                function (obj) {
+                                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                                        CierraPopups();
+                                        llenarTabla();
+                                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+                                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                                    } else {
+                                        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+                                    }
+                                })
+                        };
                     } else {
                         MsgError("Error", "por favor llene todas las cajas de texto");
                     }
