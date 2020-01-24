@@ -1,16 +1,48 @@
-﻿@*@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
+﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesFormaPago" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesInstitucionFinanciera" }))
 {
     <div class="ibox-content" style="border-color:#fff;">
 
         <div class="form-horizontal">
             <div class="row">
                 <div class="col-md-6">
-                    @Html.LabelFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                    @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                 </div>
                 <div class="col-md-6">
-                    <span id="fpa_Descripcion">@Html.DisplayFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    <span id="insf_IdInstitucionFinanciera">@Html.DisplayFor(model => model.insf_IdInstitucionFinanciera, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                </div>
+                <div class="col-md-6">
+                    <span id="insf_DescInstitucionFinanc">@Html.DisplayFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                </div>
+                <div class="col-md-6">
+                    <span id="insf_Contacto">@Html.DisplayFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                </div>
+                <div class="col-md-6">
+                    <span id="insf_Telefono">@Html.DisplayFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                </div>
+                <div class="col-md-6">
+                    <span id="insf_Correo">@Html.DisplayFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                 </div>
             </div>
         </div>
@@ -32,21 +64,21 @@
                         <tbody>
                             <tr>
                                 <td>Creado</td>
-                                @Html.HiddenFor(model => model.fpa_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                @Html.HiddenFor(model => model.insf_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
                                 <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                <td><span id="fpa_FechaCrea">@Html.DisplayFor(model => model.fpa_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="insf_FechaCrea">@Html.DisplayFor(model => model.insf_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                             </tr>
                             <tr>
                                 <td>Modificado</td>
-                                @Html.HiddenFor(model => model.fpa_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                @Html.HiddenFor(model => model.insf_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
                                 <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                <td><span id="fpa_FechaModifica">@Html.DisplayFor(model => model.fpa_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="insf_FechaModifica">@Html.DisplayFor(model => model.insf_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-}*@
+}
 
 
