@@ -51,9 +51,10 @@ function llenarTabla() {
 
                 var Acciones = value.titu_Estado == 1
                   ? null :
-                  "<div>" +
-                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                  "</div>";
+                 "<div>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>";
                 if (value.titu_Estado > fill) {
                     tabla.row.add({
                         ID: value.titu_Id,

@@ -54,8 +54,9 @@ function llenarTabla() {
                 var Acciones = value.ticn_Estado == 1
                 ?null:
                 "<div>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                "</div>";
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>";
                 if (value.ticn_Estado > fill) {
                 tabla.row.add({
                     ID: value.ticn_Id,

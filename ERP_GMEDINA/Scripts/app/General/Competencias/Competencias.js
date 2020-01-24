@@ -58,9 +58,10 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 var Acciones = value.comp_Estado == 1
                   ? null :
-                  "<div>" +
-                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                  "</div>";
+                   "<div>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>";
                 if (value.comp_Estado > fill) {
                     tabla.row.add({
                         ID: value.comp_Id,

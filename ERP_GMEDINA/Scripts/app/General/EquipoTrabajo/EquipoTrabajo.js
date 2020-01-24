@@ -54,9 +54,10 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 var Acciones = value.eqtra_Estado == 1
                   ? null :
-                  "<div>" +
-                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                  "</div>";
+                   "<div>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>";
                 tabla.row.add({
                     "Número": value.eqtra_Id,
                     ID: value.eqtra_Id,

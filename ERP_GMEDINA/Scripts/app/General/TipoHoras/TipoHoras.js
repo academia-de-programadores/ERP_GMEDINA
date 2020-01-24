@@ -51,9 +51,9 @@ function llenarTabla() {
                 var Acciones = value.tiho_Estado == 1
                        ?null:Admin?
                        "<div>" +
-                           "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                            
-                       "</div>":"";
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>" : "";
           
                 tabla.row.add({
                    

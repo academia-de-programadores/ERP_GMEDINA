@@ -50,8 +50,9 @@ function llenarTabla() {
                 var Acciones = value.resp_Estado == 1
                   ?null:
                   "<div>" +
-                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                  "</div>";
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>";
                 if (value.resp_Estado > fill) {
                 tabla.row.add({
                     ID: value.resp_Id,
