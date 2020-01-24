@@ -25,5 +25,6 @@ namespace ERP_GMEDINA.Models
         public string eqtra_Observacion { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime fechaFin { get; set; }
+        public int eqtra_Id { get; set; }
     }
 }

@@ -707,13 +707,14 @@
             <PropertyRef Name="fsel_Id" />
           </Key>
           <Property Name="fsel_Id" Type="int" Nullable="false" />
+          <Property Name="fare_Id" Type="int" Nullable="false" />
+          <Property Name="scan_Id" Type="int" Nullable="false" />
           <Property Name="fsel_Estado" Type="bit" Nullable="false" />
           <Property Name="fsel_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="fsel_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="fsel_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="fsel_UsuarioModifica" Type="int" />
           <Property Name="fsel_FechaModifica" Type="datetime" />
-          <Property Name="scan_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbFasesReclutamiento">
           <Key>
@@ -2955,6 +2956,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' does not ha
             <PropertyRef Name="Fecha" />
             <PropertyRef Name="eqtra_Descripcion" />
             <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="eqtra_Id" />
             <PropertyRef Name="FechaInicio" />
             <PropertyRef Name="fechaFin" />
           </Key>
@@ -2966,6 +2968,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' does not ha
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="eqtra_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="eqtra_Id" Type="int" Nullable="false" />
           <Property Name="eqtra_Observacion" Type="nvarchar" MaxLength="50" />
           <Property Name="FechaInicio" Type="datetime" Nullable="false" />
           <Property Name="fechaFin" Type="datetime" Nullable="false" />
@@ -6241,6 +6244,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               <PropertyRef Name="fare_Id" />
             </Principal>
             <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="fare_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id">
+          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
               <PropertyRef Name="fare_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -9585,6 +9600,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_EquipoEmpleado].[Fecha] AS [Fecha], 
     [V_RPT_EquipoEmpleado].[eqtra_Descripcion] AS [eqtra_Descripcion], 
     [V_RPT_EquipoEmpleado].[eqtra_Codigo] AS [eqtra_Codigo], 
+    [V_RPT_EquipoEmpleado].[eqtra_Id] AS [eqtra_Id], 
     [V_RPT_EquipoEmpleado].[eqtra_Observacion] AS [eqtra_Observacion], 
     [V_RPT_EquipoEmpleado].[FechaInicio] AS [FechaInicio], 
     [V_RPT_EquipoEmpleado].[fechaFin] AS [fechaFin]
@@ -10841,6 +10857,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id">
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id" Association="Self.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id">
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
             <End Role="tbHabilidadesPersona" EntitySet="tbHabilidadesPersona" />
@@ -11174,8 +11194,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbEquipoEmpleados1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoEmpleados_eqem_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEquipoEmpleados" />
           <NavigationProperty Name="tbEquipoTrabajo" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEquipoTrabajo" />
           <NavigationProperty Name="tbEquipoTrabajo1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEquipoTrabajo" />
-          <NavigationProperty Name="tbFaseSeleccion" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
-          <NavigationProperty Name="tbFaseSeleccion1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
           <NavigationProperty Name="tbFasesReclutamiento" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbFasesReclutamiento1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbHabilidades" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHabilidades" />
@@ -11256,6 +11274,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbMotivoLiquidacion1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" FromRole="tbUsuario" ToRole="tbMotivoLiquidacion" />
           <NavigationProperty Name="tbPorcentajeMotivoLiquidacion" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
           <NavigationProperty Name="tbPorcentajeMotivoLiquidacion1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
+          <NavigationProperty Name="tbFaseSeleccion" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
+          <NavigationProperty Name="tbFaseSeleccion1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -12081,22 +12101,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica" FromRole="tbEquipoTrabajo" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEquipoEmpleados" Relationship="Self.FK_rrhh_tbEquipoTrabajo_eqtra_Id_rrhh_tbEquipoEmpleados_eqtra_Id" FromRole="tbEquipoTrabajo" ToRole="tbEquipoEmpleados" />
         </EntityType>
-        <EntityType Name="tbFaseSeleccion">
-          <Key>
-            <PropertyRef Name="fsel_Id" />
-          </Key>
-          <Property Name="fsel_Id" Type="Int32" Nullable="false" />
-          <Property Name="fsel_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="fsel_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="fsel_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="fsel_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fsel_UsuarioModifica" Type="Int32" />
-          <Property Name="fsel_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="scan_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbFaseSeleccion" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbFaseSeleccion" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" FromRole="tbFaseSeleccion" ToRole="tbSeleccionCandidatos" />
-        </EntityType>
         <EntityType Name="tbFasesReclutamiento">
           <Key>
             <PropertyRef Name="fare_Id" />
@@ -12112,6 +12116,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" FromRole="tbFasesReclutamiento" ToRole="tbSeleccionCandidatos" />
+          <NavigationProperty Name="tbFaseSeleccion" Relationship="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id" FromRole="tbFasesReclutamiento" ToRole="tbFaseSeleccion" />
         </EntityType>
         <EntityType Name="tbHabilidades">
           <Key>
@@ -12638,11 +12643,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="req_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea" FromRole="tbSeleccionCandidatos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica" FromRole="tbSeleccionCandidatos" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbFaseSeleccion" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFaseSeleccion" />
           <NavigationProperty Name="tbFasesReclutamiento" Relationship="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbHistorialContrataciones" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbHistorialContrataciones" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" FromRole="tbSeleccionCandidatos" ToRole="tbPersonas" />
           <NavigationProperty Name="tbRequisiciones" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisiciones" />
+          <NavigationProperty Name="tbFaseSeleccion" Relationship="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFaseSeleccion" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -14311,6 +14316,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="eqtra_Codigo" />
             <PropertyRef Name="FechaInicio" />
             <PropertyRef Name="fechaFin" />
+            <PropertyRef Name="eqtra_Id" />
           </Key>
           <Property Name="eqem_Id" Type="Int32" Nullable="false" />
           <Property Name="Id_Persona" Type="Int32" Nullable="false" />
@@ -14323,6 +14329,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="eqtra_Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_RPT_FaseSeleccion">
           <Key>
@@ -15797,30 +15804,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Principal>
             <Dependent Role="tbEquipoTrabajo">
               <PropertyRef Name="eqtra_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbFaseSeleccion">
-              <PropertyRef Name="fsel_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbFaseSeleccion">
-              <PropertyRef Name="fsel_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -17540,18 +17523,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
-          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="1" />
-          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbSeleccionCandidatos">
-              <PropertyRef Name="scan_Id" />
-            </Principal>
-            <Dependent Role="tbFaseSeleccion">
-              <PropertyRef Name="scan_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
           <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
           <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
@@ -17972,7 +17943,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" />
           <EntitySet Name="tbEquipoEmpleados" EntityType="Self.tbEquipoEmpleados" />
           <EntitySet Name="tbEquipoTrabajo" EntityType="Self.tbEquipoTrabajo" />
-          <EntitySet Name="tbFaseSeleccion" EntityType="Self.tbFaseSeleccion" />
           <EntitySet Name="tbFasesReclutamiento" EntityType="Self.tbFasesReclutamiento" />
           <EntitySet Name="tbHabilidades" EntityType="Self.tbHabilidades" />
           <EntitySet Name="tbHabilidadesPersona" EntityType="Self.tbHabilidadesPersona" />
@@ -18457,14 +18427,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -19037,10 +18999,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <AssociationSet Name="FK_rrhh_tbEquipoTrabajo_eqtra_Id_rrhh_tbEquipoEmpleados_eqtra_Id" Association="Self.FK_rrhh_tbEquipoTrabajo_eqtra_Id_rrhh_tbEquipoEmpleados_eqtra_Id">
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" Association="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
-            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
-            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
@@ -20920,6 +20878,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_FaseSeleccion" EntityType="ERP_GMEDINAModel.V_FaseSeleccion" />
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
+          <EntitySet Name="tbFaseSeleccion" EntityType="ERP_GMEDINAModel.tbFaseSeleccion" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id">
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -21901,6 +21876,72 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="car_Id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbFaseSeleccion">
+          <Key>
+            <PropertyRef Name="fsel_Id" />
+          </Key>
+          <Property Name="fsel_Id" Type="Int32" Nullable="false" />
+          <Property Name="fare_Id" Type="Int32" Nullable="false" />
+          <Property Name="scan_Id" Type="Int32" Nullable="false" />
+          <Property Name="fsel_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="fsel_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fsel_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="fsel_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fsel_UsuarioModifica" Type="Int32" />
+          <Property Name="fsel_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbFaseSeleccion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbFaseSeleccion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbFasesReclutamiento" Relationship="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id" FromRole="tbFaseSeleccion" ToRole="tbFasesReclutamiento" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" FromRole="tbFaseSeleccion" ToRole="tbSeleccionCandidatos" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbFaseSeleccion" Role="tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fsel_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbFaseSeleccion" Role="tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fsel_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id">
+          <End Type="ERP_GMEDINAModel.tbFasesReclutamiento" Role="tbFasesReclutamiento" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbFaseSeleccion" Role="tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fare_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
+          <End Type="ERP_GMEDINAModel.tbSeleccionCandidatos" Role="tbSeleccionCandidatos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbFaseSeleccion" Role="tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="scan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22648,20 +22689,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="eqtra_FechaCrea" ColumnName="eqtra_FechaCrea" />
                 <ScalarProperty Name="eqtra_UsuarioModifica" ColumnName="eqtra_UsuarioModifica" />
                 <ScalarProperty Name="eqtra_FechaModifica" ColumnName="eqtra_FechaModifica" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbFaseSeleccion">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbFaseSeleccion">
-              <MappingFragment StoreEntitySet="tbFaseSeleccion">
-                <ScalarProperty Name="fsel_Id" ColumnName="fsel_Id" />
-                <ScalarProperty Name="fsel_Estado" ColumnName="fsel_Estado" />
-                <ScalarProperty Name="fsel_RazonInactivo" ColumnName="fsel_RazonInactivo" />
-                <ScalarProperty Name="fsel_UsuarioCrea" ColumnName="fsel_UsuarioCrea" />
-                <ScalarProperty Name="fsel_FechaCrea" ColumnName="fsel_FechaCrea" />
-                <ScalarProperty Name="fsel_UsuarioModifica" ColumnName="fsel_UsuarioModifica" />
-                <ScalarProperty Name="fsel_FechaModifica" ColumnName="fsel_FechaModifica" />
-                <ScalarProperty Name="scan_Id" ColumnName="scan_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -24415,6 +24442,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_RPT_EquipoEmpleado">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EquipoEmpleado">
               <MappingFragment StoreEntitySet="V_RPT_EquipoEmpleado">
+                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
                 <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="eqtra_Observacion" ColumnName="eqtra_Observacion" />
@@ -26743,6 +26771,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
                 <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbFaseSeleccion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbFaseSeleccion">
+              <MappingFragment StoreEntitySet="tbFaseSeleccion">
+                <ScalarProperty Name="fsel_FechaModifica" ColumnName="fsel_FechaModifica" />
+                <ScalarProperty Name="fsel_UsuarioModifica" ColumnName="fsel_UsuarioModifica" />
+                <ScalarProperty Name="fsel_FechaCrea" ColumnName="fsel_FechaCrea" />
+                <ScalarProperty Name="fsel_UsuarioCrea" ColumnName="fsel_UsuarioCrea" />
+                <ScalarProperty Name="fsel_RazonInactivo" ColumnName="fsel_RazonInactivo" />
+                <ScalarProperty Name="fsel_Estado" ColumnName="fsel_Estado" />
+                <ScalarProperty Name="scan_Id" ColumnName="scan_Id" />
+                <ScalarProperty Name="fare_Id" ColumnName="fare_Id" />
+                <ScalarProperty Name="fsel_Id" ColumnName="fsel_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
