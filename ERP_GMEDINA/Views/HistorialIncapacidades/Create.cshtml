@@ -56,14 +56,15 @@
                   <div class="form-group">
                       <div id="MeterId" hidden="hidden" class="col-md-8">
                           @Html.EditorFor(model => model.emp_Id, new { htmlAttributes = new { @class = "form-control required valid", @id = "emp_idd" } })
-                          @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                          @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "erroremp_Id" })
+                           
 
                       </div>
-
-                          @Html.LabelFor(model => model.ticn_Id, "Tipo Incapacidad", htmlAttributes: new { @class = "control-label col-md-2" })
+         
+                          @Html.LabelFor(model => model.ticn_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
-                              @Html.DropDownList("ticn_Id", null, htmlAttributes: new { @class = "form-control required valid" })
-                              @Html.ValidationMessageFor(model => model.ticn_Id, "", new { @class = "text-danger" })
+                              @Html.DropDownListFor(model => model.ticn_Id, null,  htmlAttributes: new { @class = "form-control required valid", @id= "ticn_Id" })
+                              @Html.ValidationMessageFor(model => model.ticn_Id, "", new { @class = "text-danger", @id = "valiticn_Id" })
                           </div>
                       </div>
                  
@@ -73,7 +74,7 @@
                           @Html.LabelFor(model => model.hinc_CentroMedico, "Centro Médico", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
                               @Html.EditorFor(model => model.hinc_CentroMedico, new { htmlAttributes = new { @class = "form-control required valid" } })
-                              @Html.ValidationMessageFor(model => model.hinc_CentroMedico, "", new { @class = "text-danger" })
+                              @Html.ValidationMessageFor(model => model.hinc_CentroMedico, "", new { @class = "text-danger", @id = "errorhinc_CentroMedico" })
                           </div>
                       </div>
 
@@ -81,7 +82,7 @@
                           @Html.LabelFor(model => model.hinc_Doctor, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
                               @Html.EditorFor(model => model.hinc_Doctor, "Doctor", new { htmlAttributes = new { @class = "form-control required valid" } })
-                              @Html.ValidationMessageFor(model => model.hinc_Doctor, "", new { @class = "text-danger" })
+                              @Html.ValidationMessageFor(model => model.hinc_Doctor, "", new { @class = "text-danger", @id = "errorhinc_Doctor" })
                           </div>
                       </div>
 
@@ -89,7 +90,7 @@
                           @Html.LabelFor(model => model.hinc_Diagnostico,"Diagnóstico", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
                               @Html.EditorFor(model => model.hinc_Diagnostico, new { htmlAttributes = new { @class = "form-control required valid" } })
-                              @Html.ValidationMessageFor(model => model.hinc_Diagnostico, "", new { @class = "text-danger" })
+                              @Html.ValidationMessageFor(model => model.hinc_Diagnostico, "", new { @class = "text-danger", @id = "errorhinc_Diagnostico" })
                           </div>
                       </div>
 
@@ -97,7 +98,7 @@
                           @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
                               @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker required valid", @type = "date", @id = "hinc_FechaInicio" })
-                            @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger", @id = "errorhinc_FechaInicio" })
                               
                           </div>
                       </div>
@@ -106,7 +107,7 @@
                           @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
                               @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker required valid", @type = "date", @id = "hinc_FechaFin" })
-                          @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger" })
+                          @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger", @id = "errorhinc_FechaFin" })
                           </div>
                       </div>
 
