@@ -7,34 +7,42 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.ini_Motivo)<span id="aste1">*</span>
+                    @Html.LabelFor(model => model.ini_IdIngresosIndividuales, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ini_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Motivo" } })
-                    @Html.ValidationMessageFor(model => model.ini_Motivo, "", new { @class = "text-danger", @id = "validation1" })
+                     @Html.EditorFor(model => model.ini_IdIngresosIndividuales, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ini_Motivo)<label class="" id="ast1" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ini_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Motivo", @autocomplete = "off", onkeyup = "ValidarCamposEditar(this.value,'-1', '-1')" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="validation_ini_Motivo">Campo Razón requerido</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.emp_Id)<span id="aste2">*</span>
+                    @Html.LabelFor(model => model.emp_Id)<label class="" id="ast2" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation2" })
+                    <select id="emp_Id" name="emp_Id" class="form-control" onchange = "ValidarCamposEditar('-1', this.value, '-1')"></select>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="validation_emp_Id">Campo Empleado requerido</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.ini_Monto)<span id="aste3">*</span>
+                    @Html.LabelFor(model => model.ini_Monto)<label class="" id="ast3" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Monto", @min = 0.01, @max = 9999999999.99 } })
-                    @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "validation3" })
+                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id= "ini_Monto", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', this.value)" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="validation_ini_Monto">Campo Monto requerido</span>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="validation_ini_Monto2">El campo Monto debe ser mayor que cero</span>
                 </div>
             </div>
 

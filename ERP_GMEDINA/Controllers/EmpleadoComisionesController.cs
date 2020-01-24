@@ -187,14 +187,9 @@ namespace ERP_GMEDINA.Controllers
         {
             tbEmpleadoComisiones.cc_UsuarioModifica = 1;
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
-
             IEnumerable<object> listEmpleadoComisiones = null;
-
             string MensajeError = "";
-
-            string response = String.Empty;
-
-
+            string response = "bien";
             if (ModelState.IsValid)
             {
                 try

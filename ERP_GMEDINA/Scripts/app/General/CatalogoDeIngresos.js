@@ -66,6 +66,68 @@ function cargarGridIngresos() {
 }
 
 
+//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+$(document).on("click", "#btnAgregarCatalogoIngresos", function () {
+    //OCULTAR VALIDACIONES
+    OcultarValidacionesCrear();
+    //DESLOQUEAR EL BOTON
+    $("#btnCreateRegistroIngresos").attr("disabled", false);
+    //MOSTRAR EL MODAL DE CREACION
+    $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+});
+
+//EVITAR EL POSTBACK DEL FORMULARIO
+$("#frmCatalogoIngresosCreate").submit(function (e) {
+    return false;
+});
+
+//FUNCION: CREAR EL NUEVO REGISTRO
+$('#btnCreateRegistroIngresos').click(function () {
+    //CAPTURAR EL VALOR DEL CAMPO DESCRIPCION
+    var descripcion = $("#Crear #cin_DescripcionIngreso").val();
+
+    //VALIDAMOS LOS CAMPOS
+    if (ValidarCamposCrear(descripcion)) {
+        //SERIALIZAR EL FORMULARIO DEL MODAL 
+        var data = $("#frmCatalogoIngresosCreate").serializeArray();
+        //BLOQUEAMOS EL BOTON
+        $("#btnCreateRegistroIngresos").attr("disabled", true);
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/CatalogoDeIngresos/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+                //REFRESCAR LA DATA DEL DATATBLE
+                cargarGridIngresos();
+                //OCULTAR EL MODAL DE CREACION
+                $("#AgregarCatalogoIngresos").modal('hide');
+
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+
+                $("#Crear #cin_DescripcionIngreso").val('');
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se guardó el registro, contacte al administrador',
+                });
+            }
+        });
+    }
+});
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarCrear").click(function () {
+    //OCULTAR EL MODAL DE CREACION
+    $("#AgregarCatalogoIngresos").modal("hide");
+});
+
 // DETALLES
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function () {
     var ID = $(this).data('id');
@@ -102,12 +164,15 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
         });
 });
 
-
-
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", function () {
+    //OCULTAR VALIDACIONES
+    OcultarValidacionesEditar();
+    //CAPTURAR EL ID DEL REGISTRO
     var ID = $(this).data('id');
+    //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
     InactivarID = ID;
+    //REALIZAR LA PETICION AL SERVIDOR
     $.ajax({
         url: "/CatalogoDeIngresos/Edit/" + ID,
         method: "GET",
@@ -118,11 +183,11 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                //SETEAR LOS CAMPOS
                 $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                $('#asteriscoEdit').removeClass('text-danger');
+                //MOSTRAR MODAL DE EDICION
                 $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-
             }
             else {
                 //Mensaje de error si no hay data
@@ -134,81 +199,20 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
         });
 });
 
-//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
-function ValidarCamposCrear(Descripcion) {
-    console.log("KeyUp");
-    //VALIDACIONES DEL CAMPO DESCRIPCION
-    if (Descripcion != "-1") {
-        var LengthString = Descripcion.length;
-        if (LengthString > 1) {
-            var FirstChar = LengthString - 2;
-            var LastChar = Descripcion.substring(FirstChar, LengthString);
-            console.log(LastChar);
-        }
-        if (LastChar == "  ") {
-            $("#Crear #cin_DescripcionIngreso").val(Descripcion.substring(0, FirstChar + 1));
-        }
-        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
-            if (Descripcion == ' ')
-                $("#Crear #cin_DescripcionIngreso").val("");
-            $("#Crear #asteriscoCreate").addClass("text-danger");
-            $("#Crear #DescripcionCrear").css("display", "");
-
-        } else {
-            $("#Crear #asteriscoCreate").removeClass("text-danger");
-            $("#Crear #DescripcionCrear").css("display", "none");
-        }
-    }
-}
-
-//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
-function ValidarCamposEditar(Descripcion) {
-    console.log("KeyUp");
-    //VALIDACIONES DEL CAMPO DESCRIPCION
-    if (Descripcion != "-1") {
-        var LengthString = Descripcion.length;
-        if (LengthString > 1) {
-            var FirstChar = LengthString - 2;
-            var LastChar = Descripcion.substring(FirstChar, LengthString);
-            console.log(LastChar);
-        }
-        if (LastChar == "  ") {
-            $("#Editar #cin_DescripcionIngreso").val(Descripcion.substring(0, FirstChar + 1));
-        }
-        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
-            if (Descripcion == ' ')
-                $("#Editar #cin_DescripcionIngreso").val("");
-            $("#Editar #asteriscoEdit").addClass("text-danger");
-            $("#Editar #DescripcionEditar").css("display", "");
-
-        } else {
-            $("#Editar #asteriscoEdit").removeClass("text-danger");
-            $("#Editar #DescripcionEditar").css("display", "none");
-        }
-    }
-}
-
+//DESPLEGAR MODAL DE CONFIRMA EDICION
 $("#btnUpdateIngresos").click(function () {
-    //descedit es la variable que uso para validar si esta vacio o no
+    //DESBLOQUEAR EL BOTON DE EDICION
+    $("#btnEditarIngresos").attr("disabled", false);
+    //CAPTURAR EL VALOR DE EL CAMPO DESCRIPCION
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
-    document.getElementById("btnEditarIngresos").disabled = false;
-    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
-        //al validar que no este vacio muestro mi modal de confirmación
-        $("#Editar #validareditar").css("display", "none");
+    //VALIDAR MODELSTATE
+    if (ValidarCamposEditar(descedit)) {
+        //OCULTAR EL MODAL DE EDICION
         $("#EditarCatalogoIngresos").modal('hide');
+        //MOSTRAR EL MODAL DE CONFIRMACION
         $("#EditarCatalogoIngresosConfirmacion").modal({ backdrop: 'static', keyboard: false });
     }
-    else {
-        $("#descripcioncrear").css("display", "");
-        $("#Crear #cin_DescripcionIngreso").focus();
-
-        $('#validareditar').html('Campo Descripción Ingresos requerido');
-        $('#validareditar').show();
-        $('#asteriscoEdit').addClass('text-danger');
-    }
 });
-
-
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarIngresos").click(function () {
@@ -220,8 +224,9 @@ $("#btnEditarIngresos").click(function () {
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     //VALIDAMOS LOS CAMPOS
-    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
-        document.getElementById("btnEditarIngresos").disabled = true;
+    if (ValidarCamposEditar(descedit)) {
+        //BLOQUEAR EL BOTON DE EDICION
+        $("#btnEditarIngresos").attr("disabled", true);
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
@@ -232,8 +237,6 @@ $("#btnEditarIngresos").click(function () {
             if (data != "error") {
                 //REFRESCAR LA DATA DEL DATATBLE
                 cargarGridIngresos();
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                //$("#EditarCatalogoIngresos").modal('hide');
                 $("#EditarCatalogoIngresosConfirmacion").modal('hide');
 
                 iziToast.success({
@@ -242,6 +245,9 @@ $("#btnEditarIngresos").click(function () {
                 });
 
             } else {
+                //DESBLOQUEAR EL BOTON DE EDICION
+                $("#btnEditarIngresos").attr("disabled", false);
+                //MOSTRAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
                     message: 'No se editó el registro, contacte al administrador',
@@ -250,51 +256,46 @@ $("#btnEditarIngresos").click(function () {
 
         });
 
-        // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-        $("#frmCatalogoIngresos").submit(function (e) {
-            return false;
-        });
+
     }
 });
-btnEditarNo
 
+//FUNCION: OCULTAR MODAL DE EDICIÓN
+$("#btnCerrarEditar").click(function () {
+    //OCULTAR MODAL DE EDICION
+    $("#EditarCatalogoIngresos").modal('hide');
+});
+
+//CERRAR EL MODAL DE CONFIRMACION DE LA EDICION
 $("#btnEditarNo").click(function () {
+    //OCULTAR EL MODAL DE CONFIRMACION DE EDITAR
     $("#EditarCatalogoIngresosConfirmacion").modal('hide');
+    //MOSTRAR EL MODAL DE EDITAR
     $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
 });
-const btneditar = $('#btnEditarIngresos'),
-    cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
-
-function mostrarcargandoEditar() {
-    btneditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
-function ocultarcargandoEditar() {
-    btneditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
-
-    document.getElementById("btnInactivarIngresos").disabled = false;
+    //DESBLOQUEAR EL BOTON
+    $("#btnInactivarIngresos").attr("disabled", false);
+    //OCULTAR EL MODAL DE EDICION
     $("#EditarCatalogoIngresos").modal('hide');
+    //MOSTRAR EL MODAL DE INACTIVACION
     $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
 });
 
-//Modal editar despues de No Inactivar
+//CERRAR EL MODAL DE CONFIRMACION DE INACTIVAR
 $("#btnNoInactivar").click(function () {
-    $("#validareditar").css("display", "none");
-    $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    //OCULTAR EL MODAL DE INACTIVACION
     $("#InactivarCatalogoIngresos").modal('hide');
+    //MOSTRAR EL MODAL DE EDICION
+    $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
 });
 
-
+//CONFIRMAR LA INACTIVACION
 $("#btnInactivarIngresos").click(function () {
-    document.getElementById("btnInactivarIngresos").disabled = true;
+    //BLOQUEAR EL BOTON
+    $("#btnInactivarIngresos").attr("disabled", true);
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmInactivarCatalogoIngresos").serializeArray();
     var ID = InactivarID;
@@ -305,6 +306,8 @@ $("#btnInactivarIngresos").click(function () {
         data: data
     }).done(function (data) {
         if (data == "error") {
+            //DESBLOQUEAR EL BOTON
+            $("#btnInactivarIngresos").attr("disabled", false);
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
@@ -312,8 +315,8 @@ $("#btnInactivarIngresos").click(function () {
             });
         }
         else {
+            //OCULTAR EL MODAL
             $("#InactivarCatalogoIngresos").modal('hide');
-            $("#EditarCatalogoIngresos").modal('hide');
             //REFRESCAR LA DATA DEL DATATBLE
             cargarGridIngresos();
             //Mensaje de exito de la edicion
@@ -328,120 +331,29 @@ $("#btnInactivarIngresos").click(function () {
     });
 });
 
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarCatalogoIngresos", function () {
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#Crear #cin_DescripcionIngreso").val('');
-    $('#asteriscoCreate').removeClass('text-danger');
-    document.getElementById("btnCreateRegistroIngresos").disabled = false;
-    $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-});
-
-$("#frmCatalogoIngresosCreate").submit(function (e) {
-    return false;
-});
-
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroIngresos').click(function () {
-
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCatalogoIngresosCreate").serializeArray();
-
-    var descripcion = $("#Crear #cin_DescripcionIngreso").val();
-
-    //VALIDAMOS LOS CAMPOS
-    if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
-        document.getElementById("btnCreateRegistroIngresos").disabled = true;
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/CatalogoDeIngresos/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-
-            if (data != "error") {
-                //REFRESCAR LA DATA DEL DATATBLE
-                cargarGridIngresos();
-                //OCULTAR EL MODAL DE CREACION
-                $("#AgregarCatalogoIngresos").modal('hide');
-
-
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se agregó de forma exitosa!',
-                });
-
-                $("#Crear #cin_DescripcionIngreso").val('');
-            } else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se guardó el registro, contacte al administrador',
-                });
-            }
-        });
-    }
-    else {
-        document.getElementById("btnCreateRegistroIngresos").disabled = false;
-        $("#descripcioncrear").css("display", "");
-        $("#Crear #cin_DescripcionIngreso").focus();
-        $('#asteriscoCreate').addClass('text-danger');
-    }
-});
-
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarCatalogoIngresos").modal('hide');
-    $("#frmCatalogoIngresosCreate").modal('hide');
-});
-
-
-//#region CREAR
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarCrear").click(function () {
-    $("#descripcioncrear").css("display", "none");
-});
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarCreate").click(function () {
-    $("#descripcioncrear").css("display", "none");
-});
-//#endregion
-
-//#region EDITAR
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarEditar").click(function () {
-    $("#validareditar").css("display", "none");
-});
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarEditar").click(function () {
-    $("#validareditar").css("display", "none");
-});
-//#endregion
-
 //FUNCION: PRIMERA FASE DE ACTIVAR
-
 var IDActivar = 0;
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
-    document.getElementById("btnActivarIngreso").disabled = false;
-    //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
+    //DESBLOQUEAR EL BOTON DE ACTIVAR
+    $("#btnActivarIngreso").attr("disabled", false);
+    //SETEAR LA VARIABLE GLOBAL DE ACTIVACION
     IDActivar = $(this).data('id');
+    //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
     $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
 });
 
-
 //EJECUTAR LA ACTIVACION DEL REGISTRO
 $("#btnActivarIngreso").click(function () {
-    document.getElementById("btnActivarIngreso").disabled = true;
+    //BLOQUEAR EL BOTON DE ACTIVAR
+    $("#btnActivarIngreso").attr("disabled", true);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/CatalogoDeIngresos/Activar/" + IDActivar,
         method: "POST"
     }).done(function (data) {
         if (data == "error") {
+            //DESBLOQUEAR EL BOTON DE ACTIVAR
+            $("#btnActivarIngreso").attr("disabled", false);
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
@@ -462,4 +374,83 @@ $("#btnActivarIngreso").click(function () {
     });
     IDActivar = 0;
 });
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposCrear(Descripcion) {
+    var Local_modelState = true;
+    //VALIDACIONES DEL CAMPO DESCRIPCION
+    if (Descripcion != "-1") {
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #cin_DescripcionIngreso").val(Descripcion.substring(0, FirstChar + 1));
+        }
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Crear #cin_DescripcionIngreso").val("");
+            Local_modelState = false;
+            $("#Crear #asteriscoCreate").addClass("text-danger");
+            $("#Crear #DescripcionCrear").show();
+
+        } else {
+            $("#Crear #asteriscoCreate").removeClass("text-danger");
+            $("#Crear #DescripcionCrear").hide();
+        }
+    }
+    return Local_modelState;
+}
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposEditar(Descripcion) {
+    var Local_modelState = true;
+    //VALIDACIONES DEL CAMPO DESCRIPCION
+    if (Descripcion != "-1") {
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #cin_DescripcionIngreso").val(Descripcion.substring(0, FirstChar + 1));
+        }
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Editar #cin_DescripcionIngreso").val("");
+            Local_modelState = false;
+            $("#Editar #asteriscoEdit").addClass("text-danger");
+            $("#Editar #DescripcionEditar").show();
+
+        } else {
+            $("#Editar #asteriscoEdit").removeClass("text-danger");
+            $("#Editar #DescripcionEditar").hide();
+        }
+    }
+    return Local_modelState;
+}
+
+//OCULTAR LAS VALIDACIONES DE CREAR
+function OcultarValidacionesCrear()
+{
+    //OCULTAR EL SPAN
+    $("#Crear #DescripcionCrear").hide();
+    //VACIAR EL INPUT
+    $("#Crear #cin_DescripcionIngreso").val('');
+    //REMOVER EL TEXT DANGER DEL ASTERISCO
+    $('#asteriscoCreate').removeClass('text-danger');
+}
+
+//OCULTAR LAS VALIDACIONES DE EDITAR
+function OcultarValidacionesEditar() {
+    //OCULTAR EL SPAN
+    $("#Editar #DescripcionEditar").hide();
+    //VACIAR EL INPUT
+    $("#Editar #cin_DescripcionIngreso").val('');
+    //REMOVER EL TEXT DANGER DEL ASTERISCO
+    $('#Editar #asteriscoEdit').removeClass('text-danger');
+}
+
+
 

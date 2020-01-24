@@ -1745,12 +1745,6 @@
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Details.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Edit.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Index.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
     <Content Include="Views\AcumuladosISR\Create.cshtml" />
     <Content Include="Views\AcumuladosISR\Delete.cshtml" />
     <Content Include="Views\AcumuladosISR\Details.cshtml" />
@@ -1831,7 +1825,6 @@
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_ActivarCatalogoDeIngreso.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
     <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
     <Content Include="Views\FechaPlanilla\ComprobanteEmpleadoEncabezado.cshtml" />
     <Content Include="Views\FechaPlanilla\Create.cshtml" />
@@ -1839,10 +1832,6 @@
     <Content Include="Views\FechaPlanilla\Details.cshtml" />
     <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
-    <Content Include="Views\IngresosIndividuales\Index.cshtml" />
-    <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />
-    <Content Include="Views\IngresosIndividuales\_DetailsIngresosIndividuales.cshtml" />
-    <Content Include="Views\IngresosIndividuales\_EditIngresosIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\Index.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_CreateDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_DetailsDeduccionesIndividuales.cshtml" />
@@ -1873,6 +1862,17 @@
     <Content Include="Views\InstitucionesFinancieras\_Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Edit.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\Details.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\Edit.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\Index.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Index.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_DetailsIngresosIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_EditIngresosIndividuales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
