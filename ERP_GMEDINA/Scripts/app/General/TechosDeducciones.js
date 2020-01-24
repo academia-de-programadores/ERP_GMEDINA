@@ -11,14 +11,27 @@ function _ajax(params, uri, type, callback) {
 }
 var InactivarID = 0;
 
+//#region Blur
+$('#Crear #cde_IdDeducciones, #Editar #cde_IdDeducciones').blur(function () {
+    let idDeduccion = $(this).val();
+    if (idDeduccion != null && idDeduccion != "") {
+        $('#Crear #Validation_deduccion, #Editar #Validation_deduccionE').show();
+        $('#Crear #AsteriskDeduccion, #Editar #AsteriskDeduccionE').addClass('text-danger');
+    } else {
+        $('#Crear #AsteriskDeduccion, #Editar #Validation_deduccionE').removeClass('text-danger');
+        $('#Crear #Validation_deduccion, #Editar #AsteriskDeduccionE').hide();
+    }
+});
+//#endregion
+
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 // EVITAR POSTBACK DE FORMULARIOS
 $("#frmEditTechosDeducciones").submit(function (e) {
@@ -60,13 +73,13 @@ function cargarGridTechosDeducciones() {
                 var botonActivar = ListaTechosDeducciones[i].tddu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' : '' : '';
 
                 $('#tblTechosDeducciones').dataTable().fnAddData([
-                ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
-                ListaTechosDeducciones[i].tddu_Techo,
-                ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
-                ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
-                ListaTechosDeducciones[i].cde_DescripcionDeduccion,
-                estadoRegistro,
-                  botonDetalles + botonEditar + botonActivar]
+                    ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
+                    ListaTechosDeducciones[i].tddu_Techo,
+                    ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
+                    ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
+                    ListaTechosDeducciones[i].cde_DescripcionDeduccion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar]
                 );
             }
         });
@@ -115,7 +128,7 @@ $(document).on("click", "#btnAgregarTechosDeducciones", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO TECHOS DEDUCCIONES
 $('#btnCreateTechoDeducciones').click(function () {
-    var deduccion =  $("#Crear #cde_IdDeducciones").val();
+    var deduccion = $("#Crear #cde_IdDeducciones").val();
     var techo = $("#Crear #tddu_Techo").val();
     var porcentajeColaborador = $("#Crear #tddu_PorcentajeColaboradores").val();
     var porcentajeEmpresa = $("#Crear #tddu_PorcentajeEmpresa").val();
@@ -269,7 +282,7 @@ $("#btnEditarTecho").click(function () {
             }
         });
     }
-        //Validaciones Data Annotations + asteriscos
+    //Validaciones Data Annotations + asteriscos
     else {
         if (deduccionE == "0") {
             $("#Editar #Validation_deduccionE").css("display", "block");
