@@ -1,28 +1,4 @@
-﻿var IDInactivar = 0;
-//
-//OBTENER SCRIPT DE FORMATEO DE FECHA
-//
-$.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      //console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
-
-//FUNCION GENERICA PARA REUTILIZAR AJAX
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data) {
-            callback(data);
-        }
-    });
-}
-
-//FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
+﻿// actualizar datatable
 function cargarGridFormaPago() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
@@ -30,27 +6,31 @@ function cargarGridFormaPago() {
         'GET',
         (data) => {
             if (data.length == 0) {
-                //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
-            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
+
             var ListaFormaPago = data;
-            //LIMPIAR LA DATA DEL DATATABLE
+            //limpiar datatable
             $('#tblFormaPago').DataTable().clear();
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+
             for (var i = 0; i < ListaFormaPago.length; i++) {
+
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaFormaPago[i].fpa_Activo == false ? 'Inactivo' : 'Activo';
+
                 //variable boton detalles
                 var botonDetalles = ListaFormaPago[i].fpa_Activo == true ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>' : '';
+
                 //variable boton editar
                 var botonEditar = ListaFormaPago[i].fpa_Activo == true ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>' : '';
+
                 //variable donde está el boton activar
                 var botonActivar = ListaFormaPago[i].fpa_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarFormaPago">Activar</button>' : '' : '';
-                //AGREGAR FILA AL DATATABLE POR ITERACIÓN DEL CICLO
+
+                //agregar fila
                 $('#tblFormaPago').dataTable().fnAddData([
                      ListaFormaPago[i].fpa_IdFormaPago,
                      ListaFormaPago[i].fpa_Descripcion,
@@ -58,66 +38,134 @@ function cargarGridFormaPago() {
                      botonDetalles + botonEditar + botonActivar]
                  );
             }
-            //APLICAR EL MAX-WIDTH DEL BODY
             FullBody();
         });
 }
 
 
-
-function DataAnnotations(ToF) {
-    if (ToF) {
-        //TRUE PARA OCULTAR DATAANNOTATIONS
-        $("#Editar #Edit_Validation_descripcion").css("display", "none");
-        $("#Crear #Validation_descripcion").css("display", "none");
-    }
-    else {
-        //FALSE PARA MOSTRAR DATAANNOTATIONS
-        $("#Editar #Edit_Validation_descripcion").css("display", "block");
-        $("#Crear #Validation_descripcion").css("display", "block");
-    }
-}
-
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+// create 1
 $(document).on("click", "#btnAgregarFormaPago", function () {
-    document.getElementById("btnCrearFormaPago").disabled = false;
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#Crear #fpa_Descripcion").val('');
+
+    // habilitar boton
+    $('#btnCrearFormaPago').attr('disabled', false);
+
+    // vaciar cajas de texto
+    $('#Crear input[type=text], input[type=number]').val('');
+
+    // * descripcion 
+    $('#AsteriscoDescripcion').removeClass('text-danger');
+
+    // mesanje descripcion requerida
+    $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+
+    // mesanje descripcion requerida
+    $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+
+    // modal
     $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
-    //CAMBIAR EL ASTERISCO A COLOR NEGRO
-    $("#AsteriscoFormaPago").removeClass("text-danger");
-    //OCULTAR DATAANNOTATIONS
-    DataAnnotations(true);
+
+
 });
 
-//FUNCION: CREAR UN NUEVO REGISTRO
+// validaciones key up create 
+
+// validar descripcion  create
+$('#Crear #fpa_Descripcion').keyup(function () {
+
+    var descripcion = $("#Crear #fpa_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#AsteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#AsteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#AsteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
+});
+
+// create 2 ejecurar
 $('#btnCrearFormaPago').click(function () {
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateFormaPago").serializeArray();
-    //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
-        //BLOQUEAR EL BOTON
-        $("#btnCrearFormaPago").attr("disabled", true);
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+
+    // deshabilitar el boton
+    $("#btnCrearFormaPago").attr("disabled", true);
+
+    debugger;
+    var modalState = true;
+
+    // validaciones 
+    var descripcion = $("#Crear #fpa_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#AsteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+        modalState = false;
+        $("#Crear #fpa_Descripcion").focus();
+    }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#AsteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+        modalState = false;
+        $("#Crear #fpa_Descripcion").focus();
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#AsteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
+
+    if (modalState == true) {
+
+        var data = $("#frmCreateFormaPago").serializeArray();
+
         $.ajax({
             url: "/FormaPago/Create",
             method: "POST",
             data: data
         }).done(function (data) {
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
-                //DESBLOQUEAR EL BOTON
+
                 $("#btnCrearFormaPago").attr("disabled", false);
             }
             else {
-                $("#Crear #fpa_Descripcion").val();
+
                 $("#CrearFormaPago").modal('hide');
                 cargarGridFormaPago();
-                // Mensaje de exito cuando un registro se ha guardado bien
+
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
@@ -127,25 +175,28 @@ $('#btnCrearFormaPago').click(function () {
         $("#AsteriscoFormaPago").removeClass("text-danger");
     }
     else {
-        //SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-        DataAnnotations(false);
-        //CAMBIAR A COLOR ROJO EL ASTERISCO
-        $("#AsteriscoFormaPago").addClass("text-danger");
+        $("#btnCrearFormaPago").attr("disabled", false);
     }
 });
 
-
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+// editar 1
 $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", function () {
-    document.getElementById("btnConfirmarEditar2").disabled = false;
-    //CAPTURAR EL ID DEL REGISTRO SELECCIONADO
+
+    $("#btnConfirmarEditar2").attr('disabled', false);
+    $("#btnUpdateFormaPago").attr('disabled', false);
+    
     var ID = $(this).data('id');
-    //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
     IDInactivar = ID;
-    //OCULTAR EL DATAANNOTATIONS
-    DataAnnotations(true);
-    //PONER EL ASTERISCO DE VALIDACION EN NEGRO
-    $("#AsteriscoFormaPagoEditar").removeClass("text-danger");
+
+    // * descripcion 
+    $('#EditAsteriscoDescripcion').removeClass('text-danger');
+
+    // mesanje descripcion requerida
+    $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
+
+    // mesanje descripcion requerida
+    $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+
     $.ajax({
         url: "/FormaPago/Edit/" + ID,
         method: "POST",
@@ -154,9 +205,8 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+
             if (data) {
-                //debugger;
                 $.each(data, function (i, iter) {
                     $("#Editar #fpa_IdFormaPago").val(iter.fpa_IdFormaPago);
                     $("#Editar #fpa_Descripcion").val(iter.fpa_Descripcion);
@@ -164,7 +214,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                 $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
             }
             else {
-                //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se cargó la información, contacte al administrador!',
@@ -174,50 +223,105 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
 });
 
 
+// validaciones key up udapte 
 
+// validar descripcion  update
+$('#Editar #fpa_Descripcion').keyup(function () {
 
+    var descripcion = $("#Editar #fpa_Descripcion").val();
 
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#EditAsteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditDescripcionRequerida").css('display', '');
+        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+    }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#EditAsteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditDescripcionNumerico").css('display', '');
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#EditAsteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+    }
+
+});
+
+// editar 2 validar modal
 $("#btnUpdateFormaPago").click(function () {
-    document.getElementById("btnConfirmarEditar2").disabled = false;
-    var Descripcion = $("#Editar #fpa_Descripcion").val();
-    if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
+
+    $("#btnUpdateFormaPago").attr('disabled', true);
+    
+    var modelState = true;
+    var descripcion = $("#Editar #fpa_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#EditAsteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditDescripcionRequerida").css('display', '');
+        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+        modelState = false;
+    }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#EditAsteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditDescripcionNumerico").css('display', '');
+        modelState = false;
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#EditAsteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+    }
+
+    if (modelState == true) {
         $("#EditarFormaPago").modal('hide');
+        $("#btnConfirmarEditar2").attr('disabled', false);
         $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
     }
     else {
-        //MOSTRAR EL DATAANNOTATIONS
-        DataAnnotations(false);
-        //CAMBIAR EL COLOR DEL ASTERISCO DE VALIDACION
-        $("#AsteriscoFormaPagoEditar").addClass("text-danger");
+        $("#btnUpdateFormaPago").attr('disabled', false);
     }
-   
+
 });
 
-//MOSTRAR EL MODAL DE EDICION AL MOMENTO DE CERRAR EL MODAL CON EL BOTON CERRAR
-$("#InactivarFormaPago #IconCerrar").click(function () {
-    document.getElementById("btnInactivarFormaPagoConfirm").disabled = false;
-    $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
-});
-
-//GUARADR LA EDICION DEL REGISTRO
+//editar 3 ejecutar
 $("#btnConfirmarEditar2").click(function () {
-    document.getElementById("btnConfirmarEditar2").disabled = true;
-    //VALIDAR QUE EL CAMPO NO ESTE VACIO
-    DataAnnotations(false);
-    if ($("#Editar #fpa_Descripcion").val() != "") {
-        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-        var data = $("#frmEditFormaPago").serializeArray();
+    
+    $("#btnConfirmarEditar2").attr('disabled', true);
+
+    var data = $("#frmEditFormaPago").serializeArray();
+
         $.ajax({
             url: "/FormaPago/Editar",
             method: "POST",
             data: data
         })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+
             if (data != 'error') {
+
                 cargarGridFormaPago();
                 $("#ConfirmarEdicion").modal('hide');
-                //$("#EditarFormaPago").modal('hide');
+
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro se editó de forma exitosa!',
@@ -225,20 +329,16 @@ $("#btnConfirmarEditar2").click(function () {
             }
             else {
                 $("#ConfirmarEdicion").modal('hide');
+                $("#btnUpdateFormaPago").attr('disabled', false);
+                $("#btnConfirmarEditar2").attr('disabled', false);
                 $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
-                //Mensaje de error si no hay data
+
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se editó el registro, contacte al administrador!',
                 });
             }
-        });
-    }
-    else {
-        //MOSTRAR DATAANNOTATION
-        DataAnnotations(false);
-        //OCULTAR EL SCROLLVIEW
-    }
+        });    
 });
 
 $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", function () {
@@ -277,15 +377,17 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
 
 //CERRAR MODAL DE CONFIRMACIÓN DE EDICION
 $(document).on("click", "#btnCerrarConfirmarEditar", function () {
-    document.getElementById("btnConfirmarEditar2").disabled = false;
-    //OCULTAR MODAL DE CONFIRMACIÓN DE EDICION
+    $("#btnUpdateFormaPago").attr('disabled', false);
+    $("#btnConfirmarEditar2").attr('disabled', false);
+
     $("#ConfirmarEdicion").modal('hide');
-    //MOSTRAR MODAL DE EDICION
     $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //
 //INACTIVAR
+
+var IDInactivar = 0;
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarFormaPago", function () {
@@ -443,7 +545,23 @@ $("#btnCerrarActivar").click(function () {
 });
 
 
-//FUNCIONES PARA EL ASTERISCO DE VALIDACION
+// script serialize date
+$.getScript("../Scripts/app/General/SerializeDate.js")
+  .done(function (script, textStatus) {
+      //console.log(textStatus);
+  })
+  .fail(function (jqxhr, settings, exception) {
+      console.log("No se pudo recuperar Script SerializeDate");
+  });
 
-$("#AsteriscoFormaPago").addClass("text-danger");
-$("#AsteriscoFormaPago").removeClass("text-danger");
+//funcion generica ajax
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+                success: function (data) {
+                    callback(data);
+                }
+    });
+}

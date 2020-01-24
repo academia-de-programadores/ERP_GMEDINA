@@ -250,8 +250,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             // retornar resultado del proceso
-            tbTipoDeduccion tbTipoDeduccionesJSON = db.tbTipoDeduccion.Find(ID);
-            return Json(tbTipoDeduccionesJSON, JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

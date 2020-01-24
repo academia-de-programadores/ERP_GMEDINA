@@ -23,6 +23,12 @@ function cargarGridAcumuladosISR() {
                     message: 'No se cargó la información, contacte al administrador',
                 });
             }
+            if (data == "Error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
+                });
+            }
             var ListaAcumuladosISR = data, template = '';
             //Recorrer la data y crear el template que se pondrá en el tbody
 
@@ -179,7 +185,6 @@ $('#btnCreateAcumuladosISR').click(function () {
     else {
         $('#AsteriscoMontoAISR').addClass("text-danger");
         $("#Crear #validation_MontoMayorACero").css('display', '');
-        $("#Crear #aisr_Monto").focus();
         ModelState = false;
     }
 
@@ -451,7 +456,7 @@ $("#btnNoConfirmarEditAISR").click(function () {
 });
 
 
-// ------ Detalles ------ //
+// ------ Detalles ------ 
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR", function () {
 
     var ID = $(this).data('id');
@@ -487,6 +492,15 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
                 iziToast.error({
                     title: 'Error',
                     message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+
+            if (data == "Error") {
+
+                // mensaje de error
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });

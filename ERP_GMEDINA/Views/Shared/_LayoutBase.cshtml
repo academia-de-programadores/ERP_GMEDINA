@@ -86,6 +86,16 @@
             autoGroup: true
         });
 
+        $(".MascaraEnteros").inputmask("integer", {
+            alias: 'numeric',
+            groupSeparator: ',',
+            digits: 0,
+            min: 0,
+            digitsOptional: false,
+            placeholder: '0',
+            autoGroup: true
+        });
+
       });
 	</script>
 </body>

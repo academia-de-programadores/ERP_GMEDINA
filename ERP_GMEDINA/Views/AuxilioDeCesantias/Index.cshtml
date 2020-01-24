@@ -87,8 +87,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">Crear Auxilio Cesantia</h4>
+				<h4 class="modal-title">Crear auxilio cesantia</h4>
 			</div>
 
 			@Html.Partial("_Create", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
@@ -102,8 +101,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">Detalle Auxilio de Cesantia</h4>
+				<h4 class="modal-title">Detalle auxilio de cesantia</h4>
 			</div>
 			<div class="modal-body" id="Detalles">
 				@Html.Partial("_DetailsAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
@@ -119,12 +117,11 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">Editar Auxilio de Cesantia</h4>
+				<h4 class="modal-title">Editar auxilio de cesantia</h4>
 			</div>
-			<div class="modal-body" id="Editar">
+			
 				@Html.Partial("_EditAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
-			</div>
+			
 			<div class="modal-footer">
 				<input type="button" class="btn btn-primary pull-left" id="btnUpdateAuxCes" value="Actualizar" />
 				<button type="button" class="btn btn-danger pull-left" id="btnModalEliminar">Inactivar</button>
@@ -139,8 +136,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" id="closebutton" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-				<h4 class="modal-title">Editar</h4>
+				<h4 class="modal-title">Editar auxilio de cesantía</h4>
 			</div>
 			<div class="modal-body" id="confirmarEditar">
 				¿Está seguro que desea editar este registro?
@@ -158,11 +154,10 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" id="closebutton2" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-				<h4 class="modal-title">Inactivar</h4>
+				<h4 class="modal-title">Inactivar auxilio de cesantía</h4>
 			</div>
 			<div class="modal-body" id="Eliminar">
-				¿Esta seguro que desea Inactivar este registro?
+				¿Esta seguro que desea inactivar este registro?
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger " id="btnEliminarAuxCes">Si</button>
@@ -176,8 +171,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-				<h4 class="modal-title">Activar</h4>
+				<h4 class="modal-title">Activar auxilio de cesantía</h4>
 			</div>
 			<div class="modal-body" id="Activar">
 				¿Está seguro que desea activar este registro?

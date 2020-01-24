@@ -16,6 +16,8 @@
                 </div>
                 <div class="ibox-content">
 
+
+
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
                         var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
@@ -77,7 +79,7 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.prea_Activo == false)
                                             {
-                                                 <!-- ACTIVAR -->
+                                                    <!-- ACTIVAR -->
                                                 <button type="button" data-id="@item.prea_IdPreaviso" class="btn btn-primary btn-xs" id="btnActivarPreaviso">Activar</button>
                                             }
                                         }
@@ -95,11 +97,11 @@
 <div class="modal fade" id="CrearPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">        
+            <div class="modal-header">
                 <h4 class="modal-title">Crear preaviso</h4>
             </div>
             @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
-        </div>                
+        </div>
     </div>
 </div>
 
@@ -107,7 +109,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Editar preaviso</h4>
             </div>
             @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
@@ -119,7 +121,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="confirmarEditar">
@@ -138,7 +140,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Detalle preaviso</h4>
             </div>
             <div class="modal-body" id="Detalles">
@@ -155,7 +157,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
@@ -173,7 +175,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                
+
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">

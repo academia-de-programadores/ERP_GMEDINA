@@ -10,12 +10,13 @@
                     @Html.HiddenFor(model => model.fpa_FechaCrea)
                     <div class="form-group">
                         <div class="col-md-3">
-                            @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label" })
-                            <label class="" id="AsteriscoFormaPago">*</label>                            
+                            @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label"})
+                            <label class="" id="AsteriscoDescripcion" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.fpa_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            <span class="text-danger" id="validation_DescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                            <span class="text-danger" id="validation_DescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                         </div>
                     </div>
                 </div>

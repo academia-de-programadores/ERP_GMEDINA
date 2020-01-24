@@ -6,19 +6,20 @@
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-6">
-					Rango Inicio (Meses)<label class="asterisco" id="AsteriscoRIM">*</label>
+					Rango Inicio (Meses)<label class="asterisco" id="AsteriscoRangoInicio">*</label>
 
-					@Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoInicioMeses", @id = "aces_RangoInicioMeses" } })
-
-					@Html.ValidationMessageFor(model => model.aces_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+					@Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros", @type = "text", @name = "aces_RangoInicioMeses", @step = "1", @autocomplete="off", @id = "aces_RangoInicioMeses" } })
+                    <span class="text-danger" id="validation_RangoInicioMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango inicio no puede ser menor a cero</span>
+                    <span class="text-danger" id="validation_RangoInicioRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+					
 				</div>
 				<div class="col-md-6">
-					Rango Fin (Meses)<label class="asterisco" id="AsteriscoRFM">*</label>
+					Rango Fin (Meses)<label class="asterisco" id="AsteriscoRangoFinal">*</label>
 
-
-					@Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoFinMeses", @id = "aces_RangoFinMeses" } })
-
-					@Html.ValidationMessageFor(model => model.aces_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+					@Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros", @type = "text", @name = "aces_RangoFinMeses", @step = "1", @id = "aces_RangoFinMeses", @autocomplete = "off" } })
+                    <span class="text-danger" id="validation_RangoFinalMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
+                    <span class="text-danger" id="validation_RangoFinalRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                    <span class="text-danger" id="validation_RangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
 				</div>
 			</div>
 		</div>
@@ -26,11 +27,11 @@
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-6">
+					Auxilio Cesantía (Días)<label class="asterisco" id="AsteriscoCantidadDia">*</label>
+					@Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control MascaraEnteros", @type = "text", @name = "aces_DiasAuxilioCesantia", @autocomplete = "off", @step = "1", @id = "aces_DiasAuxilioCesantia" } })
 
-					Auxilio Cesantía (Días)<label class="asterisco" id="AsteriscoACD">*</label>
-					@Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_DiasAuxilioCesantia", @id = "aces_DiasAuxilioCesantia" } })
-
-					@Html.ValidationMessageFor(model => model.aces_DiasAuxilioCesantia, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
+                    <span class="text-danger" id="validation_CantidadDiasMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
+                    <span class="text-danger" id="validation_CantidadDiasRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
 				</div>
 			</div>
 		</div>
