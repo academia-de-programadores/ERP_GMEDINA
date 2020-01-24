@@ -90,6 +90,8 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Empresas/Edit/5
+        [HttpPost]
+        [ActionName("Datos")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -102,7 +104,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbEmpresas = db.tbEmpresas.Find(id);
-                if (tbEmpresas == null || !tbEmpresas.empr_Estado)
+                if (tbEmpresas == null)
                 {
                     return HttpNotFound();
                 }
@@ -197,6 +199,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Empresas/Delete/5
+        [HttpPost]
         public ActionResult Delete(tbEmpresas tbEmpresas)
         {
             db = new ERP_GMEDINAEntities();

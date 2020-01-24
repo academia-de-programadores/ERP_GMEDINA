@@ -76,10 +76,11 @@ function llenarTabla() {
       tabla.draw();
       $.each(Lista, function (index, value) {
        var Acciones = value.empr_Estado == 1
-                    ? null : Admin ?
-                    "<div>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                    "</div>" : '';;
+                   ? null :
+                   "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>";
        tabla.row.add({
         ID: value.empr_Id,
         "Número": value.empr_Id,
@@ -91,10 +92,9 @@ function llenarTabla() {
      });
 }
 function tablaEditar(ID) {
- id = ID;
- _ajax(null,
-     '/Empresas/Edit/' + ID,
-     'GET',
+ _ajax(JSON.stringify({ id: ID }),
+     '/Empresas/Datos/',
+     'POST',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
@@ -105,10 +105,9 @@ function tablaEditar(ID) {
      });
 }
 function tablaDetalles(ID) {
- id = ID;
- _ajax(null,
-     '/Empresas/Edit/' + ID,
-     'GET',
+ _ajax(JSON.stringify({ id: ID }),
+     '/Empresas/Datos/',
+     'POST',
      function (obj) {
          if (obj != "-1" && obj != "-2" && obj != "-3") {
              $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
