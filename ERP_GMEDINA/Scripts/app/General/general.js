@@ -188,12 +188,13 @@ function pad2(number) {
 }
 function SetearClases(Id, Agregar, Remover, valorError) {
  modal.forEach(function (indice, value) {
-  var spam = $("#" + indice).find("#error" + Id);
+  //var span = $("#" + indice).find("#error" + Id);
   var input = $("#" + indice).find("#" + Id);
+  var span = $(input).closest("div").find("span");
   if (valorError == "") {
-   spam.text(valorError);
+   span.text(valorError);
   } else {
-   spam.text(input.data(valorError));
+   span.text(input.data(valorError));
   }
   input.addClass(Agregar);
   input.removeClass(Remover);
@@ -272,11 +273,12 @@ $(".required").each(function (indice, input) {
  });
  $(input).focusin(function () {
   //if ($(modal).data('open') != undefined) {
-  // limpiarClases(form);   
+  // limpiarClases(form);
   //}
  });
  $(input).focusout(function () {
-  var span = $(form).find("#error" + id);
+  //var span = $(form).find("#error" + id);
+  var span = $(input).closest("div").find("span");
   if ($(input).val() == null || $(input).val() == 0 || $(input).val().trim() == "") {
    asterisco.color = "red";
    $(span).closest("div").addClass("has-error");
@@ -292,9 +294,11 @@ $(".required").each(function (indice, input) {
  function key(event) {
     $(input).removeClass("error");
   asterisco.color = "black";
-  var lol = $(form).find("#error" + id);
-  $(form).find("#error" + id)[0].innerText = '';
-  var span = $(form).find("#error" + id);
+  //var lol = $(form).find("#error" + id);
+  //$(form).find("#error" + id)[0].innerText = '';
+  //var span = $(form).find("#error" + id);
+  var span = $(input).closest("div").find("span");
+  span[0].innerText = '';
   $(span).closest("div").removeClass("has-error");
   $(span).removeClass("text-danger");
   if ($(input).val().length >= maxlength) {
@@ -305,7 +309,8 @@ $(".required").each(function (indice, input) {
   } else {
    $(span).closest("div").removeClass("has-error has-warning");
    $(span).removeClass("text-danger text-warning");
-   $(form).find("#error" + id).text("");
+   span[0].innerText = '';
+   //$(form).find("#error" + id).text("");
   }
  }
 });
