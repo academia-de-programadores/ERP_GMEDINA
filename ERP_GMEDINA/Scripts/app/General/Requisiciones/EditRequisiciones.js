@@ -140,11 +140,11 @@ $(document).ready(function () {
     var sexo = $("#SexVal").val();
     var EstCivil = $("#CiVal").val();
     var Duration = $("#Duration").val();
-    var ReqDate = $("#ReqDate").val().substring(0,10);
-    var ConDate = $("#ConDate").val().substring(0, 10);
+    var ReqDate = $("#ReqDate").val();
+    var ConDate = $("#ConDate").val();
 
-    var _ReqDate = moment(ReqDate, "DD/MM/YYYY", true).format();
-    var _ConDate = moment(ConDate, "DD/MM/YYYY", true).format();
+    var _ReqDate = moment(ReqDate).format();
+    var _ConDate = moment(ConDate).format();
 
     var _ReqDate = _ReqDate.substring(0,10);
     var _ConDate = _ConDate.substring(0,10);

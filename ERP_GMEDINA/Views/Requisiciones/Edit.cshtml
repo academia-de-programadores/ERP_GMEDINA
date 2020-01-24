@@ -15,8 +15,8 @@
                 </div>
 
                 @Html.Hidden("SexVal", Model.req_Sexo.Trim(), new { @id = "SexVal" })
-                @Html.Hidden("ReqDate", Model.req_FechaRequisicion, new { @id = "ReqDate" })
-                @Html.Hidden("ConDate", Model.req_FechaContratacion, new { @id = "ConDate" })
+                @Html.Hidden("ReqDate", Model.req_FechaRequisicion.Value.ToString("o"), new { @id = "ReqDate" })
+                @Html.Hidden("ConDate", Model.req_FechaContratacion.Value.ToString("o"), new { @id = "ConDate" })
                 @Html.Hidden("CiVal", Model.req_EstadoCivil.Trim(), new { @id = "CiVal" })
                 @Html.Hidden("Duration", Model.req_Duracion, new { @id = "Duration" })
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormRequisicion" }))
