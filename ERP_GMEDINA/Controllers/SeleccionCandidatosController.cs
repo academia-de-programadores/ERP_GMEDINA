@@ -116,12 +116,12 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_SeleccionCandidatos> lista = new List<V_SeleccionCandidatos> { };
+            dynamic lista = null;
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    lista = db.V_SeleccionCandidatos.Where(x => x.Id == id).ToList();
+                    lista = db.tbFaseSeleccion.Where(x => x.scan_Id == id).Select(x => new { scan_Id = x.scan_Id, fsel_Id = x.fsel_Id, Fase_Id = x.fare_Id, Fase = (db.tbFasesReclutamiento.Where(fr => fr.fare_Id == x.fare_Id).Select(fr => fr.fare_Descripcion)), Fecha = x.fsel_FechaCrea }).ToList();
                 }
                 catch
                 {

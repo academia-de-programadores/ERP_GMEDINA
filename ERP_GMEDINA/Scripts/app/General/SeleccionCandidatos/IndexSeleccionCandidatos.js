@@ -5,6 +5,42 @@
 });
 var fill = 0;
 var id = 0;
+//Format Dibujar ChildRow
+function format(obj) {
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Historial Fases de Reclutamiento</h5><div align=right> </div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
+        '<thead>' +
+            '<tr>' +
+                '<th>' + 'Número' + '</th>' +
+                '<th>' + 'Fase de Reclutamiento' + '</th>' +
+                '<th>' + 'Fecha' + '</th>' +
+                 //'<th>' + 'Estado' + '</th>' +
+                '</tr>' +
+                '</thead>';
+    obj.forEach(function (index, value) {
+        //var Estado = "";
+        //if (index.hamo_Estado == false)
+        //    Estado = "Inactivo";
+        //else
+        //    Estado = "Activo";
+        //var MostrarBoton = index.hamo_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>';
+        //if (value.hamo_Estado > fill) {
+        div = div +
+                '<tbody>' +
+                '<tr>' +
+                '<td>' + index.fsel_Id+ '</td>' +
+                '<td>' + index.Fase + '</td>' +
+                '<td>' + FechaFormato(index.Fecha).substring(0, 10)+ '</td>' +
+                //'<td>' + Estado + '</td>' +
+                '<td>';
+
+        div += '</tr>' +
+                    '</tbody>'
+        '</table>'
+        //}
+    });
+    return div + '</div></div>';
+}
+
 
 //LLENAR INDEX////////////////////////////////////////////////////////////////////////////////////////
 var scan_Id = 0;
@@ -21,7 +57,7 @@ function llenarTabla() {
                  var Acciones = value.Estado == 1
                    ?null:
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                  if (value.Estado > fill) {
                      tabla.row.add({
@@ -55,7 +91,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().Id;
+        id = row.data().ID;
         hola = row.data().hola;
         _ajax({ id: parseInt(id) },
             '/SeleccionCandidatos/ChildRowData',
