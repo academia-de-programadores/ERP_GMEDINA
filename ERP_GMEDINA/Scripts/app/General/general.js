@@ -51,7 +51,7 @@ function _POST(params, uri, callback) {
     .done(callback)
     .error(function (e) {
         CierraPopups()
-        MsgError("Error", "Verifique su conexion a internet. (si el problema persiste contacte al administrador.)");
+        MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)");
     });
 }
 
@@ -65,7 +65,7 @@ function _ajax(params, uri, type, callback) {
   success: callback
  }).fail(function (request, status, error) {
   CierraPopups()
-  MsgError("Error", "Verifique su conexion a internet. (si el problema persiste contacte al administrador.)");
+  MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)");
  });
 }
 function serializar(data) {
@@ -102,7 +102,7 @@ function serializar(data) {
           var txtlabel =label.innerText;
           //var span = input.offsetParent.children[1];
           var txtRequired=$(input).data("val-required")
-          span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerirido' : txtRequired;
+          span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerido' : txtRequired;
           $(input).addClass("error");
           $(span).addClass("text-danger");
           verificacion = false;
@@ -394,8 +394,8 @@ function validarDT(obj) {
         //$("#ibox1").find(".ibox-content").hide();
         //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
         var ventana = $('#IndexTable tbody td.dataTables_empty');
-        ventana[0].innerHTML = "verifique su conexion a internet.(Sí el problema persiste contacte al administrador)";
-        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+        ventana[0].innerHTML = "Verifique su conexión a internet.(Si el problema persiste contacte al administrador.)";
+        MsgError("Error", "No se pudo cargar la información, contacte al administrador.");
         return true;
     } else {
         if (obj.Length == 0) {
