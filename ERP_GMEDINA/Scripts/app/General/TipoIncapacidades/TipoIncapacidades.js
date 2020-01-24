@@ -31,8 +31,8 @@ function tablaDetalles(ID) {
                 //Campos Estado y Razon Inactivo ya no se muestran en el modal de detalle
                 //$("#ModalDetalles").find("#ticn_Estado")["0"].innerText = obj.ticn_Estado;
                 //$("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;
-                $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = FechaFormato(obj.ticn_FechaCrea).substring(0, FechaFormato(obj.ticn_FechaCrea).length - 8);
-                $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = FechaFormato(obj.ticn_FechaModifica).substring(0, FechaFormato(obj.ticn_FechaModifica).length - 8);
+                $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = FechaFormato(obj.ticn_FechaCrea);
+                $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = FechaFormato(obj.ticn_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;

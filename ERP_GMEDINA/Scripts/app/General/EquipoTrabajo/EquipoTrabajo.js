@@ -61,8 +61,10 @@ function llenarTabla() {
                     "Número": value.eqtra_Id,
                     ID: value.eqtra_Id,
                     Codigo: value.eqtra_Codigo,
+                    "Código": value.eqtra_Codigo,
                     Equipo: value.eqtra_Descripcion,
                     Observacion: value.eqtra_Observacion,
+                    "Observación": value.eqtra_Observacion,
                     Estado:value.eqtra_Estado ? "Activo":"Inactivo",
                     Acciones:Acciones
                 });

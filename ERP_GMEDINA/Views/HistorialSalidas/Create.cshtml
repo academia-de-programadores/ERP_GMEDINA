@@ -13,7 +13,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-                    <h2>Registrar Finalizacion Laboral</h2>
+                    <h2>Registrar Finalización Laboral</h2>
                 </div>
 
 
@@ -35,7 +35,7 @@
                             //---RazonSalida---
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.rsal_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.rsal_Id,"Razón salida", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.DropDownList("rsal_Id", null, htmlAttributes: new { @class = "form-control required", @id = "RazonSalidas" })
                                     @Html.ValidationMessageFor(model => model.rsal_Id, "", new { @class = "text-danger", @id = "errorRazonSalidas" })
@@ -81,7 +81,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nombre</th>
-                                                    <th>Observacion</th>
+                                                    <th>Observación</th>
                                                     <th  style="visibility:hidden;">Usar</th>
                                                     <th>Acciones</th>
                                                 </tr>

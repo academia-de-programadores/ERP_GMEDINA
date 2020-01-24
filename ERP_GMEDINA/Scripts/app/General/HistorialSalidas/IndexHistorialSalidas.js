@@ -65,6 +65,7 @@ function llenarTabla() {
                         "Número": value.hsal_Id,
                         tsal_Id: value.tsal_Id,
                         TipoSalida: value.tsal_Descripcion,
+
                         rsal_Id: value.rsal_Id,
                         rsal_Descripcion: value.rsal_Descripcion,
                         NombreCompleto: value.per_Nombres,

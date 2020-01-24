@@ -51,7 +51,7 @@ function format(obj) {
                 '<td>' + index.Identidad + '</td>' +
                 '<td>' + index.Cuenta + '</td>' +
                 '<td>' + index.Cargo + '</td>' +
-                '<td>' + FechaFormato(index.Fecha_Crea).substring(0, 10) + '</td>' +
+                '<td>' + FechaFormato(index.Fecha_Modifica).substring(0, 10) + '</td>' +
 
 
                 '</tr>' +
@@ -159,27 +159,35 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 $("#btnActualizar").click(function () {
-    var data = $('#FormEditar').serializeArray();
-    data = serializar(data);
-    data.sue_Cantidad = parseFloat(data.sue_Cantidad);
-    if (data != null) {
+    if ($.isNumeric($('#sue_Cantidad').val())) {
+        if ($('#sue_Cantidad').val() < 1) {
+            $('#sue_Cantidad').focus();
+        } else {
+            var data = $('#FormEditar').serializeArray();
+            data = serializar(data);
+            data.sue_Cantidad = parseFloat(data.sue_Cantidad);
+            if (data != null) {
 
-        data = JSON.stringify({ tbsueldos: data });
-        _ajax(data,
-            '/Sueldos/Edit',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["sue_Id", "sue_Cantidad"]);
-                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
+                data = JSON.stringify({ tbsueldos: data });
+                _ajax(data,
+                    '/Sueldos/Edit',
+                    'POST',
+                    function (obj) {
+                        if (obj != "-1" && obj != "-2" && obj != "-3") {
+                            CierraPopups();
+                            llenarTabla();
+                            LimpiarControles(["sue_Id", "sue_Cantidad"]);
+                            MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                        } else {
+                            MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                        }
+                    });
+            } else {
+                MsgError("Error", "por favor llene todas las cajas de texto");
+            }
+        }
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor ingrese una cantidad númerica");
     }
 });
 
