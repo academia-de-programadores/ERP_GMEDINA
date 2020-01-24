@@ -30,7 +30,7 @@ namespace ERP_GMEDINA.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
         public int hinc_Dias { get; set; }
 
-        [Display(Name = "Centro Medico")]
+        [Display(Name = "Centro Médico")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
         [MaxLength(100, ErrorMessage = "Excedio el número maximo de caracteres")]
         public string hinc_CentroMedico { get; set; }

@@ -15,9 +15,10 @@
                    Nombre: value.Nombre,
                    Departamento: value.dep_Descripcion,
                    Area: value.area_Descripcion,
+                   "Área": value.area_Descripcion,
                    Cargo: value.car_Descripcion,
-                   FechaSeleccion: FechaFormato(value.scan_Fecha),
-                   FechaContratado: FechaFormato(value.scan_Fecha)                   
+                   FechaSeleccion: FechaFormato(value.scan_Fecha).substring(0, 10),
+                   FechaContratado: FechaFormato(value.scan_Fecha).substring(0, 10)
                });
            });
            tabla.draw();

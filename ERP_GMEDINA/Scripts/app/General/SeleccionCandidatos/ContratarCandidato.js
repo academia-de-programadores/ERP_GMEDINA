@@ -64,12 +64,9 @@ $("#btnGuardar").click(function () {
             emp_CuentaBancaria: $("#emp_CuentaBancaria").val(),
             emp_Fechaingreso: $("#emp_Fechaingreso").val(),
         };
+    var sue_Cantidad = $("#sue_Cantidad").val();
+    var tmon_Id = document.getElementById("tmon_Id").value;
 
-    var tbSueldos =
-        {
-            sue_Cantidad: $("#sue_Cantidad").val(),
-            tmon_Id: document.getElementById("tmon_Id").value,
-        };
     var tbRequisiciones =
         {
             req_Id: $("#req_Id").val(),
@@ -78,15 +75,21 @@ $("#btnGuardar").click(function () {
     }
     catch(Exception)
     {
-
+        
     }
     if (tbEmpleados.car_Id != null && tbEmpleados.area_Id != null && tbEmpleados.depto_Id != null && tbEmpleados.jor_Id != null &&
         tbEmpleados.cpla_IdPlanilla != null && tbEmpleados.fpa_IdFormaPago != null && tbEmpleados.emp_Fechaingreso != "" &&
-        tbEmpleados.emp_CuentaBancaria != "" && tbSueldos.tmon_Id != null && tbSueldos.sue_Cantidad != "" && tbSueldos.sue_Cantidad >= 0 && tbRequisiciones.req_Id != null) {
+        tbEmpleados.emp_CuentaBancaria != "" && tmon_Id != null && sue_Cantidad != "" && tbRequisiciones.req_Id != null)
+    {
+        if(sue_Cantidad >= 0)
+        {
+
+        
         data = JSON.stringify({
             tbSeleccionCandidatos: tbSeleccionCandidatos,
             tbEmpleados: tbEmpleados,
-            tbSueldos: tbSueldos,
+            sue_Cantidad: sue_Cantidad,
+            tmon_Id : tmon_Id,
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,
@@ -102,7 +105,14 @@ $("#btnGuardar").click(function () {
                     MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
             });
-    } else {
+        }
+        else
+        {
+        MsgError("Error", "Sueldo no puede ser negativo");
+        }
+    }
+    else 
+    {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });

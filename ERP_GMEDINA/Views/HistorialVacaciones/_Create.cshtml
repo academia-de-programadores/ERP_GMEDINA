@@ -24,14 +24,14 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.hvac_FechaInicio,"Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.TextBoxFor(model => model.hvac_FechaInicio, new { @class = "form-control datepicker", @type ="date" })
+								@Html.TextBoxFor(model => model.hvac_FechaInicio, new { @class = "form-control required valid datepicker", @type ="date" })
 								@Html.ValidationMessageFor(model => model.hvac_FechaInicio, "", new { @class = "text-danger", @id = "errorhvac_FechaInicio"})
                             </div>
                         </div>
                         <div class="form-group">
 							@Html.LabelFor(model => model.hvac_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.TextBoxFor(model => model.hvac_FechaFin, new { @class = "form-control datepicker", @type = "date" })
+								@Html.TextBoxFor(model => model.hvac_FechaFin, new { @class = "form-control required valid datepicker", @type = "date" })
 								@Html.ValidationMessageFor(model => model.hvac_FechaFin, "", new { @class = "text-danger", @id = "errorhvac_FechaFin" })
                             </div>
                         </div>
