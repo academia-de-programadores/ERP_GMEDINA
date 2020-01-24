@@ -1,22 +1,19 @@
 ﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateInstitucionFinanciera" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditInstitucionFinanciera" }))
 {
     <div class="modal-body" id="Editar">
-        @Html.AntiForgeryToken()
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.insf_UsuarioCrea)
-            @Html.HiddenFor(model => model.insf_FechaCrea)
+            @*@Html.HiddenFor(model => model.insf_UsuarioCrea)
+            @Html.HiddenFor(model => model.insf_FechaCrea)*@
 
             <div class="form-group">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, htmlAttributes: new { @class = "control-label" })
-                        <label class="" id="Asterisco_insf_IdInstitucionFinanciera">*</label>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.insf_IdInstitucionFinanciera, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger", @id = "Span_insf_IdInstitucionFinanciera" })
                     </div>
                 </div>
 
@@ -26,8 +23,8 @@
                     <label class="" id="Asterisco_insf_DescInstitucionFinanc">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "Span_insf_DescInstitucionFinanc" })
+                    @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar(this.value, '-1', '-1', '-1')" } })
+                    <span class="text-danger" style="display:block;" id="Span_insf_DescInstitucionFinanc">El campo Descripción es requerido.</span>
                 </div>
             </div>
 
@@ -37,8 +34,8 @@
                     <label class="" id="Asterisco_insf_Contacto">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "Span_insf_Contacto" })
+                    @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', this.value, '-1', '-1')" } })
+                    <span class="text-danger" style="display:block;" id="Span_insf_Contacto">El campo Contacto es requerido.</span>
                 </div>
             </div>
 
@@ -48,8 +45,8 @@
                     <label class="" id="Asterisco_insf_Telefono">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "Span_insf_Telefono" })
+                    @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', '-1', this.value, '-1')" } })
+                    <span class="text-danger" style="display:block;" id="Span_insf_Telefono">El campo Teléfono es requerido.</span>
                 </div>
             </div>
 
@@ -59,8 +56,8 @@
                     <label class="" id="Asterisco_insf_Correo">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "Span_insf_Correo" })
+                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', this.value)" } })
+                    <span class="text-danger" style="display:block;" id="Span_insf_Correo">El campo correo es requerido.</span>
                 </div>
             </div>
 

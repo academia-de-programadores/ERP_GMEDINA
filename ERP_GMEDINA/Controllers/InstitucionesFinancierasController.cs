@@ -119,7 +119,8 @@ namespace ERP_GMEDINA.Controllers
             // obtener objeto con el ID recibido
             var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras
                                                 .Where(d => d.insf_IdInstitucionFinanciera == id)
-                                                .Select(c => new { insf_Descripcion = c.insf_DescInstitucionFinanc,
+                                                .Select(c => new { insf_IdInstitucionFinanciera = c.insf_IdInstitucionFinanciera,
+                                                                   insf_Descripcion = c.insf_DescInstitucionFinanc,
                                                                    insf_Contacto = c.insf_Contacto,
                                                                    insf_Telefono = c.insf_Telefono,
                                                                    insf_Correo = c.insf_Correo,
@@ -145,13 +146,13 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: EDIT
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
+        public JsonResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             // variables de auditoria
             tbInstitucionesFinancieras.insf_UsuarioModifica = 1;
             tbInstitucionesFinancieras.insf_FechaModifica = DateTime.Now;
-            
+            tbInstitucionesFinancieras.insf_Activo = true;
+
             // variables de resultado
             IEnumerable<object> listInFs = null;
             string response = "bien";
@@ -215,6 +216,7 @@ namespace ERP_GMEDINA.Controllers
             var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras
                                                 .Where(d => d.insf_IdInstitucionFinanciera == id)
                                                 .Select(c => new {
+                                                    insf_IdInstitucionFinanciera = c.insf_IdInstitucionFinanciera,
                                                     insf_Descripcion = c.insf_DescInstitucionFinanc,
                                                     insf_Contacto = c.insf_Contacto,
                                                     insf_Telefono = c.insf_Telefono,
@@ -276,13 +278,13 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region POST: INACTIVAR
+        #region POST: ACTIVAR
         public ActionResult Activar(int id)
         {
             // variables de resultado
             IEnumerable<object> listINFS = null;
             string MensajeError = "";
-            string response = String.Empty;
+            string response = "bien";
 
             // validar si el modelo es valido
             if (ModelState.IsValid)
@@ -308,12 +310,8 @@ namespace ERP_GMEDINA.Controllers
                     // se generó una excepción
                     response = "error";
                 }
-
-                // el proceso fue exitoso
-                response = "bien";
             }
-            else
-            {
+            else {
                 // el modelo no es válido
                 response = "error";
             }

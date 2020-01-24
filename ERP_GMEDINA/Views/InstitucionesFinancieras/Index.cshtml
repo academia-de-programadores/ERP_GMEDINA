@@ -132,17 +132,17 @@
     </div>
 </div>
 
-<div class="modal fade" id="frmDetailInstitucion" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="DetailsInstitucion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Detalle Institución Financiera</h4>
             </div>
             <div class="modal-body" id="Detalles">
-                @*@Html.Partial("_Details", new ERP_GMEDINA.Models.tbFormaPago())*@
+                @Html.Partial("_Details", new ERP_GMEDINA.Models.tbInstitucionesFinancieras())
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-white" id="btnCerrarDetailsInstitucion" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -152,7 +152,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
@@ -161,7 +160,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger " id="btnInactivarINFS">Si</button>
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white" id="InactivarInstitucionCerrar" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
@@ -171,7 +170,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
@@ -179,7 +177,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnActivarINFS">Si</button>
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white" id="ActivarInstitucionCerrar" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
@@ -187,12 +185,13 @@
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Scripts.Render("~/plugins/izitoast")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+
     
 }
 
 @section Scripts {
-  @Scripts.Render("~/plugins/dataTables")
-  @Styles.Render("~/Content/plugins/izitoast/iziToast")
-<script src="~/Scripts/app/General/InstitucionesFinancierasIndex.js"></script>
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/General/InstitucionesFinancierasIndex.js")
 }

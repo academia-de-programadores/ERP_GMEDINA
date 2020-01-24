@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         #region Index
         public ActionResult Index()
         {
-            var tbISR = db.tbISR.OrderByDescending(t => t.isr_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
+            var tbISR = db.tbISR.OrderBy(t => t.isr_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
             return View(tbISR.ToList());
         }
         #endregion
@@ -88,7 +88,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea,isr_UsuarioModifica,isr_FechaModifica,isr_Activo")] tbISR tbISR)
+        public ActionResult Create([Bind(Include = "isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
             // data de auditoria
             tbISR.isr_UsuarioCrea = 1;
@@ -168,8 +168,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea,isr_UsuarioModifica,isr_FechaModifica,isr_Activo")] tbISR tbISR)
+        public ActionResult Edit([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
             // variables de auditoria
             tbISR.isr_UsuarioModifica = 1;

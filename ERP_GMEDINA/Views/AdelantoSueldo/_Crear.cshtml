@@ -26,7 +26,7 @@
                 <div class="col-md-6">
                     Monto<label class="" id="AsteriscoMonto" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad", @name = "adsu_Monto", @id = "adsu_Monto", @disabled = "disabled", @autocomplete = "off", onkeyup = "ValidarCamposCrear('-1', this.value, '-1', '-1')" } })
-                    <div>@Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion3" })</div>
+                    @*<div>@Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion3" })</div>*@
                     <label class="text-danger" id="adsu_MontoValidacion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto requerido</label>
                     <label class="text-danger" id="adsu_MontoValidacion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Monto debe ser mayor que cero</label>
                     <span class="field-validation-valid text-danger" style="display: none" id="SueldoPromedioCrear"></span>

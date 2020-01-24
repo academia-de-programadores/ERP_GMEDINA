@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Models
         public string ini_Motivo { get; set; }
 
         [Required(ErrorMessage = "Campo Empleado requerido")]
-        [Display(Name = "Empleado")]
+        [Display(Name = "Colaborador")]
         public int emp_Id { get; set; }
 
         [Required(ErrorMessage = "Campo Monto Requerido")]
