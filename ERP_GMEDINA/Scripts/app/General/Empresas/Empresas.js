@@ -114,9 +114,9 @@ function tablaDetalles(ID) {
              $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
              var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
              $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-             var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormatoSimple(obj.empr_FechaCrea);
+             var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
              $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-             var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormatoSimple(obj.empr_FechaModifica);
+             var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
        //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
        $('#ModalDetalles').modal('show');
       }
