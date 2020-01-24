@@ -20,5 +20,10 @@ namespace ERP_GMEDINA.Models
         public string Nombre_Completo { get; set; }
         public string Descripcion_del_Equipo { get; set; }
         public System.DateTime Fecha { get; set; }
+        public string eqtra_Descripcion { get; set; }
+        public string eqtra_Codigo { get; set; }
+        public string eqtra_Observacion { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public System.DateTime fechaFin { get; set; }
     }
 }

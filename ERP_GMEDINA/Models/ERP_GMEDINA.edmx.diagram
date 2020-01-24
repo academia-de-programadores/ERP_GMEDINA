@@ -453,6 +453,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" Width="1.5" PointX="29.375" PointY="24.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_FaseSeleccion" Width="1.5" PointX="15.375" PointY="30.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="29.375" PointY="28.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="29.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,5 +22,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> fechafin { get; set; }
         public string car_Descripcion { get; set; }
+        public int car_Id { get; set; }
     }
 }
