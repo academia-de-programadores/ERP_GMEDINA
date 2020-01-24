@@ -13,7 +13,10 @@ function llenarDropDownList() {
        'POST',
        function (result) {
            $.each(result, function (id, Lista) {
-
+               var x = document.getElementById("tmon_Id");
+               var option = document.createElement("option");
+               option.text ="**Seleccione una opción**"
+               x.add(option);
                Lista.forEach(function (value, index) {
                    var x = document.getElementById("tmon_Id");
                    var option = document.createElement("option");
@@ -28,6 +31,10 @@ function llenarDropDownList() {
    '/SeleccionCandidatos/llenarDropDowlistRequisicion',
    'POST',
    function (result) {
+       var x = document.getElementById("req_Id");
+       var option = document.createElement("option");
+       option.text ="**Seleccione una opción**"
+       x.add(option);
        $.each(result, function (id, Lista) {
            Lista.forEach(function (value, index) {
                var x = document.getElementById("req_Id");
@@ -42,7 +49,6 @@ function llenarDropDownList() {
 
 $("#btnGuardar").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    debugger
     try
     {
 

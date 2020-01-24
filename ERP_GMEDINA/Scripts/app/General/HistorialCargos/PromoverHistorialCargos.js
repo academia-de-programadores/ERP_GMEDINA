@@ -11,6 +11,10 @@ function llenarDropDownList() {
    'POST',
    function (result) {
        $.each(result, function (id, Lista) {
+           var x = document.getElementById("req_Id");
+           var option = document.createElement("option");
+           option.text = "**Seleccione una opción**"
+           x.add(option);
            Lista.forEach(function (value, index) {
                var x = document.getElementById("req_Id");
                var option = document.createElement("option");
