@@ -1839,7 +1839,6 @@
     <Content Include="Views\FechaPlanilla\Details.cshtml" />
     <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
-    <Content Include="Views\FechaPlanilla\Report.cshtml" />
     <Content Include="Views\IngresosIndividuales\Index.cshtml" />
     <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />
     <Content Include="Views\IngresosIndividuales\_DetailsIngresosIndividuales.cshtml" />

@@ -93,6 +93,7 @@ function listar() {
             {
                 extend: 'copy',
                 title: 'Fecha de Planilla',
+                text: '<i class="fa fa-copy btn-xs"></i>',
                 titleAttr: 'Copiar',
                 exportOptions: {
                     columns: [1]
