@@ -42,6 +42,7 @@ $(document).ready(function () {
     //llenarDropDowlistRazonSalida();
 
     ChildTable = $(ChildDataTable).DataTable({
+        "language": language,
         pageLength: 3,
         lengthChange: false,
         columns:
