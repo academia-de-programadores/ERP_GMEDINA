@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Controllers
         {
             List<V_ColaboradoresPorPlanilla> colaboradoresPlanillas = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).ToList();
             ViewBag.PlanillasColaboradores = colaboradoresPlanillas;
-            ViewBag.colaboradoresGeneral = db.tbEmpleados.Count().ToString();
+            ViewBag.colaboradoresGeneral = db.V_PreviewPlanilla.Count().ToString();
             return View(db.V_PreviewPlanilla.ToList());
         }
 

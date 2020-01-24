@@ -197,13 +197,12 @@ namespace ERP_GMEDINA.Controllers
 
         //FUNCION: EDITAR UN REGISTRO
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "adsu_IdAdelantoSueldo,emp_Id,adsu_RazonAdelanto,adsu_Monto,adsu_UsuarioModifica,adsu_FechaModifica")] tbAdelantoSueldo tbAdelantoSueldo)
         {
             tbAdelantoSueldo.adsu_UsuarioModifica = 1;
             tbAdelantoSueldo.adsu_FechaModifica = DateTime.Now;
 
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listAdelantoSueldo = null;
             string MensajeError = "";
 
@@ -237,8 +236,6 @@ namespace ERP_GMEDINA.Controllers
                     ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                     response = "error";
                 }
-                //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
-                response = "bien";
             }
 
             else

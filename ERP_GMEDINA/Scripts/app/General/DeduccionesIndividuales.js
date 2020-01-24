@@ -180,10 +180,10 @@ $('#Crear #dei_MontoInicial, #Editar #dei_MontoInicial').blur(function () {
 });
 //Monto Restante Crear
 $('#Crear #dei_MontoRestante').blur(function () {
-    let dei_MontoRestante = $(this).val().replace(/,/g, '');
+    let dei_MontoRestante = $(this).val().replace(/,/g, "");
     let montoInicial = $('#Crear #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/g, '');
+    montoInicial = montoInicial.replace(/,/g, "");
     let hayAlgo = false;
 
     if (dei_MontoRestante == "" || dei_MontoRestante == null || dei_MontoRestante == undefined) {
@@ -196,42 +196,45 @@ $('#Crear #dei_MontoRestante').blur(function () {
         $("#Crear #astMontoRestante").css("color", "black");
     }
 
-    if (hayAlgo)
+    if (hayAlgo) {
+        let esMayorCero = false;
         if (dei_MontoRestante == 0.00 || dei_MontoRestante < 0) {
             $("#Crear #valMontoRestanteMayor").html('El campo Monto restante no puede ser menor o igual que cero.');
             $("#Crear #valMontoRestanteMayor").css("display", "block");
             $("#Crear #astMontoRestante").css("color", "red");
-            estaBien = false;
+
         }
         else {
+            esMayorCero = true;
             $("#Crear #valMontoRestanteMayor").css("display", "none");
             $("#Crear #astMontoRestante").css("color", "black");
         }
 
-    let mr = parseFloat(dei_MontoRestante).toFixed(2);
-    let mi = parseFloat(montoInicial).toFixed(2);
-    debugger;
-    if (mr > mi) {
-        $("#Crear #valMontoRestanteMayorL").html('El campo monto restante no puede ser mayor que monto inicial.');
-        $("#Crear #valMontoRestanteMayorL").css("display", "block");
-        $("#Crear #astMontoRestante").css("color", "red");
-        estaBien = false;
+        let mr = parseFloat(dei_MontoRestante).toFixed(2);
+        let mi = parseFloat(montoInicial).toFixed(2);
+        if (esMayorCero)
+            debugger;
+        if (mr > mi) {
+            $("#Crear #valMontoRestanteMayorL").html('El campo monto restante no puede ser mayor que monto inicial.');
+            $("#Crear #valMontoRestanteMayorL").css("display", "block");
+            $("#Crear #astMontoRestante").css("color", "red");
+            hayAlgo = false;
+
+        }
+        else {
+            hayAlgo = false;
+            $("#Crear #valMontoRestanteMayorL").css("display", "none");
+            $("#Crear #astMontoRestante").css("color", "black");
+        }
 
     }
-    else {
-        hayAlgo = false;
-        $("#Crear #valMontoRestanteMayorL").css("display", "none");
-        $("#Crear #astMontoRestante").css("color", "black");
-    }
-
-
 });
 //Monto RestanteEditar
 $('#Editar #dei_MontoRestante').blur(function () {
-    let dei_MontoRestante = $(this).val().replace(/,/g, '');
+    let dei_MontoRestante = $(this).val().replace(/,/g, "");
     let montoInicial = $('#Editar #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/g, '');
+    montoInicial = montoInicial.replace(/,/g, "");
     let hayAlgo = false;
 
     if (dei_MontoRestante == "" || dei_MontoRestante == null || dei_MontoRestante == undefined) {
@@ -244,42 +247,46 @@ $('#Editar #dei_MontoRestante').blur(function () {
         $("#Editar #astMontoRestante").css("color", "black");
     }
 
-    if (hayAlgo)
+    if (hayAlgo) {
+        let esMayorCero = false;
         if (dei_MontoRestante == 0.00 || dei_MontoRestante < 0) {
             $("#Editar #valMontoRestanteMayor").html('El campo Monto restante no puede ser menor o igual que cero.');
             $("#Editar #valMontoRestanteMayor").css("display", "block");
             $("#Editar #astMontoRestante").css("color", "red");
-            estaBien = false;
+
         }
         else {
+            esMayorCero = true;
             $("#Editar #valMontoRestanteMayor").css("display", "none");
             $("#Editar #astMontoRestante").css("color", "black");
         }
 
-    let mr = parseFloat(dei_MontoRestante).toFixed(2);
-    let mi = parseFloat(montoInicial).toFixed(2);
+        let mr = parseFloat(dei_MontoRestante).toFixed(2);
+        let mi = parseFloat(montoInicial).toFixed(2);
+        if (esMayorCero)
+            debugger;
+        if (mr > mi) {
+            $("#Editar #valMontoRestanteMayorL").html('El campo monto restante no puede ser mayor que monto inicial.');
+            $("#Editar #valMontoRestanteMayorL").css("display", "block");
+            $("#Editar #astMontoRestante").css("color", "red");
+            hayAlgo = false;
 
-    if (mr > mi) {
-        $("#Editar #valMontoRestanteMayorL").html('El campo monto restante no puede ser mayor que monto inicial.');
-        $("#Editar #valMontoRestanteMayorL").css("display", "block");
-        $("#Editar #astMontoRestante").css("color", "red");
-        estaBien = false;
+        }
+        else {
+            hayAlgo = false;
+            $("#Editar #valMontoRestanteMayorL").css("display", "none");
+            $("#Editar #astMontoRestante").css("color", "black");
+        }
 
     }
-    else {
-        hayAlgo = false;
-        $("#Editar #valMontoRestanteMayorL").css("display", "none");
-        $("#Editar #astMontoRestante").css("color", "black");
-    }
-
 
 });
 //Cuota Crear
-$('#Crear #dei_Cuota, #Editar #dei_Cuota').blur(function () {
-    let valor = $(this).val().replace(/,/g, '');
+$('#Crear #dei_Cuota').blur(function () {
+    let valor = $(this).val().replace(/,/g, "");
     let montoInicial = $('#Crear #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/g, '');
+    montoInicial = montoInicial.replace(/,/g, "");
     let hayAlgo = false;
 
 
@@ -293,35 +300,41 @@ $('#Crear #dei_Cuota, #Editar #dei_Cuota').blur(function () {
         $("#Crear #astCuota").css("color", "black");
     }
 
-    if (hayAlgo)
-        if (valor <= 0) {
+    if (hayAlgo) {
+        let esMayorCero = false;
+        if (valor == 0.00 || valor < 0) {
             $("#Crear #valCuota").html('Campo Cuota no puede ser mayor o igual que cero');
             $("#Crear #valCuota").css("display", "");
             $("#Crear #astCuota").css("color", "red");
 
         } else {
+            esMayorCero = true;
             $("#Crear #valCuota").css("display", "none");
             $("#Crear #astCuota").css("color", "black");
         }
 
-    let cuo = parseFloat(valor).toFixed(2);
-    let mi = parseFloat(montoInicial).toFixed(2);
-    if (cuo > mi) {
-        $("#Crear #valCuotaMayor").html('Campo Cuota no puede ser mayor que el monto inicial');
-        $("#Crear #valCuotaMayor").css("display", "");
-        $("#Crear #astCuota").css("color", "red");
-        estaBien = false;
-    } else {
-        $("#Crear #valCuotaMayor").css("display", "none");
-        $("#Crear #astCuota").css("color", "black");
+        let cuo = parseFloat(valor).toFixed(2);
+        let mi = parseFloat(montoInicial).toFixed(2);
+        debugger;
+        if (esMayorCero)
+            if (cuo > mi) {
+                $("#Crear #valCuotaMayor").html('Campo Cuota no puede ser mayor que el monto inicial');
+                $("#Crear #valCuotaMayor").css("display", "");
+                $("#Crear #astCuota").css("color", "red");
+                hayAlgo = false;
+            } else {
+                hayAlgo = false;
+                $("#Crear #valCuotaMayor").css("display", "none");
+                $("#Crear #astCuota").css("color", "black");
+            }
     }
 });
 //Cuota Editar
 $('#Editar #dei_Cuota').blur(function () {
-    let valor = $(this).val().replace(/,/g, '');
+    let valor = $(this).val().replace(/,/g, "");
     let montoInicial = $('#Editar #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/g, '');
+    montoInicial = montoInicial.replace(/,/g, "");
     let hayAlgo = false;
 
 
@@ -335,27 +348,32 @@ $('#Editar #dei_Cuota').blur(function () {
         $("#Editar #astCuota").css("color", "black");
     }
 
-    if (hayAlgo)
-        if (valor <= 0) {
+    if (hayAlgo) {
+        let esMayorCero = false;
+        if (valor == 0.00 || valor < 0) {
             $("#Editar #valCuota").html('Campo Cuota no puede ser mayor o igual que cero');
             $("#Editar #valCuota").css("display", "");
             $("#Editar #astCuota").css("color", "red");
 
         } else {
+            esMayorCero = true;
             $("#Editar #valCuota").css("display", "none");
             $("#Editar #astCuota").css("color", "black");
         }
 
-    let cuo = parseFloat(valor).toFixed(2);
-    let mi = parseFloat(montoInicial).toFixed(2);
-    if (cuo > mi) {
-        $("#Editar #valCuotaMayor").html('Campo Cuota no puede ser mayor que el monto inicial');
-        $("#Editar #valCuotaMayor").css("display", "");
-        $("#Editar #astCuota").css("color", "red");
-        estaBien = false;
-    } else {
-        $("#Editar #valCuotaMayor").css("display", "none");
-        $("#Editar #astCuota").css("color", "black");
+        let cuo = parseFloat(valor).toFixed(2);
+        let mi = parseFloat(montoInicial).toFixed(2);
+        if (esMayorCero)
+            if (cuo > mi) {
+                $("#Editar #valCuotaMayor").html('Campo Cuota no puede ser mayor que el monto inicial');
+                $("#Editar #valCuotaMayor").css("display", "");
+                $("#Editar #astCuota").css("color", "red");
+                hayAlgo = false;
+            } else {
+                hayAlgo = false;
+                $("#Editar #valCuotaMayor").css("display", "none");
+                $("#Editar #astCuota").css("color", "black");
+            }
     }
 });
 //#endregion
@@ -561,9 +579,9 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     //#region Declaracion de variables
     let emp_Id = $("#Crear #emp_Id").val();
     let dei_Motivo = $("#Crear #dei_Motivo").val();
-    let dei_MontoInicial = $("#Crear #dei_MontoInicial").val().replace(/,/g, '');;
-    let dei_MontoRestante = $("#frmCreateDeduccionIndividual #dei_MontoRestante").val().replace(/,/g, '');;
-    let dei_Cuota = $("#Crear #dei_Cuota").val().replace(/,/g, '');;
+    let dei_MontoInicial = $("#Crear #dei_MontoInicial").val().replace(/,/, '');;
+    let dei_MontoRestante = $("#frmCreateDeduccionIndividual #dei_MontoRestante").val().replace(/,/, '');;
+    let dei_Cuota = $("#Crear #dei_Cuota").val().replace(/,/, '');;
     let dei_PagaSiempre = $("#Crear #dei_PagaSiempre").val();
     //#endregion
 
@@ -711,9 +729,9 @@ $("#btnEditDeduccionIndividual2").click(function () {
     var dei_IdDeduccionesIndividuales = $("#Editar #dei_IdDeduccionesIndividuales").val();
     var emp_Id = $("#Editar #emp_Id").val();
     var dei_Motivo = $("#Editar #dei_Motivo").val();
-    var dei_MontoInicial = $("#Editar #dei_MontoInicial").val().replace(/,/g, '');;
-    var dei_MontoRestante = $("#Editar #dei_MontoRestante").val().replace(/,/g, '');;
-    var dei_Cuota = $("#Editar #dei_Cuota").val().replace(/,/g, '');;
+    var dei_MontoInicial = $("#Editar #dei_MontoInicial").val().replace(/,/, '');;
+    var dei_MontoRestante = $("#Editar #dei_MontoRestante").val().replace(/,/, '');;
+    var dei_Cuota = $("#Editar #dei_Cuota").val().replace(/,/, '');;
     var dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
 
     if ($('#Editar #dei_PagaSiempre').is(':checked')) {

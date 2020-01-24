@@ -11,14 +11,141 @@ function _ajax(params, uri, type, callback) {
 }
 var InactivarID = 0;
 
+//#region Blur
+$('#Crear #cde_IdDeducciones, #Editar #cde_IdDeducciones').blur(function () {
+    let idDeduccion = $(this).val();
+    if (idDeduccion == null || idDeduccion == "" || idDeduccion == "0") {
+        $('#Crear #Validation_deduccion, #Editar #Validation_deduccionE').show();
+        $('#Crear #AsteriskDeduccion, #Editar #AsteriskDeduccionE').addClass('text-danger');
+    } else {
+        $('#Crear #AsteriskDeduccion, #Editar #AsteriskDeduccionE').removeClass('text-danger');
+        $('#Crear #Validation_deduccion, #Editar #Validation_deduccionE').hide();
+    }
+});
+
+$('#Crear #tddu_Techo, #Editar #tddu_Techo').blur(function () {
+    let techo = $(this).val();
+
+    let tieneValorTecho = false;
+    //Validacion Requerido
+    if (techo == null || techo == "") {
+
+        $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo Requerido');
+        $('#Crear #Validation_Techo, #Editar #Validation_TechoE').show();
+        $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').addClass('text-danger');
+    } else {
+        tieneValorTecho = true;
+        $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').removeClass('text-danger');
+        $('#Crear #Validation_Techo, #Editar #Validation_TechoE').hide();
+    }
+
+    if (tieneValorTecho) {
+        if (techo < 0 || techo == 0) {
+            $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo no puede ser menor o igual que cero.');
+            $('#Crear #Validation_Techo, #Editar #Validation_TechoE').show();
+            $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').addClass('text-danger');
+        } else {
+            $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo Requerido');
+            $('#Crear #Validation_Techo, #Editar #Validation_TechoE').hide();
+            $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').removeClass('text-danger');
+        }
+    }
+});
+
+$('#Crear #tddu_PorcentajeColaboradores, #Editar #tddu_PorcentajeColaboradores').blur(function () {
+    let porcentajeColaborador = $(this).val();
+
+    let tieneValorColaborador = false;
+    //Validacion Requerido
+    if (porcentajeColaborador == null || porcentajeColaborador == "") {
+        $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').show();
+        $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
+    } else {
+        tieneValorColaborador = true;
+        $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
+        $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').hide();
+    }
+
+    if (tieneValorColaborador) {
+        if (porcentajeColaborador < 0) {
+            $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo no puede ser menor que cero.');
+            $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').show();
+            $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
+        } else {
+            $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').hide();
+            $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
+        }
+    }
+});
+
+$('#Crear #tddu_PorcentajeEmpresa, #Editar #tddu_PorcentajeEmpresa').blur(function () {
+    let porcentajeEmpresa = $(this).val();
+
+    let tieneValorPorcentajeEmpresa = false;
+    //Validacion Requerido
+    if (porcentajeEmpresa == null || porcentajeEmpresa == "") {
+        $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').show();
+        $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
+    } else {
+        tieneValorPorcentajeEmpresa = true;
+        $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
+        $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').hide();
+    }
+
+    if (tieneValorPorcentajeEmpresa) {
+        if (porcentajeEmpresa < 0) {
+            $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo no puede ser menor que cero.');
+            $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').show();
+            $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
+        } else {
+            $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').hide();
+            $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeEmpresaE').removeClass('text-danger');
+        }
+    }
+});
+//#endregion
+
+
+function limpiarMensajes() {
+    //span crear
+    $('#Crear #Validation_Techo').hide();
+    $('#Crear #Validation_deduccion').hide();
+    $('#Crear #Validation_PorcentajeColaboradores').hide();
+    $('#Crear #Validation_PorcentajeEmpresa').hide();
+
+    //asteriscos rojos crear
+    $('#Crear #asterisco').removeClass('text-danger');
+    $('#Crear #AsteriskTecho').removeClass('text-danger');
+    $('#Crear #AsteriskDeduccion').removeClass('text-danger');
+    $('#Crear #AsteriskPorcentajeColaborador').removeClass('text-danger');
+    $('#Crear #AsteriskPorcentajeEmpresa').removeClass('text-danger');
+
+    //span editar
+    $('#Editar #Validation_deduccionE').hide();
+    $('#Editar #Validation_TechoE').hide();
+    $('#Editar #Validation_PorcentajeColaboradoresE').hide();
+    $('#Editar #Validation_PorcentajeEmpresaE').hide();
+
+    //asteriscos Editar
+    $('#Editar #AsteriskDeduccionE').removeClass('text-danger');
+    $('#Editar #AsteriskTechoE').removeClass('text-danger');
+    $('#Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
+    $('#Editar #AsteriskPorcentajeEmpresaE').removeClass('text-danger');
+
+}
+
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 // EVITAR POSTBACK DE FORMULARIOS
 $("#frmEditTechosDeducciones").submit(function (e) {
@@ -60,13 +187,13 @@ function cargarGridTechosDeducciones() {
                 var botonActivar = ListaTechosDeducciones[i].tddu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' : '' : '';
 
                 $('#tblTechosDeducciones').dataTable().fnAddData([
-                ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
-                ListaTechosDeducciones[i].tddu_Techo,
-                ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
-                ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
-                ListaTechosDeducciones[i].cde_DescripcionDeduccion,
-                estadoRegistro,
-                  botonDetalles + botonEditar + botonActivar]
+                    ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
+                    ListaTechosDeducciones[i].tddu_Techo,
+                    ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
+                    ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
+                    ListaTechosDeducciones[i].cde_DescripcionDeduccion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar]
                 );
             }
         });
@@ -91,6 +218,8 @@ $("#btnCerrarEditar").click(function () {
 
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarTechosDeducciones", function () {
+    limpiarMensajes();
+
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/TechosDeducciones/EditGetDDL",
@@ -112,15 +241,210 @@ $(document).on("click", "#btnAgregarTechosDeducciones", function () {
     $("#AgregarTechosDeducciones").modal();
 });
 
+function validacionCrear() {
+    let todoBien = true;
+    let idDeduccion = $('#Crear #cde_IdDeducciones').val();
+    if (idDeduccion == null || idDeduccion == "" || idDeduccion == "0") {
+        $('#Crear #Validation_deduccion').show();
+        $('#Crear #AsteriskDeduccion').addClass('text-danger');
+        todoBien = false;
+    } else {
+        $('#Crear #AsteriskDeduccion').removeClass('text-danger');
+        $('#Crear #Validation_deduccion').hide();
+    }
+
+    let techo = $('#Crear #tddu_Techo').val();
+    let tieneValorTecho = false;
+    //Validacion Requerido
+    if (techo == null || techo == "") {
+        $('#Crear #Validation_Techo').html('Campo Techo Requerido');
+        $('#Crear #Validation_Techo').show();
+        $('#Crear #AsteriskTecho').addClass('text-danger');
+        todoBien = false;
+    } else {
+        tieneValorTecho = true;
+        $('#Crear #AsteriskTecho').removeClass('text-danger');
+        $('#Crear #Validation_Techo').hide();
+    }
+
+    if (tieneValorTecho) {
+        if (techo < 0 || techo == 0) {
+            $('#Crear #Validation_Techo').html('Campo Techo no puede ser menor o igual que cero.');
+            $('#Crear #Validation_Techo').show();
+            $('#Crear #AsteriskTecho').addClass('text-danger');
+            todoBien = false;
+        } else {
+            $('#Crear #Validation_Techo').html('Campo Techo Requerido');
+            $('#Crear #Validation_Techo').hide();
+            $('#Crear #AsteriskTecho').removeClass('text-danger');
+        }
+    }
+
+    let porcentajeColaborador = $('#Crear #tddu_PorcentajeColaboradores').val();
+
+    let tieneValorColaborador = false;
+    //Validacion Requerido
+    if (porcentajeColaborador == null || porcentajeColaborador == "") {
+        todoBien = false;
+        $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeColaboradores').show();
+        $('#Crear #AsteriskPorcentajeColaborador').addClass('text-danger');
+    } else {
+        tieneValorColaborador = true;
+        $('#Crear #AsteriskPorcentajeColaborador').removeClass('text-danger');
+        $('#Crear #Validation_PorcentajeColaboradores').hide();
+    }
+
+    if (tieneValorColaborador) {
+        if (porcentajeColaborador < 0) {
+            todoBien = false;
+            $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo no puede ser menor que cero.');
+            $('#Crear #Validation_PorcentajeColaboradores').show();
+            $('#Crear #AsteriskPorcentajeColaborador').addClass('text-danger');
+        } else {
+            $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeColaboradores').hide();
+            $('#Crear #AsteriskPorcentajeColaborador').removeClass('text-danger');
+        }
+    }
+
+    let porcentajeEmpresa = $('#Crear #tddu_PorcentajeEmpresa').val();
+
+    let tieneValorPorcentajeEmpresa = false;
+    //Validacion Requerido
+    if (porcentajeEmpresa == null || porcentajeEmpresa == "") {
+        todoBien = false;
+        $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeEmpresa').show();
+        $('#Crear #AsteriskPorcentajeEmpresa').addClass('text-danger');
+    } else {
+        tieneValorPorcentajeEmpresa = true;
+        $('#Crear #AsteriskPorcentajeEmpresa').removeClass('text-danger');
+        $('#Crear #Validation_PorcentajeEmpresa').hide();
+    }
+
+    if (tieneValorPorcentajeEmpresa) {
+        if (porcentajeEmpresa < 0) {
+            todoBien = false;
+            $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo no puede ser menor que cero.');
+            $('#Crear #Validation_PorcentajeEmpresa').show();
+            $('#Crear #AsteriskPorcentajeEmpresa').addClass('text-danger');
+        } else {
+            $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeEmpresa').hide();
+            $('#Crear #AsteriskPorcentajeEmpresa').removeClass('text-danger');
+        }
+    }
+
+    return todoBien;
+}
+
+function validacionEditar() {
+    let todoBien = true;
+    let idDeduccion = $('#Editar #cde_IdDeducciones').val();
+    if (idDeduccion == null || idDeduccion == "" || idDeduccion == "0") {
+        $('#Editar #Validation_deduccionE').show();
+        $('#Editar #AsteriskDeduccionE').addClass('text-danger');
+        todoBien = false;
+    } else {
+        $('#Editar #AsteriskDeduccionE').removeClass('text-danger');
+        $('#Editar #Validation_deduccionE').hide();
+    }
+
+    let techo = $('#Editar #tddu_Techo').val();
+    let tieneValorTecho = false;
+    //Validacion Requerido
+    if (techo == null || techo == "") {
+        $('#Editar #Validation_TechoE').html('Campo Techo Requerido');
+        $('#Editar #Validation_TechoE').show();
+        $('#Editar #AsteriskTechoE').addClass('text-danger');
+        todoBien = false;
+    } else {
+        tieneValorTecho = true;
+        $('#Editar #AsteriskTechoE').removeClass('text-danger');
+        $('#Editar #Validation_TechoE').hide();
+    }
+
+    if (tieneValorTecho) {
+        if (techo < 0 || techo == 0) {
+            $('#Editar #Validation_TechoE').html('Campo Techo no puede ser menor o igual que cero.');
+            $('#Editar #Validation_TechoE').show();
+            $('#Editar #AsteriskTechoE').addClass('text-danger');
+            todoBien = false;
+        } else {
+            $('#Editar #Validation_TechoE').html('Campo Techo Requerido');
+            $('#Editar #Validation_TechoE').hide();
+            $('#Editar #AsteriskTechoE').removeClass('text-danger');
+        }
+    }
+
+    let porcentajeColaborador = $('#Editar #tddu_PorcentajeColaboradores').val();
+
+    let tieneValorColaborador = false;
+    //Validacion Requerido
+    if (porcentajeColaborador == null || porcentajeColaborador == "") {
+        todoBien = false;
+        $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+        $('#Editar #Validation_PorcentajeColaboradoresE').show();
+        $('#Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
+    } else {
+        tieneValorColaborador = true;
+        $('#Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
+        $('#Editar #Validation_PorcentajeColaboradoresE').hide();
+    }
+
+    if (tieneValorColaborador) {
+        if (porcentajeColaborador < 0) {
+            todoBien = false;
+            $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo no puede ser menor que cero.');
+            $('#Editar #Validation_PorcentajeColaboradoresE').show();
+            $('#Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
+        } else {
+            $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+            $('#Editar #Validation_PorcentajeColaboradoresE').hide();
+            $('#Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
+        }
+    }
+
+    let porcentajeEmpresa = $('#Editar #tddu_PorcentajeEmpresa').val();
+
+    let tieneValorPorcentajeEmpresa = false;
+    //Validacion Requerido
+    if (porcentajeEmpresa == null || porcentajeEmpresa == "") {
+        todoBien = false;
+        $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+        $('#Editar #Validation_PorcentajeEmpresaE').show();
+        $('#Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
+    } else {
+        tieneValorPorcentajeEmpresa = true;
+        $('#Editar #AsteriskPorcentajeEmpresaE').removeClass('text-danger');
+        $('#Editar #Validation_PorcentajeEmpresaE').hide();
+    }
+
+    if (tieneValorPorcentajeEmpresa) {
+        if (porcentajeEmpresa < 0) {
+            todoBien = false;
+            $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo no puede ser menor que cero.');
+            $('#Editar #Validation_PorcentajeEmpresaE').show();
+            $('#Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
+        } else {
+            $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+            $('#Editar #Validation_PorcentajeEmpresaE').hide();
+            $('#Editar #AsteriskPorcentajeEmpresaE').removeClass('text-danger');
+        }
+    }
+
+    return todoBien;
+}
 
 //FUNCION: CREAR EL NUEVO REGISTRO TECHOS DEDUCCIONES
 $('#btnCreateTechoDeducciones').click(function () {
-    var deduccion =  $("#Crear #cde_IdDeducciones").val();
+    var deduccion = $("#Crear #cde_IdDeducciones").val();
     var techo = $("#Crear #tddu_Techo").val();
     var porcentajeColaborador = $("#Crear #tddu_PorcentajeColaboradores").val();
     var porcentajeEmpresa = $("#Crear #tddu_PorcentajeEmpresa").val();
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    if ($("#Crear #cde_IdDeducciones").val() != "0" & $("#Crear #tddu_Techo").val() != "" & $("#Crear #tddu_PorcentajeColaboradores").val() != "" & $("#Crear #tddu_PorcentajeEmpresa").val() != "") {
+    if (validacionCrear()) {
         var data = $("#frmTechosDeduccionesCreate").serializeArray();
         console.log(data);
         $.ajax({
@@ -146,46 +470,13 @@ $('#btnCreateTechoDeducciones').click(function () {
             }
         });
     }
-    //Validaciones Data Annotations + asteriscos
-    else {
-        if (deduccion == "0") {
-            $("#Crear #Validation_deduccion").css("display", "block");
-            $("#AsteriskDeduccion").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_deduccion").css("display", "none");
-            $("#AsteriskDeduccion").removeClass("text-danger");
-        }
-        if (techo == "") {
-            $("#Crear #Validation_Techo").css("display", "block");
-            $("#AsteriskTecho").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_Techo").css("display", "none");
-            $("#AsteriskTecho").removeClass("text-danger");
-        }
-        if (porcentajeColaborador == "") {
-            $("#Crear #Validation_PorcentajeColaboradores").css("display", "block");
-            $("#AsteriskPorcentajeColaborador").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_PorcentajeColaboradores").css("display", "none");
-            $("#AsteriskPorcentajeColaborador").removeClass("text-danger");
-        }
-        if (porcentajeEmpresa == "") {
-            $("#Crear #Validation_PorcentajeEmpresa").css("display", "block");
-            $("#AsteriskPorcentajeEmpresa").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_PorcentajeEmpresa").css("display", "none");
-            $("#AsteriskPorcentajeEmpresa").removeClass("text-danger");
-        }
-    }
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeducciones", function () {
+    limpiarMensajes();
     var ID = $(this).data('id');
+
     InactivarID = ID;
     $.ajax({
         url: "/TechosDeducciones/Edit/" + ID,
@@ -241,7 +532,7 @@ $("#btnEditarTecho").click(function () {
     var techoE = $("#Editar #tddu_Techo").val();
     var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
     var porcentajeEmpresaE = $("#Editar #tddu_PorcentajeEmpresa").val();
-    if ($("#Editar #cde_IdDeducciones").val() != "0" & $("#Editar #tddu_Techo").val() != "" & $("#Editar #tddu_PorcentajeColaboradores").val() != "" & $("#Editar #tddu_PorcentajeEmpresa").val() != "") {
+    if (validacionEditar()) {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditTechosDeducciones").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -269,41 +560,7 @@ $("#btnEditarTecho").click(function () {
             }
         });
     }
-        //Validaciones Data Annotations + asteriscos
-    else {
-        if (deduccionE == "0") {
-            $("#Editar #Validation_deduccionE").css("display", "block");
-            $("#Editar #AsteriskDeduccionE").addClass("text-danger");
-        }
-        else {
-            $("#Editar #Validation_deduccionE").css("display", "none");
-            $("#Editar #AsteriskDeduccionE").removeClass("text-danger");
-        }
-        if (techoE == "") {
-            $("#Editar #Validation_TechoE").css("display", "block");
-            $("#Editar #AsteriskTechoE").addClass("text-danger");
-        }
-        else {
-            $("#Editar #Validation_TechoE").css("display", "none");
-            $("#Editar #AsteriskTechoE").removeClass("text-danger");
-        }
-        if (porcentajeColaboradorE == "") {
-            $("#Editar #Validation_PorcentajeColaboradoresE").css("display", "block");
-            $("#Editar #AsteriskPorcentajeColaboradorE").addClass("text-danger");
-        }
-        else {
-            $("#Editar #Validation_PorcentajeColaboradoresE").css("display", "none");
-            $("#Editar #AsteriskPorcentajeColaboradorE").removeClass("text-danger");
-        }
-        if (porcentajeEmpresaE == "") {
-            $("#Editar #Validation_PorcentajeEmpresaE").css("display", "block");
-            $("#Editar #AsteriskPorcentajeEmpresaE").addClass("text-danger");
-        }
-        else {
-            $("#Editar #Validation_PorcentajeEmpresaE").css("display", "none");
-            $("#Editar #AsteriskPorcentajeEmpresaE").removeClass("text-danger");
-        }
-    }
+    //Validaciones Data Annotations + asteriscos
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
@@ -345,7 +602,6 @@ $("#btnInactivarTechosDeducciones").click(function () {
     });
     InactivarID = 0;
 });
-
 
 //DETALLES
 $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDeducciones", function () {

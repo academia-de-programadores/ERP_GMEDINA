@@ -55,7 +55,10 @@
                                         @Html.DisplayFor(modelItem => item.cc_Id)
                                     </td>
                                     <td>
-                                        @{ string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;}
+                                        @{ 
+                                            string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
+                                            decimal PorcentajeDecimal = Convert.ToDecimal(item.cc_PorcentajeComision);
+                                        }
                                         @Html.HiddenFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
                                         @Nombre
                                     </td>
@@ -63,7 +66,7 @@
                                         @Html.DisplayFor(modelItem => item.tbCatalogoDeIngresos.cin_DescripcionIngreso)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.cc_PorcentajeComision)
+                                        @Html.DisplayFor(modelItem => PorcentajeDecimal)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cc_TotalVenta)
@@ -115,11 +118,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">          
-                <h4 class="modal-title">Crear Comisiones al Empleado</h4>
+                <h4 class="modal-title">Crear Comisión</h4>
             </div>
-            <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
-            </div>
             
         </div>
     </div>
@@ -149,8 +150,6 @@
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnUpdateComisionesConfirmar2" value="Si" class="btn btn-primary " />
-                <div style="display:none" class="btn" id="cargandoEditar">
-                </div>
                
                 <button type="button" class="btn btn-white" id="btCerrarEditar">No</button>
             </div>
