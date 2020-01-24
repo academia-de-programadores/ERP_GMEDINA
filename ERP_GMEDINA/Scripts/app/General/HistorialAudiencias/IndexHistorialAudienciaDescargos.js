@@ -106,9 +106,9 @@ function Llamarmodaldetalle(ID) {
                 $("#ModalDetalles").find("#aude_Descripcion")["0"].innerText = obj.aude_Descripcion;
                 $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0, 10);
                 $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo ? 'Si' : 'No';
-                $("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
+                //$("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#aude_FechaCrea")["0"].innerText = FechaFormato(obj.aude_FechaCrea).substring(0, 10);
+                $("#ModalDetalles").find("#aude_FechaCrea")["0"].innerText = FechaFormato(obj.aude_FechaCrea);
                 //$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 //$("#ModalDetalles").find("#aude_FechaModifica")["0"].innerText = FechaFormato(obj.aude_FechaModifica).substring(0, 10);
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
@@ -142,9 +142,12 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["aude_Descripcion1", "aude_FechaAudiencia1", "aude_DireccionArchivo1", "emp_Id"]);
-                    $("#aude_Testigo1").val("false");
+                   // LimpiarControles(["aude_Descripcion", "aude_FechaAudiencia", "aude_DireccionArchivo", "emp_Id"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    $("#ModalNuevo").find("#aude_FechaAudiencia").val("");
+                    $("#ModalNuevo").find("#aude_Descripcion").val("");
+                    $("#ModalNuevo").find("#aude_Testigo").prop("checked",false);
+                    $("#ModalNuevo").find("#emp_Id").val("");
                 } else {
                     MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
