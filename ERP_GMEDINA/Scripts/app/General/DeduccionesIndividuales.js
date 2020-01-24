@@ -180,10 +180,10 @@ $('#Crear #dei_MontoInicial, #Editar #dei_MontoInicial').blur(function () {
 });
 //Monto Restante Crear
 $('#Crear #dei_MontoRestante').blur(function () {
-    let dei_MontoRestante = $(this).val().replace(/,/, '');
+    let dei_MontoRestante = $(this).val().replace(/,/g, '');
     let montoInicial = $('#Crear #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/, '');
+    montoInicial = montoInicial.replace(/,/g, '');
     let hayAlgo = false;
 
     if (dei_MontoRestante == "" || dei_MontoRestante == null || dei_MontoRestante == undefined) {
@@ -228,10 +228,10 @@ $('#Crear #dei_MontoRestante').blur(function () {
 });
 //Monto RestanteEditar
 $('#Editar #dei_MontoRestante').blur(function () {
-    let dei_MontoRestante = $(this).val().replace(/,/, '');
+    let dei_MontoRestante = $(this).val().replace(/,/g, '');
     let montoInicial = $('#Editar #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/, '');
+    montoInicial = montoInicial.replace(/,/g, '');
     let hayAlgo = false;
 
     if (dei_MontoRestante == "" || dei_MontoRestante == null || dei_MontoRestante == undefined) {
@@ -276,10 +276,10 @@ $('#Editar #dei_MontoRestante').blur(function () {
 });
 //Cuota Crear
 $('#Crear #dei_Cuota, #Editar #dei_Cuota').blur(function () {
-    let valor = $(this).val().replace(/,/, '');
+    let valor = $(this).val().replace(/,/g, '');
     let montoInicial = $('#Crear #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/, '');
+    montoInicial = montoInicial.replace(/,/g, '');
     let hayAlgo = false;
 
 
@@ -318,10 +318,10 @@ $('#Crear #dei_Cuota, #Editar #dei_Cuota').blur(function () {
 });
 //Cuota Editar
 $('#Editar #dei_Cuota').blur(function () {
-    let valor = $(this).val().replace(/,/, '');
+    let valor = $(this).val().replace(/,/g, '');
     let montoInicial = $('#Editar #dei_MontoInicial').val();
 
-    montoInicial = montoInicial.replace(/,/, '');
+    montoInicial = montoInicial.replace(/,/g, '');
     let hayAlgo = false;
 
 
@@ -561,9 +561,9 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     //#region Declaracion de variables
     let emp_Id = $("#Crear #emp_Id").val();
     let dei_Motivo = $("#Crear #dei_Motivo").val();
-    let dei_MontoInicial = $("#Crear #dei_MontoInicial").val().replace(/,/, '');;
-    let dei_MontoRestante = $("#frmCreateDeduccionIndividual #dei_MontoRestante").val().replace(/,/, '');;
-    let dei_Cuota = $("#Crear #dei_Cuota").val().replace(/,/, '');;
+    let dei_MontoInicial = $("#Crear #dei_MontoInicial").val().replace(/,/g, '');;
+    let dei_MontoRestante = $("#frmCreateDeduccionIndividual #dei_MontoRestante").val().replace(/,/g, '');;
+    let dei_Cuota = $("#Crear #dei_Cuota").val().replace(/,/g, '');;
     let dei_PagaSiempre = $("#Crear #dei_PagaSiempre").val();
     //#endregion
 
@@ -711,9 +711,9 @@ $("#btnEditDeduccionIndividual2").click(function () {
     var dei_IdDeduccionesIndividuales = $("#Editar #dei_IdDeduccionesIndividuales").val();
     var emp_Id = $("#Editar #emp_Id").val();
     var dei_Motivo = $("#Editar #dei_Motivo").val();
-    var dei_MontoInicial = $("#Editar #dei_MontoInicial").val().replace(/,/, '');;
-    var dei_MontoRestante = $("#Editar #dei_MontoRestante").val().replace(/,/, '');;
-    var dei_Cuota = $("#Editar #dei_Cuota").val().replace(/,/, '');;
+    var dei_MontoInicial = $("#Editar #dei_MontoInicial").val().replace(/,/g, '');;
+    var dei_MontoRestante = $("#Editar #dei_MontoRestante").val().replace(/,/g, '');;
+    var dei_Cuota = $("#Editar #dei_Cuota").val().replace(/,/g, '');;
     var dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
 
     if ($('#Editar #dei_PagaSiempre').is(':checked')) {
