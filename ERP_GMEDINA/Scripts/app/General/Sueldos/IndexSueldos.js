@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     llenarTabla();
 });
 var id = 0;
@@ -84,6 +85,7 @@ function llenarTabla() {
                    Cuenta: value.Cuenta,
                    Sueldo_Anterior: value.Sueldo_Anterior,
                    Area: value.Area,
+                   "Área": value.Area,
                    Cargo: value.Cargo,
                    Usuario_Nombre: value.Usuario_Nombre,
                    Usuario_Crea: value.Usuario_Crea,
@@ -176,14 +178,14 @@ $("#btnActualizar").click(function () {
                             LimpiarControles(["sue_Id", "sue_Cantidad"]);
                             MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
                         } else {
-                            MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                            MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe.)");
                         }
                     });
             } else {
-                MsgError("Error", "por favor llene todas las cajas de texto");
+                MsgError("Error", "por favor llene todas las cajas de texto.");
             }
         } else {
-        MsgError("Error", "Por favor ingrese una cantidad númerica");
+        MsgError("Error", "Por favor ingrese  solo valores numéricos positivos. ");
     }
 });
 
