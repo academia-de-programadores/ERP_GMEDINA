@@ -287,8 +287,6 @@ function cargarGridDeducciones() {
                     botonDetalles + botonEditar + botonInactivar + botonActivar
                 ]);
             }
-            //APLICAR EL MAX WIDTH
-            FullBody();
         });
 }
 
@@ -503,7 +501,7 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
     $("#ActivarDeduccionesExtraordinarias").submit(function (e) {
         return false;
     });
-
+    document.getElementById("btnActivarRegistroDeduccionesExtraordinarias").disabled = false;
 });
 //#endregion
 
@@ -665,7 +663,7 @@ $("#btnInactivar").click(function () {
         return false;
     });
 
-
+    document.getElementById("btnInactivar").disabled = false;
 });
 //#endregion
 

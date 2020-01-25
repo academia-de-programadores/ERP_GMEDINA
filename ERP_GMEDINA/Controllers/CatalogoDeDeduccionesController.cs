@@ -122,12 +122,10 @@ namespace PruebaPlanilla.Controllers
             tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;
             tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listCatalogoDeDeducciones = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
@@ -157,13 +155,7 @@ namespace PruebaPlanilla.Controllers
                 }
                 //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
                 //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
-            }
-            else {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
-            }
+
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
             
             //RETORNAR MENSAJE AL LADO DEL CLIENTE

@@ -356,7 +356,7 @@ function estaTodoValidado(modal) {
     let dei_MontoInicial = $("#" + modal + " #dei_MontoInicial").val();
     let dei_MontoRestante = $("#" + modal + " #dei_MontoRestante").val();
     let dei_Cuota = $("#" + modal + " #dei_Cuota").val();
-    let emp_Id = $("#Crear #emp_Id").val();
+    let emp_Id = $("#" + modal + " #emp_Id").val();
     //#endregion
 
     //#region Validar Motivo 
@@ -678,7 +678,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
         dei_PagaSiempre = false;
     }
 
-    debugger;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/DeduccionesIndividuales/Edit",
