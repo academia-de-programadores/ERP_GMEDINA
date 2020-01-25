@@ -49,7 +49,7 @@ function cargarGridDeducciones() {
             var ListaDeduccionIndividual = data;
 
             //LIMPIAR LA DATA DEL DATATABLE
-            $('#IndexTable').DataTable().clear();
+            $('#IndexTabla').DataTable().clear();
 
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionIndividual.length; i++) {
@@ -66,7 +66,7 @@ function cargarGridDeducciones() {
                 var botonActivar = ListaDeduccionIndividual[i].dei_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarDeduccionesIndividuales" deiid="' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Activar</button>' : '' : '';
 
                 //AGREGAR EL ROW AL DATATABLE
-                $('#IndexTable').dataTable().fnAddData([
+                $('#IndexTabla').dataTable().fnAddData([
                     ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales,
                     ListaDeduccionIndividual[i].dei_Motivo,
                     ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].per_Apellidos,
@@ -83,7 +83,7 @@ function cargarGridDeducciones() {
 }
 
 //#region  Activar
-$(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividuales", function () {
+$(document).on("click", "#IndexTabla tbody tr td #btnActivarDeduccionesIndividuales", function () {
     document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = false;
     var id = $(this).data('id');
 
@@ -588,7 +588,7 @@ $("#btnCerrarEditar").click(function () {
 });
 
 
-$(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
+$(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
     limpiarAsteriscos("Editar");
     limpiarSpan("Editar");
     document.getElementById("btnEditDeduccionIndividual2").disabled = false;
@@ -731,7 +731,7 @@ $(document).on("click", "#btnReg", function () {
 //#endregion
 
 //#region Detalles
-$(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividuales", function () {
+$(document).on("click", "#IndexTabla tbody tr td #btnDetalleDeduccionesIndividuales", function () {
     var id = $(this).data('id');
     $.ajax({
         url: "/DeduccionesIndividuales/Details/" + id,

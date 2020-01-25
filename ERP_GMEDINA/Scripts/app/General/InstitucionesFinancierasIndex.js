@@ -2,12 +2,12 @@
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      //console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        //console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 
 
@@ -28,16 +28,14 @@ function _ajax(params, uri, type, callback) {
 var esAdministrador = $("#rol_Usuario").val();
 
 //Funcion para refrescar la tabla (Index)
-function cargarGridINFS()
-{
-//    var esAdministrador = $("#rol_Usuario").val();
-//    cons.log("Hola: " +esAdministrador);
+function cargarGridINFS() {
+    //    var esAdministrador = $("#rol_Usuario").val();
+    //    cons.log("Hola: " +esAdministrador);
     _ajax(null,
         '/InstitucionesFinancieras/GetData',
         'GET',
         (data) => {
-            if (data.length == 0)
-            {
+            if (data.length == 0) {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
@@ -45,12 +43,11 @@ function cargarGridINFS()
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaINFS = data;            
+            var ListaINFS = data;
             //LIMPIAR LA DATA DEL DATATABLE
-            $('#IndexTable').DataTable().clear();
+            $('#IndexTabla').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaINFS.length; i++)
-            {
+            for (var i = 0; i < ListaINFS.length; i++) {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaINFS[i].insf_Activo == false ? 'Inactivo' : 'Activo';
                 //variable boton detalles
@@ -60,14 +57,14 @@ function cargarGridINFS()
                 //variable donde está el boton activar
                 var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
 
-                $('#IndexTable').dataTable().fnAddData([
-                ListaINFS[i].insf_IdInstitucionFinanciera,
-                ListaINFS[i].insf_DescInstitucionFinanc,
-                ListaINFS[i].insf_Contacto,
-                ListaINFS[i].insf_Telefono,
-                ListaINFS[i].insf_Correo,
-                estadoRegistro,
-                botonDetalles + botonEditar + botonActivar
+                $('#IndexTabla').dataTable().fnAddData([
+                    ListaINFS[i].insf_IdInstitucionFinanciera,
+                    ListaINFS[i].insf_DescInstitucionFinanc,
+                    ListaINFS[i].insf_Contacto,
+                    ListaINFS[i].insf_Telefono,
+                    ListaINFS[i].insf_Correo,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
                 ]);
             }
         });
@@ -150,7 +147,7 @@ $("#frmCreateInstitucionFinanciera").submit(function (e) {
 //VARIABLE DE INACTIVACION
 var IDInactivar = 0;
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-$(document).on("click", "#IndexTable tbody tr td #btnModalEditarINFS", function () {
+$(document).on("click", "#IndexTabla tbody tr td #btnModalEditarINFS", function () {
     //DESBLOQUEAR EL BOTON
     $("#btnConfirmarEditar2").attr("disabled", false);
     //CAPTURAR EL ID DEL REGISTRO SELECCIONADO
@@ -166,23 +163,23 @@ $(document).on("click", "#IndexTable tbody tr td #btnModalEditarINFS", function 
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data != "error") {
-                $("#Editar #insf_IdInstitucionFinanciera").val(data[0].insf_IdInstitucionFinanciera);
-                $("#Editar #insf_DescInstitucionFinanc").val(data[0].insf_Descripcion);
-                $("#Editar #insf_Contacto").val(data[0].insf_Contacto);
-                $("#Editar #insf_Telefono").val(data[0].insf_Telefono);
-                $("#Editar #insf_Correo").val(data[0].insf_Correo);
-                //DESPLEGAR EL MODAL DE EDICION
-                $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
+        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+        if (data != "error") {
+            $("#Editar #insf_IdInstitucionFinanciera").val(data[0].insf_IdInstitucionFinanciera);
+            $("#Editar #insf_DescInstitucionFinanc").val(data[0].insf_Descripcion);
+            $("#Editar #insf_Contacto").val(data[0].insf_Contacto);
+            $("#Editar #insf_Telefono").val(data[0].insf_Telefono);
+            $("#Editar #insf_Correo").val(data[0].insf_Correo);
+            //DESPLEGAR EL MODAL DE EDICION
+            $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
+        }
+        else {
+            //Mensaje de error si no hay data
+            iziToast.error({
+                title: 'Error',
+                message: '¡No se cargó la información, contacte al administrador!',
+            });
+        }
     }).fail(function (jqxhr, settings, exception) {
         console.log("No se pudo realizar la petición");
     });
@@ -203,7 +200,7 @@ $("#btnModalActualizarINFS").click(function () {
     var insf_Contacto = $("#Editar #insf_Contacto").val();
     var insf_Telefono = $("#Editar #insf_Telefono").val();
     var insf_Correo = $("#Editar #insf_Correo").val();
-    
+
     //VALIDAR QUE EL CAMPO NO ESTE VACIO
     if (DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_Telefono, insf_Correo)) {
         //OCULTAR MODAL DE EDICION
@@ -223,10 +220,10 @@ $("#btnConfirmarEditar2").click(function () {
 
     var data = {
         insf_IdInstitucionFinanciera: $("#Editar #insf_IdInstitucionFinanciera").val(),
-        insf_DescInstitucionFinanc : $("#Editar #insf_DescInstitucionFinanc").val(),
-        insf_Contacto : $("#Editar #insf_Contacto").val(),
-        insf_Telefono : $("#Editar #insf_Telefono").val(),
-        insf_Correo : $("#Editar #insf_Correo").val()
+        insf_DescInstitucionFinanc: $("#Editar #insf_DescInstitucionFinanc").val(),
+        insf_Contacto: $("#Editar #insf_Contacto").val(),
+        insf_Telefono: $("#Editar #insf_Telefono").val(),
+        insf_Correo: $("#Editar #insf_Correo").val()
     };
 
     console.log(data);
@@ -235,32 +232,32 @@ $("#btnConfirmarEditar2").click(function () {
         method: "POST",
         data: data
     })
-    .done(function (data) {
-        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-        if (data != 'error') {
-            //REFRESCAR LA TABLA 
-            cargarGridINFS();
-            //OCULTAR MODAL DE CONFIRMACION
-            $("#ConfirmarEdicion").modal('hide');
-            //MOSTRAR MENSAJE DE EXITO
-            iziToast.success({
-                title: 'Éxito',
-                message: '¡El registro se editó de forma exitosa!',
-            });
-        }
-        else {
-            //DESBLOQUEAR EL BOTON
-            $("#btnConfirmarEditar2").attr("disabled", false);
-            //HACER EL CAMBIO DE MODALES
-            $("#ConfirmarEdicion").modal('hide');
-            $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
-            //MOSTRAR MENSAJE DE ERROR
-            iziToast.error({
-                title: 'Error',
-                message: '¡No se editó el registro, contacte al administrador!',
-            });
-        }
-    });
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data != 'error') {
+                //REFRESCAR LA TABLA 
+                cargarGridINFS();
+                //OCULTAR MODAL DE CONFIRMACION
+                $("#ConfirmarEdicion").modal('hide');
+                //MOSTRAR MENSAJE DE EXITO
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
+            }
+            else {
+                //DESBLOQUEAR EL BOTON
+                $("#btnConfirmarEditar2").attr("disabled", false);
+                //HACER EL CAMBIO DE MODALES
+                $("#ConfirmarEdicion").modal('hide');
+                $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
+                //MOSTRAR MENSAJE DE ERROR
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se editó el registro, contacte al administrador!',
+                });
+            }
+        });
 });
 
 //CERRAR MODAL DE CONFIRMACIÓN DE EDICION
@@ -280,7 +277,7 @@ $("#frmEditInstitucionFinanciera").submit(function (e) {
 
 
 //DETALLES
-$(document).on("click", "#IndexTable tbody tr td #btnModalDetallesINFS", function () {
+$(document).on("click", "#IndexTabla tbody tr td #btnModalDetallesINFS", function () {
     var ID = $(this).data('id');
     $.ajax({
         url: "/InstitucionesFinancieras/Details/" + ID,
@@ -405,10 +402,8 @@ $("#btnActivarINFS").click(function () {
         url: "/InstitucionesFinancieras/Activar/" + activarID,
         method: "POST",
         data: { id: activarID }
-    }).done(function (data)
-    {
-        if (data == "error")
-        {
+    }).done(function (data) {
+        if (data == "error") {
             //DESBLOQUEAR EL BOTON
             $("#btnActivarINFS").attr("disabled", false);
             //MOSTRAR MENSAJE DE ERROR
