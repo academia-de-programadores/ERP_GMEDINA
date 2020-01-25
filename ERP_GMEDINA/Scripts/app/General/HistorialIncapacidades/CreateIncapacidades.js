@@ -42,14 +42,21 @@
         var fecha2 = $("#hinc_FechaFin").val();
    
         var fechalimite = '01/01/1900';
-        
+        var fechamaxima = '12/31/2199';
 
-    
-        if ($("#ticn_Id").val() == 0) {
+        if ($("#ticn_Id").val() == 0 && fecha1 == "" && fecha2 == "")
+        {
+            MsgError("Error", "por favor llene todas las cajas de texto.")
+        }
+
+        else if ($("#ticn_Id").val() == 0) {
             MsgError("Error", "Es nesesario seleccionar el tipo de incapacidad.")
         }
-        else if (fecha1 == "" )
-        {
+        else if (fecha1 == "" && fecha2 == "") {
+            MsgError("Error", "Fecha inicio y fecha fin son requeridas.")
+        }
+
+        else if (fecha1 == "") {
             MsgError("Error", "Fecha inicio es requerida.")
 
         }
@@ -58,39 +65,46 @@
 
         }
 
-       else if (Date.parse(fecha1) > Date.parse(fecha2)) {
-            if (Date.parse(fecha2) < Date.parse(fechalimite)) {
-                MsgError("Error", "fecha fin no es valida")
+
+
+        else if ( Date.parse(fecha1) > Date.parse(fecha2) ) {
+            if (Date.parse(fecha1) < Date.parse(fechalimite) || Date.parse(fecha1) > Date.parse(fechamaxima))
+            {
+                
             }
-            else{
+            else if(Date.parse(fecha1) > Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)  )
+            {
+
+            }
+            else {
                 MsgError("Error", "La fecha fin debe ser mayor ");
             }
-            }
-        
+        }
+
         else if (Date.parse(fecha1) == Date.parse(fecha2)) {
-            if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
-                MsgError("Error", "Fecha inicio y fecha fin no son validas");
+           
+            if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite) || Date.parse(fecha1) > Date.parse(fechamaxima) && Date.parse(fecha2) > Date.parse(fechamaxima)) {
+
             }
             else {
                 MsgError("Error", "La fecha inicio y la fecha fin no pueden ser iguales");
             }
-        }
+        } 
 
-        else if (Date.parse(fecha1) < Date.parse(fechalimite) || Date.parse(fecha2) < Date.parse(fechalimite)) {
-            MsgError("Error", "Fecha inicio y fecha fin no son validas");
-        }
-        
-       else if (Date.parse(fecha1) < Date.parse(fechalimite)) {
-           MsgError("Error", "fecha inicio no es valida");
-       }
 
-      
+        else if (Date.parse(fecha1) < Date.parse(fechalimite))
+        {
+
+        }
        
+        else if (Date.parse(fecha2) > Date.parse(fechamaxima)) {
+
+        }
 
         else {
 
             return true;
-       }
+        }
     }
 
 
