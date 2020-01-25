@@ -17,7 +17,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: Sucursales
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             tbSucursales tbSucursales = new tbSucursales { suc_Estado = true };
             return View(tbSucursales);
         }
@@ -79,7 +83,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, tbSucursales.mun_Codigo, tbSucursales.bod_Id, tbSucursales.pemi_Id, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbSucursales_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";

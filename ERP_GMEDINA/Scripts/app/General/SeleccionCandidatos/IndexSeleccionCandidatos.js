@@ -36,8 +36,12 @@ function format(obj) {
 function compare_dates() {
     var Fecha = $("#scan_Fecha").val();
     var fechalimite = '01/01/1900';
+    var fechalimite2 = '01/01/9999';
 
     if (Date.parse(Fecha) < Date.parse(fechalimite)) {
+        MsgError("Error", "Fecha no valida");
+    }
+    else if (Date.parse(Fecha) > Date.parse(fechalimite2)) {
         MsgError("Error", "Fecha no valida");
     }
     else {

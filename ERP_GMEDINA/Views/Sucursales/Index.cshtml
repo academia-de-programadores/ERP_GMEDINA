@@ -67,7 +67,7 @@
     @Scripts.Render("~/plugins/dataTablesMatutina")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/Sucursales")
-    @if (Model.suc_Estado)
+    @if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/general/Sucursales/Admin")
     }
