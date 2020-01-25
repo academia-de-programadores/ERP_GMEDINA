@@ -9,15 +9,12 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Configuración de preavisos</h5>
+                    <h5>Configuración de Preavisos</h5>
                     <div class="ibox-tools">
                         <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarPreaviso">Registrar preaviso</button>
                     </div>
                 </div>
                 <div class="ibox-content">
-
-
-
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
                         var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];

@@ -212,20 +212,6 @@ $('#Crear #dei_MontoRestante').blur(function () {
 
         let mr = parseFloat(dei_MontoRestante).toFixed(2);
         let mi = parseFloat(montoInicial).toFixed(2);
-        if (esMayorCero)
-            debugger;
-        if (mr > mi) {
-            $("#Crear #valMontoRestanteMayorL").html('El campo monto restante no puede ser mayor que monto inicial.');
-            $("#Crear #valMontoRestanteMayorL").css("display", "block");
-            $("#Crear #astMontoRestante").css("color", "red");
-            hayAlgo = false;
-
-        }
-        else {
-            hayAlgo = false;
-            $("#Crear #valMontoRestanteMayorL").css("display", "none");
-            $("#Crear #astMontoRestante").css("color", "black");
-        }
 
     }
 });
@@ -263,20 +249,6 @@ $('#Editar #dei_MontoRestante').blur(function () {
 
         let mr = parseFloat(dei_MontoRestante).toFixed(2);
         let mi = parseFloat(montoInicial).toFixed(2);
-        if (esMayorCero)
-            debugger;
-        if (mr > mi) {
-            $("#Editar #valMontoRestanteMayorL").html('El campo monto restante no puede ser mayor que monto inicial.');
-            $("#Editar #valMontoRestanteMayorL").css("display", "block");
-            $("#Editar #astMontoRestante").css("color", "red");
-            hayAlgo = false;
-
-        }
-        else {
-            hayAlgo = false;
-            $("#Editar #valMontoRestanteMayorL").css("display", "none");
-            $("#Editar #astMontoRestante").css("color", "black");
-        }
 
     }
 
@@ -315,18 +287,6 @@ $('#Crear #dei_Cuota').blur(function () {
 
         let cuo = parseFloat(valor).toFixed(2);
         let mi = parseFloat(montoInicial).toFixed(2);
-        debugger;
-        if (esMayorCero)
-            if (cuo > mi) {
-                $("#Crear #valCuotaMayor").html('Campo Cuota no puede ser mayor que el monto inicial');
-                $("#Crear #valCuotaMayor").css("display", "");
-                $("#Crear #astCuota").css("color", "red");
-                hayAlgo = false;
-            } else {
-                hayAlgo = false;
-                $("#Crear #valCuotaMayor").css("display", "none");
-                $("#Crear #astCuota").css("color", "black");
-            }
     }
 });
 //Cuota Editar
@@ -363,17 +323,6 @@ $('#Editar #dei_Cuota').blur(function () {
 
         let cuo = parseFloat(valor).toFixed(2);
         let mi = parseFloat(montoInicial).toFixed(2);
-        if (esMayorCero)
-            if (cuo > mi) {
-                $("#Editar #valCuotaMayor").html('Campo Cuota no puede ser mayor que el monto inicial');
-                $("#Editar #valCuotaMayor").css("display", "");
-                $("#Editar #astCuota").css("color", "red");
-                hayAlgo = false;
-            } else {
-                hayAlgo = false;
-                $("#Editar #valCuotaMayor").css("display", "none");
-                $("#Editar #astCuota").css("color", "black");
-            }
     }
 });
 //#endregion
@@ -475,18 +424,6 @@ function estaTodoValidado(modal) {
     }
 
     //Validar si monto restante es mayor que monto inicial
-    if (hayAlgoEnMontoInicial && hayAlgoEnMontoRestante)
-        if (dei_MontoRestante > dei_MontoInicial) {
-            $("#" + modal + " #valMontoRestanteMayor").html('El campo monto restante no puede ser mayor que monto inicial.');
-            $("#" + modal + " #valMontoRestanteMayor").show();
-            $("#" + modal + " #astMontoRestante").css("color", "red");
-            estaBien = false;
-        }
-        else {
-            $("#" + modal + "#valMontoRestanteMayor").css("display", "none");
-            $("#" + modal + "#astMontoInicial").css("color", "black");
-
-        }
     //#endregion
 
     let hayAlgoCuota = false;

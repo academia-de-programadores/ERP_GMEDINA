@@ -32,63 +32,72 @@ namespace ERP_GMEDINA.Controllers
 		#region POST: INSERT 
 		public JsonResult InsertDecimoTercerMes(List<tbDecimoTercerMes> DecimoTercer)
 		{
-			using (var dbContextTransaction = db.Database.BeginTransaction())
-			{
-				try
-				{
-					IEnumerable<object> list = null;
-					string MessageError = "";
+            if (DecimoTercer != null)
+            {
 
-					//se construyen los lotes dependiendo de la cantidad de registros que reciba el controlador
-					if (DecimoTercer.Count == 0)
-						return Json("No hay registros en el objeto", JsonRequestBehavior.AllowGet);
-					int CantidadRegistros = DecimoTercer.Count;
-					//Declaración y validación del Número de lotes
-					int NúmeroLotes = (CantidadRegistros <= 1) ? 1 :
-									  (CantidadRegistros <= 10) ? 5 :
-									  (CantidadRegistros <= 50) ? 10 :
-									  (CantidadRegistros <= 100) ? 20 :
-									  (CantidadRegistros <= 500) ? 50 :
-									  (CantidadRegistros > 500 || CantidadRegistros <= 1000) ? 100 : 0;
 
-					int i = 0;
-					//Ciclo para insertar los registros.
-					foreach (tbDecimoTercerMes DC in DecimoTercer)
-					{
-						i++;
-						list = db.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        IEnumerable<object> list = null;
+                        string MessageError = "";
 
-						//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP                                                  
-						foreach (UDP_Plani_tbDecimoTercerMes_Insert_Result resultado in list)
-							MessageError = Convert.ToString(resultado);
+                        //se construyen los lotes dependiendo de la cantidad de registros que reciba el controlador
+                        if (DecimoTercer.Count == 0)
+                            return Json("No hay registros en el objeto", JsonRequestBehavior.AllowGet);
+                        int CantidadRegistros = DecimoTercer.Count;
+                        //Declaración y validación del Número de lotes
+                        int NúmeroLotes = (CantidadRegistros <= 1) ? 1 :
+                                          (CantidadRegistros <= 10) ? 5 :
+                                          (CantidadRegistros <= 50) ? 10 :
+                                          (CantidadRegistros <= 100) ? 20 :
+                                          (CantidadRegistros <= 500) ? 50 :
+                                          (CantidadRegistros > 500 || CantidadRegistros <= 1000) ? 100 : 0;
 
-						if (MessageError.StartsWith("-1"))
-							return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+                        int i = 0;
+                        //Ciclo para insertar los registros.
+                        foreach (tbDecimoTercerMes DC in DecimoTercer)
+                        {
+                            i++;
+                            list = db.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
 
-						if (i % NúmeroLotes == 0)
-							db.SaveChanges();
-					}
+                            //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP                                                  
+                            foreach (UDP_Plani_tbDecimoTercerMes_Insert_Result resultado in list)
+                                MessageError = Convert.ToString(resultado);
 
-					dbContextTransaction.Commit();
-				}
-				catch
-				{
-					try
-					{
-						dbContextTransaction.Rollback();
-					}
-					catch(System.Data.Entity.Core.EntityException)
-					{
-						return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
-					}
-					
-					return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
-				}
+                            if (MessageError.StartsWith("-1"))
+                                return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
 
-			}
+                            if (i % NúmeroLotes == 0)
+                                db.SaveChanges();
+                        }
 
-			int RegistrosInsertados = db.SaveChanges();
-			return Json(RegistrosInsertados);
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            dbContextTransaction.Rollback();
+                        }
+                        catch (System.Data.Entity.Core.EntityException)
+                        {
+                            return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+                        }
+
+                        return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+
+                int RegistrosInsertados = db.SaveChanges();
+                return Json(RegistrosInsertados);
+            }
+            else
+            {
+                return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+            }
 		}
 		#endregion
 

@@ -69,6 +69,11 @@ namespace ERP_GMEDINA.Controllers
             string nombreUsuario = oUsuario.usu_NombreUsuario;
             parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
+
+            var titulo = (from D in db.tbCatalogoDeDeducciones where D.cde_IdDeducciones == cde_IdDeducciones select D).First().cde_DescripcionDeduccion; 
+            string oTitulo = titulo.ToString();
+            parameters.Add(new ReportParameter("titulo", oTitulo));
+
             reportViewer.LocalReport.SetParameters(parameters);
             reportViewer.LocalReport.Refresh();
 
@@ -132,6 +137,10 @@ namespace ERP_GMEDINA.Controllers
             var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
             string nombreUsuario = oUsuario.usu_NombreUsuario;
             parameters.Add(new ReportParameter("usuario", nombreUsuario));
+
+            var titulo = (from D in db.tbCatalogoDeIngresos where D.cin_IdIngreso == cin_IdIngreso select D).First().cin_DescripcionIngreso;
+            string oTitulo = titulo.ToString();
+            parameters.Add(new ReportParameter("titulo", oTitulo));
 
             reportViewer.LocalReport.SetParameters(parameters);
             reportViewer.LocalReport.Refresh();
@@ -414,8 +423,9 @@ namespace ERP_GMEDINA.Controllers
 			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
 			string nombreUsuario = oUsuario.usu_NombreUsuario;
 			parameters.Add(new ReportParameter("usuario", nombreUsuario));
+                       
 
-			reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.LocalReport.SetParameters(parameters);
 			reportViewer.LocalReport.Refresh();
 
 			ViewBag.ReportViewer = reportViewer;            

@@ -25,7 +25,7 @@
                         Monto<label class="" id="AsteriscoMontoEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "aisr_Monto", @autocomplete = "off" } })
+                        @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad soloNumero", @id = "aisr_Monto", @autocomplete = "off" } })
                         <span class="text-danger" id="validation_EditarMontoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                     </div>
                 </div>

@@ -366,11 +366,20 @@ function ValidarCamposEditar(colaborador, Ingreso, monto) {
             $("#Editar #cb_Monto").val(monto.substring(0, FirstChar + 1));
         }
 
-        if (monto == null || monto == '' || monto == ' ' || monto == '  ' || parseFloat(monto) == 0.00 || monto == "0.00") {
+        if (parseFloat(FormatearMonto(monto)) < 0)
+        {
+            $('#Editar #Validation_Monto').empty();
+            $('#Editar #Validation_Monto').html("El campo monto no puede ser menor a cero.");
+            $('#Editar #Validation_Monto').show();
+            $("#Editar #AsteriscoMonto").addClass("text-danger");
+        }
+        else if (monto == null || monto == '' || monto == ' ' || monto == '  ' || parseFloat(FormatearMonto(monto)) == 0.00 || monto == "0.00") {
             pasoValidacion = false;
             if (monto == ' ')
                 $("#Editar #cb_Monto").val("");
 
+            $('#Editar #Validation_Monto').empty();
+            $('#Editar #Validation_Monto').html("El campo monto es requerido.");
             $('#Editar #Validation_Monto').show();
             $("#Editar #AsteriscoMonto").addClass("text-danger");
         } else {
@@ -781,3 +790,21 @@ $("#btactivarNO").click(function () {
     $("#ActivarEmpleadoBonos").modal('hide');
 });
  
+
+
+//FUNCION: FORMATEAR MONTOS A DECIMAL 
+function FormatearMonto(StringValue) {
+    //SEGMENTAR LA CADENA DE MONTO
+    var indices = StringValue.split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i <= indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateado = parseFloat(MontoFormateado);
+    //RETORNAR MONTO FORMATEADO
+    return MontoFormateado;
+}

@@ -33,6 +33,7 @@
                                 <th>@Html.DisplayNameFor(model => model.ini_Motivo)</th>
                                 <th>@Html.DisplayNameFor(model => model.emp_Id)</th>
                                 <th>@Html.DisplayNameFor(model => model.ini_Monto)</th>
+                                <th>Pagado</th>
                                 <th>@Html.DisplayNameFor(model => model.ini_Activo)</th>
                                 <th>Acciones</th>
                             </tr>
@@ -43,6 +44,9 @@
                            <!-- validar el estado del registro (activo/inactivo)-->
                                 string estadoIngresosIndividuales = item.ini_Activo == false ? "Inactivo" : "Activo";
                                 <tr class="gradeA odd" role="row" data-id="@item.ini_IdIngresosIndividuales">
+                                    @{
+                                        bool check = (item.ini_Pagado == false) ? false : true;
+                                     }
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ini_IdIngresosIndividuales)
                                     </td>
@@ -50,9 +54,13 @@
                                         @Html.DisplayFor(modelItem => item.ini_Motivo)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)</td>
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ini_Monto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => check)
                                     </td>
                                     <td>
                                         @estadoIngresosIndividuales
@@ -124,11 +132,11 @@
             <div class="modal-footer">
                 <input type="button" id="btnEditIngresoIndividual2" value="Si" class="btn btn-primary " />
                 <button type="button" class="btn btn-white" id="btnRegresar">No</button>
-                
-                </div>
+
             </div>
         </div>
     </div>
+</div>
 
 
 @*Detalles*@
@@ -157,7 +165,7 @@
                 ¿Esta seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="btnInactivarRegistroIngresoIndividual">Si</button>    
+                <button type="button" class="btn btn-danger" id="btnInactivarRegistroIngresoIndividual">Si</button>
                 <button type="button" class="btn btn-white pull-right" id="btnBack">No</button>
             </div>
         </div>
@@ -175,7 +183,7 @@
                 ¿Esta seguro que desea activar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"  id="btnActivarRegistroIngresoIndividual">Si</button>
+                <button type="button" class="btn btn-primary" id="btnActivarRegistroIngresoIndividual">Si</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>

@@ -136,7 +136,6 @@ $('#dex_MontoRestante').blur(function () {
                 $("#valMontoRestante").hide()
                 $("#asteriscoMontoRestante").removeClass('text-danger');
             }
-
     }
 });
 
@@ -299,6 +298,7 @@ function validaciones(equipoEmpId,
     observaciones,
     idDeduccion,
     cuota) {
+    debugger;
     var todoBien = true;
     let equipoEmpleadoId = equipoEmpId.val();
     //Equipo Empleado
@@ -322,8 +322,9 @@ function validaciones(equipoEmpId,
         $("#asteriscoMontoInicial").addClass('text-danger');
         todoBien = false;
     } else {
-        asteriscoMontoInicial.removeClass('text-danger');
-        validacionMontoInicial.hide();
+        $("#valMontoInicial").html('');
+        $("#valMontoInicial").hide();
+        $("#asteriscoMontoInicial").removeClass('text-danger');
         hayAlgoMontoInicial = true;
     }
 
@@ -340,9 +341,11 @@ function validaciones(equipoEmpId,
             $("#asteriscoMontoInicial").removeClass('text-danger');
         }
     }
+
     let hayAlgoMontoRestante = false;
     // Monto Restante
-    if (montoRestante != '') {
+    let valorMontoRestante = montoRestante.val()
+    if (valorMontoRestante != "") {
         $("#valMontoRestante").html('');
         $("#valMontoRestante").hide();
         hayAlgoMontoRestante = true
@@ -353,21 +356,37 @@ function validaciones(equipoEmpId,
         $("#asteriscoMontoRestante").addClass('text-danger');
         todoBien = false;
     }
-    debugger;
+
     montoRestante = montoRestante.val().replace(/,/g, "");
     let compararMontoInial = montoInicial.replace(/,/g, "");
-    if (hayAlgoMontoRestante)
-        if (montoRestante > compararMontoInial) {
-            $("#valMontoRestante").html('El campo Monto Restante no puede ser mayor que Monto Inicial.');
+    if (hayAlgoMontoRestante) {
+        let esMayorCero = false;
+        if (montoRestante < 0 || montoRestante == 0.0) {
+            $("#valMontoRestante").html('El campo Monto Restante no puede ser menor o igual que cero.');
             $("#valMontoRestante").show();
-            $("#asteriscoMontoRestante").addClass('text-danger')
-            todoBien = false;
-        }
-        else {
+            $("#asteriscoMontoRestante").addClass('text-danger');
+        } else {
+            esMayorCero = true;
             $("#valMontoRestante").html('');
-            $("#valMontoRestante").hide();
+            $("#valMontoRestante").hide()
             $("#asteriscoMontoRestante").removeClass('text-danger');
         }
+
+        if (esMayorCero)
+            if (montoRestante > compararMontoInial) {
+                $("#valMontoRestante").html('El campo Monto Restante no puede ser mayor que Monto Inicial.');
+                $("#valMontoRestante").show();
+                $("#asteriscoMontoRestante").addClass('text-danger')
+                todoBien = false;
+            }
+            else {
+                $("#valMontoRestante").html('');
+                $("#valMontoRestante").hide();
+                $("#asteriscoMontoRestante").removeClass('text-danger');
+            }
+    }
+
+
 
     // Observaciones
     if (observaciones.val().trim() != '') {
@@ -441,82 +460,6 @@ function validaciones(equipoEmpId,
     }
     return todoBien;
 }
-
-function validacionEditar(
-    MontoInicial,
-    MontoRestante,
-    Observaciones,
-    Cuota) {
-    var todoCorrecto = true;
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-
-
-    // Monto inicial
-    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
-        asteriscMontoInicial.removeClass('text-danger');
-        validMontoInicial.hide();
-
-        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
-            asteriscMontoInicial.removeClass('text-danger');
-            validMontoInicial.hide();
-        }
-        else {
-            asteriscMontoInicial.addClass('text-danger');
-            validMontoInicial.show();
-            todoBien = false;
-        }
-    } else {
-        asteriscMontoInicial.addClass('text-danger');
-        validMontoInicial.show();
-        todoBien = false;
-    }
-
-    // Monto Restante
-
-    if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
-        asteriscMontoRestante.removeClass('text-danger');
-        validMontoRestante.hide();
-        if (MontoRestante.val() < MontoInicial.val()) {
-            asteriscMontoRestante.removeClass('text-danger');
-            MontoRestanteEditar.hide();
-        }
-        else {
-            asteriscMontoRestante.addClass('text-danger');
-            MontoRestanteEditar.show();
-            todoCorrecto = false;
-        }
-
-    } else {
-        asteriscMontoRestante.addClass('text-danger');
-        validMontoRestante.show();
-        todoCorrecto = false;
-
-    }
-
-
-
-    // Observaciones
-    if (Observaciones.val() != '') {
-        validObservaciones.hide();
-        asteriscObservaciones.removeClass('text-danger');
-    } else {
-        asteriscObservaciones.addClass('text-danger');
-        validObservaciones.show();
-        todoCorrecto = false;
-    }
-
-    // Cuota
-    if (Cuota.val() != '') {
-        asteriscCuota.removeClass('text-danger');
-        validCuota.hide();
-    } else {
-        asteriscCuota.addClass('text-danger');
-        validCuota.show();
-        todoCorrecto = false;
-    }
-    return todoCorrecto;
-}
-
 //#endregion
 
 //#region Activar
@@ -574,15 +517,24 @@ $("#btnCerrarCreate").click(function () {
 });
 
 
+
 $(btnAgregar).click(function () {
+    var data2 = $("#frmCreate").serializeArray();
+    console.table(data2);
     if (validaciones(equipoEmpId,
         montoInicial,
         montoRestante,
         observaciones,
         idDeduccion,
         cuota
+
     )) {
+        debugger;
         var data = $("#frmCreate").serializeArray();
+        data[2].value = data[2].value.replace(/,/g, '');
+        data[6].value = data[6].value.replace(/,/g, '');
+        data[3].value = data[3].value.replace(/,/g, '');
+        console.table(data);
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -621,14 +573,19 @@ $(btnAgregar).click(function () {
 //#region Editar
 //Editar
 $(btnEditar).click(function () {
+    document.getElementById("btnEditar").disabled = true;
     if (validaciones(equipoEmpIdEdit,
         montoInicial,
         montoRestante,
         observaciones,
         idDeduccion,
         cuota
-    )) {
+    ) === true) {
+        debugger;
         var data = $("#frmEditar").serializeArray();
+        data[2].value = data[2].value.replace(/,/g, '');
+        data[6].value = data[6].value.replace(/,/g, '');
+        data[3].value = data[3].value.replace(/,/g, '');
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/DeduccionesExtraordinarias/Edit",
@@ -654,12 +611,9 @@ $(btnEditar).click(function () {
             }
 
         });
+        // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
 
     }
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmEdit").submit(function (e) {
-        return false;
-    });
     document.getElementById("btnEditar").disabled = false;
 });
 //#endregion

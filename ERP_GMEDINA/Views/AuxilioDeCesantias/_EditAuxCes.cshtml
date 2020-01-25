@@ -23,7 +23,7 @@
                             @Html.LabelFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })<span class="asterisco" id="EditAsteriscoRangoInicio">*</span>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros", @type = "text", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros soloNumero", @type = "text", @autocomplete = "off" } })
                             <span class="text-danger" id="validation_EditRangoInicioMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango inicio no puede ser menor a cero</span>
                             <span class="text-danger" id="validation_EditRangoInicioRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                         </div>
@@ -35,7 +35,7 @@
                             @Html.LabelFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="EditAsteriscoRangoFinal">*</label>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros", @type = "text", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros soloNumero", @type = "text", @autocomplete = "off" } })
                             <span class="text-danger" id="validation_EditRangoFinalMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
                             <span class="text-danger" id="validation_EditRangoFinalRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                             <span class="text-danger" id="validation_EditRangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
@@ -48,7 +48,7 @@
                             @Html.LabelFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="EditAsteriscoCantidadDia">*</label>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros", @type="text", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros soloNumero", @type="text", @autocomplete = "off" } })
                             <span class="text-danger" id="validation_EditCantidadDiasMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
                             <span class="text-danger" id="validation_EditCantidadDiasRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                         </div>

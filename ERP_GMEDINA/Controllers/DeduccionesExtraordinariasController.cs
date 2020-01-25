@@ -74,7 +74,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //Para llenar los campos de auditoria
             tbDeduccionesExtraordinarias.dex_UsuarioCrea = 1;
-            tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
+             tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
 
             //Variable para enviar y validar en el FrontEnd
             string Response = String.Empty;

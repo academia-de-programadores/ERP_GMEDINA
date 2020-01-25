@@ -516,6 +516,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
     console.log("entra");
     if (RangoInicial != "-1") {
         //RANGO INICIAL
+
         if (parseFloat(FormatearMonto(RangoInicial)) >= parseFloat(FormatearMonto($("#Crear #isr_RangoFinal").val()))) {
             $("#Crear #AsteriscoRangoFinal").addClass("text-danger");
             $("#Crear #isr_RangoFinalValidacion").empty();
@@ -529,6 +530,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
             $("#Crear #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
             $("#Crear #isr_RangoFinalValidacion").hide();
         }
+
         if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined) {
             $("#Crear #AsteriscoRangoInicial").addClass("text-danger");
             $("#Crear #isr_RangoInicialValidacion").show();
@@ -564,7 +566,8 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
         } else {
             $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
             $("#Crear #isr_RangoFinalValidacion").hide();
-            if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Crear #isr_RangoInicial").val()))) {
+
+            if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Crear #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
                 $("#Crear #AsteriscoRangoFinal").addClass("text-danger");
                 $("#Crear #isr_RangoFinalValidacion").empty();
                 $("#Crear #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
@@ -576,6 +579,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
                 $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
                 $("#Crear #isr_RangoFinalValidacion").hide();
             }
+
         }
     }
 
@@ -639,8 +643,8 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
     var ModelState = true;
 
     if (RangoInicial != "-1") {
-        if (parseFloat(FormatearMonto(RangoInicial)) >= parseFloat(FormatearMonto($("#Editar #isr_RangoFinal").val()))) {
 
+        if (parseFloat(FormatearMonto(RangoInicial)) >= parseFloat(FormatearMonto($("#Editar #isr_RangoFinal").val()))) {
             $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
             $("#Editar #isr_RangoFinalValidacion").empty();
             $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
@@ -653,6 +657,7 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
             $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
             $("#Editar #isr_RangoFinalValidacion").hide();
         }
+
         //RANGO INICIAL
         if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined) {
             $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
@@ -688,7 +693,8 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
         } else {
             $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
             $("#Editar #isr_RangoFinalValidacion").hide();
-            if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Crear #isr_RangoInicial").val()))) {
+
+            if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Editar #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
 
                 $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
                 $("#Editar #isr_RangoFinalValidacion").empty();
@@ -701,6 +707,7 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
                 $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
                 $("#Editar #isr_RangoFinalValidacion").hide();
             }
+
         }
     }
 

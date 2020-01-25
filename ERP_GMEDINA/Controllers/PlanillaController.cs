@@ -90,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
                             List<tbEmpleados> oEmpleados = db.tbEmpleados.Where(emp => emp.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla && emp.emp_Estado == true).ToList();
 
                             int contador = 1;
+                            int idHistorialPago = 0;
                             int idDetalleDeduccionHisotorialesContador = 1;
                             int idDetalleIngresoHisotorialesContador = 1;
                             //procesar planilla empleado por empleado
@@ -977,8 +978,14 @@ namespace ERP_GMEDINA.Controllers
 
                                         #region guardar en el historial de pago                                     
 
+                                        idHistorialPago = db.tbHistorialDePago
+                                                          .Select(x => x.hipa_IdHistorialDePago)
+                                                          .DefaultIfEmpty(0)
+                                                          .Max();
+                                        
+
                                         tbHistorialDePago oHistorialPagoEncabezado = new tbHistorialDePago();
-                                        oHistorialPagoEncabezado.hipa_IdHistorialDePago = db.tbHistorialDePago.Max(x => x.hipa_IdHistorialDePago) + contador;
+                                        oHistorialPagoEncabezado.hipa_IdHistorialDePago = idHistorialPago + contador;
                                         oHistorialPagoEncabezado.emp_Id = empleadoActual.emp_Id;
                                         oHistorialPagoEncabezado.hipa_SueldoNeto = Math.Round((decimal)netoAPagarColaborador, 2);
                                         oHistorialPagoEncabezado.hipa_FechaInicio = fechaInicio;
@@ -1042,8 +1049,12 @@ namespace ERP_GMEDINA.Controllers
                                             //guardar en el detalle de deducciones del historial de pago
                                             foreach (var hisorialDeduccioneIterado in lisHistorialDeducciones)
                                             {
-                                                int idDetalle = db.tbHistorialDeduccionPago.DefaultIfEmpty().Max(x => x.hidp_IdHistorialdeDeduPago);
-                                                hisorialDeduccioneIterado.hidp_IdHistorialdeDeduPago = idDetalle != null ? idDetalle + idDetalleDeduccionHisotorialesContador : 1;
+                                                int idDetalle = db.tbHistorialDeduccionPago
+                                                                  .Select(x => x.hidp_IdHistorialdeDeduPago)
+                                                                  .DefaultIfEmpty(0)
+                                                                  .Max();
+                                                
+                                                hisorialDeduccioneIterado.hidp_IdHistorialdeDeduPago = idDetalle + idDetalleDeduccionHisotorialesContador ;
                                                 hisorialDeduccioneIterado.hipa_IdHistorialDePago = int.Parse(MensajeError);
                                                 hisorialDeduccioneIterado.hidp_UsuarioCrea = 1;
                                                 hisorialDeduccioneIterado.hidp_FechaCrea = DateTime.Now;
@@ -1054,8 +1065,12 @@ namespace ERP_GMEDINA.Controllers
                                             //guardar en el detalle de ingresos del historial de pago
                                             foreach (var hisorialIngresosIterado in lisHistorialIngresos)
                                             {
-                                                int idDetalle = db.tbHistorialDeIngresosPago.DefaultIfEmpty().Max(x => x.hip_IdHistorialDeIngresosPago);
-                                                hisorialIngresosIterado.hip_IdHistorialDeIngresosPago = idDetalle != null ? idDetalle + idDetalleIngresoHisotorialesContador : 1;
+                                                int idDetalle = db.tbHistorialDeIngresosPago
+                                                                  .Select(x => x.hip_IdHistorialDeIngresosPago)
+                                                                  .DefaultIfEmpty(0)
+                                                                  .Max();
+
+                                                hisorialIngresosIterado.hip_IdHistorialDeIngresosPago = idDetalle + idDetalleIngresoHisotorialesContador;
                                                 hisorialIngresosIterado.hipa_IdHistorialDePago = int.Parse(MensajeError);
                                                 hisorialIngresosIterado.hip_FechaInicio = fechaInicio;
                                                 hisorialIngresosIterado.hip_FechaFinal = fechaFin;

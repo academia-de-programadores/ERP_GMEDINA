@@ -35,6 +35,7 @@ namespace ERP_GMEDINA.Controllers
                     per_Nombres = d.tbEmpleados.tbPersonas.per_Nombres,
                     per_Apellidos = d.tbEmpleados.tbPersonas.per_Apellidos,
                     ini_Monto = d.ini_Monto,
+                    ini_Pagado = d.ini_Pagado,
                     ini_PagaSiempre = d.ini_PagaSiempre,
                     ini_Activo = d.ini_Activo,
                     ini_UsuarioCrea = d.ini_UsuarioCrea,
@@ -59,6 +60,7 @@ namespace ERP_GMEDINA.Controllers
                 ini_Motivo = ini_Motivo,
                 emp_Id = emp_Id,
                 ini_Monto = ini_Monto,
+                ini_Pagado = false,
                 ini_PagaSiempre = ini_PagaSiempre
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
@@ -80,7 +82,8 @@ namespace ERP_GMEDINA.Controllers
                                                                                           tbIngresosIndividuales.ini_Pagado,
                                                                                           tbIngresosIndividuales.ini_PagaSiempre,
                                                                                           tbIngresosIndividuales.ini_UsuarioCrea,
-                                                                                          tbIngresosIndividuales.ini_FechaCrea);                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                                                                                          tbIngresosIndividuales.ini_FechaCrea);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbIngresosIndividuales_Insert_Result Resultado in listIngresosIndividuales)
                         MensajeError = Resultado.MensajeError;
 

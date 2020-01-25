@@ -31,7 +31,7 @@
 							<div class="col-md-6">
 								<label class="font-normal">Fecha Pago</label>
 								<div class="input-group date">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.dcm_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "dtm_FechaPago", @id = "dtm_FechaPago" } })
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.dcm_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "dtm_FechaPago", @id = "dtm_FechaPago", @min = "1950-01-01", @max = "9999-01-01" } })
 								</div>
 								@Html.ValidationMessageFor(model => model.dcm_FechaPago, "", new { @class = "text-danger" })
 							</div>

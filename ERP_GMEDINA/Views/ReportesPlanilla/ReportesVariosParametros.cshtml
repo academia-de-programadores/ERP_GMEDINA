@@ -44,7 +44,7 @@
 							<div class="col-md-6">
 								<label class="font-normal">Fecha inicio</label>
 								<div class="input-group date">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio" } })
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio", @min = "1950-01-01", @max = "9999-01-01" } })
 								</div>
 								@Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
 							</div>
@@ -52,7 +52,7 @@
 								<label class="font-normal">Fecha fin</label>
 
 								<div class="input-group date">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin" } })
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin", @min = "1950-01-01", @max = "9999-01-01" } })
 								</div>
 
 								@Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })

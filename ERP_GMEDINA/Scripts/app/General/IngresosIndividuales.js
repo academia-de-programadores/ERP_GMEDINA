@@ -48,9 +48,10 @@ function cargarGridDeducciones() {
 
             //LIMPIAR LA DATA DEL DATATABLE
             $('#IndexTable').DataTable().clear();
-
+            
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
+                console.log(ListaIngresoIndividual[i].ini_Pagado);
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo';
 
@@ -63,12 +64,23 @@ function cargarGridDeducciones() {
                 //variable donde está el boton activar
                 var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
 
+                //VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
+                var Check = "";
+                //ESTA VARIABLE GUARDA CODIGO HTML DE UN CHECKBOX, PARA ENVIARLO A LA TABLA
+                if (ListaIngresoIndividual[i].ini_Pagado == true) {
+                    Check = '<input type="checkbox" id="ini_Pagado" name="ini_Pagado" checked disabled>'; //SE LLENA LA VARIABLE CON UN INPUT CHEQUEADO
+                } else {
+                    Check = '<input type="checkbox" id="ini_Pagado" name="ini_Pagado" disabled>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
+                }
+
+
                 //AGREGAR EL ROW AL DATATABLE
                 $('#IndexTable').dataTable().fnAddData([
                     ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
                     ListaIngresoIndividual[i].ini_Motivo,
                     ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
                     (ListaIngresoIndividual[i].ini_Monto % 1 == 0) ? ListaIngresoIndividual[i].ini_Monto + ".00" : ListaIngresoIndividual[i].ini_Monto,
+                    Check,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
@@ -208,18 +220,6 @@ function ValidarCamposCrear(Motivo, IdEmp, Monto) {
     else
         $("#Crear #ini_Monto").attr("disabled", false);  //DESBLOQUEAR EL CAMPO MONTO
 
-    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-    var indices = $("#Crear #ini_Monto").val().split(",");
-    //VARIABLE CONTENEDORA DEL MONTO
-    var MontoFormateado = "";
-    //ITERAR LOS INDICES DEL ARRAY MONTO
-    for (var i = 0; i < indices.length; i++) {
-        //SETEAR LA VARIABLE DE MONTO
-        MontoFormateado += indices[i];
-    }
-    //FORMATEAR A DECIMAL
-    MontoFormateado = parseFloat(MontoFormateado);
-
     //VALIDACIONES DEL CAMPO EMP_ID
     if (IdEmp != "-1") {
         if (IdEmp == 0) {
@@ -258,7 +258,20 @@ function ValidarCamposCrear(Motivo, IdEmp, Monto) {
 
     //VALIDACIONES DEL CAMPO MONTO
     if (Monto != "-1") {
-        if (Monto == "" || Monto == null || Monto == undefined) {
+        //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+        var indices = $("#Crear #ini_Monto").val().split(",");
+        //VARIABLE CONTENEDORA DEL MONTO
+        var MontoFormateado = "";
+        //ITERAR LOS INDICES DEL ARRAY MONTO
+        for (var i = 0; i < indices.length; i++) {
+            //SETEAR LA VARIABLE DE MONTO
+            MontoFormateado += indices[i];
+        }
+        //FORMATEAR A DECIMAL
+        MontoFormateado = parseFloat(MontoFormateado);
+
+
+        if (MontoFormateado == "" || MontoFormateado == null || MontoFormateado == undefined) {
             pasoValidacionCrear = false;
             $("#Crear #ast3").removeClass("text-danger");
             $("#Crear #Validation_Monto3").css("display", "none");
@@ -269,7 +282,7 @@ function ValidarCamposCrear(Motivo, IdEmp, Monto) {
         } else {
             $("#Crear #ast3").removeClass("text-danger");
             $("#Crear #Validation_Monto2").css("display", "none");
-            if (Monto <= 0) {
+            if (MontoFormateado <= 0) {
                 pasoValidacionCrear = false;
                 $("#Crear #ast3").addClass("text-danger");
                 $("#Crear #Validation_Monto3").css("display", "");
@@ -289,9 +302,9 @@ function OcultarValidaciones() {
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
     $("#ini_PagaSiempre").prop('checked', false);
-    $("#ast1").css("color", "black");
-    $("#ast2").css("color", "black");
-    $("#ast3").css("color", "black");
+    $("#ast1").removeClass("text-danger");
+    $("#ast2").removeClass("text-danger");
+    $("#ast3").removeClass("text-danger");
     $("#Validation_Motivo").css("display", "none");
     $("#validatione_empleadoID").css("display", "none");
     $("#Validation_Monto2").css("display", "none");

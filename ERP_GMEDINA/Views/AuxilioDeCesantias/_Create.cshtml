@@ -8,7 +8,7 @@
 				<div class="col-md-6">
 					Rango Inicio (Meses)<label class="asterisco" id="AsteriscoRangoInicio">*</label>
 
-					@Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros", @type = "text", @name = "aces_RangoInicioMeses", @step = "1", @autocomplete="off", @id = "aces_RangoInicioMeses" } })
+					@Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @name = "aces_RangoInicioMeses", @step = "1", @autocomplete="off", @id = "aces_RangoInicioMeses" } })
                     <span class="text-danger" id="validation_RangoInicioMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango inicio no puede ser menor a cero</span>
                     <span class="text-danger" id="validation_RangoInicioRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
 					
@@ -16,7 +16,7 @@
 				<div class="col-md-6">
 					Rango Fin (Meses)<label class="asterisco" id="AsteriscoRangoFinal">*</label>
 
-					@Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros", @type = "text", @name = "aces_RangoFinMeses", @step = "1", @id = "aces_RangoFinMeses", @autocomplete = "off" } })
+					@Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @name = "aces_RangoFinMeses", @step = "1", @id = "aces_RangoFinMeses", @autocomplete = "off" } })
                     <span class="text-danger" id="validation_RangoFinalMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
                     <span class="text-danger" id="validation_RangoFinalRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                     <span class="text-danger" id="validation_RangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					Auxilio Cesantía (Días)<label class="asterisco" id="AsteriscoCantidadDia">*</label>
-					@Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control MascaraEnteros", @type = "text", @name = "aces_DiasAuxilioCesantia", @autocomplete = "off", @step = "1", @id = "aces_DiasAuxilioCesantia" } })
+					@Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @name = "aces_DiasAuxilioCesantia", @autocomplete = "off", @step = "1", @id = "aces_DiasAuxilioCesantia" } })
 
                     <span class="text-danger" id="validation_CantidadDiasMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
                     <span class="text-danger" id="validation_CantidadDiasRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>

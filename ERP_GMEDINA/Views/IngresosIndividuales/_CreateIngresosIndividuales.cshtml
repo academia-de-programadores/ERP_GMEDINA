@@ -33,7 +33,7 @@
                     @Html.LabelFor(model => model.ini_Monto)<label class="" id="ast3" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad", @id = "ini_Monto", @disabled = "disabled", @autocomplete = "off", onkeyup = "ValidarCamposCrear('-1', '-1', this.value)" } })
+                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad soloNumero", @id = "ini_Monto", @disabled = "disabled", @autocomplete = "off", onkeyup = "ValidarCamposCrear('-1', '-1', this.value)" } })
                     <div>@Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "Validation_monto" })</div>
                     <label class="text-danger" id="Validation_Monto2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto requerido</label>
                     <label class="text-danger" id="Validation_Monto3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Monto debe ser mayor que cero</label>

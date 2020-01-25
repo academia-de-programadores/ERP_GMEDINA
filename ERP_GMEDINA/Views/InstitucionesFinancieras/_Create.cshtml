@@ -48,7 +48,7 @@
                     <label class="" id="Asterisco_insf_Correo">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value)" } })
+                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control MascaraEmail", @type = "email" ,@onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value)" } })
                     <span class="text-danger" style="display:block;" id="Span_insf_Correo">El campo correo es requerido.</span>
                 </div>
             </div>
