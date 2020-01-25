@@ -21,7 +21,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.eqtra_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.eqtra_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+								@Html.EditorFor(model => model.eqtra_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
 								@Html.ValidationMessageFor(model => model.eqtra_Descripcion, "", new { @class = "text-danger", @id = "erroreqtra_Descripcion" })
                             </div>
                         </div>
