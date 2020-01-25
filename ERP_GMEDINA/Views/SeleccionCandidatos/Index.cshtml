@@ -73,7 +73,7 @@
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/SeleccionCandidatos")
 
-@if (Model.scan_Estado)
+@if ((bool)Session["Admin"])
 {
     @Scripts.Render("~/Scripts/app/General/SeleccionCandidatos/Admin")
 }

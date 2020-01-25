@@ -133,13 +133,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hamo_Id"]);
-                    MsgWarning("¡Exito!", "Se ha inactivado el registro");
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 
@@ -159,13 +159,13 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "tamo_Id","hamo_Fecha","hamo_Observacion"]);
-                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 

@@ -38,7 +38,7 @@ function compare_dates() {
     var fechalimite = '01/01/1900';
 
     if (Date.parse(Fecha) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha no valida");
+        MsgError("Error", "Fecha no válida");
     }
     else {
         return true;

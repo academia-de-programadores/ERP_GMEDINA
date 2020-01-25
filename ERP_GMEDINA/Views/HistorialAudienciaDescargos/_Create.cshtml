@@ -15,7 +15,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-control required valid",@onkeypress = "return alphanumeric(event)"} })
 								@Html.ValidationMessageFor(model => model.aude_Descripcion, "", new { @class = "text-danger", @id = "erroraude_Descripcion" })
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_Testigo, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-9">
-								<div class="checkbox">
+								<div class="checkbox col-md-12">
     								@Html.EditorFor(model => model.aude_Testigo,  new { htmlAttributes = new {  } })
     								@Html.ValidationMessageFor(model => model.aude_Testigo, "", new { @class = "text-danger", @id = "erroraude_Testigo" })
 									</div>

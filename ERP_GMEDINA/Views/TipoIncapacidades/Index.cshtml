@@ -71,7 +71,7 @@
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/TipoIncapacidades")
 
-@if (Model.ticn_Estado)
+@if ((bool)Session["Admin"])
 {
     @Scripts.Render("~/Scripts/app/general/TipoIncapacidades/Admin")
 }

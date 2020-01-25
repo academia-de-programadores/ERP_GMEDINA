@@ -17,21 +17,33 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             try
             {
-                //tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado = true };
+                Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+                try
+                {
+                    //tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                    return View(tbTipoIncapacidades);
+                }
+                catch (Exception ex)
+                {
+
+
+                    ex.Message.ToString();
+                    //tbTipoIncapacidades.Add(new tbTipoIncapacidades { ticn_Id = 0, ticn_Descripcion = "Fallo la conexión" });
+                }
                 return View(tbTipoIncapacidades);
             }
-            catch (Exception ex)
+           catch
             {
-
-
-                ex.Message.ToString();
-                //tbTipoIncapacidades.Add(new tbTipoIncapacidades { ticn_Id = 0, ticn_Descripcion = "Fallo la conexión" });
+                return View();
             }
-            return View(tbTipoIncapacidades);
         }
 
 

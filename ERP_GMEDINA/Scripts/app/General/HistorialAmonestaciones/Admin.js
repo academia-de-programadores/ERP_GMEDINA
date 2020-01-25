@@ -20,12 +20,12 @@ $("#btnActivar").click(function () {
                     CierraPopups();
                     llenarTabla(-1);
                     LimpiarControles(["txtIdRestore"]);
-                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                    MsgWarning("¡Éxito!", "El registro se activó de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró activar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });

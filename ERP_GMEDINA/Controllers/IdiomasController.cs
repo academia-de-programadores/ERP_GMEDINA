@@ -33,6 +33,11 @@ namespace ERP_GMEDINA.Controllers
         //}
         public ActionResult Index()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             tbIdiomas tbIdiomas = new tbIdiomas { idi_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
