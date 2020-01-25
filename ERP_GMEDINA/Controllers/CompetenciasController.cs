@@ -113,7 +113,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbCompetencias = db.tbCompetencias.Find(id);
-                if(tbCompetencias == null || !tbCompetencias.comp_Estado)
+                if(tbCompetencias == null )
                 {
                     return HttpNotFound();
                 }

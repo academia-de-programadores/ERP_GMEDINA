@@ -14,7 +14,7 @@ function tablaEditar(ID) {
         });
 }
 function tablaDetalles(ID) {
-    id = ID;
+    //id = ID;
     _ajax(null,
         '/TipoSalidas/Edit/' + ID,
         'GET',

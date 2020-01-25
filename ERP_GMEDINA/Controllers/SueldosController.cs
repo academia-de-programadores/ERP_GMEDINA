@@ -154,7 +154,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 VSueldos = db.tbSueldos.Find(id);
-                if (VSueldos == null || !VSueldos.sue_Estado)
+                if (VSueldos == null )
                 {
                     return HttpNotFound();
                 }

@@ -112,7 +112,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbtitulos = db.tbTitulos.Find(id);
-                if (tbtitulos == null || !tbtitulos.titu_Estado)
+                if (tbtitulos == null )
                 {
                     return HttpNotFound();
                 }

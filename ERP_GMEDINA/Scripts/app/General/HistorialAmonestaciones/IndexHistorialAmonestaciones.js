@@ -30,7 +30,7 @@ function format(obj) {
         }
         else
             {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>';
+            div += '<button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button> <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>';
             }       
         div += '</tr>' +
                     '</tbody>'

@@ -109,7 +109,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbTipoPermisos = db.tbTipoPermisos.Find(id);
-                if (tbTipoPermisos == null || !tbTipoPermisos.tper_Estado)
+                if (tbTipoPermisos == null )
                 {
                     return HttpNotFound();
                 }

@@ -261,7 +261,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbHistorialSalidas = db.tbHistorialSalidas.Find(id);
-                if (tbHistorialSalidas == null || !tbHistorialSalidas.hsal_Estado)
+                if (tbHistorialSalidas == null)
                 {
                     return HttpNotFound();
                 }
