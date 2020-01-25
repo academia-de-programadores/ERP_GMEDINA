@@ -95,7 +95,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbTipoHoras = db.tbTipoHoras.Find(id);
-                if (tbTipoHoras == null || !tbTipoHoras.tiho_Estado)
+                if (tbTipoHoras == null)
                 {
                     return HttpNotFound();
                 }
