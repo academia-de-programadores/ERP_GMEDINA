@@ -70,7 +70,7 @@
 @Scripts.Render("~/plugins/dataTablesMatutina")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/Competencias/Competencias")
-@if (Model.comp_Estado)
+@if ((bool)Session["Admin"])
 {
     @Scripts.Render("~/Scripts/app/General/Competencias/Admin")
 }
