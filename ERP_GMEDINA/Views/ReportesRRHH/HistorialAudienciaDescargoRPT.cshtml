@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reporte de Audiencias de Descargo</h5>
+                    <h5>Reporte de audiencias de descargo</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -20,8 +20,8 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Colaborador</label>
-                                @Html.DropDownList("per_Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAUDE, "Seleccione el colaborador", new { @id = "per_Identidad", @class = "form-control" })
+                                <label class="font-normal">Empleado</label>
+                                @Html.DropDownList("per_Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAUDE, "Seleccione el Empleado", new { @id = "per_Identidad", @class = "buscable form-control" })
 
                                 @Html.ValidationMessageFor(model => model.per_Identidad, "", new { @class = "text-danger" })
                             </div>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Inicio</label>
+                                <label class="font-normal">Fecha inicio</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechaAudiencia, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaInicio", @id = "fechaInicio" } })
                                 </div>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Fin</label>
+                                <label class="font-normal">Fecha fin</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaFin", @id = "fechaFin"} })
                                 </div>
@@ -63,24 +63,32 @@
 
 <div class="row" style="display:@visibilidadPreview;">
     <div class="col-lg-12  ibox-content">
-        <div class="float-e-margins ">
-            <div class="ibox-title">
-                <h5>Previsualización de reporte</h5>
-                <div class="ibox-tools">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="form-horizontal"></div>
+                <div class="ibox-title">
+                    <h5>Previsualización de reporte</h5>
+                    <br /><br />
+                    <div class="ibox-tools">
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-10 col-md-offset-1">
-                @{
-                    if (ViewBag.ReportViewer != null)
-                    {
-                        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                <div class="col-lg-10 ">
+                    @{
+                        if (ViewBag.ReportViewer != null)
+                        {
+                            @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                        }
                     }
-                }
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+@section Styles {
+    @Styles.Render("~/plugins/select2Styles")
+}
 @section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general_Fechas")
 }

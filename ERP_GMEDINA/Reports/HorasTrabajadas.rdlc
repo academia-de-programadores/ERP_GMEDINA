@@ -408,7 +408,7 @@
         <Top>0.55563cm</Top>
         <Left>1.11126cm</Left>
         <Height>1.2cm</Height>
-        <Width>23.99879cm</Width>
+        <Width>23.9988cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -479,9 +479,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
           <Top>0.31397cm</Top>
-          <Left>21.53094cm</Left>
+          <Left>20.95944cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.57911cm</Width>
+          <Width>4.15061cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>

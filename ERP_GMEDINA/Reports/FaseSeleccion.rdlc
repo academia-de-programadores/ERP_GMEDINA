@@ -6,7 +6,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>5.20917cm</Width>
+              <Width>6.19954cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>4.02384cm</Width>
@@ -15,7 +15,7 @@
               <Width>7.43799cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.48332cm</Width>
+              <Width>5.49295cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre</Value>
+                              <Value>Colaborador</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -103,7 +103,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Plaza Solicitada</Value>
+                              <Value>Plaza solicitada</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -331,9 +331,9 @@
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.44979cm</Top>
-        <Left>1.55599cm</Left>
+        <Left>2.39101cm</Left>
         <Height>1.2cm</Height>
-        <Width>23.15433cm</Width>
+        <Width>23.15432cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -344,10 +344,10 @@
     <Height>0.85in</Height>
     <Style />
   </Body>
-  <Width>9.72847in</Width>
+  <Width>10.05722in</Width>
   <Page>
     <PageHeader>
-      <Height>1.76099cm</Height>
+      <Height>1.44349cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -358,7 +358,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Fases de Selección</Value>
+                  <Value>Reporte sobre empleados según fase selección</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>
@@ -371,9 +371,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.36724cm</Top>
-          <Left>5.22343cm</Left>
-          <Height>1.39375cm</Height>
-          <Width>10.84652cm</Width>
+          <Left>2.39101cm</Left>
+          <Height>1.07625cm</Height>
+          <Width>16.70604cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -400,9 +400,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.36724cm</Top>
-          <Left>20.24711cm</Left>
+          <Left>19.27344cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.00271cm</Width>
+          <Width>3.97638cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>

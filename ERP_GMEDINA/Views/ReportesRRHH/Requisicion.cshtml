@@ -21,11 +21,11 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Requisicion</label>
+                                <label class="font-normal">Requisición</label>
 
-                                @Html.DropDownList("Id_Requisicion", (IEnumerable<SelectListItem>)ViewBag.Requisicion, "Seleccione una opción", new { @class = "form-control" })
+                                @Html.DropDownList("req_Id", (IEnumerable<SelectListItem>)ViewBag.Requisicion, "Seleccione una opción", new { @class = "form-control" })
 
-                                @Html.ValidationMessageFor(model => model.Id_Requisicion, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.req_Id, "", new { @class = "text-danger" })
                             </div>
 
 
@@ -35,9 +35,18 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha_Contratacion, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha_Contratacion", @id = "Fecha_Contratacion" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha_Contratacion", @id = "Fecha_Contratacion" } })
                                 </div>
-                                @Html.ValidationMessageFor(model => model.Fecha_Contratacion, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha_Contratacion", @id = "Fecha_Contratacion" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -65,7 +74,7 @@
                 <div class="ibox-tools">
                 </div>
             </div>
-            <div class="col-lg-10 col-md-offset-1">
+            <div class="col-lg-10 ">
                 @{
                     if (ViewBag.ReportViewer != null)
                     {

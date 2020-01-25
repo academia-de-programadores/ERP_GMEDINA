@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de Incapacidades</h5>
+                    <h5>Reportes de incapacidades</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Tipo De Incapacidad</label>
+                                <label class="font-normal">Tipo de incapacidad</label>
 
                                 @Html.DropDownList("ticn_Id", (IEnumerable<SelectListItem>)ViewBag.incapacidades, "Seleccione una opción", new { @class = "form-control" })
 
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Inicio</label>
+                                <label class="font-normal">Fecha inicio</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaInicio", @id = "fechaInicio" } })
                                 </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Fin</label>
+                                <label class="font-normal">Fecha fin</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaFin", @id = "fechaFin" } })
                                 </div>
@@ -70,7 +70,7 @@
                 <div class="ibox-tools">
                 </div>
             </div>
-            <div class="col-lg-10 col-md-offset-1">
+            <div class="col-lg-10 ">
                 @{
                     if (ViewBag.ReportViewer != null)
                     {
@@ -81,6 +81,10 @@
         </div>
     </div>
 </div>
+@section Styles {
+    @Styles.Render("~/plugins/select2Styles")
+}
 @section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general_Fechas")
 }

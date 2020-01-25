@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre Completo</Value>
+                              <Value>Nombre completo</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -139,7 +139,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Contratación</Value>
+                              <Value>Fecha contratación</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -347,7 +347,7 @@
   <Width>9.71668in</Width>
   <Page>
     <PageHeader>
-      <Height>0.4925in</Height>
+      <Height>0.53417in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -358,7 +358,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Contrataciones</Value>
+                  <Value>Reporte de contrataciones según cargo</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>
@@ -370,10 +370,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.0925in</Top>
-          <Left>2.58251in</Left>
+          <Top>0.13417in</Top>
+          <Left>1.69918in</Left>
           <Height>0.4in</Height>
-          <Width>3.8064in</Width>
+          <Width>5.14807in</Width>
           <Style>
             <Border>
               <Style>None</Style>
