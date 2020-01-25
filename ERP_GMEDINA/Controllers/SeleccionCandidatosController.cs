@@ -16,11 +16,7 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+
             var candidatosddl = db.V_SeleccionCandidatos.Where(x => x.Estado)
             .Select(
             t => new
@@ -86,7 +82,7 @@ namespace ERP_GMEDINA.Controllers
 
                 ex.Message.ToString();
             }
-            return View(tbSeleccionCandidatos);           
+            return View(tbSeleccionCandidatos);
         }
 
         public ActionResult llenarTabla()
@@ -171,7 +167,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-                if (tbSeleccionCandidatos == null || !tbSeleccionCandidatos.scan_Estado)
+                if (tbSeleccionCandidatos == null)
                 {
                     return HttpNotFound();
                 }
