@@ -67,12 +67,13 @@
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 @section Scripts {
-    @if (Model.nac_Estado)
-    {
-        @Scripts.Render("~/Scripts/app/General/Nacionalidades/Admin")
-    }
     @Scripts.Render("~/plugins/dataTablesMatutina")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/Nacionalidades")
+
+    @if ((bool)Session["Admin"])
+    {
+        @Scripts.Render("~/Scripts/app/general/Admin")
+    }
 
 }

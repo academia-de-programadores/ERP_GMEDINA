@@ -11,7 +11,7 @@ function format(obj) {
         '<thead>' +
             '<tr>' +
                 '<th>' + 'Número' + '</th>' +
-                '<th>' + 'Fase de Reclutamiento' + '</th>' +
+                '<th>' + 'Fase de reclutamiento' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
                 '</tr>' +
                 '</thead>';

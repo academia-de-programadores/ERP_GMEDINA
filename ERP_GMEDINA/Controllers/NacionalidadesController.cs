@@ -17,10 +17,12 @@ namespace ERP_GMEDINA.Controllers
         // GET: Nacionalidades
         public ActionResult Index()
         {
-            //bool Admin = (bool)Session["Admin"];
-            bool Admin = (bool)Session["Admin"];
-            tbNacionalidades tbNacionalidades = new tbNacionalidades { nac_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
+            tbNacionalidades tbNacionalidades = new tbNacionalidades { };
             return View(tbNacionalidades);
 
         }

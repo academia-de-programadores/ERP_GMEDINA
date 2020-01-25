@@ -67,13 +67,12 @@
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 @section Scripts {
-    @if (Model.tamo_Estado)
+    @if ((bool)Session["Admin"])
     {
-        @Scripts.Render("~/Scripts/app/General/TipoAmonestaciones/Admin")
+        @Scripts.Render("~/Scripts/app/General/TipoAmonestaciones/Admin.js")
     }
     @Scripts.Render("~/plugins/dataTablesMatutina")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/TipoAmonestaciones")
 
-}
 }
