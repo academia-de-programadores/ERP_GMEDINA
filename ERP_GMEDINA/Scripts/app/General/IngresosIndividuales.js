@@ -47,7 +47,7 @@ function cargarGridDeducciones() {
             var ListaIngresoIndividual = data;
 
             //LIMPIAR LA DATA DEL DATATABLE
-            $('#IndexTable').DataTable().clear();
+            $('#IndexTableIngresosIndividuales').DataTable().clear();
             
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
@@ -74,16 +74,16 @@ function cargarGridDeducciones() {
                 }
 
 
-                //AGREGAR EL ROW AL DATATABLE
-                $('#IndexTable').dataTable().fnAddData([
-                    ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
-                    ListaIngresoIndividual[i].ini_Motivo,
-                    ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
-                    (ListaIngresoIndividual[i].ini_Monto % 1 == 0) ? ListaIngresoIndividual[i].ini_Monto + ".00" : ListaIngresoIndividual[i].ini_Monto,
-                    Check,
-                    estadoRegistro,
-                    botonDetalles + botonEditar + botonActivar
-                ]);
+                    //AGREGAR EL ROW AL DATATABLE
+                $('#IndexTableIngresosIndividuales').dataTable().fnAddData([
+                        ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
+                        ListaIngresoIndividual[i].ini_Motivo,
+                        ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
+                        (ListaIngresoIndividual[i].ini_Monto % 1 == 0) ? ListaIngresoIndividual[i].ini_Monto + ".00" : ListaIngresoIndividual[i].ini_Monto,
+                        Check,
+                        estadoRegistro,
+                        botonDetalles + botonEditar + botonActivar
+                    ]);
                 }
             //APLICAR EL MAX WIDTH
             FullBody();

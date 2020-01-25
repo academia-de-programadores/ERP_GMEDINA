@@ -263,30 +263,32 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
                 $("#Crear #adsu_RazonAdelanto").val("");
             Local_modelState = false;
             $("#Crear #AsteriscoRazon").addClass("text-danger");
-            $("#Crear #adsu_RazonAdelantoValidacion").css("display", "");
+            $("#Crear #adsu_RazonAdelantoValidacion").show();
         
         } else {
             $("#Crear #AsteriscoRazon").removeClass("text-danger");
-            $("#Crear #adsu_RazonAdelantoValidacion").css("display", "none");
+            $("#Crear #adsu_RazonAdelantoValidacion").hide();
         }
     }
     //VALIDACIONES DEL CAMPO MONTO
     if (Monto != "-1") {
         if (Monto == "" || Monto == null || Monto == undefined) {
             $("#Crear #AsteriscoMonto").addClass("text-danger");
-            $("#Crear #adsu_MontoValidacion").css("display", "block");
+            $("#Crear #adsu_MontoValidacion").show();
 
             Local_modelState = false;
         } else {
             $("#Crear #AsteriscoMonto").removeClass("text-danger");
-            $("#Crear #adsu_MontoValidacion").css("display", "none");
-            if (Monto <= 0) {
-                $("#Crear #AsteriscoMonto").addClass("text-danger");
-                $("#Crear #adsu_MontoValidacion2").css("display", "");
-                Local_modelState = false;
+            $("#Crear #adsu_MontoValidacion").hide();
+            if (MontoFormateado <= 0) {
+                pasoValidacion = false;
+                $('#Crear #SueldoPromedioCrear').hide();
+                $('#Crear #adsu_MontoValidacion').hide();
+                $("#Crear #MontoAsterisco").addClass("text-danger");
+                $('#Crear #adsu_MontoValidacion2').show();
             } else {
-                $("#Crear #AsteriscoMonto").removeClass("text-danger");
-                $("#Crear #adsu_MontoValidacion2").css("display", "none");
+                $("#Crear #MontoAsterisco").removeClass("text-danger");
+                $('#Crear #adsu_MontoValidacion2').hide();
             }
         }
     }
@@ -296,12 +298,12 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
         if (Fecha == "" || Fecha == null || Fecha == undefined) {
 
             $("#Crear #AsteriscoFecha").addClass("text-danger");
-            $("#Crear #Validation_adsu_FechaAdelanto").css("display", "");
+            $("#Crear #Validation_adsu_FechaAdelanto").show();
             Local_modelState = false;
 
         } else {
             $("#Crear #AsteriscoFecha").removeClass("text-danger");
-            $("#Crear #Validation_adsu_FechaAdelanto").css("display", "none");
+            $("#Crear #Validation_adsu_FechaAdelanto").hide();
         }
     }
     return Local_modelState;
@@ -684,7 +686,7 @@ function ValidarCamposEditar(colaborador, razon, monto) {
             $("#Editar #MontoAsterisco").removeClass("text-danger");
             if (MontoFormateado <= 0) {
                 pasoValidacion = false;
-                $('#Editar #SueldoPromedio').hide();
+                $('#Editar #SueldoPromedioEditar').hide();
                 $('#Editar #adsu_MontoValidacion').hide();
                 $("#Editar #MontoAsterisco").addClass("text-danger");
                 $('#Editar #adsu_MontoValidacion2').show();
