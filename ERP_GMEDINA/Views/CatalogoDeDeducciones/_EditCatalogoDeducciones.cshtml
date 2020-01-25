@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion" } })
-                            @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+                            <label class="text-danger" id="validareditar1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Descripción requerido.</label>
                         </div>
                     </div>
                 </div>
@@ -39,10 +39,8 @@
                             <strong>Porcentaje Colaborador<label class="" id="AsteriscoPorcentajeColaboradorEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeColaborador", @value = "" } })
-                            @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
-
-                            <span class="field-validation-valid text-danger" style="display: none" id="validareditar2">El campo Porcentaje Colaborador es obligatorio.</span>
+                            @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "cde_PorcentajeColaborador", @value = "" } })
+                            <span class="field-validation-valid text-danger" style="display: none" id="validareditar2">Campo Porcentaje Colaborador requerido.</span>
                         </div>
                     </div>
                 </div>
@@ -53,30 +51,28 @@
                             <strong>Porcentaje Empresa<label class="" id="AsteriscoPorcentajeEmpresaEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeEmpresa", @value = "" } })
-                            @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
-
-                            <span class="field-validation-valid text-danger" style="display: none" id="validareditar3">El campo Porcentaje Empresa es obligatorio.</span>
+                            @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "cde_PorcentajeEmpresa", @value = "" } })
+                            <span class="field-validation-valid text-danger" style="display: none" id="validareditar3">Campo Porcentaje Empresa requerido.</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary pull-left" id="btnUpdateDeduccion">Actualizar</button>
-            <button type="button" class="btn btn-danger col-md-2" id="btnmodalInactivarCatalogoDeducciones">Inactivar</button>
-            <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarEditar">Cerrar</button>
-        </div>
-        }
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesInactivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.cde_IdDeducciones)
-        }
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary pull-left" id="btnUpdateDeduccion">Actualizar</button>
+        <button type="button" class="btn btn-danger col-md-2" id="btnmodalInactivarCatalogoDeducciones">Inactivar</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarEditar">Cerrar</button>
+    </div>
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesInactivar" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cde_IdDeducciones)
+}
 
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesActivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.cde_IdDeducciones)
-        }
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesActivar" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cde_IdDeducciones)
+}

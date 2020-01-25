@@ -6,16 +6,14 @@
 		@Html.HiddenFor(model => model.cin_IdIngreso)
 		@Html.HiddenFor(model => model.cin_FechaCrea)
 		@Html.HiddenFor(model => model.cin_UsuarioCrea)
-
-
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-10">
 					<div>
 						<label>Descripción Ingreso </label><label class="" id="asteriscoCreate">*</label>
-						@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off", @maxlength = "50" } })
+						@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off", @maxlength = "50", @onkeyup = "ValidarCamposCrear(this.value)" } })
 					</div>
-					@Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "descripcioncrear" })
+                    <span class="field-validation-valid text-danger" style="display: none" id="DescripcionCrear">El campo Descripción Ingreso es Requerido</span>
 				</div>
 			</div>
 		</div>

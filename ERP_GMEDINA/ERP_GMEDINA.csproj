@@ -341,6 +341,7 @@
     <Compile Include="Models\cLiquidacionesRPT.cs" />
     <Compile Include="Models\cNacionalidades.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
+    <Compile Include="Models\ComprobantePagoSessionViewModel.cs" />
     <Compile Include="Models\cPeriodos.cs" />
     <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cPreaviso.cs" />
@@ -1493,6 +1494,9 @@
     <Compile Include="Models\V_DecimoCuartoMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DecimoCuartoMesFE.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_DecimoCuartoMes_Pagados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1500,6 +1504,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_DecimoTercerMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_DecimoTercerMesFE.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_DecimoTercerMes_Pagados.cs">
@@ -1701,9 +1708,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_Requisiciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">

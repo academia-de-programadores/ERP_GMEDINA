@@ -40,8 +40,8 @@ namespace ERP_GMEDINA.Controllers
 					if (DecimoCuarto.Count == 0)
 						return Json("No hay registros en el objeto", JsonRequestBehavior.AllowGet);
 					int CantidadRegistros = DecimoCuarto.Count;
-					//Declaración y validación del numero de lotes
-					int numeroLotes = (CantidadRegistros <= 1) ? 1 :
+					//Declaración y validación del Número de lotes
+					int NúmeroLotes = (CantidadRegistros <= 1) ? 1 :
 									  (CantidadRegistros <= 10) ? 5 :
 									  (CantidadRegistros <= 50) ? 10 :
 									  (CantidadRegistros <= 100) ? 20 :
@@ -62,7 +62,7 @@ namespace ERP_GMEDINA.Controllers
 						if (MessageError.StartsWith("-1"))
 							return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
 
-						if (i % numeroLotes == 0)
+						if (i % NúmeroLotes == 0)
 							db.SaveChanges();
 					}
 
@@ -70,7 +70,15 @@ namespace ERP_GMEDINA.Controllers
 				}
 				catch
 				{
-					dbContextTransaction.Rollback();
+					try
+					{
+						dbContextTransaction.Rollback();
+					}
+					catch (System.Data.Entity.Core.EntityException)
+					{
+						return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+					}
+
 					return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
 				}
 
@@ -89,40 +97,26 @@ namespace ERP_GMEDINA.Controllers
 			{
 				try
 				{					
-					DateTime hipa_FechaInicio2 = Convert.ToDateTime((hipa_FechaInicio - 1) + "/06" + "/01");
+					DateTime hipa_FechaInicio2 = Convert.ToDateTime((hipa_FechaInicio - 1) + "/07" + "/01");
 					DateTime hipa_FechaFin = Convert.ToDateTime(hipa_FechaInicio + "/06" + "/30");
 
-					var ConsultaFechas = from HP in db.tbHistorialDePago
-										 join P in db.tbPersonas on HP.emp_Id equals P.per_Id
-										 join E in db.tbEmpleados on P.per_Id equals E.emp_Id
-										 join C in db.tbCargos on E.car_Id equals C.car_Id
-										 join CP in db.tbCatalogoDePlanillas on E.cpla_IdPlanilla equals CP.cpla_IdPlanilla
+					var ConsultaFechas = from HP in db.V_DecimoCuartoMesFE
+
 										 where
 
 										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
-										  HP.hipa_FechaPago <= hipa_FechaFin) &&
+										  HP.hipa_FechaPago <= hipa_FechaFin) 									  
 
-										  
-
-										 CP.cpla_IdPlanilla != 2
-										 group HP by new
+										 
+										 select new 
 										 {
-											 HP.emp_Id,
-											 P.per_Nombres,
-											 P.per_Apellidos,
-											 C.car_Descripcion,
-											 CP.cpla_DescripcionPlanilla,
-											 E.emp_CuentaBancaria
-										 } into PagoDT
-										 select new ViewModelDecimoCuartoMes
-										 {
-											 emp_Id = PagoDT.Key.emp_Id,
-											 per_Nombres = PagoDT.Key.per_Nombres,
-											 per_Apellidos = PagoDT.Key.per_Apellidos,
-											 car_Descripcion = PagoDT.Key.car_Descripcion,
-											 cpla_DescripcionPlanilla = PagoDT.Key.cpla_DescripcionPlanilla,
-											 emp_CuentaBancaria = PagoDT.Key.emp_CuentaBancaria,
-											 dcm_Monto = (PagoDT.Sum(x => x.hipa_SueldoNeto) / 360 * 30)
+											 emp_Id = HP.emp_Id,
+											 per_Nombres = HP.Nombre,
+											 per_Apellidos = HP.Apellido,
+											 car_Descripcion = HP.Cargo,
+											 cpla_DescripcionPlanilla = HP.Planilla,
+											 emp_CuentaBancaria = HP.CuentaBancaria,
+											 dcm_Monto = HP.Monto
 										 };
 					ViewBag.ConsultasFechas = ConsultaFechas.ToList();
 				}

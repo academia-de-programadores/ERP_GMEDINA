@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de AFPs</h5>
+                    <h5>Listado de AFP</h5>
                     <div class="ibox-tools">
                             <button type="button" class="btn btn-primary btn-xs" id="btnAgregarAFP">Registrar AFP</button>
                     </div>
@@ -120,11 +120,8 @@
             <div class="modal-header">
                 <h4 class="modal-title">Editar AFP</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditAFP", new ERP_GMEDINA.Models.tbAFP())
-            </div>
-
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditAFP", new ERP_GMEDINA.Models.tbAFP())
         </div>
     </div>
 </div>

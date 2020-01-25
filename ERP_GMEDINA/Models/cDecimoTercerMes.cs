@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Models
 
     public class cDecimoTercerMes
     {
-        [Display(Name = "Codigo Empleado")]
+        [Display(Name = "Código Empleado")]
         public int emp_Id { get; set; }
         [Display(Name = "Nombre")]
         public string per_Nombres { get; set; }

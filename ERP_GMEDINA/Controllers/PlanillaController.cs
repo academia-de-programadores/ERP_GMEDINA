@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Controllers
         {
             List<V_ColaboradoresPorPlanilla> colaboradoresPlanillas = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).ToList();
             ViewBag.PlanillasColaboradores = colaboradoresPlanillas;
-            ViewBag.colaboradoresGeneral = db.tbEmpleados.Count().ToString();
+            ViewBag.colaboradoresGeneral = db.V_PreviewPlanilla.Count().ToString();
             return View(db.V_PreviewPlanilla.ToList());
         }
 
@@ -115,6 +115,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? totalHorasExtras = 0;
                                         decimal? totalHorasPermiso = 0;
                                         decimal? totalBonificaciones = 0;
+                                        decimal? totalIngresosIndivuales = 0;
                                         decimal? totalVacaciones = 0;
                                         decimal? totalIngresosEmpleado = 0;
                                         decimal totalISR = 0;
@@ -124,6 +125,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? totalOtrasDeducciones = 0;
                                         decimal? adelantosSueldo = 0;
                                         decimal? totalDeduccionesEmpleado = 0;
+                                        decimal? totalDeduccionesIndividuales = 0;
                                         decimal? netoAPagarColaborador = 0;
                                         //int VerificarHorasTrabajas = 0;
                                         oPlanillaEmpleado = new ReportePlanillaViewModel();
@@ -145,11 +147,11 @@ namespace ERP_GMEDINA.Controllers
                                         SalarioBase = Math.Round((Decimal)InformacionDelEmpleadoActual.SalarioBase, 2);
 
                                         //para el voucer
-                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        {
-                                            concepto = "Sueldo base",
-                                            monto = SalarioBase
-                                        });
+                                        //ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //{
+                                        //    concepto = "Sueldo base",
+                                        //    monto = SalarioBase
+                                        //});
                                         //Historial de ingresos (salario base)
                                         //lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
                                         //{
@@ -161,33 +163,37 @@ namespace ERP_GMEDINA.Controllers
 
                                         //horas normales trabajadas
                                         horasTrabajadas = db.tbHistorialHorasTrabajadas
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo == 0)
+                                            .Where( x => x.emp_Id == empleadoActual.emp_Id && 
+                                                    x.htra_Estado == true &&
+                                                    x.tbTipoHoras.tiho_Recargo == 0 &&
+                                                    x.htra_Fecha >= fechaInicio &&
+                                                    x.htra_Fecha <= fechaFin)
                                             .Select(x => x.htra_CantidadHoras)
                                             .DefaultIfEmpty(0)
                                             .Sum();
-                                        //para el voucher
-                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        {
-                                            concepto = "Horas trabajadas",
-                                            monto = horasTrabajadas
-                                        });
+                                        ////para el voucher
+                                        //ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //{
+                                        //    concepto = "Horas trabajadas",
+                                        //    monto = horasTrabajadas
+                                        //});
 
                                         //salario por hora
                                         salarioHora = Math.Round((Decimal)SalarioBase / 240, 2);
 
                                         //para el voucher
-                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        {
-                                            concepto = "Sueldo por hora",
-                                            monto = salarioHora
-                                        });
+                                        //ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //{
+                                        //    concepto = "Sueldo por hora",
+                                        //    monto = salarioHora
+                                        //});
 
                                         //total salario
                                         totalSalario = Math.Round((Decimal)salarioHora * horasTrabajadas, 2);
                                         //para el voucer
                                         ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                         {
-                                            concepto = "Total sueldo",
+                                            concepto = "Salario ordinario",
                                             monto = totalSalario
                                         });
                                         //Historial de ingresos (horas normales trabajadas)
@@ -201,7 +207,10 @@ namespace ERP_GMEDINA.Controllers
 
                                         //horas con permiso justificado
                                         List<tbHistorialPermisos> horasConPermiso = db.tbHistorialPermisos
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hper_Estado == true)
+                                            .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                    x.hper_Estado == true &&
+                                                    x.hper_fechaInicio >= fechaInicio &&
+                                                    x.hper_fechaFin <= fechaFin)
                                             .ToList();
 
                                         if (horasConPermiso.Count > 0)
@@ -234,7 +243,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //comisiones
-                                        List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cc_Activo == true && x.cc_Pagado == false).ToList();
+                                        List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones
+                                                                                                .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                        x.cc_Activo == true &&
+                                                                                                        x.cc_Pagado == false &&
+                                                                                                        x.cc_FechaRegistro >= fechaInicio &&
+                                                                                                        x.cc_FechaRegistro <= fechaFin).ToList();
                                         if (oComisionesColaboradores.Count > 0)
                                         {
                                             //sumar todas las comisiones
@@ -274,7 +288,11 @@ namespace ERP_GMEDINA.Controllers
 
                                         //horas extras
                                         horasExtrasTrabajadas = db.tbHistorialHorasTrabajadas
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo > 0)
+                                            .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                    x.htra_Estado == true &&
+                                                    x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                    x.htra_Fecha >= fechaInicio &&
+                                                    x.htra_Fecha <= fechaFin)
                                             .Select(x => x.htra_CantidadHoras)
                                             .DefaultIfEmpty(0)
                                             .Sum();
@@ -291,7 +309,11 @@ namespace ERP_GMEDINA.Controllers
 
                                         //total ingresos horas extras
                                         List<tbHistorialHorasTrabajadas> oHorasExtras = db.tbHistorialHorasTrabajadas
-                                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo > 0)
+                                                                                        .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                x.htra_Estado == true &&
+                                                                                                x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                                                                x.htra_Fecha >= fechaInicio &&
+                                                                                                x.htra_Fecha <= fechaFin)
                                                                                         .ToList();
                                         if (oHorasExtras.Count > 0)
                                         {
@@ -332,7 +354,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //bonos del colaborador
-                                        List<tbEmpleadoBonos> oBonosColaboradores = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Activo == true && x.cb_Pagado == false).ToList();
+                                        List<tbEmpleadoBonos> oBonosColaboradores = db.tbEmpleadoBonos
+                                                                                    .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                            x.cb_Activo == true &&
+                                                                                            x.cb_Pagado == false &&
+                                                                                            x.cb_FechaRegistro >= fechaInicio &&
+                                                                                            x.cb_FechaRegistro <= fechaFin).ToList();
 
                                         if (oBonosColaboradores.Count > 0)
                                         {
@@ -363,7 +390,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //vacaciones
-                                        List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.hvac_DiasPagados == false && x.hvac_Estado == true).ToList();
+                                        List<tbHistorialVacaciones> oVacacionesColaboradores =  db.tbHistorialVacaciones
+                                                                                                .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                        x.hvac_DiasPagados == false &&
+                                                                                                        x.hvac_Estado == true &&
+                                                                                                        x.hvac_FechaInicio >= fechaInicio &&
+                                                                                                        x.hvac_FechaFin <= fechaFin).ToList();
                                         if (oVacacionesColaboradores.Count > 0)
                                         {
                                             //sumar todas las comisiones
@@ -406,6 +438,36 @@ namespace ERP_GMEDINA.Controllers
                                                 //});
                                             }
                                         }
+
+                                        // ingresos individuales
+                                        List<tbIngresosIndividuales> oIngresosIndiColaboradores = db.tbIngresosIndividuales
+                                                                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                           x.ini_Activo == true &&
+                                                                                                           x.ini_Pagado != true &&
+                                                                                                           x.ini_FechaCrea >= fechaInicio &&
+                                                                                                           x.ini_FechaCrea <= fechaFin)
+                                                                                                    .ToList();
+
+                                        if (oIngresosIndiColaboradores.Count > 0)
+                                        {
+                                            //iterar los bonos
+                                            foreach (var oIngresosIndiColaboradoresIterador in oIngresosIndiColaboradores)
+                                            {
+                                                totalIngresosIndivuales += Math.Round((Decimal)oIngresosIndiColaboradoresIterador.ini_Monto, 2);
+                                                //pasar el bono a pagado
+                                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;
+                                                oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
+                                                db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+
+                                                //agregarlo al voucher
+                                                ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                {
+                                                    concepto = oIngresosIndiColaboradoresIterador.ini_Motivo,
+                                                    monto = Math.Round((Decimal)oIngresosIndiColaboradoresIterador.ini_Monto, 2)
+                                                });
+                                            }
+                                        }
+
                                         #region Septimo Dia
                                         DateTime inicioFecha = fechaInicio;
                                         DateTime finFecha = fechaFin;
@@ -421,8 +483,19 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             if (fechaIterador.DayOfWeek.ToString() != "Sunday")
                                             {
-                                                cantHoras += db.tbHistorialHorasTrabajadas.Where(x => x.htra_Fecha == fechaIterador && x.emp_Id == empleadoActual.emp_Id).Select(x => x.htra_CantidadHoras).FirstOrDefault();
-                                                cantHorasPermiso += db.tbHistorialPermisos.Where(x => x.hper_fechaInicio <= fechaIterador && x.hper_fechaFin >= fechaIterador && x.emp_Id == empleadoActual.emp_Id).Select(x => x.hper_Duracion).FirstOrDefault();
+                                                cantHoras+= db.tbHistorialHorasTrabajadas
+                                                            .Where( x => x.htra_Fecha == fechaIterador &&
+                                                                    x.emp_Id == empleadoActual.emp_Id &&
+                                                                    x.htra_Estado == true)
+                                                            .Select(x => x.htra_CantidadHoras)
+                                                            .FirstOrDefault();
+
+                                                cantHorasPermiso += db.tbHistorialPermisos
+                                                                    .Where( x => x.hper_fechaInicio <= fechaIterador &&
+                                                                            x.hper_fechaFin >= fechaIterador &&
+                                                                            x.emp_Id == empleadoActual.emp_Id)
+                                                                    .Select(x => x.hper_Duracion)
+                                                                    .FirstOrDefault();
 
                                                 if ((cantHoras + (cantHorasPermiso * 8)) >= 48 && contadorSeptimosDias == 7)
                                                 {
@@ -453,7 +526,7 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         //total ingresos
-                                        totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones + totalHorasPermiso + resultSeptimoDia;
+                                        totalIngresosEmpleado = totalIngresosIndivuales + totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones + totalHorasPermiso + resultSeptimoDia;
 
                                         #endregion
 
@@ -496,7 +569,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //instituciones financieras
-                                        List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras = db.tbDeduccionInstitucionFinanciera.Where(x => x.emp_Id == empleadoActual.emp_Id && x.deif_Activo == true && x.deif_Pagado == false).ToList();
+                                        List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras =  db.tbDeduccionInstitucionFinanciera
+                                                                                                        .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                                x.deif_Activo == true &&
+                                                                                                                x.deif_Pagado == false &&
+                                                                                                                x.deif_FechaCrea >= fechaInicio &&
+                                                                                                                x.deif_FechaCrea <= fechaFin).ToList();
 
                                         if (oDeduInstiFinancieras.Count > 0)
                                         {
@@ -522,7 +600,13 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
                                         //afp
-                                        List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP.Where(af => af.emp_Id == empleadoActual.emp_Id && af.dafp_Pagado == false && af.dafp_Activo == true).ToList();
+                                        List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP
+                                                                            .Where( af => af.emp_Id == empleadoActual.emp_Id &&
+                                                                                    af.dafp_Pagado != true &&
+                                                                                    af.dafp_Activo == true &&
+                                                                                    af.dafp_FechaCrea >= fechaInicio &&
+                                                                                    af.dafp_FechaCrea <= fechaFin)
+                                                                            .ToList();
 
                                         if (oDeduccionAfp.Count > 0)
                                         {
@@ -543,7 +627,10 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //deducciones extras
-                                        List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador = db.tbDeduccionesExtraordinarias.Where(DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id && DEX.dex_MontoRestante > 0 && DEX.dex_Activo == true).ToList();
+                                        List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador =  db.tbDeduccionesExtraordinarias
+                                                                                                            .Where( DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id &&
+                                                                                                                    DEX.dex_MontoRestante > 0 &&
+                                                                                                                    DEX.dex_Activo == true).ToList();
 
                                         if (oDeduccionesExtrasColaborador.Count > 0)
                                         {
@@ -571,7 +658,12 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //adelantos de sueldo
-                                        List<tbAdelantoSueldo> oAdelantosSueldo = db.tbAdelantoSueldo.Where(x => x.emp_Id == empleadoActual.emp_Id && x.adsu_Activo == true && x.adsu_Deducido == false).ToList();
+                                        List<tbAdelantoSueldo> oAdelantosSueldo  =  db.tbAdelantoSueldo
+                                                                                    .Where( x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                            x.adsu_Activo == true && x.adsu_Deducido == false &&
+                                                                                            x.adsu_FechaAdelanto >= fechaInicio &&
+                                                                                            x.adsu_FechaAdelanto <= fechaFin)
+                                                                                    .ToList();
 
                                         if (oAdelantosSueldo.Count > 0)
                                         {
@@ -597,8 +689,35 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
 
+                                        //deducciones individuales
+                                        List<tbDeduccionesIndividuales> oDeduccionesIndiColaborador = db.tbDeduccionesIndividuales
+                                                                                                        .Where( DEX => DEX.emp_Id == empleadoActual.emp_Id &&
+                                                                                                                DEX.dei_MontoRestante > 0 &&
+                                                                                                                DEX.dei_Pagado != true &&
+                                                                                                                DEX.dei_Activo == true)
+                                                                                                        .ToList();
+
+                                        if (oDeduccionesIndiColaborador.Count > 0)
+                                        {
+                                            //sumarlas todas
+                                            foreach (var oDeduccionesIndiColaboradorIterador in oDeduccionesIndiColaborador)
+                                            {
+                                                totalDeduccionesIndividuales += oDeduccionesIndiColaboradorIterador.dei_MontoRestante <= oDeduccionesIndiColaboradorIterador.dei_Cuota ? oDeduccionesIndiColaboradorIterador.dei_MontoRestante : oDeduccionesIndiColaboradorIterador.dei_Cuota;
+                                                //restar la cuota al monto restante
+                                                oDeduccionesIndiColaboradorIterador.dei_MontoRestante = oDeduccionesIndiColaboradorIterador.dei_MontoRestante <= oDeduccionesIndiColaboradorIterador.dei_Cuota ? oDeduccionesIndiColaboradorIterador.dei_MontoRestante - oDeduccionesIndiColaboradorIterador.dei_MontoRestante : oDeduccionesIndiColaboradorIterador.dei_MontoRestante - oDeduccionesIndiColaboradorIterador.dei_Cuota;
+                                                db.Entry(oDeduccionesIndiColaboradorIterador).State = EntityState.Modified;
+
+                                                ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
+                                                {
+                                                    concepto = oDeduccionesIndiColaboradorIterador.dei_Motivo,
+                                                    monto = oDeduccionesIndiColaboradorIterador.dei_MontoRestante <= oDeduccionesIndiColaboradorIterador.dei_Cuota ? Math.Round((decimal)oDeduccionesIndiColaboradorIterador.dei_MontoRestante, 2) : Math.Round((decimal)oDeduccionesIndiColaboradorIterador.dei_Cuota, 2)
+                                                });
+                                            }
+                                        }
+
+
                                         //totales
-                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo;
+                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo+ totalDeduccionesIndividuales;
                                         netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
 
                                         #endregion
@@ -606,222 +725,222 @@ namespace ERP_GMEDINA.Controllers
                                         //ISR
                                         #region ISR
 
-                                        #region Declaracion de Variables
-                                        decimal SalarioMinimo = 9443.24M;
-                                        int AnioActual = DateTime.Now.Year;
-                                        decimal? TotalBonos = 0;
-                                        decimal? TotalHrsExtra = 0;
-                                        decimal? TotalComisiones = 0;
-                                        decimal? ExcesoDecimoTercer = 0;
-                                        decimal? ExcesoVacaciones = 0;
-                                        decimal? ExcesoDecimoCuarto = 0;
-                                        decimal Exceso = 0;
-                                        decimal SueldoAnual = 0;
-                                        decimal GastosMedicos = 0;
-                                        decimal TotalIngresosGravables = 0;
-                                        decimal TotalDeduccionesGravables = 0;
-                                        decimal RentaNetaGravable = 0;
-                                        var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
+                                        //#region Declaracion de Variables
+                                        //decimal SalarioMinimo = 9443.24M;
+                                        //int AnioActual = DateTime.Now.Year;
+                                        //decimal? TotalBonos = 0;
+                                        //decimal? TotalHrsExtra = 0;
+                                        //decimal? TotalComisiones = 0;
+                                        //decimal? ExcesoDecimoTercer = 0;
+                                        //decimal? ExcesoVacaciones = 0;
+                                        //decimal? ExcesoDecimoCuarto = 0;
+                                        //decimal Exceso = 0;
+                                        //decimal SueldoAnual = 0;
+                                        //decimal GastosMedicos = 0;
+                                        //decimal TotalIngresosGravables = 0;
+                                        //decimal TotalDeduccionesGravables = 0;
+                                        //decimal RentaNetaGravable = 0;
+                                        //var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
+                                        //#endregion
+
+                                        //#region Sueldo Promedio Anual
+                                        ////Sueldo redondeado del Colaborador
+                                        //DateTime AnioActualEnero = new DateTime(DateTime.Now.Year, 1, 1);
+
+                                        ////Obtener los pagos mensuales totales
+                                        //var mesesPago = (db.tbHistorialDePago
+                                        //    .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == AnioActualEnero.Year)
+                                        //    .OrderBy(x => x.hipa_Mes)
+                                        //    .GroupBy(x => x.hipa_Mes)
+                                        //    .Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
+
+                                        //DateTime FechaIngresoEmpleado = db.tbEmpleados
+                                        //                                .Where(x => x.emp_Id == empleadoActual.emp_Id)
+                                        //                                .Select(x => x.emp_Fechaingreso).FirstOrDefault();
+                                        //bool esMensual = true;
+
+                                        //TimeSpan diferencia = AnioActualEnero - FechaIngresoEmpleado;
+
+                                        //if (TimeSpan.Zero > diferencia)
+                                        //    esMensual = true;
+
+
+                                        ////Saber que mes entro
+                                        //int mes = FechaIngresoEmpleado.Month;
+                                        //decimal SalarioPromedioAnualPagadoAlAnio = 0;
+                                        //decimal salarioPromedioAnualPagadoAlMes = 0;
+                                        //decimal TotalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
+                                        //mesesPago,
+                                        //esMensual,
+                                        //ref SalarioPromedioAnualPagadoAlAnio,
+                                        //ref salarioPromedioAnualPagadoAlMes);
+                                        //#endregion
+
+                                        //#region Excesos
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
+                                        ////Exceso Décimo Tercer Mes
+                                        ////Variable para llamar en duro los empleados con Décimo Tercer Mes
+                                        //var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dtm_FechaPago.Year == AnioActual).FirstOrDefault();
+
+                                        ////Validar primero si es en el año actual el proceso de este calculo
+                                        //if (DecimoTercer != null)
+                                        //{
+                                        //    //Salario Mínimo Mensual por 10 Meses (Según SAR)
+                                        //    Exceso = SalarioMinimo * 10;
+
+                                        //    //Validar si el Décimo Tercer es mayor al Exceso
+                                        //    if (DecimoTercer.dtm_Monto > Exceso)
+                                        //    {
+                                        //        ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
+                                        //    }
+                                        //    else
+                                        //    {
+                                        //        ExcesoDecimoTercer = 0;
+                                        //    }
+                                        //}
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
+
+
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
+                                        ////Exceso Décimo Cuarto Mes
+                                        ////Variable para llamar en duro los empleados con Décimo Cuarto Mes
+                                        //var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dcm_FechaPago.Year == AnioActual).FirstOrDefault();
+
+                                        ////Validar primero si es en el año actual el proceso de este calculo
+                                        //if (DecimoCuarto != null)
+                                        //{
+                                        //    //Salario Mínimo Mensual por 10 Meses (Según SAR)
+                                        //    Exceso = SalarioMinimo * 10;
+
+                                        //    //Validar si el Décimo Cuarto es mayor al Exceso
+                                        //    if (DecimoCuarto.dcm_Monto > Exceso)
+                                        //    {
+                                        //        ExcesoDecimoCuarto = DecimoCuarto.dcm_Monto - Exceso;
+                                        //    }
+                                        //    else
+                                        //    {
+                                        //        ExcesoDecimoCuarto = 0;
+                                        //    }
+                                        //}
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
+
+
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
+                                        ////Exceso Vacaciones
+                                        ////Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
+                                        //var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
+
+                                        ////Validar si los dias a Pagar es mayor a 30 dias 
+                                        //if (objVacaciones > 30)
+                                        //{
+                                        //    ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
+                                        //}
+                                        //else
+                                        //{
+                                        //    ExcesoVacaciones = 0;
+                                        //}
+
+                                        //#endregion
+
+                                        //#region Gastos Médicos
+                                        ////Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
+                                        //var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
+
+                                        ////Variable para llamar en duro el monto de Gastos Médicos de 70,000.00
+                                        //var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
+
+                                        ////Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
+                                        //var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
+
+                                        ////Validar si el Empleado tiene menos de 60 años para saber cuanto se le cobrará de Gastos Médicos
+                                        //if (objEmpleados.tbPersonas.per_Edad < 60)
+                                        //{
+                                        //    GastosMedicos = objAcumuladosISRMenor.aisr_Monto;
+                                        //}
+                                        //else
+                                        //{
+                                        //    GastosMedicos = objAcumuladosISRMayor.aisr_Monto;
+                                        //}
+
+                                        //#endregion
+
+                                        //TotalBonos = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Pagado == true && AnioActualEnero == x.cb_FechaPagado).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.cb_Monto)).FirstOrDefault();
+                                        //TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras)).FirstOrDefault();
+                                        //TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones)).FirstOrDefault();
+
+                                        //if (TotalBonos == null)
+                                        //    TotalBonos = 0;
+
+                                        //if (TotalHrsExtra == null)
+                                        //    TotalHrsExtra = 0;
+
+                                        //if (TotalComisiones == null)
+                                        //    TotalComisiones = 0;
+
+                                        //#region Total ISR Calcular
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
+                                        ////Total Ingresos Gravables
+                                        //TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones;
+
+                                        ////Total Deducciones Gravables
+                                        //TotalDeduccionesGravables = GastosMedicos;
+
+                                        ////Renta Neta Gravable
+                                        //RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
+
+                                        //#region ISR Dinámico en Proceso
+                                        ////Tabla Progresiva ISR Dinámica
+
+                                        ///*List<tbISR> objDeduccionISR = db.tbISR.Where(x => x.isr_Activo == true).ToList();
+
+                                        //foreach(var oISR in objDeduccionISR)
+                                        //{
+                                        //    if ()
+                                        //    {
+
+                                        //    }
+                                        //}*/
+                                        //#endregion
+
+                                        //#region Tabla Progresiva para Deducir ISR
+                                        ////Cálculo con la Tabla Progresiva ISR
+
+                                        ////Variable para llamar cada uno de los Porcentajes y Techos del ISR
+                                        //var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
+                                        //var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
+                                        //var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).FirstOrDefault();
+                                        //var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).FirstOrDefault();
+
+                                        //if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
+                                        //{
+                                        //    totalISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
+                                        //               (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
+                                        //               (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                        //               (objISRBajo.isr_Porcentaje / 100);
+                                        //}
+                                        //else if (RentaNetaGravable > objISRMedio.isr_RangoInicial)
+                                        //{
+                                        //    totalISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
+                                        //               (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                        //               (objISRBajo.isr_Porcentaje / 100);
+                                        //}
+                                        //else if (RentaNetaGravable > objISRBajo.isr_RangoInicial)
+                                        //{
+                                        //    totalISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
+                                        //               (objISRBajo.isr_Porcentaje / 100);
+                                        //}
+                                        //else if (RentaNetaGravable <= objISRExcento.isr_RangoFinal)
+                                        //{
+                                        //    totalISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
+                                        //               (objISRExcento.isr_Porcentaje / 100);
+                                        //}
+                                        //#endregion
+
+                                        //#endregion
+
                                         #endregion
-
-                                        #region Sueldo Promedio Anual
-                                        //Sueldo redondeado del Colaborador
-                                        DateTime AnioActualEnero = new DateTime(DateTime.Now.Year, 1, 1);
-
-                                        //Obtener los pagos mensuales totales
-                                        var mesesPago = (db.tbHistorialDePago
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == AnioActualEnero.Year)
-                                            .OrderBy(x => x.hipa_Mes)
-                                            .GroupBy(x => x.hipa_Mes)
-                                            .Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
-
-                                        DateTime FechaIngresoEmpleado = db.tbEmpleados
-                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id)
-                                                                        .Select(x => x.emp_Fechaingreso).FirstOrDefault();
-                                        bool esMensual = true;
-
-                                        TimeSpan diferencia = AnioActualEnero - FechaIngresoEmpleado;
-
-                                        if (TimeSpan.Zero > diferencia)
-                                            esMensual = true;
-
-
-                                        //Saber que mes entro
-                                        int mes = FechaIngresoEmpleado.Month;
-                                        decimal SalarioPromedioAnualPagadoAlAnio = 0;
-                                        decimal salarioPromedioAnualPagadoAlMes = 0;
-                                        decimal TotalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
-                                        mesesPago,
-                                        esMensual,
-                                        ref SalarioPromedioAnualPagadoAlAnio,
-                                        ref salarioPromedioAnualPagadoAlMes);
-                                        #endregion
-
-                                        #region Excesos
-                                        //-----------------------------------------------------------------------------------------------------------------------------
-                                        //Exceso Décimo Tercer Mes
-                                        //Variable para llamar en duro los empleados con Décimo Tercer Mes
-                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dtm_FechaPago.Year == AnioActual).FirstOrDefault();
-
-                                        //Validar primero si es en el año actual el proceso de este calculo
-                                        if (DecimoTercer != null)
-                                        {
-                                            //Salario Mínimo Mensual por 10 Meses (Según SAR)
-                                            Exceso = SalarioMinimo * 10;
-
-                                            //Validar si el Décimo Tercer es mayor al Exceso
-                                            if (DecimoTercer.dtm_Monto > Exceso)
-                                            {
-                                                ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
-                                            }
-                                            else
-                                            {
-                                                ExcesoDecimoTercer = 0;
-                                            }
-                                        }
-                                        //-----------------------------------------------------------------------------------------------------------------------------
-
-
-                                        //-----------------------------------------------------------------------------------------------------------------------------
-                                        //Exceso Décimo Cuarto Mes
-                                        //Variable para llamar en duro los empleados con Décimo Cuarto Mes
-                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dcm_FechaPago.Year == AnioActual).FirstOrDefault();
-
-                                        //Validar primero si es en el año actual el proceso de este calculo
-                                        if (DecimoCuarto != null)
-                                        {
-                                            //Salario Mínimo Mensual por 10 Meses (Según SAR)
-                                            Exceso = SalarioMinimo * 10;
-
-                                            //Validar si el Décimo Cuarto es mayor al Exceso
-                                            if (DecimoCuarto.dcm_Monto > Exceso)
-                                            {
-                                                ExcesoDecimoCuarto = DecimoCuarto.dcm_Monto - Exceso;
-                                            }
-                                            else
-                                            {
-                                                ExcesoDecimoCuarto = 0;
-                                            }
-                                        }
-                                        //-----------------------------------------------------------------------------------------------------------------------------
-
-
-                                        //-----------------------------------------------------------------------------------------------------------------------------
-                                        //Exceso Vacaciones
-                                        //Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
-                                        var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
-
-                                        //Validar si los dias a Pagar es mayor a 30 dias 
-                                        if (objVacaciones > 30)
-                                        {
-                                            ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
-                                        }
-                                        else
-                                        {
-                                            ExcesoVacaciones = 0;
-                                        }
-
-                                        #endregion
-
-                                        #region Gastos Médicos
-                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
-                                        var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
-
-                                        //Variable para llamar en duro el monto de Gastos Médicos de 70,000.00
-                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
-
-                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
-                                        var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
-
-                                        //Validar si el Empleado tiene menos de 60 años para saber cuanto se le cobrará de Gastos Médicos
-                                        if (objEmpleados.tbPersonas.per_Edad < 60)
-                                        {
-                                            GastosMedicos = objAcumuladosISRMenor.aisr_Monto;
-                                        }
-                                        else
-                                        {
-                                            GastosMedicos = objAcumuladosISRMayor.aisr_Monto;
-                                        }
-
-                                        #endregion
-
-                                        TotalBonos = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Pagado == true && AnioActualEnero == x.cb_FechaPagado).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.cb_Monto)).FirstOrDefault();
-                                        TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras)).FirstOrDefault();
-                                        TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones)).FirstOrDefault();
-
-                                        if (TotalBonos == null)
-                                            TotalBonos = 0;
-
-                                        if (TotalHrsExtra == null)
-                                            TotalHrsExtra = 0;
-
-                                        if (TotalComisiones == null)
-                                            TotalComisiones = 0;
-
-                                        #region Total ISR Calcular
-                                        //-----------------------------------------------------------------------------------------------------------------------------
-                                        //Total Ingresos Gravables
-                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones;
-
-                                        //Total Deducciones Gravables
-                                        TotalDeduccionesGravables = GastosMedicos;
-
-                                        //Renta Neta Gravable
-                                        RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
-
-                                        #region ISR Dinámico en Proceso
-                                        //Tabla Progresiva ISR Dinámica
-
-                                        /*List<tbISR> objDeduccionISR = db.tbISR.Where(x => x.isr_Activo == true).ToList();
-
-                                        foreach(var oISR in objDeduccionISR)
-                                        {
-                                            if ()
-                                            {
-
-                                            }
-                                        }*/
-                                        #endregion
-
-                                        #region Tabla Progresiva para Deducir ISR
-                                        //Cálculo con la Tabla Progresiva ISR
-
-                                        //Variable para llamar cada uno de los Porcentajes y Techos del ISR
-                                        var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
-                                        var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
-                                        var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).FirstOrDefault();
-                                        var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).FirstOrDefault();
-
-                                        if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
-                                                       (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
-                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
-                                                       (objISRBajo.isr_Porcentaje / 100);
-                                        }
-                                        else if (RentaNetaGravable > objISRMedio.isr_RangoInicial)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
-                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
-                                                       (objISRBajo.isr_Porcentaje / 100);
-                                        }
-                                        else if (RentaNetaGravable > objISRBajo.isr_RangoInicial)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
-                                                       (objISRBajo.isr_Porcentaje / 100);
-                                        }
-                                        else if (RentaNetaGravable <= objISRExcento.isr_RangoFinal)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
-                                                       (objISRExcento.isr_Porcentaje / 100);
-                                        }
-                                        #endregion
-
-                                        #endregion
-
-                                        #endregion
-
-                                        netoAPagarColaborador = netoAPagarColaborador - totalISR;
+                                        //Pendiente testeo
+                                        //netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
                                         #region Enviar comprobante de pago por email
                                         if (enviarEmail != null && enviarEmail == true)
@@ -966,6 +1085,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalHorasPermiso = totalHorasPermiso;
                                         oPlanillaEmpleado.TotalIngresosHorasExtras = totalHorasExtras;
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
+                                        oPlanillaEmpleado.totalIngresosIndivuales = totalIngresosIndivuales;
                                         oPlanillaEmpleado.totalVacaciones = totalVacaciones;
                                         oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
                                         oPlanillaEmpleado.totalISR = totalISR;
@@ -974,6 +1094,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalInstitucionesFinancieras = totalInstitucionesFinancieras;
                                         oPlanillaEmpleado.otrasDeducciones = Math.Round((decimal)totalOtrasDeducciones, 2);
                                         oPlanillaEmpleado.adelantosSueldo = Math.Round((decimal)adelantosSueldo, 2);
+                                        oPlanillaEmpleado.totalDeduccionesIndividuales = totalDeduccionesIndividuales;
                                         oPlanillaEmpleado.totalDeducciones = Math.Round((decimal)totalDeduccionesEmpleado, 2);
                                         oPlanillaEmpleado.totalAPagar = Math.Round((decimal)netoAPagarColaborador, 2);
                                         reporte.Add(oPlanillaEmpleado);

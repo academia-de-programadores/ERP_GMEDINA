@@ -75,7 +75,7 @@ namespace ERP_GMEDINA.Controllers
                                       ts.sue_Cantidad != null */
                                     select new
                                     {
-                                        numeroIdentidad = tp.per_Identidad.Substring(0, 4) + "-" + tp.per_Identidad.Substring(4, 4) + "-" + tp.per_Identidad.Substring(9, tp.per_Identidad.Length - 9),
+                                        NúmeroIdentidad = tp.per_Identidad.Substring(0, 4) + "-" + tp.per_Identidad.Substring(4, 4) + "-" + tp.per_Identidad.Substring(9, tp.per_Identidad.Length - 9),
                                         nombreEmpleado = tp.per_Nombres,
                                         apellidoEmpleado = tp.per_Apellidos,
                                         fechaIngreso = (te.emp_Fechaingreso.Year + "/" +

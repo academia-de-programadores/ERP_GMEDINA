@@ -14,86 +14,92 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // Obtenet: tbAuxilioDeCesantias
+        #region index
         public ActionResult Index()
         {
             var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbAuxilioDeCesantias.ToList());
         }
+        #endregion
 
-        //Metodo para refrescar la tabla(Index)
+        #region Get data
         public ActionResult GetData()
         {
             var tbAuxilioCesantia1 = db.tbAuxilioDeCesantias
-                        .Select(c => new {
-                            aces_IdAuxilioCesantia = c.aces_IdAuxilioCesantia,
-                            aces_RangoInicioMeses = c.aces_RangoInicioMeses,
-                            aces_RangoFinMeses = c.aces_RangoFinMeses,
-                            aces_DiasAuxilioCesantia = c.aces_DiasAuxilioCesantia,
-                            aces_UsuarioCrea = c.aces_UsuarioCrea,
-                            aces_FechaCrea = c.aces_FechaCrea,
-                            aces_UsuarioModifica = c.aces_UsuarioModifica,
-                            aces_FechaModifica = c.aces_FechaModifica,
-                            aces_Activo = c.aces_Activo
-                        })
-                                           .OrderByDescending(x => x.aces_FechaCrea)
-                                           /*.Where(x => x.aces_Activo == true)*/.ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
+                                        .Select(c => new
+                                        {
+                                            aces_IdAuxilioCesantia = c.aces_IdAuxilioCesantia,
+                                            aces_RangoInicioMeses = c.aces_RangoInicioMeses,
+                                            aces_RangoFinMeses = c.aces_RangoFinMeses,
+                                            aces_DiasAuxilioCesantia = c.aces_DiasAuxilioCesantia,
+                                            aces_UsuarioCrea = c.aces_UsuarioCrea,
+                                            aces_FechaCrea = c.aces_FechaCrea,
+                                            aces_UsuarioModifica = c.aces_UsuarioModifica,
+                                            aces_FechaModifica = c.aces_FechaModifica,
+                                            aces_Activo = c.aces_Activo
+                                        })
+                                        .OrderByDescending(x => x.aces_FechaCrea)
+                                        .ToList();
+            // retornar json
             return new JsonResult { Data = tbAuxilioCesantia1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
-        //Metodo para mostrar los detalles del registro seleccionado
+        #region Details
         public JsonResult Details(int? ID)
         {
             var tbAuxCesanJSON = from tbAuxilioDeCesantias in db.tbAuxilioDeCesantias
-                                           where tbAuxilioDeCesantias.aces_Activo == true && tbAuxilioDeCesantias.aces_IdAuxilioCesantia == ID
-                                           orderby tbAuxilioDeCesantias.aces_FechaCrea descending
-                                           select new
-                                           {
-                                               tbAuxilioDeCesantias.aces_IdAuxilioCesantia,
-                                               tbAuxilioDeCesantias.aces_RangoInicioMeses,
-                                               tbAuxilioDeCesantias.aces_RangoFinMeses,
-                                               tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,
-                                               UsuCrea = tbAuxilioDeCesantias.tbUsuario.usu_NombreUsuario,
-                                               tbAuxilioDeCesantias.aces_FechaCrea,
-                                               tbAuxilioDeCesantias.aces_UsuarioModifica,
-                                               UsuModifica = tbAuxilioDeCesantias.tbUsuario1.usu_NombreUsuario,
-                                               tbAuxilioDeCesantias.aces_FechaModifica
-                                           };
+                                 where tbAuxilioDeCesantias.aces_Activo == true && tbAuxilioDeCesantias.aces_IdAuxilioCesantia == ID
+                                 orderby tbAuxilioDeCesantias.aces_FechaCrea descending
+                                 select new
+                                 {
+                                     tbAuxilioDeCesantias.aces_IdAuxilioCesantia,
+                                     tbAuxilioDeCesantias.aces_RangoInicioMeses,
+                                     tbAuxilioDeCesantias.aces_RangoFinMeses,
+                                     tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,
+                                     UsuCrea = tbAuxilioDeCesantias.tbUsuario.usu_NombreUsuario,
+                                     tbAuxilioDeCesantias.aces_FechaCrea,
+                                     tbAuxilioDeCesantias.aces_UsuarioModifica,
+                                     UsuModifica = tbAuxilioDeCesantias.tbUsuario1.usu_NombreUsuario,
+                                     tbAuxilioDeCesantias.aces_FechaModifica
+                                 };
 
 
             db.Configuration.ProxyCreationEnabled = false;
             return Json(tbAuxCesanJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        //Metodo de Creacion de Nuevo registro para la tabla AuxilioCesantia
+        #region Create
         [HttpPost]
         public ActionResult Create(tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
-            //Declaracion de variables
-            //Auditoria
+            
+            // Auditoria
             tbAuxilioDeCesantias.aces_UsuarioCrea = 1;
             tbAuxilioDeCesantias.aces_FechaCrea = DateTime.Now;
             tbAuxilioDeCesantias.aces_Activo = true;
+
+            // variables de resultados
             string response = String.Empty;
             IEnumerable<object> listAuxCesantias = null;
             string MensajeError = "";
-            
 
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar procedimiento almacenado
                     listAuxCesantias = db.UDP_Plani_tbAuxilioDeCesantias_Insert(tbAuxilioDeCesantias.aces_RangoInicioMeses,
                                                                                 tbAuxilioDeCesantias.aces_RangoFinMeses,
                                                                                 tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,
                                                                                          tbAuxilioDeCesantias.aces_UsuarioCrea,
-                                                                                         tbAuxilioDeCesantias.aces_FechaCrea,tbAuxilioDeCesantias.aces_Activo);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                                                                                         tbAuxilioDeCesantias.aces_FechaCrea, tbAuxilioDeCesantias.aces_Activo);
+                    // resultado 
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Insert_Result Resultado in listAuxCesantias)
                         MensajeError = Resultado.MensajeError;
-
+                    
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
@@ -103,153 +109,176 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     response = Ex.Message.ToString();
                 }
                 response = "bien";
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
 
-            ViewBag.aces_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioCrea);
-            ViewBag.aces_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioModifica);
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-        
-        // Obtener: Registro de la tabla AuxilioDeCesantias/Edit
+        #endregion
+
+        #region GET: Edit
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
             tbAuxilioDeCesantias tbAuxilioCesEditJSON = db.tbAuxilioDeCesantias.Find(ID);
             return Json(tbAuxilioCesEditJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region POST: Edit
         [HttpPost]
         public ActionResult Edit([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
-            //Declaracion de variables 
-            //LLENAR DATA DE AUDITORIA
+            // auditoria
             tbAuxilioDeCesantias.aces_UsuarioModifica = 1;
             tbAuxilioDeCesantias.aces_FechaModifica = DateTime.Now;
+
+            // variables de resultado
             string response = String.Empty;
             IEnumerable<object> listAuxCes = null;
             string MensajeError = "";
-           
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update(tbAuxilioDeCesantias.aces_IdAuxilioCesantia,tbAuxilioDeCesantias.aces_RangoInicioMeses,
+                    // ejecutar procedimiento almacenad
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update(tbAuxilioDeCesantias.aces_IdAuxilioCesantia, tbAuxilioDeCesantias.aces_RangoInicioMeses,
                                                                                             tbAuxilioDeCesantias.aces_RangoFinMeses,
-                                                                                            tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,tbAuxilioDeCesantias.aces_UsuarioModifica,tbAuxilioDeCesantias.aces_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                                                                                            tbAuxilioDeCesantias.aces_DiasAuxilioCesantia, tbAuxilioDeCesantias.aces_UsuarioModifica, tbAuxilioDeCesantias.aces_FechaModifica);
+                    
+                    // validar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Update_Result Resultado in listAuxCes)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                     response = "error";
                 }
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Inactivar
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Inactivar(int ID)
         {
+            // variables de resulado
             string response = String.Empty;
             IEnumerable<object> listAuxilioCesantia = null;
             string MensajeError = "";
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    // ejecutar el procedimiento almacenado
                     listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID, 1, DateTime.Now);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Delete_Result Resultado in listAuxilioCesantia)
                         MensajeError = Resultado.MensajeError;
 
 
-                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
+                    // el proceso fue exitoso
                     response = "bien";
                 }
                 catch (Exception)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
                     response = "error";
                 }
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                // el modelo no es válido
                 ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
                 response = "error";
             }
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+
+            // retorna resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Activar
         public ActionResult Activar(int id)
         {
+            // variables de resultado
             IEnumerable<object> listAuxCes = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Activar(id,1,DateTime.Now);
+                    // ejecutar procedimiento almacenado
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Activar(id, 1, DateTime.Now);
 
+                    // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Activar_Result Resultado in listAuxCes)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
+                    // se generó una excepción
                     response = "error";
                 }
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // el modelo no es válido
                 response = "error";
             }
 
-            return Json(JsonRequestBehavior.AllowGet);
+            // retornar resultado del proceso
+            return Json(response,JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -258,5 +287,6 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
     }
 }

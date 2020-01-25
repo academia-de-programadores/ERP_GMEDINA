@@ -1,28 +1,4 @@
-﻿//
-//Obtención de Script para Formateo de Fechas
-//
-$.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
-
-
-//FUNCION GENERICA PARA REUTILIZAR AJAX
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data) {
-            callback(data);
-        }
-    });
-}
-
-//FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
+﻿// cargar grid, refrescar datatable
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
@@ -30,22 +6,20 @@ function cargarGridDeducciones() {
         'GET',
         (data) => {
             if (data.length == 0) {
-                //Validar si se genera un error al cargar de nuevo el grid
+                // validar errores
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
-            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaAFP = data;
 
-            //LIMPIAR LA DATA DEL DATATABLE
+            //limpiar datatable
             $('#tblAFP').DataTable().clear();
 
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAFP.length; i++) {
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaAFP[i].afp_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaAFP[i].afp_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
                 var botonDetalles = ListaAFP[i].afp_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' : '';
@@ -56,324 +30,503 @@ function cargarGridDeducciones() {
                 //variable donde está el boton activar
                 var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarAFP" afpid="' + ListaAFP[i].afp_Id + '" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
 
-                //AGREGAR EL ROW AL DATATABLE
+                //agregar row al datatble
                 $('#tblAFP').dataTable().fnAddData([
                     ListaAFP[i].afp_Id,
                     ListaAFP[i].afp_Descripcion,
-                    ListaAFP[i].afp_AporteMinimoLps,
-                    ListaAFP[i].afp_InteresAporte,
-                    ListaAFP[i].afp_InteresAnual,
+                    (ListaAFP[i].afp_AporteMinimoLps % 1 == 0) ? ListaAFP[i].afp_AporteMinimoLps + ".00" : ListaAFP[i].afp_AporteMinimoLps,
+                    (ListaAFP[i].afp_InteresAporte % 1 == 0) ? ListaAFP[i].afp_InteresAporte + ".00" : ListaAFP[i].afp_InteresAporte,
+                    (ListaAFP[i].afp_InteresAnual % 1 == 0) ? ListaAFP[i].afp_InteresAnual + ".00" : ListaAFP[i].afp_InteresAnual,
                     ListaAFP[i].tde_Descripcion,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
             }
-            //APLICAR EL MAX WIDTH
             FullBody();
         });
 }
 
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
-        <div class="sk-rect1"></div>
-        <div class="sk-rect2"></div>
-        <div class="sk-rect3"></div>
-        <div class="sk-rect4"></div>
-        <div class="sk-rect5"></div>
-        </div>`;
-}
 
-//Activar
+// --- activar --- //
+
+var activarID = 0;
+
+// activar 1
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 
-    var ID = $(this).closest('tr').data('id');
+    // habilitar boton inactivar
+    $("#btnActivarRegistroAFP").attr('disabled', false);
 
-    var ID = $(this).attr('afpid');
+    // obtener ID
+    var ID = $(this).data('id');
+    activarID = ID;
+
+    // guardar ID en local storage
     localStorage.setItem('id', ID);
-   //Mostrar el Modal
+
+    //mostrar el Modal activar
     $("#ActivarAFP").modal();
 });
 
+// activar 2
 $("#btnActivarRegistroAFP").click(function () {
 
-    let ID = localStorage.getItem('id')
+    // inhabilitar el boton
+    $("#btnActivarRegistroAFP").attr('disabled',false);
+    let ID = activarID;
+
 
     $.ajax({
         url: "/AFP/Activar",
         method: "POST",
         data: { id: ID }
-    }).done(function (data) {
+    })
+    .done(function (data) {
+
         $("#ActivarAFP").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+
+        // validar errores
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
                 message: '¡No se activó el registro, contacte al administrador!',
             });
         }
-        else{
+        else {
+
+            // refrescar datatable
             cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
+            
+            // mensaje de exito
             iziToast.success({
                 title: 'Exito',
                 message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
+    activarID = 0;
 
 });
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// --- crear --- //
 
+// cerrar modal create
 $("#btnCerrarCrear").click(function () {
-    $("#afp_Descripcion").val('');
-    $("#afp_AporteMinimoLps").val('');
-    $("#afp_InteresAporte").val('');
-    $("#afp_InteresAnual").val('');
-    $("#Crear #tde_IdTipoDedu").val("0");
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#Crear #ast1").css("color", "black");
-    $("#Crear #ast2").css("color", "black");
-    $("#Crear #ast3").css("color", "black");
-    $("#Crear #ast4").css("color", "black");
-    $("#Crear #ast5").css("color", "black");
+
     $("#AgregarAFP").modal('hide');
 });
 
-//Agregar//
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-const btnGuardar = $('#btnCreateRegistroAFP')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
+// crear 1 mostrar modal
 $(document).on("click", "#btnAgregarAFP", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+
+    //llenar DDL
     $.ajax({
         url: "/AFP/EditGetTipoDeduccionDDL",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
+
+            // limpiar DDL
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+
+            // setear DDL
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
 
-    $("#afp_Descripcion").val('');
-    $("#afp_AporteMinimoLps").val('');
-    $("#afp_InteresAporte").val('');
-    $("#afp_InteresAnual").val('');
-    $("#Crear #tde_IdTipoDedu").val("0");
+    //--
+    // * descripcion 
+    $('#asiteriscoDescripcion').removeClass('text-danger');
+
+    // mesanje descripcion requerida
+    $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+
+    // mesanje descripcion no es numerico
+    $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+
+    //--
+    // * aporte minimo LPIS
+    $('#astericosAporteMinimoLps').removeClass('text-danger');
+
+    // mensaje aporte minimo debe ser mayor que cero
+    $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
+
+    //--
+    // * interes aporte 
+    $('#astericoInteresAporte').removeClass('text-danger');
+
+    // mensaje interes aporte no puede ser menor que cero
+    $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
+
+    // mensaje interes aporte no puede ser mayor que cién
+    $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
+
+    // -- 
+    // * interes anual 
+    $('#astericosInteresAnual').removeClass('text-danger');
+
+    // mensaje interes anual no puede ser menor que cero
+    $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
+
+    // mensaje interes anual no puede ser mayor que cién
+    $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
+
+    //--
+    // * tipo de deduccion
+    $('#astericosTipoDeduccion').removeClass('text-danger');
+
+    // mensaje interes aporte no puede ser menor que cero
+    $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+
+
+    //--
+
+    // vaciar cajas de texto
+    $('#Crear input[type=text], input[type=number]').val('');
+
+    // habilitar boton 
+    $("#btnCreateRegistroAFP").attr('disabled', false);
+
+    //mostrar modal
+    $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
 
 });
 
-
-
-//FUNCION: CREAR EL NUEVO REGISTRO
+// crear 2 ejecutar
 $('#btnCreateRegistroAFP').click(function () {
-    debugger;
-    //Para que no entre directamente a hacer la peticion o la acción al servidor
-    var TOF = true;
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-    var val1 = $("#Crear #afp_Descripcion").val();
-    var val2 = $("#Crear #afp_AporteMinimoLps").val();
-    var val3 = $("#Crear #afp_InteresAporte").val();
-    var val4 = $("#Crear #afp_InteresAnual").val();
-    var val5 = $("#Crear #tde_IdTipoDedu").val();
 
-    if (val1 == "" || val1 == null) {
-        $("#Crear #validation1").css("display", "");
-        $("#Crear #ast1").css("color", "red");
-        TOF = false;
-    }
-    else{
-        $("#Crear #validation1").css("display", "none");
-        $("#Crear #ast1").css("color", "black");
-    }
-    //--
-    if (val2 != "" || val2 != null || val2 != undefined) {
-        $("#Crear #validation2").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
+    // deshabilitar el boton
+    $("#btnCreateRegistroAFP").attr('disabled', true);
+
+    var modalState = true;
+    var descripcion = $("#Crear #afp_Descripcion").val();
+
+    // validar descripción
+    if (descripcion.trim() != '') {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
     }
     else {
-        $("#Crear #validation2").css("display", "");
-        $("#Crear #ast2").css("color", "red");
-        TOF = false;
-    }
-    if (expreg.test(val2)) {
-        $("#Crear #validation2").css("display", "none");
-        $("#Crear #ast2").css("color", "black");
-    }
-    else {
-        $("#Crear #validation2").css("display", "");
-        $("#Crear #ast2").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (val3 != "" || val3 != null || val3 != undefined) {
-        $("#Crear #validation3").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
-    }
-    else {
-        $("#Crear #validation3").css("display", "");
-        $("#Crear #ast3").css("color", "red");
-        TOF = false;
-    }
-    if (expreg.test(val3)) {
-        $("#Crear #validation3").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
-    }
-    else {
-        $("#Crear #validation3").css("display", "");
-        $("#Crear #ast3").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (val4 != "" || val4 != null || val4 != undefined) {
-        $("#Crear #validation4").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
-    }
-    else {
-        $("#Crear #validation4").css("display", "");
-        $("#Crear #ast4").css("color", "red");
-        TOF = false;
-    }
-    if (expreg.test(val4)) {
-        $("#Crear #validation4").css("display", "none");
-        $("#Crear #ast4").css("color", "black");
-    }
-    else {
-        $("#Crear #validation4").css("display", "");
-        $("#Crear #ast4").css("color", "red");
-        TOF = false;
-    }
-    //--
-    if (val5 == "" || val5 == 0 || val5 == "0" || val5 == null) {
-        $("#Crear #validation5").css("display", "");
-        $("#Crear #ast5").css("color", "red");
-        TOF = false;
-    }
-    else {
-        $("#Crear #validation5").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+        modalState = false;
     }
 
-    if (TOF) {
-        mostrarCargandoCrear();
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
 
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+        modalState = false;
+    }
+    // si no es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
+    //--
+
+    // validar aporte minimo lps
+
+    // si es menor o igual que cero
+    if (parseInt($("#Crear #afp_AporteMinimoLps").val()) > 0) {
+
+        $('#astericosAporteMinimoLps').removeClass('text-danger');
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
+    }
+    else {
+        $('#astericosAporteMinimoLps').addClass("text-danger");
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', '');
+        modalState = false;
+    }
+
+    //--
+
+    // validar interes aporte
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
+
+        $('#astericoInteresAporte').removeClass('text-danger');
+        $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
+    }
+    else {
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // si es mayor que cién
+    var interesAporteSinComas = $("#Crear #afp_InteresAporte").val();
+    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
+            $('#astericoInteresAporte').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAporteSinComas).toFixed(2) > 100.00) {
+
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACien").css('display', '');
+        modalState = false;
+    }
+
+    //--
+
+    // validar interes anual
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0) {
+
+        $('#astericosInteresAnual').removeClass('text-danger');
+        $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
+    }
+    else {
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // si es mayor que cién
+    var interesAnualSinComas = $("#Crear #afp_InteresAnual").val();
+    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0)
+            $('#astericosInteresAnual').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAnualSinComas).toFixed(2) > 100.00) {
+
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACien").css('display', '');
+        modalState = false;
+    }
+
+    //--
+
+    // validar tipo de deduccion create 
+    if ($("#Crear #tde_IdTipoDedu").val() != 0) {
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+        $("#Crear #astericosTipoDeduccion").removeClass('text-danger');
+
+    }
+    else {
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', '');
+        $("#Crear #astericosTipoDeduccion").addClass("text-danger");
+        modalState = false;
+    }
+
+
+    if (modalState == true) {
+
+        // serializar formulario
         var data = $("#frmCreateAFP").serializeArray();
 
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        // quitar comas de los montos
+        var aporteMinimoComas = data[3].value;
+        data[3].value = aporteMinimoComas.replace(/,/, '');
+
+        // peticion
         $.ajax({
             url: "/AFP/Create",
             method: "POST",
             data: data
         }).done(function (data) {
 
-            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            // validar resultado del proceso
             if (data != "error") {
-
+                
                 cargarGridDeducciones();
 
-                $("#Crear #afp_Descripcion").val('');
-                $("#Crear #afp_AporteMinimoLps").val('');
-                $("#Crear #afp_InteresAporte").val('');
-                $("#Crear #afp_InteresAnual").val('');
-                $("#Crear #tde_IdTipoDedu").val("0");
-
-                //CERRAR EL MODAL DE AGREGAR
+                // cerrar modal
                 $("#AgregarAFP").modal('hide');
 
-                // Mensaje de exito cuando un registro se ha guardado bien
+                // mensaje de exito
                 iziToast.success({
                     title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
             else {
+
+                $("#btnCreateRegistroAFP").attr('disabled', false);
+                // mensaje de error
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
-
-            ocultarCargandoCrear();
         });
     }
+    else {
+        $("#btnCreateRegistroAFP").attr('disabled', false);
+    }
+});
 
-    
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmCreateAFP").submit(function (e) {
-        return false;
-    });
+// validaciones key up create
+
+// validar descripcion create
+$('#Crear #afp_Descripcion').keyup(function () {
+
+    var descripcion = $("#Crear #afp_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionRequerida").css('display', '');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#asiteriscoDescripcion').addClass("text-danger");
+        $("#Crear #validation_DescripcionNumerico").css('display', '');
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#asiteriscoDescripcion').removeClass('text-danger');
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    }
 
 });
 
+//validar aporte minimo create
+$('#Crear #afp_AporteMinimoLps').keyup(function () {
+
+    // si es menor o igual que cero
+    if (parseInt($("#Crear #afp_AporteMinimoLps").val()) > 0) {
+
+        $('#astericosAporteMinimoLps').removeClass('text-danger');
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
+    }
+    else {
+        $('#astericosAporteMinimoLps').addClass("text-danger");
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', '');
+    }
+
+});
+
+// validar interes aporte create
+$('#Crear #afp_InteresAporte').keyup(function () {
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
+
+        $('#astericoInteresAporte').removeClass('text-danger');
+        $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
+    }
+    else {
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACero").css('display', '');
+    }
+
+    // si es mayor que cién
+    var interesAporteSinComas = $("#Crear #afp_InteresAporte").val();
+    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
+
+        if(parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
+            $('#astericoInteresAporte').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAporteSinComas).toFixed(2) > 100.00) {
+
+        $('#astericoInteresAporte').addClass("text-danger");
+        $("#Crear #validation_InteresAporteMenorACien").css('display', '');
+    }
+
+});
+
+// validar interes anual create
+$('#Crear #afp_InteresAnual').keyup(function () {
+
+    // si es menor que cero
+    if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0) {
+
+        $('#astericosInteresAnual').removeClass('text-danger');
+        $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
+    }
+    else {
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACero").css('display', '');
+    }
+
+    // si es mayor que cién
+    var interesAnualSinComas = $("#Crear #afp_InteresAnual").val();
+    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0)
+            $('#astericosInteresAnual').removeClass('text-danger');
+
+        $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAnualSinComas).toFixed(2) > 100.00) {
+
+        $('#astericosInteresAnual').addClass("text-danger");
+        $("#Crear #validation_InteresAnualMenorACien").css('display', '');
+    }
+
+});
+
+// validar tipo de deduccion create 
+$('#Crear #tde_IdTipoDedu').on('change', function () {
+    
+    if (this.value != 0) {
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+        $("#Crear #astericosTipoDeduccion").removeClass('text-danger');
+
+    }
+    else {
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', '');
+        $("#Crear #astericosTipoDeduccion").addClass("text-danger");
+    }
+});
 
 
-//Editar//
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+// --- Editar ---//
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
+// ocultar modal
 $("#btnCerrarEditar").click(function () {
-    $("#validationes1").css("display", "none");
-    $("#validationes2").css("display", "none");
-    $("#validationes3").css("display", "none");
-    $("#validationes4").css("display", "none");
-    $("#Editar #aste1").css("color", "black");
-    $("#Editar #aste2").css("color", "black");
-    $("#Editar #aste3").css("color", "black");
-    $("#Editar #aste4").css("color", "black");
+
     $("#EditarAFP").modal('hide');
 });
 
-const btnEditar = $('#btnEditAFP')
 
-//Div que aparecera cuando se le de click en crear
-cargandoEditar = $('#cargandoEditar')
+var inactivarID = 0;
+var activarID = 0;
 
-function ocultarCargandoEditar() {
-    btnEditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
-
-function mostrarCargandoEditar() {
-    btnEditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
+// editar 1
 $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
+
+    $("#btnEditAFP").attr('disabled', false);
     var ID = $(this).data('id');
+    inactivarID = ID;
+
     $.ajax({
         url: "/AFP/Edit/" + ID,
         method: "GET",
@@ -382,39 +535,42 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            // obtener data y setear cajas de texto
             if (data) {
                 $("#Editar #afp_Id").val(data.afp_Id);
                 $("#Editar #afp_Descripcion").val(data.afp_Descripcion);
-                $("#Editar #afp_AporteMinimoLps").val(data.afp_AporteMinimoLps);
-                $("#Editar #afp_InteresAporte").val(data.afp_InteresAporte);
-                $("#Editar #afp_InteresAnual").val(data.afp_InteresAnual);
+                $("#Editar #afp_AporteMinimoLps").val((data.afp_AporteMinimoLps % 1 == 0) ? data.afp_AporteMinimoLps + ".00" : data.afp_AporteMinimoLps);
+                $("#Editar #afp_InteresAporte").val((data.afp_InteresAporte % 1 == 0) ? data.afp_InteresAporte + ".00" : data.afp_InteresAporte);
+                $("#Editar #afp_InteresAnual").val((data.afp_InteresAnual % 1 == 0) ? data.afp_InteresAnual + ".00" : data.afp_InteresAnual);
 
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                // ID selecciona en el DDL
                 var SelectedId = data.tde_IdTipoDedu;
 
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                // llenar DDLs
                 $.ajax({
                     url: "/AFP/EditGetTipoDeduccionDDL",
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+
+                        // limipiar ddl
                         $("#Editar #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST                    
+
+                        // llenar ddl
                         $.each(data, function (i, iter) {
                             $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
+
+                // mostrar modal editar
                 $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
             }
             else {
-                //Mensaje de error si no hay data
+
+                // mostrar error si no hay data
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se cargó la información, contacte al administrador!',
@@ -423,106 +579,300 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
         });
 });
 
+// editar 2
 $("#btnEditAFP").click(function () {
-    var TOF = true;
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+    // validaciones
 
-    var vale1 = $("#Editar #afp_Descripcion").val();
-    var vale2 = $("#Editar #afp_AporteMinimoLps").val();
-    var vale3 = $("#Editar #afp_InteresAporte").val();
-    var vale4 = $("#Editar #afp_InteresAnual").val();
-    debugger;
-    if (vale1 == "" || vale1 == null) {
-        $("#validationes1").css("display", "");
-        $("#Editar #aste1").css("color", "red");
-        TOF = false;
+    // deshabilitar el boton
+    $("#btnEditAFP").attr('disabled', true);
+
+    var modalState = true;
+    var descripcion = $("#Editar #afp_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#EditarasiteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditarDescripcionRequerida").css('display', 'none');
     }
-    else{
-        $("#validationes1").css("display", "none");
-        $("#Editar #aste1").css("color", "black");
+    else {
+        $('#EditarasiteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditarDescripcionRequerida").css('display', '');
+        $("#Editar #validation_EditarDescripcionNumerico").css('display', 'none');
+        modalState = false;
     }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#EditarasiteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditarDescripcionNumerico").css('display', '');
+        modalState = false;
+    }
+    // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#EditarasiteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditarDescripcionNumerico").css('display', 'none');
+    }
+
     //--
-    if (vale2 != "" || vale2 != null || vale2 != undefined) {
-        $("#Editar #aste2").css("color", "black");
+
+    // validar aporte minimo lps
+
+    // si es menor o igual que cero
+    if (parseInt($("#Editar #afp_AporteMinimoLps").val()) > 0) {
+
+        $('#EditarastericosAporteMinimoLps').removeClass('text-danger');
+        $("#Editar #validation_EditarAporteMinimoMayorACero").css('display', 'none');
     }
     else {
-        $("#validationes2").css("display", "");
-        $("#Editar #aste2").css("color", "red");
-        TOF = false;
+        $('#EditarastericosAporteMinimoLps').addClass("text-danger");
+        $("#Editar #validation_EditarAporteMinimoMayorACero").css('display', '');
+        modalState = false;
     }
-    if (expreg.test(vale2)) {
-        $("#validationes2").css("display", "none");
-        $("#Editar #aste2").css("color", "black");
-    }
-    else {
-        $("#validationes2").css("display", "");
-        $("#Editar #aste2").css("color", "red");
-        TOF = false;
-    }
+
     //--
-    if (vale3 != "" || vale3 != null || vale3 != undefined) {
-        $("#Editar #aste3").css("color", "black");
+
+    // validar interes aporte
+
+    // si es menor que cero
+    if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0) {
+
+        $('#EditarastericoInteresAporte').removeClass('text-danger');
+        $("#Editar #validation_EditarInteresAporteMenorACero").css('display', 'none');
     }
     else {
-        $("#validationes3").css("display", "");
-        $("#Editar #aste3").css("color", "red");
-        TOF = false;
+        $('#EditarastericoInteresAporte').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAporteMenorACero").css('display', '');
+        modalState = false;
     }
-    if (expreg.test(vale3)) {
-        $("#validationes3").css("display", "");
-        $("#Editar #aste3").css("color", "black");
+
+    // si es mayor que cién
+    var interesAporteSinComas = $("#Editar #afp_InteresAporte").val();
+    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0)
+            $('#EditarastericoInteresAporte').removeClass('text-danger');
+
+        $("#Editar #validation_EditarInteresAporteMenorACien").css('display', 'none');
     }
-    else {
-        $("#validationes3").css("display", "");
-        $("#Editar #aste3").css("color", "red");
-        TOF = false;
+    else if (parseFloat(interesAporteSinComas).toFixed(2) > 100.00) {
+
+        $('#EditarastericoInteresAporte').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAporteMenorACien").css('display', '');
+        modalState = false;
     }
+
     //--
-    if (vale4 != "" || vale4 != null || vale4 != undefined) {
-        $("#Editar #aste4").css("color", "black");
+
+    // validar interes anual
+
+    // si es menor que cero
+    if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0) {
+
+        $('#EditarastericosInteresAnual').removeClass('text-danger');
+        $("#Editar #validation_EditarInteresAnualMenorACero").css('display', 'none');
     }
     else {
-        $("#validationes4").css("display", "");
-        $("#Editar #aste4").css("color", "red");
-        TOF = false;
+        $('#EditarastericosInteresAnual').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAnualMenorACero").css('display', '');
+        modalState = false;
     }
-    if (expreg.test(vale4)) {
-        $("#validationes4").css("display", "none");
-        $("#Editar #aste4").css("color", "black");
+
+    // si es mayor que cién
+    var interesAnualSinComas = $("#Editar #afp_InteresAnual").val();
+    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0)
+            $('#EditarastericosInteresAnual').removeClass('text-danger');
+
+        $("#Editar #validation_EditarInteresAnualMenorACien").css('display', 'none');
     }
-    else {
-        $("#validationes4").css("display", "");
-        $("#Editar #aste4").css("color", "red");
-        TOF = false;
+    else if (parseFloat(interesAnualSinComas).toFixed(2) > 100.00) {
+
+        $('#EditarastericosInteresAnual').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAnualMenorACien").css('display', '');
+        modalState = false;
     }
+
     //--
-    if (TOF) {
+
+    // validar tipo de deduccion create 
+    if ($("#Editar #tde_IdTipoDedu").val() != 0) {
+        $("#Editar #validation_EditarTipoDeduccionRequerida").css('display', 'none');
+        $("#Editar #EditarastericosTipoDeduccion").removeClass('text-danger');
+
+    }
+    else {
+        $("#Editar #validation_EditarTipoDeduccionRequerida").css('display', '');
+        $("#Editar #EditarastericosTipoDeduccion").addClass("text-danger");
+        modalState = false;
+    }
+
+    // terminan validaciones
+    //--
+    if (modalState == true) {
         $("#EditarAFP").modal('hide');
         $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+    }
+    else {
+        $("#btnEditAFP").attr('disabled', false);
     }
 
-    $("#EditarAFP").submit(function (e) {
-        return false;
-    });
+    
 });
 
+// --- validaciones key up editar ---
+
+$('#Editar #afp_Descripcion').keyup(function () {
+    
+    var descripcion = $("#Editar #afp_Descripcion").val();
+
+    //si no está vacio
+    if (descripcion.trim() != '') {
+
+        $('#EditarasiteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditarDescripcionRequerida").css('display', 'none');
+    }
+    else {
+        $('#EditarasiteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditarDescripcionRequerida").css('display', '');
+        $("#Editar #validation_EditarDescripcionNumerico").css('display', 'none');
+    }
+
+    // si es un número y no está vacio
+    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+
+        $('#EditarasiteriscoDescripcion').addClass("text-danger");
+        $("#Editar #validation_EditarDescripcionNumerico").css('display', '');
+    }
+        // si es un número
+    else if (isNaN(descripcion) == true) {
+
+        $('#EditarasiteriscoDescripcion').removeClass('text-danger');
+        $("#Editar #validation_EditarDescripcionNumerico").css('display', 'none');
+    }
+
+});
+
+$('#Editar #afp_AporteMinimoLps').keyup(function () {
+
+    // si es menor o igual que cero
+    if (parseInt($("#Editar #afp_AporteMinimoLps").val()) > 0) {
+
+        $('#EditarastericosAporteMinimoLps').removeClass('text-danger');
+        $("#Editar #validation_EditarAporteMinimoMayorACero").css('display', 'none');
+    }
+    else {
+        $('#EditarastericosAporteMinimoLps').addClass("text-danger");
+        $("#Editar #validation_EditarAporteMinimoMayorACero").css('display', '');
+    }
+});
+
+$('#Editar #afp_InteresAporte').keyup(function () {
+
+    // si es menor que cero
+    if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0) {
+
+        $('#EditarastericoInteresAporte').removeClass('text-danger');
+        $("#Editar #validation_EditarInteresAporteMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditarastericoInteresAporte').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAporteMenorACero").css('display', '');
+    }
+
+    // si es mayor que cién
+    var interesAporteSinComas = $("#Editar #afp_InteresAporte").val();
+    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0)
+            $('#EditarastericoInteresAporte').removeClass('text-danger');
+
+        $("#Editar #validation_EditarInteresAporteMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAporteSinComas).toFixed(2) > 100.00) {
+
+        $('#EditarastericoInteresAporte').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAporteMenorACien").css('display', '');
+    }
+});
+
+$('#Editar #afp_InteresAnual').keyup(function () {
+
+    // si es menor que cero
+    if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0) {
+
+        $('#EditarastericosInteresAnual').removeClass('text-danger');
+        $("#Editar #validation_EditarInteresAnualMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditarastericosInteresAnual').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAnualMenorACero").css('display', '');
+    }
+
+    // si es mayor que cién
+    var interesAnualSinComas = $("#Editar #afp_InteresAnual").val();
+    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+
+    if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
+
+        if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0)
+            $('#EditarastericosInteresAnual').removeClass('text-danger');
+
+        $("#Editar #validation_EditarInteresAnualMenorACien").css('display', 'none');
+    }
+    else if (parseFloat(interesAnualSinComas).toFixed(2) > 100.00) {
+
+        $('#EditarastericosInteresAnual').addClass("text-danger");
+        $("#Editar #validation_EditarInteresAnualMenorACien").css('display', '');
+    }
+   
+});
+
+$('#Editar #tde_IdTipoDedu').on('change', function () {
+
+    if (this.value != 0) {
+        $("#Editar #validation_EditarTipoDeduccionRequerida").css('display', 'none');
+        $("#Editar #EditarastericosTipoDeduccion").removeClass('text-danger');
+
+    }
+    else {
+        $("#Editar #validation_EditarTipoDeduccionRequerida").css('display', '');
+        $("#Editar #EditarastericosTipoDeduccion").addClass("text-danger");
+    }
+
+});
+
+
+// boton no confirmar edicion
 $(document).on("click", "#btnRegresar", function () {
-    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
     $("#EditarAFPConfirmacion").modal('hide');
+    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
+    $("#btnEditAFP").attr('disabled', false);
 });
 
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+// editar 3 ejecutar
 $("#btnEditAFPConfirmar").click(function () {
-    mostrarCargandoEditar();
 
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    $("#btnEditAFPConfirmar").attr('disabled', true);
+
+    // serializar formulario
     var data = $("#frmEditarAFP").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+
+    // quitar comas de los montos
+    var aporteMinimoComas = data[3].value;
+    data[3].value = aporteMinimoComas.replace(/,/, '');
+
+    
     $.ajax({
         url: "/AFP/Edit",
         method: "POST",
@@ -530,12 +880,14 @@ $("#btnEditAFPConfirmar").click(function () {
     }).done(function (data) {
         if (data != "error") {
 
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            //ocultar modal
             $("#EditarAFPConfirmacion").modal('hide');
             $("#EditarAFP").modal('hide');
-            // REFRESCAR UNICAMENTE LA TABLA
+
+            //actualizar datatable
             cargarGridDeducciones();
-            //Mensaje de exito de la edicion
+
+            // mensaje de exito
             iziToast.success({
                 title: 'Exito',
                 message: '¡El registro se editó de forma exitosa!',
@@ -543,29 +895,24 @@ $("#btnEditAFPConfirmar").click(function () {
 
         }
         else {
+            // mensaje de error
             iziToast.error({
                 title: 'Error',
                 message: '¡No se editó el registro, contacte al administrador!',
             });
+            $("#btnEditAFPConfirmar").attr('disabled', false);
         }
-        
-        ocultarCargandoEditar();
     });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmEditarAFP").submit(function (e) {
-        return false;
-    });
-
+    $("#btnEditAFPConfirmar").attr('disabled', false);
 });
 
 
-
-
-//Detalles//
-///////////////////////////////////////////////////////////////////////////////////////////////////
+// --- Detalles --- 
 $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
+
+    // obtener id registro
     var ID = $(this).data('id');
+
     $.ajax({
         url: "/AFP/Details/" + ID,
         method: "GET",
@@ -574,16 +921,16 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            // si se obtiene data setear items
             if (data) {
                 var FechaCrea = FechaFormato(data[0].afp_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].afp_FechaModifica);
                 $(".field-validation-error").css('display', 'none');
                 $("#Detalles #afp_Id").html(data[0].afp_Id);
                 $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
-                $("#Detalles #afp_AporteMinimoLps").html(data[0].afp_AporteMinimoLps);
-                $("#Detalles #afp_InteresAporte").html(data[0].afp_InteresAporte);
-                $("#Detalles #afp_InteresAnual").html(data[0].afp_InteresAnual);
+                $("#Detalles #afp_AporteMinimoLps").html((data[0].afp_AporteMinimoLps % 1 == 0) ? data[0].afp_AporteMinimoLps + ".00" : data[0].afp_AporteMinimoLps);
+                $("#Detalles #afp_InteresAporte").html((data[0].afp_InteresAporte % 1 == 0) ? data[0].afp_InteresAporte + ".00" : data[0].afp_InteresAporte);
+                $("#Detalles #afp_InteresAnual").html((data[0].afp_InteresAnual % 1 == 0) ? data[0].afp_InteresAnual + ".00" : data[0].afp_InteresAnual);
                 $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#Detalles #afp_UsuarioCrea").html(data[0].afp_UsuarioCrea);
@@ -592,123 +939,150 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                 $("#Detalles #afp_UsuarioModifica").html(data[0].afp_UsuarioModifica);
                 $("#Detalles #afp_FechaModifica").html(FechaModifica);
 
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                // id selecciona
                 var SelectedId = data[0].tde_IdTipoDedu;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                
+                // obtener tipo de deduccion descripcion
                 $.ajax({
                     url: "/AFP/EditGetTipoDeduccionDDL",
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
-                .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        //$("#Detalles #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        //$("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
+                    })
+                    .done(function (data) {
+
+                        // setear caja de texto
                         $.each(data, function (i, iter) {
-                            //$("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                             if (iter.Id == SelectedId) {
                                 $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
                             }
                         });
                     });
+
+                // mostrar modal de detalles
                 $("#DetallesAFP").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
             }
             else {
-                //Mensaje de error si no hay data
+                // mensaje de error
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
+            if (data == "Error") {
+                // mensaje de error
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
+                });
+
+            }
         });
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+// --- Inactivar --- 
 
-//Inactivar//
+// inactivar no confirmar
 $(document).on("click", "#btnBack", function () {
-    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+
+    // habilitar boton
+    $("#btnInactivarRegistroAFP").attr('disabled', false);
+
+    // ocultar modal inactivar
     $("#InactivarAFP").modal('hide');
+
+    // mostrar modal editar
+    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
+
 });
 
-$(document).on("click", "#btnBa", function () {
-    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
-    $("#InactivarAFP").modal('hide');
-});
-
+// inactivar confirmar
 $(document).on("click", "#btnInactivarAFP", function () {
-    $("#EditarAFP").modal('hide');    
+
+    // habilitar boton ejecutar inactivar
+    $("#btnInactivarRegistroAFP").attr('disabled', false);
+
+    // modales
+    $("#EditarAFP").modal('hide');
     $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+
 });
 
-const btnInhabilitar = $('#btnInactivarRegistroAFP')
-
-//Div que aparecera cuando se le de click en crear
-cargandoInhabilitar = $('#cargandoInhabilitar')
-
-function ocultarCargandoInhabilitar() {
-    btnInhabilitar.show();
-    cargandoInhabilitar.html('');
-    cargandoInhabilitar.hide();
-}
-
-function mostrarCargandoInhabilitar() {
-    btnInhabilitar.hide();
-    cargandoInhabilitar.html(spinner());
-    cargandoInhabilitar.show();
-}
-
-
-//EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
+// inactivar ejecutar
 $("#btnInactivarRegistroAFP").click(function () {
 
-    var data = $("#frmInactivarAFP").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    // deshabilitar el botón
+    $("#btnInactivarRegistroAFP").attr('disabled', true);
+    
     $.ajax({
         url: "/AFP/Inactivar",
         method: "POST",
-        data: data
+        data: { afp_Id: inactivarID }
     }).done(function (data) {
         if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
+
+            // mensaje de error
             iziToast.error({
                 title: 'Error',
                 message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
-            mostrarCargandoInhabilitar();
-            // REFRESCAR UNICAMENTE LA TABLA
+
+            // actualizar datatable
             cargarGridDeducciones();
 
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            // ocultar modales
             $("#InactivarAFP").modal('hide');
             $("#EditarAFP").modal('hide');
 
-            //Mensaje de exito de la edicion
+            // mensaje de exito
             iziToast.success({
                 title: 'Exito',
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
-        ocultarCargandoInhabilitar();
+    }); 
+
+});
+
+
+// obtener script serialize date
+$.getScript("../Scripts/app/General/SerializeDate.js")
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
     });
 
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmInactivarAFP").submit(function (e) {
-        return false;
+// funcion generica ajax
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+                success: function (data) {
+                    callback(data);
+                }
     });
+}
 
+// evitar postbacks de formularios
+$("#frmCreateAFP").submit(function (e) {
+    return false;
+});
+
+$("#frmInactivarAFP").submit(function (e) {
+    return false;
+});
+
+$("#frmEditarAFP").submit(function (e) {
+    return false;
+});
+
+$("#EditarAFP").submit(function (e) {
+    return false;
 });

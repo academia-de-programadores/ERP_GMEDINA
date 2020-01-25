@@ -14,14 +14,16 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: AcumuladosISR
+        #region GET: AcumuladosISR
         public ActionResult Index()
         {
             var tbAcumuladosISR = db.tbAcumuladosISR.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.aisr_FechaCrea);
             return View(tbAcumuladosISR.ToList());
         }
+        #endregion
+
+        #region GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         [HttpGet]
-        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         public ActionResult GetData()
         {
             var otbAcumuladosISR = db.tbAcumuladosISR
@@ -32,9 +34,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = otbAcumuladosISR, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
-
-        // GET: AcumuladosISR/Details/5
+        #region GET: Details
         public ActionResult Details(int? id)
         {
             var tbAcumuladosISRJSON = from tbAcumuladosISR in db.tbAcumuladosISR
@@ -59,9 +61,9 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(tbAcumuladosISRJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-
+        #region POST: create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioCrea,aisr_FechaCrea,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
@@ -112,141 +114,169 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        public JsonResult Edit(int? id)
+        #region GET: edit
+        public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbAcumuladosISR tbAcumuladosISRJSON = db.tbAcumuladosISR.Find(id);
+            tbAcumuladosISR tbAcumuladosISRJSON = db.tbAcumuladosISR.Find(ID);
             return Json(tbAcumuladosISRJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region POST: Editar
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
+        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
         {
+            // data de auditoria
             tbAcumuladosISR.aisr_UsuarioModifica = 1;
             tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
-            tbAcumuladosISR.aisr_Activo = true;
+
+            
+            string response = String.Empty;
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            //VALIDAR SI EL MODELO ES VÁLIDO
+            
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //Ejecución del procedimiento almacenado
+                    // ejecutar procedimiento almacenado
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Update(tbAcumuladosISR.aisr_Id,
-                                                                            tbAcumuladosISR.aisr_Descripcion,
-                                                                            tbAcumuladosISR.aisr_Monto,
-                                                                            tbAcumuladosISR.aisr_UsuarioModifica,
-                                                                            tbAcumuladosISR.aisr_FechaModifica);
-
-                    foreach (UDP_Plani_tbAcumuladosISR_Update_Result Resultado in listAcumuladosISR.ToList())
+                                                                                            tbAcumuladosISR.aisr_Descripcion,
+                                                                                            tbAcumuladosISR.aisr_Monto,
+                                                                                            tbAcumuladosISR.aisr_UsuarioModifica,
+                                                                                            tbAcumuladosISR.aisr_FechaModifica);
+                    // verificar resultado del procedimiento almacenado
+                    foreach (UDP_Plani_tbAcumuladosISR_Update_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        // error: falló el PA
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
+
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // error : se generó una excepción
+                    response = "error";
                 }
+
+                // el resultado del proceso fue exitoso
                 response = "bien";
             }
-            else
-            {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+            else {
+
+                // error: el modelo no es válido
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
+            
+            // retornar resultado
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Inactivar
         public ActionResult Inactivar(int id)
         {
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
+
+            //validar estado del modelo
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // ejecutar PA
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Inactivar(id,
                                                                                 1,
                                                                                 DateTime.Now);
 
+                    // verificar resultado del PA
                     foreach (UDP_Plani_tbAcumuladosISR_Inactivar_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                         ModelState.AddModelError("", "No se pudo inactivar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
+                    // error: se generó una excepción
                     response = "error";
                 }
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // el modelo no es válido
                 response = "error";
             }
 
+            // retornar resultado del proceso
             return Json(JsonRequestBehavior.AllowGet);
         }
 
-        // GET: TechosDeducciones/Activar/5    
+        #endregion
+
+        #region Activar  
         public ActionResult Activar(int id)
         {
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
+
+            // validar estado del modelo
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // ejecutar PA
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Activar(id,
                                                                                     1,
                                                                                     DateTime.Now);
 
+                    // verificar resultado del PA
                     foreach (UDP_Plani_tbAcumuladosISR_Activar_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                         ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
+                    // se generó una excepción
                     response = "error";
                 }
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // modelo inválido
                 response = "error";
             }
 
+            // retornar resultado del proceso
             return Json(JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region Dispose
 
         protected override void Dispose(bool disposing)
         {
@@ -256,5 +286,7 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

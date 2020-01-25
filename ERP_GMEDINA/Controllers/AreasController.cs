@@ -16,16 +16,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
-            //bool Admin = false;
-            //try
-            //{
-            //    Admin = (bool)Session["Admin"];
-            //}
-            //catch (Exception)
-            //{
-            //    Response.Redirect("~/Inicio/index");
-            //}
-            tbAreas tbAreas = new tbAreas {  };
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("");
+            }
+            tbAreas tbAreas = new tbAreas { };
             return View(tbAreas);
         }
         public ActionResult llenarTabla()
@@ -141,6 +136,10 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -162,6 +161,10 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas/Create
         public ActionResult Create()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("");
+            }
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<tbSucursales> Sucursales = new List<tbSucursales> { };
@@ -185,26 +188,52 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (var transaction = db.Database.BeginTransaction())
                 {
+                    var cargo = db.UDP_RRHH_tbCargos_Insert(
+                        tbAreas.car_Descripcion,
+                        Usuario.usu_Id,
+                        DateTime.Now
+                        );
+                    foreach (UDP_RRHH_tbCargos_Insert_Result item in cargo)
+                    {
+                        if (item.MensajeError == "-1")
+                        {
+                            return Json(new { codigo = "-3", input = "car_Descripcion", result = tbAreas.car_Descripcion }, JsonRequestBehavior.AllowGet);
+                        }
+                        tbAreas.car_Id = int.Parse(item.MensajeError);
+                    }
                     var list = db.UDP_RRHH_tbAreas_Insert(
                         tbAreas.suc_Id,
-                        tbAreas.car_Descripcion,
                         tbAreas.area_Descripcion,
+                        tbAreas.car_Id,
                         Usuario.usu_Id,
                         DateTime.Now);
                     foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
                     {
                         if (item.MensajeError == "-1")
                         {
-                            return Json("-2", JsonRequestBehavior.AllowGet);
+                            return Json(new { codigo = "-2", input = "area_Descripcion", result = tbAreas.area_Descripcion }, JsonRequestBehavior.AllowGet);
                         }
                         tbAreas.area_Id = int.Parse(item.MensajeError);
                     }
                     foreach (tbDepartamentos item in tbDepartamentos)
                     {
+                        var deptocargo = db.UDP_RRHH_tbCargos_Insert(
+                                                               item.tbCargos.car_Descripcion,
+                                                               Usuario.usu_Id,
+                                                               DateTime.Now
+                                                             );
+                        foreach (UDP_RRHH_tbCargos_Insert_Result i in cargo)
+                        {
+                            if (i.MensajeError == "-1")
+                            {
+                                return Json(new { codigo = "-4", input = "car_Descripcion", result = item.tbCargos.car_Descripcion }, JsonRequestBehavior.AllowGet);
+                            }
+                            tbAreas.car_Id = int.Parse(i.MensajeError);
+                        }
                         var depto = db.UDP_RRHH_tbDepartamentos_Insert(
                             tbAreas.area_Id,
-                            item.tbCargos.car_Descripcion,
                             item.depto_Descripcion,
+                            item.tbCargos.car_Id,
                             Usuario.usu_Id,
                             DateTime.Now);
                         string mensajeDB = "";
@@ -214,7 +243,7 @@ namespace ERP_GMEDINA.Controllers
                         }
                         if (mensajeDB == "-1")
                         {
-                            return Json("-2", JsonRequestBehavior.AllowGet);
+                            return Json("-4", JsonRequestBehavior.AllowGet);
                         }
                     }
                     transaction.Commit();
@@ -231,6 +260,10 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -329,8 +362,8 @@ namespace ERP_GMEDINA.Controllers
                         {
                             var depto = db.UDP_RRHH_tbDepartamentos_Insert(
                                 cAreas.area_Id,
-                                item.car_Descripcion,
                                 item.depto_Descripcion,
+                                item.car_Id,
                                 Usuario.usu_Id,
                                 DateTime.Now);
                             string mensajeDB = "";

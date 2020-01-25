@@ -606,13 +606,17 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Preaviso").Include(
                 "~/Scripts/app/General/Preaviso.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/General/InstitucionesFinancierasEdit").Include(
-                "~/Scripts/app/General/InstitucionesFinancierasEdit.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/InstitucionesFinancierasIndex").Include(
+                "~/Scripts/app/General/InstitucionesFinancierasIndex.js"));
             #endregion
 
             #region Otros
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FechaPlanilla").Include(
                 "~/Scripts/app/General/FechaPlanilla.js"));
+
+            //mascaras de entrada
+            bundles.Add(new ScriptBundle("~/plugins/mascarasDeEntrada").Include(
+                 "~/Scripts/plugins/mascarasDeEntrada/js/jquery.inputmask.bundle.js"));
 
             //DataAnnotations
             bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(

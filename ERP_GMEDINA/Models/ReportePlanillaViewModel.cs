@@ -21,6 +21,9 @@ namespace ERP_GMEDINA.Models
         public decimal? totalHorasPermiso { get; set; }
         public decimal? TotalIngresosHorasExtras { get; set; }
         public decimal? totalBonificaciones { get; set; }
+
+        public decimal? totalIngresosIndivuales { get; set; }
+
         public decimal? totalVacaciones { get; set; }
         public decimal? totalIngresos { get; set; }
         public decimal? totalISR { get; set; }
@@ -29,6 +32,7 @@ namespace ERP_GMEDINA.Models
         public decimal? totalInstitucionesFinancieras { get; set; }
         public decimal? otrasDeducciones { get; set; }
         public decimal? adelantosSueldo { get; set; }
+        public decimal? totalDeduccionesIndividuales { get; set; }
         public decimal? totalDeducciones { get; set; }
         public decimal? totalAPagar { get; set; }
 

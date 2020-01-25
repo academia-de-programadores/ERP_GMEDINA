@@ -1,4 +1,17 @@
-﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
+﻿//
+//OBTENER SCRIPT DE FORMATEO DE FECHA
+//
+$.getScript("../Scripts/app/General/SerializeDate.js")
+  .done(function (script, textStatus) {
+      //console.log(textStatus);
+  })
+  .fail(function (jqxhr, settings, exception) {
+      console.log("No se pudo recuperar Script SerializeDate");
+  });
+
+
+
+//FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -13,7 +26,7 @@ function _ajax(params, uri, type, callback) {
 // REGION DE VARIABLES
 //var registroID = 0;
 var esAdministrador = $("#rol_Usuario").val();
-console.log("Hola: " + esAdministrador);
+
 //Funcion para refrescar la tabla (Index)
 function cargarGridINFS()
 {
@@ -32,112 +45,362 @@ function cargarGridINFS()
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaINFS = data, template = '';
-            //console.log(ListaINFS);
+            var ListaINFS = data;            
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#IndexTable').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaINFS.length; i++)
             {
-                console.log(ListaINFS[i].insf_IdInstitucionFinanciera);
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaINFS[i].insf_Activo == false ? 'Inactivo' : 'Activo';
-
                 //variable boton detalles
-                var botonDetalles = ListaINFS[i].insf_Activo == true ? '<a href="InstitucionesFinancieras/Details?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-primary btn-xs">Detalles</a>' : '';
-                                                                     
-                                                                     //'<button data-id = "' + ListListaINFSaAuxCes[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>'
+                var botonDetalles = ListaINFS[i].insf_Activo == true ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnModalDetallesINFS">Detalles</button>' : '';
                 //variable boton editar
-                var botonEditar = ListaINFS[i].insf_Activo == true ? '<a href="InstitucionesFinancieras/Edit?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
-                    //'<input type="button" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs" value="Editar" onclick="location.href=InstitucionesFinancieras/Edit?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + '" />' : '';
-                    //'<a href="@Url.Action("Edit", "InstitucionesFinancieras", new { id = ' + ListaINFS[i].insf_IdInstitucionFinanciera + ' })" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
-                    //'<a href="InstitucionesFinancieras/Edit?id="' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
-                    //'<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
-                //"@Url.Action("Information", "Admin", new { id = UrlParameter.Optional })"
-
-                //variable donde está el boton activar
-                var botonInactivar = ListaINFS[i].insf_Activo == true ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inctivar</button>' : '' : '';
-                                                                                                
+                var botonEditar = ListaINFS[i].insf_Activo == true ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-default btn-xs" id="btnModalEditarINFS">Editar</button>' : '';
                 //variable donde está el boton activar
                 var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
 
-
-                console.log(botonEditar);
-
-                template += '<tr data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '">' +
-                    '<td>' + ListaINFS[i].insf_IdInstitucionFinanciera + '</td>' +
-                    '<td>' + ListaINFS[i].insf_DescInstitucionFinanc + '</td>' +
-                    '<td>' + ListaINFS[i].insf_Contacto + '</td>' +
-                    '<td>' + ListaINFS[i].insf_Telefono + '</td>' +
-                    '<td>' + ListaINFS[i].insf_Correo + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                     //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                     //boton de inactivar
-                     botonInactivar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
+                $('#IndexTable').dataTable().fnAddData([
+                ListaINFS[i].insf_IdInstitucionFinanciera,
+                ListaINFS[i].insf_DescInstitucionFinanc,
+                ListaINFS[i].insf_Contacto,
+                ListaINFS[i].insf_Telefono,
+                ListaINFS[i].insf_Correo,
+                estadoRegistro,
+                botonDetalles + botonEditar + botonActivar
+                ]);
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyINFS').html(template);
         });
-    //FullBody();
-
 }
 
 
-var ID_in = 0;
-// INACTIVAR 
-$(document).on("click", "#btnModalInactivarINFS", function ()
-{
-    ID_in = $(this).data('id');
-    $("#frmInactivarINFS").modal();
+
+
+//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+$(document).on("click", "#btnAgregarInstitucion", function () {
+    //OCULTAR VALIDACIONES
+    Vaciar_ModalCrear();
+    //DESBLOQUEAR EL BOTON DE CREACION
+    $("#btnCrearInstitucion").attr("disabled", false);
+    //VACIAR LOS CAMPOS DEL MODAL
+    Vaciar_ModalCrear();
+    //MOSTRAR EL MODAL DE AGREGAR
+    $("#CrearInstitucion").modal({ backdrop: 'static', keyboard: false });
 });
 
-$("#btnInactivarINFS").click(function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA INACTIVACIóN
+//FUNCION: CREAR UN NUEVO REGISTRO
+$('#btnCrearInstitucion').click(function () {
+
+    //CAPTURA DE LOS VALORES DE LOS CAMPOS
+    var insf_DescInstitucionFinanc = $("#Crear #insf_DescInstitucionFinanc").val();
+    var insf_Contacto = $("#Crear #insf_Contacto").val();
+    var insf_Telefono = $("#Crear #insf_Telefono").val();
+    var insf_Correo = $("#Crear #insf_Correo").val();
+
+    //VALIDAR QUE EL CAMPO NO ESTE VACIO
+    if (DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Telefono, insf_Correo)) {
+
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmCreateInstitucionFinanciera").serializeArray();
+        //BLOQUEAR EL BOTON
+        $("#btnCrearInstitucion").attr("disabled", true);
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/InstitucionesFinancieras/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+                //DESBLOQUEAR EL BOTON
+                $("#btnCrearInstitucion").attr("disabled", false);
+            }
+            else {
+                //OCULTAR EL MODAL DE CREACION
+                $("#CrearInstitucion").modal('hide');
+                //REFRESCAR LA TABLA 
+                cargarGridINFS();
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+        });
+    }
+});
+
+//OCULTAR MODAL DE CREACION CON EL BOTON DE CERRAR OCULTANDO EL DATAANNOTATION
+$("#btnCerrarCrear").click(function () {
+    $("#CrearInstitucion").modal("hide");
+});
+
+//DESHABILITAR EL POSTBACK DEL CREATE
+$("#frmCreateInstitucionFinanciera").submit(function (e) {
+    e.preventDefault();
+});
+
+
+
+
+//VARIABLE DE INACTIVACION
+var IDInactivar = 0;
+//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+$(document).on("click", "#IndexTable tbody tr td #btnModalEditarINFS", function () {
+    //DESBLOQUEAR EL BOTON
+    $("#btnConfirmarEditar2").attr("disabled", false);
+    //CAPTURAR EL ID DEL REGISTRO SELECCIONADO
+    var ID = $(this).data('id');
+    //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
+    IDInactivar = ID;
+    //OCULTAR EL DATAANNOTATIONS
+    Vaciar_ModalEditar();
+    //EJECUTAR LA PETICION AL SERVIDOR
     $.ajax({
-        url: "/InstitucionesFinancieras/Inactivar/" + ID_in,
+        url: "/InstitucionesFinancieras/Edit/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data != "error") {
+                $("#Editar #insf_IdInstitucionFinanciera").val(data[0].insf_IdInstitucionFinanciera);
+                $("#Editar #insf_DescInstitucionFinanc").val(data[0].insf_Descripcion);
+                $("#Editar #insf_Contacto").val(data[0].insf_Contacto);
+                $("#Editar #insf_Telefono").val(data[0].insf_Telefono);
+                $("#Editar #insf_Correo").val(data[0].insf_Correo);
+                //DESPLEGAR EL MODAL DE EDICION
+                $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
+                });
+            }
+    }).fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo realizar la petición");
+    });
+});
+
+$("#btnCerrarEditar").click(function () {
+    //OCULTAR EL MODAL DE EDICION
+    $("#EditarInstitucion").modal('hide');
+});
+
+//DESPLEGAR MODAL DE CONFIRMACION
+$("#btnModalActualizarINFS").click(function () {
+    //DESBLOQUEAR BOTON DE EDICION
+    $("#btnConfirmarEditar2").attr("disabled", false);
+
+    //CAPTURA DE LOS VALORES DE LOS CAMPOS
+    var insf_DescInstitucionFinanc = $("#Editar #insf_DescInstitucionFinanc").val();
+    var insf_Contacto = $("#Editar #insf_Contacto").val();
+    var insf_Telefono = $("#Editar #insf_Telefono").val();
+    var insf_Correo = $("#Editar #insf_Correo").val();
+    
+    //VALIDAR QUE EL CAMPO NO ESTE VACIO
+    if (DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_Telefono, insf_Correo)) {
+        //OCULTAR MODAL DE EDICION
+        $("#EditarInstitucion").modal('hide');
+        //MOSTRAR MODAL DE CONFIRMACION
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+    }
+});
+
+//GUARDAR LA EDICION DEL REGISTRO
+$("#btnConfirmarEditar2").click(function () {
+
+    //BLOQUEAR EL BOTON
+    $("#btnConfirmarEditar2").attr("disabled", true);
+    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    //var data = $("#frmEditInstitucionFinanciera").serializeArray();
+
+    var data = {
+        insf_IdInstitucionFinanciera: $("#Editar #insf_IdInstitucionFinanciera").val(),
+        insf_DescInstitucionFinanc : $("#Editar #insf_DescInstitucionFinanc").val(),
+        insf_Contacto : $("#Editar #insf_Contacto").val(),
+        insf_Telefono : $("#Editar #insf_Telefono").val(),
+        insf_Correo : $("#Editar #insf_Correo").val()
+    };
+
+    console.log(data);
+    $.ajax({
+        url: "/InstitucionesFinancieras/Edit",
+        method: "POST",
+        data: data
+    })
+    .done(function (data) {
+        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+        if (data != 'error') {
+            //REFRESCAR LA TABLA 
+            cargarGridINFS();
+            //OCULTAR MODAL DE CONFIRMACION
+            $("#ConfirmarEdicion").modal('hide');
+            //MOSTRAR MENSAJE DE EXITO
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se editó de forma exitosa!',
+            });
+        }
+        else {
+            //DESBLOQUEAR EL BOTON
+            $("#btnConfirmarEditar2").attr("disabled", false);
+            //HACER EL CAMBIO DE MODALES
+            $("#ConfirmarEdicion").modal('hide');
+            $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
+            //MOSTRAR MENSAJE DE ERROR
+            iziToast.error({
+                title: 'Error',
+                message: '¡No se editó el registro, contacte al administrador!',
+            });
+        }
+    });
+});
+
+//CERRAR MODAL DE CONFIRMACIÓN DE EDICION
+$(document).on("click", "#btnCerrarConfirmarEditar", function () {
+    //DESBLOQUEAR EL BOTON
+    $("#btnConfirmarEditar2").attr("disabled", false);
+    //OCULTAR MODAL DE CONFIRMACIÓN DE EDICION
+    $("#ConfirmarEdicion").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
+});
+
+//DESHABILITAR EL POSTBACK DEL EDITAR
+$("#frmEditInstitucionFinanciera").submit(function (e) {
+    e.preventDefault();
+});
+
+
+//DETALLES
+$(document).on("click", "#IndexTable tbody tr td #btnModalDetallesINFS", function () {
+    var ID = $(this).data('id');
+    $.ajax({
+        url: "/InstitucionesFinancieras/Details/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+
+                var FechaCrea = FechaFormato(data[0].insf_FechaCrea);
+                var FechaModifica = (FechaFormato(data[0].insf_FechaModifica));
+
+                console.log(data);
+                $("#frmDetallesInstitucionFinanciera #insf_IdInstitucionFinanciera").html(data[0].insf_IdInstitucionFinanciera);
+                $("#frmDetallesInstitucionFinanciera #insf_DescInstitucionFinanc").html(data[0].insf_Descripcion);
+                $("#frmDetallesInstitucionFinanciera #insf_Contacto").html(data[0].insf_Contacto);
+                $("#frmDetallesInstitucionFinanciera #insf_Telefono").html(data[0].insf_Telefono);
+                $("#frmDetallesInstitucionFinanciera #insf_Correo").html(data[0].insf_Correo);
+
+
+                /* AUDITORIA */
+                $("#frmDetallesInstitucionFinanciera #tbUsuario_usu_NombreUsuario").html(data[0].insf_UsuarioCrea_Nombres);
+                $("#frmDetallesInstitucionFinanciera #fpa_FechaCrea").html(FechaCrea);
+
+                $("#frmDetallesInstitucionFinanciera #tbUsuario1_usu_NombreUsuario").html((data[0].insf_UsuarioModifica_Nombres == null) ? "Sin modificaciones" : data[0].insf_UsuarioModifica_Nombres);
+                $("#frmDetallesInstitucionFinanciera #insf_FechaModifica").html(FechaModifica);
+
+
+                //DESPLEGAR MODAL 
+                $("#DetailsInstitucion").modal({ backdrop: 'static', keyboard: false });
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
+                });
+            }
+        });
+});
+
+
+$(document).on("click", "#btnCerrarDetailsInstitucion", function () {
+    //OCULTAR MODAL DE EDICION
+    $("#DetailsInstitucion").modal('hide');
+});
+
+// INACTIVAR 
+$(document).on("click", "#btnModalInactivarINFS", function () {
+    //DESBLOQUEAR EL BOTON
+    $("#btnInactivarINFS").attr("disabled", false);
+    //OCULTAR MODAL DE EDICION
+    $("#EditarInstitucion").modal('hide');
+    //DESPLEGAR EL MODAL DE CONFIRMACION DE INACTIVACION
+    $("#frmInactivarINFS").modal({ backdrop: 'static', keyboard: false });
+});
+
+//CONFIRMAR INACTIVAR
+$("#btnInactivarINFS").click(function () {
+    //BLOQUEAR EL BOTON
+    $("#btnInactivarINFS").attr("disabled", true);
+    //EJECUTAR LA PETICION AL SERVIDOR
+    $.ajax({
+        url: "/InstitucionesFinancieras/Inactivar/" + IDInactivar,
         method: "POST"
     }).done(function (data) {
         if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
+            //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
                 message: 'No se logró inactivar el registro, contacte al administrador',
             });
         }
         else {
-            $("#frmInactivarINFS").modal('hide');
+            //DESBLOQUEAR EL BOTON
+            $("#btnInactivarINFS").attr("disabled", false);
+            //OCULTAR EL MODAL DE CONFIRMACION DE INACTIVACION
+            $("#frmInactivarINFS").modal("hide");
             cargarGridINFS();
-            //Mensaje de exito de la inactivación
+            //MOSTRAR EL MENSAJE DE EXITO
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro se inactivó de forma exitosa!',
             });
         }
     });
-    ID_in = 0;
-   // $("#frmInactivarINFS").modal('hide');
+    IDInactivar = 0;
+});
+
+//CERRAR MODAL DE INACTIVAR CON EL BOTON NO
+$("#InactivarInstitucionCerrar").click(function () {
+    //OCULTAR MODAL
+    $("#frmInactivarINFS").modal("hide");
+    //MOSTRAR MODAL
+    $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
 });
 
 
-// Activar
+
+
+// ACTIVAR
 var activarID = 0;
 $(document).on("click", "#btnModalActivarINFS", function () {
+    //DESBLOQUEAR EL BOTON
+    $("#btnActivarINFS").attr("disabled", false);
+    //SETEAR LA VARIABLE GLOBAL DE ACTIVAR
     activarID = $(this).data('id');
-    $("#frmActivarINFS").modal();
+    //DESPLEGAR EL MODAL DE ACTIVAR
+    $("#frmActivarINFS").modal({ backdrop: 'static', keyboard: false });
 });
 
-//activar ejecutar
-$("#btnActivarINFS").click(function ()
-{
+//CONFIRMAR ACTIVAR
+$("#btnActivarINFS").click(function () {
+
+    //BLOQUEAR EL BOTON
+    $("#btnActivarINFS").attr("disabled", true);
+    //EJECUTAR LA PETICION AL SERVIDOR
     $.ajax({
         url: "/InstitucionesFinancieras/Activar/" + activarID,
         method: "POST",
@@ -146,15 +409,20 @@ $("#btnActivarINFS").click(function ()
     {
         if (data == "error")
         {
+            //DESBLOQUEAR EL BOTON
+            $("#btnActivarINFS").attr("disabled", false);
+            //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
                 message: 'No se logró activar el registro, contacte al administrador',
             });
         }
         else {
+            //REFRESCAR LA DATA DEL DATATABLE
             cargarGridINFS();
+            //OCULTAR EL MODAL
             $("#frmActivarINFS").modal('hide');
-            //Mensaje de exito de la activación
+            //MOSTRAR MENSAJE DE EXITO
             iziToast.success({
                 title: 'Éxito',
                 message: '¡El registro se Activó de forma exitosa!',
@@ -162,5 +430,245 @@ $("#btnActivarINFS").click(function ()
         }
     });
     activarID = 0;
-    //$("#frmActivarINFS").modal('hide');
 });
+
+//CERRAR MODAL DE EDICION CON EL BOTON CERRAR
+$("#ActivarInstitucionCerrar").click(function () {
+    //OCULTAR MODAL
+    $("#frmActivarINFS").modal("hide");
+});
+
+
+
+
+//FUNCION: OCULTAR VALIDACIONES DE CREACION
+function Vaciar_ModalCrear() {
+    //VACIADO DE INPUTS
+    $("#Crear #insf_DescInstitucionFinanc").val("");
+    $("#Crear #insf_Contacto").val("");
+    $("#Crear #insf_Telefono").val("");
+    $("#Crear #insf_Correo").val("");
+
+    //
+    //OCULTAR DATAANNOTATIONS 
+    $("#Crear #Span_insf_DescInstitucionFinanc").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #Asterisco_insf_DescInstitucionFinanc").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #Span_insf_Contacto").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #Asterisco_insf_Contacto").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #Span_insf_Telefono").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #Asterisco_insf_Telefono").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #Span_insf_Correo").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
+
+    console.log("Vaciado");
+}
+
+//FUNCION: OCULTAR VALIDACIONES DE EDICION
+function Vaciar_ModalEditar() {
+    //VACIADO DE INPUTS
+    $("#Editar #insf_DescInstitucionFinanc").val("");
+    $("#Editar #insf_Contacto").val("");
+    $("#Editar #insf_Telefono").val("");
+    $("#Editar #insf_Correo").val("");
+
+    //
+    //OCULTAR DATAANNOTATIONS 
+    $("#Editar #Span_insf_DescInstitucionFinanc").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #Asterisco_insf_DescInstitucionFinanc").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Span_insf_Contacto").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #Asterisco_insf_Contacto").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Span_insf_Telefono").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #Asterisco_insf_Telefono").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Span_insf_Correo").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
+
+    console.log("Vaciado");
+}
+
+//FUNCION PARA MOSTRAR O QUITAR DATAANNOTATIONS
+function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Telefono, insf_Correo) {
+
+    //VARIABLE DE VALIDACION DEL MODELO
+    var ModelState = true;
+
+    if (insf_DescInstitucionFinanc != "-1") {
+        //DESCRIPCION
+        if (insf_DescInstitucionFinanc == "" || insf_DescInstitucionFinanc == null) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Crear #Span_insf_DescInstitucionFinanc").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Crear #Asterisco_insf_DescInstitucionFinanc").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Crear #Span_insf_DescInstitucionFinanc").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Crear #Asterisco_insf_DescInstitucionFinanc").removeClass("text-danger");
+        }
+    }
+
+
+    if (insf_Contacto != "-1") {
+        //CONTACTO
+        if (insf_Contacto == "" || insf_Contacto == null) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Contacto").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Crear #Asterisco_insf_Contacto").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Contacto").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Crear #Asterisco_insf_Contacto").removeClass("text-danger");
+        }
+    }
+
+
+    if (insf_Telefono != "-1") {
+        //Telefono
+        if (insf_Telefono == "" || isNaN(insf_Telefono)) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Telefono").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Crear #Asterisco_insf_Telefono").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Telefono").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Crear #Asterisco_insf_Telefono").removeClass("text-danger");
+        }
+    }
+
+
+    if (insf_Correo != "-1") {
+        //CORREO
+        if (insf_Correo == "" || insf_Correo == null) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Correo").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Crear #Asterisco_insf_Correo").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Correo").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
+        }
+    }
+
+    //RETURN DEL ESTADO DEL MODELO
+    return ModelState;
+}
+
+//FUNCION PARA MOSTRAR O QUITAR DATAANNOTATIONS
+function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_Telefono, insf_Correo) {
+
+    //VARIABLE DE VALIDACION DEL MODELO
+    var ModelState = true;
+
+    if (insf_DescInstitucionFinanc != "-1") {
+        //DESCRIPCION
+        if (insf_DescInstitucionFinanc == "" || insf_DescInstitucionFinanc == null) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Editar #Span_insf_DescInstitucionFinanc").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Editar #Asterisco_insf_DescInstitucionFinanc").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Editar #Span_insf_DescInstitucionFinanc").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Editar #Asterisco_insf_DescInstitucionFinanc").removeClass("text-danger");
+        }
+    }
+
+
+    if (insf_Contacto != "-1") {
+        //CONTACTO
+        if (insf_Contacto == "" || insf_Contacto == null) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Contacto").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Editar #Asterisco_insf_Contacto").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Contacto").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Editar #Asterisco_insf_Contacto").removeClass("text-danger");
+        }
+    }
+
+
+    if (insf_Telefono != "-1") {
+        //Telefono
+        if (insf_Telefono == "" || isNaN(insf_Telefono)) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Telefono").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Editar #Asterisco_insf_Telefono").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Telefono").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Editar #Asterisco_insf_Telefono").removeClass("text-danger");
+        }
+    }
+
+
+    if (insf_Correo != "-1") {
+        //CORREO
+        if (insf_Correo == "" || insf_Correo == null) {
+            //MOSTRAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Correo").show();
+            //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+            $("#Editar #Asterisco_insf_Correo").addClass("text-danger");
+            ModelState = false;
+        }
+        else {
+            //OCULTAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Correo").hide();
+            //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+            $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
+        }
+    }
+
+    //RETURN DEL ESTADO DEL MODELO
+    return ModelState;
+}

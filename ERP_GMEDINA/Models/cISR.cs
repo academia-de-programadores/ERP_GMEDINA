@@ -15,13 +15,17 @@ namespace ERP_GMEDINA.Models
         [Display(Name ="Número")]
         public int isr_Id { get; set; }
         [Display(Name = "Rango inicial")]
+        [Required(ErrorMessage ="El campo {0} es requerido")]
         public decimal isr_RangoInicial { get; set; }
         [Display(Name = "Rango final")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
         public decimal isr_RangoFinal { get; set; }
         [Display(Name = "Porcentaje")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
         public decimal isr_Porcentaje { get; set; }
 
         [Display(Name = "Tipo deducción")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
         public int tde_IdTipoDedu { get; set; }
         [Display(Name = "Creado por")]
         public int isr_UsuarioCrea { get; set; }

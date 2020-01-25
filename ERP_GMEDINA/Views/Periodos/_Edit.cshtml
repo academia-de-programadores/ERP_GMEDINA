@@ -19,11 +19,13 @@
                     <div class="form-group">
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label" })
-                            <label class="" id="AsteriscoPeriodosEdit">*</label>
+                            <label class="" id="EditAsteriscoDescripcion" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "text-box single-line" } })
-                            @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Edit_Validation_descripcion" })
+                            @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete="off" } })
+                            
+                            <span class="text-danger" id="validation_EditDescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                            <span class="text-danger" id="validation_EditDescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                         </div>
                     </div>
                 </div>

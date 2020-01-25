@@ -1,58 +1,61 @@
 ﻿@model ERP_GMEDINA.Models.tbAuxilioDeCesantias
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditarAuxCesan" }))
 {
-	<div class="ibox-content">
-		@Html.AntiForgeryToken()
-		<div class="form-horizontal">
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-6">
-						@Html.HiddenFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-						@Html.HiddenFor(model => model.aces_UsuarioModifica, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-						@Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-					</div>
-					<div class="col-md-6">
-						@Html.EditorFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-6">
-						@Html.LabelFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="AsteriscoRIM">*</label>
-					</div>
-					<div class="col-md-6">
-						@Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })
-						<span class="field-validation-valid text-danger" style="display: none" id="EValidation_descripcion">Campo Rango Inicio (Meses) requerido</span>
-						<span class="field-validation-valid text-danger" style="display: none" id="Validation_descripcion">El Monto no puede ser menor de 0 dígitos</span>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-6">
-						@Html.LabelFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="AsteriscoRFM">*</label>
-					</div>
-					<div class="col-md-6">
-						@Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line" } })
-						<span class="field-validation-valid text-danger" style="display: none" id="EValidation_descripcion2">Campo Rango Fin (Meses) requerido</span>
-						<span class="field-validation-valid text-danger" style="display: none" id="Validation_descripcion2">El Monto no puede ser menor de 0 dígitos</span>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-6">
-						@Html.LabelFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="AsteriscoACD">*</label>
-					</div>
-					<div class="col-md-6">
-						@Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line" } })
-						<span class="field-validation-valid text-danger" style="display: none" id="EValidation_descripcion3">Campo Auxilio Cesantia (Dias) requerido</span>
-						<span class="field-validation-valid text-danger" style="display: none" id="Validation_descripcion3">El Monto no puede ser menor de 0 dígitos</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal-body" id="Editar">
+        <div class="ibox-content">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.HiddenFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            @Html.HiddenFor(model => model.aces_UsuarioModifica, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            @Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })<span class="asterisco" id="EditAsteriscoRangoInicio">*</span>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros", @type = "text", @autocomplete = "off" } })
+                            <span class="text-danger" id="validation_EditRangoInicioMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango inicio no puede ser menor a cero</span>
+                            <span class="text-danger" id="validation_EditRangoInicioRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="EditAsteriscoRangoFinal">*</label>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros", @type = "text", @autocomplete = "off" } })
+                            <span class="text-danger" id="validation_EditRangoFinalMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
+                            <span class="text-danger" id="validation_EditRangoFinalRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                            <span class="text-danger" id="validation_EditRangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line" } })<label class="asterisco" id="EditAsteriscoCantidadDia">*</label>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line MascaraEnteros", @type="text", @autocomplete = "off" } })
+                            <span class="text-danger" id="validation_EditCantidadDiasMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
+                            <span class="text-danger" id="validation_EditCantidadDiasRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 }

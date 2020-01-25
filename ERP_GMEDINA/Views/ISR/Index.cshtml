@@ -29,10 +29,11 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example animated fadeInRight" id="tblISR">
                         <thead>
                             <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_RangoInicial)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_RangoFinal)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_Porcentaje)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbTipoDeduccion.tde_Descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Estado</th>
                                 <th tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Acciones</th>
                             </tr>
                         </thead>
@@ -43,6 +44,9 @@
                                 string estadoISR = item.isr_Activo == false ? "Inactivo" : "Activo";
 
                                 <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.isr_Id)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.isr_RangoInicial)
                                     </td>
@@ -68,7 +72,7 @@
                                             if (oUsuario?.usu_EsAdministrador == true && item.isr_Activo == false)
                                             {
                                                  <!-- ACTIVAR -->
-                                                <button type="button" data-id="@item.isr_Activo" class="btn btn-primary btn-xs" id="btnActivarISR">Activar</button>
+                                                <button type="button" data-id="@item.isr_Id" class="btn btn-primary btn-xs" id="btnActivarISRModal">Activar</button>
                                             }
                                         }
                                     </td>
@@ -80,6 +84,18 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL DE CREACIÓN *@
+<div class="modal fade" id="AgregarISR" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Crear rango de ISR</h4>
+            </div>
+            @Html.Partial("_CreateISR", new ERP_GMEDINA.Models.tbISR())
         </div>
     </div>
 </div>
@@ -97,7 +113,7 @@
     </div>
 </div>
 
-
+@* MODAL DE CONFIRMACION DE EDICIÓN *@
 <div class="modal fade" id="EditarISRConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -105,7 +121,7 @@
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body">
-                ¿Esta seguro que desea Editar este registro?
+                ¿Esta seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" id="btnRegresar">No</button>
@@ -113,17 +129,6 @@
                 <div style="display:none" class="btn" id="cargandoEditar">
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-@* MODAL DE CREACIÓN *@
-<div class="modal fade" id="AgregarISR" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Crear rango de ISR</h4>
-            </div>
-            @Html.Partial("_CreateISR", new ERP_GMEDINA.Models.tbISR())
         </div>
     </div>
 </div>
@@ -145,6 +150,24 @@
     </div>
 </div>
 
+@*Activar*@
+<div class="modal fade" id="ActivarISR" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnActivarISR">Si</button>
+                <button type="button" class="btn btn-white" id="btnBackActivar">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @*Inactivar*@
 <div class="modal fade" id="InactivarISR" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -153,12 +176,11 @@
                 <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea eliminar este registro?
+                ¿Esta seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" id="btnBack">No</button>
-                <button type="button" class="btn btn-danger pull-right" id="btnInactivarISR">Si</button>
-                <div style="display:none" class="btn pull-right" id="cargandoInhabilitar"></div>
+                <button type="button" class="btn btn-danger" id="btnInactivarISR">Si</button>
+                <button type="button" class="btn btn-white" id="btnBack">No</button>
             </div>
         </div>
     </div>

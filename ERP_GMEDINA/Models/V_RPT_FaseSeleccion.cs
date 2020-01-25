@@ -23,5 +23,6 @@ namespace ERP_GMEDINA.Models
         public int req_Id { get; set; }
         public string Plaza_Solicitada { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
     }
 }

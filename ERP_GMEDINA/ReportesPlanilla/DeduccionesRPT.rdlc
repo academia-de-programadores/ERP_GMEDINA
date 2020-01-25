@@ -6,31 +6,31 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.84634cm</Width>
+              <Width>2.71405cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.39655cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>3.93782cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.36873cm</Width>
+              <Width>2.69517cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -46,7 +46,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cod. Empleado</Value>
+                              <Value>Num. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -151,7 +151,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Deduccion</Value>
+                              <Value>Descripción Deducción</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -186,7 +186,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Inicio</Value>
+                              <Value>Fecha inicio</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -221,7 +221,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Fin</Value>
+                              <Value>Fecha fin</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -256,7 +256,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Pago</Value>
+                              <Value>Fecha pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -291,7 +291,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripcion Planilla</Value>
+                              <Value>Descripción planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -326,7 +326,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total a Deducir</Value>
+                              <Value>Total a deducir</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Language>es-HN</Language>
@@ -334,7 +334,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -625,6 +625,7 @@
                               <Value>=Fields!hidp_Total.Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -643,6 +644,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -668,49 +670,124 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <RepeatRowHeaders>true</RepeatRowHeaders>
-        <FixedColumnHeaders>true</FixedColumnHeaders>
-        <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
-        <Top>0.49389cm</Top>
+        <Left>1.97045cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.91694cm</Width>
+        <Width>23.72634cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Line Name="Line1">
+        <Top>2.96296cm</Top>
+        <Left>1.97045cm</Left>
+        <Height>0cm</Height>
+        <Width>8.40021cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Firma</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox10</rd:DefaultName>
+        <Top>3.13935cm</Top>
+        <Left>5.24664cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox14">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>No hay datos en los filtros seleccionados.</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>Red</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox14</rd:DefaultName>
+        <Top>1.25218cm</Top>
+        <Height>0.6cm</Height>
+        <Width>26.65366cm</Width>
+        <ZIndex>3</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(CountRows("ReportesPlanillaDS") = 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>0.66689in</Height>
+    <Height>1.47219in</Height>
     <Style />
   </Body>
-  <Width>10.19442in</Width>
+  <Width>10.49357in</Width>
   <Page>
     <PageHeader>
-      <Height>4.98019cm</Height>
+      <Height>3.66069cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Image Name="Image5">
-          <Source>Embedded</Source>
-          <Value>otroheaderazul11</Value>
-          <Sizing>FitProportional</Sizing>
-          <Height>4.98019cm</Height>
-          <Width>10.43286cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
         <Textbox Name="Textbox1">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -740,11 +817,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>2.24681cm</Top>
-          <Left>0.3489cm</Left>
+          <Top>2.00328cm</Top>
+          <Left>0.77983cm</Left>
           <Height>0.6cm</Height>
-          <Width>23.02678cm</Width>
-          <ZIndex>1</ZIndex>
+          <Width>24.91695cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -775,11 +851,11 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
-          <Top>1.54098cm</Top>
-          <Left>0.3489cm</Left>
+          <Top>1.29745cm</Top>
+          <Left>0.77983cm</Left>
           <Height>0.6cm</Height>
-          <Width>23.02678cm</Width>
-          <ZIndex>2</ZIndex>
+          <Width>24.91695cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -794,10 +870,23 @@
           <Source>Embedded</Source>
           <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.14796cm</Top>
-          <Left>0.3489cm</Left>
+          <Top>0.29249cm</Top>
+          <Left>24.02302cm</Left>
           <Height>1.92246cm</Height>
           <Width>1.93834cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Image Name="Image7">
+          <Source>Embedded</Source>
+          <Value>image11</Value>
+          <Sizing>FitProportional</Sizing>
+          <Height>3.55551cm</Height>
+          <Width>10.43286cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -813,7 +902,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.73491cm</Height>
+      <Height>1.6379cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -844,10 +933,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.06687cm</Top>
-          <Left>15.84537cm</Left>
+          <Top>0.98498cm</Top>
+          <Left>22.45766cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.18141cm</Width>
+          <Width>3.5037cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -879,11 +968,45 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.19912cm</Top>
-          <Left>15.84537cm</Left>
+          <Top>0.17638cm</Top>
+          <Left>18.77995cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox11">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Usuario:</Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!usuario.Value</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox11</rd:DefaultName>
+          <Top>0.98498cm</Top>
+          <Left>19.01398cm</Left>
+          <Height>0.6cm</Height>
+          <Width>3.26729cm</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -903,9 +1026,9 @@
     </PageFooter>
     <PageHeight>25cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>1cm</LeftMargin>
+    <LeftMargin>0cm</LeftMargin>
     <RightMargin>1cm</RightMargin>
-    <TopMargin>1cm</TopMargin>
+    <TopMargin>0cm</TopMargin>
     <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
@@ -982,6 +1105,20 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="logo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="usuario">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <EmbeddedImages>
     <EmbeddedImage Name="WhatsAppImage20191023at15553PM">
       <MIMEType>image/jpeg</MIMEType>

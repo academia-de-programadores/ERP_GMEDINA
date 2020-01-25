@@ -9,12 +9,14 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de Preavisos</h5>
+                    <h5>Configuración de preavisos</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarPreaviso">Registrar Preaviso</button>
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarPreaviso">Registrar preaviso</button>
                     </div>
                 </div>
                 <div class="ibox-content">
+
+
 
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
@@ -77,7 +79,7 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.prea_Activo == false)
                                             {
-                                                 <!-- ACTIVAR -->
+                                                    <!-- ACTIVAR -->
                                                 <button type="button" data-id="@item.prea_IdPreaviso" class="btn btn-primary btn-xs" id="btnActivarPreaviso">Activar</button>
                                             }
                                         }
@@ -95,11 +97,11 @@
 <div class="modal fade" id="CrearPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">        
-                <h4 class="modal-title">Crear Preaviso</h4>
+            <div class="modal-header">
+                <h4 class="modal-title">Crear preaviso</h4>
             </div>
             @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
-        </div>                
+        </div>
     </div>
 </div>
 
@@ -107,8 +109,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
-                <h4 class="modal-title">Editar Preaviso</h4>
+
+                <h4 class="modal-title">Editar preaviso</h4>
             </div>
             @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
         </div>
@@ -119,7 +121,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="confirmarEditar">
@@ -138,8 +140,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
-                <h4 class="modal-title">Detalle Preaviso</h4>
+
+                <h4 class="modal-title">Detalle preaviso</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_Details", new ERP_GMEDINA.Models.tbPreaviso())
@@ -155,11 +157,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                <p><b>¿Esta Seguro Que Desea Inactivar este registro?</b></p>
+                <p><b>¿Está seguro que desea inactivar este registro?</b></p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" id="btnInactivarPreavisoConfirmar">Si</button>
@@ -173,7 +175,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                
+
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">

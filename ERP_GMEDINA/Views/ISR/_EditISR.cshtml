@@ -1,58 +1,67 @@
 ﻿@model ERP_GMEDINA.Models.tbISR
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditISR" }))
 {
+    @Html.AntiForgeryToken()
     <div class="modal-body" id="Editar">
-        @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            @Html.HiddenFor(model => model.isr_Id)
             @Html.HiddenFor(model => model.isr_FechaCrea)
             @Html.HiddenFor(model => model.isr_UsuarioCrea)
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    @Html.LabelFor(model => model.isr_Id, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_Id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoRangoInicial" id="AsteriscoRangoInicial">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @onkeyup = "DataAnnotationsEditar(this.value, '-1', '-1', '-1')" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="isr_RangoInicialValidacion">El campo Rango Inicial es requerido.</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="AsteriscoRangoFinal" id="AsteriscoRangoFinal">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @onkeyup = "DataAnnotationsEditar('-1', this.value, '-1', '-1')" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="isr_RangoFinalValidacion">El campo Rango Final es requerido.</span>
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="AsteriscoTipoDeduccion" id="AsteriscoTipoDeduccion">*</label>
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="isr_TipoDeduccionValidacion" onchange = "DataAnnotationsEditar('-1', '-1', this.value, '-1')">El campo Tipo Deducción es requerido.</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="AsteriscoPorcentaje" id="AsteriscoPorcentaje">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', this.value)" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="isr_PorcentajeValidacion">El campo Porcentaje es requerido.</span>
                 </div>
             </div>
+
+
         </div>
     </div>
     <div class="modal-footer">

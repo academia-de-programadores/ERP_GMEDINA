@@ -15,27 +15,39 @@ namespace ERP_GMEDINA.Controllers
 
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: ISR
+        #region Index
         public ActionResult Index()
         {
-            var tbISR = db.tbISR.OrderByDescending(t => t.isr_FechaCrea).Where(d => d.isr_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
+            var tbISR = db.tbISR.OrderBy(t => t.isr_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
             return View(tbISR.ToList());
         }
+        #endregion
+
+        #region Get data
         [HttpGet]
-        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
+        // GET: data para refrescar datatable
         public ActionResult GetData()
         {
             var otbISR = db.tbISR
-                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, isr_Id = c.isr_Id, isr_RangoInicial = c.isr_RangoInicial, isr_RangoFinal = c.isr_RangoFinal, isr_Porcentaje = c.isr_Porcentaje, isr_Activo = c.isr_Activo, isr_FechaCrea = c.isr_FechaCrea }).Where(c => c.isr_Activo == true).OrderByDescending(c => c.isr_FechaCrea)
+                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, isr_Id = c.isr_Id, isr_RangoInicial = c.isr_RangoInicial, isr_RangoFinal = c.isr_RangoFinal, isr_Porcentaje = c.isr_Porcentaje, isr_Activo = c.isr_Activo, isr_FechaCrea = c.isr_FechaCrea }).OrderByDescending(c => c.isr_FechaCrea)
                         .ToList();
 
-            //RETORNAR JSON AL LADO DEL CLIENTE
+            // retornar data
             return new JsonResult { Data = otbISR, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
-
+        #region GET: Details
         public JsonResult Details(int? ID)
         {
+            // validar si se obtuvo un ID
+            var response = String.Empty;
+            if (ID == null) {
+
+                response = "Error";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            // obtener registro con el ID recibido
             var tbISRJSON = from tbISR in db.tbISR
                             where tbISR.isr_Activo == true && tbISR.isr_Id == ID
                             select new
@@ -45,6 +57,7 @@ namespace ERP_GMEDINA.Controllers
                                 tbISR.isr_RangoFinal,
                                 tbISR.isr_Porcentaje,
                                 tbISR.tde_IdTipoDedu,
+                                tde_Descripcion =  tbISR.tbTipoDeduccion.tde_Descripcion,
 
                                 tbISR.isr_UsuarioCrea,
                                 UsuCrea = tbISR.tbUsuario.usu_NombreUsuario,
@@ -55,12 +68,15 @@ namespace ERP_GMEDINA.Controllers
                                 tbISR.isr_FechaModifica
                             };
 
+            // evitar referencias circulares
             db.Configuration.ProxyCreationEnabled = false;
 
+            // retornar objeto 
             return Json(tbISRJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // GET: ISR/Create
+        #region GET: Create
         public ActionResult Create()
         {
             ViewBag.isr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
@@ -68,28 +84,27 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
             return View();
         }
+        #endregion
 
-        // POST: ISR/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST: Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea,isr_UsuarioModifica,isr_FechaModifica,isr_Activo")] tbISR tbISR)
+        public ActionResult Create([Bind(Include = "isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
-            #region declaracion de variables 
-            //Llenar los datos de auditoría, de no hacerlo el modelo será inválido y entrará directamente al Catch
+            // data de auditoria
             tbISR.isr_UsuarioCrea = 1;
             tbISR.isr_FechaCrea = DateTime.Now;
-            //Variable para almacenar el resultado del proceso y enviarlo al lado del cliente
+            
+            // variables de resultado del proceso
             string response = String.Empty;
             IEnumerable<object> listISR = null;
             string MensajeError = "";
-            #endregion
-
+            
+            // validar si el modelo es válid
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //Ejecutar el procedimiento almacenado
+                    // ejecutar procedimiento almacenado
                     listISR = db.UDP_Plani_tbISR_Insert(tbISR.isr_RangoInicial,
                                                         tbISR.isr_RangoFinal,
                                                         tbISR.isr_Porcentaje,
@@ -97,64 +112,79 @@ namespace ERP_GMEDINA.Controllers
                                                         tbISR.isr_UsuarioCrea,
                                                         tbISR.isr_FechaCrea);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbISR_Insert_Result Resultado in listISR)
                         MensajeError = Resultado.MensajeError;
 
-                    response = "bien";
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el procedimiento almacenado falló
                         ModelState.AddModelError("", "No se pudo ingresar el registro. Contacte al administrador.");
                         response = "error";
                     }
+
+                    // el proceso fue exitoso
+                    response = "bien";
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    // se generó una excepción 
+                    response = "error";
                 }
 
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                // el modelo no es válido
                 response = "error";
             }
-            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
-            ViewBag.isr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbISR.isr_UsuarioCrea);
-            ViewBag.isr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbISR.isr_UsuarioModifica);
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbISR.tde_IdTipoDedu);
+
+            // retornar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // GET: ISR/Edit/5
+        #region GET: Edit
         public JsonResult Edit(int? id)
         {
+            // evitar referencias circulares
             db.Configuration.ProxyCreationEnabled = false;
+
+            // validar si se recibió algún ID
+            if (id == null)
+            {
+                string response = String.Empty;
+                response = "error";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+            // encontrar el objeto con el ID recibido
             tbISR tbISRJSON = db.tbISR.Find(id);
+
+            // retornar objeto
             return Json(tbISRJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // POST: ISR/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST: Edit
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea,isr_UsuarioModifica,isr_FechaModifica,isr_Activo")] tbISR tbISR)
+        public ActionResult Edit([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
+            // variables de auditoria
             tbISR.isr_UsuarioModifica = 1;
             tbISR.isr_FechaModifica = DateTime.Now;
+
+            // variables de resultado del proceso
             IEnumerable<object> listISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
-            //VALIDAR SI EL MODELO ES VÁLIDO
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //Ejecución del procedimiento almacenado
+                    // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Update(tbISR.isr_Id,
                                                         tbISR.isr_RangoInicial,
                                                         tbISR.isr_RangoFinal,
@@ -163,124 +193,150 @@ namespace ERP_GMEDINA.Controllers
                                                         1,
                                                         DateTime.Now);
 
+                    // obtener resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbISR_Update_Result Resultado in listISR.ToList())
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    // se generó una excepción
                     response = Ex.Message.ToString();
                 }
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // el modelo no es válido
                 response = "error";
             }
-            ViewBag.isr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbISR.isr_UsuarioCrea);
-            ViewBag.isr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbISR.isr_UsuarioModifica);
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbISR.tde_IdTipoDedu);
+
+            // reotrnar resultado del proceso
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region EditGetDDL
         public JsonResult EditGetDDL()
         {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCIÓN POR "REFERENCIAS CIRCULARES"
+            // obtener data
             var DDL =
             from TipoDeduc in db.tbTipoDeduccion
             join ISR in db.tbISR on TipoDeduc.tde_IdTipoDedu equals ISR.tde_IdTipoDedu into prodGroup
             select new { Id = TipoDeduc.tde_IdTipoDedu, Descripcion = TipoDeduc.tde_Descripcion };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            
+            // retornar data
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Inactivar 
         public ActionResult Inactivar(int id)
         {
+            // variables de resultado
             IEnumerable<object> listISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
+
+            // validar si el model es válido
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Inactivar(id,
                                                             1,
                                                             DateTime.Now);
 
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbISR_Inactivar_Result Resultado in listISR)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
+                    // se generó una excepción
                     response = "error";
                 }
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // el modelo es inválido
                 response = "error";
             }
 
-            return Json(JsonRequestBehavior.AllowGet);
+            // retornar resultado del proceso
+            return Json(response,JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Activar
         public ActionResult Activar(int id)
         {
+            // variables de resultado
             IEnumerable<object> listISR = null;
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
+
+            // validar si el modelo es válido
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Activar(id,
                                                           1,
                                                          DateTime.Now);
 
+                    // obtener resultado del PA
                     foreach (UDP_Plani_tbISR_Activar_Result Resultado in listISR)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        // el PA falló
                         ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
+                    // se generó una excepción
                     response = "error";
                 }
+
+                // el proceso fue exitoso
                 response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // el modelo es inválido
                 response = "error";
             }
 
+            // retornar resultado del proceso
             return Json(JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -289,5 +345,6 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
     }
 }

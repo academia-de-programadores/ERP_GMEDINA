@@ -11,51 +11,56 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.dei_Motivo)<span id="ast1">*</span>
+                    @Html.LabelFor(model => model.dei_Motivo)<span id="astMotivo">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "form-control", @id = "dei_Motivo" } })
-                    @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validation1" })
+                    @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "form-control", @id = "dei_Motivo", @maxlength= "100" } })
+                    <label class="text-danger" id="valMotivo" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Motivo Requerido.</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.emp_Id)<span id="ast2">*</span>
+                    @Html.LabelFor(model => model.emp_Id)<span id="astEmpId">*</span>
                 </div>
                 <div class="col-md-8">
                     <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                    <label class="text-danger" id="validation2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido.</label>
+                    <label class="text-danger" id="valEmpId" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido.</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.dei_MontoInicial)<span id="ast3">*</span>
+                    @Html.LabelFor(model => model.dei_MontoInicial)<span id="astMontoInicial">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "form-control", @id = "dei_MontoInicial" } })
-                    @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validation3" })
+                    @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "dei_MontoInicial", @min = 1, @max = 9999999999.99 } })
+                    <span id="valMontoInicial" class="text-danger" style="display:none;">El campo Monto inicial no puede ser menor o igual que cero.</span>
+                    <span id="valMontoInicialRequerido" class="text-danger" style="display:none;">Campo Monto Inicial Requerido</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.dei_MontoRestante)<span id="ast4">*</span>
+                    @Html.LabelFor(model => model.dei_MontoRestante)<span id="astMontoRestante">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "form-control", @id = "dei_MontoRestante" } })
-                    @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validation4" })
+                    @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @min = 0.01, @max = 9999999999.99 } })
+                    <span id="valMontoRestanteRequerido" class="text-danger" style="display:none;">Campo Monto Restante Requerido</span>
+                    <span id="valMontoRestanteMayor" class="text-danger" style="display:none;">El campo monto restante no puede ser menor Cero.</span>
+                    <span id="valMontoRestanteMayorL" class="text-danger" style="display:none;">El campo monto restante no puede ser mayor que monto inicial.</span>
+                   
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.dei_Cuota)<span id="ast5">*</span>
+                    @Html.LabelFor(model => model.dei_Cuota)<span id="astCuota">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "form-control", @id = "dei_Cuota" } })
-                    @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validation5" })
+                    @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "dei_Cuota", @min = 0.01, @max = 9999999999.99 } })
+                    <span id="valCuota" class="text-danger" style="display:none;">Campo Cuota Requerido</span>
+                    <span id="valCuotaMayor" class="text-danger" style="display:none;">Campo Cuota no puede ser mayor que el monto inicial</span>
                 </div>
             </div>
 
@@ -67,9 +72,7 @@
                     <input type="checkbox" class="icheckbox_square-green" name="dei_PagaSiempre" id="dei_PagaSiempre">
                 </div>
             </div>
-
         </div>
-
     </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>

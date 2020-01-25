@@ -34,13 +34,13 @@ $("body").on("click", "#btnProcesar", function () {
         dataType: "json",
         success: function (r) {
             iziToast.success({
-                title: 'Decimo Tercer Mes',
-                message:"Registros procesados !"
+                title: 'Decimotercer Mes',
+                message:"¡Decimotercer mes procesado de forma exitosa!"
             });         
         },
         error: function (e) {
             iziToast.error({
-                title: 'Decimo Tercer Mes',
+                title: 'Decimotercer Mes',
                 message: "No puede procesar dos veces un pago."
             });    
         }

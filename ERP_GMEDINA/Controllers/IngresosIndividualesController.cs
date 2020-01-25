@@ -77,10 +77,10 @@ namespace ERP_GMEDINA.Controllers
                     listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Insert(tbIngresosIndividuales.ini_Motivo,
                                                                                           tbIngresosIndividuales.emp_Id,
                                                                                           tbIngresosIndividuales.ini_Monto,
+                                                                                          tbIngresosIndividuales.ini_Pagado,
                                                                                           tbIngresosIndividuales.ini_PagaSiempre,
                                                                                           tbIngresosIndividuales.ini_UsuarioCrea,
-                                                                                          tbIngresosIndividuales.ini_FechaCrea);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                                                                                          tbIngresosIndividuales.ini_FechaCrea);                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbIngresosIndividuales_Insert_Result Resultado in listIngresosIndividuales)
                         MensajeError = Resultado.MensajeError;
 
@@ -235,10 +235,11 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Inhabilitar Ingresos Individuales
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int ini_IdIngresosIndividuales)
+        [HttpGet]
+        public ActionResult Inactivar(int? id)
         {
+            if (id == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
             //LLENAR DATA DE AUDITORIA
             int ini_UsuarioModifica = 1;
             DateTime ini_FechaModifica = DateTime.Now;
@@ -252,7 +253,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Inactivar(ini_IdIngresosIndividuales,
+                    listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Inactivar(id,
                                                                                              ini_UsuarioModifica,
                                                                                              ini_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
@@ -290,14 +291,16 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar Ingresos Individuales
-        [HttpPost]
-        public ActionResult Activar(int id)
+        [HttpGet]
+        public ActionResult Activar(int? id)
         {
+            if(id == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
             //LLENAR DATA DE AUDITORIA
             int ini_UsuarioModifica = 1;
             DateTime ini_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listIngresosIndividuales = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
@@ -326,9 +329,6 @@ namespace ERP_GMEDINA.Controllers
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
             }
             else
             {

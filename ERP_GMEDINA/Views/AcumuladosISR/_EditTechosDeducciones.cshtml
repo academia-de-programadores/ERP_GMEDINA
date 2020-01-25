@@ -2,20 +2,22 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditAcumuladosISR" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.aisr_Id)
-    <!-- CAJAS DE TEXTO -->
+    
     <div class="modal-body" id="Editar">
         <div class="ibox-content">
             <div class="form-horizontal">
-
+                @Html.HiddenFor(model => model.aisr_Id)
+                @Html.HiddenFor(model => model.aisr_UsuarioModifica)
+                @Html.HiddenFor(model => model.aisr_FechaModifica)
 
                 <div class="form-group">
                     <div class="col-md-4">
                         Descripción<label class="" id="AsteriscoDescripcionEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @id = "aisr_Descripcion" } })
-                        @Html.ValidationMessageFor(model => model.aisr_Descripcion, "", new { @class = "text-danger", @id = "validatione1" })
+                        @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @id = "aisr_Descripcion", @autocomplete = "off" } })
+                        <span class="text-danger" id="validation_EditarDescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                        <span class="text-danger" id="validation_EditarDescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -23,8 +25,8 @@
                         Monto<label class="" id="AsteriscoMontoEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "aisr_Monto" } })
-                        @Html.ValidationMessageFor(model => model.aisr_Monto, "", new { @class = "text-danger", @id = "validatione2" })
+                        @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "aisr_Monto", @autocomplete = "off" } })
+                        <span class="text-danger" id="validation_EditarMontoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                     </div>
                 </div>
 

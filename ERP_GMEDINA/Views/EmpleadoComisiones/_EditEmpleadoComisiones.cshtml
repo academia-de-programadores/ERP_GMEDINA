@@ -3,7 +3,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoComisionesEditar" }))
 {
     <div class="modal-body" id="Editar">
-        <div class="ibox-content">
+       
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
@@ -11,28 +11,25 @@
                 @Html.HiddenFor(model => model.cc_Id)
 
                 <div class="form-group">
-                    <label class="pull-left">Número</label> 
-                    
+                    <label class="pull-left">Número</label>
                     <div class="col-md-8 pull-right">
                         @Html.EditorFor(model => model.cc_Id, new { htmlAttributes = new { @class = "form-control", @id = "cc_Id", @disabled = "disabled" } })
-                       
-                        <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="pull-left">Empleado</label> 
+                    <label class="pull-left">Colaborador</label> 
                     <label class="" id="AsteriscoEmpleado">*</label> 
                     <div class="col-md-8 pull-right">
-                        <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                        <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
+                        <select id="emp_IdEmpleado" name="emp_Id" class="form-control" onchange="ValidarCamposEditar(this.value, '-1', '-1', '-1')"></select>
+                        <label class="text-danger" id="Validation_empleado" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Colaborador requerido</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="pull-left">Comisión</label> 
                     <label class="" id="AsteriscoComision">*</label>  
                     <div class="col-md-8 pull-right">
-                        <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
-                        <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
+                        <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control" onchange="ValidarCamposEditar('-1', this.value, '-1', '-1')"></select>
+                        <label class="text-danger" id="Validation_idIngreso" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Comisión requerido</label>
                     </div>
                 </div>
 
@@ -40,8 +37,11 @@
                     <label class="pull-left">Porcentaje Comisión</label> 
                     <label class="" id="AsteriscoPorcentaje">*</label>  
                         <div class="col-md-8 pull-right">    
-                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision", @type = "number", @autocomplete = "off" } })
-                            @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" , @autocomplete  = "off"})
+                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "cc_PorcentajeComision", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', this.value, '-1')" } })
+                            @*@Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" , @autocomplete  = "off"})*@
+                            <label class="text-danger" id="Validation_porcentaje" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Comisión requerido</label>
+                            <label class="text-danger" id="Validation_porcentaje2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Porcentaje Comisión debe ser mayor que cero</label>
+                            <label class="text-danger" id="Validation_porcentaje3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Porcentaje Comisión debe ser menor que cien</label>
                         </div>
                     </div>
 
@@ -49,21 +49,18 @@
                         <label class="pull-left">Total Venta</label> 
                         <label class="" id="AsteriscoTotal">*</label>  
                         <div class="col-md-8 pull-right">
-                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" , @type = "number", @autocomplete = "off" } })
-                            @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })
+                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "cc_TotalVenta" , @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', '-1', this.value)" } })
+                            @*@Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })*@
+                            <label class="text-danger" id="Validation_total" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Total Venta requerido</label>
+                            <label class="text-danger" id="Validation_total2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Total Venta debe ser mayor que cero</label>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </div>
-
     <div class="modal-footer">
-        @*data-dismiss="modal"*@
         <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModaledit">Cerrar</button>
         <button type="submit" class="btn btn-primary pull-left" id="btnUpdateComisionesConfirmar">Actualizar</button>
-
-        @*<button type="submit" class="btn btn-primary pull-left" id="btnUpdateComisiones">Actualizar</button>*@
         <button type="button" class="btn btn-danger pull-left" id="btnInactivarEmpleadoComisiones">Inactivar</button>
     </div>
     }

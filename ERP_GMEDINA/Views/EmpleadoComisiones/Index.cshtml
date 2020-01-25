@@ -55,7 +55,10 @@
                                         @Html.DisplayFor(modelItem => item.cc_Id)
                                     </td>
                                     <td>
-                                        @{ string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;}
+                                        @{ 
+                                            string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
+                                            decimal PorcentajeDecimal = Convert.ToDecimal(item.cc_PorcentajeComision);
+                                        }
                                         @Html.HiddenFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
                                         @Nombre
                                     </td>
@@ -63,7 +66,7 @@
                                         @Html.DisplayFor(modelItem => item.tbCatalogoDeIngresos.cin_DescripcionIngreso)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.cc_PorcentajeComision)
+                                        @Html.DisplayFor(modelItem => PorcentajeDecimal)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cc_TotalVenta)
@@ -115,11 +118,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">          
-                <h4 class="modal-title">Crear Comisiones al Empleado</h4>
+                <h4 class="modal-title">Crear Comisión</h4>
             </div>
-            <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
-            </div>
             
         </div>
     </div>
@@ -145,12 +146,10 @@
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="EditarConfirmacion">
-                ¿Esta seguro que desea Editar este registro?
+                ¿Esta seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnUpdateComisionesConfirmar2" value="Si" class="btn btn-primary " />
-                <div style="display:none" class="btn" id="cargandoEditar">
-                </div>
                
                 <button type="button" class="btn btn-white" id="btCerrarEditar">No</button>
             </div>
@@ -185,12 +184,11 @@
             </div>
             <div class="modal-body" id="Inactivar">
 
-                ¿Esta seguro que desea Inactivar este Registro?
+                ¿Esta seguro que desea inactivar este Registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="btnInactivarRegistroComisiones">Si</button>
                 <button type="button" class="btn btn-white"  id="btnInactivarRegistroComisionesNo">No</button>
-                
             </div>
         </div>
     </div>
@@ -203,7 +201,7 @@
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
-                ¿Esta seguro que desea Activar este registro?
+                ¿Esta seguro que desea activar este registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnActivarRegistroComisionesEjecutar">Si</button>

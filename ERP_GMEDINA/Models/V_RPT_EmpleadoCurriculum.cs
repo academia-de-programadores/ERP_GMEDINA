@@ -32,5 +32,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> comp_Id { get; set; }
         public string Habilidades { get; set; }
         public string Competencias { get; set; }
+        public System.DateTime fechaIngreso { get; set; }
+        public System.DateTime fechaFin { get; set; }
     }
 }
