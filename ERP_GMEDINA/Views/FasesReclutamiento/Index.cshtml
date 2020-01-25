@@ -65,7 +65,7 @@
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 @section Scripts {
-    @if (Model.fare_Estado)
+@if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/general/FasesReclutaiento/Admin")
     }

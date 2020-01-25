@@ -16,8 +16,11 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             tbFasesReclutamiento tbFasesReclutamiento = new tbFasesReclutamiento { fare_Estado = true };
             return View(tbFasesReclutamiento);
         }

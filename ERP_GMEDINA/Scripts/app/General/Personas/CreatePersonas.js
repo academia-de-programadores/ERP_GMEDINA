@@ -34,11 +34,11 @@ function ListFill(obj) {
         }
     });
 
-    SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel : 'Mover todos',removeAllLabel: 'Remover todos'});
-    SlctHabilidades.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
-    SlctIdiomas.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
-    SlctReqEspeciales.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
-    SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel : 'Mover todos',removeAllLabel: 'Remover todos'});
+    SlctHabilidades.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctIdiomas.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctReqEspeciales.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
 };
 $(document).ready(function () {
     llenarDropDownList();
@@ -55,14 +55,43 @@ $(document).ready(function () {
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
         //validaciones
-        onStepChanging: function (event, currentIndex, newIndex) {
-            var Form = $("#tbPersonas").find("select, textarea, input");
-            Form.validate().settings.ignore = ":disabled,:hidden";
-            return Form.valid();
+        onStepChanging:
+            function (event, currentIndex, newIndex) {
+                
+                    if ($("#per_FechaNacimiento").val() > '1899/01/01/') 
+                    {
+                        var Form = $("#tbPersonas").find("select, textarea, input");
+                        Form.validate().settings.ignore = ":disabled,:hidden";
+                        return Form.valid();
+                    }
+                    else
+                    {
+
+                        MsgError("Error", "Fecha de nacimiento inválida");
+                        window.location.href = "#Wizard-h-0";
+                        //$("#per_FechaNacimiento").val('1900/01/01')
+
+                    }
+                    var Form = $("#tbPersonas").find("select, textarea, input");
+                    Form.validate().settings.ignore = ":disabled,:hidden";
+                    return Form.valid();
+                    
         },
         onFinishing: function (event, currentIndex) {
+            if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
+                var Form = $("#tbPersonas").find("select, textarea, input");
+                Form.validate().settings.ignore = ":disabled,:hidden";
+                return Form.valid();
+            }
+            else {
+
+                MsgError("Error", "Fecha de nacimiento inválida");
+                window.location.href = "#Wizard-h-0";
+                //$("#per_FechaNacimiento").val('1900/01/01')
+
+            }
             var Form = $("#tbPersonas").find("select, textarea, input");
-            Form.validate().settings.ignore = ":disabled";
+            Form.validate().settings.ignore = ":disabled,:hidden";
             return Form.valid();
         },
         onFinished: function () {

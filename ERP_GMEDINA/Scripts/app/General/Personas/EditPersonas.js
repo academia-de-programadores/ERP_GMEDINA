@@ -96,14 +96,41 @@ $(document).ready(function () {
 
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
-        onStepChanging: function (event, currentIndex, newIndex) {
+        onStepChanging:
+                   function (event, currentIndex, newIndex) {
+
+                       if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
+                           var Form = $("#tbPersonas").find("select, textarea, input");
+                           Form.validate().settings.ignore = ":disabled,:hidden";
+                           return Form.valid();
+                       }
+                       else {
+
+                           MsgError("Error", "Fecha de nacimiento inválida");
+                           window.location.href = "#Wizard-h-0";
+                           //$("#per_FechaNacimiento").val('1900/01/01')
+
+                       }
+                       var Form = $("#tbPersonas").find("select, textarea, input");
+                       Form.validate().settings.ignore = ":disabled,:hidden";
+                       return Form.valid();
+
+                   },
+        onFinishing: function (event, currentIndex) {
+            if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
+                var Form = $("#tbPersonas").find("select, textarea, input");
+                Form.validate().settings.ignore = ":disabled,:hidden";
+                return Form.valid();
+            }
+            else {
+
+                MsgError("Error", "Fecha de nacimiento inválida");
+                window.location.href = "#Wizard-h-0";
+                //$("#per_FechaNacimiento").val('1900/01/01')
+
+            }
             var Form = $("#tbPersonas").find("select, textarea, input");
             Form.validate().settings.ignore = ":disabled,:hidden";
-            return Form.valid();
-        },
-        onFinishing: function (event, currentIndex) {
-            var Form = $("#tbPersonas").find("select, textarea, input");
-            Form.validate().settings.ignore = ":disabled";
             return Form.valid();
         },
         onFinished: function () {
