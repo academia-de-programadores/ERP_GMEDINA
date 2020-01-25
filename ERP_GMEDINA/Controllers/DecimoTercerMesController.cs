@@ -118,7 +118,7 @@ namespace ERP_GMEDINA.Controllers
 										 where
 										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
 										 HP.hipa_FechaPago <= hipa_FechaFin) 															 
-										 select new 
+										 select new ViewModelDecimoTercerMes
 										 {
 											 emp_Id = HP.emp_Id,
 											 per_Nombres = HP.per_Nombres,

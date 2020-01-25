@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha Pago</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.deif_FechaCrea, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "deif_FechaCrea", @id = "deif_FechaCrea", @min = "1950-01-01", @max = "9999-01-01" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.deif_FechaCrea, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "deif_FechaCrea", @id = "deif_FechaCrea"} })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.deif_FechaCrea, "", new { @class = "text-danger" })
                             </div>                                                      

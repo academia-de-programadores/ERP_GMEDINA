@@ -108,7 +108,7 @@ namespace ERP_GMEDINA.Controllers
 										  HP.hipa_FechaPago <= hipa_FechaFin) 									  
 
 										 
-										 select new 
+										 select new ViewModelDecimoCuartoMes
 										 {
 											 emp_Id = HP.emp_Id,
 											 per_Nombres = HP.Nombre,
