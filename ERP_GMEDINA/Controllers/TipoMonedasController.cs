@@ -17,8 +17,12 @@ namespace ERP_GMEDINA.Controllers
         // GET: TipoMonedas
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
-            tbTipoMonedas tbTipoMonedas = new tbTipoMonedas { tmon_Estado = true };
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
+            tbTipoMonedas tbTipoMonedas = new tbTipoMonedas { };
             return View(tbTipoMonedas);
         }
 
@@ -114,7 +118,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbTipoMonedas = db.tbTipoMonedas.Find(id);
-                if (tbTipoMonedas == null || !tbTipoMonedas.tmon_Estado)
+                if (tbTipoMonedas == null)
                 {
                     return HttpNotFound();
                 }

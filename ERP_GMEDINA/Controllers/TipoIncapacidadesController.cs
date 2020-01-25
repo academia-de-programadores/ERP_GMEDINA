@@ -17,33 +17,21 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+            tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado = true };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado = true };
-                Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-                try
-                {
-                    //tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                    return View(tbTipoIncapacidades);
-                }
-                catch (Exception ex)
-                {
-
-
-                    ex.Message.ToString();
-                    //tbTipoIncapacidades.Add(new tbTipoIncapacidades { ticn_Id = 0, ticn_Descripcion = "Fallo la conexión" });
-                }
+                //tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbTipoIncapacidades);
             }
-           catch
+            catch (Exception ex)
             {
-                return View();
+
+
+                ex.Message.ToString();
+                //tbTipoIncapacidades.Add(new tbTipoIncapacidades { ticn_Id = 0, ticn_Descripcion = "Fallo la conexión" });
             }
+            return View(tbTipoIncapacidades);
         }
 
 
@@ -116,7 +104,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbTipoIncapacidades = db.tbTipoIncapacidades.Find(id);
-                if (tbTipoIncapacidades == null || !tbTipoIncapacidades.ticn_Estado)
+                if (tbTipoIncapacidades == null)
                 {
                     return HttpNotFound();
                 }

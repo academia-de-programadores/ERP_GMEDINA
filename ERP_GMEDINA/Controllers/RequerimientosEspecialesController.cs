@@ -97,7 +97,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbRequerimientosEspeciales = db.tbRequerimientosEspeciales.Find(id);
-                if (tbRequerimientosEspeciales == null || !tbRequerimientosEspeciales.resp_Estado)
+                if (tbRequerimientosEspeciales == null )
                 {
                     return HttpNotFound();
                 }

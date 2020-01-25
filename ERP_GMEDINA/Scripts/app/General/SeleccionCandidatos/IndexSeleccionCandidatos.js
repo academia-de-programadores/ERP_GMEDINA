@@ -38,7 +38,7 @@ function compare_dates() {
     var fechalimite = '01/01/1900';
 
     if (Date.parse(Fecha) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha no válida");
+        MsgError("Error", "Fecha no valida");
     }
     else {
         return true;
@@ -60,7 +60,8 @@ function llenarTabla() {
                  var Acciones = value.Estado == 1
                    ?null:
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                     "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                  if (value.Estado > fill) {
                      tabla.row.add({

@@ -128,7 +128,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHistaudiencia = db.tbHistorialAudienciaDescargo.Find(ID);
-                if (tbHistaudiencia == null || !tbHistaudiencia.aude_Estado)
+                if (tbHistaudiencia == null)
                 {
                     return HttpNotFound();
                 }

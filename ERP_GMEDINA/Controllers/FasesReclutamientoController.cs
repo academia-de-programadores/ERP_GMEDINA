@@ -16,11 +16,8 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+
             tbFasesReclutamiento tbFasesReclutamiento = new tbFasesReclutamiento { fare_Estado = true };
             return View(tbFasesReclutamiento);
         }
@@ -95,7 +92,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbFasesReclutamiento = db.tbFasesReclutamiento.Find(id);
-                if (tbFasesReclutamiento == null || !tbFasesReclutamiento.fare_Estado)
+                if (tbFasesReclutamiento == null)
                 {
                     return HttpNotFound();
                 }

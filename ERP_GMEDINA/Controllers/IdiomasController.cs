@@ -117,7 +117,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbIdiomas = db.tbIdiomas.Find(ID);
-                if(tbIdiomas == null || !tbIdiomas.idi_Estado)
+                if(tbIdiomas == null)
                 {
                     return HttpNotFound();
                 }
