@@ -69,6 +69,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
+                    $("#ModalNuevo").find("#eqtra_Id").empty();
                     MsgSuccess("¡Exito!", "se ha agredado el registro");
                 }
                 else {
