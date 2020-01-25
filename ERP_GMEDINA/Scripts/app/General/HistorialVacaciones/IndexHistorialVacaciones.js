@@ -169,13 +169,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
@@ -189,14 +189,14 @@ function compare_dates() {
 
     
     if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fechas no son validas");
+        MsgError("Error", "Fechas no validas.");
     }
 
     else if (Date.parse(fecha1) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha inicio no es valida");
+        MsgError("Error", "Fecha inicio no es valida.");
     }
     else if (Date.parse(fecha2) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha fin no es valida");
+        MsgError("Error", "Fecha fin no es valida.");
     }
 
     else {
@@ -255,23 +255,23 @@ $("#btnGuardar").click(function () {
                                         CierraPopups();
                                         llenarTabla();
                                         LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                                     } else {
-                                        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+                                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
                                     }
                                 })
                         };
                     } else {
-                        MsgError("Error", "por favor llene todas las cajas de texto");
+                        MsgError("Error", "Por favor llene todas las cajas de texto.");
                     }
                 }
                 else {
-                    MsgError("Error", "por favor ingrese un rango de fecha positivo");
+                    MsgError("Error", "Por favor ingrese un rango de fecha positivo.");
                 }
             }
             else
             {
-                MsgError("Error", "Esta tratando de ingresar mas días de los respectivos");
+                MsgError("Error", "Está tratando de ingresar más días de los respectivos.");
             }
 
             }

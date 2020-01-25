@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Models
         public int empr_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(5, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(4, ErrorMessage = "Excedió el número máximo de carácteres")]
         [Display(Name = "Código Municipio ")]
         public string mun_Codigo { get; set; }
 
