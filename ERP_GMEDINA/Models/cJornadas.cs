@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int jor_Id { get; set; }
 
         [Display(Name = "Jornada")]
-        [MaxLength(30, ErrorMessage = "Excedió el número máximo de caracteres")]
+        [MaxLength(30, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string jor_Descripcion { get; set; }
 
         [Display(Name = "Estado")]

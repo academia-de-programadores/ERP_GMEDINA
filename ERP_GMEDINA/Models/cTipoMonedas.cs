@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
 
             [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
             [Display(Name = "Moneda")]
-            [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+            [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
             public string tmon_Descripcion { get; set; }
 
             [Display(Name = "Estado")]
@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Models
 
             [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
             [Display(Name = "Razón Inactivo")]
-            [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+            [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
             public string tmon_RazonInactivo { get; set; }
 
             [Display(Name = "Usuario Crea")]

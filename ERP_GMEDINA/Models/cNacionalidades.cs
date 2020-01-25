@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Models
         public int nac_Id { get; set; }
 
         [Display(Name = "Nacionalidad")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido.")]
         public string nac_Descripcion { get; set; }
 

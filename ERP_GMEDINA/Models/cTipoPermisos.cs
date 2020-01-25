@@ -17,13 +17,13 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Permiso")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres.")]
         public string tper_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
         public bool tper_Estado { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Razon de inactivación")]
         public string tper_RazonInactivo { get; set; }
 

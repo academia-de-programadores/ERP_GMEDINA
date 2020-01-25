@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int hor_Id { get; set; }
 
         [Display(Name = "Descripción")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string hor_Descripcion { get; set; }
 
         [Display(Name = "Hora Inicio")]
