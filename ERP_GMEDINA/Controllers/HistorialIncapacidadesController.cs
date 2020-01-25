@@ -17,6 +17,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialIncapacidades
         public ActionResult Index()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             try
             {
                 db = new ERP_GMEDINAEntities();
