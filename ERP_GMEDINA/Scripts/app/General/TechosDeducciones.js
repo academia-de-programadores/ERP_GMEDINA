@@ -188,9 +188,9 @@ function cargarGridTechosDeducciones() {
 
                 $('#tblTechosDeducciones').dataTable().fnAddData([
                     ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
-                    ListaTechosDeducciones[i].tddu_Techo,
                     ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
                     ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
+                    ListaTechosDeducciones[i].tddu_Techo,
                     ListaTechosDeducciones[i].cde_DescripcionDeduccion,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar]
