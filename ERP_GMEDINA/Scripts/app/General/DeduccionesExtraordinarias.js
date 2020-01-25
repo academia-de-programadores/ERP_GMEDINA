@@ -298,7 +298,6 @@ function validaciones(equipoEmpId,
     observaciones,
     idDeduccion,
     cuota) {
-    debugger;
     var todoBien = true;
     let equipoEmpleadoId = equipoEmpId.val();
     //Equipo Empleado
@@ -442,7 +441,6 @@ function validaciones(equipoEmpId,
         cuota = cuota.val();
         let cuotaFloat = parseFloat(cuota.replace(/,/g, ""));
         let floatMontoInicial = parseFloat(montoInicial.replace(/,/g, ""));
-        debugger;
         if (esMayorCero)
             if (cuotaFloat > floatMontoInicial) {
                 $("#valCuota").html('El campo Cuota no puede ser mayor que Monto Inicial.');
@@ -529,7 +527,6 @@ $(btnAgregar).click(function () {
         cuota
 
     )) {
-        debugger;
         var data = $("#frmCreate").serializeArray();
         data[2].value = data[2].value.replace(/,/g, '');
         data[6].value = data[6].value.replace(/,/g, '');
@@ -581,11 +578,11 @@ $(btnEditar).click(function () {
         idDeduccion,
         cuota
     ) === true) {
-        debugger;
         var data = $("#frmEditar").serializeArray();
-        data[2].value = data[2].value.replace(/,/g, '');
-        data[6].value = data[6].value.replace(/,/g, '');
+        console.table(data);
         data[3].value = data[3].value.replace(/,/g, '');
+        data[4].value = data[4].value.replace(/,/g, '');
+        data[7].value = data[7].value.replace(/,/g, '');
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/DeduccionesExtraordinarias/Edit",
@@ -612,9 +609,11 @@ $(btnEditar).click(function () {
 
         });
         // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-
     }
-    document.getElementById("btnEditar").disabled = false;
+    $("#frmEditar").submit(function (e) {
+        return false;
+    });
+    $('#btnEditar').prop('disabled', false);
 });
 //#endregion
 
