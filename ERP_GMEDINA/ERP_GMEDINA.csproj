@@ -2619,14 +2619,7 @@
     <Content Include="Views\CatalogoDePlanillas\Details.cshtml" />
     <Content Include="Views\CatalogoDePlanillas\Edit.cshtml" />
     <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
-    <Content Include="Views\Planilla\Create.cshtml" />
-    <Content Include="Views\Planilla\Delete.cshtml" />
-    <Content Include="Views\Planilla\Details.cshtml" />
-    <Content Include="Views\Planilla\Edit.cshtml" />
     <Content Include="Views\Planilla\Index.cshtml" />
-    <Content Include="Views\Planilla\_CatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\Planilla\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\Planilla\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\Planilla\_GenerarPlanillaConfiguracion.cshtml" />
     <Content Include="Views\TechosDeducciones\Create.cshtml" />
     <Content Include="Views\TechosDeducciones\Delete.cshtml" />
