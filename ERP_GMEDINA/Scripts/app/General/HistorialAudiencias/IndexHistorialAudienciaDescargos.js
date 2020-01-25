@@ -30,7 +30,7 @@
             div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
         }
         else {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button>' + '</td>';
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>';
         }
         div += '</tr>' + '</tbody>'
         '</table>'
@@ -135,6 +135,11 @@ function compare_dates() {
         $("#ModalNuevo").show();
         MsgError("Error", "Fecha no es valida");
     }
+    else if ( fecha1 == "")
+    {
+        $("#ModalNuevo").show();
+        MsgError("Error", "Campo fecha es requerido.");
+    }
     else {
         return true;
     }
@@ -145,7 +150,8 @@ function compare_dates() {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo1").val();
+    data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo").val();
+    if(compare_dates())
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
         if (compare_dates()) {

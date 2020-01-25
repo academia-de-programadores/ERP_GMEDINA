@@ -22,7 +22,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_FechaAudiencia, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-                                @Html.TextBoxFor(model => model.aude_FechaAudiencia, new { @class = "form-control datepicker required", @type = "date" })
+                                @Html.TextBoxFor(model => model.aude_FechaAudiencia, new { @class = "form-control datepicker", @type = "date" })
 								@Html.ValidationMessageFor(model => model.aude_FechaAudiencia, "", new { @class = "text-danger", @id = "erroraude_FechaAudiencia" })
                             </div>
                         </div>

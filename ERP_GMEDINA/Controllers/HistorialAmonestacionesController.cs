@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
-                if(tbHistorialAmonestaciones == null || !tbHistorialAmonestaciones.hamo_Estado)
+                if(tbHistorialAmonestaciones == null)
                 {
                     return HttpNotFound();
                 }
