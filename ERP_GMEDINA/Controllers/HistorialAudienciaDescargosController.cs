@@ -17,6 +17,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAudienciaDescargos
         public ActionResult Index()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             try
             {
                 db = new ERP_GMEDINAEntities();
@@ -91,7 +96,7 @@ namespace ERP_GMEDINA.Controllers
                                                                             tbHistorialAudienciaDescargo.aude_FechaAudiencia,
                                                                             tbHistorialAudienciaDescargo.aude_Testigo,
                                                                             tbHistorialAudienciaDescargo.aude_DireccionArchivo,
-                                                                            1,
+                                                                            Usuario.usu_Id,
                                                                             DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result item in list)
                     {
@@ -123,7 +128,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHistaudiencia = db.tbHistorialAudienciaDescargo.Find(ID);
-                if (tbHistaudiencia == null || !tbHistaudiencia.aude_Estado)
+                if (tbHistaudiencia == null)
                 {
                     return HttpNotFound();
                 }
@@ -227,7 +232,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, RazonInactivo, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -256,7 +261,7 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Restore(tbHistorialAudienciaDescargo.aude_Id, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Restore(tbHistorialAudienciaDescargo.aude_Id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result item in list)
                     {
                         result = item.MensajeError;

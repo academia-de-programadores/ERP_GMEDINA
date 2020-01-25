@@ -81,7 +81,7 @@
 }
 
 @section Scripts {
-    @if (Model.hvac_Estado)
+    @if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/General/HistorialVacaciones/Admin")
     }

@@ -6,6 +6,7 @@
 }
 
 
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -70,8 +71,8 @@
     @Scripts.Render("~/plugins/dataTablesMatutina")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/General/Titulos")
-    @if (Model.titu_Estado)
+@if ((bool)Session["Admin"])
     {
-        @Scripts.Render("~/Scripts/app/general/Titulos/Admin")
+    @Scripts.Render("~/Scripts/app/General/Titulos/Admin")
     }
 }

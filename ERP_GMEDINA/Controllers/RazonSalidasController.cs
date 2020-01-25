@@ -94,7 +94,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbRazonSalidas = db.tbRazonSalidas.Find(id);
-                if (tbRazonSalidas == null || !tbRazonSalidas.rsal_Estado)
+                if (tbRazonSalidas == null )
                 {
                     return HttpNotFound();
                 }

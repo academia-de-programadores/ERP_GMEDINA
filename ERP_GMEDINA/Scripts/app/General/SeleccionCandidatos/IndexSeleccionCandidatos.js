@@ -11,7 +11,7 @@ function format(obj) {
         '<thead>' +
             '<tr>' +
                 '<th>' + 'Número' + '</th>' +
-                '<th>' + 'Fase de Reclutamiento' + '</th>' +
+                '<th>' + 'Fase de reclutamiento' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
                 '</tr>' +
                 '</thead>';
@@ -36,15 +36,18 @@ function format(obj) {
 function compare_dates() {
     var Fecha = $("#scan_Fecha").val();
     var fechalimite = '01/01/1900';
-
+    var fechalimite2 = '01/01/2199';
     if (Date.parse(Fecha) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha no valida");
+        MsgError("Error", "Fecha no válida.");
+    }
+    else if (Date.parse(Fecha) > Date.parse(fechalimite2)) {
+        MsgError("Error", "Fecha no válida.");
+        
     }
     else {
         return true;
     }
 }
-
 //LLENAR INDEX////////////////////////////////////////////////////////////////////////////////////////
 var scan_Id = 0;
 function llenarTabla() {
@@ -60,7 +63,8 @@ function llenarTabla() {
                  var Acciones = value.Estado == 1
                    ?null:
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs' style= 'min-width: 70px;' onclick='CallDetalles(this)' >Detalles</a>" +
                    "</div>";
                  if (value.Estado > fill) {
                      tabla.row.add({
@@ -68,8 +72,8 @@ function llenarTabla() {
                          "Número": value.Id,
                          Identidad: value.Identidad,
                          Nombre: value.Nombre,
-                         Fase_Actual: value.Fase,
-                         Plaza_Solicitada: value.Plaza_Solicitada,
+                         "FaseActual": value.Fase,
+                         "PlazaSolicitada": value.Plaza_Solicitada,
                          Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
                          Estado: value.Estado ? "Activo" : "Inactivo",
                          Acciones: Acciones,
@@ -112,26 +116,28 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 //EDITAR///////////////////////////////////////////////////////////////////////////////////////////////////////
 function tablaEditar(id) {
     scan_Id = id;
-    _ajax(null,
-        '/SeleccionCandidatos/Edit/' + id,
-       'GET',
-       function (obj) {
-           if (obj != "-1" && obj != "-2" && obj != "-3") {
-               CierraPopups();
-               $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-               $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
-               $("#ModalEditar").find("#req_Id").val(obj.req_Id);
-               if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
-                   $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
-               }
-               else {
-                   $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
+    
+            _ajax(null,
+                '/SeleccionCandidatos/Edit/' + id,
+               'GET',
+               function (obj) {
+                   if (obj != "-1" && obj != "-2" && obj != "-3") {
+                       CierraPopups();
+                       $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+                       $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
+                       $("#ModalEditar").find("#req_Id").val(obj.req_Id);
+                       if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
+                           $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
+                       }
+                       else {
+                           $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
 
-               }
-               $('#ModalEditar').modal('show');
+                       }
+                       $('#ModalEditar').modal('show');
 
-           }
-       });
+                   }
+               })
+        ;
 
 }
 
@@ -144,29 +150,38 @@ function CallEditar(btn) {
 }
 
 
-
 $("#btnActualizar").click(function () {
+    debugger
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
-    if (compare_dates())
-    if (data != null) {
-        data = JSON.stringify({ tbSeleccionCandidatos: data });
-        if (compare_dates()){
-        _ajax(data,
-            '/SeleccionCandidatos/Edit',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    MsgSuccess("¡Éxito!", "Se ha actualizado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
+    var Fechaeditar = $("#ModalEditar").find("#scan_Fecha").val();
+    var fechalimite = '01/01/1900';
+    var fechalimite2 = '01/01/2199';
+    if (Date.parse(Fechaeditar) < Date.parse(fechalimite) || Date.parse(Fechaeditar) > Date.parse(fechalimite2)) {
+        MsgError("Error", "Fecha no válida.");
+    }
+    else{
+        if (data != null) {
+            data = JSON.stringify({ tbSeleccionCandidatos: data });
+           
+            _ajax(data,
+                '/SeleccionCandidatos/Edit',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        llenarTabla();
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                    } else {
+                        MsgError("Error","No se pudo editar el registro, contacte al administrador.");
+                    }
+                });
+            
+        } 
+
+        else {
+            MsgError("Error", "Por favor llene todas las cajas de texto.");
         }
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 
@@ -217,14 +232,14 @@ $("#btnGuardar").click(function () {
                         llenarTabla();
                         LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
 
-                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     } else {
-                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
                 });
         }
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 
 });
@@ -268,13 +283,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["scan_RazonInactivo"]);
-                    MsgWarning("¡Éxito!", "Se ha Inactivado el registro");
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
@@ -285,26 +300,31 @@ function btnInactivar() {
 }
 
 $("#btnEditar").click(function () {
-    _ajax(null,
-        '/SeleccionCandidatos/Edit/' + scan_Id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-                $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
-                $("#ModalEditar").find("#req_Id").val(obj.req_Id);
-                if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
-                    $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
-                }
-                else {
-                    $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
+    
+        
+        _ajax(null,
+            '/SeleccionCandidatos/Edit/' + scan_Id,
+            'GET',
 
-                }
-                $('#ModalEditar').modal('show');
+            function (obj) {
+              
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+                        $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
+                        $("#ModalEditar").find("#req_Id").val(obj.req_Id);
+                        if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
+                            $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
+                        }
+                        else {
+                            $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
 
-            }
-        });
+                        }
+                        $('#ModalEditar').modal('show');
+
+                    }
+                }
+            ) ;
 });
 
 

@@ -30,7 +30,7 @@
             div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
         }
         else {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button>' + '</td>';
+            div += '<button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>';
         }
         div += '</tr>' + '</tbody>'
         '</table>'
@@ -127,33 +127,54 @@ function Llamarmodalcreate() {
     modalnuevo.modal('show');
 }
 
+function compare_dates() {
+    debugger
+    var fecha1 = $("#ModalNuevo").find("#aude_FechaAudiencia").val();
+    var fechalimite = '01/01/1900';
+    if (Date.parse(fecha1) < Date.parse(fechalimite)) {
+        $("#ModalNuevo").show();
+        MsgError("Error", "Fecha no es valida");
+    }
+    else if ( fecha1 == "")
+    {
+        $("#ModalNuevo").show();
+        MsgError("Error", "Campo fecha es requerido.");
+    }
+    else {
+        return true;
+    }
+}
+
 
 
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo1").val();
+    data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo").val();
+    if(compare_dates())
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
-        _ajax(data,
-            '/HistorialAudienciaDescargos/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                   // LimpiarControles(["aude_Descripcion", "aude_FechaAudiencia", "aude_DireccionArchivo", "emp_Id"]);
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-                    $("#ModalNuevo").find("#aude_FechaAudiencia").val("");
-                    $("#ModalNuevo").find("#aude_Descripcion").val("");
-                    $("#ModalNuevo").find("#aude_Testigo").prop("checked",false);
-                    $("#ModalNuevo").find("#emp_Id").val("");
-                } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
-                }
-            });
+        if (compare_dates()) {
+            _ajax(data,
+                '/HistorialAudienciaDescargos/Create',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        llenarTabla();
+                        // LimpiarControles(["aude_Descripcion", "aude_FechaAudiencia", "aude_DireccionArchivo", "emp_Id"]);
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                        $("#ModalNuevo").find("#aude_FechaAudiencia").val("");
+                        $("#ModalNuevo").find("#aude_Descripcion").val("");
+                        $("#ModalNuevo").find("#aude_Testigo").prop("checked", false);
+                        $("#ModalNuevo").find("#emp_Id").val("");
+                    } else {
+                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                    }
+                })
+        };
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
@@ -182,13 +203,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["aude_Id"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 
@@ -221,7 +242,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa");
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

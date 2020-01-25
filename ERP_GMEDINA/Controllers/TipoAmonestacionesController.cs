@@ -15,12 +15,27 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = null;
 
         // GET: TipoAmonestaciones
+       
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
-            tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            return View(tbTipoAmonestaciones);
+            if(Session["Admin"]==null && Session["Usuario"]==null)
+            {
+                Response.Redirect("~/Incio/index");
+                return null;
+            }
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Estado = true };
+                bool Admin = (bool)Session["Admin"];
+                return View(tbTipoAmonestaciones);
+
+            }
+            catch (Exception)
+            {
+                return View();
+
+            }
         }
 
         [HttpPost]

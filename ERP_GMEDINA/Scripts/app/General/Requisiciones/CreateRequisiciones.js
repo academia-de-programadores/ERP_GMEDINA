@@ -74,12 +74,13 @@ $(document).ready(function () {
         enableCancelButton: false,
         onStepChanging: function (event, currentIndex, newIndex) {
             var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']");
-            Form.validate().settings.ignore = ":disabled,:hidden";
+            Form.validate().settings.ignore = ":hidden";
+            //if ($("#tbRequisiciones").find("#req_EdadMinima").val > 0 && $("#tbRequisiciones").find("#req_EdadMaxima").val() > 0 && $("#tbRequisiciones").find("#req_Vacantes").val() >= 1 )
             return Form.valid();
         },
         onFinishing: function (event, currentIndex) {
             var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']");
-            Form.validate().settings.ignore = ":disabled";
+           
             return Form.valid();
         },
         onFinished: function () {

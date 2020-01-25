@@ -18,12 +18,12 @@ namespace ERP_GMEDINA.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Hora")]
-        [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres.")]
         public string tiho_Descripcion { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Recargo")]
-        [MaxLength(50, ErrorMessage = "Excedio el numero maximo de caracteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public int tiho_Recargo { get; set; }
 
         [Display(Name = "Estado")]
@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Razón Inactivo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el numero máximo")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string tiho_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

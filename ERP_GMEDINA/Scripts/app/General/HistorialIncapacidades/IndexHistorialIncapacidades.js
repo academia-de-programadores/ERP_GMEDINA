@@ -45,7 +45,7 @@ function format(obj) {
             div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
         }
         else {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Activar</button>' + '</td>';
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>';
         }
         div += '</tr>' +
                   '</tbody>'
@@ -119,6 +119,7 @@ function Llamarmodaldelete(ID) {
 
 
 }
+
 
 
 
@@ -243,9 +244,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hinc_Id"]);
-                    MsgWarning("¡Exito!", "Se ha inactivado el registro");
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -307,27 +308,3 @@ function Llamarmodalhabilitar(ID) {
 //});
 
 
-
-$("#btnActivar").click(function () {
-    var data = $("#FormActivar").serializeArray();
-    data = serializar(data);
-    debugger
-    if (data != null) {
-        data = JSON.stringify({ tbHistorialIncapacidades: data });
-        _ajax(data,
-            '/HistorialIncapacidades/habilitar/',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["hinc_Id"]);
-                    
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
-});

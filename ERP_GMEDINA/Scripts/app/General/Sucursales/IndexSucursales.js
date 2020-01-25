@@ -87,8 +87,9 @@ function llenarTabla() {
                 ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.suc_Id + ")'>Detalles</a> <a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.suc_Id + ")'>Editar</a> <a class='btn btn-danger btn-xs ' onclick='ModalInactivar(" + value.suc_Id + ")'>Inactivar</a>"
                 : Admin ?
                     "<div>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                    "</div>" : '';
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                   "</div>" : '';
                 tabla.row.add({
                     Estado: value.suc_Estado ? 'Activo' : 'Inactivo',
                     "Número": value.suc_Id,

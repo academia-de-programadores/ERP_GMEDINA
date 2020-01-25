@@ -17,12 +17,12 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Razon")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el numero máximo")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string rsal_Descripcion { get; set; }
         [Display(Name = "Estado")]
         public bool rsal_Estado { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el numero máximo")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Display(Name = "Razón Inactivo")]
         public string rsal_RazonInactivo { get; set; }
         [Display(Name = "Usuario Crea")]

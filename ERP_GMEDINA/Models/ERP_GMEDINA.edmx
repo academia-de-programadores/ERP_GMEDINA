@@ -2963,30 +2963,23 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' no 
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_EmpleadoCurriculum' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_RPT_EmpleadoCurriculum">
           <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="fechaIngreso" />
-            <PropertyRef Name="fechaFin" />
+            <PropertyRef Name="fechaInicio" />
+            <PropertyRef Name="Fechafin" />
           </Key>
-          <Property Name="per_Id" Type="int" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="101" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" />
-          <Property Name="Edad" Type="int" />
-          <Property Name="Direccion" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fecha_Nacimiento" Type="date" />
-          <Property Name="Estado_Civil" Type="varchar" MaxLength="10" />
-          <Property Name="Sexo" Type="varchar" MaxLength="9" />
-          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
-          <Property Name="Correo_Electronico" Type="nvarchar" MaxLength="50" />
-          <Property Name="Tipo_Sangre" Type="nvarchar" MaxLength="4" />
-          <Property Name="hape_Id" Type="int" />
-          <Property Name="cope_Id" Type="int" />
-          <Property Name="habi_Id" Type="int" />
-          <Property Name="comp_Id" Type="int" />
-          <Property Name="fechaIngreso" Type="datetime" Nullable="false" />
-          <Property Name="fechaFin" Type="datetime" Nullable="false" />
-          <Property Name="Habilidades" Type="nvarchar" MaxLength="100" />
-          <Property Name="Competencias" Type="nvarchar" MaxLength="100" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" />
+          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+          <Property Name="depto_Id" Type="int" />
+          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="area_Id" Type="int" />
+          <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="suc_Id" Type="int" />
+          <Property Name="suc_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="jor_Descripcion" Type="nvarchar" MaxLength="30" />
+          <Property Name="jor_Id" Type="int" />
+          <Property Name="fechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="Fechafin" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -7637,6 +7630,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
           <Parameter Name="emp_FechaIngreso" Type="date" Mode="In" />
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
+          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
+          <Parameter Name="tmon_Id" Type="int" Mode="In" />
+          <Parameter Name="sue_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="sue_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Recontratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
@@ -9606,26 +9603,20 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </EntitySet>
           <EntitySet Name="V_RPT_EmpleadoCurriculum" EntityType="Self.V_RPT_EmpleadoCurriculum" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
-    [V_RPT_EmpleadoCurriculum].[per_Id] AS [per_Id], 
-    [V_RPT_EmpleadoCurriculum].[emp_Id] AS [emp_Id], 
-    [V_RPT_EmpleadoCurriculum].[Nombre] AS [Nombre], 
-    [V_RPT_EmpleadoCurriculum].[Identidad] AS [Identidad], 
-    [V_RPT_EmpleadoCurriculum].[Edad] AS [Edad], 
-    [V_RPT_EmpleadoCurriculum].[Direccion] AS [Direccion], 
-    [V_RPT_EmpleadoCurriculum].[Fecha_Nacimiento] AS [Fecha_Nacimiento], 
-    [V_RPT_EmpleadoCurriculum].[Estado_Civil] AS [Estado_Civil], 
-    [V_RPT_EmpleadoCurriculum].[Sexo] AS [Sexo], 
-    [V_RPT_EmpleadoCurriculum].[Telefono] AS [Telefono], 
-    [V_RPT_EmpleadoCurriculum].[Correo_Electronico] AS [Correo_Electronico], 
-    [V_RPT_EmpleadoCurriculum].[Tipo_Sangre] AS [Tipo_Sangre], 
-    [V_RPT_EmpleadoCurriculum].[hape_Id] AS [hape_Id], 
-    [V_RPT_EmpleadoCurriculum].[cope_Id] AS [cope_Id], 
-    [V_RPT_EmpleadoCurriculum].[habi_Id] AS [habi_Id], 
-    [V_RPT_EmpleadoCurriculum].[comp_Id] AS [comp_Id], 
-    [V_RPT_EmpleadoCurriculum].[fechaIngreso] AS [fechaIngreso], 
-    [V_RPT_EmpleadoCurriculum].[fechaFin] AS [fechaFin], 
-    [V_RPT_EmpleadoCurriculum].[Habilidades] AS [Habilidades], 
-    [V_RPT_EmpleadoCurriculum].[Competencias] AS [Competencias]
+    [V_RPT_EmpleadoCurriculum].[per_Identidad] AS [per_Identidad], 
+    [V_RPT_EmpleadoCurriculum].[NombreCompleto] AS [NombreCompleto], 
+    [V_RPT_EmpleadoCurriculum].[per_Telefono] AS [per_Telefono], 
+    [V_RPT_EmpleadoCurriculum].[per_CorreoElectronico] AS [per_CorreoElectronico], 
+    [V_RPT_EmpleadoCurriculum].[depto_Id] AS [depto_Id], 
+    [V_RPT_EmpleadoCurriculum].[depto_Descripcion] AS [depto_Descripcion], 
+    [V_RPT_EmpleadoCurriculum].[area_Id] AS [area_Id], 
+    [V_RPT_EmpleadoCurriculum].[area_Descripcion] AS [area_Descripcion], 
+    [V_RPT_EmpleadoCurriculum].[suc_Id] AS [suc_Id], 
+    [V_RPT_EmpleadoCurriculum].[suc_Descripcion] AS [suc_Descripcion], 
+    [V_RPT_EmpleadoCurriculum].[jor_Descripcion] AS [jor_Descripcion], 
+    [V_RPT_EmpleadoCurriculum].[jor_Id] AS [jor_Id], 
+    [V_RPT_EmpleadoCurriculum].[fechaInicio] AS [fechaInicio], 
+    [V_RPT_EmpleadoCurriculum].[Fechafin] AS [Fechafin]
     FROM [rrhh].[V_RPT_EmpleadoCurriculum] AS [V_RPT_EmpleadoCurriculum]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_EquipoEmpleado" EntityType="Self.V_RPT_EquipoEmpleado" store:Type="Views" store:Schema="rrhh">
@@ -19986,6 +19977,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="emp_FechaIngreso" Mode="In" Type="DateTime" />
             <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
+            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
+            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="sue_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Recontratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratar_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
@@ -20878,7 +20873,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="eqem_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqem_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="V_RPT_EmpleadoCurriculum" EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" />
           <EntitySet Name="V_RPT_HistorialAmonestaciones_Empleados" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" />
           <EntitySet Name="V_RPT_HistorialAudienciaDescargo_empleados" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" />
           <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
@@ -20914,6 +20908,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_RPT_EmpleadoCurriculum" EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -21733,33 +21728,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
         <ComplexType Name="UDP_RRHH_tbEquipoEmpleados_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <EntityType Name="V_RPT_EmpleadoCurriculum">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="fechaIngreso" />
-            <PropertyRef Name="fechaFin" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Edad" Type="Int32" />
-          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
-          <Property Name="Estado_Civil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Sexo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Correo_Electronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Tipo_Sangre" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="hape_Id" Type="Int32" />
-          <Property Name="cope_Id" Type="Int32" />
-          <Property Name="habi_Id" Type="Int32" />
-          <Property Name="comp_Id" Type="Int32" />
-          <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Competencias" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="V_RPT_HistorialAmonestaciones_Empleados">
           <Key>
             <PropertyRef Name="nombre" />
@@ -21968,6 +21936,26 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_RPT_EmpleadoCurriculum">
+          <Key>
+            <PropertyRef Name="fechaInicio" />
+            <PropertyRef Name="Fechafin" />
+          </Key>
+          <Property Name="per_Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_Id" Type="Int32" />
+          <Property Name="depto_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area_Id" Type="Int32" />
+          <Property Name="area_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="suc_Id" Type="Int32" />
+          <Property Name="suc_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jor_Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="jor_Id" Type="Int32" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fechafin" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -26663,32 +26651,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="V_RPT_EmpleadoCurriculum">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum">
-              <MappingFragment StoreEntitySet="V_RPT_EmpleadoCurriculum">
-                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
-                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
-                <ScalarProperty Name="Competencias" ColumnName="Competencias" />
-                <ScalarProperty Name="Habilidades" ColumnName="Habilidades" />
-                <ScalarProperty Name="comp_Id" ColumnName="comp_Id" />
-                <ScalarProperty Name="habi_Id" ColumnName="habi_Id" />
-                <ScalarProperty Name="cope_Id" ColumnName="cope_Id" />
-                <ScalarProperty Name="hape_Id" ColumnName="hape_Id" />
-                <ScalarProperty Name="Tipo_Sangre" ColumnName="Tipo_Sangre" />
-                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Estado_Civil" ColumnName="Estado_Civil" />
-                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Edad" ColumnName="Edad" />
-                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialAmonestaciones_Empleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados">
               <MappingFragment StoreEntitySet="V_RPT_HistorialAmonestaciones_Empleados">
@@ -26816,6 +26778,26 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Insert" />
+          <EntitySetMapping Name="V_RPT_EmpleadoCurriculum">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum">
+              <MappingFragment StoreEntitySet="V_RPT_EmpleadoCurriculum">
+                <ScalarProperty Name="Fechafin" ColumnName="Fechafin" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="jor_Id" ColumnName="jor_Id" />
+                <ScalarProperty Name="jor_Descripcion" ColumnName="jor_Descripcion" />
+                <ScalarProperty Name="suc_Descripcion" ColumnName="suc_Descripcion" />
+                <ScalarProperty Name="suc_Id" ColumnName="suc_Id" />
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -20,9 +20,9 @@ $("#btnActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["txtIdRestore"]);
-                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                    MsgWarning("¡Éxito!", "Se registro se activó de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró activar el registro, contacte al administrador.");
                 }
             });
     } else {

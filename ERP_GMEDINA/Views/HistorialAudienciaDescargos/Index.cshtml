@@ -43,7 +43,7 @@
                         <h4 class="modal-title">Activar</h4>
                     </div>
                     <div class="modal-body" id="Activar">
-                        ¿Esta seguro que desea Activar este registro?
+                        ¿Esta seguro que desea activar este registro?
                     </div>
                     <input type="hidden" value="" id="aude_Id" name="aude_Id">
                     <div class="modal-footer">
@@ -69,9 +69,9 @@
 }
 
 @section Scripts {
-    @if (Model.aude_Estado)
+@if ((bool)Session["Admin"])
     {
-        @Scripts.Render("~/Scripts/app/General/HistorialAudienciaDescargos/Admin")
+ @Scripts.Render("~/Scripts/app/General/HistorialAudienciaDescargos/Admin")
     }
   @Scripts.Render("~/plugins/dataTablesMatutina")
 @Scripts.Render("~/Scripts/app/General")

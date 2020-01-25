@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripción")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string fare_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Razon Inactivo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(100, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string fare_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

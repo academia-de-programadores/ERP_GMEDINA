@@ -17,10 +17,16 @@ namespace ERP_GMEDINA.Controllers
         // GET: Competencias
         public ActionResult Index()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             tbCompetencias tbCompetencias = new tbCompetencias { comp_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
+
                 // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbCompetencias);
             }
@@ -107,7 +113,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbCompetencias = db.tbCompetencias.Find(id);
-                if(tbCompetencias == null || !tbCompetencias.comp_Estado)
+                if(tbCompetencias == null )
                 {
                     return HttpNotFound();
                 }

@@ -16,8 +16,6 @@ function format(obj) {
             Estado = "Inactivo";
         else
             Estado = "Activo";
-        //var MostrarBoton = index.hamo_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>';
-        //if (value.hamo_Estado > fill) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
@@ -32,9 +30,8 @@ function format(obj) {
         }
         else
             {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button>' + '</td>';
+            div += '<button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button> <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>';
             }       
-             
         div += '</tr>' +
                     '</tbody>'
             '</table>'
@@ -133,39 +130,48 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hamo_Id"]);
-                    MsgWarning("¡Exito!", "Se ha inactivado el registro");
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
-
+function validarddl() {
+    if ($("#ModalNuevo").find("#tamo_Id").val() == 0) {
+        MsgError("Error", "El campo amonestación es requerido.");
+    }
+    else {
+        return true;
+    }
+}
 
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    debugger
+    if(validarddl())
     if (data != null) {
         data = JSON.stringify({ tbHistorialAmonestaciones: data });
-        _ajax(data,
-            '/HistorialAmonestaciones/Create',
-            'POST',
-            function (obj) {
-                debugger
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["emp_Id", "tamo_Id","hamo_Fecha","hamo_Observacion"]);
-                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
+        if (validarddl()) {
+            _ajax(data,
+                '/HistorialAmonestaciones/Create',
+                'POST',
+                function (obj) {
+                    debugger
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        llenarTabla();
+                        LimpiarControles(["emp_Id", "tamo_Id", "hamo_Fecha", "hamo_Observacion"]);
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    } else {
+                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                    }
+                })
+        };
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 

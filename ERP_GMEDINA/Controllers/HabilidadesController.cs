@@ -93,7 +93,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHabilidades = db.tbHabilidades.Find(id);
-                if (tbHabilidades == null || !tbHabilidades.habi_Estado)
+                if (tbHabilidades == null )
                 {
                     return HttpNotFound();
                 }

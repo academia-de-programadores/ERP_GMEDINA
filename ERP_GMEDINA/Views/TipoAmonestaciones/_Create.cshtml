@@ -3,8 +3,8 @@
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Agregar Tipo Amonestación</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Crear Tipo Amonestación</h4>
             </div>
             <div class="modal-body">
                 @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormNuevo" }))
@@ -14,7 +14,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.tamo_Descripcion,"Descripción", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.tamo_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+								@Html.EditorFor(model => model.tamo_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
 								@Html.ValidationMessageFor(model => model.tamo_Descripcion, "", new { @class = "text-danger", @id = "errortamo_Descripcion" })
                             </div>
                         </div>

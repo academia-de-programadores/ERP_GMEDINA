@@ -27,31 +27,36 @@
                                     @Html.ValidationMessageFor(model => model.empr_Id, "", new { @class = "text-danger", @id = "errorempr_Id" })
                                 </div>
                             </div>
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 @Html.LabelFor(model => model.mun_Codigo, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.mun_Codigo, new { htmlAttributes = new { @class = "required form-control required valid" } })
+                                    @Html.EditorFor(model => model.mun_Codigo, new { htmlAttributes = new { @class = "required form-control required valid", @onkeypress = "return Numericos(event)" } })
                                     @Html.ValidationMessageFor(model => model.mun_Codigo, "", new { @class = "text-danger", @id = "errormun_Codigo" })
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.bod_Id, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.bod_Id, new { htmlAttributes = new { @class = "form-control required valid" } })
+                                    <select class="form-control required valid" id="bod_Id" name="bod_Id">
+                                        <option value="">*Seleccione una opción*</option>
+                                        <option value="26">Bodega A</option>
+                                        <option value="31">Bodega B</option>
+                                        <option value="32">Bodega C</option>
+                                    </select>
                                     @Html.ValidationMessageFor(model => model.bod_Id, "", new { @class = "text-danger", @id = "errorbod_Id" })
                                 </div>
                             </div>
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 @Html.LabelFor(model => model.pemi_Id, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @Html.EditorFor(model => model.pemi_Id, new { htmlAttributes = new { @class = "form-control required valid" } })
                                     @Html.ValidationMessageFor(model => model.pemi_Id, "", new { @class = "text-danger", @id = "errorpemi_Id" })
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.suc_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.suc_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+                                    @Html.EditorFor(model => model.suc_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
                                     @Html.ValidationMessageFor(model => model.suc_Descripcion, "", new { @class = "text-danger", @id = "errorsuc_Descripcion" })
                                 </div>
                             </div>
@@ -72,7 +77,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.suc_Telefono, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.suc_Telefono, new { htmlAttributes = new { @class = "form-control required valid" } })
+                                    @Html.EditorFor(model => model.suc_Telefono, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return Numericos(event)" } })
                                     @Html.ValidationMessageFor(model => model.suc_Telefono, "", new { @class = "text-danger", @id = "errorsuc_Telefono" })
                                 </div>
                             </div>

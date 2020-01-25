@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Crear Tipo de Moneda</h4>
             </div>
             <div class="modal-body">
@@ -14,7 +14,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.tmon_Descripcion,"Moneda", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.tmon_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+								@Html.EditorFor(model => model.tmon_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
 								@Html.ValidationMessageFor(model => model.tmon_Descripcion, "", new { @class = "text-danger", @id = "errortmon_Descripcion" })
                             </div>
                         </div>

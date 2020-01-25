@@ -92,7 +92,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbFasesReclutamiento = db.tbFasesReclutamiento.Find(id);
-                if (tbFasesReclutamiento == null || !tbFasesReclutamiento.fare_Estado)
+                if (tbFasesReclutamiento == null)
                 {
                     return HttpNotFound();
                 }

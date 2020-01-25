@@ -14,25 +14,19 @@ namespace ERP_GMEDINA.Models
     
     public partial class V_RPT_EmpleadoCurriculum
     {
-        public Nullable<int> per_Id { get; set; }
-        public int emp_Id { get; set; }
-        public string Nombre { get; set; }
-        public string Identidad { get; set; }
-        public Nullable<int> Edad { get; set; }
-        public string Direccion { get; set; }
-        public Nullable<System.DateTime> Fecha_Nacimiento { get; set; }
-        public string Estado_Civil { get; set; }
-        public string Sexo { get; set; }
-        public string Telefono { get; set; }
-        public string Correo_Electronico { get; set; }
-        public string Tipo_Sangre { get; set; }
-        public Nullable<int> hape_Id { get; set; }
-        public Nullable<int> cope_Id { get; set; }
-        public Nullable<int> habi_Id { get; set; }
-        public Nullable<int> comp_Id { get; set; }
-        public string Habilidades { get; set; }
-        public string Competencias { get; set; }
-        public System.DateTime fechaIngreso { get; set; }
-        public System.DateTime fechaFin { get; set; }
+        public string per_Identidad { get; set; }
+        public string NombreCompleto { get; set; }
+        public string per_Telefono { get; set; }
+        public string per_CorreoElectronico { get; set; }
+        public Nullable<int> depto_Id { get; set; }
+        public string depto_Descripcion { get; set; }
+        public Nullable<int> area_Id { get; set; }
+        public string area_Descripcion { get; set; }
+        public Nullable<int> suc_Id { get; set; }
+        public string suc_Descripcion { get; set; }
+        public string jor_Descripcion { get; set; }
+        public Nullable<int> jor_Id { get; set; }
+        public System.DateTime fechaInicio { get; set; }
+        public System.DateTime Fechafin { get; set; }
     }
 }

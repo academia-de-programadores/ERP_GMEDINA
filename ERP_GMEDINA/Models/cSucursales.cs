@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Models
         public int empr_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(5, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(4, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Código Municipio ")]
         public string mun_Codigo { get; set; }
 
@@ -35,22 +35,22 @@ namespace ERP_GMEDINA.Models
         public int pemi_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Descripción ")]
         public string suc_Descripcion { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Correo Electrónico ")]
         public string suc_Correo { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Dirección ")]
         public string suc_Direccion { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(9, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(9, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Teléfono ")]
         public string suc_Telefono { get; set; }
 
@@ -58,7 +58,7 @@ namespace ERP_GMEDINA.Models
         public bool suc_Estado { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Razón Inactivo")]
         public string suc_RazonInactivo { get; set; }
 

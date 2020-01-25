@@ -55,7 +55,8 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.ToString();
-                throw;
+                //throw;
+                return Json(-2, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -104,7 +105,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbTipoIncapacidades = db.tbTipoIncapacidades.Find(id);
-                if (tbTipoIncapacidades == null || !tbTipoIncapacidades.ticn_Estado)
+                if (tbTipoIncapacidades == null)
                 {
                     return HttpNotFound();
                 }

@@ -17,20 +17,22 @@ namespace ERP_GMEDINA.Controllers
         // GET: Titulos
         public ActionResult Index()
         {
-            tbTitulos tbtitulos = new tbTitulos { titu_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             try
             {
-                // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbtitulos);
-            }
-            catch (Exception ex)
-            {
-
-                ex.Message.ToString();
-                // tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
-            }
+                
+            tbTitulos tbtitulos = new tbTitulos { };                   
             return View(tbtitulos);
+           }
+            catch
+               {
+                return View();
+                }
         }
 
         [HttpPost]
@@ -110,7 +112,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbtitulos = db.tbTitulos.Find(id);
-                if (tbtitulos == null || !tbtitulos.titu_Estado)
+                if (tbtitulos == null )
                 {
                     return HttpNotFound();
                 }

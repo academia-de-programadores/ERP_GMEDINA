@@ -69,7 +69,7 @@
 @Scripts.Render("~/plugins/dataTablesMatutina")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/Personas/IndexPersonas.js")
-@if (Model.per_Estado)
+@if ((bool)Session["Admin"])
 {
     @Scripts.Render("~/Scripts/app/general/Personas/Admin")
 }

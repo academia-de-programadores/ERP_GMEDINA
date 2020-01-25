@@ -167,7 +167,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-                if (tbSeleccionCandidatos == null || !tbSeleccionCandidatos.scan_Estado)
+                if (tbSeleccionCandidatos == null)
                 {
                     return HttpNotFound();
                 }

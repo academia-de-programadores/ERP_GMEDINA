@@ -1,7 +1,7 @@
 ﻿@model ERP_GMEDINA.Models.tbSucursales
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Sucursal";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -30,34 +30,39 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.mun_Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.mun_Codigo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mun_Codigo, "", new { @class = "text-danger" })
+                @Html.HiddenrFor(model => model.mun_Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.mun_Codigo, "", new { @class = "text-danger", @id = "errormun_Codigo" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.bod_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.bod_Id, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control required valid" id="bod_Id" name="bod_Id">
+                    <option value="">*Seleccione una opción*</option>
+                    <option value="26">Bodega A</option>
+                    <option value="31">Bodega B</option>
+                    <option value="32">Bodega C</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.bod_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.pemi_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.pemi_Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.pemi_Id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.pemi_Id, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.suc_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.suc_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.suc_Descripcion, new { htmlAttributes = new { @class = "form-control required" , @onkeypress = "return alphanumeric(event)" } })
                 @Html.ValidationMessageFor(model => model.suc_Descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +70,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.suc_Correo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.suc_Correo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.suc_Correo, new { htmlAttributes = new { @class = "form-control required" } })
                 @Html.ValidationMessageFor(model => model.suc_Correo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,7 +78,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.suc_Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.suc_Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.suc_Direccion, new { htmlAttributes = new { @class = "form-control required" } })
                 @Html.ValidationMessageFor(model => model.suc_Direccion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.suc_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.suc_Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.suc_Telefono, new { htmlAttributes = new { @class = "form-control required", @onkeypress = "return Numericos(event)", @MaxLength = "9" } })
                 @Html.ValidationMessageFor(model => model.suc_Telefono, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -27,6 +27,8 @@ namespace ERP_GMEDINA.Models
         public string fpa_IdFormaPago { get; set; }
         public string emp_FechaIngreso { get; set; }
         public string emp_CuentaBancaria { get; set; }
+        public string sue_Cantidad { get; set; }
+        public string tmon_Id { get; set; }
 
 
 

@@ -95,7 +95,7 @@ namespace ERP_GMEDINA.Controllers
                 using (db = new ERP_GMEDINAEntities())
                 {
                     tbTipoSalidas = db.tbTipoSalidas.Find(id);
-                    if (tbTipoSalidas == null || !tbTipoSalidas.tsal_Estado)
+                    if (tbTipoSalidas == null )
                     {
                         return HttpNotFound();
                     }

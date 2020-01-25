@@ -70,7 +70,7 @@
 }
 
 @section Scripts {
-    @if(Model.hinc_Estado)
+    @if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/General/HistorialIncapacidades/Admin")
     }

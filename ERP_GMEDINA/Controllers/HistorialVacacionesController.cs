@@ -17,6 +17,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialVacaciones
         public ActionResult Index()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             tbHistorialVacaciones tbHistorialVacaciones = new tbHistorialVacaciones { hvac_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try

@@ -22,9 +22,9 @@ $("#btnActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["txtIdRetore"]);
-                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                    MsgWarning("¡Exito!", "El registro se activó de forma exitosa  ");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró activar el registro, contacte al administrador.");
                 }
             });
     } else {

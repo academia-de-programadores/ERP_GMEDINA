@@ -93,7 +93,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbEquipoTrabajo = db.tbEquipoTrabajo.Find(id);
-                if (tbEquipoTrabajo == null || !tbEquipoTrabajo.eqtra_Estado)
+                if (tbEquipoTrabajo == null )
                 {
                     return HttpNotFound();
                 }

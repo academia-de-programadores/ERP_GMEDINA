@@ -17,7 +17,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: Personas
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             tbPersonas   tbPersonas = new tbPersonas { per_Estado = true};
             return View(tbPersonas);
         }

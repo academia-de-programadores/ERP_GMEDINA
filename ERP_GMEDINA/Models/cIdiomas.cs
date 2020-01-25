@@ -17,14 +17,14 @@ namespace ERP_GMEDINA.Models
         public int idi_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Display(Name = "Descripción")]
         public string idi_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
         public bool idi_Estado { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Display(Name = "Razon Inactivo")]
         public string idi_RazonInactivo { get; set; }
 

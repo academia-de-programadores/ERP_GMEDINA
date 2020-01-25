@@ -18,8 +18,13 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
            
-            try
+            try 
             {
+                if (Session["Admin"] == null && Session["Usuario"] == null)
+                {
+                    Response.Redirect("~/Inicio/index");
+                    return null;
+                }
                 db = new ERP_GMEDINAEntities();
                 ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
                 //var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -93,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
-                if(tbHistorialAmonestaciones == null || !tbHistorialAmonestaciones.hamo_Estado)
+                if(tbHistorialAmonestaciones == null)
                 {
                     return HttpNotFound();
                 }
@@ -143,14 +148,15 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Create(tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
             string msj = "";
-                try
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
                 {
                 db = new ERP_GMEDINAEntities();
                 var list = db.UDP_RRHH_tbHistorialAmonestaciones_Insert(tbHistorialAmonestaciones.emp_Id,
                                                                             tbHistorialAmonestaciones.tamo_Id,
                                                                             DateTime.Now,
                                                                             tbHistorialAmonestaciones.hamo_Observacion,
-                                                                            1,
+                                                                            Usuario.usu_Id,
                                                                             DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Insert_Result item in list)
                     {
@@ -170,11 +176,12 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbHistorialAmonestaciones.hamo_Id != 0 && tbHistorialAmonestaciones.hamo_RazonInactivo != "")
             {
+                var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, "Predeterminado", 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, "Predeterminado", Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -185,7 +192,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                //Session.Remove("id");
+                Session.Remove("id");
             }
             else
             {
@@ -203,7 +210,7 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Restore(tbHistorialAmonestaciones.hamo_Id, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Restore(tbHistorialAmonestaciones.hamo_Id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Restore_Result item in list)
                     {
                         result = item.MensajeError;

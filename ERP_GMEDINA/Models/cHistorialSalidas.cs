@@ -30,12 +30,12 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha salida")]
         public System.DateTime hsal_FechaSalida { get; set; }
         [Display(Name = "Observaciones")]
-        [MaxLength(25, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        [MaxLength(25, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string hsal_Observacion { get; set; }
         [Display(Name = "Estado")]
         public bool hsal_Estado { get; set; }
         [Display(Name = "Razon inactivo")]
-        [MaxLength(100, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string hsal_RazonInactivo { get; set; }
         [Display(Name = "Agregado por")]

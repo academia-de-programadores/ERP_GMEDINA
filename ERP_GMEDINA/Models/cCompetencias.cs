@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int comp_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Competencia")]
         public string comp_Descripcion { get; set; }
 
@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Razón Inactivo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string comp_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]
