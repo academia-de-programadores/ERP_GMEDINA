@@ -286,7 +286,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHistIncapacidades = db.tbHistorialIncapacidades.Find(ID);
-                if (tbHistIncapacidades == null || !tbHistIncapacidades.hinc_Estado)
+                if (tbHistIncapacidades == null)
                 {
                     return HttpNotFound();
                 }
