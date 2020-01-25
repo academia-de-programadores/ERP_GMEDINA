@@ -21,9 +21,21 @@ namespace ERP_GMEDINA.Controllers
             if(Session["Admin"]==null && Session["Usuario"]==null)
             {
                 Response.Redirect("~/Incio/index");
+                return null;
             }
-            tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones {};
-            return View(tbTipoAmonestaciones);
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Estado = true };
+                bool Admin = (bool)Session["Admin"];
+                return View(tbTipoAmonestaciones);
+
+            }
+            catch (Exception)
+            {
+                return View();
+
+            }
         }
 
         [HttpPost]
