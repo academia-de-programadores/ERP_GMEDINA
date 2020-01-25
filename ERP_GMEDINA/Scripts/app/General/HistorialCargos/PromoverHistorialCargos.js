@@ -79,16 +79,16 @@ $("#btnGuardar").click(function () {
                     $(location).attr('href', "/HistorialCargos/Index");
 
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". No se promovió el registro, contacte con el administrador");
+                    MsgError("Error", "No se promovió el registro, contacte con el administrador.");
                 }
             });
         }         
         else {
-            MsgError("Error", "Sueldo no puede ser negativo");
+            MsgError("Error", "Sueldo no puede ser negativo.");
         }
     }
     else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 

@@ -49,6 +49,7 @@ function compare_dates() {
     }
 }
 
+
 //LLENAR INDEX////////////////////////////////////////////////////////////////////////////////////////
 var scan_Id = 0;
 function llenarTabla() {
@@ -64,8 +65,7 @@ function llenarTabla() {
                  var Acciones = value.Estado == 1
                    ?null:
                    "<div>" +
-                     "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                  if (value.Estado > fill) {
                      tabla.row.add({
@@ -73,8 +73,8 @@ function llenarTabla() {
                          "Número": value.Id,
                          Identidad: value.Identidad,
                          Nombre: value.Nombre,
-                         Fase_Actual: value.Fase,
-                         Plaza_Solicitada: value.Plaza_Solicitada,
+                         "FaseActual": value.Fase,
+                         "PlazaSolicitada": value.Plaza_Solicitada,
                          Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
                          Estado: value.Estado ? "Activo" : "Inactivo",
                          Acciones: Acciones,
@@ -164,14 +164,14 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Éxito!", "Se ha actualizado el registro");
+                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error","No se pudo editar el registro, contacte al administrador.");
                 }
             });
         }
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
@@ -222,14 +222,14 @@ $("#btnGuardar").click(function () {
                         llenarTabla();
                         LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
 
-                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     } else {
-                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
                 });
         }
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 
 });
@@ -273,13 +273,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["scan_RazonInactivo"]);
-                    MsgWarning("¡Éxito!", "Se ha Inactivado el registro");
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 

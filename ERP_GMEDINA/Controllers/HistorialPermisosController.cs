@@ -261,7 +261,7 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
 
                 tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
-                if (tbHistorialPermisos == null || !tbHistorialPermisos.hper_Estado)
+                if (tbHistorialPermisos == null)
                 {
                     return HttpNotFound();
                 }
