@@ -6,16 +6,16 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @*@Html.HiddenFor(model => model.insf_UsuarioCrea)
-            @Html.HiddenFor(model => model.insf_FechaCrea)*@
+                @Html.HiddenFor(model => model.insf_FechaCrea)*@
 
             <div class="form-group">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, htmlAttributes: new { @class = "control-label" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.insf_IdInstitucionFinanciera, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, htmlAttributes: new { @class = "control-label" })
                 </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.insf_IdInstitucionFinanciera, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @autocomplete = "off" } })
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-md-4">
@@ -23,7 +23,7 @@
                     <label class="" id="Asterisco_insf_DescInstitucionFinanc">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar(this.value, '-1', '-1', '-1')" } })
+                    @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar(this.value, '-1', '-1', '-1')", @autocomplete = "off" } })
                     <span class="text-danger" style="display:block;" id="Span_insf_DescInstitucionFinanc">El campo Descripción es requerido.</span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <label class="" id="Asterisco_insf_Contacto">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', this.value, '-1', '-1')" } })
+                    @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', this.value, '-1', '-1')", @autocomplete = "off" } })
                     <span class="text-danger" style="display:block;" id="Span_insf_Contacto">El campo Contacto es requerido.</span>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     <label class="" id="Asterisco_insf_Telefono">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', '-1', this.value, '-1')" } })
+                    @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @onkeyup = "DataAnnotationsEditar('-1', '-1', this.value, '-1')", @autocomplete = "off" } })
                     <span class="text-danger" style="display:block;" id="Span_insf_Telefono">El campo Teléfono es requerido.</span>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <label class="" id="Asterisco_insf_Correo">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control MascaraEmail", @type = "email", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', this.value)" } })
+                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control MascaraEmail", @type = "email", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', this.value)", @autocomplete = "off" } })
                     <span class="text-danger" style="display:block;" id="Span_insf_Correo">El campo correo es requerido.</span>
                 </div>
             </div>

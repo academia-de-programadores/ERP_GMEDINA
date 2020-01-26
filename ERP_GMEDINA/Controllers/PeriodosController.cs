@@ -10,352 +10,352 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-	public class PeriodosController : Controller
-	{
-		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+    public class PeriodosController : Controller
+    {
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-		#region INDEX
-		public ActionResult Index()
-		{
-			var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.peri_IdPeriodo);
-			return View(tbPeriodos.ToList());
-		}
-		#endregion
+        #region INDEX
+        public ActionResult Index()
+        {
+            var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.peri_IdPeriodo);
+            return View(tbPeriodos.ToList());
+        }
+        #endregion
 
-		#region DATA PARA RECARGAR EL DATATABLE
-		public ActionResult GetData()
-		{
-			// evitar referencias circulares
-			db.Configuration.ProxyCreationEnabled = false;
+        #region DATA PARA RECARGAR EL DATATABLE
+        public ActionResult GetData()
+        {
+            // evitar referencias circulares
+            db.Configuration.ProxyCreationEnabled = false;
 
-			// obtener data para refrescar datatable
-			var tbPeriodos = db.tbPeriodos
-				.Select(c => new {
-					peri_IdPeriodo = c.peri_IdPeriodo,
-					peri_DescripPeriodo = c.peri_DescripPeriodo,
-					fpa_UsuarioCrea = c.peri_UsuarioCrea,
-					NombreUsuarioCrea = c.tbUsuario.usu_NombreUsuario,
-					peri_FechaCrea = c.peri_FechaCrea,
-					peri_UsuarioModifica = c.peri_UsuarioModifica,
-					NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
-					peri_FechaModifica = c.peri_FechaModifica,
-					peri_Activo = c.peri_Activo
-				}).OrderBy(x => x.peri_IdPeriodo).ToList();
+            // obtener data para refrescar datatable
+            var tbPeriodos = db.tbPeriodos
+                .Select(c => new {
+                    peri_IdPeriodo = c.peri_IdPeriodo,
+                    peri_DescripPeriodo = c.peri_DescripPeriodo,
+                    fpa_UsuarioCrea = c.peri_UsuarioCrea,
+                    NombreUsuarioCrea = c.tbUsuario.usu_NombreUsuario,
+                    peri_FechaCrea = c.peri_FechaCrea,
+                    peri_UsuarioModifica = c.peri_UsuarioModifica,
+                    NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
+                    peri_FechaModifica = c.peri_FechaModifica,
+                    peri_Activo = c.peri_Activo
+                }).OrderBy(x => x.peri_IdPeriodo).ToList();
 
-			// retornar data
-			return new JsonResult { Data = tbPeriodos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-		}
-		#endregion
+            // retornar data
+            return new JsonResult { Data = tbPeriodos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        #endregion
 
-		#region POST: CREATE
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo,peri_UsuarioCrea,peri_FechaCrea,peri_Activo")] tbPeriodos tbPeriodos)
-		{
-			// data de auditoria
-			tbPeriodos.peri_UsuarioCrea = 1;
-			tbPeriodos.peri_FechaCrea = DateTime.Now;
-			tbPeriodos.peri_Activo = true;
+        #region POST: CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo,peri_UsuarioCrea,peri_FechaCrea,peri_Activo")] tbPeriodos tbPeriodos)
+        {
+            // data de auditoria
+            tbPeriodos.peri_UsuarioCrea = 1;
+            tbPeriodos.peri_FechaCrea = DateTime.Now;
+            tbPeriodos.peri_Activo = true;
 
-			// variables de resultado
-			string response = "bien";
-			IEnumerable<object> listPeriodo = null;
-			String MessageError = "";
+            // variables de resultado
+            string response = "bien";
+            IEnumerable<object> listPeriodo = null;
+            String MessageError = "";
 
-			// validar si el modelo es válido
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					// ejecutar PA
-					listPeriodo = db.UDP_Plani_tbPeriodos_Insert(tbPeriodos.peri_DescripPeriodo,
-																			tbPeriodos.peri_UsuarioCrea,
-																			tbPeriodos.peri_FechaCrea,
-																			true,
-																			1);
+            // validar si el modelo es válido
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // ejecutar PA
+                    listPeriodo = db.UDP_Plani_tbPeriodos_Insert(tbPeriodos.peri_DescripPeriodo,
+                                                                            tbPeriodos.peri_UsuarioCrea,
+                                                                            tbPeriodos.peri_FechaCrea,
+                                                                            true,
+                                                                            1);
 
-					// obtener resultado del PA
-					foreach (UDP_Plani_tbPeriodos_Insert_Result resultado in listPeriodo)
-						MessageError = Convert.ToString(resultado);
+                    // obtener resultado del PA
+                    foreach (UDP_Plani_tbPeriodos_Insert_Result resultado in listPeriodo)
+                        MessageError = Convert.ToString(resultado);
 
-					if (MessageError.StartsWith("-1"))
-					{
-						// el PA falló
-						ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-						response = "error";
-					}
-				}
-				catch (Exception Ex)
-				{
-					// se generó una excepción
-					ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-					response = "error" + Ex.Message.ToString();
-				}
-			}
-			else
-			{
-				// el modelo no es válido
-				response = "error";
-			}
+                    if (MessageError.StartsWith("-1"))
+                    {
+                        // el PA falló
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    // se generó una excepción
+                    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                    response = "error" + Ex.Message.ToString();
+                }
+            }
+            else
+            {
+                // el modelo no es válido
+                response = "error";
+            }
 
-			// retornar resultado del proceso
-			return Json(response, JsonRequestBehavior.AllowGet);
-		}
+            // retornar resultado del proceso
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
 
-		#endregion
+        #endregion
 
-		#region GET: EDIT
-		public JsonResult Edit(int? id)
-		{
-			// validar si se recibió el ID
-			if (id == null)
-			{
-				return Json("Error", JsonRequestBehavior.AllowGet);
-			}
+        #region GET: EDIT
+        public JsonResult Edit(int? id)
+        {
+            // validar si se recibió el ID
+            if (id == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
 
-			// obtener registro con ese ID
-			var tbPeriodo = db.tbPeriodos.Where(d => d.peri_IdPeriodo == id)
-						.Select(c => new { peri_DescripPeriodo = c.peri_DescripPeriodo, peri_IdPeriodo = c.peri_IdPeriodo, peri_UsuarioCrea = c.peri_UsuarioCrea, peri_FechaCrea = c.peri_FechaCrea, peri_UsuarioModifica = c.peri_UsuarioModifica, peri_FechaModifica = c.peri_FechaModifica, peri_Activo = c.peri_Activo })
-						.ToList();
+            // obtener registro con ese ID
+            var tbPeriodo = db.tbPeriodos.Where(d => d.peri_IdPeriodo == id)
+                        .Select(c => new { peri_DescripPeriodo = c.peri_DescripPeriodo, peri_IdPeriodo = c.peri_IdPeriodo, peri_UsuarioCrea = c.peri_UsuarioCrea, peri_FechaCrea = c.peri_FechaCrea, peri_UsuarioModifica = c.peri_UsuarioModifica, peri_FechaModifica = c.peri_FechaModifica, peri_Activo = c.peri_Activo })
+                        .ToList();
 
-			// si no hay ningún objeto con ese ID, retornar error
-			if (tbPeriodo == null)
-			{
-				return Json("Error", JsonRequestBehavior.AllowGet);
-			}
+            // si no hay ningún objeto con ese ID, retornar error
+            if (tbPeriodo == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
 
-			// retornar objeto
-			return Json(tbPeriodo, JsonRequestBehavior.AllowGet);
-		}
-		#endregion
+            // retornar objeto
+            return Json(tbPeriodo, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
-		#region POST: EDITAR
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public JsonResult Editar([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo")] tbPeriodos tbPeriodos)
-		{
-			// data de auditoria
-			tbPeriodos.peri_UsuarioModifica = 1;
-			tbPeriodos.peri_FechaModifica = DateTime.Now;
-			tbPeriodos.peri_Activo = true;
+        #region POST: EDITAR
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult Editar([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo")] tbPeriodos tbPeriodos)
+        {
+            // data de auditoria
+            tbPeriodos.peri_UsuarioModifica = 1;
+            tbPeriodos.peri_FechaModifica = DateTime.Now;
+            tbPeriodos.peri_Activo = true;
 
-			// variables de resultado
-			string response = "bien";
-			IEnumerable<object> listPeriodo = null;
-			String MessageError = "";
+            // variables de resultado
+            string response = "bien";
+            IEnumerable<object> listPeriodo = null;
+            String MessageError = "";
 
-			// validar si el modelo es válido
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					// ejecutar PA
-					listPeriodo = db.UDP_Plani_tbPeriodos_Update(tbPeriodos.peri_IdPeriodo,
-																	tbPeriodos.peri_DescripPeriodo,
-																	tbPeriodos.peri_UsuarioModifica,
-																	tbPeriodos.peri_FechaModifica,
-																	true,
-																	1);
+            // validar si el modelo es válido
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // ejecutar PA
+                    listPeriodo = db.UDP_Plani_tbPeriodos_Update(tbPeriodos.peri_IdPeriodo,
+                                                                    tbPeriodos.peri_DescripPeriodo,
+                                                                    tbPeriodos.peri_UsuarioModifica,
+                                                                    tbPeriodos.peri_FechaModifica,
+                                                                    true,
+                                                                    1);
 
-					// obtener resultado del PA
-					foreach (UDP_Plani_tbPeriodos_Update_Result resultado in listPeriodo)
-						MessageError = Convert.ToString(resultado);
+                    // obtener resultado del PA
+                    foreach (UDP_Plani_tbPeriodos_Update_Result resultado in listPeriodo)
+                        MessageError = Convert.ToString(resultado);
 
-					if (MessageError.StartsWith("-1"))
-					{
-						// el PA falló
-						ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-						response = "error";
-					}
-				}
-				catch (Exception Ex)
-				{
-					// se generó una excepción
-					ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-					response = "error" + Ex.Message.ToString();
-				}
-			}
-			else
-			{
-				// el modelo no es válido
-				response = "error";
-			}
+                    if (MessageError.StartsWith("-1"))
+                    {
+                        // el PA falló
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    // se generó una excepción
+                    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                    response = "error" + Ex.Message.ToString();
+                }
+            }
+            else
+            {
+                // el modelo no es válido
+                response = "error";
+            }
 
-			// retornar resultado del proceso
-			return Json(response, JsonRequestBehavior.AllowGet);
-		}
+            // retornar resultado del proceso
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
 
-		#endregion
+        #endregion
 
-		#region GET: DETAILS
-		public JsonResult Details(int? id)
-		{
-			// validar si se recibió el id
-			if (id == null)
-			{
-				return Json("Error", JsonRequestBehavior.AllowGet);
-			}
+        #region GET: DETAILS
+        public JsonResult Details(int? id)
+        {
+            // validar si se recibió el id
+            if (id == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
 
-			// obtener objeto con el ID recibido
-			var tbCatalogoPeriodoJSON = from tbPeriod in db.tbPeriodos
-										where tbPeriod.peri_Activo == true && tbPeriod.peri_IdPeriodo == id
-										select new
-										{
-											tbPeriod.peri_IdPeriodo,
-											tbPeriod.peri_DescripPeriodo,
-											tbPeriod.peri_Activo,
-											tbPeriod.peri_UsuarioCrea,
-											UsuCrea = tbPeriod.tbUsuario.usu_NombreUsuario,
-											tbPeriod.peri_FechaCrea,
-											tbPeriod.peri_UsuarioModifica,
-											UsuModifica = tbPeriod.tbUsuario1.usu_NombreUsuario,
-											tbPeriod.peri_FechaModifica
-										};
+            // obtener objeto con el ID recibido
+            var tbCatalogoPeriodoJSON = from tbPeriod in db.tbPeriodos
+                                        where tbPeriod.peri_Activo == true && tbPeriod.peri_IdPeriodo == id
+                                        select new
+                                        {
+                                            tbPeriod.peri_IdPeriodo,
+                                            tbPeriod.peri_DescripPeriodo,
+                                            tbPeriod.peri_Activo,
+                                            tbPeriod.peri_UsuarioCrea,
+                                            UsuCrea = tbPeriod.tbUsuario.usu_NombreUsuario,
+                                            tbPeriod.peri_FechaCrea,
+                                            tbPeriod.peri_UsuarioModifica,
+                                            UsuModifica = tbPeriod.tbUsuario1.usu_NombreUsuario,
+                                            tbPeriod.peri_FechaModifica
+                                        };
 
 
-			// evitar referencias circulares
-			db.Configuration.ProxyCreationEnabled = false;
-			return Json(tbCatalogoPeriodoJSON, JsonRequestBehavior.AllowGet);
-		}
-		#endregion
+            // evitar referencias circulares
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(tbCatalogoPeriodoJSON, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
-		#region POST: INACTIVAR
-		[HttpPost]
-		public ActionResult Inactivar(int? id)
-		{
-			// validar si se recibió el id 
-			if (id == null)
-			{
-				return Json("Error", JsonRequestBehavior.AllowGet);
-			}
+        #region POST: INACTIVAR
+        [HttpPost]
+        public ActionResult Inactivar(int? id)
+        {
+            // validar si se recibió el id 
+            if (id == null)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
 
-			// vairables de resultado 
-			string response = "bien";
-			IEnumerable<object> listPeriodo = null;
-			string MensajeError = "";
+            // vairables de resultado 
+            string response = "bien";
+            IEnumerable<object> listPeriodo = null;
+            string MensajeError = "";
 
-			// instancia del objeto
-			tbPeriodos tbPeriodos = new tbPeriodos();
+            // instancia del objeto
+            tbPeriodos tbPeriodos = new tbPeriodos();
 
-			// data del objeto
-			tbPeriodos.peri_IdPeriodo = (int)id;
-			tbPeriodos.peri_UsuarioModifica = 1;
-			tbPeriodos.peri_FechaModifica = DateTime.Now;
+            // data del objeto
+            tbPeriodos.peri_IdPeriodo = (int)id;
+            tbPeriodos.peri_UsuarioModifica = 1;
+            tbPeriodos.peri_FechaModifica = DateTime.Now;
 
-			// validar que el id sea válido
-			if (tbPeriodos.peri_IdPeriodo > 0)
-			{
-				try
-				{
-					// ejecutar PA
-					listPeriodo = db.UDP_Plani_tbPeriodos_Inactivar(tbPeriodos.peri_IdPeriodo,
-																			   tbPeriodos.peri_UsuarioModifica,
-																			   tbPeriodos.peri_FechaModifica);
+            // validar que el id sea válido
+            if (tbPeriodos.peri_IdPeriodo > 0)
+            {
+                try
+                {
+                    // ejecutar PA
+                    listPeriodo = db.UDP_Plani_tbPeriodos_Inactivar(tbPeriodos.peri_IdPeriodo,
+                                                                               tbPeriodos.peri_UsuarioModifica,
+                                                                               tbPeriodos.peri_FechaModifica);
 
-					// obtener resultado del PA
-					foreach (UDP_Plani_tbPeriodos_Inactivar_Result Resultado in listPeriodo)
-						MensajeError = Resultado.MensajeError;
+                    // obtener resultado del PA
+                    foreach (UDP_Plani_tbPeriodos_Inactivar_Result Resultado in listPeriodo)
+                        MensajeError = Resultado.MensajeError;
 
-					if (MensajeError.StartsWith("-1"))
-					{
-						// el PA falló
-						ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
-						response = "error";
-					}
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        // el PA falló
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
 
-				}
-				catch (Exception Ex)
-				{
-					// se generó una excepción
-					response = "error";
-				}
-			}
-			else
-			{
-				// el id no es válido
-				ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-				response = "error";
-			}
+                }
+                catch (Exception Ex)
+                {
+                    // se generó una excepción
+                    response = "error";
+                }
+            }
+            else
+            {
+                // el id no es válido
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
 
-			// retornar resulado del proceso
-			return Json(response, JsonRequestBehavior.AllowGet);
-		}
-		#endregion
+            // retornar resulado del proceso
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
-		#region POST: ACTIVAR
-		[HttpPost]
-		public ActionResult Activar(int? id)
-		{
-			// variables de resultaod
-			string response = "bien";
-			IEnumerable<object> listPeriodo = null;
-			string MensajeError = "";
+        #region POST: ACTIVAR
+        [HttpPost]
+        public ActionResult Activar(int? id)
+        {
+            // variables de resultaod
+            string response = "bien";
+            IEnumerable<object> listPeriodo = null;
+            string MensajeError = "";
 
-			// validar si se recibió el id
-			if (id == null)
-			{
-				response = "error";
-				return Json(response, JsonRequestBehavior.AllowGet);
-			}
+            // validar si se recibió el id
+            if (id == null)
+            {
+                response = "error";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
 
-			// instancias del objeto
-			tbPeriodos tbPeriodos = new tbPeriodos();
+            // instancias del objeto
+            tbPeriodos tbPeriodos = new tbPeriodos();
 
-			// data del objeto
-			tbPeriodos.peri_IdPeriodo = (int)id;
-			tbPeriodos.peri_UsuarioModifica = 1;
-			tbPeriodos.peri_FechaModifica = DateTime.Now;
+            // data del objeto
+            tbPeriodos.peri_IdPeriodo = (int)id;
+            tbPeriodos.peri_UsuarioModifica = 1;
+            tbPeriodos.peri_FechaModifica = DateTime.Now;
 
-			// validar si el ID es válido
-			if (tbPeriodos.peri_IdPeriodo > 0)
-			{
-				try
-				{
-					// ejecutar PA
-					listPeriodo = db.UDP_Plani_tbPeriodos_Activar(tbPeriodos.peri_IdPeriodo,
-																			   tbPeriodos.peri_UsuarioModifica,
-																			   tbPeriodos.peri_FechaModifica);
+            // validar si el ID es válido
+            if (tbPeriodos.peri_IdPeriodo > 0)
+            {
+                try
+                {
+                    // ejecutar PA
+                    listPeriodo = db.UDP_Plani_tbPeriodos_Activar(tbPeriodos.peri_IdPeriodo,
+                                                                               tbPeriodos.peri_UsuarioModifica,
+                                                                               tbPeriodos.peri_FechaModifica);
 
-					// obetener resultado del PA
-					foreach (UDP_Plani_tbPeriodos_Activar_Result Resultado in listPeriodo)
-						MensajeError = Resultado.MensajeError;
+                    // obetener resultado del PA
+                    foreach (UDP_Plani_tbPeriodos_Activar_Result Resultado in listPeriodo)
+                        MensajeError = Resultado.MensajeError;
 
-					if (MensajeError.StartsWith("-1"))
-					{
-						// el PA falló
-						ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
-						response = "error";
-					}
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        // el PA falló
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
 
-				}
-				catch (Exception Ex)
-				{
-					// se generó una excepción
-					response = "error";
-				}
-			}
-			else
-			{
-				// el ID es válido
-				ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-				response = "error";
-			}
+                }
+                catch (Exception Ex)
+                {
+                    // se generó una excepción
+                    response = "error";
+                }
+            }
+            else
+            {
+                // el ID es válido
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
 
-			// retornar el resultado del proceso
-			return Json(response, JsonRequestBehavior.AllowGet);
-		}
-		#endregion
+            // retornar el resultado del proceso
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
-		#region DISPOSE
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				db.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        #region DISPOSE
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

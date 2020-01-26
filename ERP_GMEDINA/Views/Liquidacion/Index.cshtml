@@ -16,7 +16,7 @@
                 @* Left column - DDL + Datepicker + fire reason  *@
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control lg" id="cmbxEmpleados">
+                        <select class="form-control lg" id="cmbxEmpleados" onchange="validarCampos(this.value, '-1', '-1', false)">
                             <option></option>
                         </select>
                         <span class="text-danger" hidden id="validacionSelectEmpleado">Por favor, seleccione un empleado.</span>
@@ -25,8 +25,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control lg motivos" id="cmbxMotivos">
-                        </select>
+                        <select class="form-control lg motivos" id="cmbxMotivos" onchange="validarCampos('-1', this.value, '-1', false)"></select>
                         <span class="text-danger" hidden id="validacionSelectMotivo">Por favor, seleccione un motivo.</span>
                     </div>
                 </div>
@@ -34,7 +33,10 @@
                 <div class="col-md-4">
                     <div class="form-group form-group-sm" id="datepicker">
                         <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fechaFin" readonly style="background-color:white" class="form-control" placeholder="Ingrese la fecha de despido" value="">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input type="text" id="fechaFin" readonly style="background-color:white" class="form-control" placeholder="Ingrese la fecha de despido" value="" onchange="validarCampos('-1', '-1', this.value, false)">
                         </div>
                         <span class="text-danger" hidden id="validacionSelectFechaFin">Por favor, seleccione la fecha de despido.</span>
                     </div>
@@ -42,9 +44,7 @@
             </div>
         </div>
 
-        @*<div class="col-lg-8" id="cargarSpinnerDatosColaborador" hidden>
-            </div>*@
-        @* Second grid - General info *@
+        @*  INFORMACION GENERAL  *@
         <div class="ibox-title">
             <h3 style="text-align:center;">Información general</h3>
         </div>
@@ -64,41 +64,44 @@
                     </div>
                     <div class="row m-t-sm">
                         <div class="col-lg-4">
+                            <strong>Num. Identidad: </strong> <span class="text-success" id="spanIdentidadEmpleado"></span>
+                        </div>
+                        <div class="col-lg-4">
                             <strong>Nombre: </strong> <span class="text-success text-capitalize" id="spanNombreEmpleado"></span>
                         </div>
                         <div class="col-lg-4">
                             <strong>Apellido: </strong> <span class="text-success text-capitalize" id="spanApellidoEmpleado"></span>
                         </div>
-                        <div class="col-lg-4">
-                            <strong>Edad: </strong> <span class="text-success" id="spanEdadEmpleado"></span>
-                        </div>
                     </div>
                     <div class="row m-t-sm">
+
                         <div class="col-lg-4">
-                            <strong>Cargo: </strong> <span class="text-success" id="spanCargoEmpleado"></span>
+                            <strong>Edad: </strong> <span class="text-success" id="spanEdadEmpleado"></span>
                         </div>
                         <div class="col-lg-4">
                             <strong>Sexo: </strong> <span class="text-success" id="spanSexoEmpleado"></span>
                         </div>
                         <div class="col-lg-4">
-                            <strong>Departamento: </strong> <span class="text-success" id="spanDepartamentoEmpleado"></span>
+                            <strong>Fecha de Ingreso: </strong> <span class="text-success" id="spanFechaIngresoEmpleado"></span>
                         </div>
                     </div>
                     <div class="row m-t-sm">
                         <div class="col-lg-4">
-                            <strong>Num. Identidad: </strong> <span class="text-success" id="spanIdentidadEmpleado"></span>
+                            <strong>Departamento: </strong> <span class="text-success" id="spanDepartamentoEmpleado"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <strong>Cargo: </strong> <span class="text-success" id="spanCargoEmpleado"></span>
                         </div>
                         <div class="col-lg-4">
                             <strong>Sueldo: </strong> <span class="text-success" id="spanSueldoEmpleado"></span>
                         </div>
-                        <div class="col-lg-4">
-                            <strong>Fecha de Ingreso: </strong> <span class="text-success" id="spanFechaIngresoEmpleado"></span>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
+        @*  Cáclculos y Conceptos de Liquidacion  *@
         <div class="ibox-title">
             <h3 style="text-align:center;">Cálculos</h3>
         </div>
@@ -159,66 +162,66 @@
                         @* Columna izquierda *@
                         <div class="narrow">
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="SalarioOrdinarioMensual_Liq" id="SalarioOrdinarioMensual_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="SalarioOrdinarioMensual_Liq" id="SalarioOrdinarioMensual_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="SalarioPromedioMensual_Liq" id="SalarioPromedioMensual_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="SalarioPromedioMensual_Liq" id="SalarioPromedioMensual_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="SalarioOrdinarioDiario_Liq" id="SalarioOrdinarioDiario_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="SalarioOrdinarioDiario_Liq" id="SalarioOrdinarioDiario_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="SalarioPromedioDiario_Liq" id="SalarioPromedioDiario_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="SalarioPromedioDiario_Liq" id="SalarioPromedioDiario_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="Preaviso_Liq" id="Preaviso_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="Preaviso_Liq" id="Preaviso_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="Cesantia_Liq" id="Cesantia_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="Cesantia_Liq" id="Cesantia_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="DecimoTercerMesProporcional_Liq" id="DecimoTercerMesProporcional_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="DecimoTercerMesProporcional_Liq" id="DecimoTercerMesProporcional_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="DecimoCuartoMesProporcional_Liq" id="DecimoCuartoMesProporcional_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="DecimoCuartoMesProporcional_Liq" id="DecimoCuartoMesProporcional_Liq" value="" />
                             </div>
                             <div class="form-group" hidden>
-                                <input class="text-success text-line" name="VacacionesPendientes_Liq" id="VacacionesPendientes_Liq" value="" />
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="VacacionesPendientes_Liq" id="VacacionesPendientes_Liq" value="" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Salarios adeudados(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="SalariosAdeudados" id="SalariosAdeudados" value="" pattern="[0-9]{7}" />
+                                <strong class="" style="font-weight:900;">Salarios adeudados(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="SalariosAdeudados" id="SalariosAdeudados" value="" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Otros pagos(LPS): </strong> 
-                                <input type="text" class="text-success text-line ValidarCaracteres" name="OtrosPagos" id="OtrosPagos" pattern="[a-z]" />
+                                <strong class="" style="font-weight:900;">Otros pagos(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="OtrosPagos" id="OtrosPagos" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago HE pendiente(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="PagoHEPendiente" id="PagoHEPendiente" />
+                                <strong class="" style="font-weight:900;">Pago HE pendiente(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoHEPendiente" id="PagoHEPendiente" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Valor bono educativo(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="ValorBonoEducativo" id="ValorBonoEducativo" pattern="[0-9]{7}" />
+                                <strong class="" style="font-weight:900;">Valor bono educativo(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="ValorBonoEducativo" id="ValorBonoEducativo" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago séptimo día(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="PagoSeptimoDia" id="PagoSeptimoDia" pattern="[0-9]{7}" />
+                                <strong class="" style="font-weight:900;">Pago séptimo día(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoSeptimoDia" id="PagoSeptimoDia" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Bono por vacaciones(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="BonoPorVacaciones" id="BonoPorVacaciones" pattern="[0-9]{7}" />
+                                <strong class="" style="font-weight:900;">Bono por vacaciones(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="BonoPorVacaciones" id="BonoPorVacaciones" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Reajuste salarial(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="ReajusteSalarial" id="ReajusteSalarial" pattern="[0-9]{7}" />
+                                <strong class="" style="font-weight:900;">Reajuste salarial(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="ReajusteSalarial" id="ReajusteSalarial" />
                             </div>
 
                         </div>
@@ -226,38 +229,38 @@
                         <div class="wide">
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Decimotercer mes Adeudado(LPS): </strong> 
+                                <strong class="" style="font-weight:900;">Decimotercer mes Adeudado(LPS): </strong>
                                 <input class="text-success text-line ValidarCaracteres" name="DecimoTercerMesAdeudado" id="DecimoTercerMesAdeudado" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Decimocuarto mes Adeudado(LPS): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="DecimoCuartoMesAdeudado" id="DecimoCuartoMesAdeudado" />
+                                <strong class="" style="font-weight:900;">Decimocuarto mes Adeudado(LPS): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="DecimoCuartoMesAdeudado" id="DecimoCuartoMesAdeudado" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Bonificación Vacaciones(Dias): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="BonificacionVacaciones" id="BonificacionVacaciones" pattern="[0-9]{3}" />
+                                <strong class="" style="font-weight:900;">Bonificación Vacaciones(Dias): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="BonificacionVacaciones" id="BonificacionVacaciones" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pagos Por Embarazo(Dias): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="PagoPorEmbarazo" id="PagoPorEmbarazo" pattern="[0-9]{3}" />
+                                <strong class="" style="font-weight:900;">Pagos Por Embarazo(Dias): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoPorEmbarazo" id="PagoPorEmbarazo" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago por Lactancia(Dias): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="PagoPorLactancia" id="PagoPorLactancia" pattern="[0-9]{3}" />
+                                <strong class="" style="font-weight:900;">Pago por Lactancia(Dias): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoPorLactancia" id="PagoPorLactancia" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">PrePosNatal(Dias): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="PrePosNatal" id="PrePosNatal" />
+                                <strong class="" style="font-weight:900;">PrePosNatal(Dias): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PrePosNatal" id="PrePosNatal" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago Por Dias Feriados(Dias): </strong> 
-                                <input class="text-success text-line ValidarCaracteres" name="PagoPorDiasFeriado" id="PagoPorDiasFeriado" pattern="[0-9]{3}" />
+                                <strong class="" style="font-weight:900;">Pago Por Dias Feriados(Dias): </strong>
+                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoPorDiasFeriado" id="PagoPorDiasFeriado" />
                             </div>
                         </div>
                     </div>
@@ -269,7 +272,7 @@
                     <input type="button" class="btn btn-primary" id="btnConceptosAdicionales" value="Sumar Conceptos Adicionales" style="margin-left:5px;" />
                     <div class="form-group" style="float:right;">
                         <strong class="" style="font-weight:900;">Total de Liquidación(LPS): </strong>
-                        <input class="text-success text-line" readonly="readonly" name="MontoTotalLiquidacion" id="MontoTotalLiquidacion" />
+                        <input class="soloNumero MascaraCantidad text-success text-line" readonly="readonly" name="MontoTotalLiquidacion" id="MontoTotalLiquidacion" />
                     </div>
                 </div>
             </div>
@@ -277,7 +280,7 @@
                 <div class="row">
                     <input type="button" class="btn btn-primary" id="RegistrarLiquidacion" value="Registrar Liquidación" style="margin:10px 10px 0px 0px; float:right;" />
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </div>
@@ -347,4 +350,5 @@
 @section Styles {
     @Styles.Render("~/plugins/select2Styles")
     @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }

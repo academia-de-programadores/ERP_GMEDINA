@@ -9,55 +9,47 @@ function _ajax(params, uri, type, callback, enviar) {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(params),
-        beforeSend: function() {
+        beforeSend: function () {
             enviar();
         },
-        success: function(data) {
+        success: function (data) {
             callback(data);
         }
     });
 }
 
 //#region Variables Globales
-var fecha = new Date();
 // Inputs divs y ddl
-const inputFechaFin = $('#fechaFin'),
-	ddlEmpleados = $('#cmbxEmpleados'),
-    ddlMotivos = $('#cmbxMotivos'),
-	validacionSelectFechaFin = $('#validacionSelectFechaFin'),
-	validacionSelectEmpleado = $('#validacionSelectEmpleado'),
-    validacionSelectMotivo = $('#validacionSelectMotivo'),
-	cargarSpinnerDatosColaborador = $('#cargarSpinnerDatosColaborador'),
-	cargarSpinnerSalarios = $('#cargarSpinnerSalarios'),
-	divSalarios = $('#Salarios'),
-    divConceptosAdicionales = $('#ConceptosAdicionales'),
-	divDatosColaborador = $('#datosColaborador'),
-	// Datos del empleado
-	spanDiasLaborados = $('#spanDiasLaborados'),
-	spanMesesLaborados = $('#spanMesesLaborados'),
-	spanAniosLaborados = $('#spanAniosLaborados'),
-	spanNombreEmpleado = $('#spanNombreEmpleado'),
-	spanApellidoEmpleado = $('#spanApellidoEmpleado'),
-	spanEdadEmpleado = $('#spanEdadEmpleado'),
-	spanSexoEmpleado = $('#spanSexoEmpleado'),
-	spanDepartamentoEmpleado = $('#spanDepartamentoEmpleado'),
-	spanIdentidadEmpleado = $('#spanIdentidadEmpleado'),
-	spanSueldoEmpleado = $('#spanSueldoEmpleado'),
-	spanCargoEmpleado = $('#spanCargoEmpleado'),
-	spanFechaIngresoEmpleado = $('#spanFechaIngresoEmpleado'),
-	// Salarios
-	spanSalarioOrdinarioMensual = $('#spanSalario'),
-	spanSalarioPromedioMensual = $('#spanSalarioOrdinarioDiario'),
-	spanSalarioOrdinarioDiario = $('#spanSalarioOrdinarioPromedioDiario'),
-	spanSalarioPromedioDiario = $('#spanSalarioPromedioDiario'),
-    //Conceptos de Liquidacion
-    spanPreaviso = $('#spanPreaviso'),
-    spanCesantia = $('#spanCesantia'),
-    spanDecimotercer = $('#spanDecimotercer'),
-    spanDecimocuarto = $('#spanDecimocuarto'),
-    spanVacaciones = $('#spanVacaciones'),
-    spanTotalLiquidacion = $('#MontoTotalLiquidacion');
-//const  = $('#');
+const cargarSpinnerDatosColaborador = $('#cargarSpinnerDatosColaborador'),
+	  cargarSpinnerSalarios = $('#cargarSpinnerSalarios'),
+	  divSalarios = $('#Salarios'),
+      divConceptosAdicionales = $('#ConceptosAdicionales'),
+	  divDatosColaborador = $('#datosColaborador'),
+	  // Datos del empleado
+	  spanDiasLaborados = $('#spanDiasLaborados'),
+	  spanMesesLaborados = $('#spanMesesLaborados'),
+	  spanAniosLaborados = $('#spanAniosLaborados'),
+	  spanNombreEmpleado = $('#spanNombreEmpleado'),
+	  spanApellidoEmpleado = $('#spanApellidoEmpleado'),
+	  spanEdadEmpleado = $('#spanEdadEmpleado'),
+	  spanSexoEmpleado = $('#spanSexoEmpleado'),
+	  spanDepartamentoEmpleado = $('#spanDepartamentoEmpleado'),
+	  spanIdentidadEmpleado = $('#spanIdentidadEmpleado'),
+	  spanSueldoEmpleado = $('#spanSueldoEmpleado'),
+	  spanCargoEmpleado = $('#spanCargoEmpleado'),
+	  spanFechaIngresoEmpleado = $('#spanFechaIngresoEmpleado'),
+	  // Salarios
+	  spanSalarioOrdinarioMensual = $('#spanSalario'),
+	  spanSalarioPromedioMensual = $('#spanSalarioOrdinarioDiario'),
+	  spanSalarioOrdinarioDiario = $('#spanSalarioOrdinarioPromedioDiario'),
+	  spanSalarioPromedioDiario = $('#spanSalarioPromedioDiario'),
+      //Conceptos de Liquidacion
+      spanPreaviso = $('#spanPreaviso'),
+      spanCesantia = $('#spanCesantia'),
+      spanDecimotercer = $('#spanDecimotercer'),
+      spanDecimocuarto = $('#spanDecimocuarto'),
+      spanVacaciones = $('#spanVacaciones'),
+      spanTotalLiquidacion = $('#MontoTotalLiquidacion');
 //#endregion
 
 //Mostrar el spinner
@@ -71,74 +63,95 @@ function spinner() {
              </div>`;
 }
 
-//DETECTAR LOS CAMBIOS DEL DDL EMPLEADOS PARA LA EJECUCION
-$(ddlEmpleados).change(() => {
-    vaciarConceptosAdicionales();
-    const ddlEmpleadosLleno = ddlEmpleados.val() != '';
-    if (ddlEmpleadosLleno) {
-        validacionSelectEmpleado.hide();
-        GetDatosColaborador();
-    }
-});
 
-//VARIABLE DE CONTENCION DE DOBLE EJECUCION PARA EL INPUT FECHA
-var InputFechaBool = true;
 
-//DETECTAR LOS CAMBIOS DE INPUT DE FECHA PARA LA EJECUCION
-$(inputFechaFin).change(() => {
-    vaciarConceptosAdicionales();
-    if (inputFechaFinLlena()) {
-        validacionSelectFechaFin.hide();
-        //SET: ALTERNAR EL ESTADO DE InputFechaBool PARA QUE NO VAYA DOS VECES AL SERVIDOR
-        InputFechaBool = (InputFechaBool) ? false : true;
-        if(!InputFechaBool){
-            GetDatosColaborador();
+//VALIDAR EL FORMULARIO
+function validarCampos(colaborador, motivo, fecha, BoolConceptAddValidate) {
+    //VARIABLE PARA VALIDAR EL ESTADO DEL MODELO
+    var ModelStateForm = true;
+
+    if (colaborador != "-1") {
+
+        if (colaborador <= 0 || isNaN(colaborador || colaborador == "0")) {
+
+            //SETEAR EL ESTADO DEL MODELO
+            ModelStateForm = false;
+
+            //MOSTRAR VALIDACIONES
+            $('#validacionSelectEmpleado').show();
+
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#validacionSelectEmpleado').hide();
         }
     }
-});
 
-//DETECTAR LOS CAMBIOS DE INPUT DE MOTIVOS PARA LA EJECUCION
-$(ddlMotivos).change(() => {
-    vaciarConceptosAdicionales();
-    if (inputMotivosLleno()) {
-        validacionSelectMotivo.hide();
-        GetDatosColaborador();
-    }
-});
+    if (motivo != "-1") {
 
-//DEVUELVE TRUE EN CASO QUE LA FECHA ESTE LLENA
-function inputFechaFinLlena() {
-    return inputFechaFin.val() != '';
-}
+        if (motivo <= 0 || isNaN(motivo) || motivo == "0") {
 
-//DEVUELVE TRUE EN CASO QUE EL MOTIVO ESTE LLENO
-function inputMotivosLleno() {
-    return ddlMotivos.val() >= 1;
-}
+            //SETEAR EL ESTADO DEL MODELO
+            ModelStateForm = false;
 
-//Ejecutar peticion de datos del colaborador
-function GetDatosColaborador()
-{
-    //Captura del Input de fecha
-    const fechaFinVal = inputFechaFin.val();
-    //Captura del Input del DDL de Empleados
-    const ddlEmpleadosVal = ddlEmpleados.val();
-    //Captura del Input del DDL de Motivos
-    const ddlMotivosVal = ddlMotivos.val();
-    //Validar que los campos no esten vacios
-    if (ddlEmpleados.val() != '' && inputFechaFinLlena() && ddlMotivosVal >= 1){
-        if (validarCampos()) {
-            Registrar = true;
-            obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal, ddlMotivosVal);
+            //MOSTRAR VALIDACIONES
+            $('#validacionSelectMotivo').show();
+
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#validacionSelectMotivo').hide();
         }
-        else {
-            Registrar = false;
+
+    }
+
+    if (fecha != "-1") {
+
+        if (fecha == "" || fecha == null || fecha == undefined) {
+            //SETEAR EL ESTADO DEL MODELO
+            ModelStateForm = false;
+
+            //MOSTRAR VALIDACIONES
+            $('#validacionSelectFechaFin').show();
+
+        } else {
+            //OCULTAR VALIDACIONES
+            $('#validacionSelectFechaFin').hide();
+        }
+
+    }
+
+    //SI SE LLAMA LA FUNCION DE VALIDAR CANPOS DESDE EL CLICK DE SUMAR ADICIONALES NO IR AL SERVIDOR
+    if (BoolConceptAddValidate == false) {
+        //VALIDAR QUE EL MODELO SEA VALIDO PARA EJECUTAR LA PETICIÓN AL SERVIDOR
+        if (ModelStateForm) {
+            //OBTENER EL ID DEL COLABORADOR SELECCIONADO
+            var ddlEmpleadosVal = $("#cmbxEmpleados").val();
+            //OBTENER EL ID DEL MOTIVO SELECCIONADO
+            var ddlMotivosVal = $("#cmbxMotivos").val();
+            //OBTENER EL VALOR DE LA FECHA
+            var fechaFinVal = $("#fechaFin").val();
+
+            //VALIDAR QUE EL DDL DE EMPLEADO ESTE INICIALIZADO
+            if (ddlEmpleadosVal == null || isNaN(ddlEmpleadosVal) || ddlEmpleadosVal == 0 || ddlEmpleadosVal == "0")
+                ModelStateForm = false;
+
+            //VALIDAR QUE EL DDL DE MOTIVO ESTE INICIALIZADO
+            if (ddlMotivosVal == null || isNaN(ddlMotivosVal) || ddlMotivosVal == 0 || ddlMotivosVal == "0")
+                ModelStateForm = false;
+
+            //VALIDAR QUE EL DATEPICKER DE FECHA ESTE INICIALIZADO
+            if (fechaFinVal == null || fechaFinVal == "")
+                ModelStateForm = false;
+
+            if (ModelStateForm)
+                obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal, ddlMotivosVal);  //LLAMAR LA FUNCION DE OBTENER DATOS DE LOS EMPLEADOS
         }
     }
+
+
+    return ModelStateForm;
 }
 
-$(document).ready(function() {
-    validacionSelectEmpleado.val('');
+$(document).ready(function () {
     $('#datepicker .input-group.date')
 		.datepicker({
 		    todayBtn: 'linked',
@@ -147,14 +160,6 @@ $(document).ready(function() {
 		    calendarWeeks: true,
 		    autoclose: true,
 		    format: 'yyyy/mm/dd'
-		})
-		.on('changeDate', function(e) {
-		    //if (validarCampos()) {
-		    //    const fechaFinVal = inputFechaFin.val();
-		    //    const ddlEmpleadosVal = ddlEmpleados.val();
-		    //    const ddlMotivosVal = ddlMotivos.val();
-		    //    GetDatosColaborador();
-		    //}
 		});
 
     //Llengar DDL Areas con Empleados
@@ -167,10 +172,10 @@ $(document).ready(function() {
 		        placeholder: 'Seleccione un empleado',
 		        allowClear: true,
 		        language: {
-		            noResults: function() {
+		            noResults: function () {
 		                return 'Resultados no encontrados.';
 		            },
-		            searching: function() {
+		            searching: function () {
 		                return 'Buscando...';
 		            }
 		        },
@@ -178,7 +183,7 @@ $(document).ready(function() {
 		    });
 		},
 		() => {
-		
+
 		    //LLENAR EL DDL DE MOTIVOS 
 		    $.ajax({
 		        url: "/Liquidacion/GetMotivoLiquidacion",
@@ -204,7 +209,7 @@ function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
 		{
 		    idEmpleado: idEmpleado,
 		    fechaFin: fechaFin,
-		    IdMotivo : IdMotivo
+		    IdMotivo: IdMotivo
 		},
 		'/Liquidacion/Obtener_Informacion_Empleado',
 		'POST',
@@ -264,53 +269,33 @@ function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
 	);
 }
 
-
-function validarCampos() {
-    var todoBien = true;
-    //Validar que el drop down list tenga seleccionado un empleado.
-    if (ddlEmpleados.val() <= 0) {
-        todoBien = false;
-        validacionSelectEmpleado.show();
-    }
-    //Validar que no este vacio el campo de fecha de despido.
-    if (inputFechaFin.val() == '') {
-        todoBien = false;
-        validacionSelectFechaFin.show();
-    }
-    //Validar que no este vacio el campo de Motivo.
-    if (ddlMotivos.val() <= 0) {
-        todoBien = false;
-        validacionSelectMotivo.show();
-    }
-    return todoBien;
-}
-
+//EJECUTAR FUNCION DE OBTENER METODOS DEL COLABORADOR
 function mostrarDatosColaborador(
-	nombreEmpleado = '',
-	apellidoEmpleado = '',
-	NúmeroIdentidad = '',
-	sexoEmpleado = '',
-	edadEmpleado = '',
-	cantidadSueldo = '',
-	descripcionCargo = '',
-	descripcionDepartamento = '',
-	descripcionMoneda = '',
-	fechaIngreso = '',
-	Anios = '',
-	Meses = '',
-	Dias = '',
-	SalarioOrdinarioMensual = '',
-	SalarioPromedioMensual = '',
-	SalarioOrdinarioDiario = '',
-	SalarioPromedioDiario = '',
-    Preaviso = '',
-    Cesantia = '',
-    Decimotercer = '',
-    Decimocuarto = '',
-    Vacaciones = '', 
-    Total_Liquidacion = ''
+	nombreEmpleado,
+	apellidoEmpleado,
+	NúmeroIdentidad,
+	sexoEmpleado,
+	edadEmpleado,
+	cantidadSueldo,
+	descripcionCargo,
+	descripcionDepartamento,
+	descripcionMoneda,
+	fechaIngreso,
+	Anios,
+	Meses,
+	Dias,
+	SalarioOrdinarioMensual,
+	SalarioPromedioMensual,
+	SalarioOrdinarioDiario,
+	SalarioPromedioDiario,
+    Preaviso,
+    Cesantia,
+    Decimotercer,
+    Decimocuarto,
+    Vacaciones,
+    Total_Liquidacion
 ) {
-	spanDiasLaborados.html(Dias);
+    spanDiasLaborados.html(Dias);
     spanMesesLaborados.html(Meses);
     spanAniosLaborados.html(Anios);
     spanNombreEmpleado.html(nombreEmpleado);
@@ -332,14 +317,13 @@ function mostrarDatosColaborador(
     spanDecimocuarto.html((Decimocuarto == 0) ? 0.00 : Decimocuarto);
     spanVacaciones.html((Vacaciones == 0) ? 0.00 : Vacaciones);
     spanTotalLiquidacion.val((Total_Liquidacion == 0) ? 0.00 : Total_Liquidacion);
-}    
+}
 
 function SaveHiddenFor(SalarioOrdinarioMensual_Liq, SalarioPromedioMensual_Liq,
                        SalarioOrdinarioDiario_Liq, SalarioPromedioDiario_Liq,
                        Preaviso_Liq, Cesantia_Liq,
-                       DecimoTercerMesProporcional_Liq,DecimoCuartoMesProporcional_Liq,
-                       VacacionesPendientes_Liq)
-{
+                       DecimoTercerMesProporcional_Liq, DecimoCuartoMesProporcional_Liq,
+                       VacacionesPendientes_Liq) {
     $("#SalarioOrdinarioMensual_Liq").val(SalarioOrdinarioMensual_Liq);
     $("#SalarioPromedioMensual_Liq").val(SalarioPromedioMensual_Liq);
     $("#SalarioOrdinarioDiario_Liq").val(SalarioOrdinarioDiario_Liq);
@@ -351,51 +335,76 @@ function SaveHiddenFor(SalarioOrdinarioMensual_Liq, SalarioPromedioMensual_Liq,
     $("#VacacionesPendientes_Liq").val(VacacionesPendientes_Liq);
 }
 
-$("#btnConceptosAdicionales").click(function(){
 
-    if(!validarCampos())
-    {
+//SUMAR CONCEPTOS ADICIONALES
+$("#btnConceptosAdicionales").click(function () {
+
+    //OBTENER EL ID DEL COLABORADOR SELECCIONADO
+    var ddlEmpleadosVal = $("#cmbxEmpleados").val();
+    //OBTENER EL ID DEL MOTIVO SELECCIONADO
+    var ddlMotivosVal = $("#cmbxMotivos").val();
+    //OBTENER EL VALOR DE LA FECHA
+    var fechaFinVal = $("#fechaFin").val();
+
+
+    if (!validarCampos(ddlEmpleadosVal, ddlMotivosVal, fechaFinVal, true)) {
         //Mensaje de error si no hay data
         iziToast.error({
             title: 'Error',
-            message: 'Debe cargar los datos de un colaborador para registrar la liquidación.',
+            message: 'Debe cargar los datos de un colaborador para sumar conceptos adicionales.',
         });
     }
-    else{
-        var data = $("#frmConceptosAdicionales").serializeArray();
+    else {
         var VacacionesPendientes = $("#SalariosAdeudados").val();
-        var Form = [];
-        Form = {
-            SalariosAdeudados : $("#SalariosAdeudados").val(),
-            OtrosPagos : $("#OtrosPagos").val(),
-            PagoHEPendiente : $("#PagoHEPendiente").val(),
-            ValorBonoEducativo : $("#ValorBonoEducativo").val(),
-            PagoSeptimoDia : $("#PagoSeptimoDia").val(),
-            BonoPorVacaciones : $("#BonoPorVacaciones").val(),
-            ReajusteSalarial : $("#ReajusteSalarial").val(),
-            DecimoTercerMesAdeudado : $("#DecimoTercerMesAdeudado").val(),
-            DecimoCuartoMesAdeudado : $("#DecimoCuartoMesAdeudado").val(),
-            BonificacionVacaciones : $("#BonificacionVacaciones").val(),
-            PagoPorEmbarazo : $("#PagoPorEmbarazo").val(),
-            PagoPorLactancia : $("#PagoPorLactancia").val(),
-            PrePosNatal : $("#PrePosNatal").val(),
-            PagoPorDiasFeriado : $("#PagoPorDiasFeriado").val()
+        var Form = {
+            SalariosAdeudados: $("#SalariosAdeudados").val().replace(/,/g, ""),
+            OtrosPagos: $("#OtrosPagos").val().replace(/,/g, ""),
+            PagoHEPendiente: $("#PagoHEPendiente").val().replace(/,/g, ""),
+            ValorBonoEducativo: $("#ValorBonoEducativo").val().replace(/,/g, ""),
+            PagoSeptimoDia: $("#PagoSeptimoDia").val().replace(/,/g, ""),
+            BonoPorVacaciones: $("#BonoPorVacaciones").val().replace(/,/g, ""),
+            ReajusteSalarial: $("#ReajusteSalarial").val().replace(/,/g, ""),
+            DecimoTercerMesAdeudado: $("#DecimoTercerMesAdeudado").val().replace(/,/g, ""),
+            DecimoCuartoMesAdeudado: $("#DecimoCuartoMesAdeudado").val().replace(/,/g, ""),
+            BonificacionVacaciones: $("#BonificacionVacaciones").val().replace(/,/g, ""),
+            PagoPorEmbarazo: $("#PagoPorEmbarazo").val().replace(/,/g, ""),
+            PagoPorLactancia: $("#PagoPorLactancia").val().replace(/,/g, ""),
+            PrePosNatal: $("#PrePosNatal").val().replace(/,/g, ""),
+            PagoPorDiasFeriado: $("#PagoPorDiasFeriado").val().replace(/,/g, "")
         };
         $.ajax({
             url: "Liquidacion/CalcularLiquidacion",
             type: "POST",
-            dataType:"json",
+            dataType: "json",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(Form)
-        }).done(function (data){
-            $("#MontoTotalLiquidacion").val(data.MontoTotalLiquidacion);
+        }).done(function (data) {
+            if (data != "error") {
+                //EN CASO DE EXITO SUMAR EL MONTO TOTAL DE LIQUIDACIÓN
+                $("#MontoTotalLiquidacion").val(data.MontoTotalLiquidacion);
+                //SETEAR LA VARIABLE DE REGISTRO PARA INDICAR QUE ESTA LISTO PARA REGISTRAR
+                Registrar = true;
+            }
+            else {
+                //MENSAJE DE ERROR
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Ocurrio un error al sumar los conceptos adicionales, verifique los datos ingresados.',
+                });
+            }
+        }).fail(function (jqxhr, settings, exception) {
+            //MENSAJE DE ERROR
+            iziToast.error({
+                title: 'Error',
+                message: 'Ocurrio un error al sumar los conceptos adicionales, verifique los datos ingresados.',
+            });
         });
     }
 })
 
+
 //VACIAR LOS CONCEPTOS AGREGADOS
-function vaciarConceptosAdicionales()
-{
+function vaciarConceptosAdicionales() {
     $("#SalariosAdeudados").val('');
     $("#OtrosPagos").val('');
     $("#PagoHEPendiente").val('');
@@ -413,69 +422,77 @@ function vaciarConceptosAdicionales()
     $("#MontoTotalLiquidacion").val('');
 }
 
-//REALIZAR INSERCION
 
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+//REGISTRAR LA LIQUIDACIÓN.
 $("#RegistrarLiquidacion").click(function () {
+
+    //BLOQUEAR EL BOTON 
     $("#RegistrarLiquidacion").attr("disabled", true);
-    var Registrar_Verificar = (Registrar)? 1 : 0;
-    Registrar = false;
-    if(Registrar_Verificar == 1){
+
+    //OBTENER EL ID DEL COLABORADOR SELECCIONADO
+    var ddlEmpleadosVal = $("#cmbxEmpleados").val();
+    //OBTENER EL ID DEL MOTIVO SELECCIONADO
+    var ddlMotivosVal = $("#cmbxMotivos").val();
+    //OBTENER EL VALOR DE LA FECHA
+    var fechaFinVal = $("#fechaFin").val();
+
+    //VALIDAR QUE EL FORMULARIO ESTE LISTO PARA REGISTRAR
+    if (validarCampos(ddlEmpleadosVal, ddlMotivosVal, fechaFinVal, true)) {
         //REALIZAR LA PETICIÓN PARA LA INSERCION
         $.ajax({
             url: "Liquidacion/RegistrarLiquidacion",
             type: "GET",
-            dataType:"json",
+            dataType: "json",
             contentType: 'application/json; charset=utf-8'
-        }).done(function (data){
-            if(data == "error")
-            {
+        }).done(function (data) {
+            if (data == "error") {
+                //DESBLOQUEAR EL BOTON
+                $("#RegistrarLiquidacion").attr("disabled", false);
+
+                //MOSTRAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
-                    message: 'Ocurrio un error al registrar la liquidación',
+                    message: 'Ocurrio un error al registrar la liquidación, contacte al administrador.',
                 });
             }
-            else{
-                
+            else {
+                //MOSTRAR MENSAJE DE ÉXITO
                 iziToast.success({
                     title: 'Éxito',
-                    message: 'Se ha registrado la liquidación',
+                    message: 'El registro se agregó de forma exitosa!',
                 });
                 //SetTimeOut
-                setTimeout(function(){ 
+                setTimeout(function () {
                     location.reload();
                 }, 4500);
-                
+
             }
-        }).fail(function (data){
+        }).fail(function (data) {
+            //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
-                message: 'Ocurrio un error al registrar la liquidación',
+                message: 'Ocurrio un error al registrar la liquidación, contacte al administrador.',
             });
+
+            //DESBLOQUEAR EL BOTON
             $("#RegistrarLiquidacion").attr("disabled", false);
         });;
     }
-    else{
-        if(!validarCampos())
-        {
-            //Mensaje de error si no hay data
-            iziToast.error({
-                title: 'Error',
-                message: 'Debe cargar los datos de un colaborador para registrar la liquidación.',
-            });
-        }
-    }  
 });
 
 //VALIDAR LAS ENTRADAS DE LOS CONCEPTOS AGREGADOS
-$('.ValidarCaracteres').bind('keypress', function (event) { 
+$('.ValidarCaracteres').bind('keypress', function (event) {
     //var regex = new RegExp("^[a-zA-Z0-9]+$"); 
-    var regex = new RegExp("^[0-9]"); 
-    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode); 
-    if (!regex.test(key)) 
-    { 
-        event.preventDefault(); 
-        return false; 
-    } 
+    var regex = new RegExp("^[0-9]");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
 });
 
+
+//EVITAR EL POSTBACK DEL FORMULARIO 
+$("#frmConceptosAdicionales").submit(function (e) {
+    e.preventDefault();
+});
