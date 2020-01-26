@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class CargosController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Cargos
         public ActionResult Index()
@@ -38,7 +38,8 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
-            var tbCargos = db.tbCargos
+                db = new ERP_GMEDINAEntities();
+                var tbCargos = db.tbCargos
                 .Select(
                    t => new {
                         car_Id = t.car_Id,
@@ -66,6 +67,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Insert_Result item in list)
                     {
@@ -95,6 +97,7 @@ namespace ERP_GMEDINA.Controllers
             tbCargos tbCargos = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbCargos = db.tbCargos.Find(id);
                 if (tbCargos == null )
                 {
@@ -135,6 +138,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbCargos_Update(id, tbCargos.car_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Update_Result item in list)
                     {
@@ -165,6 +169,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbCargos_Delete(id, tbCargos.car_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Delete_Result item in list)
                     {
@@ -207,6 +212,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbCargos_Restore(id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Restore_Result item in list)
                     {
