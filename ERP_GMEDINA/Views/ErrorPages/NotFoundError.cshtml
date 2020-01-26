@@ -27,7 +27,10 @@
 
         <div class="error-desc">
             Lo sentimos, pero no hemos podido encontrar la página que buscas.
-            Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index", "Menu")" class="btn btn-primary m-t">Inicio</a>
+            @{
+                int idmenuSession = (int)HttpContext.Current.Session["sesionIdMenu"];
+            }
+            Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index","Menu", new { idmenu = idmenuSession})" class="btn btn-primary m-t">Inicio</a>
         </div>
     </div>
 
