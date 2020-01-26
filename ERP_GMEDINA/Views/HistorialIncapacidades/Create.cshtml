@@ -12,7 +12,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <a href="Index" class="pull-right">Regresar</a>
+            <a href="Index" class="btn btn-default pull-right">Regresar</a>
         	
         	<h2>Crear Incapacidad</h2>
         </div>
@@ -61,7 +61,7 @@
 
                       </div>
          
-                          @Html.LabelFor(model => model.ticn_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.ticn_Id, htmlAttributes: new { @class = "control-label col-md-2",@id="textred" })
                           <div class="col-md-10">
                               @Html.DropDownListFor(model => model.ticn_Id, null,"**Seleccione una opción**",  htmlAttributes: new { @class = "form-control", @id= "ticn_Id" })
                               @Html.ValidationMessageFor(model => model.ticn_Id, "", new { @class = "text-danger", @id = "errorticn_Id" })
@@ -97,7 +97,7 @@
                       <div class="form-group">
                           @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
-                              @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker ", @type = "date", @id = "hinc_FechaInicio" })
+                              @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker ", @type = "date", @id = "hinc_FechaInicio", @min = "1900-01-01", @max = "2199-12-31" })
                             @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger", @id = "errorhinc_FechaInicio" })
                               
                           </div>
@@ -106,7 +106,7 @@
                       <div class="form-group">
                           @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
-                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin" })
+                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin", @min = "1900-01-01", @max = "2199-12-31" })
                           @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger", @id = "errorhinc_FechaFin" })
                           </div>
                       </div>

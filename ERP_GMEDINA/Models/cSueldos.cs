@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Sueldo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string sue_Cantidad { get;set; }
 
         [Display(Name = "Sueldo Anterior")]

@@ -69,7 +69,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -376,7 +376,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id,"Predeterminado", 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id,"Predeterminado", Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

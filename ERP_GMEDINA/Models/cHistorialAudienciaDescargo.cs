@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
 
        [Display(Name ="Motivo")]
        [Required(AllowEmptyStrings =false, ErrorMessage ="El campo \"{0}\" es requerido")]
-       [MaxLength(100,ErrorMessage ="Excedió el número maximo de carácteres")]
+       [MaxLength(100,ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string aude_Descripcion { get; set; }
         [Display(Name = "Fecha Audiencia")]
         public System.DateTime aude_FechaAudiencia { get; set; }
@@ -24,7 +24,7 @@ namespace ERP_GMEDINA.Models
         public bool aude_Testigo { get; set; }
         [Display(Name = "Dirección Archivo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
-        [MaxLength(100, ErrorMessage = "Excedió el número maximo de carácteres")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string aude_DireccionArchivo { get; set; }
     }
 }

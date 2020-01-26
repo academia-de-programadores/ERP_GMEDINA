@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de Sueldos</h5>
+                    <h5>Reportes de sueldos</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -21,19 +21,9 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Seleccione el colaborador</label>
+                                <label class="font-normal">Empleado</label>
 
-                                @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione un colaborador", new { @class = "form-control", @name = "emp_Id", @id = "emp_Id" })
-
-                                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-6">
-                                <label class="font-normal">Seleccione el colaborador</label>
-
-                                @Html.DropDownList("car_Id", (IEnumerable<SelectListItem>)ViewBag.Cargos, "Seleccione un cargo", new { @class = "form-control", @name = "car_Id", @id = "car_Id" })
+                                @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione un colaborador", new { @class = "buscable form-control", @name = "emp_Id", @id = "emp_Id" })
 
                                 @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
 
@@ -41,7 +31,17 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Inicio</label>
+                                <label class="font-normal">Cargo</label>
+
+                                @Html.DropDownList("car_Id", (IEnumerable<SelectListItem>)ViewBag.Cargos, "Seleccione un cargo", new { @class = "buscable form-control", @name = "car_Id", @id = "car_Id" })
+
+                                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha inicio</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaInicio", @id = "fechaInicio" } })
                                 </div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Fin</label>
+                                <label class="font-normal">Fecha fin</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechaFin", @id = "fechaFin" } })
                                 </div>
@@ -84,7 +84,7 @@
                 <div class="ibox-tools">
                 </div>
             </div>
-            <div class="col-lg-10 col-md-offset-1">
+            <div class="col-lg-10 ">
                 @{
                     if (ViewBag.ReportViewer != null)
                     {
@@ -95,17 +95,10 @@
         </div>
     </div>
 </div>
-
-@*@section Styles {
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+@section Styles {
+    @Styles.Render("~/plugins/select2Styles")
 }
 @section Scripts {
-    @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/Scripts/app/general")
-    @Scripts.Render("~/Scripts/App/General/Reporteria/Sueldos")
-    
-}*@
-@section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general_Fechas")
 }

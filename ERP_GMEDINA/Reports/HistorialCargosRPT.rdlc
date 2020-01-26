@@ -6,19 +6,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.8in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.85in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>2.21667in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>2.36667in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.70833in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -106,7 +106,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cargo Anterior</Value>
+                              <Value>Cargo anterior</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -142,7 +142,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cargo Nuevo</Value>
+                              <Value>Cargo nuevo</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -404,7 +404,7 @@
         <Top>0.13542in</Top>
         <Left>0.41667in</Left>
         <Height>0.5in</Height>
-        <Width>5in</Width>
+        <Width>9.94167in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -415,7 +415,7 @@
     <Height>0.81458in</Height>
     <Style />
   </Body>
-  <Width>5.42917in</Width>
+  <Width>10.35834in</Width>
   <Page>
     <PageHeader>
       <Height>0.50917in</Height>
@@ -437,10 +437,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.34396cm</Top>
-          <Left>4.41667in</Left>
+          <Top>0.34397cm</Top>
+          <Left>8.225in</Left>
           <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Width>1.81667in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -458,7 +458,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Cargos</Value>
+                  <Value>Reporte sobre cargos de colaboradores</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>
@@ -471,9 +471,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.13542in</Top>
-          <Left>1.23833in</Left>
+          <Left>2.21667in</Left>
           <Height>0.37375in</Height>
-          <Width>2.69792in</Width>
+          <Width>5.65625in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -512,8 +512,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.05556in</Top>
-          <Left>4.41667in</Left>
+          <Top>0.06944in</Top>
+          <Left>9.04167in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <Style>

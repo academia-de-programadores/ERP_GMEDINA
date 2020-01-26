@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
         [Display(Name = "Empresa")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string empr_Nombre { get; set; }
         [Display(Name = "Logo")]
         public string empr_Logo { get; set; }
@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
         [Display(Name = "Razón Inactivo")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string empr_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

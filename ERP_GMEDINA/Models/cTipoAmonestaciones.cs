@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Models
 
         [Display (Name ="Descripcion")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Exedió el numero maximo de caracteres")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string tamo_Descripcion { get; set; }
 
         [Display(Name ="Estado")]

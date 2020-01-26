@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de Historial Cargos</h5>
+                    <h5>Reportes de cargos</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -18,16 +18,16 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Cargo Nuevo</label>
-                                @Html.DropDownList("car_Id", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Seleccione una opción", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger" })
+                                <label class="font-normal">Empleado</label>
+                                @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.empleados, "Seleccione una opción", new { @class = "buscable form-control" })
+                                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
                             </div>
                             <br />
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Inicio</label>
+                                <label class="font-normal">Fecha inicio</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha", @id = "fechaInicio" } })
                                 </div>
@@ -37,7 +37,7 @@
 
                         <div class="form-group">
                                 <div class="col-md-6">
-                                    <label class="font-normal">Fecha Fin</label>
+                                    <label class="font-normal">Fecha fin</label>
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaFin", @id = "fechaFin" } })
                                     </div>
@@ -68,7 +68,7 @@
                 <div class="ibox-tools">
                 </div>
             </div>
-            <div class="col-lg-10 col-md-offset-1">
+            <div class="col-lg-10 ">
                 @{
                     if (ViewBag.ReportViewer != null)
                     {
@@ -80,6 +80,10 @@
     </div>
 </div>
 
+@section Styles {
+    @Styles.Render("~/plugins/select2Styles")
+}
 @section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general_Fechas")
 }
