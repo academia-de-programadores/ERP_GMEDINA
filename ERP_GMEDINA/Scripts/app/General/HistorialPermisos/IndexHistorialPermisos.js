@@ -126,6 +126,7 @@ function llenarTabla() {
                     hper_Observacion: value.hper_Observacion,
                     FechaInicio: value.FechaInicio,
                     Estado: value.hper_Estado ? 'Activo' : 'Inactivo',
+                    Justificado: value.hper_Justificado ? 'Si' : 'No',
                     Acciones: Acciones
                     //Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                 });
@@ -210,7 +211,7 @@ $("#btnActualizar").click(function () {
 function format(obj) {
     //var EstadoCivil = '';
     //var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ];
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Informacion personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Información personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         index.per_EstadoCivil.toUpperCase() == ('S') ? EstadoCivil = 'Soltero(a)'
     : index.per_EstadoCivil.toUpperCase() == ('C') ? EstadoCivil = 'Casado(a)'
@@ -218,7 +219,7 @@ function format(obj) {
     : index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
         div = div
-                    + '<div class="col-md-5"><b>ID: </b>' + index.hper_Id + '</div>'
+                    + '<div class="col-md-5"><b>ID empleado: </b>' + index.emp_Id + '</div>'
 
         + '<div class="col-md-5"><b>Número de identidad: </b>' + index.per_Identidad + '</div>'
 
