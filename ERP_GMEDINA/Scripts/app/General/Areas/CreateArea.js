@@ -21,13 +21,9 @@ function getJson() {
  //declaramos una lista para recuperar en un formato
  //especifico el json de datatable.
  list = new Array();
- //declaramos el objeto que ira dentro de la vista
- var tbDepartamentos = new Object();
- tbDepartamentos.depto_Descripcion = '';
- tbDepartamentos.tbCargos = new Object();
- tbDepartamentos.tbCargos.car_Descripcion = '';
 
  for (var i = 0; i < ChildTable.data().length; i++) {
+  var tbDepartamentos = { depto_Descripcion: null, tbCargos: { car_Descripcion :null} };
   var fila = ChildTable.rows().data()[i];
   tbDepartamentos.depto_Descripcion = fila.Descripcion;
   tbDepartamentos.tbCargos.car_Descripcion = fila.Cargo;
