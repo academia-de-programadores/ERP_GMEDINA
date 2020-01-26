@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class SucursalesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Sucursales
         public ActionResult Index()
@@ -57,6 +57,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Sucursales/Create
         public ActionResult Create()
         {
+            db = new ERP_GMEDINAEntities();
             ViewBag.suc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.suc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             var Empresas = new List<object> { };
@@ -83,6 +84,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbSucursales_Insert_Result item in list)
                     {
@@ -209,6 +211,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id, tbSucursales.mun_Codigo, tbSucursales.bod_Id, tbSucursales.pemi_Id, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbSucursales_Update_Result item in list)
                     {
