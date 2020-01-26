@@ -327,7 +327,6 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var list = db.UDP_RRHH_tbAreas_Update(
                         cAreas.area_Id,
-                        cAreas.car_Descripcion,
                         cAreas.suc_Id,
                         cAreas.area_Descripcion,
                         Usuario.usu_Id,
@@ -384,7 +383,6 @@ namespace ERP_GMEDINA.Controllers
                             var depto = db.UDP_RRHH_tbDepartamentos_Update(
                                 item.depto_Id,
                                 cAreas.area_Id,
-                                item.car_Descripcion,
                                 item.depto_Descripcion,
                                 Usuario.usu_Id,
                                 DateTime.Now);
