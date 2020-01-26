@@ -18,11 +18,13 @@ namespace ERP_GMEDINA.Controllers
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
             {
-                Response.Redirect("");
+                Response.Redirect("~/Inicio/index");
+                return null;
             }
             tbAreas tbAreas = new tbAreas { };
             return View(tbAreas);
         }
+        [HttpPost]
         public ActionResult llenarTabla()
         {
             try
@@ -52,6 +54,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
         public ActionResult ChildRowData(int id)
         {
             try
@@ -83,6 +86,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json(new List<tbDepartamentos> { }, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
         public ActionResult cargarChild(int id)
         {
             try
@@ -108,6 +112,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
         public ActionResult llenarDropDowlist()
         {
             var Sucursales = new List<object> { };
@@ -163,7 +168,8 @@ namespace ERP_GMEDINA.Controllers
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
             {
-                Response.Redirect("");
+                Response.Redirect("~/Inicio/index");
+                return null;
             }
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
@@ -265,7 +271,8 @@ namespace ERP_GMEDINA.Controllers
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
             {
-                Response.Redirect("");
+                Response.Redirect("~/Inicio/index");
+                return null;
             }
             if (id == null)
             {
@@ -363,7 +370,7 @@ namespace ERP_GMEDINA.Controllers
                                 var resultadod = i.MensajeError + "  ";
                                 if (resultadod.Substring(0, 2) == "-1")
                                 {
-                                    return Json(new { codigo = "-3", Accion = "i"}, JsonRequestBehavior.AllowGet);
+                                    return Json(new { codigo = "-3", Accion = "i" }, JsonRequestBehavior.AllowGet);
                                 }
                                 item.car_Id = int.Parse(i.MensajeError);
                             }
@@ -380,7 +387,7 @@ namespace ERP_GMEDINA.Controllers
                             }
                             if (mensajeDB == "-1")
                             {
-                                return Json(new { codigo = "-4", Accion = "i"}, JsonRequestBehavior.AllowGet);
+                                return Json(new { codigo = "-4", Accion = "i" }, JsonRequestBehavior.AllowGet);
                             }
                         }
                         else if (item.Accion == "e")

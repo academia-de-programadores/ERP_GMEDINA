@@ -1,35 +1,8 @@
 ﻿var tabla = null;
-var Admin=false;
+var Admin = false;
 var textoBoton = 'Mostrar activos';
 var botones = [];
 $(document).ready(function () {
- var FormNuevo = $("#FormNuevo");
- if (FormNuevo.length == 1) {
-  htmlSpiner = "No hay registros para mostrar.";
- }
- language = {
-  "sProcessing": "Procesando...",
-  "sLengthMenu": "Mostrar _MENU_ registros",
-  "sZeroRecords": "No se encontraron resultados",
-  "sEmptyTable": htmlSpiner,
-  "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-  "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-  "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-  "sInfoPostFix": "",
-  "sSearch": "Buscar:",
-  "sUrl": "",
-  "sInfoThousands": ",",
-  "sLoadingRecords": "Cargando...",
-  "oPaginate": {
-   "sFirst": "Primero",
-   "sLast": "Último",
-   "sNext": "Siguiente",
-   "sPrevious": "Anterior"
-  }, "oAria": {
-   "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-   "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-  }
- };
  var columnas = [];
  var col = 0;
  var contador = -1;
@@ -86,18 +59,18 @@ $(document).ready(function () {
   }
  });
  tabla = $('#IndexTable').DataTable({
-     "language": language,
+  "language": language,
   responsive: true,
   "scrollX": true,
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
   "autoWidth": false,
   dom: '<"html5buttons"B>lTfgitp',
-  buttons : [
+  buttons: [
             {
-                extend: 'copy',
-                exportOptions: {
-                    columns: botones
-                }
+             extend: 'copy',
+             exportOptions: {
+              columns: botones
+             }
             }
   ],
   //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes

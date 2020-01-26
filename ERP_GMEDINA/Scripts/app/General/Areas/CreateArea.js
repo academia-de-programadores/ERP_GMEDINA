@@ -56,7 +56,7 @@ function llenarDropDownList() {
 $(document).ready(function () {
  llenarDropDownList();
  ChildTable = $(ChildDataTable).DataTable({
-  "language": language,
+  "language": languageChild,
   pageLength: 3,
   lengthChange: false,
   columns:

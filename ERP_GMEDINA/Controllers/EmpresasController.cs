@@ -18,9 +18,12 @@ namespace ERP_GMEDINA.Controllers
         // GET: Empresas
         public ActionResult Index()
         {
-            var Admin = (bool)Session["Admin"];
-            var tbEmpresas = new tbEmpresas {empr_Estado= Admin };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
+            var tbEmpresas = new tbEmpresas { };
             return View(tbEmpresas);
         }
 
