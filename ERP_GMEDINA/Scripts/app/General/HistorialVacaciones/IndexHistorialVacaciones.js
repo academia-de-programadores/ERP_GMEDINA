@@ -167,9 +167,9 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -253,9 +253,9 @@ $("#btnGuardar").click(function () {
                                 function (obj) {
                                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                                         CierraPopups();
-                                        llenarTabla();
-                                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
                                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+                                        llenarTabla();
                                     } else {
                                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                                     }

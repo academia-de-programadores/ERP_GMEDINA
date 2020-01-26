@@ -129,12 +129,16 @@
 </div>
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+@Styles.Render("~/Content/plugins/izitoast/iziToast")
+@Styles.Render("~/Content/plugins/izitoast/iziToast.min")
     @Styles.Render("~/plugins/select2Styles")
 }
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/Scripts/app/general")
+@*general*@
+@Scripts.Render("~/Scripts/app/general")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @*@Scripts.Render("~/plugins/customdataTables")*@
     @Scripts.Render("~/Scripts/app/general/HistorialPermisos/CreateHistorialPermisos.js")
     @Scripts.Render("~/plugins/select2")

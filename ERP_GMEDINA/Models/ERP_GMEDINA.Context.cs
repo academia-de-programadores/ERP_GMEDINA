@@ -51,13 +51,11 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
         public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
-        public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
         public virtual DbSet<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
         public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         public virtual DbSet<tbISR> tbISR { get; set; }
         public virtual DbSet<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
         public virtual DbSet<tbMotivoLiquidacion> tbMotivoLiquidacion { get; set; }
-        public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
         public virtual DbSet<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
         public virtual DbSet<tbPreaviso> tbPreaviso { get; set; }
         public virtual DbSet<tbTechosDeducciones> tbTechosDeducciones { get; set; }
@@ -210,6 +208,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
         public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
         public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
+        public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
+        public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1971,7 +1971,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result>("UDP_Plani_tbHistorialDeLiquidaciones_Insert", emp_IdParameter, hdli_FechaLiquidacionParameter, hdli_SalarioOrdinarioMensual_LiqParameter, hdli_SalarioPromedioMensual_LiqlParameter, hdli_SalarioOrdinarioDiario_LiqParameter, hdli_SalarioPromedioDiario_LiqParameter, hdli_Preaviso_LiqParameter, hdli_Cesantia_LiqParameter, hdli_DecimoTercerMesProporcional_LiqParameter, hdli_DecimoCuartoMesProporcional_LiqParameter, hdli_VacacionesPendientes_LiqParameter, hdli_SalariosAdeudadosParameter, hdli_OtrosPagosParameter, hdli_PagoHEPendienteParameter, hdli_ValorBonoEducativoParameter, hdli_PagoSeptimoDiaParameter, hdli_BonoPorVacacionesParameter, hdli_ReajusteSalarialParameter, hdli_DecimoTercerMesAdeudadoParameter, hdli_DecimoCuartoMesAdeudadoParameter, hdli_BonificacionVacacionesParameter, hdli_PagoPorEmbarazoParameter, hdli_PagoPorLactanciaParameter, hdli_PrePosNatalParameter, hdli_PagoPorDiasFeriadoParameter, hdli_MontoTotalLiquidacionParameter, hdli_liqu_UsuarioCreaParameter, hdli_liqu_FechaCreaParameter, moli_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario)
+        public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario, Nullable<decimal> hipa_TotalDeduccionesIndividuales, Nullable<decimal> hipa_TotalIngresosIndividuales, Nullable<decimal> hipa_TotalSueldoBruto, Nullable<int> hipa_CantidadUnidadesHorasExtras, Nullable<int> hipa_CantidadUnidadesBonos, Nullable<decimal> hipa_TotalBonos)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -2053,7 +2053,31 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hipa_TotalSalario", hipa_TotalSalario) :
                 new ObjectParameter("hipa_TotalSalario", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter);
+            var hipa_TotalDeduccionesIndividualesParameter = hipa_TotalDeduccionesIndividuales.HasValue ?
+                new ObjectParameter("hipa_TotalDeduccionesIndividuales", hipa_TotalDeduccionesIndividuales) :
+                new ObjectParameter("hipa_TotalDeduccionesIndividuales", typeof(decimal));
+    
+            var hipa_TotalIngresosIndividualesParameter = hipa_TotalIngresosIndividuales.HasValue ?
+                new ObjectParameter("hipa_TotalIngresosIndividuales", hipa_TotalIngresosIndividuales) :
+                new ObjectParameter("hipa_TotalIngresosIndividuales", typeof(decimal));
+    
+            var hipa_TotalSueldoBrutoParameter = hipa_TotalSueldoBruto.HasValue ?
+                new ObjectParameter("hipa_TotalSueldoBruto", hipa_TotalSueldoBruto) :
+                new ObjectParameter("hipa_TotalSueldoBruto", typeof(decimal));
+    
+            var hipa_CantidadUnidadesHorasExtrasParameter = hipa_CantidadUnidadesHorasExtras.HasValue ?
+                new ObjectParameter("hipa_CantidadUnidadesHorasExtras", hipa_CantidadUnidadesHorasExtras) :
+                new ObjectParameter("hipa_CantidadUnidadesHorasExtras", typeof(int));
+    
+            var hipa_CantidadUnidadesBonosParameter = hipa_CantidadUnidadesBonos.HasValue ?
+                new ObjectParameter("hipa_CantidadUnidadesBonos", hipa_CantidadUnidadesBonos) :
+                new ObjectParameter("hipa_CantidadUnidadesBonos", typeof(int));
+    
+            var hipa_TotalBonosParameter = hipa_TotalBonos.HasValue ?
+                new ObjectParameter("hipa_TotalBonos", hipa_TotalBonos) :
+                new ObjectParameter("hipa_TotalBonos", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter, hipa_TotalDeduccionesIndividualesParameter, hipa_TotalIngresosIndividualesParameter, hipa_TotalSueldoBrutoParameter, hipa_CantidadUnidadesHorasExtrasParameter, hipa_CantidadUnidadesBonosParameter, hipa_TotalBonosParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Activar_Result> UDP_Plani_tbIngresosIndividuales_Activar(Nullable<int> ini_IdIngresosIndividuales, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
@@ -2357,7 +2381,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Inactivar_Result>("UDP_Plani_tbPeriodos_Inactivar", peri_IdPeriodoParameter, peri_UsuarioModificaParameter, peri_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbPeriodos_Insert_Result> UDP_Plani_tbPeriodos_Insert(string peri_DescripPeriodo, Nullable<int> peri_UsuarioCrea, Nullable<System.DateTime> peri_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbPeriodos_Insert_Result> UDP_Plani_tbPeriodos_Insert(string peri_DescripPeriodo, Nullable<int> peri_UsuarioCrea, Nullable<System.DateTime> peri_FechaCrea, Nullable<bool> peri_RecibeSeptimoDia, Nullable<int> peri_CantidadDias)
         {
             var peri_DescripPeriodoParameter = peri_DescripPeriodo != null ?
                 new ObjectParameter("peri_DescripPeriodo", peri_DescripPeriodo) :
@@ -2371,10 +2395,18 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("peri_FechaCrea", peri_FechaCrea) :
                 new ObjectParameter("peri_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Insert_Result>("UDP_Plani_tbPeriodos_Insert", peri_DescripPeriodoParameter, peri_UsuarioCreaParameter, peri_FechaCreaParameter);
+            var peri_RecibeSeptimoDiaParameter = peri_RecibeSeptimoDia.HasValue ?
+                new ObjectParameter("peri_RecibeSeptimoDia", peri_RecibeSeptimoDia) :
+                new ObjectParameter("peri_RecibeSeptimoDia", typeof(bool));
+    
+            var peri_CantidadDiasParameter = peri_CantidadDias.HasValue ?
+                new ObjectParameter("peri_CantidadDias", peri_CantidadDias) :
+                new ObjectParameter("peri_CantidadDias", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Insert_Result>("UDP_Plani_tbPeriodos_Insert", peri_DescripPeriodoParameter, peri_UsuarioCreaParameter, peri_FechaCreaParameter, peri_RecibeSeptimoDiaParameter, peri_CantidadDiasParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbPeriodos_Update_Result> UDP_Plani_tbPeriodos_Update(Nullable<int> peri_IdPeriodo, string peri_DescripPeriodo, Nullable<int> peri_UsuarioModifica, Nullable<System.DateTime> peri_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbPeriodos_Update_Result> UDP_Plani_tbPeriodos_Update(Nullable<int> peri_IdPeriodo, string peri_DescripPeriodo, Nullable<int> peri_UsuarioModifica, Nullable<System.DateTime> peri_FechaModifica, Nullable<bool> peri_RecibeSeptimoDia, Nullable<int> peri_CantidadDias)
         {
             var peri_IdPeriodoParameter = peri_IdPeriodo.HasValue ?
                 new ObjectParameter("peri_IdPeriodo", peri_IdPeriodo) :
@@ -2392,7 +2424,15 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("peri_FechaModifica", peri_FechaModifica) :
                 new ObjectParameter("peri_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Update_Result>("UDP_Plani_tbPeriodos_Update", peri_IdPeriodoParameter, peri_DescripPeriodoParameter, peri_UsuarioModificaParameter, peri_FechaModificaParameter);
+            var peri_RecibeSeptimoDiaParameter = peri_RecibeSeptimoDia.HasValue ?
+                new ObjectParameter("peri_RecibeSeptimoDia", peri_RecibeSeptimoDia) :
+                new ObjectParameter("peri_RecibeSeptimoDia", typeof(bool));
+    
+            var peri_CantidadDiasParameter = peri_CantidadDias.HasValue ?
+                new ObjectParameter("peri_CantidadDias", peri_CantidadDias) :
+                new ObjectParameter("peri_CantidadDias", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Update_Result>("UDP_Plani_tbPeriodos_Update", peri_IdPeriodoParameter, peri_DescripPeriodoParameter, peri_UsuarioModificaParameter, peri_FechaModificaParameter, peri_RecibeSeptimoDiaParameter, peri_CantidadDiasParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbPreaviso_Activar_Result> UDP_Plani_tbPreaviso_Activar(Nullable<int> prea_IdPreaviso, Nullable<int> prea_UsuarioModifica, Nullable<System.DateTime> prea_FechaModifica)
@@ -2714,15 +2754,11 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Restore_Result>("UDP_RRHH_tbAreas_Restore", area_IdParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbAreas_Update_Result> UDP_RRHH_tbAreas_Update(Nullable<int> area_Id, string car_Descripcion, Nullable<int> suc_Id, string area_Descripcion, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
+        public virtual ObjectResult<UDP_RRHH_tbAreas_Update_Result> UDP_RRHH_tbAreas_Update(Nullable<int> area_Id, Nullable<int> suc_Id, string area_Descripcion, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
         {
             var area_IdParameter = area_Id.HasValue ?
                 new ObjectParameter("area_Id", area_Id) :
                 new ObjectParameter("area_Id", typeof(int));
-    
-            var car_DescripcionParameter = car_Descripcion != null ?
-                new ObjectParameter("Car_Descripcion", car_Descripcion) :
-                new ObjectParameter("Car_Descripcion", typeof(string));
     
             var suc_IdParameter = suc_Id.HasValue ?
                 new ObjectParameter("suc_Id", suc_Id) :
@@ -2740,7 +2776,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("area_Fechamodifica", area_Fechamodifica) :
                 new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Update_Result>("UDP_RRHH_tbAreas_Update", area_IdParameter, car_DescripcionParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Update_Result>("UDP_RRHH_tbAreas_Update", area_IdParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbCargos_Delete_Result> UDP_RRHH_tbCargos_Delete(Nullable<int> car_Id, string car_razon_Inactivo, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
@@ -3022,7 +3058,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Restore_Result>("UDP_RRHH_tbDepartamentos_Restore", depto_IdParameter, depto_UsuariomodificaParameter, depto_FechamodificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Update_Result> UDP_RRHH_tbDepartamentos_Update(Nullable<int> depto_Id, Nullable<int> area_Id, string car_Descripcion, string depto_Descripcion, Nullable<int> depto_UsuarioModifica, Nullable<System.DateTime> depto_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Update_Result> UDP_RRHH_tbDepartamentos_Update(Nullable<int> depto_Id, Nullable<int> area_Id, string depto_Descripcion, Nullable<int> depto_UsuarioModifica, Nullable<System.DateTime> depto_FechaModifica)
         {
             var depto_IdParameter = depto_Id.HasValue ?
                 new ObjectParameter("depto_Id", depto_Id) :
@@ -3031,10 +3067,6 @@ namespace ERP_GMEDINA.Models
             var area_IdParameter = area_Id.HasValue ?
                 new ObjectParameter("area_Id", area_Id) :
                 new ObjectParameter("area_Id", typeof(int));
-    
-            var car_DescripcionParameter = car_Descripcion != null ?
-                new ObjectParameter("Car_Descripcion", car_Descripcion) :
-                new ObjectParameter("Car_Descripcion", typeof(string));
     
             var depto_DescripcionParameter = depto_Descripcion != null ?
                 new ObjectParameter("depto_Descripcion", depto_Descripcion) :
@@ -3048,7 +3080,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("depto_FechaModifica", depto_FechaModifica) :
                 new ObjectParameter("depto_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Update_Result>("UDP_RRHH_tbDepartamentos_Update", depto_IdParameter, area_IdParameter, car_DescripcionParameter, depto_DescripcionParameter, depto_UsuarioModificaParameter, depto_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Update_Result>("UDP_RRHH_tbDepartamentos_Update", depto_IdParameter, area_IdParameter, depto_DescripcionParameter, depto_UsuarioModificaParameter, depto_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbEmpleados_Contratar_Result> UDP_RRHH_tbEmpleados_Contratar(Nullable<int> scan_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, string emp_CuentaBancaria, Nullable<bool> emp_Reingreso, Nullable<int> req_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> emp_Fechaingreso, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)

@@ -166,6 +166,7 @@
     @Styles.Render("~/plugins/duallistStyles")
     @Styles.Render("~/plugins/wizardStepsStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
     @Styles.Render("~/plugins/dataPickerStyles")
     @Styles.Render("~/Content/InputMask")
 
@@ -173,7 +174,10 @@
 
 @section Scripts {
     @Scripts.Render("~/plugins/validate")
-    @Scripts.Render("~/Scripts/app/general")
+@*general*@
+@Scripts.Render("~/Scripts/app/general")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/plugins/duallist")
     @Scripts.Render("~/plugins/wizardSteps")
     @Scripts.Render("~/plugins/dataPicker")

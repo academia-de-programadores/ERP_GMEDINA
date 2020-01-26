@@ -31,9 +31,9 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["suc_Id", "suc_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    LimpiarControles(["suc_Id", "suc_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
@@ -87,8 +87,8 @@ function llenarTabla() {
                 ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.suc_Id + ")'>Detalles</a> <a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.suc_Id + ")'>Editar</a> <a class='btn btn-danger btn-xs ' onclick='ModalInactivar(" + value.suc_Id + ")'>Inactivar</a>"
                 : Admin ?
                     "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
                 tabla.row.add({
                     Estado: value.suc_Estado ? 'Activo' : 'Inactivo',

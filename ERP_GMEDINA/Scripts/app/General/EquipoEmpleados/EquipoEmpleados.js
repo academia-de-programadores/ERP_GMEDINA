@@ -67,10 +67,10 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
+                    MsgSuccess("¡Exito!", "se ha agredado el registro");
                     LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
                     $("#ModalNuevo").find("#eqtra_Id").empty();
-                    MsgSuccess("¡Exito!", "se ha agredado el registro");
+                    llenarTabla();
                 }
                 else {
                     MsgError("Error", "Código:" + obj + ". contacte al administrador. (Verifique si el registro ya existe)");
@@ -100,8 +100,8 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();                    
                     MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    llenarTabla();                    
                 }
                 else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador");

@@ -18,9 +18,9 @@ $("#btnActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["txtIdRestore"]);
                     MsgWarning("¡Éxito!", "Se registro se activó de forma exitosa.");
+                    LimpiarControles(["txtIdRestore"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró activar el registro, contacte al administrador.");
                 }

@@ -174,9 +174,9 @@ $("#btnActualizar").click(function () {
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
                             CierraPopups();
-                            llenarTabla();
-                            LimpiarControles(["sue_Id", "sue_Cantidad"]);
                             MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                            LimpiarControles(["sue_Id", "sue_Cantidad"]);
+                            llenarTabla();
                         } else {
                             MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe.)");
                         }

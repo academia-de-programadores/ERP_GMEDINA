@@ -221,9 +221,9 @@ function llenarTabla() {
 
                 var Acciones = value.req_Estado == 1
                     ? null :
-                     "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                    "<div>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.req_Estado > fill) {
 
@@ -316,10 +316,9 @@ $("#btnGuardar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
+                    CierraPopups(); MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
@@ -339,10 +338,9 @@ $("#InActivar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
+                    CierraPopups();ç                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
@@ -364,8 +362,8 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
                     MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

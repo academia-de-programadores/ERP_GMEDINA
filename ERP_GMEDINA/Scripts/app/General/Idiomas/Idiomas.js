@@ -48,8 +48,8 @@ function llenarTabla() {
                 var Acciones = value.idi_Estado == 1
                   ?null:
                   "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.idi_Estado > fill) {
                     tabla.row.add({
@@ -104,9 +104,9 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["idi_Descripcion"]);
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    LimpiarControles(["idi_Descripcion"]);
+                    llenarTabla();
                 }
                 else {
                     MsgError("Error", "No se agrego el registro, contacte al administrador.");
@@ -128,9 +128,9 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["idi_Descripcion", "idi_RazonInactivo"]);
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["idi_Descripcion", "idi_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }

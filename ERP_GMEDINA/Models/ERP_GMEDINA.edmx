@@ -358,10 +358,10 @@
           </Key>
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaInicio" Type="date" />
+          <Property Name="hipa_FechaFin" Type="date" />
+          <Property Name="hipa_FechaPago" Type="date" />
           <Property Name="hipa_Anio" Type="int" Nullable="false" />
           <Property Name="hipa_Mes" Type="int" Nullable="false" />
           <Property Name="peri_IdPeriodo" Type="int" Nullable="false" />
@@ -369,16 +369,22 @@
           <Property Name="hipa_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hipa_UsuarioModifica" Type="int" />
           <Property Name="hipa_FechaModifica" Type="datetime" />
-          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="2" />
           <Property Name="hipa_ISRPendiente" Type="bit" />
-          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalComisiones" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasExtras" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalVacaciones" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSeptimoDia" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalDeduccionesIndividuales" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalIngresosIndividuales" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSueldoBruto" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_CantidadUnidadesHorasExtras" Type="int" />
+          <Property Name="hipa_CantidadUnidadesBonos" Type="int" />
+          <Property Name="hipa_TotalBonos" Type="decimal" Precision="16" Scale="2" />
         </EntityType>
         <EntityType Name="tbIngresosIndividuales">
           <Key>
@@ -463,6 +469,8 @@
           <Property Name="peri_UsuarioModifica" Type="int" />
           <Property Name="peri_FechaModifica" Type="datetime" />
           <Property Name="peri_Activo" Type="bit" Nullable="false" />
+          <Property Name="peri_RecibeSeptimoDia" Type="bit" />
+          <Property Name="peri_CantidadDias" Type="int" />
         </EntityType>
         <EntityType Name="tbPorcentajeMotivoLiquidacion">
           <Key>
@@ -1112,7 +1120,7 @@
           <Property Name="req_Id" Type="int" Nullable="false" />
           <Property Name="req_Experiencia" Type="nvarchar" MaxLength="100" />
           <Property Name="req_Sexo" Type="char" MaxLength="10" />
-          <Property Name="req_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="req_Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="req_EdadMinima" Type="int" Nullable="false" />
           <Property Name="req_EdadMaxima" Type="int" Nullable="false" />
           <Property Name="req_EstadoCivil" Type="char" MaxLength="2" Nullable="false" />
@@ -3104,6 +3112,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialCargos' no t
             <PropertyRef Name="CargoAnterior" />
             <PropertyRef Name="car_Id" />
             <PropertyRef Name="CargoNuevo" />
+            <PropertyRef Name="emp_Id" />
           </Key>
           <Property Name="hcar_Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -3113,6 +3122,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialCargos' no t
           <Property Name="CargoNuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha" Type="date" />
           <Property Name="FechaFin" Type="date" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialContrataciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3220,14 +3230,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' 
         <EntityType Name="V_RPT_HistorialVacaciones">
           <Key>
             <PropertyRef Name="hvac_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre_Empleado" />
             <PropertyRef Name="hvac_CantDias" />
             <PropertyRef Name="hvac_FechaInicio" />
             <PropertyRef Name="hvac_DiasPagados" />
             <PropertyRef Name="hvac_MesVacaciones" />
             <PropertyRef Name="hvac_anioVacaciones" />
             <PropertyRef Name="hvac_FechaFin" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre_Empleado" />
           </Key>
           <Property Name="hvac_Id" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
@@ -3238,6 +3248,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' 
           <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_anioVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" />
+          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HorasTrabajadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -7195,6 +7207,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="hipa_TotalSeptimoDia" Type="decimal" Mode="In" />
           <Parameter Name="hipa_AdelantoSueldo" Type="decimal" Mode="In" />
           <Parameter Name="hipa_TotalSalario" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_TotalDeduccionesIndividuales" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_TotalIngresosIndividuales" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_TotalSueldoBruto" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_CantidadUnidadesHorasExtras" Type="int" Mode="In" />
+          <Parameter Name="hipa_CantidadUnidadesBonos" Type="int" Mode="In" />
+          <Parameter Name="hipa_TotalBonos" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbIngresosIndividuales_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="ini_IdIngresosIndividuales" Type="int" Mode="In" />
@@ -7294,12 +7312,16 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="peri_DescripPeriodo" Type="nvarchar" Mode="In" />
           <Parameter Name="peri_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="peri_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="peri_RecibeSeptimoDia" Type="bit" Mode="In" />
+          <Parameter Name="peri_CantidadDias" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbPeriodos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="peri_IdPeriodo" Type="int" Mode="In" />
           <Parameter Name="peri_DescripPeriodo" Type="nvarchar" Mode="In" />
           <Parameter Name="peri_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="peri_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="peri_RecibeSeptimoDia" Type="bit" Mode="In" />
+          <Parameter Name="peri_CantidadDias" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbPreaviso_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="prea_IdPreaviso" Type="int" Mode="In" />
@@ -7494,7 +7516,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
         </Function>
         <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="Car_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="suc_Id" Type="int" Mode="In" />
           <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
@@ -7583,7 +7604,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
         <Function Name="UDP_RRHH_tbDepartamentos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="Car_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
@@ -9694,7 +9714,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_RPT_HistorialCargos].[car_Id] AS [car_Id], 
     [V_RPT_HistorialCargos].[CargoNuevo] AS [CargoNuevo], 
     [V_RPT_HistorialCargos].[Fecha] AS [Fecha], 
-    [V_RPT_HistorialCargos].[FechaFin] AS [FechaFin]
+    [V_RPT_HistorialCargos].[FechaFin] AS [FechaFin], 
+    [V_RPT_HistorialCargos].[emp_Id] AS [emp_Id]
     FROM [rrhh].[V_RPT_HistorialCargos] AS [V_RPT_HistorialCargos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="Self.V_RPT_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
@@ -9768,7 +9789,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_RPT_HistorialVacaciones].[hvac_DiasPagados] AS [hvac_DiasPagados], 
     [V_RPT_HistorialVacaciones].[hvac_MesVacaciones] AS [hvac_MesVacaciones], 
     [V_RPT_HistorialVacaciones].[hvac_anioVacaciones] AS [hvac_anioVacaciones], 
-    [V_RPT_HistorialVacaciones].[hvac_FechaFin] AS [hvac_FechaFin]
+    [V_RPT_HistorialVacaciones].[hvac_FechaFin] AS [hvac_FechaFin], 
+    [V_RPT_HistorialVacaciones].[per_Identidad] AS [per_Identidad], 
+    [V_RPT_HistorialVacaciones].[per_Telefono] AS [per_Telefono]
     FROM [rrhh].[V_RPT_HistorialVacaciones] AS [V_RPT_HistorialVacaciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="Self.V_RPT_HorasTrabajadas" store:Type="Views" store:Schema="rrhh">
@@ -11159,8 +11182,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbHistorialDeduccionPago1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeduccionPago_hidp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialDeduccionPago" />
           <NavigationProperty Name="tbHistorialDeIngresosPago" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialDeIngresosPago" />
           <NavigationProperty Name="tbHistorialDeIngresosPago1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialDeIngresosPago" />
-          <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialDePago" />
-          <NavigationProperty Name="tbHistorialDePago1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialDePago" />
           <NavigationProperty Name="tbIngresosIndividuales" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea" FromRole="tbUsuario" ToRole="tbIngresosIndividuales" />
           <NavigationProperty Name="tbIngresosIndividuales1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioModifica" FromRole="tbUsuario" ToRole="tbIngresosIndividuales" />
           <NavigationProperty Name="tbInstitucionesFinancieras" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbInstitucionesFinancieras_insf_UsuarioCrea" FromRole="tbUsuario" ToRole="tbInstitucionesFinancieras" />
@@ -11169,8 +11190,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbISR1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbISR_isr_UsuarioModifica" FromRole="tbUsuario" ToRole="tbISR" />
           <NavigationProperty Name="tbLiquidacionVacaciones" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioCrea" FromRole="tbUsuario" ToRole="tbLiquidacionVacaciones" />
           <NavigationProperty Name="tbLiquidacionVacaciones1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" FromRole="tbUsuario" ToRole="tbLiquidacionVacaciones" />
-          <NavigationProperty Name="tbPeriodos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPeriodos" />
-          <NavigationProperty Name="tbPeriodos1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPeriodos" />
           <NavigationProperty Name="tbPreaviso" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPreaviso" />
           <NavigationProperty Name="tbPreaviso1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPreaviso" />
           <NavigationProperty Name="tbTechosDeducciones" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tddu_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTechosDeducciones" />
@@ -11283,6 +11302,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbPorcentajeMotivoLiquidacion1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
           <NavigationProperty Name="tbFaseSeleccion" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
           <NavigationProperty Name="tbFaseSeleccion1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
+          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialDePago" />
+          <NavigationProperty Name="tbHistorialDePago1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialDePago" />
+          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPeriodos" />
+          <NavigationProperty Name="tbPeriodos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPeriodos" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -11620,7 +11643,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeduccionPago_hidp_UsuarioCrea" FromRole="tbHistorialDeduccionPago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeduccionPago_hidp_UsuarioModifica" FromRole="tbHistorialDeduccionPago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" FromRole="tbHistorialDeduccionPago" ToRole="tbCatalogoDeDeducciones" />
-          <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDeduccionPago" ToRole="tbHistorialDePago" />
+          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDeduccionPago" ToRole="tbHistorialDePago" />
         </EntityType>
         <EntityType Name="tbHistorialDeIngresosPago">
           <Key>
@@ -11641,41 +11664,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioCrea" FromRole="tbHistorialDeIngresosPago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioModifica" FromRole="tbHistorialDeIngresosPago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbCatalogoDeIngresos" Relationship="Self.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" FromRole="tbHistorialDeIngresosPago" ToRole="tbCatalogoDeIngresos" />
-          <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDeIngresosPago" ToRole="tbHistorialDePago" />
-        </EntityType>
-        <EntityType Name="tbHistorialDePago">
-          <Key>
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-          </Key>
-          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
-          <Property Name="hipa_Mes" Type="Int32" Nullable="false" />
-          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="hipa_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hipa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_UsuarioModifica" Type="Int32" />
-          <Property Name="hipa_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_ISRPendiente" Type="Boolean" />
-          <Property Name="hipa_AFP" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="4" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbHistorialDeduccionPago" Relationship="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeduccionPago" />
-          <NavigationProperty Name="tbHistorialDeIngresosPago" Relationship="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeIngresosPago" />
-          <NavigationProperty Name="tbPeriodos" Relationship="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbHistorialDePago" ToRole="tbPeriodos" />
-          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbHistorialDePago" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDeIngresosPago" ToRole="tbHistorialDePago" />
         </EntityType>
         <EntityType Name="tbIngresosIndividuales">
           <Key>
@@ -11762,21 +11751,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" FromRole="tbMotivoLiquidacion" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" FromRole="tbMotivoLiquidacion" ToRole="tbUsuario" />
           <NavigationProperty Name="tbPorcentajeMotivoLiquidacion" Relationship="Self.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" FromRole="tbMotivoLiquidacion" ToRole="tbPorcentajeMotivoLiquidacion" />
-        </EntityType>
-        <EntityType Name="tbPeriodos">
-          <Key>
-            <PropertyRef Name="peri_IdPeriodo" />
-          </Key>
-          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="peri_DescripPeriodo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="peri_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="peri_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="peri_UsuarioModifica" Type="Int32" />
-          <Property Name="peri_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="peri_Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
         </EntityType>
         <EntityType Name="tbPorcentajeMotivoLiquidacion">
           <Key>
@@ -12034,7 +12008,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbEmpleadoBonos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoBonos_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoBonos" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoComisiones" />
           <NavigationProperty Name="tbFormaPago" Relationship="Self.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" FromRole="tbEmpleados" ToRole="tbFormaPago" />
-          <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialDePago" />
           <NavigationProperty Name="tbIngresosIndividuales" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id" FromRole="tbEmpleados" ToRole="tbIngresosIndividuales" />
           <NavigationProperty Name="tbAreas" Relationship="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" FromRole="tbEmpleados" ToRole="tbAreas" />
           <NavigationProperty Name="tbCargos" Relationship="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" FromRole="tbEmpleados" ToRole="tbCargos" />
@@ -12052,6 +12025,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbSueldos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbSueldos_emp_Id" FromRole="tbEmpleados" ToRole="tbSueldos" />
           <NavigationProperty Name="tbJornadas" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" FromRole="tbEmpleados" ToRole="tbJornadas" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialDePago" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -12607,7 +12581,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="req_Id" Type="Int32" Nullable="false" />
           <Property Name="req_Experiencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="req_Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="req_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="req_Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="req_EdadMinima" Type="Int32" Nullable="false" />
           <Property Name="req_EdadMaxima" Type="Int32" Nullable="false" />
           <Property Name="req_EstadoCivil" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
@@ -14388,6 +14362,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <PropertyRef Name="CargoAnterior" />
             <PropertyRef Name="car_Id" />
             <PropertyRef Name="CargoNuevo" />
+            <PropertyRef Name="emp_Id" />
           </Key>
           <Property Name="hcar_Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
@@ -14397,6 +14372,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="CargoNuevo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_RPT_HistorialContrataciones">
           <Key>
@@ -15311,30 +15287,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialDePago">
-              <PropertyRef Name="hipa_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialDePago">
-              <PropertyRef Name="hipa_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbIngresosIndividuales" Type="Self.tbIngresosIndividuales" Multiplicity="*" />
@@ -15428,30 +15380,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbLiquidacionVacaciones">
               <PropertyRef Name="pvac_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbPeriodos" Type="Self.tbPeriodos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPeriodos">
-              <PropertyRef Name="peri_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbPeriodos" Type="Self.tbPeriodos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPeriodos">
-              <PropertyRef Name="peri_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -17111,54 +17039,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
-          <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="1" />
-          <End Role="tbHistorialDeduccionPago" Type="Self.tbHistorialDeduccionPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbHistorialDePago">
-              <PropertyRef Name="hipa_IdHistorialDePago" />
-            </Principal>
-            <Dependent Role="tbHistorialDeduccionPago">
-              <PropertyRef Name="hipa_IdHistorialDePago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago">
-          <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="1" />
-          <End Role="tbHistorialDeIngresosPago" Type="Self.tbHistorialDeIngresosPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbHistorialDePago">
-              <PropertyRef Name="hipa_IdHistorialDePago" />
-            </Principal>
-            <Dependent Role="tbHistorialDeIngresosPago">
-              <PropertyRef Name="hipa_IdHistorialDePago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
-          <End Role="tbPeriodos" Type="Self.tbPeriodos" Multiplicity="1" />
-          <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPeriodos">
-              <PropertyRef Name="peri_IdPeriodo" />
-            </Principal>
-            <Dependent Role="tbHistorialDePago">
-              <PropertyRef Name="peri_IdPeriodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialDePago">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbIngresosIndividuales" Type="Self.tbIngresosIndividuales" Multiplicity="*" />
@@ -17928,13 +17808,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbFormaPago" EntityType="Self.tbFormaPago" />
           <EntitySet Name="tbHistorialDeduccionPago" EntityType="Self.tbHistorialDeduccionPago" />
           <EntitySet Name="tbHistorialDeIngresosPago" EntityType="Self.tbHistorialDeIngresosPago" />
-          <EntitySet Name="tbHistorialDePago" EntityType="Self.tbHistorialDePago" />
           <EntitySet Name="tbIngresosIndividuales" EntityType="Self.tbIngresosIndividuales" />
           <EntitySet Name="tbInstitucionesFinancieras" EntityType="Self.tbInstitucionesFinancieras" />
           <EntitySet Name="tbISR" EntityType="Self.tbISR" />
           <EntitySet Name="tbLiquidacionVacaciones" EntityType="Self.tbLiquidacionVacaciones" />
           <EntitySet Name="tbMotivoLiquidacion" EntityType="Self.tbMotivoLiquidacion" />
-          <EntitySet Name="tbPeriodos" EntityType="Self.tbPeriodos" />
           <EntitySet Name="tbPorcentajeMotivoLiquidacion" EntityType="Self.tbPorcentajeMotivoLiquidacion" />
           <EntitySet Name="tbPreaviso" EntityType="Self.tbPreaviso" />
           <EntitySet Name="tbTechosDeducciones" EntityType="Self.tbTechosDeducciones" />
@@ -18268,14 +18146,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialDeIngresosPago" EntitySet="tbHistorialDeIngresosPago" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbIngresosIndividuales" EntitySet="tbIngresosIndividuales" />
@@ -18307,14 +18177,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbLiquidacionVacaciones" EntitySet="tbLiquidacionVacaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -18867,22 +18729,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" Association="Self.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago">
             <End Role="tbFormaPago" EntitySet="tbFormaPago" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" Association="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
-            <End Role="tbHistorialDeduccionPago" EntitySet="tbHistorialDeduccionPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" Association="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago">
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
-            <End Role="tbHistorialDeIngresosPago" EntitySet="tbHistorialDeIngresosPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" Association="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
-            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -19651,6 +19497,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="hipa_TotalSeptimoDia" Mode="In" Type="Decimal" />
             <Parameter Name="hipa_AdelantoSueldo" Mode="In" Type="Decimal" />
             <Parameter Name="hipa_TotalSalario" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalDeduccionesIndividuales" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalIngresosIndividuales" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalSueldoBruto" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_CantidadUnidadesHorasExtras" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_CantidadUnidadesBonos" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_TotalBonos" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Activar_Result)">
             <Parameter Name="ini_IdIngresosIndividuales" Mode="In" Type="Int32" />
@@ -19741,12 +19593,16 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="peri_DescripPeriodo" Mode="In" Type="String" />
             <Parameter Name="peri_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="peri_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="peri_RecibeSeptimoDia" Mode="In" Type="Boolean" />
+            <Parameter Name="peri_CantidadDias" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbPeriodos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbPeriodos_Update_Result)">
             <Parameter Name="peri_IdPeriodo" Mode="In" Type="Int32" />
             <Parameter Name="peri_DescripPeriodo" Mode="In" Type="String" />
             <Parameter Name="peri_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="peri_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="peri_RecibeSeptimoDia" Mode="In" Type="Boolean" />
+            <Parameter Name="peri_CantidadDias" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbPreaviso_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbPreaviso_Activar_Result)">
             <Parameter Name="prea_IdPreaviso" Mode="In" Type="Int32" />
@@ -19841,7 +19697,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Descripcion" Mode="In" Type="String" />
             <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
@@ -19930,7 +19785,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <FunctionImport Name="UDP_RRHH_tbDepartamentos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result)">
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
@@ -20909,6 +20763,40 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_RPT_EmpleadoCurriculum" EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" />
+          <EntitySet Name="tbHistorialDePago" EntityType="ERP_GMEDINAModel.tbHistorialDePago" />
+          <EntitySet Name="tbPeriodos" EntityType="ERP_GMEDINAModel.tbPeriodos" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" Association="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+            <End Role="tbHistorialDeduccionPago" EntitySet="tbHistorialDeduccionPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" Association="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago">
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+            <End Role="tbHistorialDeIngresosPago" EntitySet="tbHistorialDeIngresosPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" Association="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -21801,6 +21689,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
           <Property Name="hvac_anioVacaciones" Type="Int32" Nullable="false" />
           <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="per_Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_FaseSeleccion">
           <Key>
@@ -21957,6 +21847,159 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Fechafin" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="tbHistorialDePago">
+          <Key>
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+          </Key>
+          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Precision="0" />
+          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
+          <Property Name="hipa_Mes" Type="Int32" Nullable="false" />
+          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="hipa_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hipa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_UsuarioModifica" Type="Int32" />
+          <Property Name="hipa_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_ISRPendiente" Type="Boolean" />
+          <Property Name="hipa_AFP" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalDeduccionesIndividuales" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalIngresosIndividuales" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSueldoBruto" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_CantidadUnidadesHorasExtras" Type="Int32" />
+          <Property Name="hipa_CantidadUnidadesBonos" Type="Int32" />
+          <Property Name="hipa_TotalBonos" Type="Decimal" Precision="16" Scale="2" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialDeduccionPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeduccionPago" />
+          <NavigationProperty Name="tbHistorialDeIngresosPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeIngresosPago" />
+          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbHistorialDePago" ToRole="tbPeriodos" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbHistorialDePago" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="tbPeriodos">
+          <Key>
+            <PropertyRef Name="peri_IdPeriodo" />
+          </Key>
+          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="peri_DescripPeriodo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="peri_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="peri_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="peri_UsuarioModifica" Type="Int32" />
+          <Property Name="peri_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="peri_Activo" Type="Boolean" Nullable="false" />
+          <Property Name="peri_RecibeSeptimoDia" Type="Boolean" />
+          <Property Name="peri_CantidadDias" Type="Int32" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialDePago">
+              <PropertyRef Name="hipa_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialDePago">
+              <PropertyRef Name="hipa_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPeriodos">
+              <PropertyRef Name="peri_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPeriodos">
+              <PropertyRef Name="peri_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDeduccionPago" Role="tbHistorialDeduccionPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbHistorialDePago">
+              <PropertyRef Name="hipa_IdHistorialDePago" />
+            </Principal>
+            <Dependent Role="tbHistorialDeduccionPago">
+              <PropertyRef Name="hipa_IdHistorialDePago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago">
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDeIngresosPago" Role="tbHistorialDeIngresosPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbHistorialDePago">
+              <PropertyRef Name="hipa_IdHistorialDePago" />
+            </Principal>
+            <Dependent Role="tbHistorialDeIngresosPago">
+              <PropertyRef Name="hipa_IdHistorialDePago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPeriodos">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Principal>
+            <Dependent Role="tbHistorialDePago">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialDePago">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22334,35 +22377,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbHistorialDePago">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialDePago">
-              <MappingFragment StoreEntitySet="tbHistorialDePago">
-                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hipa_SueldoNeto" ColumnName="hipa_SueldoNeto" />
-                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
-                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
-                <ScalarProperty Name="hipa_Mes" ColumnName="hipa_Mes" />
-                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
-                <ScalarProperty Name="hipa_UsuarioCrea" ColumnName="hipa_UsuarioCrea" />
-                <ScalarProperty Name="hipa_FechaCrea" ColumnName="hipa_FechaCrea" />
-                <ScalarProperty Name="hipa_UsuarioModifica" ColumnName="hipa_UsuarioModifica" />
-                <ScalarProperty Name="hipa_FechaModifica" ColumnName="hipa_FechaModifica" />
-                <ScalarProperty Name="hipa_TotalISR" ColumnName="hipa_TotalISR" />
-                <ScalarProperty Name="hipa_ISRPendiente" ColumnName="hipa_ISRPendiente" />
-                <ScalarProperty Name="hipa_AFP" ColumnName="hipa_AFP" />
-                <ScalarProperty Name="hipa_TotalHorasConPermisoJustificado" ColumnName="hipa_TotalHorasConPermisoJustificado" />
-                <ScalarProperty Name="hipa_TotalComisiones" ColumnName="hipa_TotalComisiones" />
-                <ScalarProperty Name="hipa_TotalHorasExtras" ColumnName="hipa_TotalHorasExtras" />
-                <ScalarProperty Name="hipa_TotalVacaciones" ColumnName="hipa_TotalVacaciones" />
-                <ScalarProperty Name="hipa_TotalSeptimoDia" ColumnName="hipa_TotalSeptimoDia" />
-                <ScalarProperty Name="hipa_AdelantoSueldo" ColumnName="hipa_AdelantoSueldo" />
-                <ScalarProperty Name="hipa_TotalSalario" ColumnName="hipa_TotalSalario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbIngresosIndividuales">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbIngresosIndividuales">
               <MappingFragment StoreEntitySet="tbIngresosIndividuales">
@@ -22437,19 +22451,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="moli_FechaModifica" ColumnName="moli_FechaModifica" />
                 <ScalarProperty Name="moli_Activo" ColumnName="moli_Activo" />
                 <ScalarProperty Name="moli_RazonInactivo" ColumnName="moli_RazonInactivo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbPeriodos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPeriodos">
-              <MappingFragment StoreEntitySet="tbPeriodos">
-                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
-                <ScalarProperty Name="peri_DescripPeriodo" ColumnName="peri_DescripPeriodo" />
-                <ScalarProperty Name="peri_UsuarioCrea" ColumnName="peri_UsuarioCrea" />
-                <ScalarProperty Name="peri_FechaCrea" ColumnName="peri_FechaCrea" />
-                <ScalarProperty Name="peri_UsuarioModifica" ColumnName="peri_UsuarioModifica" />
-                <ScalarProperty Name="peri_FechaModifica" ColumnName="peri_FechaModifica" />
-                <ScalarProperty Name="peri_Activo" ColumnName="peri_Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -24507,6 +24508,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="V_RPT_HistorialCargos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialCargos">
               <MappingFragment StoreEntitySet="V_RPT_HistorialCargos">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="hcar_Id" ColumnName="hcar_Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -26696,6 +26698,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="V_RPT_HistorialVacaciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialVacaciones">
               <MappingFragment StoreEntitySet="V_RPT_HistorialVacaciones">
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
                 <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
                 <ScalarProperty Name="hvac_anioVacaciones" ColumnName="hvac_anioVacaciones" />
                 <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
@@ -26795,6 +26799,56 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
                 <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
                 <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbHistorialDePago">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialDePago">
+              <MappingFragment StoreEntitySet="tbHistorialDePago">
+                <ScalarProperty Name="hipa_TotalBonos" ColumnName="hipa_TotalBonos" />
+                <ScalarProperty Name="hipa_CantidadUnidadesBonos" ColumnName="hipa_CantidadUnidadesBonos" />
+                <ScalarProperty Name="hipa_CantidadUnidadesHorasExtras" ColumnName="hipa_CantidadUnidadesHorasExtras" />
+                <ScalarProperty Name="hipa_TotalSueldoBruto" ColumnName="hipa_TotalSueldoBruto" />
+                <ScalarProperty Name="hipa_TotalIngresosIndividuales" ColumnName="hipa_TotalIngresosIndividuales" />
+                <ScalarProperty Name="hipa_TotalDeduccionesIndividuales" ColumnName="hipa_TotalDeduccionesIndividuales" />
+                <ScalarProperty Name="hipa_TotalSalario" ColumnName="hipa_TotalSalario" />
+                <ScalarProperty Name="hipa_AdelantoSueldo" ColumnName="hipa_AdelantoSueldo" />
+                <ScalarProperty Name="hipa_TotalSeptimoDia" ColumnName="hipa_TotalSeptimoDia" />
+                <ScalarProperty Name="hipa_TotalVacaciones" ColumnName="hipa_TotalVacaciones" />
+                <ScalarProperty Name="hipa_TotalHorasExtras" ColumnName="hipa_TotalHorasExtras" />
+                <ScalarProperty Name="hipa_TotalComisiones" ColumnName="hipa_TotalComisiones" />
+                <ScalarProperty Name="hipa_TotalHorasConPermisoJustificado" ColumnName="hipa_TotalHorasConPermisoJustificado" />
+                <ScalarProperty Name="hipa_AFP" ColumnName="hipa_AFP" />
+                <ScalarProperty Name="hipa_ISRPendiente" ColumnName="hipa_ISRPendiente" />
+                <ScalarProperty Name="hipa_TotalISR" ColumnName="hipa_TotalISR" />
+                <ScalarProperty Name="hipa_FechaModifica" ColumnName="hipa_FechaModifica" />
+                <ScalarProperty Name="hipa_UsuarioModifica" ColumnName="hipa_UsuarioModifica" />
+                <ScalarProperty Name="hipa_FechaCrea" ColumnName="hipa_FechaCrea" />
+                <ScalarProperty Name="hipa_UsuarioCrea" ColumnName="hipa_UsuarioCrea" />
+                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
+                <ScalarProperty Name="hipa_Mes" ColumnName="hipa_Mes" />
+                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
+                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
+                <ScalarProperty Name="hipa_SueldoNeto" ColumnName="hipa_SueldoNeto" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPeriodos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPeriodos">
+              <MappingFragment StoreEntitySet="tbPeriodos">
+                <ScalarProperty Name="peri_CantidadDias" ColumnName="peri_CantidadDias" />
+                <ScalarProperty Name="peri_RecibeSeptimoDia" ColumnName="peri_RecibeSeptimoDia" />
+                <ScalarProperty Name="peri_Activo" ColumnName="peri_Activo" />
+                <ScalarProperty Name="peri_FechaModifica" ColumnName="peri_FechaModifica" />
+                <ScalarProperty Name="peri_UsuarioModifica" ColumnName="peri_UsuarioModifica" />
+                <ScalarProperty Name="peri_FechaCrea" ColumnName="peri_FechaCrea" />
+                <ScalarProperty Name="peri_UsuarioCrea" ColumnName="peri_UsuarioCrea" />
+                <ScalarProperty Name="peri_DescripPeriodo" ColumnName="peri_DescripPeriodo" />
+                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
