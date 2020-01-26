@@ -2892,6 +2892,7 @@
     <Content Include="Views\InstitucionesFinancieras\_Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
+    <Content Include="Views\Menu\MenuPrincipal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
