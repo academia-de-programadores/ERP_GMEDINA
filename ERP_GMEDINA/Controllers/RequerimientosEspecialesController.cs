@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class RequerimientosEspecialesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         public ActionResult Index()
         {
@@ -36,6 +36,7 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
+                db = new ERP_GMEDINAEntities();
                 var tbRequerimientosEspeciales = db.tbRequerimientosEspeciales
                     .Select(
                        x => new {
@@ -63,6 +64,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbRequerimientosEspeciales.resp_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
@@ -96,6 +98,7 @@ namespace ERP_GMEDINA.Controllers
             tbRequerimientosEspeciales tbRequerimientosEspeciales = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbRequerimientosEspeciales = db.tbRequerimientosEspeciales.Find(id);
                 if (tbRequerimientosEspeciales == null )
                 {
@@ -131,6 +134,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbRequerimientosEspeciales.resp_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -165,6 +169,7 @@ namespace ERP_GMEDINA.Controllers
 
             if (RazonInactivo != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
