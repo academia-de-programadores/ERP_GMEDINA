@@ -18,7 +18,10 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
 
-
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+            }
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             var tbHistorialCargos = new List<tbHistorialCargos> { };
 
@@ -46,6 +49,10 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult llenarTabla()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+            }
             try
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -83,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult ChildRowData(int? id)
         {
+
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<V_HistorialCargos> lista = new List<V_HistorialCargos> { };
@@ -134,6 +142,10 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Promover()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+            }
 
             var Empleado = new tbEmpleados();
 

@@ -30,7 +30,7 @@
             div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
         }
         else {
-            div += '<button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>';
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>';
         }
         div += '</tr>' + '</tbody>'
         '</table>'
@@ -131,14 +131,16 @@ function compare_dates() {
     debugger
     var fecha1 = $("#ModalNuevo").find("#aude_FechaAudiencia").val();
     var fechalimite = '01/01/1900';
-    if (Date.parse(fecha1) < Date.parse(fechalimite)) {
+    var fechamayor = "01/01/2199";
+    if (Date.parse(fecha1) < Date.parse(fechalimite) || Date.parse(fecha1) < Date.parse(fechamayor))
+    {
         $("#ModalNuevo").show();
-        MsgError("Error", "Fecha no es valida");
+        MsgError("Error", "Fecha no es válida.");
     }
     else if ( fecha1 == "")
     {
         $("#ModalNuevo").show();
-        MsgError("Error", "Campo fecha es requerido.");
+        MsgError("Error", "El campo fecha es requerido.");
     }
     else {
         return true;
