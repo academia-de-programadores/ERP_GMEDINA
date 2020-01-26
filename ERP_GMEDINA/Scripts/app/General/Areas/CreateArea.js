@@ -79,6 +79,35 @@ $("#add").click(function () {
  var area = { cargo: $("#FormNuevo").find("#car_Descripcion").val() };
  var data = $("#FormDepartamentos").serializeArray();
  data = serializarChild(data, "FormDepartamentos");
+
+ var lista = getJson();
+ var valid = true;
+ lista.forEach(function (value, index) {
+  if (value.depto_Descripcion == data.depto_Descripcion) {
+   var input = $("#FormDepartamentos").find("#depto_Descripcion")[0];
+   var div = $(input).closest(".form-group")[0];
+   var span = $(div).find("span")[0];
+
+   $(div).addClass("error");
+   span.innerText = 'Cambie la descripcion.';
+   $(span).addClass("text-danger");
+   valid = false;
+  }
+  if (value.car_Descripcion == data.car_Descripcion) {
+   var input = $("#FormDepartamentos").find("#car_Descripcion")[0];
+   var div = $(input).closest(".form-group")[0];
+   var span = $(div).find("span")[0];
+
+   $(div).addClass("error");
+   span.innerText = 'Cambie la descripcion.';
+   $(span).addClass("text-danger");
+   valid = false;
+  }
+ });
+ if (!valid) {
+  return null;
+ }
+
  if (area.cargo == data.car_Descripcion) {
   var span = $("#FormDepartamentos").find("#errorcar_Descripcion")[0];
   span.innerText = "Cargo reservado, por favor cambiar.";

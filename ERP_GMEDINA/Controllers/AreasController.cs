@@ -335,7 +335,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         if (item.MensajeError == "-1")
                         {
-                            return Json("-2", JsonRequestBehavior.AllowGet);
+                            return Json(new { codigo = "-1" }, JsonRequestBehavior.AllowGet);
                         }
                         cAreas.area_Id = int.Parse(item.MensajeError);
                     }
@@ -348,20 +348,25 @@ namespace ERP_GMEDINA.Controllers
                                 item.depto_RazonInactivo,
                                 Usuario.usu_Id,
                                 DateTime.Now);
-                        string mensajeDB = "";
-                        foreach (UDP_RRHH_tbDepartamentos_Delete_Result i in depto)
-                        {
-                            mensajeDB = i.MensajeError.ToString();
-                        }
-                        if (mensajeDB == "-1")
-                        {
-                            return Json("-2", JsonRequestBehavior.AllowGet);
-                        }
                     }
                     foreach (cDepartamentos item in Departamentos)
                     {
                         if (item.Accion == "i")
                         {
+                            var deptocargo = db.UDP_RRHH_tbCargos_Insert(
+                                                               item.car_Descripcion,
+                                                               Usuario.usu_Id,
+                                                               DateTime.Now
+                                                             );
+                            foreach (UDP_RRHH_tbCargos_Insert_Result i in deptocargo)
+                            {
+                                var resultadod = i.MensajeError + "  ";
+                                if (resultadod.Substring(0, 2) == "-1")
+                                {
+                                    return Json(new { codigo = "-3", Accion = "i"}, JsonRequestBehavior.AllowGet);
+                                }
+                                item.car_Id = int.Parse(i.MensajeError);
+                            }
                             var depto = db.UDP_RRHH_tbDepartamentos_Insert(
                                 cAreas.area_Id,
                                 item.depto_Descripcion,
@@ -375,7 +380,7 @@ namespace ERP_GMEDINA.Controllers
                             }
                             if (mensajeDB == "-1")
                             {
-                                return Json("-2", JsonRequestBehavior.AllowGet);
+                                return Json(new { codigo = "-4", Accion = "i"}, JsonRequestBehavior.AllowGet);
                             }
                         }
                         else if (item.Accion == "e")
@@ -393,21 +398,12 @@ namespace ERP_GMEDINA.Controllers
                             }
                             if (mensajeDB == "-1")
                             {
-                                return Json("-2", JsonRequestBehavior.AllowGet);
+                                return Json(new { codigo = "-4", Accion = "e" }, JsonRequestBehavior.AllowGet);
                             }
                         }
                         else if (item.Accion == "a")
                         {
                             var depto = db.UDP_RRHH_tbDepartamentos_Restore(item.depto_Id, Usuario.usu_Id, DateTime.Now);
-                            string mensajeDB = "";
-                            foreach (UDP_RRHH_tbDepartamentos_Restore_Result items in depto)
-                            {
-                                mensajeDB = items.MensajeError.ToString();
-                            }
-                            if (mensajeDB == "-1")
-                            {
-                                return Json("-2", JsonRequestBehavior.AllowGet);
-                            }
                         }
                     }
                     transaction.Commit();
@@ -416,7 +412,7 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                return Json("-2", JsonRequestBehavior.AllowGet);
+                return Json(new { codigo = "-2" }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -506,6 +502,27 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
             //new { codigo = "-3", input = "car_Descripcion", result = tbAreas.car_Descripcion }
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ValidarDepto(string Descripcion)
+        {
+            List<object> Resultado = new List<object> { };
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                List<tbDepartamentos> departamento = db.tbDepartamentos
+                    .Where(t => t.depto_Descripcion == Descripcion)
+                    .ToList();
+                if (departamento.Count > 0)
+                {
+                    Resultado.Add(new { input = "depto_Descripcion", Descripcion = Descripcion });
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)

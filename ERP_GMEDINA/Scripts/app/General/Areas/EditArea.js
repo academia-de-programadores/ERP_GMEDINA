@@ -120,9 +120,40 @@ $("#add").click(function () {
  var area = { cargo: $("#FormNuevo").find("#car_Descripcion").val() };
  var data = $("#FormDepartamentos").serializeArray();
  data = serializarChild(data, "FormDepartamentos");
+
+ var lista = getJson();
+ var valid = true;
+ lista.forEach(function (value, index) {
+  if (value.depto_Descripcion == data.depto_Descripcion) {
+   var input = $("#FormDepartamentos").find("#depto_Descripcion")[0];
+   var div = $(input).closest(".form-group")[0];
+   var span = $(div).find("span")[0];
+
+   $(div).addClass("error");
+   span.innerText = 'Cambie la descripcion.';
+   $(span).addClass("text-danger");
+   valid = false;
+  }
+  if (value.car_Descripcion == data.car_Descripcion) {
+   var input = $("#FormDepartamentos").find("#car_Descripcion")[0];
+   var div = $(input).closest(".form-group")[0];
+   var span = $(div).find("span")[0];
+
+   $(div).addClass("error");
+   span.innerText = 'Cambie la descripcion.';
+   $(span).addClass("text-danger");
+   valid = false;
+  }
+ });
+ if (!valid) {
+  return null;
+ }
+
  if (area.cargo == data.car_Descripcion) {
   var span = $("#FormDepartamentos").find("#errorcar_Descripcion")[0];
+  span.innerText = "Cargo reservado, por favor cambiar.";
   $(span).addClass("text-danger");
+  return null;
  }
  if (data == null) {
   return null;
@@ -147,10 +178,9 @@ $("#add").click(function () {
           $(span).addClass("text-danger");
          });
         } else {
-         Add(Descripcion, Cargo);
+         Add(data.depto_Descripcion, data.car_Descripcion);
         }
        }
-
  );
 });
 $("#FormCreate").submit(function (e) {
@@ -188,24 +218,25 @@ $("#btnCrear").click(function () {
       '/Areas/Edit',
       'POST',
       function (obj) {
-       if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
-        //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-        //MsgSuccess("¡Exito!", "Se ah agregado el registro");
-        window.location.href = "/Areas";
-       } else {
-        if (obj.input != undefined) {
-         var input = $("#FormNuevo").find("#" + obj.input)[0];
-         var div = $(input).closest(".form-group")[0];
-         var asterisco = $(div).find("label font")[0];
-         var span = $(div).find("span")[0];
-
-         $(div).addClass("error");
-         asterisco.color = "red";
-         span.innerText = 'ya existe, por favor cambie la descripcion';
-         $(span).addClass("text-danger");
-        }
+       var input = $("#FormNuevo").find("#area_Descripcion")[0];
+       var div = $(input).closest(".form-group")[0];
+       var asterisco = $(div).find("label font")[0];
+       if (obj.codigo == "-2") {
         MsgError("Error", "No se logro editar el registro, contacte al administrador");
        }
+       if (obj.codigo == "-3") {
+        console.log("violación de la seguridad.");
+       }
+
+       if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
+        window.location.href = "/Areas";
+       } else {
+        $(div).addClass("error");
+        asterisco.color = "red";
+        span.innerText = 'ya existe, por favor cambie la descripcion';
+        $(span).addClass("text-danger");
+       }
+       MsgError("Error", "No se logro editar el registro, verifique la conección a internet");
       });
  } else {
   MsgError("Error", "por favor llene todas las cajas de texto");
@@ -233,8 +264,8 @@ $("#ModalEditar").find("#btnActualizar").on("click", function () {
  var depto =
      {
       Id: dRow.data().Id,
+      Cargo: dRow.data().Cargo,
       Descripcion: $('#ModalEditar').find("#depto_Descripcion").val(),
-      Cargo: $('#ModalEditar').find("#car_Descripcion").val(),
       Accion: 'e'
      }
  if (depto.Cargo == area.cargo) {
@@ -244,16 +275,15 @@ $("#ModalEditar").find("#btnActualizar").on("click", function () {
   return null;
  }
  _ajax(JSON.stringify({
-  Descripcion: depto.Descripcion,
-  Cargo: depto.Cargo
+  Descripcion: depto.Descripcion
  }),
-      "/Areas/Validar/",
+      "/Areas/ValidarDepto/",
       "POST",
       function (obj) {
        if (obj == "-2") {
         MsgError("Error", "Verifique su conexion a internet");
-       } else if (obj.length > 1) {
-        var input = $("#ModalEditar").find("#" + obj[1].input)[0];
+       } else if (obj.length > 0) {
+        var input = $("#ModalEditar").find("#" + obj[0].input)[0];
         var div = $(input).closest(".form-group")[0];
         var span = $(div).find("span")[0];
 
