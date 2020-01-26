@@ -54,5 +54,6 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
 
 function tablaDetalles(ID) {
     id = ID;
+    sessionStorage.setItem("emp_Id", ID);
     $(location).attr('href', "/Empleados/details/" + id);
 }

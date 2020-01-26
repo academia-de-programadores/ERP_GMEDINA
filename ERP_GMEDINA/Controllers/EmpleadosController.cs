@@ -24,8 +24,12 @@ namespace ERP_GMEDINA.Controllers
         // GET: Empleados
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbEmpleados = new List<tbEmpleados> { };
+            if (Session["Admin"] == null || Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index/");
+                return null;
+            }
+            tbEmpleados tbEmpleados = new tbEmpleados { };
             return View(tbEmpleados);
         }
         public ActionResult llenarTabla()
@@ -477,30 +481,269 @@ namespace ERP_GMEDINA.Controllers
             return View(tbEmpleados);
         }
 
-        // GET: Empleados/Delete/5
-        public ActionResult Delete(int? id)
+        /// <summary>
+        /// SUBR DOCUMENTOS AL EXPEDIENTE
+        /// </summary>
+        /// 
+        [HttpPost]
+        public ActionResult UploadDocumento(string tiposArchivo, int id, HttpPostedFileBase File)
+        {
+
+            try
+            {
+                if ((File.ContentLength != 0))
+                {//OPEN IF
+                    bool ExtensionAceptada = false;
+                    string ExtensionDeArchivo = File.FileName.ToString().Split('.').Last();
+
+                    string[] ExtensionesValidas = { "xls", "xlsx", "jpeg", "jpg", "png", "pdf", "svg", "doc", "docx" };
+
+                    db = new ERP_GMEDINAEntities();
+
+                    foreach (string ext in ExtensionesValidas)
+                    {
+                        if (ExtensionDeArchivo == ext)
+                            ExtensionAceptada = true;
+                    }
+
+                    if (ExtensionAceptada == true)
+                    {
+                        string path = Server.MapPath("~/Expedientes/");
+                        string folder = ("Expediente_" + id);
+                        string carpetaempleados = Server.MapPath("~/Expedientes/" + "Expediente_" + id);
+                        string subcarpetas = (carpetaempleados + "/" + tiposArchivo);
+                        string FULLPATH = (subcarpetas + "/" + File.FileName);
+
+                        if (!System.IO.Directory.Exists((carpetaempleados)))
+                        {//OPEN IF
+                         //db = new ERP_GMEDINAEntities();
+                            System.IO.Directory.CreateDirectory(path + "Expediente_" + id);
+                        }//CLOSE IF
+
+                        if (!System.IO.Directory.Exists((subcarpetas)))
+                        {
+                            System.IO.Directory.CreateDirectory(path + "Expediente_" + id + "/" + tiposArchivo);
+                        }
+                        if (!System.IO.File.Exists((FULLPATH)))
+                        {
+                            File.SaveAs(FULLPATH);
+                        }
+                        else
+                        {
+                            return Json(-3, JsonRequestBehavior.AllowGet);
+                        }
+                        //File.SaveAs(subcarpetas+"/"+File.FileName);
+
+                        //File.SaveAs(path);
+                        var Usuario = (tbUsuario)Session["Usuario"];
+
+                        IEnumerable<object> listdocumentos = null;
+                        string MensajeError = "";
+                        listdocumentos = db.UDP_RRHH_tbDirectoriosEmpleados_Insert(tiposArchivo, File.FileName, id, Usuario.usu_Id, DateTime.Now);
+
+                        foreach (UDP_RRHH_tbDirectoriosEmpleados_Insert_Result Item in listdocumentos)
+                        {
+                            MensajeError = Item.MensajeError;
+                        }
+                        if (!string.IsNullOrEmpty(MensajeError))
+                        {//OPEN IF
+                            if (MensajeError.StartsWith("-1"))
+                            {
+                                ModelState.AddModelError("", "1. No se pudo Agregar el registro");
+                                return Json(-1, JsonRequestBehavior.AllowGet);
+                            }
+                        }//CLOSE IF
+                        return Json(1, JsonRequestBehavior.AllowGet);
+
+                    }//CLOSE IF
+                    else
+                    {
+                        return Json(-4, JsonRequestBehavior.AllowGet);
+                    }
+                }//CLOSE IF
+                else
+                {
+                    return Json(-4, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return Json(-2, JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+        //  [HttpPost]
+        public ActionResult CargarArchivos(int? id)
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbDirectoriosEmpleados = db.tbDirectoriosEmpleados.Include(t => t.tbEmpleados)
+                    .Select(
+                    x => new {
+
+                        direm_Id = x.direm_Id,
+                        direm_Carpeta = x.direm_Carpeta,
+                        direm_FechaCrea = x.direm_FechaCrea,
+                        direm_NombreArchivo = x.direm_NombreArchivo,
+                        direm_Estado = x.direm_Estado,
+                        emp_Id = x.emp_Id,
+                        emp_FechaIngreso = x.tbEmpleados.emp_Fechaingreso
+                    }
+                    ).Where(x => x.direm_Estado == true && x.emp_Id == id && x.emp_FechaIngreso <= x.direm_FechaCrea).ToList();
+                    return Json(tbDirectoriosEmpleados, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
+        }
+
+        public ActionResult CargarArchivosExpedienteViejo(int? id)
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbDirectoriosEmpleados = db.tbDirectoriosEmpleados.Include(t => t.tbEmpleados)
+                    .Select(
+                    x => new {
+
+                        direm_Id = x.direm_Id,
+                        direm_Carpeta = x.direm_Carpeta,
+                        direm_FechaCrea = x.direm_FechaCrea,
+                        direm_NombreArchivo = x.direm_NombreArchivo,
+                        direm_Estado = x.direm_Estado,
+                        emp_Id = x.emp_Id,
+                        emp_FechaIngreso = x.tbEmpleados.emp_Fechaingreso
+                    }
+                    ).Where(x => x.direm_Estado == true && x.emp_Id == id && x.emp_FechaIngreso > x.direm_FechaCrea).ToList();
+                    return Json(tbDirectoriosEmpleados, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
+        }
+
+        public ActionResult DetallesExpediente(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
-            if (tbEmpleados == null)
+
+            tbDirectoriosEmpleados tbDirectoriosEmpleados = null;
+            try
             {
+                db = new ERP_GMEDINAEntities();
+                tbDirectoriosEmpleados = db.tbDirectoriosEmpleados.Find(id);
+                if (tbDirectoriosEmpleados == null || !tbDirectoriosEmpleados.direm_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            return View(tbEmpleados);
+            Session["id"] = id;
+            var Lista = new tbDirectoriosEmpleados
+            {
+                direm_Id = tbDirectoriosEmpleados.direm_Id,
+                direm_NombreArchivo = tbDirectoriosEmpleados.direm_NombreArchivo,
+                direm_Carpeta = tbDirectoriosEmpleados.direm_Carpeta,
+                direm_Estado = tbDirectoriosEmpleados.direm_Estado,
+                direm_UsuarioCrea = tbDirectoriosEmpleados.direm_UsuarioCrea,
+                direm_FechaCrea = tbDirectoriosEmpleados.direm_FechaCrea,
+                direm_UsuarioModifica = tbDirectoriosEmpleados.direm_UsuarioModifica,
+                direm_FechaModifica = tbDirectoriosEmpleados.direm_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbDirectoriosEmpleados.tbUsuario).usu_NombreUsuario },
+            };
+            return Json(Lista, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Empleados/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(tbDirectoriosEmpleados tbDirectoriosEmpleados)
         {
-            tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
-            db.tbEmpleados.Remove(tbEmpleados);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            string msj = "";
+
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+            if (tbDirectoriosEmpleados.direm_Id != 0)
+            {
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbDirectoriosEmpleados_Delete(tbDirectoriosEmpleados.direm_Id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbDirectoriosEmpleados_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+
+
+
+                    if (msj.Substring(0, 1) != "-")
+                    {
+                        using (db = new ERP_GMEDINAEntities())
+                        {
+                            var tbDirectoriosEmpleadosDireccion = db.tbDirectoriosEmpleados
+                            .Select(
+                            x => new {
+                                emp_Id = x.emp_Id,
+                                direm_Id = x.direm_Id,
+                                direm_Carpeta = x.direm_Carpeta,
+                                direm_NombreArchivo = x.direm_NombreArchivo,
+                            }
+
+                            ).Where(x => x.direm_Id == tbDirectoriosEmpleados.direm_Id).ToList().Last();
+                            string direm_Carpeta = tbDirectoriosEmpleadosDireccion.direm_Carpeta;
+                            string direm_NombreArchivo = tbDirectoriosEmpleadosDireccion.direm_NombreArchivo;
+                            int emp_Id = tbDirectoriosEmpleadosDireccion.emp_Id;
+
+                            string path = Server.MapPath("~/Expedientes/" + "Expediente_" + emp_Id + "/" + direm_Carpeta + "/" + direm_NombreArchivo);
+
+                            if (System.IO.File.Exists(path))
+                            {
+                                System.IO.File.Delete(path);
+                            }
+
+                        }
+
+                        //Eliminar Archivo
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
         }
 
         protected override void Dispose(bool disposing)

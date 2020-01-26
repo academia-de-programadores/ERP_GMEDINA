@@ -90,16 +90,85 @@
 
 @*MODAL AGREGAR EMPLEADOS*@
 
-    
+
+
+@*MODAL AGREGAR DOCUMENTO*@
+
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Agregar Documento</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>
+                        Todos los archivos
+                    </p>*@
+                <p>
+                    Seleccione el archivo que desee guardar, y seleccione la carpeta en donde desea guardarlo.
+                </p>
+
+                @*@Html.ActionLink("Descargar Archivo", "ArchivoEmpleados", null, new { @class = "btn btn-primary " })*@
+
+                @using (Html.BeginForm("UploadDocumento", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data", @Id = "FormEmpleadosDocument" }))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileinput-new">Seleccionar documento</span><span class="fileinput-exists">Cambiar documento </span>
+                                    <input type="file" name="FileUpload" id="FileUpload" accept=".xls,.xlsx,.JPEG,.JPG,.PNG,.PDF,.SVG,.doc,.docx" id="btnUploadDocument">
+                                </span>
+                                <span class="fileinput-filename"></span>
+                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control m-b" name="tiposArchivo" id="tiposArchivo">
+                                <option value="" disabled selected>Seleccione el tipo de archivo</option>
+                                <option value="Amonestaciones">Amonestación</option>
+                                <option value="Permisos">Permiso</option>
+                                <option value="Incapacidades">Incapacidad</option>
+                                <option value="Constancia">Constancia</option>
+                                <option value="Solicitud">Solicitud</option>
+                                <option value="Facturas">Factura</option>
+                                <option value="Archivos_Personales">Archivos Personales</option>
+                                <option value="Otros">Otros</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 float-e-margins">
+                            <input type="submit" class="btn btn-primary pull-left" id="btnGuardarDocumento" value="Guardar" />
+                        </div>
+                    </div>
+
+                }
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                    @*<button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Guardar</button>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*MODAL AGREGAR DOCUMENTO*@
+
+
+
+
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
-@Styles.Render("~/plugins/jasnyBootstrapStyles")
+    @Styles.Render("~/plugins/jasnyBootstrapStyles")
 
 }
 @section Scripts {
-@Scripts.Render("~/plugins/dataTablesMatutina")
-@Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/app/general/Empleados")
-@Scripts.Render("~/plugins/jasnyBootstrap")
+    @Scripts.Render("~/plugins/dataTablesMatutina")
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general/Empleados")
+    @Scripts.Render("~/plugins/jasnyBootstrap")
 }
