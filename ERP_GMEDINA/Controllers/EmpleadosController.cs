@@ -66,16 +66,16 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult ChildRowData(int id)
         {
             List<V_Datos_Empleado> lista = new List<V_Datos_Empleado> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
                 try
                 {
+            using (db = new ERP_GMEDINAEntities())
+            {
                     lista = db.V_Datos_Empleado.Where(x => x.emp_Id == id).ToList();
+            }
                 }
                 catch
                 {
                 }
-            }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
         public void ArchivoEmpleados()
