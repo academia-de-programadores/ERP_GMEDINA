@@ -1,6 +1,29 @@
 //
 var modal = ["ModalNuevo", "ModalEditar", "ModalInactivar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
+var languageChild = {
+ "sProcessing": "Procesando...",
+ "sLengthMenu": "Mostrar _MENU_ registros",
+ "sZeroRecords": "No se encontraron resultados",
+ "sEmptyTable": "No hay registros para mostrar.",
+ "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+ "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+ "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+ "sInfoPostFix": "",
+ "sSearch": "Buscar:",
+ "sUrl": "",
+ "sInfoThousands": ",",
+ "sLoadingRecords": "Cargando...",
+ "oPaginate": {
+  "sFirst": "Primero",
+  "sLast": "Último",
+  "sNext": "Siguiente",
+  "sPrevious": "Anterior"
+ }, "oAria": {
+  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+ }
+};
 var htmlSpiner =
     `<div id="ibox1" class="sk-spinner sk-spinner-wave">
                 <div class="sk-rect1"></div>
@@ -9,28 +32,28 @@ var htmlSpiner =
                 <div class="sk-rect4"></div>
                 <div class="sk-rect5"></div>
              </div>`;
-var language = n = {
-    "sProcessing": "Procesando...",
-    "sLengthMenu": "Mostrar _MENU_ registros",
-    "sZeroRecords": "No se encontraron resultados",
-    "sEmptyTable": htmlSpiner,
-    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "sInfoPostFix": "",
-    "sSearch": "Buscar:",
-    "sUrl": "",
-    "sInfoThousands": ",",
-    "sLoadingRecords": "Cargando...",
-    "oPaginate": {
-        "sFirst": "Primero",
-        "sLast": "Último",
-        "sNext": "Siguiente",
-        "sPrevious": "Anterior"
-    }, "oAria": {
-        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    }
+var language = {
+ "sProcessing": "Procesando...",
+ "sLengthMenu": "Mostrar _MENU_ registros",
+ "sZeroRecords": "No se encontraron resultados",
+ "sEmptyTable": htmlSpiner,
+ "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+ "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+ "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+ "sInfoPostFix": "",
+ "sSearch": "Buscar:",
+ "sUrl": "",
+ "sInfoThousands": ",",
+ "sLoadingRecords": "Cargando...",
+ "oPaginate": {
+  "sFirst": "Primero",
+  "sLast": "Último",
+  "sNext": "Siguiente",
+  "sPrevious": "Anterior"
+ }, "oAria": {
+  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+ }
 };
 function CierraPopups() {
  $.each(modal, function (index, valor) {
@@ -47,12 +70,12 @@ $(".modal").on("load", function () {
 });
 
 function _POST(params, uri, callback) {
-    $.post(uri, params)
-    .done(callback)
-    .error(function (e) {
-        CierraPopups()
-        MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)");
-    });
+ $.post(uri, params)
+ .done(callback)
+ .error(function (e) {
+  CierraPopups()
+  MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)");
+ });
 }
 
 function _ajax(params, uri, type, callback) {
@@ -69,12 +92,12 @@ function _ajax(params, uri, type, callback) {
  });
 }
 function serializar(data) {
-    var Modals = $(".modal");
-    var modal;
-    if (Modals.length==0) {
-        Modals = $("form");
-        modal = Modals[0];
-    }
+ var Modals = $(".modal");
+ var modal;
+ if (Modals.length == 0) {
+  Modals = $("form");
+  modal = Modals[0];
+ }
  var primerInput = true;
  $.each(Modals, function (indice, valor) {
   if (valor.style.display == "block") {
@@ -85,41 +108,79 @@ function serializar(data) {
  var verificacion = true;
  $.each(data, function (index, valor) {
   var value = valor.value.trim();
-  if (value != "" && value!="0") {
+  if (value != "" && value != "0") {
    Data[valor.name] = value;
   } else {
    if (primerInput) {
     primerInput = false;
     $(modal).find("#" + valor.name).focus();
    }
-        var input = $(modal).find("#" + valor.name)[0];
-        if ($(input).hasClass("required")) {
-          var div = $(input).closest(".form-group");
-          var asterisco=$(div).find("font");
-          var label=$(div).find("label")[0];
-          var span=$(input).closest("div").find("span")[0];
-          asterisco[0].color = "red";
-          var txtlabel =label.innerText;
-          //var span = input.offsetParent.children[1];
-          var txtRequired=$(input).data("val-required")
-          span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerido' : txtRequired;
-          $(input).addClass("error");
-          $(span).addClass("text-danger");
-          verificacion = false;
-          if (input.type=="select-one") {
-              primerInput = true;
-          }
-        }
+   var input = $(modal).find("#" + valor.name)[0];
+   if ($(input).hasClass("required")) {
+    var div = $(input).closest(".form-group");
+    var asterisco = $(div).find("font");
+    var label = $(div).find("label")[0];
+    var span = $(input).closest("div").find("span")[0];
+    asterisco[0].color = "red";
+    var txtlabel = label.innerText;
+    //var span = input.offsetParent.children[1];
+    var txtRequired = $(input).data("val-required")
+    span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerido' : txtRequired;
+    $(input).addClass("error");
+    $(span).addClass("text-danger");
+    verificacion = false;
+    if (input.type == "select-one") {
+     primerInput = true;
+    }
+   }
   }
  });
  if (verificacion) {
   return Data;
  } else {
-  $(modal).data('open',true);
+  $(modal).data('open', true);
   return null;
  }
 }
-
+function serializarChild(data, form) {
+ var primerInput = true;
+ var Modal = $("#" + form)[0];
+ var Data = new Object();
+ var verificacion = true;
+ $.each(data, function (index, valor) {
+  var value = valor.value.trim();
+  if (value != "" && value != "0") {
+   Data[valor.name] = value;
+  } else {
+   if (primerInput) {
+    primerInput = false;
+    $(Modal).find("#" + valor.name).focus();
+   }
+   var input = $(Modal).find("#" + valor.name)[0];
+   if ($(input).hasClass("required")) {
+    var div = $(input).closest(".form-group");
+    var asterisco = $(div).find("font");
+    var label = $(div).find("label")[0];
+    var span = $(input).closest("div").find("span")[0];
+    asterisco[0].color = "red";
+    var txtlabel = label.innerText;
+    //var span = input.offsetParent.children[1];
+    var txtRequired = $(input).data("val-required")
+    span.innerText = txtRequired == undefined ? 'El campo ' + txtlabel.replace("*", "") + ' es requerido' : txtRequired;
+    $(input).addClass("error");
+    $(span).addClass("text-danger");
+    verificacion = false;
+    if (input.type == "select-one") {
+     primerInput = true;
+    }
+   }
+  }
+ });
+ if (!verificacion) {
+  return null;
+ }
+ return Data;
+}
 function serializarPro(data) {
  var Data = new Object();
  $.each(data, function (index, valor) {
@@ -174,19 +235,19 @@ function FechaFormatoSimple(pFecha) {
 }
 
 function FechaFormatoSimpleAlt(pFecha) {
-    if (pFecha != null && pFecha != undefined) {
-        var fechaString = pFecha.substr(6);
-        var fechaActual = new Date(parseInt(fechaString));
-        var mes = pad2(fechaActual.getMonth() + 1);
-        var dia = pad2(fechaActual.getDate());
-        var anio = fechaActual.getFullYear();
-        var hora = pad2(fechaActual.getHours());
-        var minutos = pad2(fechaActual.getMinutes());
-        var segundos = pad2(fechaActual.getSeconds().toString());
-        var FechaFinal = dia + "/" + mes + "/" + anio;
-        return FechaFinal;
-    }
-    return '';
+ if (pFecha != null && pFecha != undefined) {
+  var fechaString = pFecha.substr(6);
+  var fechaActual = new Date(parseInt(fechaString));
+  var mes = pad2(fechaActual.getMonth() + 1);
+  var dia = pad2(fechaActual.getDate());
+  var anio = fechaActual.getFullYear();
+  var hora = pad2(fechaActual.getHours());
+  var minutos = pad2(fechaActual.getMinutes());
+  var segundos = pad2(fechaActual.getSeconds().toString());
+  var FechaFinal = dia + "/" + mes + "/" + anio;
+  return FechaFinal;
+ }
+ return '';
 }
 
 function pad2(number) {
@@ -225,7 +286,7 @@ function MsgInfo(Titulo, Mensajes) {
 }
 function MsgSuccess(Titulo, Mensajes) {
  iziToast.success({
-     title: "¡Éxito!",//Titulo,
+  title: "¡Éxito!",//Titulo,
   message: Mensajes,
  });
 }
@@ -235,22 +296,22 @@ function MsgWarning(Titulo, Mensajes) {
  //    message: Mensajes,
  //});
  iziToast.success({
-     title: "¡Éxito!",
+  title: "¡Éxito!",
   message: Mensajes,
  });
 }
 function limpiarClases(form) {
-        var div = null;
-        var asterisco = null;
-        var span = null;
-        $(form).find(".required").each(function (indice, input) {
-            div = $(input).closest(".form-group");
-            asterisco = $(div).find("font")[0];
-            input.nextElementSibling.innerText = '';
-            $(div).find("div").removeClass("has-error has-warning");
-            $(input).removeClass("error warning");
-            asterisco.color = 'black';
-        });
+ var div = null;
+ var asterisco = null;
+ var span = null;
+ $(form).find(".required").each(function (indice, input) {
+  div = $(input).closest(".form-group");
+  asterisco = $(div).find("font")[0];
+  input.nextElementSibling.innerText = '';
+  $(div).find("div").removeClass("has-error has-warning");
+  $(input).removeClass("error warning");
+  asterisco.color = 'black';
+ });
 }
 $("#ModalNuevo").on('hidden.bs.modal', function () {
  limpiarClases(this);
@@ -277,10 +338,15 @@ $(".required").each(function (indice, input) {
  $(input).keypress(function (event) {
   key(event);
  });
- $(input).focusin(function () {
-  //if ($(modal).data('open') != undefined) {
-  // limpiarClases(form);
-  //}
+ $(input).click(function () {
+  var div = $(input).closest(".form-group")[0];
+  var span = $(div).find("span")[0];
+  $(div).removeClass("error");
+  span.innerText = '';
+  $(span).removeClass("text-danger");
+  if (asterisco != undefined) {
+   asterisco.color = "black";
+  }
  });
  $(input).focusout(function () {
   //var span = $(form).find("#error" + id);
@@ -291,14 +357,14 @@ $(".required").each(function (indice, input) {
    span.text(txt_required);
    $(span).addClass("text-danger");
   } else {
-      $(input).removeClass("error");
-       asterisco.color = "black";
-       $(span).closest("div").removeClass("has-error");
-       $(span).removeClass("text-danger");
+   $(input).removeClass("error");
+   asterisco.color = "black";
+   $(span).closest("div").removeClass("has-error");
+   $(span).removeClass("text-danger");
   }
  });
  function key(event) {
-    $(input).removeClass("error");
+  $(input).removeClass("error");
   asterisco.color = "black";
   //var lol = $(form).find("#error" + id);
   //$(form).find("#error" + id)[0].innerText = '';
@@ -360,15 +426,15 @@ function alphanumeric(e) {
 };
 
 function SinCaracteresEspeciales(e) {
-    var regex = new RegExp("[A-Za-z���������������������������������������������1234567890 ]");
-    var key = e.keyCode || e.which;
-    key = String.fromCharCode(key);
-    if (!regex.test(key)) {
-        e.returnValue = false;
-        if (e.preventDefault) {
-            e.preventDefault();
-        }
-    }
+ var regex = new RegExp("[A-Za-z���������������������������������������������1234567890 ]");
+ var key = e.keyCode || e.which;
+ key = String.fromCharCode(key);
+ if (!regex.test(key)) {
+  e.returnValue = false;
+  if (e.preventDefault) {
+   e.preventDefault();
+  }
+ }
 };
 
 function Numericos(e) {
@@ -402,23 +468,22 @@ function FechaFormatoSimple(pFecha) {
  return '';
 };
 function validarDT(obj) {
-    if (obj == "-2") {
-        //$("#ibox1").find(".ibox-content").hide();
-        //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
-        var ventana = $('#IndexTable tbody td.dataTables_empty');
-        ventana[0].innerHTML = "Verifique su conexión a internet.(Si el problema persiste contacte al administrador.)";
-        MsgError("Error", "No se pudo cargar la información, contacte al administrador.");
-        return true;
-    } else {
-        if (obj.Length == 0) {
-            RestaurarDT();
-        } else {
-            return false;
-        }
-        return true;
-    }
+ if (obj == "-2") {
+  //$("#ibox1").find(".ibox-content").hide();
+  //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+  var ventana = $('#IndexTable tbody td.dataTables_empty');
+  ventana[0].innerHTML = "Verifique su conexión a internet.(Si el problema persiste contacte al administrador.)";
+  MsgError("Error", "No se pudo cargar la información, contacte al administrador.");
+  return true;
+ } else {
+  if (obj.Length == 0) {
+   $("#ibox1").find(".ibox-content").hide();
+   $(".dataTables_empty").append('No hay registros para mostrar.');
+  } else {
+   return false;
+  }
+  return true;
+ }
 }
 function RestaurarDT() {
-    $("#ibox1").find(".ibox-content").hide();
-    $(".dataTables_empty").append('No hay registros para mostrar.');
 }

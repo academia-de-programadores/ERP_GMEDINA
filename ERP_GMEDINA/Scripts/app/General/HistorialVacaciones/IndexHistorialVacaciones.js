@@ -49,7 +49,7 @@ function format(obj) {
         div += '</tr>' +
                     '</tbody>'
         '</table>'
-        
+
     });
     return div + '</div></div>';
 }
@@ -122,7 +122,7 @@ function llamarmodaldelete(ID) {
 //    id = ID;
 
 function llamarmodaldetalles(ID) {
-   
+
     //var modaldetalle = $("#ModalDetalles");
     //$('#Prueba tbody tr').on('click', function () {
     //    var tr = $(this).closest('tr');
@@ -130,7 +130,7 @@ function llamarmodaldetalles(ID) {
     //    var id = row.data().id;
     //});
     id = ID;
-    
+
     _ajax({ id: parseInt(id) },
         '/HistorialVacaciones/Detalles',
         'GET',
@@ -149,7 +149,7 @@ function llamarmodaldetalles(ID) {
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioCrea;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioModifica;
                 $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj[0].hvac_FechaModifica).substring(0, 10);
-                
+
 
             }
         });
@@ -158,7 +158,7 @@ function llamarmodaldetalles(ID) {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    
+
     if (data != null) {
         data = JSON.stringify({ tbHistorialVacaciones: data });
         _ajax(data,
@@ -170,6 +170,7 @@ $("#InActivar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     llenarTabla();
+                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -187,7 +188,7 @@ function compare_dates() {
     var fechalimite = '01/01/1900';
 
 
-    
+
     if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
         MsgError("Error", "Fechas no validas.");
     }
@@ -244,7 +245,7 @@ $("#btnGuardar").click(function () {
                     data = serializar(data);
 
                     if (data != null) {
-                       
+
                             data = JSON.stringify({ tbHistorialVacaciones: data });
                         if (compare_dates()) {
                             _ajax(data,
@@ -256,6 +257,7 @@ $("#btnGuardar").click(function () {
                                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                                         LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
                                         llenarTabla();
+                                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                                     } else {
                                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                                     }
@@ -278,10 +280,3 @@ $("#btnGuardar").click(function () {
     });
 
 });
-
-
-
-
-
-
-

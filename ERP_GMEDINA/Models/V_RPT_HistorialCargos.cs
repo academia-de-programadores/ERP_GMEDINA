@@ -22,5 +22,6 @@ namespace ERP_GMEDINA.Models
         public string CargoNuevo { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
+        public int emp_Id { get; set; }
     }
 }

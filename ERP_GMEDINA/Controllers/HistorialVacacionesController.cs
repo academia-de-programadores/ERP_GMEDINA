@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialVacacionesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialVacaciones
         public ActionResult Index()
@@ -26,13 +26,11 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbHistorialVacaciones);
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                // tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
             }
             return View(tbHistorialVacaciones);
         }
@@ -95,37 +93,15 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Create(tbHistorialVacaciones tbHistorialVacaciones)
         {
             string msj = "";
-            try
-            {
-                var list = db.UDP_RRHH_tbHistorialVacaciones_Insert(tbHistorialVacaciones.emp_Id,
-                                                                        tbHistorialVacaciones.hvac_FechaInicio,
-                                                                        tbHistorialVacaciones.hvac_FechaFin,
-                                                                        1,
-                                                                        DateTime.Now);
-                foreach (UDP_RRHH_tbHistorialVacaciones_Insert_Result item in list)
-                {
-                    msj = item.MensajeError + " ";
-                }
-            }
-            catch (Exception ex)
-            {
-                msj = "-2";
-                ex.Message.ToString();
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult Delete(tbHistorialVacaciones tbHistorialVacaciones)
-        {
-            string msj = "";
-            if (tbHistorialVacaciones.hvac_Id != 0 && tbHistorialVacaciones.hvac_RazonInactivo != "")
-            {
-                var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialVacaciones_Delete(tbHistorialVacaciones.hvac_Id, tbHistorialVacaciones.hvac_RazonInactivo, 1, DateTime.Now);
-                    foreach (UDP_RRHH_tbHistorialVacaciones_Delete_Result item in list)
+                    var list = db.UDP_RRHH_tbHistorialVacaciones_Insert(tbHistorialVacaciones.emp_Id,
+                                                                            tbHistorialVacaciones.hvac_FechaInicio,
+                                                                            tbHistorialVacaciones.hvac_FechaFin,
+                                                                            1,
+                                                                            DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialVacaciones_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -135,21 +111,46 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                //Session.Remove("id");
-            }
-            else
-            {
-                msj = "-3";
-            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(tbHistorialVacaciones tbHistorialVacaciones)
+        {
+            string msj = "";
+            using (db = new ERP_GMEDINAEntities())
+                if (tbHistorialVacaciones.hvac_Id != 0 && tbHistorialVacaciones.hvac_RazonInactivo != "")
+                {
+                    var Usuario = (tbUsuario)Session["Usuario"];
+                    try
+                    {
+                        var list = db.UDP_RRHH_tbHistorialVacaciones_Delete(tbHistorialVacaciones.hvac_Id, tbHistorialVacaciones.hvac_RazonInactivo, 1, DateTime.Now);
+                        foreach (UDP_RRHH_tbHistorialVacaciones_Delete_Result item in list)
+                        {
+                            msj = item.MensajeError + " ";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        msj = "-2";
+                        ex.Message.ToString();
+                    }
+                    Session.Remove("id");
+                }
+                else
+                {
+                    msj = "-3";
+                }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            using (db = new ERP_GMEDINAEntities())
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
             List<tbHistorialVacaciones> tbHistorialVacaciones = null;
             try
             {
@@ -323,31 +324,32 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            try
-            {
-                var Empleados = db.V_HVacacionesEmpleados
-                        .Select(
-                        t => new
-                        {
-                            emp_Id = t.emp_Id,
-                            Empleado = t.emp_NombreCompleto,
-                            Cargo = t.car_Descripcion,
-                            Departamento = t.depto_Descripcion,
-                            FechaContratacion = t.emp_Fechaingreso,
-                            DiasTotales = t.DiasMax,
-                            DiasTomados = t.DiasTomados,
-                            DiasRestantes = t.DiasTotales,
-                            Año = t.Annio
-                        }).ToList();
+            using (db = new ERP_GMEDINAEntities())
+                try
+                {
+                    var Empleados = db.V_HVacacionesEmpleados
+                            .Select(
+                            t => new
+                            {
+                                emp_Id = t.emp_Id,
+                                Empleado = t.emp_NombreCompleto,
+                                Cargo = t.car_Descripcion,
+                                Departamento = t.depto_Descripcion,
+                                FechaContratacion = t.emp_Fechaingreso,
+                                DiasTotales = t.DiasMax,
+                                DiasTomados = t.DiasTomados,
+                                DiasRestantes = t.DiasTotales,
+                                Año = t.Annio
+                            }).ToList();
 
 
-                return Json(Empleados, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                ex.ToString();
-                throw;
-            }
+                    return Json(Empleados, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                    throw;
+                }
         }
         [HttpPost]
         public JsonResult habilitar(tbHistorialVacaciones tbHistorialVacaciones)
@@ -374,7 +376,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
@@ -382,4 +384,4 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 
-    }
+}

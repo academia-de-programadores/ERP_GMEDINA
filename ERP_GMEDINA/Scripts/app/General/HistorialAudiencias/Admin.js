@@ -21,6 +21,7 @@ $("#btnActivar").click(function () {
                     MsgWarning("¡Éxito!", "Se registro se activó de forma exitosa.");
                     LimpiarControles(["txtIdRestore"]);
                     llenarTabla();
+                    MsgWarning("¡Éxito!", "Se registro se activó de forma exitosa.");
                 } else {
                     MsgError("Error", "No se logró activar el registro, contacte al administrador.");
                 }

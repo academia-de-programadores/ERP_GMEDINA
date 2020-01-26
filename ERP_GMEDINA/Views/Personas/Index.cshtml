@@ -16,7 +16,7 @@
                         @Html.ActionLink("Registrar Persona", "Create",null, new { @class = "btn btn-primary btn-xs" })
                     </div>
                 </div>
-                <div class="ibox-content">  
+                <div class="ibox-content">
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">
@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>                       
+                    </tbody>
                   </table>
                 </div>
             </div>
@@ -60,7 +60,7 @@
 
 @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbPersonas())
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbPersonas())
-    
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
@@ -84,4 +84,3 @@
 
 @*@Scripts.Render("~/Scripts/app/general/Personas/Personas.js")*@
 }
-

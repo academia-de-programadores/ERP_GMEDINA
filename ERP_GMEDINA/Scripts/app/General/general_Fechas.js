@@ -1,6 +1,13 @@
-//
-//$(document).change(() => alert());
+
+//@section Styles {
+//@Styles.Render("~/plugins/select2Styles")
+//}
+//@section Scripts {
+//@Scripts.Render("~/plugins/select2")
+//@Scripts.Render("~/Scripts/app/general_Fechas")
+//}
 $(document).ready(function () {
+    $(".buscable").select2();
     if ($('#fechaFin').val()) {
         $('#fechaFin').val('');
     }
@@ -9,6 +16,14 @@ $(document).ready(function () {
     }
 });
 $('#fechaInicio').focusout(() => {
+    var a = $("#fechaInicio").val();
+    a = toDate("#fechaInicio")
+    a.getFullYear();
+    if ($('#fechaFin').val() != null) {
+        $('#fechaInicio').val() < '1900-01-01' || a > 2518 ? $('#fechaInicio').val($('#fechaFin').val()) : '';
+    } else {
+        $('#fechaInicio').val() < '1900-01-01' || $('#fechaInicio').val() > '9999-01-01' ? $('#fechaInicio').val('') : '';
+    }
     if ($('#fechaFin').attr('min')) {
         $('#fechaFin').removeAttr('min');
         $("#fechaFin").attr("min", $('#fechaInicio').val());
@@ -25,8 +40,19 @@ $('#fechaInicio').focusout(() => {
         }
     }
 });
-
+function toDate(selector) {
+    var from = $(selector).val().split("-")
+    return new Date(from[2], from[1] - 1, from[0])
+}
 $('#fechaFin').focusout(() => {
+    var a = $("#fechaFin").val();
+    a = toDate("#fechaFin")
+    a.getFullYear();
+    if ($('#fechaInicio').val() != null) {
+        $('#fechaFin').val() < '1900-01-01' || a > 2518 ? $('#fechaFin').val($('#fechaInicio').val()) : '';
+    } else {
+        $('#fechaFin').val() < '1900-01-01' || $('#fechaFin').val() > '9999-01-01' ? $('#fechaFin').val('') : '';
+    }
     if ($('#fechaInicio').attr('max')) {
         $('#fechaInicio').removeAttr('max');
         $("#fechaInicio").attr("max", $('#fechaFin').val());

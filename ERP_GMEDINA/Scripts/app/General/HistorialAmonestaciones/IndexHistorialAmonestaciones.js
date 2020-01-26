@@ -31,7 +31,7 @@ function format(obj) {
         else
             {
             div += '<button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button> <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>';
-            }       
+            }
         div += '</tr>' +
                     '</tbody>'
             '</table>'
@@ -131,6 +131,7 @@ $("#InActivar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     LimpiarControles(["hamo_Id"]);
                     llenarTabla();
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -162,9 +163,9 @@ $("#btnGuardar").click(function () {
                     debugger
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         CierraPopups();
-                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-                        LimpiarControles(["emp_Id", "tamo_Id", "hamo_Fecha", "hamo_Observacion"]);
                         llenarTabla();
+                        LimpiarControles(["emp_Id", "tamo_Id", "hamo_Fecha", "hamo_Observacion"]);
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     } else {
                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
@@ -180,4 +181,3 @@ function redireccionar(Audiencia)
 {
    window.location.href = "/HistorialAudienciaDescargos/Index/";
 }
-

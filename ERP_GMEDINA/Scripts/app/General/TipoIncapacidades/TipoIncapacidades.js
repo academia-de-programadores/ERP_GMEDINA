@@ -112,6 +112,7 @@ $("#btnGuardar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     LimpiarControles(["ticn_Descripcion"]);
                     llenarTabla();
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                 } else {
                     MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }

@@ -23,5 +23,7 @@ namespace ERP_GMEDINA.Models
         public int hvac_MesVacaciones { get; set; }
         public int hvac_anioVacaciones { get; set; }
         public System.DateTime hvac_FechaFin { get; set; }
+        public string per_Identidad { get; set; }
+        public string per_Telefono { get; set; }
     }
 }

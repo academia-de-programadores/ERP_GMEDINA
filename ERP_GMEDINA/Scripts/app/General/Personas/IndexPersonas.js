@@ -12,7 +12,7 @@ function format(obj) {
     obj.forEach(function (index, value) {
         debugger
         Id = index.per_Id.toString();
-        if(index.Relacion == "Competencias") 
+        if(index.Relacion == "Competencias")
             Comp += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
         else if(index.Relacion == "Habilidades")
             Hab += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';

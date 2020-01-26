@@ -25,8 +25,8 @@ namespace ERP_GMEDINA.Controllers
             }
             try
             {
-                
-            tbTitulos tbtitulos = new tbTitulos { };                   
+
+            tbTitulos tbtitulos = new tbTitulos { };
             return View(tbtitulos);
            }
             catch
@@ -58,7 +58,7 @@ namespace ERP_GMEDINA.Controllers
                 ex.ToString();
                 throw;
             }
-        } 
+        }
 
         public ActionResult Create()
         {
@@ -112,7 +112,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbtitulos = db.tbTitulos.Find(id);
-                if (tbtitulos == null )
+                if (tbtitulos == null)
                 {
                     return HttpNotFound();
                 }
@@ -251,23 +251,3 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

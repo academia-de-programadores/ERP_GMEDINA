@@ -21,6 +21,7 @@
                                 <th>Número</th>
                                 <th>Nombre Completo</th>
                                 <th>Tipo Permiso</th>
+                                <th>Justificado</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
@@ -132,8 +133,10 @@
     @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
     @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/Scripts/app/general/HistorialPermisos/IndexHistorialPermisos.js")
-    @if (Model.hper_Estado)
+@if ((bool)Session["Admin"])
     {
-        @Scripts.Render("~/Scripts/app/general/HistorialPermisos/Admin.js")
-    }
+    @Scripts.Render("~/Scripts/app/General/HistorialPermisos/Admin")
+}
+
+
 }

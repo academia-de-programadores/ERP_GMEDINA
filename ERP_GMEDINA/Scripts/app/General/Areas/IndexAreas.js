@@ -102,9 +102,8 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         //"htmlSpiner" es el nombre de la variable que contiene el spiner en html
         row.child(htmlSpiner).show();
         tr.addClass('shown');
-        _ajax({ id: parseInt(id) },
+        _POST({ id: id },
             '/Areas/ChildRowData',
-            'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     //desaparecemos el spiner

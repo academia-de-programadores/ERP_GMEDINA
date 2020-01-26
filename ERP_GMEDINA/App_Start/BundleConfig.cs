@@ -718,11 +718,15 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Idiomas").Include(
                                "~/Scripts/app/general/Idiomas/Idiomas.js"));
 
+
             //SCRIPT EMPLEADOS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
                               "~/Scripts/app/general/Empleados/IndexEmpleados.js",
-                              "~/Scripts/app/general/Empleados/AgregarEmpleado.js"));
+                              "~/Scripts/app/general/Empleados/AgregarEmpleado.js",
+                              "~/Scripts/app/general/Empleados/DocumentoEmpleado.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/ExpedienteEmpleado").Include(
+                              "~/Scripts/app/general/Empleados/ExpedienteEmpleado.js"));
             //SCRIPT CARGOS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos").Include(
                              "~/Scripts/app/general/Cargos/Cargos.js"));

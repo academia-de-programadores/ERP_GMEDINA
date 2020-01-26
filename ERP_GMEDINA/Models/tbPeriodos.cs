@@ -27,6 +27,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> peri_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> peri_FechaModifica { get; set; }
         public bool peri_Activo { get; set; }
+        public Nullable<bool> peri_RecibeSeptimoDia { get; set; }
+        public Nullable<int> peri_CantidadDias { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

@@ -180,7 +180,7 @@ function tablaEditar(btn) {
 }
 
 function tablaDetalles(ID) {
-   
+
     id = ID;
     _ajax(null,
         '/Requisiciones/Detalles/' + ID,
@@ -378,5 +378,3 @@ function tablaEditar(ID) {
     sessionStorage.setItem("IdRequisicion", id);
     window.location.href = "/Requisiciones/Edit/" + id;
 };
-
-

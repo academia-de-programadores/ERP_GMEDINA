@@ -26,7 +26,7 @@ function tablaDetalles(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#rsal_Descripcion")["0"].innerText = obj.rsal_Descripcion;             
+                $("#ModalDetalles").find("#rsal_Descripcion")["0"].innerText = obj.rsal_Descripcion;
                 $("#ModalDetalles").find("#rsal_FechaCrea")["0"].innerText = FechaFormato(obj.rsal_FechaCrea);
                 $("#ModalDetalles").find("#rsal_FechaModifica")["0"].innerText = FechaFormato(obj.rsal_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -63,7 +63,7 @@ function llenarTabla() {
                     }).draw();
                 }
             });
-        });         
+        });
 }
 
 //Botones GET
@@ -105,6 +105,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     llenarTabla();
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                 } else {
                     MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
@@ -127,6 +128,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     llenarTabla();
+                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -149,6 +151,7 @@ $("#btnActualizar").click(function () {
                     CierraPopups();
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
+                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
                 }

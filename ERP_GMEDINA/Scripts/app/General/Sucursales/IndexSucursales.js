@@ -103,4 +103,3 @@ function llenarTabla() {
             tabla.draw();
         });
 }
-

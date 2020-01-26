@@ -42,7 +42,7 @@ function compare_dates() {
     }
     else if (Date.parse(Fecha) > Date.parse(fechalimite2)) {
         MsgError("Error", "Fecha no válida.");
-        
+
     }
     else {
         return true;
@@ -80,8 +80,8 @@ function llenarTabla() {
                          per_Id: value.per_Id
                  }).draw();
                  }
-             });       
-         });      
+             });
+         });
 }
 
 $(document).ready(function () {
@@ -116,7 +116,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 //EDITAR///////////////////////////////////////////////////////////////////////////////////////////////////////
 function tablaEditar(id) {
     scan_Id = id;
-    
+
             _ajax(null,
                 '/SeleccionCandidatos/Edit/' + id,
                'GET',
@@ -163,21 +163,21 @@ $("#btnActualizar").click(function () {
     else{
         if (data != null) {
             data = JSON.stringify({ tbSeleccionCandidatos: data });
-           
+
             _ajax(data,
                 '/SeleccionCandidatos/Edit',
                 'POST',
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         CierraPopups();
-                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                         llenarTabla();
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     } else {
                         MsgError("Error","No se pudo editar el registro, contacte al administrador.");
                     }
                 });
-            
-        } 
+
+        }
 
         else {
             MsgError("Error", "Por favor llene todas las cajas de texto.");
@@ -203,7 +203,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#scan_FechaCrea")["0"].innerText = FechaFormato(obj.scan_FechaCrea);
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#scan_FechaModifica")["0"].innerText = FechaFormato(obj.scan_FechaModifica);
-              
+
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -232,6 +232,7 @@ $("#btnGuardar").click(function () {
                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                         LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
                         llenarTabla();
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     } else {
                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
@@ -283,6 +284,7 @@ $("#InActivar").click(function () {
                     MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     LimpiarControles(["scan_RazonInactivo"]);
                     llenarTabla();
+                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -299,14 +301,14 @@ function btnInactivar() {
 }
 
 $("#btnEditar").click(function () {
-    
-        
+
+
         _ajax(null,
             '/SeleccionCandidatos/Edit/' + scan_Id,
             'GET',
 
             function (obj) {
-              
+
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         CierraPopups();
                         $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
@@ -327,7 +329,7 @@ $("#btnEditar").click(function () {
 });
 
 
-//EMPLEADO 
+//EMPLEADO
 function CallContratar(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
@@ -339,6 +341,6 @@ function CallContratar(btn) {
     sessionStorage.setItem("scan_Id", scan_Id);
     sessionStorage.setItem("per_Id", per_id);
     sessionStorage.setItem("per_Descripcion", Identidad + " - " + Nombre);
-    
+
     $(location).attr('href', "/SeleccionCandidatos/Contratar/" + scan_Id);
 }

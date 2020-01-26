@@ -1,5 +1,5 @@
 ﻿var tabla = null;
-var Admin=false;
+var Admin = false;
 var textoBoton = 'Mostrar activos';
 var botones = [];
 $(document).ready(function () {
@@ -50,6 +50,7 @@ $(document).ready(function () {
     orderable: false,
     defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
                         "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                        " <a class='btn btn-default btn-xs ' onclick='CallEditar(this)' >Archivos</a>" +
                     "</div>"
    });
   }
@@ -59,18 +60,18 @@ $(document).ready(function () {
   }
  });
  tabla = $('#IndexTable').DataTable({
-     "language": language,
+  "language": language,
   responsive: true,
   "scrollX": true,
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
   "autoWidth": false,
   dom: '<"html5buttons"B>lTfgitp',
-  buttons : [
+  buttons: [
             {
-                extend: 'copy',
-                exportOptions: {
-                    columns: botones
-                }
+             extend: 'copy',
+             exportOptions: {
+              columns: botones
+             }
             }
   ],
   //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes

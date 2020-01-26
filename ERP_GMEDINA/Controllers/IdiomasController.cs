@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class IdiomasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Idiomas Index
         //public ActionResult Index()
@@ -33,6 +33,7 @@ namespace ERP_GMEDINA.Controllers
         //}
         public ActionResult Index()
         {
+            db = new ERP_GMEDINAEntities();
             if (Session["Admin"] == null && Session["Usuario"] == null)
             {
                 Response.Redirect("~/Inicio/index");
@@ -54,8 +55,9 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
+            db = new ERP_GMEDINAEntities();
             List<tbIdiomas> tbIdiomas = new List<Models.tbIdiomas> { };
-            foreach(tbIdiomas x in db.tbIdiomas.ToList())
+            foreach (tbIdiomas x in db.tbIdiomas.ToList())
             {
                 tbIdiomas.Add(new tbIdiomas
                 {
@@ -66,11 +68,12 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(tbIdiomas, JsonRequestBehavior.AllowGet);
         }
-       
+
         // POST: Idiomas/Create
 
         public JsonResult Details(int? ID)
         {
+            db = new ERP_GMEDINAEntities();
             db.Configuration.ProxyCreationEnabled = false;
             tbIdiomas tbJSON = db.tbIdiomas.Find(ID);
             return Json(tbJSON, JsonRequestBehavior.AllowGet);
@@ -80,21 +83,23 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Create(tbIdiomas tbIdiomas)
         {
+
             string msj = "...";
-            if(tbIdiomas.idi_Descripcion !="")
+            if (tbIdiomas.idi_Descripcion != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Insert(tbIdiomas.idi_Descripcion,
                                                             Usuario.usu_Id,
                                                             DateTime.Now);
-                    foreach(UDP_RRHH_tbIdiomas_Insert_Result item in list)
+                    foreach (UDP_RRHH_tbIdiomas_Insert_Result item in list)
                     {
                         msj = item.MensajeError + "";
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
@@ -109,20 +114,23 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Edit(int? ID)
         {
-           if(ID == null )
+
+            if (ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbIdiomas tbIdiomas = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbIdiomas = db.tbIdiomas.Find(ID);
+
                 if(tbIdiomas == null)
                 {
                     return HttpNotFound();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ex.Message.ToString();
                 return HttpNotFound();
@@ -144,27 +152,29 @@ namespace ERP_GMEDINA.Controllers
             return Json(idiomas, JsonRequestBehavior.AllowGet);
         }
         //POST : Idiomas/Edit
-       
+
         [HttpPost]
         public JsonResult Edit(tbIdiomas tbIdiomas)
         {
+
             string msj = "";
-            if(tbIdiomas.idi_Id !=0 && tbIdiomas.idi_Descripcion !="")
+            if (tbIdiomas.idi_Id != 0 && tbIdiomas.idi_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Update(id,
                                                             tbIdiomas.idi_Descripcion,
                                                             Usuario.usu_Id,
                                                             DateTime.Now);
-                    foreach(UDP_RRHH_tbIdiomas_Update_Result item in list)
+                    foreach (UDP_RRHH_tbIdiomas_Update_Result item in list)
                     {
                         msj = item.MensajeError + "";
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
@@ -180,12 +190,14 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
+
             string result = "";
             var Usuario = (tbUsuario)Session["Usuario"];
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Restore(id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbIdiomas_Restore_Result item in list)
                     {
@@ -204,6 +216,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Delete(tbIdiomas tbIdiomas)
         {
+
             string msj = "...";
 
             string RazonInactivo = "Se ha Inhabilitado este Registro";
@@ -213,16 +226,17 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Delete(id,
                                                             RazonInactivo,
                                                             Usuario.usu_Id,
                                                             DateTime.Now);
-                    foreach(UDP_RRHH_tbIdiomas_Delete_Result item in list)
+                    foreach (UDP_RRHH_tbIdiomas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + "";
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
@@ -237,7 +251,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected tbUsuario IsNull(tbUsuario valor)
         {
-            if (valor !=null)
+            if (valor != null)
             {
                 return valor;
             }
@@ -248,7 +262,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
