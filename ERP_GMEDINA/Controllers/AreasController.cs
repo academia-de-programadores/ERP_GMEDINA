@@ -195,7 +195,8 @@ namespace ERP_GMEDINA.Controllers
                         );
                     foreach (UDP_RRHH_tbCargos_Insert_Result item in cargo)
                     {
-                        if (item.MensajeError == "-1")
+                        var resultado = item.MensajeError + "  ";
+                        if (resultado.Substring(0, 2) == "-1")
                         {
                             return Json(new { codigo = "-3", input = "car_Descripcion", result = tbAreas.car_Descripcion }, JsonRequestBehavior.AllowGet);
                         }
@@ -209,7 +210,8 @@ namespace ERP_GMEDINA.Controllers
                         DateTime.Now);
                     foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
                     {
-                        if (item.MensajeError == "-1")
+                        var resultado = item.MensajeError + "  ";
+                        if (resultado.Substring(0, 2) == "-1")
                         {
                             return Json(new { codigo = "-2", input = "area_Descripcion", result = tbAreas.area_Descripcion }, JsonRequestBehavior.AllowGet);
                         }
@@ -222,13 +224,14 @@ namespace ERP_GMEDINA.Controllers
                                                                Usuario.usu_Id,
                                                                DateTime.Now
                                                              );
-                        foreach (UDP_RRHH_tbCargos_Insert_Result i in cargo)
+                        foreach (UDP_RRHH_tbCargos_Insert_Result i in deptocargo)
                         {
-                            if (i.MensajeError == "-1")
+                            var resultadod = i.MensajeError + "  ";
+                            if (resultadod.Substring(0, 2) == "-1")
                             {
                                 return Json(new { codigo = "-4", input = "car_Descripcion", result = item.tbCargos.car_Descripcion }, JsonRequestBehavior.AllowGet);
                             }
-                            tbAreas.car_Id = int.Parse(i.MensajeError);
+                            item.tbCargos.car_Id = int.Parse(i.MensajeError);
                         }
                         var depto = db.UDP_RRHH_tbDepartamentos_Insert(
                             tbAreas.area_Id,
@@ -241,7 +244,8 @@ namespace ERP_GMEDINA.Controllers
                         {
                             mensajeDB = i.MensajeError.ToString();
                         }
-                        if (mensajeDB == "-1")
+                        var resultado = mensajeDB + "  ";
+                        if (resultado.Substring(0, 2) == "-1")
                         {
                             return Json("-4", JsonRequestBehavior.AllowGet);
                         }
@@ -252,10 +256,9 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                return Json("-2", JsonRequestBehavior.AllowGet);
+                return Json(new { codigo = "-2" }, JsonRequestBehavior.AllowGet);
             }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(new { codigo = result }, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Edit/5
         public ActionResult Edit(int? id)
@@ -476,6 +479,36 @@ namespace ERP_GMEDINA.Controllers
                 result = "-2";
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Validar(string Descripcion, string Cargo)
+        {
+            List<object> Resultado = new List<object> { };
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                List<tbDepartamentos> departamento = db.tbDepartamentos
+                    .Where(t => t.depto_Descripcion == Descripcion)
+                    .ToList();
+                if (departamento.Count > 0)
+                {
+                    Resultado.Add(new { input = "depto_Descripcion", Descripcion = Descripcion });
+                }
+                List<tbCargos> cargo = db.tbCargos
+                    .Where(t => t.car_Descripcion == Cargo)
+                    .ToList();
+                if (cargo.Count > 0)
+                {
+                    Resultado.Add(new { input = "car_Descripcion", Descripcion = Cargo });
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+            //new { codigo = "-3", input = "car_Descripcion", result = tbAreas.car_Descripcion }
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {

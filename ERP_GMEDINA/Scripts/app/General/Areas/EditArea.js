@@ -7,69 +7,13 @@ var Entidad = '';
 var hablilitar = function () {
 
 };
-//function Remove(Id, lista) {
-//    var list = [];
-//    lista.forEach(function (value, index) {
-//        if (value.Id != Id) {
-//            list.push(value);
-//        }
-//    });
-//    return list;
-//}
 function Add(depto_Descripcion, car_Descripcion) {
- var info = ChildTable.rows().data();
- if (depto_Descripcion.trim().length != 0 && car_Descripcion.trim().length != 0) {
-  for (var i = 0; i < ChildTable.data().length; i++) {
-   var Fila = info[i];
-   if (Fila.Descripcion == depto_Descripcion || Fila.Cargo == car_Descripcion) {
-    if (Fila.Cargo == car_Descripcion) {
-     var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
-     $(span).addClass("text-warning");
-     $(span).closest("div").addClass("has-warning");
-     span.text('El cargo "' + car_Descripcion + '" ya existe');
-     $("#FormDepartamentos").find("#car_Descripcion").focus();
-    }
-    if (Fila.Descripcion == depto_Descripcion) {
-     var span = $("#FormDepartamentos").find("#errordepto_Descripcion");
-     $(span).addClass("text-warning");
-     $(span).closest("div").addClass("has-warning");
-     span.text('La Descripcion "' + depto_Descripcion + '" ya existe');
-     $("#FormDepartamentos").find("#depto_Descripcion").focus();
-    }
-    return null;
-   }
-  }
-  ChildTable.row.add(
-      {
-       Descripcion: depto_Descripcion.trim(),
-       Cargo: car_Descripcion,
-       Acciones: '<div>' +
-                   '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
-               '</div>',
-       Accion: 'i'
-      }
-      ).draw();
-  $("#FormDepartamentos").find("#depto_Descripcion").val("");
-  $("#FormDepartamentos").find("#car_Descripcion").val("");
-  $("#FormDepartamentos").find("#depto_Descripcion").focus();
- } else {
-  if (car_Descripcion.trim().length == 0) {
-   var txt_required = $("#FormDepartamentos").find("#car_Descripcion").data("val-required");
-   var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
-   $(span).addClass("text-danger");
-   $(span).closest("div").addClass("has-error");
-   span.text(txt_required);
-   $("#FormDepartamentos").find("#car_Descripcion").focus();
-  }
-  if (depto_Descripcion.trim().length == 0) {
-   var txt_required = $("#FormDepartamentos").find("#depto_Descripcion").data("val-required");
-   var span = $("#FormDepartamentos").find("#errordepto_Descripcion");
-   $(span).addClass("text-danger");
-   $(span).closest("div").addClass("has-error");
-   span.text(txt_required);
-   $("#FormDepartamentos").find("#depto_Descripcion").focus();
-  }
- }
+ ChildTable.row.add(
+            {
+             Descripcion: depto_Descripcion.trim(),
+             Cargo: car_Descripcion
+            }
+            ).draw();
 }
 function getJson() {
  //declaramos una lista para recuperar en un formato
@@ -154,7 +98,7 @@ $(document).ready(function () {
   }
  }
  ChildTable = $(ChildDataTable).DataTable({
-     "language": language,
+  "language": language,
   pageLength: 3,
   lengthChange: false,
   columns:
@@ -173,22 +117,41 @@ $(document).ready(function () {
  llenarChild();
 });
 $("#add").click(function () {
- var depto_Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").data("val-maxlength-max");
- var car_Descripcion = $("#FormDepartamentos").find("#car_Descripcion").data("val-maxlength-max");
- var Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").val();
- var Cargo = $("#FormDepartamentos").find("#car_Descripcion").val();
- if (Descripcion.length > depto_Descripcion || Cargo.length > car_Descripcion) {
-  MsgError("Error", "una caja de texto tiene muchos caracteres");
+ var area = { cargo: $("#FormNuevo").find("#car_Descripcion").val() };
+ var data = $("#FormDepartamentos").serializeArray();
+ data = serializarChild(data, "FormDepartamentos");
+ if (area.cargo == data.car_Descripcion) {
+  var span = $("#FormDepartamentos").find("#errorcar_Descripcion")[0];
+  $(span).addClass("text-danger");
+ }
+ if (data == null) {
   return null;
  }
- var valores = Descripcion + Cargo;
- for (var i = 0; i < valores.length; i++) {
-  if (valores[i] == ">" || valores[i] == "<") {
-   MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.('>' ó '<')");
-   return null;
-  }
- }
- Add(Descripcion, Cargo);
+ _ajax(JSON.stringify({
+  Descripcion: data.depto_Descripcion,
+  Cargo: data.car_Descripcion
+ }),
+       "/Areas/Validar/",
+       "POST",
+       function (obj) {
+        if (obj == "-2") {
+         MsgError("Error", "Verifique su conexion a internet");
+        } else if (obj.length > 0) {
+         obj.forEach(function (value, index) {
+          var input = $("#FormDepartamentos").find("#" + value.input)[0];
+          var div = $(input).closest(".form-group")[0];
+          var span = $(div).find("span")[0];
+
+          $(div).addClass("error");
+          span.innerText = 'Cambie la descripcion.';
+          $(span).addClass("text-danger");
+         });
+        } else {
+         Add(Descripcion, Cargo);
+        }
+       }
+
+ );
 });
 $("#FormCreate").submit(function (e) {
  e.preventDefault();
@@ -202,6 +165,18 @@ $("#btnCrear").click(function () {
       car_Descripcion: $("#car_Descripcion").val(),
      };
  var lista = getJson();
+ var valid = true;
+ lista.forEach(function (value, indice) {
+  if (value.car_Descripcion == tbAreas.car_Descripcion) {
+   valid = false;
+  }
+ });
+ if (!valid) {
+  var span = $("#FormAreas").find("#errorcar_Descripcion")[0];
+  span.innerText = "Cargo reservado, por favor cambiar.";
+  $(span).addClass("text-danger");
+  return null;
+ }
 
  if (tbAreas != null) {
   data = JSON.stringify({
@@ -213,11 +188,22 @@ $("#btnCrear").click(function () {
       '/Areas/Edit',
       'POST',
       function (obj) {
-       if (obj != "-1" && obj != "-2" && obj != "-3") {
+       if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
         //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
         //MsgSuccess("¡Exito!", "Se ah agregado el registro");
         window.location.href = "/Areas";
        } else {
+        if (obj.input != undefined) {
+         var input = $("#FormNuevo").find("#" + obj.input)[0];
+         var div = $(input).closest(".form-group")[0];
+         var asterisco = $(div).find("label font")[0];
+         var span = $(div).find("span")[0];
+
+         $(div).addClass("error");
+         asterisco.color = "red";
+         span.innerText = 'ya existe, por favor cambie la descripcion';
+         $(span).addClass("text-danger");
+        }
         MsgError("Error", "No se logro editar el registro, contacte al administrador");
        }
       });
@@ -225,24 +211,25 @@ $("#btnCrear").click(function () {
   MsgError("Error", "por favor llene todas las cajas de texto");
  }
 });
-$("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
- if (alerta($(this).closest("div"))) {
-  return null;
- }
- var id = $(this).attr("id");
- var form = $(this).closest("form");
- limpiarSpan(id, form);
-});
-$("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
- if (alerta($(this).closest("div"))) {
-  return null;
- }
- var id = $(this).attr("id");
- var form = $(this).closest("form");
- limpiarSpan(id, form);
-});
+//$("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
+// if (alerta($(this).closest("div"))) {
+//  return null;
+// }
+// var id = $(this).attr("id");
+// var form = $(this).closest("form");
+// limpiarSpan(id, form);
+//});
+//$("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
+// if (alerta($(this).closest("div"))) {
+//  return null;
+// }
+// var id = $(this).attr("id");
+// var form = $(this).closest("form");
+// limpiarSpan(id, form);
+//});
 
 $("#ModalEditar").find("#btnActualizar").on("click", function () {
+ var area = { cargo: $("#FormAreas").find("#car_Descripcion").val() };
  var depto =
      {
       Id: dRow.data().Id,
@@ -250,18 +237,44 @@ $("#ModalEditar").find("#btnActualizar").on("click", function () {
       Cargo: $('#ModalEditar').find("#car_Descripcion").val(),
       Accion: 'e'
      }
- if (depto.Descripcion != "" || depto.Cargo != "") {
-  ChildTable
-  .row(dRow)
-  .remove();
-
-  ChildTable
-  .row
-  .add(depto)
-  .draw();
-  $('#ModalEditar').modal('hide');
+ if (depto.Cargo == area.cargo) {
+  var span = $("#ModalEditar").find("#errorcar_Descripcion")[0];
+  span.innerText = "Cargo reservado, por favor cambiar.";
+  $(span).addClass("text-danger");
+  return null;
  }
- dRow = null;
+ _ajax(JSON.stringify({
+  Descripcion: depto.Descripcion,
+  Cargo: depto.Cargo
+ }),
+      "/Areas/Validar/",
+      "POST",
+      function (obj) {
+       if (obj == "-2") {
+        MsgError("Error", "Verifique su conexion a internet");
+       } else if (obj.length > 1) {
+        var input = $("#ModalEditar").find("#" + obj[1].input)[0];
+        var div = $(input).closest(".form-group")[0];
+        var span = $(div).find("span")[0];
+
+        $(div).addClass("error");
+        span.innerText = 'Cambie la descripcion.';
+        $(span).addClass("text-danger");
+       } else {
+        ChildTable
+        .row(dRow)
+        .remove();
+
+        ChildTable
+        .row
+        .add(depto)
+        .draw();
+        $('#ModalEditar').modal('hide');
+        dRow = null;
+       }
+      }
+
+);
 });
 $("#ModalInactivar").find("#InActivar").on("click", function () {
  if (Entidad == 'Depto') {
