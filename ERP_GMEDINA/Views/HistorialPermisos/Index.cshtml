@@ -126,8 +126,10 @@
     @Scripts.Render("~/plugins/dataTablesMatutina")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/HistorialPermisos/IndexHistorialPermisos.js")
-    @if (Model.hper_Estado)
+@if ((bool)Session["Admin"])
     {
-        @Scripts.Render("~/Scripts/app/general/HistorialPermisos/Admin.js")
-    }
+    @Scripts.Render("~/Scripts/app/General/HistorialPermisos/Admin")
+}
+
+
 }

@@ -36,7 +36,9 @@ function tablaDetalles(ID) {
                 $("#ModalDetallesAX").find("#hper_FechaCrea")["0"].innerText = FechaFormato(obj.hper_FechaCrea);
                 $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio).substring(0, 10);
                 $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin).substring(0, 10);
-                $("#ModalDetallesAX").find("#hper_Duracion")["0"].innerText = obj.hper_Duracion;
+                $("#ModalDetallesAX").find("#hper_Duracion")["0"].innerText = obj.hper_Duracion; 
+                $("#ModalDetallesAX").find("#hper_PorcentajeIndemnizado")["0"].innerText = obj.hper_PorcentajeIndemnizado+"%";
+
 
 
                 //$("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
@@ -109,7 +111,7 @@ function llenarTabla() {
                 ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                    : Admin ?
                        "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")' >Detalles</a>" +
                        "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                        "</div>" : '';
                 tabla.row.add({
