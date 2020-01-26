@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class FasesReclutamientoController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         public ActionResult Index()
         {
