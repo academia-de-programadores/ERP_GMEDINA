@@ -14,6 +14,8 @@ function Add(depto_Descripcion, car_Descripcion) {
              Cargo: car_Descripcion
             }
             ).draw();
+ $("#FormDepartamentos").find(".required").val("");
+ $("#FormDepartamentos").find("#depto_Descripcion").focus();
 }
 function getJson() {
  //declaramos una lista para recuperar en un formato

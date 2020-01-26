@@ -16,6 +16,8 @@ function Add(depto_Descripcion, car_Descripcion) {
              Cargo: car_Descripcion
             }
             ).draw();
+ $("#FormDepartamentos").find(".required").val("");
+ $("#FormDepartamentos").find("#depto_Descripcion").focus();
 }
 function getJson() {
  //declaramos una lista para recuperar en un formato
@@ -23,7 +25,7 @@ function getJson() {
  list = new Array();
 
  for (var i = 0; i < ChildTable.data().length; i++) {
-  var tbDepartamentos = { depto_Descripcion: null, tbCargos: { car_Descripcion :null} };
+  var tbDepartamentos = { depto_Descripcion: null, tbCargos: { car_Descripcion: null } };
   var fila = ChildTable.rows().data()[i];
   tbDepartamentos.depto_Descripcion = fila.Descripcion;
   tbDepartamentos.tbCargos.car_Descripcion = fila.Cargo;
