@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class CompetenciasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Competencias
         public ActionResult Index()
@@ -54,46 +54,49 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            try
-            {
-                var tbCompetencias = db.tbCompetencias
-                    .Select(
-                    t => new
-                    {
-                        comp_Id = t.comp_Id,
-                        comp_Descripcion = t.comp_Descripcion,
-                        comp_Estado = t.comp_Estado,
-                    }
-                    ).ToList();
-                return Json(tbCompetencias, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                ex.ToString();
-                throw;
-            }
+            using (db = new ERP_GMEDINAEntities())
+                try
+                {
+                    var tbCompetencias = db.tbCompetencias
+                        .Select(
+                        t => new
+                        {
+                            comp_Id = t.comp_Id,
+                            comp_Descripcion = t.comp_Descripcion,
+                            comp_Estado = t.comp_Estado,
+                        }
+                        ).ToList();
+                    return Json(tbCompetencias, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                    throw;
+                }
         }
         [HttpPost]
         public JsonResult Create(tbCompetencias tbCompetencias)
         {
             string msj = "";
+
             if (tbCompetencias.comp_Descripcion != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbCompetencias_Insert(
-                        tbCompetencias.comp_Descripcion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbCompetencias_Insert_Result item in list)
+                using (db = new ERP_GMEDINAEntities())
+                    try
                     {
-                        msj = item.MensajeError + " ";
+                        var list = db.UDP_RRHH_tbCompetencias_Insert(
+                            tbCompetencias.comp_Descripcion, Usuario.usu_Id, DateTime.Now);
+                        foreach (UDP_RRHH_tbCompetencias_Insert_Result item in list)
+                        {
+                            msj = item.MensajeError + " ";
+                        }
                     }
-                }
-                catch(Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
+                    catch (Exception ex)
+                    {
+                        msj = "-2";
+                        ex.Message.ToString();
+                    }
             }
             else
             {
@@ -104,20 +107,23 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             tbCompetencias tbCompetencias = null;
+            // using (db = new ERP_GMEDINAEntities())
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbCompetencias = db.tbCompetencias.Find(id);
-                if(tbCompetencias == null )
+                if (tbCompetencias == null)
                 {
                     return HttpNotFound();
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 ex.Message.ToString();
@@ -140,17 +146,19 @@ namespace ERP_GMEDINA.Controllers
             return Json(competencias, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult Edit (tbCompetencias tbCompetencias)
+        public JsonResult Edit(tbCompetencias tbCompetencias)
         {
             string msj = "";
             if (tbCompetencias.comp_Id != 0 && tbCompetencias.comp_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var usuario = (tbUsuario)Session["Usuario"];
+
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbCompetencias_Update(id,
-                        tbCompetencias.comp_Descripcion, usuario.usu_Id, DateTime.Now);
+                    tbCompetencias.comp_Descripcion, usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCompetencias_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -178,8 +186,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
+
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbCompetencias_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCompetencias_Delete_Result item in list)
                     {
@@ -236,7 +246,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

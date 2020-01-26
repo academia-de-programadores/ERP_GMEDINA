@@ -358,10 +358,10 @@
           </Key>
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaInicio" Type="date" />
+          <Property Name="hipa_FechaFin" Type="date" />
+          <Property Name="hipa_FechaPago" Type="date" />
           <Property Name="hipa_Anio" Type="int" Nullable="false" />
           <Property Name="hipa_Mes" Type="int" Nullable="false" />
           <Property Name="peri_IdPeriodo" Type="int" Nullable="false" />
@@ -369,16 +369,22 @@
           <Property Name="hipa_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hipa_UsuarioModifica" Type="int" />
           <Property Name="hipa_FechaModifica" Type="datetime" />
-          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="2" />
           <Property Name="hipa_ISRPendiente" Type="bit" />
-          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalComisiones" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasExtras" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalVacaciones" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSeptimoDia" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalDeduccionesIndividuales" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalIngresosIndividuales" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSueldoBruto" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_CantidadUnidadesHorasExtras" Type="int" />
+          <Property Name="hipa_CantidadUnidadesBonos" Type="int" />
+          <Property Name="hipa_TotalBonos" Type="decimal" Precision="16" Scale="2" />
         </EntityType>
         <EntityType Name="tbIngresosIndividuales">
           <Key>
@@ -463,6 +469,8 @@
           <Property Name="peri_UsuarioModifica" Type="int" />
           <Property Name="peri_FechaModifica" Type="datetime" />
           <Property Name="peri_Activo" Type="bit" Nullable="false" />
+          <Property Name="peri_RecibeSeptimoDia" Type="bit" />
+          <Property Name="peri_CantidadDias" Type="int" />
         </EntityType>
         <EntityType Name="tbPorcentajeMotivoLiquidacion">
           <Key>
@@ -632,6 +640,21 @@
           <Property Name="depto_Fechacrea" Type="datetime" Nullable="false" />
           <Property Name="depto_UsuarioModifica" Type="int" />
           <Property Name="depto_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbDirectoriosEmpleados">
+          <Key>
+            <PropertyRef Name="direm_Id" />
+          </Key>
+          <Property Name="direm_Id" Type="int" Nullable="false" />
+          <Property Name="direm_Carpeta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="direm_NombreArchivo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="direm_Estado" Type="bit" Nullable="false" />
+          <Property Name="direm_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="direm_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="direm_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="direm_UsuarioModifica" Type="int" />
+          <Property Name="direm_FechaModifica" Type="datetime" />
         </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
@@ -4528,6 +4551,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbDirectoriosEmpleados" Type="Self.tbDirectoriosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDirectoriosEmpleados">
+              <PropertyRef Name="direm_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbDirectoriosEmpleados" Type="Self.tbDirectoriosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDirectoriosEmpleados">
+              <PropertyRef Name="direm_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
@@ -6136,6 +6183,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbDirectoriosEmpleados" Type="Self.tbDirectoriosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbDirectoriosEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbEquipoEmpleados_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbEquipoEmpleados" Type="Self.tbEquipoEmpleados" Multiplicity="*" />
@@ -7199,6 +7258,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="hipa_TotalSeptimoDia" Type="decimal" Mode="In" />
           <Parameter Name="hipa_AdelantoSueldo" Type="decimal" Mode="In" />
           <Parameter Name="hipa_TotalSalario" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_TotalDeduccionesIndividuales" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_TotalIngresosIndividuales" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_TotalSueldoBruto" Type="decimal" Mode="In" />
+          <Parameter Name="hipa_CantidadUnidadesHorasExtras" Type="int" Mode="In" />
+          <Parameter Name="hipa_CantidadUnidadesBonos" Type="int" Mode="In" />
+          <Parameter Name="hipa_TotalBonos" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbIngresosIndividuales_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="ini_IdIngresosIndividuales" Type="int" Mode="In" />
@@ -7298,12 +7363,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="peri_DescripPeriodo" Type="nvarchar" Mode="In" />
           <Parameter Name="peri_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="peri_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="peri_RecibeSeptimoDia" Type="bit" Mode="In" />
+          <Parameter Name="peri_CantidadDias" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbPeriodos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="peri_IdPeriodo" Type="int" Mode="In" />
           <Parameter Name="peri_DescripPeriodo" Type="nvarchar" Mode="In" />
           <Parameter Name="peri_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="peri_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="peri_RecibeSeptimoDia" Type="bit" Mode="In" />
+          <Parameter Name="peri_CantidadDias" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbPreaviso_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="prea_IdPreaviso" Type="int" Mode="In" />
@@ -7589,6 +7658,19 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbDirectoriosEmpleados_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="direm_Id" Type="int" Mode="In" />
+          <Parameter Name="direm_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="direm_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="direm_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbDirectoriosEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="direm_Carpeta" Type="nvarchar" Mode="In" />
+          <Parameter Name="direm_NombreArchivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="direm_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="direm_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Contratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
@@ -8547,6 +8629,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="tbCompetenciasPersona" EntityType="Self.tbCompetenciasPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbCompetenciasRequisicion" EntityType="Self.tbCompetenciasRequisicion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbDepartamentos" EntityType="Self.tbDepartamentos" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbDirectoriosEmpleados" EntityType="Self.tbDirectoriosEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEquipoEmpleados" EntityType="Self.tbEquipoEmpleados" Schema="rrhh" store:Type="Tables" />
@@ -10293,6 +10376,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDirectoriosEmpleados" EntitySet="tbDirectoriosEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDirectoriosEmpleados" EntitySet="tbDirectoriosEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -10829,6 +10920,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbIngresosIndividuales" EntitySet="tbIngresosIndividuales" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbDirectoriosEmpleados" EntitySet="tbDirectoriosEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbEquipoEmpleados_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbEquipoEmpleados_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
@@ -11288,6 +11383,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbPorcentajeMotivoLiquidacion1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
           <NavigationProperty Name="tbFaseSeleccion" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
           <NavigationProperty Name="tbFaseSeleccion1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
+          <NavigationProperty Name="tbDirectoriosEmpleados" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDirectoriosEmpleados" />
+          <NavigationProperty Name="tbDirectoriosEmpleados1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDirectoriosEmpleados" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -11654,10 +11751,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </Key>
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Precision="0" />
           <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
           <Property Name="hipa_Mes" Type="Int32" Nullable="false" />
           <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
@@ -11665,22 +11762,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hipa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hipa_UsuarioModifica" Type="Int32" />
           <Property Name="hipa_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Precision="16" Scale="2" />
           <Property Name="hipa_ISRPendiente" Type="Boolean" />
-          <Property Name="hipa_AFP" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="2" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDeduccionPago" Relationship="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeduccionPago" />
           <NavigationProperty Name="tbHistorialDeIngresosPago" Relationship="Self.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeIngresosPago" />
           <NavigationProperty Name="tbPeriodos" Relationship="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbHistorialDePago" ToRole="tbPeriodos" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbHistorialDePago" ToRole="tbEmpleados" />
+          <Property Name="hipa_TotalDeduccionesIndividuales" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalIngresosIndividuales" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSueldoBruto" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_CantidadUnidadesHorasExtras" Type="Int32" />
+          <Property Name="hipa_CantidadUnidadesBonos" Type="Int32" />
+          <Property Name="hipa_TotalBonos" Type="Decimal" Precision="16" Scale="2" />
         </EntityType>
         <EntityType Name="tbIngresosIndividuales">
           <Key>
@@ -11782,6 +11885,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
+          <Property Name="peri_RecibeSeptimoDia" Type="Boolean" />
+          <Property Name="peri_CantidadDias" Type="Int32" />
         </EntityType>
         <EntityType Name="tbPorcentajeMotivoLiquidacion">
           <Key>
@@ -12057,6 +12162,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbSueldos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbSueldos_emp_Id" FromRole="tbEmpleados" ToRole="tbSueldos" />
           <NavigationProperty Name="tbJornadas" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" FromRole="tbEmpleados" ToRole="tbJornadas" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbDirectoriosEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" FromRole="tbEmpleados" ToRole="tbDirectoriosEmpleados" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -19658,6 +19764,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="hipa_TotalSeptimoDia" Mode="In" Type="Decimal" />
             <Parameter Name="hipa_AdelantoSueldo" Mode="In" Type="Decimal" />
             <Parameter Name="hipa_TotalSalario" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalDeduccionesIndividuales" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalIngresosIndividuales" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalSueldoBruto" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_CantidadUnidadesHorasExtras" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_CantidadUnidadesBonos" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_TotalBonos" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Activar_Result)">
             <Parameter Name="ini_IdIngresosIndividuales" Mode="In" Type="Int32" />
@@ -19748,12 +19860,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="peri_DescripPeriodo" Mode="In" Type="String" />
             <Parameter Name="peri_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="peri_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="peri_RecibeSeptimoDia" Mode="In" Type="Boolean" />
+            <Parameter Name="peri_CantidadDias" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbPeriodos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbPeriodos_Update_Result)">
             <Parameter Name="peri_IdPeriodo" Mode="In" Type="Int32" />
             <Parameter Name="peri_DescripPeriodo" Mode="In" Type="String" />
             <Parameter Name="peri_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="peri_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="peri_RecibeSeptimoDia" Mode="In" Type="Boolean" />
+            <Parameter Name="peri_CantidadDias" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbPreaviso_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbPreaviso_Activar_Result)">
             <Parameter Name="prea_IdPreaviso" Mode="In" Type="Int32" />
@@ -20914,6 +21030,32 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbDirectoriosEmpleados" EntityType="ERP_GMEDINAModel.tbDirectoriosEmpleados" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDirectoriosEmpleados" EntitySet="tbDirectoriosEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDirectoriosEmpleados" EntitySet="tbDirectoriosEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbDirectoriosEmpleados" EntitySet="tbDirectoriosEmpleados" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbDirectoriosEmpleados_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDirectoriosEmpleados_Delete_Result)">
+            <Parameter Name="direm_Id" Mode="In" Type="Int32" />
+            <Parameter Name="direm_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="direm_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="direm_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbDirectoriosEmpleados_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDirectoriosEmpleados_Insert_Result)">
+            <Parameter Name="direm_Carpeta" Mode="In" Type="String" />
+            <Parameter Name="direm_NombreArchivo" Mode="In" Type="String" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="direm_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="direm_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -21964,6 +22106,66 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbDepartamentos_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="tbDirectoriosEmpleados">
+          <Key>
+            <PropertyRef Name="direm_Id" />
+          </Key>
+          <Property Name="direm_Id" Type="Int32" Nullable="false" />
+          <Property Name="direm_Carpeta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direm_NombreArchivo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="direm_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="direm_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direm_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="direm_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="direm_UsuarioModifica" Type="Int32" />
+          <Property Name="direm_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" FromRole="tbDirectoriosEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" FromRole="tbDirectoriosEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" FromRole="tbDirectoriosEmpleados" ToRole="tbEmpleados" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDirectoriosEmpleados" Role="tbDirectoriosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDirectoriosEmpleados">
+              <PropertyRef Name="direm_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbDirectoriosEmpleados" Role="tbDirectoriosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDirectoriosEmpleados">
+              <PropertyRef Name="direm_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDirectoriosEmpleados" Role="tbDirectoriosEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbDirectoriosEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbDirectoriosEmpleados_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDirectoriosEmpleados_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22344,6 +22546,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbHistorialDePago">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialDePago">
               <MappingFragment StoreEntitySet="tbHistorialDePago">
+                <ScalarProperty Name="hipa_TotalBonos" ColumnName="hipa_TotalBonos" />
+                <ScalarProperty Name="hipa_CantidadUnidadesBonos" ColumnName="hipa_CantidadUnidadesBonos" />
+                <ScalarProperty Name="hipa_CantidadUnidadesHorasExtras" ColumnName="hipa_CantidadUnidadesHorasExtras" />
+                <ScalarProperty Name="hipa_TotalSueldoBruto" ColumnName="hipa_TotalSueldoBruto" />
+                <ScalarProperty Name="hipa_TotalIngresosIndividuales" ColumnName="hipa_TotalIngresosIndividuales" />
+                <ScalarProperty Name="hipa_TotalDeduccionesIndividuales" ColumnName="hipa_TotalDeduccionesIndividuales" />
                 <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hipa_SueldoNeto" ColumnName="hipa_SueldoNeto" />
@@ -22450,6 +22658,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbPeriodos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPeriodos">
               <MappingFragment StoreEntitySet="tbPeriodos">
+                <ScalarProperty Name="peri_CantidadDias" ColumnName="peri_CantidadDias" />
+                <ScalarProperty Name="peri_RecibeSeptimoDia" ColumnName="peri_RecibeSeptimoDia" />
                 <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
                 <ScalarProperty Name="peri_DescripPeriodo" ColumnName="peri_DescripPeriodo" />
                 <ScalarProperty Name="peri_UsuarioCrea" ColumnName="peri_UsuarioCrea" />
@@ -26804,6 +27014,36 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbDirectoriosEmpleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDirectoriosEmpleados">
+              <MappingFragment StoreEntitySet="tbDirectoriosEmpleados">
+                <ScalarProperty Name="direm_FechaModifica" ColumnName="direm_FechaModifica" />
+                <ScalarProperty Name="direm_UsuarioModifica" ColumnName="direm_UsuarioModifica" />
+                <ScalarProperty Name="direm_FechaCrea" ColumnName="direm_FechaCrea" />
+                <ScalarProperty Name="direm_UsuarioCrea" ColumnName="direm_UsuarioCrea" />
+                <ScalarProperty Name="direm_RazonInactivo" ColumnName="direm_RazonInactivo" />
+                <ScalarProperty Name="direm_Estado" ColumnName="direm_Estado" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="direm_NombreArchivo" ColumnName="direm_NombreArchivo" />
+                <ScalarProperty Name="direm_Carpeta" ColumnName="direm_Carpeta" />
+                <ScalarProperty Name="direm_Id" ColumnName="direm_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDirectoriosEmpleados_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDirectoriosEmpleados_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDirectoriosEmpleados_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDirectoriosEmpleados_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDirectoriosEmpleados_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDirectoriosEmpleados_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

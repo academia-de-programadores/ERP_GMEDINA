@@ -221,7 +221,7 @@ function format(obj) {
     : index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
         div = div
-                    + '<div class="col-md-5"><b>ID empleado: </b>' + index.emp_Id + '</div>'
+                    + '<div class="col-md-5"><b>Número: </b>' + index.emp_Id + '</div>'
 
         + '<div class="col-md-5"><b>Número de identidad: </b>' + index.per_Identidad + '</div>'
 

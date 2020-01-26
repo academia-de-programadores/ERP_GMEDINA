@@ -21,7 +21,8 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-               // tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList()[0];
+                db = new ERP_GMEDINAEntities();
+                // tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList()[0];
 
                 return View(tbCargos);
             }
@@ -64,6 +65,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbCargos.car_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {

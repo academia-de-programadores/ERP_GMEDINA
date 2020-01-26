@@ -186,6 +186,8 @@ namespace ERP_GMEDINA.Models
             this.tbPorcentajeMotivoLiquidacion1 = new HashSet<tbPorcentajeMotivoLiquidacion>();
             this.tbFaseSeleccion = new HashSet<tbFaseSeleccion>();
             this.tbFaseSeleccion1 = new HashSet<tbFaseSeleccion>();
+            this.tbDirectoriosEmpleados = new HashSet<tbDirectoriosEmpleados>();
+            this.tbDirectoriosEmpleados1 = new HashSet<tbDirectoriosEmpleados>();
         }
     
         public int usu_Id { get; set; }
@@ -537,5 +539,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDirectoriosEmpleados> tbDirectoriosEmpleados { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDirectoriosEmpleados> tbDirectoriosEmpleados1 { get; set; }
     }
 }

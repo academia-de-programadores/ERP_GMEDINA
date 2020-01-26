@@ -132,13 +132,15 @@ function compare_dates() {
     var fecha1 = $("#ModalNuevo").find("#aude_FechaAudiencia").val();
     var fechalimite = '01/01/1900';
     var fechamayor = "01/01/2199";
-    if (Date.parse(fecha1) < Date.parse(fechalimite) || Date.parse(fecha1) < Date.parse(fechamayor))
-    {
+    if (Date.parse(fecha1) < Date.parse(fechalimite)) {
         $("#ModalNuevo").show();
         MsgError("Error", "Fecha no es válida.");
     }
-    else if ( fecha1 == "")
-    {
+    else if (Date.parse(fecha1) > Date.parse(fechamayor)) {
+        $("#ModalNuevo").show();
+        MsgError("Error", "Fecha no es válida.");
+    }
+    else if (fecha1 == "") {
         $("#ModalNuevo").show();
         MsgError("Error", "El campo fecha es requerido.");
     }
@@ -153,31 +155,31 @@ $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo").val();
-    if(compare_dates())
-    if (data != null) {
-        data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
-        if (compare_dates()) {
-            _ajax(data,
-                '/HistorialAudienciaDescargos/Create',
-                'POST',
-                function (obj) {
-                    if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        CierraPopups();
-                        llenarTabla();
-                        // LimpiarControles(["aude_Descripcion", "aude_FechaAudiencia", "aude_DireccionArchivo", "emp_Id"]);
-                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-                        $("#ModalNuevo").find("#aude_FechaAudiencia").val("");
-                        $("#ModalNuevo").find("#aude_Descripcion").val("");
-                        $("#ModalNuevo").find("#aude_Testigo").prop("checked", false);
-                        $("#ModalNuevo").find("#emp_Id").val("");
-                    } else {
-                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
-                    }
-                })
-        };
-    } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto.");
-    }
+    if (compare_dates())
+        if (data != null) {
+            data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
+            if (compare_dates()) {
+                _ajax(data,
+                    '/HistorialAudienciaDescargos/Create',
+                    'POST',
+                    function (obj) {
+                        if (obj != "-1" && obj != "-2" && obj != "-3") {
+                            CierraPopups();
+                            llenarTabla();
+                            // LimpiarControles(["aude_Descripcion", "aude_FechaAudiencia", "aude_DireccionArchivo", "emp_Id"]);
+                            MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                            $("#ModalNuevo").find("#aude_FechaAudiencia").val("");
+                            $("#ModalNuevo").find("#aude_Descripcion").val("");
+                            $("#ModalNuevo").find("#aude_Testigo").prop("checked", false);
+                            $("#ModalNuevo").find("#emp_Id").val("");
+                        } else {
+                            MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                        }
+                    })
+            };
+        } else {
+            MsgError("Error", "Por favor llene todas las cajas de texto.");
+        }
 });
 
 
