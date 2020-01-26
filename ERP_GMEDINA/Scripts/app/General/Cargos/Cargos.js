@@ -51,9 +51,9 @@ function llenarTabla() {
                // console.log(value.car_Descripcion);
                 var Acciones = value.car_Estado == 1
                    ? null :
-                   "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+"<div>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.car_Estado > fill) {
                     tabla.row.add({
@@ -108,9 +108,10 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se ha agregado de forma exitosa");
+                    LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
+                    llenarTabla();
+
                 } else {
                     MsgError("Error", "No se pudo agregar el registro, contacte al administrador");
                 }
@@ -132,9 +133,9 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
@@ -156,8 +157,8 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
                     MsgSuccess("¡Exito!", "El registro se ha editado de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

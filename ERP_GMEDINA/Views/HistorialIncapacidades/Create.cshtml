@@ -149,11 +149,14 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 @Styles.Render("~/Content/plugins/izitoast/iziToast")
-@Styles.Render("~/plugins/izitoast")
+@Styles.Render("~/Content/plugins/izitoast/iziToast.min")
 }
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/app/General")
+@*general*@
+@Scripts.Render("~/Scripts/app/general")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
 @Scripts.Render("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades")
 
 }

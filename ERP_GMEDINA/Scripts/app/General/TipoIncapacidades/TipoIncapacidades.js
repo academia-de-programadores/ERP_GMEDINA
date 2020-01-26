@@ -54,8 +54,8 @@ function llenarTabla() {
                 var Acciones = value.ticn_Estado == 1
                 ?null:
                 "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.ticn_Estado > fill) {
                 tabla.row.add({
@@ -109,9 +109,9 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["ticn_Descripcion"]);
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    LimpiarControles(["ticn_Descripcion"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }

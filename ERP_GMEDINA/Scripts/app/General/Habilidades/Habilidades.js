@@ -47,8 +47,8 @@ function llenarTabla() {
        var Acciones = value.habi_Estado == 1
                    ? null : Admin ?
                    "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
        tabla.row.add({
         Estado: value.habi_Estado ? 'Activo' : 'Inactivo',
@@ -104,10 +104,10 @@ $("#btnGuardar").click(function () {
       'POST',
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
-        CierraPopups();
+           CierraPopups();
+           MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+           LimpiarControles(["habi_Descripcion"]);
         llenarTabla();
-        LimpiarControles(["habi_Descripcion"]);
-        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
        } else {
         MsgError("Error", "No se agrego el registro, contacte al administrador");
        }
@@ -128,10 +128,10 @@ $("#InActivar").click(function () {
       'POST',
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
-        CierraPopups();
+           CierraPopups();
+           MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+           LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
         llenarTabla();
-        LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
        } else {
         MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
        }
@@ -152,9 +152,9 @@ $("#btnActualizar").click(function () {
       'POST',
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
-        CierraPopups();
+           CierraPopups();
+           MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
         llenarTabla();
-        MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
        } else {
         MsgError("Error", "No se pudo editar el registro, contacte al administrador");
        }

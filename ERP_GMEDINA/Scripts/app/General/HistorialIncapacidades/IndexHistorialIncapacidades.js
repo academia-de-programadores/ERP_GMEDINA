@@ -242,9 +242,9 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $("#ModalInhabilitar").modal("hide");
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["hinc_Id"]);
                     MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["hinc_Id"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }

@@ -65,14 +65,21 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
 }
 @section Scripts {
     @if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/General/TipoAmonestaciones/Admin.js")
     }
-    @Scripts.Render("~/plugins/dataTablesMatutina")
+    @* datatble *@
+    @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations")
+    @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/datatables.min")
+
+    @*general*@
     @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/Scripts/app/general/TipoAmonestaciones")
 
 }

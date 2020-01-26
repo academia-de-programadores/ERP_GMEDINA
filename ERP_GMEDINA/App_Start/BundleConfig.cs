@@ -480,15 +480,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/pdfjs").Include(
                       "~/Scripts/plugins/pdfjs/pdf.js"));
 
-
-            // iziToast JS
-            bundles.Add(new ScriptBundle("~/plugins/izitoast").Include(
-                        "~/Scripts/plugins/iziToast/iziToast.js",
-                        "~/Scripts/plugins/iziToast/iziToast.min.js"));
-            //iziToast CSS
-            // Touch Spin Styless
+            // iziToast css
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
-                      "~/Content/plugins/izitoast/iziToast.css",
+                      "~/Content/plugins/izitoast/iziToast.css"));
+
+            bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast.min").Include(
                       "~/Content/plugins/izitoast/iziToast.min.css"));
             #endregion
 
@@ -544,9 +540,15 @@ namespace ERP_GMEDINA
 
             // SCRIPT GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
-             "~/Scripts/plugins/iziToast/iziToast.js",
-             "~/Scripts/plugins/iziToast/iziToast.min.js",
              "~/Scripts/app/general/general.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/iziToast/iziToast").Include(
+             "~/Scripts/plugins/iziToast/iziToast.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/iziToast/iziToast.min").Include(
+             "~/Scripts/plugins/iziToast/iziToast.min.js"));
+
+
 
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
@@ -911,9 +913,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
                  "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
 
-            bundles.Add(new ScriptBundle("~/plugins/dataTablesMatutina").Include(
-                      "~/Scripts/plugins/dataTablesMatutina/datatables.min.js",
-                      "~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/dataTablesMatutina/datatables.min").Include(
+                      "~/Scripts/plugins/dataTablesMatutina/datatables.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations").Include(
+            "~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations.js"));
 
             //App/HistorialPermisos
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos").Include(

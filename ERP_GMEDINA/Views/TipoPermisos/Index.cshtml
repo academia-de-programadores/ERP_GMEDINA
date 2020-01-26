@@ -62,11 +62,18 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
     @Styles.Render("~/plugins/clockpickerStyles")
 }
 @section Scripts {
-    @Scripts.Render("~/plugins/dataTablesMatutina")
-    @Scripts.Render("~/Scripts/app/general")
+@* datatble *@
+@Scripts.Render("~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations")
+@Scripts.Render("~/Scripts/plugins/dataTablesMatutina/datatables.min")
+
+@*general*@
+@Scripts.Render("~/Scripts/app/general")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/Scripts/app/TipoPermisos")
     @Scripts.Render("~/plugins/clockpicker")
     @if (Model.tper_Estado)

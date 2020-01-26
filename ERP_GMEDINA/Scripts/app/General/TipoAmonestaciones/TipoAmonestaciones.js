@@ -52,8 +52,8 @@ function llenarTabla() {
                  var Acciones = value.tamo_Estado == 1
                    ?null:
                    "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.tamo_Estado > fill) {
                     tabla.row.add({
@@ -107,8 +107,8 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se agrego el registro, contacte al administrador");
                 }
@@ -129,9 +129,9 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["tamo_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    LimpiarControles(["tamo_Descripcion"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
                 }
@@ -152,8 +152,8 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
                     MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

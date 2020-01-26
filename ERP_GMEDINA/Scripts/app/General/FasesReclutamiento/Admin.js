@@ -17,8 +17,8 @@ $("#btnActivar").click(function () {
         'POST',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                llenarTabla(-1);
                 MsgSuccess("¡Exito!", "El registro se activo  de forma exitosa");
+                llenarTabla(-1);
             } else {
                 MsgError("Error", "No se logró activar el registro, contacte al administrador");
             }

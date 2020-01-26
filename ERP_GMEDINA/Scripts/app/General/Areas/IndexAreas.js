@@ -55,8 +55,8 @@ function llenarTabla() {
                 var Acciones = value.area_Estado==1
                     ? null : Admin ?
                    "<div>" +
-                       //"<a class='btn btn-default btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
                 tabla.row.add({
                     Estado:value.area_Estado?'Activo':'Inactivo',

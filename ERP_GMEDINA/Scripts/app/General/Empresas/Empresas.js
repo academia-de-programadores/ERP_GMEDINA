@@ -55,8 +55,8 @@ function llenarTabla() {
        var Acciones = value.empr_Estado == 1
                    ? null : Admin ?
                     "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
        tabla.row.add({
         ID: value.empr_Id,
@@ -183,8 +183,8 @@ $("#btnActualizar").click(function () {
     if (obj == "-4") {
      MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
     } else if (obj != "-1" && obj != "-2" && obj != "-3") {
-     llenarTabla();
      MsgSuccess("¡Exito!", "El registro se ha editado de forma exitosa");
+     llenarTabla();
      $("#ModalEditar").modal('hide');//ocultamos el modal
      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
      $('.modal-backdrop').remove();//eliminamos el
@@ -206,9 +206,9 @@ $("#InActivar").click(function () {
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
         CierraPopups();
-        llenarTabla();
-        LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
         MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+        LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
+        llenarTabla();
        } else {
         MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
        }
