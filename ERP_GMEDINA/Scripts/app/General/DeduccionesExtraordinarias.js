@@ -91,6 +91,7 @@ $('#dex_MontoInicial').blur(function () {
 });
 
 $('#dex_MontoRestante').blur(function () {
+    debugger;
     let montoRestante = $(this).val().replace(/,/g, '');
     let hayAlgo = false;
     let montoInicial = $('#dex_MontoInicial').val().replace(/,/g, '');
@@ -108,7 +109,7 @@ $('#dex_MontoRestante').blur(function () {
 
     if (hayAlgo) {
         let esMayorCero = false;
-        if (montoRestante == 0.00 || montoRestante < 0) {
+        if (montoRestante == 0.00 || montoRestante < "0") {
             $("#valMontoRestante").html('El campo Monto Restante no puede ser menor o igual que cero.');
             $("#valMontoRestante").show();
             $("#asteriscoMontoRestante").addClass('text-danger');
@@ -269,10 +270,10 @@ function cargarGridDeducciones() {
                 var botonEditar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" style="margin-right:3px;" class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnActivarDeduccionesExtraordinarias" iddeduccionesextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
+                var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnActivarDeduccionesExtraordinarias" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
 
                 //variable boton inactivar
-                var botonInactivar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? esAdministrador == "1" ? '<button type="button" name="iddeduccionesextraordinarias" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias" iddeduccionextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Inactivar</button>' : '' : '';
+                var botonInactivar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? esAdministrador == "1" ? '<button type="button" name="iddeduccionesextraordinarias" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Inactivar</button>' : '' : '';
 
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblDeduccionesExtraordinarias').dataTable().fnAddData([
@@ -341,11 +342,11 @@ function validaciones(equipoEmpId,
 
     let hayAlgoMontoRestante = false;
     // Monto Restante
-    let valorMontoRestante = montoRestante.val()
+    let valorMontoRestante = montoRestante.val();
     if (valorMontoRestante != "") {
         $("#valMontoRestante").html('');
         $("#valMontoRestante").hide();
-        hayAlgoMontoRestante = true
+        hayAlgoMontoRestante = true;
         $("#asteriscoMontoRestante").removeClass('text-danger');
     } else {
         $("#valMontoRestante").html('Campo Monto Restante Requerido');
@@ -365,7 +366,7 @@ function validaciones(equipoEmpId,
         } else {
             esMayorCero = true;
             $("#valMontoRestante").html('');
-            $("#valMontoRestante").hide()
+            $("#valMontoRestante").hide();
             $("#asteriscoMontoRestante").removeClass('text-danger');
         }
 
@@ -459,29 +460,41 @@ function validaciones(equipoEmpId,
 //#endregion
 
 //#region Activar
+
+//VARIABLE GLOBAL DE INACTIVAR
+var GB_Activar = 0;
+
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-    document.getElementById("btnActivarDeduccionesExtraordinarias").disabled = false;
-    var ID = $(this).closest('tr').data('id');
+    //DESBLOQUEAR EL BOTON
+    $("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
+    //OBTENER EL ID
+    var ID = $(this).data('id');
+    GB_Activar = ID;
 
-    var ID = $(this).attr('iddeduccionesextra');
-    localStorage.setItem('id', ID);
+    //var ID = $(this).attr('iddeduccionesextra');
+    //localStorage.setItem('id', ID);
+
     //Mostrar el Modal
     $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
 });
 
 //Activar
 $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
-    document.getElementById("btnActivarRegistroDeduccionesExtraordinarias").disabled = true;
-    let ID = localStorage.getItem('id')
+    //BLOQUEAR EL BOTON
+    $("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", true);
+
+    //let ID = localStorage.getItem('id')
     $.ajax({
-        url: "/DeduccionesExtraordinarias/Activar",
-        method: "POST",
-        data: { id: ID }
+        url: "/DeduccionesExtraordinarias/Activar/" + GB_Activar,
+        method: "GET"
     }).done(function (data) {
         $("#ActivarDeduccionesExtraordinarias").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
+            //DESBLOQUEAR EL BOTON
+            $("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
+            //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
                 message: '¡No se activó el registro, contacte al administrador!',
@@ -496,13 +509,14 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
             });
         }
     });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#ActivarDeduccionesExtraordinarias").submit(function (e) {
-        return false;
-    });
-    document.getElementById("btnActivarRegistroDeduccionesExtraordinarias").disabled = false;
+    GB_Activar = 0;
 });
+
+// Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+$("#ActivarDeduccionesExtraordinarias").submit(function (e) {
+    return false;
+});
+
 //#endregion
 
 //#region Create
@@ -540,11 +554,11 @@ $(btnAgregar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-                document.getElementById("btnAgregar").disabled = true;
+                $("#btnAgregar").attr('disabled', true);
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
+                    title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
@@ -561,14 +575,14 @@ $(btnAgregar).click(function () {
     $("#frmCreate").submit(function (e) {
         return false;
     });
-    document.getElementById("btnAgregar").disabled = false;
+    $("#btnAgregar").attr('disabled', false);
 });
 //#endregion
 
 //#region Editar
 //Editar
-$(btnEditar).click(function () {
-    document.getElementById("btnEditar").disabled = true;
+$("#btnEditar").click(function () {
+    $("#btnEditar").attr('disabled', true);
     if (validaciones(equipoEmpIdEdit,
         montoInicial,
         montoRestante,
@@ -590,7 +604,7 @@ $(btnEditar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "Exito") {
-                document.getElementById("btnEditar").disabled = true;
+                $("#btnEditar").attr('disabled', true);
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -616,30 +630,35 @@ $(btnEditar).click(function () {
 //#endregion
 
 //#region Inactivar
+
+//VARIABLE GLOBAL DE INACTIVAR
+var GB_Inactivar = 0;
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
-    document.getElementById("btnInactivar").disabled = false;
-    var ID = $(this).closest('tr').data('id');
-
-    var ID = $(this).attr('iddeduccionextra');
-
-    localStorage.setItem('id', ID);
+    //DESBLOQUEAR EL BOTON
+    $("#btnInactivar").attr("disabled", false);
+    var ID = $(this).data('id');
+    GB_Inactivar = ID;
     //Mostrar el Modal
     $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
 
 });
 
+
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
-    document.getElementById("btnInactivar").disabled = true;
-    let ID = localStorage.getItem('id')
+
+    //BLOQUEAR EL BOTON
+    $("#btnInactivar").attr("disabled", true);
+
     //Se envia el Formato Json al Controlador para realizar la Inactivación
     $.ajax({
-        url: "/DeduccionesExtraordinarias/Inactivar",
-        method: "POST",
-        data: { id: ID }
+        url: "/DeduccionesExtraordinarias/Inactivar/" + GB_Inactivar,
+        method: "GET"
     }).done(function (data) {
         if (data == "Error") {
+            //DESBLOQUEAR EL BOTON
+            $("#btnInactivar").attr("disabled", false);
             //Cuando trae un error en el BackEnd al realizar la Inactivación
             iziToast.error({
                 title: 'Error',
@@ -649,22 +668,23 @@ $("#btnInactivar").click(function () {
         else {
             // Actualizar el Index para ver los cambios
             $("#InactivarDeduccionesExtraordinarias").modal('hide');
+            //REFRESCAR LA DATA DEL DATATABLE
             cargarGridDeducciones();
             //Mensaje de Éxito de la Inactivación
             iziToast.success({
-                title: 'Exito',
+                title: 'Éxito',
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#InactivarDeduccionesExtraordinarias").submit(function (e) {
-        return false;
-    });
-
-    document.getElementById("btnInactivar").disabled = false;
+    GB_Inactivar = 0;
 });
+
+// Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+$("#InactivarDeduccionesExtraordinarias").submit(function (e) {
+    return false;
+});
+
 //#endregion
 
 //#region Otras

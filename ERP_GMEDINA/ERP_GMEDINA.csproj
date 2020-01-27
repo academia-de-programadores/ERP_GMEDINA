@@ -2011,6 +2011,7 @@
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\RazonSalidas\Admin.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
+    <Content Include="Scripts\app\General\ReportesPlanilla.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\Admin.js" />
@@ -2134,6 +2135,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\Publicacion_ERP_GMEDINA.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

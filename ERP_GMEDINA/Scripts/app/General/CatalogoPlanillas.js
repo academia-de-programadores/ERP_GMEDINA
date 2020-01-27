@@ -12,7 +12,8 @@ var pathname = window.location.pathname + '/',
         (location.port ? ':' + location.port : ''),
     table,
     table2,
-    checkSeleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones'); //Almacenar la tabla
+    checkSeleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones'),
+    urlSinElIndex = ""; //Almacenar la tabla
 
 //Constantes
 const btnGuardar = $('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), //Boton para guardar el catalogo de planilla con sus detalles
@@ -56,6 +57,31 @@ function _ajax(params, uri, type, callback, enviar) {
             callback(data);
         }
     });
+}
+function getDDL() {
+    _ajax(
+        null,
+        urlSinElIndex + '/getPeriodos',
+        'GET',
+        (data) => {
+            data = data.data;
+            let valEditar = $('#valFrecuenciaEnDias').val();
+            let valorEstaEnEditar = !(estaEnCrear() > 0);
+            if (valorEstaEnEditar)
+                $("#cpla_FrecuenciaEnDias").append("<option value=0>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                if (valorEstaEnEditar)
+                    $("#cpla_FrecuenciaEnDias").append("<option value='" + iter.id + "' " + ((iter.id == valEditar) ? 'selected' : '')+">" + iter.descripcion + "</option>");
+                else
+                    $("#cpla_FrecuenciaEnDias").append("<option value='" + iter.id + "'>" + iter.descripcion + "</option>");
+
+            });
+            console.log(data);
+        },
+        () => {
+
+        }
+    )
 }
 
 // Funcion para crear y editar
@@ -299,7 +325,7 @@ function verificarCampos(
         validacionDescripcionPlanilla.hide();
     }
     //Validar que la frecuencia en días esté bien
-    if (frecuenciaDias == null || frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0) {
+    if (frecuenciaDias == null || parseInt(frecuenciaDias) == 0) {
         scrollArriba();
         validacionFrecuenciaDias.show();
         if (todoBien) inputFrecuenciaEnDias.focus();
@@ -991,14 +1017,27 @@ function obtenerDetalles(id, handleData) {
     );
 }
 //#endregion
-var urlSinElIndex = "";
+
 $(document).ready(() => {
     //Validar que no haya un /Index en la URL, si no falla el AJAX
     let ubicacionIndexUrl = URLactual.indexOf('/Index');
+    let ubicacionCreateUrl = URLactual.indexOf('/Create');
+    let ubicacionEditUrl = URLactual.indexOf('/Edit');
+
 
     if (ubicacionIndexUrl > 0) {
         urlSinElIndex = URLactual.replace('/Index', '');
     }
+
+    if (ubicacionCreateUrl > 0) {
+        urlSinElIndex = URLactual.replace('/Create', '');
+    }
+
+    if (ubicacionEditUrl > 0) {
+        urlSinElIndex = URLactual.replace(URLactual.substring(ubicacionEditUrl, URLactual.length), '');
+    }
+
+    getDDL();
 
     if (estaEnCrear() < 1 && estaEnEditar() < 1) {
         listar();
@@ -1068,8 +1107,9 @@ $(document).ready(() => {
     //Validar la frecuencia en dias cuando se salga del input
     inputFrecuenciaEnDias.blur(function () {
         if (
-            inputFrecuenciaEnDias.val() != '0' &&
-            inputFrecuenciaEnDias.val() > 0
+            inputFrecuenciaEnDias.val() != '0' ||
+            inputFrecuenciaEnDias.val() > 0 ||
+            inputFrecuenciaEnDias.val() != ""
         ) {
             validacionFrecuenciaDias.hide();
             asteriscoFrecuenciaPago.removeClass('text-danger');
