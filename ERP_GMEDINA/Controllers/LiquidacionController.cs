@@ -34,6 +34,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
+                    return "Error";
                 }
                 return json;
             }
@@ -113,7 +114,7 @@ namespace ERP_GMEDINA.Controllers
                     decimal Monto_DecimoCuartoProporcional = Helpers.Liquidacion.Calculo_DecimoCuartoMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
                     decimal Monto_DecimoTercerProporcional = Helpers.Liquidacion.Calculo_DecimoTercerMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
                     decimal Monto_VacacionesProporcionales = Helpers.Liquidacion.Calculo_VacacionesProporcionales(IdEmpleado, fechaFin, SalarioOrdinarioMensual, TotalDiasLaborados);
-
+                    
 
                     //CALCULAR EL PAGO DE CONCEPTOS PROPORCIONAL AL MOTIVO DE LIQUIDACION
                     var PorcentajeLiqudiacion = from Porcentajes in db.tbPorcentajeMotivoLiquidacion
@@ -145,7 +146,7 @@ namespace ERP_GMEDINA.Controllers
                     LiquidacionVM.FechaLiquidacion = fechaFin;
                     LiquidacionVM.SalarioOrdinarioMensual_Liq = SalarioOrdinarioMensual;
                     LiquidacionVM.SalarioPromedioMensual_Liq = (SalarioOrdinarioMensual * 14) / 12;
-                    LiquidacionVM.SalarioOrdinarioDiario_Liq = (SalarioOrdinarioMensual) / 360;
+                    LiquidacionVM.SalarioOrdinarioDiario_Liq = (SalarioOrdinarioMensual) / 360 ;
                     LiquidacionVM.SalarioPromedioDiario_Liq = (SalarioOrdinarioMensual * 14) / 360;
                     LiquidacionVM.Preaviso_Liq = Monto_Preaviso;
                     LiquidacionVM.Cesantia_Liq = Monto_Cesantia;
@@ -177,6 +178,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
+                    return Json("Error", JsonRequestBehavior.AllowGet);
                 }
             }
             return Json("Error", JsonRequestBehavior.AllowGet);
@@ -187,20 +189,20 @@ namespace ERP_GMEDINA.Controllers
         {
             //using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             //{
-            try
-            {
-                var listaMotivo = from motivoLiq in db.tbMotivoLiquidacion
-                                  select new { Id = motivoLiq.moli_IdMotivo, Descripcion = motivoLiq.moli_Descripcion };
-                return Json(listaMotivo, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception Ex)
-            {
-                Ex.Message.ToString();
-                return Json("Error");
-            }
+                try
+                {
+                    var listaMotivo = from motivoLiq in db.tbMotivoLiquidacion
+                                        select new { Id = motivoLiq.moli_IdMotivo, Descripcion = motivoLiq.moli_Descripcion };
+                    return Json(listaMotivo, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception Ex)
+                {
+                    Ex.Message.ToString();
+                    return Json("Error");
+                }
             //}
         }
-
+        
 
         //GET: CALCULAR LIQUIDACION
         [HttpPost]
@@ -248,7 +250,7 @@ namespace ERP_GMEDINA.Controllers
                 list.PagoPorDiasFeriado = (list.PagoPorDiasFeriado == null) ? 0 : list.PagoPorDiasFeriado;
                 //Total
                 list.MontoTotalLiquidacion = list.Preaviso_Liq +
-                list.Cesantia_Liq +
+                list.Cesantia_Liq + 
                 list.DecimoTercerMesProporcional_Liq +
                 list.DecimoCuartoMesProporcional_Liq +
                 list.VacacionesPendientes_Liq +
@@ -273,6 +275,7 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.Message.ToString();
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
             return Json("Error", JsonRequestBehavior.AllowGet);
         }
@@ -341,6 +344,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
+                    return Json("Error", JsonRequestBehavior.AllowGet);
                 }
             }
             else
