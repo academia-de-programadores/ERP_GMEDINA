@@ -1,9 +1,6 @@
 ﻿var IDInactivar = 0;
 
-const btnGuardar = $('#btnCrearPreavisoConfirmar'),
-cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
-
-// actualizar datatable
+// cargar grid
 function cargarGridPreaviso() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
@@ -21,19 +18,26 @@ function cargarGridPreaviso() {
 
             // limpiar datatable
             $('#tblPreaviso').DataTable().clear();
+
             for (var i = 0; i < ListaPreaviso.length; i++) {
+
                 var FechaCrea = FechaFormato(ListaPreaviso[i].prea_FechaCrea);
                 var FechaModifica = FechaFormato(ListaPreaviso[i].prea_FechaModifica);
+
                 UsuarioModifica = ListaPreaviso[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListaPreaviso[i].NombreUsuarioModifica;
+
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaPreaviso[i].prea_Activo == false ? 'Inactivo' : 'Activo';
+
                 //variable boton detalles
                 var botonDetalles = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetallePreaviso">Detalles</button>' : '';
+
                 //variable boton editar
                 var botonEditar = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs"  id="btnEditarPreaviso">Editar</button>' : '';
+
                 //variable donde está el boton activar
                 var botonActivar = ListaPreaviso[i].prea_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPreaviso">Activar</button>' : '' : '';
-                
+
                 // agregar row
                 $('#tblPreaviso').dataTable().fnAddData([
                      ListaPreaviso[i].prea_IdPreaviso,
@@ -48,94 +52,355 @@ function cargarGridPreaviso() {
     FullBody();
 }
 
-function DataAnnotations(ToF) {
-    if (ToF == true) {
-        //TRUE PARA OCULTAR DATAANNOTATIONS
-        $("#Editar #RangoInicio_Validation_descripcion").css("display", "none");
-        $("#Editar #RangoInicio_Validation_descripcion").removeClass("text-danger");
-        $("#Editar #RangoFin_Validation_descripcion").css("display", "none");
-        //$("#Editar #RangoFin_Validation_descripcion").removeClass("text-danger");
-        $("#Editar #Dias_descripcion").css("display", "none");
-        $("#Editar #Dias_descripcion").removeClass("text-danger");
-    }
-    else {
-        //FALSE PARA MOSTRAR DATAANNOTATIONS
-        $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
-        $("#Editar #RangoInicio_Validation_descripcion").addClass("text-danger");
-        $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
-        //$("#Editar #RangoFin_Validation_descripcion").addClass("text-danger");
-        $("#Editar #Dias_descripcion").css("display", "block");
-        $("#Editar #Dias_descripcion").addClass("text-danger");
-    }
-}
-
-function ValidarForm() {
-    //VARIABLE DE RETORNO
-    var Retorno = true;
-    //DECLARACION DE OBJETOS 
-    var RangoInicio = $("#Editar #prea_RangoInicioMeses").val('');
-    var RangoFin = $("#Editar #prea_RangoFinMeses").val('');
-    var Dias = $("#Editar #prea_DiasPreaviso").val('');
-    //VALIDAR QUE LOS CAMPOS SEAN MAYORES QUE CERO
-    if (!RangoInicio >= 0 || RangoInicio != '')
-        Retorno = false;
-    if (!RangoFin >= 0 || RangoFin != '')
-        Retorno = false;
-    if (!Dias >= 0 || Dias != '')
-        Retorno = false;
-    //RETORNO DE FUNCION
-    return Retorno;
-}
-
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+// create 1 modal 
 $(document).on("click", "#btnAgregarPreaviso", function () {
+
+    // * rango inicio 
+    $('#AsteriscoRangoInicio').removeClass('text-danger');
+
+    // mesanje rango inicio no puede ser menor a cero
+    $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
+
+    // mesanje rango inicio requerido
+    $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
+
+    // * rango final 
+    $('#AsteriscoRangoFinal').removeClass('text-danger');
+
+    // mesanje rango final no puede ser menor a cero
+    $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+
+    // mesanje rango final requerido
+    $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+
+    // mesanje rango final no puede ser menor a rango inicial
+    $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+
+    // vaciar cajas de texto
+    $('#Crear input[type=text], input[type=number]').val('');
+
+
+    // habilitar boton
     $("#btnCrearPreavisoConfirmar").attr("disabled", false);
-    //OCULTAR VALIDACION
-    $("#Crear #RangoFinCrear").css("display", "none");
-    $("#Crear #AsteriscoFin").removeClass("text-danger");
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#Crear #prea_RangoInicioMeses").val('');
-    $("#Crear #prea_RangoFinMeses").val('');
-    $("#Crear #prea_DiasPreaviso").val('');
+
+    // mostrar modal
     $("#CrearPreaviso").modal({ backdrop: 'static', keyboard: false });
 
-
-    DataAnnotations(true);
 });
 
-//FUNCION: CREAR UN NUEVO REGISTRO
+// validaciones key up create
+
+// validar rango inicio create
+$('#Crear #prea_RangoInicioMeses').keyup(function () {
+
+    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/, '');
+    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/, '');
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Crear #prea_RangoFinMeses").val().trim() == '' || $("#Crear #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#AsteriscoRangoFinal').removeClass('text-danger');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoInicio) >= 0 || $("#Crear #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#AsteriscoRangoInicio').removeClass('text-danger');
+        $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoInicio').addClass("text-danger");
+        $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
+        $("#Crear #validation_RangoInicioMenorACero").css('display', '');
+    }
+
+    // requerido
+    if ($("#Crear #prea_RangoInicioMeses").val().trim() != '') {
+
+        if (parseInt(rangoInicio) >= 0) {
+            $('#AsteriscoRangoInicio').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoInicio').addClass("text-danger");
+        $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoInicioRequerido").css('display', '');
+    }
+
+});
+
+// validar rango final create
+$('#Crear #prea_RangoFinMeses').keyup(function () {
+
+    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/, '');
+    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/, '');
+
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || rangoFin.trim() == '' || rangoInicio.trim() == '') {
+
+        $('#AsteriscoRangoFinal').removeClass('text-danger');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoFin) >= 0 || $("#Crear #prea_RangoFinMeses").val().trim() == '') {
+
+        if (parseInt(rangoFin) > parseInt(rangoInicio) && $("#Crear #prea_RangoFinMeses").val().trim() != '') {
+            $('#AsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Crear #validation_RangoFinalMenorACero").css('display', '');
+    }
+
+    // requerido
+    if ($("#Crear #prea_RangoFinMeses").val().trim() != '') {
+
+        if (parseInt(rangoFin) >= 0 && parseInt(rangoFin) > parseInt(rangoInicio)) {
+            $('#AsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Crear #validation_RangoFinalRequerido").css('display', '');
+    }
+
+});
+
+// validar cantidad de dias create
+$('#Crear #prea_DiasPreaviso').keyup(function () {
+
+    var cantidadDias = $("#Crear #prea_DiasPreaviso").val().replace(/,/, '');
+
+    // si es menor o igual que cero
+    if (parseInt(cantidadDias) >= 0 || $("#Crear #prea_DiasPreaviso").val().trim() == '') {
+
+        $('#AsteriscoCantidadDia').removeClass('text-danger');
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoCantidadDia').addClass("text-danger");
+        $("#Crear #validation_CantidadDiasRequerido").css('display', 'none');
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', '');
+    }
+
+    // requerido
+    if ($("#Crear #prea_DiasPreaviso").val().trim() != '') {
+
+        if (parseInt($("#Crear #prea_DiasPreaviso").val()) >= 0) {
+            $('#AsteriscoCantidadDia').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_CantidadDiasRequerido").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoCantidadDia').addClass("text-danger");
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', 'none');
+        $("#Crear #validation_CantidadDiasRequerido").css('display', '');
+    }
+
+});
+
+// create 2 ejecutar 
 $('#btnCrearPreavisoConfirmar').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var Inicio = $("#Crear #prea_RangoInicioMeses").val();
-    var Fin = $("#Crear #prea_RangoFinMeses").val();
-    var Dias = $("#Crear #prea_DiasPreaviso").val();
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if (Inicio >= 0 && Fin > Inicio && Inicio != "" && Fin != "" && Dias != "" && Fin <= 36 && Inicio < 36) {
-        $("#btnCrearPreavisoConfirmar").attr("disabled", true);
+
+    // deshabilitar boton
+    $('#btnCrearPreavisoConfirmar').attr('disabled', true);
+    var modalState = true;
+    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/, '');
+    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/, '');
+    var cantidaDiasPreaviso = $("#Crear #prea_DiasPreaviso").val().replace(/,/, '');
+
+    // --- validaciones rango inicio ---
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Crear #prea_RangoFinMeses").val().trim() == '' || $("#Crear #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#AsteriscoRangoFinal').removeClass('text-danger');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
+        modalState = false;
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoInicio) >= 0 || $("#Crear #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#AsteriscoRangoInicio').removeClass('text-danger');
+        $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoInicio').addClass("text-danger");
+        $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
+        $("#Crear #validation_RangoInicioMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // rango inicial requerido
+    if ($("#Crear #prea_RangoInicioMeses").val().trim() != '') {
+
+        if (parseInt(rangoInicio) >= 0) {
+            $('#AsteriscoRangoInicio').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoInicio').addClass("text-danger");
+        $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoInicioRequerido").css('display', '');
+        modalState = false;
+    }
+
+    // --- validaciones rango fin ---
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Crear #prea_RangoFinMeses").val().trim() == '' || $("#Crear #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#AsteriscoRangoFinal').removeClass('text-danger');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
+        modalState = false;
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoFin) >= 0 || $("#Crear #prea_RangoFinMeses").val().trim() == '') {
+
+        if (parseInt(rangoFin) > parseInt(rangoInicio) && $("#Crear #prea_RangoFinMeses").val().trim() != '') {
+            $('#AsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Crear #validation_RangoFinalMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // requerido
+    if ($("#Crear #prea_RangoFinMeses").val().trim() != '') {
+
+        if (parseInt(rangoFin) >= 0 && parseInt(rangoFin) > parseInt(rangoInicio)) {
+            $('#AsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Crear #validation_RangoFinalRequerido").css('display', '');
+        modalState = false;
+    }
+
+    // --- cantidad dias preaviso ---
+
+    // si es menor o igual que cero
+    if (parseInt($("#Crear #prea_DiasPreaviso").val()) >= 0 || $("#Crear #prea_DiasPreaviso").val().trim() == '') {
+
+        $('#AsteriscoCantidadDia').removeClass('text-danger');
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoCantidadDia').addClass("text-danger");
+        $("#Crear #validation_CantidadDiasRequerido").css('display', 'none');
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // requerido
+    if ($("#Crear #prea_DiasPreaviso").val().trim() != '') {
+
+        if (parseInt(cantidaDiasPreaviso) >= 0) {
+            $('#AsteriscoCantidadDia').removeClass('text-danger');
+        }
+
+        $("#Crear #validation_CantidadDiasRequerido").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoCantidadDia').addClass("text-danger");
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', 'none');
+        $("#Crear #validation_CantidadDiasRequerido").css('display', '');
+        modalState = false;
+    }
+
+    //----
+
+    if (modalState == true) {
+        debugger;
         var data = $("#frmCreatePreaviso").serializeArray();
-        $("#Crear #AsteriscoInicio").removeClass("text-danger");
-        $("#Crear #AsteriscoFin").removeClass("text-danger");
-        $("#Crear #AsteriscoDias").removeClass("text-danger");
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+
+        console.log(data);
+
+        var indiceRangoInicio = data[3].value;
+        data[3].value = indiceRangoInicio.replace(/,/, '');
+
+        var indiceRangoFin = data[4].value;
+        data[4].value = indiceRangoFin.replace(/,/, '');
+
+        var indiceCantidadDias = data[5].value;
+        data[5].value = indiceCantidadDias.replace(/,/, '');
+
         $.ajax({
             url: "/Preaviso/Create",
             method: "POST",
             data: data
         }).done(function (data) {
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+
             if (data != "error") {
+
                 $("#btnCrearPreavisoConfirmar").attr("disabled", false);
                 $("#CrearPreaviso").modal('hide');
+
                 cargarGridPreaviso();
-                // Mensaje de exito cuando un registro se ha guardado bien
+
                 iziToast.success({
                     title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
             else {
+
                 $("#btnCrearPreavisoConfirmar").attr("disabled", false);
+
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
@@ -144,59 +409,42 @@ $('#btnCrearPreavisoConfirmar').click(function () {
         });
     }
     else {
-        if (Inicio == "" || Inicio < 0 || Inicio >= 36) {
-            $("#Crear #Validation_descripcion").css("display", "block");
-            $("#Crear #AsteriscoInicio").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_descripcion").css("display", "none");
-            $("#Crear #AsteriscoInicio").removeClass("text-danger");
-        }
-        //
-
-        if (Fin == "" || Fin <= 0 || fin > 36) {
-            $("#Crear #Validation_descripcion1").css("display", "block");
-            $("#Crear #AsteriscoFin").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_descripcion1").css("display", "none");
-            $("#Crear #AsteriscoFin").removeClass("text-danger");
-            if (Fin < Inicio) {
-                $("#Crear #RangoFinCrear").css("display", "block");
-                $("#Crear #AsteriscoFin").addClass("text-danger");
-            }
-            else {
-                $("#Crear #RangoFinCrear").css("display", "none");
-                $("#Crear #AsteriscoFin").removeClass("text-danger");
-            }
-        }
-        //
-
-        if (Dias == "" || Dias < "0") {
-            $("#Crear #Validation_descripcion2").css("display", "block");
-            $("#Crear #AsteriscoDias").addClass("text-danger");
-        }
-        else {
-            $("#Crear #Validation_descripcion2").css("display", "none");
-            $("#Crear #AsteriscoDias").removeClass("text-danger");
-        }
+        $('#btnCrearPreavisoConfirmar').attr('disabled', false);
     }
 });
 
 
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+// editar 1 modal
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
 
-    //OCULTAR DATAANNOTATIONS 
-    $("#Editar #Validation_descipcion").css("display", "block");
-    $("#Editar #Validation_descipcion1").css("display", "block");
-    $("#Editar #Validation_descipcion2").css("display", "block");
-    $("#Editar #AsteriscoInicio").removeClass("text-danger");
-    $("#Editar #AsteriscoFin").removeClass("text-danger");
-    $("#Editar #AsteriscoDias").removeClass("text-danger");
-    //REALIZAR LA PETICION AL SERVIDOR
     var ID = $(this).data('id');
     IDInactivar = ID;
+
+    // * rango inicio 
+    $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+
+    // mesanje rango inicio no puede ser menor a cero
+    $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
+
+    // mesanje rango inicio requerido
+    $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+
+    // * rango final 
+    $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+
+    // mesanje rango final no puede ser menor a cero
+    $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+
+    // mesanje rango final requerido
+    $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+
+    // mesanje rango final no puede ser menor a rango inicial
+    $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+
+
+    // habilitar boton 
+    $('#btnUpdatePreaviso').attr('disabled', false);
+
     $.ajax({
         url: "/Preaviso/Edit/" + ID,
         method: "POST",
@@ -205,123 +453,384 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+
             if (data) {
+
                 $.each(data, function (i, iter) {
                     $("#Editar #prea_IdPreaviso").val(iter.prea_IdPreaviso);
                     $("#Editar #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
                     $("#Editar #prea_RangoFinMeses").val(iter.prea_RangoFinMeses);
                     $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
                 });
+
                 $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
-
-
             }
-        });
-});
-
-$("#btnUpdatePreaviso").click(function () {
-    var Error = true;
-    var prea_RangoInicioMeses = $("#Editar #prea_RangoInicioMeses").val();
-    var prea_RangoFinMeses = $("#Editar #prea_RangoFinMeses").val();
-    var prea_DiasPreaviso = $("#Editar #prea_DiasPreaviso").val();
-    if (prea_RangoInicioMeses == "" || prea_RangoInicioMeses >= 36) {
-        $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
-        $("#Editar #RangoInicio_Validation_descripcion").addClass("text-danger");
-        $("#Editar #AsteriscoInicio").addClass("text-danger");
-        Error = false;
-    }
-    else {
-        $("#Editar  #RangoInicio_Validation_descripcion").css("display", "none");
-        $("#Editar #AsteriscoInicio").removeClass("text-danger");
-    }
-    if (prea_RangoFinMeses == "0" || prea_RangoFinMeses == "" || prea_RangoFinMeses > 36) {
-        $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
-        $("#Editar #AsteriscoFin").addClass("text-danger");
-        Error = false;
-    }
-    else {
-        $("#Editar #RangoFin_Validation_descripcion").css("display", "none");
-        $("#Editar #AsteriscoFin").removeClass("text-danger");
-
-        if (prea_RangoFinMeses < prea_RangoInicioMeses) {
-
-            $("#Editar #RangoFinEditar").css("display", "block");
-            $("#Editar #AsteriscoFin").addClass("text-danger");
-            Error = false;
-
-        }
-        else {
-            $("#Editar #RangoFinEditar").css("display", "none");
-            $("#Editar #AsteriscoFin").removeClass("text-danger");
-        }
-    }
-
-
-    if (prea_DiasPreaviso == "" || prea_DiasPreaviso < 0) {
-        $("#Editar #Dias_Validation_descripcion").css("display", "block");
-        $("#Editar #AsteriscoDias").addClass("text-danger");
-        Error = false;
-    }
-    else {
-        $("#Editar #Dias_Validation_descripcion").css("display", "none");
-        $("#Editar #AsteriscoDias").removeClass("text-danger");
-    }
-    if (Error) {
-        $("#Editar #AsteriscoInicio").removeClass("text-danger");
-        $("#Editar #AsteriscoFin").removeClass("text-danger");
-        $("#Editar #AsteriscoDias").removeClass("text-danger");
-        $("#EditarPreaviso").modal('hide');
-        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
-        $("#btnConfirmarEditar").attr("disabled", false);
-
-
-    }
-});
-
-//DESPLEGAR EL MODAL DE INACTIVAR
-$(document).on("click", "#btnCerrarConfirmarEditar", function () {
-    //OCULTAR EL MODAL DE EDICION
-    $("#ConfirmarEdicion").modal('hide');
-    //MOSTRAR MODAL DE EDICION
-    $("#EditarPreaviso").modal();
-});
-
-//GUARADAR LA EDICION DEL REGISTRO
-$(document).on("click", "#btnConfirmarEditar", function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-
-    $("#CrearPreaviso #Validation_descripcion").css("display", "block");
-
-    if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" && $("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "0.00" && $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" && $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "0.00" && $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "") {
-        $("#btnConfirmarEditar").attr("disabled", true);
-        var data = $("#frmEditPreaviso").serializeArray();
-        $.ajax({
-            url: "/Preaviso/Editar",
-            method: "POST",
-            data: data
-        })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data != "error") {
-                $("#btnConfirmarEditar").attr("disabled", false);
-                cargarGridPreaviso();
-
-                $("#ConfirmarEdicion").modal('hide');
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            } else {
-                $("#btnConfirmarEditar").attr("disabled", false);
+            else {
                 iziToast.error({
                     title: 'Error',
-                    message: '¡No se editó el registro, contacte al administrador!',
+                    message: 'No se pudo cargar la información, contacte al administrador',
                 });
             }
         });
+});
+
+// validaciones key up update
+
+// validar rango inicio create
+$('#Editar #prea_RangoInicioMeses').keyup(function () {
+
+    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/, '');
+    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/, '');
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Editar #prea_RangoFinMeses").val().trim() == '' || $("#Editar #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
     }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', '');
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoInicio) >= 0 || $("#Editar #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+        $("#Editar #validation_RangoInicioMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoInicio').addClass("text-danger");
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', '');
+    }
+
+    // requerido
+    if ($("#Editar #prea_RangoInicioMeses").val().trim() != '') {
+
+        if (parseInt(rangoInicio) >= 0) {
+            $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoInicio').addClass("text-danger");
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', '');
+    }
+
+});
+
+// validar rango final create
+$('#Editar #prea_RangoFinMeses').keyup(function () {
+
+    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/, '');
+    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/, '');
+
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || rangoFin.trim() == '' || rangoInicio.trim() == '') {
+
+        $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', '');
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoFin) >= 0 || $("#Editar #prea_RangoFinMeses").val().trim() == '') {
+
+        if (parseInt(rangoFin) > parseInt(rangoInicio) && $("#Editar #prea_RangoFinMeses").val().trim() != '') {
+            $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_RangoFinalMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', '');
+    }
+
+    // requerido
+    if ($("#Editar #prea_RangoFinMeses").val().trim() != '') {
+
+        if (parseInt(rangoFin) >= 0 && parseInt(rangoFin) > parseInt(rangoInicio)) {
+            $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', '');
+    }
+
+});
+
+// validar cantidad de dias create
+$('#Editar #prea_DiasPreaviso').keyup(function () {
+
+    var cantidadDias = $("#Editar #prea_DiasPreaviso").val().replace(/,/, '');
+
+    // si es menor o igual que cero
+    if (parseInt(cantidadDias) >= 0 || $("#Editar #prea_DiasPreaviso").val().trim() == '') {
+
+        $('#EditAsteriscoCantidadDia').removeClass('text-danger');
+        $("#Editar #validation_EditCantidadDiasMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoCantidadDia').addClass("text-danger");
+        $("#Editar #validation_EditCantidadDiasRequerido").css('display', 'none');
+        $("#Editar #validation_EditCantidadDiasMenorACero").css('display', '');
+    }
+
+    // requerido
+    if ($("#Editar #prea_DiasPreaviso").val().trim() != '') {
+
+        if (parseInt($("#Editar #prea_DiasPreaviso").val()) >= 0) {
+            $('#EditAsteriscoCantidadDia').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_EditCantidadDiasRequerido").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoCantidadDia').addClass("text-danger");
+        $("#Editar #validation_EditCantidadDiasMenorACero").css('display', 'none');
+        $("#Editar #validation_EditCantidadDiasRequerido").css('display', '');
+    }
+
+});
+
+// editar 2 ejecutar
+$("#btnUpdatePreaviso").click(function () {
+
+    $("#btnUpdatePreaviso").attr('disabled', true);
+
+    var modalState = true;
+    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/, '');
+    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/, '');
+    var cantidaDiasPreaviso = $("#Editar #prea_DiasPreaviso").val().replace(/,/, '');
+
+    // --- validaciones rango inicio ---
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Editar #prea_RangoFinMeses").val().trim() == '' || $("#Editar #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', '');
+        modalState = false;
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoInicio) >= 0 || $("#Editar #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoInicio').addClass("text-danger");
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // rango inicial requerido
+    if ($("#Editar #prea_RangoInicioMeses").val().trim() != '') {
+
+        if (parseInt(rangoInicio) >= 0) {
+            $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoInicio').addClass("text-danger");
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', '');
+        modalState = false;
+    }
+
+    // --- validaciones rango fin ---
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Editar #prea_RangoFinMeses").val().trim() == '' || $("#Editar #prea_RangoInicioMeses").val().trim() == '') {
+
+        $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', '');
+        modalState = false;
+    }
+
+    // si es menor o igual que cero
+    if (parseInt(rangoFin) >= 0 || $("#Editar #prea_RangoFinMeses").val().trim() == '') {
+
+        if (parseInt(rangoFin) > parseInt(rangoInicio) && $("#Editar #prea_RangoFinMeses").val().trim() != '') {
+            $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_RangoFinalMenorACero").css('display', 'none');
+    }
+    else {
+        $('Edit#AsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // requerido
+    if ($("#Editar #prea_RangoFinMeses").val().trim() != '') {
+
+        if (parseInt(rangoFin) >= 0 && parseInt(rangoFin) > parseInt(rangoInicio)) {
+            $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoRangoFinal').addClass("text-danger");
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', '');
+        modalState = false;
+    }
+
+    // --- cantidad dias preaviso ---
+
+    // si es menor o igual que cero
+    if (parseInt(cantidaDiasPreaviso) >= 0 || $("#Editar #prea_DiasPreaviso").val().trim() == '') {
+
+        $('#EditAsteriscoCantidadDia').removeClass('text-danger');
+        $("#Editar #validation_EditCantidadDiasMenorACero").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoCantidadDia').addClass("text-danger");
+        $("#Editar #validation_EditCantidadDiasRequerido").css('display', 'none');
+        $("#Editar #validation_EditCantidadDiasMenorACero").css('display', '');
+        modalState = false;
+    }
+
+    // requerido
+    if ($("#Editar #prea_DiasPreaviso").val().trim() != '') {
+
+        if (parseInt(cantidaDiasPreaviso) >= 0) {
+            $('#EditAsteriscoCantidadDia').removeClass('text-danger');
+        }
+
+        $("#Editar #validation_EditCantidadDiasRequerido").css('display', 'none');
+    }
+    else {
+        $('#EditAsteriscoCantidadDia').addClass("text-danger");
+        $("#Editar #validation_EditCantidadDiasMenorACero").css('display', 'none');
+        $("#Editar #validation_EditCantidadDiasRequerido").css('display', '');
+        modalState = false;
+    }
+
+
+    if (modalState == true) {
+
+        // ocultar modal de edicion
+        $("#EditarPreaviso").modal('hide');
+
+        // mostrar modal de confirmar edicion
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+
+        // habilitar boton de confirmación
+        $("#btnConfirmarEditar").attr("disabled", false);
+
+    }
+    else {
+        $("#btnUpdatePreaviso").attr('disabled', false);
+    }
+});
+
+
+// editar 3 ejecutar
+$(document).on("click", "#btnConfirmarEditar", function () {
+
+    $("#btnConfirmarEditar").attr("disabled", true);
+
+    var data = $("#frmEditPreaviso").serializeArray();
+
+    var indiceRangoInicio = data[3].value;
+    data[3].value = indiceRangoInicio.replace(/,/, '');
+
+    var indiceRangoFin = data[4].value;
+    data[4].value = indiceRangoFin.replace(/,/, '');
+
+    var indiceCantidadDias = data[5].value;
+    data[5].value = indiceCantidadDias.replace(/,/, '');
+
+
+
+    $.ajax({
+        url: "/Preaviso/Editar",
+        method: "POST",
+        data: data
+    })
+    .done(function (data) {
+
+        // validar respuesta del servidor 
+        if (data != "error") {
+
+            $("#ConfirmarEdicion").modal('hide');
+            cargarGridPreaviso();
+            $("#btnUpdatePreaviso").attr("disabled", false);
+            $("#btnConfirmarEditar").attr("disabled", false);
+
+            // mensaje de exito
+            iziToast.success({
+                title: 'Exito',
+                message: '¡El registro se editó de forma exitosa!',
+            });
+        }
+        else {
+
+            $("#btnUpdatePreaviso").attr("disabled", false);
+            $("#btnConfirmarEditar").attr("disabled", false);
+
+            iziToast.error({
+                title: 'Error',
+                message: '¡No se editó el registro, contacte al administrador!',
+            });
+        }
+    });
+});
+
+// inactivar cerrar modal confirmacion
+$(document).on("click", "#btnCerrarConfirmarEditar", function () {
+
+    // habilitar boton
+    $("#btnUpdatePreaviso").attr("disabled", false);
+    $("#btnConfirmarEditar").attr("disabled", false);
+
+    // ocultar modal de confirmacion de edicion
+    $("#ConfirmarEdicion").modal('hide');
+
+    // mostrar modal de edicion
+    $("#EditarPreaviso").modal();
 });
 
 //DESPLEGAR EL MODAL DE INACTIVAR
@@ -542,8 +1051,8 @@ function _ajax(params, uri, type, callback) {
         url: uri,
         type: type,
         data: { params },
-                success: function (data) {
-                    callback(data);
-                }
+        success: function (data) {
+            callback(data);
+        }
     });
 }

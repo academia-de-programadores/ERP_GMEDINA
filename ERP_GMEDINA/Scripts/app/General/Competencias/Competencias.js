@@ -120,6 +120,8 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["comp_Descripcion", "comp_RazonInactivo"]);
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    LimpiarControles(["comp_Descripcion", "comp_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
@@ -144,6 +146,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["comp_Descripcion"]);
                     llenarTabla();
                     MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["comp_Descripcion"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -167,6 +171,7 @@ $("#btnActualizar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
                 }

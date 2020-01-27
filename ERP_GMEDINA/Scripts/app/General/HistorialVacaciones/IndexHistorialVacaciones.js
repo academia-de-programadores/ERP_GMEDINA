@@ -171,6 +171,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -258,6 +260,8 @@ $("#btnGuardar").click(function () {
                                         LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
                                         llenarTabla();
                                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+                                        llenarTabla();
                                     } else {
                                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                                     }

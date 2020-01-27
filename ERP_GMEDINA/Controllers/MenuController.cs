@@ -11,11 +11,29 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         // GET: Menu
-        public ActionResult Index()
+        public ActionResult Index(int idmenu)
+        {
+            if(idmenu != 0)
+            {
+                tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
+                Session["sesionUsuario"] = sesionUsuario;
+                Session["sesionIdMenu"] = idmenu;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("MenuPrincipal");
+            }
+        }
+
+        public ActionResult MenuPrincipal()
         {
             tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
-            Session["sesionUsuario"] = sesionUsuario;			
+            Session["sesionUsuario"] = sesionUsuario;
+
             return View();
         }
+
+
     }
 }

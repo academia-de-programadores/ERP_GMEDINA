@@ -108,6 +108,8 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["idi_Descripcion"]);
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    LimpiarControles(["idi_Descripcion"]);
+                    llenarTabla();
                 }
                 else {
                     MsgError("Error", "No se agrego el registro, contacte al administrador.");
@@ -133,6 +135,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["idi_Descripcion", "idi_RazonInactivo"]);
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["idi_Descripcion", "idi_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }

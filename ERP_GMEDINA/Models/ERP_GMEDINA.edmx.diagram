@@ -29,13 +29,11 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbFormaPago" Width="1.5" PointX="3" PointY="140.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialDeduccionPago" Width="1.5" PointX="18.75" PointY="158.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialDeIngresosPago" Width="1.5" PointX="5.25" PointY="148.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialDePago" Width="1.5" PointX="13.5" PointY="159.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbIngresosIndividuales" Width="1.5" PointX="13.5" PointY="154.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbInstitucionesFinancieras" Width="1.5" PointX="3" PointY="143.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbISR" Width="1.5" PointX="5.25" PointY="166.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbLiquidacionVacaciones" Width="1.5" PointX="3" PointY="152.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbMotivoLiquidacion" Width="1.5" PointX="3" PointY="156.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPeriodos" Width="1.5" PointX="3" PointY="160" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion" Width="1.5" PointX="11.25" PointY="162.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPreaviso" Width="1.5" PointX="3" PointY="163.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTechosDeducciones" Width="1.5" PointX="19.5" PointY="153.25" IsExpanded="true" />
@@ -225,8 +223,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeduccionPago_hidp_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbInstitucionesFinancieras_insf_UsuarioCrea" ManuallyRouted="false" />
@@ -235,8 +231,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbISR_isr_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tddu_UsuarioCrea" ManuallyRouted="false" />
@@ -375,10 +369,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoBonos_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" ManuallyRouted="false" />
@@ -457,6 +447,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" Width="1.5" PointX="31.375" PointY="4.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" Width="1.5" PointX="29.375" PointY="28.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDirectoriosEmpleados" Width="1.5" PointX="16.5" PointY="172.875" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" />

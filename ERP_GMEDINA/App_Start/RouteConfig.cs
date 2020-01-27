@@ -16,7 +16,7 @@ namespace ERP_GMEDINA
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Menu", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Menu", action = "MenuPrincipal", id = UrlParameter.Optional }
             );
         }
     }

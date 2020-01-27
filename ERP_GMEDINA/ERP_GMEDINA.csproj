@@ -247,7 +247,9 @@
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
+    <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
@@ -1773,16 +1775,12 @@
     <Content Include="Content\BTN\BTN-HOME.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
-    <Content Include="Content\img\flecha-derecha.png" />
-    <Content Include="Content\img\flecha-derecha.svg" />
-    <Content Include="Content\img\flecha-hacia-la-izquierda.svg" />
     <Content Include="Content\img\header-profile-skin-2.png" />
     <Content Include="Content\img\header-profile.png" />
     <Content Include="Content\img\LoadingIcon.png" />
     <Content Include="Content\img\LoadingSpinner.gif" />
     <Content Include="Content\img\mas.png" />
     <Content Include="Content\img\menos.png" />
-    <Content Include="Content\img\pago.jpg" />
     <Content Include="Content\img\payroll.jpg" />
     <Content Include="Content\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-indicator.css" />
@@ -2123,6 +2121,8 @@
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresos.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresosRPT.rdlc" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2602,22 +2602,15 @@
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Details.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Edit.cshtml" />
     <Content Include="Views\EmpleadoComisiones\Index.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
-    <Content Include="Views\AcumuladosISR\Create.cshtml" />
-    <Content Include="Views\AcumuladosISR\Delete.cshtml" />
-    <Content Include="Views\AcumuladosISR\Details.cshtml" />
-    <Content Include="Views\AcumuladosISR\Edit.cshtml" />
     <Content Include="Views\AcumuladosISR\Index.cshtml" />
     <Content Include="Views\AcumuladosISR\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_EditTechosDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_DetailCatalogoDeIngreso.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_EditCatalogoDeIngresos.cshtml" />
@@ -2627,10 +2620,6 @@
     <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
     <Content Include="Views\Planilla\Index.cshtml" />
     <Content Include="Views\Planilla\_GenerarPlanillaConfiguracion.cshtml" />
-    <Content Include="Views\TechosDeducciones\Create.cshtml" />
-    <Content Include="Views\TechosDeducciones\Delete.cshtml" />
-    <Content Include="Views\TechosDeducciones\Details.cshtml" />
-    <Content Include="Views\TechosDeducciones\Edit.cshtml" />
     <Content Include="Views\TechosDeducciones\Index.cshtml" />
     <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
@@ -2651,10 +2640,6 @@
     <Content Include="Views\TipoDeducciones\Index.cshtml" />
     <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
     <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
-    <Content Include="Views\ISR\Create.cshtml" />
-    <Content Include="Views\ISR\Delete.cshtml" />
-    <Content Include="Views\ISR\Details.cshtml" />
-    <Content Include="Views\ISR\Edit.cshtml" />
     <Content Include="Views\ISR\Index.cshtml" />
     <Content Include="Views\ISR\_CreateISR.cshtml" />
     <Content Include="Views\ISR\_DetailsISR.cshtml" />
@@ -2685,10 +2670,6 @@
     <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
     <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
     <Content Include="Views\FechaPlanilla\ComprobanteEmpleadoEncabezado.cshtml" />
-    <Content Include="Views\FechaPlanilla\Create.cshtml" />
-    <Content Include="Views\FechaPlanilla\Delete.cshtml" />
-    <Content Include="Views\FechaPlanilla\Details.cshtml" />
-    <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
     <Content Include="Views\IngresosIndividuales\Index.cshtml" />
     <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />
@@ -2920,10 +2901,12 @@
     <Content Include="Views\InstitucionesFinancieras\_Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Edit.cshtml" />
-    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index2.cshtml" />
     <Content Include="Views\Empleados\_DeleteExpediente.cshtml" />
     <Content Include="Views\Empleados\_DetallesExpediente.cshtml" />
+    <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
+    <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
+    <Content Include="Views\Menu\MenuPrincipal.cshtml" />
+    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
