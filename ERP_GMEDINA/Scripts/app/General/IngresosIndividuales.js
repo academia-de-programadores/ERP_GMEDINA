@@ -55,20 +55,21 @@ function cargarGridDeducciones() {
                 var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
-                var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
+                var botonDetalles = '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>';
 
                 //variable boton editar
                 var botonEditar = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnEditarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" iniid="' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
+                //var botonActivar = (ListaIngresoIndividual[i].ini_Activo) == false ? (esAdministrador) == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnActivarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
+                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" type="button" class="btn btn-default btn-xs"  id="btnActivarIngresosIndividuales">Activar</button>' : '' : '';
 
                 //AGREGAR EL ROW AL DATATABLE
                 $('#IndexTabla').dataTable().fnAddData([
                     ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
                     ListaIngresoIndividual[i].ini_Motivo,
                     ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
-                    ListaIngresoIndividual[i].ini_Monto,
+                    (ListaIngresoIndividual[i].ini_Monto % 1 == 0) ? ListaIngresoIndividual[i].ini_Monto + ".00" : ListaIngresoIndividual[i].ini_Monto,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
@@ -78,40 +79,36 @@ function cargarGridDeducciones() {
         });
 }
 
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
-        <div class="sk-rect1"></div>
-        <div class="sk-rect2"></div>
-        <div class="sk-rect3"></div>
-        <div class="sk-rect4"></div>
-        <div class="sk-rect5"></div>
-        </div>`;
-}
 
+//VARIABLE GLOBAL DE INACTIVACION
+var GB_Activar = 0;
 //Activar
 $(document).on("click", "#IndexTabla tbody tr td #btnActivarIngresosIndividuales", function () {
-    document.getElementById("btnActivarRegistroIngresoIndividual").disabled = false;
-    var id = $(this).closest('tr').data('id');
-
-    var id = $(this).attr('iniid');
-    localStorage.setItem('id', id);
+    //DESBLOQUEAR EL BOTON DE ACTIVAR
+    $("#btnActivarRegistroIngresoIndividual").attr("disabled", false);
+    //OBTENER EL ID DEL BOTON
+    var id = $(this).data('id');
+    //SETEO DE LA VARIABLE GLOABAL DE ACTIVACION
+    GB_Activar = id;
     //Mostrar el Modal
-    $("#ActivarIngresosIndividuales").modal();
+    $("#ActivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
 });
 
+
 $("#btnActivarRegistroIngresoIndividual").click(function () {
-    document.getElementById("btnActivarRegistroIngresoIndividual").disabled = true;
-    let id = localStorage.getItem('id')
+    //BLOQUEAR EL BOTON DE ACTIVAR
+    $("#btnActivarRegistroIngresoIndividual").attr("disabled", true);
 
     $.ajax({
-        url: "/IngresosIndividuales/Activar",
-        method: "POST",
-        data: { id: id }
+        url: "/IngresosIndividuales/Activar/" + GB_Activar,
+        method: "GET"
     }).done(function (data) {
         $("#ActivarIngresosIndividuales").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
+            //DESBLOQUEAR EL BOTON DE ACTIVAR
+            $("#btnActivarRegistroIngresoIndividual").attr("disabled", false);
+            //MOSTRAR EL MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
                 message: '¡No se activó el registro, contacte al administrador!',
@@ -126,6 +123,8 @@ $("#btnActivarRegistroIngresoIndividual").click(function () {
             });
         }
     });
+    //SETEAR LA VARIABLE DE ACTIVACION
+    GB_Activar = 0;
 
 });
 
@@ -139,9 +138,6 @@ $("#btnCerrarCrear").click(function () {
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
 
 $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
@@ -202,7 +198,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     if (ValidarCamposCrear(Motivo, IdEmp, Monto)) {
         document.getElementById("btnCreateRegistroIngresoIndividual").disabled = true;
         var data = { ini_Motivo: Motivo, emp_Id: IdEmp, ini_Monto: MontoFormateado, ini_PagaSiempre: ini_PagaSiempre };
-        console.log(data);
+
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/IngresosIndividuales/Create",
@@ -238,7 +234,6 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
         document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
         //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
         ValidarCamposCrear(Motivo, IdEmp, Monto);
-        console.log("Modelo Invalido");
     }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -357,14 +352,9 @@ $("#btnCerrarEditar").click(function () {
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-
-const btnEditar = $('#btnEditIngresoIndividual')
-
-const btnInactivar = $('#btnInactivarIngresoIndividual')
-
-
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales", function () {
     var id = $(this).data('id');
+    GB_Inactivar = id;
     $.ajax({
         url: "/IngresosIndividuales/Edit/" + id,
         method: "GET",
@@ -446,13 +436,11 @@ $("#btnEditIngresoIndividual").click(function () {
     var Monto = $("#Editar #ini_Monto").val();
 
     if (ValidarCamposEditar(Motivo, IdColaborador, Monto)) {
-        console.log("si");
         $("#EditarIngresosIndividuales").modal('hide');
         $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
         document.getElementById("btnEditIngresoIndividual2").disabled = false;
     }  
     else {
-        console.log("no");
         ValidarCamposEditar(Motivo, IdColaborador, Monto);
         document.getElementById("btnEditIngresoIndividual").disabled = false;
     }
@@ -545,7 +533,6 @@ function ValidarCamposEditar(Motivo, IDColaborador, Monto) {
         if (LengthString > 1) {
             var FirstChar = LengthString - 2;
             var LastChar = Motivo.substring(FirstChar, LengthString);
-            console.log(LastChar);
         }
         if (LastChar == "  ") {
             $("#Editar #ini_Motivo").val(Motivo.substring(0, FirstChar + 1));
@@ -717,33 +704,18 @@ $(document).on("click", "#btnInactivarIngresoIndividual", function () {
     document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = false;
 });
 
-const btnInhabilitar = $('#btnInactivarRegistroIngresoIndividual')
-
-//Div que aparecera cuando se le de click en crear
-cargandoInhabilitar = $('#cargandoInhabilitar')
-
-function ocultarCargandoInhabilitar() {
-    btnInhabilitar.show();
-    cargandoInhabilitar.html('');
-    cargandoInhabilitar.hide();
-}
-
-function mostrarCargandoInhabilitar() {
-    btnInhabilitar.hide();
-    cargandoInhabilitar.html(spinner());
-    cargandoInhabilitar.show();
-}
-
-
+//VARIABLE GLOBAL DE INACTIVACION
+var GB_Inactivar = 0;
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroIngresoIndividual").click(function () {
-    document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = true;
-    var data = $("#frmInactivarIngresoIndividual").serializeArray();
+    //BLOQUEAR EL BOTON
+    $("#btnInactivarRegistroIngresoIndividual").attr("disabled", true);
+
+    //var data = $("#frmInactivarIngresoIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/IngresosIndividuales/Inactivar",
-        method: "POST",
-        data: data
+        url: "/IngresosIndividuales/Inactivar/" + GB_Inactivar,
+        method: "GET"
     }).done(function (data) {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
@@ -753,7 +725,6 @@ $("#btnInactivarRegistroIngresoIndividual").click(function () {
             });
         }
         else {
-            mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
 
@@ -767,7 +738,8 @@ $("#btnInactivarRegistroIngresoIndividual").click(function () {
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
-        ocultarCargandoInhabilitar();
+        //SETEAR LA VARIABLE GLOBAL DE INACTIVAR
+        GB_Inactivar = 0;
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal

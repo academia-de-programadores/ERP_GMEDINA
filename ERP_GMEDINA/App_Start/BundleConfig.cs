@@ -488,6 +488,14 @@ namespace ERP_GMEDINA
             #endregion
 
             #region Planillas
+
+            #region ReportesPlanilla
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesPlanilla").Include(
+                "~/Scripts/app/General/ReportesPlanilla.js"));
+
+            #endregion
+
             #region Equipo Flamenco
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
