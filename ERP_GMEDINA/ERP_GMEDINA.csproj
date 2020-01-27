@@ -469,6 +469,9 @@
     <Compile Include="Models\tbAuxilioDeCesantias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbBitacoraErrores.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
