@@ -92,7 +92,7 @@ var crearEditar = function (edit) {
                         title: 'Exito',
                         message: '¡El registro se agregó de forma exitosa!'
                     });
-                    location.href = baseUrl;
+                    location.href = baseUrl + '/Index';
                 } else {
                     iziToast.error({
                         title: 'Error',
@@ -123,7 +123,7 @@ var crearEditar = function (edit) {
                         title: 'Exito',
                         message: '¡El registro se editó de forma exitosa!'
                     });
-                    location.href = baseUrl;
+                    location.href = baseUrl + '/Index';;
                 } else {
                     iziToast.error({
                         title: 'Error',
@@ -902,7 +902,7 @@ function obtenerIdDetallesEditar(tbody, table) {
     $(tbody).on('click', 'button#btnActivar', function () {
         localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
         localStorage.setItem('element', JSON.stringify($(this).parents('tr')));
-        $('#frmActivarCatalogoPlanilla').modal();
+        $('#frmActivarCatalogoPlanilla').modal({ backdrop: 'static', keyboard: false });
     });
 }
 
@@ -1068,7 +1068,6 @@ $(document).ready(() => {
     //Validar la frecuencia en dias cuando se salga del input
     inputFrecuenciaEnDias.blur(function () {
         if (
-            inputFrecuenciaEnDias.val().trim() != '' &&
             inputFrecuenciaEnDias.val() != '0' &&
             inputFrecuenciaEnDias.val() > 0
         ) {
@@ -1204,7 +1203,7 @@ $('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
             arrayDeducciones
         )
     ) {
-        $('#modalConfirmacionEdit').modal();
+        $('#modalConfirmacionEdit').modal({ backdrop: 'static', keyboard: false });
     }
 
 });
@@ -1220,7 +1219,7 @@ $(document).on(
 
 //Inactivar
 $('#inactivar').click(() => {
-    $('#InactivarCatalogoDeducciones').modal();
+    $('#InactivarCatalogoDeducciones').modal({ backdrop: 'static', keyboard: false });
 });
 
 
@@ -1237,7 +1236,8 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
                     title: 'Exito',
                     message: '¡El registro se inactivó de forma exitosa!'
                 });
-                location.href = baseUrl;
+                $('#InactivarCatalogoDeducciones').modal('hide');
+                location.href = baseUrl + '/Index';
             } else {
                 iziToast.error({
                     title: 'Error',
