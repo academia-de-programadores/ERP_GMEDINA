@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TitulosController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Titulos
         public ActionResult Index()
@@ -26,13 +26,13 @@ namespace ERP_GMEDINA.Controllers
             try
             {
 
-            tbTitulos tbtitulos = new tbTitulos { };
-            return View(tbtitulos);
-           }
+                tbTitulos tbtitulos = new tbTitulos { };
+                return View(tbtitulos);
+            }
             catch
-               {
+            {
                 return View();
-                }
+            }
         }
 
         [HttpPost]
@@ -40,6 +40,8 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
+                db = new ERP_GMEDINAEntities();
+
                 var tbTitulos = db.tbTitulos
                     .Select(
                     t => new
@@ -77,6 +79,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTitulos_Insert(tbtitulos.titu_Descripcion, usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTitulos_Insert_Result item in list)
                     {
@@ -111,6 +114,7 @@ namespace ERP_GMEDINA.Controllers
 
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbtitulos = db.tbTitulos.Find(id);
                 if (tbtitulos == null)
                 {
@@ -149,6 +153,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTitulos_Update(id, tbtitulos.titu_Descripcion, usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTitulos_Update_Result item in list)
                     {
@@ -176,12 +181,13 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             string RazonInactivo = "Se ha Inhabilitado este Registro";
 
-            if (tbtitulos.titu_Id != 0 )
+            if (tbtitulos.titu_Id != 0)
             {
                 var id = (int)Session["id"];
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTitulos_Delete(id, RazonInactivo, usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTitulos_Delete_Result item in list)
                     {
@@ -227,6 +233,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTitulos_Restore(id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTitulos_Restore_Result item in list)
                     {
@@ -243,7 +250,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
@@ -251,3 +258,23 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,29 +18,27 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                  <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
-                    <thead>
-                        <tr role="row">
-                            <th>Número</th>
-                            <th>Títulos</th>
-                            <th>Estado</th>
-                             <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            
-                    </tbody>                       
-                  </table>
+                    <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
+                        <thead>
+                            <tr role="row">
+                                <th>Número</th>
+                                <th>Títulos</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
- </div>
+</div>
 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbTitulos())
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbTitulos())
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbTitulos())
 @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbTitulos())
-    
+
 
 <div class="modal fade" id="ModalHabilitar" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -50,7 +48,7 @@
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
-                ¿Esta seguro que desea Activar este registro?
+                ¿Esta seguro que desea activar este registro?
             </div>
             <input type="hidden" value="" id="txtIdRestore">
             <div class="modal-footer">
