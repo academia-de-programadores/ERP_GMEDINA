@@ -2903,13 +2903,13 @@
     <Content Include="Views\InstitucionesFinancieras\_Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Edit.cshtml" />
-    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Index2.cshtml" />
     <Content Include="Views\Empleados\_DeleteExpediente.cshtml" />
     <Content Include="Views\Empleados\_DetallesExpediente.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
     <Content Include="Views\Menu\MenuPrincipal.cshtml" />
+    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

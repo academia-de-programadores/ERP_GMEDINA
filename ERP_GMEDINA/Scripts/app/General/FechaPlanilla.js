@@ -182,7 +182,7 @@ function getTipoPlanilla(data) {
         ingresosPlanillas +=
             `  <tr>
                     <td>
-                         <form method="POST" action="FechaPlanilla/ComprobanteEmpleadoEncabezado">
+                         <form method="POST" action="/FechaPlanilla/ComprobanteEmpleadoEncabezado">
                             <input name="ID" id="idPlanilla" value="`+ val.idPlanilla + `" hidden>
                             <input name="anio" id="anioPlanilla" value="` + val.anioPlanilla + `" hidden>
                             ` + val.DescripcionPlanilla + `
