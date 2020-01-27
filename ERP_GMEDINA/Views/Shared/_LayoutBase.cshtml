@@ -21,6 +21,9 @@
     <!-- Primary Inspinia style -->
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
+
 
 </head>
 <body class="pace-done  fixed-sidebar">
@@ -47,7 +50,10 @@
     @Scripts.Render("~/bundles/inspinia")
     <!-- Skin config script - only for demo purpose-->
     @Scripts.Render("~/bundles/skinConfig")
-    @Scripts.Render("~/plugins/izitoast")
+
+    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
+    
     @Scripts.Render("~/plugins/mascarasDeEntrada")
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
