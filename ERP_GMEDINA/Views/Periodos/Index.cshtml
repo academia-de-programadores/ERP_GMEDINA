@@ -27,64 +27,74 @@
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
                     }
 
-                  <table id="tblPeriodo" class="table table-striped table-bordered table-hover dataTables-example">
-                    <thead>
-                        <tr role="row">
-                            <th>@Html.DisplayNameFor(model => model.peri_IdPeriodo)</th>
-                            <th>@Html.DisplayNameFor(model => model.peri_DescripPeriodo)</th>
-                            <th>@Html.DisplayNameFor(model => model.peri_Activo)</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyPeriodo">
+                    <table id="tblPeriodo" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th>@Html.DisplayNameFor(model => model.peri_IdPeriodo)</th>
+                                <th>@Html.DisplayNameFor(model => model.peri_DescripPeriodo)</th>
+                                <th>@Html.DisplayNameFor(model => model.peri_CantidadDias)</th>
+                                <th>@Html.DisplayNameFor(model => model.peri_RecibeSeptimoDia)</th>
+                                <th>@Html.DisplayNameFor(model => model.peri_Activo)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyPeriodo">
 
-                      @foreach (var item in Model){
+                            @foreach (var item in Model)
+                            {
 
-                         var UsuarioModifica = !(item.peri_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
-                          var UsuarioCrea = !(item.peri_UsuarioCrea > 0) ? "Sin modificaciones" : item.tbUsuario.usu_NombreUsuario;
-                          var FechaCrea = Convert.ToString(item.peri_FechaCrea) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.peri_FechaCrea);
-                          var FechaModifica = Convert.ToString(item.peri_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.peri_FechaModifica);
+                                var UsuarioModifica = !(item.peri_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
+                                var UsuarioCrea = !(item.peri_UsuarioCrea > 0) ? "Sin modificaciones" : item.tbUsuario.usu_NombreUsuario;
+                                var FechaCrea = Convert.ToString(item.peri_FechaCrea) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.peri_FechaCrea);
+                                var FechaModifica = Convert.ToString(item.peri_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.peri_FechaModifica);
+                                var SeptimoDia = (item.peri_RecibeSeptimoDia == null || item.peri_RecibeSeptimoDia == false) ? "No" : "Si";
 
                         <!-- validar el estado del registro (activo/inactivo)-->
-                        string estadoISR = item.peri_Activo == false ? "Inactivo" : "Activo";
+                                string estadoISR = item.peri_Activo == false ? "Inactivo" : "Activo";
 
-                        <tr class="gradeA odd" role="row">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.peri_IdPeriodo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.peri_DescripPeriodo)
-                            </td>
-                            <td>
-                                <!-- variable del estado del registro creada arriba-->
-                                @estadoISR
-                            </td>
-                            <td>
-                                @{
+                                <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.peri_IdPeriodo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.peri_DescripPeriodo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.peri_CantidadDias)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => SeptimoDia)
+                                    </td>
+                                    <td>
+                                        <!-- variable del estado del registro creada arriba-->
+                                        @estadoISR
+                                    </td>
+                                    <td>
+                                        @{
                                             <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
-                                    if (item.peri_Activo == true)
-                                    {
-                                        <button type="button" data-id="@item.peri_IdPeriodo" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalles</button>
+                                            if (item.peri_Activo == true)
+                                            {
+                                                <button type="button" data-id="@item.peri_IdPeriodo" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalles</button>
                                                 <button type="button" data-id="@item.peri_IdPeriodo" class="btn btn-default btn-xs" id="btnEditarPeriodo">Editar</button>
-                                    }
+                                            }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
-                                    if (oUsuario?.usu_EsAdministrador == true && item.peri_Activo == false)
-                                    {
+                                            if (oUsuario?.usu_EsAdministrador == true && item.peri_Activo == false)
+                                            {
                                                  <!-- ACTIVAR -->
-                                        <button type="button" data-id="@item.peri_IdPeriodo" class="btn btn-primary btn-xs" id="btnActivarPeriodos">Activar</button>
-                                    }
-                                }
-                            </td>
-                        </tr>
-                        }
+                                                <button type="button" data-id="@item.peri_IdPeriodo" class="btn btn-primary btn-xs" id="btnActivarPeriodos">Activar</button>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                            }
 
-                    </tbody>
-                  </table>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
- </div>
+</div>
 
 <div class="modal fade" id="CrearPeriodo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -168,7 +178,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Detalle Período</h4>
             </div>
-            <div class="modal-body"id="Detalles">
+            <div class="modal-body" id="Detalles">
                 @Html.Partial("_Details", new ERP_GMEDINA.Models.tbPeriodos())
             </div>
             <div class="modal-footer">

@@ -33,6 +33,8 @@ namespace ERP_GMEDINA.Controllers
                 .Select(c => new {
                     peri_IdPeriodo = c.peri_IdPeriodo,
                     peri_DescripPeriodo = c.peri_DescripPeriodo,
+                    peri_CantidadDias = c.peri_CantidadDias,
+                    peri_RecibeSeptimoDia = c.peri_RecibeSeptimoDia,
                     fpa_UsuarioCrea = c.peri_UsuarioCrea,
                     NombreUsuarioCrea = c.tbUsuario.usu_NombreUsuario,
                     peri_FechaCrea = c.peri_FechaCrea,
@@ -49,8 +51,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: CREATE
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo,peri_UsuarioCrea,peri_FechaCrea,peri_Activo")] tbPeriodos tbPeriodos)
+        public ActionResult Create([Bind(Include = "peri_DescripPeriodo, peri_CantidadDias, peri_RecibeSeptimoDia")] tbPeriodos tbPeriodos)
         {
             // data de auditoria
             tbPeriodos.peri_UsuarioCrea = 1;
@@ -71,8 +72,8 @@ namespace ERP_GMEDINA.Controllers
                     listPeriodo = db.UDP_Plani_tbPeriodos_Insert(tbPeriodos.peri_DescripPeriodo,
                                                                             tbPeriodos.peri_UsuarioCrea,
                                                                             tbPeriodos.peri_FechaCrea,
-                                                                            true,
-                                                                            1);
+                                                                            tbPeriodos.peri_RecibeSeptimoDia,
+                                                                            tbPeriodos.peri_CantidadDias);
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPeriodos_Insert_Result resultado in listPeriodo)
@@ -115,7 +116,7 @@ namespace ERP_GMEDINA.Controllers
 
             // obtener registro con ese ID
             var tbPeriodo = db.tbPeriodos.Where(d => d.peri_IdPeriodo == id)
-                        .Select(c => new { peri_DescripPeriodo = c.peri_DescripPeriodo, peri_IdPeriodo = c.peri_IdPeriodo, peri_UsuarioCrea = c.peri_UsuarioCrea, peri_FechaCrea = c.peri_FechaCrea, peri_UsuarioModifica = c.peri_UsuarioModifica, peri_FechaModifica = c.peri_FechaModifica, peri_Activo = c.peri_Activo })
+                        .Select(c => new { peri_DescripPeriodo = c.peri_DescripPeriodo, peri_CantidadDias = c.peri_CantidadDias, peri_RecibeSeptimoDia = c.peri_RecibeSeptimoDia, peri_IdPeriodo = c.peri_IdPeriodo, peri_UsuarioCrea = c.peri_UsuarioCrea, peri_FechaCrea = c.peri_FechaCrea, peri_UsuarioModifica = c.peri_UsuarioModifica, peri_FechaModifica = c.peri_FechaModifica, peri_Activo = c.peri_Activo })
                         .ToList();
 
             // si no hay ningún objeto con ese ID, retornar error
@@ -131,8 +132,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: EDITAR
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Editar([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo")] tbPeriodos tbPeriodos)
+        public JsonResult Editar([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo, peri_CantidadDias, peri_RecibeSeptimoDia")] tbPeriodos tbPeriodos)
         {
             // data de auditoria
             tbPeriodos.peri_UsuarioModifica = 1;
@@ -203,6 +203,8 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             tbPeriod.peri_IdPeriodo,
                                             tbPeriod.peri_DescripPeriodo,
+                                            tbPeriod.peri_CantidadDias,
+                                            tbPeriod.peri_RecibeSeptimoDia,
                                             tbPeriod.peri_Activo,
                                             tbPeriod.peri_UsuarioCrea,
                                             UsuCrea = tbPeriod.tbUsuario.usu_NombreUsuario,

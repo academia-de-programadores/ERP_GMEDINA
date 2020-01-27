@@ -262,7 +262,7 @@ namespace ERP_GMEDINA.Controllers
         {
             string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
             try
-            {
+                { 
                 db = new ERP_GMEDINAEntities();
                 if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
                 {//OPEN IF
@@ -377,11 +377,26 @@ namespace ERP_GMEDINA.Controllers
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                InsertBitacoraErrores("Empleados_Index", "-2 " +  ex.Message.ToString(), "Insert");
                 return Json(-2, JsonRequestBehavior.AllowGet);
             }
             return Json(1, JsonRequestBehavior.AllowGet);
         }
+
+        private void InsertBitacoraErrores(string sPantalla, string biteMensajeError, string biteAccion)
+        {
+            string UserName = "Error";
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                var List = db.UDP_Acce_tbBitacoraErrores_Insert(sPantalla, UserName, DateTime.Now, biteMensajeError, biteAccion);
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+            }
+        }
+
         // GET: Empleados/Details/5
         public ActionResult Details(int? id)
         {

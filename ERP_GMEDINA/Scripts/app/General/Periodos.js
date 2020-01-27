@@ -44,6 +44,8 @@ function cargarGridPeriodo() {
                 var FechaModifica = FechaFormato(ListPeriodo[i].peri_FechaModifica);
                 UsuarioModifica = ListPeriodo[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListPeriodo[i].NombreUsuarioModifica;
 
+                var SeptimoDia = (ListPeriodo[i].peri_RecibeSeptimoDia == null || ListPeriodo[i].peri_RecibeSeptimoDia == false) ? "No" : "Si";
+
                 // variable para verificar el estado del registro
                 var estadoRegistro = ListPeriodo[i].peri_Activo == false ? 'Inactivo' : 'Activo'
 
@@ -60,6 +62,8 @@ function cargarGridPeriodo() {
                 $('#tblPeriodo').dataTable().fnAddData([
                     ListPeriodo[i].peri_IdPeriodo,
                     ListPeriodo[i].peri_DescripPeriodo,
+                    ListPeriodo[i].peri_CantidadDias,
+                    SeptimoDia,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar]
                 );
@@ -74,97 +78,39 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
     // habilitar boton
     $("#btnCrearPeriodoConfirmar").attr("disabled", false);
 
-    // vaciar cajas de texto
-    $('#Crear input[type=text], input[type=number]').val('');
-
-    // * descripcion 
-    $('#AsteriscoDescripcion').removeClass('text-danger');
-
-    // mesanje descripcion requerida
-    $("#Crear #validation_DescripcionRequerida").css('display', 'none');
-
-    // mesanje descripcion requerida
-    $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+    //OCULTAR VALIDACIONES
+    OcultarValidacionesCrear();
 
     // modal crear
-    $("#CrearPeriodo").modal();
+    $("#CrearPeriodo").modal({ backdrop: 'static', keyboard: false });
 });
 
-// create validaciones keyup
-$('#Crear #peri_DescripPeriodo').keyup(function () {
 
-    var descripcion = $("#Crear #peri_DescripPeriodo").val();
-
-    //si no está vacio
-    if (descripcion.trim() != '') {
-
-        $('#AsteriscoDescripcion').removeClass('text-danger');
-        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
-    }
-    else {
-        $('#AsteriscoDescripcion').addClass("text-danger");
-        $("#Crear #validation_DescripcionRequerida").css('display', '');
-        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
-    }
-
-    // si es un número y no está vacio
-    if (isNaN(descripcion) == false && descripcion.trim() != '') {
-
-        $('#AsteriscoDescripcion').addClass("text-danger");
-        $("#Crear #validation_DescripcionNumerico").css('display', '');
-    }
-        // si es un número
-    else if (isNaN(descripcion) == true) {
-
-        $('#AsteriscoDescripcion').removeClass('text-danger');
-        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
-    }
-
-});
 
 // create 2 ejecutar
 $('#btnCrearPeriodoConfirmar').click(function () {
 
-    // deshabilitar boton
-    $("#btnCrearPeriodoConfirmar").attr("disabled", true);
 
-    var modelState = true;
+    //OBTENER LEL VALOR DE LOS INPUTS
+    var Descrip = $("#Crear #peri_DescripPeriodo").val();
+    var Cantidad = $("#Crear #peri_CantidadDias").val();
 
-    var descripcion = $("#Crear #peri_DescripPeriodo").val();
+    //REALIZAR LA VALIDACION
+    if (ValidarCamposCrear(Descrip, Cantidad)) {
+        // deshabilitar boton
+        $("#btnCrearPeriodoConfirmar").attr("disabled", true);
 
-    //si no está vacio
-    if (descripcion.trim() != '') {
+        ////SERIALIZAR EL FORMULARIO
+        //var data = $("#frmCreatePeriodo").serializeArray();
 
-        $('#AsteriscoDescripcion').removeClass('text-danger');
-        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
-    }
-    else {
-        $('#AsteriscoDescripcion').addClass("text-danger");
-        $("#Crear #validation_DescripcionRequerida").css('display', '');
-        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
-        modelState = false;
-    }
+        var recibe = ($('#Crear #peri_RecibeSeptimoDia').is(':checked')) ? true : false;
 
-    // si es un número y no está vacio
-    if (isNaN(descripcion) == false && descripcion.trim() != '') {
+        var data = {
+            peri_DescripPeriodo: $("#Crear #peri_DescripPeriodo").val(),
+            peri_CantidadDias: $("#Crear #peri_CantidadDias").val(),
+            peri_RecibeSeptimoDia: RecibeCrear
+        };
 
-        $('#AsteriscoDescripcion').addClass("text-danger");
-        $("#Crear #validation_DescripcionNumerico").css('display', '');
-        modelState = false;
-    }
-        // si es un número
-    else if (isNaN(descripcion) == true) {
-
-        $('#AsteriscoDescripcion').removeClass('text-danger');
-        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
-    }
-    
-
-    if (modelState == true) {
-
-        var data = $("#frmCreatePeriodo").serializeArray();
-
-        
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/Periodos/Create",
@@ -203,21 +149,12 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 
 // editar 1
 $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function () {
-   
+
+    //OCULTAR VALIDACIONES
+    OcultarValidacionesEditar();
+
     var ID = $(this).data('id');
     IDInactivar = ID;
-
-    // habilitar boton
-    $("#btnUpdatePeriodo").attr("disabled", false);
-    
-    // * descripcion 
-    $('#EditAsteriscoDescripcion').removeClass('text-danger');
-
-    // mesanje descripcion requerida
-    $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
-
-    // mesanje descripcion requerida
-    $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
 
     $.ajax({
         url: "/Periodos/Edit/" + ID,
@@ -226,13 +163,16 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
-        .done(function (data) {            
+        .done(function (data) {
             if (data) {
                 $.each(data, function (i, iter) {
                     $("#Editar #peri_IdPeriodo").val(iter.peri_IdPeriodo);
                     $("#Editar #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
+                    $("#Editar #peri_CantidadDias").val(iter.peri_CantidadDias);
+                    if (iter.peri_RecibeSeptimoDia == true)
+                        $("#Editar #peri_RecibeSeptimoDia").prop('checked', true);
                 });
-                $("#EditarPeriodo").modal();
+                $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 iziToast.error({
@@ -243,138 +183,83 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
         });
 });
 
-// update descripcion validaciones keyup
-$('#Editar #peri_DescripPeriodo').keyup(function () {
-
-    var descripcion = $("#Editar #peri_DescripPeriodo").val();
-
-    //si no está vacio
-    if (descripcion.trim() != '') {
-
-        $('#EditAsteriscoDescripcion').removeClass('text-danger');
-        $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
-    }
-    else {
-        $('#EditAsteriscoDescripcion').addClass("text-danger");
-        $("#Editar #validation_EditDescripcionRequerida").css('display', '');
-        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
-    }
-
-    // si es un número y no está vacio
-    if (isNaN(descripcion) == false && descripcion.trim() != '') {
-
-        $('#EditAsteriscoDescripcion').addClass("text-danger");
-        $("#Editar #validation_EditDescripcionNumerico").css('display', '');
-    }
-        // si es un número
-    else if (isNaN(descripcion) == true) {
-
-        $('#EditAsteriscoDescripcion').removeClass('text-danger');
-        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
-    }
-
-});
 
 $("#btnUpdatePeriodo").click(function () {
-    
-    // deshabilitar boton
-    $("#btnUpdatePeriodo").attr('disabled', true);
 
-    var modelState = true;
-    var descripcion = $("#Editar #peri_DescripPeriodo").val();
+    //OBTENER LEL VALOR DE LOS INPUTS
+    var Descrip = $("#Editar #peri_DescripPeriodo").val();
+    var Cantidad = $("#Editar #peri_CantidadDias").val();
 
-    //si no está vacio
-    if (descripcion.trim() != '') {
+    //REALIZAR LA VALIDACION
+    if (ValidarCamposEditar(Descrip, Cantidad)) {
 
-        $('#EditAsteriscoDescripcion').removeClass('text-danger');
-        $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
-    }
-    else {
-        $('#EditAsteriscoDescripcion').addClass("text-danger");
-        $("#Editar #validation_EditDescripcionRequerida").css('display', '');
-        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
-        modelState = false;
-    }
-
-    // si es un número y no está vacio
-    if (isNaN(descripcion) == false && descripcion.trim() != '') {
-
-        $('#EditAsteriscoDescripcion').addClass("text-danger");
-        $("#Editar #validation_EditDescripcionNumerico").css('display', '');
-        modelState = false;
-    }
-        // si es un número
-    else if (isNaN(descripcion) == true) {
-
-        $('#EditAsteriscoDescripcion').removeClass('text-danger');
-        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
-    }
-
-    if (modelState == true) {
+        //OCULTAR MODAL DE EDICION
         $("#EditarPeriodo").modal('hide');
-        $("#ConfirmarEdicion").modal();
+        //MOSTRAR MODAL DE CONFIRMACION
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
         //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
         $("#btnConfirmarEditar").attr("disabled", false);
     }
-    else {
-        // habilitar boton
-        $("#btnUpdatePeriodo").attr('disabled', false);
-    }
 
 });
 
-$("#btnCerrarConfirmarEditar").click(function () {   
+$("#btnCerrarConfirmarEditar").click(function () {
 
     //ocultar modal de confirmación
     $("#ConfirmarEdicion").modal('hide');
 
     // habilitar boton
-    $("#btnUpdatePeriodo").attr('disabled', false);
+    $("#btnConfirmarEditar").attr('disabled', false);
 
     //modal de edicion
-    $("#EditarPeriodo").modal();
+    $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
 });
 
 //editar 3 ejecutar 
-$(document).on("click", "#btnConfirmarEditar", function () {   
-    
-    
-        var data = $("#frmEditPeriodo").serializeArray();
-        $.ajax({
-            url: "/Periodos/Editar",
-            method: "POST",
-            data: data
-        })
-            .done(function (data) {
-                
-                if (data != 'error') {
-                    
-                    // habilitar boton
-                    $("#btnConfirmarEditar").attr("disabled", false);
-                    
-                    // actualizar datatable
-                    cargarGridPeriodo();
-                    $("#ConfirmarEdicion").modal('hide');
-
-                    iziToast.success({
-                        title: 'Exito',
-                        message: '¡El registro se editó de forma exitosa!',
-                    });
-                } 
-                else {
-                    $("#ConfirmarEdicion").modal('hide');
-
-                    // habilitar boton
-                    $("#btnUpdatePeriodo").attr('disabled', false);
-
-                    $("#EditarPeriodo").modal();
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡No se editó el registro, contacte al administrador!',
-                    });
-                }
-            });
+$(document).on("click", "#btnConfirmarEditar", function () {
+    //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
     $("#btnConfirmarEditar").attr("disabled", false);
+
+    var recibe = ($('#Editar #peri_RecibeSeptimoDia').is(':checked')) ? true : false;
+
+    var data = {
+        peri_IdPeriodo: IDInactivar,
+        peri_DescripPeriodo: $("#Editar #peri_DescripPeriodo").val(),
+        peri_CantidadDias: $("#Editar #peri_CantidadDias").val(),
+        peri_RecibeSeptimoDia: RecibeEdit
+    };
+    console.log(data);
+    //var data = $("#frmEditPeriodo").serializeArray();
+    $.ajax({
+        url: "/Periodos/Editar",
+        method: "POST",
+        data: data
+    })
+        .done(function (data) {
+
+            if (data != 'error') {
+                // actualizar datatable
+                cargarGridPeriodo();
+                $("#ConfirmarEdicion").modal('hide');
+
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
+            }
+            else {
+                // HABILITAR BOTON
+                $("#btnConfirmarEditar").attr("disabled", false);
+                //OCULTAR MODAL DE CONFIRMACION
+                $("#ConfirmarEdicion").modal('hide');
+                //MOSTRAR MODAL DE EDICION
+                $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se editó el registro, contacte al administrador!',
+                });
+            }
+        });
 });
 
 
@@ -391,34 +276,35 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
-    })
+    }).done(function (data) {
+        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+        if (data) {
+            $.each(data, function (i, iter) {
 
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $.each(data, function (i, iter) {
-
-                    var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
-                    var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
-                    $("#Detalles #peri_IdPeriodo").html(iter.peri_IdPeriodo);
-                    $("#Detalles #peri_DescripPeriodo").html(iter.peri_DescripPeriodo);
-                    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                    $("#Detalles #peri_UsuarioCrea").html(iter.peri_UsuarioCrea);
-                    $("#Detalles #peri_FechaCrea").html(FechaCrea);
-                    data[0].peri_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                    $("#Detalles #peri_UsuarioModifica").html(data[0].peri_UsuarioModifica);
-                    $("#Detalles #peri_FechaModifica").html(FechaModifica);
-                });
-                $("#DetallarPeriodo").modal();
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-        });
+                var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
+                $("#Detalles #peri_IdPeriodo").html(iter.peri_IdPeriodo);
+                $("#Detalles #peri_DescripPeriodo").html(iter.peri_DescripPeriodo);
+                $("#Detalles #peri_CantidadDias").html(iter.peri_CantidadDias);
+                if (iter.peri_RecibeSeptimoDia == true)
+                    $("#Detalles #peri_RecibeSeptimoDia").prop('checked', true);
+                data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #peri_UsuarioCrea").html(iter.peri_UsuarioCrea);
+                $("#Detalles #peri_FechaCrea").html(FechaCrea);
+                data[0].peri_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detalles #peri_UsuarioModifica").html(data[0].peri_UsuarioModifica);
+                $("#Detalles #peri_FechaModifica").html(FechaModifica);
+            });
+            $("#DetallarPeriodo").modal({ backdrop: 'static', keyboard: false });
+        }
+        else {
+            //Mensaje de error si no hay data
+            iziToast.error({
+                title: 'Error',
+                message: '¡No se cargó la información, contacte al administrador!',
+            });
+        }
+    });
 });
 
 //DESPLEGAR EL MODAL DE INACTIVAR
@@ -428,7 +314,7 @@ $(document).on("click", "#btnInactivarPeriodo", function () {
     //OCULTAR MODAL DE EDICION
     $("#EditarPeriodo").modal('hide');
     //MOSTRAR MODAL DE INACTIVACION
-    $("#InactivarPeriodo").modal();
+    $("#InactivarPeriodo").modal({ backdrop: 'static', keyboard: false });
 });
 
 //CERRAR EL MODAL DE INACTIVAR
@@ -436,7 +322,7 @@ $(document).on("click", "#btnCerrarInactivar", function () {
     //OCULTAR MODAL DE INACTIVACION
     $("#InactivarPeriodo").modal('hide');
     //MOSTRAR MODAL DE EDICION
-    $("#EditarPeriodo").modal();
+    $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
 });
 
 //CONFIRMAR INACTIVACION DEL REGISTRO
@@ -482,7 +368,7 @@ $(document).on("click", "#btnActivarPeriodos", function () {
     $("#btnActivarPeriodoConfirm").attr("disabled", false);
     ActivarID = $(this).data('id');
     //DESPLEGAR EL MODAL DE ACTIVAR
-    $("#ActivarPeriodo").modal();
+    $("#ActivarPeriodo").modal({ backdrop: 'static', keyboard: false });
 });
 
 //CONFIRMAR ACTIVACION DEL REGISTRO
@@ -548,7 +434,7 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
                     $("#Detalles #peri_UsuarioModifica").html(data[0].peri_UsuarioModifica);
                     $("#Detalles #peri_FechaModifica").html(FechaModifica);
                 });
-                $("#DetallarPeriodo").modal();
+                $("#DetallarPeriodo").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
@@ -623,7 +509,7 @@ $("#frmEditPeriodo").submit(function (event) {
 //MOSTRAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnmodalInactivarPeriodo", function () {
     $("#DetallesFormaPago").modal('hide');
-    $("#InactivarFormaPago").modal();
+    $("#InactivarFormaPago").modal({ backdrop: 'static', keyboard: false });
 });
 
 //Boton para cerrar el modal de Inactivar
@@ -656,3 +542,167 @@ function mostrarError(Mensaje) {
         message: Mensaje,
     });
 }
+
+
+
+
+//*******************************VALIDACIONES********************//
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposCrear(Descripcion, CantidadDias) {
+    var Local_ModelState = true;
+
+    if (Descripcion != "-1") {
+        //VALIDACION DE DOBLE ESPACIO
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #peri_DescripPeriodo").val(Descripcion.substring(0, FirstChar + 1));
+        }//FIN DE VALIDACION DE DOBLE ESPACIO
+
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Crear #peri_DescripPeriodo").val("");
+            Local_modelState = false;
+            $("#Crear #AsteriscoDescripPeriodo").addClass("text-danger");
+            $("#Crear #Validar_peri_DescripPeriodo").show();
+
+        } else {
+            $("#Crear #AsteriscoDescripPeriodo").removeClass("text-danger");
+            $("#Crear #Validar_peri_DescripPeriodo").hide();
+        }
+    }
+
+    if (CantidadDias != "-1") {
+        //VALIDAR EL TOTAL DE VENTA
+        if (CantidadDias == null || CantidadDias == "") {
+            $("#Crear #AsteriscoCantidadDias").addClass("text-danger");
+            $("#Crear #Validar_peri_CantidadDias").empty();
+            $("#Crear #Validar_peri_CantidadDias").html("Este campo es requerido.");
+            $("#Crear #Validar_peri_CantidadDias").show();
+            Local_ModelState = false;
+        } else {
+            $("#Crear #AsteriscoCantidadDias").removeClass("text-danger");
+            $("#Crear #Validar_peri_CantidadDias").hide();
+            if (CantidadDias <= 0) {
+                $("#Crear #AsteriscoCantidadDias").addClass("text-danger");
+                $("#Crear #Validar_peri_CantidadDias").empty();
+                $("#Crear #Validar_peri_CantidadDias").html("Este campo no puede ser menor que cero.");
+                $("#Crear #Validar_peri_CantidadDias").show();
+                Local_ModelState = false;
+            } else {
+                $("#Crear #AsteriscoCantidadDias").removeClass("text-danger");
+                $("#Crear #Validar_peri_CantidadDias").hide();
+            }
+        }
+    }
+
+    return Local_ModelState;
+}
+
+//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION DEL MODAL DE CREAR
+function OcultarValidacionesCrear() {
+    //VACIAR LOS INPUTS
+    $("#Crear #peri_DescripPeriodo").val("");
+    $("#Crear #peri_CantidadDias").val("");
+
+    //OCULTAR VALIDACIONES
+    $("#Crear #AsteriscoDescripPeriodo").removeClass("text-danger");
+    $("#Crear #Validar_peri_DescripPeriodo").hide();
+
+    $("#Crear #AsteriscoCantidadDias").removeClass("text-danger");
+    $("#Crear #Validar_peri_CantidadDias").hide();
+}
+
+
+
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
+function ValidarCamposEditar(Descripcion, CantidadDias) {
+    var Local_ModelState = true;
+
+    if (Descripcion != "-1") {
+        //VALIDACION DE DOBLE ESPACIO
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #peri_DescripPeriodo").val(Descripcion.substring(0, FirstChar + 1));
+        }//FIN DE VALIDACION DE DOBLE ESPACIO
+
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Editar #peri_DescripPeriodo").val("");
+            Local_modelState = false;
+            $("#Editar #AsteriscoDescripPeriodo").addClass("text-danger");
+            $("#Editar #Validar_peri_DescripPeriodo").show();
+
+        } else {
+            $("#Editar #AsteriscoDescripPeriodo").removeClass("text-danger");
+            $("#Editar #Validar_peri_DescripPeriodo").hide();
+        }
+    }
+
+    if (CantidadDias != "-1") {
+        //VALIDAR EL TOTAL DE VENTA
+        if (CantidadDias == null || CantidadDias == "") {
+            $("#Editar #AsteriscoCantidadDias").addClass("text-danger");
+            $("#Editar #Validar_peri_CantidadDias").empty();
+            $("#Editar #Validar_peri_CantidadDias").html("Este campo es requerido.");
+            $("#Editar #Validar_peri_CantidadDias").show();
+            Local_ModelState = false;
+        } else {
+            $("#Editar #AsteriscoCantidadDias").removeClass("text-danger");
+            $("#Editar #Validar_peri_CantidadDias").hide();
+            if (CantidadDias <= 0) {
+                $("#Editar #AsteriscoCantidadDias").addClass("text-danger");
+                $("#Editar #Validar_peri_CantidadDias").empty();
+                $("#Editar #Validar_peri_CantidadDias").html("Este campo no puede ser menor que cero.");
+                $("#Editar #Validar_peri_CantidadDias").show();
+                Local_ModelState = false;
+            } else {
+                $("#Editar #AsteriscoCantidadDias").removeClass("text-danger");
+                $("#Editar #Validar_peri_CantidadDias").hide();
+            }
+        }
+    }
+
+    return Local_ModelState;
+}
+
+
+//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION DEL MODAL DE EDITAR
+function OcultarValidacionesEditar() {
+    //VACIAR LOS INPUTS
+    $("#Editar #peri_DescripPeriodo").val("");
+    $("#Editar #peri_CantidadDias").val("");
+
+    //OCULTAR VALIDACIONES
+    $("#Editar #AsteriscoDescripPeriodo").removeClass("text-danger");
+    $("#Editar #Validar_peri_DescripPeriodo").hide();
+
+    $("#Editar #AsteriscoCantidadDias").removeClass("text-danger");
+    $("#Editar #Validar_peri_CantidadDias").hide();
+}
+
+
+//VARIABLE GLOBAL DE EDICION DE RECIBE SEPTIMO DIA
+var RecibeCrear = false;
+//CONFIRMAR ACTIVACION DEL REGISTRO
+$("#Crear #peri_RecibeSeptimoDia").click(function () {
+    //SETEAR EL ESTADO DE RECIBE EDIT
+    RecibeCrear = ($('#Crear #peri_RecibeSeptimoDia').is(':checked')) ? true : false;
+});
+
+
+//VARIABLE GLOBAL DE EDICION DE RECIBE SEPTIMO DIA 
+var RecibeEdit = false;
+//CONFIRMAR ACTIVACION DEL REGISTRO
+$("#Editar #peri_RecibeSeptimoDia").click(function () {
+    //SETEAR EL ESTADO DE RECIBE EDIT
+    RecibeEdit = ($('#Editar #peri_RecibeSeptimoDia').is(':checked')) ? true : false;
+});
