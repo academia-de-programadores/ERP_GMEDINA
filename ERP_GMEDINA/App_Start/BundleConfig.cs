@@ -122,7 +122,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/SucursalesEdit").Include(
             "~/Scripts/app/General/Sucursales/EditSucursales.js"));
 
-        
+
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales").Include(
             "~/Scripts/app/General/Sucursales/IndexSucursales.js"));
@@ -510,8 +510,9 @@ namespace ERP_GMEDINA
 
             #endregion
 
-            #region Equipo Flamenco
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
+
+			#region Equipo Flamenco
+			bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionAFP").Include(

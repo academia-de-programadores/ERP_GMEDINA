@@ -2013,6 +2013,8 @@
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\ReportesDecimoCuarto.js" />
     <Content Include="Scripts\app\General\ReportesIngresos.js" />
+    <Content Include="Scripts\app\General\ReportesDecimoTercerMes.js" />
+    <Content Include="Scripts\app\General\ReportesDeducciones.js" />
     <Content Include="Scripts\app\General\ReportesPlanilla.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
@@ -2137,6 +2139,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\Publicacion_ERP_GMEDINA.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
