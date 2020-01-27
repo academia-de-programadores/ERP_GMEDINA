@@ -91,6 +91,7 @@ $('#dex_MontoInicial').blur(function () {
 });
 
 $('#dex_MontoRestante').blur(function () {
+    debugger;
     let montoRestante = $(this).val().replace(/,/g, '');
     let hayAlgo = false;
     let montoInicial = $('#dex_MontoInicial').val().replace(/,/g, '');
@@ -108,7 +109,7 @@ $('#dex_MontoRestante').blur(function () {
 
     if (hayAlgo) {
         let esMayorCero = false;
-        if (montoRestante == 0.00 || montoRestante < 0) {
+        if (montoRestante == 0.00 || montoRestante < "0") {
             $("#valMontoRestante").html('El campo Monto Restante no puede ser menor o igual que cero.');
             $("#valMontoRestante").show();
             $("#asteriscoMontoRestante").addClass('text-danger');
@@ -341,11 +342,11 @@ function validaciones(equipoEmpId,
 
     let hayAlgoMontoRestante = false;
     // Monto Restante
-    let valorMontoRestante = montoRestante.val()
+    let valorMontoRestante = montoRestante.val();
     if (valorMontoRestante != "") {
         $("#valMontoRestante").html('');
         $("#valMontoRestante").hide();
-        hayAlgoMontoRestante = true
+        hayAlgoMontoRestante = true;
         $("#asteriscoMontoRestante").removeClass('text-danger');
     } else {
         $("#valMontoRestante").html('Campo Monto Restante Requerido');
@@ -365,7 +366,7 @@ function validaciones(equipoEmpId,
         } else {
             esMayorCero = true;
             $("#valMontoRestante").html('');
-            $("#valMontoRestante").hide()
+            $("#valMontoRestante").hide();
             $("#asteriscoMontoRestante").removeClass('text-danger');
         }
 
@@ -553,11 +554,11 @@ $(btnAgregar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-                document.getElementById("btnAgregar").disabled = true;
+                $("#btnAgregar").attr('disabled', true);
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
+                    title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
@@ -574,14 +575,14 @@ $(btnAgregar).click(function () {
     $("#frmCreate").submit(function (e) {
         return false;
     });
-    document.getElementById("btnAgregar").disabled = false;
+    $("#btnAgregar").attr('disabled', false);
 });
 //#endregion
 
 //#region Editar
 //Editar
-$(btnEditar).click(function () {
-    document.getElementById("btnEditar").disabled = true;
+$("#btnEditar").click(function () {
+    $("#btnEditar").attr('disabled', true);
     if (validaciones(equipoEmpIdEdit,
         montoInicial,
         montoRestante,
@@ -603,7 +604,7 @@ $(btnEditar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "Exito") {
-                document.getElementById("btnEditar").disabled = true;
+                $("#btnEditar").attr('disabled', true);
                 window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -646,7 +647,7 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
-    console.log("Entra");
+
     //BLOQUEAR EL BOTON
     $("#btnInactivar").attr("disabled", true);
 
@@ -656,8 +657,8 @@ $("#btnInactivar").click(function () {
         method: "GET"
     }).done(function (data) {
         if (data == "Error") {
-            ////DESBLOQUEAR EL BOTON
-            //$("#btnInactivar").attr("disabled", false);
+            //DESBLOQUEAR EL BOTON
+            $("#btnInactivar").attr("disabled", false);
             //Cuando trae un error en el BackEnd al realizar la Inactivación
             iziToast.error({
                 title: 'Error',
@@ -671,7 +672,7 @@ $("#btnInactivar").click(function () {
             cargarGridDeducciones();
             //Mensaje de Éxito de la Inactivación
             iziToast.success({
-                title: 'Exito',
+                title: 'Éxito',
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
