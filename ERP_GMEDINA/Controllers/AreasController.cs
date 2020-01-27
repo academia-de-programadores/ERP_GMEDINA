@@ -355,6 +355,10 @@ namespace ERP_GMEDINA.Controllers
                                 item.depto_RazonInactivo,
                                 Usuario.usu_Id,
                                 DateTime.Now);
+                        foreach (UDP_RRHH_tbDepartamentos_Delete_Result dep in depto)
+                        {
+                            dep.ToString();
+                        }
                     }
                     foreach (cDepartamentos item in Departamentos)
                     {
@@ -426,7 +430,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json(new { codigo = "-2" }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(new { codigo = result }, JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Delete/5
         [HttpPost]
