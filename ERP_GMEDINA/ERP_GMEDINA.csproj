@@ -1781,6 +1781,7 @@
     <Content Include="Content\BTN\BTN-HOME.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
+    <Content Include="Content\img\done.gif" />
     <Content Include="Content\img\header-profile-skin-2.png" />
     <Content Include="Content\img\header-profile.png" />
     <Content Include="Content\img\LoadingIcon.png" />
