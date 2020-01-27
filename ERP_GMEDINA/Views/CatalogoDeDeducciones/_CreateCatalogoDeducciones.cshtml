@@ -6,7 +6,7 @@
             <div class="form-group">
                 <div class="col-md-6">
                     Descripción<label class="" id="AsteriscoDescripcionDedu" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id = "cde_DescripcionDeduccionA", @Value = "" } })
+                    @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id = "cde_DescripcionDeduccionA", @Value = "", maxlength = 50 } })
                     <label class="text-danger" id="Validation_descipcionA" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Descripción requerido.</label>
                 </div>
                 <div class="col-md-6">
@@ -19,13 +19,13 @@
             <div class="form-group">
                 <div class="col-md-6">
                     Porcentaje Colaborador<label class="" id="AsteriscoPorcentajeColaborador" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control MascaraCantidad MascaraPorcentaje soloNumero", @id = "cde_PorcentajeColaboradorA", @Value = "" } })
+                    @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control MascaraCantidad MascaraPorcentaje soloNumero", @id = "cde_PorcentajeColaboradorA", @Value = "", max = 100 } })
                     <label class="text-danger" id="Validation_descipcion3AR" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Colaborador requerido.</label>
                 </div>
 
                 <div class="col-md-6">
                     Porcentaje Empresa<label class="" id="AsteriscoPorcentajeEmpresa" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control MascaraCantidad MascaraPorcentaje soloNumero", @id = "cde_PorcentajeEmpresaA"} })
+                    @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control MascaraCantidad MascaraPorcentaje soloNumero", @id = "cde_PorcentajeEmpresaA", max = 100 } })
                     <label class="text-danger" id="Validation_descipcion4AR" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Empresa requerido.</label>
                 </div>
             </div>

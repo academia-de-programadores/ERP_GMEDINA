@@ -15,7 +15,7 @@
                             <strong>Descripción<label class="" id="AsteriscoDescripcionDeduEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion" } })
+                            @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion", maxlength = 50 } })
                             <label class="text-danger" id="validareditar1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Descripción requerido.</label>
                         </div>
                     </div>

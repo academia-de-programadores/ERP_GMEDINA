@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-md-6">
                     Razón<label class="" id="AsteriscoRazon">*</label>
-                    @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "col-md-9", @name = "adsu_RazonAdelanto", @id = "adsu_RazonAdelanto", @autocomplete = "off", onkeyup = "ValidarCamposCrear(this.value, '-1', '-1', '-1')" } })
+                    @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "col-md-9", @name = "adsu_RazonAdelanto", @id = "adsu_RazonAdelanto", @autocomplete = "off", onkeyup = "ValidarCamposCrear(this.value, '-1', '-1', '-1')", maxlength = 50 } })
                     <div><span class="text-danger" id="adsu_RazonAdelantoValidacion" style="display:none;">Campo Razón requerido</span></div>
                 </div>
             </div>
