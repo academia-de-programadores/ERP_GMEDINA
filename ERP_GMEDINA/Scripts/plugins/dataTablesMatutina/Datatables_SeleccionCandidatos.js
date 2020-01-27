@@ -50,7 +50,7 @@ $(document).ready(function () {
     });
     tabla = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-        pageLength: 25,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             {

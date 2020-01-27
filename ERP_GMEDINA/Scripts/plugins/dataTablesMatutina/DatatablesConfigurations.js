@@ -68,7 +68,8 @@ $(document).ready(function () {
   dom: '<"html5buttons"B>lTfgitp',
   buttons: [
             {
-             extend: 'copy',
+          extend: 'copy',
+          text: '<i class="fa fa-copy btn-xs"></i>',
              exportOptions: {
               columns: botones
              }
