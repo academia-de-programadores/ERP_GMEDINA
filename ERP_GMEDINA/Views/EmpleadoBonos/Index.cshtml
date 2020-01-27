@@ -79,6 +79,7 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                     if (oUsuario?.usu_EsAdministrador == true && item.cb_Activo == false)
                                     {
+                                        <button type="button" data-id="@item.cb_Id" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalles</button>
                                                  <!-- ACTIVAR -->
                                         <button type="button" data-id="@item.cb_Id" class="btn btn-primary btn-xs" id="btnActivarEmpleadoBonos">Activar</button>
                                     }

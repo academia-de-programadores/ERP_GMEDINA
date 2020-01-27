@@ -76,6 +76,7 @@
                                                 <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.cde_Activo == false)
                                             {
+                                                <button type="button" data-id="@item.cde_IdDeducciones" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
                                                  <!-- ACTIVAR -->
                                                 <button type="button" data-id="@item.cde_IdDeducciones" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones">Activar</button>
                                             }
