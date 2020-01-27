@@ -23,7 +23,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Tipo de incapacidad</label>
 
-                                @Html.DropDownList("ticn_Id", (IEnumerable<SelectListItem>)ViewBag.incapacidades, "Seleccione una opción", new { @class = "form-control" })
+                                @Html.DropDownList("ticn_Id", (IEnumerable<SelectListItem>)ViewBag.incapacidades, "Seleccione una opción", new { @class = "buscable form-control" })
 
                                 @Html.ValidationMessageFor(model => model.ticn_Id, "", new { @class = "text-danger" })
                             </div>

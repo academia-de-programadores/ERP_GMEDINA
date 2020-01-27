@@ -18,10 +18,7 @@ $("#btnActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgWarning("¡Éxito!", "Se registro se activó de forma exitosa.");
-                    LimpiarControles(["txtIdRestore"]);
-                    llenarTabla();
-                    MsgWarning("¡Éxito!", "Se registro se activó de forma exitosa.");
+                    MsgWarning("¡Éxito!", "El registro se activó de forma exitosa.");
                     LimpiarControles(["txtIdRestore"]);
                     llenarTabla();
                 } else {

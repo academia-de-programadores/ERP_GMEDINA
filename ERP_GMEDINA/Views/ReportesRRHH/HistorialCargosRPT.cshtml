@@ -24,6 +24,14 @@
                             </div>
                             <br />
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Cargo</label>
+                                @Html.DropDownList("car_Id", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Seleccione una opción", new { @class = "buscable form-control" })
+                                @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6">

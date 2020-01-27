@@ -23,7 +23,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Tipo de turno</label>
 
-                                @Html.DropDownList("tiho_Id", (IEnumerable<SelectListItem>)ViewBag.Turno, "Seleccione una opción", new { @class = "form-control" })
+                                @Html.DropDownList("tiho_Id", (IEnumerable<SelectListItem>)ViewBag.Turno, "Seleccione una opción", new { @class = "buscable form-control" })
 
                                 @Html.ValidationMessageFor(model => model.tiho_Id, "", new { @class = "text-danger" })
                             </div>
@@ -86,6 +86,10 @@
     </div>
 </div>
 
+@section Styles {
+    @Styles.Render("~/plugins/select2Styles")
+}
 @section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general_Fechas")
 }

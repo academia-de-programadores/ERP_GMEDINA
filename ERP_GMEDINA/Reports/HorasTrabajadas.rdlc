@@ -70,7 +70,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre Completo</Value>
+                              <Value>Nombre completo</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -106,7 +106,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Tipo Hora</Value>
+                              <Value>Tipo hora</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -142,7 +142,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cantidad Horas</Value>
+                              <Value>Cantidad horas</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -438,7 +438,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte De Horas Trabajadas</Value>
+                  <Value>Reporte de horas trabajadas</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>

@@ -70,11 +70,6 @@ $("#btnGuardar").click(function () {
                     MsgSuccess("¡Exito!", "se ha agredado el registro");
                     LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
                     $("#ModalNuevo").find("#eqtra_Id").empty();
-
-                    MsgSuccess("¡Exito!", "se ha agredado el registro");
-                    LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
-                    $("#ModalNuevo").find("#eqtra_Id").empty();
-                    llenarTabla();
                 }
                 else {
                     MsgError("Error", "Código:" + obj + ". contacte al administrador. (Verifique si el registro ya existe)");

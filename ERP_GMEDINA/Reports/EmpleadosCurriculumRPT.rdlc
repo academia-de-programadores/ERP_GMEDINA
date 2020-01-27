@@ -27,7 +27,7 @@
               <Width>3.63117cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.28833cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -79,7 +79,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Colaborador</Value>
+                              <Value>Empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -620,9 +620,8 @@
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.17639cm</Top>
-        <Left>0.2705cm</Left>
         <Height>1.2cm</Height>
-        <Width>26.06301cm</Width>
+        <Width>25.85134cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -633,7 +632,7 @@
     <Height>0.675in</Height>
     <Style />
   </Body>
-  <Width>10.36752in</Width>
+  <Width>10.17769in</Width>
   <Page>
     <PageHeader>
       <Height>1.27cm</Height>
@@ -656,7 +655,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.335cm</Top>
-          <Left>22.12429cm</Left>
+          <Left>21.64213cm</Left>
           <Height>0.6cm</Height>
           <Width>4.20921cm</Width>
           <Style>
@@ -676,7 +675,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de colaboradores</Value>
+                  <Value>Reporte de empleados</Value>
                   <Style>
                     <FontSize>16pt</FontSize>
                   </Style>
@@ -729,7 +728,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.335cm</Top>
-          <Left>22.92862cm</Left>
+          <Left>22.44646cm</Left>
           <Height>0.6cm</Height>
           <Width>3.40488cm</Width>
           <Style>
