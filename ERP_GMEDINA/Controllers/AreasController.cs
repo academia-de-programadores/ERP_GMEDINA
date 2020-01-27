@@ -297,7 +297,7 @@ namespace ERP_GMEDINA.Controllers
                         }).ToList()
                         .Where(x => x.area_Id == id)
                         .First();
-                    Sucursales = db.tbSucursales.ToList();
+                    Sucursales = db.tbSucursales.Where(t=>t.suc_Estado==true).ToList();
                     ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
                     if (tbAreas.area_Estado == false)
                     {
