@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateIngresosIndividuales" }))
 {
-        @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
+    @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
     <div class="modal-body" id="Crear">
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
                     @Html.LabelFor(model => model.emp_Id)<label class="" id="ast2" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="emp_Id" name="emp_Id" class="form-control" onchange = "ValidarCamposCrear('-1', this.value, '-1')"></select>
+                    <select id="emp_Id" name="emp_Id" class="form-control" onchange="ValidarCamposCrear('-1', this.value, '-1')"></select>
                     <label class="text-danger" id="validatione_empleadoID" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido.</label>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     @Html.LabelFor(model => model.ini_Monto)<label class="" id="ast3" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad soloNumero", @id = "ini_Monto", @disabled = "disabled", @autocomplete = "off", onkeyup = "ValidarCamposCrear('-1', '-1', this.value)" } })
+                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad", @id = "ini_Monto", @disabled = "disabled", @autocomplete = "off", onkeyup = "ValidarCamposCrear('-1', '-1', this.value)" } })
                     <div>@Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "Validation_monto" })</div>
                     <label class="text-danger" id="Validation_Monto2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto requerido</label>
                     <label class="text-danger" id="Validation_Monto3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Monto debe ser mayor que cero</label>
@@ -51,11 +51,11 @@
 
         </div>
     </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>
-            <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroIngresoIndividual">Guardar</button>
-            <div style="display:none" class="btn pull-left" id="cargandoCrear"></div>
-        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroIngresoIndividual">Guardar</button>
+        <div style="display:none" class="btn pull-left" id="cargandoCrear"></div>
+    </div>
 
 }
 
