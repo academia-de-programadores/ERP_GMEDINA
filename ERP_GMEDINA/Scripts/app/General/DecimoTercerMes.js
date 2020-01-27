@@ -29,17 +29,24 @@ $("body").on("click", "#btnProcesar", function () {
         data: JSON.stringify(DecimoTercer),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (r) {
-            iziToast.success({
-                title: 'Decimotercer Mes',
-                message:"¡Decimotercer mes procesado de forma exitosa!"
-            });         
+        success: function (data) {
+            console.log(data)
+            if (data != "-1")
+                iziToast.success({
+                    title: 'Decimotercer Mes',
+                    message: "¡Decimotercer mes procesado de forma exitosa!"
+                });
+            else
+                iziToast.error({
+                    title: 'Decimotercer Mes',
+                    message: "No puede procesar dos veces un pago."
+                });
         },
         error: function (e) {
             iziToast.error({
                 title: 'Decimotercer Mes',
                 message: "No puede procesar dos veces un pago."
-            });    
+            });
         }
     });
 });
@@ -47,8 +54,8 @@ $("body").on("click", "#btnProcesar", function () {
 
 
 // MOSTRAR MODAL DE FECHAS
-$(document).on("click", "#btnFechaEspecifica", function () {    
-    $("#frmFechaDecimoTercer").modal();    
+$(document).on("click", "#btnFechaEspecifica", function () {
+    $("#frmFechaDecimoTercer").modal();
 });
 
 // OCULTAR MODAL DE FECHAS

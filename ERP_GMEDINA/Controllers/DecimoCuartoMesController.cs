@@ -60,7 +60,7 @@ namespace ERP_GMEDINA.Controllers
 							MessageError = Convert.ToString(resultado);
 
 						if (MessageError.StartsWith("-1"))
-							return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+							return Json("-1", JsonRequestBehavior.AllowGet);
 
 						if (i % NúmeroLotes == 0)
 							db.SaveChanges();
@@ -76,10 +76,10 @@ namespace ERP_GMEDINA.Controllers
 					}
 					catch (System.Data.Entity.Core.EntityException)
 					{
-						return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+						return Json("-1", JsonRequestBehavior.AllowGet);
 					}
 
-					return Json("Ha ocurrido un error durante la inserción", JsonRequestBehavior.AllowGet);
+					return Json("-1", JsonRequestBehavior.AllowGet);
 				}
 
 			}
