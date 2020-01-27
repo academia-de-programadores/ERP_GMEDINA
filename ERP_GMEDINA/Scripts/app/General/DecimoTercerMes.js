@@ -10,9 +10,6 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
-$(document).ready(function () {
-	$("#hipa_FechaInicio").yearpicker();
-});
 
 $("body").on("click", "#btnProcesar", function () {
     //Recorra las filas de la tabla y cree una matriz JSON.
