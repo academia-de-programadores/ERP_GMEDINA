@@ -316,15 +316,16 @@ $("#btnGuardar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups(); MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    CierraPopups();
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.")
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 $("#InActivar").click(function () {
@@ -339,15 +340,15 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                  MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                     MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
     $("#req_RazonInactivo").val = "";
 });
@@ -363,14 +364,14 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
