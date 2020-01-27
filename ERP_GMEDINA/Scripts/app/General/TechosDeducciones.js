@@ -30,7 +30,7 @@ $('#Crear #tddu_Techo, #Editar #tddu_Techo').blur(function () {
     //Validacion Requerido
     if (techo == null || techo == "") {
 
-        $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo Requerido');
+        $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo requerido');
         $('#Crear #Validation_Techo, #Editar #Validation_TechoE').show();
         $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').addClass('text-danger');
     } else {
@@ -45,7 +45,7 @@ $('#Crear #tddu_Techo, #Editar #tddu_Techo').blur(function () {
             $('#Crear #Validation_Techo, #Editar #Validation_TechoE').show();
             $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').addClass('text-danger');
         } else {
-            $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo Requerido');
+            $('#Crear #Validation_Techo, #Editar #Validation_TechoE').html('Campo Techo requerido');
             $('#Crear #Validation_Techo, #Editar #Validation_TechoE').hide();
             $('#Crear #AsteriskTecho, #Editar #AsteriskTechoE').removeClass('text-danger');
         }
@@ -58,7 +58,7 @@ $('#Crear #tddu_PorcentajeColaboradores, #Editar #tddu_PorcentajeColaboradores')
     let tieneValorColaborador = false;
     //Validacion Requerido
     if (porcentajeColaborador == null || porcentajeColaborador == "") {
-        $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo requerido');
         $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').show();
         $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
     } else {
@@ -73,7 +73,7 @@ $('#Crear #tddu_PorcentajeColaboradores, #Editar #tddu_PorcentajeColaboradores')
             $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').show();
             $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
         } else {
-            $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo requerido');
             $('#Crear #Validation_PorcentajeColaboradores, #Editar #Validation_PorcentajeColaboradoresE').hide();
             $('#Crear #AsteriskPorcentajeColaborador, #Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
         }
@@ -86,7 +86,7 @@ $('#Crear #tddu_PorcentajeEmpresa, #Editar #tddu_PorcentajeEmpresa').blur(functi
     let tieneValorPorcentajeEmpresa = false;
     //Validacion Requerido
     if (porcentajeEmpresa == null || porcentajeEmpresa == "") {
-        $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo requerido');
         $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').show();
         $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
     } else {
@@ -101,7 +101,7 @@ $('#Crear #tddu_PorcentajeEmpresa, #Editar #tddu_PorcentajeEmpresa').blur(functi
             $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').show();
             $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
         } else {
-            $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').html('Campo Techo requerido');
             $('#Crear #Validation_PorcentajeEmpresa, #Editar #Validation_PorcentajeEmpresaE').hide();
             $('#Crear #AsteriskPorcentajeEmpresa, #Editar #AsteriskPorcentajeEmpresaE').removeClass('text-danger');
         }
@@ -257,7 +257,7 @@ function validacionCrear() {
     let tieneValorTecho = false;
     //Validacion Requerido
     if (techo == null || techo == "") {
-        $('#Crear #Validation_Techo').html('Campo Techo Requerido');
+        $('#Crear #Validation_Techo').html('Campo Techo requerido');
         $('#Crear #Validation_Techo').show();
         $('#Crear #AsteriskTecho').addClass('text-danger');
         todoBien = false;
@@ -274,7 +274,7 @@ function validacionCrear() {
             $('#Crear #AsteriskTecho').addClass('text-danger');
             todoBien = false;
         } else {
-            $('#Crear #Validation_Techo').html('Campo Techo Requerido');
+            $('#Crear #Validation_Techo').html('Campo Techo requerido');
             $('#Crear #Validation_Techo').hide();
             $('#Crear #AsteriskTecho').removeClass('text-danger');
         }
@@ -286,7 +286,7 @@ function validacionCrear() {
     //Validacion Requerido
     if (porcentajeColaborador == null || porcentajeColaborador == "") {
         todoBien = false;
-        $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo requerido');
         $('#Crear #Validation_PorcentajeColaboradores').show();
         $('#Crear #AsteriskPorcentajeColaborador').addClass('text-danger');
     } else {
@@ -302,7 +302,7 @@ function validacionCrear() {
             $('#Crear #Validation_PorcentajeColaboradores').show();
             $('#Crear #AsteriskPorcentajeColaborador').addClass('text-danger');
         } else {
-            $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeColaboradores').html('Campo Techo requerido');
             $('#Crear #Validation_PorcentajeColaboradores').hide();
             $('#Crear #AsteriskPorcentajeColaborador').removeClass('text-danger');
         }
@@ -314,7 +314,7 @@ function validacionCrear() {
     //Validacion Requerido
     if (porcentajeEmpresa == null || porcentajeEmpresa == "") {
         todoBien = false;
-        $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo Requerido');
+        $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo requerido');
         $('#Crear #Validation_PorcentajeEmpresa').show();
         $('#Crear #AsteriskPorcentajeEmpresa').addClass('text-danger');
     } else {
@@ -330,7 +330,7 @@ function validacionCrear() {
             $('#Crear #Validation_PorcentajeEmpresa').show();
             $('#Crear #AsteriskPorcentajeEmpresa').addClass('text-danger');
         } else {
-            $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo Requerido');
+            $('#Crear #Validation_PorcentajeEmpresa').html('Campo Techo requerido');
             $('#Crear #Validation_PorcentajeEmpresa').hide();
             $('#Crear #AsteriskPorcentajeEmpresa').removeClass('text-danger');
         }
@@ -355,7 +355,7 @@ function validacionEditar() {
     let tieneValorTecho = false;
     //Validacion Requerido
     if (techo == null || techo == "") {
-        $('#Editar #Validation_TechoE').html('Campo Techo Requerido');
+        $('#Editar #Validation_TechoE').html('Campo Techo requerido');
         $('#Editar #Validation_TechoE').show();
         $('#Editar #AsteriskTechoE').addClass('text-danger');
         todoBien = false;
@@ -372,7 +372,7 @@ function validacionEditar() {
             $('#Editar #AsteriskTechoE').addClass('text-danger');
             todoBien = false;
         } else {
-            $('#Editar #Validation_TechoE').html('Campo Techo Requerido');
+            $('#Editar #Validation_TechoE').html('Campo Techo requerido');
             $('#Editar #Validation_TechoE').hide();
             $('#Editar #AsteriskTechoE').removeClass('text-danger');
         }
@@ -384,7 +384,7 @@ function validacionEditar() {
     //Validacion Requerido
     if (porcentajeColaborador == null || porcentajeColaborador == "") {
         todoBien = false;
-        $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+        $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo requerido');
         $('#Editar #Validation_PorcentajeColaboradoresE').show();
         $('#Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
     } else {
@@ -400,7 +400,7 @@ function validacionEditar() {
             $('#Editar #Validation_PorcentajeColaboradoresE').show();
             $('#Editar #AsteriskPorcentajeColaboradorE').addClass('text-danger');
         } else {
-            $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo Requerido');
+            $('#Editar #Validation_PorcentajeColaboradoresE').html('Campo Techo requerido');
             $('#Editar #Validation_PorcentajeColaboradoresE').hide();
             $('#Editar #AsteriskPorcentajeColaboradorE').removeClass('text-danger');
         }
@@ -412,7 +412,7 @@ function validacionEditar() {
     //Validacion Requerido
     if (porcentajeEmpresa == null || porcentajeEmpresa == "") {
         todoBien = false;
-        $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+        $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo requerido');
         $('#Editar #Validation_PorcentajeEmpresaE').show();
         $('#Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
     } else {
@@ -428,7 +428,7 @@ function validacionEditar() {
             $('#Editar #Validation_PorcentajeEmpresaE').show();
             $('#Editar #AsteriskPorcentajeEmpresaE').addClass('text-danger');
         } else {
-            $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo Requerido');
+            $('#Editar #Validation_PorcentajeEmpresaE').html('Campo Techo requerido');
             $('#Editar #Validation_PorcentajeEmpresaE').hide();
             $('#Editar #AsteriskPorcentajeEmpresaE').removeClass('text-danger');
         }
