@@ -1775,16 +1775,12 @@
     <Content Include="Content\BTN\BTN-HOME.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
-    <Content Include="Content\img\flecha-derecha.png" />
-    <Content Include="Content\img\flecha-derecha.svg" />
-    <Content Include="Content\img\flecha-hacia-la-izquierda.svg" />
     <Content Include="Content\img\header-profile-skin-2.png" />
     <Content Include="Content\img\header-profile.png" />
     <Content Include="Content\img\LoadingIcon.png" />
     <Content Include="Content\img\LoadingSpinner.gif" />
     <Content Include="Content\img\mas.png" />
     <Content Include="Content\img\menos.png" />
-    <Content Include="Content\img\pago.jpg" />
     <Content Include="Content\img\payroll.jpg" />
     <Content Include="Content\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-indicator.css" />
@@ -2125,6 +2121,8 @@
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresos.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresosRPT.rdlc" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2903,7 +2901,6 @@
     <Content Include="Views\InstitucionesFinancieras\_Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\_Edit.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index2.cshtml" />
     <Content Include="Views\Empleados\_DeleteExpediente.cshtml" />
     <Content Include="Views\Empleados\_DetallesExpediente.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
