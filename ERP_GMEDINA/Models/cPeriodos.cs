@@ -29,6 +29,12 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha Crea")]
         public System.DateTime peri_FechaCrea { get; set; }
 
+        [Display(Name = "Recibe Septimo Día")]
+        public Nullable<bool> peri_RecibeSeptimoDia { get; set; }
+
+        [Display(Name = "Cantidad de Días")]
+        public Nullable<int> peri_CantidadDias { get; set; }
+
         public Nullable<int> peri_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> peri_FechaModifica { get; set; }
 

@@ -217,7 +217,7 @@ $('#btnCreateRegistroBonos').click(function () {
 //CERRAR EL MODAL DE CREAR
 $("#btnCerrarCrearBono").click(function () {
     //OCULTAR EL MODAL DE CREACION
-    $("#AgregarEmpleadoBonos").modal("");
+    $("#AgregarEmpleadoBonos").modal("hide");
     //CULTAR LAS VALIDACIONES DE CREAR
     OcultarValidacionesCrear();
 });

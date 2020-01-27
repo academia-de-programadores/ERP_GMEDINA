@@ -26,7 +26,6 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
 
         [Required(ErrorMessage = "Campo Monto Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Monto")]
         public decimal ini_Monto { get; set; }
 

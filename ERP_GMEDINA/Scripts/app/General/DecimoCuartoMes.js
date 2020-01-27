@@ -11,7 +11,7 @@ function _ajax(params, uri, type, callback) {
 }
 
 $(document).ready(function () {
-	console.clear();
+    console.clear();
 });
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
@@ -65,11 +65,18 @@ $("body").on("click", "#btnProcesar", function () {
         data: JSON.stringify(DecimoCuarto),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (r) {
-            iziToast.success({
-                title: 'Decimo Cuarto Mes',
-                message: "Registros procesados !"
-            });
+        success: function (data) {
+            console.log(data);
+            if (data != "-1")
+                iziToast.success({
+                    title: 'Decimo Cuarto Mes',
+                    message: "¡Decimocuarto mes procesado de forma exitosa!"
+                });
+            else
+                iziToast.error({
+                    title: 'Decimo Cuarto Mes',
+                    message: "No puede procesar dos veces un pago."
+                });
         },
         error: function (e) {
             iziToast.error({

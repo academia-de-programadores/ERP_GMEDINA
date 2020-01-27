@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Models
         public int dafp_Id { get; set; }
 
         [Required(ErrorMessage = "Campo Aporte Requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Aporte")]
         public decimal dafp_AporteLps { get; set; }
 

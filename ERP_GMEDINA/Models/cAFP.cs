@@ -23,17 +23,14 @@ namespace ERP_GMEDINA.Models
         public string afp_Descripcion { get; set; }
         
         [Required(ErrorMessage = "Campo {0} requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Aporte Mínimo")]
         public decimal afp_AporteMinimoLps { get; set; }
 
         [Required(ErrorMessage = "Campo {0} requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Interés por Aporte")]
         public decimal afp_InteresAporte { get; set; }
 
         [Required(ErrorMessage = "Campo {0} requerido")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Interés Anual")]
         public decimal afp_InteresAnual { get; set; }
 
