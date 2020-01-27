@@ -494,11 +494,18 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesPlanilla").Include(
                 "~/Scripts/app/General/ReportesPlanilla.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesDeducciones").Include(
+                "~/Scripts/app/General/ReportesDeducciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesDecimoTercerMes").Include(
+                "~/Scripts/app/General/ReportesDecimoTercerMes.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesIngresos").Include(
                 "~/Scripts/app/General/ReportesIngresos.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesDecimoCuarto").Include(
                 "~/Scripts/app/General/ReportesDecimoCuarto.js"));
+
 
 
             #endregion
