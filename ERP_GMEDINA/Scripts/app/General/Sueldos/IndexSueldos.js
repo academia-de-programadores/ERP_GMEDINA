@@ -112,7 +112,7 @@ function tablaDetalles(ID) {
                 //$("#ModalDetalles").find("#sue_Estado")["0"].innerText = obj.sue_Estado;
                 //$("#ModalDetalles").find("#sue_RazonInactivo")["0"].innerText = obj.sue_RazonInactivo;
                 $("#ModalDetalles").find("#sue_UsuarioCrea")["0"].innerText = obj.sue_UsuarioCrea;
-                $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj.sue_FechaCrea);
+                $("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj.sue_FechaModifica);
                 //$("#ModalDetalles").find("#sue_UsuarioModifica")["0"].innerText = obj.sue_UsuarioModifica;
                 //$("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj.sue_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -161,30 +161,30 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 $("#btnActualizar").click(function () {
-    if ( $('#sue_Cantidad').val() > 0) {
-            var data = $('#FormEditar').serializeArray();
-            data = serializar(data);
-            data.sue_Cantidad = parseFloat(data.sue_Cantidad);
-            if (data != null) {
+    if ($('#sue_Cantidad').val() > 0) {
+        var data = $('#FormEditar').serializeArray();
+        data = serializar(data);
+        data.sue_Cantidad = parseFloat(data.sue_Cantidad);
+        if (data != null) {
 
-                data = JSON.stringify({ tbsueldos: data });
-                _ajax(data,
-                    '/Sueldos/Edit',
-                    'POST',
-                    function (obj) {
-                        if (obj != "-1" && obj != "-2" && obj != "-3") {
-                            CierraPopups();
-                            MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
-                            LimpiarControles(["sue_Id", "sue_Cantidad"]);
-                            llenarTabla();
-                        } else {
-                            MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe.)");
-                        }
-                    });
-            } else {
-                MsgError("Error", "por favor llene todas las cajas de texto.");
-            }
+            data = JSON.stringify({ tbsueldos: data });
+            _ajax(data,
+                '/Sueldos/Edit',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        llenarTabla();
+                        LimpiarControles(["sue_Id", "sue_Cantidad"]);
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                    } else {
+                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe.)");
+                    }
+                });
         } else {
+            MsgError("Error", "por favor llene todas las cajas de texto.");
+        }
+    } else {
         MsgError("Error", "Por favor ingrese  solo valores numéricos positivos. ");
     }
 });

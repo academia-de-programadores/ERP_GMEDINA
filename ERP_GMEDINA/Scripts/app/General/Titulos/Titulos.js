@@ -52,8 +52,8 @@ function llenarTabla() {
                 var Acciones = value.titu_Estado == 1
                   ? null :
                  "<div>" +
-                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.titu_Estado > fill) {
                     tabla.row.add({
@@ -105,7 +105,7 @@ $("#btnInactivar").click(function () {
 });
 
 
-$("#btnGuardar").click(function() {
+$("#btnGuardar").click(function () {
     console.log("dfsdf");
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
@@ -117,15 +117,15 @@ $("#btnGuardar").click(function() {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-                    LimpiarControles(["titu_Descripcion"]);
                     llenarTabla();
+                    LimpiarControles(["titu_Descripcion"]);
+                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se agrego el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de textos");
+        MsgError("Error", "Por favor llene todas las cajas de textos.");
     }
 });
 
@@ -142,15 +142,15 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
-                    LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
                     llenarTabla();
+                    LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
@@ -166,13 +166,13 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
                     llenarTabla();
+                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                    MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
