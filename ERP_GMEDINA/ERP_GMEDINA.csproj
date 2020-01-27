@@ -2906,6 +2906,7 @@
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
     <Content Include="Views\Menu\MenuPrincipal.cshtml" />
+    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
