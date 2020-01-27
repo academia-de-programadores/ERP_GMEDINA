@@ -231,11 +231,13 @@ namespace ERP_GMEDINA.Controllers
         //POST: DeduccionesExtraordinarias/Inactivar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public ActionResult Inactivar(int id)
+        [HttpGet]
+        public JsonResult Inactivar(int? id)
         {
+            if (id == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
             //Variable para enviarla al lado del Cliente
-            string Response = String.Empty;
+            string Response = "bien";
             IEnumerable<object> listDeduccionesExtraordinarias = null;
             string MensajeError = "";
             if (ModelState.IsValid)
@@ -266,10 +268,6 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Response = Ex.Message.ToString();
                 }
-
-                //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
-                Response = "Exito";
-                return RedirectToAction("Index");
             }
             else
             {
@@ -284,14 +282,17 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar Deducciones Extraordinarias
-        [HttpPost]
-        public ActionResult Activar(int id)
+        [HttpGet]
+        public JsonResult Activar(int? id)
         {
+            if(id == null)
+                return Json("error", JsonRequestBehavior.AllowGet);
+
             //LLENAR DATA DE AUDITORIA
             int dex_UsuarioModifica = 1;
             DateTime dex_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listDeduccionesExtraordinarias = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
@@ -320,9 +321,6 @@ namespace ERP_GMEDINA.Controllers
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
             }
             else
             {
