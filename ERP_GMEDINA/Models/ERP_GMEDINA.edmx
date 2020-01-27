@@ -20967,7 +20967,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="direm_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tbBitacoraErrores" EntityType="ERP_GMEDINAModel.tbBitacoraErrores" />
-          <FunctionImport Name="UDP_Acce_tbBitacoraErrores_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Acce_tbBitacoraErrores_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Acce_tbBitacoraErrores_Insert_Result)">
             <Parameter Name="bite_Pantalla" Mode="In" Type="String" />
             <Parameter Name="bite_Usuario" Mode="In" Type="String" />
             <Parameter Name="bite_Fecha" Mode="In" Type="DateTime" />
@@ -22248,6 +22248,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="bite_MensajeError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="bite_Accion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="UDP_Acce_tbBitacoraErrores_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -27146,7 +27149,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbBitacoraErrores_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbBitacoraErrores_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbBitacoraErrores_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbBitacoraErrores_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Acce_tbBitacoraErrores_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

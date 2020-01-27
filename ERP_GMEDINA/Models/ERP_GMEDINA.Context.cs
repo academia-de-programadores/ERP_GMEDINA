@@ -6563,7 +6563,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDirectoriosEmpleados_Insert_Result>("UDP_RRHH_tbDirectoriosEmpleados_Insert", direm_CarpetaParameter, direm_NombreArchivoParameter, emp_IdParameter, direm_UsuarioCreaParameter, direm_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbBitacoraErrores_Insert(string bite_Pantalla, string bite_Usuario, Nullable<System.DateTime> bite_Fecha, string bite_MensajeError, string bite_Accion)
+        public virtual ObjectResult<UDP_Acce_tbBitacoraErrores_Insert_Result> UDP_Acce_tbBitacoraErrores_Insert(string bite_Pantalla, string bite_Usuario, Nullable<System.DateTime> bite_Fecha, string bite_MensajeError, string bite_Accion)
         {
             var bite_PantallaParameter = bite_Pantalla != null ?
                 new ObjectParameter("bite_Pantalla", bite_Pantalla) :
@@ -6585,7 +6585,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("bite_Accion", bite_Accion) :
                 new ObjectParameter("bite_Accion", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbBitacoraErrores_Insert", bite_PantallaParameter, bite_UsuarioParameter, bite_FechaParameter, bite_MensajeErrorParameter, bite_AccionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbBitacoraErrores_Insert_Result>("UDP_Acce_tbBitacoraErrores_Insert", bite_PantallaParameter, bite_UsuarioParameter, bite_FechaParameter, bite_MensajeErrorParameter, bite_AccionParameter);
         }
     }
 }
