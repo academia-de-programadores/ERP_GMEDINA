@@ -45,11 +45,11 @@ function llenarTabla() {
       tabla.draw();
       $.each(Lista, function (index, value) {
        var Acciones = value.habi_Estado == 1
-                   ? null : Admin ?
-                   "<div>" +
-                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                   "</div>" : '';
+                  ? null : Admin ?
+                  "<div>" +
+                     "<a class='btn  btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                     "<a class='btn  btn-default btn-xs' onclick='hablilitar(this)' >Activar</a>" +
+                 "</div>" : '';
        tabla.row.add({
         Estado: value.habi_Estado ? 'Activo' : 'Inactivo',
         "Número": value.habi_Id,
@@ -104,9 +104,9 @@ $("#btnGuardar").click(function () {
       'POST',
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
-           CierraPopups();
-           MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-           LimpiarControles(["habi_Descripcion"]);
+        CierraPopups();
+        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+        LimpiarControles(["habi_Descripcion"]);
         llenarTabla();
        } else {
         MsgError("Error", "No se agrego el registro, contacte al administrador");
@@ -128,9 +128,9 @@ $("#InActivar").click(function () {
       'POST',
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
-           CierraPopups();
-           MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
-           LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+        CierraPopups();
+        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+        LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
         llenarTabla();
        } else {
         MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
@@ -152,8 +152,8 @@ $("#btnActualizar").click(function () {
       'POST',
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
-           CierraPopups();
-           MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+        CierraPopups();
+        MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
         llenarTabla();
        } else {
         MsgError("Error", "No se pudo editar el registro, contacte al administrador");
