@@ -19,33 +19,34 @@
     @Styles.Render("~/font-awesome/css")
 </head>
 
-<div class="row border-bottom">
-    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;" id="navMenu">
 
-        <ul class="nav navbar-top-links navbar-right" id="ulMenu">
-
-            @{var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
-            string nombreUsuario = oUsuario.usu_NombreUsuario;
-            }
-
-
-            <li>
-                <a href="#">
-                    Bienvenido @nombreUsuario
-                </a>
-            </li>
-
-
-            <li>
-                <a href="@Url.Action(" Login", "Pages" )">
-                    <i class="fa fa-sign-out"></i> Cerrar sesión
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
 
 <body class="gray-bg">
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;" id="navMenu">
+
+            <ul class="nav navbar-top-links navbar-right" id="ulMenu">
+
+                @{var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+                string nombreUsuario = oUsuario.usu_NombreUsuario;
+                }
+
+
+                <li>
+                    <a href="#">
+                        Bienvenido @nombreUsuario
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="@Url.Action(" Login", "Pages" )">
+                        <i class="fa fa-sign-out"></i> Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div class="text-center">
         <div class="wrapper">
             <div class="wrapper white-bg">
@@ -55,7 +56,7 @@
                             <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:150px;">
                                 <div class="m-b-md">
                                     <i class="fa fa-users fa-4x"></i>
-                                    <b><h2 class="m-xs">RECURSOS HUMANOS</h2></b>
+                                    <h2 class="m-xs"><b>RECURSOS HUMANOS</b></h2>
                                 </div>
                             </div>
                         </a>
@@ -81,7 +82,7 @@
                             <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:150px;">
                                 <div class="m-b-md">
                                     <i class="fa fa-money fa-4x"></i>
-                                    <b><h1 class="m-xs">PLANILLA</h1></b>
+                                    <h1 class="m-xs"><b>PLANILLA</b></h1>
                                 </div>
                             </div>
 
