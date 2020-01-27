@@ -189,28 +189,10 @@ $("#FormCreate").submit(function (e) {
  e.preventDefault();
 });
 $("#btnCrear").click(function () {
- //declaramos el objeto principal de nuestra tabla y asignamos sus valores
- var tbAreas =
-     {
-      suc_Id: $("#Sucursales").val(),
-      area_Descripcion: $("#area_Descripcion").val(),
-      car_Descripcion: $("#car_Descripcion").val(),
-     };
+ var tbAreas = $("#FormAreas").serializeArray();
+ tbAreas = serializar(tbAreas);
  var lista = getJson();
- var valid = true;
- lista.forEach(function (value, indice) {
-  if (value.car_Descripcion == tbAreas.car_Descripcion) {
-   valid = false;
-  }
- });
- if (!valid) {
-  var span = $("#FormAreas").find("#errorcar_Descripcion")[0];
-  span.innerText = "Cargo reservado, por favor cambiar.";
-  $(span).addClass("text-danger");
-  return null;
- }
-
- if (tbAreas != null) {
+  if (tbAreas != null) {
   data = JSON.stringify({
    cAreas: tbAreas,
    Departamentos: lista,
@@ -231,7 +213,7 @@ $("#btnCrear").click(function () {
        }
 
        if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
-        window.location.href = "/Areas";
+        window.location.href = "/Areas/Index";
        } else {
         $(div).addClass("error");
         asterisco.color = "red";
