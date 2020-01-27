@@ -273,7 +273,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DataSets\ReportesRRHH.Designer.cs" />
+    <Compile Include="DataSets\ReportesRRHH1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1724,6 +1728,9 @@
     <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_Requisiciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1764,7 +1771,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\ReportesDS1.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -1891,12 +1897,6 @@
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\style.css" />
-    <Content Include="DataSets\ReportesRRHH.xsc">
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Content>
-    <Content Include="DataSets\ReportesRRHH.xss">
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -2115,14 +2115,19 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="DataSets\ReportesRRHH.xsc">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
     <None Include="DataSets\ReportesRRHH.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ReportesRRHH1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
+    <Content Include="DataSets\ReportesRRHH.xss">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\App.pubxml" />
     <Content Include="Scripts\app\General\desktop.ini" />
-    <Content Include="Reports\EquipoEmpleadosRPT3.rdlc" />
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresos.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresosRPT.rdlc" />

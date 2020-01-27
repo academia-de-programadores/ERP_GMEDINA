@@ -145,7 +145,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Dias</Value>
+                              <Value>Días</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -514,7 +514,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Incapacidades</Value>
+                  <Value>Reporte de incapacidades</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>
