@@ -256,6 +256,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 ViewBag.empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado== true), "emp_Id", "per_NombreCompleto");
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
                 //Codigo que hace que todo truene
                 //int Cero = 0;
                 //int Uno = 1;
@@ -269,7 +270,7 @@ namespace ERP_GMEDINA.Controllers
             
         }
         [HttpPost]
-        public ActionResult HistorialCargosRPT(int? emp_Id, DateTime? Fecha, DateTime? FechaFin)
+        public ActionResult HistorialCargosRPT(int? car_Id, int? emp_Id, DateTime? Fecha, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -286,6 +287,11 @@ namespace ERP_GMEDINA.Controllers
             {
                 command.CommandText += "and emp_Id = @emp_Id";
                 command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+            }
+            if (car_Id != null)
+            {
+                command.CommandText += " and car_Id = @car_Id";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
             }
             if (Fecha != null && FechaFin != null)
             {
@@ -318,6 +324,7 @@ namespace ERP_GMEDINA.Controllers
                 ViewBag.ReportViewer = reportViewer;
                 
                 ViewBag.empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado== true), "emp_Id", "per_NombreCompleto");
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
 
                 return View();
             }
@@ -759,7 +766,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Permisos(int? emp_Id, DateTime? FechaInicio, DateTime? FechaFin)
+        public ActionResult Permisos(int? emp_Id, DateTime? FechaInicio, DateTime? FechaFin, int? tper_Id)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -774,7 +781,7 @@ namespace ERP_GMEDINA.Controllers
             SqlCommand command = new SqlCommand();
             if (emp_Id == null && FechaInicio == null && FechaFin == null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos";
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where 1 = 1 ";
             }
             else if (emp_Id == null && FechaInicio != null && FechaFin != null)
             {
@@ -816,6 +823,11 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
+            if (tper_Id != null)
+            {
+                command.CommandText += " and tper_Id = @tper_Id";
+                command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
+            }
 
             try
             {
@@ -839,7 +851,7 @@ namespace ERP_GMEDINA.Controllers
                 ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
                 return View();
             }
-            catch
+            catch(Exception ex)
             {
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }

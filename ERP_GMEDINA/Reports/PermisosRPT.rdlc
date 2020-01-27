@@ -34,7 +34,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre del colaborador</Value>
+                              <Value>Nombre del empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -460,9 +460,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.335cm</Top>
-          <Left>21.19718cm</Left>
+          <Left>19.71551cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.00271cm</Width>
+          <Width>4.48438cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -480,7 +480,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Permisos</Value>
+                  <Value>Reporte de permisos</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>

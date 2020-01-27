@@ -20,14 +20,14 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Jornadas</label>
+                                <label class="font-normal">Jornada</label>
 
                                 @Html.DropDownList("jor_Id", (IEnumerable<SelectListItem>)ViewBag.Jornadas, "Seleccione una opción", new { @class = "buscable form-control" })
 
                                 @*@Html.ValidationMessageFor(model => model.des, "", new { @class = "text-danger" })*@
                             </div>
                             <div class="col-md-6">
-                                <label class="font-normal">Departamentos</label>
+                                <label class="font-normal">Departamento</label>
 
                                 @Html.DropDownList("depto_Id", (IEnumerable<SelectListItem>)ViewBag.Departamentos, "Seleccione una opción", new { @class = "buscable form-control" })
 
@@ -36,14 +36,14 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Áreas</label>
+                                <label class="font-normal">Área</label>
 
                                 @Html.DropDownList("area_Id", (IEnumerable<SelectListItem>)ViewBag.areas, "Seleccione una opción", new { @class = "buscable form-control" })
 
                                 @*@Html.ValidationMessageFor(model => model.habi_Id, "", new { @class = "text-danger" })*@
                             </div>
                             <div class="col-md-6">
-                                <label class="font-normal">Sucursales</label>
+                                <label class="font-normal">Sucursal</label>
 
                                 @Html.DropDownList("suc_Id", (IEnumerable<SelectListItem>)ViewBag.Sucursales, "Seleccione una opción", new { @class = "buscable form-control" })
 

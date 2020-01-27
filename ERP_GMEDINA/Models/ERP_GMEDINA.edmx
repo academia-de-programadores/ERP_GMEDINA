@@ -3298,6 +3298,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HorasTrabajadas' does not h
           <Property Name="FechaFin" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Requisiciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_Requisiciones">
+          <Key>
+            <PropertyRef Name="req_Id" />
+          </Key>
+          <Property Name="req_Id" Type="int" Nullable="false" />
+          <Property Name="fechaInicio" Type="datetime" />
+          <Property Name="fechaFin" Type="datetime" />
+          <Property Name="NombreCimpleto" Type="nvarchar" MaxLength="101" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" />
+          <Property Name="req_Duracion" Type="nvarchar" MaxLength="50" />
+          <Property Name="req_EdadMaxima" Type="int" />
+          <Property Name="req_EdadMinima" Type="int" />
+          <Property Name="req_EducacionSuperior" Type="bit" />
+          <Property Name="req_Vacantes" Type="nvarchar" MaxLength="50" />
+          <Property Name="req_Experiencia" Type="nvarchar" MaxLength="100" />
+          <Property Name="req_FechaContratacion" Type="datetime" />
+          <Property Name="req_Descripcion" Type="nvarchar" MaxLength="200" />
+          <Property Name="req_Sexo" Type="char" MaxLength="10" />
+          <Property Name="req_Permanente" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_SeleccionCandidatos">
           <Key>
@@ -9911,6 +9933,25 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_HorasTrabajadas].[Fecha] AS [Fecha], 
     [V_RPT_HorasTrabajadas].[FechaFin] AS [FechaFin]
     FROM [rrhh].[V_RPT_HorasTrabajadas] AS [V_RPT_HorasTrabajadas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_Requisiciones" EntityType="Self.V_RPT_Requisiciones" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_Requisiciones].[req_Id] AS [req_Id], 
+    [V_RPT_Requisiciones].[fechaInicio] AS [fechaInicio], 
+    [V_RPT_Requisiciones].[fechaFin] AS [fechaFin], 
+    [V_RPT_Requisiciones].[NombreCimpleto] AS [NombreCimpleto], 
+    [V_RPT_Requisiciones].[per_Identidad] AS [per_Identidad], 
+    [V_RPT_Requisiciones].[req_Duracion] AS [req_Duracion], 
+    [V_RPT_Requisiciones].[req_EdadMaxima] AS [req_EdadMaxima], 
+    [V_RPT_Requisiciones].[req_EdadMinima] AS [req_EdadMinima], 
+    [V_RPT_Requisiciones].[req_EducacionSuperior] AS [req_EducacionSuperior], 
+    [V_RPT_Requisiciones].[req_Vacantes] AS [req_Vacantes], 
+    [V_RPT_Requisiciones].[req_Experiencia] AS [req_Experiencia], 
+    [V_RPT_Requisiciones].[req_FechaContratacion] AS [req_FechaContratacion], 
+    [V_RPT_Requisiciones].[req_Descripcion] AS [req_Descripcion], 
+    [V_RPT_Requisiciones].[req_Sexo] AS [req_Sexo], 
+    [V_RPT_Requisiciones].[req_Permanente] AS [req_Permanente]
+    FROM [rrhh].[V_RPT_Requisiciones] AS [V_RPT_Requisiciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -20974,6 +21015,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="bite_MensajeError" Mode="In" Type="String" />
             <Parameter Name="bite_Accion" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -22251,6 +22293,26 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_Acce_tbBitacoraErrores_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="V_RPT_Requisiciones">
+          <Key>
+            <PropertyRef Name="req_Id" />
+          </Key>
+          <Property Name="req_Id" Type="Int32" Nullable="false" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="fechaFin" Type="DateTime" Precision="3" />
+          <Property Name="NombreCimpleto" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="req_Duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="req_EdadMaxima" Type="Int32" />
+          <Property Name="req_EdadMinima" Type="Int32" />
+          <Property Name="req_EducacionSuperior" Type="Boolean" />
+          <Property Name="req_Vacantes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="req_Experiencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="req_FechaContratacion" Type="DateTime" Precision="3" />
+          <Property Name="req_Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="req_Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="req_Permanente" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -27156,6 +27218,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_RPT_Requisiciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_Requisiciones">
+              <MappingFragment StoreEntitySet="V_RPT_Requisiciones">
+                <ScalarProperty Name="req_Permanente" ColumnName="req_Permanente" />
+                <ScalarProperty Name="req_Sexo" ColumnName="req_Sexo" />
+                <ScalarProperty Name="req_Descripcion" ColumnName="req_Descripcion" />
+                <ScalarProperty Name="req_FechaContratacion" ColumnName="req_FechaContratacion" />
+                <ScalarProperty Name="req_Experiencia" ColumnName="req_Experiencia" />
+                <ScalarProperty Name="req_Vacantes" ColumnName="req_Vacantes" />
+                <ScalarProperty Name="req_EducacionSuperior" ColumnName="req_EducacionSuperior" />
+                <ScalarProperty Name="req_EdadMinima" ColumnName="req_EdadMinima" />
+                <ScalarProperty Name="req_EdadMaxima" ColumnName="req_EdadMaxima" />
+                <ScalarProperty Name="req_Duracion" ColumnName="req_Duracion" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="NombreCimpleto" ColumnName="NombreCimpleto" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="req_Id" ColumnName="req_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

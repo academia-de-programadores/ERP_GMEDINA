@@ -393,7 +393,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de equipo por colaborador</Value>
+                  <Value>Reporte de equipo por empleado</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>

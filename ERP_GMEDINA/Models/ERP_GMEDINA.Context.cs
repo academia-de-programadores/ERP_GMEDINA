@@ -212,6 +212,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
         public virtual DbSet<tbDirectoriosEmpleados> tbDirectoriosEmpleados { get; set; }
         public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
+        public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

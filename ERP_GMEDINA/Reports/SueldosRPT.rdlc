@@ -439,7 +439,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Sueldos</Value>
+                  <Value>Reporte de sueldos</Value>
                   <Style>
                     <FontSize>20pt</FontSize>
                   </Style>

@@ -338,7 +338,8 @@ $("#InActivar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();ç                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                    CierraPopups();
+                  MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
                     llenarTabla();
                 } else {

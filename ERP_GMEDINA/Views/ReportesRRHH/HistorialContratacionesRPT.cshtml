@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <div class="col-md-6">
                                 <label class="font-normal">Cargo</label>
-                                @Html.DropDownList("car_Id", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Seleccione una opción", new { @class = "form-control" })
+                                @Html.DropDownList("car_Id", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Seleccione una opción", new { @class = "buscable form-control" })
                                 @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger" })
                             </div>
                             <br />
@@ -79,6 +79,10 @@
     </div>
 </div>
 
+@section Styles {
+    @Styles.Render("~/plugins/select2Styles")
+}
 @section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general_Fechas")
 }
