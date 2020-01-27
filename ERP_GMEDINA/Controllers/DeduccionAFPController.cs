@@ -230,7 +230,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbDeduccionAFPJSON = from tbDeduAFP in db.tbDeduccionAFP
-                                     where tbDeduAFP.dafp_Activo == true && tbDeduAFP.dafp_Id == ID
+                                     where tbDeduAFP.dafp_Id == ID
                                      select new
                                      {
                                          tbDeduAFP.dafp_Id,

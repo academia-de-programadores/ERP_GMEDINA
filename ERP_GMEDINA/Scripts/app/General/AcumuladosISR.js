@@ -39,6 +39,7 @@ function cargarGridAcumuladosISR() {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaAcumuladosISR[i].aisr_Activo == false ? 'Inactivo' : 'Activo';
 
+                console.log(ListaAcumuladosISR[i].aisr_Id);
                 //variable boton detalles
                 var botonDetalles = '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>';
 
@@ -87,7 +88,7 @@ $('#Crear #aisr_Descripcion').keyup(function () {
         $('#AsteriscoDescripcionAISR').addClass("text-danger");
         $("#Crear #validation_DescripcionNumerico").css('display', '');
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#AsteriscoDescripcionAISR').removeClass('text-danger');
@@ -204,7 +205,7 @@ $('#btnCreateAcumuladosISR').click(function () {
         }).done(function (data) {
             // validar respuesta del servidor
             if (data == "error") {
-                
+
                 // habilitar boton
                 $('#btnCreateAcumuladosISR').attr('disabled', false);
 
@@ -237,7 +238,7 @@ var Data_Edit = "";
 
 //edit 1
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR", function () {
-    
+
     var ID = $(this).data('id');
     InactivarID = ID;
 
@@ -249,7 +250,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            
+
             if (data) {
                 // llenar modal del formulario
 
@@ -273,7 +274,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
 
                 // mensaje monto debe ser mayo que cero
                 $("#Editar #validation_EditarMontoMayorACero").css('display', 'none');
-                
+
 
                 $("#EditarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
                 $('#btnUpdateAISR2').attr('disabled', false);
@@ -312,7 +313,7 @@ $('#Editar #aisr_Descripcion').keyup(function () {
         $('#AsteriscoDescripcionEditAISR').addClass("text-danger");
         $("#Editar #validation_EditarDescripcionNumerico").css('display', '');
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#AsteriscoDescripcionEditAISR').removeClass('text-danger');
@@ -366,7 +367,7 @@ $("#btnEditarAcumulado").click(function () {
         $("#Editar #aisr_Descripcion").focus();
         ModelState = false;
     }
-        // si no es un número
+    // si no es un número
     else if (isNaN(descripcion) == true) {
 
         $('#AsteriscoDescripcionEditAISR').removeClass('text-danger');
@@ -385,7 +386,7 @@ $("#btnEditarAcumulado").click(function () {
         $("#Editar #aisr_Monto").focus();
         ModelState = false;
     }
-   
+
     if (ModelState == true) {
         // oculat modal edición
         $("#EditarAcumuladosISR").modal('hide');
@@ -409,7 +410,7 @@ $("#btnUpdateAISR2").click(function () {
     // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
     var stringDecimal = data[5].value;
     data[5].value = stringDecimal.replace(/,/, '');
-    
+
 
     $.ajax({
         url: "/AcumuladosISR/Edit",
@@ -460,6 +461,7 @@ $("#btnNoConfirmarEditAISR").click(function () {
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR", function () {
 
     var ID = $(this).data('id');
+    console.log(ID);
 
     $.ajax({
         url: "/AcumuladosISR/Details/" + ID,
@@ -469,6 +471,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
+            console.log(data);
             // llenar formulario
             if (data) {
                 var FechaCrea = FechaFormato(data[0].aisr_FechaCrea);
@@ -534,7 +537,7 @@ $("#btnInactivarAcumuladosISREjecutar").click(function () {
 
         // validar respuesta del servidor
         if (data == "error") {
-            
+
             iziToast.error({
                 title: 'Error',
                 message: 'No inactivó el registro, contacte al administrador',
@@ -546,7 +549,7 @@ $("#btnInactivarAcumuladosISREjecutar").click(function () {
 
             $("#InactivarAcumuladosISR").modal('hide');
             cargarGridAcumuladosISR();
-            
+
             iziToast.success({
                 title: 'Éxito',
                 message: '¡El registro se inactivó de forma exitosa!',

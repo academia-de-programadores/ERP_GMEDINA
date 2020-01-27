@@ -198,7 +198,7 @@ namespace ERP_GMEDINA.Controllers
 
             // obtener objeto con el ID recibido
             var tbCatalogoPeriodoJSON = from tbPeriod in db.tbPeriodos
-                                        where tbPeriod.peri_Activo == true && tbPeriod.peri_IdPeriodo == id
+                                        where tbPeriod.peri_IdPeriodo == id
                                         select new
                                         {
                                             tbPeriod.peri_IdPeriodo,

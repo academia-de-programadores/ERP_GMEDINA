@@ -77,7 +77,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones 
-                                           where tbEmplComisiones.cc_Activo == true && tbEmplComisiones.cc_Id == ID
+                                           where tbEmplComisiones.cc_Id == ID
                                            select new
                                            {
                                                tbEmplComisiones.cc_Id,

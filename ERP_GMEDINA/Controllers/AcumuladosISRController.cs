@@ -40,7 +40,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Details(int? id)
         {
             var tbAcumuladosISRJSON = from tbAcumuladosISR in db.tbAcumuladosISR
-                                      where tbAcumuladosISR.aisr_Activo == true && tbAcumuladosISR.aisr_Id == id
+                                      where tbAcumuladosISR.aisr_Id == id
                                       select new
                                       {
                                           tbAcumuladosISR.aisr_Id,

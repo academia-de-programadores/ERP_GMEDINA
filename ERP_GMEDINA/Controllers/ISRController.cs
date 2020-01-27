@@ -49,7 +49,7 @@ namespace ERP_GMEDINA.Controllers
             }
             // obtener registro con el ID recibido
             var tbISRJSON = from tbISR in db.tbISR
-                            where tbISR.isr_Activo == true && tbISR.isr_Id == ID
+                            where tbISR.isr_Id == ID
                             select new
                             {
                                 tbISR.isr_Id,

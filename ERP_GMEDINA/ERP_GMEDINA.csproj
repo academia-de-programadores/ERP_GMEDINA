@@ -251,7 +251,6 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
-    <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\ReportesRRHHController.cs" />
@@ -1781,7 +1780,6 @@
     <Content Include="Content\BTN\BTN-HOME.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
-    <Content Include="Content\img\done.gif" />
     <Content Include="Content\img\header-profile-skin-2.png" />
     <Content Include="Content\img\header-profile.png" />
     <Content Include="Content\img\LoadingIcon.png" />

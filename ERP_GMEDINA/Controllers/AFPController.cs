@@ -205,7 +205,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbAFPJSON = from tbAFP in db.tbAFP
-                            where tbAFP.afp_Activo == true && tbAFP.afp_Id == ID
+                           where  tbAFP.afp_Id == ID
                             select new
                             {
                                 tbAFP.afp_Id,

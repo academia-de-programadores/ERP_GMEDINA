@@ -107,7 +107,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeIngresosJSON = from tbCatIngreso in db.tbCatalogoDeIngresos
-                                           where tbCatIngreso.cin_Activo == true && tbCatIngreso.cin_IdIngreso == ID
+                                           where tbCatIngreso.cin_IdIngreso == ID
                                            orderby tbCatIngreso.cin_FechaCrea descending
                                            select new
                                            {

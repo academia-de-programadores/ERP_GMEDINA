@@ -182,7 +182,7 @@ namespace PruebaPlanilla.Controllers
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeDeduccionesJSON = from tbCatDedu in db.tbCatalogoDeDeducciones
-                                        where tbCatDedu.cde_Activo == true && tbCatDedu.cde_IdDeducciones == ID
+                                        where tbCatDedu.cde_IdDeducciones == ID
                                         select new
                                         {
                                             tbCatDedu.cde_IdDeducciones,

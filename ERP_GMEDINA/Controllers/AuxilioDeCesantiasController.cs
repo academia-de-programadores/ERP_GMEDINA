@@ -49,7 +49,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbAuxCesanJSON = from tbAuxilioDeCesantias in db.tbAuxilioDeCesantias
-                                 where tbAuxilioDeCesantias.aces_Activo == true && tbAuxilioDeCesantias.aces_IdAuxilioCesantia == ID
+                                 where tbAuxilioDeCesantias.aces_IdAuxilioCesantia == ID
                                  orderby tbAuxilioDeCesantias.aces_FechaCrea descending
                                  select new
                                  {

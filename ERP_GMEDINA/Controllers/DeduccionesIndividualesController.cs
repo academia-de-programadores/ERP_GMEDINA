@@ -229,7 +229,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Details(int? id)
         {
             var tbDeduccionesIndividualesJSON = from tbDeduIndi in db.tbDeduccionesIndividuales
-                                                where tbDeduIndi.dei_Activo == true && tbDeduIndi.dei_IdDeduccionesIndividuales == id
+                                                where tbDeduIndi.dei_IdDeduccionesIndividuales == id
                                                 select new
                                                 {
                                                     tbDeduIndi.dei_IdDeduccionesIndividuales,

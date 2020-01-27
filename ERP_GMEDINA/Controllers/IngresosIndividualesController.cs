@@ -214,7 +214,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Details(int? id)
         {
             var tbIngresosIndividualesJSON = from tbIngrIndi in db.tbIngresosIndividuales
-                                                where tbIngrIndi.ini_Activo == true && tbIngrIndi.ini_IdIngresosIndividuales == id
+                                                where tbIngrIndi.ini_IdIngresosIndividuales == id
                                                 select new
                                                 {
                                                     tbIngrIndi.ini_IdIngresosIndividuales,

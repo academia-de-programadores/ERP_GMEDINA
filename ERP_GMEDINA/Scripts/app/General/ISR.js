@@ -55,7 +55,7 @@ function cargarGridISR() {
                 var estadoRegistro = ListaISR[i].isr_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
-                var botonDetalles = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>' : '';
+                var botonDetalles = '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>';
 
                 //variable boton editar
                 var botonEditar = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' : '';

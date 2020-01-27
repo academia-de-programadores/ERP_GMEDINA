@@ -60,7 +60,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             var tbCatalogoPreavisoJSON = from tbPreavi in db.tbPreaviso
-                                         where tbPreavi.prea_Activo == true && tbPreavi.prea_IdPreaviso == id
+                                         where tbPreavi.prea_IdPreaviso == id
                                          select new
                                          {
                                              tbPreavi.prea_IdPreaviso,
