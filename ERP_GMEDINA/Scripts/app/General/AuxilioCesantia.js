@@ -381,6 +381,9 @@ $('#btnCrearAuxCes').click(function () {
         }).done(function (data) {
 
             if (data == "error") {
+
+                $('#btnCrearAuxCes').attr('disabled', false);
+
                 iziToast.error({
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
