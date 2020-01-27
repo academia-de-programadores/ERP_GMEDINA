@@ -69,7 +69,7 @@ function cargarGridDeducciones() {
                     ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
                     ListaIngresoIndividual[i].ini_Motivo,
                     ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
-                    ListaIngresoIndividual[i].ini_Monto,
+                    (ListaIngresoIndividual[i].ini_Monto % 1 == 0) ? ListaIngresoIndividual[i].ini_Monto + ".00" : ListaIngresoIndividual[i].ini_Monto,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
