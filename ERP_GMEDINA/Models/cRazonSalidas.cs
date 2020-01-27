@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID")]
         public int rsal_Id { get; set; }
 
-        [Display(Name = "Razon")]
+        [Display(Name = "Razón")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string rsal_Descripcion { get; set; }

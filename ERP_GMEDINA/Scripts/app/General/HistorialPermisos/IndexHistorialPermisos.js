@@ -187,7 +187,7 @@ $("#InActivar").click(function () {
             }
         });
     } else {
-        MsgWarning(" ", "la eliminación de información debe ser justificada");
+        MsgSuccess(" Error ", "la eliminación de información debe ser justificada");
     }
 });
 

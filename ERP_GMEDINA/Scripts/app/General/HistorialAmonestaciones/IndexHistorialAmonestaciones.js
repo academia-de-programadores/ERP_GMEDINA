@@ -26,11 +26,11 @@ function format(obj) {
                 '<td>';
         if (index.hamo_Estado)
         {
-            div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>';
+            div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalles</button>';
         }
         else
             {
-            div += '<button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button> <button type="button" class="btn btn-outline btn-primary btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>';
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalles</button>' + '</td>';
             }
         div += '</tr>' +
                     '</tbody>'
