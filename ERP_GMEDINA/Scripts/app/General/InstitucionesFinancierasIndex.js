@@ -51,11 +51,11 @@ function cargarGridINFS() {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaINFS[i].insf_Activo == false ? 'Inactivo' : 'Activo';
                 //variable boton detalles
-                var botonDetalles = ListaINFS[i].insf_Activo == true ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnModalDetallesINFS">Detalles</button>' : '';
+                var botonDetalles = '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnModalDetallesINFS">Detalles</button>';
                 //variable boton editar
                 var botonEditar = ListaINFS[i].insf_Activo == true ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-default btn-xs" id="btnModalEditarINFS">Editar</button>' : '';
                 //variable donde está el boton activar
-                var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
+                var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-default btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
 
                 $('#IndexTabla').dataTable().fnAddData([
                     ListaINFS[i].insf_IdInstitucionFinanciera,

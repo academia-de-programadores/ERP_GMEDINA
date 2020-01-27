@@ -26,13 +26,13 @@ function cargarGridAuxilioCesantia() {
         		var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo';
 
         		//variable boton detalles
-        		var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
+        		var botonDetalles = '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>';
 
         		//variable boton editar
         		var botonEditar = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
 
         		//variable donde está el boton activar
-        		var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarAuxCes">Activar</button>' : '' : '';
+        		var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalActivarAuxCes">Activar</button>' : '' : '';
 
         		//agregar fila al datatable
         		$('#tblAuxCesantia').dataTable().fnAddData([

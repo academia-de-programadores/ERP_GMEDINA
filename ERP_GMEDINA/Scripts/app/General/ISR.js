@@ -61,7 +61,7 @@ function cargarGridISR() {
                 var botonEditar = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' : '';
 
                 //variable boton activar
-                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISRModal">Activar</button>' : '' : '';
+                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnActivarISRModal">Activar</button>' : '' : '';
 
                 //agregar el row al datatable
                 $('#tblISR').dataTable().fnAddData([

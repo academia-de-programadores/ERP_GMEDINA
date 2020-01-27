@@ -330,8 +330,8 @@ function verificarCampos(
     return todoBien;
 }
 
-const Activar = `
-							<button type="button" class="btn btn-primary btn-xs" id="btnActivar">Activar</button>
+const Activar = `           <button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+							<button type="button" class ="btn btn-default btn-xs" id="btnActivar">Activar</button>
 							`;
 const DetallesEditar = `
 							<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>

@@ -46,13 +46,13 @@ function cargarGridTipoDeducciones() {
                 var estadoRegistro = ListaTipoDeducciones[i].tde_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
-                var botonDetalles = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" style="margin-right:3px;" id="btnDetalleTipoDeducciones">Detalles</button>' : '';
+                var botonDetalles = '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" style="margin-right:3px;" id="btnDetalleTipoDeducciones">Detalles</button>';
 
                 //variable boton editar
                 var botonEditar = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTipoDeducciones">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaTipoDeducciones[i].tde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTipoDeducciones">Activar</button>' : '' : '';
+                var botonActivar = ListaTipoDeducciones[i].tde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs"  id="btnActivarTipoDeducciones">Activar</button>' : '' : '';
 
 
                 var FechaCrea = FechaFormato(ListaTipoDeducciones[i].tde_FechaCrea);

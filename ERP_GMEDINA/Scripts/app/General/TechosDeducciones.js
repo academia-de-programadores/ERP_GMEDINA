@@ -178,13 +178,13 @@ function cargarGridTechosDeducciones() {
                 var estadoRegistro = ListaTechosDeducciones[i].tddu_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs" style="margin-right: 3px;"  id="btnDetalleTechosDeducciones">Detalles</button>' : '';
+                var botonDetalles = '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs" style="margin-right: 3px;"  id="btnDetalleTechosDeducciones">Detalles</button>';
 
                 //variable boton editar
                 var botonEditar = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaTechosDeducciones[i].tddu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' : '' : '';
+                var botonActivar = ListaTechosDeducciones[i].tddu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' : '' : '';
 
                 $('#tblTechosDeducciones').dataTable().fnAddData([
                     ListaTechosDeducciones[i].tddu_IdTechosDeducciones,

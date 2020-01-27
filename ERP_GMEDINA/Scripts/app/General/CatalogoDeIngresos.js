@@ -42,16 +42,14 @@ function cargarGridIngresos() {
             for (var i = 0; i < ListaIngresos.length; i++) {
                 var estadoRegistro = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
 
-                var botonDetalles = ListaIngresos[i].cin_Activo == true ?
-                    '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
-                    + ListaIngresos[i].cin_IdIngresos + '">Detalles</button>' : '';
+                var botonDetalles = '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalle" data-id="' + ListaIngresos[i].cin_IdIngresos + '">Detalles</button>';
 
                 var botonEditar = ListaIngresos[i].cin_Activo == true ?
                     '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' : '';
 
                 var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
+                    '<button type="button" class="btn btn-default btn-xs" id="btnActivar" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' : '';
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblCatalogoIngresos').dataTable().fnAddData([
