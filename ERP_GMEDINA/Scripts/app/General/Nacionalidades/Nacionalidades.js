@@ -107,6 +107,7 @@ $("#btnGuardar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
@@ -131,6 +132,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["nac_Descripcion"]);
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["nac_Descripcion"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }

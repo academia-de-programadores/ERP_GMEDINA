@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    @{ 
+                    @{
                     <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
                     var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
 
@@ -63,7 +63,7 @@
                                 @Html.DisplayFor(modelItem => item.cb_Pagado)
                             </td>
                             <td>
-                                @{ 
+                                @{
                                     string Estado = item.cb_Activo == true ? (string)"Activo" : (string)"Inactivo";
                                 }
                                 @Html.DisplayFor(modelItem => @Estado)
@@ -100,7 +100,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-             
+
                 <h4 class="modal-title">Crear Bono</h4>
             </div>
             @Html.Partial("_CreateEmpleadoBonos", new ERP_GMEDINA.Models.tbEmpleadoBonos())
@@ -112,7 +112,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-             
+
                 <h4 class="modal-title">Detalle Bono</h4>
             </div>
             <div class="modal-body" id="Detalles">
@@ -129,13 +129,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-              
+
                 <h4 class="modal-title">Editar Bono</h4>
             </div>
-           
+
                 @Html.Partial("_EditEmpleadoBonos", new ERP_GMEDINA.Models.tbEmpleadoBonos())
             </div>
-           
+
         </div>
     </div>
 
@@ -144,7 +144,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-              
+
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="Activar">
@@ -166,7 +166,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
@@ -184,7 +184,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-             
+
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
@@ -193,19 +193,17 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnActivarRegistroBono">Si</button>
                 <button type="button" class="btn btn-white" id="btactivarNO">No</button>
-                
+
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/Scripts/app/General/EmpleadoBonos")
+    @Scripts.Render("~/plugins/dataTables")
 }
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }

@@ -226,7 +226,6 @@ $("#btnConfirmarEditar2").click(function () {
         insf_Correo: $("#Editar #insf_Correo").val()
     };
 
-    console.log(data);
     $.ajax({
         url: "/InstitucionesFinancieras/Edit",
         method: "POST",
@@ -293,7 +292,6 @@ $(document).on("click", "#IndexTabla tbody tr td #btnModalDetallesINFS", functio
                 var FechaCrea = FechaFormato(data[0].insf_FechaCrea);
                 var FechaModifica = (FechaFormato(data[0].insf_FechaModifica));
 
-                console.log(data);
                 $("#frmDetallesInstitucionFinanciera #insf_IdInstitucionFinanciera").html(data[0].insf_IdInstitucionFinanciera);
                 $("#frmDetallesInstitucionFinanciera #insf_DescInstitucionFinanc").html(data[0].insf_Descripcion);
                 $("#frmDetallesInstitucionFinanciera #insf_Contacto").html(data[0].insf_Contacto);
@@ -468,7 +466,6 @@ function Vaciar_ModalCrear() {
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
 
-    console.log("Vaciado");
 }
 
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
@@ -503,7 +500,6 @@ function Vaciar_ModalEditar() {
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
 
-    console.log("Vaciado");
 }
 
 //FUNCION PARA MOSTRAR O QUITAR DATAANNOTATIONS
@@ -513,8 +509,19 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
     var ModelState = true;
 
     if (insf_DescInstitucionFinanc != "-1") {
-        //DESCRIPCION
-        if (insf_DescInstitucionFinanc == "" || insf_DescInstitucionFinanc == null) {
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_DescInstitucionFinanc.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_DescInstitucionFinanc.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #insf_DescInstitucionFinanc").val(insf_DescInstitucionFinanc.substring(0, FirstChar + 1));
+        }
+        if (insf_DescInstitucionFinanc == "" || insf_DescInstitucionFinanc == " " || insf_DescInstitucionFinanc == "  " || insf_DescInstitucionFinanc == null) {
+            //ELIMINAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_DescInstitucionFinanc == ' ')
+                $("#Crear #insf_DescInstitucionFinanc").val("");
             //MOSTRAR DATAANNOTATIONS
             $("#Crear #Span_insf_DescInstitucionFinanc").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -531,8 +538,21 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
 
 
     if (insf_Contacto != "-1") {
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_Contacto.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_Contacto.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #insf_Contacto").val(insf_Contacto.substring(0, FirstChar + 1));
+        }
         //CONTACTO
-        if (insf_Contacto == "" || insf_Contacto == null) {
+        if (insf_Contacto == "" || insf_Contacto == " " || insf_Contacto == "  " || insf_Contacto == null) {
+            //VACIAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_Contacto == ' ')
+                $("#Crear #insf_Contacto").val("");
+
             //MOSTRAR DATAANNOTATIONS
             $("#Crear #Span_insf_Contacto").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -549,8 +569,23 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
 
 
     if (insf_Telefono != "-1") {
+
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_Telefono.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_Telefono.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #insf_DescInstitucionFinanc").val(insf_Telefono.substring(0, FirstChar + 1));
+        }
+
         //Telefono
-        if (insf_Telefono == "" || isNaN(insf_Telefono)) {
+        if (insf_Telefono == "" || insf_Telefono == " " || insf_Telefono == "  " || isNaN(insf_Telefono)) {
+            //VACIAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_Telefono == ' ')
+                $("#Crear #insf_Telefono").val("");
+
             //MOSTRAR DATAANNOTATIONS
             $("#Crear #Span_insf_Telefono").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -567,8 +602,35 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
 
 
     if (insf_Correo != "-1") {
+
+        //FORMATO DE LA MASCARA
+        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+        //VALIDAR
+        if (!emailRegex.test(insf_Correo)) {
+            //MOSTRAR LA VALIDACIÓN DE CORREO
+            $("#Crear #Span_insf_Correo_Validar").show();
+        } else {
+            //MOSTRAR LA VALIDACIÓN DE CORREO
+            $("#Crear #Span_insf_Correo_Validar").hide();
+        }
+
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_Correo.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_Correo.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Crear #insf_Correo").val(insf_Correo.substring(0, FirstChar + 1));
+        }
+
         //CORREO
-        if (insf_Correo == "" || insf_Correo == null) {
+        if (insf_Correo == "" || insf_Correo == " " || insf_Correo == "  " || insf_Correo == null) {
+            //VACIAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_Telefono == ' ')
+                $("#Crear #insf_Correo").val("");
+
             //MOSTRAR DATAANNOTATIONS
             $("#Crear #Span_insf_Correo").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -594,8 +656,20 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
     var ModelState = true;
 
     if (insf_DescInstitucionFinanc != "-1") {
-        //DESCRIPCION
-        if (insf_DescInstitucionFinanc == "" || insf_DescInstitucionFinanc == null) {
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_DescInstitucionFinanc.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_DescInstitucionFinanc.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #insf_DescInstitucionFinanc").val(insf_DescInstitucionFinanc.substring(0, FirstChar + 1));
+        }
+        if (insf_DescInstitucionFinanc == "" || insf_DescInstitucionFinanc == " " || insf_DescInstitucionFinanc == "  " || insf_DescInstitucionFinanc == null) {
+            //ELIMINAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_DescInstitucionFinanc == ' ')
+                $("#Editar #insf_DescInstitucionFinanc").val("");
+
             //MOSTRAR DATAANNOTATIONS
             $("#Editar #Span_insf_DescInstitucionFinanc").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -612,8 +686,21 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
 
 
     if (insf_Contacto != "-1") {
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_Contacto.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_Contacto.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #insf_Contacto").val(insf_Contacto.substring(0, FirstChar + 1));
+        }
         //CONTACTO
-        if (insf_Contacto == "" || insf_Contacto == null) {
+        if (insf_Contacto == "" || insf_Contacto == " " || insf_Contacto == "  " || insf_Contacto == null) {
+            //VACIAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_Contacto == ' ')
+                $("#Editar #insf_Contacto").val("");
+
             //MOSTRAR DATAANNOTATIONS
             $("#Editar #Span_insf_Contacto").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -630,8 +717,21 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
 
 
     if (insf_Telefono != "-1") {
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_Telefono.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_Telefono.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #insf_DescInstitucionFinanc").val(insf_Telefono.substring(0, FirstChar + 1));
+        }
+
         //Telefono
-        if (insf_Telefono == "" || isNaN(insf_Telefono)) {
+        if (insf_Telefono == "" || insf_Telefono == " " || insf_Telefono == "  " || isNaN(insf_Telefono)) {
+            //VACIAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_Telefono == ' ')
+                $("#Editar #insf_Telefono").val("");
             //MOSTRAR DATAANNOTATIONS
             $("#Editar #Span_insf_Telefono").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -648,8 +748,34 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
 
 
     if (insf_Correo != "-1") {
+
+        //FORMATO DE LA MASCARA
+        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+        //VALIDAR
+        if (!emailRegex.test(insf_Correo)) {
+            //MOSTRAR LA VALIDACIÓN DE CORREO
+            $("#Editar #Span_insf_Correo_Validar").show();
+        } else {
+            //MOSTRAR LA VALIDACIÓN DE CORREO
+            $("#Editar #Span_insf_Correo_Validar").hide();
+        }
+
+        //VALIDAR ESPACIOS EN BLANCO
+        var LengthString = insf_Correo.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = insf_Correo.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #insf_Correo").val(insf_Correo.substring(0, FirstChar + 1));
+        }
+
         //CORREO
-        if (insf_Correo == "" || insf_Correo == null) {
+        if (insf_Correo == "" || insf_Correo == " " || insf_Correo == "  " || insf_Correo == null) {
+            //VACIAR EL ESPACIO EN BLANCO INICIAL
+            if (insf_Telefono == ' ')
+                $("#Editar #insf_Correo").val("");
             //MOSTRAR DATAANNOTATIONS
             $("#Editar #Span_insf_Correo").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -667,3 +793,6 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
     //RETURN DEL ESTADO DEL MODELO
     return ModelState;
 }
+
+
+

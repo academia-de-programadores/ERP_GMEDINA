@@ -1911,6 +1911,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -2602,22 +2603,15 @@
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Details.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Edit.cshtml" />
     <Content Include="Views\EmpleadoComisiones\Index.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
-    <Content Include="Views\AcumuladosISR\Create.cshtml" />
-    <Content Include="Views\AcumuladosISR\Delete.cshtml" />
-    <Content Include="Views\AcumuladosISR\Details.cshtml" />
-    <Content Include="Views\AcumuladosISR\Edit.cshtml" />
     <Content Include="Views\AcumuladosISR\Index.cshtml" />
     <Content Include="Views\AcumuladosISR\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_EditTechosDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_DetailCatalogoDeIngreso.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_EditCatalogoDeIngresos.cshtml" />
@@ -2627,10 +2621,6 @@
     <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
     <Content Include="Views\Planilla\Index.cshtml" />
     <Content Include="Views\Planilla\_GenerarPlanillaConfiguracion.cshtml" />
-    <Content Include="Views\TechosDeducciones\Create.cshtml" />
-    <Content Include="Views\TechosDeducciones\Delete.cshtml" />
-    <Content Include="Views\TechosDeducciones\Details.cshtml" />
-    <Content Include="Views\TechosDeducciones\Edit.cshtml" />
     <Content Include="Views\TechosDeducciones\Index.cshtml" />
     <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
@@ -2651,10 +2641,6 @@
     <Content Include="Views\TipoDeducciones\Index.cshtml" />
     <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
     <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
-    <Content Include="Views\ISR\Create.cshtml" />
-    <Content Include="Views\ISR\Delete.cshtml" />
-    <Content Include="Views\ISR\Details.cshtml" />
-    <Content Include="Views\ISR\Edit.cshtml" />
     <Content Include="Views\ISR\Index.cshtml" />
     <Content Include="Views\ISR\_CreateISR.cshtml" />
     <Content Include="Views\ISR\_DetailsISR.cshtml" />
@@ -2685,10 +2671,6 @@
     <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
     <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
     <Content Include="Views\FechaPlanilla\ComprobanteEmpleadoEncabezado.cshtml" />
-    <Content Include="Views\FechaPlanilla\Create.cshtml" />
-    <Content Include="Views\FechaPlanilla\Delete.cshtml" />
-    <Content Include="Views\FechaPlanilla\Details.cshtml" />
-    <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
     <Content Include="Views\IngresosIndividuales\Index.cshtml" />
     <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />

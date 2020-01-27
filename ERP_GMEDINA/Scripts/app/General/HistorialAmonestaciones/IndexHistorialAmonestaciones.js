@@ -163,9 +163,9 @@ $("#btnGuardar").click(function () {
                     debugger
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         CierraPopups();
-                        llenarTabla();
-                        LimpiarControles(["emp_Id", "tamo_Id", "hamo_Fecha", "hamo_Observacion"]);
                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                        LimpiarControles(["emp_Id", "tamo_Id", "hamo_Fecha", "hamo_Observacion"]);
+                        llenarTabla();
                     } else {
                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }

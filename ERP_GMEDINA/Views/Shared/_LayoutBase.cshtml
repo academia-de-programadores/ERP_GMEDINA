@@ -50,6 +50,7 @@
     @Scripts.Render("~/plugins/mascarasDeEntrada")
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
+    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
     <script>
 		$('#menuDesplegar').click(function () {
 			$('#menulateral').removeClass("custom-scrollbar");

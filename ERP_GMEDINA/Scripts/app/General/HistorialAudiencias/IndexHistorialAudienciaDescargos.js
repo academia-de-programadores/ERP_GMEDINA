@@ -209,6 +209,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["aude_Id"]);
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["aude_Id"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -249,6 +251,7 @@ $("#btnActualizar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa");
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

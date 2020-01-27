@@ -1,4 +1,5 @@
-﻿$.getScript("../Scripts/app/General/SerializeDate.js")
+﻿var urlSinElIndex = "";
+$.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
         console.log(textStatus);
     })
@@ -35,12 +36,13 @@ function spinner() {
              </div>`
 }
 function listar() {
+    console.log(urlSinElIndex + '/getFechaPlanilla');
     table = $('#tblHistorialPlanillas').DataTable({
         //Con este metodo se le dan los estilos y funcionalidades de datatable a la tabla
         ajax: {
             //Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
             method: 'GET',
-            url: 'FechaPlanilla/getFechaPlanilla',
+            url: urlSinElIndex + '/getFechaPlanilla',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json'
         },
@@ -107,7 +109,7 @@ function listar() {
 function obtenerDetalles(id, handleData) {
     _ajax(
         { anio: id },
-        '/FechaPlanilla/getTipoPlanilla',
+        urlSinElIndex + '/getTipoPlanilla',
         'POST',
         (data) => {
             handleData(data);
@@ -218,5 +220,11 @@ $(document).on('click', '#btnDetalleCatalogoDeducciones2', function () {
 });
 
 $(document).ready(() => {
+    let ubicacionIndexUrl = window.location.toString().indexOf('/Index');
+
+    if (ubicacionIndexUrl > 0) {
+        urlSinElIndex = window.location.toString().replace('/Index', '');
+        console.log(urlSinElIndex);
+    }
     listar();
 }); 
