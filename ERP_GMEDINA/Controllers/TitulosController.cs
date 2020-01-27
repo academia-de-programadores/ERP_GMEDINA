@@ -138,7 +138,7 @@ namespace ERP_GMEDINA.Controllers
                 titu_UsuarioModifica = tbtitulos.titu_UsuarioModifica,
                 titu_FechaModifica = tbtitulos.titu_FechaModifica,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbtitulos.tbUsuario).usu_NombreUsuario },
-                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbtitulos.tbUsuario).usu_NombreUsuario }
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbtitulos.tbUsuario1).usu_NombreUsuario }
             };
             return Json(titulos, JsonRequestBehavior.AllowGet);
         }

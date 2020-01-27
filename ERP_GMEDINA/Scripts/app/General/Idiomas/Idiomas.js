@@ -109,7 +109,7 @@ $("#btnGuardar").click(function () {
                     llenarTabla();
                 }
                 else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador.");
+                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -136,7 +136,7 @@ $("#InActivar").click(function () {
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 $("#btnActualizar").click(function () {

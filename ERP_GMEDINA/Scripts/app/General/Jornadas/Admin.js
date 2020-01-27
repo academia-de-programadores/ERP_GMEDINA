@@ -17,10 +17,10 @@ $("#btnActivar").click(function () {
         'POST',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                MsgSuccess("¡Exito!", "El registro se habilitado  de forma exitosa");
+                MsgSuccess("¡Exito!", "El registro se habilitado de forma exitosa.");
                 llenarTabla(-1);
             } else {
-                MsgError("Error", "No se logró habilitado el registro, contacte al administrador");
+                MsgError("Error", "No se logró habilitado el registro, contacte al administrador.");
             }
         });
     CierraPopups();

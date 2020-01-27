@@ -105,15 +105,15 @@ $("#btnGuardar").click(function () {
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
         CierraPopups();
-        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa.");
         LimpiarControles(["habi_Descripcion"]);
         llenarTabla();
        } else {
-        MsgError("Error", "No se agrego el registro, contacte al administrador");
+        MsgError("Error", "No se agregó el registro, contacte al administrador.");
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+  MsgError("Error", "por favor llene todas las cajas de texto.");
  }
 });
 
@@ -129,15 +129,15 @@ $("#InActivar").click(function () {
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
         CierraPopups();
-        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa.");
         LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
         llenarTabla();
        } else {
-        MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+        MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+  MsgError("Error", "por favor llene todas las cajas de texto.");
  }
 });
 
@@ -153,13 +153,13 @@ $("#btnActualizar").click(function () {
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
         CierraPopups();
-        MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+        MsgSuccess("¡Exito!", "El registro se editó de forma exitosa.");
         llenarTabla();
        } else {
-        MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+        MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+  MsgError("Error", "Por favor llene todas las cajas de texto.");
  }
 });
