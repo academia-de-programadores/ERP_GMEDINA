@@ -68,7 +68,7 @@ $("body").on("click", "#btnProcesar", function () {
         success: function (r) {
             iziToast.success({
                 title: 'Decimo Cuarto Mes',
-                message: "Registros procesados !"
+                message: "¡Decimocuarto mes procesado de forma exitosa!"
             });
         },
         error: function (e) {
