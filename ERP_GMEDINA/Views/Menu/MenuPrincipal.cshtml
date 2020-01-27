@@ -1,5 +1,4 @@
-﻿
-@*@{
+﻿@*@{
     Layout = null;
 }*@
 
@@ -14,7 +13,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <!-- Add jQuery Style direct - used for jQGrid plugin -->
-    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content(" ~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
     <!-- Primary Inspinia style -->
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
@@ -22,14 +21,11 @@
 
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;" id="navMenu">
-        @*<div class="navbar-header">
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" id="menuDesplegar"><i class="fa fa-bars"></i> </a>
 
-            </div>*@
         <ul class="nav navbar-top-links navbar-right" id="ulMenu">
 
             @{var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
-                string nombreUsuario = oUsuario.usu_NombreUsuario;
+            string nombreUsuario = oUsuario.usu_NombreUsuario;
             }
 
 
@@ -41,7 +37,7 @@
 
 
             <li>
-                <a href="@Url.Action("Login", "Pages")">
+                <a href="@Url.Action(" Login", "Pages" )">
                     <i class="fa fa-sign-out"></i> Cerrar sesión
                 </a>
             </li>
@@ -55,7 +51,15 @@
             <div class="wrapper white-bg">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div onclick="Redirect();" class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:40px;">
+                        <a href="@Url.Action(" Index","Inicio",new { idmenu=0})" id="btnMenuRRHH">
+                            <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:150px;">
+                                <div class="m-b-md">
+                                    <i class="fa fa-users fa-4x"></i>
+                                    <b><h2 class="m-xs">RECURSOS HUMANOS</h2></b>
+                                </div>
+                            </div>
+                        </a>
+                        @*<div onclick="Redirect();" class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:40px;">
                             <div class="m-b-md">
                                 <i class="fa fa-calculator fa-4x"></i>
                                 <b><h1 class="m-xs">FACTURACIÓN</h1></b>
@@ -66,27 +70,21 @@
                                 <i class="fa fa-book fa-4x"></i>
                                 <b><h1 class="m-xs">INVENTARIO</h1></b>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="col-lg-6">
                         <img src="~/Content/img/payroll.jpg" alt="dashboard" class="img-responsive animated fadeInUp" style="height:469px; width:626px; margin-top:40px; margin-bottom:40px;">
                     </div>
                     <div class="col-lg-3">
-                        <a href="@Url.Action("Index","Inicio",new { idmenu = 0})" id="btnMenuRRHH">
-                            <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:40px;">
-                                <div class="m-b-md">
-                                    <i class="fa fa-users fa-4x"></i>
-                                    <b><h2 class="m-xs">RECURSOS HUMANOS</h2></b>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="@Url.Action("Index","Menu", new { idmenu = 1})" id="btnMenuPlanilla">
-                            <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:75px;">
+                        <a href="@Url.Action(" Index","Menu", new { idmenu=1})" id="btnMenuPlanilla">
+
+                            <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:150px;">
                                 <div class="m-b-md">
                                     <i class="fa fa-money fa-4x"></i>
                                     <b><h1 class="m-xs">PLANILLA</h1></b>
                                 </div>
                             </div>
+
                         </a>
                     </div>
                 </div>
@@ -99,12 +97,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/plugins/slimScroll")
     @*@Scripts.Render("~/bundles/inspinia")*@
-    
-    <script type="text/javascript">
-            $('#frmOpcionesINFS').modal();
-    </script>
+
+
 
     <div id="flotTip" style="display: none; position: absolute; background: rgb(255, 255, 255); z-index: 100; padding: 0.4em 0.6em; border-radius: 0.5em; font-size: 0.8em; border: 1px solid rgb(17, 17, 17); white-space: nowrap; left: 389px; top: 434px;"></div>
 </body>
-<!-- Section for main scripts render -->
+
 </html>
