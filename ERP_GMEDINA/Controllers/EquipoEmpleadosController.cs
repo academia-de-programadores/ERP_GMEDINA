@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Controllers
             bool Admin = (bool)Session["Admin"];
             var tbEquipoEmpleados = new List<tbEquipoEmpleados> { };
             var equipoe = db.tbEquipoEmpleados.Where(e => e.eqem_Estado == true).Count();
-            ViewBag.eqtra_Id = new SelectList(db.tbEquipoTrabajo.Where(x => x.eqtra_Estado == true && (db.tbEquipoEmpleados.Where(ee => ee.eqtra_Id == x.eqtra_Id).Count()) == 0).Select(x => new { eqtra_Id = x.eqtra_Id, eqtra_Descripcion = x.eqtra_Descripcion }), "eqtra_Id", "eqtra_Descripcion");
+            ViewBag.eqtra_Id = new SelectList(db.tbEquipoTrabajo.Where(x => x.eqtra_Estado == true && (db.tbEquipoEmpleados.Where(ee => ee.eqtra_Id == x.eqtra_Id && ee.eqem_Estado == true).Count()) == 0).Select(x => new { eqtra_Id = x.eqtra_Id, eqtra_Descripcion = x.eqtra_Descripcion }), "eqtra_Id", "eqtra_Descripcion");
             return View(tbEquipoEmpleados);
         }
 
@@ -84,7 +84,7 @@ namespace ERP_GMEDINA.Controllers
         {
             return View();
         }
-
+        
         // POST: EquipoEmpleados/Create
         [HttpPost]
         public ActionResult Create(tbEquipoEmpleados tbEquipoEmpleados)

@@ -67,10 +67,27 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            //bool Admin = (bool)Session["Admin"];
-            tbJornadas tbJornadas = new tbJornadas { jor_Estado = true};
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            return View(tbJornadas);
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
+
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                tbJornadas tbJornadas = new tbJornadas { jor_Estado = true };
+                bool Admin = (bool)Session["Admin"];
+                return View(tbJornadas);
+
+            }
+            catch (Exception)
+            {
+                return View();
+
+            }
+            //var tbJornadas = new tbJornadas { };
+            //return View(tbJornadas);
         }
 
         //// GET: Jornadas/Details/5
@@ -253,7 +270,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbHorarios = db.tbHorarios.Find(id);
-                if (tbHorarios == null || !tbHorarios.hor_Estado)
+                if (tbHorarios == null)
                 {
                     return HttpNotFound();
                 }
@@ -292,7 +309,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(tbJornadas tbJornadas)
         {
             string msj = "";
-            if (tbJornadas.jor_Id != 0 && tbJornadas.jor_Descripcion!= "")
+            if (tbJornadas.jor_Id != 0 && tbJornadas.jor_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
