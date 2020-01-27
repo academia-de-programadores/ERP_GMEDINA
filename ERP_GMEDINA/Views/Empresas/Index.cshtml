@@ -55,7 +55,7 @@
 @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
 @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/Scripts/app/general/Empresas")
-    @if (Model.empr_Estado)
+    @if ((bool)Session["Admin"])
     {
         @Scripts.Render("~/Scripts/app/general/Admin/Empresas")
     }
