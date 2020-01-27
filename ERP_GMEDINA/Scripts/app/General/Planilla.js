@@ -7,6 +7,15 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
       console.log("No se pudo recuperar Script SerializeDate");
   });
 
+//OBTENER SCRIPT DE EXPORTAR A EXCEL
+$.getScript("../Scripts/app/General/excelexportjs.js")
+  .done(function (script, textStatus) {
+      console.log(textStatus);
+  })
+  .fail(function (jqxhr, settings, exception) {
+      console.log("No se pudo recuperar Script excelexportjs");
+  });
+
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
@@ -145,7 +154,7 @@ $('#btnGenerarPlanilla').click(function () {
                     message: data.Response.Response,
                 });
             }
-            else {
+            else if (data.Response.Tipo == 'warning') {
                 iziToast.warning({
                     title: data.Response.Encabezado,
                     message: data.Response.Response,
