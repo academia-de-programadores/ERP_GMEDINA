@@ -2011,6 +2011,7 @@
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\RazonSalidas\Admin.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
+    <Content Include="Scripts\app\General\ReportesPlanilla.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\Admin.js" />
