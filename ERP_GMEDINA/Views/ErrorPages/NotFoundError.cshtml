@@ -22,24 +22,31 @@
 
 
     <div class="middle-box text-center animated fadeInDown">
-        <h1>404</h1>
-        <h3 class="font-bold">Página no encontrada</h3>
+        @{
+            int idmenuSession = (int)(HttpContext.Current.Session["sesionIdMenu"] ?? 0);
+        }
 
-        <div class="error-desc">
-            Lo sentimos, pero no hemos podido encontrar la página que buscas.
-            <br />
-            @{
-                int idmenuSession = (int)(HttpContext.Current.Session["sesionIdMenu"] ?? 0);
-            }
-            @if (idmenuSession != 0)
-            {
+        @if (idmenuSession != 0)
+        {
+            <h1>404</h1>
+            <h3 class="font-bold">Página no encontrada</h3>
+
+            <div class="error-desc">
+                Lo sentimos, pero no hemos podido encontrar la página que buscas.
+                <br />
                 <label>Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index","Menu", new { idmenu = idmenuSession})" class="btn btn-primary m-t">Inicio</a></label>
-            }
-            else
-            {
+            </div>
+        }
+        else
+        {
+            <h1>403</h1>
+            <h3 class="font-bold">No tienes acceso a este Recurso</h3>
+            <div class="error-desc">
+                Lo sentimos, no tienes acceso a esta pagina.
+                <br />
                 <label>Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index","Menu", new { idmenu = 0})" class="btn btn-primary m-t">Inicio</a></label>
-            }
-        </div>
+            </div>
+        }
     </div>
 
     <!-- Mainly scripts -->
