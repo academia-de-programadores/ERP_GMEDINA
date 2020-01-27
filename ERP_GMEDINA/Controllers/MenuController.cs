@@ -13,10 +13,17 @@ namespace ERP_GMEDINA.Controllers
         // GET: Menu
         public ActionResult Index(int idmenu)
         {
-            tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
-            Session["sesionUsuario"] = sesionUsuario;
-            Session["sesionIdMenu"] = idmenu;
-            return View();
+            if(idmenu != 0)
+            {
+                tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
+                Session["sesionUsuario"] = sesionUsuario;
+                Session["sesionIdMenu"] = idmenu;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("MenuPrincipal");
+            }
         }
 
         public ActionResult MenuPrincipal()

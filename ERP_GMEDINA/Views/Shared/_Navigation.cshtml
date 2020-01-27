@@ -4,7 +4,13 @@
 
             @{
                 //var idmenu = Session["sesionIdMenu"];
-                int idmenu = (int)HttpContext.Current.Session["sesionIdMenu"];
+                int? idmenu = (int?)(HttpContext.Current.Session["sesionIdMenu"]);
+                if(idmenu == null)
+                {
+                    <script>
+                        location.href = window.location.protocol + '//' + window.location.host + '/' + window.location.pathname.split('/')[1];
+                    </script>
+                }
                 if (idmenu == 0)
                 {
 

@@ -25,7 +25,8 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control lg motivos" id="cmbxMotivos" onchange="validarCampos('-1', this.value, '-1', false)"></select>
+                        <select class="form-control lg motivos" id="cmbxMotivos" onchange="validarCampos('-1', this.value, '-1', false)">
+                        </select>
                         <span class="text-danger" hidden id="validacionSelectMotivo">Por favor, seleccione un motivo.</span>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
             </div>
         </div>
 
-        @*  INFORMACION GENERAL  *@
+         @*  INFORMACION GENERAL  *@
         <div class="ibox-title">
             <h3 style="text-align:center;">Información general</h3>
         </div>
@@ -190,38 +191,38 @@
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Salarios adeudados(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="SalariosAdeudados" id="SalariosAdeudados" value="" />
+                                <strong class="" style="font-weight:900;">Salarios adeudados(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="SalariosAdeudados" id="SalariosAdeudados" value="" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Otros pagos(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="OtrosPagos" id="OtrosPagos" />
+                                <strong class="" style="font-weight:900;">Otros pagos(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="OtrosPagos" id="OtrosPagos" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago HE pendiente(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoHEPendiente" id="PagoHEPendiente" />
+                                <strong class="" style="font-weight:900;">Pago HE pendiente(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="PagoHEPendiente" id="PagoHEPendiente" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Valor bono educativo(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="ValorBonoEducativo" id="ValorBonoEducativo" />
+                                <strong class="" style="font-weight:900;">Valor bono educativo(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="ValorBonoEducativo" id="ValorBonoEducativo" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago séptimo día(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoSeptimoDia" id="PagoSeptimoDia" />
+                                <strong class="" style="font-weight:900;">Pago séptimo día(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="PagoSeptimoDia" id="PagoSeptimoDia" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Bono por vacaciones(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="BonoPorVacaciones" id="BonoPorVacaciones" />
+                                <strong class="" style="font-weight:900;">Bono por vacaciones(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="BonoPorVacaciones" id="BonoPorVacaciones" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Reajuste salarial(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="ReajusteSalarial" id="ReajusteSalarial" />
+                                <strong class="" style="font-weight:900;">Reajuste salarial(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="ReajusteSalarial" id="ReajusteSalarial" />
                             </div>
 
                         </div>
@@ -229,38 +230,38 @@
                         <div class="wide">
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Decimotercer mes Adeudado(LPS): </strong>
-                                <input class="text-success text-line ValidarCaracteres" name="DecimoTercerMesAdeudado" id="DecimoTercerMesAdeudado" />
+                                <strong class="" style="font-weight:900;">Decimotercer mes Adeudado(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="DecimoTercerMesAdeudado" id="DecimoTercerMesAdeudado" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Decimocuarto mes Adeudado(LPS): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="DecimoCuartoMesAdeudado" id="DecimoCuartoMesAdeudado" />
+                                <strong class="" style="font-weight:900;">Decimocuarto mes Adeudado(LPS): </strong> 
+                                <input class="soloNumero MascaraCantidad text-success text-line" name="DecimoCuartoMesAdeudado" id="DecimoCuartoMesAdeudado" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Bonificación Vacaciones(Dias): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="BonificacionVacaciones" id="BonificacionVacaciones" />
+                                <strong class="" style="font-weight:900;">Bonificación Vacaciones(Dias): </strong> 
+                                <input class="soloNumero text-success text-line" name="BonificacionVacaciones" id="BonificacionVacaciones" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pagos Por Embarazo(Dias): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoPorEmbarazo" id="PagoPorEmbarazo" />
+                                <strong class="" style="font-weight:900;">Pagos Por Embarazo(Dias): </strong> 
+                                <input class="soloNumero text-success text-line" name="PagoPorEmbarazo" id="PagoPorEmbarazo" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago por Lactancia(Dias): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoPorLactancia" id="PagoPorLactancia" />
+                                <strong class="" style="font-weight:900;">Pago por Lactancia(Dias): </strong> 
+                                <input class="soloNumero text-success text-line" name="PagoPorLactancia" id="PagoPorLactancia" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">PrePosNatal(Dias): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PrePosNatal" id="PrePosNatal" />
+                                <strong class="" style="font-weight:900;">PrePosNatal(Dias): </strong> 
+                                <input class="soloNumero text-success text-line" name="PrePosNatal" id="PrePosNatal" />
                             </div>
 
                             <div class="form-group">
-                                <strong class="" style="font-weight:900;">Pago Por Dias Feriados(Dias): </strong>
-                                <input class="soloNumero MascaraCantidad text-success text-line ValidarCaracteres" name="PagoPorDiasFeriado" id="PagoPorDiasFeriado" />
+                                <strong class="" style="font-weight:900;">Pago Por Dias Feriados(Dias): </strong> 
+                                <input class="soloNumero text-success text-line" name="PagoPorDiasFeriado" id="PagoPorDiasFeriado" />
                             </div>
                         </div>
                     </div>
@@ -280,7 +281,7 @@
                 <div class="row">
                     <input type="button" class="btn btn-primary" id="RegistrarLiquidacion" value="Registrar Liquidación" style="margin:10px 10px 0px 0px; float:right;" />
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
 </div>
@@ -341,6 +342,7 @@
 </style>
 
 @section Scripts {
+    @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/plugins/dataPicker")
     @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/Scripts/app/general/Liquidacion")
@@ -349,4 +351,5 @@
 @section Styles {
     @Styles.Render("~/plugins/select2Styles")
     @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }

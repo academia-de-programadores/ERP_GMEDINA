@@ -27,10 +27,18 @@
 
         <div class="error-desc">
             Lo sentimos, pero no hemos podido encontrar la página que buscas.
+            <br />
             @{
-                int idmenuSession = (int)HttpContext.Current.Session["sesionIdMenu"];
+                int idmenuSession = (int)(HttpContext.Current.Session["sesionIdMenu"] ?? 0);
             }
-            Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index","Menu", new { idmenu = idmenuSession})" class="btn btn-primary m-t">Inicio</a>
+            @if (idmenuSession != 0)
+            {
+                <label>Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index","Menu", new { idmenu = idmenuSession})" class="btn btn-primary m-t">Inicio</a></label>
+            }
+            else
+            {
+                <label>Puedes regresar a la página principal aquí: <br /><a href="@Url.Action("Index","Menu", new { idmenu = 0})" class="btn btn-primary m-t">Inicio</a></label>
+            }
         </div>
     </div>
 

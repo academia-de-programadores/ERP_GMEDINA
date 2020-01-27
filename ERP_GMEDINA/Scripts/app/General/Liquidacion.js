@@ -21,35 +21,35 @@ function _ajax(params, uri, type, callback, enviar) {
 //#region Variables Globales
 // Inputs divs y ddl
 const cargarSpinnerDatosColaborador = $('#cargarSpinnerDatosColaborador'),
-	  cargarSpinnerSalarios = $('#cargarSpinnerSalarios'),
-	  divSalarios = $('#Salarios'),
-      divConceptosAdicionales = $('#ConceptosAdicionales'),
-	  divDatosColaborador = $('#datosColaborador'),
-	  // Datos del empleado
-	  spanDiasLaborados = $('#spanDiasLaborados'),
-	  spanMesesLaborados = $('#spanMesesLaborados'),
-	  spanAniosLaborados = $('#spanAniosLaborados'),
-	  spanNombreEmpleado = $('#spanNombreEmpleado'),
-	  spanApellidoEmpleado = $('#spanApellidoEmpleado'),
-	  spanEdadEmpleado = $('#spanEdadEmpleado'),
-	  spanSexoEmpleado = $('#spanSexoEmpleado'),
-	  spanDepartamentoEmpleado = $('#spanDepartamentoEmpleado'),
-	  spanIdentidadEmpleado = $('#spanIdentidadEmpleado'),
-	  spanSueldoEmpleado = $('#spanSueldoEmpleado'),
-	  spanCargoEmpleado = $('#spanCargoEmpleado'),
-	  spanFechaIngresoEmpleado = $('#spanFechaIngresoEmpleado'),
-	  // Salarios
-	  spanSalarioOrdinarioMensual = $('#spanSalario'),
-	  spanSalarioPromedioMensual = $('#spanSalarioOrdinarioDiario'),
-	  spanSalarioOrdinarioDiario = $('#spanSalarioOrdinarioPromedioDiario'),
-	  spanSalarioPromedioDiario = $('#spanSalarioPromedioDiario'),
-      //Conceptos de Liquidacion
-      spanPreaviso = $('#spanPreaviso'),
-      spanCesantia = $('#spanCesantia'),
-      spanDecimotercer = $('#spanDecimotercer'),
-      spanDecimocuarto = $('#spanDecimocuarto'),
-      spanVacaciones = $('#spanVacaciones'),
-      spanTotalLiquidacion = $('#MontoTotalLiquidacion');
+    cargarSpinnerSalarios = $('#cargarSpinnerSalarios'),
+    divSalarios = $('#Salarios'),
+    divConceptosAdicionales = $('#ConceptosAdicionales'),
+    divDatosColaborador = $('#datosColaborador'),
+    // Datos del empleado
+    spanDiasLaborados = $('#spanDiasLaborados'),
+    spanMesesLaborados = $('#spanMesesLaborados'),
+    spanAniosLaborados = $('#spanAniosLaborados'),
+    spanNombreEmpleado = $('#spanNombreEmpleado'),
+    spanApellidoEmpleado = $('#spanApellidoEmpleado'),
+    spanEdadEmpleado = $('#spanEdadEmpleado'),
+    spanSexoEmpleado = $('#spanSexoEmpleado'),
+    spanDepartamentoEmpleado = $('#spanDepartamentoEmpleado'),
+    spanIdentidadEmpleado = $('#spanIdentidadEmpleado'),
+    spanSueldoEmpleado = $('#spanSueldoEmpleado'),
+    spanCargoEmpleado = $('#spanCargoEmpleado'),
+    spanFechaIngresoEmpleado = $('#spanFechaIngresoEmpleado'),
+    // Salarios
+    spanSalarioOrdinarioMensual = $('#spanSalario'),
+    spanSalarioPromedioMensual = $('#spanSalarioOrdinarioDiario'),
+    spanSalarioOrdinarioDiario = $('#spanSalarioOrdinarioPromedioDiario'),
+    spanSalarioPromedioDiario = $('#spanSalarioPromedioDiario'),
+    //Conceptos de Liquidacion
+    spanPreaviso = $('#spanPreaviso'),
+    spanCesantia = $('#spanCesantia'),
+    spanDecimotercer = $('#spanDecimotercer'),
+    spanDecimocuarto = $('#spanDecimocuarto'),
+    spanVacaciones = $('#spanVacaciones'),
+    spanTotalLiquidacion = $('#MontoTotalLiquidacion');
 //#endregion
 
 //Mostrar el spinner
@@ -123,6 +123,7 @@ function validarCampos(colaborador, motivo, fecha, BoolConceptAddValidate) {
     if (BoolConceptAddValidate == false) {
         //VALIDAR QUE EL MODELO SEA VALIDO PARA EJECUTAR LA PETICIÓN AL SERVIDOR
         if (ModelStateForm) {
+
             //OBTENER EL ID DEL COLABORADOR SELECCIONADO
             var ddlEmpleadosVal = $("#cmbxEmpleados").val();
             //OBTENER EL ID DEL MOTIVO SELECCIONADO
@@ -144,150 +145,150 @@ function validarCampos(colaborador, motivo, fecha, BoolConceptAddValidate) {
 
             if (ModelStateForm)
                 obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal, ddlMotivosVal);  //LLAMAR LA FUNCION DE OBTENER DATOS DE LOS EMPLEADOS
+
         }
     }
-
 
     return ModelStateForm;
 }
 
 $(document).ready(function () {
     $('#datepicker .input-group.date')
-		.datepicker({
-		    todayBtn: 'linked',
-		    keyboardNavigation: false,
-		    forceParse: false,
-		    calendarWeeks: true,
-		    autoclose: true,
-		    format: 'yyyy/mm/dd'
-		});
+        .datepicker({
+            todayBtn: 'linked',
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        });
 
     //Llengar DDL Areas con Empleados
     _ajax(
-		null,
-		'/Liquidacion/GetEmpleadosAreas',
-		'GET',
-		(data) => {
-		    $('#cmbxEmpleados').select2({
-		        placeholder: 'Seleccione un empleado',
-		        allowClear: true,
-		        language: {
-		            noResults: function () {
-		                return 'Resultados no encontrados.';
-		            },
-		            searching: function () {
-		                return 'Buscando...';
-		            }
-		        },
-		        data: data.results
-		    });
-		},
-		() => {
+        null,
+        '/Liquidacion/GetEmpleadosAreas',
+        'GET',
+        (data) => {
+            $('#cmbxEmpleados').select2({
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
+                },
+                data: data.results
+            });
+        },
+        () => {
 
-		    //LLENAR EL DDL DE MOTIVOS 
-		    $.ajax({
-		        url: "/Liquidacion/GetMotivoLiquidacion",
-		        method: "GET",
-		        dataType: "json",
-		        contentType: "application/json; charset=utf-8"
-		    }).done(function (data) {
-		        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-		        $("#cmbxMotivos").empty();
-		        $("#cmbxMotivos").append("<option value='0'>Selecione un motivo...</option>");
-		        $.each(data, function (i, iter) {
-		            $("#cmbxMotivos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-		        });
-		    });
+            //LLENAR EL DDL DE MOTIVOS 
+            $.ajax({
+                url: "/Liquidacion/GetMotivoLiquidacion",
+                method: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8"
+            }).done(function (data) {
+                //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+                $("#cmbxMotivos").empty();
+                $("#cmbxMotivos").append("<option value='0'>Selecione un motivo...</option>");
+                $.each(data, function (i, iter) {
+                    $("#cmbxMotivos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
+            });
 
-		}
-	);
+        }
+    );
 });
 
 
 function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
     _ajax(
-		{
-		    idEmpleado: idEmpleado,
-		    fechaFin: fechaFin,
-		    IdMotivo: IdMotivo
-		},
-		'/Liquidacion/Obtener_Informacion_Empleado',
-		'POST',
-		(data) => {
-		    mostrarDatosColaborador(
-				data.consulta[0].nombreEmpleado,
-				data.consulta[0].apellidoEmpleado,
-				data.consulta[0].NúmeroIdentidad,
-				data.consulta[0].sexoEmpleado,
-				data.consulta[0].edadEmpleado,
-				data.consulta[0].cantidadSueldo,
-				data.consulta[0].descripcionCargo,
-				data.consulta[0].descripcionDepartamento,
-				data.consulta[0].descripcionMoneda,
-				data.consulta[0].fechaIngreso,
-				data.anios,
-				data.meses,
-				data.dias,
-				data.salarios.SalarioOrdinarioMensual,
-				data.salarios.SalarioPromedioMensual,
-				data.salarios.SalarioOrdinarioDiario,
-				data.salarios.SalarioPromedioDiario,
-                data.Preaviso,
-                data.Cesantia,
-				data.DecimoTercer,
-				data.DecimoCuarto,
-				data.Vacaciones,
-                data.Total_Liquidacion
-			);
-		    SaveHiddenFor(
+        {
+            idEmpleado: idEmpleado,
+            fechaFin: fechaFin,
+            IdMotivo: IdMotivo
+        },
+        '/Liquidacion/Obtener_Informacion_Empleado',
+        'POST',
+        (data) => {
+            mostrarDatosColaborador(
+                data.consulta[0].nombreEmpleado,
+                data.consulta[0].apellidoEmpleado,
+                data.consulta[0].NúmeroIdentidad,
+                data.consulta[0].sexoEmpleado,
+                data.consulta[0].edadEmpleado,
+                data.consulta[0].cantidadSueldo,
+                data.consulta[0].descripcionCargo,
+                data.consulta[0].descripcionDepartamento,
+                data.consulta[0].descripcionMoneda,
+                data.consulta[0].fechaIngreso,
+                data.anios,
+                data.meses,
+                data.dias,
                 data.salarios.SalarioOrdinarioMensual,
-				data.salarios.SalarioPromedioMensual,
-				data.salarios.SalarioOrdinarioDiario,
-				data.salarios.SalarioPromedioDiario,
+                data.salarios.SalarioPromedioMensual,
+                data.salarios.SalarioOrdinarioDiario,
+                data.salarios.SalarioPromedioDiario,
                 data.Preaviso,
                 data.Cesantia,
-				data.DecimoTercer,
-				data.DecimoCuarto,
-				data.Vacaciones,
+                data.DecimoTercer,
+                data.DecimoCuarto,
+                data.Vacaciones,
+                data.Total_Liquidacion
+            );
+            SaveHiddenFor(
+                data.salarios.SalarioOrdinarioMensual,
+                data.salarios.SalarioPromedioMensual,
+                data.salarios.SalarioOrdinarioDiario,
+                data.salarios.SalarioPromedioDiario,
+                data.Preaviso,
+                data.Cesantia,
+                data.DecimoTercer,
+                data.DecimoCuarto,
+                data.Vacaciones,
                 data.Total_Liquidacion);
-		    cargarSpinnerDatosColaborador.html('');
-		    cargarSpinnerDatosColaborador.hide();
-		    divDatosColaborador.show();
-		    cargarSpinnerSalarios.html('');
-		    cargarSpinnerSalarios.hide();
-		    divSalarios.show();
-		    divConceptosAdicionales.show();
-		},
-		() => {
-		    divDatosColaborador.hide();
-		    cargarSpinnerDatosColaborador.html(spinner());
-		    cargarSpinnerDatosColaborador.show();
-		    divSalarios.hide();
-		    cargarSpinnerSalarios.html(spinner());
-		    cargarSpinnerSalarios.show();
-		}
-	);
+            cargarSpinnerDatosColaborador.html('');
+            cargarSpinnerDatosColaborador.hide();
+            divDatosColaborador.show();
+            cargarSpinnerSalarios.html('');
+            cargarSpinnerSalarios.hide();
+            divSalarios.show();
+            divConceptosAdicionales.show();
+        },
+        () => {
+            divDatosColaborador.hide();
+            cargarSpinnerDatosColaborador.html(spinner());
+            cargarSpinnerDatosColaborador.show();
+            divSalarios.hide();
+            cargarSpinnerSalarios.html(spinner());
+            cargarSpinnerSalarios.show();
+        }
+    );
 }
 
 //EJECUTAR FUNCION DE OBTENER METODOS DEL COLABORADOR
 function mostrarDatosColaborador(
-	nombreEmpleado,
-	apellidoEmpleado,
-	NúmeroIdentidad,
-	sexoEmpleado,
-	edadEmpleado,
-	cantidadSueldo,
-	descripcionCargo,
-	descripcionDepartamento,
-	descripcionMoneda,
-	fechaIngreso,
-	Anios,
-	Meses,
-	Dias,
-	SalarioOrdinarioMensual,
-	SalarioPromedioMensual,
-	SalarioOrdinarioDiario,
-	SalarioPromedioDiario,
+    nombreEmpleado,
+    apellidoEmpleado,
+    NúmeroIdentidad,
+    sexoEmpleado,
+    edadEmpleado,
+    cantidadSueldo,
+    descripcionCargo,
+    descripcionDepartamento,
+    descripcionMoneda,
+    fechaIngreso,
+    Anios,
+    Meses,
+    Dias,
+    SalarioOrdinarioMensual,
+    SalarioPromedioMensual,
+    SalarioOrdinarioDiario,
+    SalarioPromedioDiario,
     Preaviso,
     Cesantia,
     Decimotercer,
@@ -304,26 +305,26 @@ function mostrarDatosColaborador(
     spanSexoEmpleado.html(sexoEmpleado);
     spanDepartamentoEmpleado.html(descripcionDepartamento);
     spanIdentidadEmpleado.html(NúmeroIdentidad);
-    spanSueldoEmpleado.html(cantidadSueldo + ' ' + descripcionMoneda);
+    spanSueldoEmpleado.html(((cantidadSueldo == 0) ? "0.00" : (cantidadSueldo % 1 == 0) ? cantidadSueldo + ".00" : cantidadSueldo) + ' ' + descripcionMoneda);
     spanCargoEmpleado.html(descripcionCargo);
     spanFechaIngresoEmpleado.html(fechaIngreso);
-    spanSalarioOrdinarioMensual.html(SalarioOrdinarioMensual);
-    spanSalarioPromedioMensual.html(SalarioPromedioMensual);
-    spanSalarioOrdinarioDiario.html(SalarioOrdinarioDiario);
-    spanSalarioPromedioDiario.html(SalarioPromedioDiario);
-    spanPreaviso.html((Preaviso == 0) ? 0.00 : Preaviso);
-    spanCesantia.html((Cesantia == 0) ? 0.00 : Cesantia);
-    spanDecimotercer.html((Decimotercer == 0) ? 0.00 : Decimotercer);
-    spanDecimocuarto.html((Decimocuarto == 0) ? 0.00 : Decimocuarto);
-    spanVacaciones.html((Vacaciones == 0) ? 0.00 : Vacaciones);
-    spanTotalLiquidacion.val((Total_Liquidacion == 0) ? 0.00 : Total_Liquidacion);
+    spanSalarioOrdinarioMensual.html((SalarioOrdinarioMensual == 0) ? "0.00" : (SalarioOrdinarioMensual % 1 == 0) ? SalarioOrdinarioMensual + ".00" : SalarioOrdinarioMensual);
+    spanSalarioPromedioMensual.html((SalarioPromedioMensual == 0) ? "0.00" : (SalarioPromedioMensual % 1 == 0) ? SalarioPromedioMensual + ".00" : SalarioPromedioMensual);
+    spanSalarioOrdinarioDiario.html((SalarioOrdinarioDiario == 0) ? "0.00" : (SalarioOrdinarioDiario % 1 == 0) ? SalarioOrdinarioDiario + ".00" : SalarioOrdinarioDiario);
+    spanSalarioPromedioDiario.html((SalarioPromedioDiario == 0) ? "0.00" : (SalarioPromedioDiario % 1 == 0) ? SalarioPromedioDiario + ".00" : SalarioPromedioDiario);
+    spanPreaviso.html((Preaviso == 0) ? "0.00" : (Preaviso % 1 == 0) ? Preaviso + ".00" : Preaviso);
+    spanCesantia.html((Cesantia == 0) ? "0.00" : (Cesantia % 1 == 0) ? Cesantia + ".00" : Cesantia);
+    spanDecimotercer.html((Decimotercer == 0) ? "0.00" : (Decimotercer % 1 == 0) ? Decimotercer + ".00" : Decimotercer);
+    spanDecimocuarto.html((Decimocuarto == 0) ? "0.00" : (Decimocuarto % 1 == 0) ? Decimocuarto + ".00" : Decimocuarto);
+    spanVacaciones.html((Vacaciones == 0) ? "0.00" : (Vacaciones % 1 == 0) ? Vacaciones + ".00" : Vacaciones);
+    spanTotalLiquidacion.val((Total_Liquidacion == 0) ? "0.00" : (Total_Liquidacion % 1 == 0) ? Total_Liquidacion + ".00" : Total_Liquidacion);
 }
 
 function SaveHiddenFor(SalarioOrdinarioMensual_Liq, SalarioPromedioMensual_Liq,
-                       SalarioOrdinarioDiario_Liq, SalarioPromedioDiario_Liq,
-                       Preaviso_Liq, Cesantia_Liq,
-                       DecimoTercerMesProporcional_Liq, DecimoCuartoMesProporcional_Liq,
-                       VacacionesPendientes_Liq) {
+    SalarioOrdinarioDiario_Liq, SalarioPromedioDiario_Liq,
+    Preaviso_Liq, Cesantia_Liq,
+    DecimoTercerMesProporcional_Liq, DecimoCuartoMesProporcional_Liq,
+    VacacionesPendientes_Liq) {
     $("#SalarioOrdinarioMensual_Liq").val(SalarioOrdinarioMensual_Liq);
     $("#SalarioPromedioMensual_Liq").val(SalarioPromedioMensual_Liq);
     $("#SalarioOrdinarioDiario_Liq").val(SalarioOrdinarioDiario_Liq);

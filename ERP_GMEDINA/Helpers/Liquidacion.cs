@@ -9,13 +9,7 @@ namespace ERP_GMEDINA.Helpers
     public class Liquidacion
     {
 
-        #region MALCOM_MEDINA
-
-        //
-        //UTIL BASE
-        //
-
-        #region Calcular las fechas, año de 360 días
+        #region OBTENER DÍAS TRABAJADOS
         public static double Dias360Mes(DateTime fechaFin, int idEmpleado)
         {
             DateTime fechaInicio = DateTime.MinValue;
@@ -42,14 +36,10 @@ namespace ERP_GMEDINA.Helpers
             int anioFin = fechaFin.Year;
 
             if (diaInicio == 31 || EsElUltimoDiaDeFebrero(fechaInicio))
-            {
                 diaInicio = 30;
-            }
 
             if (diaInicio == 30 && diaFin == 31)
-            {
                 diaFin = 30;
-            }
 
             return ((anioFin - anioInicio) * 360) + ((mesFin - mesInicio) * 30) + (diaFin - diaInicio);
         }
@@ -60,6 +50,7 @@ namespace ERP_GMEDINA.Helpers
         }
         #endregion
 
+        #region CÁLCULO DE ANTIGUEDAD EN DÍAS
         //CALCULO DE ANTIGUEDAD DE EMPLEADO
         public static int Calculo_AntiguedadEnDias(int Emp_Id, DateTime FechaLiquidacion)
         {
@@ -78,7 +69,9 @@ namespace ERP_GMEDINA.Helpers
             }
             return DiasTrabajados;
         }
+        #endregion
 
+        #region CÁLCULO DE SALARIO PROMEDIO MENSUAL
         //CALCULO DE SALARIO ORDINARIO PROMEDIO MENSUAL
         public static decimal Calculo_SalarioOrdinarioMensual(int Emp_Id)
         {
@@ -108,8 +101,41 @@ namespace ERP_GMEDINA.Helpers
             }
             return Math.Round(SalarioPromedio, 2);
         }
+        #endregion
 
-        //
+        #region CÁLCULO DE SALARIO MAS ALTO
+        //CALCULO DE SALARIO ORDINARIO PROMEDIO MENSUAL
+        public static decimal Calculo_SalarioOrdinarioMensualMasAlto(int Emp_Id)
+        {
+            //Captura de SalarioPromedio
+            decimal SalarioPromedio = 0;
+            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
+                    //METODO MEDIANTE HISTORIAL DE PAGO
+                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id
+                                                                               && p.sue_FechaCrea >= FechaHistorialPago)
+                                                                               .Select(x => (decimal)x.sue_Cantidad).Take(6);
+                    //CAPTURA DEL SALARIO PROMEDIO Y CONVERSIÓN A STRING PARA EL RETORNO 
+                    SalarioPromedio = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Average() : 0;
+                    if (SalarioPromedio == 0)
+                    {
+                        SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id).Select(x => (decimal)x.sue_Cantidad).Take(1);
+                        SalarioPromedio = SalariosUlt6Meses.Average();
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Ex.Message.ToString();
+                }
+            }
+            return Math.Round(SalarioPromedio, 2);
+        }
+        #endregion
+
+        #region OBTENETER SALARIOS
         //OBTENER SALARIOS
         public static object EjecutarCalculosSalarios(int IdEmpleado)
         {
@@ -125,10 +151,13 @@ namespace ERP_GMEDINA.Helpers
 
             return new { SalarioOrdinarioMensual, SalarioPromedioMensual, SalarioOrdinarioDiario, SalarioPromedioDiario };
         }
+        #endregion
 
         //
         //CALCULO DE CONCEPTOS
+        //
 
+        #region CÁLCULO DE PREAVISO
         //CALCULO DE PAGO POR CONCEPTO DE PREAVISO
         public static decimal Calculo_PagoDePreaviso(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
         {
@@ -143,8 +172,8 @@ namespace ERP_GMEDINA.Helpers
                     int RangoInicial = 0;
                     //ALMACENA LA CANTIDAD DE DIAS CORRESPONDIENTES
                     int DiasCorrespondientes = 0;
-                    //ALMACENA LA CANTIDAD DE AÑOS LABORADOS
-                    int MesesLaborados = Antiguedad / 30;
+                    ////ALMACENA LA CANTIDAD DE AÑOS LABORADOS
+                    //int MesesLaborados = Antiguedad / 30;
                     //ALMACENA EL SALARIO PROMEDIO DIARIO
                     SalarioPromedioDiario = (Calculo_SalarioOrdinarioMensual(Emp_Id) * 14) / 360;
                     //INICIALIZACION DE LISTA DE LIQUIDACION_PREAVISO
@@ -153,9 +182,9 @@ namespace ERP_GMEDINA.Helpers
                     foreach (tbPreaviso iter in TbLiquidacionPreaviso)
                     {
                         //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
-                        if (MesesLaborados > RangoInicial && MesesLaborados <= iter.prea_RangoFinMeses)
+                        if (Antiguedad > (RangoInicial * 30) && Antiguedad <= (iter.prea_RangoFinMeses * 30))
                             DiasCorrespondientes = iter.prea_DiasPreaviso;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
-                        else if (MesesLaborados > iter.prea_RangoFinMeses)
+                        else if (Antiguedad > (iter.prea_RangoFinMeses * 30))
                             DiasCorrespondientes = iter.prea_DiasPreaviso;
                         //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
                         RangoInicial = iter.prea_RangoFinMeses;
@@ -169,7 +198,9 @@ namespace ERP_GMEDINA.Helpers
             }
             return Math.Round(PagoDePreaviso, 2);
         }
+        #endregion
 
+        #region CÁLCULO DE CESANTÍA
         //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
         public static decimal Calculo_PagoDeCesantia(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
         {
@@ -199,10 +230,10 @@ namespace ERP_GMEDINA.Helpers
                         if (Contador == 0)
                         {
                             //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
-                            if (MesesLaborados >= iter.aces_RangoInicioMeses && MesesLaborados <= iter.aces_RangoFinMeses)
+                            if (Antiguedad >= (iter.aces_RangoInicioMeses * 30) && Antiguedad <= (iter.aces_RangoFinMeses * 30))
                                 DiasCorrespondientes = iter.aces_DiasAuxilioCesantia;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
-                            else if (MesesLaborados > iter.aces_RangoFinMeses)
-                                DiasCorrespondientes = (MesesLaborados / 12) * 30;
+                            else if (Antiguedad > (iter.aces_RangoFinMeses * 30))
+                                DiasCorrespondientes = MesesLaborados * 30;
                         }
                         else
                         {
@@ -210,7 +241,7 @@ namespace ERP_GMEDINA.Helpers
                             if (MesesLaborados > RangoInicial && MesesLaborados <= iter.aces_RangoFinMeses)
                                 DiasCorrespondientes = iter.aces_DiasAuxilioCesantia;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
                             else if (MesesLaborados > 12)
-                                DiasCorrespondientes = (MesesLaborados / 12) * 30;
+                                DiasCorrespondientes = MesesLaborados * 30;
                         }
                         //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
                         RangoInicial = iter.aces_RangoFinMeses;
@@ -228,7 +259,9 @@ namespace ERP_GMEDINA.Helpers
             }
             return Math.Round(PagoDeCesantia, 2);
         }
+        #endregion
 
+        #region CÁLCULO DE DECIMOCUARTO MES PROPORCIONAL
         //CALCULO DE DECIMO TERCER MES PENDIENTE / ADEUDADO
         public static decimal Calculo_DecimoTercerMesProporcional(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario)
         {
@@ -239,7 +272,7 @@ namespace ERP_GMEDINA.Helpers
                 try
                 {
                     //ALMACENA EL VALOR DEL SALARIO PROMEDIO DIARIO
-                    SalarioPromedioDiario = (SalarioPromedioDiario * 14) / 360;
+                    SalarioPromedioDiario = ((SalarioPromedioDiario * 14) / 12) / 360;
                     //ALMACENAR LOS DÍAS PENDIENTES DE PAGO DE DECIMO TERCER MES
                     int DiasPendientesDTM = 0;
                     //CAPTURAR LA ULTIMA FECHA DE PAGO DE DECIMO TERCER MES
@@ -263,7 +296,9 @@ namespace ERP_GMEDINA.Helpers
             }
             return (MontoDecimoTercerMes < 0) ? 0 : Math.Round(MontoDecimoTercerMes, 2);
         }
+        #endregion
 
+        #region CÁLCULO DE DECIMOCUARTO MES PROPORCIONAL
         //CALCULO DE DECIMO CUARTO MES PENDIENTE / ADEUDADO
         public static decimal Calculo_DecimoCuartoMesProporcional(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario)
         {
@@ -274,7 +309,7 @@ namespace ERP_GMEDINA.Helpers
                 try
                 {
                     //ALMACENA EL VALOR DEL SALARIO PROMEDIO DIARIO
-                    SalarioPromedioDiario = (SalarioPromedioDiario * 14) / 360;
+                    SalarioPromedioDiario = ((SalarioPromedioDiario * 14) / 12) / 360;
                     //ALMACENAR LOS DÍAS PENDIENTES DE PAGO DE DECIMO TERCER MES
                     int DiasPendientesDCM = 0;
                     //CAPTURAR LA ULTIMA FECHA DE PAGO DE DECIMO CUARTO MES
@@ -298,7 +333,9 @@ namespace ERP_GMEDINA.Helpers
             }
             return (MontoDecimoCuartoMes < 0) ? 0 : Math.Round(MontoDecimoCuartoMes, 2);
         }
+        #endregion
 
+        #region CÁLCULO DE VACACIONES PENDIENTES
         //CALCULO DE PAGO DE VACACIONES PENDIENTES
         public static decimal Calculo_VacacionesProporcionales(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
         {
@@ -306,6 +343,8 @@ namespace ERP_GMEDINA.Helpers
             decimal MontoVacacionesPendientes = 0;
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
+                //SALARIO ORDINADIO
+                decimal SalarioOrdinario = SalarioPromedioDiario;
                 //ACUMULADOR DE DIAS DE VACACIONES
                 int Historico_DiasDeVacacionCorrespondiente = 0;
                 //ACUMULADOR DE VACACIONES TOMADAS
@@ -332,12 +371,34 @@ namespace ERP_GMEDINA.Helpers
                                                     where HV.emp_Id == Emp_Id
                                                     select new { HV };
                     if (ListHistorialDeVacaciones.Count() > 0)
-                        foreach (tbHistorialVacaciones it in (List<tbHistorialVacaciones>)ListHistorialDeVacaciones)
+                    {
+                        var tbHistorialVacaciones = db.tbHistorialVacaciones.Where(p => p.emp_Id == Emp_Id).ToList();
+                        foreach (tbHistorialVacaciones it in tbHistorialVacaciones)
                             //CAPTURA EN CONTADOR LA CANTIDAD DE VACIONES TOMADAS 
-                            Historico_DiasVacacionesTomadas += (it.hvac_FechaFin - it.hvac_FechaInicio).Days;
+                            Historico_DiasVacacionesTomadas += it.hvac_CantDias;
+                    }
 
+                    //OBTENER LA BASE EN DIAS
+                    int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
+                                                                   (iter == 2) ? 12 :
+                                                                   (iter == 3) ? 15 :
+                                                                   (iter >= 4) ? 20 : 0; 
+                    //VALIDAR VACACIONES PROPORCIONALES
+                    decimal PagoProporcionalDeVacaciones = (
+                                                                 (Antiguedad > 360) ?
+                                                                    ((SalarioOrdinario / 30) * (Antiguedad % (AniosLaborados * 360))) / BaseEnDias :
+                                                                    ((SalarioOrdinario / 30) * Antiguedad) / BaseEnDias
+                                                            );
+
+
+
+                    //VALIDAR VACACIONES TOMADAS
+                    int DiasVacacionesValidos = (Historico_DiasDeVacacionCorrespondiente >= Historico_DiasVacacionesTomadas) ? (Historico_DiasDeVacacionCorrespondiente - Historico_DiasVacacionesTomadas) : 0;
                     //int Historico_DiasVacacionestomadas = db.tbHistorialVacaciones.Where(p => p.emp_Id == Emp_Id).Select(c => c.hvac_DiasTomados).Sum();
-                    MontoVacacionesPendientes = (Historico_DiasDeVacacionCorrespondiente - Historico_DiasVacacionesTomadas) * SalarioPromedioDiario;
+                    MontoVacacionesPendientes = ((Antiguedad / 360) > 0) ? DiasVacacionesValidos * SalarioPromedioDiario : 0;
+                    //SUMATORIA DE DÍAS DE VACACIONES PROPORCIONALES
+                    MontoVacacionesPendientes += PagoProporcionalDeVacaciones;
+
                 }
                 catch (Exception Ex)
                 {
@@ -346,7 +407,6 @@ namespace ERP_GMEDINA.Helpers
             }
             return (MontoVacacionesPendientes < 0) ? 0 : Math.Round(MontoVacacionesPendientes, 2);
         }
-
         #endregion
 
     }
