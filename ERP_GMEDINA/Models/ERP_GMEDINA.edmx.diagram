@@ -456,6 +456,10 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" Width="1.5" PointX="31.375" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" Width="1.5" PointX="31.375" PointY="4.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" Width="1.5" PointX="29.375" PointY="28.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDirectoriosEmpleados" Width="1.5" PointX="16.5" PointY="172.875" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

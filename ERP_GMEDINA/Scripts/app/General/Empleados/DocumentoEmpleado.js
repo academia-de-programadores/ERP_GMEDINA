@@ -79,6 +79,6 @@ $("#FormEmpleadosDocument").on("submit", function (event) {
 
         });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Debe Agregar el archivo correspondiente");
     }
 });

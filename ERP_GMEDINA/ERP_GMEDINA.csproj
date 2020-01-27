@@ -2985,9 +2985,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Downloadable files\" />
+    <Folder Include="Expedientes\Expediente_2\Constancia\" />
     <Folder Include="fonts\font-awesome\less\" />
     <Folder Include="fonts\font-awesome\scss\" />
-    <Folder Include="Expedientes\Expediente_2\Constancia\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
