@@ -125,8 +125,7 @@ namespace ERP_GMEDINA
         
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales").Include(
-            "~/Scripts/app/General/Sucursales/IndexSucursales.js",
-            "~/Scripts/app/General/Sucursales/Admin.js"));
+            "~/Scripts/app/General/Sucursales/IndexSucursales.js"));
 
             // iCheck
             bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
@@ -887,9 +886,10 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/CreateHistorialVacaciones.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialVacaciones").Include(
-   "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js",
-   "~/Scripts/app/General/HistorialVacaciones/DateDiff.js"));
+   "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/DateDiff").Include(
+   "~/Scripts/app/General/HistorialVacaciones/DateDiff.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexSueldos").Include(
                          "~/Scripts/app/general/Sueldos/IndexSueldos.js"));
@@ -911,8 +911,11 @@ namespace ERP_GMEDINA
 
             // dataTables
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSeleccionCandidatos").Include(
-                      "~/Scripts/plugins/dataTables/datatables.min.js",
-                      "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
+                      "~/Scripts/plugins/dataTables/datatables.min.js"));
+
+            bundles.Add(new ScriptBundle("~/plugins/dataTablesSeleccionCandidatos2").Include(
+          "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
+
 
             bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
                  "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
