@@ -246,6 +246,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["hinc_Id"]);
                     llenarTabla();
                     MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["hinc_Id"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }

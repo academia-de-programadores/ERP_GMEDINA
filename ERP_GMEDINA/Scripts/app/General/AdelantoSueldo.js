@@ -213,22 +213,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
     }
     //FORMATEAR A DECIMAL
     MontoFormateado = parseFloat(MontoFormateado);
-    //VALIDACIONES DE ENTRADA POR EL CAMPO MONTO
-    if (MontoFormateado > MaxSueldoCreate && MontoFormateado != '' && MontoFormateado != undefined && MontoFormateado != null  && IdEmp != 0) {
-        
-        //MOSTRAR VALIDACIONES
-        var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
-        $("#Crear #SueldoPromedioCrear").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
-        $("#Crear #SueldoPromedioCrear").show();
-        //$("#Crear #AsteriscoMonto").css("display", "");
-        $("#Crear #AsteriscoMonto").addClass("text-danger");
 
-    } else {
-        //OCULTAR VALIDACIONES
-        $("#Crear #AsteriscoMonto").removeClass("text-danger");
-        $("#Crear #SueldoPromedioCrear").hide();
-        
-    }
 
     //VALIDACIONES DEL CAMPO EMP_ID
     if (IdEmp != "-1") {
@@ -248,13 +233,11 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
         //VALIDACION DE DOBLE ESPACIO
         var LengthString = Razon.length;
-        if (LengthString > 1)
-        {
+        if (LengthString > 1) {
             var FirstChar = LengthString - 2;
             var LastChar = Razon.substring(FirstChar, LengthString);
         }
-        if (LastChar == "  ")
-        {
+        if (LastChar == "  ") {
             $("#Crear #adsu_RazonAdelanto").val(Razon.substring(0, FirstChar + 1));
         }//FIN DE VALIDACION DE DOBLE ESPACIO
 
@@ -264,7 +247,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
             Local_modelState = false;
             $("#Crear #AsteriscoRazon").addClass("text-danger");
             $("#Crear #adsu_RazonAdelantoValidacion").show();
-        
+
         } else {
             $("#Crear #AsteriscoRazon").removeClass("text-danger");
             $("#Crear #adsu_RazonAdelantoValidacion").hide();
@@ -272,25 +255,46 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
     }
     //VALIDACIONES DEL CAMPO MONTO
     if (Monto != "-1") {
-        if (Monto == "" || Monto == null || Monto == undefined) {
-            $("#Crear #AsteriscoMonto").addClass("text-danger");
-            $("#Crear #adsu_MontoValidacion").show();
 
+        //VALIDACIONES DE ENTRADA POR EL CAMPO MONTO
+        if (MontoFormateado > MaxSueldoCreate && MontoFormateado != '' && MontoFormateado != undefined && MontoFormateado != null && IdEmp != 0) {
+
+            //MOSTRAR VALIDACIONES
+            var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
+            $("#Crear #SueldoPromedioCrear").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
+            $("#Crear #SueldoPromedioCrear").show();
+            //$("#Crear #AsteriscoMonto").css("display", "");
+            $("#Crear #AsteriscoMonto").addClass("text-danger");
             Local_modelState = false;
+
         } else {
+            //OCULTAR VALIDACIONES
             $("#Crear #AsteriscoMonto").removeClass("text-danger");
-            $("#Crear #adsu_MontoValidacion").hide();
-            if (MontoFormateado <= 0) {
-                pasoValidacion = false;
-                $('#Crear #SueldoPromedioCrear').hide();
-                $('#Crear #adsu_MontoValidacion').hide();
-                $("#Crear #MontoAsterisco").addClass("text-danger");
-                $('#Crear #adsu_MontoValidacion2').show();
+            $("#Crear #SueldoPromedioCrear").hide();
+
+            //VALIDACIONES DE INDEFINIDO Y MENOR QUE CERO
+            if (Monto == "" || Monto == null || Monto == undefined) {
+                $("#Crear #AsteriscoMonto").addClass("text-danger");
+                $("#Crear #adsu_MontoValidacion").show();
+
+                Local_modelState = false;
             } else {
-                $("#Crear #MontoAsterisco").removeClass("text-danger");
-                $('#Crear #adsu_MontoValidacion2').hide();
+                $("#Crear #AsteriscoMonto").removeClass("text-danger");
+                $("#Crear #adsu_MontoValidacion").hide();
+                if (MontoFormateado <= 0) {
+                    pasoValidacion = false;
+                    $('#Crear #SueldoPromedioCrear').hide();
+                    $('#Crear #adsu_MontoValidacion').hide();
+                    $("#Crear #MontoAsterisco").addClass("text-danger");
+                    $('#Crear #adsu_MontoValidacion2').show();
+                    console.log("Mostrar asterisco");
+                } else {
+                    $("#Crear #MontoAsterisco").removeClass("text-danger");
+                    $('#Crear #adsu_MontoValidacion2').hide();
+                }
             }
         }
+
     }
 
     //VALIDACIONES DEL CAMPO FECHA
@@ -468,48 +472,19 @@ $(cmbEmpleadoEdit).change(() => {
 //FUNCION: OCULTAR EL MODAL DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
 $("#btnUpdateAdelantos").click(function () {
     //OBTENER EL ID DEL EMPLEADO 
-    var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
-    var monto = $('#EditarAdelantoSueldo #adsu_Monto');
+    var Razon = $("#Editar #adsu_RazonAdelanto").val();
+    var Monto = $("#Editar #adsu_Monto").val();
+    var IdEmp = $("#Editar #emp_Id").children("option:selected").val();
+    console.log(IdEmp);
     //DESBLOQUEAR EL BOTON DE EDICION
     $("#btnConfirmarEditar").attr("disabled", false);
     //VALIDAR EL FORMULARIO
-    if (ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id').val(), $('#EditarAdelantoSueldo #adsu_RazonAdelanto').val(), $('#EditarAdelantoSueldo #adsu_Monto').val())) {
-        $.ajax({
-            url: "/AdelantoSueldo/GetSueldoNetoProm",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: IdEmp })
-        }).done(function (data) {
-            SuelPromedio = data;
-            $('#SueldoPromedio').html('El sueldo promedio es ' + data);
-            if (monto.val() > SuelPromedio
-                && monto.val() != '' && monto.val() != undefined && monto.val() != null) {
-                pasoValidacion = false;
-                //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
-                iziToast.error({
-                    title: 'Error',
-                    message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
-                });
-                //MENSAJES DEL SUELDO PROMEDIO
-                $("#EditarAdelantoSueldo #adsu_Monto").val('');
-                $('#SueldoPromedio').show();
-                $("#Editar #MontoAsterisco").addClass("text-danger");
-            } else {
-                $("#Editar #MontoAsterisco").removeClass("text-danger");
-                $('#SueldoPromedio').hide();
+    if (ValidarCamposEditar(IdEmp, Razon, Monto)) {
+        //OCULTAR EL MODAL DE EDICION
+        $("#EditarAdelantoSueldo").modal('hide');
+        //DESPLEGAR EL MODAL DE CONFIRMACION
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
 
-                $("#EditarAdelantoSueldo").modal('hide');
-                $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
-            }
-        }).fail(function (data) {
-            //ACCIONES EN CASO DE ERROR
-            $("#EditarAdelantoSueldo").modal('hide');
-            iziToast.error({
-                title: 'Error',
-                message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
-            });
-        });
     }
 });
 
@@ -552,7 +527,7 @@ $("#btnConfirmarEditar").click(function () {
                     adsu_RazonAdelanto: Razon,
                     adsu_Monto: MontoFormateado
                 };
-                
+
                 console.log(data_valida);
 
                 $.ajax({
@@ -603,8 +578,7 @@ $("#btnConfirmarEditar").click(function () {
 function ValidarCamposEditar(colaborador, razon, monto) {
     var pasoValidacion = true;
 
-    if (colaborador != "-1")
-    {
+    if (colaborador != "-1") {
 
         if (colaborador <= 0 || isNaN(colaborador)) {
             pasoValidacion = false;
@@ -618,8 +592,7 @@ function ValidarCamposEditar(colaborador, razon, monto) {
         }
     }
 
-    if(razon != "-1")
-    {
+    if (razon != "-1") {
         var LengthString = razon.length;
         if (LengthString > 1) {
             var FirstChar = LengthString - 2;
@@ -643,8 +616,7 @@ function ValidarCamposEditar(colaborador, razon, monto) {
 
 
     //VALIDACION DEL MONTO
-    if(monto != "-1")
-    {
+    if (monto != "-1") {
         //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
         var indices = monto.split(",");
         //VARIABLE CONTENEDORA DEL MONTO
@@ -664,37 +636,36 @@ function ValidarCamposEditar(colaborador, razon, monto) {
             var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
             $("#Editar #SueldoPromedioEditar").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
             $("#Editar #SueldoPromedioEditar").show();
-            //$("#Crear #AsteriscoMonto").css("display", "");
             $("#Editar #MontoAsterisco").addClass("text-danger");
-
+            pasoValidacion = false;
         } else {
             //OCULTAR VALIDACIONES
             $("#Editar #MontoAsterisco").removeClass("text-danger");
             $("#Editar #SueldoPromedioEditar").hide();
 
-        }
-
-        //VALIDACIONES
-        if (MontoFormateado == null || MontoFormateado == '' || MontoFormateado == undefined) {
-            pasoValidacion = false;
-            $('#Editar #SueldoPromedio').hide();
-            $('#Editar #adsu_MontoValidacion2').hide();
-            $('#Editar #adsu_MontoValidacion').show();
-            $("#Editar #MontoAsterisco").addClass("text-danger");
-        } else {
-            $('#Editar #adsu_MontoValidacion').hide();
-            $("#Editar #MontoAsterisco").removeClass("text-danger");
-            if (MontoFormateado <= 0) {
+            //VALIDACIONES DE INDEFINIDO Y MENOR QUE CERO
+            if (MontoFormateado == null || MontoFormateado == '' || MontoFormateado == undefined) {
                 pasoValidacion = false;
-                $('#Editar #SueldoPromedioEditar').hide();
-                $('#Editar #adsu_MontoValidacion').hide();
-                $("#Editar #MontoAsterisco").addClass("text-danger");
-                $('#Editar #adsu_MontoValidacion2').show();
-            } else {
-                $("#Editar #MontoAsterisco").removeClass("text-danger");
+                $('#Editar #SueldoPromedio').hide();
                 $('#Editar #adsu_MontoValidacion2').hide();
+                $('#Editar #adsu_MontoValidacion').show();
+                $("#Editar #MontoAsterisco").addClass("text-danger");
+            } else {
+                $('#Editar #adsu_MontoValidacion').hide();
+                $("#Editar #MontoAsterisco").removeClass("text-danger");
+                if (MontoFormateado <= 0) {
+                    pasoValidacion = false;
+                    $('#Editar #SueldoPromedioEditar').hide();
+                    $('#Editar #adsu_MontoValidacion').hide();
+                    $("#Editar #MontoAsterisco").addClass("text-danger");
+                    $('#Editar #adsu_MontoValidacion2').show();
+                } else {
+                    $("#Editar #MontoAsterisco").removeClass("text-danger");
+                    $('#Editar #adsu_MontoValidacion2').hide();
+                }
             }
         }
+
     }
 
     return pasoValidacion;

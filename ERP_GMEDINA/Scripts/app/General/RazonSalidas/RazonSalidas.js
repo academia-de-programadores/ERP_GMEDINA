@@ -106,6 +106,7 @@ $("#btnGuardar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
@@ -129,6 +130,7 @@ $("#InActivar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }
@@ -152,6 +154,7 @@ $("#btnActualizar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
                 }

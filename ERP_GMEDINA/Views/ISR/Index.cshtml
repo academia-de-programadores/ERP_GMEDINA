@@ -18,7 +18,7 @@
                 <div class="ibox-content">
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
-                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionIdMenu"];
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
                         string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
@@ -187,11 +187,9 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/Scripts/app/General/ISR")
 }
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }

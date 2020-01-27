@@ -335,7 +335,7 @@ namespace ERP_GMEDINA.Controllers
                     var list = db.UDP_RRHH_tbAreas_Update(
                         cAreas.area_Id,
                         cAreas.suc_Id,
-                        cAreas.area_Descripcion,
+                        cAreas.car_Descripcion,
                         Usuario.usu_Id,
                         DateTime.Now);
                     foreach (UDP_RRHH_tbAreas_Update_Result item in list)

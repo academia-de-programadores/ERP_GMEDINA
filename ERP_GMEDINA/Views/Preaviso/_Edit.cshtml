@@ -26,11 +26,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.prea_RangoInicioMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                            <label class="" id="AsteriscoInicio">*</label> 
+                            <span class="asterisco" id="EditAsteriscoRangoInicio">*</span>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control col-md-2" } })
-                            @Html.ValidationMessageFor(model => model.prea_RangoInicioMeses, "", new { @class = "text-danger", @id = "RangoInicio_Validation_descripcion" })
+                            @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @autocomplete = "off" } })
+                            
+                            <span class="text-danger" id="validation_EditRangoInicioMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango inicio no puede ser menor a cero</span>
+                            <span class="text-danger" id="validation_EditRangoInicioRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                         </div>
                     </div>
                 </div>
@@ -39,12 +41,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.prea_RangoFinMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                            <label class="" id="AsteriscoFin">*</label> 
+                            <label class="asterisco" id="EditAsteriscoRangoFinal">*</label>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.prea_RangoFinMeses, "", new { @class = "text-danger", @id = "RangoFin_Validation_descripcion" })
-                            <span id="RangoFinEditar" class="text-danger" style="display:none;">El campo rango fin no puede ser menor que rango inicio</span>
+                            @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @autocomplete = "off" } })
+                            
+                            <span class="text-danger" id="validation_EditRangoFinalMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
+                            <span class="text-danger" id="validation_EditRangoFinalRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                            <span class="text-danger" id="validation_EditRangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
                         </div>
                     </div>
                 </div>
@@ -53,11 +57,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.prea_DiasPreaviso, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                            <label class="" id="AsteriscoDias">*</label> 
+                            <label class="asterisco" id="EditAsteriscoCantidadDia">*</label>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.prea_DiasPreaviso, "", new { @class = "text-danger", @id = "Dias_Validation_descripcion" })
+                            @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @autocomplete = "off" } })
+                            
+                            <span class="text-danger" id="validation_EditCantidadDiasMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
+                            <span class="text-danger" id="validation_EditCantidadDiasRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                         </div>
                     </div>
                 </div>

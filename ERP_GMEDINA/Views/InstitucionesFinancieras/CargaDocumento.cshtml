@@ -20,10 +20,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox">
-					<div class="ibox-title">
-                        <a href="~/Content/FormatoPlanillaInstitucionesFinancieras/FormatoPredeterminadoDeduccionPlanilla.xlsx" class = "pull-right">Descargar Formato Predeterminado para Deducción de Planilla </a>
-						<h2>Carga de Planilla externa de Deducción </h2>
-					</div>
+                    <div class="ibox-title">
+                        <a href="~/Content/FormatoPlanillaInstitucionesFinancieras/FormatoPredeterminadoDeduccionPlanilla.xlsx" class="pull-right">Descargar Formato Predeterminado para Deducción de Planilla </a>
+                        <h2>Carga de Planilla externa de Deducción </h2>
+                    </div>
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-md-12">
@@ -118,15 +118,15 @@
                     <div class="col-sm-6">
                         <img alt="Done" class="img-responsive" src="~/Content/img/done.gif">
                     </div>
-                   
+
                     <br>
                     <p class="aligncenter"><h2>¡Planilla cargada al Sistema Exitosamente!</h2><p>
-                    <br>
-                    <h3>¿Desea cargar una nueva planilla o volver a la tabla principal?</h3>
+                        <br>
+                        <h3>¿Desea cargar una nueva planilla o volver a la tabla principal?</h3>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal"> Cargar Nueva Planilla</button>
-                    <a href="index" class="btn btn-success" >Página Principal (Inicio)</a>
+                    <a href="index" class="btn btn-success">Página Principal (Inicio)</a>
                 </div>
             </div>
         </div>
@@ -137,13 +137,12 @@
     <!-- Mainly scripts -->
 
     <script src="~/Scripts/jquery-2.1.1.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
         <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
         <script src="~/Scripts/app/inspinia.js"></script>
-        <script src="~/Scripts/app/General/InstitucionesFinancieras.js"></script>
 
 
     <!-- Jasny -->
@@ -156,16 +155,7 @@
         <script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
         <script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
 
-
-        @section Scripts {
-            @Scripts.Render("~/plugins/izitoast")
-        }
-
-
-        @section Styles {
-            @Styles.Render("~/Content/plugins/izitoast/iziToast")
-
-        }
+        
 
 
     if (ViewBag.MensajeError == "bien")
@@ -183,69 +173,4 @@
         });
         </script>
     }
-
-
-    @*  <script>
-
-        $(document).ready(function () {
-
-            $('.demo1').click(function(){
-                swal({
-                    title: "Carga en Proceso",
-                    text: "Su archivo se esta cargando al sistema. Favor esperar pacientemente. Cuando se finalice la carga, sera redirigido a la pagina principal."
-                });
-            });
-
-            $('.demo2').click(function(){
-                swal({
-                    title: "Good job!",
-                    text: "You clicked the button!",
-                    type: "success"
-                });
-            });
-
-            $('.demo3').click(function () {
-                swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this imaginary file!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                }, function () {
-                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                });
-            });
-
-            $('.demo4').click(function () {
-                swal({
-                            title: "Are you sure?",
-                            text: "Your will not be able to recover this imaginary file!",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Yes, delete it!",
-                            cancelButtonText: "No, cancel plx!",
-                            closeOnConfirm: false,
-                            closeOnCancel: false },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                            } else {
-                                swal("Cancelled", "Your imaginary file is safe :)", "error");
-                            }
-                        });
-            });
-
-
-        });
-
-        </script>*@
-
-
 }
-
-
-
-

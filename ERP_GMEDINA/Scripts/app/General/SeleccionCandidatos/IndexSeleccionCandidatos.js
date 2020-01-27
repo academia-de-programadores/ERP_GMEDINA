@@ -170,8 +170,8 @@ $("#btnActualizar").click(function () {
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         CierraPopups();
-                        llenarTabla();
                         MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                        llenarTabla();
                     } else {
                         MsgError("Error","No se pudo editar el registro, contacte al administrador.");
                     }
@@ -233,6 +233,8 @@ $("#btnGuardar").click(function () {
                         LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
                         llenarTabla();
                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                        LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
+                        llenarTabla();
                     } else {
                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
@@ -285,6 +287,8 @@ $("#InActivar").click(function () {
                     LimpiarControles(["scan_RazonInactivo"]);
                     llenarTabla();
                     MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    LimpiarControles(["scan_RazonInactivo"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
                 }

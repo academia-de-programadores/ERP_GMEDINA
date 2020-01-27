@@ -24,6 +24,8 @@ $("#btnActivar").click(function () {
                     LimpiarControles(["txtIdRetore"]);
                     llenarTabla();
                     MsgWarning("¡Exito!", "El registro se activó de forma exitosa  ");
+                    LimpiarControles(["txtIdRetore"]);
+                    llenarTabla();
                 } else {
                     MsgError("Error", "No se logró activar el registro, contacte al administrador.");
                 }

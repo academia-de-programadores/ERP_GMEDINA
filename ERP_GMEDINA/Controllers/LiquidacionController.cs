@@ -34,6 +34,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
+                    return "Error";
                 }
                 return json;
             }
@@ -177,6 +178,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
+                    return Json("Error", JsonRequestBehavior.AllowGet);
                 }
             }
             return Json("Error", JsonRequestBehavior.AllowGet);
@@ -200,6 +202,7 @@ namespace ERP_GMEDINA.Controllers
                 }
             //}
         }
+        
 
         //GET: CALCULAR LIQUIDACION
         [HttpPost]
@@ -272,6 +275,7 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.Message.ToString();
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
             return Json("Error", JsonRequestBehavior.AllowGet);
         }
@@ -340,6 +344,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
+                    return Json("Error", JsonRequestBehavior.AllowGet);
                 }
             }
             else
