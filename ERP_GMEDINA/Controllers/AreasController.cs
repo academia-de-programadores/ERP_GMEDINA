@@ -411,6 +411,10 @@ namespace ERP_GMEDINA.Controllers
                         else if (item.Accion == "a")
                         {
                             var depto = db.UDP_RRHH_tbDepartamentos_Restore(item.depto_Id, Usuario.usu_Id, DateTime.Now);
+                            foreach (UDP_RRHH_tbDepartamentos_Restore_Result dep in depto)
+                            {
+                                dep.ToString();
+                            }
                         }
                     }
                     transaction.Commit();
