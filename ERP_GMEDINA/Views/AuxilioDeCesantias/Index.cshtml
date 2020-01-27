@@ -64,9 +64,10 @@
 											{
 												<button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnModalDetalles">Detalles</button>
 												<button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-default btn-xs" id="btnModalEdit">Editar</button>
-											}
-											if (oUsuario.usu_EsAdministrador == true && item.aces_Activo == false)
-											{
+                                            }
+                                            if (oUsuario.usu_EsAdministrador == true && item.aces_Activo == false)
+                                            {
+                                                <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnModalDetalles">Detalles</button>
                                                  <!-- ACTIVAR -->
 												<button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnModalActivarAuxCes">Activar</button>
 											}

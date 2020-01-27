@@ -69,6 +69,7 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.dafp_Activo == false)
                                             {
+                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP">Detalles</button>
                                                  <!-- ACTIVAR -->
                                                 <button type="button" dafpid="@item.dafp_Id" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP">Activar</button>
                                             }

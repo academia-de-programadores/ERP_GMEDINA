@@ -83,6 +83,7 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.dex_Activo == false)
                                             {
+                                                @Html.ActionLink("Detalle", "Details", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-primary btn-xs" })
                                                  <!-- ACTIVAR -->
                                                 <button type="button" iddeduccionesextra="@item.dex_IdDeduccionesExtra" data-id="@item.dex_IdDeduccionesExtra" class="btn btn-primary btn-xs" id="btnActivarDeduccionesExtraordinarias">Activar</button>
                                             }

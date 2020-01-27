@@ -94,6 +94,7 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario.usu_EsAdministrador == true && item.cc_Activo == false)
                                             {
+                                                <button type="button" data-id="@item.cc_Id" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalles</button>
                                                  <!-- ACTIVAR -->
                                                 <button type="button" data-id="@item.cc_Id" class="btn btn-primary btn-xs" id="btnActivarRegistroComisiones">Activar</button>
                                                

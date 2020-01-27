@@ -417,7 +417,7 @@ namespace ERP_GMEDINA.Controllers
                                              {
                                                  empleadoID = E.emp_Id,
                                              }).FirstOrDefault();
-                                var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
+                                var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).DefaultIfEmpty(0).Max();
                                 var iddeducfin = sql + 1;
 
                                 //Validamos si encontro empleados que correspondan a los numeros de identidad proporcionados, de lo contrario mostrara error.
@@ -449,7 +449,7 @@ namespace ERP_GMEDINA.Controllers
                         response = "bien";
                     }
                 }
-                catch (Exception)
+                catch (Exception Ex)
                 {
                     response="error";
                 }
