@@ -13,8 +13,9 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <!-- Add jQuery Style direct - used for jQGrid plugin -->
-    <link href="@Url.Content(" ~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    @*<link href="@Url.Content(" ~/Scripts/plugins/jquery-ui/jqueryuiStyles")" rel="stylesheet" type="text/css" />*@
     <!-- Primary Inspinia style -->
+    @Styles.Render(" ~/Scripts/plugins/jquery-ui/jqueryuiStyles")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
 </head>
