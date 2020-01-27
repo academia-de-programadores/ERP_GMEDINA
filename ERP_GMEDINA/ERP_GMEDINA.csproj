@@ -1911,7 +1911,6 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
-    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -2906,6 +2905,9 @@
     <Content Include="Views\CatalogoDeDeducciones\Index2.cshtml" />
     <Content Include="Views\Empleados\_DeleteExpediente.cshtml" />
     <Content Include="Views\Empleados\_DetallesExpediente.cshtml" />
+    <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
+    <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
+    <Content Include="Views\Menu\MenuPrincipal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
