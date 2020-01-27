@@ -5,13 +5,7 @@
             @{
                 //var idmenu = Session["sesionIdMenu"];
                 int? idmenu = (int?)(HttpContext.Current.Session["sesionIdMenu"]);
-                if(idmenu == null)
-                {
-                    <script>
-                        location.href = window.location.protocol + '//' + window.location.host + '/' + window.location.pathname.split('/')[1];
-                    </script>
-                }
-                if (idmenu == 0)
+                if (idmenu == 0 || idmenu == null)
                 {
 
                     <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
