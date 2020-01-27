@@ -36,7 +36,9 @@ namespace ERP_GMEDINA.Models
         public int cpla_IdPlanilla { get; set; }
 
         public int fpa_IdFormaPago { get; set; }
-        [Display(Name = "Cuenta Bancaria ")]
+        [Display(Name = "Cuenta Bancaria")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string emp_CuentaBancaria { get; set; }
         [Display(Name = "Reingreso")]
         public bool emp_Reingreso { get; set; }

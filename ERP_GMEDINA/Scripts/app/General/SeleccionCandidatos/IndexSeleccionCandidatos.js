@@ -232,9 +232,6 @@ $("#btnGuardar").click(function () {
                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                         LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
                         llenarTabla();
-                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-                        LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
-                        llenarTabla();
                     } else {
                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
@@ -283,9 +280,6 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $('#ModalInhabilitar').modal('hide');
                     CierraPopups();
-                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
-                    LimpiarControles(["scan_RazonInactivo"]);
-                    llenarTabla();
                     MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     LimpiarControles(["scan_RazonInactivo"]);
                     llenarTabla();

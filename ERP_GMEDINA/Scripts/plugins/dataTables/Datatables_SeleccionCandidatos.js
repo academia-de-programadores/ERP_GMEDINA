@@ -1,4 +1,6 @@
 ﻿var tabla = null;
+var Admin = false;
+var textoBoton = 'Mostrar activos';
 var botones = [];
 $(document).ready(function () {
     var columnas = [];
@@ -30,6 +32,8 @@ $(document).ready(function () {
             col = col + 1;
         }
 
+
+
             //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
@@ -43,96 +47,51 @@ $(document).ready(function () {
                                 "</div>"
             });
         }
+        else if (campo == "Info") {
+            columnas.push({
+                data: null,
+                orderable: false,
+                defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                                    "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                                    " <a class='btn btn-default btn-xs ' onclick='CallEditar(this)' >Archivos</a>" +
+                                "</div>"
+            });
+        }
         else {
             columnas.push({ data: campo });
             botones.push(contador);
         }
     });
     tabla = $('#IndexTable').DataTable({
-        "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+        "language": language,
+        responsive: true,
+        "scrollX": true,
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "autoWidth": false,
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
-            {
-                extend: 'copy',
-                exportOptions: {
-                    columns: botones
-                }
-            },
-            {
-                extend: 'csv',
-                exportOptions: {
-                    columns: botones
-                }
-            },
-            {
-                extend: 'excel',
-                exportOptions: {
-                    columns: botones
-                },
-                title: 'ExampleFile'
-            },
-            {
-                extend: 'pdf',
-                exportOptions: {
-                    columns: botones
-                },
-                title: 'nadaaa'
-            },
-
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: botones
-                },
-                customize: function (win) {
-                    $(win.document.body).addClass('white-bg');
-                    $(win.document.body).css('font-size', '10px');
-
-
-
-                    $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                }
-            }
+                  {
+                      extend: 'copy',
+                      text: '<i class="fa fa-copy btn-xs"></i>',
+                      exportOptions: {
+                          columns: botones
+                      }
+                  }
         ],
         //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes
         columns: columnas,
-        order: [[col, 'asc']],
+        order: [[col, 'asc']]
     });
 });
-
-
 function CallDetalles(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var id = row.data().ID;
     tablaDetalles(id);
 }
-
-//function CallEditar(btn) {
-//    var tr = $(btn).closest('tr');
-//    var row = tabla.row(tr);
-//    var id = row.data().ID;
-//    debugger
-//    tablaEditar(id);
-//}
-
-function validarDT(obj) {
-    if (obj == "-2") {
-        //$("#ibox1").find(".ibox-content").hide();
-        //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
-        var ventana = $('#IndexTable tbody td.dataTables_empty');
-        ventana[0].innerHTML = "verifique su conexion a internet. (Sí el problema persiste llame al administrador)";
-        return true;
-    } else {
-        if (obj.Length == 0) {
-            $("#ibox1").find(".ibox-content").hide();
-            $("#ibox1").append('No hay registros para mostrar.');
-        } else {
-            return false;
-        }
-        return true;
-    }
+function CallEditar(btn) {
+    var tr = $(btn).closest('tr');
+    var row = tabla.row(tr);
+    var id = row.data().ID;
+    tablaEditar(id);
 }

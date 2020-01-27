@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
                     <h2>Contratar</h2>
                 </div>
                 <div class="ibox-content">
@@ -26,62 +26,63 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.car_Id, "Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("car_Id", null,"Seleccione una opción",htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("car_Id", null,"**Seleccione una opción**",htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger", @id = "errorcar_Id" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.area_Id, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("area_Id", null,"**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("area_Id", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.area_Id, "", new { @class = "text-danger", @id = "errorarea_Id" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.depto_Id, "Departamento", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("depto_Id", null,"**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("depto_Id", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.depto_Id, "", new { @class = "text-danger", @id = "errordepto_Id" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.jor_Id, "Jornada", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("jor_Id", null,"**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("jor_Id", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.jor_Id, "", new { @class = "text-danger", @id = "errorjor_Id" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_IdPlanilla,"Planilla", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("cpla_IdPlanilla", null,"**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("cpla_IdPlanilla", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger", @id = "errorcpla_IdPlanilla" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.fpa_IdFormaPago,"Forma de Pago", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("fpa_IdFormaPago", null,"**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("fpa_IdFormaPago", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
                                     @Html.ValidationMessageFor(model => model.fpa_IdFormaPago, "", new { @class = "text-danger", @id = "errorfpa_IdFormaPago" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.emp_CuentaBancaria, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.emp_CuentaBancaria, new { htmlAttributes = new { @class = "form-contro required valid" } })
+                                    @Html.EditorFor(model => model.emp_CuentaBancaria, new { htmlAttributes = new { @class = "form-contro required valid", @onkeypress = "return Numericos(event)"} })
                                     @Html.ValidationMessageFor(model => model.emp_CuentaBancaria, "", new { @class = "text-danger", @id = "erroremp_CuentaBancaria" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="tmon_Id">Tipo Moneda</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" id="tmon_Id" name="tmon_Id"></select>
+                                    <select class="form-control required valid" id="tmon_Id" name="tmon_Id"></select>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="tmon_Id" data-valmsg-replace="true" id="errortmon_Id"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="sue_Cantidad">Sueldo</label>
                                 <div class="col-md-8">
-                                    <input class="form-control required valid text-box single-line" data-val="true" data-val-maxlength="Excedió el número máximo de carácteres" data-val-maxlength-max="18" data-val-required="El campo Sueldo es requerido" id="sue_Cantidad" name="sue_Cantidad" type="number" value="">
+                                    <input class="form-control required valid text-box single-line" data-val="true" data-val-maxlength="Excedió el número máximo de carácteres" data-val-maxlength-max="18" data-val-required="El campo Sueldo es requerido" id="sue_Cantidad" name="sue_Cantidad" type="number" value="" onkeypress="return filterFloat(event,this);">
                                     <span class="field-validation-valid" data-valmsg-for="sue_Cantidad" data-valmsg-replace="true" id="errorsue_Cantidad"></span>
                                 </div>
                             </div>
@@ -89,7 +90,7 @@
                                 <label class="control-label col-md-2" for="req_Id">Requisición</label>
                                 <div class="col-md-8">
                                     <select class="form-control required valid" id="req_Id" name="req_Id"></select>
-                                    <span class="field-validation-valid" data-valmsg-for="req_Id" data-valmsg-replace="true" id="errorreq_Id"></span>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="req_Id" data-valmsg-replace="true" id="errorreq_Id"></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -114,13 +115,9 @@
 </div>
 
 @Styles.Render("~/Content/plugins/izitoast/iziToast")
-@Styles.Render("~/Content/plugins/izitoast/iziToast.min")
 }
 @section Scripts {
     @Scripts.Render("~/plugins/dataTablesSeleccionCandidatos")
-@*general*@
-@Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
-@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
+    @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/ContratarCandidato")
 }
