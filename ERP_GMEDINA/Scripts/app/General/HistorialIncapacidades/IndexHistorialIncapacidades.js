@@ -42,10 +42,10 @@ function format(obj) {
                 + '<td>' + Estado + '</td>'
                 + '<td>';
         if (index.hinc_Estado) {
-            div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
+            div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalles</button>';
         }
         else {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>';
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalles</button>' + '</td>';
         }
         div += '</tr>' +
                   '</tbody>'
@@ -242,9 +242,6 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $("#ModalInhabilitar").modal("hide");
                     CierraPopups();
-                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
-                    LimpiarControles(["hinc_Id"]);
-                    llenarTabla();
                     MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
                     LimpiarControles(["hinc_Id"]);
                     llenarTabla();

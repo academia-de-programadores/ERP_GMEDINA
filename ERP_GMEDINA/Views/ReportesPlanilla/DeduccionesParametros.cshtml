@@ -20,38 +20,41 @@
 					<div class="form-horizontal">
 						<div class="form-group">
 							<div class="col-md-6">
-								<label class="font-normal">Deducción</label>
+								<label class="font-normal">Deducción</label><label class="AsteriscoReporte" id="AsteriscoReporte">*</label>
 
 								@Html.DropDownList("cde_IdDeducciones", (IEnumerable<SelectListItem>)ViewBag.Deducciones, "Seleccione una opción", new { @class = "form-control" })
-
-								@Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
+								<span class="text-danger" id="validation_ReporteRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+								
 							</div>
 
 							<div class="col-md-6">
-								<label class="font-normal">Planilla</label>
+								<label class="font-normal">Planilla</label><label class="AsteriscoPlanilla" id="AsteriscoPlanilla">*</label>
 
 								@Html.DropDownList("cpla_IdPlanilla", (IEnumerable<SelectListItem>)ViewBag.Planillas, "Seleccione una opción", new { @class = "form-control" })
 
-								@Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger" })
+								<span class="text-danger" id="validation_PlanillaRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
 							</div>
 							<br />
 						</div>
 
 						<div class="form-group">
 							<div class="col-md-6">
-								<label class="font-normal">Fecha Inicio</label>
+								<label class="font-normal">Fecha Inicio</label><label class="AsteriscoFechaInicio" id="AsteriscoFechaInicio">*</label>
 								<div class="input-group date">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio" } })
 								</div>
-								@Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
+								<span class="text-danger" id="validation_FechaInicioRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+								<span class="text-danger" id="validation_FechaInicioMenor1920" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha no puede ser menor que 1920</span>
 							</div>
 
 							<div class="col-md-6">
-								<label class="font-normal">Fecha Fin</label>
+								<label class="font-normal">Fecha Fin</label><label class="AsteriscoFechaFin" id="AsteriscoFechaFin">*</label>
 								<div class="input-group date">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin"} })
 								</div>
-								@Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
+								<span class="text-danger" id="validation_FechaFinRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+								<span class="text-danger" id="validation_FechaFinMenor192" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha no puede ser menor que 1920</span>
+								<span class="text-danger" id="validation_FechaFinMenorFechaInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha fin no puede ser menor o igual que la fecha inicio</span>
 							</div>
 
 						</div>
@@ -93,3 +96,8 @@
 
 <br />
 <br />
+
+
+@section Scripts {
+	@Scripts.Render("~/Scripts/app/General/ReportesDeducciones")
+}
