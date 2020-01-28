@@ -15,7 +15,7 @@
                     @Html.LabelFor(model => model.afp_Descripcion)<span id="asiteriscoDescripcion">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @id = "afp_Descripcion", @maxlength = "100" } })
+                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @id = "afp_Descripcion", maxlength = "100" } })
                     <span class="text-danger" id="validation_DescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                     <span class="text-danger" id="validation_DescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                 </div>

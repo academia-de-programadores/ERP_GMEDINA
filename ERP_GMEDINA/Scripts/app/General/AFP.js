@@ -72,7 +72,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 $("#btnActivarRegistroAFP").click(function () {
 
     // inhabilitar el boton
-    $("#btnActivarRegistroAFP").attr('disabled',false);
+    $("#btnActivarRegistroAFP").attr('disabled', false);
     let ID = activarID;
 
 
@@ -81,29 +81,29 @@ $("#btnActivarRegistroAFP").click(function () {
         method: "POST",
         data: { id: ID }
     })
-    .done(function (data) {
+        .done(function (data) {
 
-        $("#ActivarAFP").modal('hide');
+            $("#ActivarAFP").modal('hide');
 
-        // validar errores
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: '¡No se activó el registro, contacte al administrador!',
-            });
-        }
-        else {
+            // validar errores
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se activó el registro, contacte al administrador!',
+                });
+            }
+            else {
 
-            // refrescar datatable
-            cargarGridDeducciones();
-            
-            // mensaje de exito
-            iziToast.success({
-                title: 'Exito',
-                message: '¡El registro se activó de forma exitosa!',
-            });
-        }
-    });
+                // refrescar datatable
+                cargarGridDeducciones();
+
+                // mensaje de exito
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se activó de forma exitosa!',
+                });
+            }
+        });
     activarID = 0;
 
 });
@@ -349,7 +349,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
             // validar resultado del proceso
             if (data != "error") {
-                
+
                 cargarGridDeducciones();
 
                 // cerrar modal
@@ -402,7 +402,7 @@ $('#Crear #afp_Descripcion').keyup(function () {
         $('#asiteriscoDescripcion').addClass("text-danger");
         $("#Crear #validation_DescripcionNumerico").css('display', '');
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#asiteriscoDescripcion').removeClass('text-danger');
@@ -447,7 +447,7 @@ $('#Crear #afp_InteresAporte').keyup(function () {
 
     if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
 
-        if(parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
+        if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
             $('#astericoInteresAporte').removeClass('text-danger');
 
         $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
@@ -494,8 +494,8 @@ $('#Crear #afp_InteresAnual').keyup(function () {
 });
 
 // validar tipo de deduccion create 
-$('#Crear #tde_IdTipoDedu').on('change', function () {
-    
+$('#Crear #tde_IdTipoDedu').blur(function () {
+
     if (this.value != 0) {
         $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
         $("#Crear #astericosTipoDeduccion").removeClass('text-danger');
@@ -553,7 +553,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                    })
+                })
                     .done(function (data) {
 
                         // limipiar ddl
@@ -724,13 +724,13 @@ $("#btnEditAFP").click(function () {
         $("#btnEditAFP").attr('disabled', false);
     }
 
-    
+
 });
 
 // --- validaciones key up editar ---
 
 $('#Editar #afp_Descripcion').keyup(function () {
-    
+
     var descripcion = $("#Editar #afp_Descripcion").val();
 
     //si no está vacio
@@ -751,7 +751,7 @@ $('#Editar #afp_Descripcion').keyup(function () {
         $('#EditarasiteriscoDescripcion').addClass("text-danger");
         $("#Editar #validation_EditarDescripcionNumerico").css('display', '');
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#EditarasiteriscoDescripcion').removeClass('text-danger');
@@ -834,7 +834,7 @@ $('#Editar #afp_InteresAnual').keyup(function () {
         $('#EditarastericosInteresAnual').addClass("text-danger");
         $("#Editar #validation_EditarInteresAnualMenorACien").css('display', '');
     }
-   
+
 });
 
 $('#Editar #tde_IdTipoDedu').on('change', function () {
@@ -872,7 +872,7 @@ $("#btnEditAFPConfirmar").click(function () {
     var aporteMinimoComas = data[3].value;
     data[3].value = aporteMinimoComas.replace(/,/g, '');
 
-    
+
     $.ajax({
         url: "/AFP/Edit",
         method: "POST",
@@ -941,7 +941,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 
                 // id selecciona
                 var SelectedId = data[0].tde_IdTipoDedu;
-                
+
                 // obtener tipo de deduccion descripcion
                 $.ajax({
                     url: "/AFP/EditGetTipoDeduccionDDL",
@@ -949,7 +949,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                    })
+                })
                     .done(function (data) {
 
                         // setear caja de texto
@@ -1015,7 +1015,7 @@ $("#btnInactivarRegistroAFP").click(function () {
 
     // deshabilitar el botón
     $("#btnInactivarRegistroAFP").attr('disabled', true);
-    
+
     $.ajax({
         url: "/AFP/Inactivar",
         method: "POST",
@@ -1044,7 +1044,7 @@ $("#btnInactivarRegistroAFP").click(function () {
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
-    }); 
+    });
 
 });
 
@@ -1052,10 +1052,10 @@ $("#btnInactivarRegistroAFP").click(function () {
 // obtener script serialize date
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        
+
     })
     .fail(function (jqxhr, settings, exception) {
-        
+
     });
 
 // funcion generica ajax
@@ -1064,9 +1064,9 @@ function _ajax(params, uri, type, callback) {
         url: uri,
         type: type,
         data: { params },
-                success: function (data) {
-                    callback(data);
-                }
+        success: function (data) {
+            callback(data);
+        }
     });
 }
 
