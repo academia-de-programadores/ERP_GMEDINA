@@ -21,7 +21,7 @@ $("#btnActivar").click(function () {
                 llenarTabla(-1);
                 llenarTabla(-1);
             } else {
-                MsgError("Error", "No se logró activar el registro, contacte al administrador.");
+                MsgError("Error", "No se activó el registro, contacte al administrador.");
             }
         });
     CierraPopups();

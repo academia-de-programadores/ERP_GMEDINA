@@ -116,15 +116,15 @@ $("#InActivar").click(function () {
         $.post("/HistorialSalidas/Delete", data).done(function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                 LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
                 llenarTabla();
             } else {
-                MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                MsgError("Error", "No se inactivó el registro, contacte al administrador.");
             }
         });
     } else {
-        MsgError(" ", "La eliminación de información debe ser justificada");
+        MsgError(" ", "La eliminación de información debe ser justificada.");
     }
 });
 
@@ -137,11 +137,11 @@ $("#btnActualizar").click(function () {
         $.post("/HistorialSalidas/Edit", data).done(function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                 LimpiarControles(["hsal_Observacion"]);
                 llenarTabla();
             } else {
-                MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                MsgError("Error", "No se editó el registro, contacte al administrador.");
             }
         });
     }

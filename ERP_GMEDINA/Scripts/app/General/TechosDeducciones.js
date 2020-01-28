@@ -141,10 +141,8 @@ function limpiarMensajes() {
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        console.log(textStatus);
     })
     .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
     });
 
 // EVITAR POSTBACK DE FORMULARIOS
@@ -188,9 +186,9 @@ function cargarGridTechosDeducciones() {
 
                 $('#tblTechosDeducciones').dataTable().fnAddData([
                     ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
-                    ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
-                    ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
-                    ListaTechosDeducciones[i].tddu_Techo,
+                    ListaTechosDeducciones[i].tddu_PorcentajeColaboradores.toFixed(2),
+                    ListaTechosDeducciones[i].tddu_PorcentajeEmpresa.toFixed(2),
+                    ListaTechosDeducciones[i].tddu_Techo.toFixed(2),
                     ListaTechosDeducciones[i].cde_DescripcionDeduccion,
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar]
@@ -238,7 +236,7 @@ $(document).on("click", "#btnAgregarTechosDeducciones", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $(".field-validation-error").css('display', 'none');
     $('#Crear input[type=text], input[type=number]').val('');
-    $("#AgregarTechosDeducciones").modal();
+    $("#AgregarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
 });
 
 function validacionCrear() {
@@ -449,7 +447,6 @@ $('#btnCreateTechoDeducciones').click(function () {
         data[5].value = data[5].value.replace(/,/g, '');
         data[6].value = data[6].value.replace(/,/g, '');
         data[7].value = data[7].value.replace(/,/g, '');
-        console.log(data);
         $.ajax({
             url: "/TechosDeducciones/Create",
             method: "POST",
@@ -517,7 +514,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                             $("#Editar #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#EditarTechosDeducciones").modal();
+                $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
@@ -538,7 +535,6 @@ $("#btnEditarTecho").click(function () {
     if (validacionEditar()) {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditTechosDeducciones").serializeArray();
-        console.log(data);
         data[5].value = data[5].value.replace(/,/g, '');
         data[6].value = data[6].value.replace(/,/g, '');
         data[7].value = data[7].value.replace(/,/g, '');
@@ -575,9 +571,14 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarTechosDeducciones").modal('hide');
 });
 
+//quitar Confirmacion
+$('#btnNoInactivar').click(function () {
+    $("#InactivarTechosDeducciones").modal('hide');
+    $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+});
 $(document).on("click", "#btnInactivarTechoDeducciones", function () {
     $("#EditarTechosDeducciones").modal('hide');
-    $("#InactivarTechosDeducciones").modal();
+    $("#InactivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
 });
 
 //Inactivar registro Techos Deducciones
@@ -628,10 +629,9 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 $("#Detalles #tddu_UsuarioCrea").val(data[0].tddu_UsuarioCrea);
                 $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
                 $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
-
-                $("#Detalles #tddu_PorcentajeColaboradores").html(data[0].tddu_PorcentajeColaboradores);
-                $("#Detalles #tddu_PorcentajeEmpresa").html(data[0].tddu_PorcentajeEmpresa);
-                $("#Detalles #tddu_Techo").html(data[0].tddu_Techo);
+                $("#Detalles #tddu_PorcentajeColaboradores").html(data[0].tddu_PorcentajeColaboradores.toFixed(2));
+                $("#Detalles #tddu_PorcentajeEmpresa").html(data[0].tddu_PorcentajeEmpresa.toFixed(2));
+                $("#Detalles #tddu_Techo").html(data[0].tddu_Techo.toFixed(2));
                 $("#Detalles #tede_UsuarioCrea").html(data[0].tede_UsuarioCrea);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#Detalles #tddu_FechaCrea").html(FechaCrea);
@@ -657,7 +657,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 //            $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                 //        });
                 //    });
-                $("#DetailsTechosDeducciones").modal();
+                $("#DetailsTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
@@ -673,7 +673,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
 var activarID = 0;
 $(document).on("click", "#btnActivarTechosDeducciones", function () {
     activarID = $(this).data('id');
-    $("#ActivarTechosDeducciones").modal();
+    $("#ActivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
 });
 
 //activar ejecutar

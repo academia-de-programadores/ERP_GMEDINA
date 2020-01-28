@@ -15,7 +15,7 @@ function tablaEditar(ID) {
 $("#btnUploadDocument").change(function () {
     var fileExtension = ['xls', 'xlsx', 'jpeg', 'jpg', 'png', 'pdf', 'svg', 'doc', 'docx'];
     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-        MsgError("¡Error!", "Debe Agregar el tipo de archivo correspondiente");
+        MsgError("Error", "Debe agregar el tipo de archivo correspondiente.");
     }
 });
 
@@ -47,7 +47,7 @@ $("#FormEmpleadosDocument").on("submit", function (event) {
         UploadFile.append("id", id);
 
         //data = serializar(data);
-        console.log(UploadFile);
+        
         //data = JSON.stringify({ data: data });
         $.ajax({
             url: "/Empleados/UploadDocumento",
@@ -60,25 +60,25 @@ $("#FormEmpleadosDocument").on("submit", function (event) {
         })
         .done(function (res) {
             if (res == "-1") {
-                MsgError("Error", "No se pudo agregar el archivo, contacte al administrador.");
+                MsgError("Error", "No se agregó el archivo, contacte al administrador.");
             }
             else if (res == "-2") {
-                MsgError("Error", "El archivo ya existe");
+                MsgError("Error", "El archivo ya existe.");
             }
             else if (res == "-3") {
-                MsgError("Error", "El archivo ya existe o su nombre es duplicado");
+                MsgError("Error", "El archivo ya existe o su nombre es duplicado.");
             }
             else if (res == "1") {
-                MsgSuccess("Exito", "El archivo se agrego de forma exitosa");
+                MsgSuccess("¡Éxito!", "El archivo se agregó de forma exitos.a");
                 llenarTabla();
                 $('#ModalEditar').modal('hide');
             }
             else if (res == "-4") {
-                MsgError("Error", "Debe Agregar el archivo correspondiente");
+                MsgError("Error", "Debe agregar el archivo correspondiente.");
             }
 
         });
     } else {
-        MsgError("Error", "Debe Agregar el archivo correspondiente");
+        MsgError("Error", "Debe agregar el archivo correspondiente.");
     }
 });

@@ -18,11 +18,11 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 var tbAdelantoSueldo = db.tbAdelantoSueldo.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
-                    //.OrderBy(t => t.adsu_IdAdelantoSueldo).OrderByDescending(t => t.adsu_IdAdelantoSueldo);
+                //.OrderBy(t => t.adsu_IdAdelantoSueldo).OrderByDescending(t => t.adsu_IdAdelantoSueldo);
                 //.Where(t => t.adsu_Activo == true);
                 return View(tbAdelantoSueldo.ToList());
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 Ex.Message.ToString();
                 return View(db.tbAdelantoSueldo.ToList());
@@ -53,11 +53,11 @@ namespace ERP_GMEDINA.Controllers
                         //.OrderBy(t => t.adsu_IdAdelantoSueldo)
                         //.OrderByDescending(x => x.adsu_IdAdelantoSueldo)
                         .ToList();
-                        //.Where(p => p.adsu_Activo == true);
+            //.Where(p => p.adsu_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbAdelantoSueldo, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-        
+
         //OBTENER INFORMACION DE LOS REGISTROS DE LOS EMPLEADOS PARA LLENAR EL MODAL DE INSERTAR, SELECCIONA LOS QUE NO TIENEN
         //UN ADELANTO ACTIVO
         public JsonResult EmpleadoGetDDL()
@@ -66,8 +66,10 @@ namespace ERP_GMEDINA.Controllers
             var DDL =
             from Personas in db.tbPersonas
             join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
-            where !(from Adelanto in db.tbAdelantoSueldo where Adelanto.adsu_Deducido == false
-                      select Adelanto.emp_Id).Contains(Empleados.emp_Id)
+            where !(from Adelanto in db.tbAdelantoSueldo
+                    where Adelanto.adsu_Deducido == false
+                    select Adelanto.emp_Id).Contains(Empleados.emp_Id)
+            orderby (Personas.per_Nombres)
             select new
             {
                 Id = Empleados.emp_Id,
@@ -87,7 +89,7 @@ namespace ERP_GMEDINA.Controllers
             decimal SueldoNetoPromedio = 0;
             try
             {
-                if(id == null)
+                if (id == null)
                     return Json("Id_Vacio", JsonRequestBehavior.AllowGet);
                 //LA CONSULTA DEVUELVE LOS REGISTROS QUE NO TENGAN ADELANTOS ACTIVOS
                 DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
@@ -120,12 +122,12 @@ namespace ERP_GMEDINA.Controllers
                 //    SueldoNetoPromedio = Sueldo.Average();
                 //}
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 Ex.Message.ToString();
             }
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE
-            return Json( Math.Round(SueldoNetoPromedio, 2), JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(SueldoNetoPromedio, 2), JsonRequestBehavior.AllowGet);
         }
 
         //FUNCION: CREAR UN NUEVO REGISTRO
@@ -133,7 +135,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "emp_Id, adsu_FechaAdelanto, adsu_RazonAdelanto, adsu_Monto")] tbAdelantoSueldo tbAdelantoSueldo)
         {
             //Para llenar los campos de auditoría
-            tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
+            //tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
             tbAdelantoSueldo.adsu_UsuarioCrea = 1;
             tbAdelantoSueldo.adsu_FechaCrea = DateTime.Now;
 
@@ -141,7 +143,7 @@ namespace ERP_GMEDINA.Controllers
             string Response = String.Empty;
             IEnumerable<object> listAdelantoSueldo = null;
             string MensajeError = "";
-            
+
             if (ModelState.IsValid)
             {
                 try
@@ -187,7 +189,7 @@ namespace ERP_GMEDINA.Controllers
 
         //EDITAR
 
-            //OBTENER REGISTRO PARA EDITAR
+        //OBTENER REGISTRO PARA EDITAR
         public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;

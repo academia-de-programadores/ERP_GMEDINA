@@ -160,7 +160,7 @@ $("#btnActualizar").click(function () {
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
                 }
             });
     } else {

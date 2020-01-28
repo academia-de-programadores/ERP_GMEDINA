@@ -56,6 +56,47 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        public ActionResult RefreshEquipos()
+        {
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+
+                var Equipo = db.tbEquipoTrabajo.Select(e => new  { e.eqtra_Id, e.eqtra_Descripcion}).ToList();
+                var EquipoAsignado = db.tbEquipoEmpleados.Select(e => new  {e.eqtra_Id, e.eqem_Estado }).Where(d => d.eqem_Estado == true).ToList();
+                bool Found = false;
+                List<tbEquipoTrabajo> Send = new List<tbEquipoTrabajo>();
+                tbEquipoTrabajo _snd = null;
+                foreach (var et in Equipo)
+                {
+                    Found = false;
+                    foreach (var ee in EquipoAsignado)
+                    {
+                        if (ee.eqtra_Id == et.eqtra_Id)
+                        {
+                            Found = true;
+                        }
+                    }
+
+                    if(!Found)
+                    {
+                        _snd = new tbEquipoTrabajo();
+                        _snd.eqtra_Id = et.eqtra_Id;
+                        _snd.eqtra_Descripcion = et.eqtra_Descripcion;
+
+                        Send.Add(_snd);
+                    }
+                }
+
+                return Json(Send, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                ex.Message.ToString();
+                return Json(-1, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult ChildRowData(int? id)
         {
             using (db = new ERP_GMEDINAEntities())
@@ -156,11 +197,13 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
+                    var Restore = db.tbEquipoEmpleados.Where(x => x.eqem_Id == tbEquipoEmpleados.eqem_Id).ToList().First();
                     var list = db.UDP_RRHH_tbEquipoEmpleados_Delete(tbEquipoEmpleados.eqem_Id, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbEquipoEmpleados_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
+                    var list2 = db.UDP_RRHH_tbEquipoTrabajo_Restore(Restore.eqtra_Id, 1, DateTime.Now);
                 }
                 catch (Exception ex)
                 {

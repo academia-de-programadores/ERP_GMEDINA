@@ -76,7 +76,7 @@ function getDDL() {
                     $("#cpla_FrecuenciaEnDias").append("<option value='" + iter.id + "'>" + iter.descripcion + "</option>");
 
             });
-            console.log(data);
+            
         },
         () => {
 

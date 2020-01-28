@@ -31,7 +31,7 @@ function llenarDropDownList() {
 
 $("#btnGuardar").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    debugger
+    
     try
     {
 
@@ -76,7 +76,7 @@ $("#btnGuardar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    MsgSuccess("¡Éxito!", "Promoción exitosa");
+                    MsgSuccess("¡Éxito!", "Promoción exitosa.");
                     sessionStorage.clear();
                     $(location).attr('href', "/HistorialCargos/Index");
 

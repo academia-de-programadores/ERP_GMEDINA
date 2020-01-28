@@ -1052,10 +1052,10 @@ $("#btnInactivarRegistroAFP").click(function () {
 // obtener script serialize date
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        console.log(textStatus);
+        
     })
     .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
+        
     });
 
 // funcion generica ajax

@@ -1,19 +1,19 @@
 ﻿//OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      
   });
 
 //OBTENER SCRIPT DE EXPORTAR A EXCEL
 $.getScript("../Scripts/app/General/excelexportjs.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script excelexportjs");
+      
   });
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -37,12 +37,12 @@ $('.cargarPlanilla').click(function () {
     $('#btnPlanilla').attr('disabled', true);
     //$('#Cargando').css('display', '');
     var ID = $(this).data('id');
-    console.log(ID);
+    
     _ajax(null,
         '/Planilla/GetPlanilla/' + ID,
         'GET',
         (data) => {
-            console.log(data);
+            
 
             if (data.length == 0) {
                 //Validar si se genera un error al cargar la data de la planilla especifica

@@ -278,7 +278,7 @@ $("#btnActualizar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -302,7 +302,7 @@ $("#btnActualizarHorario").click(function () {
                     llenarTabla();
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -321,11 +321,11 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["jor_Descripcion", "jor_RazonInactivo"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -348,9 +348,9 @@ $("#InActivarHorario").click(function () {
                     $('.modal-backdrop').remove();//eliminamos el backdrop del modal
                     llenarTabla();
                     LimpiarControles(["hor_Descripcion", "hor_RazonInactivo"]);
-                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -361,5 +361,5 @@ $("#InActivarHorario").click(function () {
 
 $(document).on("click", "#IndexTable tbody tr td button#btnAgregarHorarios", function () {
     var Id = $(this).data('id');
-    console.log(Id);
+    
 })

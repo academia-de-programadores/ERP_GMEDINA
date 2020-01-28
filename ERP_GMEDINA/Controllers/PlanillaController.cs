@@ -702,7 +702,6 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
-
                                         #region cálculo de ISR
 
                                         //#region Declaracion de Variables
@@ -923,39 +922,6 @@ namespace ERP_GMEDINA.Controllers
                                         // Pendiente testeo
                                         //netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
-                                        #region Enviar comprobante de pago por email
-                                        if (enviarEmail != null && enviarEmail == true)
-                                        {
-                                            oComprobantePagoModel.EmailAsunto = "Comprobante de pago";
-                                            oComprobantePagoModel.NombreColaborador = empleadoActual.tbPersonas.per_Nombres + " " + empleadoActual.tbPersonas.per_Apellidos;
-                                            oComprobantePagoModel.idColaborador = empleadoActual.emp_Id;
-                                            oComprobantePagoModel.EmailDestino = empleadoActual.tbPersonas.per_CorreoElectronico;
-                                            oComprobantePagoModel.PeriodoPago = $"{fechaInicio.ToString("dd/MM/yyyy")}- {fechaFin.ToString("dd/MM/yyyy")}";
-                                            oComprobantePagoModel.Ingresos = ListaIngresosVoucher;
-                                            oComprobantePagoModel.Deducciones = ListaDeduccionesVoucher;
-                                            oComprobantePagoModel.totalIngresos = totalIngresosEmpleado;
-                                            oComprobantePagoModel.totalDeducciones = totalDeduccionesEmpleado;
-                                            oComprobantePagoModel.NetoPagar = netoAPagarColaborador;
-
-                                            // enviar comprobante de pago
-                                            try
-                                            {
-                                                if (!utilities.SendEmail(oComprobantePagoModel))
-                                                    errores++;
-                                                else
-                                                {
-                                                    ListaDeduccionesVoucher = new List<IngresosDeduccionesVoucher>();
-                                                    ListaIngresosVoucher = new List<IngresosDeduccionesVoucher>();
-                                                }
-
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                errores++;
-                                            }
-                                        }
-                                        #endregion
-
                                         #region guardar en el historial de pago                                     
 
                                         idHistorialPago = db.tbHistorialDePago
@@ -1086,6 +1052,39 @@ namespace ERP_GMEDINA.Controllers
                                         // guardar cambios en la bbdd
                                         db.SaveChanges();
                                         dbContextTransaccion.Commit();
+
+                                        #region Enviar comprobante de pago por email
+                                        if (enviarEmail != null && enviarEmail == true)
+                                        {
+                                            oComprobantePagoModel.EmailAsunto = "Comprobante de pago";
+                                            oComprobantePagoModel.NombreColaborador = empleadoActual.tbPersonas.per_Nombres + " " + empleadoActual.tbPersonas.per_Apellidos;
+                                            oComprobantePagoModel.idColaborador = empleadoActual.emp_Id;
+                                            oComprobantePagoModel.EmailDestino = empleadoActual.tbPersonas.per_CorreoElectronico;
+                                            oComprobantePagoModel.PeriodoPago = $"{fechaInicio.ToString("dd/MM/yyyy")}- {fechaFin.ToString("dd/MM/yyyy")}";
+                                            oComprobantePagoModel.Ingresos = ListaIngresosVoucher;
+                                            oComprobantePagoModel.Deducciones = ListaDeduccionesVoucher;
+                                            oComprobantePagoModel.totalIngresos = totalIngresosEmpleado;
+                                            oComprobantePagoModel.totalDeducciones = totalDeduccionesEmpleado;
+                                            oComprobantePagoModel.NetoPagar = netoAPagarColaborador;
+
+                                            // enviar comprobante de pago
+                                            try
+                                            {
+                                                if (!utilities.SendEmail(oComprobantePagoModel))
+                                                    errores++;
+                                                else
+                                                {
+                                                    ListaDeduccionesVoucher = new List<IngresosDeduccionesVoucher>();
+                                                    ListaIngresosVoucher = new List<IngresosDeduccionesVoucher>();
+                                                }
+
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                errores++;
+                                            }
+                                        }
+                                        #endregion
 
                                         #region crear registro de la planilla del colaborador para el reporte
                                         oPlanillaEmpleado.CodColaborador = InformacionDelEmpleadoActual.emp_Id.ToString();

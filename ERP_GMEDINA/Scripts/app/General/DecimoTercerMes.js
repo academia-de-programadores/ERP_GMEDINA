@@ -30,7 +30,7 @@ $("body").on("click", "#btnProcesar", function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log(data)
+            
             if (data != "-1")
                 iziToast.success({
                     title: 'Decimotercer Mes',

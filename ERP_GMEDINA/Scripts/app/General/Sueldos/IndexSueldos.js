@@ -176,16 +176,16 @@ $("#btnActualizar").click(function () {
                         CierraPopups();
                         llenarTabla();
                         LimpiarControles(["sue_Id", "sue_Cantidad"]);
-                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     } else {
-                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe.)");
+                        MsgError("Error", "No se editó el registro, contacte al administrador.");
                     }
                 });
         } else {
-            MsgError("Error", "por favor llene todas las cajas de texto.");
+            MsgError("Error", "Por favor llene todas las cajas de texto.");
         }
     } else {
-        MsgError("Error", "Por favor ingrese  solo valores numéricos positivos. ");
+        MsgError("Error", "Por favor ingrese solo valores numéricos positivos. ");
     }
 });
 

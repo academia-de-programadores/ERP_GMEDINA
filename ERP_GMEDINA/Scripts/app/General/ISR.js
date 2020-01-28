@@ -14,10 +14,10 @@ var InactivarID = 0;
 //formato fecha
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      
   });
 
 // evitar postbacks
@@ -121,7 +121,7 @@ $('#btnCreateISR').click(function () {
             isr_Porcentaje: FormatearMonto($("#Crear #isr_Porcentaje").val())
         };
 
-        console.log(data);
+        
 
         $.ajax({
             url: "/ISR/Create",
@@ -472,7 +472,7 @@ function Vaciar_ModalCrear() {
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
 
-    console.log("Vaciado");
+    
 }
 
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
@@ -513,7 +513,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
-    console.log("entra");
+    
     if (RangoInicial != "-1") {
         //RANGO INICIAL
 

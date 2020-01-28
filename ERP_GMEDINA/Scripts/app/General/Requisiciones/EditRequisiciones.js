@@ -115,7 +115,7 @@ $(document).ready(function () {
             tbRequisicion = serializar(Form);
             tbRequisicion.req_Id = id;
             Form = JSON.stringify({ tbRequisiciones: tbRequisicion, DatosProfesionales: data });
-            console.log(Form);
+            
 
             if (tbRequisicion != null) {
                 _ajax(Form,
@@ -123,16 +123,16 @@ $(document).ready(function () {
                 'POST',
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        MsgSuccess("¡Exito!", "El registro se edito de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                         $("#finish").attr("href", " ");
                         setTimeout(function () { window.location.href = "/Requisiciones/Index"; }, 3000);
                     } else {
-                        MsgError("Error", "No se agrego el registro, contacte al administrador");
+                        MsgError("Error", "No se editó el registro, contacte al administrador.");
                     }
                 });
             }
             else {
-                MsgError("Error", "por favor llene todos los campos de texto.");
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
             }
         },
     });

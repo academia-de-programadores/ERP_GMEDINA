@@ -15,14 +15,14 @@
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         $("#btnGuardar").attr("disabled", "disabled");
-                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa.");
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.")
                         setTimeout(function () { window.location.href = "/Sucursales/Index"; }, 3000);
                     } else {
                         MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
                 });
         } else {
-            MsgError("Error", "por favor llene todas las cajas de texto.");
+            MsgError("Error", "No se editó el registro, contacte al administrador.");
         }
     }
     else

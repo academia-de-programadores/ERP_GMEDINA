@@ -19,14 +19,14 @@ function compare_dates() {
 
 
     if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fechas no son validas");
+        MsgError("Error", "Fechas no válidas");
     }
 
     else if (Date.parse(fecha1) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha inicio no es valida");
+        MsgError("Error", "Fecha inicio no válida");
     }
     else if (Date.parse(fecha2) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha fin no es valida");
+        MsgError("Error", "Fecha fin no válida");
     }
 
     else {
@@ -241,11 +241,11 @@ $("#hper_PorcentajeIndemnizado").focusout(function () {
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     if ($("#hper_fechaFin").val() <= $("#hper_fechaInicio").val()) {
-        MsgError("Error", "Seleccione una fecha de regreso distinta");
+        MsgError("Error", "Seleccione una fecha de regreso distinta.");
     } else if ($("#TipoPermisos").val() == 0) {
-        MsgError("Error", "Es nesesario seleccionar el tipo de permiso");
+        MsgError("Error", "Es nesesario seleccionar el tipo de permiso.");
     } else if ($("#hper_PorcentajeIndemnizado").val() == "") {
-        MsgError("Error", "Es nesesario especificar el porcentaje del sueldo del cual el colaborador gozara durante la duración del permiso");
+        MsgError("Error", "Es nesesario especificar el porcentaje del sueldo del cual el colaborador gozará durante la duración del permiso.");
     } else {
         //declaramos el objeto principal de nuestra tabla y asignamos sus valores
         var tbHistorialPermisos =
@@ -259,15 +259,15 @@ $("#btnCrear").click(function () {
         };
         var lista = getJson();
         if (lista == "") {
-            MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador");
+            MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador.");
         }
             //else if ($("#hper_PorcentajeIndemnizado").val() < '0' || $("#hper_PorcentajeIndemnizado").val() == "") {
             //    MsgError("Error", "Es nesesario especificar el porcenaje del suelo del cual gozara el colaborador durante laduración del permiso");
             //}
         else if ($("#hper_fechaInicio").val() == "") {
-            MsgError("Error", "Es nesesario seleccionar la fecha de salida");
+            MsgError("Error", "Es nesesario seleccionar la fecha de salida.");
         } else if ($("#hper_fechaFin").val() == "") {
-            MsgError("Error", "Es nesesario seleccionar la fecha de regreso");
+            MsgError("Error", "Es nesesario seleccionar la fecha de regreso.");
         }
         else {
             if (tbHistorialPermisos != null) {
@@ -286,11 +286,11 @@ $("#btnCrear").click(function () {
                             setTimeout(function () { location.href = "/HistorialPermisos/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");
                         } else {
-                            MsgError("Error", "No se agrego el registro, contacte al administrador");
+                            MsgError("Error","No se agregó el registro, contacte al administrador.");
                         }
                     });
             } else {
-                MsgError("Error", "por favor llene todas las cajas de texto");
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
             }
         }
     }
