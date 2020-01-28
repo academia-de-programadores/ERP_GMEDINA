@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Helpers
             string Contraseña = "Admin2305";
             string body = String.Empty;
             StringBuilder trDeduccionesIngresosTemplate = new StringBuilder();
+            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
             #endregion
 
             try
@@ -83,11 +84,22 @@ namespace ERP_GMEDINA.Helpers
                 oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
                 oSmtpClient.Send(oMailMessage);
                 oSmtpClient.Dispose();
+                throw new Exception();
 
             }
             catch
             {
+
                 response = false;
+
+                // insertar en tabla bitácora de errores
+                IEnumerable<object> listSendMail = null;
+                string MensajeError = "";
+
+                // ejecutar el procedimiento almacenado
+                listSendMail = db.UDP_Acce_tbBitacoraErrores_Insert("sendEmailPlanilla","Error",DateTime.Now,MensajeError,"SendMail");
+
+                
             }
             return response;
         }
