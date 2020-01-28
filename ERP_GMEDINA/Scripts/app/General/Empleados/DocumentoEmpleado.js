@@ -47,7 +47,7 @@ $("#FormEmpleadosDocument").on("submit", function (event) {
         UploadFile.append("id", id);
 
         //data = serializar(data);
-        console.log(UploadFile);
+        
         //data = JSON.stringify({ data: data });
         $.ajax({
             url: "/Empleados/UploadDocumento",

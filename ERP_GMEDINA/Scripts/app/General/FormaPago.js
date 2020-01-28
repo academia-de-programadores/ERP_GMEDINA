@@ -551,7 +551,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
       //console.log(textStatus);
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      
   });
 
 //funcion generica ajax

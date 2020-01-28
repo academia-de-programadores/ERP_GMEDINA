@@ -1,10 +1,10 @@
 ﻿var urlSinElIndex = "";
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        console.log(textStatus);
+        
     })
     .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
+        
     });
 
 //Funcion generica para reutilizar AJAX
@@ -36,7 +36,7 @@ function spinner() {
              </div>`
 }
 function listar() {
-    console.log(urlSinElIndex + '/getFechaPlanilla');
+    
     table = $('#tblHistorialPlanillas').DataTable({
         //Con este metodo se le dan los estilos y funcionalidades de datatable a la tabla
         ajax: {
@@ -151,15 +151,15 @@ $(document).on('click', 'td.details-control', function () {
 
 
 $(document).on('click', '#btnDetalle', function () {
-    console.log(this);
+    
 })
 
 $(document).on('submit', '#btnDetalle', function () {
     let data = $(this).data("idplanilla");
     let anio = $(this).data("anioplanilla");
-    console.log(data);
-    console.log(anio);
-    //_ajax({ ID: data, anio: anio }, 'http://localhost:51144/FechaPlanilla/ComprobanteEmpleadoEncabezado', 'POST', (data) => { console.log(data); }, () => { });
+    
+    
+    //_ajax({ ID: data, anio: anio }, 'http://localhost:51144/FechaPlanilla/ComprobanteEmpleadoEncabezado', 'POST', (data) => { 
 
 });
 
@@ -178,7 +178,7 @@ function getTipoPlanilla(data) {
                 </thead>
                 <tbody>`;
     $.each(data.data, function (index, val) {
-        console.log("Id:" + val.idPlanilla + " Desc: " + val.DescripcionPlanilla);
+        
         ingresosPlanillas +=
             `  <tr>
                     <td>
@@ -224,7 +224,7 @@ $(document).ready(() => {
 
     if (ubicacionIndexUrl > 0) {
         urlSinElIndex = window.location.toString().replace('/Index', '');
-        console.log(urlSinElIndex);
+        
     }
     listar();
 }); 

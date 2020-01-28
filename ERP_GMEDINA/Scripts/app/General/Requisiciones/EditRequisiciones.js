@@ -115,7 +115,7 @@ $(document).ready(function () {
             tbRequisicion = serializar(Form);
             tbRequisicion.req_Id = id;
             Form = JSON.stringify({ tbRequisiciones: tbRequisicion, DatosProfesionales: data });
-            console.log(Form);
+            
 
             if (tbRequisicion != null) {
                 _ajax(Form,

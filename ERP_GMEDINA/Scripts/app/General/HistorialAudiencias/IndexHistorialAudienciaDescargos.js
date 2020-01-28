@@ -205,11 +205,11 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se activó de forma exitosa.");
                     LimpiarControles(["aude_Id"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
+                    MsgError("Error", "No se activó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -248,11 +248,11 @@ $("#btnActualizar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa");
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 

@@ -181,13 +181,13 @@ $("#InActivar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hper_Observacion", "hper_RazonInactivo"]);
-                MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+                MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
             } else {
-                MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                MsgError("Error", "No se inactivó el registro, contacte al administrador.");
             }
         });
     } else {
-        MsgSuccess(" Error ", "la eliminación de información debe ser justificada");
+        MsgWarning("¡Éxito!", "La eliminación de información debe ser justificada.");
     }
 });
 
@@ -202,9 +202,9 @@ $("#btnActualizar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hper_Observacion"]);
-                MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
             } else {
-                MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                MsgError("Error", "No se editó el registro, contacte al administrador.");
             }
         });
     }

@@ -167,7 +167,7 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("Éxito", "El registro se editó de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
                 } else {
                     MsgError("Error", "No se editó el registro, contacte al administrador.");

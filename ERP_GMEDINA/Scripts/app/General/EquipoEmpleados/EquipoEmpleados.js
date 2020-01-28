@@ -64,6 +64,9 @@ function RefreshEquipos() {
     _ajax(null, '/EquipoEmpleados/RefreshEquipos', 'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#ModalNuevo").find("#eqtra_Id").append(
+                        '<option value="">' + "**Seleccione una opción**" + '</option>'
+                    );
                 obj.forEach(function (index, value) {
                     $("#ModalNuevo").find("#eqtra_Id").append(
                         '<option value="' + index.eqtra_Id + '">' + index.eqtra_Descripcion + '</option>'

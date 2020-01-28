@@ -168,7 +168,7 @@ $("#add").click(function () {
        "POST",
        function (obj) {
         if (obj == "-2") {
-         MsgError("Error", "Verifique su conexion a internet");
+         MsgError("Error", "Verifique su conexión a internet.");
         } else if (obj.length > 0) {
          obj.forEach(function (value, index) {
           var input = $("#FormDepartamentos").find("#" + value.input)[0];
@@ -176,7 +176,7 @@ $("#add").click(function () {
           var span = $(div).find("span")[0];
 
           $(div).addClass("error");
-          span.innerText = 'Cambie la descripcion.';
+          span.innerText = 'Cambie la descripción.';
           $(span).addClass("text-danger");
          });
         } else {
@@ -206,10 +206,10 @@ $("#btnCrear").click(function () {
        var div = $(input).closest(".form-group")[0];
        var asterisco = $(div).find("label font")[0];
        if (obj.codigo == "-2") {
-        MsgError("Error", "No se logro editar el registro, contacte al administrador");
+           MsgError("Error", "No se editó el registro, contacte al administrador.");
        }
        if (obj.codigo == "-3") {
-        console.log("violación de la seguridad.");
+        console.log("Violación de la seguridad.");
        }
 
        if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
@@ -217,13 +217,13 @@ $("#btnCrear").click(function () {
        } else {
         $(div).addClass("error");
         asterisco.color = "red";
-        span.innerText = 'ya existe, por favor cambie la descripcion';
+        span.innerText = 'Ya existe, por favor cambie la descripción.';
         $(span).addClass("text-danger");
        }
-       MsgError("Error", "No se logro editar el registro, verifique la conección a internet");
+       MsgError("Error", "No se editó el registro, contacte al administrador.");
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+      MsgError("Error", "Por favor llene todas las cajas de texto.");
  }
 });
 //$("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
@@ -265,7 +265,7 @@ $("#ModalEditar").find("#btnActualizar").on("click", function () {
       "POST",
       function (obj) {
        if (obj == "-2") {
-        MsgError("Error", "Verifique su conexion a internet");
+        MsgError("Error", "Verifique su conexión a internet.");
        } else if (obj.length > 0) {
         var input = $("#ModalEditar").find("#" + obj[0].input)[0];
         var div = $(input).closest(".form-group")[0];
@@ -318,7 +318,7 @@ $("#ModalInactivar").find("#InActivar").on("click", function () {
         //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
         $(location).attr('href', '/Areas');
        } else {
-        MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+           MsgError("Error", "No se inactivó el registro, contacte al administrador.");
        }
       });
  }

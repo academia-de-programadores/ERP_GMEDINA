@@ -21,33 +21,34 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Institución financiera</label>
+                                <label class="font-normal">Institución financiera</label><label class="AsteriscoInstitucion" id="AsteriscoInstitucion">*</label>
 
                                 @Html.DropDownList("insf_IdInstitucionFinanciera", (IEnumerable<SelectListItem>)ViewBag.Instituciones, "Seleccione una opción", new { @class = "form-control" })
 
-                                @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
+                                <span class="text-danger" id="validation_InstitucionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="font-normal">Planilla</label>
+                                <label class="font-normal">Planilla</label><label class="AsteriscoPlanilla" id="AsteriscoPlanilla">*</label>
 
                                 @Html.DropDownList("cpla_IdPlanilla", (IEnumerable<SelectListItem>)ViewBag.Planillas, "Seleccione una opción", new { @class = "form-control" })
 
-                                @Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger" })
+                                <span class="text-danger" id="validation_PlanillaRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                             </div>
-                            
+
                         </div>
 
                         <div class="form-group">
 
                             <div class="col-md-6">
-                                <label class="font-normal">Fecha Pago</label>
+                                <label class="font-normal">Fecha registro</label><label class="AsteriscoFechaRegistro" id="AsteriscoFechaRegistro">*</label>
                                 <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.deif_FechaCrea, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "deif_FechaCrea", @id = "deif_FechaCrea"} })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.deif_FechaCrea, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "deif_FechaCrea", @id = "deif_FechaCrea" } })
                                 </div>
-                                @Html.ValidationMessageFor(model => model.deif_FechaCrea, "", new { @class = "text-danger" })
-                            </div>                                                      
-                            
+                                <span class="text-danger" id="validation_FechaInicioRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                                <span class="text-danger" id="validation_FechaInicioMenor1920" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha no puede ser menor que 1920</span>
+                            </div>
+
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarIngresos">Previsualizar</button>
                     </div>
@@ -83,3 +84,7 @@
 </div>
 <br />
 <br />
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/General/ReportesInstitucionesFinancieras")
+}

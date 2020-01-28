@@ -361,5 +361,5 @@ $("#InActivarHorario").click(function () {
 
 $(document).on("click", "#IndexTable tbody tr td button#btnAgregarHorarios", function () {
     var Id = $(this).data('id');
-    console.log(Id);
+    
 })

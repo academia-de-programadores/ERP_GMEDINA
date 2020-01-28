@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Helpers
             string Contraseña = "Admin2305";
             string body = String.Empty;
             StringBuilder trDeduccionesIngresosTemplate = new StringBuilder();
+            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
             #endregion
 
             try
@@ -85,9 +86,15 @@ namespace ERP_GMEDINA.Helpers
                 oSmtpClient.Dispose();
 
             }
-            catch
+            catch (Exception ex)
             {
-                response = false;
+
+                response = false;                
+
+                // ejecutar el procedimiento almacenado
+                db.UDP_Acce_tbBitacoraErrores_Insert("sendEmailPlanilla","Error",DateTime.Now, ex.Message.ToString(), "SendMail");
+
+                
             }
             return response;
         }

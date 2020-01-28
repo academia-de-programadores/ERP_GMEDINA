@@ -11,6 +11,7 @@ using ERP_GMEDINA.Models;
 using OfficeOpenXml;
 using LinqToExcel;
 using Microsoft.Office.Interop.Excel;
+using SpreadsheetLight;
 
 //using Excel = Microsoft.Office.Interop.Excel;
 
@@ -260,78 +261,87 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult UploadEmpleados(HttpPostedFileBase FileUpload)
         {
-            string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
             try
                 { 
                 db = new ERP_GMEDINAEntities();
                 if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
                 {//OPEN IF
-                    if (!System.IO.File.Exists(path))
+                   // string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
+                  string path = Path.Combine(Server.MapPath("~/Downloadable files"),
+                                     Path.GetFileName(FileUpload.FileName));
+                   if (!System.IO.File.Exists(path))
                     {//OPEN IF
-                        db = new ERP_GMEDINAEntities();
+                        //db = new ERP_GMEDINAEntities();
 
                         FileUpload.SaveAs(path);
-                        Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
-                        Microsoft.Office.Interop.Excel.Workbook workbook = application.Workbooks.Open(path);
-                        Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.ActiveSheet;
-                        Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
-
-                        for (int i = 5; i < range.Rows.Count + 1; i++)
-                        {//OPEN FOR
-                            string identidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
-                            string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
-                            string apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
+                        // Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
+                        //Microsoft.Office.Interop.Excel.Workbook workbook = application.Workbooks.Open(path);
+                        //Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.ActiveSheet;
+                        //Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
+                        SLDocument Slight = new SLDocument(path);
+                        // for (int i = 5; i < range.Rows.Count + 1; i++)
+                        //{//OPEN FOR
+                        int Row = 5;
+                        while (!string.IsNullOrEmpty(Slight.GetCellValueAsString(Row, 1)))
+                        {
+                            string identidad =Slight.GetCellValueAsString(Row, 1);//((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
+                            string nombre = Slight.GetCellValueAsString(Row, 2);//((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
+                            string apellidos = Slight.GetCellValueAsString(Row, 3); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
                             if (identidad != "" && nombre != "" && apellidos != "")
                             {//open if
-                                string fechanacimiento = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
-                                DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
-                                string EDAD = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
+                                DateTime fechanacimiento = Slight.GetCellValueAsDateTime(Row, 4); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
+                               // DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
+                                string EDAD = Slight.GetCellValueAsString(Row, 5);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
                                 int Edad = Convert.ToInt32(EDAD);
-                                string sexo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
-                                string nacionalidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
+                                string sexo = Slight.GetCellValueAsString(Row, 6);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
+                                string nacionalidad = Slight.GetCellValueAsString(Row, 7); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
 
-                                int nac_id = Convert.ToInt32(db.tbNacionalidades.Where(nac => nac.nac_Descripcion == nacionalidad)
-                                    .Select(nac => nac.nac_Id).ToList()[0]);
+                                var nac_id = db.tbNacionalidades.Where(nac => nac.nac_Descripcion == nacionalidad)
+                                .Select(nac => nac.nac_Id).ToList()[0];
 
-                                string direccion = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
-                                string telefono = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
-                                string correo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
-                                string estadocivil = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
-                                string tiposangre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
+                                //var nacio = (from b in db.tbNacionalidades where b.nac_Descripcion == nacionalidad select b.nac_Id).ToList().First();
 
-                                string cargodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
+                                //int nacio_id = Convert.ToInt32(nacio);
+
+                                string direccion = Slight.GetCellValueAsString(Row, 8);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
+                                string telefono = Slight.GetCellValueAsString(Row, 9); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
+                                string correo = Slight.GetCellValueAsString(Row, 10); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
+                                string estadocivil = Slight.GetCellValueAsString(Row, 11); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
+                                string tiposangre = Slight.GetCellValueAsString(Row, 12); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
+
+                                string cargodescrip = Slight.GetCellValueAsString(Row, 13);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
                                 int cargo_id = Convert.ToInt32(db.tbCargos.Where(car => car.car_Descripcion == cargodescrip)
                                     .Select(car => car.car_Id).ToList()[0]);
 
-                                string areadescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
+                                string areadescrip = Slight.GetCellValueAsString(Row, 14);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
                                 int areas_id = Convert.ToInt32(db.tbAreas.Where(Areas => Areas.area_Descripcion == areadescrip)
                                     .Select(Areas => Areas.area_Id).ToList()[0]);
 
-                                string dptodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
+                                string dptodescrip = Slight.GetCellValueAsString(Row, 15);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
                                 int dpto_id = Convert.ToInt32(db.tbDepartamentos.Where(dpto => dpto.depto_Descripcion == dptodescrip)
                                   .Select(dpto => dpto.depto_Id).ToList()[0]);
 
-                                string jordescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
+                                string jordescrip = Slight.GetCellValueAsString(Row, 16);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
                                 int jor_id = Convert.ToInt32(db.tbJornadas.Where(jor => jor.jor_Descripcion == jordescrip)
                                 .Select(jor => jor.jor_Id).ToList()[0]);
 
-                                string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 17]).Text;
+                                string Planidescrip = Slight.GetCellValueAsString(Row, 17);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 17]).Text;
                                 int plani_id = Convert.ToInt32(db.tbCatalogoDePlanillas.Where(plani => plani.cpla_DescripcionPlanilla == Planidescrip)
                                 .Select(plani => plani.cpla_IdPlanilla).ToList()[0]);
 
-                                string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 18]).Text;
+                                string formapagodescrip = Slight.GetCellValueAsString(Row, 18);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 18]).Text;
                                 int formpago_id = Convert.ToInt32(db.tbFormaPago.Where(formpago => formpago.fpa_Descripcion == formapagodescrip)
                                .Select(formpago => formpago.fpa_IdFormaPago).ToList()[0]);
 
-                                string fechaingreso = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 19]).Text;
-                                DateTime FECHAINGRESO = Convert.ToDateTime(fechaingreso);
+                                DateTime fechaingreso = Slight.GetCellValueAsDateTime(Row, 19); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 19]).Text;
+                                //DateTime FECHAINGRESO = Convert.ToDateTime(fechaingreso);
 
-                                string CuentaBancaria = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 20]).Text;
+                                string CuentaBancaria = Slight.GetCellValueAsString(Row, 20); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 20]).Text;
 
-                                string sueldoCantidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 21]).Text;
+                                string sueldoCantidad = Slight.GetCellValueAsString(Row, 21); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 21]).Text;
                                 decimal SUELDO = Convert.ToDecimal(sueldoCantidad);
 
-                                string Monedadescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 22]).Text;
+                                string Monedadescrip = Slight.GetCellValueAsString(Row, 22); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 22]).Text;
                                 int tmon_id = Convert.ToInt32(db.tbTipoMonedas.Where(mon => mon.tmon_Descripcion == Monedadescrip)
                                 .Select(mon => mon.tmon_Id).ToList()[0]);
 
@@ -340,7 +350,7 @@ namespace ERP_GMEDINA.Controllers
 
                                 IEnumerable<object> listEmpleados = null;
                                 string MensajeError = "";
-                                listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, FECHANAC, Edad, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, Usuario.usu_Id, DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id, Usuario.usu_Id, DateTime.Now, FECHAINGRESO, CuentaBancaria, SUELDO, tmon_id,Usuario.usu_Id,DateTime.Now);
+                                listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, Edad, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, Usuario.usu_Id, DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id, Usuario.usu_Id, DateTime.Now, fechaingreso, CuentaBancaria, SUELDO, tmon_id,Usuario.usu_Id,DateTime.Now);
 
                                 foreach (UDP_RRHH_tbEmpleados_Insert_Result Item in listEmpleados)
                                 {
@@ -361,8 +371,9 @@ namespace ERP_GMEDINA.Controllers
                                 break;
 
                             }//CLOSE ELSE
-                        }//CLOSE FOR
-                    }//CLOSE IF
+                            Row++;
+                           }//CLOSE FOR
+                        }//CLOSE IF
                     else
                     {
                         System.IO.File.Delete(path);
@@ -371,7 +382,7 @@ namespace ERP_GMEDINA.Controllers
                 }//CLOSE IF
                 else
                 {
-                    System.IO.File.Delete(path);
+                   // System.IO.File.Delete(path);
                     return Json(-4, JsonRequestBehavior.AllowGet);
                 }
             }

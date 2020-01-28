@@ -93,7 +93,7 @@ $(document).ready(function () {
             var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']").serializeArray();
             tbRequisicion = serializar(Form);
             Form = JSON.stringify({ tbRequisiciones: tbRequisicion, DatosProfesionales: data });
-            console.log(Form);
+            
 
             if (tbRequisicion != null)
             {

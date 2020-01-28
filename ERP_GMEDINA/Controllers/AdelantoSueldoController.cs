@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.Collections.Generic;
+using System.Web.Mvc.Html;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -36,12 +37,12 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbAdelantoSueldo = db.tbAdelantoSueldo
-                        .Select(c => new
+                        .Select(c => new 
                         {
                             adsu_IdAdelantoSueldo = c.adsu_IdAdelantoSueldo,
                             adsu_RazonAdelanto = c.adsu_RazonAdelanto,
                             adsu_Monto = c.adsu_Monto,
-                            adsu_FechaAdelanto = c.adsu_FechaAdelanto,
+                            adsu_FechaAdelanto = c.adsu_FechaAdelanto.Day + "/" + (((c.adsu_FechaAdelanto.Month).ToString().Length > 1) ? c.adsu_FechaAdelanto.Month.ToString() : "0" + c.adsu_FechaAdelanto.Month) + "/" + c.adsu_FechaAdelanto.Year,
                             adsu_Deducido = c.adsu_Deducido,
                             adsu_UsuarioCrea = c.tbUsuario.usu_NombreUsuario,
                             adsu_FechaCrea = c.adsu_FechaCrea,
@@ -53,7 +54,8 @@ namespace ERP_GMEDINA.Controllers
                         //.OrderBy(t => t.adsu_IdAdelantoSueldo)
                         //.OrderByDescending(x => x.adsu_IdAdelantoSueldo)
                         .ToList();
-                        //.Where(p => p.adsu_Activo == true);
+             
+            //.Where(p => p.adsu_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbAdelantoSueldo, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -68,6 +70,7 @@ namespace ERP_GMEDINA.Controllers
             join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
             where !(from Adelanto in db.tbAdelantoSueldo where Adelanto.adsu_Deducido == false
                       select Adelanto.emp_Id).Contains(Empleados.emp_Id)
+            orderby(Personas.per_Nombres)
             select new
             {
                 Id = Empleados.emp_Id,
@@ -133,7 +136,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "emp_Id, adsu_FechaAdelanto, adsu_RazonAdelanto, adsu_Monto")] tbAdelantoSueldo tbAdelantoSueldo)
         {
             //Para llenar los campos de auditoría
-            tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
+            //tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
             tbAdelantoSueldo.adsu_UsuarioCrea = 1;
             tbAdelantoSueldo.adsu_FechaCrea = DateTime.Now;
 

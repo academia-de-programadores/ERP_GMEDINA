@@ -123,7 +123,7 @@ $("#add").click(function () {
        "POST",
        function (obj) {
         if (obj == "-2") {
-         MsgError("Error", "Verifique su conexion a internet");
+         MsgError("Error", "Verifique su conexión a internet");
         } else if (obj.length > 0) {
          obj.forEach(function (value, index) {
           var input = $("#FormDepartamentos").find("#" + value.input)[0];
@@ -171,7 +171,7 @@ $("#btnCrear").click(function () {
       function (obj) {
        if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
         //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-        MsgSuccess("Exito", "El registro se agregó de forma exitosa");
+        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.")
         ChildTable.clear().draw();
         $("#FormAreas").find("#suc_Id option[value='0']").attr("selected", true);
         $("#FormAreas").find("#area_Descripcion").val("");
@@ -189,11 +189,11 @@ $("#btnCrear").click(function () {
          span.innerText = 'ya existe, por favor cambie la descripcion';
          $(span).addClass("text-danger");
         }
-        MsgError("Error", "No se logro guardar el registro, contacte al administrador");
+        MsgError("Error", "No se agregó el registro, contacte al administrador.");
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+     MsgError("Error", "Por favor llene todas las cajas de texto.");
  }
 });
 $("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {

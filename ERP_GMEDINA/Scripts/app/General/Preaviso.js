@@ -368,7 +368,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
         debugger;
         var data = $("#frmCreatePreaviso").serializeArray();
 
-        console.log(data);
+        
 
         var indiceRangoInicio = data[3].value;
         data[3].value = indiceRangoInicio.replace(/,/, '');
@@ -1042,7 +1042,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      
   });
 
 // funcion generica ajax
