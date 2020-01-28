@@ -531,6 +531,15 @@ $(cmbEmpleadoEdit).change(() => {
         MaxSueldoEdit = data;
         var Decimal_Sueldo = (MaxSueldoEdit % 1 == 0) ? MaxSueldoEdit + ".00" : MaxSueldoEdit;
         $("#Editar #SueldoPromedioEditar").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
+
+        if (MontoFormateado != "")
+            if (MontoFormateado > MaxSueldoEdit) {
+                $("#Editar #SueldoPromedioEditar").show();
+                $("#Editar #MontoAsterisco").addClass("text-danger");
+            } else {
+                $("#Editar #MontoAsterisco").removeClass("text-danger");
+                $("#Editar #SueldoPromedioEditar").hide();
+            }
     }).fail(function (data) {
         //ACCIONES EN CASO DE ERROR
         $("#EditarAdelantoSueldo").modal('hide');
@@ -644,7 +653,7 @@ $("#btnConfirmarEditar").click(function () {
     });
 });
 
-
+var MontoFormateado = "";
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
 function ValidarCamposEditar(colaborador, razon, monto) {
     var pasoValidacion = true;
