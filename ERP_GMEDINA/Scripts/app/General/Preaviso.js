@@ -93,8 +93,8 @@ $(document).on("click", "#btnAgregarPreaviso", function () {
 // validar rango inicio create
 $('#Crear #prea_RangoInicioMeses').keyup(function () {
 
-    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/g, '');
 
     // si rango fin es mayor que rango inicio
     if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Crear #prea_RangoFinMeses").val().trim() == '' || $("#Crear #prea_RangoInicioMeses").val().trim() == '') {
@@ -141,8 +141,8 @@ $('#Crear #prea_RangoInicioMeses').keyup(function () {
 // validar rango final create
 $('#Crear #prea_RangoFinMeses').keyup(function () {
 
-    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/g, '');
 
 
     // si rango fin es mayor que rango inicio
@@ -195,7 +195,7 @@ $('#Crear #prea_RangoFinMeses').keyup(function () {
 // validar cantidad de dias create
 $('#Crear #prea_DiasPreaviso').keyup(function () {
 
-    var cantidadDias = $("#Crear #prea_DiasPreaviso").val().replace(/,/, '');
+    var cantidadDias = $("#Crear #prea_DiasPreaviso").val().replace(/,/g, '');
 
     // si es menor o igual que cero
     if (parseInt(cantidadDias) >= 0 || $("#Crear #prea_DiasPreaviso").val().trim() == '') {
@@ -232,9 +232,9 @@ $('#btnCrearPreavisoConfirmar').click(function () {
     // deshabilitar boton
     $('#btnCrearPreavisoConfirmar').attr('disabled', true);
     var modalState = true;
-    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/, '');
-    var cantidaDiasPreaviso = $("#Crear #prea_DiasPreaviso").val().replace(/,/, '');
+    var rangoFin = $("#Crear #prea_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #prea_RangoInicioMeses").val().replace(/,/g, '');
+    var cantidaDiasPreaviso = $("#Crear #prea_DiasPreaviso").val().replace(/,/g, '');
 
     // --- validaciones rango inicio ---
 
@@ -371,13 +371,13 @@ $('#btnCrearPreavisoConfirmar').click(function () {
         
 
         var indiceRangoInicio = data[3].value;
-        data[3].value = indiceRangoInicio.replace(/,/, '');
+        data[3].value = indiceRangoInicio.replace(/,/g, '');
 
         var indiceRangoFin = data[4].value;
-        data[4].value = indiceRangoFin.replace(/,/, '');
+        data[4].value = indiceRangoFin.replace(/,/g, '');
 
         var indiceCantidadDias = data[5].value;
-        data[5].value = indiceCantidadDias.replace(/,/, '');
+        data[5].value = indiceCantidadDias.replace(/,/g, '');
 
         $.ajax({
             url: "/Preaviso/Create",
@@ -479,8 +479,8 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
 // validar rango inicio create
 $('#Editar #prea_RangoInicioMeses').keyup(function () {
 
-    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/g, '');
 
     // si rango fin es mayor que rango inicio
     if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Editar #prea_RangoFinMeses").val().trim() == '' || $("#Editar #prea_RangoInicioMeses").val().trim() == '') {
@@ -527,8 +527,8 @@ $('#Editar #prea_RangoInicioMeses').keyup(function () {
 // validar rango final create
 $('#Editar #prea_RangoFinMeses').keyup(function () {
 
-    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/g, '');
 
 
     // si rango fin es mayor que rango inicio
@@ -581,7 +581,7 @@ $('#Editar #prea_RangoFinMeses').keyup(function () {
 // validar cantidad de dias create
 $('#Editar #prea_DiasPreaviso').keyup(function () {
 
-    var cantidadDias = $("#Editar #prea_DiasPreaviso").val().replace(/,/, '');
+    var cantidadDias = $("#Editar #prea_DiasPreaviso").val().replace(/,/g, '');
 
     // si es menor o igual que cero
     if (parseInt(cantidadDias) >= 0 || $("#Editar #prea_DiasPreaviso").val().trim() == '') {
@@ -618,9 +618,9 @@ $("#btnUpdatePreaviso").click(function () {
     $("#btnUpdatePreaviso").attr('disabled', true);
 
     var modalState = true;
-    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/, '');
-    var cantidaDiasPreaviso = $("#Editar #prea_DiasPreaviso").val().replace(/,/, '');
+    var rangoFin = $("#Editar #prea_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Editar #prea_RangoInicioMeses").val().replace(/,/g, '');
+    var cantidaDiasPreaviso = $("#Editar #prea_DiasPreaviso").val().replace(/,/g, '');
 
     // --- validaciones rango inicio ---
 
@@ -775,13 +775,13 @@ $(document).on("click", "#btnConfirmarEditar", function () {
     var data = $("#frmEditPreaviso").serializeArray();
 
     var indiceRangoInicio = data[3].value;
-    data[3].value = indiceRangoInicio.replace(/,/, '');
+    data[3].value = indiceRangoInicio.replace(/,/g, '');
 
     var indiceRangoFin = data[4].value;
-    data[4].value = indiceRangoFin.replace(/,/, '');
+    data[4].value = indiceRangoFin.replace(/,/g, '');
 
     var indiceCantidadDias = data[5].value;
-    data[5].value = indiceCantidadDias.replace(/,/, '');
+    data[5].value = indiceCantidadDias.replace(/,/g, '');
 
 
 

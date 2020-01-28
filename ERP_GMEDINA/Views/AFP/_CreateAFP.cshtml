@@ -15,7 +15,7 @@
                     @Html.LabelFor(model => model.afp_Descripcion)<span id="asiteriscoDescripcion">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @id = "afp_Descripcion" } })
+                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @id = "afp_Descripcion", @maxlength = "100" } })
                     <span class="text-danger" id="validation_DescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                     <span class="text-danger" id="validation_DescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                 </div>
@@ -26,7 +26,7 @@
                     @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="astericosAporteMinimoLps">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @id = "afp_AporteMinimoLps", @min = 0.01, @max = 9999999999.99 } })
+                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @id = "afp_AporteMinimoLps", @min = 0.01, @max = 9999999999.99} })
                     <span class="text-danger" id="validation_AporteMinimoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     @Html.LabelFor(model => model.afp_InteresAporte)<span id="astericoInteresAporte">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off",  @id = "afp_InteresAporte", @min = 0.00, @max = 100.00 } })
+                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control MascaraPorcentaje soloNumero", @autocomplete = "off",  @id = "afp_InteresAporte", @min = 0.00, @max = 100.00 } })
                     <span class="text-danger" id="validation_InteresAporteMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser menor a cero</span>
                     <span class="text-danger" id="validation_InteresAporteMenorACien" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser mayor a cién</span>
                 </div>
@@ -47,7 +47,7 @@
                     @Html.LabelFor(model => model.afp_InteresAnual)<span id="astericosInteresAnual">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @id = "afp_InteresAnual", @min = 0.00, @max = 100.00 } })
+                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control MascaraPorcentaje soloNumero", @autocomplete = "off", @id = "afp_InteresAnual", @min = 0.00, @max = 100.00 } })
                     <span class="text-danger" id="validation_InteresAnualMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser menor a cero</span>
                     <span class="text-danger" id="validation_InteresAnualMenorACien" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El porcentaje no puede ser mayor a cién</span>
                 </div>

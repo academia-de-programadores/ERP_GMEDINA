@@ -14,10 +14,10 @@ var InactivarID = 0;
 //formato fecha
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      
+
   })
   .fail(function (jqxhr, settings, exception) {
-      
+
   });
 
 // evitar postbacks
@@ -112,7 +112,7 @@ $('#btnCreateISR').click(function () {
     if (DataAnnotationsCrear(rangoInicial, rangoFinal, tipoDeduccion, porcentaje)) {
         $('#btnCreateISR').attr('disabled', true);
 
-        
+
         //var data = $("#frmISRCreate").serializeArray();
         var data = {
             isr_RangoInicial: FormatearMonto($("#Crear #isr_RangoInicial").val()),
@@ -120,8 +120,6 @@ $('#btnCreateISR').click(function () {
             tde_IdTipoDedu: $("#Crear #tde_IdTipoDedu").val(),
             isr_Porcentaje: FormatearMonto($("#Crear #isr_Porcentaje").val())
         };
-
-        
 
         $.ajax({
             url: "/ISR/Create",
@@ -182,8 +180,8 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
             if (data) {
                 $("#Editar #isr_Id").val(data.isr_Id);
                 $("#Editar #isr_RangoInicial").val((data.isr_RangoInicial % 1 == 0) ? data.isr_RangoInicial + ".00" : data.isr_RangoInicial);
-                $("#Editar #isr_RangoFinal").val((data.isr_RangoFinal % 1 == 0) ? data.isr_RangoFinal + ".00" : data.isr_RangoFinal); 
-                $("#Editar #isr_Porcentaje").val((data.isr_Porcentaje % 1 == 0) ? data.isr_Porcentaje + ".00" : data.isr_Porcentaje); 
+                $("#Editar #isr_RangoFinal").val((data.isr_RangoFinal % 1 == 0) ? data.isr_RangoFinal + ".00" : data.isr_RangoFinal);
+                $("#Editar #isr_Porcentaje").val((data.isr_Porcentaje % 1 == 0) ? data.isr_Porcentaje + ".00" : data.isr_Porcentaje);
                 $("#Editar #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
                 $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
                 $(".rangoInicial").focus();
@@ -223,7 +221,7 @@ $("#btnEditarISR").click(function () {
     var rangoFinal = $("#Editar #isr_RangoFinal").val();
     var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
     var porcentaje = $("#Editar #isr_Porcentaje").val();
-    
+
     if (DataAnnotationsEditar(rangoInicial, rangoFinal, tipoDeduccion, porcentaje)) {
         //BLOQUEAR BOTON DE EDITAR
         $('#btnEditarISR').attr('disabled', true);
@@ -299,7 +297,7 @@ $(document).on("click", "#btnBack", function () {
     $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
 });
 
-//Inactivar registro Techos Deducciones    
+//Inactivar registro Techos Deducciones
 $("#btnInactivarISR").click(function () {
     //BLOQUEAR BOTON
     $("#btnInactivarISR").attr("disabled", true);
@@ -321,7 +319,7 @@ $("#btnInactivarISR").click(function () {
         }
         else {
             $("#InactivarISR").modal('hide');
-            cargarGridISR();            
+            cargarGridISR();
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -350,7 +348,7 @@ $(document).on("click", "#btnBackActivar", function () {
     $("#ActivarISR").modal('hide');
 });
 
-//ACTIVAR REGISTRO 
+//ACTIVAR REGISTRO
 $("#btnActivarISR").click(function () {
     //BLOQUEAR BOTON
     $("#btnActivarISR").attr("disabled", true);
@@ -449,7 +447,7 @@ function Vaciar_ModalCrear() {
     $("#Crear #isr_Porcentaje").val("");
 
     //
-    //OCULTAR DATAANNOTATIONS 
+    //OCULTAR DATAANNOTATIONS
     $("#Crear #isr_RangoInicialValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoRangoInicial").removeClass("text-danger");
@@ -472,7 +470,6 @@ function Vaciar_ModalCrear() {
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
 
-    
 }
 
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
@@ -484,7 +481,7 @@ function Vaciar_ModalEditar() {
     $("#Editar #isr_Porcentaje").val("");
 
     //
-    //OCULTAR DATAANNOTATIONS 
+    //OCULTAR DATAANNOTATIONS
     $("#Editar #isr_RangoInicialValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Editar #AsteriscoRangoInicial").removeClass("text-danger");
@@ -513,7 +510,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
-    
+
     if (RangoInicial != "-1") {
         //RANGO INICIAL
 
@@ -612,6 +609,8 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
         } else {
             $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
             $("#Crear #isr_PorcentajeValidacion").hide();
+            //CONVERTIR EN DECIMAL EL PORCENTAJE
+            Porcentaje = parseFloat(FormatearMonto(Porcentaje));
             if (parseInt(Porcentaje) < 0 || parseFloat(Porcentaje) < 0.00) {
                 $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
                 $("#Crear #isr_PorcentajeValidacion").empty();
@@ -740,7 +739,9 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
         } else {
             $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
             $("#Editar #isr_PorcentajeValidacion").hide();
-            if (parseInt(Porcentaje) < 0 || parseFloat(Porcentaje) < 0.00) {
+            //CONVERTIR EN DECIMAL EL PORCENTAJE
+            Porcentaje = parseFloat(FormatearMonto(Porcentaje));
+            if (Porcentaje < 0 || Porcentaje < 0.00) {
                 $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
                 $("#Editar #isr_PorcentajeValidacion").empty();
                 $("#Editar #isr_PorcentajeValidacion").html("El campo Porcentaje no puede ser menor a 0.");
@@ -762,7 +763,7 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
     return ModelState;
 }
 
-//FUNCION: FORMATEAR MONTOS A DECIMAL 
+//FUNCION: FORMATEAR MONTOS A DECIMAL
 function FormatearMonto(StringValue) {
     //SEGMENTAR LA CADENA DE MONTO
     var indices = StringValue.split(",");

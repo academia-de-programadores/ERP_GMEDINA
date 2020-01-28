@@ -87,8 +87,8 @@ $(document).on("click", "#btnModalCrear", function () {
 // validar rango inicio create
 $('#Crear #aces_RangoInicioMeses').keyup(function () {
 
-    var rangoFin = $("#Crear #aces_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Crear #aces_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val().replace(/,/g, '');
 
     // si rango fin es mayor que rango inicio
     if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Crear #aces_RangoFinMeses").val().trim() == '' || $("#Crear #aces_RangoInicioMeses").val().trim() == '') {
@@ -136,8 +136,8 @@ $('#Crear #aces_RangoInicioMeses').keyup(function () {
 // validar rango final create
 $('#Crear #aces_RangoFinMeses').keyup(function () {
 
-    var rangoFin = $("#Crear #aces_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Crear #aces_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val().replace(/,/g, '');
     
     
     // si rango fin es mayor que rango inicio
@@ -192,7 +192,7 @@ $('#Crear #aces_RangoFinMeses').keyup(function () {
 // validar cantidad de dias create
 $('#Crear #aces_DiasAuxilioCesantia').keyup(function () {
 
-    var cantidadDias = $("#Crear #aces_DiasAuxilioCesantia").val().replace(/,/, '');
+    var cantidadDias = $("#Crear #aces_DiasAuxilioCesantia").val().replace(/,/g, '');
 
     // si es menor o igual que cero
     if (parseInt(cantidadDias) >= 0 || $("#Crear #aces_DiasAuxilioCesantia").val().trim() == '') {
@@ -230,9 +230,9 @@ $('#btnCrearAuxCes').click(function () {
     // deshabilitar boton
     $('#btnCrearAuxCes').attr('disabled',true);
     var modalState = true;
-    var rangoFin = $("#Crear #aces_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val().replace(/,/, '');
-    var cantidaDiasPreaviso = $("#Crear #aces_DiasAuxilioCesantia").val().replace(/,/, '');
+    var rangoFin = $("#Crear #aces_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val().replace(/,/g, '');
+    var cantidaDiasPreaviso = $("#Crear #aces_DiasAuxilioCesantia").val().replace(/,/g, '');
 
     // --- validaciones rango inicio ---
 
@@ -365,13 +365,13 @@ $('#btnCrearAuxCes').click(function () {
         var data = $("#frmCrearAuxCess").serializeArray();
 
         var indiceRangoInicio = data[0].value;
-        data[0].value = indiceRangoInicio.replace(/,/, '');
+        data[0].value = indiceRangoInicio.replace(/,/g, '');
 
         var indiceRangoFin = data[1].value;
-        data[1].value = indiceRangoFin.replace(/,/, '');
+        data[1].value = indiceRangoFin.replace(/,/g, '');
 
         var indiceCantidadDias = data[2].value;
-        data[2].value = indiceCantidadDias.replace(/,/, '');
+        data[2].value = indiceCantidadDias.replace(/,/g, '');
 
         
         $.ajax({
@@ -531,8 +531,8 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalEdit", function ()
 // validar rango inicio create
 $('#Editar #aces_RangoInicioMeses').keyup(function () {
 
-    var rangoFin = $("#Editar #aces_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Editar #aces_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val().replace(/,/g, '');
 
     // si rango fin es mayor que rango inicio
     if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Editar #aces_RangoFinMeses").val().trim() == '' || $("#Editar #aces_RangoInicioMeses").val().trim() == '') {
@@ -579,8 +579,8 @@ $('#Editar #aces_RangoInicioMeses').keyup(function () {
 // validar rango final create
 $('#Editar #aces_RangoFinMeses').keyup(function () {
 
-    var rangoFin = $("#Editar #aces_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val().replace(/,/, '');
+    var rangoFin = $("#Editar #aces_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val().replace(/,/g, '');
 
 
     // si rango fin es mayor que rango inicio
@@ -633,7 +633,7 @@ $('#Editar #aces_RangoFinMeses').keyup(function () {
 // validar cantidad de dias create
 $('#Editar #aces_DiasAuxilioCesantia').keyup(function () {
 
-    var cantidadDias = $("#Editar #aces_DiasAuxilioCesantia").val().replace(/,/, '');
+    var cantidadDias = $("#Editar #aces_DiasAuxilioCesantia").val().replace(/,/g, '');
 
     // si es menor o igual que cero
     if (parseInt(cantidadDias) >= 0 || $("#Editar #aces_DiasAuxilioCesantia").val().trim() == '') {
@@ -671,9 +671,9 @@ $("#btnUpdateAuxCes").click(function () {
     $("#btnUpdateAuxCes").attr('disabled', true);
 
     var modalState = true;
-    var rangoFin = $("#Editar #aces_RangoFinMeses").val().replace(/,/, '');
-    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val().replace(/,/, '');
-    var cantidaDiasPreaviso = $("#Editar #aces_DiasAuxilioCesantia").val().replace(/,/, '');
+    var rangoFin = $("#Editar #aces_RangoFinMeses").val().replace(/,/g, '');
+    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val().replace(/,/g, '');
+    var cantidaDiasPreaviso = $("#Editar #aces_DiasAuxilioCesantia").val().replace(/,/g, '');
 
     // --- validaciones rango inicio ---
 
@@ -820,13 +820,13 @@ $("#btnConfirmarEditar").click(function () {
 
 
     var indiceRangoInicio = data[3].value;
-    data[3].value = indiceRangoInicio.replace(/,/, '');
+    data[3].value = indiceRangoInicio.replace(/,/g, '');
 
     var indiceRangoFin = data[4].value;
-    data[4].value = indiceRangoFin.replace(/,/, '');
+    data[4].value = indiceRangoFin.replace(/,/g, '');
 
     var indiceCantidadDias = data[5].value;
-    data[5].value = indiceCantidadDias.replace(/,/, '');
+    data[5].value = indiceCantidadDias.replace(/,/g, '');
 
     
 		$.ajax({

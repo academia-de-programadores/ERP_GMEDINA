@@ -59,7 +59,7 @@
                                         @Html.DisplayFor(modelItem => item.adsu_Monto)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.adsu_FechaAdelanto)
+                                        @(item.adsu_FechaAdelanto.Day + "/" + (((item.adsu_FechaAdelanto.Month).ToString().Length > 1) ? item.adsu_FechaAdelanto.Month.ToString() : "0" + item.adsu_FechaAdelanto.Month) + "/" + item.adsu_FechaAdelanto.Year)
                                     </td>
                                     <td>
                                          @Deducido

@@ -213,14 +213,13 @@ $("#btnCrear").click(function () {
        }
 
        if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {
-        window.location.href = "/Areas/Index";
+        setTimeout(function () { window.location.href = "/Areas/Index"; }, 3000);
        } else {
         $(div).addClass("error");
         asterisco.color = "red";
         span.innerText = 'Ya existe, por favor cambie la descripción.';
         $(span).addClass("text-danger");
        }
-       MsgError("Error", "No se editó el registro, contacte al administrador.");
       });
  } else {
       MsgError("Error", "Por favor llene todas las cajas de texto.");
