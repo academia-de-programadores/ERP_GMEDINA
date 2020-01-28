@@ -139,11 +139,11 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se ha inactivadó de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["comp_Descripcion"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -165,7 +165,7 @@ $("#btnActualizar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador.");
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
                 }
             });
     } else {

@@ -20,14 +20,14 @@ $("#btnActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgWarning("¡Exito!", "El registro se activó de forma exitosa  ");
+                    MsgSuccess("¡Éxito!", "El registro se activó de forma exitosa.");
                     LimpiarControles(["txtIdRetore"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró activar el registro, contacte al administrador.");
+                    MsgError("Error", "No se activó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });

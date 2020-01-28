@@ -128,15 +128,15 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $("#ModalInhabilitar").modal("hide");
                     CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["hamo_Id"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 function validarddl() {
@@ -171,7 +171,7 @@ $("#btnGuardar").click(function () {
                 })
         };
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
 
