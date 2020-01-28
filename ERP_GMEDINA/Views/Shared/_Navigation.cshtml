@@ -4,8 +4,14 @@
 
             @{
                 //var idmenu = Session["sesionIdMenu"];
-                int? idmenu = (int?)(HttpContext.Current.Session["sesionIdMenu"]);
-                if (idmenu == 0 || idmenu == null)
+                int idmenu = (int)(HttpContext.Current.Session["sesionIdMenu"] ?? -1);
+                if(idmenu == -1)
+                {
+                    <script>
+                        location.href = '/';
+                    </script>
+                }
+                if (idmenu == 0)
                 {
 
                     <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
