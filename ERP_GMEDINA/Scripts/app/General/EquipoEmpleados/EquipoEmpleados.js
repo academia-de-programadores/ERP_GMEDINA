@@ -2,6 +2,7 @@
 var emp_Id = 0;
 $(document).ready(function () {
     llenarTabla();
+    RefreshEquipos();
 });
 function format(obj, emp_Id) {
     var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Equipo de trabajo</strong><div class="btn-group pull-right">' +
@@ -57,6 +58,24 @@ function ShowModalCreate(btn) {
     $(modalnuevo).find("#eqem_Fecha").val("");
 }
 
+function RefreshEquipos() {
+    $("#ModalNuevo").find("#eqtra_Id").empty()
+
+    _ajax(null, '/EquipoEmpleados/RefreshEquipos', 'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                obj.forEach(function (index, value) {
+                    $("#ModalNuevo").find("#eqtra_Id").append(
+                        '<option value="' + index.eqtra_Id + '">' + index.eqtra_Descripcion + '</option>'
+                    );
+                });
+            }
+            else {
+                MsgError("Error", "Código:" + obj + ". contacte al administrador. (Verifique si el registro ya existe)");
+            }
+        });
+}
+
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
@@ -70,9 +89,8 @@ $("#btnGuardar").click(function () {
                     MsgSuccess("¡Exito!", "se ha agredado el registro");
                     LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
                     $("#ModalNuevo").find("#eqtra_Id").empty();
-                }
-                else {
-                    MsgError("Error", "Código:" + obj + ". contacte al administrador. (Verifique si el registro ya existe)");
+                    llenarTabla();
+                    RefreshEquipos();
                 }
             });
     }
@@ -142,6 +160,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                     tr.addClass('shown');
                 }
             });
+        RefreshEquipos();
     }
 });
 $(document).on("click", "#IndexTable tbody tr td buttton#btnAgregar", function () {
