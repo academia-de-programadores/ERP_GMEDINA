@@ -488,6 +488,32 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
     });
 });
 
+$('#Crear #emp_IdEmpleado').change(() => {
+    console.log('cambio');
+    let IdEmpCreate = $('#emp_IdEmpleado').val();
+    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
+    $.ajax({
+        url: "/AdelantoSueldo/GetSueldoNetoProm",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: IdEmpCreate })
+    }).done(function (data) {
+        console.log(data);
+        //ACCIONES EN CASO DE EXITO
+        MaxSueldoCreate = data;
+        let Decimal_SueldoCreate = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
+        $("#Crear #SueldoPromedioCrear").html('El monto máximo de adelanto es ' + Decimal_SueldoCreate);
+    }).fail(function (data) {
+        //ACCIONES EN CASO DE ERROR
+        $("#EditarAdelantoSueldo").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
+        });
+    });
+})
+
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA EDICION
 $(cmbEmpleadoEdit).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
@@ -503,6 +529,8 @@ $(cmbEmpleadoEdit).change(() => {
     }).done(function (data) {
         //ACCIONES EN CASO DE EXITO
         MaxSueldoEdit = data;
+        var Decimal_Sueldo = (MaxSueldoEdit % 1 == 0) ? MaxSueldoEdit + ".00" : MaxSueldoEdit;
+        $("#Editar #SueldoPromedioEditar").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
     }).fail(function (data) {
         //ACCIONES EN CASO DE ERROR
         $("#EditarAdelantoSueldo").modal('hide');
@@ -673,10 +701,10 @@ function ValidarCamposEditar(colaborador, razon, monto) {
         MontoFormateado = parseFloat(MontoFormateado);
 
         //VALIDACIONES QUE EL MONTO NO SEA MAYOR QUE EL SUELDO NETO PROMEDIO
-        if (MontoFormateado > MaxSueldoCreate) {
+        if (MontoFormateado > MaxSueldoEdit) {
 
             //MOSTRAR VALIDACIONES
-            var Decimal_Sueldo = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
+            var Decimal_Sueldo = (MaxSueldoEdit % 1 == 0) ? MaxSueldoEdit + ".00" : MaxSueldoEdit;
             $("#Editar #SueldoPromedioEditar").html('El monto máximo de adelanto es ' + Decimal_Sueldo);
             $("#Editar #SueldoPromedioEditar").show();
             $("#Editar #MontoAsterisco").addClass("text-danger");
