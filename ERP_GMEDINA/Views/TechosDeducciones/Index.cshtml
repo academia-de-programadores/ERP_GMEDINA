@@ -75,8 +75,9 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.tddu_Activo == false)
                                             {
+                                                <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnDetalleTechosDeducciones">Detalles</button>
                                                  <!-- ACTIVAR -->
-                                                <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnActivarTechosDeducciones">Activar</button>
+                                                <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-default btn-xs" id="btnActivarTechosDeducciones">Activar</button>
                                             }
                                         }
                                     </td>
@@ -119,7 +120,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">                
-                <h4 class="modal-title">Detalles del techo de la deducción</h4>
+                <h4 class="modal-title">Detalle del techo de la deducción</h4>
             </div>
             <div class="modal-body" style="padding-bottom:0px;" id="Detalles">
                 @Html.Partial("_DetailsTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
@@ -135,14 +136,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">                
-                <h4 class="modal-title">Inactivar techo de deducción</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Está seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger " id="btnInactivarTechosDeducciones">Sí</button>
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white" id="btnNoInactivar" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
