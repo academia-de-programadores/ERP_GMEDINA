@@ -266,7 +266,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
     // si es mayor que cién
     var interesAporteSinComas = $("#Crear #afp_InteresAporte").val();
-    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+    interesAporteSinComas = interesAporteSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
 
@@ -300,7 +300,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
     // si es mayor que cién
     var interesAnualSinComas = $("#Crear #afp_InteresAnual").val();
-    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+    interesAnualSinComas = interesAnualSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
 
@@ -338,7 +338,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
         // quitar comas de los montos
         var aporteMinimoComas = data[3].value;
-        data[3].value = aporteMinimoComas.replace(/,/, '');
+        data[3].value = aporteMinimoComas.replace(/,/g, '');
 
         // peticion
         $.ajax({
@@ -443,7 +443,7 @@ $('#Crear #afp_InteresAporte').keyup(function () {
 
     // si es mayor que cién
     var interesAporteSinComas = $("#Crear #afp_InteresAporte").val();
-    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+    interesAporteSinComas = interesAporteSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
 
@@ -476,7 +476,7 @@ $('#Crear #afp_InteresAnual').keyup(function () {
 
     // si es mayor que cién
     var interesAnualSinComas = $("#Crear #afp_InteresAnual").val();
-    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+    interesAnualSinComas = interesAnualSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
 
@@ -650,7 +650,7 @@ $("#btnEditAFP").click(function () {
 
     // si es mayor que cién
     var interesAporteSinComas = $("#Editar #afp_InteresAporte").val();
-    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+    interesAporteSinComas = interesAporteSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
 
@@ -684,7 +684,7 @@ $("#btnEditAFP").click(function () {
 
     // si es mayor que cién
     var interesAnualSinComas = $("#Editar #afp_InteresAnual").val();
-    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+    interesAnualSinComas = interesAnualSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
 
@@ -789,7 +789,7 @@ $('#Editar #afp_InteresAporte').keyup(function () {
 
     // si es mayor que cién
     var interesAporteSinComas = $("#Editar #afp_InteresAporte").val();
-    interesAporteSinComas = interesAporteSinComas.replace(/,/, '');
+    interesAporteSinComas = interesAporteSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
 
@@ -820,7 +820,7 @@ $('#Editar #afp_InteresAnual').keyup(function () {
 
     // si es mayor que cién
     var interesAnualSinComas = $("#Editar #afp_InteresAnual").val();
-    interesAnualSinComas = interesAnualSinComas.replace(/,/, '');
+    interesAnualSinComas = interesAnualSinComas.replace(/,/g, '');
 
     if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
 
@@ -870,7 +870,7 @@ $("#btnEditAFPConfirmar").click(function () {
 
     // quitar comas de los montos
     var aporteMinimoComas = data[3].value;
-    data[3].value = aporteMinimoComas.replace(/,/, '');
+    data[3].value = aporteMinimoComas.replace(/,/g, '');
 
     
     $.ajax({

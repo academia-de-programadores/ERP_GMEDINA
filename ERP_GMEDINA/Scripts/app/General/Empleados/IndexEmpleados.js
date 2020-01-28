@@ -7,7 +7,7 @@ function format(obj) {
             '<div class="col-md-5">' +
                 '<p><label><strong>Cargo:' + '\xa0' + ' </strong></label>'
                      + index.car_Descripcion + '</p>'+
-                     '<p><label><strong>Area:' + '\xa0' + ' </strong></label>'
+                     '<p><label><strong>Área:' + '\xa0' + ' </strong></label>'
                     +index.area_Descripcion + '</p>' +
                     '<p><label><strong>Jornada:' + '\xa0' + ' </strong></label>' +
                     //\xa0=Espacio en texto.

@@ -43,7 +43,7 @@ function format(obj) {
                     div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalle</button>';
                 }
                 else {
-                    div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Activar</button>' + '</td>';
+                    div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Activar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalles</button>' + '</td>';
                 }
 
         div += '</tr>' +
@@ -170,9 +170,6 @@ $("#InActivar").click(function () {
                     MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     llenarTabla();
-                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
-                    LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
-                    llenarTabla();
                 } else {
                     MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
@@ -256,9 +253,6 @@ $("#btnGuardar").click(function () {
                                 function (obj) {
                                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                                         CierraPopups();
-                                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-                                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                                        llenarTabla();
                                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                                         LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
                                         llenarTabla();

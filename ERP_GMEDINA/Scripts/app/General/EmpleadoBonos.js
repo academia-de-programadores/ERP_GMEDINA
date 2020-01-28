@@ -25,7 +25,6 @@ function _ajax(params, uri, type, callback) {
 }
 
 //EVITAR POSTBACK DE FORMULARIOS
-
 $('#frmEmpleadoBonosCreate').submit(function (e) {
     return false;
 });
@@ -33,7 +32,6 @@ $('#frmEmpleadoBonos').submit(function (e) {
     return false;
 });
 
-//FUNCION GENERICA PARA REUTILIZAR AJAX
 
 
 //FUNCION: MOSTRAR ERRORES IZITOAST
@@ -165,18 +163,11 @@ $('#btnCreateRegistroBonos').click(function () {
 
         //DESBLOQUEAR EL BOTON DE CREAR
         $("#btnCreateRegistroBonos").attr("disabled", true);
-
+        debugger;
         //SEGMENTAR LA CADENA DE MONTO
-        var indices = $("#Crear #cb_Monto").val().split(",");
-        //VARIABLE CONTENEDORA DEL MONTO
-        var MontoFormateado = "";
-        //ITERAR LOS INDICES DEL ARRAY MONTO
-        for (var i = 0; i <= indices.length; i++) {
-            //SETEAR LA VARIABLE DE MONTO
-            MontoFormateado += indices[i];
-        }
+        var MontoFormateado = $("#Crear #cb_Monto").val().replace(/,/g, '');
         //FORMATEAR A DECIMAL
-        MontoFormateado = parseFloat(MontoFormateado);
+        MontoFormateado = parseFloat(MontoFormateado).toFixed(2);
         var data = {
             emp_Id: fnc_Colaborador,
             cin_IdIngreso: fnc_Ingreso,
@@ -478,6 +469,7 @@ $("#btnUpdateBonos").click(function () {
 
     // VALIDAR EL MODEL STATE DEL FORMULARIO
     if (ValidarCamposEditar(fnc_Colaborador, fnc_Ingreso, fnc_Monto)) {
+        $("#btnUpdateBonos2").attr('disabled',false);
         $("#EditarEmpleadoBonos").modal('hide');
         $("#EditarEmpleadoBonosConfirmacion").modal({ backdrop: 'static', keyboard: false });
     }
@@ -528,6 +520,7 @@ $("#btnUpdateBonos2").click(function () {
                     title: 'Error',
                     message: '¡No se editó el registro, contacte al administrador!',
                 });
+                $("#btnUpdateBonos2").attr('disabled', false);
                 $("#EditarEmpleadoBonosConfirmacion").modal('hide');
             }
             else {
@@ -545,6 +538,7 @@ $("#btnUpdateBonos2").click(function () {
             }
         });
     } else {
+        $("#btnUpdateBonos2").attr('disabled', false);
         $("#EditarEmpleadoBonosConfirmacion").modal('hide');
         iziToast.error({
             title: 'Error',

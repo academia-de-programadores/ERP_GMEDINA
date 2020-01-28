@@ -131,6 +131,27 @@ $(cmbEmpleado).change(() => {
     });
 });
 
+$('#Crear #adsu_FechaAdelanto').blur(function () {
+    var campo = $(this).val();
+
+    var hoy = new Date();
+    let fechaEscogida = campo.split('-');
+    let anioActual = hoy.getFullYear();
+    let mesActual = hoy.getMonth() + 1;
+    let diaActual = hoy.getDate();
+    let anioEscogido = parseInt(fechaEscogida[0]);
+    let mesEscogido = parseInt(fechaEscogida[1]);
+    let diaEscogido = parseInt(fechaEscogida[2]);
+
+    if (anioEscogido >= anioActual && mesEscogido >= mesActual && diaEscogido >= diaActual) {
+        $('#Crear #Validation_adsu_FechaAdelantoMenor').hide();
+        $("#Crear #AsteriscoFecha").removeClass("text-danger");
+    } else {
+        $('#Crear #Validation_adsu_FechaAdelantoMenor').show();
+        $("#Crear #AsteriscoFecha").addClass("text-danger");
+    }
+});
+
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAdelantos').click(function () {
     var Razon = $("#Crear #adsu_RazonAdelanto").val();
@@ -299,9 +320,6 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
     //VALIDACIONES DEL CAMPO FECHA
     if (Fecha != "-1") {
-
-
-
         if (Fecha == "" || Fecha == null || Fecha == undefined) {
 
             $("#Crear #AsteriscoFecha").addClass("text-danger");
@@ -314,8 +332,27 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
             $("#Crear #AsteriscoFecha").removeClass("text-danger");
             $("#Crear #Validation_adsu_FechaAdelanto").empty();
             $("#Crear #Validation_adsu_FechaAdelanto").hide();
+
+            var hoy = new Date();
+            let fechaEscogida = Fecha.split('-');
+            let anioActual = hoy.getFullYear();
+            let mesActual = hoy.getMonth() + 1;
+            let diaActual = hoy.getDate();
+            let anioEscogido = parseInt(fechaEscogida[0]);
+            let mesEscogido = parseInt(fechaEscogida[1]);
+            let diaEscogido = parseInt(fechaEscogida[2]);
+
+            if (anioEscogido >= anioActual && mesEscogido >= mesActual && diaEscogido >= diaActual) {
+                $('#Crear #Validation_adsu_FechaAdelantoMenor').hide();
+                $("#Crear #AsteriscoFecha").removeClass("text-danger");
+            } else {
+                Local_modelState = false;
+                $('#Crear #Validation_adsu_FechaAdelantoMenor').show();
+                $("#Crear #AsteriscoFecha").addClass("text-danger");
+            }
         }
     }
+
     return Local_modelState;
 }
 
