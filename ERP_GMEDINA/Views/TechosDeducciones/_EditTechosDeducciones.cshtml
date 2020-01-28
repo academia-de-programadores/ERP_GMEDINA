@@ -32,7 +32,7 @@
                     @Html.LabelFor(model => model.tddu_PorcentajeColaboradores, htmlAttributes: new { @class = "control-label" })<label class="asterisco" id="AsteriskPorcentajeColaboradorE">*</label>
                     </div>
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+                        @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control MascaraPorcentaje soloNumero" } })
                         <label class="text-danger" id="Validation_PorcentajeColaboradoresE" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Colaborador requerido.</label>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     @Html.LabelFor(model => model.tddu_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label" })<label class="asterisco" id="AsteriskPorcentajeEmpresaE">*</label>
                     </div>
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+                        @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control MascaraPorcentaje soloNumero" } })
                         <label class="text-danger" id="Validation_PorcentajeEmpresaE" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Empresa requerido.</label>
                     </div>
                 </div>

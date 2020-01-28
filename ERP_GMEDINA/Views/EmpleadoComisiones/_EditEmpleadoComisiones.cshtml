@@ -37,7 +37,7 @@
                     <label class="pull-left">Porcentaje Comisión</label> 
                     <label class="" id="AsteriscoPorcentaje">*</label>  
                         <div class="col-md-8 pull-right">    
-                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraCantidad MascaraPorcentaje soloNumero", @id = "cc_PorcentajeComision", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', this.value, '-1')" } })
+                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraPorcentaje soloNumero", @id = "cc_PorcentajeComision", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', this.value, '-1')" } })
                             @*@Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" , @autocomplete  = "off"})*@
                             <label class="text-danger" id="Validation_porcentaje" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Comisión requerido</label>
                             <label class="text-danger" id="Validation_porcentaje2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Porcentaje Comisión debe ser mayor que cero</label>
@@ -49,7 +49,7 @@
                         <label class="pull-left">Total Venta</label> 
                         <label class="" id="AsteriscoTotal">*</label>  
                         <div class="col-md-8 pull-right">
-                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @id = "cc_TotalVenta" , @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', '-1', this.value)", maxlength = 15 } })
+                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control MascaraCantidad decimal soloNumero", @id = "cc_TotalVenta" , @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', '-1', '-1', this.value)"} })
                             @*@Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })*@
                             <label class="text-danger" id="Validation_total" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Total Venta requerido</label>
                             <label class="text-danger" id="Validation_total2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Total Venta debe ser mayor que cero</label>

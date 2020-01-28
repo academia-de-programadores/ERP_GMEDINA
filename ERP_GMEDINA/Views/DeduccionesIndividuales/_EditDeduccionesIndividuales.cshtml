@@ -31,7 +31,7 @@
                         @Html.LabelFor(model => model.dei_MontoInicial)<span id="astMontoInicial">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "dei_MontoInicial", maxlength = 10 } })
+                        @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "dei_MontoInicial"} })
                         <span id="valMontoInicial" class="text-danger" style="display:none;">El campo Monto inicial no puede ser menor o igual que cero.</span>
                         <span id="valMontoInicialRequerido" class="text-danger" style="display:none;">Campo Monto Inicial Requerido</span>
                     </div>
@@ -42,7 +42,7 @@
                         @Html.LabelFor(model => model.dei_MontoRestante)<span id="astMontoRestante">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "dei_MontoRestante", maxlength = 10 } })
+                        @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "dei_MontoRestante"} })
                         <span id="valMontoRestanteRequerido" class="text-danger" style="display:none;">Campo Monto Restante Requerido</span>
                         <span id="valMontoRestanteMayor" class="text-danger" style="display:none;">El campo monto restante no puede ser menor Cero.</span>
                         <span id="valMontoRestanteMayorL" class="text-danger" style="display:none;">El campo monto restante no puede ser mayor que monto inicial.</span>
@@ -55,7 +55,7 @@
                         @Html.LabelFor(model => model.dei_Cuota)<span id="astCuota">*</span>
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "dei_Cuota", maxlength = 10 } })
+                        @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line MascaraCantidad", @id = "dei_Cuota"} })
                         <span id="valCuota" class="text-danger" style="display:none;">Campo Cuota Requerido</span>
                         <span id="valCuotaMayor" class="text-danger" style="display:none;">Campo Cuota no puede ser mayor que el monto inicial</span>
                      </div>

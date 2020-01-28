@@ -64,6 +64,7 @@
           alias:'numeric',
           groupSeparator: ',',
           digits: 2,
+          integerDigits: 18,
           digitsOptional: false,
           placeholder: '0',
           radixPoint: ".",
@@ -95,6 +96,21 @@
             min: 0.00,
             max: 100
         });
+
+        Inputmask.extendAliases({
+            'decimal': {
+                integerDigits: 18,
+                digits: 2,
+                digitsOptional: false,
+                numericInput: true,
+                autoGroup: true,
+                groupSeparator: ",",
+                radixPoint: ".",
+                placeholder: "0",
+            }
+        });
+
+        $('.decimal').inputmask('decimal');
 
         $(".MascaraEnteros").inputmask("integer", {
             alias: 'numeric',

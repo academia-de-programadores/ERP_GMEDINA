@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-6">
                     Aporte<label class="" id="Asterisco2" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @id = "dafp_AporteLps", @autocomplete = "off", maxlength = 10, onkeyup = "ValidarCampos('-1',this.value,'-1' )" } })
+                    @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @id = "dafp_AporteLps", @autocomplete = "off", onkeyup = "ValidarCampos('-1',this.value,'-1' )" } })
                     <label class="text-danger" id="validatione2d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Aporte requerido</label>
                     <label class="text-danger" id="validatione2d2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
                     <label class="text-danger" id="validatione2d3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Aporte debe ser mayor que cero</label>

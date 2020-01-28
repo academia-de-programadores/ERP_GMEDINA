@@ -23,7 +23,7 @@
                     <label class="AsteriscoRangoInicial" id="AsteriscoRangoInicial">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad MascaraPorcentaje soloNumero", @onkeyup = "DataAnnotationsEditar(this.value, '-1', '-1', '-1')" } })
+                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsEditar(this.value, '-1', '-1', '-1')" } })
                     <span class="field-validation-valid text-danger" style="display: none;" id="isr_RangoInicialValidacion">El campo Rango Inicial es requerido.</span>
                 </div>
             </div>
