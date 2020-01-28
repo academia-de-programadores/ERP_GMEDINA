@@ -88,7 +88,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                      tbAcumuladosISR.aisr_FechaCrea);
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbAcumuladosISR_Insert_Result1 Resultado in listAcumuladosISR)
+                    foreach (UDP_Plani_tbAcumuladosISR_Insert_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;
 
                     response = "bien";

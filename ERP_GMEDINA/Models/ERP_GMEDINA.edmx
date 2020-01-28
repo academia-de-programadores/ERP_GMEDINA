@@ -19302,7 +19302,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="aisr_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aisr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbAcumuladosISR_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Insert_Result1)">
+          <FunctionImport Name="UDP_Plani_tbAcumuladosISR_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Insert_Result)">
             <Parameter Name="aisr_Descripcion" Mode="In" Type="String" />
             <Parameter Name="aisr_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="aisr_UsuarioCrea" Mode="In" Type="Int32" />
@@ -21028,9 +21028,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="UDP_Plani_tbAcumuladosISR_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="rrhh_tbCompetenciasRequisicion_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
@@ -21108,9 +21105,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbAcumuladosISR_Inactivar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbAcumuladosISR_Insert_Result1">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbAcumuladosISR_Update_Result">
@@ -22313,6 +22307,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="req_Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="req_Permanente" Type="Boolean" />
         </EntityType>
+        <ComplexType Name="UDP_Plani_tbAcumuladosISR_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -25287,7 +25284,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAcumuladosISR_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAcumuladosISR_Insert">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Insert_Result1">
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

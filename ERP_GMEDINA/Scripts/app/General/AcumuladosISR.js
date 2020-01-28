@@ -39,7 +39,7 @@ function cargarGridAcumuladosISR() {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaAcumuladosISR[i].aisr_Activo == false ? 'Inactivo' : 'Activo';
 
-                
+
                 //variable boton detalles
                 var botonDetalles = '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>';
 
@@ -203,6 +203,7 @@ $('#btnCreateAcumuladosISR').click(function () {
             method: "POST",
             data: data
         }).done(function (data) {
+            console.log(data);
             // validar respuesta del servidor
             if (data == "error") {
 
@@ -406,7 +407,7 @@ $("#btnUpdateAISR2").click(function () {
 
     var data = $("#frmEditAcumuladosISR").serializeArray();
 
-    
+
     // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
     var stringDecimal = data[5].value;
     data[5].value = stringDecimal.replace(/,/g, '');
@@ -461,7 +462,7 @@ $("#btnNoConfirmarEditAISR").click(function () {
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR", function () {
 
     var ID = $(this).data('id');
-    
+
 
     $.ajax({
         url: "/AcumuladosISR/Details/" + ID,
@@ -471,7 +472,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            
+
             // llenar formulario
             if (data) {
                 var FechaCrea = FechaFormato(data[0].aisr_FechaCrea);
@@ -655,8 +656,8 @@ $("#frmAcumuladosISRCreate").submit(function (e) {
 // script formatos fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        
+
     })
     .fail(function (jqxhr, settings, exception) {
-        
+
     });

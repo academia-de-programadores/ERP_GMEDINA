@@ -748,9 +748,6 @@
     <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Insert_Result1.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
