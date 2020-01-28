@@ -299,14 +299,36 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
     //VALIDACIONES DEL CAMPO FECHA
     if (Fecha != "-1") {
+        console.log();
+        console.log();
+        console.log(Fecha);
         if (Fecha == "" || Fecha == null || Fecha == undefined) {
 
             $("#Crear #AsteriscoFecha").addClass("text-danger");
+            $("#Crear #Validation_adsu_FechaAdelanto").empty();
+            $("#Crear #Validation_adsu_FechaAdelanto").html("El campo Fecha es requerido.");
             $("#Crear #Validation_adsu_FechaAdelanto").show();
             Local_modelState = false;
 
         } else {
+            //var FechaFloat = parseFloat(Fecha.substring(0, 4));
+            //var FechaAnios = Fecha.substring(0, 4);
+            //if (FechaFloat > 1000)
+            //{
+            //    $("#Crear #AsteriscoFecha").removeClass("text-danger");
+            //    $("#Crear #Validation_adsu_FechaAdelanto").empty();
+            //    $("#Crear #Validation_adsu_FechaAdelanto").html("El año debe ser mayor a 1900.");
+            //    $("#Crear #Validation_adsu_FechaAdelanto").hide();
+            //}
+            //if (FechaAnios == "0001") {
+            //    $("#Crear #AsteriscoFecha").removeClass("text-danger");
+            //    $("#Crear #Validation_adsu_FechaAdelanto").empty();
+            //    $("#Crear #Validation_adsu_FechaAdelanto").html("Por favor ingrese una fecha valida.");
+            //    $("#Crear #Validation_adsu_FechaAdelanto").hide();
+            //}
+
             $("#Crear #AsteriscoFecha").removeClass("text-danger");
+            $("#Crear #Validation_adsu_FechaAdelanto").empty();
             $("#Crear #Validation_adsu_FechaAdelanto").hide();
         }
     }

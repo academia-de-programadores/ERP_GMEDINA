@@ -18,11 +18,9 @@ $("#btnActivar").click(function () {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 MsgSuccess("¡Éxito!", "El registro se activó  de forma exitosa.");
-                llenarTabla(-1);
-                MsgSuccess("¡Éxito!", "El registro se activó  de forma exitosa.");
-                llenarTabla(-1);
+                llenarTabla();
             } else {
-                MsgError("Error", "No se logró activar el registro, contacte al administrador.");
+                MsgError("Error", "No se inactivó el registro, contacte al administrador.");
             }
         });
     CierraPopups();

@@ -176,6 +176,7 @@ $("#btnCrear").click(function () {
         $("#FormAreas").find("#suc_Id option[value='0']").attr("selected", true);
         $("#FormAreas").find("#area_Descripcion").val("");
         $("#FormAreas").find("#car_Descripcion").val("");
+        setTimeout(function () { window.location.href = "/Areas/Index"; }, 3000);
        } else {
         if (obj.input != undefined) {
          var input = $("#FormNuevo").find("#" + obj.input)[0];

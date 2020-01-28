@@ -53,14 +53,14 @@ $("#btnGuardar").click(function () {
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         $("#btnGuardar").attr("disabled", "disabled");
-                        MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                         setTimeout(function () { window.location.href = "/Sucursales/Index"; }, 3000);
                     } else {
-                        MsgError("Error", "No se editar el registro, contacte al administrador");
+                        MsgError("Error", "No se editó el registro, contacte al administrador.");
                     }
                 });
         } else {
-            MsgError("Error", "por favor llene todas las cajas de texto");
+            MMsgError("Error", "Por favor llene todas las cajas de texto.");
         }
     }
     else

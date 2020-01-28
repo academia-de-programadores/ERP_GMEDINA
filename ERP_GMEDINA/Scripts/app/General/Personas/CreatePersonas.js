@@ -111,11 +111,11 @@ $(document).ready(function () {
                         'POST',
                         function (obj) {
                             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                                MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                                MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                                 $("#finish").attr("href", " ");
                                 setTimeout(function () { window.location.href = "/Personas/Index"; }, 3000);
                             } else {
-                                MsgError("Error", "No se agrego el registro, contacte al administrador");
+                                MsgError("Error", "No se agregó el registro, contacte al administrador.");
                             }
                         });
         },

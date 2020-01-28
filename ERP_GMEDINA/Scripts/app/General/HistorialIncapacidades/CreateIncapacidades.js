@@ -46,7 +46,7 @@
 
         if ($("#ticn_Id").val() == 0 && fecha1 == "" && fecha2 == "")
         {
-            MsgError("Error", "por favor llene todas las cajas de texto.")
+            MsgError("Error", "Por favor llene todas las cajas de texto.")
         }
 
         else if ($("#ticn_Id").val() == 0) {
@@ -77,7 +77,7 @@
 
             }
             else {
-                MsgError("Error", "La fecha fin debe ser mayor ");
+                MsgError("Error", "La fecha fin debe ser mayor.");
             }
         }
 
@@ -87,7 +87,7 @@
 
             }
             else {
-                MsgError("Error", "La fecha inicio y la fecha fin no pueden ser iguales");
+                MsgError("Error", "La fecha inicio y la fecha fin no pueden ser iguales.");
             }
         } 
 
@@ -131,7 +131,7 @@
                             })
                     };
                 } else {
-                    MsgError("Error", "por favor llene todas las cajas de texto");
+                    MsgError("Error", "Por favor llene todas las cajas de texto.");
                 }
         } );
 

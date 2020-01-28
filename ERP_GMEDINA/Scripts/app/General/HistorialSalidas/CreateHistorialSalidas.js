@@ -213,11 +213,11 @@ $("#FormCreate").submit(function (e) {
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     if ($("#TipoSalidas").val() == 0) {
-        MsgError("Error", "Es nesesario seleccionar el tipo de la salida");
+        MsgError("Error", "Es nesesario seleccionar el tipo de la salida.");
     } else if ($("#RazonSalidas").val() == 0) {
-        MsgError("Error", "Es nesesario seleccionar la razón de la salida");
+        MsgError("Error", "Es nesesario seleccionar la razón de la salida.");
     } else if ($("#hsal_FechaSalida").val() == "") {
-        MsgError("Error", "Es necesario seleccionar la fecha en la cual se desocupo el puesto de trabajo");
+        MsgError("Error", "Es necesario seleccionar la fecha en la cual se desocupo el puesto de trabajo.");
     } else {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     var tbHistorialSalidas =
@@ -229,7 +229,7 @@ $("#btnCrear").click(function () {
     };
         var lista = getJson();
         if (lista == "") {
-            MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador");
+            MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador.");
         } else {
             if (tbHistorialSalidas != null) {
                 data = JSON.stringify({
@@ -242,15 +242,15 @@ $("#btnCrear").click(function () {
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
                             //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                            MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                            MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                             setTimeout(function () { location.href = "/HistorialSalidas/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");
                         } else {
-                            MsgError("Error", "No se agrego el registro, contacte al administrador");
+                            MsgError("Error", "No se agregó el registro, contacte al administrador.");
                         }
                     });
             } else {
-                MsgError("Error", "Por favor llene todas las cajas de texto");
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
             }
         }
 }

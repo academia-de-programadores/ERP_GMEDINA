@@ -34,7 +34,7 @@ namespace ERP_GMEDINA.Models
         public string hsal_Observacion { get; set; }
         [Display(Name = "Estado")]
         public bool hsal_Estado { get; set; }
-        [Display(Name = "Razon inactivo")]
+        [Display(Name = "Razón inactivo")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string hsal_RazonInactivo { get; set; }

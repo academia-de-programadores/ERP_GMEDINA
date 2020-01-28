@@ -159,12 +159,12 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbEquipoTrabajo.eqtra_Id != 0 && tbEquipoTrabajo.eqtra_RazonInactivo != "")
             {
-                var id = (int)Session["id"];
+                //var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEquipoTrabajo_Inactivar(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoTrabajo_Inactivar(tbEquipoTrabajo.eqtra_Id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEquipoTrabajo_Inactivar_Result item in list)
                     {
                         msj = item.MensajeError + " ";

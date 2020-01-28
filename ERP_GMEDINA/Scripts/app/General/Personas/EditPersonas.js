@@ -155,22 +155,22 @@ $(document).ready(function () {
                         'POST',
                         function (obj) {
                             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                                MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                                MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                                 $("#finish").attr("href", " ");
                                 setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
                             } else {
-                                MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                                MsgError("Error", "No se editó el registro, contacte al administrador.");
                                 $("#finish").attr("href", "#finish");
                             }
                         });
                     }
                     else {
-                        MsgError("Error", "Correo Electronico invalido");
+                        MsgError("Error", "Correo electrónico invalido.");
                         $("#finish").attr("href", "#finish");
                     }
             }
             else {
-                MsgError("Error", "por favor llene todos los datos");
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
             }
 
         },

@@ -22,10 +22,10 @@ $("#btnActivar").click(function () {
                     LimpiarControles(["txtIdRestore"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró activar el registro, contacte al administrador.");
+                    MsgError("Error", "No se activó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });

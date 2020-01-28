@@ -122,7 +122,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/SucursalesEdit").Include(
             "~/Scripts/app/General/Sucursales/EditSucursales.js"));
 
-        
+
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales").Include(
             "~/Scripts/app/General/Sucursales/IndexSucursales.js"));
@@ -494,10 +494,25 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesPlanilla").Include(
                 "~/Scripts/app/General/ReportesPlanilla.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesDeducciones").Include(
+                "~/Scripts/app/General/ReportesDeducciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesDecimoTercerMes").Include(
+                "~/Scripts/app/General/ReportesDecimoTercerMes.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesIngresos").Include(
+                "~/Scripts/app/General/ReportesIngresos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ReportesDecimoCuarto").Include(
+                "~/Scripts/app/General/ReportesDecimoCuarto.js"));
+
+
+
             #endregion
 
-            #region Equipo Flamenco
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
+
+			#region Equipo Flamenco
+			bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionAFP").Include(

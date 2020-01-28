@@ -38,7 +38,6 @@ function ListFill(obj) {
         }
 
     });
-
     SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
     SlctHabilidades.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
     SlctIdiomas.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
@@ -124,16 +123,16 @@ $(document).ready(function () {
                 'POST',
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        MsgSuccess("¡Exito!", "El registro se edito de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                         $("#finish").attr("href", " ");
                         setTimeout(function () { window.location.href = "/Requisiciones/Index"; }, 3000);
                     } else {
-                        MsgError("Error", "No se agrego el registro, contacte al administrador");
+                        MsgError("Error", "No se editó el registro, contacte al administrador.");
                     }
                 });
             }
             else {
-                MsgError("Error", "por favor llene todos los campos de texto.");
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
             }
         },
     });

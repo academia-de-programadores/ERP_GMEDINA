@@ -121,7 +121,7 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["titu_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador.");
+                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
             });
     } else {

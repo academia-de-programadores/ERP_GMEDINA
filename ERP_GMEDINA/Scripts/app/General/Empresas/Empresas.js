@@ -26,7 +26,7 @@ $("#empr_Logo").change(function () {
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
   var img = document.getElementById('img1');
   img.src = "";
-  MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+  MsgError("Error", "Debe agregar el logo en el formato correspondiente.");
   $("#ModalNuevo").data("res", false);
  } else {
   $("#ModalNuevo").data("res", true);
@@ -37,7 +37,7 @@ $("#UPempr_Logo").change(function () {
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
   var img = document.getElementById('img2');
   img.src = "";
-  MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+  MsgError("Error", "Debe agregar el logo en el formato correspondiente.");
   $("#ModalEditar").data("res", false);
  } else {
   $("#ModalEditar").data("res", true);
@@ -148,20 +148,20 @@ $("#FormNuevo").on("submit", function (event) {
    })
     .done(function (obj) {
      if (obj == "-4") {
-      MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
+      MsgError("Error", "Formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
      } else if (obj != "-1" && obj != "-2" && obj != "-3") {
       llenarTabla();
-      MsgSuccess("¡Exito!", "El registro se ha agregado de forma exitosa");
+      MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
       $("#ModalNuevo").modal('hide');//ocultamos el modal
       $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
       $('.modal-backdrop').remove();//eliminamos el
      } else {
-      MsgError("Error", "No se pudo agregar el registro, contacte al administrador");
+      MsgError("Error", "No se agregó el registro, contacte al administrador.");
      }
     });
   }
  } else {
-  MsgError("Error", "por favor, seleccione una imagen");
+  MsgError("Error", "Por favor seleccione una imagen.");
  }
 });
 $("#btnActualizar").click(function () {
@@ -181,15 +181,15 @@ $("#btnActualizar").click(function () {
   })
    .done(function (obj) {
     if (obj == "-4") {
-     MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
+     MsgError("Error", "Formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
     } else if (obj != "-1" && obj != "-2" && obj != "-3") {
-     MsgSuccess("¡Exito!", "El registro se ha editado de forma exitosa");
+     MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
      llenarTabla();
      $("#ModalEditar").modal('hide');//ocultamos el modal
      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
      $('.modal-backdrop').remove();//eliminamos el
     } else {
-     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+     MsgError("Error", "No se editó el registro, contacte al administrador.");
     }
    });
  }
@@ -206,14 +206,14 @@ $("#InActivar").click(function () {
       function (obj) {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
         CierraPopups();
-        MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
+        MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
         LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
         llenarTabla();
        } else {
-        MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+        MsgError("Error", "No se inactivó el registro, contacte al administrador.");
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+  MsgError("Error", "Por favor llene todas las cajas de texto.");
  }
 });

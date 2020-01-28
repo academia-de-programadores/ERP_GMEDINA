@@ -86,16 +86,19 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "se ha agredado el registro");
+                    MsgSuccess("¡Éxito!","El registro se agregó de forma exitosa.");
                     LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
                     $("#ModalNuevo").find("#eqtra_Id").empty();
                     llenarTabla();
                     RefreshEquipos();
                 }
+                else {
+                    MsgError("Error", "Error","No se agregó el registro, contacte al administrador.");
+                }
             });
     }
     else {
-        MsgError("Error", "por favor llene todaslas cajas de texto.");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 })
 
@@ -117,11 +120,11 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se ha inactivado de forma exitosa");
-                    llenarTabla();
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
+                    setTimeout(function () { window.location.href = "/EquipoEmpleados/Index"; }, 1000);
                 }
                 else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     }

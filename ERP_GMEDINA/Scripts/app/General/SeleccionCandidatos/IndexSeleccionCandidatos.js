@@ -173,7 +173,7 @@ $("#btnActualizar").click(function () {
                         MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
                         llenarTabla();
                     } else {
-                        MsgError("Error","No se pudo editar el registro, contacte al administrador.");
+                        MsgError("Error", "No se editó el registro, contacte al administrador.");
                     }
                 });
 
@@ -280,11 +280,11 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $('#ModalInhabilitar').modal('hide');
                     CierraPopups();
-                    MsgWarning("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["scan_RazonInactivo"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {

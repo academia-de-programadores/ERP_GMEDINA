@@ -26,7 +26,6 @@ function ListFill(obj) {
     obj.Titulos.forEach(function (index, value) {
         SlctTitulos.append('<option value="' + index.titu_Id + '">' + index.titu_Descripcion + '</option>');
     });
-
     SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
     SlctHabilidades.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
     SlctIdiomas.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacía', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
@@ -104,17 +103,17 @@ $(document).ready(function () {
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                        // $("#finish").attr("href", " ");
-                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.")
                         $("#finish").attr("href", " ");
                         setTimeout(function () { window.location.href = "/Requisiciones/Index"; }, 3000);
                     } else {
-                        MsgError("Error", "No se agrego el registro, contacte al administrador");
+                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
                     }
                 });
             }
             else
             {
-                MsgError("Error", "por favor llene todos los campos de texto.");
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
             }
         },
     });

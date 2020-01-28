@@ -17,6 +17,11 @@ namespace ERP_GMEDINA.Controllers
         // GET: EquipoEmpleados
         public ActionResult Index()
         {
+            if (Session["Admin"] == null && Session["Usuario"] == null)
+            {
+                Response.Redirect("~/Inicio/index");
+                return null;
+            }
             db = new ERP_GMEDINAEntities();
             bool Admin = (bool)Session["Admin"];
             var tbEquipoEmpleados = new List<tbEquipoEmpleados> { };
