@@ -51,7 +51,7 @@ function cargarGridAdelantos() {
 
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAdelantos.length; i++) {
-                var FechaAdelanto = FechaFormato(ListaAdelantos[i].adsu_FechaAdelanto);
+                // var FechaAdelanto = FechaFormato(ListaAdelantos[i].adsu_FechaAdelanto);
                 var Deducido = ListaAdelantos[i].adsu_Deducido == true ? 'Deducido en planilla' : 'Sin deducir';
                 var Activo = ListaAdelantos[i].adsu_Activo == true ? 'Activo' : 'Inactivo';
                 UsuarioModifica = ListaAdelantos[i].adsu_UsuarioModifica == null ? 'Sin modificaciones' : ListaAdelantos[i].adsu_UsuarioModifica;
@@ -69,8 +69,9 @@ function cargarGridAdelantos() {
                     ListaAdelantos[i].adsu_IdAdelantoSueldo,
                     ListaAdelantos[i].empleadoNombre,
                     ListaAdelantos[i].adsu_RazonAdelanto,
-                    (ListaAdelantos[i].adsu_Monto % 1 == 0) ? ListaAdelantos[i].adsu_Monto + ".00" : ListaAdelantos[i].adsu_Monto,
-                    FechaAdelanto,
+                    ListaAdelantos[i].adsu_Monto.toFixed(2),
+                    //(ListaAdelantos[i].adsu_Monto % 1 == 0) ? ListaAdelantos[i].adsu_Monto + ".00" : ListaAdelantos[i].adsu_Monto,
+                    ListaAdelantos[i].adsu_FechaAdelanto,
                     Deducido,
                     Activo,
                     botonDetalles +
@@ -78,7 +79,6 @@ function cargarGridAdelantos() {
                     botonActivar
                 ]);
             }
-            FullBody();
         });
 
 }
@@ -287,7 +287,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
                     $('#Crear #adsu_MontoValidacion').hide();
                     $("#Crear #MontoAsterisco").addClass("text-danger");
                     $('#Crear #adsu_MontoValidacion2').show();
-                    
+
                 } else {
                     $("#Crear #MontoAsterisco").removeClass("text-danger");
                     $('#Crear #adsu_MontoValidacion2').hide();
@@ -299,9 +299,9 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
     //VALIDACIONES DEL CAMPO FECHA
     if (Fecha != "-1") {
-        
-        
-        
+
+
+
         if (Fecha == "" || Fecha == null || Fecha == undefined) {
 
             $("#Crear #AsteriscoFecha").addClass("text-danger");
@@ -311,22 +311,6 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
             Local_modelState = false;
 
         } else {
-            //var FechaFloat = parseFloat(Fecha.substring(0, 4));
-            //var FechaAnios = Fecha.substring(0, 4);
-            //if (FechaFloat > 1000)
-            //{
-            //    $("#Crear #AsteriscoFecha").removeClass("text-danger");
-            //    $("#Crear #Validation_adsu_FechaAdelanto").empty();
-            //    $("#Crear #Validation_adsu_FechaAdelanto").html("El año debe ser mayor a 1900.");
-            //    $("#Crear #Validation_adsu_FechaAdelanto").hide();
-            //}
-            //if (FechaAnios == "0001") {
-            //    $("#Crear #AsteriscoFecha").removeClass("text-danger");
-            //    $("#Crear #Validation_adsu_FechaAdelanto").empty();
-            //    $("#Crear #Validation_adsu_FechaAdelanto").html("Por favor ingrese una fecha valida.");
-            //    $("#Crear #Validation_adsu_FechaAdelanto").hide();
-            //}
-
             $("#Crear #AsteriscoFecha").removeClass("text-danger");
             $("#Crear #Validation_adsu_FechaAdelanto").empty();
             $("#Crear #Validation_adsu_FechaAdelanto").hide();
@@ -343,6 +327,7 @@ function OcultarValidacionesCrear() {
     $("#Crear #adsu_Monto").val("");
     $("#Crear #emp_IdEmpleado").val("0");
     $("#Crear #adsu_FechaAdelanto").val("");
+    $("#Crear #SueldoPromedioCrear").hide();
 
     //OCULTAR VALIDACIONES DE EMP_ID
     $('#Crear #Span_emp_Id').hide();
@@ -497,7 +482,7 @@ $("#btnUpdateAdelantos").click(function () {
     var Razon = $("#Editar #adsu_RazonAdelanto").val();
     var Monto = $("#Editar #adsu_Monto").val();
     var IdEmp = $("#Editar #emp_Id").children("option:selected").val();
-    
+
     //DESBLOQUEAR EL BOTON DE EDICION
     $("#btnConfirmarEditar").attr("disabled", false);
     //VALIDAR EL FORMULARIO
@@ -525,7 +510,7 @@ $("#btnConfirmarEditar").click(function () {
             //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
             if (!data.adsu_Deducido) {
 
-                
+
 
                 var IdEmp = $('#Editar #emp_Id').val();
                 var Razon = $('#Editar #adsu_RazonAdelanto').val();
@@ -550,7 +535,7 @@ $("#btnConfirmarEditar").click(function () {
                     adsu_Monto: MontoFormateado
                 };
 
-                
+
 
                 $.ajax({
                     url: "/AdelantoSueldo/Edit",
@@ -568,7 +553,6 @@ $("#btnConfirmarEditar").click(function () {
                         // REFRESCAR UNICAMENTE LA TABLA
                         cargarGridAdelantos();
                         //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                        FullBody();
                         $("#ConfirmarEdicion").modal('hide');
                         document.getElementById("btnConfirmarEditar").disabled = false;
                         //Setear la variable de SueldoAdelantoMaximo a cero 
@@ -728,7 +712,6 @@ $("#btnCerrarEditar").click(function () {
     //OCULTAR MODAL DE EDITAR
     $("#EditarAdelantoSueldo").modal('hide');
     document.getElementById("adsu_Monto").placeholder = '';
-    FullBody();
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
@@ -746,7 +729,6 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueld
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
 
-                var FechaRegistro = FechaFormato(data.adsu_FechaAdelanto).toString();
                 var FechaCrea = FechaFormato(data.adsu_FechaCrea);
                 var FechaModifica = FechaFormato(data.adsu_FechaModifica);
 
@@ -876,5 +858,4 @@ $("#btnActivarRegistroAdelantosModal").click(function () {
 //FUNCION: OCULTAR MODAL DE ACTIVACION
 $("#btnCerrarActivar").click(function () {
     $("#ActivarAdelantoSueldo").modal('hide');
-    FullBody();
 });

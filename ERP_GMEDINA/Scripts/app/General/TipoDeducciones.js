@@ -3,12 +3,12 @@ var inactivar = 0;
 
 // script serialize date
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      
-  })
-  .fail(function (jqxhr, settings, exception) {
-      
-  });
+    .done(function (script, textStatus) {
+
+    })
+    .fail(function (jqxhr, settings, exception) {
+
+    });
 
 // funcion generica ajax
 function _ajax(params, uri, type, callback) {
@@ -61,11 +61,11 @@ function cargarGridTipoDeducciones() {
                 UsuarioModifica = ListaTipoDeducciones[i].tde_UsuarioModifica == null ? 'Sin modificaciones' : ListaTipoDeducciones[i].NombreUsuarioModifica;
 
                 $('#tblTipoDeducciones').dataTable().fnAddData([
-                                ListaTipoDeducciones[i].tde_IdTipoDedu,
-                                ListaTipoDeducciones[i].tde_Descripcion,
-                                estadoRegistro,
-                                  botonDetalles + botonEditar + botonActivar]
-                                );
+                    ListaTipoDeducciones[i].tde_IdTipoDedu,
+                    ListaTipoDeducciones[i].tde_Descripcion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar]
+                );
             }
         });
     FullBody();
@@ -73,7 +73,7 @@ function cargarGridTipoDeducciones() {
 
 // create 1 
 $(document).on("click", "#btnAgregarTipoDeducciones", function () {
-    
+
     // habilitar boton
     $("#btnCreateRegistroTipoDeducciones").attr("disabled", false);
 
@@ -91,8 +91,8 @@ $(document).on("click", "#btnAgregarTipoDeducciones", function () {
 
     // mostrar modal
     $("#AgregarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    
-    
+
+
 });
 
 // create validaciones keyup
@@ -118,7 +118,7 @@ $('#Crear #tde_Descripcion').keyup(function () {
         $('#AsteriscoDescripcion').addClass("text-danger");
         $("#Crear #validation_DescripcionNumerico").css('display', '');
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#AsteriscoDescripcion').removeClass('text-danger');
@@ -130,7 +130,7 @@ $('#Crear #tde_Descripcion').keyup(function () {
 // create 2 ejecutar
 $('#btnCreateRegistroTipoDeducciones').click(function () {
 
-    $('#btnCreateRegistroTipoDeducciones').attr('disabled',true);
+    $('#btnCreateRegistroTipoDeducciones').attr('disabled', true);
 
     var modelState = true;
     var descripcion = $("#Crear #tde_Descripcion").val();
@@ -155,7 +155,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
         $("#Crear #validation_DescripcionNumerico").css('display', '');
         modelState = false;
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#AsteriscoDescripcion').removeClass('text-danger');
@@ -163,8 +163,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
     }
 
 
-    if (modelState == true)
-    {
+    if (modelState == true) {
         var data = $("#frmTipoDeduccionCreate").serializeArray();
 
         if ($("#Crear #tde_Descripcion").val()) {
@@ -174,7 +173,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
                 method: "POST",
                 data: data
             }).done(function (data) {
-                    
+
                 if (data == "error") {
 
                     $('#btnCreateRegistroTipoDeducciones').attr('disabled', false);
@@ -190,8 +189,8 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
             });
         }
     }
-    else{
-        
+    else {
+
         $('#btnCreateRegistroTipoDeducciones').attr('disabled', false);
     }
 });
@@ -203,49 +202,49 @@ $("#btnCerrarEditar").click(function () {
 // editar 1 
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeducciones", function () {
 
-        var ID = $(this).data('id');
-        inactivar = ID;
+    var ID = $(this).data('id');
+    inactivar = ID;
 
-        // habilitar boton
-        $("#btnUpdateTipoDeducciones").attr("disabled", false);
+    // habilitar boton
+    $("#btnUpdateTipoDeducciones").attr("disabled", false);
 
-        // vaciar cajas de texto
-        $('#Editar input[type=text], input[type=number]').val('');
+    // vaciar cajas de texto
+    $('#Editar input[type=text], input[type=number]').val('');
 
-        // * descripcion 
-        $('#EditAsteriscoDescripcion').removeClass('text-danger');
+    // * descripcion 
+    $('#EditAsteriscoDescripcion').removeClass('text-danger');
 
-        // mesanje descripcion requerida
-        $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
+    // mesanje descripcion requerida
+    $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
 
-        // mesanje descripcion requerida
-        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+    // mesanje descripcion requerida
+    $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
 
-        $.ajax({
-            url: "/TipoDeducciones/Edit/" + ID,
-            method: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ ID: ID })
-        })
-            .done(function (data) {
+    $.ajax({
+        url: "/TipoDeducciones/Edit/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
 
-                if (data) {
+            if (data) {
 
-                    $.each(data, function (i, iter) {
-                        $("#Editar #tde_IdTipoDedu").val(iter.tde_IdTipoDedu);
-                        $("#Editar #tde_Descripcion").val(iter.tde_Descripcion);
-                    });
+                $.each(data, function (i, iter) {
+                    $("#Editar #tde_IdTipoDedu").val(iter.tde_IdTipoDedu);
+                    $("#Editar #tde_Descripcion").val(iter.tde_Descripcion);
+                });
 
-                    $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });                    
-                }        
-                else {
-                    iziToast.error({
-                        title: 'Error',
-                        message: 'No se cargó la información, contacte al administrador',
-                    });
-                }
-            });    
+                $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se cargó la información, contacte al administrador',
+                });
+            }
+        });
 });
 
 // editar validaciones key up
@@ -272,7 +271,7 @@ $('#Editar #tde_Descripcion').keyup(function () {
         $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
         $("#Editar #validation_EditDescripcionNumerico").css('display', '');
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#EditAsteriscoDescripcion').removeClass('text-danger');
@@ -309,7 +308,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
         $("#Editar #validation_EditDescripcionNumerico").css('display', '');
         modelState = false;
     }
-        // si es un número
+    // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#EditAsteriscoDescripcion').removeClass('text-danger');
@@ -320,8 +319,8 @@ $("#btnUpdateTipoDeducciones").click(function () {
     if (modelState == true) {
 
         $("#EditarTipoDeducciones").modal('hide');
-        $("#EditarTipoDeduccionConfirmacion").modal({ backdrop: 'static', keyboard: false });        
-        
+        $("#EditarTipoDeduccionConfirmacion").modal({ backdrop: 'static', keyboard: false });
+
     }
     else {
         $("#btnUpdateTipoDeducciones").attr('disabled', false);
@@ -331,7 +330,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
 
 $("#denegarEdicion").click(function () {
     $("#btnUpdateTipoDeducciones").attr('disabled', false);
-    $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });    
+    $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
 
 });
 
@@ -340,34 +339,34 @@ $("#btnEditarTipoDedu").click(function () {
 
     var data = $("#frmTipoDeduccionEdit").serializeArray();
 
-            $.ajax({
-                url: "/TipoDeducciones/Edit",
-                method: "POST",
-                data: data
-            }).done(function (data) {
+    $.ajax({
+        url: "/TipoDeducciones/Edit",
+        method: "POST",
+        data: data
+    }).done(function (data) {
 
-                if (data != "error") {
-                    
-                    $("#EditarTipoDeduccionConfirmacion").modal('hide');
-                    cargarGridTipoDeducciones();
-                    iziToast.success({
-                        title: 'Éxito',
-                        message: '¡El registro se editó de forma exitosa!',
-                    });
+        if (data != "error") {
 
-                }
-                else {
-
-                    $("#EditarTipoDeduccionConfirmacion").modal('hide');
-                    $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-
-                    iziToast.success({
-                        title: 'Error',
-                        message: 'El registro no se editó, contacte al administrador',
-                    });
-                }
+            $("#EditarTipoDeduccionConfirmacion").modal('hide');
+            cargarGridTipoDeducciones();
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se editó de forma exitosa!',
             });
-                   
+
+        }
+        else {
+
+            $("#EditarTipoDeduccionConfirmacion").modal('hide');
+            $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+
+            iziToast.success({
+                title: 'Error',
+                message: 'El registro no se editó, contacte al administrador',
+            });
+        }
+    });
+
 });
 
 const btneditar = $('#btnEditarTipoDedu'),
@@ -412,7 +411,7 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                
+
                 var FechaCrea = FechaFormato(data[0].tde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].tde_FechaModifica);
                 $("#Detalles #tde_UsuarioCrea").val(data[0].tde_UsuarioCrea);
@@ -427,8 +426,8 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
 
                 //$("#DetailsTipoDeducciones").modal();
                 $("#DetailsTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-                
-                
+
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -445,8 +444,8 @@ $("#btnInactivarTipoDeducciones").click(function () {
     $("#EditarTipoDeducciones").modal('hide');
     //$("#InactivarTipoDeducciones").modal();
     $("#InactivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    
-    
+
+
 
 });
 
@@ -460,28 +459,28 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: inactivar })
     })
-    .done(function (data) {
+        .done(function (data) {
 
-        if (data != "Error") {
+            if (data != "Error") {
 
-            $("#InactivarTipoDeducciones").modal('hide');
-            cargarGridTipoDeducciones();
-            iziToast.success({
-                title: 'Éxito',
-                message: '¡El registro se inactivó de forma exitosa!',
-            });
-        }
-        else {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se inactivó el registro, contacte al administrador',
-            });
+                $("#InactivarTipoDeducciones").modal('hide');
+                cargarGridTipoDeducciones();
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro se inactivó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se inactivó el registro, contacte al administrador',
+                });
 
-        }
-        
-            
-    });
-    
+            }
+
+
+        });
+
 });
 
 //FUNCION: OCULTAR MODAL DE CREACION
@@ -524,11 +523,9 @@ $("#frmTipoDeduccionEdit").submit(function (event) {
 // activar
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeducciones", function () {
     activarID = $(this).data('id');
-    
+
     //$("#ActivarTipoDeducciones").modal();
     $("#ActivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    
-    
 });
 
 //FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO
@@ -543,7 +540,7 @@ $("#btnActivarRegistroTipoDeducciones").click(function () {
         $("#ActivarTipoDeducciones").modal('hide');
         //Refrescar la tabla de TipoDeducciones
         cargarGridTipoDeducciones();
-        
+
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',
