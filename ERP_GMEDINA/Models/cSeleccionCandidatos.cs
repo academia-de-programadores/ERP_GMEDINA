@@ -17,15 +17,15 @@ namespace ERP_GMEDINA.Models
     { 
 
         [Display(Name = "Id")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public int scan_Id { get; set; }
 
         [Display(Name = "Persona")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public int per_Id { get; set; }
 
         [Display(Name = "Fecha")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public Nullable<System.DateTime> scan_Fecha { get; set; }
 
         [Display(Name = "Estado")]

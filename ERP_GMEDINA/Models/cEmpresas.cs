@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id")]
         public int empr_Id { get; set; } 
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [Display(Name = "Empresa")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string empr_Nombre { get; set; }
@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name ="Estado")]
         public Nullable<bool> empr_Estado { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [Display(Name = "Razón Inactivo")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string empr_RazonInactivo { get; set; }

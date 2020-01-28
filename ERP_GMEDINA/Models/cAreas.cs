@@ -19,13 +19,13 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Sucursal")]
         public int suc_Id { get; set; }
         [Display(Name = "Área")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string area_Descripcion { get; set; }
         [Display(Name = "Estado")]
         public bool area_Estado { get; set; }
         [Display(Name = "Razón Inactivo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string area_Razoninactivo { get; set; }
         public int area_Usuariocrea { get; set; }

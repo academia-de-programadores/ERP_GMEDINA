@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Nacionalidad")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public string nac_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
@@ -29,7 +29,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Razón Inactivo")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres.")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public string nac_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

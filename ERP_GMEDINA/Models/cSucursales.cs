@@ -17,47 +17,47 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Número")]
         public int suc_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [Display(Name = "Empresa ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        [Display(Name = "Empresa")]
         public int empr_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(4, ErrorMessage = "Excedió el número máximo de carácteres.")]
-        [Display(Name = "Código Municipio ")]
+        [Display(Name = "Código Municipio")]
         public string mun_Codigo { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [Display(Name = "Bodega ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        [Display(Name = "Bodega")]
         public int bod_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [Display(Name = "pemi_Id ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        [Display(Name = "pemi_Id")]
         public int pemi_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
-        [Display(Name = "Descripción ")]
+        [Display(Name = "Descripción")]
         public string suc_Descripcion { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
-        [Display(Name = "Correo Electrónico ")]
+        [Display(Name = "Correo Electrónico")]
         public string suc_Correo { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres.")]
-        [Display(Name = "Dirección ")]
+        [Display(Name = "Dirección")]
         public string suc_Direccion { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(9, ErrorMessage = "Excedió el número máximo de carácteres.")]
-        [Display(Name = "Teléfono ")]
+        [Display(Name = "Teléfono")]
         public string suc_Telefono { get; set; }
 
-        [Display(Name = "Estado ")]
+        [Display(Name = "Estado")]
         public bool suc_Estado { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres.")]
         [Display(Name = "Razón Inactivo")]
         public string suc_RazonInactivo { get; set; }

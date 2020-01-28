@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Models
     public class cHistorialAmonestaciones
     {
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(150, ErrorMessage = "Excedió el número máximo de caracteres.")]
         [Display(Name = "Observación")]
         public string hamo_Observacion { get; set; }

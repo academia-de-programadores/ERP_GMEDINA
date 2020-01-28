@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int car_Id { get; set; }
 
         [Display(Name = "Cargo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string car_Descripcion { get; set; }
 
@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
         public bool car_Estado { get; set; }
 
         [Display(Name = "Razón Inactivo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string car_RazonInactivo { get; set; }
 

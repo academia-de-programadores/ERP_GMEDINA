@@ -27,30 +27,30 @@ namespace ERP_GMEDINA.Models
 
    
         [Display(Name = "Dias")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public int hinc_Dias { get; set; }
 
         [Display(Name = "Centro Médico")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string hinc_CentroMedico { get; set; }
 
         [Display(Name = "Doctor")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string hinc_Doctor { get; set; }
 
         [Display(Name = "Diagnostico")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(150, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string hinc_Diagnostico { get; set; }
 
         [Display(Name = "Fecha Inicio")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public Nullable<System.DateTime> hinc_FechaInicio { get; set; }
 
         [Display(Name = "Fecha Fin")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public Nullable<System.DateTime> hinc_FechaFin { get; set; }
 
         [Display(Name = "Estado")]

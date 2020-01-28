@@ -13,14 +13,14 @@ namespace ERP_GMEDINA.Models
     //}
     public class cHistorialPermisos
     {
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         //[MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]        
         [Display(Name = "Id")]
         public int hper_Id { get; set; }
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
         [Display(Name = "Tipo permiso")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
 
         public int tper_Id { get; set; }
         [Display(Name = "Fecha Inicio")]
@@ -33,13 +33,13 @@ namespace ERP_GMEDINA.Models
         public int hper_Duracion { get; set; }
 
         [Display(Name = "Observaciones")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(25, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string hper_Observacion { get; set; }
         [Display(Name = "Justificado")]
         public bool hper_Justificado { get; set; }
         [Display(Name = "Porcentaje indemnización")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
 
         public int hper_PorcentajeIndemnizado { get; set; }
         [Display(Name = "Estado")]

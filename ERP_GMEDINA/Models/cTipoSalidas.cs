@@ -15,13 +15,13 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id")]
         public int tsal_Id { get; set; }
         [Display(Name = "Salidas")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string tsal_Descripcion { get; set; }
         [Display(Name = "Estado")]
         public bool tsal_Estado { get; set; }
         [Display(Name = "Razón Inactivo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string tsal_RazonInactivo { get; set; }
         [Display(Name = "Usuario Crea")]

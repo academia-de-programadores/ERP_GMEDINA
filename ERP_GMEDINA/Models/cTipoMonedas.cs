@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
             [Display(Name = "Id")]
             public int tmon_Id { get; set; }
 
-            [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
             [Display(Name = "Moneda")]
             [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres.")]
             public string tmon_Descripcion { get; set; }

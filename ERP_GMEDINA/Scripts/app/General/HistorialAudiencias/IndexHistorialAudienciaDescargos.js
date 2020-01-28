@@ -205,7 +205,7 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se activó de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["aude_Id"]);
                     llenarTabla();
                 } else {

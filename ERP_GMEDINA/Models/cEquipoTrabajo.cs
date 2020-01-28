@@ -17,17 +17,17 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Número")]
         public int eqtra_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [Display(Name = "Codigo")]
         [MaxLength(25, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string eqtra_Codigo { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [Display(Name = "Equipo")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string eqtra_Descripcion { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         [Display(Name = "Observacion")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string eqtra_Observacion { get; set; }
