@@ -220,7 +220,6 @@ $("#btnCrear").click(function () {
         span.innerText = 'Ya existe, por favor cambie la descripción.';
         $(span).addClass("text-danger");
        }
-       MsgError("Error", "No se editó el registro, contacte al administrador.");
       });
  } else {
       MsgError("Error", "Por favor llene todas las cajas de texto.");
