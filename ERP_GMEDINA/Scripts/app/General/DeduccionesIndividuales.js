@@ -1,10 +1,10 @@
 ﻿//#region Region Obtención de Script para Formateo de Fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        console.log(textStatus);
+        
     })
     .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
+        
     });
 //#endregion
 var inactivarID = 0;

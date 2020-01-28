@@ -6,7 +6,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
         //console.log(textStatus);
     })
     .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
+        
     });
 
 
@@ -181,7 +181,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnModalEditarINFS", function 
             });
         }
     }).fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo realizar la petición");
+        
     });
 });
 

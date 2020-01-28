@@ -4,10 +4,10 @@ var inactivar = 0;
 // script serialize date
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      
   });
 
 // funcion generica ajax
@@ -401,7 +401,7 @@ function spinner() {
 
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {
     var ID = $(this).data('id');
-    //console.log(ID);
+    //
     $.ajax({
         url: "/TipoDeducciones/Details/" + ID,
         method: "GET",
@@ -412,7 +412,7 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log(data);
+                
                 var FechaCrea = FechaFormato(data[0].tde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].tde_FechaModifica);
                 $("#Detalles #tde_UsuarioCrea").val(data[0].tde_UsuarioCrea);
@@ -524,7 +524,7 @@ $("#frmTipoDeduccionEdit").submit(function (event) {
 // activar
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeducciones", function () {
     activarID = $(this).data('id');
-    console.log(activarID);
+    
     //$("#ActivarTipoDeducciones").modal();
     $("#ActivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
     
@@ -543,7 +543,7 @@ $("#btnActivarRegistroTipoDeducciones").click(function () {
         $("#ActivarTipoDeducciones").modal('hide');
         //Refrescar la tabla de TipoDeducciones
         cargarGridTipoDeducciones();
-        console.log(data);
+        
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',

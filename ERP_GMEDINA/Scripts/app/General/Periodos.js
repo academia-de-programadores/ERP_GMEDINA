@@ -5,7 +5,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
     })
     .fail(function (jqxhr, settings, exception) {
-        console.log("No se pudo recuperar Script SerializeDate");
+        
     });
 
 // funcion generica ajax
@@ -228,7 +228,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
         peri_CantidadDias: $("#Editar #peri_CantidadDias").val(),
         peri_RecibeSeptimoDia: RecibeEdit
     };
-    console.log(data);
+    
     //var data = $("#frmEditPeriodo").serializeArray();
     $.ajax({
         url: "/Periodos/Editar",
