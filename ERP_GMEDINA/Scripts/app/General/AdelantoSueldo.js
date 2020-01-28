@@ -1,11 +1,11 @@
 ﻿//VARIABLE GLOBAL PARA INACTIVAR
 var IDInactivar = 0;
 var IDActivar = 0;
-//OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
+//OBJETO CONSTANTE DEL DDL DE EMPLEADOS
 var cmbEmpleado = $("#emp_IdEmpleado");
 //VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA CREACION
 var MaxSueldoCreate = 0;
-//OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
+//OBJETO CONSTANTE DEL DDL DE EMPLEADOS
 var cmbEmpleadoEdit = $("#frmAdelantosEdit #emp_Id");
 //VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA EDICION
 var MaxSueldoEdit = 0;
@@ -202,7 +202,7 @@ $('#btnCreateRegistroAdelantos').click(function () {
             }
             else {
                 cargarGridAdelantos();
-                //Setear la variable de SueldoAdelantoMaximo a cero 
+                //Setear la variable de SueldoAdelantoMaximo a cero
                 MaxSueldoCreate = 0;
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -444,7 +444,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
             data: JSON.stringify({ id: ID })
         }).done(function (data) {
             if (data) {
-                //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
+                //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO
                 if (data.adsu_Deducido) {
                     document.getElementById("btnUpdateAdelantos").disabled = true;
                 } else {
@@ -552,7 +552,7 @@ $(cmbEmpleadoEdit).change(() => {
 
 //FUNCION: OCULTAR EL MODAL DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
 $("#btnUpdateAdelantos").click(function () {
-    //OBTENER EL ID DEL EMPLEADO 
+    //OBTENER EL ID DEL EMPLEADO
     var Razon = $("#Editar #adsu_RazonAdelanto").val();
     var Monto = $("#Editar #adsu_Monto").val();
     var IdEmp = $("#Editar #emp_Id").children("option:selected").val();
@@ -581,7 +581,7 @@ $("#btnConfirmarEditar").click(function () {
         data: JSON.stringify({ id: IDInactivar })
     }).done(function (data) {
         if (data) {
-            //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
+            //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO
             if (!data.adsu_Deducido) {
 
 
@@ -629,7 +629,7 @@ $("#btnConfirmarEditar").click(function () {
                         //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                         $("#ConfirmarEdicion").modal('hide');
                         document.getElementById("btnConfirmarEditar").disabled = false;
-                        //Setear la variable de SueldoAdelantoMaximo a cero 
+                        //Setear la variable de SueldoAdelantoMaximo a cero
                         MaxSueldoEdit = 0;
                         //Mensaje de exito de la edicion
                         iziToast.success({
