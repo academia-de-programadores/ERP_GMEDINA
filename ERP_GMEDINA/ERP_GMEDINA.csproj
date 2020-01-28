@@ -2015,6 +2015,7 @@
     <Content Include="Scripts\app\General\ReportesIngresos.js" />
     <Content Include="Scripts\app\General\ReportesDecimoTercerMes.js" />
     <Content Include="Scripts\app\General\ReportesDeducciones.js" />
+    <Content Include="Scripts\app\General\ReportesInstitucionesFinancieras.js" />
     <Content Include="Scripts\app\General\ReportesPlanilla.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />

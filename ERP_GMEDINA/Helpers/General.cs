@@ -84,20 +84,15 @@ namespace ERP_GMEDINA.Helpers
                 oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
                 oSmtpClient.Send(oMailMessage);
                 oSmtpClient.Dispose();
-                throw new Exception();
 
             }
-            catch
+            catch (Exception ex)
             {
 
-                response = false;
-
-                // insertar en tabla bitácora de errores
-                IEnumerable<object> listSendMail = null;
-                string MensajeError = "";
+                response = false;                
 
                 // ejecutar el procedimiento almacenado
-                listSendMail = db.UDP_Acce_tbBitacoraErrores_Insert("sendEmailPlanilla","Error",DateTime.Now,MensajeError,"SendMail");
+                db.UDP_Acce_tbBitacoraErrores_Insert("sendEmailPlanilla","Error",DateTime.Now, ex.Message.ToString(), "SendMail");
 
                 
             }
