@@ -438,9 +438,9 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", functio
         .done(function (data) {
 
         	if (data) {
-        		console.log('la data es:');
-        		console.log(data);
-        		console.log(data);
+        		
+        		
+        		
         		var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
         		var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
         		$("#aces_IdAuxilioCesantia").html(data[0].aces_IdAuxilioCesantia);
@@ -828,7 +828,7 @@ $("#btnConfirmarEditar").click(function () {
     var indiceCantidadDias = data[5].value;
     data[5].value = indiceCantidadDias.replace(/,/, '');
 
-    console.log(data);
+    
 		$.ajax({
 			url: "/AuxilioDeCesantias/Edit",
 			method: "POST",
@@ -965,10 +965,10 @@ function _ajax(params, uri, type, callback) {
 // obtener script serialize date
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      
   });
 
 //evitar postback

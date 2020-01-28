@@ -287,7 +287,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
                     $('#Crear #adsu_MontoValidacion').hide();
                     $("#Crear #MontoAsterisco").addClass("text-danger");
                     $('#Crear #adsu_MontoValidacion2').show();
-                    console.log("Mostrar asterisco");
+                    
                 } else {
                     $("#Crear #MontoAsterisco").removeClass("text-danger");
                     $('#Crear #adsu_MontoValidacion2').hide();
@@ -299,9 +299,9 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
     //VALIDACIONES DEL CAMPO FECHA
     if (Fecha != "-1") {
-        console.log();
-        console.log();
-        console.log(Fecha);
+        
+        
+        
         if (Fecha == "" || Fecha == null || Fecha == undefined) {
 
             $("#Crear #AsteriscoFecha").addClass("text-danger");
@@ -497,7 +497,7 @@ $("#btnUpdateAdelantos").click(function () {
     var Razon = $("#Editar #adsu_RazonAdelanto").val();
     var Monto = $("#Editar #adsu_Monto").val();
     var IdEmp = $("#Editar #emp_Id").children("option:selected").val();
-    console.log(IdEmp);
+    
     //DESBLOQUEAR EL BOTON DE EDICION
     $("#btnConfirmarEditar").attr("disabled", false);
     //VALIDAR EL FORMULARIO
@@ -525,7 +525,7 @@ $("#btnConfirmarEditar").click(function () {
             //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
             if (!data.adsu_Deducido) {
 
-                console.log(data);
+                
 
                 var IdEmp = $('#Editar #emp_Id').val();
                 var Razon = $('#Editar #adsu_RazonAdelanto').val();
@@ -550,7 +550,7 @@ $("#btnConfirmarEditar").click(function () {
                     adsu_Monto: MontoFormateado
                 };
 
-                console.log(data_valida);
+                
 
                 $.ajax({
                     url: "/AdelantoSueldo/Edit",
