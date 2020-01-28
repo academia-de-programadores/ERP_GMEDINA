@@ -183,7 +183,6 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
-            //tbDepartamentos = tbDepartamentos == null ? new tbDepartamentos[] { } : tbDepartamentos;
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
@@ -191,6 +190,7 @@ namespace ERP_GMEDINA.Controllers
             //en esta area ingresamos el registro con el procedimiento almacenado
             try
             {
+                tbDepartamentos = tbDepartamentos == null ? new tbDepartamentos[] { } : tbDepartamentos;
                 db = new ERP_GMEDINAEntities();
                 using (var transaction = db.Database.BeginTransaction())
                 {
