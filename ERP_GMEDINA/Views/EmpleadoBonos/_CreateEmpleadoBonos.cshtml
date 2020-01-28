@@ -27,7 +27,7 @@
                         <div class="col-md-6">
                              Monto
                             <label class="" id="AsteriscoMonto">*</label>  
-                            @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad soloNumero", @name = "cb_Monto", @id = "cb_Monto", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', '-1', this.value)" } })
+                            @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "col-md-9 MascaraCantidad soloNumero", @name = "cb_Monto", @id = "cb_Monto", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', '-1', this.value)", maxlength = 15 } })
                              <br />
                             <span class="field-validation-valid text-danger" style="display: none;" id="Validation_Monto">El campo monto es requerido.</span>
                                  
