@@ -121,8 +121,6 @@ $('#btnCreateISR').click(function () {
             isr_Porcentaje: FormatearMonto($("#Crear #isr_Porcentaje").val())
         };
 
-        console.log(data);
-
         $.ajax({
             url: "/ISR/Create",
             method: "POST",
@@ -472,7 +470,6 @@ function Vaciar_ModalCrear() {
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
 
-    console.log("Vaciado");
 }
 
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
@@ -513,7 +510,6 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
-    console.log("entra");
     if (RangoInicial != "-1") {
         //RANGO INICIAL
 
@@ -612,6 +608,8 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
         } else {
             $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
             $("#Crear #isr_PorcentajeValidacion").hide();
+            //CONVERTIR EN DECIMAL EL PORCENTAJE
+            Porcentaje = parseFloat(FormatearMonto(Porcentaje));
             if (parseInt(Porcentaje) < 0 || parseFloat(Porcentaje) < 0.00) {
                 $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
                 $("#Crear #isr_PorcentajeValidacion").empty();
@@ -740,7 +738,9 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
         } else {
             $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
             $("#Editar #isr_PorcentajeValidacion").hide();
-            if (parseInt(Porcentaje) < 0 || parseFloat(Porcentaje) < 0.00) {
+            //CONVERTIR EN DECIMAL EL PORCENTAJE
+            Porcentaje = parseFloat(FormatearMonto(Porcentaje));
+            if (Porcentaje < 0 || Porcentaje < 0.00) {
                 $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
                 $("#Editar #isr_PorcentajeValidacion").empty();
                 $("#Editar #isr_PorcentajeValidacion").html("El campo Porcentaje no puede ser menor a 0.");

@@ -22,7 +22,7 @@
                         <label class="" id="AsteriscoDescripPeriodo" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off", @onkeyup = "ValidarCamposEditar(this.value, '-1')" } })
+                        @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off", @onkeyup = "ValidarCamposEditar(this.value, '-1')", @maxlength = "100" } })
 
                         <span class="text-danger" id="Validar_peri_DescripPeriodo" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido.</span>
                         <span class="text-danger" id="validation_EditDescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico.</span>
