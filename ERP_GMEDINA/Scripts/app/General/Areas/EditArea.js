@@ -315,7 +315,7 @@ $("#ModalInactivar").find("#InActivar").on("click", function () {
        if (obj != "-1" && obj != "-2" && obj != "-3") {
         //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
         //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
-        $(location).attr('href', '/Areas');
+        $(location).attr('href', '/Areas/Index');
        } else {
            MsgError("Error", "No se inactivó el registro, contacte al administrador.");
        }
