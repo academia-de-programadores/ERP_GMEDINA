@@ -25,7 +25,9 @@
                         <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label><label class="" id="AsteriscoColaborador" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-8">
-                        <select id="emp_Id" name="emp_Id" class="form-control" onchange="ValidarCamposEditar(this.value, '-1', '-1')"></select>
+                        <select class="form-control lg" name="emp_Id" id="emp_Id" onchange="ValidarCamposEditar(this.value, '-1', '-1')">
+                            <option></option>
+                        </select>
                         <span class="field-validation-valid text-danger" style="display: none;" id="Span_emp_Id">Campo Colaborador requerido</span>
                     </div>
                 </div>

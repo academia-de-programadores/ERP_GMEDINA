@@ -49,7 +49,7 @@
                                     <td>
                                         @{  string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
                                             string Deducido = item.adsu_Deducido == true ? (string)"Deducido en planilla" : (string)"Sin deducir";
-                                            }
+                                        }
                                         @Html.DisplayFor(modelItem => @Nombre)
                                     </td>
                                     <td>
@@ -62,7 +62,7 @@
                                         @(item.adsu_FechaAdelanto.Day + "/" + (((item.adsu_FechaAdelanto.Month).ToString().Length > 1) ? item.adsu_FechaAdelanto.Month.ToString() : "0" + item.adsu_FechaAdelanto.Month) + "/" + item.adsu_FechaAdelanto.Year)
                                     </td>
                                     <td>
-                                         @Deducido
+                                        @Deducido
                                     </td>
                                     <td>
                                         @{
@@ -88,7 +88,7 @@
                                         }
                                     </td>
                                 </tr>
-                            }
+                                            }
                         </tbody>
                     </table>
                 </div>
@@ -114,16 +114,17 @@
             <div class="modal-header">
                 <h4 class="modal-title">Editar Adelanto de Sueldo</h4>
             </div>
-            
-                @Html.Partial("_Editar", new ERP_GMEDINA.Models.tbAdelantoSueldo())
-            </div>
+
+            @Html.Partial("_Editar", new ERP_GMEDINA.Models.tbAdelantoSueldo())
+        </div>
     </div>
 </div>
 
 <div class="modal fade" id="DetallesAdelantoSueldo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Detalle Adelanto</h4>
             </div>
             <div class="modal-body" id="Detalles">
@@ -189,10 +190,12 @@
 </div>
 
 @section Styles {
+    @Styles.Render("~/plugins/select2Styles")
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 
 @section Scripts {
+    @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/General/AdelantoSueldo")
 }

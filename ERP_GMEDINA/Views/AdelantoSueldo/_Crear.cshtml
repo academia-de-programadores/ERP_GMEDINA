@@ -10,8 +10,10 @@
             <div class="row">
                 <div class="col-md-6">
                     Colaborador<label class="" id="AsteriscoColaborador">*</label>
-                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control" onchange="ValidarCamposCrear('-1', '-1', this.value, '-1')"></select>
-                    <span class="text-danger" id="Span_emp_Id" style="display:none;">Campo Colaborador requerido</span>
+                    <select class="form-control lg" name="emp_Id" id="emp_IdEmpleado" onchange="ValidarCamposCrear('-1', '-1', this.value, '-1')">
+                        <option></option>
+                    </select>
+                    <span class="text-danger" id="Span_emp_Id" style="display:none; z-index:9999 !important;">Campo Colaborador requerido</span>
                 </div>
                 <div class="col-md-6">
                     Razón<label class="" id="AsteriscoRazon">*</label>
