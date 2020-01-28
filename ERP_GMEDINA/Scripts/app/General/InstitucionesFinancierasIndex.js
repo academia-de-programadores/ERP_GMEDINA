@@ -581,7 +581,7 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
         }
 
         //Telefono
-        if (insf_Telefono == "" || insf_Telefono == " " || insf_Telefono == "  " || isNaN(insf_Telefono)) {
+        if (insf_Telefono == "" || insf_Telefono == " " || insf_Telefono == "  " || insf_Telefono == null) {
             //VACIAR EL ESPACIO EN BLANCO INICIAL
             if (insf_Telefono == ' ')
                 $("#Crear #insf_Telefono").val("");
@@ -604,15 +604,18 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
     if (insf_Correo != "-1") {
 
         //FORMATO DE LA MASCARA
-        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        emailRegex = /^[-\w.%+]{1,50}@(?:[A-Z0-9-]{1,50}\.){1,100}[A-Z]{2,50}$/i;
 
         //VALIDAR
         if (!emailRegex.test(insf_Correo)) {
             //MOSTRAR LA VALIDACIÓN DE CORREO
+            $("#Crear #Span_insf_Correo").hide();
             $("#Crear #Span_insf_Correo_Validar").show();
+            $("#Crear #Asterisco_insf_Correo").addClass("text-danger");
         } else {
             //MOSTRAR LA VALIDACIÓN DE CORREO
             $("#Crear #Span_insf_Correo_Validar").hide();
+            $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
         }
 
         //VALIDAR ESPACIOS EN BLANCO
@@ -632,6 +635,7 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
                 $("#Crear #insf_Correo").val("");
 
             //MOSTRAR DATAANNOTATIONS
+            $("#Crear #Span_insf_Correo_Validar").hide();
             $("#Crear #Span_insf_Correo").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Crear #Asterisco_insf_Correo").addClass("text-danger");
@@ -717,6 +721,7 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
 
 
     if (insf_Telefono != "-1") {
+
         //VALIDAR ESPACIOS EN BLANCO
         var LengthString = insf_Telefono.length;
         if (LengthString > 1) {
@@ -728,7 +733,7 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
         }
 
         //Telefono
-        if (insf_Telefono == "" || insf_Telefono == " " || insf_Telefono == "  " || isNaN(insf_Telefono)) {
+        if (insf_Telefono == "" || insf_Telefono == " " || insf_Telefono == "  " || insf_Telefono == null) {
             //VACIAR EL ESPACIO EN BLANCO INICIAL
             if (insf_Telefono == ' ')
                 $("#Editar #insf_Telefono").val("");
@@ -750,15 +755,18 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
     if (insf_Correo != "-1") {
 
         //FORMATO DE LA MASCARA
-        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        emailRegex = /^[-\w.%+]{1,50}@(?:[A-Z0-9-]{1,50}\.){1,100}[A-Z]{2,50}$/i;
 
         //VALIDAR
         if (!emailRegex.test(insf_Correo)) {
             //MOSTRAR LA VALIDACIÓN DE CORREO
+            $("#Editar #Span_insf_Correo").hide();
             $("#Editar #Span_insf_Correo_Validar").show();
+            $("#Editar #Asterisco_insf_Correo").addClass("text-danger");
         } else {
             //MOSTRAR LA VALIDACIÓN DE CORREO
             $("#Editar #Span_insf_Correo_Validar").hide();
+            $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
         }
 
         //VALIDAR ESPACIOS EN BLANCO
@@ -774,9 +782,10 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
         //CORREO
         if (insf_Correo == "" || insf_Correo == " " || insf_Correo == "  " || insf_Correo == null) {
             //VACIAR EL ESPACIO EN BLANCO INICIAL
-            if (insf_Telefono == ' ')
+            if (insf_Correo == ' ')
                 $("#Editar #insf_Correo").val("");
             //MOSTRAR DATAANNOTATIONS
+            $("#Editar #Span_insf_Correo_Validar").hide();
             $("#Editar #Span_insf_Correo").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Editar #Asterisco_insf_Correo").addClass("text-danger");
@@ -793,6 +802,3 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
     //RETURN DEL ESTADO DEL MODELO
     return ModelState;
 }
-
-
-
