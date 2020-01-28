@@ -14,7 +14,7 @@ function Add(emp_Id, tamo_Id) {
         var Fila = ChildTable.rows().data()[i];
         if (Fila.Empleado == Empleado || Fila.TipoAmonestacion == TipoAmonestacion) {
             if (Fila.Empleado == Empleado) {
-                MsgError("Error","Ya Existe el Empledo")
+                MsgError("Error","Ya existe el empleado.")
             }
         }
     }

@@ -366,14 +366,14 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Exito!", "El registro se ha eliminado de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El archivo se eliminó de forma exitosa.");
                     CargarDatos();
                 } else {
-                    MsgError("Error", "No se logró eliminar el registro, contacte al administrador");
+                    MsgError("Error", "No se eliminó el archivo, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "No se logró eliminar el registro, contacte al administrador");
+        MsgError("Error", "No se eliminó el archivo, contacte al administrador.");
     }
 });
 

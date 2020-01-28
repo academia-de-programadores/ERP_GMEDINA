@@ -55,7 +55,7 @@ $("#btnGuardar").click(function () {
     data = serializar(data1);
     if (data != null) {
         data = JSON.stringify({ tbEmpleados: data });
-        debugger
+        
         _ajax(data,
             '/HistorialCargos/Create',
             'POST',
@@ -65,13 +65,13 @@ $("#btnGuardar").click(function () {
                     llenarTabla();
                     LimpiarControles(["sue_Cantidad"]);
 
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
                 } else {
-                    MsgError("Error", "No se agrego el registro, contacte al administrador");
+                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 
 });

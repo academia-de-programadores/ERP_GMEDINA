@@ -22,14 +22,14 @@ $("#btnActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                    MsgWarning("¡Éxito!", "El registro se activó de forma exitosa.");
                     LimpiarControles(["hvac_Id"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se activó el registro, contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });

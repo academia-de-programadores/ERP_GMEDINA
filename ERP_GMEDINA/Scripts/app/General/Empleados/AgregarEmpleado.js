@@ -6,7 +6,7 @@
 $("#btnUpload").change(function () {
     var fileExtension = ['xls','xlsx'];
     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-        MsgError("¡Error!", "Debe Agregar el archivo de excel correspondiente");
+        MsgError("Error", "Debe agregar el archivo de excel correspondiente.");
     }
 });
 
@@ -31,22 +31,22 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
     })
     .done(function (res) {
         if (res == "-1" ) {
-            MsgError("Error", "Codigo:"+res+"Contacte al administrador");
+            MsgError("Error", "Codigo:"+res+" Contacte al administrador.");
         }
         else if (res == "-2")
         {
-            MsgError("Error", "El archivo ya existe");
+            MsgError("Error", "El archivo ya existe.");
         }
         else if (res == "-3") {
-            MsgError("Error", "El archivo ya existe");
+            MsgError("Error", "El archivo ya existe.");
         }
         else if (res == "1") {
-            MsgSuccess("Exito", "Los registros se agregaron de forma exitosa");
+            MsgSuccess("¡Éxito!", "Los registros se agregaron de forma exitosa.");
             llenarTabla();
             $('#ModalNuevo').modal('hide');
         }
         else if (res == "-4") {
-            MsgError("Error", "Debe Agregar el archivo de excel correspondiente");
+            MsgError("Error", "Debe agregar el archivo de excel correspondiente.");
         }
     });
 });

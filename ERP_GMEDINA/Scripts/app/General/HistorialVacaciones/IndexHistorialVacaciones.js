@@ -167,14 +167,14 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     llenarTabla();
-                    MsgSuccess("¡Éxito!", "El registro se ha inactivado de forma exitosa.");
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     llenarTabla();
                 } else {
-                    MsgError("Error", "No se logró inactivar el registro, contacte al administrador.");
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
                 }
             });
     } else {
@@ -192,14 +192,14 @@ function compare_dates() {
 
 
     if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fechas no validas.");
+        MsgError("Error", "Fechas no válidas.");
     }
 
     else if (Date.parse(fecha1) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha inicio no es valida.");
+        MsgError("Error", "Fecha inicio no válida.");
     }
     else if (Date.parse(fecha2) < Date.parse(fechalimite)) {
-        MsgError("Error", "Fecha fin no es valida.");
+        MsgError("Error", "Fecha fin no válida.");
     }
 
     else {
