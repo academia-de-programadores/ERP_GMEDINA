@@ -805,7 +805,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueld
 
                 var FechaCrea = FechaFormato(data.adsu_FechaCrea);
                 var FechaModifica = FechaFormato(data.adsu_FechaModifica);
-
+                var FechaRegistro = FechaFormato(data.adsu_FechaAdelanto);
                 if (data.adsu_Deducido) {
                     $("#Detalles #adsu_Deducido").html("Si");
                 } else {

@@ -206,6 +206,8 @@ $(document).ready(function () {
 
 
 function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
+    //VACIAR CONCEPTOS ADICIONALES 
+    vaciarConceptosAdicionales();
     _ajax(
         {
             idEmpleado: idEmpleado,
@@ -296,6 +298,7 @@ function mostrarDatosColaborador(
     Vacaciones,
     Total_Liquidacion
 ) {
+    //LLENAR CONCEPTOS ADICIONALES
     spanDiasLaborados.html(Dias);
     spanMesesLaborados.html(Meses);
     spanAniosLaborados.html(Anios);
@@ -356,7 +359,6 @@ $("#btnConceptosAdicionales").click(function () {
         });
     }
     else {
-        var VacacionesPendientes = $("#SalariosAdeudados").val();
         var Form = {
             SalariosAdeudados: $("#SalariosAdeudados").val().replace(/,/g, ""),
             OtrosPagos: $("#OtrosPagos").val().replace(/,/g, ""),
@@ -374,7 +376,7 @@ $("#btnConceptosAdicionales").click(function () {
             PagoPorDiasFeriado: $("#PagoPorDiasFeriado").val().replace(/,/g, "")
         };
         $.ajax({
-            url: "Liquidacion/CalcularLiquidacion",
+            url: "/Liquidacion/CalcularLiquidacion",
             type: "POST",
             dataType: "json",
             contentType: 'application/json; charset=utf-8',
@@ -406,6 +408,9 @@ $("#btnConceptosAdicionales").click(function () {
 
 //VACIAR LOS CONCEPTOS AGREGADOS
 function vaciarConceptosAdicionales() {
+
+        //OCULTAR CONCEPTOS ADICIONALES
+    divConceptosAdicionales.hide();
     $("#SalariosAdeudados").val('');
     $("#OtrosPagos").val('');
     $("#PagoHEPendiente").val('');
@@ -441,7 +446,7 @@ $("#RegistrarLiquidacion").click(function () {
     if (validarCampos(ddlEmpleadosVal, ddlMotivosVal, fechaFinVal, true)) {
         //REALIZAR LA PETICIÓN PARA LA INSERCION
         $.ajax({
-            url: "Liquidacion/RegistrarLiquidacion",
+            url: "/Liquidacion/RegistrarLiquidacion",
             type: "GET",
             dataType: "json",
             contentType: 'application/json; charset=utf-8'
@@ -449,7 +454,7 @@ $("#RegistrarLiquidacion").click(function () {
             if (data == "error") {
                 //DESBLOQUEAR EL BOTON
                 $("#RegistrarLiquidacion").attr("disabled", false);
-
+                console.log("Response : Error");
                 //MOSTRAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
@@ -457,6 +462,7 @@ $("#RegistrarLiquidacion").click(function () {
                 });
             }
             else {
+                console.log("Response : EXito");
                 //MOSTRAR MENSAJE DE ÉXITO
                 iziToast.success({
                     title: 'Éxito',
@@ -469,6 +475,7 @@ $("#RegistrarLiquidacion").click(function () {
 
             }
         }).fail(function (data) {
+            console.log("Error en la conexion");
             //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',

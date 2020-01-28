@@ -146,7 +146,7 @@ namespace ERP_GMEDINA.Controllers
                     LiquidacionVM.FechaLiquidacion = fechaFin;
                     LiquidacionVM.SalarioOrdinarioMensual_Liq = SalarioOrdinarioMensual;
                     LiquidacionVM.SalarioPromedioMensual_Liq = (SalarioOrdinarioMensual * 14) / 12;
-                    LiquidacionVM.SalarioOrdinarioDiario_Liq = (SalarioOrdinarioMensual) / 360 ;
+                    LiquidacionVM.SalarioOrdinarioDiario_Liq = (SalarioOrdinarioMensual) / 30 ;
                     LiquidacionVM.SalarioPromedioDiario_Liq = (SalarioOrdinarioMensual * 14) / 360;
                     LiquidacionVM.Preaviso_Liq = Monto_Preaviso;
                     LiquidacionVM.Cesantia_Liq = Monto_Cesantia;
