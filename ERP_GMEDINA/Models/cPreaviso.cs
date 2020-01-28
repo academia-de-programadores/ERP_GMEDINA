@@ -16,14 +16,14 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Número")]
         public int prea_IdPreaviso { get; set; }
 
-        //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
+        
        
         [Display(Name = "Rango de Inicio del Mes")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
         [Range(0, 36, ErrorMessage = "El rango inicio meses debe estar entre {1} y {2}")]
         public string prea_RangoInicioMeses { get; set; }
 
-        //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
+        
       
         [Display(Name = "Rango de Fin de Mes")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Models
         public string prea_RangoFinMeses { get; set; }
 
         [RegularExpression("^[0-9]*$", ErrorMessage = "Solo se permiten caracteres entre 0 y 9")]
-        [Range(0 ,999999, ErrorMessage = "El campo dias de preaviso debe ser mayor que cero")]
+        [Range(0 ,999999999, ErrorMessage = "El campo dias de preaviso debe ser mayor que cero")]
         [Display(Name = "Días de Preaviso")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
         public string prea_DiasPreaviso { get; set; }
