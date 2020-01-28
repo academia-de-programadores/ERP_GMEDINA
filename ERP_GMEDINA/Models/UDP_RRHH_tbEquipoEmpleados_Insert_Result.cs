@@ -1,3 +1,4 @@
+
 namespace ERP_GMEDINA.Models
 {
     using System;
