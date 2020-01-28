@@ -196,7 +196,7 @@ $('#btnCreateAcumuladosISR').click(function () {
         var data = $("#frmAcumuladosISRCreate").serializeArray();
         // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
         var stringDecimal = data[5].value;
-        data[5].value = stringDecimal.replace(/,/, '');
+        data[5].value = stringDecimal.replace(/,/g, '');
 
         $.ajax({
             url: "/AcumuladosISR/Create",
@@ -409,7 +409,7 @@ $("#btnUpdateAISR2").click(function () {
     
     // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
     var stringDecimal = data[5].value;
-    data[5].value = stringDecimal.replace(/,/, '');
+    data[5].value = stringDecimal.replace(/,/g, '');
 
 
     $.ajax({

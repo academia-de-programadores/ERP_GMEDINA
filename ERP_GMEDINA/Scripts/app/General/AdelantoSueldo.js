@@ -131,6 +131,40 @@ $(cmbEmpleado).change(() => {
     });
 });
 
+$('#Crear #adsu_FechaAdelanto, #Editar #adsu_FechaAdelanto').blur(function () {
+    var campo = $(this).val();
+
+    var hoy = new Date();
+
+    let splitCampo = campo.split('-');
+    let date = new Date(splitCampo[0], splitCampo[1], splitCampo[2]);
+
+    console.log(date);
+
+
+
+
+    campo = new Date(campo);
+
+    if (campo >= hoy) {
+        alert('pasa');
+    } else {
+        alert('menor');
+    }
+
+    // if (!validarFechaMenorActual($(this).val())) {
+    //     console.log('mayor');
+
+    //     $('#Validation_adsu_FechaAdelantoMenor').show();
+    //     $("#Crear #AsteriscoFecha").addClass("text-danger");
+    // }
+    // else {
+    //     $('#Validation_adsu_FechaAdelantoMenor').hide();
+    //     $("#Crear #AsteriscoFecha").removeClass("text-danger");
+
+    // }
+});
+
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAdelantos').click(function () {
     var Razon = $("#Crear #adsu_RazonAdelanto").val();
