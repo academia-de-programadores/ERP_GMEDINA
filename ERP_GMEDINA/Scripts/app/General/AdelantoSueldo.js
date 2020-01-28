@@ -803,9 +803,9 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueld
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
 
-                var FechaCrea = FechaFormato(data.adsu_FechaCrea);
-                var FechaModifica = FechaFormato(data.adsu_FechaModifica);
-
+                var FechaCrea = FechaFormatoNac(data.adsu_FechaCrea);
+                var FechaModifica = FechaFormatoNac(data.adsu_FechaModifica);
+                let FechaRegistro = FechaFormatoNac(data.adsu_FechaAdelanto);
                 if (data.adsu_Deducido) {
                     $("#Detalles #adsu_Deducido").html("Si");
                 } else {
