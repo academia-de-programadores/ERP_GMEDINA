@@ -36,22 +36,9 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region DDLEmpleado
-        public JsonResult EditGetDDLEmpleado()
+        public string EditGetDDLEmpleado()
         {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from Personas in db.tbPersonas
-            join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
-            join planillas in db.tbCatalogoDePlanillas on Empleados.cpla_IdPlanilla equals planillas.cpla_IdPlanilla
-            //join Cargo in db.tbCargos on Empleados.car_Id equals Cargo.car_Id
-            where planillas.cpla_RecibeComision == true && Empleados.emp_Estado == true
-            select new
-            {
-                Id = Empleados.emp_Id,
-                Descripcion = Personas.per_Nombres + " " + Personas.per_Apellidos
-            };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
+            return Helpers.General.ObtenerEmpleados();
         }
         #endregion
 
