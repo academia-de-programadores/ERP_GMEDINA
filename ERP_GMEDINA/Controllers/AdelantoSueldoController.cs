@@ -65,23 +65,6 @@ namespace ERP_GMEDINA.Controllers
         public string EmpleadoGetDDL()
         {
             return Helpers.General.ObtenerEmpleados();
-
-            //LA CONSULTA DEVUELVE LOS REGISTROS QUE NO TENGAN ADELANTOS ACTIVOS
-            //var DDL =
-            //from Personas in db.tbPersonas
-            //join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
-            //where !(from Adelanto in db.tbAdelantoSueldo where Adelanto.adsu_Deducido == false
-            //          select Adelanto.emp_Id).Contains(Empleados.emp_Id)
-            //orderby(Personas.per_Nombres)
-            //select new
-            //{
-            //    Id = Empleados.emp_Id,
-            //    Descripcion = Personas.per_Nombres
-            //    + " " + Personas.per_Apellidos
-            //    + "-" + Personas.per_Identidad
-            //};
-            ////RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            //return Json(DDL, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

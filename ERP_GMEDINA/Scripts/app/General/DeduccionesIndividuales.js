@@ -25,6 +25,45 @@ function _ajax(params, uri, type, callback) {
 }
 
 $(document).ready(function () {
+
+    $.ajax({
+        url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $('#Crear #emp_IdCreate').select2({
+            dropdownParent: $('#Crear'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+
+        $('#Editar #emp_Id').select2({
+            dropdownParent: $('#Editar'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+    });
+
+
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green'
@@ -479,6 +518,10 @@ $("#btnCerrarCrear").click(function () {
 
 //Pedir data para llenar el DDL
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
+     let valCreate = $("#Crear #emp_IdCreate").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdCreate").val('').trigger('change');
+
     //Ocultar validaciones span
     limpiarSpan("Crear");
     //Asteriscos
@@ -589,6 +632,16 @@ $("#btnCerrarEditar").click(function () {
 
 
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
+        idEmpSelect = data.emp_Id;
+        NombreSelect = data.per_Nombres;
+
+
     limpiarAsteriscos("Editar");
     limpiarSpan("Editar");
     document.getElementById("btnEditDeduccionIndividual2").disabled = false;
@@ -612,33 +665,22 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
                     $('#Editar #dei_PagaSiempre').prop('checked', false);
                 }
 
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                let valor = $('#Editar #emp_Id').val();
+
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
+                }
+
+
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
                 $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
                 $("#Editar #dei_MontoRestante").val(data.dei_MontoRestante);
                 $("#Editar #dei_Cuota").val(data.dei_Cuota);
                 $("#Editar #dei_PagaSiempre").val(data.dei_PagaSiempre);
-
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.emp_Id;
-
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ id })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
             }
             else {
