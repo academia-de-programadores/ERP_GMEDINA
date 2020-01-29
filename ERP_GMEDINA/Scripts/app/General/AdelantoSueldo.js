@@ -85,20 +85,23 @@ function cargarGridAdelantos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
+    let valCreate = $("#Crear #emp_IdEmpleado").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdEmpleado").val('').trigger('change');
     //OCULTAR TODAS LAS VALIDACIONES
     OcultarValidacionesCrear();
     //DESBLOQUEAR EL BOTON DE CREAR
     $("#btnCreateRegistroAdelantos").attr("disabled", false);
-    //VACIAR OPTIONS
-    $('.select2-hidden-accessible').empty();
-    $('.select2-hidden-accessible').attr("placeholder", "Seleccione un empleado.");
+    $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
+});
+
+$(document).ready(function () {
     $.ajax({
         url: "/AdelantoSueldo/EmpleadoGetDDL",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
-        // $('#Crear #emp_IdEmpleado').attr("Seleccione un empleado.");
         $('#Crear #emp_IdEmpleado').select2({
             dropdownParent: $('#Crear'),
             placeholder: 'Seleccione un empleado',
@@ -113,15 +116,22 @@ $(document).on("click", "#btnAgregarAdelanto", function () {
             },
             data: data.results
         });
-        // //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-        // $("#Crear #emp_IdEmpleado").empty();
-        // //LLENAR EL DROPDOWNLIST
-        // $("#Crear #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
-        // $.each(data, function (i, iter) {
-        //     $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-        // });
+
+        $('#Editar #emp_Id').select2({
+            dropdownParent: $('#Editar'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
     });
-    $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
 });
 
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA CREACION
@@ -175,7 +185,6 @@ $('#btnCreateRegistroAdelantos').click(function () {
     var Monto = $("#Crear #adsu_Monto").val();
     var IdEmp = $("#Crear #emp_IdEmpleado").val();
     var Fecha = $("#Crear #adsu_FechaAdelanto").val();
-
 
     if (ValidarCamposCrear(Razon, Monto, IdEmp, Fecha)) {
         //BLOQUEAR EL BOTON
@@ -379,7 +388,6 @@ function OcultarValidacionesCrear() {
     //SETEAR LOS CAMPOS
     $("#Crear #adsu_RazonAdelanto").val("");
     $("#Crear #adsu_Monto").val("");
-    $("#Crear #emp_IdEmpleado").val("0");
     $("#Crear #adsu_FechaAdelanto").val("");
     $("#Crear #SueldoPromedioCrear").hide();
 
@@ -411,10 +419,16 @@ $('#btnCerrarCrearAdelanto').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
+
     //OCULTAR VALIDACIONES
     OcultarValidacionesEditar();
 
-    $("#Editar #emp_Id").empty();
     var ID = $(this).data('id');
     IDInactivar = ID;
 
@@ -466,40 +480,17 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
                     $("#btnUpdateAdelantos").attr('disabled', false);
                 }
 
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/AdelantoSueldo/EmpleadoGetDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                }).done(function (data) {
-                    $('#Editar #emp_Id').empty();
-                    $('#Editar #emp_Id').select2({
-                        dropdownParent: $('#Editar'),
-                        placeholder: 'Seleccione un empleado',
-                        allowClear: true,
-                        language: {
-                            noResults: function () {
-                                return 'Resultados no encontrados.';
-                            },
-                            searching: function () {
-                                return 'Buscando...';
-                            }
-                        },
-                        data: data.results
-                    });
+                $("#Editar #emp_Id").select2("val", "");
 
-                    $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
 
-                    let valor = $('#Editar #emp_Id').val();
+                let valor = $('#Editar #emp_Id').val();
 
-                    if (valor == null)
-                        $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
+                }
 
-                    let valorOption = $('#Editar #emp_Id').val();
-                    console.log(valorOption);
-                });
                 $("#Editar #adsu_IdAdelantoSueldo").val(dataAdelantoSueldo.adsu_IdAdelantoSueldo);
                 $("#Editar #adsu_RazonAdelanto").val(dataAdelantoSueldo.adsu_RazonAdelanto);
                 $("#Editar #adsu_Monto").val(dataAdelantoSueldo.adsu_Monto);
@@ -790,7 +781,6 @@ function OcultarValidacionesEditar() {
     //SETEAR LOS CAMPOS
     $("#Editar #adsu_RazonAdelanto").val("");
     $("#CreEditarar #adsu_Monto").val("");
-    $("#Editar #emp_IdEmpleado").val(0);
 
     //OCULTAR VALIDACIONES DE EMP_ID
     $('#Editar #Span_emp_Id').hide();
