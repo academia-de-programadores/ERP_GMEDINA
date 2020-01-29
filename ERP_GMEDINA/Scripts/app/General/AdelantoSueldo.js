@@ -436,9 +436,9 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: data.emp_Id })
-        }).done(function (data) {
+        }).done(function (dataEmpleado) {
             //ACCIONES EN CASO DE EXITO
-            MaxSueldoCreate = data;
+            MaxSueldoCreate = dataEmpleado;
         }).fail(function (data) {
             //ACCIONES EN CASO DE ERROR
             $("#AgregarAdelantos").modal('hide');
@@ -449,7 +449,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
         });
         idEmpSelect = data.emp_Id;
         NombreSelect = data.per_Nombres;
-        
+
         // $("#Editar #emp_Id").append("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>");
         $.ajax({
             url: "/AdelantoSueldo/Edit/" + ID,
@@ -457,15 +457,14 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: ID })
-        }).done(function (data) {
-            if (data) {
+        }).done(function (dataAdelantoSueldo) {
+            if (dataAdelantoSueldo) {
                 //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO
-                if (data.adsu_Deducido) {
+                if (dataAdelantoSueldo.adsu_Deducido) {
                     document.getElementById("btnUpdateAdelantos").disabled = true;
                 } else {
                     $("#btnUpdateAdelantos").attr('disabled', false);
                 }
-                var SelectedIdEmp = dataAdelantoSueldo.emp_Id;
 
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
