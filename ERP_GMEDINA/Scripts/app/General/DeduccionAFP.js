@@ -25,7 +25,7 @@ $(document).ready(function () {
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
-        $('#Crear #emp_Id').select2({
+        $('#Crear #emp_IdCrear').select2({
             dropdownParent: $('#Crear'),
             placeholder: 'Seleccione un empleado',
             allowClear: true,
@@ -150,9 +150,9 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionAFP", function () {
-    let valCreate = $("#Crear #emp_Id").val();
+    let valCreate = $("#Crear #emp_IdCrear").val();
     if (valCreate != null && valCreate != "")
-        $("#Crear #emp_Id").val('').trigger('change');
+        $("#Crear #emp_IdCrear").val('').trigger('change');
 
     OcultarValidacionesCrear();
     OcultarValidacionesEdit();
@@ -256,7 +256,7 @@ function OcultarValidacionesEdit() {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionAFP').click(function () {
-    var empId = $("#Crear #emp_Id").val();
+    var empId = $("#Crear #emp_IdCrear").val();
     var Aporte = $("#Crear #dafp_AporteLps").val();
     var AFP = $("#Crear #afp_Id").val();
 
@@ -294,7 +294,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
                     message: '¡El registro se agregó de forma exitosa!',
                 });
 
-                $("#Crear #emp_Id").val("0");
+                $("#Crear #emp_IdCrear").val("0");
                 $("#Crear #dafp_AporteLps").val('');
                 $("#Crear #afp_Id").val("0");
             }
