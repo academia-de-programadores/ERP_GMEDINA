@@ -463,8 +463,6 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
         });
         idEmpSelect = data.emp_Id;
         NombreSelect = data.per_Nombres;
-
-        // $("#Editar #emp_Id").append("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>");
         $.ajax({
             url: "/AdelantoSueldo/Edit/" + ID,
             method: "GET",

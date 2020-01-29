@@ -195,12 +195,14 @@
     </div>
 </div>
 
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/select2Styles")
+}
+
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general/DeduccionAFP")
-}
-
-@section Styles {
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Scripts.Render("~/plugins/select2")
 }
 
