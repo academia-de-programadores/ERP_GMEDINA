@@ -109,6 +109,8 @@ function cargarGridBonos() {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
 
+    $('.select2-hidden-accessible').empty();
+    $('.select2-hidden-accessible').attr("placeholder", "Seleccione un empleado...");
     //LLAMAR LA FUNCION PARA OCULTAR LAS VALIDACIONES
     OcultarValidacionesCrear();
     //DESBLOQUEAR EL BOTON DE CREAR
@@ -122,11 +124,19 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            $("#Crear #emp_IdEmpleado").empty();
-            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecionar colaborador...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
+            $('#Crear #emp_IdEmpleado').select2({
+                dropdownParent: $('#Crear'),
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
+                },
+                data: data.results
         });
 
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE INGRESO DEL MODAL
@@ -390,10 +400,10 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
             if (data) {
                 if (data.cb_Pagado) {
                     varPagado = 1;
-                    document.getElementById("btnUpdateBonos").disabled = true;
+                    $("#btnUpdateBonos").attr('disabled', true);
                 } else {
                     varPagado = 0;
-                    document.getElementById("btnUpdateBonos").disabled = false;
+                    $("#btnUpdateBonos").attr('disabled', false);
                 }
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
 
@@ -423,8 +433,20 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_IdEmpleado").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                        $('#Editar #emp_IdEmpleado').empty();
+                        $('#Editar #emp_IdEmpleado').select2({
+                            dropdownParent: $('#Editar'),
+                            placeholder: 'Seleccione un empleado',
+                            allowClear: true,
+                            language: {
+                                noResults: function () {
+                                    return 'Resultados no encontrados.';
+                                },
+                                searching: function () {
+                                    return 'Buscando...';
+                                }
+                            },
+                            data: data.results
                         });
                     });
 

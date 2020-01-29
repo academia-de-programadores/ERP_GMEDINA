@@ -35,16 +35,9 @@ namespace ERP_GMEDINA.Controllers
             return new JsonResult { Data = tbEmpleadoBonos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public JsonResult EditGetDDLEmpleado()
-        {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from Personas in db.tbPersonas            
-            join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
-            where Empleados.emp_Estado == true
-            select new { Id = Empleados.emp_Id, Descripcion = Personas.per_Nombres + " " + Personas.per_Apellidos };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
+        public string EditGetDDLEmpleado()
+        {                        
+            return Helpers.General.ObtenerEmpleados();
         }
 
         public JsonResult EditGetDDLIngreso()
