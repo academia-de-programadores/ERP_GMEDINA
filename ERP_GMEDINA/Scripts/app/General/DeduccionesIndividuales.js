@@ -1,10 +1,10 @@
 ﻿//#region Region Obtención de Script para Formateo de Fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        
+
     })
     .fail(function (jqxhr, settings, exception) {
-        
+
     });
 //#endregion
 var inactivarID = 0;
@@ -62,7 +62,6 @@ $(document).ready(function () {
             data: data.results
         });
     });
-
 
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
@@ -518,7 +517,7 @@ $("#btnCerrarCrear").click(function () {
 
 //Pedir data para llenar el DDL
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
-     let valCreate = $("#Crear #emp_IdCreate").val();
+    let valCreate = $("#Crear #emp_IdCreate").val();
     if (valCreate != null && valCreate != "")
         $("#Crear #emp_IdCreate").val('').trigger('change');
 
@@ -527,24 +526,8 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
     //Asteriscos
     limpiarAsteriscos("Crear");
     document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = false;
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #emp_Id").empty();
-            $("#Crear #emp_Id").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
+
     $("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
@@ -633,14 +616,12 @@ $("#btnCerrarEditar").click(function () {
 
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
     let itemEmpleado = localStorage.getItem('idEmpleado');
+    let dataEmp = table.row($(this).parents('tr')).data();
 
     if (itemEmpleado != null) {
-        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        $("#Editar #emp_Id #opt-gr-emp-info-incompleta").remove();
         localStorage.removeItem('idEmpleado');
     }
-        idEmpSelect = data.emp_Id;
-        NombreSelect = data.per_Nombres;
-
 
     limpiarAsteriscos("Editar");
     limpiarSpan("Editar");
@@ -657,6 +638,9 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                console.log()
+                idEmpSelect = data.emp_Id;
+                NombreSelect = dataEmp[2];
 
                 if (data.dei_PagaSiempre) {
                     $('#Editar #dei_PagaSiempre').prop('checked', true);
@@ -670,10 +654,10 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
                 let valor = $('#Editar #emp_Id').val();
 
                 if (valor == null) {
-                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    $("#Editar #emp_Id").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>');
+                    $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
                     localStorage.setItem('idEmpleado', idEmpSelect);
                 }
-
 
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);

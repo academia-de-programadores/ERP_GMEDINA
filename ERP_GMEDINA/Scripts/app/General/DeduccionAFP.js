@@ -156,7 +156,7 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
     OcultarValidacionesCrear();
     OcultarValidacionesEdit();
-    
+
     //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
     $.ajax({
         url: "/DeduccionAFP/EditGetAFPDDL",
