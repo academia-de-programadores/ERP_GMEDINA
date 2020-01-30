@@ -46,21 +46,6 @@ $(document).ready(function () {
             },
             data: data.results
         });
-
-        $('#Editar #emp_Id').select2({
-            dropdownParent: $('#Editar'),
-            placeholder: 'Seleccione un empleado',
-            allowClear: true,
-            language: {
-                noResults: function () {
-                    return 'Resultados no encontrados.';
-                },
-                searching: function () {
-                    return 'Buscando...';
-                }
-            },
-            data: data.results
-        });
     });
 
     $('.i-checks').iCheck({
@@ -636,28 +621,49 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
         data: JSON.stringify({ id: id })
     })
         .done(function (data) {
+            if (data.dei_PagaSiempre) {
+                $('#Editar #dei_PagaSiempre').prop('checked', true);
+            }
+            else {
+                $('#Editar #dei_PagaSiempre').prop('checked', false);
+            }
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log()
-                let idEmpSelect = data.emp_Id;
-                console.table(dataEmp);
-                let NombreSelect = dataEmp[2]; //asignar data del row seleccionado
+                $.ajax({
+                    url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8"
+                }).done(function (emp) {
+                    $('#Editar #emp_Id').empty();
+                    $('#Editar #emp_Id').select2({
+                        dropdownParent: $('#Editar'),
+                        placeholder: 'Seleccione un empleado',
+                        allowClear: true,
+                        cache: false,
+                        language: {
+                            noResults: function () {
+                                return 'Resultados no encontrados.';
+                            },
+                            searching: function () {
+                                return 'Buscando...';
+                            }
+                        },
+                        data: emp.results
+                    });
 
-                if (data.dei_PagaSiempre) {
-                    $('#Editar #dei_PagaSiempre').prop('checked', true);
-                }
-                else {
-                    $('#Editar #dei_PagaSiempre').prop('checked', false);
-                }
+                    let idEmpSelect = data.emp_Id;
+                    let NombreSelect = dataEmp[2]; //asignar data del row seleccionado
+    
 
-                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
-
-                let valor = $('#Editar #emp_Id').val();
-
-                if (valor == null) {
-                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
-                    localStorage.setItem('idEmpleado', idEmpSelect);
-                }
+                    $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+                    let valor = $('#Editar #emp_Id').val();
+                    if (valor == null) {
+                        $("#Editar #emp_Id").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>');
+                        $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
+                        localStorage.setItem('idEmpleado', idEmpSelect);
+                    }
+                });
 
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
