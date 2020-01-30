@@ -403,10 +403,14 @@ function OcultarValidacionesEditar() {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos", function () {
+    //OBTENER TODA LA DATA DEL ROW SELECCIONADO
+    let dataEmp = table.row($(this).parents('tr')).data();
+    //INICIALIZAR UNA VARIABLE CON EL VALOR DEL ALMACENAMIENTO LOCAL
     let itemEmpleado = localStorage.getItem('idEmpleado');
 
     if (itemEmpleado != null) {
-        $("#Editar #emp_IdEmpleado option[value='" + itemEmpleado + "']").remove();
+        $("#Editar #emp_IdEmpleado option[value='" + itemEmpleado + "']").remove().trigger('change');
+        $("#Editar #emp_IdEmpleado #opt-gr-emp-info-incompleta").remove().trigger('change');
         localStorage.removeItem('idEmpleado');
     }
     //OCULTAR VALIDACIONES DE EDITAR
@@ -444,7 +448,8 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                     $('#Editar #cb_Pagado').prop('checked', false);
                 }
                 idEmpSelect = data.emp_Id;
-                NombreSelect = data.per_Nombres;
+                console.table(dataEmp);
+                NombreSelect = dataEmp[1];
                 
                $("#Editar #emp_IdEmpleado").select2("val", "");
                $('#Editar #emp_IdEmpleado').val(idEmpSelect).trigger('change');
@@ -452,8 +457,10 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                let valor = $('#Editar #emp_IdEmpleado').val();
 
                if (valor == null) {
-                   $("#Editar #emp_IdEmpleado").prepend("<option value='" +idEmpSelect + "' selected>" +NombreSelect + "</option>").trigger('change');
-                localStorage.setItem('idEmpleado', idEmpSelect);
+                   console.log(idEmpSelect, NombreSelect);
+                   $("#Editar #emp_IdEmpleado").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>').trigger('change');
+                   $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
+                   localStorage.setItem('idEmpleado', idEmpSelect);
                 }
 
                 $("#Editar #cb_Id").val(data.cb_Id);

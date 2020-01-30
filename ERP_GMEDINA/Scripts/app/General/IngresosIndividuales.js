@@ -382,6 +382,8 @@ $("#btnCerrarEditar").click(function () {
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales", function () {
+    //OBTENER TODA LA DATA DEL ROW SELECCIONADO
+    let dataEmp = table.row($(this).parents('tr')).data();
     //INICIALIZAR UNA VARIABLE CON EL VALOR DEL ALMACENAMIENTO LOCAL
     let itemEmpleado = localStorage.getItem('idEmpleado');
 
@@ -393,6 +395,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales"
 
     //VARIABLE DE CONTEXTO PARA CAPTURAR EL ID DEL EMPLEADO SELCCIONADO
     var idEmpSelect = "";
+    var NombreSelect = "";
     //CAPTURAR EL DATAID
     var id = $(this).data('id');
     //SETEO DE LA VARIABLE DE INACTIVACION
@@ -407,15 +410,15 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales"
     })
         .done(function (data) {
             //SETEO DE LA VARIABLE DE idEmpSelect CON EL ID DEL EMPLEADO 
-            idEmpSelect = data.emp_Id;
-
+            idEmpSelect = data.emp_Id;            
+            NombreSelect = dataEmp[2];
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
                 if (data.ini_Pagado) {
-                    document.getElementById("btnEditIngresoIndividual").disabled = true;
+                    $("#btnEditIngresoIndividual").attr('disabled', true);
                 } else {
-                    document.getElementById("btnEditIngresoIndividual").disabled = false;
+                    $("#btnEditIngresoIndividual").attr('disabled', false);
                 }
 
                 if (data.ini_PagaSiempre) {
