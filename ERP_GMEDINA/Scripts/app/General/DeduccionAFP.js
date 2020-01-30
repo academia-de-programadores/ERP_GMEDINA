@@ -325,7 +325,8 @@ $("#Editar #validatione1").css("display", "none");
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     let itemEmpleado = localStorage.getItem('idEmpleado');
-
+    let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
+    console.log(dataEmp);
     if (itemEmpleado != null) {
         $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
         localStorage.removeItem('idEmpleado');

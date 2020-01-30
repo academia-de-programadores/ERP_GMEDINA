@@ -2,7 +2,7 @@
 var IDInactivar = 0, IDActivar = 0;
 //VARIABLE PARA VALIDAR SI ESTA PAGADO
 var varPagado;
-
+var dataIdentidad;
 //OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {

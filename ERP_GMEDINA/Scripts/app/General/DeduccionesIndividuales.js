@@ -619,7 +619,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
     let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
 
     if (itemEmpleado != null) {
-        $("#Editar #emp_Id #opt-gr-emp-info-incompleta").remove();
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
         localStorage.removeItem('idEmpleado');
     }
 
@@ -639,9 +639,9 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 console.log()
-                idEmpSelect = data.emp_Id;
+                let idEmpSelect = data.emp_Id;
                 console.table(dataEmp);
-                NombreSelect = dataEmp[2]; //asignar data del row seleccionado
+                let NombreSelect = dataEmp[2]; //asignar data del row seleccionado
 
                 if (data.dei_PagaSiempre) {
                     $('#Editar #dei_PagaSiempre').prop('checked', true);
@@ -655,8 +655,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
                 let valor = $('#Editar #emp_Id').val();
 
                 if (valor == null) {
-                    $("#Editar #emp_Id").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>');
-                    $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
                     localStorage.setItem('idEmpleado', idEmpSelect);
                 }
 
