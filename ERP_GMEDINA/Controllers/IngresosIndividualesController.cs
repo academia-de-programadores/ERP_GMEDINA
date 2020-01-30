@@ -134,6 +134,15 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
+        #region GETDDL EMPLEADOS
+        //OBTENER INFORMACION DE LOS REGISTROS DE LOS EMPLEADOS PARA LLENAR EL MODAL DE INSERTAR, SELECCIONA LOS QUE NO TIENEN
+        //UN ADELANTO ACTIVO
+        public string EmpleadoGetDDL()
+        {
+            return Helpers.General.ObtenerEmpleados();
+        }
+        #endregion
+
         #region Editar Ingresos Individuales
         // GET: IngresosIndividuales/Edit/5
         public ActionResult Edit(int? id)

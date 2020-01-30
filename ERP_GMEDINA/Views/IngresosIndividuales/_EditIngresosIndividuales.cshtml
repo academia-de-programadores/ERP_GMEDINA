@@ -30,7 +30,9 @@
                     @Html.LabelFor(model => model.emp_Id)<label class="" id="ast2" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="emp_Id" name="emp_Id" class="form-control" onchange="ValidarCamposEditar('-1', this.value, '-1')"></select>
+                    <select id="emp_Id" name="emp_Id" class="form-control" onchange="ValidarCamposEditar('-1', this.value, '-1')">
+                        <option></option>
+                    </select>
                     <span class="field-validation-valid text-danger" style="display: none;" id="validation_emp_Id">Campo Empleado requerido</span>
                 </div>
             </div>
