@@ -7017,6 +7017,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_EmpleadosPorAreas_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" />
+        <Function Name="UDP_Plani_EquipoEmpleadosPorAreas_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" />
         <Function Name="UDP_Plani_tbAcumuladosISR_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="aisr_Id" Type="int" Mode="In" />
           <Parameter Name="aisr_UsuarioModifica" Type="int" Mode="In" />
@@ -21128,6 +21129,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
           <EntitySet Name="V_HistorialPermisos" EntityType="ERP_GMEDINAModel.V_HistorialPermisos" />
           <EntitySet Name="V_RPT_EmpleadoCurriculum_Personas" EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum_Personas" />
+          <FunctionImport Name="UDP_Plani_EquipoEmpleadosPorAreas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EquipoEmpleadosPorAreas_Select_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -22483,6 +22485,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Competencias" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="UDP_Plani_EquipoEmpleadosPorAreas_Select_Result">
+          <Property Type="String" Name="json" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -27458,6 +27463,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EquipoEmpleadosPorAreas_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EquipoEmpleadosPorAreas_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EquipoEmpleadosPorAreas_Select_Result">
+                <ScalarProperty Name="json" ColumnName="json" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -6581,5 +6581,10 @@
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbBitacoraErrores_Insert_Result>("UDP_Acce_tbBitacoraErrores_Insert", bite_PantallaParameter, bite_UsuarioParameter, bite_FechaParameter, bite_MensajeErrorParameter, bite_AccionParameter);
         }
+    
+        public virtual ObjectResult<UDP_Plani_EquipoEmpleadosPorAreas_Select_Result> UDP_Plani_EquipoEmpleadosPorAreas_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EquipoEmpleadosPorAreas_Select_Result>("UDP_Plani_EquipoEmpleadosPorAreas_Select");
+        }
     }
 }

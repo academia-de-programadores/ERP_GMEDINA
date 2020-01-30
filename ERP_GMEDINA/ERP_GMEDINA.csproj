@@ -739,6 +739,9 @@
     <Compile Include="Models\UDP_Plani_EmpleadosPorAreas_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_EquipoEmpleadosPorAreas_Select_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
