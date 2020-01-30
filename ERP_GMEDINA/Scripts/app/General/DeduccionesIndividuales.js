@@ -616,7 +616,7 @@ $("#btnCerrarEditar").click(function () {
 
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
     let itemEmpleado = localStorage.getItem('idEmpleado');
-    let dataEmp = table.row($(this).parents('tr')).data();
+    let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
 
     if (itemEmpleado != null) {
         $("#Editar #emp_Id #opt-gr-emp-info-incompleta").remove();
@@ -640,7 +640,8 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
             if (data) {
                 console.log()
                 idEmpSelect = data.emp_Id;
-                NombreSelect = dataEmp[2];
+                console.table(dataEmp);
+                NombreSelect = dataEmp[2]; //asignar data del row seleccionado
 
                 if (data.dei_PagaSiempre) {
                     $('#Editar #dei_PagaSiempre').prop('checked', true);

@@ -705,24 +705,25 @@ $("#btnCerrarInactivar").click(function () {
 //#endregion
 
 $(document).ready(function () {
-    $.ajax({
-        url: "/DeduccionesExtraordinarias/EquipoEmpleadoGetDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    }).done(function (data) {
-        $('#eqem_Id').select2({
-            placeholder: 'Seleccione un empleado',
-            allowClear: true,
-            language: {
-                noResults: function () {
-                    return 'Resultados no encontrados.';
+    if (location.href.indexOf('Create') || location.href.indexOf('Edit'))
+        $.ajax({
+            url: "/DeduccionesExtraordinarias/EquipoEmpleadoGetDDL",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (data) {
+            $('#eqem_Id').select2({
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
                 },
-                searching: function () {
-                    return 'Buscando...';
-                }
-            },
-            data: data.results
+                data: data.results
+            });
         });
-    });
 });
