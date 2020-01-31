@@ -31,6 +31,7 @@
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">@Html.DisplayNameFor(model => model.cin_IdIngreso)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">Tipo de Ingreso</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_Activo)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 240px;">Acciones</th>
 
@@ -51,6 +52,21 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
                                     </td>
+                                    @switch (item.cin_TipoIngreso)
+                                    {
+                                        case 1:
+                                            <td>Bonos</td>
+                                            break;
+                                        case 2:
+                                            <td>Comisiones</td>
+                                            break;
+                                        case 3:
+                                            <td>Extra</td>
+                                            break;
+                                        default:
+                                            <td>Otros</td>
+                                            break;
+                                    }
                                     <td>
                                         @estadoIng
                                     </td>
@@ -70,7 +86,7 @@
                                         }
                                     </td>
                                 </tr>
-                              }
+                                            }
                         </tbody>
                     </table>
                 </div>
@@ -104,7 +120,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnEditarIngresos" value="Sí" class="btn btn-primary " />
-                
+
                 <button type="button" class="btn btn-white" id="btnEditarNo">No</button>
             </div>
         </div>
@@ -153,7 +169,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger " id="btnInactivarIngresos">Sí</button>
                 <button type="button" class="btn btn-white " data-dismiss="modal" id="btnNoInactivar">No</button>
-                
+
             </div>
         </div>
     </div>
