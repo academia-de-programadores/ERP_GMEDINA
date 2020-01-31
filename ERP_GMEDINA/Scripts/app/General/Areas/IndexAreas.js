@@ -24,11 +24,11 @@ function format(obj) {
                 '</div>' +
                 '<div class="ibox-content">' +
                     '<h5>' + index.car_Descripcion + '</h5>'+
-                    '<div><strong>Empleados:</strong>' + '<strong class="pull-right">' + index.Empleados + '</strong></div>';
+                    '<div>Empleados:<strong class="pull-right">' + index.Empleados + '</strong></div>'+
+                    '<h4>Encargado</h4>';
 
         if (index.persona.per_NombreCompleto[0] != undefined) {
-            div = div +
-                '<strong>Encargado</strong><br>' +
+            div = div +                
                 '<i class="fa fa-user margin "></i>' + index.persona.per_NombreCompleto[0] + '<br>' +
                 '<i class="fa fa-phone margin "></i>' + index.persona.per_Telefono[0] + '<br>' +
                 '<a href="mailto:#"><i class="fa fa-envelope-square"></i>' + index.persona.per_CorreoElectronico[0] + '</a>'+   
