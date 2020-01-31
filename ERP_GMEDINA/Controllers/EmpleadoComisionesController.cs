@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cc_FechaRegistro, cc_Pagado, cc_UsuarioCrea, cc_FechaCrea,cc_TotalComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cc_FechaRegistro, cc_Pagado, cc_UsuarioCrea, cc_FechaCrea, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
@@ -114,8 +114,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Insert(tbEmpleadoComisiones.emp_Id,
+					tbEmpleadoComisiones.cc_TotalComision = tbEmpleadoComisiones.cc_TotalVenta * 0;
+					//EJECUTAR PROCEDIMIENTO ALMACENADO
+					listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Insert(tbEmpleadoComisiones.emp_Id,
                                                                                             tbEmpleadoComisiones.cin_IdIngreso,
                                                                                             tbEmpleadoComisiones.cc_FechaRegistro,
                                                                                             tbEmpleadoComisiones.cc_Pagado,
@@ -170,7 +171,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST Editar
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cc_Id,emp_Id,cin_IdIngreso,cc_UsuarioModifica,cc_FechaModifica,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        public ActionResult Edit([Bind(Include = "cc_Id,emp_Id,cin_IdIngreso,cc_UsuarioModifica,cc_FechaModifica, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             tbEmpleadoComisiones.cc_UsuarioModifica = 1;
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
@@ -181,8 +182,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Update(tbEmpleadoComisiones.cc_Id,
+					tbEmpleadoComisiones.cc_TotalComision = tbEmpleadoComisiones.cc_TotalVenta * 0;
+
+					//EJECUTAR PROCEDIMIENTO ALMACENADO
+					listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Update(tbEmpleadoComisiones.cc_Id,
                                                                                             tbEmpleadoComisiones.emp_Id,
                                                                                             tbEmpleadoComisiones.cin_IdIngreso,
                                                                                             tbEmpleadoComisiones.cc_UsuarioModifica,
