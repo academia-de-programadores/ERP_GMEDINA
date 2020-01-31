@@ -42,6 +42,7 @@ namespace ERP_GMEDINA.Controllers
                         Sucursales = t.tbSucursales.suc_Descripcion,
                         Encargado = t.tbCargos.tbEmpleados
                             .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
+                            Empleados=t.tbEmpleados.Count,
                         area_Estado = t.area_Estado
                     }
                     )
@@ -70,6 +71,7 @@ namespace ERP_GMEDINA.Controllers
                         {
                             car_Descripcion = depto.tbCargos.car_Descripcion,
                             depto_Descripcion = depto.depto_Descripcion,
+                            Empleados = depto.tbEmpleados.Count,
                             persona = new
                             {
                                 per_NombreCompleto = depto.tbCargos.tbEmpleados.Select(persona => persona.tbPersonas.per_Nombres + " " + persona.tbPersonas.per_Apellidos),

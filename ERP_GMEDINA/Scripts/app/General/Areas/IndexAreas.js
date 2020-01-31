@@ -23,12 +23,16 @@ function format(obj) {
                      '<h5>' + index.depto_Descripcion + '</h5>' +
                 '</div>' +
                 '<div class="ibox-content">' +
-                    '<h5>' + index.car_Descripcion + '</h5>';
+                    '<h5>' + index.car_Descripcion + '</h5>'+
+                    '<div><strong>Empleados:</strong>' + '<strong class="pull-right">' + index.Empleados + '</strong></div>';
+
         if (index.persona.per_NombreCompleto[0] != undefined) {
             div = div +
+                '<strong>Encargado</strong><br>' +
                 '<i class="fa fa-user margin "></i>' + index.persona.per_NombreCompleto[0] + '<br>' +
-                '<i class="fa fa-phone margin "></i>' + index.persona.per_Telefono[0] + '<br>'+ 
-                '<i class="fa fa-envelope-square"></i>' + index.persona.per_CorreoElectronico[0] + '</div></div></div>';
+                '<i class="fa fa-phone margin "></i>' + index.persona.per_Telefono[0] + '<br>' +
+                '<a href="mailto:#"><i class="fa fa-envelope-square"></i>' + index.persona.per_CorreoElectronico[0] + '</a>'+   
+                 '</div></div></div>';
         }
         else {
             div = div +
@@ -64,6 +68,7 @@ function llenarTabla() {
                     ID: value.area_Id,
                     "Área": value.area_Descripcion,
                     Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                    Empleados:value.Empleados,
                     Sucursales: value.Sucursales,
                     Acciones: Acciones
                 });
