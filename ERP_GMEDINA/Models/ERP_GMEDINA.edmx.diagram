@@ -25,7 +25,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionesIndividuales" Width="1.5" PointX="13.5" PointY="167.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="16.5" PointY="152.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleadoBonos" Width="1.5" PointX="5.25" PointY="153.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleadoComisiones" Width="1.5" PointX="8.25" PointY="150.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbFormaPago" Width="1.5" PointX="3" PointY="140.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialDeduccionPago" Width="1.5" PointX="18.75" PointY="158.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialDeIngresosPago" Width="1.5" PointX="5.25" PointY="148.875" IsExpanded="true" />
@@ -215,8 +214,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoBonos_cb_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoBonos_cb_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoComisiones_cc_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoComisiones_cc_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeduccionPago_hidp_UsuarioCrea" ManuallyRouted="false" />
@@ -351,7 +348,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTipoPlanillaDetalleDeduccion_cde_IdDeducciones" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoBonos_cin_IdIngreso" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbTipoPlanillaDetalleIngreso_cin_IdIngreso" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" ManuallyRouted="false" />
@@ -367,7 +363,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoBonos_emp_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu" ManuallyRouted="false" />
@@ -454,6 +449,16 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="31.375" PointY="8.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialPermisos" Width="1.5" PointX="9.375" PointY="31.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum_Personas" Width="1.5" PointX="11.375" PointY="31.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTechosComisiones" Width="1.5" PointX="3" PointY="171.75" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_RRHH_tbPersonas_per_Id_RRHH_tbEmpresas_per_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleadoComisiones" Width="1.5" PointX="7.5" PointY="153.5" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoComisiones_cc_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoComisiones_cc_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

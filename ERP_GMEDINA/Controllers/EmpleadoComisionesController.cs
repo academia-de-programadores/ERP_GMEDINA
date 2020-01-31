@@ -121,11 +121,11 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbEmpleadoComisiones.cc_Pagado,
                                                                                             tbEmpleadoComisiones.cc_UsuarioCrea,
                                                                                             tbEmpleadoComisiones.cc_FechaCrea,
-                                                                                            tbEmpleadoComisiones.cc_PorcentajeComision,
+                                                                                            tbEmpleadoComisiones.cc_TotalComision,
                                                                                             tbEmpleadoComisiones.cc_TotalVenta);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_EmpleadoComisiones_Insert_Result Resultado in listEmpleadoComisiones)
-                        MensajeError = Resultado.MensajeError;
+                    //foreach (UDP_Plani_EmpleadoComisiones_Insert_Result Resultado in listEmpleadoComisiones)
+                    //    MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
@@ -187,12 +187,12 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbEmpleadoComisiones.cin_IdIngreso,
                                                                                             tbEmpleadoComisiones.cc_UsuarioModifica,
                                                                                             tbEmpleadoComisiones.cc_FechaModifica,
-                                                                                            tbEmpleadoComisiones.cc_PorcentajeComision,
+                                                                                            tbEmpleadoComisiones.cc_TotalComision,
                                                                                             tbEmpleadoComisiones.cc_TotalVenta
                                                                                             );
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_EmpleadoComisiones_Update_Result Resultado in listEmpleadoComisiones)
-                        MensajeError = Resultado.MensajeError;
+                    //foreach (UDP_Plani_EmpleadoComisiones_Update_Result Resultado in listEmpleadoComisiones)
+                    //    MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {

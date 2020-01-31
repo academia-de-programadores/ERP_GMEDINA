@@ -38,7 +38,6 @@
         public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
-        public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
         public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
@@ -206,6 +205,8 @@
         public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
         public virtual DbSet<V_HistorialPermisos> V_HistorialPermisos { get; set; }
         public virtual DbSet<V_RPT_EmpleadoCurriculum_Personas> V_RPT_EmpleadoCurriculum_Personas { get; set; }
+        public virtual DbSet<tbTechosComisiones> tbTechosComisiones { get; set; }
+        public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -656,76 +657,6 @@
                 new ObjectParameter("cc_FechaModifcia", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Inactivar_Result>("UDP_Plani_EmpleadoComisiones_Inactivar", cc_IdParameter, cc_UsuarioModificaParameter, cc_FechaModifciaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Insert_Result> UDP_Plani_EmpleadoComisiones_Insert(Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<System.DateTime> cc_FechaRegistro, Nullable<bool> cc_Pagado, Nullable<int> cc_UsuarioCrea, Nullable<System.DateTime> cc_FechaCrea, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var cin_IdIngresoParameter = cin_IdIngreso.HasValue ?
-                new ObjectParameter("cin_IdIngreso", cin_IdIngreso) :
-                new ObjectParameter("cin_IdIngreso", typeof(int));
-    
-            var cc_FechaRegistroParameter = cc_FechaRegistro.HasValue ?
-                new ObjectParameter("cc_FechaRegistro", cc_FechaRegistro) :
-                new ObjectParameter("cc_FechaRegistro", typeof(System.DateTime));
-    
-            var cc_PagadoParameter = cc_Pagado.HasValue ?
-                new ObjectParameter("cc_Pagado", cc_Pagado) :
-                new ObjectParameter("cc_Pagado", typeof(bool));
-    
-            var cc_UsuarioCreaParameter = cc_UsuarioCrea.HasValue ?
-                new ObjectParameter("cc_UsuarioCrea", cc_UsuarioCrea) :
-                new ObjectParameter("cc_UsuarioCrea", typeof(int));
-    
-            var cc_FechaCreaParameter = cc_FechaCrea.HasValue ?
-                new ObjectParameter("cc_FechaCrea", cc_FechaCrea) :
-                new ObjectParameter("cc_FechaCrea", typeof(System.DateTime));
-    
-            var cc_PorcentajeComisionParameter = cc_PorcentajeComision.HasValue ?
-                new ObjectParameter("cc_PorcentajeComision", cc_PorcentajeComision) :
-                new ObjectParameter("cc_PorcentajeComision", typeof(decimal));
-    
-            var cc_TotalVentaParameter = cc_TotalVenta.HasValue ?
-                new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
-                new ObjectParameter("cc_TotalVenta", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Insert_Result>("UDP_Plani_EmpleadoComisiones_Insert", emp_IdParameter, cin_IdIngresoParameter, cc_FechaRegistroParameter, cc_PagadoParameter, cc_UsuarioCreaParameter, cc_FechaCreaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Update_Result> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> emp_Id, Nullable<int> cin_IdIngresos, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
-        {
-            var cc_IdParameter = cc_Id.HasValue ?
-                new ObjectParameter("cc_Id", cc_Id) :
-                new ObjectParameter("cc_Id", typeof(int));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var cin_IdIngresosParameter = cin_IdIngresos.HasValue ?
-                new ObjectParameter("cin_IdIngresos", cin_IdIngresos) :
-                new ObjectParameter("cin_IdIngresos", typeof(int));
-    
-            var cc_UsuarioModificaParameter = cc_UsuarioModifica.HasValue ?
-                new ObjectParameter("cc_UsuarioModifica", cc_UsuarioModifica) :
-                new ObjectParameter("cc_UsuarioModifica", typeof(int));
-    
-            var cc_FechaModificaParameter = cc_FechaModifica.HasValue ?
-                new ObjectParameter("cc_FechaModifica", cc_FechaModifica) :
-                new ObjectParameter("cc_FechaModifica", typeof(System.DateTime));
-    
-            var cc_PorcentajeComisionParameter = cc_PorcentajeComision.HasValue ?
-                new ObjectParameter("cc_PorcentajeComision", cc_PorcentajeComision) :
-                new ObjectParameter("cc_PorcentajeComision", typeof(decimal));
-    
-            var cc_TotalVentaParameter = cc_TotalVenta.HasValue ?
-                new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
-                new ObjectParameter("cc_TotalVenta", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Update_Result>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, emp_IdParameter, cin_IdIngresosParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_EmpleadosPorAreas_Select_Result> UDP_Plani_EmpleadosPorAreas_Select()
@@ -1967,7 +1898,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result>("UDP_Plani_tbHistorialDeLiquidaciones_Insert", emp_IdParameter, hdli_FechaLiquidacionParameter, hdli_SalarioOrdinarioMensual_LiqParameter, hdli_SalarioPromedioMensual_LiqlParameter, hdli_SalarioOrdinarioDiario_LiqParameter, hdli_SalarioPromedioDiario_LiqParameter, hdli_Preaviso_LiqParameter, hdli_Cesantia_LiqParameter, hdli_DecimoTercerMesProporcional_LiqParameter, hdli_DecimoCuartoMesProporcional_LiqParameter, hdli_VacacionesPendientes_LiqParameter, hdli_SalariosAdeudadosParameter, hdli_OtrosPagosParameter, hdli_PagoHEPendienteParameter, hdli_ValorBonoEducativoParameter, hdli_PagoSeptimoDiaParameter, hdli_BonoPorVacacionesParameter, hdli_ReajusteSalarialParameter, hdli_DecimoTercerMesAdeudadoParameter, hdli_DecimoCuartoMesAdeudadoParameter, hdli_BonificacionVacacionesParameter, hdli_PagoPorEmbarazoParameter, hdli_PagoPorLactanciaParameter, hdli_PrePosNatalParameter, hdli_PagoPorDiasFeriadoParameter, hdli_MontoTotalLiquidacionParameter, hdli_liqu_UsuarioCreaParameter, hdli_liqu_FechaCreaParameter, moli_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario, Nullable<decimal> hipa_TotalDeduccionesIndividuales, Nullable<decimal> hipa_TotalIngresosIndividuales, Nullable<decimal> hipa_TotalSueldoBruto, Nullable<int> hipa_CantidadUnidadesHorasExtras, Nullable<int> hipa_CantidadUnidadesBonos, Nullable<decimal> hipa_TotalBonos)
+        public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario, Nullable<decimal> hipa_TotalDeduccionesIndividuales, Nullable<decimal> hipa_TotalIngresosIndividuales, Nullable<decimal> hipa_TotalSueldoBruto, Nullable<int> hipa_CantidadUnidadesHorasExtras, Nullable<int> hipa_CantidadUnidadesBonos, Nullable<decimal> hipa_TotalBonos, string hipa_CodigoPlanilla)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -2073,7 +2004,11 @@
                 new ObjectParameter("hipa_TotalBonos", hipa_TotalBonos) :
                 new ObjectParameter("hipa_TotalBonos", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter, hipa_TotalDeduccionesIndividualesParameter, hipa_TotalIngresosIndividualesParameter, hipa_TotalSueldoBrutoParameter, hipa_CantidadUnidadesHorasExtrasParameter, hipa_CantidadUnidadesBonosParameter, hipa_TotalBonosParameter);
+            var hipa_CodigoPlanillaParameter = hipa_CodigoPlanilla != null ?
+                new ObjectParameter("hipa_CodigoPlanilla", hipa_CodigoPlanilla) :
+                new ObjectParameter("hipa_CodigoPlanilla", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter, hipa_TotalDeduccionesIndividualesParameter, hipa_TotalIngresosIndividualesParameter, hipa_TotalSueldoBrutoParameter, hipa_CantidadUnidadesHorasExtrasParameter, hipa_CantidadUnidadesBonosParameter, hipa_TotalBonosParameter, hipa_CodigoPlanillaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Activar_Result> UDP_Plani_tbIngresosIndividuales_Activar(Nullable<int> ini_IdIngresosIndividuales, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
@@ -3364,7 +3299,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Delete_Result>("UDP_RRHH_tbEmpresas_Delete", empr_IdParameter, empr_razon_InactivoParameter, empr_UsuarioModificaParameter, empr_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Insert_Result> UDP_RRHH_tbEmpresas_Insert(string empr_Nombre, string empr_Logo, Nullable<int> empr_usuarioCrea, Nullable<System.DateTime> empr_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Insert_Result> UDP_RRHH_tbEmpresas_Insert(string empr_Nombre, string empr_Logo, Nullable<int> per_Id, string empr_RTN, Nullable<int> empr_usuarioCrea, Nullable<System.DateTime> empr_FechaCrea)
         {
             var empr_NombreParameter = empr_Nombre != null ?
                 new ObjectParameter("empr_Nombre", empr_Nombre) :
@@ -3374,6 +3309,14 @@
                 new ObjectParameter("empr_Logo", empr_Logo) :
                 new ObjectParameter("empr_Logo", typeof(string));
     
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var empr_RTNParameter = empr_RTN != null ?
+                new ObjectParameter("empr_RTN", empr_RTN) :
+                new ObjectParameter("empr_RTN", typeof(string));
+    
             var empr_usuarioCreaParameter = empr_usuarioCrea.HasValue ?
                 new ObjectParameter("empr_usuarioCrea", empr_usuarioCrea) :
                 new ObjectParameter("empr_usuarioCrea", typeof(int));
@@ -3382,7 +3325,7 @@
                 new ObjectParameter("empr_FechaCrea", empr_FechaCrea) :
                 new ObjectParameter("empr_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Insert_Result>("UDP_RRHH_tbEmpresas_Insert", empr_NombreParameter, empr_LogoParameter, empr_usuarioCreaParameter, empr_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Insert_Result>("UDP_RRHH_tbEmpresas_Insert", empr_NombreParameter, empr_LogoParameter, per_IdParameter, empr_RTNParameter, empr_usuarioCreaParameter, empr_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbEmpresas_Restore_Result> UDP_RRHH_tbEmpresas_Restore(Nullable<int> empr_Id, Nullable<int> empr_UsuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
@@ -3411,7 +3354,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Select_Result>("UDP_RRHH_tbEmpresas_Select", empr_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Update_Result> UDP_RRHH_tbEmpresas_Update(Nullable<int> empr_Id, string empr_Nombre, string empr_Logo, Nullable<int> empr_usuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Update_Result> UDP_RRHH_tbEmpresas_Update(Nullable<int> empr_Id, string empr_Nombre, Nullable<int> per_Id, string empr_RTN, string empr_Logo, Nullable<int> empr_usuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
         {
             var empr_IdParameter = empr_Id.HasValue ?
                 new ObjectParameter("empr_Id", empr_Id) :
@@ -3420,6 +3363,14 @@
             var empr_NombreParameter = empr_Nombre != null ?
                 new ObjectParameter("empr_Nombre", empr_Nombre) :
                 new ObjectParameter("empr_Nombre", typeof(string));
+    
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var empr_RTNParameter = empr_RTN != null ?
+                new ObjectParameter("empr_RTN", empr_RTN) :
+                new ObjectParameter("empr_RTN", typeof(string));
     
             var empr_LogoParameter = empr_Logo != null ?
                 new ObjectParameter("empr_Logo", empr_Logo) :
@@ -3433,7 +3384,7 @@
                 new ObjectParameter("empr_FechaModifica", empr_FechaModifica) :
                 new ObjectParameter("empr_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Update_Result>("UDP_RRHH_tbEmpresas_Update", empr_IdParameter, empr_NombreParameter, empr_LogoParameter, empr_usuarioModificaParameter, empr_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Update_Result>("UDP_RRHH_tbEmpresas_Update", empr_IdParameter, empr_NombreParameter, per_IdParameter, empr_RTNParameter, empr_LogoParameter, empr_usuarioModificaParameter, empr_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbEquipoEmpleado_Inactivar_Result> UDP_RRHH_tbEquipoEmpleado_Inactivar(Nullable<int> eqem_Id, Nullable<int> eqem_UsuarioModifica, Nullable<System.DateTime> eqem_FechaModifica)
@@ -6585,6 +6536,76 @@
         public virtual ObjectResult<UDP_Plani_EquipoEmpleadosPorAreas_Select_Result> UDP_Plani_EquipoEmpleadosPorAreas_Select()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EquipoEmpleadosPorAreas_Select_Result>("UDP_Plani_EquipoEmpleadosPorAreas_Select");
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_EmpleadoComisiones_Insert(Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<System.DateTime> cc_FechaRegistro, Nullable<bool> cc_Pagado, Nullable<int> cc_UsuarioCrea, Nullable<System.DateTime> cc_FechaCrea, Nullable<decimal> cc_TotalComision, Nullable<decimal> cc_TotalVenta)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var cin_IdIngresoParameter = cin_IdIngreso.HasValue ?
+                new ObjectParameter("cin_IdIngreso", cin_IdIngreso) :
+                new ObjectParameter("cin_IdIngreso", typeof(int));
+    
+            var cc_FechaRegistroParameter = cc_FechaRegistro.HasValue ?
+                new ObjectParameter("cc_FechaRegistro", cc_FechaRegistro) :
+                new ObjectParameter("cc_FechaRegistro", typeof(System.DateTime));
+    
+            var cc_PagadoParameter = cc_Pagado.HasValue ?
+                new ObjectParameter("cc_Pagado", cc_Pagado) :
+                new ObjectParameter("cc_Pagado", typeof(bool));
+    
+            var cc_UsuarioCreaParameter = cc_UsuarioCrea.HasValue ?
+                new ObjectParameter("cc_UsuarioCrea", cc_UsuarioCrea) :
+                new ObjectParameter("cc_UsuarioCrea", typeof(int));
+    
+            var cc_FechaCreaParameter = cc_FechaCrea.HasValue ?
+                new ObjectParameter("cc_FechaCrea", cc_FechaCrea) :
+                new ObjectParameter("cc_FechaCrea", typeof(System.DateTime));
+    
+            var cc_TotalComisionParameter = cc_TotalComision.HasValue ?
+                new ObjectParameter("cc_TotalComision", cc_TotalComision) :
+                new ObjectParameter("cc_TotalComision", typeof(decimal));
+    
+            var cc_TotalVentaParameter = cc_TotalVenta.HasValue ?
+                new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
+                new ObjectParameter("cc_TotalVenta", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_EmpleadoComisiones_Insert", emp_IdParameter, cin_IdIngresoParameter, cc_FechaRegistroParameter, cc_PagadoParameter, cc_UsuarioCreaParameter, cc_FechaCreaParameter, cc_TotalComisionParameter, cc_TotalVentaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> emp_Id, Nullable<int> cin_IdIngresos, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_TotalComision, Nullable<decimal> cc_TotalVenta)
+        {
+            var cc_IdParameter = cc_Id.HasValue ?
+                new ObjectParameter("cc_Id", cc_Id) :
+                new ObjectParameter("cc_Id", typeof(int));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var cin_IdIngresosParameter = cin_IdIngresos.HasValue ?
+                new ObjectParameter("cin_IdIngresos", cin_IdIngresos) :
+                new ObjectParameter("cin_IdIngresos", typeof(int));
+    
+            var cc_UsuarioModificaParameter = cc_UsuarioModifica.HasValue ?
+                new ObjectParameter("cc_UsuarioModifica", cc_UsuarioModifica) :
+                new ObjectParameter("cc_UsuarioModifica", typeof(int));
+    
+            var cc_FechaModificaParameter = cc_FechaModifica.HasValue ?
+                new ObjectParameter("cc_FechaModifica", cc_FechaModifica) :
+                new ObjectParameter("cc_FechaModifica", typeof(System.DateTime));
+    
+            var cc_TotalComisionParameter = cc_TotalComision.HasValue ?
+                new ObjectParameter("cc_TotalComision", cc_TotalComision) :
+                new ObjectParameter("cc_TotalComision", typeof(decimal));
+    
+            var cc_TotalVentaParameter = cc_TotalVenta.HasValue ?
+                new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
+                new ObjectParameter("cc_TotalVenta", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, emp_IdParameter, cin_IdIngresosParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_TotalComisionParameter, cc_TotalVentaParameter);
         }
     }
 }
