@@ -873,6 +873,48 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox18">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Total en deducciones:</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=Sum(Fields!hip_TotalPagar.Value, "ReportesPlanillaDS")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox16</rd:DefaultName>
+        <Top>2.35951cm</Top>
+        <Left>20.85661cm</Left>
+        <Height>0.6cm</Height>
+        <Width>7.52948cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>1.3441in</Height>
     <Style />
@@ -1026,7 +1068,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.09146cm</Top>
+          <Top>1.09145cm</Top>
           <Left>24.53846cm</Left>
           <Height>0.6cm</Height>
           <Width>3.5037cm</Width>
@@ -1061,7 +1103,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.28286cm</Top>
+          <Top>0.28285cm</Top>
           <Left>20.86075cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
@@ -1095,7 +1137,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>1.09146cm</Top>
+          <Top>1.09145cm</Top>
           <Left>21.09478cm</Left>
           <Height>0.6cm</Height>
           <Width>3.26729cm</Width>
