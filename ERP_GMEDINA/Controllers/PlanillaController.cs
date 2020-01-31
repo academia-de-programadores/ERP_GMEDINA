@@ -234,34 +234,34 @@ namespace ERP_GMEDINA.Controllers
                                                                                                        x.cc_FechaRegistro >= fechaInicio &&
                                                                                                        x.cc_FechaRegistro <= fechaFin)
                                                                                                 .ToList();
-                                        if (oComisionesColaboradores.Count > 0)
-                                        {
-                                            // sumar todas las comisiones
-                                            foreach (var oComisionesColaboradoresIterador in oComisionesColaboradores)
-                                            {
-                                                porcentajeComision = (from tbEmpCom in db.tbEmpleadoComisiones
-                                                                      where tbEmpCom.cc_Id == oComisionesColaboradoresIterador.cc_Id
-                                                                      select tbEmpCom.cc_PorcentajeComision).FirstOrDefault();
+                                        //if (oComisionesColaboradores.Count > 0)
+                                        //{
+                                        //    // sumar todas las comisiones
+                                        //    foreach (var oComisionesColaboradoresIterador in oComisionesColaboradores)
+                                        //    {
+                                        //        porcentajeComision = (from tbEmpCom in db.tbEmpleadoComisiones
+                                        //                              where tbEmpCom.cc_Id == oComisionesColaboradoresIterador.cc_Id
+                                        //                              select tbEmpCom.cc_PorcentajeComision).FirstOrDefault();
 
-                                                totalVentas = (from tbEmpCom in db.tbEmpleadoComisiones
-                                                               where tbEmpCom.cc_Id == oComisionesColaboradoresIterador.cc_Id
-                                                               select tbEmpCom.cc_TotalVenta).FirstOrDefault();
+                                        //        totalVentas = (from tbEmpCom in db.tbEmpleadoComisiones
+                                        //                       where tbEmpCom.cc_Id == oComisionesColaboradoresIterador.cc_Id
+                                        //                       select tbEmpCom.cc_TotalVenta).FirstOrDefault();
 
-                                                totalComisiones += Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2);
+                                        //        totalComisiones += Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2);
 
-                                                // pasar el estado de las comisiones a pagadas
-                                                oComisionesColaboradoresIterador.cc_Pagado = true;
-                                                oComisionesColaboradoresIterador.cc_FechaPagado = DateTime.Now;
-                                                db.Entry(oComisionesColaboradoresIterador).State = EntityState.Modified;
+                                        //        // pasar el estado de las comisiones a pagadas
+                                        //        oComisionesColaboradoresIterador.cc_Pagado = true;
+                                        //        oComisionesColaboradoresIterador.cc_FechaPagado = DateTime.Now;
+                                        //        db.Entry(oComisionesColaboradoresIterador).State = EntityState.Modified;
 
-                                                // agregarlas al vocher
-                                                ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                                {
-                                                    concepto = oComisionesColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                    monto = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2)
-                                                });
-                                            }
-                                        }
+                                        //        // agregarlas al vocher
+                                        //        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //        {
+                                        //            concepto = oComisionesColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                        //            monto = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2)
+                                        //        });
+                                        //    }
+                                        //}
 
                                         // horas extras
                                         horasExtrasTrabajadas = db.tbHistorialHorasTrabajadas
@@ -966,36 +966,36 @@ namespace ERP_GMEDINA.Controllers
                                         oHistorialPagoEncabezado.hipa_TotalBonos = totalBonificaciones;
 
                                         //Ejecutar el procedimiento almacenado
-                                        listHistorialPago = db.UDP_Plani_tbHistorialDePago_Insert(oHistorialPagoEncabezado.emp_Id,
-                                                                                                oHistorialPagoEncabezado.hipa_SueldoNeto,
-                                                                                                oHistorialPagoEncabezado.hipa_FechaInicio,
-                                                                                                oHistorialPagoEncabezado.hipa_FechaFin,
-                                                                                                oHistorialPagoEncabezado.hipa_FechaPago,
-                                                                                                oHistorialPagoEncabezado.hipa_Anio,
-                                                                                                oHistorialPagoEncabezado.hipa_Mes,
-                                                                                                oHistorialPagoEncabezado.peri_IdPeriodo,
-                                                                                                oHistorialPagoEncabezado.hipa_UsuarioCrea,
-                                                                                                oHistorialPagoEncabezado.hipa_FechaCrea,
-                                                                                                oHistorialPagoEncabezado.hipa_TotalISR,
-                                                                                                oHistorialPagoEncabezado.hipa_ISRPendiente,
-                                                                                                oHistorialPagoEncabezado.hipa_AFP,
-                                                                                                // nuevos campos
-                                                                                                oHistorialPagoEncabezado.hipa_TotalHorasConPermisoJustificado,
-                                                                                                oHistorialPagoEncabezado.hipa_TotalComisiones,
-                                                                                                oHistorialPagoEncabezado.hipa_TotalHorasExtras,
-                                                                                                oHistorialPagoEncabezado.hipa_TotalVacaciones,
-                                                                                                oHistorialPagoEncabezado.hipa_TotalSeptimoDia,
-                                                                                                oHistorialPagoEncabezado.hipa_AdelantoSueldo,
-                                                                                                oHistorialPagoEncabezado.hipa_TotalSalario,
-                                                                                                // nuevos campos
+                                        //listHistorialPago = db.UDP_Plani_tbHistorialDePago_Insert(oHistorialPagoEncabezado.emp_Id,
+                                        //                                                        oHistorialPagoEncabezado.hipa_SueldoNeto,
+                                        //                                                        oHistorialPagoEncabezado.hipa_FechaInicio,
+                                        //                                                        oHistorialPagoEncabezado.hipa_FechaFin,
+                                        //                                                        oHistorialPagoEncabezado.hipa_FechaPago,
+                                        //                                                        oHistorialPagoEncabezado.hipa_Anio,
+                                        //                                                        oHistorialPagoEncabezado.hipa_Mes,
+                                        //                                                        oHistorialPagoEncabezado.peri_IdPeriodo,
+                                        //                                                        oHistorialPagoEncabezado.hipa_UsuarioCrea,
+                                        //                                                        oHistorialPagoEncabezado.hipa_FechaCrea,
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalISR,
+                                        //                                                        oHistorialPagoEncabezado.hipa_ISRPendiente,
+                                        //                                                        oHistorialPagoEncabezado.hipa_AFP,
+                                        //                                                        // nuevos campos
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalHorasConPermisoJustificado,
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalComisiones,
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalHorasExtras,
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalVacaciones,
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalSeptimoDia,
+                                        //                                                        oHistorialPagoEncabezado.hipa_AdelantoSueldo,
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalSalario,
+                                        //                                                        // nuevos campos
 
-                                                                                                oHistorialPagoEncabezado.hipa_TotalDeduccionesIndividuales,// deducciones individuales
-                                                                                                oHistorialPagoEncabezado.hipa_TotalIngresosIndividuales,// ingresos individuales
-                                                                                                oHistorialPagoEncabezado.hipa_TotalSueldoBruto,// sueldo bruto
-                                                                                                oHistorialPagoEncabezado.hipa_CantidadUnidadesHorasExtras,// cantidad unidades horas extras
-                                                                                                oHistorialPagoEncabezado.hipa_CantidadUnidadesBonos,// cantidad unidades bonos
-                                                                                                oHistorialPagoEncabezado.hipa_TotalBonos // total bonos
-                                                                                                );
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalDeduccionesIndividuales,// deducciones individuales
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalIngresosIndividuales,// ingresos individuales
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalSueldoBruto,// sueldo bruto
+                                        //                                                        oHistorialPagoEncabezado.hipa_CantidadUnidadesHorasExtras,// cantidad unidades horas extras
+                                        //                                                        oHistorialPagoEncabezado.hipa_CantidadUnidadesBonos,// cantidad unidades bonos
+                                        //                                                        oHistorialPagoEncabezado.hipa_TotalBonos // total bonos
+                                        //                                                        );
 
                                         // obtener resultado del procedimiento almacenado
                                         foreach (UDP_Plani_tbHistorialDePago_Insert_Result Resultado in listHistorialPago)
