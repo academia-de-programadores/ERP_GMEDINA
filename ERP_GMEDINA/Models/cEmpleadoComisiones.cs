@@ -51,10 +51,10 @@ namespace ERP_GMEDINA.Models
         public bool cc_Activo { get; set; }
 
 
-        [Display(Name = "Porcentaje Comisión")]
+        [Display(Name = "Total Comisión")]
         [Required(ErrorMessage = "Campo porcentaje comisión requerido")]
         [Range(1, 100, ErrorMessage = "El {0} debe estar entre {1} y {2}")]
-        public decimal cc_PorcentajeComision { get; set; }
+        public decimal cc_TotalComision { get; set; }
 
 
         [Display(Name = "Total Venta")]

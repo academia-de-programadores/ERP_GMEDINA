@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones
-                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_TotalComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
+                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_TotalComision = c.cc_TotalComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

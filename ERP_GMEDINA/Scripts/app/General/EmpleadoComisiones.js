@@ -65,7 +65,6 @@ function cargarGridComisiones() {
                     ListaComisiones[i].cc_Id,
                     ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos,
                     ListaComisiones[i].cin_DescripcionIngreso,
-                    (ListaComisiones[i].cc_PorcentajeComision % 1 == 0) ? ListaComisiones[i].cc_PorcentajeComision + ".00" : ListaComisiones[i].cc_PorcentajeComision,
                     (ListaComisiones[i].cc_TotalVenta % 1 == 0) ? ListaComisiones[i].cc_TotalVenta + ".00" : ListaComisiones[i].cc_TotalVenta,
                     FechaRegistro,
                     estadoRegistro,
@@ -248,7 +247,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                     document.getElementById("btnUpdateComisionesConfirmar").disabled = false;
                 }
                 $("#Editar #cc_Id").val(data.cc_Id);
-                $("#Editar #cc_PorcentajeComision").val(data.cc_PorcentajeComision);
                 $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
@@ -307,7 +305,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 $('#btnUpdateComisionesConfirmar').click(function () {
     var Colaborador = $("#Editar #emp_IdEmpleado").val();
     var idIngreso = $("#Editar #cin_IdIngreso").val();
-    var PorcentajeComision = $("#Editar #cc_PorcentajeComision").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();
 
     if (ValidarCamposEditar(Colaborador, idIngreso, PorcentajeComision, TotalVenta)) {

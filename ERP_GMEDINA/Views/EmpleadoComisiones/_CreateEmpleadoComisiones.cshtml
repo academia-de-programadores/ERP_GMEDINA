@@ -25,17 +25,6 @@
                      <label class="text-danger" id="Validation_idIngreso" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Comisión requerido</label>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="pull-left">Porcentaje Comisión</label>
-                    <label class="" id="AsteriscoPorcentaje">*</label>  
-                    <div class="col-md-8 pull-right">
-                        @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraPorcentaje soloNumero", @id = "PorcentajeComision", @autocomplete  = "off", onkeyup = "ValidarCamposCrear('-1', '-1', this.value, '-1')" } })
-                        <label class="text-danger" id="Validation_porcentaje" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Comisión requerido</label>
-                        <label class="text-danger" id="Validation_porcentaje2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Porcentaje Comisión debe ser mayor que cero</label>
-                        <label class="text-danger" id="Validation_porcentaje3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Porcentaje Comisión debe ser menor que cien</label>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="pull-left">Total Venta</label>
                     <label class="" id="AsteriscoTotal">*</label>  
