@@ -48,61 +48,31 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            if (ticn_Id == null && FechaInicio == null && FechaFin == null)
-            {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad";
-            }
-            else if (ticn_Id == null && FechaInicio != null && FechaFin != null)
-            {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where FechaInicio between @FechaInicio and @FechaFin";
-                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
-            }
-            else if (ticn_Id == null && FechaInicio == null && FechaFin != null)
-            {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where  FechaFin <= @FechaFin ";
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where 1 = 1";
 
-            }
-            else if (ticn_Id == null && FechaFin == null && FechaInicio != null)
+            if (ticn_Id != null)
             {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where  FechaInicio >=@FechaInicio ";
+                command.CommandText += " and ticn_Id = @ticn_Id ";
+                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
+            }
+
+            if (FechaFin != null && FechaInicio != null)
+            {
+                command.CommandText += " and FechaInicio between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
                 command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
             }
-            else if (FechaFin == null && FechaInicio == null && ticn_Id != null)
+            else if (FechaFin != null && FechaInicio == null)
             {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where  ticn_Id =@ticn_Id";
-                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
-
+                command.CommandText += " and FechaInicio <= @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
-
-            else if (FechaInicio == null && ticn_Id != null && FechaFin != null)
+            else if (FechaInicio != null && FechaFin == null)
             {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id=@ticn_Id and FechaFin <=@FechaFin";
-                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Int).Value = FechaFin;
-
+                command.CommandText += " and FechaInicio >= @FechaInicio ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
             }
-
-            else if (FechaFin == null && ticn_Id != null && FechaInicio != null)
-            {
-                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id=@ticn_Id and FechaInicio >=@FechaInicio";
-                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
-                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.Int).Value = FechaInicio;
-
-            }
-
-
-
-            else
-            {
-                command.CommandText = " select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id = @ticn_Id and  FechaInicio between  @FechaInicio and @FechaFin ";
-                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
-
-                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.Date).Value = FechaInicio;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
-            }
-
+            /**/
 
             try
             {
@@ -124,7 +94,7 @@ namespace ERP_GMEDINA.Controllers
                 //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
                 return View();
             }
-            catch
+            catch(Exception ex)
             {
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
@@ -158,60 +128,28 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            if (tiho_Id == null && Fecha == null && FechaFin == null)
+            command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where 1=1 ";
+            if (tiho_Id != null) 
             {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas";
+                command.CommandText += " and tiho_Id = @tiho_Id ";
+                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
             }
-            else if (tiho_Id == null && Fecha != null && FechaFin != null)
+            if (FechaFin != null && Fecha != null)
             {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where Fecha between @Fecha and @FechaFin";
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
+                command.CommandText += " and Fecha between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = Fecha;
+            }
+            else if (FechaFin != null && Fecha == null)
+            {
+                command.CommandText += " and Fecha <= @FechaFin ";
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
-            else if (tiho_Id == null && Fecha == null && FechaFin != null)
+            else if (Fecha != null && FechaFin == null)
             {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where Fecha <= @FechaFin ";
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
-
+                command.CommandText += " and Fecha >= @FechaInicio ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = Fecha;
             }
-            else if (tiho_Id == null && FechaFin == null && Fecha != null)
-            {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where  Fecha >= @Fecha ";
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
-            }
-            else if (FechaFin == null && Fecha == null && tiho_Id != null)
-            {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where  tiho_Id = @tiho_Id";
-                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
-
-            }
-
-            else if (Fecha == null && tiho_Id != null && FechaFin != null)
-            {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id = @tiho_Id  and Fecha <= @FechaFin";
-                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Int).Value = FechaFin;
-
-            }
-
-            else if (FechaFin == null && tiho_Id != null && Fecha != null)
-            {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id=@tiho_Id and Fecha >= @Fecha";
-                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Int).Value = Fecha;
-
-            }
-
-
-
-            else
-            {
-                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id = @tiho_Id and  Fecha between @Fecha and @FechaFin";
-                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
-            }
-
             try
             {
                 SqlConnection conx = new SqlConnection(connectionString);
@@ -232,7 +170,7 @@ namespace ERP_GMEDINA.Controllers
                 //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
                 return View();
             }
-            catch
+            catch(Exception ex)
             {
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
@@ -346,50 +284,28 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where 1=1";
 
-            if (car_Id == null && FechaContratacion == null && FechaFin == null)
+            if (car_Id != null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones";
-            }
-            else if (car_Id == null && FechaContratacion != null && FechaFin != null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where FechaContratacion between @FechaContratacion and @FechaFin";
-                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
-            }
-            else if (car_Id == null && FechaContratacion == null && FechaFin != null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where FechaFin= @FechaFin";
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
-            }
-            else if (car_Id == null && FechaFin == null && FechaContratacion != null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where FechaContratacion= @FechaContratacion";
-                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
-            }
-            else if (FechaFin == null && FechaContratacion == null && car_Id != null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id";
+                command.CommandText += " and car_Id = @car_Id";
                 command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
             }
-            else if (FechaContratacion == null && car_Id != null && FechaFin != null)
+            if (FechaFin != null && FechaContratacion != null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaFin=@FechaFin";
-                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+                command.CommandText += " and FechaContratacion between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaContratacion;
             }
-            else if (FechaFin == null && car_Id != null && FechaContratacion != null)
+            else if (FechaFin != null && FechaContratacion == null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaContratacion=@FechaContratacion";
-                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
-                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
+                command.CommandText += " and FechaContratacion <= @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
-            else
+            else if (FechaContratacion != null && FechaFin == null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaContratacion between @FechaContratacion and @FechaFin";
-                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
-                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
-                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+                command.CommandText += " and FechaContratacion >= @FechaInicio ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaContratacion;
             }
             try
             {
@@ -408,11 +324,11 @@ namespace ERP_GMEDINA.Controllers
 
                 return View();
             }
-            catch
+            catch (Exception ex)
             {
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
-    }
+        }
         public ActionResult HistorialSalidasRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
