@@ -326,7 +326,6 @@ $("#Editar #validatione1").css("display", "none");
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     let itemEmpleado = localStorage.getItem('idEmpleado');
     let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
-    console.log(dataEmp);
     if (itemEmpleado != null) {
         $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
         localStorage.removeItem('idEmpleado');
@@ -347,7 +346,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 let idEmpSelect = data.emp_Id;
-                let NombreSelect = data.per_Nombres;
+                let NombreSelect = dataEmp[1];
                 $("#Editar #dafp_Id").val(data.dafp_Id);
                 $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION

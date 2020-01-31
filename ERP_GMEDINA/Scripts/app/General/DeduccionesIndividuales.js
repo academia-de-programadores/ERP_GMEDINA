@@ -622,8 +622,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
 
     let itemEmpleado = localStorage.getItem('idEmpleado');
     if (itemEmpleado != null) {
-        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove().end().trigger('change.select2');
-        $("#Editar #emp_Id #opt-gr-emp-info-incompleta").remove().end().trigger('change.select2');
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove().trigger('change.select2');
         localStorage.removeItem('idEmpleado');
     }
 
@@ -687,10 +686,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
                 $('#Editar #emp_Id').val(idEmpSelect).trigger('change').trigger('clear.select2');
                 let valor = $('#Editar #emp_Id').val();
                 if (valor == null) {
-                    let empPrueba = $('.select2-container #select2-emp_Id-results .select2-results__options .select2-results__option').html();
-                    console.log(empPrueba);
-                    $("#Editar #emp_Id").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>').trigger('change.select2');
-                    $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
+                    $("#Editar #emp_Id").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
                     localStorage.setItem('idEmpleado', idEmpSelect);
                 }
 

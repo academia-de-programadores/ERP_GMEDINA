@@ -15,7 +15,21 @@
 					</div>
                     <span class="field-validation-valid text-danger" style="display: none" id="DescripcionCrear">El campo Descripción Ingreso es Requerido</span>
 				</div>
+                <div class="col-md-10">
+                    <div>
+                        <select id="idTipoIngreso" name="idTipoIngreso" class="form-control" onchange="ValidarCamposIngreso('-1', '-1', this.value)">
+                            <option value="0">Seleccione una opción...</option>
+                            <option value="0">Bonos</option>
+                            <option value="0">Comisiones</option>
+                            <option value="0">Extra</option>
+                            <option value="0">Otros</option>
+                        </select>
+
+                    </div>
+                    <span class="field-validation-valid text-danger" style="display: none" id="DescripcionCrear">El campo Descripción Ingreso es Requerido</span>
+                </div>
 			</div>
+
 		</div>
 	</div>
 	<div class="modal-footer">
