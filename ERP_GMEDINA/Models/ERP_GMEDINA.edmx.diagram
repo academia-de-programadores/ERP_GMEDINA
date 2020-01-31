@@ -438,8 +438,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_tbFaseSeleccion_fare_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" Width="1.5" PointX="31.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" Width="1.5" PointX="31.375" PointY="4.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" Width="1.5" PointX="29.375" PointY="28.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDirectoriosEmpleados" Width="1.5" PointX="16.5" PointY="172.875" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDirectoriosEmpleados_direm_UsuarioCrea" />
@@ -457,6 +455,8 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_RRHH_tbPersonas_per_Id_RRHH_tbEmpresas_per_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" Width="1.5" PointX="31.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" Width="1.5" PointX="31.375" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

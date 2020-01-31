@@ -97,15 +97,13 @@ namespace ERP_GMEDINA.Controllers
 			{
 				try
 				{					
-					DateTime hipa_FechaInicio2 = Convert.ToDateTime((hipa_FechaInicio - 1) + "/07" + "/01");
-					DateTime hipa_FechaFin = Convert.ToDateTime(hipa_FechaInicio + "/06" + "/30");
+					
 
 					var ConsultaFechas = from HP in db.V_DecimoCuartoMesFE
 
 										 where
 
-										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
-										  HP.hipa_FechaPago <= hipa_FechaFin) 									  
+										 (HP.hipa_Anio == hipa_FechaInicio) 								  
 
 										 
 										 select new ViewModelDecimoCuartoMes
