@@ -174,6 +174,7 @@
           <Property Name="cin_UsuarioModifica" Type="int" />
           <Property Name="cin_FechaModifica" Type="datetime" />
           <Property Name="cin_Activo" Type="bit" Nullable="false" />
+          <Property Name="cin_TipoIngreso" Type="int" />
         </EntityType>
         <EntityType Name="tbCatalogoDePlanillas">
           <Key>
@@ -7575,6 +7576,33 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="prea_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="prea_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Plani_tbTechosComisiones_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="tc_Id" Type="int" Mode="In" />
+          <Parameter Name="tc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbTechosComisiones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="tc_Id" Type="int" Mode="In" />
+          <Parameter Name="tc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbTechosComisiones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
+          <Parameter Name="tc_RangoInicio" Type="decimal" Mode="In" />
+          <Parameter Name="tc_RangoFin" Type="decimal" Mode="In" />
+          <Parameter Name="tc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="tc_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="tc_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbTechosComisiones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="tc_Id" Type="int" Mode="In" />
+          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
+          <Parameter Name="tc_RangoInicio" Type="decimal" Mode="In" />
+          <Parameter Name="tc_RangoFin" Type="decimal" Mode="In" />
+          <Parameter Name="tc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="tc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_tbTechosDeducciones_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tddu_IdTechosDeducciones" Type="int" Mode="In" />
           <Parameter Name="tddu_UsuarioModifica" Type="int" Mode="In" />
@@ -11793,6 +11821,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbTipoPlanillaDetalleIngreso" Relationship="Self.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbTipoPlanillaDetalleIngreso_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbTipoPlanillaDetalleIngreso" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbEmpleadoComisiones" />
           <NavigationProperty Name="tbTechosComisiones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbTechosComisiones" />
+          <Property Name="cin_TipoIngreso" Type="Int32" />
         </EntityType>
         <EntityType Name="tbCatalogoDePlanillas">
           <Key>
@@ -21183,6 +21212,33 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="cc_TotalComision" Mode="In" Type="Decimal" />
             <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Activar" ReturnType="Collection(String)">
+            <Parameter Name="tc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Inactivar" ReturnType="Collection(String)">
+            <Parameter Name="tc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Insert" ReturnType="Collection(String)">
+            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
+            <Parameter Name="tc_RangoInicio" Mode="In" Type="Decimal" />
+            <Parameter Name="tc_RangoFin" Mode="In" Type="Decimal" />
+            <Parameter Name="tc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="tc_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tc_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Update" ReturnType="Collection(String)">
+            <Parameter Name="tc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
+            <Parameter Name="tc_RangoInicio" Mode="In" Type="Decimal" />
+            <Parameter Name="tc_RangoFin" Mode="In" Type="Decimal" />
+            <Parameter Name="tc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -22842,6 +22898,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbCatalogoDeIngresos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCatalogoDeIngresos">
               <MappingFragment StoreEntitySet="tbCatalogoDeIngresos">
+                <ScalarProperty Name="cin_TipoIngreso" ColumnName="cin_TipoIngreso" />
                 <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
                 <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
                 <ScalarProperty Name="cin_UsuarioCrea" ColumnName="cin_UsuarioCrea" />
@@ -27667,6 +27724,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Activar" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Inactivar" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

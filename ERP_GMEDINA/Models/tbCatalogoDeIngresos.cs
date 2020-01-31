@@ -23,6 +23,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> cin_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> cin_FechaModifica { get; set; }
         public bool cin_Activo { get; set; }
+        public Nullable<int> cin_TipoIngreso { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
