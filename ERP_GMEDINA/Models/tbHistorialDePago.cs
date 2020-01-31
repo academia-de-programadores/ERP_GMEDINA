@@ -42,6 +42,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> hipa_CantidadUnidadesHorasExtras { get; set; }
         public Nullable<int> hipa_CantidadUnidadesBonos { get; set; }
         public Nullable<decimal> hipa_TotalBonos { get; set; }
+        public string hipa_CodigoPlanilla { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> cc_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> cc_FechaModifica { get; set; }
         public bool cc_Activo { get; set; }
-        public decimal cc_PorcentajeComision { get; set; }
+        public decimal cc_TotalComision { get; set; }
         public decimal cc_TotalVenta { get; set; }
         public Nullable<System.DateTime> cc_FechaPagado { get; set; }
     
