@@ -21164,7 +21164,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
             <End Role="tbTechosComisiones" EntitySet="tbTechosComisiones" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaRegistro" Mode="In" Type="DateTime" />
@@ -21174,7 +21174,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="cc_TotalComision" Mode="In" Type="Decimal" />
             <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Update_Result)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngresos" Mode="In" Type="Int32" />
@@ -22674,6 +22674,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Association>
         <ComplexType Name="UDP_Plani_EmpleadoComisiones_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -27665,8 +27668,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

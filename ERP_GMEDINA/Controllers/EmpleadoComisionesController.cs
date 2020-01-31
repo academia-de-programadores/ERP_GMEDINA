@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones
-                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
+                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_TotalComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -82,7 +82,7 @@ namespace ERP_GMEDINA.Controllers
                                                tbEmplComisiones.cc_UsuarioModifica,
                                                UsuModifica = tbEmplComisiones.tbUsuario1.usu_NombreUsuario,
                                                tbEmplComisiones.cc_FechaModifica,
-                                               tbEmplComisiones.cc_PorcentajeComision,
+                                               tbEmplComisiones.cc_TotalComision,
                                                tbEmplComisiones.cc_TotalVenta
                                            };
 
@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cc_FechaRegistro, cc_Pagado, cc_UsuarioCrea, cc_FechaCrea,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cc_FechaRegistro, cc_Pagado, cc_UsuarioCrea, cc_FechaCrea,cc_TotalComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
@@ -123,11 +123,11 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbEmpleadoComisiones.cc_FechaCrea,
                                                                                             tbEmpleadoComisiones.cc_TotalComision,
                                                                                             tbEmpleadoComisiones.cc_TotalVenta);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    //foreach (UDP_Plani_EmpleadoComisiones_Insert_Result Resultado in listEmpleadoComisiones)
-                    //    MensajeError = Resultado.MensajeError;
+					//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+					foreach (UDP_Plani_EmpleadoComisiones_Insert_Result Resultado in listEmpleadoComisiones)
+						MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
+					if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                         ModelState.AddModelError("", "Datos Incorrectos");
@@ -190,11 +190,11 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbEmpleadoComisiones.cc_TotalComision,
                                                                                             tbEmpleadoComisiones.cc_TotalVenta
                                                                                             );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    //foreach (UDP_Plani_EmpleadoComisiones_Update_Result Resultado in listEmpleadoComisiones)
-                    //    MensajeError = Resultado.MensajeError;
+					//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+					foreach (UDP_Plani_EmpleadoComisiones_Update_Result Resultado in listEmpleadoComisiones)
+						MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
+					if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                         ModelState.AddModelError("", "Datos Incorrectos");
