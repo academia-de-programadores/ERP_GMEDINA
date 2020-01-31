@@ -1559,7 +1559,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMesFE' does not ha
             <PropertyRef Name="Apellido" />
             <PropertyRef Name="Cargo" />
             <PropertyRef Name="Planilla" />
-            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="hipa_Anio" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -1568,7 +1568,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMesFE' does not ha
           <Property Name="Planilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="Monto" Type="decimal" Precision="38" Scale="6" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_Anio" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1639,7 +1639,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMesFE' does not ha
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="car_Descripcion" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="hipa_Anio" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -1648,7 +1648,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMesFE' does not ha
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="dtm_Monto" Type="decimal" Precision="38" Scale="6" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_Anio" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Deducciones_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -8964,7 +8964,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_DecimoCuartoMesFE].[Planilla] AS [Planilla], 
     [V_DecimoCuartoMesFE].[CuentaBancaria] AS [CuentaBancaria], 
     [V_DecimoCuartoMesFE].[Monto] AS [Monto], 
-    [V_DecimoCuartoMesFE].[hipa_FechaPago] AS [hipa_FechaPago]
+    [V_DecimoCuartoMesFE].[hipa_Anio] AS [hipa_Anio]
     FROM [Plani].[V_DecimoCuartoMesFE] AS [V_DecimoCuartoMesFE]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" store:Type="Views" store:Schema="Plani">
@@ -9013,7 +9013,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_DecimoTercerMesFE].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_DecimoTercerMesFE].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
     [V_DecimoTercerMesFE].[dtm_Monto] AS [dtm_Monto], 
-    [V_DecimoTercerMesFE].[hipa_FechaPago] AS [hipa_FechaPago]
+    [V_DecimoTercerMesFE].[hipa_Anio] AS [hipa_Anio]
     FROM [Plani].[V_DecimoTercerMesFE] AS [V_DecimoTercerMesFE]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Deducciones_RPT" EntityType="Self.V_Deducciones_RPT" store:Type="Views" store:Schema="Plani">
@@ -20943,8 +20943,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
             <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
           </AssociationSet>
-          <EntitySet Name="V_DecimoCuartoMesFE" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" />
-          <EntitySet Name="V_DecimoTercerMesFE" EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" />
           <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Insert" ReturnType="Collection(String)">
             <Parameter Name="ini_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -21127,6 +21125,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_DecimoCuartoMesFE" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" />
+          <EntitySet Name="V_DecimoTercerMesFE" EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -22109,42 +22109,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="V_DecimoCuartoMesFE">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Apellido" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Planilla" />
-            <PropertyRef Name="hipa_FechaPago" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Planilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_DecimoTercerMesFE">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="V_RPT_EmpleadoCurriculum">
           <Key>
             <PropertyRef Name="fechaInicio" />
@@ -22558,6 +22522,42 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_Plani_EmpleadoComisiones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="V_DecimoCuartoMesFE">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Apellido" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Planilla" />
+            <PropertyRef Name="hipa_Anio" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Planilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_DecimoTercerMesFE">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="hipa_Anio" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -27284,34 +27284,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoCuartoMesFE">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMesFE">
-              <MappingFragment StoreEntitySet="V_DecimoCuartoMesFE">
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-                <ScalarProperty Name="Planilla" ColumnName="Planilla" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoTercerMesFE">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMesFE">
-              <MappingFragment StoreEntitySet="V_DecimoTercerMesFE">
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
-                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Insert" />
           <EntitySetMapping Name="V_RPT_EmpleadoCurriculum">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum">
@@ -27512,6 +27484,34 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Update" />
+          <EntitySetMapping Name="V_DecimoCuartoMesFE">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMesFE">
+              <MappingFragment StoreEntitySet="V_DecimoCuartoMesFE">
+                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="Planilla" ColumnName="Planilla" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DecimoTercerMesFE">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMesFE">
+              <MappingFragment StoreEntitySet="V_DecimoTercerMesFE">
+                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
+                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

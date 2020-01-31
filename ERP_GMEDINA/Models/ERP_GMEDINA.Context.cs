@@ -195,8 +195,6 @@
         public virtual DbSet<V_FaseSeleccion> V_FaseSeleccion { get; set; }
         public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
         public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
-        public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
-        public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
         public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
         public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
         public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
@@ -205,6 +203,8 @@
         public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
         public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         public virtual DbSet<tbTechosComisiones> tbTechosComisiones { get; set; }
+        public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
+        public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

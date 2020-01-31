@@ -13,6 +13,6 @@ namespace ERP_GMEDINA.Models
         public string cpla_DescripcionPlanilla { get; set; }
         public string emp_CuentaBancaria { get; set; }
         public Nullable<decimal> dtm_Monto { get; set; }
-        public System.DateTime hipa_FechaPago { get; set; }
+        public int hipa_Anio { get; set; }
     }
 }
