@@ -2,10 +2,8 @@
     var General = [
             "Cargos",
             "Empresas",
-            "Idiomas",
             "Sucursales",
             "TipoMonedas",
-            "Nacionalidades",
             "Jornadas",
             "Areas",
             "TipoHoras",
@@ -54,6 +52,8 @@
          "Competencias",
             "Habilidades",
             "Titulos",
+            "Idiomas",
+            "Nacionalidades",
             "FasesReclutamiento",
              "RequerimientosEspeciales"
     ];

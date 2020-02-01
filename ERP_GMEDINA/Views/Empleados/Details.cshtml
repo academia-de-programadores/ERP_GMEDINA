@@ -105,6 +105,13 @@
                                                 <dd>
                                                     @Html.DisplayFor(model => model.emp_CuentaBancaria)
                                                 </dd>
+                                                <dt>
+                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_EstadoCivil)
+                                                </dt>
+
+                                                <dd>
+                                                    @Html.DisplayFor(model => model.tbPersonas.per_EstadoCivil)
+                                                </dd>
 
                                             </dl>
 
@@ -142,6 +149,14 @@
 
                                                 <dt>
                                                     @Html.DisplayNameFor(model => model.tbFormaPago.fpa_Descripcion)
+                                                </dt>
+
+                                                <dd>
+                                                    @Html.DisplayFor(model => model.tbFormaPago.fpa_Descripcion)
+                                                </dd>
+
+                                                <dt>
+                                                    @Html.DisplayNameFor(model=>model.tbPersonas.per_Nombres+" "+model.tbPersonas.per_Apellidos.Where)
                                                 </dt>
 
                                                 <dd>
