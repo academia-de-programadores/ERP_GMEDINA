@@ -1,5 +1,8 @@
 ﻿var fill = 0;
+var UltimaAmonestacion;
+var i = 0;
 function format(obj) {
+    UltimaAmonestacion = null;
     var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" onclick="redireccionar()">Audiencia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
@@ -24,6 +27,16 @@ function format(obj) {
                 '<td>' + index.hamo_Observacion + '</td>' +
                 '<td>' + Estado + '</td>' +
                 '<td>';
+        debugger
+        if(i == 0)
+        {
+            UltimaAmonestacion = index.hamo_Fecha;
+        }
+        else if (UltimaAmonestacion < index.hamo_Fecha)
+        {
+            UltimaAmonestacion = index.hamo_Fecha;
+        }
+        i++;
         if (index.hamo_Estado)
         {
             div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalles</button>';
@@ -37,6 +50,7 @@ function format(obj) {
             '</table>'
         //}
     });
+    i = 0;
     return div + '</div></div>';
 }
 function llenarTabla() {
@@ -89,6 +103,16 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 function llamarmodal() {
+    debugger
+    _ajax({ ID: parseInt(IdEmpleado) },
+        '/HistorialAmonestaciones/Fecha/',
+        'GET',
+        function (obj) {
+            debugger
+            $("#msjerror").html(obj);
+
+        });
+
     var modalnuevo = $("#ModalNuevo");
     $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
     modalnuevo.modal('show');

@@ -15,7 +15,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-control required valid",@onkeypress = "return alphanumeric(event)"} })
+								@Html.TextAreaFor(model => model.aude_Descripcion, htmlAttributes : new {@class = "form-control required valid", @onkeypress = "return alphanumeric(event)", @style = "width: 349px; margin: 0px 0.65625px 0px 0px; height: 94px;" })
 								@Html.ValidationMessageFor(model => model.aude_Descripcion, "", new { @class = "text-danger", @id = "erroraude_Descripcion" })
                             </div>
                         </div>

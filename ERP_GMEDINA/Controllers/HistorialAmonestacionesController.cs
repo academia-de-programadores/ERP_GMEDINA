@@ -143,6 +143,68 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+        public ActionResult Fecha(int? id)
+        {
+       
+            tbHistorialAmonestaciones tbHistorialAmonestaciones = null;
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
+                if (tbHistorialAmonestaciones == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+
+            db = new ERP_GMEDINAEntities();
+            List<V_HistorialAmonestacion> lista = new List<V_HistorialAmonestacion> { };
+
+            using (db = new ERP_GMEDINAEntities())
+            {
+
+                lista = db.V_HistorialAmonestacion.Where(x => x.emp_Id == id).ToList();
+            }
+            bool i = true;
+            string Mensaje = "";
+            DateTime FechaUltimaAmonestacion = Convert.ToDateTime("1900/01/01");
+
+            foreach (var item in lista)
+            {
+                DateTime FechaAmonestacion = Convert.ToDateTime(item.hamo_Fecha);
+                if (i)
+                {
+                    FechaUltimaAmonestacion = FechaAmonestacion;
+                    i = false;
+                }
+                else if (FechaUltimaAmonestacion < FechaAmonestacion)
+                {
+                    FechaUltimaAmonestacion = FechaAmonestacion;
+                }
+            }
+            if(FechaUltimaAmonestacion == Convert.ToDateTime("1900/01/01"))
+            {
+                Mensaje = "";
+
+            }
+            else
+            {
+                DateTime oldDate = FechaUltimaAmonestacion;
+                DateTime newDate = DateTime.Now;
+
+                // Difference in days, hours, and minutes.
+                TimeSpan ts = newDate - oldDate;
+                int differenceInDays = ts.Days;
+                // Difference in days.
+                Mensaje = "*Última amonestación hace: " + differenceInDays + " Días";
+            }
+            return Json(Mensaje, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: HistorialAmonestaciones/Create
         public JsonResult Create(tbHistorialAmonestaciones tbHistorialAmonestaciones)
