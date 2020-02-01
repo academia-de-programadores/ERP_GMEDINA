@@ -1,10 +1,10 @@
 ﻿//#region Region Obtención de Script para Formateo de Fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        
+
     })
     .fail(function (jqxhr, settings, exception) {
-        
+
     });
 //#endregion
 var inactivarID = 0;
@@ -25,6 +25,47 @@ function _ajax(params, uri, type, callback) {
 }
 
 $(document).ready(function () {
+
+    $.ajax({
+        url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $('#Crear #emp_IdCreate').select2({
+            dropdownParent: $('#Crear'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+
+        $('#Editar #emp_Id')
+            .select2({
+                dropdownParent: $('#Editar'),
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                debug: true,
+                cache: false,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
+                },
+                data: data.results
+            });
+    });
+
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green'
@@ -479,29 +520,17 @@ $("#btnCerrarCrear").click(function () {
 
 //Pedir data para llenar el DDL
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
+    let valCreate = $("#Crear #emp_IdCreate").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdCreate").val('').trigger('change');
+
     //Ocultar validaciones span
     limpiarSpan("Crear");
     //Asteriscos
     limpiarAsteriscos("Crear");
     document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = false;
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #emp_Id").empty();
-            $("#Crear #emp_Id").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
+
     $("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
@@ -589,6 +618,14 @@ $("#btnCerrarEditar").click(function () {
 
 
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
+    let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
+
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove().trigger('change.select2');
+        localStorage.removeItem('idEmpleado');
+    }
+
     limpiarAsteriscos("Editar");
     limpiarSpan("Editar");
     document.getElementById("btnEditDeduccionIndividual2").disabled = false;
@@ -602,15 +639,57 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
         data: JSON.stringify({ id: id })
     })
         .done(function (data) {
+            if (data.dei_PagaSiempre) {
+                $('#Editar #dei_PagaSiempre').prop('checked', true);
+            }
+            else {
+                $('#Editar #dei_PagaSiempre').prop('checked', false);
+            }
+
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
 
-                if (data.dei_PagaSiempre) {
-                    $('#Editar #dei_PagaSiempre').prop('checked', true);
+                if ($('#Editar #emp_Id').hasClass("select2-hidden-accessible")) {
+                    $('#Editar #emp_Id').select2('destroy').trigger('change');
+                    $('#Editar #emp_Id').empty();
                 }
-                else {
-                    $('#Editar #dei_PagaSiempre').prop('checked', false);
+
+                $.ajax({
+                    url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8"
+                }).done(function (data) {
+                    $('#Editar #emp_Id').select2({
+                        destroy: true,
+                        dropdownParent: $('#Editar'),
+                        placeholder: 'Seleccione un empleado',
+                        allowClear: true,
+                        debug: true,
+                        cache: false,
+                        language: {
+                            noResults: function () {
+                                return 'Resultados no encontrados.';
+                            },
+                            searching: function () {
+                                return 'Buscando...';
+                            }
+                        },
+                        data: data.results
+                    });
+                });
+
+                let idEmpSelect = data.emp_Id;
+                let NombreSelect = dataEmp[2]; //asignar data del row seleccionado
+
+
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change').trigger('clear.select2');
+                let valor = $('#Editar #emp_Id').val();
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
                 }
+
 
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
@@ -618,27 +697,6 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividual
                 $("#Editar #dei_MontoRestante").val(data.dei_MontoRestante);
                 $("#Editar #dei_Cuota").val(data.dei_Cuota);
                 $("#Editar #dei_PagaSiempre").val(data.dei_PagaSiempre);
-
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.emp_Id;
-
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ id })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
             }
             else {

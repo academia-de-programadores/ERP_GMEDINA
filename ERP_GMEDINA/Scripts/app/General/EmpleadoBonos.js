@@ -2,6 +2,7 @@
 var IDInactivar = 0, IDActivar = 0;
 //VARIABLE PARA VALIDAR SI ESTA PAGADO
 var varPagado;
+var dataSelect;
 
 //OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
@@ -105,56 +106,87 @@ function cargarGridBonos() {
         });
     (FullBody);
 }
-
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarEmpleadoBonos", function () {
-
-    //LLAMAR LA FUNCION PARA OCULTAR LAS VALIDACIONES
-    OcultarValidacionesCrear();
-    //DESBLOQUEAR EL BOTON DE CREAR
-    $("#btnCreateRegistroBonos").attr("disabled", false);
-    //FUNCION PARA CARGAR EL EMPLEADO SELECCIONADO
+$(document).ready(function () {
     $.ajax({
         url: "/EmpleadoBonos/EditGetDDLEmpleado",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #emp_IdEmpleado").empty();
-            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecionar colaborador...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
+           //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+           .done(function (data) {
+
+               $('#Crear #emp_IdEmpleadoCrear').select2({
+                   dropdownParent: $('#Crear'),
+                   placeholder: 'Seleccione un empleado...',
+                   allowClear: true,
+                   language: {
+                       noResults: function () {
+                           return 'Resultados no encontrados.';
+                       },
+                       searching: function () {
+                           return 'Buscando...';
+                       }
+                   },
+                   data: data.results
+               });
+            
+               var idEmpSelect = "";
+               var NombreSelect = "";
+
+               $('#Editar #emp_IdEmpleado').select2({
+                   dropdownParent: $('#Editar'),
+                   placeholder: 'Seleccione un empleado...',
+                   allowClear: true,
+                   language: {
+                       noResults: function () {
+                           return 'Resultados no encontrados.';
+                       },
+                       searching: function () {
+                           return 'Buscando...';
+                       }
+                   },
+                   data: data.results
+               });
+           });
+});
+//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+$(document).on("click", "#btnAgregarEmpleadoBonos", function () {
+    let valCreate = $("#Crear #emp_IdEmpleadoCrear").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdEmpleadoCrear").val('').trigger('change');
+    //LLAMAR LA FUNCION PARA OCULTAR LAS VALIDACIONES
+    OcultarValidacionesCrear();
+    //DESBLOQUEAR EL BOTON DE CREAR
+    $("#btnCreateRegistroBonos").attr("disabled", false);
+    //FUNCION PARA CARGAR EL EMPLEADO SELECCIONADO
+   
+    //MOSTRAR EL MODAL DE AGREGAR
+    $("#Crear #cb_Monto").val("");
+    $("#AgregarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
 
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE INGRESO DEL MODAL
     $.ajax({
         url: "/EmpleadoBonos/EditGetDDLIngreso",
         method: "GET",
-        dataType: "json",
+            dataType : "json",
         contentType: "application/json; charset=utf-8"
-    })
+        })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #cin_IdIngreso").empty();
-            $("#Crear #cin_IdIngreso").append("<option value='0'>Selecionar bono...</option>");
+            $("#Crear #cin_IdIngreso").append("<option value='0'>Selecione un bono...</option>");
             $.each(data, function (i, iter) {
-                $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" +iter.Descripcion + "</option>");
             });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#Crear #cb_Monto").val("");
-    $("#AgregarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-
+            });
 
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroBonos').click(function () {
     //CAPTURAR LOS VALORES DEL FORMULARIO
-    var fnc_Colaborador = $("#Crear #emp_IdEmpleado").val();
+    var fnc_Colaborador = $("#Crear #emp_IdEmpleadoCrear").val();
     var fnc_Ingreso = $("#Crear #cin_IdIngreso").val();
     var fnc_Monto = $("#Crear #cb_Monto").val();
 
@@ -372,12 +404,25 @@ function OcultarValidacionesEditar() {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos", function () {
+    //OBTENER TODA LA DATA DEL ROW SELECCIONADO
+    let dataEmp = table.row($(this).parents('tr')).data();
+    //INICIALIZAR UNA VARIABLE CON EL VALOR DEL ALMACENAMIENTO LOCAL
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+
+    if (itemEmpleado != null) {
+        $("#Editar #emp_IdEmpleado option[value='" + itemEmpleado + "']").remove().trigger('change');
+        $("#Editar #emp_IdEmpleado #opt-gr-emp-info-incompleta").remove().trigger('change');
+        localStorage.removeItem('idEmpleado');
+    }
     //OCULTAR VALIDACIONES DE EDITAR
     OcultarValidacionesEditar();
     //CAPTURA DEL ID DEL REGISTRO A EDITAR
     var ID = $(this).data('id');
     //SETEAR LA VARIABLE DE INACTIVACION
     IDInactivar = ID;
+    var idEmpSelect = "";
+    var NombreSelect = "";
+
     $.ajax({
         url: "/EmpleadoBonos/Edit/" + ID,
         method: "GET",
@@ -390,10 +435,10 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
             if (data) {
                 if (data.cb_Pagado) {
                     varPagado = 1;
-                    document.getElementById("btnUpdateBonos").disabled = true;
+                    $("#btnUpdateBonos").attr('disabled', true);
                 } else {
                     varPagado = 0;
-                    document.getElementById("btnUpdateBonos").disabled = false;
+                    $("#btnUpdateBonos").attr('disabled', false);
                 }
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
 
@@ -402,6 +447,21 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                     $('#Editar #cb_Pagado').prop('checked', true);
                 } else {
                     $('#Editar #cb_Pagado').prop('checked', false);
+                }
+                idEmpSelect = data.emp_Id;
+                console.table(dataEmp);
+                NombreSelect = dataEmp[1];
+                
+               $("#Editar #emp_IdEmpleado").select2("val", "");
+               $('#Editar #emp_IdEmpleado').val(idEmpSelect).trigger('change');
+
+               let valor = $('#Editar #emp_IdEmpleado').val();
+
+               if (valor == null) {
+                   console.log(idEmpSelect, NombreSelect);
+                   $("#Editar #emp_IdEmpleado").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>').trigger('change');
+                   $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
+                   localStorage.setItem('idEmpleado', idEmpSelect);
                 }
 
                 $("#Editar #cb_Id").val(data.cb_Id);
@@ -412,21 +472,6 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdCatIngreso = data.cin_IdIngreso;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/EmpleadoBonos/EditGetDDLEmpleado",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_IdEmpleado").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
 
                 $.ajax({
                     url: "/EmpleadoBonos/EditGetDDLIngreso",
@@ -443,11 +488,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                             $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-
-
                 $("#EditarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-
-
             }
             else {
                 //Mensaje de error si no hay data

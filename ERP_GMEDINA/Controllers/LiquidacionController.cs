@@ -22,22 +22,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpGet]
         public string GetEmpleadosAreas()
         {
-            using (Models.ERP_GMEDINAEntities db = new Models.ERP_GMEDINAEntities())
-            {
-                var json = "";
-                try
-                {
-                    var jsonAreasEmpleados = db.UDP_Plani_EmpleadosPorAreas_Select();
-                    foreach (UDP_Plani_EmpleadosPorAreas_Select_Result result in jsonAreasEmpleados)
-                        json = result.json;
-                }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-                    return "Error";
-                }
-                return json;
-            }
+            return General.ObtenerEmpleados();
         }
 
         //OBTENER LA INFORMACION DE EMPLEADOS

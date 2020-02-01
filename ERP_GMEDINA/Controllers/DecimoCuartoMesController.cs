@@ -102,10 +102,7 @@ namespace ERP_GMEDINA.Controllers
 					var ConsultaFechas = from HP in db.V_DecimoCuartoMesFE
 
 										 where
-
-										 (HP.hipa_Anio == hipa_FechaInicio) 								  
-
-										 
+										 (HP.hipa_Anio == hipa_FechaInicio)							 
 										 select new ViewModelDecimoCuartoMes
 										 {
 											 emp_Id = HP.emp_Id,

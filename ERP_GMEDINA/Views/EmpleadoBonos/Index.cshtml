@@ -47,7 +47,7 @@
                             </td>
                             <td>
                                 @{ string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;}
-                                @Html.HiddenFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
+                                
                                 @Nombre
                             </td>
                             <td>
@@ -203,8 +203,10 @@
 @section Scripts {
     @Scripts.Render("~/Scripts/app/General/EmpleadoBonos")
     @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/select2")
 }
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/select2Styles")
 }

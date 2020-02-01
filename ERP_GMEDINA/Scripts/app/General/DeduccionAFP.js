@@ -18,6 +18,46 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+$(document).ready(function () {
+    $.ajax({
+        url: "/DeduccionAFP/EditGetEmpleadoDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $('#Crear #emp_IdCrear').select2({
+            dropdownParent: $('#Crear'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+
+        $('#Editar #emp_Id').select2({
+            dropdownParent: $('#Editar'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+    });
+});
+
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -110,24 +150,12 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionAFP", function () {
+    let valCreate = $("#Crear #emp_IdCrear").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdCrear").val('').trigger('change');
+
     OcultarValidacionesCrear();
     OcultarValidacionesEdit();
-    //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
-    $.ajax({
-        url: "/DeduccionAFP/EditGetEmpleadoDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Crear #emp_Id").empty();
-            $("#Crear #emp_Id").append("<option value='0'>Selecione una opción...</option>");
-            //LLENAR EL DROPDOWNLIST
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
 
     //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
     $.ajax({
@@ -148,7 +176,6 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("#Crear #emp_Id").val("0");
     $("#dafp_AporteLps").val('');
     $("#Crear #afp_Id").val("0");
 });
@@ -229,7 +256,7 @@ function OcultarValidacionesEdit() {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionAFP').click(function () {
-    var empId = $("#Crear #emp_Id").val();
+    var empId = $("#Crear #emp_IdCrear").val();
     var Aporte = $("#Crear #dafp_AporteLps").val();
     var AFP = $("#Crear #afp_Id").val();
 
@@ -267,7 +294,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
                     message: '¡El registro se agregó de forma exitosa!',
                 });
 
-                $("#Crear #emp_Id").val("0");
+                $("#Crear #emp_IdCrear").val("0");
                 $("#Crear #dafp_AporteLps").val('');
                 $("#Crear #afp_Id").val("0");
             }
@@ -297,6 +324,13 @@ $("#Editar #validatione1").css("display", "none");
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+    let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
+
     OcultarValidacionesCrear();
     OcultarValidacionesEdit();
     var ID = $(this).data('id');
@@ -311,27 +345,20 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                let idEmpSelect = data.emp_Id;
+                let NombreSelect = dataEmp[1];
                 $("#Editar #dafp_Id").val(data.dafp_Id);
                 $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
 
-                var SelectedIdEmpleado = data.emp_Id;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionAFP/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                let valor = $('#Editar #emp_Id').val();
+
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
+                }
 
                 var SelectedIdAFP = data.afp_Id;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL

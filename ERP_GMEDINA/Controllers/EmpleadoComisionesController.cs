@@ -36,22 +36,9 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region DDLEmpleado
-        public JsonResult EditGetDDLEmpleado()
+        public string EditGetDDLEmpleado()
         {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from Personas in db.tbPersonas
-            join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
-            join planillas in db.tbCatalogoDePlanillas on Empleados.cpla_IdPlanilla equals planillas.cpla_IdPlanilla
-            //join Cargo in db.tbCargos on Empleados.car_Id equals Cargo.car_Id
-            where planillas.cpla_RecibeComision == true && Empleados.emp_Estado == true
-            select new
-            {
-                Id = Empleados.emp_Id,
-                Descripcion = Personas.per_Nombres + " " + Personas.per_Apellidos
-            };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
+            return Helpers.General.ObtenerEmpleados();
         }
         #endregion
 
@@ -137,11 +124,11 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbEmpleadoComisiones.cc_FechaCrea,
                                                                                             tbEmpleadoComisiones.cc_TotalComision,
                                                                                             tbEmpleadoComisiones.cc_TotalVenta);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_EmpleadoComisiones_Insert_Result Resultado in listEmpleadoComisiones)
-                        MensajeError = Resultado.MensajeError;
+					//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+					foreach (UDP_Plani_EmpleadoComisiones_Insert_Result Resultado in listEmpleadoComisiones)
+						MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
+					if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                         ModelState.AddModelError("", "Datos Incorrectos");
@@ -205,11 +192,11 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbEmpleadoComisiones.cc_TotalComision,
                                                                                             tbEmpleadoComisiones.cc_TotalVenta
                                                                                             );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_EmpleadoComisiones_Update_Result Resultado in listEmpleadoComisiones)
-                        MensajeError = Resultado.MensajeError;
+					//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+					foreach (UDP_Plani_EmpleadoComisiones_Update_Result Resultado in listEmpleadoComisiones)
+						MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
+					if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                         ModelState.AddModelError("", "Datos Incorrectos");

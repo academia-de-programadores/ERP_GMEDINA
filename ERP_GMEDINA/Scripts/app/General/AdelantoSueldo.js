@@ -85,26 +85,53 @@ function cargarGridAdelantos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
+    let valCreate = $("#Crear #emp_IdEmpleado").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdEmpleado").val('').trigger('change');
     //OCULTAR TODAS LAS VALIDACIONES
     OcultarValidacionesCrear();
     //DESBLOQUEAR EL BOTON DE CREAR
     $("#btnCreateRegistroAdelantos").attr("disabled", false);
+    $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
+});
 
+$(document).ready(function () {
     $.ajax({
         url: "/AdelantoSueldo/EmpleadoGetDDL",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
-        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-        $("#Crear #emp_IdEmpleado").empty();
-        //LLENAR EL DROPDOWNLIST
-        $("#Crear #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
-        $.each(data, function (i, iter) {
-            $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+        $('#Crear #emp_IdEmpleado').select2({
+            dropdownParent: $('#Crear'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+
+        $('#Editar #emp_Id').select2({
+            dropdownParent: $('#Editar'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
         });
     });
-    $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
 });
 
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA CREACION
@@ -158,7 +185,6 @@ $('#btnCreateRegistroAdelantos').click(function () {
     var Monto = $("#Crear #adsu_Monto").val();
     var IdEmp = $("#Crear #emp_IdEmpleado").val();
     var Fecha = $("#Crear #adsu_FechaAdelanto").val();
-
 
     if (ValidarCamposCrear(Razon, Monto, IdEmp, Fecha)) {
         //BLOQUEAR EL BOTON
@@ -362,7 +388,6 @@ function OcultarValidacionesCrear() {
     //SETEAR LOS CAMPOS
     $("#Crear #adsu_RazonAdelanto").val("");
     $("#Crear #adsu_Monto").val("");
-    $("#Crear #emp_IdEmpleado").val("0");
     $("#Crear #adsu_FechaAdelanto").val("");
     $("#Crear #SueldoPromedioCrear").hide();
 
@@ -394,10 +419,16 @@ $('#btnCerrarCrearAdelanto').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
+
     //OCULTAR VALIDACIONES
     OcultarValidacionesEditar();
 
-    $("#Editar #emp_Id").empty();
     var ID = $(this).data('id');
     IDInactivar = ID;
 
@@ -419,9 +450,9 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: data.emp_Id })
-        }).done(function (data) {
+        }).done(function (dataEmpleado) {
             //ACCIONES EN CASO DE EXITO
-            MaxSueldoCreate = data;
+            MaxSueldoCreate = dataEmpleado;
         }).fail(function (data) {
             //ACCIONES EN CASO DE ERROR
             $("#AgregarAdelantos").modal('hide');
@@ -430,49 +461,42 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
                 message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
             });
         });
-
         idEmpSelect = data.emp_Id;
         NombreSelect = data.per_Nombres;
-        //LLENAR EL DROPDOWNLIST
-        $("#Editar #emp_Id").append("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>");
-
         $.ajax({
             url: "/AdelantoSueldo/Edit/" + ID,
             method: "GET",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: ID })
-        }).done(function (data) {
-            if (data) {
+        }).done(function (dataAdelantoSueldo) {
+            if (dataAdelantoSueldo) {
                 //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO
-                if (data.adsu_Deducido) {
+                if (dataAdelantoSueldo.adsu_Deducido) {
                     document.getElementById("btnUpdateAdelantos").disabled = true;
                 } else {
-                    document.getElementById("btnUpdateAdelantos").disabled = false;
+                    $("#btnUpdateAdelantos").attr('disabled', false);
                 }
-                var SelectedIdEmp = data.emp_Id;
 
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/AdelantoSueldo/EmpleadoGetDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                }).done(function (data) {
-                    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                    $.each(data, function (i, iter) {
-                        $("#Editar #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                    });
-                });
-                $("#Editar #adsu_IdAdelantoSueldo").val(data.adsu_IdAdelantoSueldo);
-                $("#Editar #adsu_RazonAdelanto").val(data.adsu_RazonAdelanto);
-                $("#Editar #adsu_Monto").val(data.adsu_Monto);
+                $("#Editar #emp_Id").select2("val", "");
+
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                let valor = $('#Editar #emp_Id').val();
+
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
+                }
+
+                $("#Editar #adsu_IdAdelantoSueldo").val(dataAdelantoSueldo.adsu_IdAdelantoSueldo);
+                $("#Editar #adsu_RazonAdelanto").val(dataAdelantoSueldo.adsu_RazonAdelanto);
+                $("#Editar #adsu_Monto").val(dataAdelantoSueldo.adsu_Monto);
 
                 //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
                 $("#EditarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
 
-            } else if (data.adsu_Deducido) {
+            } else if (dataAdelantoSueldo.adsu_Deducido) {
                 iziToast.error({
                     title: 'Error',
                     message: 'No puede editar un registro deducido',
@@ -489,7 +513,6 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
 });
 
 $('#Crear #emp_IdEmpleado').change(() => {
-    console.log('cambio');
     let IdEmpCreate = $('#emp_IdEmpleado').val();
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
@@ -499,7 +522,6 @@ $('#Crear #emp_IdEmpleado').change(() => {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ id: IdEmpCreate })
     }).done(function (data) {
-        console.log(data);
         //ACCIONES EN CASO DE EXITO
         MaxSueldoCreate = data;
         let Decimal_SueldoCreate = (MaxSueldoCreate % 1 == 0) ? MaxSueldoCreate + ".00" : MaxSueldoCreate;
@@ -757,7 +779,6 @@ function OcultarValidacionesEditar() {
     //SETEAR LOS CAMPOS
     $("#Editar #adsu_RazonAdelanto").val("");
     $("#CreEditarar #adsu_Monto").val("");
-    $("#Editar #emp_IdEmpleado").val(0);
 
     //OCULTAR VALIDACIONES DE EMP_ID
     $('#Editar #Span_emp_Id').hide();

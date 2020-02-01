@@ -25,6 +25,24 @@
 			</div>
 		</div>
 	</div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-5">
+                <label>Tipo de Ingreso</label><label class="" id="asteriscoTipoIngreso" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+            </div>
+            <div class="col-md-7">
+                <select id="idTipoIngreso" name="cin_TipoIngreso" class="form-control" onchange="ValidarTipoIngreso('Editar')">
+                    <option value="0">Seleccione una opción...</option>
+                    <option value="1">Bonos</option>
+                    <option value="2">Comisiones</option>
+                    <option value="3">Extra</option>
+                    <option value="4">Otros</option>
+                </select>
+                <label class="text-danger" id="valTipoIngreso" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Tipo de Ingreso Requerido</label>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
 	<button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>

@@ -1,27 +1,36 @@
 ﻿@model ERP_GMEDINA.Models.tbCatalogoDeIngresos
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoIngresosCreate" }))
 {
-	@Html.AntiForgeryToken()
-	<div class="modal-body" id="Crear">
-		@Html.HiddenFor(model => model.cin_IdIngreso)
-		@Html.HiddenFor(model => model.cin_FechaCrea)
-		@Html.HiddenFor(model => model.cin_UsuarioCrea)
-		<div class="form-group">
-			<div class="row">
-				<div class="col-md-10">
-					<div>
-						<label>Descripción Ingreso </label><label class="" id="asteriscoCreate">*</label>
-						@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off", @maxlength = "50", @onkeyup = "ValidarCamposCrear(this.value)" } })
-					</div>
+    @Html.AntiForgeryToken()
+    <div class="modal-body" id="Crear">
+        @Html.HiddenFor(model => model.cin_IdIngreso)
+        @Html.HiddenFor(model => model.cin_FechaCrea)
+        @Html.HiddenFor(model => model.cin_UsuarioCrea)
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Descripción Ingreso </label><label class="" id="asteriscoCreate">*</label>
+                    @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off", @maxlength = "50", @onkeyup = "ValidarCamposCrear(this.value, -1)" } })
                     <span class="field-validation-valid text-danger" style="display: none" id="DescripcionCrear">El campo Descripción Ingreso es Requerido</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
-		<input type="submit" id="btnCreateRegistroIngresos" value="Guardar" class="btn btn-primary pull-left" />
-		<div style="display:none" class="btn pull-left" id="cargandoCrear">
-		</div>
-	</div>
+                </div>
+                <div class="col-md-6">
+                    <label>Tipo de Ingreso</label><label class="" id="asteriscoTipoIngreso" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                    <select id="idTipoIngreso" name="cin_TipoIngreso" class="form-control" onchange="ValidarTipoIngreso('Crear')">
+                        <option value="0">Seleccione una opción...</option>
+                        <option value="1">Bonos</option>
+                        <option value="2">Comisiones</option>
+                        <option value="3">Extra</option>
+                        <option value="4">Otros</option>
+                    </select>
+                    <label class="text-danger" id="valTipoIngreso" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Tipo de Ingreso Requerido</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
+        <input type="submit" id="btnCreateRegistroIngresos" value="Guardar" class="btn btn-primary pull-left" />
+        <div style="display:none" class="btn pull-left" id="cargandoCrear">
+        </div>
+    </div>
 }

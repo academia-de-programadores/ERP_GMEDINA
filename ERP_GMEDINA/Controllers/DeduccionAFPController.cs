@@ -127,16 +127,10 @@ namespace ERP_GMEDINA.Controllers
 
         #region Dropdownlists
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        public JsonResult EditGetEmpleadoDDL()
+        public string EditGetEmpleadoDDL()
         {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from Emp in db.tbEmpleados
-            where Emp.emp_Estado == true
-            join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
-            select new { Id = Emp.emp_Id, Descripcion = Per.per_Nombres + " " + Per.per_Apellidos };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
+            return Helpers.General.ObtenerEmpleados();
         }
 
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN

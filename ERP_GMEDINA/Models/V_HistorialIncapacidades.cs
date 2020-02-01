@@ -19,5 +19,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> hinc_FechaFin { get; set; }
         public bool hinc_Estado { get; set; }
         public string hinc_RazonInactivo { get; set; }
+        public bool hinc_Espermanente { get; set; }
     }
 }

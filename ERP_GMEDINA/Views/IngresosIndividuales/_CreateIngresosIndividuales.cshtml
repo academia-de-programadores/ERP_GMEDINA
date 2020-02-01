@@ -23,8 +23,10 @@
                     @Html.LabelFor(model => model.emp_Id)<label class="" id="ast2" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="emp_Id" name="emp_Id" class="form-control" onchange="ValidarCamposCrear('-1', this.value, '-1')"></select>
-                    <label class="text-danger" id="validatione_empleadoID" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido.</label>
+                    <select id="emp_IdCrear" name="emp_Id" class="form-control" onchange="ValidarCamposCrear('-1', this.value, '-1')">
+                        <option></option>
+                    </select>
+                    <span class="text-danger" id="validatione_empleadoID" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido.</span>
                 </div>
             </div>
 

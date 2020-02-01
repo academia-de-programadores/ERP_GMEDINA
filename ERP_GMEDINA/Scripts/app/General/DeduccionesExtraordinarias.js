@@ -703,3 +703,27 @@ $("#btnCerrarInactivar").click(function () {
     $("#InactivarDeduccionesExtraordinarias").modal('hide');
 });
 //#endregion
+
+$(document).ready(function () {
+    if (location.href.indexOf('Create') || location.href.indexOf('Edit'))
+        $.ajax({
+            url: "/DeduccionesExtraordinarias/EquipoEmpleadoGetDDL",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (data) {
+            $('#eqem_Id').select2({
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
+                },
+                data: data.results
+            });
+        });
+});

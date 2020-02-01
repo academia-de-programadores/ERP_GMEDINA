@@ -21,6 +21,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hinc_FechaCrea { get; set; }
         public Nullable<int> hinc_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hinc_FechaModifica { get; set; }
+        public bool hinc_Espermanente { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

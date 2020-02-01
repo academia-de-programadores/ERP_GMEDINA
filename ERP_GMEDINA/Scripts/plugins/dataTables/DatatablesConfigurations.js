@@ -2,6 +2,7 @@
 var Admin = false;
 var textoBoton = 'Mostrar activos';
 var botones = [];
+var table;
 var htmlSpiner =
     `<div class="sk-spinner sk-spinner-wave">
                 <div class="sk-rect1"></div>
@@ -12,7 +13,7 @@ var htmlSpiner =
              </div>`;
 
 $(document).ready(function () {
-    $('.dataTables-example').DataTable({
+    table = $('.dataTables-example').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         destroy: true,

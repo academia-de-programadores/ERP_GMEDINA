@@ -60,8 +60,27 @@ namespace ERP_GMEDINA.Controllers
         {
             //Viewbag para llenar sus respectivos Dropdownlist
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado");
             return View();
+        }
+
+        public string EquipoEmpleadoGetDDL()
+        {
+            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+            {
+                var json = "";
+                try
+                {
+                    var jsonAreasEmpleados = db.UDP_Plani_EquipoEmpleadosPorAreas_Select();
+                    foreach (UDP_Plani_EquipoEmpleadosPorAreas_Select_Result result in jsonAreasEmpleados)
+                        json = result.json;
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    return "Error";
+                }
+                return json;
+            }
         }
 
 
@@ -74,7 +93,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //Para llenar los campos de auditoria
             tbDeduccionesExtraordinarias.dex_UsuarioCrea = 1;
-             tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
+            tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
 
             //Variable para enviar y validar en el FrontEnd
             string Response = String.Empty;
@@ -285,7 +304,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpGet]
         public JsonResult Activar(int? id)
         {
-            if(id == null)
+            if (id == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
 
             //LLENAR DATA DE AUDITORIA

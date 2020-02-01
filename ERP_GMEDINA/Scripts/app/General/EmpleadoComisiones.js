@@ -75,33 +75,54 @@ function cargarGridComisiones() {
         });
     (FullBody);
 }
+$(document).ready(function () {
+    $.ajax({
+        url: "/AdelantoSueldo/EmpleadoGetDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $('#Crear #emp_IdEmpleado').select2({
+            dropdownParent: $('#Crear'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
 
+        $('#Editar #emp_Id').select2({
+            dropdownParent: $('#Editar'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+    });
+});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
+    let valCreate = $("#Crear #emp_IdEmpleado").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdEmpleado").val('').trigger('change');
     //OCULTAR VALIDACIONES
     OcultarValidacionesCrear();
     //DESBLOQUEAR EL BOTON DE CREAR
     $("#btnCreateRegistroComisiones").attr("disabled", false);
-
-    //RECUPERAR LA DATA PARA LLENAR EL DROPDOWNLIST DE EMPLEADO
-    $.ajax({
-        url: "/EmpleadoComisiones/EditGetDDLEmpleado",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-
-    })
-    //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-    .done(function (data) {
-
-        $("#Crear #emp_IdEmpleado").empty();
-        $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
-        $.each(data, function (i, iter) {
-            $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-        });
-    });
-
     //RECUPERAR LA DATA PARA LLENAR EL DROPDOWNLIST DE INGRESO
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLIngreso",
@@ -222,6 +243,12 @@ $("#btnCerrarModalCrear").click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
     //OCULTAR DATAANNOTATIONS
     $("#Editar #Validation_descipcion1e").css("display", "hidden");
     $("#Editar #Validation_descipcion2e").css("display", "hidden");
@@ -231,6 +258,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
     $("#Editar #AsteriscoTotal").removeClass("text-danger");
     var ID = $(this).data('id');
     Idinactivar = ID;
+    var idEmpSelect = "";
+    var NombreSelect = "";
     $.ajax({
         url: "/EmpleadoComisiones/Edit/" + ID,
         method: "GET",
@@ -242,32 +271,26 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 if (data.cc_Pagado) {
-                    document.getElementById("btnUpdateComisionesConfirmar").disabled = true;
+                    $("#btnUpdateComisionesConfirmar").attr('disabled',true);
                 } else {
-                    document.getElementById("btnUpdateComisionesConfirmar").disabled = false;
+                    $("#btnUpdateComisionesConfirmar").attr('disabled', false);
                 }
+                idEmpSelect = data.emp_Id;
+                NombreSelect = data.Descripcion;                
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                let valor = $('#Editar #emp_Id').val();
+
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
+                }
+
                 $("#Editar #cc_Id").val(data.cc_Id);
                 $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdIng = data.cin_IdIngreso;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/EmpleadoComisiones/EditGetDDLEmpleado",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_IdEmpleado").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-
-                    });
 
                 $.ajax({
                     url: "/EmpleadoComisiones/EditGetDDLIngreso",

@@ -23,11 +23,50 @@ function _ajax(params, uri, type, callback) {
 }
 
 $(document).ready(function () {
+    //PLUGIN DE LOS CHECKS-BOX
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green'
     });
-})
+
+    //PLUGIN SELECT2 DATATABLE 
+    $.ajax({
+        url: "/IngresosIndividuales/EmpleadoGetDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $('#Crear #emp_IdCrear').select2({
+            dropdownParent: $('#Crear'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+
+        $('#Editar #emp_Id').select2({
+            dropdownParent: $('#Editar'),
+            placeholder: 'Seleccione un empleado',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                    return 'Resultados no encontrados.';
+                },
+                searching: function () {
+                    return 'Buscando...';
+                }
+            },
+            data: data.results
+        });
+    });
+});
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
@@ -140,30 +179,20 @@ $("#btnCerrarCrear").click(function () {
 const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
 
 $(document).on("click", "#btnAgregarIngresoIndividual", function () {
-    document.getElementById("btnCreateRegistroIngresoIndividual").disabled = false;
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/IngresosIndividuales/EditGetEmpleadoDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #emp_Id").empty();
-            $("#Crear #emp_Id").append("<option value=0>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
-    $("#Crear #emp_Id").val("0");
+
+    //DESBLOQUEAR EL BOTON DE CREAR
+    $("#btnCreateRegistroIngresoIndividual").attr("disabled", false);
+    //INICIALIZAR LOS VALORES DEL MODAL
+    $("#Crear #emp_IdCrear").val("0");
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
     $('#Crear #ini_PagaSiempre').prop('checked', false);
+    //VALIDAR EL DDL
+    let valCreate = $("#Crear #emp_IdCrear").val();
+    if (valCreate != null && valCreate != "")
+        $("#Crear #emp_IdCrear").val('').trigger('change');
+    //MOSTRAR EL MODAL DE AGREGAR
+    $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
 });
 
 
@@ -172,7 +201,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
 $('#btnCreateRegistroIngresoIndividual').click(function () {
     var Motivo = $("#Crear #ini_Motivo").val();
     var Monto = $("#Crear #ini_Monto").val();
-    var IdEmp = $("#Crear #emp_Id").val();
+    var IdEmp = $("#Crear #emp_IdCrear").val();
     var ini_PagaSiempre = false;
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
     var indices = $("#Crear #ini_Monto").val().split(",");
@@ -330,7 +359,7 @@ function ValidarCamposCrear(Motivo, IdEmp, Monto) {
 ////////// fin crear
 
 function OcultarValidaciones() {
-    $("#Crear #emp_Id").val("0");
+    $("#Crear #emp_IdCrear").val("0");
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
     $("#ini_PagaSiempre").prop('checked', false);
@@ -353,8 +382,25 @@ $("#btnCerrarEditar").click(function () {
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales", function () {
+    //OBTENER TODA LA DATA DEL ROW SELECCIONADO
+    let dataEmp = table.row($(this).parents('tr')).data();
+    //INICIALIZAR UNA VARIABLE CON EL VALOR DEL ALMACENAMIENTO LOCAL
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+
+    //VALIDAR QUE NO  ESTE NULL
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
+
+    //VARIABLE DE CONTEXTO PARA CAPTURAR EL ID DEL EMPLEADO SELCCIONADO
+    var idEmpSelect = "";
+    var NombreSelect = "";
+    //CAPTURAR EL DATAID
     var id = $(this).data('id');
+    //SETEO DE LA VARIABLE DE INACTIVACION
     GB_Inactivar = id;
+    //PETICION AL SERVIDOR
     $.ajax({
         url: "/IngresosIndividuales/Edit/" + id,
         method: "GET",
@@ -363,13 +409,16 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales"
         data: JSON.stringify({ id: id })
     })
         .done(function (data) {
+            //SETEO DE LA VARIABLE DE idEmpSelect CON EL ID DEL EMPLEADO 
+            idEmpSelect = data.emp_Id;            
+            NombreSelect = dataEmp[2];
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
                 if (data.ini_Pagado) {
-                    document.getElementById("btnEditIngresoIndividual").disabled = true;
+                    $("#btnEditIngresoIndividual").attr('disabled', true);
                 } else {
-                    document.getElementById("btnEditIngresoIndividual").disabled = false;
+                    $("#btnEditIngresoIndividual").attr('disabled', false);
                 }
 
                 if (data.ini_PagaSiempre) {
@@ -379,30 +428,41 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales"
                     $('#Editar #ini_PagaSiempre').prop('checked', false);
                 }
 
+                $("#Editar #emp_Id").select2("val", "");
+
+                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                let valor = $('#Editar #emp_Id').val();
+
+                if (valor == null) {
+                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmpSelect);
+                }
+
                 $("#Editar #ini_IdIngresosIndividuales").val(data.ini_IdIngresosIndividuales);
                 $("#Editar #ini_Motivo").val(data.ini_Motivo);
                 $("#Editar #ini_Monto").val(data.ini_Monto);
                 $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.emp_Id;
+                //var SelectedId = data.emp_Id;
 
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/IngresosIndividuales/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ id })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST                    
-                        $.each(data, function (i, iter) {
-                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
+                //$.ajax({
+                //    url: "/IngresosIndividuales/EditGetEmpleadoDDL",
+                //    method: "GET",
+                //    dataType: "json",
+                //    contentType: "application/json; charset=utf-8",
+                //    data: JSON.stringify({ id })
+                //})
+                //    .done(function (data) {
+                //        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                //        $("#Editar #emp_Id").empty();
+                //        //LLENAR EL DROPDOWNLIST                    
+                //        $.each(data, function (i, iter) {
+                //            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                //        });
+                //    });
                 $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
                 
             }

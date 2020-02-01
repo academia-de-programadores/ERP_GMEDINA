@@ -98,5 +98,25 @@ namespace ERP_GMEDINA.Helpers
             }
             return response;
         }
+
+        public static string ObtenerEmpleados()
+        {
+            using (Models.ERP_GMEDINAEntities db = new Models.ERP_GMEDINAEntities())
+            {
+                var json = "";
+                try
+                {
+                    var jsonAreasEmpleados = db.UDP_Plani_EmpleadosPorAreas_Select();
+                    foreach (UDP_Plani_EmpleadosPorAreas_Select_Result result in jsonAreasEmpleados)
+                        json = result.json;
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    return "Error";
+                }
+                return json;
+            }
+        }
     }
 }

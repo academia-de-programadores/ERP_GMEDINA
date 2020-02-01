@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using System.Data.Entity.Core.Objects;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -28,17 +29,14 @@ namespace ERP_GMEDINA.Controllers
         {
             var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos               
                         .Select(c => new {
-                                           cin_IdIngresos = c.cin_IdIngreso,
+                                           cin_IdIngreso = c.cin_IdIngreso,
                                            cin_DescripcionIngreso = c.cin_DescripcionIngreso,
                                            cin_Activo = c.cin_Activo,
-
                                            cin_UsuarioCrea = c.cin_UsuarioCrea,
                                            cin_FechaCrea = c.cin_FechaCrea,
-
+                                          cin_TipoIngreso = c.cin_TipoIngreso,
                                            cin_UsuarioModifica= c.cin_UsuarioModifica,
                                            cin_FechaModifica = c.cin_FechaModifica})
-                                           //.OrderByDescending(x => x.cin_IdIngresos)
-                                          // .Where(x => x.cin_Activo == true)
                                            .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeIngresos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -46,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cin_IdIngreso,cin_DescripcionIngreso,cin_UsuarioCrea,cin_FechaCrea,cin_UsuarioModifica,cin_FechaModifica,cin_Activo")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
+        public ActionResult Create([Bind(Include = "cin_IdIngreso,cin_DescripcionIngreso,cin_UsuarioCrea,cin_FechaCrea,cin_TipoIngreso,cin_UsuarioModifica,cin_FechaModifica,cin_Activo")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
         {
             #region declaracion de variables
             //Auditoria
@@ -63,11 +61,12 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Insert(tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Insert(tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                         tbCatalogoDeIngresos.cin_TipoIngreso,
                                                                                          tbCatalogoDeIngresos.cin_UsuarioCrea,
                                                                                          tbCatalogoDeIngresos.cin_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Insert_Result Resultado in listCatalogoDeIngresos)
+                    foreach (UDP_Plani_tbCatalogoDeIngresos_Insert_Result Resultado in listCatalogoDeIngresos)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -115,7 +114,8 @@ namespace ERP_GMEDINA.Controllers
                                                tbCatIngreso.cin_DescripcionIngreso,
                                                tbCatIngreso.cin_Activo,
                                                tbCatIngreso.cin_UsuarioCrea,
-                                               UsuCrea= tbCatIngreso.tbUsuario.usu_NombreUsuario,
+                                               tbCatIngreso.cin_TipoIngreso,
+                                               UsuCrea = tbCatIngreso.tbUsuario.usu_NombreUsuario,
                                                tbCatIngreso.cin_FechaCrea,
                                                tbCatIngreso.cin_UsuarioModifica,
                                                UsuModifica= tbCatIngreso.tbUsuario1.usu_NombreUsuario,
@@ -129,9 +129,9 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(int id, string cin_DescripcionIngreso)
+        public ActionResult Edit(int id, string cin_DescripcionIngreso, int cin_TipoIngreso)
         {
-            tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id };
+            tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id, cin_TipoIngreso = cin_TipoIngreso };
             #region declaracion de variables 
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
@@ -146,6 +146,7 @@ namespace ERP_GMEDINA.Controllers
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
                                                                                             tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                            tbCatalogoDeIngresos.cin_TipoIngreso,
                                                                                             tbCatalogoDeIngresos.cin_UsuarioModifica,
                                                                                             tbCatalogoDeIngresos.cin_FechaModifica
                                                                                             );
