@@ -480,6 +480,8 @@
           <Property Name="pdcd_TotalCesantiaColaborador" Type="decimal" Precision="16" Scale="2" />
           <Property Name="pdcd_CodigoPlanillaCesantias" Type="nvarchar" MaxLength="50" />
           <Property Name="pdce_IdCesantiaEncabezado" Type="int" />
+          <Property Name="pdcd_DiasPagados" Type="int" />
+          <Property Name="pdcd_ConSueldoBruto" Type="decimal" Precision="16" Scale="2" />
           <Property Name="pdcd_UsuarioCrea" Type="int" />
           <Property Name="pdcd_FechaCrea" Type="datetime" />
           <Property Name="pdcd_UsuarioModifica" Type="int" />
@@ -3117,6 +3119,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_EmpleadoCurriculum' n
           <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" />
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+          <Property Name="car_Id" Type="int" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="depto_Id" Type="int" />
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="area_Id" Type="int" />
@@ -10102,6 +10106,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_RPT_EmpleadoCurriculum].[NombreCompleto] AS [NombreCompleto], 
     [V_RPT_EmpleadoCurriculum].[per_Telefono] AS [per_Telefono], 
     [V_RPT_EmpleadoCurriculum].[per_CorreoElectronico] AS [per_CorreoElectronico], 
+    [V_RPT_EmpleadoCurriculum].[car_Id] AS [car_Id], 
+    [V_RPT_EmpleadoCurriculum].[car_Descripcion] AS [car_Descripcion], 
     [V_RPT_EmpleadoCurriculum].[depto_Id] AS [depto_Id], 
     [V_RPT_EmpleadoCurriculum].[depto_Descripcion] AS [depto_Descripcion], 
     [V_RPT_EmpleadoCurriculum].[area_Id] AS [area_Id], 
@@ -11743,8 +11749,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbDeduccionAFP1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionAFP" />
           <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
           <NavigationProperty Name="tbDeduccionesExtraordinarias1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
-          <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
-          <NavigationProperty Name="tbDeduccionesIndividuales1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbEmpleadoBonos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoBonos_cb_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleadoBonos" />
@@ -11889,7 +11893,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbPagoDeCesantiaDetalle1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaDetalle" />
           <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
           <NavigationProperty Name="tbPagoDeCesantiaEncabezado1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
-        </EntityType>
+          <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
+          <NavigationProperty Name="tbDeduccionesIndividuales1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
+          </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -12111,30 +12117,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbDeduccionesExtraordinarias" ToRole="tbUsuario" />
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" FromRole="tbDeduccionesExtraordinarias" ToRole="tbCatalogoDeDeducciones" />
           <NavigationProperty Name="tbEquipoEmpleados" Relationship="Self.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" FromRole="tbDeduccionesExtraordinarias" ToRole="tbEquipoEmpleados" />
-        </EntityType>
-        <EntityType Name="tbDeduccionesIndividuales">
-          <Key>
-            <PropertyRef Name="dei_IdDeduccionesIndividuales" />
-          </Key>
-          <Property Name="dei_IdDeduccionesIndividuales" Type="Int32" Nullable="false" />
-          <Property Name="dei_Motivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="dei_MontoInicial" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dei_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dei_Cuota" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dei_PagaSiempre" Type="Boolean" />
-          <Property Name="dei_Pagado" Type="Boolean" Nullable="false" />
-          <Property Name="dei_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="dei_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dei_UsuarioModifica" Type="Int32" />
-          <Property Name="dei_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="dei_Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbDeduccionesIndividuales" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbDeduccionesIndividuales" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" FromRole="tbDeduccionesIndividuales" ToRole="tbEmpleados" />
-          <Property Name="dei_Monto" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="dei_NumeroCuotas" Type="Int32" Nullable="false" />
-          <Property Name="dei_MontoCuota" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
         </EntityType>
         <EntityType Name="tbDeduccionInstitucionFinanciera">
           <Key>
@@ -12571,7 +12553,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbDecimoCuartoMes" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoCuartoMes_emp_Id" FromRole="tbEmpleados" ToRole="tbDecimoCuartoMes" />
           <NavigationProperty Name="tbDecimoTercerMes" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id" FromRole="tbEmpleados" ToRole="tbDecimoTercerMes" />
           <NavigationProperty Name="tbDeduccionAFP" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionAFP" />
-          <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionesIndividuales" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbEmpleadoBonos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoBonos_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoBonos" />
           <NavigationProperty Name="tbFormaPago" Relationship="Self.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" FromRole="tbEmpleados" ToRole="tbFormaPago" />
@@ -12595,6 +12576,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialDePago" />
           <NavigationProperty Name="tbDirectoriosEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" FromRole="tbEmpleados" ToRole="tbDirectoriosEmpleados" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoComisiones" />
+          <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionesIndividuales" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -15715,30 +15697,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbDeduccionesIndividuales" Type="Self.tbDeduccionesIndividuales" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDeduccionesIndividuales">
-              <PropertyRef Name="dei_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbDeduccionesIndividuales" Type="Self.tbDeduccionesIndividuales" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDeduccionesIndividuales">
-              <PropertyRef Name="dei_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -17527,18 +17485,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbDeduccionesIndividuales" Type="Self.tbDeduccionesIndividuales" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbDeduccionesIndividuales">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
           <End Role="tbInstitucionesFinancieras" Type="Self.tbInstitucionesFinancieras" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -18349,7 +18295,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbDecimoTercerMes" EntityType="Self.tbDecimoTercerMes" />
           <EntitySet Name="tbDeduccionAFP" EntityType="Self.tbDeduccionAFP" />
           <EntitySet Name="tbDeduccionesExtraordinarias" EntityType="Self.tbDeduccionesExtraordinarias" />
-          <EntitySet Name="tbDeduccionesIndividuales" EntityType="Self.tbDeduccionesIndividuales" />
           <EntitySet Name="tbDeduccionInstitucionFinanciera" EntityType="Self.tbDeduccionInstitucionFinanciera" />
           <EntitySet Name="tbEmpleadoBonos" EntityType="Self.tbEmpleadoBonos" />
           <EntitySet Name="tbFormaPago" EntityType="Self.tbFormaPago" />
@@ -18636,14 +18581,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDeduccionesIndividuales" EntitySet="tbDeduccionesIndividuales" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDeduccionesIndividuales" EntitySet="tbDeduccionesIndividuales" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -19240,10 +19177,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" Association="Self.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id">
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
             <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbDeduccionesIndividuales" EntitySet="tbDeduccionesIndividuales" />
           </AssociationSet>
           <AssociationSet Name="FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" Association="Self.FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
             <End Role="tbInstitucionesFinancieras" EntitySet="tbInstitucionesFinancieras" />
@@ -21271,8 +21204,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
             <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
           </AssociationSet>
-          <EntitySet Name="V_DecimoCuartoMesFE" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" />
-          <EntitySet Name="V_DecimoTercerMesFE" EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" />
           <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Insert" ReturnType="Collection(String)">
             <Parameter Name="ini_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -21480,7 +21411,22 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
             <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="tbDeduccionesIndividuales" EntityType="ERP_GMEDINAModel.tbDeduccionesIndividuales" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDeduccionesIndividuales" EntitySet="tbDeduccionesIndividuales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDeduccionesIndividuales" EntitySet="tbDeduccionesIndividuales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbDeduccionesIndividuales" EntitySet="tbDeduccionesIndividuales" />
+          </AssociationSet>
+          <EntitySet Name="V_DecimoCuartoMesFE" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" />
+          <EntitySet Name="V_DecimoTercerMesFE" EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" />
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -22462,46 +22408,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="V_DecimoCuartoMesFE">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Apellido" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Planilla" />
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="hipa_Anio" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Planilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_DecimoTercerMesFE">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="hipa_Anio" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="V_RPT_EmpleadoCurriculum">
           <Key>
             <PropertyRef Name="fechaInicio" />
@@ -22521,6 +22427,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="jor_Id" Type="Int32" />
           <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Fechafin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="car_Id" Type="Int32" />
+          <Property Name="car_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbHistorialDePago">
           <Key>
@@ -22995,6 +22903,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbUsuario" />
           <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbPagoDeCesantiaEncabezado" />
+          <Property Name="pdcd_DiasPagados" Type="Int32" />
+          <Property Name="pdcd_ConSueldoBruto" Type="Decimal" Precision="16" Scale="2" />
         </EntityType>
         <EntityType Name="tbPagoDeCesantiaEncabezado">
           <Key>
@@ -23093,7 +23003,100 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="tbDeduccionesIndividuales">
+          <Key>
+            <PropertyRef Name="dei_IdDeduccionesIndividuales" />
+          </Key>
+          <Property Name="dei_IdDeduccionesIndividuales" Type="Int32" Nullable="false" />
+          <Property Name="dei_Motivo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="dei_Monto" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="dei_NumeroCuotas" Type="Int32" Nullable="false" />
+          <Property Name="dei_MontoCuota" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="dei_PagaSiempre" Type="Boolean" />
+          <Property Name="dei_Pagado" Type="Boolean" Nullable="false" />
+          <Property Name="dei_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="dei_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dei_UsuarioModifica" Type="Int32" />
+          <Property Name="dei_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="dei_Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbDeduccionesIndividuales" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbDeduccionesIndividuales" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" FromRole="tbDeduccionesIndividuales" ToRole="tbEmpleados" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDeduccionesIndividuales" Role="tbDeduccionesIndividuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDeduccionesIndividuales">
+              <PropertyRef Name="dei_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbDeduccionesIndividuales" Role="tbDeduccionesIndividuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDeduccionesIndividuales">
+              <PropertyRef Name="dei_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDeduccionesIndividuales" Role="tbDeduccionesIndividuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbDeduccionesIndividuales">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="V_DecimoCuartoMesFE">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Apellido" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Planilla" />
+            <PropertyRef Name="hipa_Anio" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Planilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_DecimoTercerMesFE">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="hipa_Anio" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -23349,25 +23352,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
                 <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
                 <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbDeduccionesIndividuales">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionesIndividuales">
-              <MappingFragment StoreEntitySet="tbDeduccionesIndividuales">
-                <ScalarProperty Name="dei_MontoCuota" ColumnName="dei_MontoCuota" />
-                <ScalarProperty Name="dei_NumeroCuotas" ColumnName="dei_NumeroCuotas" />
-                <ScalarProperty Name="dei_Monto" ColumnName="dei_Monto" />
-                <ScalarProperty Name="dei_IdDeduccionesIndividuales" ColumnName="dei_IdDeduccionesIndividuales" />
-                <ScalarProperty Name="dei_Motivo" ColumnName="dei_Motivo" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="dei_PagaSiempre" ColumnName="dei_PagaSiempre" />
-                <ScalarProperty Name="dei_Pagado" ColumnName="dei_Pagado" />
-                <ScalarProperty Name="dei_UsuarioCrea" ColumnName="dei_UsuarioCrea" />
-                <ScalarProperty Name="dei_FechaCrea" ColumnName="dei_FechaCrea" />
-                <ScalarProperty Name="dei_UsuarioModifica" ColumnName="dei_UsuarioModifica" />
-                <ScalarProperty Name="dei_FechaModifica" ColumnName="dei_FechaModifica" />
-                <ScalarProperty Name="dei_Activo" ColumnName="dei_Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -27832,38 +27816,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoCuartoMesFE">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMesFE">
-              <MappingFragment StoreEntitySet="V_DecimoCuartoMesFE">
-                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-                <ScalarProperty Name="Planilla" ColumnName="Planilla" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoTercerMesFE">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMesFE">
-              <MappingFragment StoreEntitySet="V_DecimoTercerMesFE">
-                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
-                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
-                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Insert" />
           <EntitySetMapping Name="V_RPT_EmpleadoCurriculum">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum">
               <MappingFragment StoreEntitySet="V_RPT_EmpleadoCurriculum">
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
                 <ScalarProperty Name="Fechafin" ColumnName="Fechafin" />
                 <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
                 <ScalarProperty Name="jor_Id" ColumnName="jor_Id" />
@@ -28118,6 +28076,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbPagoDeCesantiaDetalle">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle">
               <MappingFragment StoreEntitySet="tbPagoDeCesantiaDetalle">
+                <ScalarProperty Name="pdcd_ConSueldoBruto" ColumnName="pdcd_ConSueldoBruto" />
+                <ScalarProperty Name="pdcd_DiasPagados" ColumnName="pdcd_DiasPagados" />
                 <ScalarProperty Name="pdcd_FechaModifica" ColumnName="pdcd_FechaModifica" />
                 <ScalarProperty Name="pdcd_UsuarioModifica" ColumnName="pdcd_UsuarioModifica" />
                 <ScalarProperty Name="pdcd_FechaCrea" ColumnName="pdcd_FechaCrea" />
@@ -28161,6 +28121,53 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
                 <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
                 <ScalarProperty Name="tc_Id" ColumnName="tc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDeduccionesIndividuales">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionesIndividuales">
+              <MappingFragment StoreEntitySet="tbDeduccionesIndividuales">
+                <ScalarProperty Name="dei_Activo" ColumnName="dei_Activo" />
+                <ScalarProperty Name="dei_FechaModifica" ColumnName="dei_FechaModifica" />
+                <ScalarProperty Name="dei_UsuarioModifica" ColumnName="dei_UsuarioModifica" />
+                <ScalarProperty Name="dei_FechaCrea" ColumnName="dei_FechaCrea" />
+                <ScalarProperty Name="dei_UsuarioCrea" ColumnName="dei_UsuarioCrea" />
+                <ScalarProperty Name="dei_Pagado" ColumnName="dei_Pagado" />
+                <ScalarProperty Name="dei_PagaSiempre" ColumnName="dei_PagaSiempre" />
+                <ScalarProperty Name="dei_MontoCuota" ColumnName="dei_MontoCuota" />
+                <ScalarProperty Name="dei_NumeroCuotas" ColumnName="dei_NumeroCuotas" />
+                <ScalarProperty Name="dei_Monto" ColumnName="dei_Monto" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="dei_Motivo" ColumnName="dei_Motivo" />
+                <ScalarProperty Name="dei_IdDeduccionesIndividuales" ColumnName="dei_IdDeduccionesIndividuales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DecimoCuartoMesFE">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMesFE">
+              <MappingFragment StoreEntitySet="V_DecimoCuartoMesFE">
+                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="Planilla" ColumnName="Planilla" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DecimoTercerMesFE">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMesFE">
+              <MappingFragment StoreEntitySet="V_DecimoTercerMesFE">
+                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
+                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

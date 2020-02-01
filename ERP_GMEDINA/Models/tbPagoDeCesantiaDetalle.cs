@@ -15,6 +15,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> pdcd_FechaCrea { get; set; }
         public Nullable<int> pdcd_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> pdcd_FechaModifica { get; set; }
+        public Nullable<int> pdcd_DiasPagados { get; set; }
+        public Nullable<decimal> pdcd_ConSueldoBruto { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

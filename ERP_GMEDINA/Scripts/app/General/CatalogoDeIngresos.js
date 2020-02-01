@@ -21,6 +21,25 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+function getTipoIngreso(tipoIngreso) {
+    let descripcionTipoIngreso = '';
+    switch (tipoIngreso) {
+        case 1:
+            descripcionTipoIngreso = 'Bonos';
+            break;
+        case 2:
+            descripcionTipoIngreso = 'Comisiones';
+            break;
+        case 3:
+            descripcionTipoIngreso = 'Extra';
+            break;
+        default:
+            descripcionTipoIngreso = 'Otros';
+            break;
+    }
+    return descripcionTipoIngreso;
+}
+
 // REFRESCAR INFORMACIÓN DE LA TABLA
 function cargarGridIngresos() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -52,10 +71,12 @@ function cargarGridIngresos() {
                 var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
                     '<button type="button" class="btn btn-default btn-xs" id="btnActivar" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' : '';
+
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblCatalogoIngresos').dataTable().fnAddData([
-                    ListaIngresos[i].cin_IdIngresos,
+                    ListaIngresos[i].cin_IdIngreso,
                     ListaIngresos[i].cin_DescripcionIngreso,
+                    getTipoIngreso(ListaIngresos[i].cin_TipoIngreso),
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar]
                 );
@@ -139,13 +160,15 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                let tipoIngreso = getTipoIngreso(data[0].cin_TipoIngreso);
+                console.table(tipoIngreso)
                 var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
                 $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
                 $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
                 $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
-                $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
                 $("#Detallar #cin_FechaCrea").val(FechaCrea);
+                $("#Detallar #tipoDeIngresoDetalle").html(tipoIngreso);
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
                 $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
                 $("#Detallar #cin_FechaModifica").val(FechaModifica);
@@ -217,8 +240,9 @@ $("#btnUpdateIngresos").click(function () {
 $("#btnEditarIngresos").click(function () {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $('input[name$="cin_DescripcionIngreso"').val();
-    var id = $('input[name$="cin_IdIngreso"').val();
+    var data = $('#Editar input[name$="cin_DescripcionIngreso"').val();
+    var id = $('#Editar input[name$="cin_IdIngreso"').val();
+    let TipoIngreso = $('#Editar select[name$="cin_TipoIngreso"').val();
 
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
     let validacionTipoIngreso = ValidarTipoIngreso('Editar');
@@ -230,7 +254,7 @@ $("#btnEditarIngresos").click(function () {
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
             method: "POST",
-            data: { cin_DescripcionIngreso: data, id: id }
+            data: { cin_DescripcionIngreso: data, id: id, cin_TipoIngreso: TipoIngreso }
         }).done(function (data) {
 
             if (data != "error") {
@@ -391,7 +415,7 @@ function ValidarCamposCrear(Descripcion) {
             if (Descripcion == ' ')
                 $("#Crear #cin_DescripcionIngreso").val("");
             Local_modelState = false;
-            $("#Crear #asteriscoTipoIngreso").addClass("text-danger");
+            $("#Crear #asteriscoCreate").addClass("text-danger");
             $("#Crear #DescripcionCrear").show();
 
         } else {

@@ -3,39 +3,48 @@
 {
     @Html.AntiForgeryToken()
 
-            @*<div class="ibox-content">*@
-                <div class="form-horizontal">
-                    <div class="row">
+    @*<div class="ibox-content">*@
+    <div class="form-horizontal">
+        <div class="row">
 
-                        @Html.HiddenFor(model => model.cin_IdIngreso)
-                        @Html.HiddenFor(model => model.cin_FechaCrea)
-                        @Html.HiddenFor(model => model.cin_UsuarioCrea)
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-
-                        <div class="col-md-6">
-                            <span id="cin_IdIngreso">
-                                @Html.DisplayFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                            </span>
-                            @Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-                            <div class="col-md-6">
-                                <span id="cin_DescripcionIngreso">
-                                    @Html.DisplayFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                </span>
-                                @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
-                            </div>
-                        
-                    </div>
+            @Html.HiddenFor(model => model.cin_IdIngreso)
+            @Html.HiddenFor(model => model.cin_FechaCrea)
+            @Html.HiddenFor(model => model.cin_UsuarioCrea)
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
             </div>
+
+            <div class="col-md-6">
+                <span id="cin_IdIngreso">
+                    @Html.DisplayFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </span>
+                @Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+            </div>
+            <div class="col-md-6">
+                <span id="cin_DescripcionIngreso">
+                    @Html.DisplayFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </span>
+                @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label class="">Tipo de Ingreso</label>
+            </div>
+            <div class="col-md-6">
+                <span id="tipoDeIngresoDetalle">Valor</span>
+            </div>
+        </div>
+    </div>
+    <br />
             @*</div>*@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -70,4 +79,4 @@
 
                 </div>
             </div>
-            }
+}

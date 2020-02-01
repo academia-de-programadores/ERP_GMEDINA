@@ -114,10 +114,7 @@ namespace ERP_GMEDINA.Controllers
 					DateTime hipa_FechaFin = Convert.ToDateTime(hipa_FechaInicio + "/12" + "/31");
 
 					//Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.				
-					var ConsultaFechas = from HP in db.V_DecimoTercerMesFE									 
-										 where
-										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
-										 HP.hipa_FechaPago <= hipa_FechaFin) 															 
+					var ConsultaFechas = from HP in db.V_DecimoTercerMesFE													 
 										 select new ViewModelDecimoTercerMes
 										 {
 											 emp_Id = HP.emp_Id,

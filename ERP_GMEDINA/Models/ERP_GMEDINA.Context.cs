@@ -35,7 +35,6 @@
         public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         public virtual DbSet<tbDeduccionAFP> tbDeduccionAFP { get; set; }
         public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
-        public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
         public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
@@ -195,8 +194,6 @@
         public virtual DbSet<V_FaseSeleccion> V_FaseSeleccion { get; set; }
         public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
         public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
-        public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
-        public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
         public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
         public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
         public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
@@ -210,6 +207,9 @@
         public virtual DbSet<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle { get; set; }
         public virtual DbSet<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado { get; set; }
         public virtual DbSet<V_tbTechosComisiones> V_tbTechosComisiones { get; set; }
+        public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
+        public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
+        public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

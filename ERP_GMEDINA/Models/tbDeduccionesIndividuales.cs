@@ -9,9 +9,9 @@ namespace ERP_GMEDINA.Models
         public int dei_IdDeduccionesIndividuales { get; set; }
         public string dei_Motivo { get; set; }
         public int emp_Id { get; set; }
-        public Nullable<decimal> dei_MontoInicial { get; set; }
-        public Nullable<decimal> dei_MontoRestante { get; set; }
-        public Nullable<decimal> dei_Cuota { get; set; }
+        public decimal dei_Monto { get; set; }
+        public int dei_NumeroCuotas { get; set; }
+        public decimal dei_MontoCuota { get; set; }
         public Nullable<bool> dei_PagaSiempre { get; set; }
         public bool dei_Pagado { get; set; }
         public int dei_UsuarioCrea { get; set; }
@@ -19,9 +19,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> dei_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> dei_FechaModifica { get; set; }
         public bool dei_Activo { get; set; }
-        public decimal dei_Monto { get; set; }
-        public int dei_NumeroCuotas { get; set; }
-        public decimal dei_MontoCuota { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
