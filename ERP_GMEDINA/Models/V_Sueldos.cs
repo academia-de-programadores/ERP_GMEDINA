@@ -24,5 +24,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> Fecha_Modifica { get; set; }
         public bool Estado { get; set; }
         public string RazonInactivo { get; set; }
+        public decimal Sueldo_MAximo { get; set; }
+        public Nullable<decimal> Sueldo_Minimo { get; set; }
     }
 }

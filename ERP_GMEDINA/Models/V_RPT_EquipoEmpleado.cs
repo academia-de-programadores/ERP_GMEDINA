@@ -18,5 +18,11 @@ namespace ERP_GMEDINA.Models
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime fechaFin { get; set; }
         public int eqtra_Id { get; set; }
+        public string area_Descripcion { get; set; }
+        public int area_Id { get; set; }
+        public int depto_Id { get; set; }
+        public string depto_Descripcion { get; set; }
+        public int car_Id { get; set; }
+        public string car_Descripcion { get; set; }
     }
 }

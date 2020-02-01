@@ -23,6 +23,7 @@ namespace ERP_GMEDINA.Models
         public string empr_Logo { get; set; }
         public Nullable<int> per_Id { get; set; }
         public string empr_RTN { get; set; }
+        public Nullable<decimal> empr_SalarioMinimo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

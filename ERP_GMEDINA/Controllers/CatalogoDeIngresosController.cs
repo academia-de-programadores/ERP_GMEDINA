@@ -65,6 +65,7 @@ namespace ERP_GMEDINA.Controllers
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Insert(tbCatalogoDeIngresos.cin_DescripcionIngreso,
                                                                                          tbCatalogoDeIngresos.cin_UsuarioCrea,
+                                                                                         tbCatalogoDeIngresos.cin_TipoIngreso,
                                                                                          tbCatalogoDeIngresos.cin_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbCatalogoDeDeducciones_Insert_Result Resultado in listCatalogoDeIngresos)
@@ -146,6 +147,7 @@ namespace ERP_GMEDINA.Controllers
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
                                                                                             tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                            tbCatalogoDeIngresos.cin_TipoIngreso,
                                                                                             tbCatalogoDeIngresos.cin_UsuarioModifica,
                                                                                             tbCatalogoDeIngresos.cin_FechaModifica
                                                                                             );

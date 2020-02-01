@@ -14,5 +14,6 @@ namespace ERP_GMEDINA.Models
         public string CuentaBancaria { get; set; }
         public Nullable<decimal> Monto { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
+        public int hipa_Anio { get; set; }
     }
 }

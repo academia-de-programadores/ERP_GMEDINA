@@ -15,5 +15,6 @@ namespace ERP_GMEDINA.Models
         public bool emp_Estado { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
+        public int Porcentaje { get; set; }
     }
 }

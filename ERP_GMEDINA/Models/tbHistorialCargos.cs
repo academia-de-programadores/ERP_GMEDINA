@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hcar_FechaCrea { get; set; }
         public Nullable<int> hcar_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hcar_FechaModifica { get; set; }
+        public string hcar_RazonPromocion { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

@@ -87,11 +87,12 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    //(string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_Monto, Nullable<int> dei_NumeroCuotas, Nullable<decimal> dei_MontoCuotas, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioCrea, Nullable<System.DateTime> dei_FechaCrea)
                     listDeduccionIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Insert(tbDeduccionesIndividuales.dei_Motivo,
                                                                                               tbDeduccionesIndividuales.emp_Id,
-                                                                                              tbDeduccionesIndividuales.dei_MontoInicial,
-                                                                                              tbDeduccionesIndividuales.dei_MontoRestante,
-                                                                                              tbDeduccionesIndividuales.dei_Cuota,
+                                                                                              tbDeduccionesIndividuales.dei_Monto,
+                                                                                              tbDeduccionesIndividuales.dei_NumeroCuotas,
+                                                                                              tbDeduccionesIndividuales.dei_MontoCuota,
                                                                                               tbDeduccionesIndividuales.dei_PagaSiempre,
                                                                                               tbDeduccionesIndividuales.dei_UsuarioCrea,
                                                                                               tbDeduccionesIndividuales.dei_FechaCrea);
