@@ -30,7 +30,7 @@ var listadoCesantia = new Array();
         });
 
         $.map(dataTable.rows().data(), function (x) {
-            listadoCesantia.push({ idEmpleado: x[0], totalCesantia: x[6], diasPagados: x[4] });
+            listadoCesantia.push({ idEmpleado: x[0], totalCesantia: x[6], diasPagados: x[4], sueldoBruto: x[5] });
         });
     });
 
