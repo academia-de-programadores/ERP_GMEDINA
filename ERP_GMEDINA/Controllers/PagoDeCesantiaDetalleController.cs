@@ -46,7 +46,6 @@ namespace ERP_GMEDINA.Controllers
         /////
         public async void ObtenerListaDePagoCesantia()
         {
-            Session["PagoCesantiaPreview"] = null;
             //INICIALIZACION DEL OBJETO TIPO LISTA V_tbPagoDeCesantiaDetalle
             List<V_tbPagoDeCesantiaDetalle> ModelPagoDeCesantiaDetalleList = new List<V_tbPagoDeCesantiaDetalle>();
             //await Task.Run(() => {
