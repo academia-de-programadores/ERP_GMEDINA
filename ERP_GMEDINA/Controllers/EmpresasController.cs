@@ -23,6 +23,8 @@ namespace ERP_GMEDINA.Controllers
                 Response.Redirect("~/Inicio/index");
                 return null;
             }
+            var per_id = new List<object> { new { emp_id = 0, Nombre = "**Seleccione una opción**" } };
+            ViewBag.per_id = new SelectList(per_id, "emp_id", "Nombre");
             var tbEmpresas = new tbEmpresas { };
             return View(tbEmpresas);
         }
@@ -38,13 +40,26 @@ namespace ERP_GMEDINA.Controllers
                 {
                     empr_Id = x.empr_Id,
                     empr_Nombre = x.empr_Nombre,
-                    empr_Estado = x.empr_Estado
+                    empr_Estado = x.empr_Estado,
+                    RTN = x.empr_RTN,
+                    Nombre = x.tbPersonas.per_Nombres + " " + x.tbPersonas.per_Apellidos
                 }
                 ).ToList();
-                return Json(tbEmpresas, JsonRequestBehavior.AllowGet);
+                var ddlEmpl = new List<object> { new { per_Id = 0, Nombre = "**Seleccione una opción**" } };
+                ddlEmpl.AddRange(db.tbPersonas
+                    .Select(p => new
+                    {
+                        per_Id = p.per_Id,
+                        Nombre = p == null ? "no aplica" : p.per_Identidad + " / " +
+                                    p.per_Nombres + " " +
+                                    p.per_Apellidos
+                    })
+                    .ToList());
+                return Json(new { tbEmpresas = tbEmpresas, ddlEmpl = ddlEmpl }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+                ex.Message.ToString();
                 return Json(-2, JsonRequestBehavior.AllowGet);
             }
         }
@@ -68,7 +83,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, tbEmpresas.per_Id, tbEmpresas.empr_RTN, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Insert_Result item in list)
                     {
                         msj = int.Parse(item.MensajeError);
@@ -118,10 +133,12 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var empresa = new tbEmpresas
+            var empresa = new 
             {
                 empr_Id = tbEmpresas.empr_Id,
                 empr_Nombre = tbEmpresas.empr_Nombre,
+                per_Id = tbEmpresas.tbPersonas.per_Id,
+                empr_RTN =tbEmpresas.empr_RTN,
                 empr_Logo = tbEmpresas.empr_Logo,
                 empr_Estado = tbEmpresas.empr_Estado,
                 empr_RazonInactivo = tbEmpresas.empr_RazonInactivo,
@@ -157,7 +174,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     db = new ERP_GMEDINAEntities();
                     string ruta = "/Logos/" + id + "." + ext;
-                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, ruta, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, tbEmpresas.per_Id, tbEmpresas.empr_RTN, ruta, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";

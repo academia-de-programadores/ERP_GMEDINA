@@ -48,10 +48,12 @@ function llenarTabla() {
      '/Empresas/llenarTabla',
      'POST',
      function (Lista) {
-      var tabla = $("#IndexTable").DataTable();
+      if (validarDT(Lista)) {
+       return null;
+      }
       tabla.clear();
       tabla.draw();
-      $.each(Lista, function (index, value) {
+      $.each(Lista.tbEmpresas, function (index, value) {
        var Acciones = value.empr_Estado == 1
                    ? null : Admin ?
                     "<div>" +
@@ -62,21 +64,30 @@ function llenarTabla() {
         ID: value.empr_Id,
         "Número": value.empr_Id,
         Empresa: value.empr_Nombre,
+        "Representantelegal": value.Nombre,
+        RTN: value.RTN,
         Estado: value.empr_Estado ? 'Activo' : 'Inactivo',
         Acciones: Acciones
        }).draw();
+
+      });
+      $("#per_id option").remove();
+      $.each(Lista.ddlEmpl, function (index, value) {
+       $('.modal #per_id').append(new Option(value.Nombre, value.per_Id));
       });
      });
 }
 function tablaEditar(ID) {
-    id = ID;
+ id = ID;
  _ajax(JSON.stringify({ id: ID }),
      '/Empresas/Datos/',
      'POST',
      function (obj) {
+      $("#per_id option").attr("selected", null);
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
-       //$('#UPempr_Logo').val(obj.empr_Logo);
+       $("#FormEditar").find("#empr_RTN").val(obj.empr_RTN);
+       $("#FormEditar").find("#per_Id option[value='" + obj.per_Id + "']").attr("selected", true);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }

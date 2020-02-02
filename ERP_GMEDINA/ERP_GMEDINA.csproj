@@ -214,6 +214,7 @@
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EquipoEmpleadosController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
