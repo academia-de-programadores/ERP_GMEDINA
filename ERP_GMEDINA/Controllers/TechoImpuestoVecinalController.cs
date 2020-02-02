@@ -89,8 +89,8 @@ namespace ERP_GMEDINA.Controllers
         #region GET: Create
         public ActionResult Create()
         {
-            ViewBag.isr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.isr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.timv_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.timv_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
             return View();
         }
@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicial,timv_RangoFin,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
+        public ActionResult Create([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
         {
             // data de auditoria
             tbTechoImpuestoVecinal.timv_UsuarioCrea = 1;
@@ -180,7 +180,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicial,timv_RangoFin,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
+        public ActionResult Edit([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
         {
             // variables de auditoria
             tbTechoImpuestoVecinal.timv_UsuarioModifica = 1;
