@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="241642d5e4af4d7d8a3af204e0a1d32c" Name="Diagram1" ZoomLevel="115">
+      <Diagram DiagramId="241642d5e4af4d7d8a3af204e0a1d32c" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="139.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="101.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRol" Width="1.5" PointX="3" PointY="105.375" IsExpanded="true" />
@@ -447,14 +447,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Width="1.5" PointX="14.25" PointY="160.125" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Width="1.5" PointX="3" PointY="148.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbTechosComisiones" Width="1.5" PointX="31.375" PointY="13.75" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionesIndividuales" Width="1.5" PointX="13.5" PointY="167.625" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" />
@@ -477,6 +470,13 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" Width="1.5" PointX="0.75" PointY="29.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" Width="1.5" PointX="2.75" PointY="29.75" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Width="1.5" PointX="11.25" PointY="181.25" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Width="1.5" PointX="3" PointY="206.125" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

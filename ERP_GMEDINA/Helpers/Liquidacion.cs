@@ -415,36 +415,6 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO DE ANTIGUEDAD EN DÍAS
 
-        /*CALCULO DE ANTIGUEDAD DE EMPLEADO
-        public static int DiasAcumuladosCesantia(int Emp_Id, DateTime FechaActual)
-        {
-            //CAPTURA DE ANTIGUEDAD EN DIAS
-            int DiasTrabajados = 0;
-            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
-            {
-                //SETEAR LA FECHA CON LA DE REINGRESO
-                var FechaInicial = (DateTime)db.tbEmpleados.OrderByDescending(c => c.emp_FechaCrea).Where(p => p.emp_Id == Emp_Id && p.emp_Reingreso == true).Select(x => x.emp_Fechaingreso).Take(1).FirstOrDefault();
-                if(FechaInicial == null)
-                {
-                    //SETEAR A FECHA CON EL ULTIMO PAGO DE CESANTIA
-                    FechaInicial = (DateTime)db.tbPagoDeCesantiaDetalle.OrderByDescending(c => c.pdcd_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => x.pdcd_FechaCrea).Take(1).FirstOrDefault();
-                }
-              
-                if(FechaInicial == null)
-                {
-                    //SETEAR A FECHA CON LA FECHA DE INGRESO
-                    FechaInicial = (DateTime)db.tbEmpleados.Where(p => p.emp_Id == Emp_Id).Select(x => x.emp_Fechaingreso).FirstOrDefault();
-                }
-                DiasTrabajados = (((FechaActual - FechaInicial)).Days);
-                //Calcular la cantidad de años para restar los dias no habiles 
-                int Anios = DiasTrabajados / 365;
-                int DiasNoHabiles = Anios * 5;
-                //Resta de los dias no habiles a los dias trabajados durante el año 
-                DiasTrabajados = DiasTrabajados - DiasNoHabiles;
-            }
-            return DiasTrabajados;
-        }*/
-
         //GET DÍAS DE CESANTIA PROPORCIONAL
         public static double Dias360AcumuladosCesantia(int Emp_Id, DateTime FechaActual)
         {
@@ -456,13 +426,13 @@ namespace ERP_GMEDINA.Helpers
                     //SETEAR LA FECHA CON LA DE REINGRESO
                     FechaInicial = (DateTime)db.tbEmpleados.OrderByDescending(c => c.emp_FechaCrea).Where(p => p.emp_Id == Emp_Id && p.emp_Reingreso == true).Select(x => x.emp_Fechaingreso).Take(1).FirstOrDefault();
                     //VALIDAR EN CASO QUE LA FECHA REINGRESO SEA NULL
-                    if (FechaInicial == null)
+                    if (FechaInicial.Year == 1)
                     {
                         //SETEAR A FECHA CON EL ULTIMO PAGO DE CESANTIA
                         FechaInicial = (DateTime)db.tbPagoDeCesantiaDetalle.OrderByDescending(c => c.pdcd_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => x.pdcd_FechaCrea).Take(1).FirstOrDefault();
                     }
                     //VALIDAR EN CASO QUE LA FECHA DE HISTORIAL DE PAGO DE CESANTÍA SEA NULL
-                    if (FechaInicial == null)
+                    if (FechaInicial.Year == 1)
                     {
                         //SETEAR A FECHA CON LA FECHA DE INGRESO
                         FechaInicial = (DateTime)db.tbEmpleados.Where(p => p.emp_Id == Emp_Id).Select(x => x.emp_Fechaingreso).FirstOrDefault();
