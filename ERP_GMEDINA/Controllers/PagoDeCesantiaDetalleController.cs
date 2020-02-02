@@ -73,6 +73,7 @@ namespace ERP_GMEDINA.Controllers
             string response = "bien";
             DateTime FechaActual = DateTime.Now;
             int idEncabezado = 0;
+            SqlTransaction transaccion = null;
 
             //Query del detalle
             String queryDetalle = @"
@@ -127,8 +128,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //Comenzar la transaccion
                 connection.Open();
-                SqlTransaction transaccion;
-                transaccion = connection.BeginTransaction();
+                transaccion = connection.BeginTransaction("InsersionCesasntias");
                 foreach (var item in listadoCesantia)
                     try
                     {
