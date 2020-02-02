@@ -10,28 +10,28 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-	public class DecimoTercerMesController : Controller
-	{
-		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+    public class DecimoTercerMesController : Controller
+    {
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-		#region GET: INDEX
-		// GET: V_DecimoTercerMes
-		public ActionResult Index()
-		{
-			return View(db.V_DecimoTercerMes.ToList());
-		}
-		#endregion
+        #region GET: INDEX
+        // GET: V_DecimoTercerMes
+        public ActionResult Index()
+        {
+            return View(db.V_DecimoTercerMes.ToList());
+        }
+        #endregion
 
-		#region GET: INDEX PAGADOS 
-		public ActionResult IndexPagado()
-		{
-			return View(db.V_DecimoTercerMes_Pagados.ToList());
-		}
-		#endregion
+        #region GET: INDEX PAGADOS 
+        public ActionResult IndexPagado()
+        {
+            return View(db.V_DecimoTercerMes_Pagados.ToList());
+        }
+        #endregion
 
-		#region POST: INSERT 
-		public JsonResult InsertDecimoTercerMes(List<tbDecimoTercerMes> DecimoTercer)
-		{
+        #region POST: INSERT 
+        public JsonResult InsertDecimoTercerMes(List<tbDecimoTercerMes> DecimoTercer)
+        {
             if (DecimoTercer != null)
             {
 
@@ -98,59 +98,59 @@ namespace ERP_GMEDINA.Controllers
             {
                 return Json("-1", JsonRequestBehavior.AllowGet);
             }
-		}
-		#endregion
+        }
+        #endregion
 
-		#region POST: FECHAS POR ESPECIFICACIÓN
-		[HttpPost]
-		public ActionResult FechaEspecifica(int? hipa_FechaInicio)
-		{
-			if (ModelState.IsValid)
-			{
+        #region POST: FECHAS POR ESPECIFICACIÓN
+        [HttpPost]
+        public ActionResult FechaEspecifica(int? hipa_FechaInicio)
+        {
+            if (ModelState.IsValid)
+            {
 
-				try
-				{
-					DateTime hipa_FechaInicio2 = Convert.ToDateTime(hipa_FechaInicio + "/01" + "/01");
-					DateTime hipa_FechaFin = Convert.ToDateTime(hipa_FechaInicio + "/12" + "/31");
+                try
+                {
+                    DateTime hipa_FechaInicio2 = Convert.ToDateTime(hipa_FechaInicio + "/01" + "/01");
+                    DateTime hipa_FechaFin = Convert.ToDateTime(hipa_FechaInicio + "/12" + "/31");
 
-					//Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.				
-					var ConsultaFechas = from HP in db.V_DecimoTercerMesFE									 
-										 where
-										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
-										 HP.hipa_FechaPago <= hipa_FechaFin) 															 
-										 select new ViewModelDecimoTercerMes
-										 {
-											 emp_Id = HP.emp_Id,
-											 per_Nombres = HP.per_Nombres,
-											 per_Apellidos = HP.per_Apellidos,
-											 car_Descripcion = HP.car_Descripcion,
-											 cpla_DescripcionPlanilla = HP.cpla_DescripcionPlanilla,
-											 emp_CuentaBancaria = HP.emp_CuentaBancaria,
-											 dtm_Monto = HP.dtm_Monto
-										 };
-					//La consulta LINQ se almacena en un viewbag y se convierte a list la cual vamos a recorrer con un foreach en la vista.
-					ViewBag.ConsultasFechas = ConsultaFechas.ToList();
-				}
-				catch (Exception ex)
-				{
-					ex.Message.ToString();
-				}
+                    //Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.				
+                    var ConsultaFechas = from HP in db.V_DecimoTercerMesFE
+                                         where
+                                         (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
+                                         HP.hipa_FechaPago <= hipa_FechaFin)
+                                         select new ViewModelDecimoTercerMes
+                                         {
+                                             emp_Id = HP.emp_Id,
+                                             per_Nombres = HP.per_Nombres,
+                                             per_Apellidos = HP.per_Apellidos,
+                                             car_Descripcion = HP.car_Descripcion,
+                                             cpla_DescripcionPlanilla = HP.cpla_DescripcionPlanilla,
+                                             emp_CuentaBancaria = HP.emp_CuentaBancaria,
+                                             dtm_Monto = HP.dtm_Monto
+                                         };
+                    //La consulta LINQ se almacena en un viewbag y se convierte a list la cual vamos a recorrer con un foreach en la vista.
+                    ViewBag.ConsultasFechas = ConsultaFechas.ToList();
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                }
 
-			}
-			return View();
-		}
-		#endregion
+            }
+            return View();
+        }
+        #endregion
 
-		#region DISPOSE
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				db.Dispose();
-			}
-			base.Dispose(disposing);
-		}
-		#endregion
+        #region DISPOSE
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        #endregion
 
-	}
+    }
 }

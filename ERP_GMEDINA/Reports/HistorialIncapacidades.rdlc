@@ -6,22 +6,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.69403cm</Width>
+              <Width>3.11326cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.47446cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>4.09103cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.69403cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>4.83186cm</Width>
+              <Width>5.46256cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>4.09103cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.21236cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.40853cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.47203cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -486,10 +486,10 @@
         </TablixRowHierarchy>
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.34396cm</Top>
+        <Top>0.38136cm</Top>
         <Left>1.01069cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.87644cm</Width>
+        <Width>22.75977cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -497,10 +497,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.73914in</Height>
+    <Height>0.66425in</Height>
     <Style />
   </Body>
-  <Width>10.19178in</Width>
+  <Width>9.35845in</Width>
   <Page>
     <PageHeader>
       <Height>1.35834cm</Height>
@@ -556,7 +556,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>0.335cm</Top>
-          <Left>21.106cm</Left>
+          <Left>19.8523cm</Left>
           <Height>0.6cm</Height>
           <Width>3.91816cm</Width>
           <ZIndex>1</ZIndex>
@@ -598,7 +598,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.17639cm</Top>
-          <Left>22.52417cm</Left>
+          <Left>21.27046cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -618,8 +618,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

@@ -34,7 +34,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 return View();
             }
-           
+
 
             //bool Admin = (bool)Session["Admin"];
             //tbHistorialIncapacidades tbHistorialIncapacidades = new tbHistorialIncapacidades { hinc_Estado = true };
@@ -135,7 +135,7 @@ namespace ERP_GMEDINA.Controllers
             {
 
             }
-                return Json(lista, JsonRequestBehavior.AllowGet);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
         // GET: HistorialIncapacidades/Details/5
         public ActionResult Details(int? id)
@@ -147,7 +147,7 @@ namespace ERP_GMEDINA.Controllers
                 }
 
                 tbHistorialIncapacidades tbincapacidades = null;
-               
+
                 try
                 {
                     tbincapacidades = db.tbHistorialIncapacidades.Find(id);
@@ -163,10 +163,10 @@ namespace ERP_GMEDINA.Controllers
                 }
                 Session["id"] = id;
                 var incapacidades = new tbHistorialIncapacidades
-              
+
                 {
                     hinc_Id = tbincapacidades.hinc_Id,
-                   tbTipoIncapacidades= new tbTipoIncapacidades { ticn_Descripcion = tbincapacidades.tbTipoIncapacidades.ticn_Descripcion },
+                    tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Descripcion = tbincapacidades.tbTipoIncapacidades.ticn_Descripcion },
                     hinc_Dias = tbincapacidades.hinc_Dias,
                     hinc_CentroMedico = tbincapacidades.hinc_CentroMedico,
                     hinc_Doctor = tbincapacidades.hinc_Doctor,
@@ -213,8 +213,8 @@ namespace ERP_GMEDINA.Controllers
 
                 {
                     tbPersonas = new tbPersonas { per_Identidad = IsNull(tbEmpleados1.tbPersonas).per_Identidad, per_Nombres = IsNull(tbEmpleados1.tbPersonas).per_Nombres + " " + IsNull(tbEmpleados1.tbPersonas).per_Apellidos }
-                 
-                
+
+
                 };
                 return Json(empleados, JsonRequestBehavior.AllowGet);
             }
@@ -307,7 +307,7 @@ namespace ERP_GMEDINA.Controllers
                 hinc_FechaFin = tbHistIncapacidades.hinc_FechaFin,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistIncapacidades.tbUsuario).usu_NombreUsuario },
                 hinc_FechaCrea = tbHistIncapacidades.hinc_FechaCrea,
-                
+
             };
 
             return Json(Incapacidades, JsonRequestBehavior.AllowGet);
@@ -340,11 +340,11 @@ namespace ERP_GMEDINA.Controllers
 
         private tbTipoIncapacidades IsNull(tbTipoIncapacidades valor)
         {
-           if(valor != null)
+            if (valor != null)
             {
                 return valor;
             }
-           else
+            else
             {
                 return new tbTipoIncapacidades { ticn_Descripcion = "" };
             }
@@ -376,7 +376,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id,"Predeterminado", Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, "Predeterminado", Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

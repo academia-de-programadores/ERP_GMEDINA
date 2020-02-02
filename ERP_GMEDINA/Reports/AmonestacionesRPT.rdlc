@@ -430,7 +430,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>10.50183in</Width>
+  <Width>9.95622in</Width>
   <Page>
     <PageHeader>
       <Height>1.40995cm</Height>
@@ -548,8 +548,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

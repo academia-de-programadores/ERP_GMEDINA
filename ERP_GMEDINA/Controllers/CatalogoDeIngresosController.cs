@@ -19,26 +19,28 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             var tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-           //.OrderByDescending(x => x.cin_IdIngreso);
+            //.OrderByDescending(x => x.cin_IdIngreso);
             //.Where(x => x.cin_Activo == true);
             return View(tbCatalogoDeIngresos.ToList());
         }
 
         public ActionResult GetData()
         {
-            var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos               
-                        .Select(c => new {
-                                           cin_IdIngresos = c.cin_IdIngreso,
-                                           cin_DescripcionIngreso = c.cin_DescripcionIngreso,
-                                           cin_Activo = c.cin_Activo,
+            var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos
+                        .Select(c => new
+                        {
+                            cin_IdIngresos = c.cin_IdIngreso,
+                            cin_DescripcionIngreso = c.cin_DescripcionIngreso,
+                            cin_Activo = c.cin_Activo,
 
-                                           cin_UsuarioCrea = c.cin_UsuarioCrea,
-                                           cin_FechaCrea = c.cin_FechaCrea,
+                            cin_UsuarioCrea = c.cin_UsuarioCrea,
+                            cin_FechaCrea = c.cin_FechaCrea,
 
-                                           cin_UsuarioModifica= c.cin_UsuarioModifica,
-                                           cin_FechaModifica = c.cin_FechaModifica})
+                            cin_UsuarioModifica = c.cin_UsuarioModifica,
+                            cin_FechaModifica = c.cin_FechaModifica
+                        })
                                            //.OrderByDescending(x => x.cin_IdIngresos)
-                                          // .Where(x => x.cin_Activo == true)
+                                           // .Where(x => x.cin_Activo == true)
                                            .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeIngresos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -52,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
             //Auditoria
             tbCatalogoDeIngresos.cin_UsuarioCrea = 1;
             tbCatalogoDeIngresos.cin_FechaCrea = DateTime.Now;
-            
+
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
             string MensajeError = "";
@@ -115,10 +117,10 @@ namespace ERP_GMEDINA.Controllers
                                                tbCatIngreso.cin_DescripcionIngreso,
                                                tbCatIngreso.cin_Activo,
                                                tbCatIngreso.cin_UsuarioCrea,
-                                               UsuCrea= tbCatIngreso.tbUsuario.usu_NombreUsuario,
+                                               UsuCrea = tbCatIngreso.tbUsuario.usu_NombreUsuario,
                                                tbCatIngreso.cin_FechaCrea,
                                                tbCatIngreso.cin_UsuarioModifica,
-                                               UsuModifica= tbCatIngreso.tbUsuario1.usu_NombreUsuario,
+                                               UsuModifica = tbCatIngreso.tbUsuario1.usu_NombreUsuario,
                                                tbCatIngreso.cin_FechaModifica
                                            };
 
@@ -141,33 +143,33 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             #endregion
 
-                try
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_UsuarioModifica,
+                                                                                        tbCatalogoDeIngresos.cin_FechaModifica
+                                                                                        );
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_tbCatalogoDeIngresos_Update_Result Resultado in listCatalogoDeIngresos)
+                    MensajeError = Resultado.MensajeError;
+
+
+
+                if (MensajeError.StartsWith("-1"))
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
-                                                                                            tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                                                            tbCatalogoDeIngresos.cin_UsuarioModifica,
-                                                                                            tbCatalogoDeIngresos.cin_FechaModifica
-                                                                                            );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeIngresos_Update_Result Resultado in listCatalogoDeIngresos)
-                        MensajeError = Resultado.MensajeError;
-
-
-
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
-                    }
-                }
-                catch (Exception)
-                {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                     response = "error";
                 }
+            }
+            catch (Exception)
+            {
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                response = "error";
+            }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }

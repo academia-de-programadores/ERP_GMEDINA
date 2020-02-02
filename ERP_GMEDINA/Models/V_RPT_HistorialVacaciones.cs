@@ -7,7 +7,7 @@ namespace ERP_GMEDINA.Models
     public partial class V_RPT_HistorialVacaciones
     {
         public int hvac_Id { get; set; }
-        public int emp_Id { get; set; }
+        public Nullable<int> emp_Id { get; set; }
         public string Nombre_Empleado { get; set; }
         public int hvac_CantDias { get; set; }
         public System.DateTime hvac_FechaInicio { get; set; }

@@ -136,7 +136,8 @@ namespace ERP_GMEDINA.Controllers
             from Emp in db.tbEmpleados
             join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
             where Emp.emp_Estado == true
-            select new {
+            select new
+            {
                 Id = Emp.emp_Id,
                 Descripcion = Per.per_Nombres + " " + Per.per_Apellidos
             };

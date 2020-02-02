@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-       
+
         #region Index
         public ActionResult Index()
         {
@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones
-                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
+                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision, cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica, cc_Activo = c.cc_Activo })
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -60,7 +60,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from CatIngreso in  db.tbCatalogoDeIngresos.Where(x => x.cin_Activo==true)
+            from CatIngreso in db.tbCatalogoDeIngresos.Where(x => x.cin_Activo == true)
                 //join EmpBonos in db.tbEmpleadoBonos on CatIngreso.cin_IdIngreso equals EmpBonos.cin_IdIngreso
             select new
             {
@@ -76,7 +76,7 @@ namespace ERP_GMEDINA.Controllers
         #region Detalles
         public JsonResult Details(int? ID)
         {
-            var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones 
+            var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones
                                            where tbEmplComisiones.cc_Id == ID
                                            select new
                                            {
@@ -85,7 +85,7 @@ namespace ERP_GMEDINA.Controllers
                                                NombreEmpleado = tbEmplComisiones.tbEmpleados.tbPersonas.per_Nombres,
                                                ApellidosEmpleado = tbEmplComisiones.tbEmpleados.tbPersonas.per_Apellidos,
                                                tbEmplComisiones.cin_IdIngreso,
-                                               Ingreso =tbEmplComisiones.tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                               Ingreso = tbEmplComisiones.tbCatalogoDeIngresos.cin_DescripcionIngreso,
                                                tbEmplComisiones.cc_FechaRegistro,
                                                tbEmplComisiones.cc_Pagado,
                                                tbEmplComisiones.cc_Activo,
@@ -305,7 +305,7 @@ namespace ERP_GMEDINA.Controllers
                         ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
                         response = "error";
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {

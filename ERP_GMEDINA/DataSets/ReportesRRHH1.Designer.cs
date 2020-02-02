@@ -1212,6 +1212,18 @@ namespace ERP_GMEDINA.DataSets {
             
             private global::System.Data.DataColumn columnfechaFin;
             
+            private global::System.Data.DataColumn columnarea_Descripcion;
+            
+            private global::System.Data.DataColumn columnarea_Id;
+            
+            private global::System.Data.DataColumn columndepto_Id;
+            
+            private global::System.Data.DataColumn columndepto_Descripcion;
+            
+            private global::System.Data.DataColumn columncar_Id;
+            
+            private global::System.Data.DataColumn columncar_Descripcion;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public V_RPT_EquipoEmpleadoDataTable() {
@@ -1343,6 +1355,54 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn area_DescripcionColumn {
+                get {
+                    return this.columnarea_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn area_IdColumn {
+                get {
+                    return this.columnarea_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn depto_IdColumn {
+                get {
+                    return this.columndepto_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn depto_DescripcionColumn {
+                get {
+                    return this.columndepto_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn car_IdColumn {
+                get {
+                    return this.columncar_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn car_DescripcionColumn {
+                get {
+                    return this.columncar_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1378,7 +1438,25 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_RPT_EquipoEmpleadoRow AddV_RPT_EquipoEmpleadoRow(int eqem_Id, int Id_Persona, string Identidad, string Nombre_Completo, string Descripcion_del_Equipo, System.DateTime Fecha, string eqtra_Descripcion, string eqtra_Codigo, int eqtra_Id, string eqtra_Observacion, System.DateTime FechaInicio, System.DateTime fechaFin) {
+            public V_RPT_EquipoEmpleadoRow AddV_RPT_EquipoEmpleadoRow(
+                        int eqem_Id, 
+                        int Id_Persona, 
+                        string Identidad, 
+                        string Nombre_Completo, 
+                        string Descripcion_del_Equipo, 
+                        System.DateTime Fecha, 
+                        string eqtra_Descripcion, 
+                        string eqtra_Codigo, 
+                        int eqtra_Id, 
+                        string eqtra_Observacion, 
+                        System.DateTime FechaInicio, 
+                        System.DateTime fechaFin, 
+                        string area_Descripcion, 
+                        int area_Id, 
+                        int depto_Id, 
+                        string depto_Descripcion, 
+                        int car_Id, 
+                        string car_Descripcion) {
                 V_RPT_EquipoEmpleadoRow rowV_RPT_EquipoEmpleadoRow = ((V_RPT_EquipoEmpleadoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         eqem_Id,
@@ -1392,7 +1470,13 @@ namespace ERP_GMEDINA.DataSets {
                         eqtra_Id,
                         eqtra_Observacion,
                         FechaInicio,
-                        fechaFin};
+                        fechaFin,
+                        area_Descripcion,
+                        area_Id,
+                        depto_Id,
+                        depto_Descripcion,
+                        car_Id,
+                        car_Descripcion};
                 rowV_RPT_EquipoEmpleadoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowV_RPT_EquipoEmpleadoRow);
                 return rowV_RPT_EquipoEmpleadoRow;
@@ -1427,6 +1511,12 @@ namespace ERP_GMEDINA.DataSets {
                 this.columneqtra_Observacion = base.Columns["eqtra_Observacion"];
                 this.columnFechaInicio = base.Columns["FechaInicio"];
                 this.columnfechaFin = base.Columns["fechaFin"];
+                this.columnarea_Descripcion = base.Columns["area_Descripcion"];
+                this.columnarea_Id = base.Columns["area_Id"];
+                this.columndepto_Id = base.Columns["depto_Id"];
+                this.columndepto_Descripcion = base.Columns["depto_Descripcion"];
+                this.columncar_Id = base.Columns["car_Id"];
+                this.columncar_Descripcion = base.Columns["car_Descripcion"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1456,6 +1546,18 @@ namespace ERP_GMEDINA.DataSets {
                 base.Columns.Add(this.columnFechaInicio);
                 this.columnfechaFin = new global::System.Data.DataColumn("fechaFin", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfechaFin);
+                this.columnarea_Descripcion = new global::System.Data.DataColumn("area_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarea_Descripcion);
+                this.columnarea_Id = new global::System.Data.DataColumn("area_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarea_Id);
+                this.columndepto_Id = new global::System.Data.DataColumn("depto_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndepto_Id);
+                this.columndepto_Descripcion = new global::System.Data.DataColumn("depto_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndepto_Descripcion);
+                this.columncar_Id = new global::System.Data.DataColumn("car_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncar_Id);
+                this.columncar_Descripcion = new global::System.Data.DataColumn("car_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncar_Descripcion);
                 this.columneqem_Id.AllowDBNull = false;
                 this.columnId_Persona.AllowDBNull = false;
                 this.columnIdentidad.AllowDBNull = false;
@@ -1473,6 +1575,15 @@ namespace ERP_GMEDINA.DataSets {
                 this.columneqtra_Observacion.MaxLength = 50;
                 this.columnFechaInicio.AllowDBNull = false;
                 this.columnfechaFin.AllowDBNull = false;
+                this.columnarea_Descripcion.AllowDBNull = false;
+                this.columnarea_Descripcion.MaxLength = 50;
+                this.columnarea_Id.AllowDBNull = false;
+                this.columndepto_Id.AllowDBNull = false;
+                this.columndepto_Descripcion.AllowDBNull = false;
+                this.columndepto_Descripcion.MaxLength = 100;
+                this.columncar_Id.AllowDBNull = false;
+                this.columncar_Descripcion.AllowDBNull = false;
+                this.columncar_Descripcion.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7038,6 +7149,72 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string area_Descripcion {
+                get {
+                    return ((string)(this[this.tableV_RPT_EquipoEmpleado.area_DescripcionColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_EquipoEmpleado.area_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int area_Id {
+                get {
+                    return ((int)(this[this.tableV_RPT_EquipoEmpleado.area_IdColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_EquipoEmpleado.area_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int depto_Id {
+                get {
+                    return ((int)(this[this.tableV_RPT_EquipoEmpleado.depto_IdColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_EquipoEmpleado.depto_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string depto_Descripcion {
+                get {
+                    return ((string)(this[this.tableV_RPT_EquipoEmpleado.depto_DescripcionColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_EquipoEmpleado.depto_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int car_Id {
+                get {
+                    return ((int)(this[this.tableV_RPT_EquipoEmpleado.car_IdColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_EquipoEmpleado.car_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string car_Descripcion {
+                get {
+                    return ((string)(this[this.tableV_RPT_EquipoEmpleado.car_DescripcionColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_EquipoEmpleado.car_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNombre_CompletoNull() {
                 return this.IsNull(this.tableV_RPT_EquipoEmpleado.Nombre_CompletoColumn);
             }
@@ -10271,6 +10448,12 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             tableMapping.ColumnMappings.Add("eqtra_Observacion", "eqtra_Observacion");
             tableMapping.ColumnMappings.Add("FechaInicio", "FechaInicio");
             tableMapping.ColumnMappings.Add("fechaFin", "fechaFin");
+            tableMapping.ColumnMappings.Add("area_Descripcion", "area_Descripcion");
+            tableMapping.ColumnMappings.Add("area_Id", "area_Id");
+            tableMapping.ColumnMappings.Add("depto_Id", "depto_Id");
+            tableMapping.ColumnMappings.Add("depto_Descripcion", "depto_Descripcion");
+            tableMapping.ColumnMappings.Add("car_Id", "car_Id");
+            tableMapping.ColumnMappings.Add("car_Descripcion", "car_Descripcion");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -10287,9 +10470,9 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT eqem_Id, Id_Persona, Identidad, Nombre_Completo, Descripcion_del_Equipo, F" +
-                "echa, eqtra_Descripcion, eqtra_Codigo, eqtra_Id, eqtra_Observacion, FechaInicio," +
-                " fechaFin FROM rrhh.V_RPT_EquipoEmpleado";
+            this._commandCollection[0].CommandText = @"SELECT eqem_Id, Id_Persona, Identidad, Nombre_Completo, Descripcion_del_Equipo, Fecha, eqtra_Descripcion, eqtra_Codigo, eqtra_Id, eqtra_Observacion, FechaInicio, fechaFin, area_Descripcion, area_Id, depto_Id, depto_Descripcion, car_Id, 
+                  car_Descripcion
+FROM     rrhh.V_RPT_EquipoEmpleado";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
