@@ -74,6 +74,7 @@ namespace ERP_GMEDINA.Controllers
             string response = "bien";
             DateTime FechaActual = DateTime.Now;
             int idEncabezado = 0;
+            SqlTransaction transaccion = null;
 
             //Query del detalle
             String queryDetalle = @"
@@ -99,8 +100,8 @@ namespace ERP_GMEDINA.Controllers
                                         @diasPagados,
                                         @sueldoBruto,
                                         @usuarioCrea,
-                                        @fechaCrea,
-                                    )
+                                        @fechaCrea
+                                    )   
                              ";
 
             //Query del encabezado
@@ -120,19 +121,18 @@ namespace ERP_GMEDINA.Controllers
                                         @totalCesantia,
                                         @usuarioCrea,
                                         @fechaCrea
-                                    )
+                                    ) 
                              ";
             #endregion
-
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
             {
                 //Comenzar la transaccion
                 connection.Open();
-                SqlTransaction transaccion;
-                transaccion = connection.BeginTransaction();
-                foreach (var item in listadoCesantia)
-                    try
+                transaccion = connection.BeginTransaction("InsersionCesasntias");
+                try
+                {
+                    foreach (var item in listadoCesantia)
                     {
                         #region Obtener el id del encabezado a insertar
                         using (SqlCommand command = new SqlCommand("(SELECT ISNULL(MAX(pdce_IdCesantiaEncabezado) + 1, 1) FROM [Plani].[tbPagoDeCesantiaEncabezado])", connection, transaccion))
@@ -150,6 +150,7 @@ namespace ERP_GMEDINA.Controllers
                         //Asignar el codigo de planilla
                         string codigoPlanillaCesantia = "CSC-" + idEncabezado + FechaActual.Month + FechaActual.Year;
 
+
                         #region Insertar en el encabezado
                         using (SqlCommand command = new SqlCommand(queryEncabezado, connection, transaccion))
                         {
@@ -161,10 +162,12 @@ namespace ERP_GMEDINA.Controllers
 
                             int result = command.ExecuteNonQuery();
 
+                            //si hay error en encabezado hacer rollback
                             if (result < 0)
                                 try
                                 {
                                     transaccion.Rollback();
+                                    response = "error";
                                 }
                                 catch
                                 {
@@ -172,7 +175,6 @@ namespace ERP_GMEDINA.Controllers
                                 }
                         }
                         #endregion
-
 
                         #region Insertar en el detalle
                         using (SqlCommand command = new SqlCommand(queryDetalle, connection, transaccion))
@@ -182,16 +184,18 @@ namespace ERP_GMEDINA.Controllers
                             command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
                             command.Parameters.AddWithValue("@idEncabezado", idEncabezado);
                             command.Parameters.AddWithValue("@diasPagados", item.diasPagados);
-                            command.Parameters.AddWithValue("@sueldoBruto",item.sueldoBruto);
+                            command.Parameters.AddWithValue("@sueldoBruto", item.sueldoBruto);
                             command.Parameters.AddWithValue("@usuarioCrea", sesion.usu_Id);
                             command.Parameters.AddWithValue("@fechaCrea", FechaActual);
 
                             int result = command.ExecuteNonQuery();
 
+                            //Si hay error hacer un rollback
                             if (result < 0)
                                 try
                                 {
                                     transaccion.Rollback();
+                                    response = "error";
                                 }
                                 catch
                                 {
@@ -200,6 +204,7 @@ namespace ERP_GMEDINA.Controllers
                         }
                         #endregion
                     }
+
                     //Confirmar los cambios en la base de datos
                     transaccion.Commit();
                 }
@@ -212,15 +217,9 @@ namespace ERP_GMEDINA.Controllers
                     }
                     catch
                     {
-                        try
-                        {
-                            transaccion.Rollback();
-                        }
-                        catch
-                        {
 
-                        }
                     }
+                }
             }
 
             return Json(response, JsonRequestBehavior.AllowGet);
