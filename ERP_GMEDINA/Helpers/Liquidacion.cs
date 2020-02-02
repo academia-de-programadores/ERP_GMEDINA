@@ -400,42 +400,29 @@ namespace ERP_GMEDINA.Helpers
                             Historico_DiasVacacionesTomadas += it.hvac_CantDias;
                     }
 
+                    ////OBTENER LA BASE EN DIAS
+                    //int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
+                    //                                                            (iter == 2) ? 12 :
+                    //                                                            (iter == 3) ? 15 :
+                    //                                                            (iter >= 4) ? 20 : 0;
                     //OBTENER LA BASE EN DIAS
-                    int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
-                                                                                (iter == 2) ? 12 :
-                                                                                (iter == 3) ? 15 :
-                                                                                (iter >= 4) ? 20 : 0;
-
-                    decimal PagoDeCesantiaCompleta = 0;
-                    decimal PagoDeCesantiaProporcional = 0;
-                    decimal PagoDeCesantiaTotal = 0;
-
-                    //VALIDAR VACACIONES PROPORCIONALES
-                    decimal PagoProporcionalDeVacaciones = (
-                                                                 (Antiguedad > 360) ?
-                                                                    ((SalarioOrdinario / 30) * (Antiguedad % (AniosLaborados * 360))) / BaseEnDias :
-                                                                    ((SalarioOrdinario / 30) * Antiguedad) / BaseEnDias
-                                                            );
-
-                    if ((Antiguedad / 360) >= 12)
-                    {
-                        //CESANTÍA EN BASE A RANGO
-                        PagoDeCesantiaCompleta = (SalarioPromedioDiario * BaseEnDias);
-
-                        PagoDeCesantiaProporcional = ((BaseEnDias * SalarioPromedioDiario) / 360) * (Antiguedad % 360);
-                    }
-                    else
-                    {
-                        PagoDeCesantiaCompleta = ((BaseEnDias * SalarioPromedioDiario) / 360) * Antiguedad;
-                    }
-                    PagoDeCesantiaTotal = PagoDeCesantiaCompleta + PagoDeCesantiaProporcional;
+                    int BaseEnDias = (iter == 1) ? 10 :
+                                     (iter == 2) ? 12 :
+                                     (iter == 3) ? 15 :
+                                     (iter >= 4) ? 20 : 0;
 
                     //VALIDAR VACACIONES TOMADAS
                     int DiasVacacionesValidos = (Historico_DiasDeVacacionCorrespondiente >= Historico_DiasVacacionesTomadas) ? (Historico_DiasDeVacacionCorrespondiente - Historico_DiasVacacionesTomadas) : 0;
-                    //int Historico_DiasVacacionestomadas = db.tbHistorialVacaciones.Where(p => p.emp_Id == Emp_Id).Select(c => c.hvac_DiasTomados).Sum();
-                    MontoVacacionesPendientes = ((Antiguedad / 360) > 0) ? DiasVacacionesValidos * SalarioPromedioDiario : 0;
-                    //SUMATORIA DE DÍAS DE VACACIONES PROPORCIONALES
-                    MontoVacacionesPendientes += PagoProporcionalDeVacaciones;
+
+                    //VACACIONES CORRESPONDIENTES
+                    MontoVacacionesPendientes = SalarioPromedioDiario * DiasVacacionesValidos;
+                    if (Antiguedad % (BaseEnDias * 30) > 1)
+                    {
+                        //INCREMENTAR LA BASE EN DÍAS POR EL AÑO QUE ESTA INCOMPLETO
+                        BaseEnDias++;
+                        //CALCULTAR PROPORCIONAL
+                        MontoVacacionesPendientes += ((SalarioPromedioDiario * 30) / (BaseEnDias * 12)) * (Antiguedad % (BaseEnDias * 30));
+                    }
 
                 }
                 catch (Exception Ex)
