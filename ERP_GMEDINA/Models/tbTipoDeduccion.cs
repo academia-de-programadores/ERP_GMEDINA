@@ -12,6 +12,7 @@ namespace ERP_GMEDINA.Models
             this.tbAFP = new HashSet<tbAFP>();
             this.tbCatalogoDeDeducciones = new HashSet<tbCatalogoDeDeducciones>();
             this.tbISR = new HashSet<tbISR>();
+            this.tbTechoImpuestoVecinal = new HashSet<tbTechoImpuestoVecinal>();
         }
     
         public int tde_IdTipoDedu { get; set; }
@@ -30,5 +31,7 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbISR> tbISR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTechoImpuestoVecinal> tbTechoImpuestoVecinal { get; set; }
     }
 }

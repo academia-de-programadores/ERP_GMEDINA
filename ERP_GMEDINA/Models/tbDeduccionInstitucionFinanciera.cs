@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> deif_FechaModifica { get; set; }
         public bool deif_Activo { get; set; }
         public Nullable<bool> deif_Pagado { get; set; }
+        public Nullable<bool> deif_DeducirISR { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

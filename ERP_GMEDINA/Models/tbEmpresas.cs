@@ -23,6 +23,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime empr_FechaCrea { get; set; }
         public Nullable<int> empr_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> empr_FechaModifica { get; set; }
+        public Nullable<decimal> empr_SalarioMinimo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

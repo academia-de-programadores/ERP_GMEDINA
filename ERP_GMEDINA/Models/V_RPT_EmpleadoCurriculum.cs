@@ -10,6 +10,8 @@ namespace ERP_GMEDINA.Models
         public string NombreCompleto { get; set; }
         public string per_Telefono { get; set; }
         public string per_CorreoElectronico { get; set; }
+        public Nullable<int> car_Id { get; set; }
+        public string car_Descripcion { get; set; }
         public Nullable<int> depto_Id { get; set; }
         public string depto_Descripcion { get; set; }
         public Nullable<int> area_Id { get; set; }

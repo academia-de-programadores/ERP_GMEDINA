@@ -12,9 +12,9 @@ namespace ERP_GMEDINA.Models
         public string NombreCompleto { get; set; }
         public int tper_Id { get; set; }
         public string TipoPermiso { get; set; }
+        public int Porcentaje { get; set; }
         public bool emp_Estado { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
-        public int Porcentaje { get; set; }
     }
 }
