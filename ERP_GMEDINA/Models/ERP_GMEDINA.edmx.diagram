@@ -477,12 +477,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
