@@ -2040,6 +2040,7 @@
     <Content Include="Scripts\app\General\IngresosIndividuales.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasIndex.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
+    <Content Include="Scripts\app\General\IV.js" />
     <Content Include="Scripts\app\General\ISR.js" />
     <Content Include="Scripts\app\General\ISRRPT.js" />
     <Content Include="Scripts\app\General\Jornadas\Admin.js" />
@@ -2974,6 +2975,8 @@
     <Content Include="Views\PagoDeCesantiaDetalle\PagarCesantia.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\Index.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\_CreateIV.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\_EditIV.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\_DetailsIV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
