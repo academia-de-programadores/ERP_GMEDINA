@@ -265,7 +265,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>NombreCompleto</rd:DefaultName>
@@ -298,7 +300,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Identidad</rd:DefaultName>
@@ -331,7 +335,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>TipoPermiso</rd:DefaultName>
@@ -364,7 +370,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>FechaInicio</rd:DefaultName>
@@ -397,7 +405,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>FechaFin</rd:DefaultName>
@@ -430,7 +440,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Porcentaje</rd:DefaultName>
@@ -465,6 +477,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Detalles" />
@@ -472,7 +485,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesPermisosDS</DataSetName>
-        <Top>0.29167in</Top>
+        <Top>0.06944in</Top>
         <Left>0.37063in</Left>
         <Height>0.5in</Height>
         <Width>8.19355in</Width>
@@ -483,13 +496,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.89583in</Height>
+    <Height>0.62916in</Height>
     <Style />
   </Body>
   <Width>8.97043in</Width>
   <Page>
     <PageHeader>
-      <Height>0.67014in</Height>
+      <Height>0.43414in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -508,7 +521,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.71865cm</Top>
+          <Top>0.11921cm</Top>
           <Left>17.9301cm</Left>
           <Height>0.6cm</Height>
           <Width>4.48438cm</Width>
@@ -541,7 +554,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.59944cm</Top>
           <Left>6.12724cm</Left>
           <Height>1.10271cm</Height>
           <Width>10.64776cm</Width>
@@ -604,6 +616,8 @@
         </Border>
       </Style>
     </PageFooter>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
     <TopMargin>1in</TopMargin>

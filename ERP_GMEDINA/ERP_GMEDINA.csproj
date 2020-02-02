@@ -2975,7 +2975,6 @@
     <EmbeddedResource Include="Reports\AudienciasDescargo.rdlc" />
     <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\EquipoEmpleadosRPT.rdlc" />
-    <EmbeddedResource Include="Reports\EquipoEmpleadosRPT2.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialAmonestacionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\HistorialCargosRPT.rdlc" />
