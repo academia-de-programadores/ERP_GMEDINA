@@ -1,0 +1,55 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialIncapacidades
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <h6 class="modal-title">Seguro(a) que desea incapacitar permanentemente a:</h6>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+
+                    <dt>Empleado</dt>
+                    <dd id="nombre"></dd>
+
+                    <dt>Identidad</dt>
+                    <dd id="identidad"></dd>
+
+                  
+
+                    <dt>@Html.DisplayNameFor(model => model.hinc_CentroMedico)</dt>
+                    <dd id="hinc_CentroMedico"></dd>
+
+
+                    <dt>@Html.DisplayNameFor(model => model.hinc_Diagnostico)</dt>
+                    <dd id="hinc_Diagnostico"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.hinc_FechaInicio)</dt>
+                    <dd id="hinc_FechaInicio"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.hinc_FechaFin)</dt>
+                    <dd id="hinc_FechaFin"></dd>
+
+                    <dt>Incapacidad</dt>
+                    <dd id="tipincapacidad"></dd>
+
+
+                </dl>
+               
+            </div>
+            <div class="modal-footer">
+                
+                    <input type="submit" value="Si" id="btnSi" class="btn btn-primary" />
+
+                
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                @*<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

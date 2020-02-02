@@ -59,7 +59,10 @@ namespace ERP_GMEDINA.Controllers
                             Fecha_Crea = t.Fecha_Crea,
                             Usuario_Modifica = t.Usuario_Modifica,
                             Fecha_Modifica = t.Fecha_Modifica,
-                            Estado = t.Estado
+                            Estado = t.Estado,
+                            Sueldo_Maximo = t.Sueldo_Maximo,
+                            Sueldo_Minimo = t.Sueldo_Minimo,
+                            Id_cargo = t.Id_Cargo
 
                         }
 
@@ -149,13 +152,14 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            tbSueldos VSueldos = null;
+            V_Sueldos VSueldos = null;
+            tbSueldos sueldos1 = null;
 
             try
             {
                 db = new ERP_GMEDINAEntities();
-                VSueldos = db.tbSueldos.Find(id);
-                if (VSueldos == null)
+                sueldos1 = db.tbSueldos.Find(id);
+                if (sueldos1 == null)
                 {
                     return HttpNotFound();
                 }
@@ -166,25 +170,30 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var sueldos = new tbSueldos
+            db = new ERP_GMEDINAEntities();
+            var sueldos = db.V_Sueldos.Select(x =>
+            new
             {
 
-                sue_Id = VSueldos.sue_Id,
-                emp_Id = VSueldos.emp_Id,
-                tmon_Id = VSueldos.tmon_Id,
-                sue_Cantidad = VSueldos.sue_Cantidad,
-                sue_SueldoAnterior = VSueldos.sue_SueldoAnterior,
-                sue_Estado = VSueldos.sue_Estado,
-                sue_RazonInactivo = VSueldos.sue_RazonInactivo,
-                sue_UsuarioCrea = VSueldos.sue_UsuarioCrea,
-                sue_FechaCrea = VSueldos.sue_FechaCrea,
-                sue_UsuarioModifica = VSueldos.sue_UsuarioModifica,
-                sue_FechaModifica = VSueldos.sue_FechaModifica,
-                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(VSueldos.tbUsuario).usu_NombreUsuario },
-                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(VSueldos.tbUsuario).usu_NombreUsuario }
+                Id = x.Id,
+                Identidad = x.Identidad,
+                Id_Empleado = x.Id_Empleado,
+                Id_Amonestacion = x.Id_Amonestacion,
+                Sueldo = x.Sueldo,
+                Sueldo_Anterior = x.Sueldo_Anterior,
+                Estado = x.Estado,
+                RazonInactivo = x.RazonInactivo,
+                Usuario_Nombre = x.Usuario_Nombre,
+                Usuario_Crea = x.Usuario_Crea,
+                Fecha_Crea = x.Fecha_Crea,
+                Usuario_Modifica = x.Usuario_Modifica,
+                Fecha_Modifica = x.Fecha_Modifica,
+                Sueldo_Maximo = x.Sueldo_Maximo,
+                Sueldo_Minimo = x.Sueldo_Minimo,
 
 
-            };
+            }).Where(x => x.Id == id).ToList();
+
             return Json(sueldos, JsonRequestBehavior.AllowGet);
         }
 
@@ -192,7 +201,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(cSueldos tbsueldos)
         {
             string msj = "";
-            if (tbsueldos.sue_Id != 0 && tbsueldos.emp_Id != 0 && tbsueldos.tmon_Id != 0 && decimal.Parse(tbsueldos.sue_Cantidad) != 0)
+            if (tbsueldos.sue_Id != 0 && decimal.Parse(tbsueldos.sue_Cantidad) != 0)
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try

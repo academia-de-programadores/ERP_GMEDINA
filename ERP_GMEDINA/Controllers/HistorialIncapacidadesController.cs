@@ -69,7 +69,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, tbHistorialIncapacidades.hinc_Espermanente, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -303,6 +303,7 @@ namespace ERP_GMEDINA.Controllers
                 tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Descripcion = IsNull(tbHistIncapacidades.tbTipoIncapacidades).ticn_Descripcion },
                 hinc_CentroMedico = tbHistIncapacidades.hinc_CentroMedico,
                 hinc_Diagnostico = tbHistIncapacidades.hinc_Diagnostico,
+                hinc_Doctor = tbHistIncapacidades.hinc_Doctor,
                 hinc_FechaInicio = tbHistIncapacidades.hinc_FechaInicio,
                 hinc_FechaFin = tbHistIncapacidades.hinc_FechaFin,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistIncapacidades.tbUsuario).usu_NombreUsuario },
