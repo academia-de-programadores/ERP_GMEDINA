@@ -358,6 +358,7 @@
     <Compile Include="Models\cSeleccionCandidatos.cs" />
     <Compile Include="Models\cSucursales.cs" />
     <Compile Include="Models\cSueldos.cs" />
+    <Compile Include="Models\cTechoImpuestoVecinal.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
@@ -2971,7 +2972,6 @@
     <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
     <Content Include="Views\PagoDeCesantiaDetalle\Index.cshtml" />
     <Content Include="Views\PagoDeCesantiaDetalle\PagarCesantia.cshtml" />
-    <Content Include="Views\TechoImpuestoVecinal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
