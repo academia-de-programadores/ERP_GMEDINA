@@ -83,14 +83,15 @@ function tablaEditar(ID) {
      '/Empresas/Datos/',
      'POST',
      function (obj) {
+      var item = $("#ModalEditar").find("#per_id option").removeAttr("selected");
       $("#per_id option").attr("selected", null);
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
        $("#FormEditar").find("#empr_RTN").val(obj.empr_RTN);
 
-       $("#FormEditar").find("#per_Id option[value=" + obj.per_Id + "]").attr('selected', 'selected');
-       $("#FormEditar").find("#myselect").val(obj.per_Id);
-       //$("#FormEditar").find("#per_Id option[value='" + obj.per_Id + "']").attr("selected", true);
+       $("#ModalEditar").find("#per_id").val(obj.per_Id)
+       var item = $("#ModalEditar").find("#per_id option[value='" + obj.per_Id + "']");
+       $(item).attr('selected', true);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }

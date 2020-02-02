@@ -83,10 +83,14 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, tbEmpresas.per_Id, tbEmpresas.empr_RTN, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, tbEmpresas.per_Id, tbEmpresas.empr_RTN == null ? "N/A" : tbEmpresas.empr_RTN, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Insert_Result item in list)
                     {
                         msj = int.Parse(item.MensajeError);
+                    }
+                    if (!(Directory.Exists(Server.MapPath("~/") + "/Logos/")))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(Server.MapPath("~/") + "/Logos/");
                     }
                     string ruta = Server.MapPath("~/") + "/Logos/" + msj.ToString() + "." + ext;
                     file.SaveAs(ruta);
@@ -133,12 +137,12 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var empresa = new 
+            var empresa = new
             {
                 empr_Id = tbEmpresas.empr_Id,
                 empr_Nombre = tbEmpresas.empr_Nombre,
                 per_Id = tbEmpresas.tbPersonas.per_Id,
-                empr_RTN =tbEmpresas.empr_RTN,
+                empr_RTN = tbEmpresas.empr_RTN,
                 empr_Logo = tbEmpresas.empr_Logo,
                 empr_Estado = tbEmpresas.empr_Estado,
                 empr_RazonInactivo = tbEmpresas.empr_RazonInactivo,
@@ -174,10 +178,16 @@ namespace ERP_GMEDINA.Controllers
                 {
                     db = new ERP_GMEDINAEntities();
                     string ruta = "/Logos/" + id + "." + ext;
-                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, tbEmpresas.per_Id, tbEmpresas.empr_RTN, ruta, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, tbEmpresas.per_Id,
+                        tbEmpresas.empr_RTN == null ? "N/A" : tbEmpresas.empr_RTN,
+                        ruta, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
+                    }
+                    if (!(Directory.Exists(Server.MapPath("~/") + "/Logos/")))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(Server.MapPath("~/") + "/Logos/");
                     }
                     ruta = Server.MapPath("~/") + "/Logos/" + id + "." + ext;
                     file.SaveAs(ruta);
