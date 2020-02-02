@@ -736,7 +736,7 @@ namespace ERP_GMEDINA.Controllers
                                             .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == AnioActualEnero.Year)
                                             .OrderBy(x => x.hipa_Mes)
                                             .GroupBy(x => x.hipa_Mes)
-                                            .Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
+                                            .Select(x => x.Sum(y => (Decimal)y.hipa_TotalSueldoBruto))).ToList();
 
                                         DateTime FechaIngresoEmpleado = db.tbEmpleados
                                                                         .Where(x => x.emp_Id == empleadoActual.emp_Id)
