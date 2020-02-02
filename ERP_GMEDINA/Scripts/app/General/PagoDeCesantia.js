@@ -38,9 +38,19 @@ var listadoCesantia = new Array();
         $.post('ProcesarCesantia',
             { listadoCesantia },
             function (response) {
-                console.log(response);
+                if (response == "bien") {
+                    iziToast.success({
+                        title: 'Éxito',
+                        message: 'Se ha deducido la cesantía de forma exitosa!',
+                    });
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡Ha ocurrido un error al deducir la cesantía, contacte al administrador!',
+                    });
+                }
             }).done((x) => {
-                console.log('Procesado');
+
             });
     });
 })();
