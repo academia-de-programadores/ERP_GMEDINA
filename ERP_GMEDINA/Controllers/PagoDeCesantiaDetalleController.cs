@@ -69,105 +69,141 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult ProcesarCesantia(PagoCesantiaViewModel[] listadoCesantia)
         {
+            tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
             string response = "bien";
             DateTime FechaActual = DateTime.Now;
+            int idEncabezado = 0;
+
+            //Query del detalle
+            String queryDetalle = @"
+                                    INSERT plani.tbPagoDeCesantiaDetalle
+                                    (
+                                        pdcd_IdCesantiaDetalle,
+                                        emp_Id,
+                                        pdcd_TotalCesantiaColaborador,
+                                        pdcd_CodigoPlanillaCesantias,
+                                        pdce_IdCesantiaEncabezado,
+                                        pdcd_DiasPagados,
+                                        pdcd_ConSueldoBruto,
+                                        pdcd_UsuarioCrea,
+                                        pdcd_FechaCrea
+                                    )
+                                    VALUES
+                                    (
+                                        (SELECT ISNULL(MAX(pdcd_IdCesantiaDetalle) + 1, 1) FROM [Plani].[tbPagoDeCesantiaDetalle]),
+                                        @empId,
+                                        @totalCesantia,
+                                        @codigoPlanillaCesantia,
+                                        @idEncabezado,
+                                        @diasPagados,
+                                        @sueldoBruto,
+                                        @usuarioCrea,
+                                        @fechaCrea,
+                                    )   
+                             ";
+
+            //Query del encabezado
+            String queryEncabezado = @"
+                                    INSERT plani.tbPagoDeCesantiaEncabezado
+                                    (
+                                        pdce_IdCesantiaEncabezado,
+                                        pdce_CodigoPlanillaCesantias,
+                                        pdce_TotalCesantias,
+                                        pdce_UsuarioCrea,
+                                        pdce_FechaCrea
+                                    )
+                                    VALUES
+                                    (
+                                        @idCesantiaEncabezado,
+                                        @codigoPlanillaCesantia,
+                                        @totalCesantia,
+                                        @usuarioCrea,
+                                        @fechaCrea
+                                    ) 
+                             ";
+
+
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
             {
                 //Comenzar la transaccion
                 connection.Open();
                 SqlTransaction transaccion;
                 transaccion = connection.BeginTransaction();
-
-                try
-                {
-                    //Query del encabezado
-                    String queryEncabezado = @"
-                                    INSERT plani.tbPagoDeCesantiaDetalle
-                                    (
-                                        pdcd_IdCesantiaDetalle,
-                                        emp_Id,
-                                        pdcd_TotalCesantiaColaborador,
-                                        pdcd_CodigoPlanillaCesantias,
-                                        pdce_IdCesantiaEncabezado,
-                                        pdcd_DiasPagados,
-                                        pdcd_ConSueldoBruto,
-                                        pdcd_UsuarioCrea,
-                                        pdcd_FechaCrea
-                                    )
-                                    VALUES
-                                    (
-                                        (SELECT ISNULL(MAX(pdcd_IdCesantiaDetalle) + 1, 1) FROM [Plani].[tbPagoDeCesantiaDetalle]),
-                                        @empId,
-                                        @totalCesantia,
-                                        @codigoPlanillaCesantia,
-                                        @idEncabezado,
-                                        @diasPagados,
-                                        @sueldoBruto,
-                                        @usuarioCrea,
-                                        @fechaCrea,
-                                    )   
-                             ";
-                    
-                    //Query del detalle
-                    String queryDetalle = @"
-                                    INSERT plani.tbPagoDeCesantiaDetalle
-                                    (
-                                        pdcd_IdCesantiaDetalle,
-                                        emp_Id,
-                                        pdcd_TotalCesantiaColaborador,
-                                        pdcd_CodigoPlanillaCesantias,
-                                        pdce_IdCesantiaEncabezado,
-                                        pdcd_DiasPagados,
-                                        pdcd_ConSueldoBruto,
-                                        pdcd_UsuarioCrea,
-                                        pdcd_FechaCrea
-                                    )
-                                    VALUES
-                                    (
-                                        (SELECT ISNULL(MAX(pdcd_IdCesantiaDetalle) + 1, 1) FROM [Plani].[tbPagoDeCesantiaDetalle]),
-                                        @empId,
-                                        @totalCesantia,
-                                        @codigoPlanillaCesantia,
-                                        @idEncabezado,
-                                        @diasPagados,
-                                        @sueldoBruto,
-                                        @usuarioCrea,
-                                        @fechaCrea,
-                                    )   
-                             ";
-
-                    //Asignar el codigo de planilla
-                    string codigoPlanillaCesantia = "CSC-" + 1 + FechaActual.Month + FechaActual.Year;
-
-                    using (SqlCommand command = new SqlCommand(queryDetalle, connection))
-                    {
-
-                        command.Parameters.AddWithValue("@empId", 1);
-                        command.Parameters.AddWithValue("@totalCesantia", 245564M);
-                        command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
-                        command.Parameters.AddWithValue("@idEncabezado", 1);
-                        command.Parameters.AddWithValue("@diasPagados", 35);
-                        command.Parameters.AddWithValue("@sueldoBruto", 553);
-                        command.Parameters.AddWithValue("@usuarioCrea", 1);
-                        command.Parameters.AddWithValue("@fechaCrea", FechaActual);
-
-                        int result = command.ExecuteNonQuery();
-
-                        if (result < 0)
-                            response = "error";
-                    }
-                }
-                catch
-                {
+                foreach (var item in listadoCesantia)
                     try
                     {
-                        transaccion.Rollback();
-                    }
-                    catch
-                    {
+                        using (SqlCommand command = new SqlCommand("(SELECT ISNULL(MAX(pdce_IdCesantiaEncabezado) + 1, 1) FROM [Plani].[tbPagoDeCesantiaEncabezado])", connection))
+                        {
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    idEncabezado = reader.GetInt32(0);
+                                }
+                            }
+                        }
 
+                        //Asignar el codigo de planilla
+                        string codigoPlanillaCesantia = "CSC-" + idEncabezado + FechaActual.Month + FechaActual.Year;
+
+                        //Insertar en el encabezado
+                        using (SqlCommand command = new SqlCommand(queryEncabezado, connection))
+                        {
+                            command.Parameters.AddWithValue("@idCesantiaEncabezado", idEncabezado);
+                            command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
+                            command.Parameters.AddWithValue("@totalCesantia", item.totalCesantia);
+                            command.Parameters.AddWithValue("@usuarioCrea", sesion.usu_Id);
+                            command.Parameters.AddWithValue("@fechaCrea", FechaActual);
+
+                            int result = command.ExecuteNonQuery();
+
+                            if (result < 0)
+                                try
+                                {
+                                    transaccion.Rollback();
+                                }
+                                catch
+                                {
+
+                                }
+                        }
+
+                        //Insertar en el detalle
+                        using (SqlCommand command = new SqlCommand(queryDetalle, connection))
+                        {
+                            command.Parameters.AddWithValue("@empId", item.idEmpleado);
+                            command.Parameters.AddWithValue("@totalCesantia", item.totalCesantia);
+                            command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
+                            command.Parameters.AddWithValue("@idEncabezado", idEncabezado);
+                            command.Parameters.AddWithValue("@diasPagados", item.diasPagados);
+                            command.Parameters.AddWithValue("@sueldoBruto",item.sueldoBruto);
+                            command.Parameters.AddWithValue("@usuarioCrea", sesion.usu_Id);
+                            command.Parameters.AddWithValue("@fechaCrea", FechaActual);
+
+                            int result = command.ExecuteNonQuery();
+
+                            if (result < 0)
+                                try
+                                {
+                                    transaccion.Rollback();
+                                }
+                                catch
+                                {
+
+                                }
+                        }
                     }
-                }
+                    catch(Exception ex)
+                    {
+                        try
+                        {
+                            transaccion.Rollback();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
             }
 
             return Json(response, JsonRequestBehavior.AllowGet);
@@ -212,5 +248,6 @@ namespace ERP_GMEDINA.Controllers
         public int idEmpleado { get; set; }
         public decimal totalCesantia { get; set; }
         public int diasPagados { get; set; }
+        public decimal sueldoBruto { get; set; }
     }
 }
