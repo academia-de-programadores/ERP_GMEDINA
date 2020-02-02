@@ -161,7 +161,7 @@ namespace ERP_GMEDINA.Helpers
         public static decimal Calculo_PagoDePreaviso(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE PREAVISO
-            decimal PagoDePreaviso = 0;
+            decimal PagoDePreavisoTotal = 0;
 
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
@@ -172,7 +172,7 @@ namespace ERP_GMEDINA.Helpers
                     //ALMACENA LA CANTIDAD DE DIAS CORRESPONDIENTES
                     int DiasCorrespondientes = 0;
                     ////ALMACENA LA CANTIDAD DE AÑOS LABORADOS
-                    //int MesesLaborados = Antiguedad / 30;
+                    int MesesLaborados = Antiguedad / 30;
                     //ALMACENA EL SALARIO PROMEDIO DIARIO
                     SalarioPromedioDiario = (Calculo_SalarioOrdinarioMensual(Emp_Id) * 14) / 360;
                     //INICIALIZACION DE LISTA DE LIQUIDACION_PREAVISO
@@ -181,21 +181,29 @@ namespace ERP_GMEDINA.Helpers
                     foreach (tbPreaviso iter in TbLiquidacionPreaviso)
                     {
                         //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
-                        if (Antiguedad > (RangoInicial * 30) && Antiguedad <= (iter.prea_RangoFinMeses * 30))
-                            DiasCorrespondientes = iter.prea_DiasPreaviso;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
-                        else if (Antiguedad > (iter.prea_RangoFinMeses * 30))
+                        if (MesesLaborados >= RangoInicial && MesesLaborados < iter.prea_RangoFinMeses)
+                        {
+                            //ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
                             DiasCorrespondientes = iter.prea_DiasPreaviso;
-                        //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
-                        RangoInicial = iter.prea_RangoFinMeses;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.prea_RangoFinMeses == 0) ? RangoInicial : iter.prea_RangoFinMeses;
+                        }
+                        else if (MesesLaborados >= iter.prea_RangoInicioMeses && iter.prea_RangoFinMeses == 0)
+                        {
+                            DiasCorrespondientes = iter.prea_DiasPreaviso;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.prea_RangoFinMeses == 0) ? RangoInicial : iter.prea_RangoFinMeses;
+                        }
                     }
-                    PagoDePreaviso = (SalarioPromedioDiario * DiasCorrespondientes);
+                    //SETEAR LA VARIABLE DE TOTAL PREAVISO
+                    PagoDePreavisoTotal = (SalarioPromedioDiario * DiasCorrespondientes);
                 }
                 catch (Exception Ex)
                 {
                     Ex.Message.ToString();
                 }
             }
-            return Math.Round(PagoDePreaviso, 2);
+            return Math.Round(PagoDePreavisoTotal, 2);
         }
         #endregion
 
@@ -246,10 +254,23 @@ namespace ERP_GMEDINA.Helpers
                         Contador++;
                     }
                     //SETEO DE LA VARIABLE CONTENEDORA DEL MONTO DE AUXILIODECESANTIA
-                    PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
+                    //PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
 
-                    if (MesesLaborados > 12)
-                        PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+                    //if (MesesLaborados > 12)
+                    //    PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+                    if (MesesLaborados >= 12)
+                    {
+                        //CESANTÍA EN BASE A RANGO
+                        PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
+                        //CESANTÍA PRO
+                        //PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+
+                        PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioPromedioDiario) / (RangoInicial * 30)) * (DiasLaborados % 360);
+                    }
+                    else
+                    {
+                        PagoDeCesantiaCompleta = ((DiasCorrespondientes * SalarioPromedioDiario) / (RangoInicial * 30)) * DiasLaborados;
+                    }
 
                     PagoDeCesantiaTotal = PagoDeCesantiaCompleta + PagoDeCesantiaProporcional;
                 }
@@ -384,6 +405,11 @@ namespace ERP_GMEDINA.Helpers
                                                                                 (iter == 2) ? 12 :
                                                                                 (iter == 3) ? 15 :
                                                                                 (iter >= 4) ? 20 : 0;
+
+                    decimal PagoDeCesantiaCompleta = 0;
+                    decimal PagoDeCesantiaProporcional = 0;
+                    decimal PagoDeCesantiaTotal = 0;
+
                     //VALIDAR VACACIONES PROPORCIONALES
                     decimal PagoProporcionalDeVacaciones = (
                                                                  (Antiguedad > 360) ?
@@ -391,7 +417,18 @@ namespace ERP_GMEDINA.Helpers
                                                                     ((SalarioOrdinario / 30) * Antiguedad) / BaseEnDias
                                                             );
 
+                    if ((Antiguedad / 360) >= 12)
+                    {
+                        //CESANTÍA EN BASE A RANGO
+                        PagoDeCesantiaCompleta = (SalarioPromedioDiario * BaseEnDias);
 
+                        PagoDeCesantiaProporcional = ((BaseEnDias * SalarioPromedioDiario) / 360) * (Antiguedad % 360);
+                    }
+                    else
+                    {
+                        PagoDeCesantiaCompleta = ((BaseEnDias * SalarioPromedioDiario) / 360) * Antiguedad;
+                    }
+                    PagoDeCesantiaTotal = PagoDeCesantiaCompleta + PagoDeCesantiaProporcional;
 
                     //VALIDAR VACACIONES TOMADAS
                     int DiasVacacionesValidos = (Historico_DiasDeVacacionCorrespondiente >= Historico_DiasVacacionesTomadas) ? (Historico_DiasDeVacacionCorrespondiente - Historico_DiasVacacionesTomadas) : 0;
@@ -470,7 +507,7 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO - REDUCCION DE PASIVO LABORAL
         //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
-        public static decimal Calculo_ReduccionPasivoLaboral(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_ReduccionPasivoLaboral(int Emp_Id, decimal SalarioBrutoMasAlto, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE CESANTIA
             decimal PagoDeCesantiaCompleta = 0;
@@ -489,8 +526,6 @@ namespace ERP_GMEDINA.Helpers
                     int DiasLaborados = Antiguedad;
                     //ALMACENA LA CANTIDAD DE AÑOS LABORADOS
                     int MesesLaborados = DiasLaborados / 30;
-                    //ALMACENA EL SALARIO PROMEDIO DIARIO
-                    SalarioPromedioDiario = (SalarioPromedioDiario * 14) / 360;
                     //INICIALIZACION DE LISTA DE LIQUIDACION_CESANTIA
                     List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia = db.tbAuxilioDeCesantias.ToList();
                     int Contador = 0;
@@ -518,15 +553,15 @@ namespace ERP_GMEDINA.Helpers
                     if(MesesLaborados >= 12)
                     {
                         //CESANTÍA EN BASE A RANGO
-                        PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
+                        PagoDeCesantiaCompleta = (SalarioBrutoMasAlto * DiasCorrespondientes);
                         //CESANTÍA PRO
                         //PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
 
-                        PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioPromedioDiario) / (RangoInicial * 30)) * (DiasLaborados % 360);
+                        PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioBrutoMasAlto) / (RangoInicial * 30)) * (DiasLaborados % 360);
                     }
                     else
                     {
-                        PagoDeCesantiaCompleta = ((DiasCorrespondientes * SalarioPromedioDiario) / (RangoInicial * 30)) * DiasLaborados;
+                        PagoDeCesantiaCompleta = ((DiasCorrespondientes * SalarioBrutoMasAlto) / (RangoInicial * 30)) * DiasLaborados;
                     }
                     PagoDeCesantiaTotal = PagoDeCesantiaCompleta + PagoDeCesantiaProporcional;
                 }
