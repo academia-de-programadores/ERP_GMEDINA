@@ -69,6 +69,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult ProcesarCesantia(PagoCesantiaViewModel[] listadoCesantia)
         {
+            #region Declaración de variables
             tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
             string response = "bien";
             DateTime FechaActual = DateTime.Now;
@@ -122,6 +123,7 @@ namespace ERP_GMEDINA.Controllers
                                         @fechaCrea
                                     ) 
                              ";
+            #endregion
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
             {
@@ -132,6 +134,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     foreach (var item in listadoCesantia)
                     {
+                        #region Obtener el id del encabezado a insertar
                         using (SqlCommand command = new SqlCommand("(SELECT ISNULL(MAX(pdce_IdCesantiaEncabezado) + 1, 1) FROM [Plani].[tbPagoDeCesantiaEncabezado])", connection, transaccion))
                         {
                             using (SqlDataReader reader = command.ExecuteReader())
@@ -142,11 +145,13 @@ namespace ERP_GMEDINA.Controllers
                                 }
                             }
                         }
+                        #endregion
 
                         //Asignar el codigo de planilla
                         string codigoPlanillaCesantia = "CSC-" + idEncabezado + FechaActual.Month + FechaActual.Year;
 
-                        //Insertar en el encabezado
+
+                        #region Insertar en el encabezado
                         using (SqlCommand command = new SqlCommand(queryEncabezado, connection, transaccion))
                         {
                             command.Parameters.AddWithValue("@idCesantiaEncabezado", idEncabezado);
@@ -169,8 +174,9 @@ namespace ERP_GMEDINA.Controllers
 
                                 }
                         }
+                        #endregion
 
-                        //Insertar en el detalle
+                        #region Insertar en el detalle
                         using (SqlCommand command = new SqlCommand(queryDetalle, connection, transaccion))
                         {
                             command.Parameters.AddWithValue("@empId", item.idEmpleado);
@@ -196,8 +202,9 @@ namespace ERP_GMEDINA.Controllers
 
                                 }
                         }
+                        #endregion
                     }
-                    
+
                     //Confirmar los cambios en la base de datos
                     transaccion.Commit();
                 }
