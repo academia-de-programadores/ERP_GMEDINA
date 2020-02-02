@@ -474,6 +474,8 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_dep_Codigo" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" Width="1.5" PointX="0.75" PointY="29.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" Width="1.5" PointX="2.75" PointY="29.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

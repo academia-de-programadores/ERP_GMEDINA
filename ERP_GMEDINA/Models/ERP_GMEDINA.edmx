@@ -2587,6 +2587,51 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbEmpleadoComisiones' no
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbPagoDeCesantiaDetalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_tbPagoDeCesantiaDetalle">
+          <Key>
+            <PropertyRef Name="IdCesantia" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="NoIdentidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="Depto_Id" />
+            <PropertyRef Name="DeptoDescripcion" />
+            <PropertyRef Name="Area_Id" />
+            <PropertyRef Name="Area_Descripcion" />
+          </Key>
+          <Property Name="IdCesantia" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="NoIdentidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Depto_Id" Type="int" Nullable="false" />
+          <Property Name="DeptoDescripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Area_Id" Type="int" Nullable="false" />
+          <Property Name="Area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiasPagados" Type="int" />
+          <Property Name="ConSueldo" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TotalCesantiaColaborador" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="NoDeCuenta" Type="nvarchar" MaxLength="100" />
+          <Property Name="pdcd_UsuarioCrea" Type="int" />
+          <Property Name="pdcd_FechaCrea" Type="datetime" />
+          <Property Name="pdcd_UsuarioModifica" Type="int" />
+          <Property Name="pdcd_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbPagoDeCesantiaDetalle_Preview' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_tbPagoDeCesantiaDetalle_Preview">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="NoIdentidad" />
+            <PropertyRef Name="NombreCompleto" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="NoIdentidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="NoDeCuenta" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbTechosComisiones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbTechosComisiones">
           <Key>
@@ -3559,8 +3604,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="Razon_Inactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Sueldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbEmpleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbEmpleados">
@@ -7529,6 +7572,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="dei_NumeroCuotas" Type="int" Mode="In" />
           <Parameter Name="dei_MontoCuotas" Type="decimal" Mode="In" />
           <Parameter Name="dei_PagaSiempre" Type="bit" Mode="In" />
+          <Parameter Name="dei_Pagado" Type="bit" Mode="In" />
           <Parameter Name="dei_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="dei_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -7536,9 +7580,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="dei_IdDeduccionesIndividuales" Type="int" Mode="In" />
           <Parameter Name="dei_Motivo" Type="nvarchar" Mode="In" />
           <Parameter Name="emp_Id" Type="int" Mode="In" />
-          <Parameter Name="dei_MontoInicial" Type="decimal" Mode="In" />
-          <Parameter Name="dei_MontoRestante" Type="decimal" Mode="In" />
-          <Parameter Name="dei_Cuota" Type="decimal" Mode="In" />
+          <Parameter Name="dei_Monto" Type="decimal" Mode="In" />
+          <Parameter Name="dei_NumeroCuotas" Type="int" Mode="In" />
+          <Parameter Name="dei_MontoCuota" Type="decimal" Mode="In" />
           <Parameter Name="dei_PagaSiempre" Type="bit" Mode="In" />
           <Parameter Name="dei_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="dei_FechaModifica" Type="datetime" Mode="In" />
@@ -8454,7 +8498,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="hinc_FechaFin" Type="datetime" Mode="In" />
           <Parameter Name="hinc_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hinc_FechaCrea" Type="datetime" Mode="In" />
-          <Parameter Name="hinc_Espermanente" Type="int" Mode="In" />
+          <Parameter Name="hinc_Espermanente" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialIncapacidades_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hinc_Id" Type="int" Mode="In" />
@@ -9873,6 +9917,35 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_tbEmpleadoComisiones].[jor_Descripcion] AS [jor_Descripcion], 
     [V_tbEmpleadoComisiones].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_tbEmpleadoComisiones] AS [V_tbEmpleadoComisiones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_tbPagoDeCesantiaDetalle" EntityType="Self.V_tbPagoDeCesantiaDetalle" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_tbPagoDeCesantiaDetalle].[IdCesantia] AS [IdCesantia], 
+    [V_tbPagoDeCesantiaDetalle].[emp_Id] AS [emp_Id], 
+    [V_tbPagoDeCesantiaDetalle].[per_Id] AS [per_Id], 
+    [V_tbPagoDeCesantiaDetalle].[NoIdentidad] AS [NoIdentidad], 
+    [V_tbPagoDeCesantiaDetalle].[NombreCompleto] AS [NombreCompleto], 
+    [V_tbPagoDeCesantiaDetalle].[Depto_Id] AS [Depto_Id], 
+    [V_tbPagoDeCesantiaDetalle].[DeptoDescripcion] AS [DeptoDescripcion], 
+    [V_tbPagoDeCesantiaDetalle].[Area_Id] AS [Area_Id], 
+    [V_tbPagoDeCesantiaDetalle].[Area_Descripcion] AS [Area_Descripcion], 
+    [V_tbPagoDeCesantiaDetalle].[DiasPagados] AS [DiasPagados], 
+    [V_tbPagoDeCesantiaDetalle].[ConSueldo] AS [ConSueldo], 
+    [V_tbPagoDeCesantiaDetalle].[TotalCesantiaColaborador] AS [TotalCesantiaColaborador], 
+    [V_tbPagoDeCesantiaDetalle].[NoDeCuenta] AS [NoDeCuenta], 
+    [V_tbPagoDeCesantiaDetalle].[pdcd_UsuarioCrea] AS [pdcd_UsuarioCrea], 
+    [V_tbPagoDeCesantiaDetalle].[pdcd_FechaCrea] AS [pdcd_FechaCrea], 
+    [V_tbPagoDeCesantiaDetalle].[pdcd_UsuarioModifica] AS [pdcd_UsuarioModifica], 
+    [V_tbPagoDeCesantiaDetalle].[pdcd_FechaModifica] AS [pdcd_FechaModifica]
+    FROM [Plani].[V_tbPagoDeCesantiaDetalle] AS [V_tbPagoDeCesantiaDetalle]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_tbPagoDeCesantiaDetalle_Preview" EntityType="Self.V_tbPagoDeCesantiaDetalle_Preview" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_tbPagoDeCesantiaDetalle_Preview].[emp_Id] AS [emp_Id], 
+    [V_tbPagoDeCesantiaDetalle_Preview].[NoIdentidad] AS [NoIdentidad], 
+    [V_tbPagoDeCesantiaDetalle_Preview].[NombreCompleto] AS [NombreCompleto], 
+    [V_tbPagoDeCesantiaDetalle_Preview].[NoDeCuenta] AS [NoDeCuenta]
+    FROM [Plani].[V_tbPagoDeCesantiaDetalle_Preview] AS [V_tbPagoDeCesantiaDetalle_Preview]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbTechosComisiones" EntityType="Self.V_tbTechosComisiones" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -19825,6 +19898,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="dei_NumeroCuotas" Mode="In" Type="Int32" />
             <Parameter Name="dei_MontoCuotas" Mode="In" Type="Decimal" />
             <Parameter Name="dei_PagaSiempre" Mode="In" Type="Boolean" />
+            <Parameter Name="dei_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="dei_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -19832,9 +19906,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="dei_IdDeduccionesIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="dei_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="dei_MontoInicial" Mode="In" Type="Decimal" />
-            <Parameter Name="dei_MontoRestante" Mode="In" Type="Decimal" />
-            <Parameter Name="dei_Cuota" Mode="In" Type="Decimal" />
+            <Parameter Name="dei_Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="dei_NumeroCuotas" Mode="In" Type="Int32" />
+            <Parameter Name="dei_MontoCuota" Mode="In" Type="Decimal" />
             <Parameter Name="dei_PagaSiempre" Mode="In" Type="Boolean" />
             <Parameter Name="dei_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaModifica" Mode="In" Type="DateTime" />
@@ -20543,7 +20617,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="hinc_FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="hinc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaCrea" Mode="In" Type="DateTime" />
-            <Parameter Name="hinc_Espermanente" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_Espermanente" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result)">
             <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
@@ -21494,6 +21568,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="timv_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="timv_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_tbPagoDeCesantiaDetalle" EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" />
+          <EntitySet Name="V_tbPagoDeCesantiaDetalle_Preview" EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -23362,6 +23438,47 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
         <ComplexType Name="UDP_Plani_tbTechoImpuestoVecinal_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="V_tbPagoDeCesantiaDetalle">
+          <Key>
+            <PropertyRef Name="IdCesantia" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="NoIdentidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="Depto_Id" />
+            <PropertyRef Name="DeptoDescripcion" />
+            <PropertyRef Name="Area_Id" />
+            <PropertyRef Name="Area_Descripcion" />
+          </Key>
+          <Property Name="IdCesantia" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="NoIdentidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="DeptoDescripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Area_Id" Type="Int32" Nullable="false" />
+          <Property Name="Area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiasPagados" Type="Int32" />
+          <Property Name="ConSueldo" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TotalCesantiaColaborador" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="NoDeCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="pdcd_UsuarioCrea" Type="Int32" />
+          <Property Name="pdcd_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="pdcd_UsuarioModifica" Type="Int32" />
+          <Property Name="pdcd_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_tbPagoDeCesantiaDetalle_Preview">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="NoIdentidad" />
+            <PropertyRef Name="NombreCompleto" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="NoIdentidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="NoDeCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -28480,6 +28597,39 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_tbPagoDeCesantiaDetalle">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle">
+              <MappingFragment StoreEntitySet="V_tbPagoDeCesantiaDetalle">
+                <ScalarProperty Name="pdcd_FechaModifica" ColumnName="pdcd_FechaModifica" />
+                <ScalarProperty Name="pdcd_UsuarioModifica" ColumnName="pdcd_UsuarioModifica" />
+                <ScalarProperty Name="pdcd_FechaCrea" ColumnName="pdcd_FechaCrea" />
+                <ScalarProperty Name="pdcd_UsuarioCrea" ColumnName="pdcd_UsuarioCrea" />
+                <ScalarProperty Name="NoDeCuenta" ColumnName="NoDeCuenta" />
+                <ScalarProperty Name="TotalCesantiaColaborador" ColumnName="TotalCesantiaColaborador" />
+                <ScalarProperty Name="ConSueldo" ColumnName="ConSueldo" />
+                <ScalarProperty Name="DiasPagados" ColumnName="DiasPagados" />
+                <ScalarProperty Name="Area_Descripcion" ColumnName="Area_Descripcion" />
+                <ScalarProperty Name="Area_Id" ColumnName="Area_Id" />
+                <ScalarProperty Name="DeptoDescripcion" ColumnName="DeptoDescripcion" />
+                <ScalarProperty Name="Depto_Id" ColumnName="Depto_Id" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="NoIdentidad" ColumnName="NoIdentidad" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="IdCesantia" ColumnName="IdCesantia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_tbPagoDeCesantiaDetalle_Preview">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview">
+              <MappingFragment StoreEntitySet="V_tbPagoDeCesantiaDetalle_Preview">
+                <ScalarProperty Name="NoDeCuenta" ColumnName="NoDeCuenta" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="NoIdentidad" ColumnName="NoIdentidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
