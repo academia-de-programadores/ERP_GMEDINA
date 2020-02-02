@@ -51,6 +51,7 @@ namespace ERP_GMEDINA.Controllers
                 V_tbPagoDeCesantiaDetalle ModelPagoDeCesantiaDetalle = new V_tbPagoDeCesantiaDetalle();
                 //SETEAR LOS CAMPOS PARA MOSTRAR LA PROYECCIÓN
                 ModelPagoDeCesantiaDetalle.IdCesantia = iter;
+                ModelPagoDeCesantiaDetalle.emp_Id = item.emp_Id;
                 ModelPagoDeCesantiaDetalle.NoIdentidad = item.NoIdentidad;
                 ModelPagoDeCesantiaDetalle.NombreCompleto = item.NombreCompleto;
                 ModelPagoDeCesantiaDetalle.DiasPagados = (int)Liquidacion.Dias360AcumuladosCesantia(item.emp_Id, FechaPeticion);
@@ -64,7 +65,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public JsonResult ProcesarCesantia()
+        public JsonResult ProcesarCesantia(PagoCesantiaViewModel[] listadoCesantia)
         {
             return Json("bien", JsonRequestBehavior.AllowGet);
         }
@@ -101,5 +102,12 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
+    }
+
+    public class PagoCesantiaViewModel
+    {
+        public int idEmpleado { get; set; }
+        public decimal totalCesantia { get; set; }
+        public int diasPagados { get; set; }
     }
 }
