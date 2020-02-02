@@ -702,14 +702,18 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
+
                                         #region cálculo de ISR
 
                                         #region Declaracion de Variables
-                                        decimal SalarioMinimo = 9443.24M;
                                         int AnioActual = DateTime.Now.Year;
                                         decimal? TotalBonos = 0;
                                         decimal? TotalHrsExtra = 0;
                                         decimal? TotalComisiones = 0;
+                                        decimal? TotalIngresosExtras = 0;
+                                        //decimal? TotalDeduccionesEquípoTrabajo = 0;
+                                        //decimal? TotalDeduccionesExtras = 0;
+                                        //decimal? TotalDeduccionesAFP = 0;
                                         decimal? ExcesoDecimoTercer = 0;
                                         decimal? ExcesoVacaciones = 0;
                                         decimal? ExcesoDecimoCuarto = 0;
@@ -719,6 +723,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal TotalIngresosGravables = 0;
                                         decimal TotalDeduccionesGravables = 0;
                                         decimal RentaNetaGravable = 0;
+                                        decimal SalarioMinimo = db.tbEmpresas.Select(x => x.empr_SalarioMinimo).FirstOrDefault()??0;
                                         var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
                                         #endregion
 
@@ -731,7 +736,7 @@ namespace ERP_GMEDINA.Controllers
                                             .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == AnioActualEnero.Year)
                                             .OrderBy(x => x.hipa_Mes)
                                             .GroupBy(x => x.hipa_Mes)
-                                            .Select(x => x.Sum(y => (Decimal)y.hipa_TotalSueldoBruto))).ToList();
+                                            .Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
 
                                         DateTime FechaIngresoEmpleado = db.tbEmpleados
                                                                         .Where(x => x.emp_Id == empleadoActual.emp_Id)
@@ -756,9 +761,9 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         #region Excesos
-                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Tercer Mes
-                                        //Variable para llamar en duro los empleados con Décimo Tercer Mes
+                                        //Variable para los empleados con Décimo Tercer Mes
                                         var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dtm_FechaPago.Year == AnioActual).FirstOrDefault();
 
                                         //Validar primero si es en el año actual el proceso de este calculo
@@ -777,12 +782,12 @@ namespace ERP_GMEDINA.Controllers
                                                 ExcesoDecimoTercer = 0;
                                             }
                                         }
-                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
 
 
-                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Cuarto Mes
-                                        //Variable para llamar en duro los empleados con Décimo Cuarto Mes
+                                        //Variable para los empleados con Décimo Cuarto Mes
                                         var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dcm_FechaPago.Year == AnioActual).FirstOrDefault();
 
                                         //Validar primero si es en el año actual el proceso de este calculo
@@ -801,12 +806,12 @@ namespace ERP_GMEDINA.Controllers
                                                 ExcesoDecimoCuarto = 0;
                                             }
                                         }
-                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
 
 
-                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        ////-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
-                                        //Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
+                                        //Variable para las Vacaciones Pagadas del Historial de Ingresos de Pago
                                         var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
 
                                         //Validar si los dias a Pagar es mayor a 30 dias 
@@ -821,31 +826,19 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
-                                        #region Gastos Médicos
-                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
-                                        var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
+                                        #region Acumulados ISR
 
-                                        //Variable para llamar en duro el monto de Gastos Médicos de 70,000.00
-                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
-
-                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
-                                        var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
-
-                                        //Validar si el Empleado tiene menos de 60 años para saber cuanto se le cobrará de Gastos Médicos
-                                        if (objEmpleados.tbPersonas.per_Edad < 60)
-                                        {
-                                            GastosMedicos = objAcumuladosISRMenor.aisr_Monto;
-                                        }
-                                        else
-                                        {
-                                            GastosMedicos = objAcumuladosISRMayor.aisr_Monto;
-                                        }
+                                        //Variable para obtener los registros de los Acumulados ISR del empleado actual
+                                        GastosMedicos = db.tbAcumuladosISR.Where(x => x.aisr_Activo == true).Select(x => x.aisr_Monto).FirstOrDefault();
 
                                         #endregion
 
-                                        TotalBonos = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Pagado == true && AnioActualEnero == x.cb_FechaPagado).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.cb_Monto)).FirstOrDefault();
+                                        #region Otros Ingresos
+
+                                        TotalBonos = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalBonos)).FirstOrDefault();
                                         TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras)).FirstOrDefault();
                                         TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones)).FirstOrDefault();
+                                        TotalIngresosExtras = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalIngresosIndividuales)).FirstOrDefault();
 
                                         if (TotalBonos == null)
                                             TotalBonos = 0;
@@ -856,68 +849,76 @@ namespace ERP_GMEDINA.Controllers
                                         if (TotalComisiones == null)
                                             TotalComisiones = 0;
 
-                                        #region Total ISR Calcular
+                                        if (TotalIngresosExtras == null)
+                                            TotalIngresosExtras = 0;
+
+                                        #endregion
+
+                                        #region Otras Deducciones
+                                        /*
+                                        decimal DeduccionEquipoTrabajo = db.tbDeduccionesExtraordinarias.Where(x => x.eqem_Id.tbEmpleados.emp_Id == empleadoActual.emp_Id && x.dex_Activo == true).Select(x => x.dex_MontoInicial) - db.tbDeduccionesExtraordinarias.Where(x => x.eqem_Id.tbEmpleados.emp_Id == empleadoActual.emp_Id && x.dex_Activo == true).Select(x => x.dex_MontoRestante);
+                                        TotalDeduccionesEquípoTrabajo = db.tbDeduccionesExtraordinarias.Where(x => x.eqem_Id.tbEmpleados.emp_Id == empleadoActual.emp_Id && x.dex_Activo == true).GroupBy(x => x.eqem_Id.tbEmpleados.emp_Id).Select(x => x.Sum(y => y.));
+                                        TotalDeduccionesExtras = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalDeduccionesIndividuales)).FirstOrDefault();
+                                        TotalDeduccionesAFP = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_AFP)).FirstOrDefault();
+                                        */
+                                        #endregion
+
+                                        #region Calculo del ISR
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Total Ingresos Gravables
-                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones;
+                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones + (Decimal)TotalIngresosExtras;
 
                                         //Total Deducciones Gravables
-                                        TotalDeduccionesGravables = GastosMedicos;
+                                        TotalDeduccionesGravables = GastosMedicos /*+ (Decimal)TotalDeduccionesEquipoTrabajo + (Decimal)TotalDeduccionesExtras + (Decimal)TotalDeduccionesAFP*/;
 
                                         //Renta Neta Gravable
                                         RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
 
-                                        #region ISR Dinámico en Proceso
-                                        //Tabla Progresiva ISR Dinámica
 
-                                        /*List<tbISR> objDeduccionISR = db.tbISR.Where(x => x.isr_Activo == true).ToList();
+                                        #region Tabla Progresiva ISR
+                                        //Tabla Progresiva ISR
 
-                                        foreach(var oISR in objDeduccionISR)
+                                        //Variable para validar que entre primero en la primera parte de la fórmula del ISR y luego en la segunda parte
+                                        string VI = "FirstRange";
+
+                                        //Variable de tipo Lista para obtener los registros de la tabla progresiva de mayor a menor
+                                        List<tbISR> objDeduccionISR = db.tbISR.Where(x => x.isr_Activo == true)
+                                                                              .OrderByDescending(x => x.isr_RangoInicial)
+                                                                              .ToList();
+
+                                        foreach (var oISR in objDeduccionISR)
                                         {
-                                            if ()
+                                            if (objDeduccionISR.Count() > 0)
                                             {
-
+                                                if (RentaNetaGravable >= oISR.isr_RangoInicial)
+                                                {
+                                                    if (VI == "FirstRange")
+                                                    {
+                                                        totalISR = totalISR + (RentaNetaGravable - oISR.isr_RangoInicial) * (oISR.isr_Porcentaje / 100);
+                                                        VI = "No";
+                                                    }
+                                                    else if (VI == "No")
+                                                    {
+                                                        VI = "SecondRange";
+                                                    }
+                                                    if (VI == "SecondRange")
+                                                    {
+                                                        totalISR = totalISR + (oISR.isr_RangoFinal - oISR.isr_RangoInicial) * (oISR.isr_Porcentaje / 100);
+                                                        VI = "No";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    totalISR = 0;
+                                                }
                                             }
-                                        }*/
-                                        #endregion
-
-                                        #region Tabla Progresiva para Deducir ISR
-                                        //Cálculo con la Tabla Progresiva ISR
-
-                                        //Variable para llamar cada uno de los Porcentajes y Techos del ISR
-                                        var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
-                                        var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
-                                        var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).FirstOrDefault();
-                                        var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).FirstOrDefault();
-
-                                        if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
-                                                       (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
-                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
-                                                       (objISRBajo.isr_Porcentaje / 100);
-                                        }
-                                        else if (RentaNetaGravable > objISRMedio.isr_RangoInicial)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
-                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
-                                                       (objISRBajo.isr_Porcentaje / 100);
-                                        }
-                                        else if (RentaNetaGravable > objISRBajo.isr_RangoInicial)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
-                                                       (objISRBajo.isr_Porcentaje / 100);
-                                        }
-                                        else if (RentaNetaGravable <= objISRExcento.isr_RangoFinal)
-                                        {
-                                            totalISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
-                                                       (objISRExcento.isr_Porcentaje / 100);
                                         }
                                         #endregion
 
                                         #endregion
 
                                         #endregion
+
 
                                         // Pendiente testeo
                                         //netoAPagarColaborador = netoAPagarColaborador - totalISR;
