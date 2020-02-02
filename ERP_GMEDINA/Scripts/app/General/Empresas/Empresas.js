@@ -87,7 +87,10 @@ function tablaEditar(ID) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
        $("#FormEditar").find("#empr_RTN").val(obj.empr_RTN);
-       $("#FormEditar").find("#per_Id option[value='" + obj.per_Id + "']").attr("selected", true);
+
+       $("#FormEditar").find("#per_Id option[value=" + obj.per_Id + "]").attr('selected', 'selected');
+       $("#FormEditar").find("#myselect").val(obj.per_Id);
+       //$("#FormEditar").find("#per_Id option[value='" + obj.per_Id + "']").attr("selected", true);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }
