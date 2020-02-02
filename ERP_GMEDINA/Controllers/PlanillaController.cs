@@ -150,7 +150,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? netoAPagarColaborador = 0;
                                         oPlanillaEmpleado = new ReportePlanillaViewModel();
 
-                                        //variables para insertar en los historiales de pago
+                                        // variables para insertar en los historiales de pago
                                         IEnumerable<object> listHistorialPago = null;
                                         string MensajeError = "";
                                         List<tbHistorialDeduccionPago> lisHistorialDeducciones = new List<tbHistorialDeduccionPago>();
@@ -1160,6 +1160,763 @@ namespace ERP_GMEDINA.Controllers
             return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        public ActionResult PrevisualizarPlanilla (int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
+
+        {
+            #region declaracion de instancias
+
+            // helper
+            General utilities = new General();
+
+            // instancias 
+            IngresosDeduccionesVoucher ingresosColaborador = new IngresosDeduccionesVoucher();
+            IngresosDeduccionesVoucher deduccionesColaborador = new IngresosDeduccionesVoucher();
+
+            // instancias para el reporte final
+            ReportePlanillaViewModel oPlanillaEmpleado;
+            List<ReportePlanillaViewModel> reporte = new List<ReportePlanillaViewModel>();
+
+            // instancia para resultado del proceso en izitoast
+            iziToast response = new iziToast();
+            int errores = 0;
+            #endregion
+
+            #region inicia proceso de previsualizacion de planilla
+            try
+            {
+                using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+                {
+                    List<tbCatalogoDePlanillas> oIDSPlanillas = new List<tbCatalogoDePlanillas>();
+
+                    // seleccionar las planillas que se van a generar
+                    if (ID != null)
+                        oIDSPlanillas = db.tbCatalogoDePlanillas
+                                          .Where(X => X.cpla_IdPlanilla == ID)
+                                          .ToList();
+                    else
+                        oIDSPlanillas = db.tbCatalogoDePlanillas
+                                          .Where(x => x.cpla_Activo == true)
+                                          .ToList();
+
+                    // procesar todas las planillas seleccionadas
+                    foreach (var iter in oIDSPlanillas)
+                    {
+                        try
+                        {
+                            // planilla actual del foreach
+                            tbCatalogoDePlanillas oPlanilla = db.tbCatalogoDePlanillas
+                                                                .Find(iter.cpla_IdPlanilla);
+
+                            // ingresos de la planilla actual
+                            List<V_PlanillaIngresos> oIngresos = db.V_PlanillaIngresos
+                                                                   .Where(x => x.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla)
+                                                                   .ToList();
+
+                            // deducciones de la planilla actual
+                            List<V_PlanillaDeducciones> oDeducciones = db.V_PlanillaDeducciones
+                                                                         .Where(x => x.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla)
+                                                                         .ToList();
+
+                            // empleados de la planilla actual
+                            List<tbEmpleados> oEmpleados = db.tbEmpleados
+                                                             .Where(emp => emp.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla &&
+                                                                    emp.emp_Estado == true)
+                                                            .ToList();
+                            
+
+                            // procesar planilla empleado por empleado
+                            foreach (var empleadoActual in oEmpleados)
+                            {
+                                using (var dbContextTransaccion = db.Database.BeginTransaction())
+                                {
+                                    try
+                                    {
+                                        #region variables reporte view model
+
+                                        string codColaborador = string.Empty;
+                                        string nombreColaborador = string.Empty;
+                                        decimal SalarioBase = 0;
+                                        int horasTrabajadas = 0;
+                                        decimal salarioHora = 0;
+                                        decimal totalSalario = 0;
+                                        string tipoPlanilla = string.Empty;
+                                        decimal? porcentajeComision = 0;
+                                        decimal? totalVentas = 0;
+                                        decimal? totalComisiones = 0;
+                                        int horasExtrasTrabajadas = 0;
+                                        int cantidadUnidadesBonos = 0;
+                                        decimal? totalHorasExtras = 0;
+                                        decimal? totalHorasPermiso = 0;
+                                        decimal? totalBonificaciones = 0;
+                                        decimal? totalIngresosIndivuales = 0;
+                                        decimal? totalVacaciones = 0;
+                                        decimal? totalIngresosEmpleado = 0;
+                                        decimal totalISR = 0;
+                                        decimal? colaboradorDeducciones = 0;
+                                        decimal totalAFP = 0;
+                                        decimal? totalInstitucionesFinancieras = 0;
+                                        decimal? totalOtrasDeducciones = 0;
+                                        decimal? adelantosSueldo = 0;
+                                        decimal? totalDeduccionesEmpleado = 0;
+                                        decimal? totalDeduccionesIndividuales = 0;
+                                        decimal? netoAPagarColaborador = 0;
+                                        oPlanillaEmpleado = new ReportePlanillaViewModel();
+                                        
+                                        List<tbHistorialDeduccionPago> lisHistorialDeducciones = new List<tbHistorialDeduccionPago>();
+                                        List<tbHistorialDeIngresosPago> lisHistorialIngresos = new List<tbHistorialDeIngresosPago>();
+
+
+                                        #endregion
+
+                                        #region Procesar ingresos
+
+                                        // informacion del colaborador actual
+                                        V_InformacionColaborador InformacionDelEmpleadoActual = db.V_InformacionColaborador
+                                                                                                  .Where(x => x.emp_Id == empleadoActual.emp_Id)
+                                                                                                  .FirstOrDefault();
+
+                                        // salario base del colaborador actual
+                                        SalarioBase = Math.Round((Decimal)InformacionDelEmpleadoActual.SalarioBase, 2);
+
+
+                                        // horas normales trabajadas
+                                        horasTrabajadas = db.tbHistorialHorasTrabajadas
+                                                            .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                   x.htra_Estado == true &&
+                                                                   x.tbTipoHoras.tiho_Recargo == 0 &&
+                                                                   x.htra_Fecha >= fechaInicio &&
+                                                                   x.htra_Fecha <= fechaFin)
+                                                            .Select(x => x.htra_CantidadHoras)
+                                                            .DefaultIfEmpty(0)
+                                                            .Sum();
+
+
+                                        // salario por hora
+                                        salarioHora = Math.Round((Decimal)SalarioBase / 240, 2);
+
+
+                                        // total salario o salario bruto
+                                        totalSalario = Math.Round((Decimal)salarioHora * horasTrabajadas, 2);
+
+
+                                        // horas con permiso justificado
+                                        List<tbHistorialPermisos> horasConPermiso = db.tbHistorialPermisos
+                                                                                      .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                             x.hper_Estado == true &&
+                                                                                             x.hper_fechaInicio >= fechaInicio &&
+                                                                                             x.hper_fechaFin <= fechaFin)
+                                                                                      .ToList();
+
+                                        if (horasConPermiso.Count > 0)
+                                        {
+                                            int CantidadHorasPermisoActual = 0;
+                                            // sumar todas las horas extras
+                                            foreach (var iterHorasPermiso in horasConPermiso)
+                                            {
+                                                CantidadHorasPermisoActual = iterHorasPermiso.hper_Duracion;
+
+                                                totalHorasPermiso += Math.Round(CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100)), 2);
+                                                
+                                            }
+                                        }
+
+                                        // comisiones
+                                        List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones
+                                                                                                .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                       x.cc_Activo == true &&
+                                                                                                       x.cc_Pagado == false &&
+                                                                                                       x.cc_FechaRegistro >= fechaInicio &&
+                                                                                                       x.cc_FechaRegistro <= fechaFin)
+                                                                                                .ToList();
+                                        if (oComisionesColaboradores.Count > 0)
+                                        {
+                                            // sumar todas las comisiones
+                                            foreach (var oComisionesColaboradoresIterador in oComisionesColaboradores)
+                                            {
+                                                totalComisiones += oComisionesColaboradoresIterador.cc_TotalComision;                                                
+                                            }
+                                        }
+
+                                        // horas extras
+                                        horasExtrasTrabajadas = db.tbHistorialHorasTrabajadas
+                                                                .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                        x.htra_Estado == true &&
+                                                                        x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                                        x.htra_Fecha >= fechaInicio &&
+                                                                        x.htra_Fecha <= fechaFin)
+                                                                .Select(x => x.htra_CantidadHoras)
+                                                                .DefaultIfEmpty(0)
+                                                                .Sum();                                        
+
+                                        // total ingresos horas extras
+                                        List<tbHistorialHorasTrabajadas> oHorasExtras = db.tbHistorialHorasTrabajadas
+                                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                               x.htra_Estado == true &&
+                                                                                               x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                                                               x.htra_Fecha >= fechaInicio &&
+                                                                                               x.htra_Fecha <= fechaFin)
+                                                                                        .ToList();
+                                        if (oHorasExtras.Count > 0)
+                                        {
+                                            int CantidadHorasExtrasActual = 0;
+                                            // sumar todas las horas extras
+                                            foreach (var iterHorasExtras in oHorasExtras)
+                                            {
+                                                CantidadHorasExtrasActual = db.tbHistorialHorasTrabajadas
+                                                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.htra_Id == iterHorasExtras.htra_Id)
+                                                                            .Select(x => x.htra_CantidadHoras)
+                                                                            .DefaultIfEmpty(0)
+                                                                            .Sum();
+
+                                                totalHorasExtras += Math.Round((Decimal)CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2);
+                                                
+                                            }
+                                        }
+
+                                        // bonos del colaborador
+                                        List<tbEmpleadoBonos> oBonosColaboradores = db.tbEmpleadoBonos
+                                                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                           x.cb_Activo == true &&
+                                                                                           x.cb_Pagado == false &&
+                                                                                           x.cb_FechaRegistro >= fechaInicio &&
+                                                                                           x.cb_FechaRegistro <= fechaFin)
+                                                                                    .ToList();
+
+
+                                        if (oBonosColaboradores.Count > 0)
+                                        {
+                                            cantidadUnidadesBonos = oBonosColaboradores.Count;
+
+                                            // iterar los bonos
+                                            foreach (var oBonosColaboradoresIterador in oBonosColaboradores)
+                                            {
+                                                totalBonificaciones += Math.Round((Decimal)oBonosColaboradoresIterador.cb_Monto, 2);                                                
+                                            }
+                                        }
+
+                                        // vacaciones
+                                        List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones
+                                                                                                .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                       x.hvac_DiasPagados == false &&
+                                                                                                       x.hvac_Estado == true &&
+                                                                                                       x.hvac_FechaInicio >= fechaInicio &&
+                                                                                                       x.hvac_FechaFin <= fechaFin)
+                                                                                                .ToList();
+                                        if (oVacacionesColaboradores.Count > 0)
+                                        {
+                                            // sumar todas las comisiones
+                                            foreach (var oVacacionesColaboradoresIterador in oVacacionesColaboradores)
+                                            {
+                                                int cantidadDias = 0;
+                                                DateTime VacacionesfechaInicio;
+                                                DateTime VacacionesfechaFin;
+
+                                                VacacionesfechaInicio = (from tbEmpVac in db.tbHistorialVacaciones
+                                                                         where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                                         select tbEmpVac.hvac_FechaInicio).FirstOrDefault();
+
+                                                VacacionesfechaFin = (from tbEmpVac in db.tbHistorialVacaciones
+                                                                      where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                                      select tbEmpVac.hvac_FechaFin).FirstOrDefault();
+
+                                                TimeSpan restaFechas = VacacionesfechaFin - VacacionesfechaInicio;
+                                                cantidadDias = restaFechas.Days;
+
+                                                totalVacaciones += Math.Round((salarioHora * 8) * cantidadDias, 2);
+                                                
+                                            }
+                                        }
+
+                                        // ingresos individuales
+                                        List<tbIngresosIndividuales> oIngresosIndiColaboradores = db.tbIngresosIndividuales
+                                                                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                           x.ini_Activo == true &&
+                                                                                                           x.ini_Pagado != true &&
+                                                                                                           x.ini_FechaCrea >= fechaInicio &&
+                                                                                                           x.ini_FechaCrea <= fechaFin)
+                                                                                                    .ToList();
+
+                                        if (oIngresosIndiColaboradores.Count > 0)
+                                        {
+                                            //iterar los bonos
+                                            foreach (var oIngresosIndiColaboradoresIterador in oIngresosIndiColaboradores)
+                                            {
+                                                totalIngresosIndivuales += Math.Round((Decimal)oIngresosIndiColaboradoresIterador.ini_Monto, 2);
+                                                
+                                            }
+                                        }
+
+                                        #region Septimo Dia
+                                        DateTime inicioFecha = fechaInicio;
+                                        DateTime finFecha = fechaFin;
+                                        TimeSpan restaFechasSeptimo = finFecha - inicioFecha;
+                                        int cantidadDiasSeptimo = restaFechasSeptimo.Days + 1;
+                                        DateTime fechaIterador = inicioFecha;
+                                        int cantHoras = 0;
+                                        int cantHorasPermiso = 0;
+                                        int cantidadSeptimosDias = 0;
+                                        int contadorSeptimosDias = 1;
+
+                                        for (int i = 1; i <= cantidadDiasSeptimo; i++)
+                                        {
+                                            if (fechaIterador.DayOfWeek.ToString() != "Sunday")
+                                            {
+                                                cantHoras += db.tbHistorialHorasTrabajadas
+                                                            .Where(x => x.htra_Fecha == fechaIterador &&
+                                                                   x.emp_Id == empleadoActual.emp_Id &&
+                                                                   x.htra_Estado == true)
+                                                            .Select(x => x.htra_CantidadHoras)
+                                                            .FirstOrDefault();
+
+                                                cantHorasPermiso += db.tbHistorialPermisos
+                                                                    .Where(x => x.hper_fechaInicio <= fechaIterador &&
+                                                                           x.hper_fechaFin >= fechaIterador &&
+                                                                           x.emp_Id == empleadoActual.emp_Id)
+                                                                    .Select(x => x.hper_Duracion)
+                                                                    .FirstOrDefault();
+
+                                                if ((cantHoras + (cantHorasPermiso * 8)) >= 48 && contadorSeptimosDias == 7)
+                                                {
+                                                    cantidadSeptimosDias++;
+                                                    contadorSeptimosDias = 0;
+                                                    cantHoras = 0;
+                                                }
+                                            }
+                                            if (contadorSeptimosDias == 7)
+                                            {
+                                                cantHoras = 0;
+                                                contadorSeptimosDias = 0;
+                                            }
+                                            fechaIterador = fechaIterador.Add(new TimeSpan(1, 0, 0, 0, 0));
+                                            contadorSeptimosDias++;
+                                        }
+
+                                        decimal resultSeptimoDia = (salarioHora * 8) * cantidadSeptimosDias;
+                                        #endregion
+
+                                        // total ingresos
+                                        totalIngresosEmpleado = totalIngresosIndivuales + totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones + totalHorasPermiso + resultSeptimoDia;
+
+                                        #endregion
+
+                                        #region Procesar deducciones
+
+                                        // deducciones de la planilla
+                                        foreach (var iterDeducciones in oDeducciones)
+                                        {
+                                            decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
+                                            decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
+                                            decimal? montoDeduccionColaborador = SalarioBase;
+
+                                            // verificar techos deducciones
+                                            List<tbTechosDeducciones> oTechosDeducciones = db.tbTechosDeducciones
+                                                                                             .Where(x => x.cde_IdDeducciones == iterDeducciones.cde_IdDeducciones &&
+                                                                                                    x.tddu_Activo == true)
+                                                                                             .OrderBy(x => x.tddu_Techo)
+                                                                                             .ToList();
+                                            if (oTechosDeducciones.Count() > 0)
+                                            {
+                                                foreach (var techosDeduccionesIter in oTechosDeducciones)
+                                                {
+                                                    if (SalarioBase > techosDeduccionesIter.tddu_Techo)
+                                                    {
+                                                        montoDeduccionColaborador = techosDeduccionesIter.tddu_Techo;
+                                                        porcentajeColaborador = techosDeduccionesIter.tddu_PorcentajeColaboradores;
+                                                        porcentajeEmpresa = techosDeduccionesIter.tddu_PorcentajeEmpresa;
+                                                    }
+                                                }
+                                            }
+                                            //sumar las deducciones
+                                            colaboradorDeducciones += Math.Round((decimal)(montoDeduccionColaborador * porcentajeColaborador) / 100, 2);
+                                            
+                                        }
+
+                                        //instituciones financieras
+                                        List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras = db.tbDeduccionInstitucionFinanciera
+                                                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                                               x.deif_Activo == true &&
+                                                                                                               x.deif_Pagado == false &&
+                                                                                                               x.deif_FechaCrea >= fechaInicio &&
+                                                                                                               x.deif_FechaCrea <= fechaFin)
+                                                                                                        .ToList();
+
+                                        if (oDeduInstiFinancieras.Count > 0)
+                                        {
+                                            // sumarlas todas
+                                            foreach (var oDeduInstiFinancierasIterador in oDeduInstiFinancieras)
+                                            {
+                                                totalInstitucionesFinancieras += Math.Round((decimal)oDeduInstiFinancierasIterador.deif_Monto, 2);
+                        
+                                            }
+                                        }
+                                        // deducciones afp
+                                        List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP
+                                                                            .Where(af => af.emp_Id == empleadoActual.emp_Id &&
+                                                                                   af.dafp_Pagado != true &&
+                                                                                   af.dafp_Activo == true &&
+                                                                                   af.dafp_FechaCrea >= fechaInicio &&
+                                                                                   af.dafp_FechaCrea <= fechaFin)
+                                                                            .ToList();
+
+                                        if (oDeduccionAfp.Count > 0)
+                                        {
+                                            // sumarlas todas
+                                            foreach (var oDeduccionAfpIter in oDeduccionAfp)
+                                            {
+                                                totalAFP += Math.Round((decimal)oDeduccionAfpIter.dafp_AporteLps, 2);
+                                            }
+                                        }
+
+                                        // deducciones extras
+                                        List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador = db.tbDeduccionesExtraordinarias
+                                                                                                            .Where(DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id &&
+                                                                                                                   DEX.dex_MontoRestante > 0 &&
+                                                                                                                   DEX.dex_Activo == true)
+                                                                                                            .ToList();
+
+                                        if (oDeduccionesExtrasColaborador.Count > 0)
+                                        {
+                                            // sumarlas todas
+                                            foreach (var oDeduccionesExtrasColaboradorIterador in oDeduccionesExtrasColaborador)
+                                            {
+                                                totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
+                                                
+                                            }
+                                        }
+
+                                        // adelantos de sueldo
+                                        List<tbAdelantoSueldo> oAdelantosSueldo = db.tbAdelantoSueldo
+                                                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                           x.adsu_Activo == true && x.adsu_Deducido == false &&
+                                                                                           x.adsu_FechaAdelanto >= fechaInicio &&
+                                                                                           x.adsu_FechaAdelanto <= fechaFin)
+                                                                                    .ToList();
+
+                                        if (oAdelantosSueldo.Count > 0)
+                                        {
+                                            // sumarlas todas
+                                            foreach (var oAdelantosSueldoIterador in oAdelantosSueldo)
+                                            {
+                                                adelantosSueldo += Math.Round((decimal)oAdelantosSueldoIterador.adsu_Monto, 2);
+                                            }
+                                        }
+
+                                        // deducciones individuales
+                                        List<tbDeduccionesIndividuales> oDeduccionesIndiColaborador = db.tbDeduccionesIndividuales
+                                                                                                        .Where(DEX => DEX.emp_Id == empleadoActual.emp_Id &&
+                                                                                                               DEX.dei_Monto > 0 &&
+                                                                                                               DEX.dei_Pagado != true &&
+                                                                                                               DEX.dei_Activo == true)
+                                                                                                        .ToList();
+
+                                        if (oDeduccionesIndiColaborador.Count > 0)
+                                        {
+                                            // sumarlas todas
+                                            foreach (var oDeduccionesIndiColaboradorIterador in oDeduccionesIndiColaborador)
+                                            {
+                                                totalDeduccionesIndividuales += oDeduccionesIndiColaboradorIterador.dei_Monto <= oDeduccionesIndiColaboradorIterador.dei_MontoCuota ? oDeduccionesIndiColaboradorIterador.dei_MontoCuota : oDeduccionesIndiColaboradorIterador.dei_MontoCuota;
+                                                
+                                            }
+                                        }
+
+
+                                        // totales
+                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo + totalDeduccionesIndividuales;
+                                        netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
+
+                                        #endregion
+
+                                        #region cálculo de ISR
+
+                                        #region Declaracion de Variables
+                                        decimal SalarioMinimo = 9443.24M;
+                                        int AnioActual = DateTime.Now.Year;
+                                        decimal? TotalBonos = 0;
+                                        decimal? TotalHrsExtra = 0;
+                                        decimal? TotalComisiones = 0;
+                                        decimal? ExcesoDecimoTercer = 0;
+                                        decimal? ExcesoVacaciones = 0;
+                                        decimal? ExcesoDecimoCuarto = 0;
+                                        decimal Exceso = 0;
+                                        decimal SueldoAnual = 0;
+                                        decimal GastosMedicos = 0;
+                                        decimal TotalIngresosGravables = 0;
+                                        decimal TotalDeduccionesGravables = 0;
+                                        decimal RentaNetaGravable = 0;
+                                        var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
+                                        #endregion
+
+                                        #region Sueldo Promedio Anual
+                                        //Sueldo redondeado del Colaborador
+                                        DateTime AnioActualEnero = new DateTime(DateTime.Now.Year, 1, 1);
+
+                                        //Obtener los pagos mensuales totales
+                                        var mesesPago = (db.tbHistorialDePago
+                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == AnioActualEnero.Year)
+                                            .OrderBy(x => x.hipa_Mes)
+                                            .GroupBy(x => x.hipa_Mes)
+                                            .Select(x => x.Sum(y => (Decimal)y.hipa_TotalSueldoBruto))).ToList();
+
+                                        DateTime FechaIngresoEmpleado = db.tbEmpleados
+                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id)
+                                                                        .Select(x => x.emp_Fechaingreso).FirstOrDefault();
+                                        bool esMensual = true;
+
+                                        TimeSpan diferencia = AnioActualEnero - FechaIngresoEmpleado;
+
+                                        if (TimeSpan.Zero > diferencia)
+                                            esMensual = true;
+
+
+                                        //Saber que mes entro
+                                        int mes = FechaIngresoEmpleado.Month;
+                                        decimal SalarioPromedioAnualPagadoAlAnio = 0;
+                                        decimal salarioPromedioAnualPagadoAlMes = 0;
+                                        decimal TotalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
+                                        mesesPago,
+                                        esMensual,
+                                        ref SalarioPromedioAnualPagadoAlAnio,
+                                        ref salarioPromedioAnualPagadoAlMes);
+                                        #endregion
+
+                                        #region Excesos
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Exceso Décimo Tercer Mes
+                                        //Variable para llamar en duro los empleados con Décimo Tercer Mes
+                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dtm_FechaPago.Year == AnioActual).FirstOrDefault();
+
+                                        //Validar primero si es en el año actual el proceso de este calculo
+                                        if (DecimoTercer != null)
+                                        {
+                                            //Salario Mínimo Mensual por 10 Meses (Según SAR)
+                                            Exceso = SalarioMinimo * 10;
+
+                                            //Validar si el Décimo Tercer es mayor al Exceso
+                                            if (DecimoTercer.dtm_Monto > Exceso)
+                                            {
+                                                ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
+                                            }
+                                            else
+                                            {
+                                                ExcesoDecimoTercer = 0;
+                                            }
+                                        }
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+
+
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Exceso Décimo Cuarto Mes
+                                        //Variable para llamar en duro los empleados con Décimo Cuarto Mes
+                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dcm_FechaPago.Year == AnioActual).FirstOrDefault();
+
+                                        //Validar primero si es en el año actual el proceso de este calculo
+                                        if (DecimoCuarto != null)
+                                        {
+                                            //Salario Mínimo Mensual por 10 Meses (Según SAR)
+                                            Exceso = SalarioMinimo * 10;
+
+                                            //Validar si el Décimo Cuarto es mayor al Exceso
+                                            if (DecimoCuarto.dcm_Monto > Exceso)
+                                            {
+                                                ExcesoDecimoCuarto = DecimoCuarto.dcm_Monto - Exceso;
+                                            }
+                                            else
+                                            {
+                                                ExcesoDecimoCuarto = 0;
+                                            }
+                                        }
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+
+
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Exceso Vacaciones
+                                        //Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
+                                        var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
+
+                                        //Validar si los dias a Pagar es mayor a 30 dias 
+                                        if (objVacaciones > 30)
+                                        {
+                                            ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
+                                        }
+                                        else
+                                        {
+                                            ExcesoVacaciones = 0;
+                                        }
+
+                                        #endregion
+
+                                        #region Gastos Médicos
+                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
+                                        var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
+
+                                        //Variable para llamar en duro el monto de Gastos Médicos de 70,000.00
+                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
+
+                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
+                                        var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
+
+                                        //Validar si el Empleado tiene menos de 60 años para saber cuanto se le cobrará de Gastos Médicos
+                                        if (objEmpleados.tbPersonas.per_Edad < 60)
+                                        {
+                                            GastosMedicos = objAcumuladosISRMenor.aisr_Monto;
+                                        }
+                                        else
+                                        {
+                                            GastosMedicos = objAcumuladosISRMayor.aisr_Monto;
+                                        }
+
+                                        #endregion
+
+                                        TotalBonos = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Pagado == true && AnioActualEnero == x.cb_FechaPagado).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.cb_Monto)).FirstOrDefault();
+                                        TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras)).FirstOrDefault();
+                                        TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones)).FirstOrDefault();
+
+                                        if (TotalBonos == null)
+                                            TotalBonos = 0;
+
+                                        if (TotalHrsExtra == null)
+                                            TotalHrsExtra = 0;
+
+                                        if (TotalComisiones == null)
+                                            TotalComisiones = 0;
+
+                                        #region Total ISR Calcular
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Total Ingresos Gravables
+                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones;
+
+                                        //Total Deducciones Gravables
+                                        TotalDeduccionesGravables = GastosMedicos;
+
+                                        //Renta Neta Gravable
+                                        RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
+
+                                        #region ISR Dinámico en Proceso
+                                        //Tabla Progresiva ISR Dinámica
+
+                                        /*List<tbISR> objDeduccionISR = db.tbISR.Where(x => x.isr_Activo == true).ToList();
+
+                                        foreach(var oISR in objDeduccionISR)
+                                        {
+                                            if ()
+                                            {
+
+                                            }
+                                        }*/
+                                        #endregion
+
+                                        #region Tabla Progresiva para Deducir ISR
+                                        //Cálculo con la Tabla Progresiva ISR
+
+                                        //Variable para llamar cada uno de los Porcentajes y Techos del ISR
+                                        var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
+                                        var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
+                                        var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).FirstOrDefault();
+                                        var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).FirstOrDefault();
+
+                                        if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
+                                        {
+                                            totalISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
+                                                       (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
+                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                                       (objISRBajo.isr_Porcentaje / 100);
+                                        }
+                                        else if (RentaNetaGravable > objISRMedio.isr_RangoInicial)
+                                        {
+                                            totalISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
+                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                                       (objISRBajo.isr_Porcentaje / 100);
+                                        }
+                                        else if (RentaNetaGravable > objISRBajo.isr_RangoInicial)
+                                        {
+                                            totalISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
+                                                       (objISRBajo.isr_Porcentaje / 100);
+                                        }
+                                        else if (RentaNetaGravable <= objISRExcento.isr_RangoFinal)
+                                        {
+                                            totalISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
+                                                       (objISRExcento.isr_Porcentaje / 100);
+                                        }
+
+                                        // Pendiente testeo
+                                        //netoAPagarColaborador = netoAPagarColaborador - totalISR;
+
+                                        #endregion
+
+                                        #endregion
+
+                                        #endregion
+
+                                        #region crear registro de la planilla del colaborador para el reporte
+                                        oPlanillaEmpleado.CodColaborador = InformacionDelEmpleadoActual.emp_Id.ToString();
+                                        oPlanillaEmpleado.NombresColaborador = $"{empleadoActual.tbPersonas.per_Nombres} {empleadoActual.tbPersonas.per_Apellidos}";
+                                        oPlanillaEmpleado.SalarioBase = SalarioBase;
+                                        oPlanillaEmpleado.horasTrabajadas = horasTrabajadas;
+                                        oPlanillaEmpleado.SalarioHora = salarioHora;
+                                        oPlanillaEmpleado.totalSalario = totalSalario;
+                                        oPlanillaEmpleado.tipoPlanilla = empleadoActual.tbCatalogoDePlanillas.cpla_DescripcionPlanilla;
+                                        oPlanillaEmpleado.procentajeComision = porcentajeComision;
+                                        oPlanillaEmpleado.totalVentas = totalVentas;
+                                        oPlanillaEmpleado.totalComisiones = totalComisiones;
+                                        oPlanillaEmpleado.horasExtras = horasExtrasTrabajadas;
+                                        oPlanillaEmpleado.totalHorasPermiso = totalHorasPermiso;
+                                        oPlanillaEmpleado.TotalIngresosHorasExtras = totalHorasExtras;
+                                        oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
+                                        oPlanillaEmpleado.totalIngresosIndivuales = totalIngresosIndivuales;
+                                        oPlanillaEmpleado.totalVacaciones = totalVacaciones;
+                                        oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
+                                        oPlanillaEmpleado.totalISR = totalISR;
+                                        oPlanillaEmpleado.totalDeduccionesColaborador = colaboradorDeducciones;
+                                        oPlanillaEmpleado.totalAFP = totalAFP;
+                                        oPlanillaEmpleado.totalInstitucionesFinancieras = totalInstitucionesFinancieras;
+                                        oPlanillaEmpleado.otrasDeducciones = Math.Round((decimal)totalOtrasDeducciones, 2);
+                                        oPlanillaEmpleado.adelantosSueldo = Math.Round((decimal)adelantosSueldo, 2);
+                                        oPlanillaEmpleado.totalDeduccionesIndividuales = totalDeduccionesIndividuales;
+                                        oPlanillaEmpleado.totalDeducciones = Math.Round((decimal)totalDeduccionesEmpleado, 2);
+                                        oPlanillaEmpleado.totalAPagar = Math.Round((decimal)netoAPagarColaborador, 2);
+                                        reporte.Add(oPlanillaEmpleado);
+                                        oPlanillaEmpleado = null;
+                                        #endregion
+
+                                    }
+                                    // catch por si hubo un error al generar la planilla de un empleado
+                                    catch (Exception ex)
+                                    {
+                                        // mensaje del error en el registro del colaborador
+                                        errores++;
+                                    }
+                                }
+                            }
+
+                        }
+                        // catch si se produjo un error al procesar una sola planilla
+                        catch (Exception ex)
+                        {
+                            errores++;
+                        }
+                    }
+                }
+
+                // enviar resultado al cliente
+                response.Response = $"El proceso de generación de planilla se realizó, con {errores} errores";
+                response.Encabezado = "Exito";
+                response.Tipo = errores == 0 ? "success" : "warning";
+
+            }
+            // catch se produjo un error fatal en el proceso generar planilla
+            catch (Exception ex)
+            {
+                response.Response = "El proceso de generación de planillas falló, contacte al adminstrador.";
+                response.Encabezado = "Error";
+                response.Tipo = "error";
+            }
+            #endregion 
+
+            // retornar resultado del proceso
+            return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
+        }
+
 
         #region SalarioPromedioAnualISR
         private static decimal SalarioPromedioAnualISR(decimal? netoAPagarColaborador, List<decimal> mesesPago, bool esMensual, ref decimal SalarioPromedioAnualPagadoAlAnio, ref decimal salarioPromedioAnualPagadoAlMes)
