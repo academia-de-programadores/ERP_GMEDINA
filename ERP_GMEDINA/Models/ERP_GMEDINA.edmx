@@ -505,14 +505,14 @@
             <PropertyRef Name="pdcd_IdCesantiaDetalle" />
           </Key>
           <Property Name="pdcd_IdCesantiaDetalle" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" />
-          <Property Name="pdcd_TotalCesantiaColaborador" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="pdcd_CodigoPlanillaCesantias" Type="nvarchar" MaxLength="50" />
-          <Property Name="pdce_IdCesantiaEncabezado" Type="int" />
-          <Property Name="pdcd_DiasPagados" Type="int" />
-          <Property Name="pdcd_ConSueldoBruto" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="pdcd_UsuarioCrea" Type="int" />
-          <Property Name="pdcd_FechaCrea" Type="datetime" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="pdcd_TotalCesantiaColaborador" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="pdcd_CodigoPlanillaCesantias" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pdce_IdCesantiaEncabezado" Type="int" Nullable="false" />
+          <Property Name="pdcd_DiasPagados" Type="int" Nullable="false" />
+          <Property Name="pdcd_ConSueldoBruto" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="pdcd_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="pdcd_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="pdcd_UsuarioModifica" Type="int" />
           <Property Name="pdcd_FechaModifica" Type="datetime" />
         </EntityType>
@@ -521,10 +521,10 @@
             <PropertyRef Name="pdce_IdCesantiaEncabezado" />
           </Key>
           <Property Name="pdce_IdCesantiaEncabezado" Type="int" Nullable="false" />
-          <Property Name="pdce_CodigoPlanillaCesantias" Type="nvarchar" MaxLength="50" />
-          <Property Name="pdce_TotalCesantias" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="pdce_UsuarioCrea" Type="int" />
-          <Property Name="pdce_FechaCrea" Type="datetime" />
+          <Property Name="pdce_CodigoPlanillaCesantias" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pdce_TotalCesantias" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="pdce_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="pdce_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="pdce_UsuarioModifica" Type="int" />
           <Property Name="pdce_FechaModifica" Type="datetime" />
         </EntityType>
@@ -3862,7 +3862,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbPagoDeCesantiaDetalle" Type="Self.tbPagoDeCesantiaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbUsuario">
@@ -3886,7 +3886,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbPagoDeCesantiaEncabezado" Type="Self.tbPagoDeCesantiaEncabezado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbUsuario">
@@ -6274,7 +6274,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado">
-          <End Role="tbPagoDeCesantiaEncabezado" Type="Self.tbPagoDeCesantiaEncabezado" Multiplicity="0..1" />
+          <End Role="tbPagoDeCesantiaEncabezado" Type="Self.tbPagoDeCesantiaEncabezado" Multiplicity="1" />
           <End Role="tbPagoDeCesantiaDetalle" Type="Self.tbPagoDeCesantiaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbPagoDeCesantiaEncabezado">
@@ -12112,10 +12112,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbTechosComisiones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTechosComisiones" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoComisiones_cc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleadoComisiones" />
           <NavigationProperty Name="tbEmpleadoComisiones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoComisiones_cc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpleadoComisiones" />
-          <NavigationProperty Name="tbPagoDeCesantiaDetalle" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaDetalle" />
-          <NavigationProperty Name="tbPagoDeCesantiaDetalle1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaDetalle" />
-          <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
-          <NavigationProperty Name="tbPagoDeCesantiaEncabezado1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
           <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
           <NavigationProperty Name="tbDeduccionesIndividuales1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
           <NavigationProperty Name="tbTechoImpuestoVecinal" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTechoImpuestoVecinal" />
@@ -12124,6 +12120,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbDepartamento1" Relationship="ERP_GMEDINAModel.FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDepartamento" />
           <NavigationProperty Name="tbMunicipio" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_mun_UsuarioModifica" FromRole="tbUsuario" ToRole="tbMunicipio" />
           <NavigationProperty Name="tbMunicipio1" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea" FromRole="tbUsuario" ToRole="tbMunicipio" />
+          <NavigationProperty Name="tbPagoDeCesantiaDetalle" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaDetalle" />
+          <NavigationProperty Name="tbPagoDeCesantiaDetalle1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaDetalle" />
+          <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
+          <NavigationProperty Name="tbPagoDeCesantiaEncabezado1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
           </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -21508,29 +21508,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="tbPagoDeCesantiaDetalle" EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" />
-          <EntitySet Name="tbPagoDeCesantiaEncabezado" EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" />
           <EntitySet Name="V_tbTechosComisiones" EntityType="ERP_GMEDINAModel.V_tbTechosComisiones" />
-          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" Association="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado">
-            <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
-            <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
-          </AssociationSet>
           <EntitySet Name="tbDeduccionesIndividuales" EntityType="ERP_GMEDINAModel.tbDeduccionesIndividuales" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -21622,6 +21600,28 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbAcumuladosISR" EntitySet="tbAcumuladosISR" />
+          </AssociationSet>
+          <EntitySet Name="tbPagoDeCesantiaDetalle" EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" />
+          <EntitySet Name="tbPagoDeCesantiaEncabezado" EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" />
+          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" Association="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado">
+            <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
+            <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -23084,40 +23084,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
         <ComplexType Name="UDP_Plani_EmpleadoComisiones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <EntityType Name="tbPagoDeCesantiaDetalle">
-          <Key>
-            <PropertyRef Name="pdcd_IdCesantiaDetalle" />
-          </Key>
-          <Property Name="pdcd_IdCesantiaDetalle" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" />
-          <Property Name="pdcd_TotalCesantiaColaborador" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="pdcd_CodigoPlanillaCesantias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pdce_IdCesantiaEncabezado" Type="Int32" />
-          <Property Name="pdcd_UsuarioCrea" Type="Int32" />
-          <Property Name="pdcd_FechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="pdcd_UsuarioModifica" Type="Int32" />
-          <Property Name="pdcd_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbPagoDeCesantiaEncabezado" />
-          <Property Name="pdcd_DiasPagados" Type="Int32" />
-          <Property Name="pdcd_ConSueldoBruto" Type="Decimal" Precision="16" Scale="2" />
-        </EntityType>
-        <EntityType Name="tbPagoDeCesantiaEncabezado">
-          <Key>
-            <PropertyRef Name="pdce_IdCesantiaEncabezado" />
-          </Key>
-          <Property Name="pdce_IdCesantiaEncabezado" Type="Int32" Nullable="false" />
-          <Property Name="pdce_CodigoPlanillaCesantias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pdce_TotalCesantias" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="pdce_UsuarioCrea" Type="Int32" />
-          <Property Name="pdce_FechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="pdce_UsuarioModifica" Type="Int32" />
-          <Property Name="pdce_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" FromRole="tbPagoDeCesantiaEncabezado" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbPagoDeCesantiaEncabezado" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbPagoDeCesantiaDetalle" Relationship="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" FromRole="tbPagoDeCesantiaEncabezado" ToRole="tbPagoDeCesantiaDetalle" />
-        </EntityType>
         <EntityType Name="V_tbTechosComisiones">
           <Key>
             <PropertyRef Name="tc_Id" />
@@ -23140,66 +23106,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="NombresModifica" Type="String" MaxLength="301" FixedLength="false" Unicode="false" />
           <Property Name="tc_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Role="tbPagoDeCesantiaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPagoDeCesantiaDetalle">
-              <PropertyRef Name="pdcd_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Role="tbPagoDeCesantiaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPagoDeCesantiaDetalle">
-              <PropertyRef Name="pdcd_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Role="tbPagoDeCesantiaEncabezado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPagoDeCesantiaEncabezado">
-              <PropertyRef Name="pdce_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Role="tbPagoDeCesantiaEncabezado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPagoDeCesantiaEncabezado">
-              <PropertyRef Name="pdce_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado">
-          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Role="tbPagoDeCesantiaEncabezado" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Role="tbPagoDeCesantiaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPagoDeCesantiaEncabezado">
-              <PropertyRef Name="pdce_IdCesantiaEncabezado" />
-            </Principal>
-            <Dependent Role="tbPagoDeCesantiaDetalle">
-              <PropertyRef Name="pdce_IdCesantiaEncabezado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tbDeduccionesIndividuales">
           <Key>
             <PropertyRef Name="dei_IdDeduccionesIndividuales" />
@@ -23542,6 +23448,100 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbAcumuladosISR">
               <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbPagoDeCesantiaDetalle">
+          <Key>
+            <PropertyRef Name="pdcd_IdCesantiaDetalle" />
+          </Key>
+          <Property Name="pdcd_IdCesantiaDetalle" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="pdcd_TotalCesantiaColaborador" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="pdcd_CodigoPlanillaCesantias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pdce_IdCesantiaEncabezado" Type="Int32" Nullable="false" />
+          <Property Name="pdcd_DiasPagados" Type="Int32" Nullable="false" />
+          <Property Name="pdcd_ConSueldoBruto" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="pdcd_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="pdcd_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pdcd_UsuarioModifica" Type="Int32" />
+          <Property Name="pdcd_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" FromRole="tbPagoDeCesantiaDetalle" ToRole="tbPagoDeCesantiaEncabezado" />
+        </EntityType>
+        <EntityType Name="tbPagoDeCesantiaEncabezado">
+          <Key>
+            <PropertyRef Name="pdce_IdCesantiaEncabezado" />
+          </Key>
+          <Property Name="pdce_IdCesantiaEncabezado" Type="Int32" Nullable="false" />
+          <Property Name="pdce_CodigoPlanillaCesantias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pdce_TotalCesantias" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="pdce_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="pdce_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pdce_UsuarioModifica" Type="Int32" />
+          <Property Name="pdce_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" FromRole="tbPagoDeCesantiaEncabezado" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbPagoDeCesantiaEncabezado" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPagoDeCesantiaDetalle" Relationship="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" FromRole="tbPagoDeCesantiaEncabezado" ToRole="tbPagoDeCesantiaDetalle" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Role="tbPagoDeCesantiaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPagoDeCesantiaDetalle">
+              <PropertyRef Name="pdcd_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Role="tbPagoDeCesantiaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPagoDeCesantiaDetalle">
+              <PropertyRef Name="pdcd_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Role="tbPagoDeCesantiaEncabezado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPagoDeCesantiaEncabezado">
+              <PropertyRef Name="pdce_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Role="tbPagoDeCesantiaEncabezado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPagoDeCesantiaEncabezado">
+              <PropertyRef Name="pdce_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado">
+          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Role="tbPagoDeCesantiaEncabezado" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Role="tbPagoDeCesantiaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPagoDeCesantiaEncabezado">
+              <PropertyRef Name="pdce_IdCesantiaEncabezado" />
+            </Principal>
+            <Dependent Role="tbPagoDeCesantiaDetalle">
+              <PropertyRef Name="pdce_IdCesantiaEncabezado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -28479,36 +28479,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="tbPagoDeCesantiaDetalle">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle">
-              <MappingFragment StoreEntitySet="tbPagoDeCesantiaDetalle">
-                <ScalarProperty Name="pdcd_ConSueldoBruto" ColumnName="pdcd_ConSueldoBruto" />
-                <ScalarProperty Name="pdcd_DiasPagados" ColumnName="pdcd_DiasPagados" />
-                <ScalarProperty Name="pdcd_FechaModifica" ColumnName="pdcd_FechaModifica" />
-                <ScalarProperty Name="pdcd_UsuarioModifica" ColumnName="pdcd_UsuarioModifica" />
-                <ScalarProperty Name="pdcd_FechaCrea" ColumnName="pdcd_FechaCrea" />
-                <ScalarProperty Name="pdcd_UsuarioCrea" ColumnName="pdcd_UsuarioCrea" />
-                <ScalarProperty Name="pdce_IdCesantiaEncabezado" ColumnName="pdce_IdCesantiaEncabezado" />
-                <ScalarProperty Name="pdcd_CodigoPlanillaCesantias" ColumnName="pdcd_CodigoPlanillaCesantias" />
-                <ScalarProperty Name="pdcd_TotalCesantiaColaborador" ColumnName="pdcd_TotalCesantiaColaborador" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="pdcd_IdCesantiaDetalle" ColumnName="pdcd_IdCesantiaDetalle" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbPagoDeCesantiaEncabezado">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado">
-              <MappingFragment StoreEntitySet="tbPagoDeCesantiaEncabezado">
-                <ScalarProperty Name="pdce_FechaModifica" ColumnName="pdce_FechaModifica" />
-                <ScalarProperty Name="pdce_UsuarioModifica" ColumnName="pdce_UsuarioModifica" />
-                <ScalarProperty Name="pdce_FechaCrea" ColumnName="pdce_FechaCrea" />
-                <ScalarProperty Name="pdce_UsuarioCrea" ColumnName="pdce_UsuarioCrea" />
-                <ScalarProperty Name="pdce_TotalCesantias" ColumnName="pdce_TotalCesantias" />
-                <ScalarProperty Name="pdce_CodigoPlanillaCesantias" ColumnName="pdce_CodigoPlanillaCesantias" />
-                <ScalarProperty Name="pdce_IdCesantiaEncabezado" ColumnName="pdce_IdCesantiaEncabezado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_tbTechosComisiones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbTechosComisiones">
               <MappingFragment StoreEntitySet="V_tbTechosComisiones">
@@ -28699,6 +28669,36 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
                 <ScalarProperty Name="NoIdentidad" ColumnName="NoIdentidad" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPagoDeCesantiaDetalle">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle">
+              <MappingFragment StoreEntitySet="tbPagoDeCesantiaDetalle">
+                <ScalarProperty Name="pdcd_FechaModifica" ColumnName="pdcd_FechaModifica" />
+                <ScalarProperty Name="pdcd_UsuarioModifica" ColumnName="pdcd_UsuarioModifica" />
+                <ScalarProperty Name="pdcd_FechaCrea" ColumnName="pdcd_FechaCrea" />
+                <ScalarProperty Name="pdcd_UsuarioCrea" ColumnName="pdcd_UsuarioCrea" />
+                <ScalarProperty Name="pdcd_ConSueldoBruto" ColumnName="pdcd_ConSueldoBruto" />
+                <ScalarProperty Name="pdcd_DiasPagados" ColumnName="pdcd_DiasPagados" />
+                <ScalarProperty Name="pdce_IdCesantiaEncabezado" ColumnName="pdce_IdCesantiaEncabezado" />
+                <ScalarProperty Name="pdcd_CodigoPlanillaCesantias" ColumnName="pdcd_CodigoPlanillaCesantias" />
+                <ScalarProperty Name="pdcd_TotalCesantiaColaborador" ColumnName="pdcd_TotalCesantiaColaborador" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="pdcd_IdCesantiaDetalle" ColumnName="pdcd_IdCesantiaDetalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPagoDeCesantiaEncabezado">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado">
+              <MappingFragment StoreEntitySet="tbPagoDeCesantiaEncabezado">
+                <ScalarProperty Name="pdce_FechaModifica" ColumnName="pdce_FechaModifica" />
+                <ScalarProperty Name="pdce_UsuarioModifica" ColumnName="pdce_UsuarioModifica" />
+                <ScalarProperty Name="pdce_FechaCrea" ColumnName="pdce_FechaCrea" />
+                <ScalarProperty Name="pdce_UsuarioCrea" ColumnName="pdce_UsuarioCrea" />
+                <ScalarProperty Name="pdce_TotalCesantias" ColumnName="pdce_TotalCesantias" />
+                <ScalarProperty Name="pdce_CodigoPlanillaCesantias" ColumnName="pdce_CodigoPlanillaCesantias" />
+                <ScalarProperty Name="pdce_IdCesantiaEncabezado" ColumnName="pdce_IdCesantiaEncabezado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
