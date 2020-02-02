@@ -400,6 +400,11 @@ namespace ERP_GMEDINA.Helpers
                             Historico_DiasVacacionesTomadas += it.hvac_CantDias;
                     }
 
+                    ////OBTENER LA BASE EN DIAS
+                    //int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
+                    //                                                            (iter == 2) ? 12 :
+                    //                                                            (iter == 3) ? 15 :
+                    //                                                            (iter >= 4) ? 20 : 0;
                     //OBTENER LA BASE EN DIAS
                     int BaseEnDias = (iter == 1) ? 10 :
                                      (iter == 2) ? 12 :
