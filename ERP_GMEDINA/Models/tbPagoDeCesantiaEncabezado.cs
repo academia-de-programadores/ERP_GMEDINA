@@ -14,9 +14,9 @@ namespace ERP_GMEDINA.Models
     
         public int pdce_IdCesantiaEncabezado { get; set; }
         public string pdce_CodigoPlanillaCesantias { get; set; }
-        public Nullable<decimal> pdce_TotalCesantias { get; set; }
-        public Nullable<int> pdce_UsuarioCrea { get; set; }
-        public Nullable<System.DateTime> pdce_FechaCrea { get; set; }
+        public decimal pdce_TotalCesantias { get; set; }
+        public int pdce_UsuarioCrea { get; set; }
+        public System.DateTime pdce_FechaCrea { get; set; }
         public Nullable<int> pdce_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> pdce_FechaModifica { get; set; }
     

@@ -81,10 +81,9 @@ namespace ERP_GMEDINA.Helpers
             {
                 try
                 {
-                    DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
                     //METODO MEDIANTE HISTORIAL DE PAGO
-                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id
-                                                                               && p.sue_FechaCrea >= FechaHistorialPago)
+                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.OrderByDescending(x => x.sue_FechaCrea).ThenByDescending(x => x.sue_Cantidad)
+                                                                               .Where(p => p.emp_Id == Emp_Id)
                                                                                .Select(x => (decimal)x.sue_Cantidad).Take(6);
                     //CAPTURA DEL SALARIO PROMEDIO Y CONVERSIÓN A STRING PARA EL RETORNO 
                     SalarioPromedio = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Average() : 0;
@@ -103,27 +102,27 @@ namespace ERP_GMEDINA.Helpers
         }
         #endregion
 
-        #region CÁLCULO DE SALARIO MAS ALTO
+        #region CÁLCULO DE SALARIO BRUTO MAS ALTO
         //CALCULO DE SALARIO ORDINARIO PROMEDIO MENSUAL
-        public static decimal Calculo_SalarioOrdinarioMensualMasAlto(int Emp_Id)
+        public static decimal Calculo_SalarioBrutoMasAlto(int Emp_Id)
         {
             //Captura de SalarioPromedio
-            decimal SalarioPromedio = 0;
+            decimal SalarioBrutoMasAlto = 0;
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
                     //METODO MEDIANTE HISTORIAL DE PAGO
-                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id
-                                                                               && p.sue_FechaCrea >= FechaHistorialPago)
-                                                                               .Select(x => (decimal)x.sue_Cantidad).Take(6);
+                    IQueryable<decimal> SalariosUlt6Meses = db.tbHistorialDePago.OrderByDescending(x => x.hipa_FechaPago).Where(p => p.emp_Id == Emp_Id)
+                                                                               .Select(x => (decimal)x.hipa_TotalSueldoBruto).Take(6);
                     //CAPTURA DEL SALARIO PROMEDIO Y CONVERSIÓN A STRING PARA EL RETORNO 
-                    SalarioPromedio = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Average() : 0;
-                    if (SalarioPromedio == 0)
+                    SalarioBrutoMasAlto = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Max() : 0;
+                    //VALIDAR EN CASO QUE EL EMPLEADO NO ESTE EN EL HISTORIAL DE PAGO
+                    if (SalarioBrutoMasAlto == 0)
                     {
-                        SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id).Select(x => (decimal)x.sue_Cantidad).Take(1);
-                        SalarioPromedio = SalariosUlt6Meses.Average();
+                        //CAPTURAR EL SALARIO DEL REINGRESO EN CASO QUE SEA DE REINGRESO EN LA EMPRESA
+                        SalariosUlt6Meses = db.tbSueldos.OrderByDescending(z => z.sue_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => (decimal)x.sue_Cantidad).Take(1);
+                        SalarioBrutoMasAlto = SalariosUlt6Meses.FirstOrDefault();
                     }
                 }
                 catch (Exception Ex)
@@ -131,7 +130,7 @@ namespace ERP_GMEDINA.Helpers
                     Ex.Message.ToString();
                 }
             }
-            return Math.Round(SalarioPromedio, 2);
+            return Math.Round(SalarioBrutoMasAlto, 2);
         }
         #endregion
 
@@ -159,7 +158,7 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO DE PREAVISO
         //CALCULO DE PAGO POR CONCEPTO DE PREAVISO
-        public static decimal Calculo_PagoDePreaviso(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_PagoDePreaviso(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE PREAVISO
             decimal PagoDePreaviso = 0;
@@ -202,7 +201,7 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO DE CESANTÍA
         //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
-        public static decimal Calculo_PagoDeCesantia(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_PagoDeCesantia(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE CESANTIA
             decimal PagoDeCesantia = 0;
@@ -382,7 +381,7 @@ namespace ERP_GMEDINA.Helpers
                     int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
                                                                    (iter == 2) ? 12 :
                                                                    (iter == 3) ? 15 :
-                                                                   (iter >= 4) ? 20 : 0; 
+                                                                   (iter >= 4) ? 20 : 0;
                     //VALIDAR VACACIONES PROPORCIONALES
                     decimal PagoProporcionalDeVacaciones = (
                                                                  (Antiguedad > 360) ?
@@ -407,6 +406,64 @@ namespace ERP_GMEDINA.Helpers
             }
             return (MontoVacacionesPendientes < 0) ? 0 : Math.Round(MontoVacacionesPendientes, 2);
         }
+        #endregion
+
+
+        //
+        //CALCULO DE CESANTIA ANUAL
+        //
+
+        #region CÁLCULO DE ANTIGUEDAD EN DÍAS
+
+        //GET DÍAS DE CESANTIA PROPORCIONAL
+        public static double Dias360AcumuladosCesantia(int Emp_Id, DateTime FechaActual)
+        {
+            DateTime FechaInicial = DateTime.MinValue;
+            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    //SETEAR LA FECHA CON LA DE REINGRESO
+                    FechaInicial = (DateTime)db.tbEmpleados.OrderByDescending(c => c.emp_FechaCrea).Where(p => p.emp_Id == Emp_Id && p.emp_Reingreso == true).Select(x => x.emp_Fechaingreso).Take(1).FirstOrDefault();
+                    //VALIDAR EN CASO QUE LA FECHA REINGRESO SEA NULL
+                    if (FechaInicial.Year == 1)
+                    {
+                        //SETEAR A FECHA CON EL ULTIMO PAGO DE CESANTIA
+                        FechaInicial = (DateTime)db.tbPagoDeCesantiaDetalle.OrderByDescending(c => c.pdcd_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => x.pdcd_FechaCrea).Take(1).FirstOrDefault();
+                    }
+                    //VALIDAR EN CASO QUE LA FECHA DE HISTORIAL DE PAGO DE CESANTÍA SEA NULL
+                    if (FechaInicial.Year == 1)
+                    {
+                        //SETEAR A FECHA CON LA FECHA DE INGRESO
+                        FechaInicial = (DateTime)db.tbEmpleados.Where(p => p.emp_Id == Emp_Id).Select(x => x.emp_Fechaingreso).FirstOrDefault();
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Ex.Message.ToString();
+                }
+            }
+            //VALIDAR QUE LA FECHA ACTUAL SEA MENOR QUE LA FECHA INICIAL
+            if (FechaInicial > FechaActual)
+                return 0;
+
+            //DESCOMPOSICIÓN DE FECHAS PARA FACTORIZAR EL VALOR DE RETORNO
+            int diaInicio = FechaInicial.Day;
+            int mesInicio = FechaInicial.Month;
+            int anioInicio = FechaInicial.Year;
+            int diaFin = FechaActual.Day;
+            int mesFin = FechaActual.Month;
+            int anioFin = FechaActual.Year;
+            //VALIDAR FEBRERO EN FORMATO DE DIAS 30
+            if (diaInicio == 31 || EsElUltimoDiaDeFebrero(FechaInicial))
+                diaInicio = 30;
+            //VALIDAR MESES EN FORMATO DE AÑO 360
+            if (diaInicio == 30 && diaFin == 31)
+                diaFin = 30;
+            //VALOR DE RETORNO
+            return ((anioFin - anioInicio) * 360) + ((mesFin - mesInicio) * 30) + (diaFin - diaInicio);
+        }
+
         #endregion
 
     }

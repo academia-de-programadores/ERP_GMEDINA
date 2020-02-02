@@ -106,8 +106,6 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialContrataciones1 = new HashSet<tbHistorialContrataciones>();
             this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
             this.tbHistorialHorasTrabajadas1 = new HashSet<tbHistorialHorasTrabajadas>();
-            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
-            this.tbHistorialIncapacidades1 = new HashSet<tbHistorialIncapacidades>();
             this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
             this.tbHistorialPermisos1 = new HashSet<tbHistorialPermisos>();
             this.tbHistorialRefrendamientos = new HashSet<tbHistorialRefrendamientos>();
@@ -180,10 +178,6 @@ namespace ERP_GMEDINA.Models
             this.tbTechosComisiones1 = new HashSet<tbTechosComisiones>();
             this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
             this.tbEmpleadoComisiones1 = new HashSet<tbEmpleadoComisiones>();
-            this.tbPagoDeCesantiaDetalle = new HashSet<tbPagoDeCesantiaDetalle>();
-            this.tbPagoDeCesantiaDetalle1 = new HashSet<tbPagoDeCesantiaDetalle>();
-            this.tbPagoDeCesantiaEncabezado = new HashSet<tbPagoDeCesantiaEncabezado>();
-            this.tbPagoDeCesantiaEncabezado1 = new HashSet<tbPagoDeCesantiaEncabezado>();
             this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
             this.tbDeduccionesIndividuales1 = new HashSet<tbDeduccionesIndividuales>();
             this.tbTechoImpuestoVecinal = new HashSet<tbTechoImpuestoVecinal>();
@@ -192,6 +186,10 @@ namespace ERP_GMEDINA.Models
             this.tbDepartamento1 = new HashSet<tbDepartamento>();
             this.tbMunicipio = new HashSet<tbMunicipio>();
             this.tbMunicipio1 = new HashSet<tbMunicipio>();
+            this.tbPagoDeCesantiaDetalle = new HashSet<tbPagoDeCesantiaDetalle>();
+            this.tbPagoDeCesantiaDetalle1 = new HashSet<tbPagoDeCesantiaDetalle>();
+            this.tbPagoDeCesantiaEncabezado = new HashSet<tbPagoDeCesantiaEncabezado>();
+            this.tbPagoDeCesantiaEncabezado1 = new HashSet<tbPagoDeCesantiaEncabezado>();
         }
     
         public int usu_Id { get; set; }
@@ -400,10 +398,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos1 { get; set; }
@@ -548,14 +542,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales1 { get; set; }
@@ -571,5 +557,13 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbMunicipio> tbMunicipio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbMunicipio> tbMunicipio1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado1 { get; set; }
     }
 }

@@ -112,7 +112,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                                       tbDeduccionesExtraordinarias.cde_IdDeducciones,
                                                                                                       tbDeduccionesExtraordinarias.dex_Cuota,
                                                                                                       tbDeduccionesExtraordinarias.dex_UsuarioCrea,
-                                                                                                      tbDeduccionesExtraordinarias.dex_FechaCrea);
+                                                                                                      tbDeduccionesExtraordinarias.dex_FechaCrea, true);
                     //El tipo complejo del Procedimiento Almacenado
                     foreach (UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result Resultado in listDeduccionesExtraordinarias)
                     {
@@ -197,7 +197,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                                   tbDeduccionesExtraordinarias.cde_IdDeducciones,
                                                                                                   tbDeduccionesExtraordinarias.dex_Cuota,
                                                                                                   tbDeduccionesExtraordinarias.dex_UsuarioModifica,
-                                                                                                  tbDeduccionesExtraordinarias.dex_FechaModifica);
+                                                                                                  tbDeduccionesExtraordinarias.dex_FechaModifica, true);
 
                 //El tipo complejo del Procedimiento Almacenado
                 foreach (UDP_Plani_tbDeduccionesExtraordinarias_Update_Result Resultado in listDeduccionesExtraordinarias)

@@ -21,7 +21,6 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialAudienciaDescargo = new HashSet<tbHistorialAudienciaDescargo>();
             this.tbHistorialCargos = new HashSet<tbHistorialCargos>();
             this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
-            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
             this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
             this.tbHistorialRefrendamientos = new HashSet<tbHistorialRefrendamientos>();
             this.tbHistorialSalidas = new HashSet<tbHistorialSalidas>();
@@ -31,6 +30,7 @@ namespace ERP_GMEDINA.Models
             this.tbDirectoriosEmpleados = new HashSet<tbDirectoriosEmpleados>();
             this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
             this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
+            this.tbAcumuladosISR = new HashSet<tbAcumuladosISR>();
         }
     
         public int emp_Id { get; set; }
@@ -86,8 +86,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
@@ -107,5 +105,7 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAcumuladosISR> tbAcumuladosISR { get; set; }
     }
 }

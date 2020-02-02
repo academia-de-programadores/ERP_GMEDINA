@@ -201,6 +201,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TechoImpuestoVecinalController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\AFPController.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
+    <Compile Include="Controllers\PagoDeCesantiaDetalleController.cs" />
     <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
@@ -581,9 +583,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialHorasTrabajadas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbHistorialIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialPermisos.cs">
@@ -1770,9 +1769,6 @@
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_Sueldos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_tbAdelantoSueldo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1795,6 +1791,12 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbHistorialSalidas_completa.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbPagoDeCesantiaDetalle.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbPagoDeCesantiaDetalle_Preview.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbPersonas.cs">
@@ -2967,6 +2969,9 @@
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
     <Content Include="Views\Menu\MenuPrincipal.cshtml" />
     <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
+    <Content Include="Views\PagoDeCesantiaDetalle\Index.cshtml" />
+    <Content Include="Views\PagoDeCesantiaDetalle\PagarCesantia.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
