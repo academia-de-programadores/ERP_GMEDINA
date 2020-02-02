@@ -158,7 +158,7 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO DE PREAVISO
         //CALCULO DE PAGO POR CONCEPTO DE PREAVISO
-        public static decimal Calculo_PagoDePreaviso(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_PagoDePreaviso(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE PREAVISO
             decimal PagoDePreaviso = 0;
@@ -201,7 +201,7 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO DE CESANTÍA
         //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
-        public static decimal Calculo_PagoDeCesantia(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_PagoDeCesantia(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE CESANTIA
             decimal PagoDeCesantia = 0;
