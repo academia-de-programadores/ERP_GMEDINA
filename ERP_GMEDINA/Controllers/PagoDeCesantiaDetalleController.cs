@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Helpers;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -67,7 +69,108 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult ProcesarCesantia(PagoCesantiaViewModel[] listadoCesantia)
         {
-            return Json("bien", JsonRequestBehavior.AllowGet);
+            string response = "bien";
+            DateTime FechaActual = DateTime.Now;
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
+            {
+                //Comenzar la transaccion
+                connection.Open();
+                SqlTransaction transaccion;
+                transaccion = connection.BeginTransaction();
+
+                try
+                {
+                    //Query del encabezado
+                    String queryEncabezado = @"
+                                    INSERT plani.tbPagoDeCesantiaDetalle
+                                    (
+                                        pdcd_IdCesantiaDetalle,
+                                        emp_Id,
+                                        pdcd_TotalCesantiaColaborador,
+                                        pdcd_CodigoPlanillaCesantias,
+                                        pdce_IdCesantiaEncabezado,
+                                        pdcd_DiasPagados,
+                                        pdcd_ConSueldoBruto,
+                                        pdcd_UsuarioCrea,
+                                        pdcd_FechaCrea
+                                    )
+                                    VALUES
+                                    (
+                                        (SELECT ISNULL(MAX(pdcd_IdCesantiaDetalle) + 1, 1) FROM [Plani].[tbPagoDeCesantiaDetalle]),
+                                        @empId,
+                                        @totalCesantia,
+                                        @codigoPlanillaCesantia,
+                                        @idEncabezado,
+                                        @diasPagados,
+                                        @sueldoBruto,
+                                        @usuarioCrea,
+                                        @fechaCrea,
+                                    )   
+                             ";
+                    
+                    //Query del detalle
+                    String queryDetalle = @"
+                                    INSERT plani.tbPagoDeCesantiaDetalle
+                                    (
+                                        pdcd_IdCesantiaDetalle,
+                                        emp_Id,
+                                        pdcd_TotalCesantiaColaborador,
+                                        pdcd_CodigoPlanillaCesantias,
+                                        pdce_IdCesantiaEncabezado,
+                                        pdcd_DiasPagados,
+                                        pdcd_ConSueldoBruto,
+                                        pdcd_UsuarioCrea,
+                                        pdcd_FechaCrea
+                                    )
+                                    VALUES
+                                    (
+                                        (SELECT ISNULL(MAX(pdcd_IdCesantiaDetalle) + 1, 1) FROM [Plani].[tbPagoDeCesantiaDetalle]),
+                                        @empId,
+                                        @totalCesantia,
+                                        @codigoPlanillaCesantia,
+                                        @idEncabezado,
+                                        @diasPagados,
+                                        @sueldoBruto,
+                                        @usuarioCrea,
+                                        @fechaCrea,
+                                    )   
+                             ";
+
+                    //Asignar el codigo de planilla
+                    string codigoPlanillaCesantia = "CSC-" + 1 + FechaActual.Month + FechaActual.Year;
+
+                    using (SqlCommand command = new SqlCommand(queryDetalle, connection))
+                    {
+
+                        command.Parameters.AddWithValue("@empId", 1);
+                        command.Parameters.AddWithValue("@totalCesantia", 245564M);
+                        command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
+                        command.Parameters.AddWithValue("@idEncabezado", 1);
+                        command.Parameters.AddWithValue("@diasPagados", 35);
+                        command.Parameters.AddWithValue("@sueldoBruto", 553);
+                        command.Parameters.AddWithValue("@usuarioCrea", 1);
+                        command.Parameters.AddWithValue("@fechaCrea", FechaActual);
+
+                        int result = command.ExecuteNonQuery();
+
+                        if (result < 0)
+                            response = "error";
+                    }
+                }
+                catch
+                {
+                    try
+                    {
+                        transaccion.Rollback();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         #region GET: LISTADO DEL PREVIEW DE GENERAR LA PLANILLA DE CESANTIA
@@ -75,7 +178,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult ObtenerListaDePagoCesantia()
         {
             //INICIALIZACION DEL OBJETO TIPO LISTA V_tbPagoDeCesantiaDetalle
-            List <V_tbPagoDeCesantiaDetalle> ModelPagoDeCesantiaDetalleList = new List<V_tbPagoDeCesantiaDetalle>();
+            List<V_tbPagoDeCesantiaDetalle> ModelPagoDeCesantiaDetalleList = new List<V_tbPagoDeCesantiaDetalle>();
 
             //FECHA DE LA PETICION
             DateTime FechaPeticion = DateTime.Now;
