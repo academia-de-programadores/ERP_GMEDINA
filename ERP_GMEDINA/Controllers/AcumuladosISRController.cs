@@ -85,7 +85,7 @@ namespace ERP_GMEDINA.Controllers
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Insert(tbAcumuladosISR.aisr_Descripcion,
                                                                                      tbAcumuladosISR.aisr_Monto,
                                                                                      tbAcumuladosISR.aisr_UsuarioCrea,
-                                                                                     tbAcumuladosISR.aisr_FechaCrea);
+                                                                                     tbAcumuladosISR.aisr_FechaCrea, true, 1);
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbAcumuladosISR_Insert_Result Resultado in listAcumuladosISR)
@@ -148,7 +148,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbAcumuladosISR.aisr_Descripcion,
                                                                                             tbAcumuladosISR.aisr_Monto,
                                                                                             tbAcumuladosISR.aisr_UsuarioModifica,
-                                                                                            tbAcumuladosISR.aisr_FechaModifica);
+                                                                                            tbAcumuladosISR.aisr_FechaModifica, true, 1);
                     // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAcumuladosISR_Update_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;

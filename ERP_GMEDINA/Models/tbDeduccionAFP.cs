@@ -16,6 +16,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> dafp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> dafp_FechaModifica { get; set; }
         public bool dafp_Activo { get; set; }
+        public Nullable<bool> dafp_DeducirISR { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

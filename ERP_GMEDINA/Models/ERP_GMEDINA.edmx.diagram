@@ -476,6 +476,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" Width="1.5" PointX="0.75" PointY="29.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" Width="1.5" PointX="2.75" PointY="29.75" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

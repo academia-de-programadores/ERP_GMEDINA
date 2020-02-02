@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> dei_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> dei_FechaModifica { get; set; }
         public bool dei_Activo { get; set; }
+        public Nullable<bool> dei_DeducirISR { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
