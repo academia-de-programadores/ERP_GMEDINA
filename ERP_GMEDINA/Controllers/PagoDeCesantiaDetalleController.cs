@@ -73,6 +73,7 @@ namespace ERP_GMEDINA.Controllers
             string response = "bien";
             DateTime FechaActual = DateTime.Now;
             int idEncabezado = 0;
+            SqlTransaction transaccion = null;
 
             //Query del detalle
             String queryDetalle = @"
@@ -98,7 +99,7 @@ namespace ERP_GMEDINA.Controllers
                                         @diasPagados,
                                         @sueldoBruto,
                                         @usuarioCrea,
-                                        @fechaCrea,
+                                        @fechaCrea
                                     )   
                              ";
 
@@ -122,17 +123,16 @@ namespace ERP_GMEDINA.Controllers
                                     ) 
                              ";
 
-
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
             {
                 //Comenzar la transaccion
                 connection.Open();
-                SqlTransaction transaccion;
-                transaccion = connection.BeginTransaction();
-                foreach (var item in listadoCesantia)
-                    try
+                transaccion = connection.BeginTransaction("InsersionCesasntias");
+                try
+                {
+                    foreach (var item in listadoCesantia)
                     {
-                        using (SqlCommand command = new SqlCommand("(SELECT ISNULL(MAX(pdce_IdCesantiaEncabezado) + 1, 1) FROM [Plani].[tbPagoDeCesantiaEncabezado])", connection))
+                        using (SqlCommand command = new SqlCommand("(SELECT ISNULL(MAX(pdce_IdCesantiaEncabezado) + 1, 1) FROM [Plani].[tbPagoDeCesantiaEncabezado])", connection, transaccion))
                         {
                             using (SqlDataReader reader = command.ExecuteReader())
                             {
@@ -147,7 +147,7 @@ namespace ERP_GMEDINA.Controllers
                         string codigoPlanillaCesantia = "CSC-" + idEncabezado + FechaActual.Month + FechaActual.Year;
 
                         //Insertar en el encabezado
-                        using (SqlCommand command = new SqlCommand(queryEncabezado, connection))
+                        using (SqlCommand command = new SqlCommand(queryEncabezado, connection, transaccion))
                         {
                             command.Parameters.AddWithValue("@idCesantiaEncabezado", idEncabezado);
                             command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
@@ -157,10 +157,12 @@ namespace ERP_GMEDINA.Controllers
 
                             int result = command.ExecuteNonQuery();
 
+                            //si hay error en encabezado hacer rollback
                             if (result < 0)
                                 try
                                 {
                                     transaccion.Rollback();
+                                    response = "error";
                                 }
                                 catch
                                 {
@@ -169,23 +171,25 @@ namespace ERP_GMEDINA.Controllers
                         }
 
                         //Insertar en el detalle
-                        using (SqlCommand command = new SqlCommand(queryDetalle, connection))
+                        using (SqlCommand command = new SqlCommand(queryDetalle, connection, transaccion))
                         {
                             command.Parameters.AddWithValue("@empId", item.idEmpleado);
                             command.Parameters.AddWithValue("@totalCesantia", item.totalCesantia);
                             command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
                             command.Parameters.AddWithValue("@idEncabezado", idEncabezado);
                             command.Parameters.AddWithValue("@diasPagados", item.diasPagados);
-                            command.Parameters.AddWithValue("@sueldoBruto",item.sueldoBruto);
+                            command.Parameters.AddWithValue("@sueldoBruto", item.sueldoBruto);
                             command.Parameters.AddWithValue("@usuarioCrea", sesion.usu_Id);
                             command.Parameters.AddWithValue("@fechaCrea", FechaActual);
 
                             int result = command.ExecuteNonQuery();
 
+                            //Si hay error hacer un rollback
                             if (result < 0)
                                 try
                                 {
                                     transaccion.Rollback();
+                                    response = "error";
                                 }
                                 catch
                                 {
@@ -193,17 +197,22 @@ namespace ERP_GMEDINA.Controllers
                                 }
                         }
                     }
-                    catch(Exception ex)
+                    
+                    //Confirmar los cambios en la base de datos
+                    transaccion.Commit();
+                }
+                catch (Exception ex)
+                {
+                    try
                     {
-                        try
-                        {
-                            transaccion.Rollback();
-                        }
-                        catch
-                        {
-
-                        }
+                        transaccion.Rollback();
+                        response = "error";
                     }
+                    catch
+                    {
+
+                    }
+                }
             }
 
             return Json(response, JsonRequestBehavior.AllowGet);
