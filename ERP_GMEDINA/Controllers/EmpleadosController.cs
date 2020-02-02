@@ -419,7 +419,52 @@ namespace ERP_GMEDINA.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                //t.tbCargos.tbEmpleados
+                //           .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
+                //            Empleados = t.tbEmpleados.Count
                 tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
+                var fechaingreso = (from a in db.tbEmpleados where a.emp_Id==id select a.emp_Fechaingreso).ToList()[0];
+                DateTime fechaactual = DateTime.Now;
+                DateTime fechaingresodate = Convert.ToDateTime(fechaingreso);
+                //System.TimeSpan diff = fechaactual.Subtract(fechaingresodate);
+                int timespan = (fechaactual.Year - fechaingresodate.Year);
+                if (timespan==0)
+                {
+                    ViewBag.Antiguedad = "Menos de 1 año";
+                }
+                else
+                {
+                    ViewBag.Antiguedad = timespan+" "+"Años";
+                }
+              //  var Jefe = db.tbEmpleados.Select(t => t.tbDepartamentos.tbCargos.s);
+             //   var Jefe = db.tbDepartamentos.Where(x => x. == id)
+             //.Select(
+             //t => t.tbCargos.tbEmpleados.Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
+             //)
+             //.ToList()[0];
+                //var JEFE = db.tbAreas.Where(X=>db.tbEmpleados)
+                //   .Select(
+                //   t => new
+                //   {
+                //       Encargado = t.tbCargos.tbEmpleados
+                //           .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
+                //   }
+                //   )
+                //   .ToList()[0];
+                //if (JEFE == null)
+                //{
+                //    ViewBag.Jefe = "Sin Asignar";
+                //}
+                //else
+                //{
+                //    ViewBag.Jefe = JEFE;
+                //}
+                // int meses= (fechaactual.Month - fechaingresodate.Month) + 12 * (fechaactual.Year - fechaingresodate.Year);
+                //int timespanMonths = (fechaactual.Month + fechaingresodate.Month);
+
+                // ViewBag.Meses = timespanMonths;
+                //tbEmpleados tbEmpleados = db.tbEmpleados.Include(Antiguedad).SingleOrDefault;
+                //tbEmpleados tbEmpleados = db.tbEmpleados.Include(u => u.).SingleOrDefault(u => u.id == id);
                 if (tbEmpleados == null)
                 {
                     return HttpNotFound();
@@ -433,80 +478,8 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        // GET: Empleados/Create
-        public ActionResult Create()
-        {
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion");
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion");
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad");
-            return View();
-        }
-
-        // POST: Empleados/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "emp_Id,per_Id,car_Id,area_Id,depto_Id,jor_Id,cpla_IdPlanilla,fpa_IdFormaPago,emp_CuentaBancaria,emp_Reingreso,emp_Fechaingreso,emp_RazonSalida,emp_CargoAnterior,emp_FechaDeSalida,emp_Estado,emp_RazonInactivo,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleados tbEmpleados)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tbEmpleados.Add(tbEmpleados);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioCrea);
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioModifica);
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion", tbEmpleados.area_Id);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbEmpleados.car_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbEmpleados.per_Id);
-            return View(tbEmpleados);
-        }
-
-        // GET: Empleados/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
-            if (tbEmpleados == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioCrea);
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioModifica);
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion", tbEmpleados.area_Id);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbEmpleados.car_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbEmpleados.per_Id);
-            return View(tbEmpleados);
-        }
-
-        // POST: Empleados/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "emp_Id,per_Id,car_Id,area_Id,depto_Id,jor_Id,cpla_IdPlanilla,fpa_IdFormaPago,emp_CuentaBancaria,emp_Reingreso,emp_Fechaingreso,emp_RazonSalida,emp_CargoAnterior,emp_FechaDeSalida,emp_Estado,emp_RazonInactivo,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleados tbEmpleados)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbEmpleados).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioCrea);
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioModifica);
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion", tbEmpleados.area_Id);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbEmpleados.car_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbEmpleados.per_Id);
-            return View(tbEmpleados);
-        }
-
+    
+     
         /// <summary>
         /// SUBR DOCUMENTOS AL EXPEDIENTE
         /// </summary>
