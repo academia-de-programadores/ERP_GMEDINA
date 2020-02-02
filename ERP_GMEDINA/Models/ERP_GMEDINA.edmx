@@ -443,7 +443,6 @@
           <Property Name="ini_UsuarioModifica" Type="int" />
           <Property Name="ini_FechaModifica" Type="datetime" />
           <Property Name="ini_Activo" Type="bit" Nullable="false" />
-          <Property Name="ini_comentario" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tbInstitucionesFinancieras">
           <Key>
@@ -7742,7 +7741,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="ini_Monto" Type="decimal" Mode="In" />
           <Parameter Name="ini_Pagado" Type="bit" Mode="In" />
           <Parameter Name="ini_PagaSiempre" Type="bit" Mode="In" />
-          <Parameter Name="ini_Comentario" Type="nvarchar" Mode="In" />
           <Parameter Name="ini_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="ini_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -7754,7 +7752,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="ini_PagaSiempre" Type="bit" Mode="In" />
           <Parameter Name="ini_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="ini_FechaModifica" Type="datetime" Mode="In" />
-          <Parameter Name="ini_Comentario" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbInstitucionesFinancieras_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
@@ -12470,7 +12467,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea" FromRole="tbIngresosIndividuales" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioModifica" FromRole="tbIngresosIndividuales" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id" FromRole="tbIngresosIndividuales" ToRole="tbEmpleados" />
-          <Property Name="ini_comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbInstitucionesFinancieras">
           <Key>
@@ -20094,7 +20090,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_PagaSiempre" Mode="In" Type="Boolean" />
             <Parameter Name="ini_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaModifica" Mode="In" Type="DateTime" />
-            <Parameter Name="ini_Comentario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Activar_Result)">
             <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
@@ -21335,7 +21330,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="ini_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="ini_PagaSiempre" Mode="In" Type="Boolean" />
-            <Parameter Name="ini_Comentario" Mode="In" Type="String" />
             <Parameter Name="ini_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -23899,7 +23893,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbIngresosIndividuales">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbIngresosIndividuales">
               <MappingFragment StoreEntitySet="tbIngresosIndividuales">
-                <ScalarProperty Name="ini_comentario" ColumnName="ini_comentario" />
                 <ScalarProperty Name="ini_IdIngresosIndividuales" ColumnName="ini_IdIngresosIndividuales" />
                 <ScalarProperty Name="ini_Motivo" ColumnName="ini_Motivo" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
