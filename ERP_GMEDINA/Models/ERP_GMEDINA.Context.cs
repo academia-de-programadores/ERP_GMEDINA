@@ -5348,67 +5348,6 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Delete_Result>("UDP_RRHH_tbRequisiciones_Delete", req_idParameter, req_razonInactivoParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Insert_Result> UDP_RRHH_tbRequisiciones_Insert(string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioCrea, Nullable<System.DateTime> req_FechaCrea)
-        {
-            var req_ExperienciaParameter = req_Experiencia != null ?
-                new ObjectParameter("req_Experiencia", req_Experiencia) :
-                new ObjectParameter("req_Experiencia", typeof(string));
-    
-            var req_SexoParameter = req_Sexo != null ?
-                new ObjectParameter("req_Sexo", req_Sexo) :
-                new ObjectParameter("req_Sexo", typeof(string));
-    
-            var req_DescripcionParameter = req_Descripcion != null ?
-                new ObjectParameter("req_Descripcion", req_Descripcion) :
-                new ObjectParameter("req_Descripcion", typeof(string));
-    
-            var req_EdadMinimaParameter = req_EdadMinima.HasValue ?
-                new ObjectParameter("req_EdadMinima", req_EdadMinima) :
-                new ObjectParameter("req_EdadMinima", typeof(int));
-    
-            var req_EdadMaximaParameter = req_EdadMaxima.HasValue ?
-                new ObjectParameter("req_EdadMaxima", req_EdadMaxima) :
-                new ObjectParameter("req_EdadMaxima", typeof(int));
-    
-            var req_EstadoCivilParameter = req_EstadoCivil != null ?
-                new ObjectParameter("req_EstadoCivil", req_EstadoCivil) :
-                new ObjectParameter("req_EstadoCivil", typeof(string));
-    
-            var req_EducacionSuperiorParameter = req_EducacionSuperior.HasValue ?
-                new ObjectParameter("req_EducacionSuperior", req_EducacionSuperior) :
-                new ObjectParameter("req_EducacionSuperior", typeof(bool));
-    
-            var req_PermanenteParameter = req_Permanente.HasValue ?
-                new ObjectParameter("req_Permanente", req_Permanente) :
-                new ObjectParameter("req_Permanente", typeof(bool));
-    
-            var req_DuracionParameter = req_Duracion != null ?
-                new ObjectParameter("req_Duracion", req_Duracion) :
-                new ObjectParameter("req_Duracion", typeof(string));
-    
-            var req_VacantesParameter = req_Vacantes != null ?
-                new ObjectParameter("req_Vacantes", req_Vacantes) :
-                new ObjectParameter("req_Vacantes", typeof(string));
-    
-            var req_FechaRequisicionParameter = req_FechaRequisicion.HasValue ?
-                new ObjectParameter("req_FechaRequisicion", req_FechaRequisicion) :
-                new ObjectParameter("req_FechaRequisicion", typeof(System.DateTime));
-    
-            var req_FechaContratacionParameter = req_FechaContratacion.HasValue ?
-                new ObjectParameter("req_FechaContratacion", req_FechaContratacion) :
-                new ObjectParameter("req_FechaContratacion", typeof(System.DateTime));
-    
-            var req_UsuarioCreaParameter = req_UsuarioCrea.HasValue ?
-                new ObjectParameter("req_UsuarioCrea", req_UsuarioCrea) :
-                new ObjectParameter("req_UsuarioCrea", typeof(int));
-    
-            var req_FechaCreaParameter = req_FechaCrea.HasValue ?
-                new ObjectParameter("req_FechaCrea", req_FechaCrea) :
-                new ObjectParameter("req_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Insert_Result>("UDP_RRHH_tbRequisiciones_Insert", req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioCreaParameter, req_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Restore_Result> UDP_RRHH_tbRequisiciones_Restore(Nullable<int> req_id, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
         {
             var req_idParameter = req_id.HasValue ?
@@ -5424,71 +5363,6 @@
                 new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Restore_Result>("UDP_RRHH_tbRequisiciones_Restore", req_idParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Update_Result> UDP_RRHH_tbRequisiciones_Update(Nullable<int> req_Id, string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
-        {
-            var req_IdParameter = req_Id.HasValue ?
-                new ObjectParameter("req_Id", req_Id) :
-                new ObjectParameter("req_Id", typeof(int));
-    
-            var req_ExperienciaParameter = req_Experiencia != null ?
-                new ObjectParameter("req_Experiencia", req_Experiencia) :
-                new ObjectParameter("req_Experiencia", typeof(string));
-    
-            var req_SexoParameter = req_Sexo != null ?
-                new ObjectParameter("req_Sexo", req_Sexo) :
-                new ObjectParameter("req_Sexo", typeof(string));
-    
-            var req_DescripcionParameter = req_Descripcion != null ?
-                new ObjectParameter("req_Descripcion", req_Descripcion) :
-                new ObjectParameter("req_Descripcion", typeof(string));
-    
-            var req_EdadMinimaParameter = req_EdadMinima.HasValue ?
-                new ObjectParameter("req_EdadMinima", req_EdadMinima) :
-                new ObjectParameter("req_EdadMinima", typeof(int));
-    
-            var req_EdadMaximaParameter = req_EdadMaxima.HasValue ?
-                new ObjectParameter("req_EdadMaxima", req_EdadMaxima) :
-                new ObjectParameter("req_EdadMaxima", typeof(int));
-    
-            var req_EstadoCivilParameter = req_EstadoCivil != null ?
-                new ObjectParameter("req_EstadoCivil", req_EstadoCivil) :
-                new ObjectParameter("req_EstadoCivil", typeof(string));
-    
-            var req_EducacionSuperiorParameter = req_EducacionSuperior.HasValue ?
-                new ObjectParameter("req_EducacionSuperior", req_EducacionSuperior) :
-                new ObjectParameter("req_EducacionSuperior", typeof(bool));
-    
-            var req_PermanenteParameter = req_Permanente.HasValue ?
-                new ObjectParameter("req_Permanente", req_Permanente) :
-                new ObjectParameter("req_Permanente", typeof(bool));
-    
-            var req_DuracionParameter = req_Duracion != null ?
-                new ObjectParameter("req_Duracion", req_Duracion) :
-                new ObjectParameter("req_Duracion", typeof(string));
-    
-            var req_VacantesParameter = req_Vacantes != null ?
-                new ObjectParameter("req_Vacantes", req_Vacantes) :
-                new ObjectParameter("req_Vacantes", typeof(string));
-    
-            var req_FechaRequisicionParameter = req_FechaRequisicion.HasValue ?
-                new ObjectParameter("req_FechaRequisicion", req_FechaRequisicion) :
-                new ObjectParameter("req_FechaRequisicion", typeof(System.DateTime));
-    
-            var req_FechaContratacionParameter = req_FechaContratacion.HasValue ?
-                new ObjectParameter("req_FechaContratacion", req_FechaContratacion) :
-                new ObjectParameter("req_FechaContratacion", typeof(System.DateTime));
-    
-            var req_UsuarioModificaParameter = req_UsuarioModifica.HasValue ?
-                new ObjectParameter("req_UsuarioModifica", req_UsuarioModifica) :
-                new ObjectParameter("req_UsuarioModifica", typeof(int));
-    
-            var req_FechaModificaParameter = req_FechaModifica.HasValue ?
-                new ObjectParameter("req_FechaModifica", req_FechaModifica) :
-                new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Update_Result>("UDP_RRHH_tbRequisiciones_Update", req_IdParameter, req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbSeleccionCandidatos_Delete_Result> UDP_RRHH_tbSeleccionCandidatos_Delete(Nullable<int> scan_Id, string scan_RazonInactivo, Nullable<int> scan_UsuarioModifica, Nullable<System.DateTime> scan_FechaModifica)
@@ -6912,6 +6786,140 @@
                 new ObjectParameter("hcar_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialCargos_Degradar", hcar_IdParameter, hcar_RazonPromocionParameter, hcar_FechaParameter, hcar_UsuarioModificaParameter, hcar_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Insert_Result> UDP_RRHH_tbRequisiciones_Insert(string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, string req_NivelEducativo, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioCrea, Nullable<System.DateTime> req_FechaCrea)
+        {
+            var req_ExperienciaParameter = req_Experiencia != null ?
+                new ObjectParameter("req_Experiencia", req_Experiencia) :
+                new ObjectParameter("req_Experiencia", typeof(string));
+    
+            var req_SexoParameter = req_Sexo != null ?
+                new ObjectParameter("req_Sexo", req_Sexo) :
+                new ObjectParameter("req_Sexo", typeof(string));
+    
+            var req_DescripcionParameter = req_Descripcion != null ?
+                new ObjectParameter("req_Descripcion", req_Descripcion) :
+                new ObjectParameter("req_Descripcion", typeof(string));
+    
+            var req_EdadMinimaParameter = req_EdadMinima.HasValue ?
+                new ObjectParameter("req_EdadMinima", req_EdadMinima) :
+                new ObjectParameter("req_EdadMinima", typeof(int));
+    
+            var req_EdadMaximaParameter = req_EdadMaxima.HasValue ?
+                new ObjectParameter("req_EdadMaxima", req_EdadMaxima) :
+                new ObjectParameter("req_EdadMaxima", typeof(int));
+    
+            var req_EstadoCivilParameter = req_EstadoCivil != null ?
+                new ObjectParameter("req_EstadoCivil", req_EstadoCivil) :
+                new ObjectParameter("req_EstadoCivil", typeof(string));
+    
+            var req_EducacionSuperiorParameter = req_EducacionSuperior.HasValue ?
+                new ObjectParameter("req_EducacionSuperior", req_EducacionSuperior) :
+                new ObjectParameter("req_EducacionSuperior", typeof(bool));
+    
+            var req_PermanenteParameter = req_Permanente.HasValue ?
+                new ObjectParameter("req_Permanente", req_Permanente) :
+                new ObjectParameter("req_Permanente", typeof(bool));
+    
+            var req_DuracionParameter = req_Duracion != null ?
+                new ObjectParameter("req_Duracion", req_Duracion) :
+                new ObjectParameter("req_Duracion", typeof(string));
+    
+            var req_VacantesParameter = req_Vacantes != null ?
+                new ObjectParameter("req_Vacantes", req_Vacantes) :
+                new ObjectParameter("req_Vacantes", typeof(string));
+    
+            var req_NivelEducativoParameter = req_NivelEducativo != null ?
+                new ObjectParameter("req_NivelEducativo", req_NivelEducativo) :
+                new ObjectParameter("req_NivelEducativo", typeof(string));
+    
+            var req_FechaRequisicionParameter = req_FechaRequisicion.HasValue ?
+                new ObjectParameter("req_FechaRequisicion", req_FechaRequisicion) :
+                new ObjectParameter("req_FechaRequisicion", typeof(System.DateTime));
+    
+            var req_FechaContratacionParameter = req_FechaContratacion.HasValue ?
+                new ObjectParameter("req_FechaContratacion", req_FechaContratacion) :
+                new ObjectParameter("req_FechaContratacion", typeof(System.DateTime));
+    
+            var req_UsuarioCreaParameter = req_UsuarioCrea.HasValue ?
+                new ObjectParameter("req_UsuarioCrea", req_UsuarioCrea) :
+                new ObjectParameter("req_UsuarioCrea", typeof(int));
+    
+            var req_FechaCreaParameter = req_FechaCrea.HasValue ?
+                new ObjectParameter("req_FechaCrea", req_FechaCrea) :
+                new ObjectParameter("req_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Insert_Result>("UDP_RRHH_tbRequisiciones_Insert", req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_NivelEducativoParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioCreaParameter, req_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Update_Result> UDP_RRHH_tbRequisiciones_Update(Nullable<int> req_Id, string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, string req_NivelEducativo, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        {
+            var req_IdParameter = req_Id.HasValue ?
+                new ObjectParameter("req_Id", req_Id) :
+                new ObjectParameter("req_Id", typeof(int));
+    
+            var req_ExperienciaParameter = req_Experiencia != null ?
+                new ObjectParameter("req_Experiencia", req_Experiencia) :
+                new ObjectParameter("req_Experiencia", typeof(string));
+    
+            var req_SexoParameter = req_Sexo != null ?
+                new ObjectParameter("req_Sexo", req_Sexo) :
+                new ObjectParameter("req_Sexo", typeof(string));
+    
+            var req_DescripcionParameter = req_Descripcion != null ?
+                new ObjectParameter("req_Descripcion", req_Descripcion) :
+                new ObjectParameter("req_Descripcion", typeof(string));
+    
+            var req_EdadMinimaParameter = req_EdadMinima.HasValue ?
+                new ObjectParameter("req_EdadMinima", req_EdadMinima) :
+                new ObjectParameter("req_EdadMinima", typeof(int));
+    
+            var req_EdadMaximaParameter = req_EdadMaxima.HasValue ?
+                new ObjectParameter("req_EdadMaxima", req_EdadMaxima) :
+                new ObjectParameter("req_EdadMaxima", typeof(int));
+    
+            var req_EstadoCivilParameter = req_EstadoCivil != null ?
+                new ObjectParameter("req_EstadoCivil", req_EstadoCivil) :
+                new ObjectParameter("req_EstadoCivil", typeof(string));
+    
+            var req_EducacionSuperiorParameter = req_EducacionSuperior.HasValue ?
+                new ObjectParameter("req_EducacionSuperior", req_EducacionSuperior) :
+                new ObjectParameter("req_EducacionSuperior", typeof(bool));
+    
+            var req_PermanenteParameter = req_Permanente.HasValue ?
+                new ObjectParameter("req_Permanente", req_Permanente) :
+                new ObjectParameter("req_Permanente", typeof(bool));
+    
+            var req_DuracionParameter = req_Duracion != null ?
+                new ObjectParameter("req_Duracion", req_Duracion) :
+                new ObjectParameter("req_Duracion", typeof(string));
+    
+            var req_VacantesParameter = req_Vacantes != null ?
+                new ObjectParameter("req_Vacantes", req_Vacantes) :
+                new ObjectParameter("req_Vacantes", typeof(string));
+    
+            var req_NivelEducativoParameter = req_NivelEducativo != null ?
+                new ObjectParameter("req_NivelEducativo", req_NivelEducativo) :
+                new ObjectParameter("req_NivelEducativo", typeof(string));
+    
+            var req_FechaRequisicionParameter = req_FechaRequisicion.HasValue ?
+                new ObjectParameter("req_FechaRequisicion", req_FechaRequisicion) :
+                new ObjectParameter("req_FechaRequisicion", typeof(System.DateTime));
+    
+            var req_FechaContratacionParameter = req_FechaContratacion.HasValue ?
+                new ObjectParameter("req_FechaContratacion", req_FechaContratacion) :
+                new ObjectParameter("req_FechaContratacion", typeof(System.DateTime));
+    
+            var req_UsuarioModificaParameter = req_UsuarioModifica.HasValue ?
+                new ObjectParameter("req_UsuarioModifica", req_UsuarioModifica) :
+                new ObjectParameter("req_UsuarioModifica", typeof(int));
+    
+            var req_FechaModificaParameter = req_FechaModifica.HasValue ?
+                new ObjectParameter("req_FechaModifica", req_FechaModifica) :
+                new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Update_Result>("UDP_RRHH_tbRequisiciones_Update", req_IdParameter, req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_NivelEducativoParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     }
 }

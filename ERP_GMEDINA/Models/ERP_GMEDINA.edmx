@@ -2267,11 +2267,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlani
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="V_Plani_FechaPlani">
-          <Property Name="hipa_FechaPago" Type="int" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -9045,6 +9040,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="req_Permanente" Type="bit" Mode="In" />
           <Parameter Name="req_Duracion" Type="nvarchar" Mode="In" />
           <Parameter Name="req_Vacantes" Type="nvarchar" Mode="In" />
+          <Parameter Name="req_NivelEducativo" Type="char" Mode="In" />
           <Parameter Name="req_FechaRequisicion" Type="datetime" Mode="In" />
           <Parameter Name="req_FechaContratacion" Type="datetime" Mode="In" />
           <Parameter Name="req_UsuarioCrea" Type="int" Mode="In" />
@@ -9067,6 +9063,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="req_Permanente" Type="bit" Mode="In" />
           <Parameter Name="req_Duracion" Type="nvarchar" Mode="In" />
           <Parameter Name="req_Vacantes" Type="nvarchar" Mode="In" />
+          <Parameter Name="req_NivelEducativo" Type="char" Mode="In" />
           <Parameter Name="req_FechaRequisicion" Type="datetime" Mode="In" />
           <Parameter Name="req_FechaContratacion" Type="datetime" Mode="In" />
           <Parameter Name="req_UsuarioModifica" Type="int" Mode="In" />
@@ -13576,41 +13573,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Insert_Result)">
-            <Parameter Name="req_Experiencia" Mode="In" Type="String" />
-            <Parameter Name="req_Sexo" Mode="In" Type="String" />
-            <Parameter Name="req_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="req_EdadMinima" Mode="In" Type="Int32" />
-            <Parameter Name="req_EdadMaxima" Mode="In" Type="Int32" />
-            <Parameter Name="req_EstadoCivil" Mode="In" Type="String" />
-            <Parameter Name="req_EducacionSuperior" Mode="In" Type="Boolean" />
-            <Parameter Name="req_Permanente" Mode="In" Type="Boolean" />
-            <Parameter Name="req_Duracion" Mode="In" Type="String" />
-            <Parameter Name="req_Vacantes" Mode="In" Type="String" />
-            <Parameter Name="req_FechaRequisicion" Mode="In" Type="DateTime" />
-            <Parameter Name="req_FechaContratacion" Mode="In" Type="DateTime" />
-            <Parameter Name="req_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="req_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbRequisiciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Restore_Result)">
             <Parameter Name="req_id" Mode="In" Type="Int32" />
-            <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Update_Result)">
-            <Parameter Name="req_Id" Mode="In" Type="Int32" />
-            <Parameter Name="req_Experiencia" Mode="In" Type="String" />
-            <Parameter Name="req_Sexo" Mode="In" Type="String" />
-            <Parameter Name="req_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="req_EdadMinima" Mode="In" Type="Int32" />
-            <Parameter Name="req_EdadMaxima" Mode="In" Type="Int32" />
-            <Parameter Name="req_EstadoCivil" Mode="In" Type="String" />
-            <Parameter Name="req_EducacionSuperior" Mode="In" Type="Boolean" />
-            <Parameter Name="req_Permanente" Mode="In" Type="Boolean" />
-            <Parameter Name="req_Duracion" Mode="In" Type="String" />
-            <Parameter Name="req_Vacantes" Mode="In" Type="String" />
-            <Parameter Name="req_FechaRequisicion" Mode="In" Type="DateTime" />
-            <Parameter Name="req_FechaContratacion" Mode="In" Type="DateTime" />
             <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -15401,6 +15365,41 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="hcar_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hcar_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Insert_Result)">
+            <Parameter Name="req_Experiencia" Mode="In" Type="String" />
+            <Parameter Name="req_Sexo" Mode="In" Type="String" />
+            <Parameter Name="req_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="req_EdadMinima" Mode="In" Type="Int32" />
+            <Parameter Name="req_EdadMaxima" Mode="In" Type="Int32" />
+            <Parameter Name="req_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="req_EducacionSuperior" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Permanente" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Duracion" Mode="In" Type="String" />
+            <Parameter Name="req_Vacantes" Mode="In" Type="String" />
+            <Parameter Name="req_NivelEducativo" Mode="In" Type="String" />
+            <Parameter Name="req_FechaRequisicion" Mode="In" Type="DateTime" />
+            <Parameter Name="req_FechaContratacion" Mode="In" Type="DateTime" />
+            <Parameter Name="req_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="req_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Update_Result)">
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
+            <Parameter Name="req_Experiencia" Mode="In" Type="String" />
+            <Parameter Name="req_Sexo" Mode="In" Type="String" />
+            <Parameter Name="req_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="req_EdadMinima" Mode="In" Type="Int32" />
+            <Parameter Name="req_EdadMaxima" Mode="In" Type="Int32" />
+            <Parameter Name="req_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="req_EducacionSuperior" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Permanente" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Duracion" Mode="In" Type="String" />
+            <Parameter Name="req_Vacantes" Mode="In" Type="String" />
+            <Parameter Name="req_NivelEducativo" Mode="In" Type="String" />
+            <Parameter Name="req_FechaRequisicion" Mode="In" Type="DateTime" />
+            <Parameter Name="req_FechaContratacion" Mode="In" Type="DateTime" />
+            <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -16051,13 +16050,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbRequisiciones_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbRequisiciones_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
         <ComplexType Name="UDP_RRHH_tbRequisiciones_Restore_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbRequisiciones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbSeleccionCandidatos_Delete_Result">
@@ -24050,6 +24043,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbRequisiciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequisiciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -25572,23 +25571,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Insert">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Restore">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Restore_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Update">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -29234,6 +29219,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialCargos_Degradar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialCargos_Degradar" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
