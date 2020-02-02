@@ -443,7 +443,6 @@
           <Property Name="ini_UsuarioModifica" Type="int" />
           <Property Name="ini_FechaModifica" Type="datetime" />
           <Property Name="ini_Activo" Type="bit" Nullable="false" />
-          <Property Name="ini_comentario" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tbInstitucionesFinancieras">
           <Key>
@@ -597,13 +596,13 @@
             <PropertyRef Name="tc_Id" />
           </Key>
           <Property Name="tc_Id" Type="int" Nullable="false" />
-          <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
-          <Property Name="tc_RangoInicio" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="tc_RangoFin" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="tc_PorcentajeComision" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="cin_IdIngreso" Type="int" />
+          <Property Name="tc_RangoInicio" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="tc_RangoFin" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="tc_PorcentajeComision" Type="decimal" Precision="5" Scale="2" />
           <Property Name="tc_Estado" Type="bit" Nullable="false" />
-          <Property Name="tc_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="tc_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="tc_UsuarioCrea" Type="int" />
+          <Property Name="tc_FechaCrea" Type="datetime" />
           <Property Name="tc_UsuarioModifica" Type="int" />
           <Property Name="tc_FechaModifica" Type="datetime" />
         </EntityType>
@@ -951,12 +950,6 @@
           <Property Name="hcar_UsuarioModifica" Type="int" />
           <Property Name="hcar_FechaModifica" Type="datetime" />
           <Property Name="hcar_RazonPromocion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="area_IdAnterior" Type="int" Nullable="false" />
-          <Property Name="area_IdNuevo" Type="int" Nullable="false" />
-          <Property Name="depto_IdAnterior" Type="int" Nullable="false" />
-          <Property Name="depto_IdNuevo" Type="int" Nullable="false" />
-          <Property Name="jor_IdAnterior" Type="int" Nullable="false" />
-          <Property Name="jor_IdNuevo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbHistorialContrataciones">
           <Key>
@@ -3941,7 +3934,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbTechosComisiones" Type="Self.tbTechosComisiones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbUsuario">
@@ -6149,7 +6142,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso">
-          <End Role="tbCatalogoDeIngresos" Type="Self.tbCatalogoDeIngresos" Multiplicity="1" />
+          <End Role="tbCatalogoDeIngresos" Type="Self.tbCatalogoDeIngresos" Multiplicity="0..1" />
           <End Role="tbTechosComisiones" Type="Self.tbTechosComisiones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbCatalogoDeIngresos">
@@ -6412,30 +6405,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior">
-          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="1" />
-          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbAreas">
-              <PropertyRef Name="area_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="area_IdAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo">
-          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="1" />
-          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbAreas">
-              <PropertyRef Name="area_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="area_IdNuevo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
           <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
           <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
@@ -6517,30 +6486,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbEmpleados">
               <PropertyRef Name="depto_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior">
-          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
-          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbDepartamentos">
-              <PropertyRef Name="depto_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="depto_IdAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo">
-          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
-          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbDepartamentos">
-              <PropertyRef Name="depto_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="depto_IdNuevo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6937,30 +6882,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbEmpleados">
               <PropertyRef Name="jor_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior">
-          <End Role="tbJornadas" Type="Self.tbJornadas" Multiplicity="1" />
-          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbJornadas">
-              <PropertyRef Name="jor_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="jor_IdAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo">
-          <End Role="tbJornadas" Type="Self.tbJornadas" Multiplicity="1" />
-          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbJornadas">
-              <PropertyRef Name="jor_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="jor_IdNuevo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7820,7 +7741,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="ini_Monto" Type="decimal" Mode="In" />
           <Parameter Name="ini_Pagado" Type="bit" Mode="In" />
           <Parameter Name="ini_PagaSiempre" Type="bit" Mode="In" />
-          <Parameter Name="ini_Comentario" Type="nvarchar" Mode="In" />
           <Parameter Name="ini_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="ini_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -7832,7 +7752,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="ini_PagaSiempre" Type="bit" Mode="In" />
           <Parameter Name="ini_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="ini_FechaModifica" Type="datetime" Mode="In" />
-          <Parameter Name="ini_Comentario" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbInstitucionesFinancieras_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
@@ -8560,7 +8479,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
-          <Parameter Name="hcar_RazonPromocion" Type="varchar" Mode="In" />
           <Parameter Name="hcar_Fecha" Type="datetime" Mode="In" />
           <Parameter Name="req_Id" Type="int" Mode="In" />
           <Parameter Name="emp_UsuarioModifica" Type="int" Mode="In" />
@@ -11659,14 +11577,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbAreas" EntitySet="tbAreas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior" Association="Self.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior">
-            <End Role="tbAreas" EntitySet="tbAreas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo" Association="Self.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo">
-            <End Role="tbAreas" EntitySet="tbAreas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
             <End Role="tbCargos" EntitySet="tbCargos" />
             <End Role="tbAreas" EntitySet="tbAreas" />
@@ -11694,14 +11604,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id">
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior">
-            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo">
-            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialContrataciones_depto_Id" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialContrataciones_depto_Id">
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
@@ -11834,14 +11736,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" Association="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id">
             <End Role="tbJornadas" EntitySet="tbJornadas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior" Association="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior">
-            <End Role="tbJornadas" EntitySet="tbJornadas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo" Association="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo">
-            <End Role="tbJornadas" EntitySet="tbJornadas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id" Association="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id">
             <End Role="tbJornadas" EntitySet="tbJornadas" />
@@ -12078,6 +11972,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbDecimoTercerMes1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDecimoTercerMes" />
           <NavigationProperty Name="tbDeduccionAFP" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionAFP" />
           <NavigationProperty Name="tbDeduccionAFP1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionAFP" />
+          <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
+          <NavigationProperty Name="tbDeduccionesExtraordinarias1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbEmpleadoBonos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbEmpleadoBonos_cb_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleadoBonos" />
@@ -12228,8 +12124,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbPagoDeCesantiaDetalle1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaDetalle" />
           <NavigationProperty Name="tbPagoDeCesantiaEncabezado" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
           <NavigationProperty Name="tbPagoDeCesantiaEncabezado1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
-          <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
-          <NavigationProperty Name="tbDeduccionesExtraordinarias1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
           </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -12330,12 +12224,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cde_Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea" FromRole="tbCatalogoDeDeducciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" FromRole="tbCatalogoDeDeducciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbDeduccionesExtraordinarias" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionInstitucionFinanciera_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbHistorialDeduccionPago" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbHistorialDeduccionPago" />
           <NavigationProperty Name="tbTechosDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTechosDeducciones_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbTechosDeducciones" />
           <NavigationProperty Name="tbTipoPlanillaDetalleDeduccion" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTipoPlanillaDetalleDeduccion_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbTipoPlanillaDetalleDeduccion" />
           <NavigationProperty Name="tbTipoDeduccion" Relationship="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" FromRole="tbCatalogoDeDeducciones" ToRole="tbTipoDeduccion" />
-          <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbDeduccionesExtraordinarias" />
         </EntityType>
         <EntityType Name="tbCatalogoDeIngresos">
           <Key>
@@ -12435,6 +12329,28 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbAFP" Relationship="Self.FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id" FromRole="tbDeduccionAFP" ToRole="tbAFP" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" FromRole="tbDeduccionAFP" ToRole="tbEmpleados" />
           <Property Name="dafp_DeducirISR" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbDeduccionesExtraordinarias">
+          <Key>
+            <PropertyRef Name="dex_IdDeduccionesExtra" />
+          </Key>
+          <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
+          <Property Name="dex_MontoInicial" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="dex_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
+          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dex_UsuarioModifica" Type="Int32" />
+          <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" FromRole="tbDeduccionesExtraordinarias" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbDeduccionesExtraordinarias" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" FromRole="tbDeduccionesExtraordinarias" ToRole="tbCatalogoDeDeducciones" />
+          <NavigationProperty Name="tbEquipoEmpleados" Relationship="Self.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" FromRole="tbDeduccionesExtraordinarias" ToRole="tbEquipoEmpleados" />
+          <Property Name="dex_DeducirISR" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbDeduccionInstitucionFinanciera">
           <Key>
@@ -12551,7 +12467,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioCrea" FromRole="tbIngresosIndividuales" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbIngresosIndividuales_ini_UsuarioModifica" FromRole="tbIngresosIndividuales" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbIngresosIndividuales_emp_Id" FromRole="tbIngresosIndividuales" ToRole="tbEmpleados" />
-          <Property Name="ini_comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbInstitucionesFinancieras">
           <Key>
@@ -12747,8 +12662,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" FromRole="tbAreas" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbCargos" Relationship="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" FromRole="tbAreas" ToRole="tbCargos" />
           <NavigationProperty Name="tbSucursales" Relationship="Self.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" FromRole="tbAreas" ToRole="tbSucursales" />
-          <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior" FromRole="tbAreas" ToRole="tbHistorialCargos" />
-          <NavigationProperty Name="tbHistorialCargos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo" FromRole="tbAreas" ToRole="tbHistorialCargos" />
         </EntityType>
         <EntityType Name="tbCargos">
           <Key>
@@ -12844,8 +12757,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbCargos" Relationship="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" FromRole="tbDepartamentos" ToRole="tbCargos" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" FromRole="tbDepartamentos" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbHistorialContrataciones" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialContrataciones_depto_Id" FromRole="tbDepartamentos" ToRole="tbHistorialContrataciones" />
-          <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior" FromRole="tbDepartamentos" ToRole="tbHistorialCargos" />
-          <NavigationProperty Name="tbHistorialCargos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo" FromRole="tbDepartamentos" ToRole="tbHistorialCargos" />
         </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
@@ -12940,9 +12851,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="eqem_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoEmpleados_eqem_UsuarioCrea" FromRole="tbEquipoEmpleados" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoEmpleados_eqem_UsuarioModifica" FromRole="tbEquipoEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="Self.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" FromRole="tbEquipoEmpleados" ToRole="tbDeduccionesExtraordinarias" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbEquipoEmpleados_emp_Id" FromRole="tbEquipoEmpleados" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbEquipoTrabajo" Relationship="Self.FK_rrhh_tbEquipoTrabajo_eqtra_Id_rrhh_tbEquipoEmpleados_eqtra_Id" FromRole="tbEquipoEmpleados" ToRole="tbEquipoTrabajo" />
-          <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" FromRole="tbEquipoEmpleados" ToRole="tbDeduccionesExtraordinarias" />
         </EntityType>
         <EntityType Name="tbEquipoTrabajo">
           <Key>
@@ -13093,18 +13004,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbCargos" Relationship="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo" FromRole="tbHistorialCargos" ToRole="tbCargos" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" FromRole="tbHistorialCargos" ToRole="tbEmpleados" />
           <Property Name="hcar_RazonPromocion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="area_IdAnterior" Type="Int32" Nullable="false" />
-          <Property Name="area_IdNuevo" Type="Int32" Nullable="false" />
-          <Property Name="depto_IdAnterior" Type="Int32" Nullable="false" />
-          <Property Name="depto_IdNuevo" Type="Int32" Nullable="false" />
-          <Property Name="jor_IdAnterior" Type="Int32" Nullable="false" />
-          <Property Name="jor_IdNuevo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior" FromRole="tbHistorialCargos" ToRole="tbAreas" />
-          <NavigationProperty Name="tbAreas1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo" FromRole="tbHistorialCargos" ToRole="tbAreas" />
-          <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior" FromRole="tbHistorialCargos" ToRole="tbDepartamentos" />
-          <NavigationProperty Name="tbDepartamentos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo" FromRole="tbHistorialCargos" ToRole="tbDepartamentos" />
-          <NavigationProperty Name="tbJornadas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior" FromRole="tbHistorialCargos" ToRole="tbJornadas" />
-          <NavigationProperty Name="tbJornadas1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo" FromRole="tbHistorialCargos" ToRole="tbJornadas" />
         </EntityType>
         <EntityType Name="tbHistorialContrataciones">
           <Key>
@@ -13323,8 +13222,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" FromRole="tbJornadas" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id" FromRole="tbJornadas" ToRole="tbHistorialHorasTrabajadas" />
           <NavigationProperty Name="tbHorarios" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHorarios_jor_Id" FromRole="tbJornadas" ToRole="tbHorarios" />
-          <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior" FromRole="tbJornadas" ToRole="tbHistorialCargos" />
-          <NavigationProperty Name="tbHistorialCargos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo" FromRole="tbJornadas" ToRole="tbHistorialCargos" />
         </EntityType>
         <EntityType Name="tbNacionalidades">
           <Key>
@@ -15951,6 +15848,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbDeduccionesExtraordinarias" Type="Self.tbDeduccionesExtraordinarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDeduccionesExtraordinarias">
+              <PropertyRef Name="dex_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbDeduccionesExtraordinarias" Type="Self.tbDeduccionesExtraordinarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDeduccionesExtraordinarias">
+              <PropertyRef Name="dex_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -17499,6 +17420,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones">
+          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="1" />
+          <End Role="tbDeduccionesExtraordinarias" Type="Self.tbDeduccionesExtraordinarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDeDeducciones">
+              <PropertyRef Name="cde_IdDeducciones" />
+            </Principal>
+            <Dependent Role="tbDeduccionesExtraordinarias">
+              <PropertyRef Name="cde_IdDeducciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionInstitucionFinanciera_cde_IdDeducciones">
           <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -17688,6 +17621,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbDeduccionAFP">
               <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id">
+          <End Role="tbEquipoEmpleados" Type="Self.tbEquipoEmpleados" Multiplicity="1" />
+          <End Role="tbDeduccionesExtraordinarias" Type="Self.tbDeduccionesExtraordinarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEquipoEmpleados">
+              <PropertyRef Name="eqem_Id" />
+            </Principal>
+            <Dependent Role="tbDeduccionesExtraordinarias">
+              <PropertyRef Name="eqem_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -18476,6 +18421,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbDecimoCuartoMes" EntityType="Self.tbDecimoCuartoMes" />
           <EntitySet Name="tbDecimoTercerMes" EntityType="Self.tbDecimoTercerMes" />
           <EntitySet Name="tbDeduccionAFP" EntityType="Self.tbDeduccionAFP" />
+          <EntitySet Name="tbDeduccionesExtraordinarias" EntityType="Self.tbDeduccionesExtraordinarias" />
           <EntitySet Name="tbDeduccionInstitucionFinanciera" EntityType="Self.tbDeduccionInstitucionFinanciera" />
           <EntitySet Name="tbEmpleadoBonos" EntityType="Self.tbEmpleadoBonos" />
           <EntitySet Name="tbFormaPago" EntityType="Self.tbFormaPago" />
@@ -18752,6 +18698,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDeduccionAFP" EntitySet="tbDeduccionAFP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionInstitucionFinanciera_deif_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -19269,6 +19223,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
             <End Role="tbAFP" EntitySet="tbAFP" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" Association="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones">
+            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
+            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionInstitucionFinanciera_cde_IdDeducciones" Association="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionInstitucionFinanciera_cde_IdDeducciones">
             <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
@@ -19332,6 +19290,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbDeduccionAFP" EntitySet="tbDeduccionAFP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" Association="Self.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id">
+            <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
+            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
           </AssociationSet>
           <AssociationSet Name="FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" Association="Self.FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
             <End Role="tbInstitucionesFinancieras" EntitySet="tbInstitucionesFinancieras" />
@@ -20128,7 +20090,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_PagaSiempre" Mode="In" Type="Boolean" />
             <Parameter Name="ini_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaModifica" Mode="In" Type="DateTime" />
-            <Parameter Name="ini_Comentario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Activar_Result)">
             <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
@@ -20658,7 +20619,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
-            <Parameter Name="hcar_RazonPromocion" Mode="In" Type="String" />
             <Parameter Name="hcar_Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="req_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
@@ -21370,7 +21330,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="ini_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="ini_PagaSiempre" Mode="In" Type="Boolean" />
-            <Parameter Name="ini_Comentario" Mode="In" Type="String" />
             <Parameter Name="ini_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -21663,47 +21622,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado" Association="ERP_GMEDINAModel.FK_Plani_TbPagoDeCesantiaDetalle_tbPagoDeCesantiaDetalle_pdce_IdCesantiaEncabezado">
             <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
             <End Role="tbPagoDeCesantiaDetalle" EntitySet="tbPagoDeCesantiaDetalle" />
-          </AssociationSet>
-          <EntitySet Name="tbDeduccionesExtraordinarias" EntityType="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" />
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones">
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
-            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id">
-            <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
-            <End Role="tbDeduccionesExtraordinarias" EntitySet="tbDeduccionesExtraordinarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior" Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior">
-            <End Role="tbAreas" EntitySet="tbAreas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo" Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo">
-            <End Role="tbAreas" EntitySet="tbAreas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior" Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior">
-            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo" Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo">
-            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior" Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior">
-            <End Role="tbJornadas" EntitySet="tbJornadas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo" Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo">
-            <End Role="tbJornadas" EntitySet="tbJornadas" />
-            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -23029,17 +22947,17 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <PropertyRef Name="tc_Id" />
           </Key>
           <Property Name="tc_Id" Type="Int32" Nullable="false" />
-          <Property Name="tc_RangoInicio" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="tc_RangoFin" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="tc_PorcentajeComision" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="tc_RangoInicio" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="tc_RangoFin" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="tc_PorcentajeComision" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="tc_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="tc_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="tc_FechaCrea" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="tc_UsuarioCrea" Type="Int32" />
+          <Property Name="tc_FechaCrea" Type="DateTime" Precision="3" />
           <Property Name="tc_UsuarioModifica" Type="Int32" />
           <Property Name="tc_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea" FromRole="tbTechosComisiones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioModifica" FromRole="tbTechosComisiones" ToRole="tbUsuario" />
-          <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
+          <Property Name="cin_IdIngreso" Type="Int32" />
           <NavigationProperty Name="tbCatalogoDeIngresos" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso" FromRole="tbTechosComisiones" ToRole="tbCatalogoDeIngresos" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea">
@@ -23627,148 +23545,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tbDeduccionesExtraordinarias">
-          <Key>
-            <PropertyRef Name="dex_IdDeduccionesExtra" />
-          </Key>
-          <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
-          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
-          <Property Name="dex_MontoInicial" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dex_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dex_UsuarioModifica" Type="Int32" />
-          <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
-          <Property Name="dex_DeducirISR" Type="Boolean" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" FromRole="tbDeduccionesExtraordinarias" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbDeduccionesExtraordinarias" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" FromRole="tbDeduccionesExtraordinarias" ToRole="tbCatalogoDeDeducciones" />
-          <NavigationProperty Name="tbEquipoEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" FromRole="tbDeduccionesExtraordinarias" ToRole="tbEquipoEmpleados" />
-        </EntityType>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" Role="tbDeduccionesExtraordinarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDeduccionesExtraordinarias">
-              <PropertyRef Name="dex_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" Role="tbDeduccionesExtraordinarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDeduccionesExtraordinarias">
-              <PropertyRef Name="dex_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones">
-          <End Type="ERP_GMEDINAModel.tbCatalogoDeDeducciones" Role="tbCatalogoDeDeducciones" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" Role="tbDeduccionesExtraordinarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="cde_IdDeducciones" />
-            </Principal>
-            <Dependent Role="tbDeduccionesExtraordinarias">
-              <PropertyRef Name="cde_IdDeducciones" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id">
-          <End Type="ERP_GMEDINAModel.tbEquipoEmpleados" Role="tbEquipoEmpleados" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" Role="tbDeduccionesExtraordinarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEquipoEmpleados">
-              <PropertyRef Name="eqem_Id" />
-            </Principal>
-            <Dependent Role="tbDeduccionesExtraordinarias">
-              <PropertyRef Name="eqem_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdAnterior">
-          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbAreas">
-              <PropertyRef Name="area_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="area_IdAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbAreas_Area_Id_rrhh_tbHistorialCargos_area_IdNuevo">
-          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbAreas">
-              <PropertyRef Name="area_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="area_IdNuevo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdAnterior">
-          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbDepartamentos">
-              <PropertyRef Name="depto_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="depto_IdAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo">
-          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbDepartamentos">
-              <PropertyRef Name="depto_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="depto_IdNuevo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior">
-          <End Type="ERP_GMEDINAModel.tbJornadas" Role="tbJornadas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbJornadas">
-              <PropertyRef Name="jor_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="jor_IdAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo">
-          <End Type="ERP_GMEDINAModel.tbJornadas" Role="tbJornadas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbJornadas">
-              <PropertyRef Name="jor_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialCargos">
-              <PropertyRef Name="jor_IdNuevo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -24013,6 +23789,25 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbDeduccionesExtraordinarias">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionesExtraordinarias">
+              <MappingFragment StoreEntitySet="tbDeduccionesExtraordinarias">
+                <ScalarProperty Name="dex_DeducirISR" ColumnName="dex_DeducirISR" />
+                <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
+                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
+                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
+                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
+                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
+                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
+                <ScalarProperty Name="dex_UsuarioCrea" ColumnName="dex_UsuarioCrea" />
+                <ScalarProperty Name="dex_FechaCrea" ColumnName="dex_FechaCrea" />
+                <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
+                <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
+                <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbDeduccionInstitucionFinanciera">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionInstitucionFinanciera">
               <MappingFragment StoreEntitySet="tbDeduccionInstitucionFinanciera">
@@ -24098,7 +23893,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbIngresosIndividuales">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbIngresosIndividuales">
               <MappingFragment StoreEntitySet="tbIngresosIndividuales">
-                <ScalarProperty Name="ini_comentario" ColumnName="ini_comentario" />
                 <ScalarProperty Name="ini_IdIngresosIndividuales" ColumnName="ini_IdIngresosIndividuales" />
                 <ScalarProperty Name="ini_Motivo" ColumnName="ini_Motivo" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
@@ -24529,12 +24323,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbHistorialCargos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialCargos">
               <MappingFragment StoreEntitySet="tbHistorialCargos">
-                <ScalarProperty Name="jor_IdNuevo" ColumnName="jor_IdNuevo" />
-                <ScalarProperty Name="jor_IdAnterior" ColumnName="jor_IdAnterior" />
-                <ScalarProperty Name="depto_IdNuevo" ColumnName="depto_IdNuevo" />
-                <ScalarProperty Name="depto_IdAnterior" ColumnName="depto_IdAnterior" />
-                <ScalarProperty Name="area_IdNuevo" ColumnName="area_IdNuevo" />
-                <ScalarProperty Name="area_IdAnterior" ColumnName="area_IdAnterior" />
                 <ScalarProperty Name="hcar_RazonPromocion" ColumnName="hcar_RazonPromocion" />
                 <ScalarProperty Name="hcar_Id" ColumnName="hcar_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
@@ -28911,25 +28699,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="pdce_TotalCesantias" ColumnName="pdce_TotalCesantias" />
                 <ScalarProperty Name="pdce_CodigoPlanillaCesantias" ColumnName="pdce_CodigoPlanillaCesantias" />
                 <ScalarProperty Name="pdce_IdCesantiaEncabezado" ColumnName="pdce_IdCesantiaEncabezado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbDeduccionesExtraordinarias">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionesExtraordinarias">
-              <MappingFragment StoreEntitySet="tbDeduccionesExtraordinarias">
-                <ScalarProperty Name="dex_DeducirISR" ColumnName="dex_DeducirISR" />
-                <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
-                <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
-                <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
-                <ScalarProperty Name="dex_FechaCrea" ColumnName="dex_FechaCrea" />
-                <ScalarProperty Name="dex_UsuarioCrea" ColumnName="dex_UsuarioCrea" />
-                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
-                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
-                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
-                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
-                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
-                <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
