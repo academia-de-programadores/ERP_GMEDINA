@@ -26,5 +26,6 @@ namespace ERP_GMEDINA.Models
         public string RazonInactivo { get; set; }
         public decimal Sueldo_MAximo { get; set; }
         public Nullable<decimal> Sueldo_Minimo { get; set; }
+        public decimal Sueldo_Maximo { get; set; }
     }
 }

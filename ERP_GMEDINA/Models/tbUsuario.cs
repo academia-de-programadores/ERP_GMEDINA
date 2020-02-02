@@ -186,6 +186,12 @@ namespace ERP_GMEDINA.Models
             this.tbPagoDeCesantiaEncabezado1 = new HashSet<tbPagoDeCesantiaEncabezado>();
             this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
             this.tbDeduccionesIndividuales1 = new HashSet<tbDeduccionesIndividuales>();
+            this.tbTechoImpuestoVecinal = new HashSet<tbTechoImpuestoVecinal>();
+            this.tbTechoImpuestoVecinal1 = new HashSet<tbTechoImpuestoVecinal>();
+            this.tbDepartamento = new HashSet<tbDepartamento>();
+            this.tbDepartamento1 = new HashSet<tbDepartamento>();
+            this.tbMunicipio = new HashSet<tbMunicipio>();
+            this.tbMunicipio1 = new HashSet<tbMunicipio>();
         }
     
         public int usu_Id { get; set; }
@@ -553,5 +559,17 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTechoImpuestoVecinal> tbTechoImpuestoVecinal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTechoImpuestoVecinal> tbTechoImpuestoVecinal1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDepartamento> tbDepartamento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDepartamento> tbDepartamento1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbMunicipio> tbMunicipio { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbMunicipio> tbMunicipio1 { get; set; }
     }
 }

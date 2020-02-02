@@ -89,6 +89,29 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="tbDepartamento">
+          <Key>
+            <PropertyRef Name="dep_Codigo" />
+          </Key>
+          <Property Name="dep_Codigo" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="dep_Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dep_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="dep_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="dep_UsuarioModifica" Type="int" />
+          <Property Name="dep_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbMunicipio">
+          <Key>
+            <PropertyRef Name="mun_Codigo" />
+          </Key>
+          <Property Name="mun_Codigo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="dep_Codigo" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="mun_Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="mun_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="mun_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="mun_UsuarioModifica" Type="int" />
+          <Property Name="mun_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbAcumuladosISR">
           <Key>
             <PropertyRef Name="aisr_Id" />
@@ -545,6 +568,23 @@
           <Property Name="prea_FechaModifica" Type="datetime" />
           <Property Name="prea_Activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbTechoImpuestoVecinal">
+          <Key>
+            <PropertyRef Name="timv_IdTechoImpuestoVecinal" />
+          </Key>
+          <Property Name="timv_IdTechoImpuestoVecinal" Type="int" Nullable="false" />
+          <Property Name="mun_Codigo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="tde_IdTipoDedu" Type="int" />
+          <Property Name="timv_RangoInicio" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="timv_RangoFin" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="timv_Rango" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="timv_Impuesto" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="timv_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="timv_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="timv_UsuarioModifica" Type="int" />
+          <Property Name="timv_FechaModifica" Type="datetime" />
+          <Property Name="timv_Activo" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbTechosComisiones">
           <Key>
             <PropertyRef Name="tc_Id" />
@@ -956,7 +996,7 @@
           <Property Name="hinc_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hinc_UsuarioModifica" Type="int" />
           <Property Name="hinc_FechaModifica" Type="datetime" />
-          <Property Name="hinc_Espermanente" Type="bit" Nullable="false" />
+          <Property Name="hinc_Espermanente" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbHistorialPermisos">
           <Key>
@@ -2592,6 +2632,35 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbTechosComisiones' no t
           <Property Name="tc_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TechoImpuestoVecinal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_TechoImpuestoVecinal">
+          <Key>
+            <PropertyRef Name="timv_IdTechoImpuestoVecinal" />
+            <PropertyRef Name="mun_Codigo" />
+            <PropertyRef Name="mun_Nombre" />
+            <PropertyRef Name="tde_Descripcion" />
+            <PropertyRef Name="timv_Rango" />
+            <PropertyRef Name="timv_Impuesto" />
+            <PropertyRef Name="timv_UsuarioCrea" />
+            <PropertyRef Name="timv_FechaCrea" />
+            <PropertyRef Name="timv_Activo" />
+          </Key>
+          <Property Name="timv_IdTechoImpuestoVecinal" Type="int" Nullable="false" />
+          <Property Name="mun_Codigo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="mun_Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="tde_IdTipoDedu" Type="int" />
+          <Property Name="tde_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="timv_RangoInicio" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="timv_RangoFin" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="timv_Rango" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="timv_Impuesto" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="timv_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="timv_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="timv_UsuarioModifica" Type="int" />
+          <Property Name="timv_FechaModifica" Type="datetime" />
+          <Property Name="timv_Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_TipoDeduccion">
           <Key>
@@ -3523,7 +3592,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Sueldos' no tiene definid
             <PropertyRef Name="Sueldo" />
             <PropertyRef Name="Area" />
             <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Sueldo_MAximo" />
+            <PropertyRef Name="Sueldo_Maximo" />
             <PropertyRef Name="Usuario_Crea" />
             <PropertyRef Name="Estado" />
           </Key>
@@ -3538,7 +3607,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Sueldos' no tiene definid
           <Property Name="Sueldo_Anterior" Type="int" />
           <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Sueldo_MAximo" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="Sueldo_Maximo" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="Sueldo_Minimo" Type="decimal" Precision="16" Scale="4" />
           <Property Name="Usuario_Nombre" Type="varchar" MaxLength="150" />
           <Property Name="Usuario_Crea" Type="int" Nullable="false" />
@@ -3844,6 +3913,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbPagoDeCesantiaEncabezado">
               <PropertyRef Name="pdce_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTechoImpuestoVecinal" Type="Self.tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="timv_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTechoImpuestoVecinal" Type="Self.tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="timv_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5875,6 +5968,90 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Gral_tbDepartamento_dep_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbDepartamento" Type="Self.tbDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamento">
+              <PropertyRef Name="dep_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbDepartamento" Type="Self.tbDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamento">
+              <PropertyRef Name="dep_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_dep_Codigo">
+          <End Role="tbDepartamento" Type="Self.tbDepartamento" Multiplicity="1" />
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamento">
+              <PropertyRef Name="dep_Codigo" />
+            </Principal>
+            <Dependent Role="tbMunicipio">
+              <PropertyRef Name="dep_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_mun_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMunicipio">
+              <PropertyRef Name="mun_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbTechoImpuestoVecinal" Type="Self.tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMunicipio">
+              <PropertyRef Name="mun_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu">
+          <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="0..1" />
+          <End Role="tbTechoImpuestoVecinal" Type="Self.tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoDeduccion">
+              <PropertyRef Name="tde_IdTipoDedu" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="tde_IdTipoDedu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
           <End Role="tbAFP" Type="Self.tbAFP" Multiplicity="1" />
           <End Role="tbDeduccionAFP" Type="Self.tbDeduccionAFP" Multiplicity="*" />
@@ -7714,6 +7891,37 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="prea_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="prea_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Plani_tbTechoImpuestoVecinal_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="timv_IdTechoImpuestoVecinal" Type="int" Mode="In" />
+          <Parameter Name="timv_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="timv_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbTechoImpuestoVecinal_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="timv_IdTechoImpuestoVecinal" Type="int" Mode="In" />
+          <Parameter Name="timv_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="timv_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbTechoImpuestoVecinal_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
+          <Parameter Name="timv_RangoInicio" Type="decimal" Mode="In" />
+          <Parameter Name="timv_RangoFin" Type="decimal" Mode="In" />
+          <Parameter Name="timv_Rango" Type="decimal" Mode="In" />
+          <Parameter Name="timv_Impuesto" Type="decimal" Mode="In" />
+          <Parameter Name="timv_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="timv_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbTechoImpuestoVecinal_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="timv_IdTechoImpuestoVecinal" Type="int" Mode="In" />
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
+          <Parameter Name="timv_RangoInicio" Type="decimal" Mode="In" />
+          <Parameter Name="timv_RangoFin" Type="decimal" Mode="In" />
+          <Parameter Name="timv_Rango" Type="decimal" Mode="In" />
+          <Parameter Name="timv_Impuesto" Type="decimal" Mode="In" />
+          <Parameter Name="timv_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="timv_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_tbTechosComisiones_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tc_Id" Type="int" Mode="In" />
           <Parameter Name="tc_UsuarioModifica" Type="int" Mode="In" />
@@ -8348,9 +8556,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="hinc_Diagnostico" Type="nvarchar" Mode="In" />
           <Parameter Name="hinc_FechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="hinc_FechaFin" Type="datetime" Mode="In" />
-          <Parameter Name="hinc_Espermanente" Type="bit" Mode="In" />
           <Parameter Name="hinc_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hinc_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="hinc_Espermanente" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialIncapacidades_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hinc_Id" Type="int" Mode="In" />
@@ -8962,6 +9170,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbRolesUsuario" EntityType="Self.tbRolesUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
+          <EntitySet Name="tbMunicipio" EntityType="Self.tbMunicipio" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbAcumuladosISR" EntityType="Self.tbAcumuladosISR" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbAdelantoSueldo" EntityType="Self.tbAdelantoSueldo" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbAFP" EntityType="Self.tbAFP" Schema="Plani" store:Type="Tables" />
@@ -8991,6 +9201,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbPeriodos" EntityType="Self.tbPeriodos" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbPorcentajeMotivoLiquidacion" EntityType="Self.tbPorcentajeMotivoLiquidacion" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbPreaviso" EntityType="Self.tbPreaviso" Schema="Plani" store:Type="Tables" />
+          <EntitySet Name="tbTechoImpuestoVecinal" EntityType="Self.tbTechoImpuestoVecinal" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbTechosComisiones" EntityType="Self.tbTechosComisiones" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbTechosDeducciones" EntityType="Self.tbTechosDeducciones" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbTipoDeduccion" EntityType="Self.tbTipoDeduccion" Schema="Plani" store:Type="Tables" />
@@ -9787,6 +9998,24 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_tbTechosComisiones].[tc_FechaModifica] AS [tc_FechaModifica]
     FROM [Plani].[V_tbTechosComisiones] AS [V_tbTechosComisiones]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_TechoImpuestoVecinal" EntityType="Self.V_TechoImpuestoVecinal" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_TechoImpuestoVecinal].[timv_IdTechoImpuestoVecinal] AS [timv_IdTechoImpuestoVecinal], 
+    [V_TechoImpuestoVecinal].[mun_Codigo] AS [mun_Codigo], 
+    [V_TechoImpuestoVecinal].[mun_Nombre] AS [mun_Nombre], 
+    [V_TechoImpuestoVecinal].[tde_IdTipoDedu] AS [tde_IdTipoDedu], 
+    [V_TechoImpuestoVecinal].[tde_Descripcion] AS [tde_Descripcion], 
+    [V_TechoImpuestoVecinal].[timv_RangoInicio] AS [timv_RangoInicio], 
+    [V_TechoImpuestoVecinal].[timv_RangoFin] AS [timv_RangoFin], 
+    [V_TechoImpuestoVecinal].[timv_Rango] AS [timv_Rango], 
+    [V_TechoImpuestoVecinal].[timv_Impuesto] AS [timv_Impuesto], 
+    [V_TechoImpuestoVecinal].[timv_UsuarioCrea] AS [timv_UsuarioCrea], 
+    [V_TechoImpuestoVecinal].[timv_FechaCrea] AS [timv_FechaCrea], 
+    [V_TechoImpuestoVecinal].[timv_UsuarioModifica] AS [timv_UsuarioModifica], 
+    [V_TechoImpuestoVecinal].[timv_FechaModifica] AS [timv_FechaModifica], 
+    [V_TechoImpuestoVecinal].[timv_Activo] AS [timv_Activo]
+    FROM [Plani].[V_TechoImpuestoVecinal] AS [V_TechoImpuestoVecinal]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_TipoDeduccion" EntityType="Self.V_TipoDeduccion" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_TipoDeduccion].[tde_IdTipoDedu] AS [tde_IdTipoDedu], 
@@ -10369,7 +10598,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_Sueldos].[Sueldo_Anterior] AS [Sueldo_Anterior], 
     [V_Sueldos].[Area] AS [Area], 
     [V_Sueldos].[Cargo] AS [Cargo], 
-    [V_Sueldos].[Sueldo_MAximo] AS [Sueldo_MAximo], 
+    [V_Sueldos].[Sueldo_Maximo] AS [Sueldo_Maximo], 
     [V_Sueldos].[Sueldo_Minimo] AS [Sueldo_Minimo], 
     [V_Sueldos].[Usuario_Nombre] AS [Usuario_Nombre], 
     [V_Sueldos].[Usuario_Crea] AS [Usuario_Crea], 
@@ -10543,6 +10772,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPagoDeCesantiaEncabezado" EntitySet="tbPagoDeCesantiaEncabezado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -11220,6 +11457,34 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbDepartamento_dep_UsuarioModifica" Association="Self.FK_Gral_tbDepartamento_dep_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea" Association="Self.FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_dep_Codigo" Association="Self.FK_Gral_tbMunicipio_dep_Codigo">
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_mun_UsuarioModifica" Association="Self.FK_Gral_tbMunicipio_mun_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" Association="Self.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea" Association="Self.FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" Association="Self.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu">
+            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id" Association="Self.FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
             <End Role="tbAFP" EntitySet="tbAFP" />
             <End Role="tbDeduccionAFP" EntitySet="tbDeduccionAFP" />
@@ -11895,6 +12160,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbPagoDeCesantiaEncabezado1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPagoDeCesantiaEncabezado" />
           <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
           <NavigationProperty Name="tbDeduccionesIndividuales1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesIndividuales" />
+          <NavigationProperty Name="tbTechoImpuestoVecinal" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTechoImpuestoVecinal" />
+          <NavigationProperty Name="tbTechoImpuestoVecinal1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTechoImpuestoVecinal" />
+          <NavigationProperty Name="tbDepartamento" Relationship="ERP_GMEDINAModel.FK_Gral_tbDepartamento_dep_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDepartamento" />
+          <NavigationProperty Name="tbDepartamento1" Relationship="ERP_GMEDINAModel.FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDepartamento" />
+          <NavigationProperty Name="tbMunicipio" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_mun_UsuarioModifica" FromRole="tbUsuario" ToRole="tbMunicipio" />
+          <NavigationProperty Name="tbMunicipio1" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea" FromRole="tbUsuario" ToRole="tbMunicipio" />
           </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -12371,6 +12642,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbAFP" Relationship="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbAFP_tde_IdTipoDedu" FromRole="tbTipoDeduccion" ToRole="tbAFP" />
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" FromRole="tbTipoDeduccion" ToRole="tbCatalogoDeDeducciones" />
           <NavigationProperty Name="tbISR" Relationship="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu" FromRole="tbTipoDeduccion" ToRole="tbISR" />
+          <NavigationProperty Name="tbTechoImpuestoVecinal" Relationship="ERP_GMEDINAModel.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" FromRole="tbTipoDeduccion" ToRole="tbTechoImpuestoVecinal" />
         </EntityType>
         <EntityType Name="tbTipoPlanillaDetalleDeduccion">
           <Key>
@@ -15064,6 +15336,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <PropertyRef Name="Usuario_Crea" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="Sueldo_MAximo" />
+            <PropertyRef Name="Sueldo_Maximo" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
@@ -15085,6 +15358,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Sueldo_MAximo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
           <Property Name="Sueldo_Minimo" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Sueldo_Maximo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
         </EntityType>
         <EntityType Name="V_tbEmpleados">
           <Key>
@@ -20544,9 +20818,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="hinc_Diagnostico" Mode="In" Type="String" />
             <Parameter Name="hinc_FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="hinc_FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="hinc_Espermanente" Mode="In" Type="Boolean" />
             <Parameter Name="hinc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="hinc_Espermanente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result)">
             <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
@@ -21426,6 +21700,77 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </AssociationSet>
           <EntitySet Name="V_DecimoCuartoMesFE" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" />
           <EntitySet Name="V_DecimoTercerMesFE" EntityType="ERP_GMEDINAModel.V_DecimoTercerMesFE" />
+          <EntitySet Name="tbDepartamento" EntityType="ERP_GMEDINAModel.tbDepartamento" />
+          <EntitySet Name="tbMunicipio" EntityType="ERP_GMEDINAModel.tbMunicipio" />
+          <EntitySet Name="tbTechoImpuestoVecinal" EntityType="ERP_GMEDINAModel.tbTechoImpuestoVecinal" />
+          <EntitySet Name="V_TechoImpuestoVecinal" EntityType="ERP_GMEDINAModel.V_TechoImpuestoVecinal" />
+          <AssociationSet Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbDepartamento_dep_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Gral_tbDepartamento_dep_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_mun_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_mun_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_dep_Codigo" Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_dep_Codigo">
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" Association="ERP_GMEDINAModel.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu">
+            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
+            <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_Plani_tbTechoImpuestoVecinal_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Activar_Result)">
+            <Parameter Name="timv_IdTechoImpuestoVecinal" Mode="In" Type="Int32" />
+            <Parameter Name="timv_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="timv_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechoImpuestoVecinal_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Inactivar_Result)">
+            <Parameter Name="timv_IdTechoImpuestoVecinal" Mode="In" Type="Int32" />
+            <Parameter Name="timv_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="timv_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechoImpuestoVecinal_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Insert_Result)">
+            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+            <Parameter Name="timv_RangoInicio" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_RangoFin" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_Rango" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_Impuesto" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="timv_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbTechoImpuestoVecinal_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Update_Result)">
+            <Parameter Name="timv_IdTechoImpuestoVecinal" Mode="In" Type="Int32" />
+            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+            <Parameter Name="timv_RangoInicio" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_RangoFin" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_Rango" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_Impuesto" Mode="In" Type="Decimal" />
+            <Parameter Name="timv_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="timv_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -23096,6 +23441,204 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbDepartamento">
+          <Key>
+            <PropertyRef Name="dep_Codigo" />
+          </Key>
+          <Property Name="dep_Codigo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="dep_Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dep_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="dep_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dep_UsuarioModifica" Type="Int32" />
+          <Property Name="dep_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Gral_tbDepartamento_dep_UsuarioModifica" FromRole="tbDepartamento" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea" FromRole="tbDepartamento" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbMunicipio" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_dep_Codigo" FromRole="tbDepartamento" ToRole="tbMunicipio" />
+        </EntityType>
+        <EntityType Name="tbMunicipio">
+          <Key>
+            <PropertyRef Name="mun_Codigo" />
+          </Key>
+          <Property Name="mun_Codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="dep_Codigo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="mun_Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="mun_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="mun_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mun_UsuarioModifica" Type="Int32" />
+          <Property Name="mun_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_mun_UsuarioModifica" FromRole="tbMunicipio" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea" FromRole="tbMunicipio" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbDepartamento" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_dep_Codigo" FromRole="tbMunicipio" ToRole="tbDepartamento" />
+          <NavigationProperty Name="tbTechoImpuestoVecinal" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" FromRole="tbMunicipio" ToRole="tbTechoImpuestoVecinal" />
+        </EntityType>
+        <EntityType Name="tbTechoImpuestoVecinal">
+          <Key>
+            <PropertyRef Name="timv_IdTechoImpuestoVecinal" />
+          </Key>
+          <Property Name="timv_IdTechoImpuestoVecinal" Type="Int32" Nullable="false" />
+          <Property Name="mun_Codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="tde_IdTipoDedu" Type="Int32" />
+          <Property Name="timv_RangoInicio" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="timv_RangoFin" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="timv_Rango" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="timv_Impuesto" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="timv_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="timv_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="timv_UsuarioModifica" Type="Int32" />
+          <Property Name="timv_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="timv_Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" FromRole="tbTechoImpuestoVecinal" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica" FromRole="tbTechoImpuestoVecinal" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbMunicipio" Relationship="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" FromRole="tbTechoImpuestoVecinal" ToRole="tbMunicipio" />
+          <NavigationProperty Name="tbTipoDeduccion" Relationship="ERP_GMEDINAModel.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" FromRole="tbTechoImpuestoVecinal" ToRole="tbTipoDeduccion" />
+        </EntityType>
+        <EntityType Name="V_TechoImpuestoVecinal">
+          <Key>
+            <PropertyRef Name="timv_IdTechoImpuestoVecinal" />
+            <PropertyRef Name="mun_Codigo" />
+            <PropertyRef Name="mun_Nombre" />
+            <PropertyRef Name="tde_Descripcion" />
+            <PropertyRef Name="timv_Rango" />
+            <PropertyRef Name="timv_Impuesto" />
+            <PropertyRef Name="timv_UsuarioCrea" />
+            <PropertyRef Name="timv_FechaCrea" />
+            <PropertyRef Name="timv_Activo" />
+          </Key>
+          <Property Name="timv_IdTechoImpuestoVecinal" Type="Int32" Nullable="false" />
+          <Property Name="mun_Codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="mun_Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tde_IdTipoDedu" Type="Int32" />
+          <Property Name="tde_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="timv_RangoInicio" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="timv_RangoFin" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="timv_Rango" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="timv_Impuesto" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="timv_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="timv_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="timv_UsuarioModifica" Type="Int32" />
+          <Property Name="timv_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="timv_Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTechoImpuestoVecinal" Role="tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="timv_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTechoImpuestoVecinal" Role="tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="timv_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbDepartamento_dep_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbDepartamento" Role="tbDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamento">
+              <PropertyRef Name="dep_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbDepartamento_tbUsuario_dep_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDepartamento" Role="tbDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamento">
+              <PropertyRef Name="dep_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_mun_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbMunicipio" Role="tbMunicipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMunicipio">
+              <PropertyRef Name="mun_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_tbUsuario_mun_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbMunicipio" Role="tbMunicipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMunicipio">
+              <PropertyRef Name="mun_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_dep_Codigo">
+          <End Type="ERP_GMEDINAModel.tbDepartamento" Role="tbDepartamento" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbMunicipio" Role="tbMunicipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamento">
+              <PropertyRef Name="dep_Codigo" />
+            </Principal>
+            <Dependent Role="tbMunicipio">
+              <PropertyRef Name="dep_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo">
+          <End Type="ERP_GMEDINAModel.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTechoImpuestoVecinal" Role="tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu">
+          <End Type="ERP_GMEDINAModel.tbTipoDeduccion" Role="tbTipoDeduccion" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTechoImpuestoVecinal" Role="tbTechoImpuestoVecinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoDeduccion">
+              <PropertyRef Name="tde_IdTipoDedu" />
+            </Principal>
+            <Dependent Role="tbTechoImpuestoVecinal">
+              <PropertyRef Name="tde_IdTipoDedu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_Plani_tbTechoImpuestoVecinal_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechoImpuestoVecinal_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechoImpuestoVecinal_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechoImpuestoVecinal_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -25675,8 +26218,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="V_Sueldos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Sueldos">
               <MappingFragment StoreEntitySet="V_Sueldos">
+                <ScalarProperty Name="Sueldo_Maximo" ColumnName="Sueldo_Maximo" />
                 <ScalarProperty Name="Sueldo_Minimo" ColumnName="Sueldo_Minimo" />
-                <ScalarProperty Name="Sueldo_MAximo" ColumnName="Sueldo_MAximo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
                 <ScalarProperty Name="Id_Amonestacion" ColumnName="Id_Amonestacion" />
@@ -28171,6 +28714,97 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbDepartamento">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDepartamento">
+              <MappingFragment StoreEntitySet="tbDepartamento">
+                <ScalarProperty Name="dep_FechaModifica" ColumnName="dep_FechaModifica" />
+                <ScalarProperty Name="dep_UsuarioModifica" ColumnName="dep_UsuarioModifica" />
+                <ScalarProperty Name="dep_FechaCrea" ColumnName="dep_FechaCrea" />
+                <ScalarProperty Name="dep_UsuarioCrea" ColumnName="dep_UsuarioCrea" />
+                <ScalarProperty Name="dep_Nombre" ColumnName="dep_Nombre" />
+                <ScalarProperty Name="dep_Codigo" ColumnName="dep_Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMunicipio">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbMunicipio">
+              <MappingFragment StoreEntitySet="tbMunicipio">
+                <ScalarProperty Name="mun_FechaModifica" ColumnName="mun_FechaModifica" />
+                <ScalarProperty Name="mun_UsuarioModifica" ColumnName="mun_UsuarioModifica" />
+                <ScalarProperty Name="mun_FechaCrea" ColumnName="mun_FechaCrea" />
+                <ScalarProperty Name="mun_UsuarioCrea" ColumnName="mun_UsuarioCrea" />
+                <ScalarProperty Name="mun_Nombre" ColumnName="mun_Nombre" />
+                <ScalarProperty Name="dep_Codigo" ColumnName="dep_Codigo" />
+                <ScalarProperty Name="mun_Codigo" ColumnName="mun_Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTechoImpuestoVecinal">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTechoImpuestoVecinal">
+              <MappingFragment StoreEntitySet="tbTechoImpuestoVecinal">
+                <ScalarProperty Name="timv_Activo" ColumnName="timv_Activo" />
+                <ScalarProperty Name="timv_FechaModifica" ColumnName="timv_FechaModifica" />
+                <ScalarProperty Name="timv_UsuarioModifica" ColumnName="timv_UsuarioModifica" />
+                <ScalarProperty Name="timv_FechaCrea" ColumnName="timv_FechaCrea" />
+                <ScalarProperty Name="timv_UsuarioCrea" ColumnName="timv_UsuarioCrea" />
+                <ScalarProperty Name="timv_Impuesto" ColumnName="timv_Impuesto" />
+                <ScalarProperty Name="timv_Rango" ColumnName="timv_Rango" />
+                <ScalarProperty Name="timv_RangoFin" ColumnName="timv_RangoFin" />
+                <ScalarProperty Name="timv_RangoInicio" ColumnName="timv_RangoInicio" />
+                <ScalarProperty Name="tde_IdTipoDedu" ColumnName="tde_IdTipoDedu" />
+                <ScalarProperty Name="mun_Codigo" ColumnName="mun_Codigo" />
+                <ScalarProperty Name="timv_IdTechoImpuestoVecinal" ColumnName="timv_IdTechoImpuestoVecinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_TechoImpuestoVecinal">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_TechoImpuestoVecinal">
+              <MappingFragment StoreEntitySet="V_TechoImpuestoVecinal">
+                <ScalarProperty Name="timv_Activo" ColumnName="timv_Activo" />
+                <ScalarProperty Name="timv_FechaModifica" ColumnName="timv_FechaModifica" />
+                <ScalarProperty Name="timv_UsuarioModifica" ColumnName="timv_UsuarioModifica" />
+                <ScalarProperty Name="timv_FechaCrea" ColumnName="timv_FechaCrea" />
+                <ScalarProperty Name="timv_UsuarioCrea" ColumnName="timv_UsuarioCrea" />
+                <ScalarProperty Name="timv_Impuesto" ColumnName="timv_Impuesto" />
+                <ScalarProperty Name="timv_Rango" ColumnName="timv_Rango" />
+                <ScalarProperty Name="timv_RangoFin" ColumnName="timv_RangoFin" />
+                <ScalarProperty Name="timv_RangoInicio" ColumnName="timv_RangoInicio" />
+                <ScalarProperty Name="tde_Descripcion" ColumnName="tde_Descripcion" />
+                <ScalarProperty Name="tde_IdTipoDedu" ColumnName="tde_IdTipoDedu" />
+                <ScalarProperty Name="mun_Nombre" ColumnName="mun_Nombre" />
+                <ScalarProperty Name="mun_Codigo" ColumnName="mun_Codigo" />
+                <ScalarProperty Name="timv_IdTechoImpuestoVecinal" ColumnName="timv_IdTechoImpuestoVecinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechoImpuestoVecinal_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechoImpuestoVecinal_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechoImpuestoVecinal_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechoImpuestoVecinal_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechoImpuestoVecinal_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechoImpuestoVecinal_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechoImpuestoVecinal_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechoImpuestoVecinal_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechoImpuestoVecinal_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
