@@ -977,27 +977,6 @@
           <Property Name="htra_UsuarioModifica" Type="int" />
           <Property Name="htra_FechaModifica" Type="datetime" />
         </EntityType>
-        <EntityType Name="tbHistorialIncapacidades">
-          <Key>
-            <PropertyRef Name="hinc_Id" />
-          </Key>
-          <Property Name="hinc_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="ticn_Id" Type="int" Nullable="false" />
-          <Property Name="hinc_Dias" Type="int" Nullable="false" />
-          <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
-          <Property Name="hinc_FechaInicio" Type="datetime" />
-          <Property Name="hinc_FechaFin" Type="datetime" />
-          <Property Name="hinc_Estado" Type="bit" Nullable="false" />
-          <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="hinc_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="hinc_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hinc_UsuarioModifica" Type="int" />
-          <Property Name="hinc_FechaModifica" Type="datetime" />
-          <Property Name="hinc_Espermanente" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbHistorialPermisos">
           <Key>
             <PropertyRef Name="hper_Id" />
@@ -3582,41 +3561,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Sueldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_Sueldos">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Id_Empleado" />
-            <PropertyRef Name="Id_Amonestacion" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Sueldo" />
-            <PropertyRef Name="Area" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Sueldo_Maximo" />
-            <PropertyRef Name="Usuario_Crea" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Id_Empleado" Type="int" Nullable="false" />
-          <Property Name="Id_Amonestacion" Type="int" Nullable="false" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="Sueldo" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="Tipo_Moneda" Type="varchar" MaxLength="3" />
-          <Property Name="Cuenta" Type="nvarchar" MaxLength="100" />
-          <Property Name="Sueldo_Anterior" Type="int" />
-          <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Sueldo_Maximo" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="Sueldo_Minimo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="Usuario_Nombre" Type="varchar" MaxLength="150" />
-          <Property Name="Usuario_Crea" Type="int" Nullable="false" />
-          <Property Name="Fecha_Crea" Type="datetime" />
-          <Property Name="Usuario_Modifica" Type="int" />
-          <Property Name="Fecha_Modifica" Type="datetime" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="RazonInactivo" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbEmpleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbEmpleados">
@@ -5272,30 +5216,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
@@ -6724,18 +6644,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
@@ -7225,18 +7133,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbHistorialHorasTrabajadas">
               <PropertyRef Name="tiho_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoIncapacidades">
-              <PropertyRef Name="ticn_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="ticn_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9228,7 +9124,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbHistorialCargos" EntityType="Self.tbHistorialCargos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialContrataciones" EntityType="Self.tbHistorialContrataciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialHorasTrabajadas" EntityType="Self.tbHistorialHorasTrabajadas" Schema="rrhh" store:Type="Tables" />
-          <EntitySet Name="tbHistorialIncapacidades" EntityType="Self.tbHistorialIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialPermisos" EntityType="Self.tbHistorialPermisos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialRefrendamientos" EntityType="Self.tbHistorialRefrendamientos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialSalidas" EntityType="Self.tbHistorialSalidas" Schema="rrhh" store:Type="Tables" />
@@ -10585,30 +10480,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_SeleccionCandidatos].[Razon_Inactivo] AS [Razon_Inactivo]
     FROM [rrhh].[V_SeleccionCandidatos] AS [V_SeleccionCandidatos]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_Sueldos" EntityType="Self.V_Sueldos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_Sueldos].[Id] AS [Id], 
-    [V_Sueldos].[Id_Empleado] AS [Id_Empleado], 
-    [V_Sueldos].[Id_Amonestacion] AS [Id_Amonestacion], 
-    [V_Sueldos].[Identidad] AS [Identidad], 
-    [V_Sueldos].[Nombre] AS [Nombre], 
-    [V_Sueldos].[Sueldo] AS [Sueldo], 
-    [V_Sueldos].[Tipo_Moneda] AS [Tipo_Moneda], 
-    [V_Sueldos].[Cuenta] AS [Cuenta], 
-    [V_Sueldos].[Sueldo_Anterior] AS [Sueldo_Anterior], 
-    [V_Sueldos].[Area] AS [Area], 
-    [V_Sueldos].[Cargo] AS [Cargo], 
-    [V_Sueldos].[Sueldo_Maximo] AS [Sueldo_Maximo], 
-    [V_Sueldos].[Sueldo_Minimo] AS [Sueldo_Minimo], 
-    [V_Sueldos].[Usuario_Nombre] AS [Usuario_Nombre], 
-    [V_Sueldos].[Usuario_Crea] AS [Usuario_Crea], 
-    [V_Sueldos].[Fecha_Crea] AS [Fecha_Crea], 
-    [V_Sueldos].[Usuario_Modifica] AS [Usuario_Modifica], 
-    [V_Sueldos].[Fecha_Modifica] AS [Fecha_Modifica], 
-    [V_Sueldos].[Estado] AS [Estado], 
-    [V_Sueldos].[RazonInactivo] AS [RazonInactivo]
-    FROM [rrhh].[V_Sueldos] AS [V_Sueldos]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_tbEmpleados].[NombreCompleto] AS [NombreCompleto], 
@@ -11225,14 +11096,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
@@ -11709,10 +11572,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" Association="Self.'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
@@ -11876,10 +11735,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id" Association="Self.FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id">
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" Association="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" Association="Self.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id">
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
@@ -12080,8 +11935,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbHistorialContrataciones1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialContrataciones_hcon_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialContrataciones" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialHorasTrabajadas" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialHorasTrabajadas" />
-          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialIncapacidades" />
-          <NavigationProperty Name="tbHistorialIncapacidades1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialIncapacidades" />
           <NavigationProperty Name="tbHistorialPermisos" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
           <NavigationProperty Name="tbHistorialPermisos1" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
           <NavigationProperty Name="tbHistorialRefrendamientos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialRefrendamientos_href_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialRefrendamientos" />
@@ -12837,7 +12690,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbHistorialAudienciaDescargo" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAudienciaDescargo" />
           <NavigationProperty Name="tbHistorialCargos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialCargos" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialHorasTrabajadas_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialHorasTrabajadas" />
-          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialIncapacidades" />
           <NavigationProperty Name="tbHistorialPermisos" Relationship="Self.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialPermisos" />
           <NavigationProperty Name="tbHistorialRefrendamientos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialRefrendamientos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialRefrendamientos" />
           <NavigationProperty Name="tbHistorialSalidas" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialSalidas_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialSalidas" />
@@ -13081,31 +12933,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialHorasTrabajadas_emp_Id" FromRole="tbHistorialHorasTrabajadas" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbJornadas" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id" FromRole="tbHistorialHorasTrabajadas" ToRole="tbJornadas" />
           <NavigationProperty Name="tbTipoHoras" Relationship="Self.FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id" FromRole="tbHistorialHorasTrabajadas" ToRole="tbTipoHoras" />
-        </EntityType>
-        <EntityType Name="tbHistorialIncapacidades">
-          <Key>
-            <PropertyRef Name="hinc_Id" />
-          </Key>
-          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
-          <Property Name="hinc_Dias" Type="Int32" Nullable="false" />
-          <Property Name="hinc_CentroMedico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hinc_Doctor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
-          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
-          <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hinc_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hinc_UsuarioModifica" Type="Int32" />
-          <Property Name="hinc_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" FromRole="tbHistorialIncapacidades" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" FromRole="tbHistorialIncapacidades" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" FromRole="tbHistorialIncapacidades" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbTipoIncapacidades" Relationship="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" FromRole="tbHistorialIncapacidades" ToRole="tbTipoIncapacidades" />
-          <Property Name="hinc_Espermanente" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tbHistorialPermisos">
           <Key>
@@ -13554,7 +13381,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="ticn_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" FromRole="tbTipoIncapacidades" ToRole="tbHistorialIncapacidades" />
         </EntityType>
         <EntityType Name="tbTipoMonedas">
           <Key>
@@ -15323,43 +15149,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="Razon_Inactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="V_Sueldos">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Id_Empleado" />
-            <PropertyRef Name="Id_Amonestacion" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Sueldo" />
-            <PropertyRef Name="Area" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Usuario_Crea" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="Sueldo_MAximo" />
-            <PropertyRef Name="Sueldo_Maximo" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
-          <Property Name="Id_Amonestacion" Type="Int32" Nullable="false" />
-          <Property Name="Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sueldo" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="Tipo_Moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Sueldo_Anterior" Type="Int32" />
-          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Usuario_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_Crea" Type="DateTime" Precision="3" />
-          <Property Name="Usuario_Modifica" Type="Int32" />
-          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Sueldo_MAximo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="Sueldo_Minimo" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="Sueldo_Maximo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-        </EntityType>
         <EntityType Name="V_tbEmpleados">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -16763,30 +16552,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
@@ -18059,18 +17824,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
@@ -18284,18 +18037,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbHistorialHorasTrabajadas">
               <PropertyRef Name="tiho_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoIncapacidades">
-              <PropertyRef Name="ticn_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="ticn_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -18604,7 +18345,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbHistorialCargos" EntityType="Self.tbHistorialCargos" />
           <EntitySet Name="tbHistorialContrataciones" EntityType="Self.tbHistorialContrataciones" />
           <EntitySet Name="tbHistorialHorasTrabajadas" EntityType="Self.tbHistorialHorasTrabajadas" />
-          <EntitySet Name="tbHistorialIncapacidades" EntityType="Self.tbHistorialIncapacidades" />
           <EntitySet Name="tbHistorialPermisos" EntityType="Self.tbHistorialPermisos" />
           <EntitySet Name="tbHistorialRefrendamientos" EntityType="Self.tbHistorialRefrendamientos" />
           <EntitySet Name="tbHistorialSalidas" EntityType="Self.tbHistorialSalidas" />
@@ -18713,7 +18453,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="V_RPT_HistorialPermisos" EntityType="Self.V_RPT_HistorialPermisos" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="Self.V_RPT_HorasTrabajadas" />
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" />
-          <EntitySet Name="V_Sueldos" EntityType="Self.V_Sueldos" />
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" />
           <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="Self.V_tbHistorialPermisos_completa" />
           <EntitySet Name="V_tbHistorialSalidas" EntityType="Self.V_tbHistorialSalidas" />
@@ -19119,14 +18858,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
           </AssociationSet>
           <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" Association="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -19552,10 +19283,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" Association="Self.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
@@ -19627,10 +19354,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id" Association="Self.FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id">
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" Association="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
           </AssociationSet>
           <AssociationSet Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" Association="Self.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
             <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
@@ -24461,28 +24184,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbHistorialIncapacidades">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialIncapacidades">
-              <MappingFragment StoreEntitySet="tbHistorialIncapacidades">
-                <ScalarProperty Name="hinc_Espermanente" ColumnName="hinc_Espermanente" />
-                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
-                <ScalarProperty Name="hinc_Dias" ColumnName="hinc_Dias" />
-                <ScalarProperty Name="hinc_CentroMedico" ColumnName="hinc_CentroMedico" />
-                <ScalarProperty Name="hinc_Doctor" ColumnName="hinc_Doctor" />
-                <ScalarProperty Name="hinc_Diagnostico" ColumnName="hinc_Diagnostico" />
-                <ScalarProperty Name="hinc_FechaInicio" ColumnName="hinc_FechaInicio" />
-                <ScalarProperty Name="hinc_FechaFin" ColumnName="hinc_FechaFin" />
-                <ScalarProperty Name="hinc_Estado" ColumnName="hinc_Estado" />
-                <ScalarProperty Name="hinc_RazonInactivo" ColumnName="hinc_RazonInactivo" />
-                <ScalarProperty Name="hinc_UsuarioCrea" ColumnName="hinc_UsuarioCrea" />
-                <ScalarProperty Name="hinc_FechaCrea" ColumnName="hinc_FechaCrea" />
-                <ScalarProperty Name="hinc_UsuarioModifica" ColumnName="hinc_UsuarioModifica" />
-                <ScalarProperty Name="hinc_FechaModifica" ColumnName="hinc_FechaModifica" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbHistorialPermisos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialPermisos">
               <MappingFragment StoreEntitySet="tbHistorialPermisos">
@@ -26212,32 +25913,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Razon_Inactivo" ColumnName="Razon_Inactivo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Sueldos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Sueldos">
-              <MappingFragment StoreEntitySet="V_Sueldos">
-                <ScalarProperty Name="Sueldo_Maximo" ColumnName="Sueldo_Maximo" />
-                <ScalarProperty Name="Sueldo_Minimo" ColumnName="Sueldo_Minimo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
-                <ScalarProperty Name="Id_Amonestacion" ColumnName="Id_Amonestacion" />
-                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
-                <ScalarProperty Name="Tipo_Moneda" ColumnName="Tipo_Moneda" />
-                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
-                <ScalarProperty Name="Sueldo_Anterior" ColumnName="Sueldo_Anterior" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="Usuario_Nombre" ColumnName="Usuario_Nombre" />
-                <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario_Crea" />
-                <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha_Crea" />
-                <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
-                <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha_Modifica" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="RazonInactivo" ColumnName="RazonInactivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

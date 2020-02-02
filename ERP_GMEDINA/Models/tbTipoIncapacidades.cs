@@ -6,12 +6,6 @@ namespace ERP_GMEDINA.Models
     
     public partial class tbTipoIncapacidades
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTipoIncapacidades()
-        {
-            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
-        }
-    
         public int ticn_Id { get; set; }
         public string ticn_Descripcion { get; set; }
         public bool ticn_Estado { get; set; }
@@ -23,7 +17,5 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
     }
 }
