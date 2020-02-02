@@ -449,13 +449,13 @@ namespace ERP_GMEDINA.Helpers
             {
                 try
                 {
-                    //SETEAR LA FECHA CON LA DE REINGRESO
-                    FechaInicial = (DateTime)db.tbEmpleados.OrderByDescending(c => c.emp_FechaCrea).Where(p => p.emp_Id == Emp_Id && p.emp_Reingreso == true).Select(x => x.emp_Fechaingreso).Take(1).FirstOrDefault();
+                    //SETEAR A FECHA CON EL ULTIMO PAGO DE CESANTIA
+                    FechaInicial = (DateTime)db.tbPagoDeCesantiaDetalle.OrderByDescending(c => c.pdcd_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => x.pdcd_FechaCrea).Take(1).FirstOrDefault();
                     //VALIDAR EN CASO QUE LA FECHA REINGRESO SEA NULL
                     if (FechaInicial.Year == 1)
                     {
-                        //SETEAR A FECHA CON EL ULTIMO PAGO DE CESANTIA
-                        FechaInicial = (DateTime)db.tbPagoDeCesantiaDetalle.OrderByDescending(c => c.pdcd_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => x.pdcd_FechaCrea).Take(1).FirstOrDefault();
+                        //SETEAR LA FECHA CON LA DE REINGRESO
+                        FechaInicial = (DateTime)db.tbEmpleados.OrderByDescending(c => c.emp_FechaCrea).Where(p => p.emp_Id == Emp_Id && p.emp_Reingreso == true).Select(x => x.emp_Fechaingreso).Take(1).FirstOrDefault();
                     }
                     //VALIDAR EN CASO QUE LA FECHA DE HISTORIAL DE PAGO DE CESANTÍA SEA NULL
                     if (FechaInicial.Year == 1)

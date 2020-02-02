@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> ini_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> ini_FechaModifica { get; set; }
         public bool ini_Activo { get; set; }
+        public string ini_comentario { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

@@ -76,13 +76,13 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Insert(tbIngresosIndividuales.ini_Motivo,
-                                                                                          tbIngresosIndividuales.emp_Id,
-                                                                                          tbIngresosIndividuales.ini_Monto,
-                                                                                          tbIngresosIndividuales.ini_Pagado,
-                                                                                          tbIngresosIndividuales.ini_PagaSiempre,
-                                                                                          tbIngresosIndividuales.ini_UsuarioCrea,
-                                                                                          tbIngresosIndividuales.ini_FechaCrea);
+                    //listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Insert(tbIngresosIndividuales.ini_Motivo,
+                    //                                                                      tbIngresosIndividuales.emp_Id,
+                    //                                                                      tbIngresosIndividuales.ini_Monto,
+                    //                                                                      tbIngresosIndividuales.ini_Pagado,
+                    //                                                                      tbIngresosIndividuales.ini_PagaSiempre,
+                    //                                                                      tbIngresosIndividuales.ini_UsuarioCrea,
+                    //                                                                      tbIngresosIndividuales.ini_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbIngresosIndividuales_Insert_Result Resultado in listIngresosIndividuales)
                         MensajeError = Resultado.MensajeError;
@@ -179,13 +179,13 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Update(tbIngresosIndividuales.ini_IdIngresosIndividuales,
-                                                                                          tbIngresosIndividuales.ini_Motivo,
-                                                                                          tbIngresosIndividuales.emp_Id,
-                                                                                          tbIngresosIndividuales.ini_Monto,
-                                                                                          tbIngresosIndividuales.ini_PagaSiempre,
-                                                                                          tbIngresosIndividuales.ini_UsuarioModifica,
-                                                                                          tbIngresosIndividuales.ini_FechaModifica);
+                    //listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Update(tbIngresosIndividuales.ini_IdIngresosIndividuales,
+                    //                                                                      tbIngresosIndividuales.ini_Motivo,
+                    //                                                                      tbIngresosIndividuales.emp_Id,
+                    //                                                                      tbIngresosIndividuales.ini_Monto,
+                    //                                                                      tbIngresosIndividuales.ini_PagaSiempre,
+                    //                                                                      tbIngresosIndividuales.ini_UsuarioModifica,
+                    //                                                                      tbIngresosIndividuales.ini_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbIngresosIndividuales_Update_Result Resultado in listIngresosIndividuales)
                         MensajeError = Resultado.MensajeError;
