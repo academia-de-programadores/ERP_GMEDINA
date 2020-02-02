@@ -2972,6 +2972,8 @@
     <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
     <Content Include="Views\PagoDeCesantiaDetalle\Index.cshtml" />
     <Content Include="Views\PagoDeCesantiaDetalle\PagarCesantia.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\Index.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\_CreateIV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,209 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbTechoImpuestoVecinal>
+@{
+    ViewBag.Title = "Techo Impuesto Vecinal";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Techo Impuesto Vecinal</h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary btn-xs pull-right animated fadeInRight" id="btnAgregarIV">Registrar Rango</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
+                    <table class="table table-striped table-bordered table-hover dataTables-example animated fadeInRight" id="tblIV">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbMunicipio.mun_Nombre)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbTipoDeduccion.tde_Descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.timv_RangoInicio)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.timv_RangoFin)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.timv_Rango)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.timv_Impuesto)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Estado</th>
+                                <th tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyIV">
+                            @foreach (var item in Model)
+                            {
+                                <!-- validar el estado del registro (activo/inactivo)-->
+                                string estadoIV = item.timv_Activo == false ? "Inactivo" : "Activo";
+
+                                <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.timv_IdTechoImpuestoVecinal)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbMunicipio.mun_Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbTipoDeduccion.tde_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.timv_RangoInicio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.timv_RangoFin)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.timv_Rango)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.timv_Impuesto)
+                                    </td>
+                                    <td>
+                                        <!-- variable del estado del registro creada arriba-->
+                                        @estadoIV
+                                    </td>
+                                    <td>
+                                        @{
+                                            <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
+                                            if (item.timv_Activo == true)
+                                            {
+                                                <button type="button" data-id="@item.timv_IdTechoImpuestoVecinal" class="btn btn-primary btn-xs" id="btnDetalleIV">Detalles</button>
+                                                <button type="button" data-id="@item.timv_IdTechoImpuestoVecinal" class="btn btn-default btn-xs" id="btnModalEditarIV">Editar</button>
+                                            }
+                                            <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
+                                            if (oUsuario?.usu_EsAdministrador == true && item.timv_Activo == false)
+                                            {
+                                                <button type="button" data-id="@item.timv_IdTechoImpuestoVecinal" class="btn btn-primary btn-xs" id="btnDetalleIV">Detalles</button>
+                                                <!-- ACTIVAR -->
+                                                <button type="button" data-id="@item.timv_IdTechoImpuestoVecinal" class="btn btn-default btn-xs" id="btnActivarIVModal">Activar</button>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL DE CREACIÓN *@
+<div class="modal fade" id="AgregarIV" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Crear rango de Impuesto Vecinal</h4>
+            </div>
+            @Html.Partial("_CreateIV", new ERP_GMEDINA.Models.tbTechoImpuestoVecinal())
+        </div>
+    </div>
+</div>
+
+@* MODAL DE EDICIÓN *@
+<div class="modal fade" id="EditarIV" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar rango de Impuesto Vecinal</h4>
+            </div>
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditIV", new ERP_GMEDINA.Models.tbTechoImpuestoVecinal())
+        </div>
+    </div>
+</div>
+
+@* MODAL DE CONFIRMACION DE EDICIÓN *@
+<div class="modal fade" id="EditarIVConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro que desea editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" id="btnRegresar">No</button>
+                <input type="button" id="btnEditIV2" value="Si" class="btn btn-primary " />
+                <div style="display:none" class="btn" id="cargandoEditar">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL DE DETALLES *@
+<div class="modal fade" id="DetailsIV" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalles del rango Impuesto Vecinal</h4>
+            </div>
+            <div class="modal-body" id="Detalles">
+                @Html.Partial("_DetailsIV", new ERP_GMEDINA.Models.tbTechoImpuestoVecinal())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Activar*@
+<div class="modal fade" id="ActivarIV" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Está seguro que desea activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnActivarIV">Si</button>
+                <button type="button" class="btn btn-white" id="btnBackActivar">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Inactivar*@
+<div class="modal fade" id="InactivarIV" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                ¿Está seguro que desea inactivar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnInactivarIV">Si</button>
+                <button type="button" class="btn btn-white" id="btnBack">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General/IV")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
