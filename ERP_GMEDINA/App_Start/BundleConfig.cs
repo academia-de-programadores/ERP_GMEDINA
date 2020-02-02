@@ -641,6 +641,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/InstitucionesFinancierasIndex").Include(
                 "~/Scripts/app/General/InstitucionesFinancierasIndex.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/PagoCesantia").Include(
+                "~/Scripts/app/General/PagoDeCesantia.js"));
             #endregion
 
             #region Otros

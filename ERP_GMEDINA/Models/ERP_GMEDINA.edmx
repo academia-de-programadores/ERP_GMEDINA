@@ -124,6 +124,8 @@
           <Property Name="aisr_UsuarioModifica" Type="int" />
           <Property Name="aisr_FechaModifica" Type="datetime" />
           <Property Name="aisr_Activo" Type="bit" Nullable="false" />
+          <Property Name="aisr_DeducirISR" Type="bit" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbAdelantoSueldo">
           <Key>
@@ -257,6 +259,7 @@
           <Property Name="dafp_UsuarioModifica" Type="int" />
           <Property Name="dafp_FechaModifica" Type="datetime" />
           <Property Name="dafp_Activo" Type="bit" Nullable="false" />
+          <Property Name="dafp_DeducirISR" Type="bit" />
         </EntityType>
         <EntityType Name="tbDeduccionesExtraordinarias">
           <Key>
@@ -274,6 +277,7 @@
           <Property Name="dex_UsuarioModifica" Type="int" />
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
+          <Property Name="dex_DeducirISR" Type="bit" />
         </EntityType>
         <EntityType Name="tbDeduccionesIndividuales">
           <Key>
@@ -292,6 +296,7 @@
           <Property Name="dei_UsuarioModifica" Type="int" />
           <Property Name="dei_FechaModifica" Type="datetime" />
           <Property Name="dei_Activo" Type="bit" Nullable="false" />
+          <Property Name="dei_DeducirISR" Type="bit" />
         </EntityType>
         <EntityType Name="tbDeduccionInstitucionFinanciera">
           <Key>
@@ -309,6 +314,7 @@
           <Property Name="deif_FechaModifica" Type="datetime" />
           <Property Name="deif_Activo" Type="bit" Nullable="false" />
           <Property Name="deif_Pagado" Type="bit" />
+          <Property Name="deif_DeducirISR" Type="bit" />
         </EntityType>
         <EntityType Name="tbEmpleadoBonos">
           <Key>
@@ -6495,6 +6501,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbAcumuladosISR" Type="Self.tbAcumuladosISR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbAcumuladosISR">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAdelantoSueldo_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbAdelantoSueldo" Type="Self.tbAdelantoSueldo" Multiplicity="*" />
@@ -7355,6 +7373,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="aisr_Monto" Type="decimal" Mode="In" />
           <Parameter Name="aisr_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="aisr_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="aisr_DeducirISR" Type="bit" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbAcumuladosISR_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="aisr_Id" Type="int" Mode="In" />
@@ -7362,6 +7382,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="aisr_Monto" Type="decimal" Mode="In" />
           <Parameter Name="aisr_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="aisr_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="aisr_DeducirISR" Type="bit" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbAdelantoSueldo_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="adsu_IdAdelantoSueldo" Type="int" Mode="In" />
@@ -7515,6 +7537,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="dafp_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="dafp_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="dafp_DeducirISR" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbDeduccionAFP_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="dafp_Id" Type="int" Mode="In" />
@@ -7523,6 +7546,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="dafp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="dafp_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="dafp_DeducirISR" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="dex_IdDeduccionesExtra" Type="int" Mode="In" />
@@ -7543,6 +7567,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="dex_Cuota" Type="decimal" Mode="In" />
           <Parameter Name="dex_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="dex_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="dex_DeducirISR" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="dex_IdDeduccionesExtra" Type="int" Mode="In" />
@@ -7554,6 +7579,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="dex_Cuota" Type="decimal" Mode="In" />
           <Parameter Name="dex_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="dex_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="dex_DeducirISR" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbDeduccionesIndividuales_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="dei_IdDeduccionesIndividuales" Type="int" Mode="In" />
@@ -7575,6 +7601,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="dei_Pagado" Type="bit" Mode="In" />
           <Parameter Name="dei_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="dei_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="dei_DeducirISR" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbDeduccionesIndividuales_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="dei_IdDeduccionesIndividuales" Type="int" Mode="In" />
@@ -7586,6 +7613,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="dei_PagaSiempre" Type="bit" Mode="In" />
           <Parameter Name="dei_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="dei_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="dei_DeducirISR" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbEmpleadoBonos_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cb_Id" Type="int" Mode="In" />
@@ -11581,6 +11609,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
             <End Role="tbHistorialContrataciones" EntitySet="tbHistorialContrataciones" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbAcumuladosISR" EntitySet="tbAcumuladosISR" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAdelantoSueldo_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAdelantoSueldo_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbAdelantoSueldo" EntitySet="tbAdelantoSueldo" />
@@ -12117,6 +12149,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="aisr_Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbAcumuladosISR_aisr_UsuarioCrea" FromRole="tbAcumuladosISR" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbAcumuladosISR_aisr_UsuarioModifica" FromRole="tbAcumuladosISR" ToRole="tbUsuario" />
+          <Property Name="aisr_DeducirISR" Type="Boolean" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" FromRole="tbAcumuladosISR" ToRole="tbEmpleados" />
         </EntityType>
         <EntityType Name="tbAdelantoSueldo">
           <Key>
@@ -12293,6 +12328,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioModifica" FromRole="tbDeduccionAFP" ToRole="tbUsuario" />
           <NavigationProperty Name="tbAFP" Relationship="Self.FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id" FromRole="tbDeduccionAFP" ToRole="tbAFP" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" FromRole="tbDeduccionAFP" ToRole="tbEmpleados" />
+          <Property Name="dafp_DeducirISR" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbDeduccionesExtraordinarias">
           <Key>
@@ -12314,6 +12350,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioModifica" FromRole="tbDeduccionesExtraordinarias" ToRole="tbUsuario" />
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionesExtraordinarias_cde_IdDeducciones" FromRole="tbDeduccionesExtraordinarias" ToRole="tbCatalogoDeDeducciones" />
           <NavigationProperty Name="tbEquipoEmpleados" Relationship="Self.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" FromRole="tbDeduccionesExtraordinarias" ToRole="tbEquipoEmpleados" />
+          <Property Name="dex_DeducirISR" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbDeduccionInstitucionFinanciera">
           <Key>
@@ -12336,6 +12373,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionInstitucionFinanciera_cde_IdDeducciones" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbCatalogoDeDeducciones" />
           <NavigationProperty Name="tbInstitucionesFinancieras" Relationship="Self.FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbInstitucionesFinancieras" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbEmpleados" />
+          <Property Name="deif_DeducirISR" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbEmpleadoBonos">
           <Key>
@@ -12774,6 +12812,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbDirectoriosEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbDirectoriosEmpleados_emp_Id" FromRole="tbEmpleados" ToRole="tbDirectoriosEmpleados" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoComisiones_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoComisiones" />
           <NavigationProperty Name="tbDeduccionesIndividuales" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionesIndividuales" />
+          <NavigationProperty Name="tbAcumuladosISR" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" FromRole="tbEmpleados" ToRole="tbAcumuladosISR" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -19660,6 +19699,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="aisr_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="aisr_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="aisr_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="aisr_DeducirISR" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAcumuladosISR_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Update_Result)">
             <Parameter Name="aisr_Id" Mode="In" Type="Int32" />
@@ -19667,6 +19708,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="aisr_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="aisr_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aisr_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="aisr_DeducirISR" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAdelantoSueldo_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAdelantoSueldo_Activar_Result)">
             <Parameter Name="adsu_IdAdelantoSueldo" Mode="In" Type="Int32" />
@@ -19841,6 +19884,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dafp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dafp_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="dafp_DeducirISR" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Update_Result)">
             <Parameter Name="dafp_Id" Mode="In" Type="Int32" />
@@ -19849,6 +19893,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dafp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dafp_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="dafp_DeducirISR" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result)">
             <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
@@ -19869,6 +19914,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
             <Parameter Name="dex_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="dex_DeducirISR" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result)">
             <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
@@ -19880,6 +19926,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
             <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="dex_DeducirISR" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Activar_Result)">
             <Parameter Name="dei_IdDeduccionesIndividuales" Mode="In" Type="Int32" />
@@ -19901,6 +19948,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="dei_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="dei_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="dei_DeducirISR" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Update_Result)">
             <Parameter Name="dei_IdDeduccionesIndividuales" Mode="In" Type="Int32" />
@@ -19912,6 +19960,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="dei_PagaSiempre" Mode="In" Type="Boolean" />
             <Parameter Name="dei_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="dei_DeducirISR" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Activar_Result)">
             <Parameter Name="cb_Id" Mode="In" Type="Int32" />
@@ -21570,6 +21619,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </FunctionImport>
           <EntitySet Name="V_tbPagoDeCesantiaDetalle" EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" />
           <EntitySet Name="V_tbPagoDeCesantiaDetalle_Preview" EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" />
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbAcumuladosISR" EntitySet="tbAcumuladosISR" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -23167,6 +23220,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea" FromRole="tbDeduccionesIndividuales" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioModifica" FromRole="tbDeduccionesIndividuales" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" FromRole="tbDeduccionesIndividuales" ToRole="tbEmpleados" />
+          <Property Name="dei_DeducirISR" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesIndividuales_dei_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -23479,6 +23533,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="NoDeCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbAcumuladosISR" Role="tbAcumuladosISR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbAcumuladosISR">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -23567,6 +23633,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbAcumuladosISR">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbAcumuladosISR">
               <MappingFragment StoreEntitySet="tbAcumuladosISR">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="aisr_DeducirISR" ColumnName="aisr_DeducirISR" />
                 <ScalarProperty Name="aisr_Id" ColumnName="aisr_Id" />
                 <ScalarProperty Name="aisr_Descripcion" ColumnName="aisr_Descripcion" />
                 <ScalarProperty Name="aisr_Monto" ColumnName="aisr_Monto" />
@@ -23707,6 +23775,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbDeduccionAFP">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionAFP">
               <MappingFragment StoreEntitySet="tbDeduccionAFP">
+                <ScalarProperty Name="dafp_DeducirISR" ColumnName="dafp_DeducirISR" />
                 <ScalarProperty Name="dafp_Id" ColumnName="dafp_Id" />
                 <ScalarProperty Name="dafp_AporteLps" ColumnName="dafp_AporteLps" />
                 <ScalarProperty Name="afp_Id" ColumnName="afp_Id" />
@@ -23723,6 +23792,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbDeduccionesExtraordinarias">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionesExtraordinarias">
               <MappingFragment StoreEntitySet="tbDeduccionesExtraordinarias">
+                <ScalarProperty Name="dex_DeducirISR" ColumnName="dex_DeducirISR" />
                 <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
                 <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
                 <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
@@ -23741,6 +23811,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbDeduccionInstitucionFinanciera">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionInstitucionFinanciera">
               <MappingFragment StoreEntitySet="tbDeduccionInstitucionFinanciera">
+                <ScalarProperty Name="deif_DeducirISR" ColumnName="deif_DeducirISR" />
                 <ScalarProperty Name="deif_IdDeduccionInstFinanciera" ColumnName="deif_IdDeduccionInstFinanciera" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="insf_IdInstitucionFinanciera" ColumnName="insf_IdInstitucionFinanciera" />
@@ -28462,6 +28533,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbDeduccionesIndividuales">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionesIndividuales">
               <MappingFragment StoreEntitySet="tbDeduccionesIndividuales">
+                <ScalarProperty Name="dei_DeducirISR" ColumnName="dei_DeducirISR" />
                 <ScalarProperty Name="dei_Activo" ColumnName="dei_Activo" />
                 <ScalarProperty Name="dei_FechaModifica" ColumnName="dei_FechaModifica" />
                 <ScalarProperty Name="dei_UsuarioModifica" ColumnName="dei_UsuarioModifica" />

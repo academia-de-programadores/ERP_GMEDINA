@@ -86,7 +86,7 @@ namespace ERP_GMEDINA.Controllers
                                                                           tbDeduccionAFP.afp_Id,
                                                                           tbDeduccionAFP.emp_Id,
                                                                           tbDeduccionAFP.dafp_UsuarioCrea,
-                                                                          tbDeduccionAFP.dafp_FechaCrea);
+                                                                          tbDeduccionAFP.dafp_FechaCrea, true);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Insert_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;
@@ -180,7 +180,7 @@ namespace ERP_GMEDINA.Controllers
                                                                           tbDeduccionAFP.afp_Id,
                                                                           tbDeduccionAFP.emp_Id,
                                                                           tbDeduccionAFP.dafp_UsuarioModifica,
-                                                                          tbDeduccionAFP.dafp_FechaModifica);
+                                                                          tbDeduccionAFP.dafp_FechaModifica, true);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Update_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;

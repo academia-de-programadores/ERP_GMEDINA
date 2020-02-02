@@ -51,7 +51,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //INICIALIZACION DEL OBJETO TIPO V_tbPagoDeCesantiaDetalle
                 V_tbPagoDeCesantiaDetalle ModelPagoDeCesantiaDetalle = new V_tbPagoDeCesantiaDetalle();
-                //SETEAR LOS CAMPOS PARA MOSTRAR LA PROYECCIÓN 
+                //SETEAR LOS CAMPOS PARA MOSTRAR LA PROYECCIÓN
                 ModelPagoDeCesantiaDetalle.IdCesantia = iter;
                 ModelPagoDeCesantiaDetalle.NoIdentidad = item.NoIdentidad;
                 ModelPagoDeCesantiaDetalle.NombreCompleto = item.NombreCompleto;

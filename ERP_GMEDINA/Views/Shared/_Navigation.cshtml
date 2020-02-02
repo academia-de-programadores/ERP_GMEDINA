@@ -271,7 +271,7 @@
                         <a href="@Url.Action("Index", "Menu",new {idmenu = 1 })"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Inicio</span></a>
                     </li>
 
-                    <li class="@Html.IsSelected(controller: "Planilla")  @Html.IsSelected(controller: "CatalogoDePlanillas")  @Html.IsSelected(controller: "DecimoCuartoMes")  @Html.IsSelected(controller: "DecimoTercerMes") @Html.IsSelected(controller: "Liquidacion") @Html.IsSelected(controller: "FechaPlanilla")">
+                    <li class="@Html.IsSelected(controller: "Planilla")  @Html.IsSelected(controller: "CatalogoDePlanillas")  @Html.IsSelected(controller: "DecimoCuartoMes")  @Html.IsSelected(controller: "DecimoTercerMes") @Html.IsSelected(controller: "Liquidacion") @Html.IsSelected(controller: "FechaPlanilla") @Html.IsSelected(controller: "PagoDeCesantiaDetalle")">
                         <a href="#"><i class="fa fa-group"></i> <span class="nav-label" data-i18n="nav.dashboard">Planilla</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "CatalogoDePlanillas", cssClass: "in") @Html.IsSelected(controller: "DecimoCuartoMes", cssClass: "in") @Html.IsSelected(controller: "DecimoTercerMes", cssClass: "in") @Html.IsSelected(controller: "Planilla", cssClass: "in")">
                             <li class="@Html.IsSelected(controller: "Planilla")"><a href="@Url.Action("index", "Planilla")">Generar Planillas</a></li>
