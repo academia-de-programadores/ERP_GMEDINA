@@ -541,6 +541,31 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     let dei_DeducirISR = $("#Crear #dei_DeducirISR").val();
     //#endregion
 
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Crear #dei_Monto").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateado = parseFloat(MontoFormateado);
+
+
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Crear #dei_MontoCuota").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateadoMontoCuota = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateadoMontoCuota += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateadoMontoCuota = parseFloat(MontoFormateadoMontoCuota);
+
     //Obtener valor del checkbox
     if ($('#Crear #dei_PagaSiempre').is(':checked')) {
         dei_PagaSiempre = true;
@@ -560,7 +585,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     if (estaTodoValidado("Crear")) {
         document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
 
-        var data = { dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: dei_Monto, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: dei_MontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
+        var data = { dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: MontoFormateado, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: MontoFormateadoMontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -698,9 +723,9 @@ $(document).on("click", "#Tabla tbody tr td #btnEditarDeduccionesIndividuales", 
 
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
-                $("#Editar #dei_Monto").val(data.dei_MontoInicial);
-                $("#Editar #dei_NumeroCuotas").val(data.dei_MontoRestante);
-                $("#Editar #dei_MontoCuota").val(data.dei_Cuota);
+                $("#Editar #dei_Monto").val(data.dei_Monto);
+                $("#Editar #dei_NumeroCuotas").val(data.dei_NumeroCuotas);
+                $("#Editar #dei_MontoCuota").val(data.dei_MontoCuota);
                 $("#Editar #dei_PagaSiempre").val(data.dei_PagaSiempre);
                 $("#Editar #dei_DeducirISR").val(data.dei_DeducirISR);
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
@@ -736,6 +761,31 @@ $("#btnEditDeduccionIndividual2").click(function () {
     var dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
     var dei_DeducirISR = $("#Editar #dei_DeducirISR").val();
 
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Editar #dei_Monto").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateado = parseFloat(MontoFormateado);
+
+
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Editar #dei_MontoCuota").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoFormateadoMontoCuota = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoFormateadoMontoCuota += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoFormateadoMontoCuota = parseFloat(MontoFormateadoMontoCuota);
+
     if ($('#Editar #dei_PagaSiempre').is(':checked')) {
         dei_PagaSiempre = true;
     }
@@ -750,7 +800,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
         dei_DeducirISR = false;
     }
 
-    var data = { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: dei_Monto, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: dei_MontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
+    var data = { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: MontoFormateado, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: MontoFormateadoMontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
 
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
