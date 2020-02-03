@@ -64,7 +64,7 @@ function cargarGridComisiones() {
                 $('#tblEmpleadoComisiones').dataTable().fnAddData([
                     ListaComisiones[i].cc_Id,
                     ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos,
-                    ListaComisiones[i].cin_DescripcionIngreso,  
+                    ListaComisiones[i].cin_DescripcionIngreso,
                     (ListaComisiones[i].cc_TotalVenta % 1 == 0) ? ListaComisiones[i].cc_TotalVenta + ".00" : ListaComisiones[i].cc_TotalVenta,
                     (ListaComisiones[i].cc_TotalComision % 1 == 0) ? ListaComisiones[i].cc_TotalComision + ".00" : ListaComisiones[i].cc_TotalComision,
                     FechaRegistro,
@@ -117,9 +117,7 @@ $(document).ready(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    let valCreate = $("#Crear #emp_IdEmpleado").val();
-    if (valCreate != null && valCreate != "")
-        $("#Crear #emp_IdEmpleado").val('').trigger('change');
+    $("#Crear #emp_IdEmpleado").val('').trigger('change');
     //OCULTAR VALIDACIONES
     OcultarValidacionesCrear();
     //DESBLOQUEAR EL BOTON DE CREAR
@@ -157,7 +155,6 @@ $('#btnCreateRegistroComisiones').click(function () {
 
         //BLOQUEAR EL BOTON DE CREAR
         $("#btnCreateRegistroComisiones").attr("disabled", true);
-        debugger;
         //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
         var indicest = $("#Crear #TotalVenta").val().split(",");
         //VARIABLE CONTENEDORA DEL TOTAL
@@ -174,7 +171,6 @@ $('#btnCreateRegistroComisiones').click(function () {
             cin_IdIngreso: $("#Crear #cin_IdIngreso").val(),
             cc_TotalVenta: TotalFormateado,
         };
-        debugger;
 
         //REALIZAR LA PETICION AL SERVIDOR
         $.ajax({
@@ -206,7 +202,6 @@ $('#btnCreateRegistroComisiones').click(function () {
                         message: '¡El registro se agregó de forma exitosa!',
                     });
                 }
-                debugger;
             });
     }
 
@@ -276,7 +271,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
                 $("#Editar #cc_Id").val(data.cc_Id);
                 $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
-                debugger;
+       
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdIng = data.cin_IdIngreso;
@@ -318,8 +313,6 @@ $('#btnUpdateComisionesConfirmar').click(function () {
     var Colaborador = $("#Editar #emp_Id").val();
     var idIngreso = $("#Editar #cin_IdIngreso").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();
-
-    debugger;
     if (ValidarCamposEditar(Colaborador, idIngreso, TotalVenta)) {
         $("#EditarEmpleadoComisiones").modal('hide');
         //DESBLOQUEAR EL BOTON
@@ -351,22 +344,15 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
 
 
     //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
-    var indicest = $("#Editar #cc_TotalVenta").val().split(",");
-    //VARIABLE CONTENEDORA DEL TOTAL
-    var TotalFormateado = "";
-    //ITERAR LOS INDICES DEL ARRAY TOTAL
-    for (var i = 0; i < indicest.length; i++) {
-        //SETEAR LA VARIABLE DE TOTAL
-        TotalFormateado += indicest[i];
-    }
-    TotalFormateado = parseFloat(TotalFormateado);
+    var indicest = $("#Editar #cc_TotalVenta").val().replace(/,/g, '');;
 
+    //ITERAR LOS INDICES DEL ARRAY TOTAL
     var data = {
         cc_Id: $("#Editar #cc_Id").val(),
         emp_Id: $("#Editar #emp_Id").val(),
         cin_IdIngreso: $("#Editar #cin_IdIngreso").val(),
         //cc_PorcentajeComision: PorcentajeFormateado,
-        cc_TotalVenta: TotalFormateado
+        cc_TotalVenta: indicest
     };
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN   
     $.ajax({
