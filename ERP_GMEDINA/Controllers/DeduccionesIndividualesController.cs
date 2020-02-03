@@ -41,7 +41,8 @@ namespace ERP_GMEDINA.Controllers
                     dei_UsuarioCrea = d.dei_UsuarioCrea,
                     dei_FechaCrea = d.dei_FechaCrea,
                     dei_UsuarioModifica = d.dei_UsuarioModifica,
-                    dei_FechaModifica = d.dei_FechaModifica
+                    dei_FechaModifica = d.dei_FechaModifica,
+                    dei_DeducirISR = d.dei_DeducirISR
                 })
                 .OrderBy(d => d.dei_FechaCrea)
                 .ToList();
@@ -62,7 +63,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre)
+        public ActionResult Create(string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre, bool dei_DeducirISR)
         {
             tbDeduccionesIndividuales tbDeduccionesIndividuales = new tbDeduccionesIndividuales
             {
@@ -71,13 +72,14 @@ namespace ERP_GMEDINA.Controllers
                 dei_Monto = dei_Monto,
                 dei_NumeroCuotas = dei_NumeroCuotas,
                 dei_MontoCuota = dei_MontoCuota,
-                dei_PagaSiempre = dei_PagaSiempre
+                dei_PagaSiempre = dei_PagaSiempre,
+                dei_DeducirISR = dei_DeducirISR
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbDeduccionesIndividuales.dei_UsuarioCrea = 1;
             tbDeduccionesIndividuales.dei_FechaCrea = DateTime.Now;
-            tbDeduccionesIndividuales.dei_Pagado = false;
-            tbDeduccionesIndividuales.dei_DeducirISR = false;
+            //tbDeduccionesIndividuales.dei_Pagado = false;
+            //tbDeduccionesIndividuales.dei_DeducirISR = false;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listDeduccionIndividuales = null;
@@ -152,7 +154,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int dei_IdDeduccionesIndividuales, string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre)
+        public ActionResult Edit(int dei_IdDeduccionesIndividuales, string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre, bool dei_DeducirISR)
         {
             tbDeduccionesIndividuales tbDeduccionesIndividuales = new tbDeduccionesIndividuales
             {
@@ -162,7 +164,8 @@ namespace ERP_GMEDINA.Controllers
                 dei_Monto = dei_Monto,
                 dei_NumeroCuotas = dei_NumeroCuotas,
                 dei_MontoCuota = dei_MontoCuota,
-                dei_PagaSiempre = dei_PagaSiempre
+                dei_PagaSiempre = dei_PagaSiempre,
+                dei_DeducirISR = dei_DeducirISR
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbDeduccionesIndividuales.dei_UsuarioModifica = 1;

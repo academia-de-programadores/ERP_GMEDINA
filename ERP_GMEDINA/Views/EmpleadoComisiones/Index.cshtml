@@ -37,7 +37,6 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_Id)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Nombre</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso)</th>
-
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_TotalVenta)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_TotalComision)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_FechaRegistro)</th>
@@ -60,17 +59,17 @@
                                             string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
                                             decimal PorcentajeDecimal = Convert.ToDecimal(item.cc_TotalComision);
                                         }
-                                        @Html.HiddenFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
                                         @Nombre
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.tbCatalogoDeIngresos.cin_DescripcionIngreso)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => PorcentajeDecimal)
-                                    </td>
+                                    
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cc_TotalVenta)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => PorcentajeDecimal)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cc_FechaRegistro)

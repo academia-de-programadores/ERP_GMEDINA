@@ -32,6 +32,10 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> aisr_FechaModifica { get; set; }
         [Display(Name = "Activo")]
         public bool aisr_Activo { get; set; }
+        [Display(Name = "Incluir para el ISR")]
+        public bool aisr_DeducirISR { get; set; }
+        [Display(Name = "Empleado")]
+        public int emp_Id { get; set; }
 
         [Display(Name = "Creado por")]
         public virtual tbUsuario tbUsuario { get; set; }

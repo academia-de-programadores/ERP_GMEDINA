@@ -110,6 +110,7 @@ function cargarGridDeducciones() {
                     ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
                     (ListaIngresoIndividual[i].ini_Monto % 1 == 0) ? ListaIngresoIndividual[i].ini_Monto + ".00" : ListaIngresoIndividual[i].ini_Monto,
                     estadoRegistro,
+                    ListaIngresoIndividual[i].ini_comentario,
                     botonDetalles + botonEditar + botonActivar
                 ]);
                 }
@@ -187,6 +188,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
     $('#Crear #ini_PagaSiempre').prop('checked', false);
+    $("#Crear #ini_comentario").val('');
     //VALIDAR EL DDL
     let valCreate = $("#Crear #emp_IdCrear").val();
     if (valCreate != null && valCreate != "")
@@ -203,6 +205,8 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var Monto = $("#Crear #ini_Monto").val();
     var IdEmp = $("#Crear #emp_IdCrear").val();
     var ini_PagaSiempre = false;
+    var comentario = document.getElementById("ini_comentario").value;//$("#Crear #ini_comentario").val();
+    console.log(comentario);
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
     var indices = $("#Crear #ini_Monto").val().split(",");
     //VARIABLE CONTENEDORA DEL MONTO
@@ -226,7 +230,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
    
     if (ValidarCamposCrear(Motivo, IdEmp, Monto)) {
         document.getElementById("btnCreateRegistroIngresoIndividual").disabled = true;
-        var data = { ini_Motivo: Motivo, emp_Id: IdEmp, ini_Monto: MontoFormateado, ini_PagaSiempre: ini_PagaSiempre };
+        var data = { ini_Motivo: Motivo, emp_Id: IdEmp, ini_Monto: MontoFormateado, ini_PagaSiempre: ini_PagaSiempre, ini_comentario: comentario };
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -239,6 +243,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 $("#Crear #ini_Motivo").val('');
                 $("#Crear #ini_Monto").val('');
                 $('#Crear #ini_PagaSiempre').prop('checked', false);
+                $("#Crear #ini_comentario").val('');
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarIngresosIndividuales").modal('hide');
                 OcultarValidaciones();
@@ -443,6 +448,9 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales"
                 $("#Editar #ini_Motivo").val(data.ini_Motivo);
                 $("#Editar #ini_Monto").val(data.ini_Monto);
                 $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
+                $("#Editar #ini_comentario").val(data.ini_comentario);
+                console.log("Data que recoje de la row " + data.ini_comentario);
+
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 //var SelectedId = data.emp_Id;
@@ -494,6 +502,8 @@ $("#btnEditIngresoIndividual").click(function () {
     var Motivo = $("#Editar #ini_Motivo").val();
     var IdColaborador = $("#Editar #emp_Id").val();
     var Monto = $("#Editar #ini_Monto").val();
+    //var comentario = document.getElementById("ini_comentario").value;
+
 
     if (ValidarCamposEditar(Motivo, IdColaborador, Monto)) {
         $("#EditarIngresosIndividuales").modal('hide');
@@ -514,6 +524,10 @@ $("#btnEditIngresoIndividual2").click(function () {
     var emp_Id = $("#Editar #emp_Id").val();
     var ini_Motivo = $("#Editar #ini_Motivo").val();
     var ini_Monto = $("#Editar #ini_Monto").val();
+    //var comentario1 = $("#ini_comentario").val();
+    //console.log(comentario1);
+    var comentario = $("#Editar #ini_comentario").val(); //document.getElementById("ini_comentario").value;
+    console.log(comentario);
 
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
     var indices = $("#Editar #ini_Monto").val().split(",");
@@ -535,7 +549,7 @@ $("#btnEditIngresoIndividual2").click(function () {
         ini_PagaSiempre = false;
     }
 
-    var data = { ini_IdIngresosIndividuales: ini_IdIngresosIndividuales, ini_Motivo: ini_Motivo, emp_Id: emp_Id, ini_Monto: MontoFormateado, ini_PagaSiempre: ini_PagaSiempre };
+    var data = { ini_IdIngresosIndividuales: ini_IdIngresosIndividuales, ini_Motivo: ini_Motivo, emp_Id: emp_Id, ini_Monto: MontoFormateado, ini_PagaSiempre: ini_PagaSiempre, ini_comentario: comentario };
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/IngresosIndividuales/Edit",
@@ -701,6 +715,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnDetalleIngresosIndividuales
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#Detalles #ini_UsuarioModifica").html(data[0].dei_UsuarioModifica);
                 $("#Detalles #ini_FechaModifica").html(FechaModifica);
+                $("#Detalles #ini_comentario").html(data[0].ini_comentario);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].emp_Id;

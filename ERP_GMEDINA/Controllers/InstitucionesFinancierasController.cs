@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
                             insf_Activo = c.insf_Activo
                         })
                         .ToList();
-            
+
             // retornar data obtenida 
             return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -58,12 +58,12 @@ namespace ERP_GMEDINA.Controllers
             tbInstitucionesFinancieras.insf_UsuarioCrea = 1;
             tbInstitucionesFinancieras.insf_FechaCrea = DateTime.Now;
             tbInstitucionesFinancieras.insf_Activo = true;
-            
+
             // variables de resultados
             string response = "bien";
             IEnumerable<object> listInstitucionesFinancieras = null;
             string MensajeError = "";
-            
+
             // validar si el modelo es válido
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                                   tbInstitucionesFinancieras.insf_UsuarioCrea,
                                                                                                   tbInstitucionesFinancieras.insf_FechaCrea,
                                                                                                   tbInstitucionesFinancieras.insf_Activo);
-                    
+
                     // obtener resultado del procedimiento almacendo
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Insert_Result Resultado in listInstitucionesFinancieras)
                         MensajeError = Resultado.MensajeError;
@@ -119,18 +119,20 @@ namespace ERP_GMEDINA.Controllers
             // obtener objeto con el ID recibido
             var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras
                                                 .Where(d => d.insf_IdInstitucionFinanciera == id)
-                                                .Select(c => new { insf_IdInstitucionFinanciera = c.insf_IdInstitucionFinanciera,
-                                                                   insf_Descripcion = c.insf_DescInstitucionFinanc,
-                                                                   insf_Contacto = c.insf_Contacto,
-                                                                   insf_Telefono = c.insf_Telefono,
-                                                                   insf_Correo = c.insf_Correo,
-                                                                   insf_UsuarioCrea = c.insf_UsuarioCrea,
-                                                                   insf_FechaCrea = c.insf_FechaCrea,
-                                                                   insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
-                                                                   insf_UsuarioModifica = c.insf_UsuarioModifica,
-                                                                   insf_FechaModifica = c.insf_FechaModifica,
-                                                                   insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
-                                                                   insf_Activo = c.insf_Activo })
+                                                .Select(c => new {
+                                                    insf_IdInstitucionFinanciera = c.insf_IdInstitucionFinanciera,
+                                                    insf_Descripcion = c.insf_DescInstitucionFinanc,
+                                                    insf_Contacto = c.insf_Contacto,
+                                                    insf_Telefono = c.insf_Telefono,
+                                                    insf_Correo = c.insf_Correo,
+                                                    insf_UsuarioCrea = c.insf_UsuarioCrea,
+                                                    insf_FechaCrea = c.insf_FechaCrea,
+                                                    insf_UsuarioCrea_Nombres = c.tbUsuario.usu_NombreUsuario,
+                                                    insf_UsuarioModifica = c.insf_UsuarioModifica,
+                                                    insf_FechaModifica = c.insf_FechaModifica,
+                                                    insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
+                                                    insf_Activo = c.insf_Activo
+                                                })
                                                 .ToList();
 
             // si no existe un registro con ese ID, retornar error
@@ -228,7 +230,7 @@ namespace ERP_GMEDINA.Controllers
                                                     insf_FechaModifica = c.insf_FechaModifica,
                                                     insf_UsuarioModifica_Nombres = c.tbUsuario1.usu_NombreUsuario,
                                                     insf_Activo = c.insf_Activo
-                                                }).ToList();            
+                                                }).ToList();
 
             // retornar objeto
             return Json(tbInstitucionesFinancieras, JsonRequestBehavior.AllowGet);
@@ -311,7 +313,8 @@ namespace ERP_GMEDINA.Controllers
                     response = "error";
                 }
             }
-            else {
+            else
+            {
                 // el modelo no es válido
                 response = "error";
             }
@@ -360,7 +363,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: CARGAR DOCUMENTO
         [HttpPost]
-        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS,string cboIdDeduccion)
+        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS, string cboIdDeduccion)
         {
             string response = String.Empty;
             string MensajeError = "";
@@ -375,7 +378,7 @@ namespace ERP_GMEDINA.Controllers
 
                 try
                 {
-                    List<int> idsDeducciones = db.tbCatalogoDeDeducciones.Where(x => x.cde_Activo == true).Select(x=> x.cde_IdDeducciones).ToList();
+                    List<int> idsDeducciones = db.tbCatalogoDeDeducciones.Where(x => x.cde_Activo == true).Select(x => x.cde_IdDeducciones).ToList();
                     List<int> idsINFS = db.tbInstitucionesFinancieras.Where(x => x.insf_Activo == true).Select(x => x.insf_IdInstitucionFinanciera).ToList();
 
                     int idCatDeduc = Convert.ToInt16(cboIdDeduccion);
@@ -402,21 +405,35 @@ namespace ERP_GMEDINA.Controllers
                             int iRow = 2;
                             while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
                             {
+                                bool DeducirISR = false;
                                 string identidad = sl.GetCellValueAsString(iRow, 1);
                                 decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
                                 string comentario = sl.GetCellValueAsString(iRow, 3);
+                                string deducirisr = sl.GetCellValueAsString(iRow, 6);
 
+                                if (deducirisr == "Si")
+                                {
+                                    DeducirISR = true;
+                                }
+                                else if (deducirisr == "No" || deducirisr == "")
+                                {
+                                    DeducirISR = false;
+                                }
+                                else
+                                {
+                                    DeducirISR = false;
+                                }
 
                                 var oMiExcel = new tbDeduccionInstitucionFinanciera();
 
                                 var IdEmpleado = (from P in db.tbPersonas
-                                             join E in db.tbEmpleados on P.per_Id equals E.per_Id
-                                             where
-                                             P.per_Identidad == identidad
-                                             select new
-                                             {
-                                                 empleadoID = E.emp_Id,
-                                             }).FirstOrDefault();
+                                                  join E in db.tbEmpleados on P.per_Id equals E.per_Id
+                                                  where
+                                                  P.per_Identidad == identidad
+                                                  select new
+                                                  {
+                                                      empleadoID = E.emp_Id,
+                                                  }).FirstOrDefault();
                                 var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).DefaultIfEmpty(0).Max();
                                 var iddeducfin = sql + 1;
 
@@ -436,6 +453,7 @@ namespace ERP_GMEDINA.Controllers
                                     oMiExcel.deif_FechaModifica = null;
                                     oMiExcel.deif_Activo = true;
                                     oMiExcel.deif_Pagado = false;
+                                    oMiExcel.deif_DeducirISR = DeducirISR;
                                     db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
                                     db.SaveChanges();
                                 }
@@ -451,7 +469,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    response="error";
+                    response = "error";
                 }
             }
             else

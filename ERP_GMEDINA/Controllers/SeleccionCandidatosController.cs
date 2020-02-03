@@ -404,7 +404,7 @@
 //                    {
 //                        var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
 //                        tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-//                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
+//                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, 1, DateTime.Now);
 //                        foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
 //                        {
 //                            msj = item.MensajeError + " ";

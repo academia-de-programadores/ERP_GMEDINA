@@ -264,7 +264,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
     //VALIDACIONES DEL CAMPO EMP_ID
     if (IdEmp != "-1") {
-        if (IdEmp == 0) {
+        if (IdEmp == null || IdEmp == "") {
             Local_modelState = false;
             $("#Crear #AsteriscoColaborador").addClass("text-danger");
             $("#Crear #Span_emp_Id").css("display", "");
@@ -577,7 +577,7 @@ $("#btnUpdateAdelantos").click(function () {
     //OBTENER EL ID DEL EMPLEADO
     var Razon = $("#Editar #adsu_RazonAdelanto").val();
     var Monto = $("#Editar #adsu_Monto").val();
-    var IdEmp = $("#Editar #emp_Id").children("option:selected").val();
+    var IdEmp = $("#Editar #emp_Id").val();
 
     //DESBLOQUEAR EL BOTON DE EDICION
     $("#btnConfirmarEditar").attr("disabled", false);
@@ -682,7 +682,7 @@ function ValidarCamposEditar(colaborador, razon, monto) {
 
     if (colaborador != "-1") {
 
-        if (colaborador <= 0 || isNaN(colaborador)) {
+        if (colaborador == null || colaborador == "") {
             pasoValidacion = false;
             $('#Editar #Span_emp_Id').show();
             $("#Editar #AsteriscoColaborador").addClass("text-danger");
