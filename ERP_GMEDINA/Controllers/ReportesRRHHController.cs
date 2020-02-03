@@ -666,7 +666,7 @@ namespace ERP_GMEDINA.Controllers
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             try
             {
-                ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true), "fare_Id", "fare_Descripcion");
+                ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true).OrderBy(x => x.fare_Descripcion), "fare_Id", "fare_Descripcion");
                 // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
                 return View();
             }
@@ -815,10 +815,10 @@ namespace ERP_GMEDINA.Controllers
                 //ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
                 //ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
 
-                ViewBag.Jornadas = new SelectList(db.tbJornadas.Where(o => o.jor_Estado == true), "jor_Id", "jor_Descripcion");
-                ViewBag.Departamentos = new SelectList(db.tbDepartamentos.Where(o => o.depto_Estado == true), "depto_Id", "depto_Descripcion");
-                ViewBag.areas = new SelectList(db.tbAreas.Where(o => o.area_Estado == true), "area_Id", "area_Descripcion");
-                ViewBag.Sucursales = new SelectList(db.tbSucursales.Where(o => o.suc_Estado == true), "suc_Id", "suc_Descripcion");
+                ViewBag.Jornadas = new SelectList(db.tbJornadas.Where(o => o.jor_Estado == true).OrderBy(x => x.jor_Descripcion),, "jor_Id", "jor_Descripcion");
+                ViewBag.Departamentos = new SelectList(db.tbDepartamentos.Where(o => o.depto_Estado == true).OrderBy(x => x.depto_Descripcion), "depto_Id", "depto_Descripcion");
+                ViewBag.areas = new SelectList(db.tbAreas.Where(o => o.area_Estado == true).OrderBy(x => x.area_Descripcion), "area_Id", "area_Descripcion");
+                ViewBag.Sucursales = new SelectList(db.tbSucursales.Where(o => o.suc_Estado == true).OrderBy(x => x.area_Descripcion),.OrderBy(x => x.suc_Descripcion), "suc_Id", "suc_Descripcion");
                 return View();
             }
             catch
@@ -909,8 +909,8 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
-                ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
-                ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
+                ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true).OrderBy(x => x.tamo_Descripcion), "tamo_Id", "tamo_Descripcion");
+                ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados.OrderBy(x => x.nombre), "per_Identidad", "nombre");
                 return View();
             }
             catch
@@ -1067,8 +1067,8 @@ namespace ERP_GMEDINA.Controllers
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             try
             {
-                ViewBag.tbEquipoTrabajo = new SelectList(db.tbEquipoTrabajo.Where(o => o.eqtra_Estado == true), "eqtra_Id", "eqtra_Descripcion");
-                ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                ViewBag.tbEquipoTrabajo = new SelectList(db.tbEquipoTrabajo.Where(o => o.eqtra_Estado == true).OrderBy(x => x.eqtra_Descripcion), "eqtra_Id", "eqtra_Descripcion");
+                ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true).OrderBy(x => x.per_NombreCompleto), "emp_Id", "per_NombreCompleto");
                 ViewBag.tbDepartamentos = new SelectList(db.tbDepartamentos.Where(x => x.depto_Estado == true), "depto_Id", "depto_Descripcion");
                 ViewBag.tbAreas = new SelectList(db.tbAreas.Where(x => x.area_Estado == true), "area_Id", "area_Descripcion");
                 ViewBag.tbCargos = new SelectList(db.tbCargos.Where(x => x.car_Estado == true), "car_Id", "car_Descripcion");
