@@ -13,12 +13,12 @@ var InactivarID = 0;
 
 //formato fecha
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
+    .done(function (script, textStatus) {
 
-  })
-  .fail(function (jqxhr, settings, exception) {
+    })
+    .fail(function (jqxhr, settings, exception) {
 
-  });
+    });
 
 // evitar postbacks
 $("#frmEditISR").submit(function (e) {
@@ -74,7 +74,7 @@ function cargarGridISR() {
                 ]);
             }
         }
-        });
+    });
     FullBody();
 }
 
@@ -215,8 +215,25 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
         });
 });
 
+$('#btnEditarISR').click(function () {
+    var rangoInicial = $("#Editar #isr_RangoInicial").val();
+    var rangoFinal = $("#Editar #isr_RangoFinal").val();
+    var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
+    var porcentaje = $("#Editar #isr_Porcentaje").val();
+    
+    if (DataAnnotationsEditar(rangoInicial, rangoFinal, tipoDeduccion, porcentaje)) {
+        $("#EditarISR").modal('hide');
+        $("#EditarISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
+    }
+});
+
+$('#btnRegresar').click(function(){
+    $("#EditarISRConfirmacion").modal('hide');
+    $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
+});
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditarISR").click(function () {
+$("#btnEditISR2").click(function () {
     var rangoInicial = $("#Editar #isr_RangoInicial").val();
     var rangoFinal = $("#Editar #isr_RangoFinal").val();
     var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
@@ -256,7 +273,7 @@ $("#btnEditarISR").click(function () {
                 //REFRESCAR LA DATA DEL DATATABLE
                 cargarGridISR();
                 //OCULTAR MODAL DE EDICION
-                $("#EditarISR").modal('hide');
+                $("#EditarISRConfirmacion").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
@@ -273,10 +290,6 @@ $("#btnCerrarEditar").click(function () {
     //OCULTAR MODAL DE EDITAR
     $("#EditarISR").modal('hide');
 });
-
-
-
-
 
 
 //DESPLEGAR MODAL DE INACTIVACION
@@ -564,18 +577,19 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
             $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
             $("#Crear #isr_RangoFinalValidacion").hide();
 
-            if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Crear #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
-                $("#Crear #AsteriscoRangoFinal").addClass("text-danger");
-                $("#Crear #isr_RangoFinalValidacion").empty();
-                $("#Crear #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
-                $("#Crear #isr_RangoFinalValidacion").show();
-                ModelState = false;
-            } else {
-                $("#Crear #isr_RangoFinalValidacion").empty();
-                $("#Crear #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
-                $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
-                $("#Crear #isr_RangoFinalValidacion").hide();
-            }
+            //Validacion rango final comentada
+            // if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Crear #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
+            //     $("#Crear #AsteriscoRangoFinal").addClass("text-danger");
+            //     $("#Crear #isr_RangoFinalValidacion").empty();
+            //     $("#Crear #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
+            //     $("#Crear #isr_RangoFinalValidacion").show();
+            //     ModelState = false;
+            // } else {
+            //     $("#Crear #isr_RangoFinalValidacion").empty();
+            //     $("#Crear #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
+            //     $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
+            //     $("#Crear #isr_RangoFinalValidacion").hide();
+            // }
 
         }
     }
@@ -643,19 +657,19 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
 
     if (RangoInicial != "-1") {
 
-        if (parseFloat(FormatearMonto(RangoInicial)) >= parseFloat(FormatearMonto($("#Editar #isr_RangoFinal").val()))) {
-            $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
-            $("#Editar #isr_RangoFinalValidacion").empty();
-            $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
-            $("#Editar #isr_RangoFinalValidacion").show();
-            ModelState = false;
-        }
-        else {
-            $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
-            $("#Editar #isr_RangoFinalValidacion").empty();
-            $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
-            $("#Editar #isr_RangoFinalValidacion").hide();
-        }
+        // if (parseFloat(FormatearMonto(RangoInicial)) >= parseFloat(FormatearMonto($("#Editar #isr_RangoFinal").val()))) {
+        //     $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
+        //     $("#Editar #isr_RangoFinalValidacion").empty();
+        //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
+        //     $("#Editar #isr_RangoFinalValidacion").show();
+        //     ModelState = false;
+        // }
+        // else {
+        //     $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
+        //     $("#Editar #isr_RangoFinalValidacion").empty();
+        //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
+        //     $("#Editar #isr_RangoFinalValidacion").hide();
+        // }
 
         //RANGO INICIAL
         if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined) {
@@ -693,19 +707,20 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
             $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
             $("#Editar #isr_RangoFinalValidacion").hide();
 
-            if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Editar #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
+            //Validacion rango final comentada
+            // if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Editar #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
 
-                $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
-                $("#Editar #isr_RangoFinalValidacion").empty();
-                $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
-                $("#Editar #isr_RangoFinalValidacion").show();
-                ModelState = false;
-            } else {
-                $("#Editar #isr_RangoFinalValidacion").empty();
-                $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
-                $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
-                $("#Editar #isr_RangoFinalValidacion").hide();
-            }
+            //     $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
+            //     $("#Editar #isr_RangoFinalValidacion").empty();
+            //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
+            //     $("#Editar #isr_RangoFinalValidacion").show();
+            //     ModelState = false;
+            // } else {
+            //     $("#Editar #isr_RangoFinalValidacion").empty();
+            //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
+            //     $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
+            //     $("#Editar #isr_RangoFinalValidacion").hide();
+            // }
 
         }
     }
