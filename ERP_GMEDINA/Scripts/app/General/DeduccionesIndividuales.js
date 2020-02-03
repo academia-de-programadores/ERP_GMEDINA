@@ -90,7 +90,7 @@ function cargarGridDeducciones() {
             var ListaDeduccionIndividual = data;
 
             //LIMPIAR LA DATA DEL DATATABLE
-            $('#IndexTabla').DataTable().clear();
+            $('#Tabla').DataTable().clear();
 
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionIndividual.length; i++) {
@@ -107,7 +107,7 @@ function cargarGridDeducciones() {
                 var botonActivar = ListaDeduccionIndividual[i].dei_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnActivarDeduccionesIndividuales" deiid="' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Activar</button>' : '' : '';
 
                 //AGREGAR EL ROW AL DATATABLE
-                $('#IndexTabla').dataTable().fnAddData([
+                $('#Tabla').dataTable().fnAddData([
                     ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales,
                     ListaDeduccionIndividual[i].dei_Motivo,
                     ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].per_Apellidos,
@@ -124,7 +124,7 @@ function cargarGridDeducciones() {
 }
 
 //#region  Activar
-$(document).on("click", "#IndexTabla tbody tr td #btnActivarDeduccionesIndividuales", function () {
+$(document).on("click", "#Tabla tbody tr td #btnActivarDeduccionesIndividuales", function () {
     document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = false;
     var id = $(this).data('id');
 
@@ -380,7 +380,12 @@ function estaTodoValidado(modal) {
     let dei_Monto = $("#" + modal + " #dei_Monto").val();
     let dei_NumeroCuotas = $("#" + modal + " #dei_NumeroCuotas").val();
     let dei_MontoCuota = $("#" + modal + " #dei_MontoCuota").val();
-    let emp_Id = $("#" + modal + " #emp_Id").val();
+    let emp_Id;
+    if (modal == "Crear")
+        emp_Id = $("#" + modal + " #emp_IdCreate").val();
+    else
+        emp_Id = $("#" + modal + " #emp_Id").val();
+
     //#endregion
 
     //#region Validar Motivo 
@@ -396,7 +401,7 @@ function estaTodoValidado(modal) {
     //#endregion
 
     //#region Validar DDL Empleados
-    if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
+    if (emp_Id == null || emp_Id == "") {
         $("#" + modal + " #valEmpId").css("display", "");
         $("#" + modal + " #astEmpId").css("color", "red");
         estaBien = false;
@@ -527,7 +532,7 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
 $('#btnCreateRegistroDeduccionIndividual').click(function () {
 
     //#region Declaracion de variables
-    let emp_Id = $("#Crear #emp_Id").val();
+    let emp_Id = $("#Crear #emp_IdCreate").val();
     let dei_Motivo = $("#Crear #dei_Motivo").val();
     let dei_Monto = $("#Crear #dei_Monto").val();
     let dei_NumeroCuotas = $("#frmCreateDeduccionIndividual #dei_NumeroCuotas").val();
@@ -550,7 +555,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         dei_DeducirISR = false;
     }
-    debugger;
+
     //#region  POST Create
     if (estaTodoValidado("Crear")) {
         document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
@@ -610,7 +615,7 @@ $("#btnCerrarEditar").click(function () {
 });
 
 
-$(document).on("click", "#IndexTabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
+$(document).on("click", "#Tabla tbody tr td #btnEditarDeduccionesIndividuales", function () {
     let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
 
     let itemEmpleado = localStorage.getItem('idEmpleado');
@@ -799,7 +804,7 @@ $(document).on("click", "#btnReg", function () {
 //#endregion
 
 //#region Detalles
-$(document).on("click", "#IndexTabla tbody tr td #btnDetalleDeduccionesIndividuales", function () {
+$(document).on("click", "#Tabla tbody tr td #btnDetalleDeduccionesIndividuales", function () {
     var id = $(this).data('id');
     $.ajax({
         url: "/DeduccionesIndividuales/Details/" + id,
@@ -817,7 +822,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnDetalleDeduccionesIndividua
                 }
                 else {
                     $("#Detalles #dei_PagaSiempre").html("No");
-                } 
+                }
 
                 if (data[0].dei_DeducirISR) {
                     $("#Detalles #dei_DeducirISR").html("Si");
