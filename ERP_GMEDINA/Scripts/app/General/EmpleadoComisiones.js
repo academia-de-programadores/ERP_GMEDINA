@@ -65,7 +65,7 @@ function cargarGridComisiones() {
                     ListaComisiones[i].cc_Id,
                     ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos,
                     ListaComisiones[i].cin_DescripcionIngreso,
-                     (ListaComisiones[i].cc_TotalComision % 1 == 0) ? ListaComisiones[i].cc_TotalComision + ".00" : ListaComisiones[i].cc_TotalComision,
+                    (ListaComisiones[i].cc_TotalComision % 1 == 0) ? ListaComisiones[i].cc_TotalComision + ".00" : ListaComisiones[i].cc_TotalComision,
                     (ListaComisiones[i].cc_TotalVenta % 1 == 0) ? ListaComisiones[i].cc_TotalVenta + ".00" : ListaComisiones[i].cc_TotalVenta,
                     FechaRegistro,
                     estadoRegistro,
@@ -349,22 +349,15 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
 
 
     //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
-    var indicest = $("#Editar #cc_TotalVenta").val().split(",");
-    //VARIABLE CONTENEDORA DEL TOTAL
-    var TotalFormateado = "";
-    //ITERAR LOS INDICES DEL ARRAY TOTAL
-    for (var i = 0; i < indicest.length; i++) {
-        //SETEAR LA VARIABLE DE TOTAL
-        TotalFormateado += indicest[i];
-    }
-    TotalFormateado = parseFloat(TotalFormateado);
+    var indicest = $("#Editar #cc_TotalVenta").val().replace(/,/g, '');;
 
+    //ITERAR LOS INDICES DEL ARRAY TOTAL
     var data = {
         cc_Id: $("#Editar #cc_Id").val(),
         emp_Id: $("#Editar #emp_IdEmpleado").val(),
         cin_IdIngreso: $("#Editar #cin_IdIngreso").val(),
         //cc_PorcentajeComision: PorcentajeFormateado,
-        cc_TotalVenta: TotalFormateado
+        cc_TotalVenta: indicest
     };
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN   
     $.ajax({

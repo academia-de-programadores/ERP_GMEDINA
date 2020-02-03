@@ -279,7 +279,7 @@ $('#btnCreateAcumuladosISR').click(function () {
         var data = $("#frmAcumuladosISRCreate").serializeArray();
 
         let descripcion = $('#Crear #aisr_Descripcion').val();
-        let monto = $('#Crear #aisr_Monto').val().replace(/,/g, '');;
+        let monto = $('#Crear #aisr_Monto').val().replace(/,/g, '');
         let idEmpleado = $('#Crear #emp_IdCrear').val();
         let token = $('#Crear input[name="__RequestVerificationToken"]').val();
         $.ajax({
