@@ -11,7 +11,7 @@ namespace ERP_GMEDINA.Models
         public  string per_Identidad { get; set; }
         public  string per_Nombres { get; set; }
         public  string per_Apellidos { get; set; }
-        public  System.DateTime per_FechaNacimiento { get; set; }
+        public  System.DateTime? per_FechaNacimiento { get; set; }
         public  string per_Sexo { get; set; }
         public  Nullable<int> per_Edad { get; set; }
         public  int nac_Id { get; set; }

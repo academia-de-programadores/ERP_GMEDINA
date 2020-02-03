@@ -98,43 +98,48 @@ $(document).ready(function () {
         enableCancelButton: false,
         onStepChanging:
                    function (event, currentIndex, newIndex) {
+                       if ($("#per_FechaNacimiento").val() != '')
+                       {
+                           if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
+                               var Form = $("#tbPersonas").find("select, textarea, input");
+                               Form.validate().settings.ignore = ":disabled,:hidden";
+                               return Form.valid();
+                           }
+                           else {
 
-                       if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
-                           var Form = $("#tbPersonas").find("select, textarea, input");
-                           Form.validate().settings.ignore = ":disabled,:hidden";
-                           return Form.valid();
+                               MsgError("Error", "Fecha de nacimiento inválida");
+                               window.location.href = "#Wizard-h-0";
+                               //$("#per_FechaNacimiento").val('1900/01/01')
+                           }
                        }
-                       else {
-
-                           MsgError("Error", "Fecha de nacimiento inválida");
-                           window.location.href = "#Wizard-h-0";
-                           //$("#per_FechaNacimiento").val('1900/01/01')
-
-                       }
+                       
                        var Form = $("#tbPersonas").find("select, textarea, input");
                        Form.validate().settings.ignore = ":disabled,:hidden";
                        return Form.valid();
 
                    },
         onFinishing: function (event, currentIndex) {
-            if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
-                var Form = $("#tbPersonas").find("select, textarea, input");
-                Form.validate().settings.ignore = ":disabled,:hidden";
-                return Form.valid();
-            }
-            else {
+            if ($("#per_FechaNacimiento").val() != '')
+            {
+                if ($("#per_FechaNacimiento").val() > '1899/01/01/') {
+                    var Form = $("#tbPersonas").find("select, textarea, input");
+                    Form.validate().settings.ignore = ":disabled,:hidden";
+                    return Form.valid();
+                }
+                else {
 
-                MsgError("Error", "Fecha de nacimiento inválida");
-                window.location.href = "#Wizard-h-0";
-                //$("#per_FechaNacimiento").val('1900/01/01')
+                    MsgError("Error", "Fecha de nacimiento inválida");
+                    window.location.href = "#Wizard-h-0";
+                    //$("#per_FechaNacimiento").val('1900/01/01')
 
+                }
             }
+            
             var Form = $("#tbPersonas").find("select, textarea, input");
             Form.validate().settings.ignore = ":disabled,:hidden";
             return Form.valid();
         },
         onFinished: function () {
-            $("#finish").attr("href", " ");
             var SlctCompetencias = $(".SlctCompetencias");
             var SlctHabilidades = $(".SlctHabilidades");
             var SlctIdiomas = $(".SlctIdiomas");
@@ -146,10 +151,23 @@ $(document).ready(function () {
             var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
             tbPersonas = serializarPro(Form);
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
-
-            if (tbPersonas != null)
+            //
+            var campos = "";
+            if ($("#per_FechaNacimiento").val() == "")
+                campos += "fecha de nacimiento, "
+            if ($("#per_Direccion").val() == "")
+                campos += "dirección, "
+            if ($("#per_Telefono").val() == "")
+                campos += "teléfono, "
+            if ($("#per_CorreoElectronico").val() == "")
+                campos += "correo electrónico ,"
+            if (campos != "") {
+                $('#ModalHabilitar').modal('show');
+                $("#ModalHabilitar").find("#campos")["0"].innerText = campos;
+            }
+            else
             {
-                    if (Correo != "") {
+                if (tbPersonas != null) {
                         _ajax(data,
                         '/Personas/Edit',
                         'POST',
@@ -160,19 +178,48 @@ $(document).ready(function () {
                                 setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
                             } else {
                                 MsgError("Error", "No se editó el registro, contacte al administrador.");
-                                $("#finish").attr("href", "#finish");
                             }
                         });
                     }
-                    else {
-                        MsgError("Error", "Correo electrónico invalido.");
-                        $("#finish").attr("href", "#finish");
-                    }
+                else {
+                    MsgError("Error", "Por favor llene todas las cajas de texto.");
+                }
             }
-            else {
-                MsgError("Error", "Por favor llene todas las cajas de texto.");
-            }
+            
 
         },
     });
+});
+$("#btnConfirmar").click(function () {
+    if ($("#per_FechaNacimiento").val() == "")
+        $('#per_FechaNacimiento').val(null);
+    if ($("#per_Direccion").val() == "")
+        $('#per_Direccion').val("--");
+    if ($("#per_Telefono").val() == "")
+        $('#per_Telefono').val("--");
+    if ($("#per_CorreoElectronico").val() == "")
+        $('#per_CorreoElectronico').val("--");
+    var SlctCompetencias = $(".SlctCompetencias");
+    var SlctHabilidades = $(".SlctHabilidades");
+    var SlctIdiomas = $(".SlctIdiomas");
+    var SlctReqEspeciales = $(".SlctReqEspeciales");
+    var SlctTitulos = $(".SlctTitulos");
+
+    var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
+    var Form = $("#tbPersonas").find("select, textarea , input").serializeArray();
+    tbPersonas = serializarPro(Form);
+    data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
+    console.log(data);
+        _ajax(data,
+        '/Personas/Edit',
+        'POST',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                $("#finish").attr("href", " ");
+                setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
+            } else {
+                MsgError("Error", "No se editó el registro, contacte al administrador.");
+            }
+        });
 });

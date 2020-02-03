@@ -210,68 +210,119 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                        List<DatosProfessionalesEdit> Data = new List<DatosProfessionalesEdit> { };
-                        var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
-                        foreach(var X in lista)
+                    if (id == null)
+                    {
+                        var lista = db.V_DatosProfesionales.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                        DatosProfesionales Data = new DatosProfesionales();
+                        foreach (var X in lista)
                         {
                             switch (X.TipoDato)
                             {
                                 case "C":
-                                    var Comp = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id , Descripcion = c.tbCompetencias.comp_Descripcion , per_Id = c.per_Id , Estado = c.cope_Estado}).Where(c => c.per_Id == id && c.Estado == true && c.comp_Id == X.Id).ToList();
-                                    foreach(var cmp in Comp)
+                                    tbCompetencias Comp = new tbCompetencias();
+                                    Comp.comp_Descripcion = X.Descripcion;
+                                    Comp.comp_Id = X.Id;
+                                    Data.Competencias.Add(Comp);
+                                    break;
+
+                                case "H":
+                                    tbHabilidades Habi = new tbHabilidades();
+                                    Habi.habi_Descripcion = X.Descripcion;
+                                    Habi.habi_Id = X.Id;
+                                    Data.Habilidades.Add(Habi);
+                                    break;
+
+                                case "I":
+                                    tbIdiomas Idi = new tbIdiomas();
+                                    Idi.idi_Descripcion = X.Descripcion;
+                                    Idi.idi_Id = X.Id;
+                                    Data.Idiomas.Add(Idi);
+                                    break;
+
+                                case "T":
+                                    tbTitulos Titu = new tbTitulos();
+                                    Titu.titu_Descripcion = X.Descripcion;
+                                    Titu.titu_Id = X.Id;
+                                    Data.Titulos.Add(Titu);
+                                    break;
+
+                                case "R":
+                                    tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
+                                    Reqs.resp_Descripcion = X.Descripcion;
+                                    Reqs.resp_Id = X.Id;
+                                    Data.ReqEspeciales.Add(Reqs);
+                                    break;
+                            }
+                        }
+
+                        return Json(Data, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        List<DatosProfessionalesEdit> Data = new List<DatosProfessionalesEdit> { };
+                        var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                        foreach (var X in lista)
+                        {
+                            switch (X.TipoDato)
+                            {
+                                case "C":
+                                    var Comp = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, per_Id = c.per_Id, Estado = c.cope_Estado }).Where(c => c.per_Id == id && c.Estado == true && c.comp_Id == X.Id).ToList();
+                                    foreach (var cmp in Comp)
                                     {
-                                            Data.Add(new DatosProfessionalesEdit { Id = cmp.comp_Id ,Descripcion = cmp.Descripcion,TipoDato = "C",Seleccionado = 1 });
+                                        Data.Add(new DatosProfessionalesEdit { Id = cmp.comp_Id, Descripcion = cmp.Descripcion, TipoDato = "C", Seleccionado = 1 });
                                     }
-                                    if(Comp.Count == 0)
+                                    if (Comp.Count == 0)
                                         Data.Add(new DatosProfessionalesEdit { Id = X.Id, Descripcion = X.Descripcion, TipoDato = "C", Seleccionado = 0 });
                                     break;
 
                                 case "H":
-                                    var Hab = db.tbHabilidadesPersona.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, per_Id = h.per_Id , Estado = h.hape_Estado }).Where(h => h.per_Id == id && h.Estado == true && h.habi_Id == X.Id).ToList();
+                                    var Hab = db.tbHabilidadesPersona.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, per_Id = h.per_Id, Estado = h.hape_Estado }).Where(h => h.per_Id == id && h.Estado == true && h.habi_Id == X.Id).ToList();
                                     foreach (var habi in Hab)
                                     {
                                         if (X.Id == habi.habi_Id)
                                             Data.Add(new DatosProfessionalesEdit { Id = habi.habi_Id, Descripcion = habi.Descripcion, TipoDato = "H", Seleccionado = 1 });
                                     }
-                                    if(Hab.Count == 0)
+                                    if (Hab.Count == 0)
                                         Data.Add(new DatosProfessionalesEdit { Id = X.Id, Descripcion = X.Descripcion, TipoDato = "H", Seleccionado = 0 });
                                     break;
 
                                 case "I":
-                                    var Idi = db.tbIdiomaPersona.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, per_Id = i.per_Id , Estado = i.idpe_Estado }).Where(i => i.per_Id == id && i.Estado == true && i.idi_Id == X.Id).ToList();
+                                    var Idi = db.tbIdiomaPersona.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, per_Id = i.per_Id, Estado = i.idpe_Estado }).Where(i => i.per_Id == id && i.Estado == true && i.idi_Id == X.Id).ToList();
                                     foreach (var idm in Idi)
                                     {
                                         if (X.Id == idm.idi_Id)
                                             Data.Add(new DatosProfessionalesEdit { Id = idm.idi_Id.Value, Descripcion = idm.Descripcion, TipoDato = "I", Seleccionado = 1 });
                                     }
-                                    if(Idi.Count == 0)
+                                    if (Idi.Count == 0)
                                         Data.Add(new DatosProfessionalesEdit { Id = X.Id, Descripcion = X.Descripcion, TipoDato = "I", Seleccionado = 0 });
                                     break;
 
                                 case "T":
-                                    var Tit = db.tbTitulosPersona.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, per_Id = t.per_Id , Estado = t.tipe_Estado}).Where(t => t.per_Id == id && t.Estado == true && t.titu_Id == X.Id).ToList();
+                                    var Tit = db.tbTitulosPersona.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, per_Id = t.per_Id, Estado = t.tipe_Estado }).Where(t => t.per_Id == id && t.Estado == true && t.titu_Id == X.Id).ToList();
                                     foreach (var Titu in Tit)
                                     {
                                         if (X.Id == Titu.titu_Id)
                                             Data.Add(new DatosProfessionalesEdit { Id = Titu.titu_Id, Descripcion = Titu.Descripcion, TipoDato = "T", Seleccionado = 1 });
                                     }
-                                    if(Tit.Count == 0)
+                                    if (Tit.Count == 0)
                                         Data.Add(new DatosProfessionalesEdit { Id = X.Id, Descripcion = X.Descripcion, TipoDato = "T", Seleccionado = 0 });
                                     break;
 
                                 case "R":
-                                    var Reqs = db.tbRequerimientosEspecialesPersona.Select(re => new { resp_Id = re.resp_Id, Descripcion = re.tbRequerimientosEspeciales.resp_Descripcion, per_Id = re.per_Id , Estado = re.rep_Estado}).Where(re => re.per_Id == id && re.Estado == true && re.resp_Id == X.Id).ToList();
+                                    var Reqs = db.tbRequerimientosEspecialesPersona.Select(re => new { resp_Id = re.resp_Id, Descripcion = re.tbRequerimientosEspeciales.resp_Descripcion, per_Id = re.per_Id, Estado = re.rep_Estado }).Where(re => re.per_Id == id && re.Estado == true && re.resp_Id == X.Id).ToList();
                                     foreach (var ReEs in Reqs)
                                     {
                                         if (X.Id == ReEs.resp_Id)
                                             Data.Add(new DatosProfessionalesEdit { Id = ReEs.resp_Id, Descripcion = ReEs.Descripcion, TipoDato = "R", Seleccionado = 1 });
                                     }
-                                    if(Reqs.Count == 0)
+                                    if (Reqs.Count == 0)
                                         Data.Add(new DatosProfessionalesEdit { Id = X.Id, Descripcion = X.Descripcion, TipoDato = "R", Seleccionado = 0 });
                                     break;
                             }
                         }
                         return Json(Data, JsonRequestBehavior.AllowGet);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -292,6 +343,9 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
                     {
+                        var fecha = tbPersonas.per_FechaNacimiento.ToString();
+                        if (fecha == "01/01/0001 0:00:00")
+                            tbPersonas.per_FechaNacimiento = null;
                         var List = db.UDP_RRHH_tbPersonas_Insert(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
 
                         foreach (UDP_RRHH_tbPersonas_Insert_Result item in List)

@@ -184,6 +184,8 @@ function serializarChild(data, form) {
 function serializarPro(data) {
  var Data = new Object();
  $.each(data, function (index, valor) {
+     if (index == "")
+         index = "per_Direccion";
   var value = valor.value.trim();
   if (value != "") {
    Data[valor.name] = value;
