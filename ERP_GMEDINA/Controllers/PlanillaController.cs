@@ -178,7 +178,7 @@ namespace ERP_GMEDINA.Controllers
                                             // salario base del colaborador actual
                                             try
                                             {
-                                                SalarioBase = InformacionDelEmpleadoActual.SalarioBase.Value;
+                                                SalarioBase = Math.Round(InformacionDelEmpleadoActual.SalarioBase.Value, 2);
                                             }
                                             catch (Exception ex)
                                             {
@@ -228,6 +228,13 @@ namespace ERP_GMEDINA.Controllers
                                             try
                                             {
                                                 totalSalario = Math.Round((Decimal)salarioHora * horasTrabajadas, 2);
+
+                                                // agregar total salario al voucher
+                                                ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                {
+                                                    concepto = "Salario ordinario",
+                                                    monto = totalSalario
+                                                });
                                             }
                                             catch (Exception ex)
                                             {
@@ -242,12 +249,7 @@ namespace ERP_GMEDINA.Controllers
                                                 errores++;
                                             }
 
-                                            // agregar total salario al voucher
-                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                            {
-                                                concepto = "Salario ordinario",
-                                                monto = totalSalario
-                                            });
+
 
 
                                             // horas con permiso justificado
@@ -269,7 +271,6 @@ namespace ERP_GMEDINA.Controllers
                                                         CantidadHorasPermisoActual = iterHorasPermiso.hper_Duracion;
 
                                                         totalHorasPermiso += CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100));
-
 
                                                         // para el voucher
                                                         ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
@@ -311,19 +312,36 @@ namespace ERP_GMEDINA.Controllers
                                                 {
                                                     foreach (var oComisionesColaboradoresIterador in oComisionesColaboradores)
                                                     {
-                                                        totalComisiones += oComisionesColaboradoresIterador.cc_TotalComision;
-
-                                                        // pasar el estado de las comisiones a pagadas
-                                                        oComisionesColaboradoresIterador.cc_Pagado = true;
-                                                        oComisionesColaboradoresIterador.cc_FechaPagado = DateTime.Now;
-                                                        db.Entry(oComisionesColaboradoresIterador).State = EntityState.Modified;
-
-                                                        // agregarlas al vocher
-                                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                        try
                                                         {
-                                                            concepto = oComisionesColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                            monto = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalComision), 2)
-                                                        });
+                                                            totalComisiones += oComisionesColaboradoresIterador.cc_TotalComision;
+
+                                                            // pasar el estado de las comisiones a pagadas
+                                                            oComisionesColaboradoresIterador.cc_Pagado = true;
+                                                            oComisionesColaboradoresIterador.cc_FechaPagado = DateTime.Now;
+                                                            db.Entry(oComisionesColaboradoresIterador).State = EntityState.Modified;
+
+                                                            // agregarlas al vocher
+                                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                            {
+                                                                concepto = oComisionesColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                monto = Math.Round(oComisionesColaboradoresIterador.cc_TotalComision, 2)
+                                                            });
+
+                                                        }
+                                                        catch (Exception ex)
+                                                        {
+                                                            listaErrores.Add(new ViewModelListaErrores
+                                                            {
+                                                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                                Error = $"Error al procesar comisión número {oComisionesColaboradoresIterador.cc_Id}, con total venta: {oComisionesColaboradoresIterador.cc_TotalVenta}, total comsión: {oComisionesColaboradoresIterador.cc_TotalComision}.",
+                                                                PosibleSolucion = "Verifique que laa comisión fue registradaa al colaborador de forma correcta."
+
+                                                            });
+                                                            errores++;
+                                                        }
+
                                                     }
                                                 }
                                                 catch (Exception ex)
@@ -333,7 +351,7 @@ namespace ERP_GMEDINA.Controllers
                                                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
                                                         NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
                                                         Error = "Error al procesar las comisiones del colaborador.",
-                                                        PosibleSolucion = "Verifique que las comisiones registradas al colaborador sean las correctas.."
+                                                        PosibleSolucion = "Verifique que las comisiones registradas al colaborador sean las correctas."
 
                                                     });
                                                     errores++;
@@ -371,28 +389,44 @@ namespace ERP_GMEDINA.Controllers
                                                                                             .ToList();
                                             if (oHorasExtras.Count > 0)
                                             {
-                                                int CantidadHorasExtrasActual = 0;                                               
+                                                int CantidadHorasExtrasActual = 0;
 
                                                 try
-                                            {
+                                                {
                                                     // sumar todas las horas extras
                                                     foreach (var iterHorasExtras in oHorasExtras)
                                                     {
-                                                        CantidadHorasExtrasActual = db.tbHistorialHorasTrabajadas
+                                                        try
+                                                        {
+                                                            CantidadHorasExtrasActual = db.tbHistorialHorasTrabajadas
                                                                                     .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.htra_Id == iterHorasExtras.htra_Id)
                                                                                     .Select(x => x.htra_CantidadHoras)
                                                                                     .DefaultIfEmpty(0)
                                                                                     .Sum();
 
-                                                        totalHorasExtras += Math.Round((Decimal)CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2);
+                                                            totalHorasExtras += Math.Round(CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2);
 
 
-                                                        // para el voucher
-                                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                            // para el voucher
+                                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                            {
+                                                                concepto = $"{CantidadHorasExtrasActual} horas {iterHorasExtras.tbTipoHoras.tiho_Descripcion} al {iterHorasExtras.tbTipoHoras.tiho_Recargo} %",
+                                                                monto = Math.Round(CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2)
+                                                            });
+                                                        }
+                                                        catch (Exception ex)
                                                         {
-                                                            concepto = $"{CantidadHorasExtrasActual} horas {iterHorasExtras.tbTipoHoras.tiho_Descripcion} al {iterHorasExtras.tbTipoHoras.tiho_Recargo} %",
-                                                            monto = Math.Round((Decimal)CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2)
-                                                        });
+                                                            listaErrores.Add(new ViewModelListaErrores
+                                                            {
+                                                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                                Error = $"Error al cargar horas extras registradas el dia {iterHorasExtras.htra_Fecha}, cantidad: {iterHorasExtras.htra_CantidadHoras}.",
+                                                                PosibleSolucion = "Verifique que las horas registradas al colaborador sean las correctas."
+
+                                                            });
+                                                            errores++;
+                                                        }
+                                                        
                                                     }
                                                     // para el voucher
                                                     ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
@@ -401,18 +435,18 @@ namespace ERP_GMEDINA.Controllers
                                                         monto = totalHorasExtras
                                                     });
                                                 }
-                                            catch (Exception ex)
-                                            {
-                                                listaErrores.Add(new ViewModelListaErrores
+                                                catch (Exception ex)
                                                 {
-                                                    Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
-                                                    Error = "Error al calcular horas extras.",
-                                                    PosibleSolucion = "Verifique que las horas registradas al colaborador sean las correctas."
+                                                    listaErrores.Add(new ViewModelListaErrores
+                                                    {
+                                                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                        Error = "Error al calcular horas extras.",
+                                                        PosibleSolucion = "Verifique que las horas registradas al colaborador sean las correctas."
 
-                                                });
-                                                errores++;
-                                            }
+                                                    });
+                                                    errores++;
+                                                }
                                             }
 
                                             // bonos del colaborador
@@ -426,7 +460,7 @@ namespace ERP_GMEDINA.Controllers
 
 
                                             if (oBonosColaboradores.Count > 0)
-                                            {                                                                                               
+                                            {
 
                                                 try
                                                 {
@@ -435,28 +469,44 @@ namespace ERP_GMEDINA.Controllers
                                                     // iterar los bonos
                                                     foreach (var oBonosColaboradoresIterador in oBonosColaboradores)
                                                     {
-                                                        totalBonificaciones += Math.Round((Decimal)oBonosColaboradoresIterador.cb_Monto, 2);
-
-                                                        // pasar el bono a pagado
-                                                        oBonosColaboradoresIterador.cb_Pagado = true;
-                                                        oBonosColaboradoresIterador.cb_FechaPagado = DateTime.Now;
-                                                        db.Entry(oBonosColaboradoresIterador).State = EntityState.Modified;
-
-                                                        // agregarlo al voucher
-                                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                        try
                                                         {
-                                                            concepto = oBonosColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                            monto = Math.Round((Decimal)oBonosColaboradoresIterador.cb_Monto, 2)
-                                                        });
+                                                            totalBonificaciones += Math.Round(oBonosColaboradoresIterador.cb_Monto.Value, 2);
 
-                                                        // Historial de ingresos (bonos)
-                                                        lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                            // pasar el bono a pagado
+                                                            oBonosColaboradoresIterador.cb_Pagado = true;
+                                                            oBonosColaboradoresIterador.cb_FechaPagado = DateTime.Now;
+                                                            db.Entry(oBonosColaboradoresIterador).State = EntityState.Modified;
+
+                                                            // agregarlo al voucher
+                                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                            {
+                                                                concepto = oBonosColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                monto = Math.Round(oBonosColaboradoresIterador.cb_Monto.Value, 2)
+                                                            });
+
+                                                            // Historial de ingresos (bonos)
+                                                            lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                            {
+                                                                hip_UnidadesPagar = 1,
+                                                                hip_MedidaUnitaria = 1,
+                                                                hip_TotalPagar = Math.Round(oBonosColaboradoresIterador.cb_Monto.Value, 2),
+                                                                cin_IdIngreso = oBonosColaboradoresIterador.cin_IdIngreso
+                                                            });
+                                                        }
+                                                        catch (Exception ex)
                                                         {
-                                                            hip_UnidadesPagar = 1,
-                                                            hip_MedidaUnitaria = 1,
-                                                            hip_TotalPagar = Math.Round((Decimal)oBonosColaboradoresIterador.cb_Monto, 2),
-                                                            cin_IdIngreso = oBonosColaboradoresIterador.cin_IdIngreso
-                                                        });
+                                                            listaErrores.Add(new ViewModelListaErrores
+                                                            {
+                                                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                                Error = $"Error al cargar bono número {oBonosColaboradoresIterador.cb_Id}, con monto: {oBonosColaboradoresIterador.cb_Monto}.",
+                                                                PosibleSolucion = "Verifique que el bono registrado al colaborador esté completo y/o correcto."
+
+                                                            });
+                                                            errores++;
+                                                        }
+                                                        
                                                     }
                                                 }
                                                 catch (Exception ex)
@@ -482,40 +532,56 @@ namespace ERP_GMEDINA.Controllers
                                                                                                            x.hvac_FechaFin <= fechaFin)
                                                                                                     .ToList();
                                             if (oVacacionesColaboradores.Count > 0)
-                                            {                                                
+                                            {
 
                                                 try
                                                 {
                                                     // sumar todas las comisiones
                                                     foreach (var oVacacionesColaboradoresIterador in oVacacionesColaboradores)
                                                     {
-                                                        int cantidadDias = 0;
-                                                        DateTime VacacionesfechaInicio;
-                                                        DateTime VacacionesfechaFin;
-
-                                                        VacacionesfechaInicio = (from tbEmpVac in db.tbHistorialVacaciones
-                                                                                 where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
-                                                                                 select tbEmpVac.hvac_FechaInicio).FirstOrDefault();
-
-                                                        VacacionesfechaFin = (from tbEmpVac in db.tbHistorialVacaciones
-                                                                              where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
-                                                                              select tbEmpVac.hvac_FechaFin).FirstOrDefault();
-
-                                                        TimeSpan restaFechas = VacacionesfechaFin - VacacionesfechaInicio;
-                                                        cantidadDias = restaFechas.Days;
-
-                                                        totalVacaciones += Math.Round((salarioHora * 8) * cantidadDias, 2);
-
-                                                        // cambiar el estado de las vacaciones a pagadas
-                                                        oVacacionesColaboradoresIterador.hvac_DiasPagados = true;
-                                                        db.Entry(oVacacionesColaboradoresIterador).State = EntityState.Modified;
-
-                                                        // agregarlas al vocher
-                                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                        try
                                                         {
-                                                            concepto = $"{cantidadDias} dias de vacaciones",
-                                                            monto = Math.Round((Decimal)(salarioHora * 8) * cantidadDias, 2)
-                                                        });
+                                                            int cantidadDias = 0;
+                                                            DateTime VacacionesfechaInicio;
+                                                            DateTime VacacionesfechaFin;
+
+                                                            VacacionesfechaInicio = (from tbEmpVac in db.tbHistorialVacaciones
+                                                                                     where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                                                     select tbEmpVac.hvac_FechaInicio).FirstOrDefault();
+
+                                                            VacacionesfechaFin = (from tbEmpVac in db.tbHistorialVacaciones
+                                                                                  where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                                                  select tbEmpVac.hvac_FechaFin).FirstOrDefault();
+
+                                                            TimeSpan restaFechas = VacacionesfechaFin - VacacionesfechaInicio;
+                                                            cantidadDias = restaFechas.Days;
+
+                                                            totalVacaciones += Math.Round((salarioHora * 8) * cantidadDias, 2);
+
+                                                            // cambiar el estado de las vacaciones a pagadas
+                                                            oVacacionesColaboradoresIterador.hvac_DiasPagados = true;
+                                                            db.Entry(oVacacionesColaboradoresIterador).State = EntityState.Modified;
+
+                                                            // agregarlas al vocher
+                                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                            {
+                                                                concepto = $"{cantidadDias} dias de vacaciones",
+                                                                monto = Math.Round((salarioHora * 8) * cantidadDias, 2)
+                                                            });
+                                                        }
+                                                        catch (Exception ex)
+                                                        {
+                                                            listaErrores.Add(new ViewModelListaErrores
+                                                            {
+                                                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                                Error = $"Error al cargar vaciones registradas {oVacacionesColaboradoresIterador.hvac_FechaCrea}, con fecha de inicio: {oVacacionesColaboradoresIterador.hvac_FechaInicio} y fecha fin {oVacacionesColaboradoresIterador.hvac_FechaFin}.",
+                                                                PosibleSolucion = "Verifique que los rangos de fecha registrados son correctos."
+
+                                                            });
+                                                            errores++;
+                                                        }
+                                                        
                                                     }
                                                 }
                                                 catch (Exception ex)
@@ -542,38 +608,45 @@ namespace ERP_GMEDINA.Controllers
                                                                                                         .ToList();
 
                                             if (oIngresosIndiColaboradores.Count > 0)
-                                            {                                                
+                                            {
                                                 try
                                                 {
                                                     //iterar los bonos
                                                     foreach (var oIngresosIndiColaboradoresIterador in oIngresosIndiColaboradores)
                                                     {
-                                                        totalIngresosIndivuales += Math.Round((Decimal)oIngresosIndiColaboradoresIterador.ini_Monto, 2);
-
-                                                        //pasar el bono a pagado
-                                                        oIngresosIndiColaboradoresIterador.ini_Pagado = true;
-                                                        oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
-                                                        db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
-
-                                                        //agregarlo al voucher
-                                                        ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                        try
                                                         {
-                                                            concepto = oIngresosIndiColaboradoresIterador.ini_Motivo,
-                                                            monto = Math.Round((Decimal)oIngresosIndiColaboradoresIterador.ini_Monto, 2)
-                                                        });
+                                                            totalIngresosIndivuales += Math.Round(oIngresosIndiColaboradoresIterador.ini_Monto.Value, 2);
+
+                                                            //pasar el bono a pagado
+                                                            oIngresosIndiColaboradoresIterador.ini_Pagado = true;
+                                                            oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
+                                                            db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+
+                                                            //agregarlo al voucher
+                                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                            {
+                                                                concepto = oIngresosIndiColaboradoresIterador.ini_Motivo,
+                                                                monto = Math.Round(oIngresosIndiColaboradoresIterador.ini_Monto.Value, 2)
+                                                            });
+                                                        }
+                                                        catch(Exception ex)
+                                                        {
+                                                            listaErrores.Add(new ViewModelListaErrores
+                                                            {
+                                                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                                Error = $"Error al procesar ingreso inidividual número {oIngresosIndiColaboradoresIterador.ini_IdIngresosIndividuales}, con motivo {oIngresosIndiColaboradoresIterador.ini_Motivo} y monto: {oIngresosIndiColaboradoresIterador.ini_Monto}.",
+                                                                PosibleSolucion = "Verifique la información de dichos ingresos sea correcta."
+
+                                                            });
+                                                            errores++;
+                                                        }
                                                     }
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    listaErrores.Add(new ViewModelListaErrores
-                                                    {
-                                                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
-                                                        Error = "Error al procesar ingresos inidividuales.",
-                                                        PosibleSolucion = "Verifique la información de dichos ingresos sea correcta."
-
-                                                    });
-                                                    errores++;
+                                                    
                                                 }
                                             }
 
@@ -647,9 +720,9 @@ namespace ERP_GMEDINA.Controllers
 
                                                 });
                                                 errores++;
-                                            }                                            
+                                            }
 
-                                            
+
                                             #endregion
 
                                             // total ingresos
@@ -659,7 +732,7 @@ namespace ERP_GMEDINA.Controllers
 
                                             #region Procesar deducciones
 
-                                            if (oDeducciones.Count > 0 )
+                                           if (oDeducciones.Count > 0)
                                             {
                                                 // deducciones de la planilla
                                                 foreach (var iterDeducciones in oDeducciones)
@@ -667,7 +740,7 @@ namespace ERP_GMEDINA.Controllers
                                                     decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
                                                     decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
                                                     decimal? montoDeduccionColaborador = SalarioBase;
-                                                    
+
                                                     try
                                                     {
                                                         // verificar techos deducciones
@@ -719,7 +792,7 @@ namespace ERP_GMEDINA.Controllers
                                                     }
                                                 }
                                             }
-                                            
+
 
                                             //instituciones financieras
                                             List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras = db.tbDeduccionInstitucionFinanciera
@@ -734,7 +807,7 @@ namespace ERP_GMEDINA.Controllers
                                             {
                                                 // sumarlas todas
                                                 foreach (var oDeduInstiFinancierasIterador in oDeduInstiFinancieras)
-                                                {                                                    
+                                                {
 
                                                     try
                                                     {
@@ -784,10 +857,10 @@ namespace ERP_GMEDINA.Controllers
                                             {
                                                 // sumarlas todas
                                                 foreach (var oDeduccionAfpIter in oDeduccionAfp)
-                                                {  
+                                                {
                                                     try
                                                     {
-                                                        totalAFP += Math.Round((decimal)oDeduccionAfpIter.dafp_AporteLps, 2);
+                                                        totalAFP += Math.Round(oDeduccionAfpIter.dafp_AporteLps, 2);
 
                                                         //pasar el estado del aporte a pagado
                                                         oDeduccionAfpIter.dafp_Pagado = true;
@@ -827,25 +900,41 @@ namespace ERP_GMEDINA.Controllers
                                                 // sumarlas todas
                                                 foreach (var oDeduccionesExtrasColaboradorIterador in oDeduccionesExtrasColaborador)
                                                 {
-                                                    totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
-
-                                                    // agregar al comprobante de pago
-                                                    ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
+                                                    try
                                                     {
-                                                        concepto = oDeduccionesExtrasColaboradorIterador.dex_ObservacionesComentarios,
-                                                        monto = Math.Round((decimal)oDeduccionesExtrasColaboradorIterador.dex_Cuota, 2)
-                                                    });
+                                                        throw new Exception();
+                                                        totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
 
-                                                    // restar la cuota al monto restante
-                                                    oDeduccionesExtrasColaboradorIterador.dex_MontoRestante = oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_Cuota;
-                                                    db.Entry(oDeduccionesExtrasColaboradorIterador).State = EntityState.Modified;
+                                                        // agregar al comprobante de pago
+                                                        ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
+                                                        {
+                                                            concepto = oDeduccionesExtrasColaboradorIterador.dex_ObservacionesComentarios,
+                                                            monto = Math.Round((decimal)oDeduccionesExtrasColaboradorIterador.dex_Cuota, 2)
+                                                        });
 
-                                                    // Historial de deducciones
-                                                    lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
+                                                        // restar la cuota al monto restante
+                                                        oDeduccionesExtrasColaboradorIterador.dex_MontoRestante = oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_Cuota;
+                                                        db.Entry(oDeduccionesExtrasColaboradorIterador).State = EntityState.Modified;
+
+                                                        // Historial de deducciones
+                                                        lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
+                                                        {
+                                                            cde_IdDeducciones = oDeduccionesExtrasColaboradorIterador.cde_IdDeducciones,
+                                                            hidp_Total = Math.Round((decimal)oDeduccionesExtrasColaboradorIterador.dex_Cuota, 2)
+                                                        });
+                                                    }
+                                                    catch (Exception ex)
                                                     {
-                                                        cde_IdDeducciones = oDeduccionesExtrasColaboradorIterador.cde_IdDeducciones,
-                                                        hidp_Total = Math.Round((decimal)oDeduccionesExtrasColaboradorIterador.dex_Cuota, 2)
-                                                    });
+                                                        listaErrores.Add(new ViewModelListaErrores
+                                                        {
+                                                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                                            Error = $"Error al procesar deduccion extra. {oDeduccionesExtrasColaboradorIterador.dex_ObservacionesComentarios} - {oDeduccionesExtrasColaboradorIterador.dex_Cuota}",
+                                                            PosibleSolucion = "Verifique que la información de esta deducción esté correcta y/o completa."
+
+                                                        });
+                                                        errores++;
+                                                    }
                                                 }
                                             }
 
@@ -861,7 +950,7 @@ namespace ERP_GMEDINA.Controllers
                                             {
                                                 // sumarlas todas
                                                 foreach (var oAdelantosSueldoIterador in oAdelantosSueldo)
-                                                {                                                   
+                                                {
 
                                                     try
                                                     {
@@ -1298,7 +1387,7 @@ namespace ERP_GMEDINA.Controllers
 
                                                 });
                                                 errores++;
-                                            }  
+                                            }
 
                                             contador++;
                                             #endregion
@@ -1429,7 +1518,7 @@ namespace ERP_GMEDINA.Controllers
                         } // for each idsPlanillas
 
                     } // if idsPlanilla != null
-                    
+
                 } // using entities model
 
                 // enviar resultado al cliente
@@ -1460,12 +1549,12 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region previsualizar 
-        public ActionResult PrevisualizarPlanilla (int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
+        public ActionResult PrevisualizarPlanilla(int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
         {
             #region declaracion de instancias
 
             // helper
-            General utilities = new General();            
+            General utilities = new General();
 
             // instancias para el reporte final
             ReportePlanillaViewModel oPlanillaEmpleado;
@@ -1517,7 +1606,7 @@ namespace ERP_GMEDINA.Controllers
                                                              .Where(emp => emp.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla &&
                                                                     emp.emp_Estado == true)
                                                             .ToList();
-                            
+
 
                             // procesar planilla empleado por empleado
                             foreach (var empleadoActual in oEmpleados)
@@ -1608,7 +1697,7 @@ namespace ERP_GMEDINA.Controllers
                                                 CantidadHorasPermisoActual = iterHorasPermiso.hper_Duracion;
 
                                                 totalHorasPermiso += CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100));
-                                                
+
                                             }
                                         }
 
@@ -1625,7 +1714,7 @@ namespace ERP_GMEDINA.Controllers
                                             // sumar todas las comisiones
                                             foreach (var oComisionesColaboradoresIterador in oComisionesColaboradores)
                                             {
-                                                totalComisiones += oComisionesColaboradoresIterador.cc_TotalComision;                                                
+                                                totalComisiones += oComisionesColaboradoresIterador.cc_TotalComision;
                                             }
                                         }
 
@@ -1638,7 +1727,7 @@ namespace ERP_GMEDINA.Controllers
                                                                         x.htra_Fecha <= fechaFin)
                                                                 .Select(x => x.htra_CantidadHoras)
                                                                 .DefaultIfEmpty(0)
-                                                                .Sum();                                        
+                                                                .Sum();
 
                                         // total ingresos horas extras
                                         List<tbHistorialHorasTrabajadas> oHorasExtras = db.tbHistorialHorasTrabajadas
@@ -1661,7 +1750,7 @@ namespace ERP_GMEDINA.Controllers
                                                                             .Sum();
 
                                                 totalHorasExtras += CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100));
-                                                
+
                                             }
                                         }
 
@@ -1682,7 +1771,7 @@ namespace ERP_GMEDINA.Controllers
                                             // iterar los bonos
                                             foreach (var oBonosColaboradoresIterador in oBonosColaboradores)
                                             {
-                                                totalBonificaciones += oBonosColaboradoresIterador.cb_Monto;                                                
+                                                totalBonificaciones += oBonosColaboradoresIterador.cb_Monto;
                                             }
                                         }
 
@@ -1715,7 +1804,7 @@ namespace ERP_GMEDINA.Controllers
                                                 cantidadDias = restaFechas.Days;
 
                                                 totalVacaciones += (salarioHora * 8) * cantidadDias;
-                                                
+
                                             }
                                         }
 
@@ -1734,7 +1823,7 @@ namespace ERP_GMEDINA.Controllers
                                             foreach (var oIngresosIndiColaboradoresIterador in oIngresosIndiColaboradores)
                                             {
                                                 totalIngresosIndivuales += oIngresosIndiColaboradoresIterador.ini_Monto;
-                                                
+
                                             }
                                         }
 
@@ -1820,7 +1909,7 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                             //sumar las deducciones
                                             colaboradorDeducciones += (montoDeduccionColaborador * porcentajeColaborador) / 100;
-                                            
+
                                         }
 
                                         //instituciones financieras
@@ -1838,7 +1927,7 @@ namespace ERP_GMEDINA.Controllers
                                             foreach (var oDeduInstiFinancierasIterador in oDeduInstiFinancieras)
                                             {
                                                 totalInstitucionesFinancieras += oDeduInstiFinancierasIterador.deif_Monto;
-                        
+
                                             }
                                         }
                                         // deducciones afp
@@ -1872,7 +1961,7 @@ namespace ERP_GMEDINA.Controllers
                                             foreach (var oDeduccionesExtrasColaboradorIterador in oDeduccionesExtrasColaborador)
                                             {
                                                 totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
-                                                
+
                                             }
                                         }
 
@@ -1907,14 +1996,14 @@ namespace ERP_GMEDINA.Controllers
                                             foreach (var oDeduccionesIndiColaboradorIterador in oDeduccionesIndiColaborador)
                                             {
                                                 totalDeduccionesIndividuales += oDeduccionesIndiColaboradorIterador.dei_Monto <= oDeduccionesIndiColaboradorIterador.dei_MontoCuota ? oDeduccionesIndiColaboradorIterador.dei_MontoCuota : oDeduccionesIndiColaboradorIterador.dei_MontoCuota;
-                                                
+
                                             }
                                         }
 
 
                                         // totales
                                         totalDeduccionesEmpleado = totalOtrasDeducciones + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo + totalDeduccionesIndividuales;
-                                        netoAPagarColaborador = Math.Round((decimal)totalIngresosEmpleado.Value - totalDeduccionesEmpleado.Value,2);
+                                        netoAPagarColaborador = Math.Round((decimal)totalIngresosEmpleado.Value - totalDeduccionesEmpleado.Value, 2);
 
                                         #endregion
 
