@@ -53,7 +53,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: IngresosIndividuales/Create
         [HttpPost]
-        public ActionResult Create(string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre, string comentario)
+        public ActionResult Create(string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
         {
             tbIngresosIndividuales tbIngresosIndividuales = new tbIngresosIndividuales
             {
@@ -61,8 +61,7 @@ namespace ERP_GMEDINA.Controllers
                 emp_Id = emp_Id,
                 ini_Monto = ini_Monto,
                 ini_Pagado = false,
-                ini_PagaSiempre = ini_PagaSiempre,
-                ini_comentario = comentario
+                ini_PagaSiempre = ini_PagaSiempre
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbIngresosIndividuales.ini_UsuarioCrea = 1;
@@ -82,7 +81,6 @@ namespace ERP_GMEDINA.Controllers
                                                                                           tbIngresosIndividuales.ini_Monto,
                                                                                           tbIngresosIndividuales.ini_Pagado,
                                                                                           tbIngresosIndividuales.ini_PagaSiempre,
-                                                                                          tbIngresosIndividuales.ini_comentario,
                                                                                           tbIngresosIndividuales.ini_UsuarioCrea,
                                                                                           tbIngresosIndividuales.ini_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
@@ -158,7 +156,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int ini_IdIngresosIndividuales, string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre, string comentario)
+        public ActionResult Edit(int ini_IdIngresosIndividuales, string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
         {
             tbIngresosIndividuales tbIngresosIndividuales = new tbIngresosIndividuales
             {
@@ -166,8 +164,7 @@ namespace ERP_GMEDINA.Controllers
                 ini_Motivo = ini_Motivo,
                 emp_Id = emp_Id,
                 ini_Monto = ini_Monto,
-                ini_PagaSiempre = ini_PagaSiempre,
-                ini_comentario = comentario
+                ini_PagaSiempre = ini_PagaSiempre
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbIngresosIndividuales.ini_UsuarioModifica = 1;
@@ -188,8 +185,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                           tbIngresosIndividuales.ini_Monto,
                                                                                           tbIngresosIndividuales.ini_PagaSiempre,
                                                                                           tbIngresosIndividuales.ini_UsuarioModifica,
-                                                                                          tbIngresosIndividuales.ini_FechaModifica,
-                                                                                          tbIngresosIndividuales.ini_comentario);
+                                                                                          tbIngresosIndividuales.ini_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbIngresosIndividuales_Update_Result Resultado in listIngresosIndividuales)
                         MensajeError = Resultado.MensajeError;
@@ -243,8 +239,7 @@ namespace ERP_GMEDINA.Controllers
                                                     tbIngrIndi.ini_FechaCrea,
                                                     tbIngrIndi.ini_UsuarioModifica,
                                                     UsuModifica = tbIngrIndi.tbUsuario1.usu_NombreUsuario,
-                                                    tbIngrIndi.ini_FechaModifica,
-                                                    tbIngrIndi.ini_comentario
+                                                    tbIngrIndi.ini_FechaModifica
                                                 };
             db.Configuration.ProxyCreationEnabled = false;
             return Json(tbIngresosIndividualesJSON, JsonRequestBehavior.AllowGet);

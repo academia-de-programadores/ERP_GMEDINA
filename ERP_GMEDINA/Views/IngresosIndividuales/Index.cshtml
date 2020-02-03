@@ -34,7 +34,6 @@
                                 <th>@Html.DisplayNameFor(model => model.emp_Id)</th>
                                 <th>@Html.DisplayNameFor(model => model.ini_Monto)</th>
                                 <th>@Html.DisplayNameFor(model => model.ini_Activo)</th>
-                                <th>@Html.DisplayNameFor(model => model.ini_comentario)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -56,12 +55,8 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ini_Monto)
                                     </td>
-
                                     <td>
                                         @estadoIngresosIndividuales
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ini_comentario)
                                     </td>
                                     <td>
                                         @{

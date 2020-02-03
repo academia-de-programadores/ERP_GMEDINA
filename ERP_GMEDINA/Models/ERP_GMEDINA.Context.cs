@@ -2104,6 +2104,39 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Inactivar_Result>("UDP_Plani_tbIngresosIndividuales_Inactivar", ini_IdIngresosIndividualesParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
         }
     
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Update_Result> UDP_Plani_tbIngresosIndividuales_Update(Nullable<int> ini_IdIngresosIndividuales, string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
+        {
+            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
+                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
+                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
+    
+            var ini_MotivoParameter = ini_Motivo != null ?
+                new ObjectParameter("ini_Motivo", ini_Motivo) :
+                new ObjectParameter("ini_Motivo", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var ini_MontoParameter = ini_Monto.HasValue ?
+                new ObjectParameter("ini_Monto", ini_Monto) :
+                new ObjectParameter("ini_Monto", typeof(decimal));
+    
+            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
+                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
+                new ObjectParameter("ini_PagaSiempre", typeof(bool));
+    
+            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
+                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
+                new ObjectParameter("ini_UsuarioModifica", typeof(int));
+    
+            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
+                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
+                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Update_Result>("UDP_Plani_tbIngresosIndividuales_Update", ini_IdIngresosIndividualesParameter, ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Activar_Result> UDP_Plani_tbInstitucionesFinancieras_Activar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
         {
             var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
@@ -6383,6 +6416,39 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEquipoEmpleados_Delete_Result>("UDP_RRHH_tbEquipoEmpleados_Delete", eqem_IdParameter, eqem_UsuarioModificaParameter, eqem_FechaModificaParameter);
         }
     
+        public virtual ObjectResult<string> UDP_Plani_tbIngresosIndividuales_Insert(string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_Pagado, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioCrea, Nullable<System.DateTime> ini_FechaCrea)
+        {
+            var ini_MotivoParameter = ini_Motivo != null ?
+                new ObjectParameter("ini_Motivo", ini_Motivo) :
+                new ObjectParameter("ini_Motivo", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var ini_MontoParameter = ini_Monto.HasValue ?
+                new ObjectParameter("ini_Monto", ini_Monto) :
+                new ObjectParameter("ini_Monto", typeof(decimal));
+    
+            var ini_PagadoParameter = ini_Pagado.HasValue ?
+                new ObjectParameter("ini_Pagado", ini_Pagado) :
+                new ObjectParameter("ini_Pagado", typeof(bool));
+    
+            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
+                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
+                new ObjectParameter("ini_PagaSiempre", typeof(bool));
+    
+            var ini_UsuarioCreaParameter = ini_UsuarioCrea.HasValue ?
+                new ObjectParameter("ini_UsuarioCrea", ini_UsuarioCrea) :
+                new ObjectParameter("ini_UsuarioCrea", typeof(int));
+    
+            var ini_FechaCreaParameter = ini_FechaCrea.HasValue ?
+                new ObjectParameter("ini_FechaCrea", ini_FechaCrea) :
+                new ObjectParameter("ini_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbIngresosIndividuales_Insert", ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagadoParameter, ini_PagaSiempreParameter, ini_UsuarioCreaParameter, ini_FechaCreaParameter);
+        }
+    
         public virtual int UDP_RRHH_tbConceptosArchivos_Delete(Nullable<int> cona_Id, string cona_RazonInactivo, Nullable<int> cona_UsuarioModifica, Nullable<System.DateTime> cona_FechaModifica)
         {
             var cona_IdParameter = cona_Id.HasValue ?
@@ -6811,80 +6877,6 @@
                 new ObjectParameter("timv_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechoImpuestoVecinal_Update_Result>("UDP_Plani_tbTechoImpuestoVecinal_Update", timv_IdTechoImpuestoVecinalParameter, mun_CodigoParameter, tde_IdTipoDeduParameter, timv_RangoInicioParameter, timv_RangoFinParameter, timv_RangoParameter, timv_ImpuestoParameter, timv_UsuarioModificaParameter, timv_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Insert_Result> UDP_Plani_tbIngresosIndividuales_Insert(string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_Pagado, Nullable<bool> ini_PagaSiempre, string ini_Comentario, Nullable<int> ini_UsuarioCrea, Nullable<System.DateTime> ini_FechaCrea)
-        {
-            var ini_MotivoParameter = ini_Motivo != null ?
-                new ObjectParameter("ini_Motivo", ini_Motivo) :
-                new ObjectParameter("ini_Motivo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var ini_MontoParameter = ini_Monto.HasValue ?
-                new ObjectParameter("ini_Monto", ini_Monto) :
-                new ObjectParameter("ini_Monto", typeof(decimal));
-    
-            var ini_PagadoParameter = ini_Pagado.HasValue ?
-                new ObjectParameter("ini_Pagado", ini_Pagado) :
-                new ObjectParameter("ini_Pagado", typeof(bool));
-    
-            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
-                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
-                new ObjectParameter("ini_PagaSiempre", typeof(bool));
-    
-            var ini_ComentarioParameter = ini_Comentario != null ?
-                new ObjectParameter("ini_Comentario", ini_Comentario) :
-                new ObjectParameter("ini_Comentario", typeof(string));
-    
-            var ini_UsuarioCreaParameter = ini_UsuarioCrea.HasValue ?
-                new ObjectParameter("ini_UsuarioCrea", ini_UsuarioCrea) :
-                new ObjectParameter("ini_UsuarioCrea", typeof(int));
-    
-            var ini_FechaCreaParameter = ini_FechaCrea.HasValue ?
-                new ObjectParameter("ini_FechaCrea", ini_FechaCrea) :
-                new ObjectParameter("ini_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Insert_Result>("UDP_Plani_tbIngresosIndividuales_Insert", ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagadoParameter, ini_PagaSiempreParameter, ini_ComentarioParameter, ini_UsuarioCreaParameter, ini_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Update_Result> UDP_Plani_tbIngresosIndividuales_Update(Nullable<int> ini_IdIngresosIndividuales, string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica, string ini_Comentario)
-        {
-            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
-                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
-                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
-    
-            var ini_MotivoParameter = ini_Motivo != null ?
-                new ObjectParameter("ini_Motivo", ini_Motivo) :
-                new ObjectParameter("ini_Motivo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var ini_MontoParameter = ini_Monto.HasValue ?
-                new ObjectParameter("ini_Monto", ini_Monto) :
-                new ObjectParameter("ini_Monto", typeof(decimal));
-    
-            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
-                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
-                new ObjectParameter("ini_PagaSiempre", typeof(bool));
-    
-            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
-                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
-                new ObjectParameter("ini_UsuarioModifica", typeof(int));
-    
-            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
-                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
-                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
-    
-            var ini_ComentarioParameter = ini_Comentario != null ?
-                new ObjectParameter("ini_Comentario", ini_Comentario) :
-                new ObjectParameter("ini_Comentario", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Update_Result>("UDP_Plani_tbIngresosIndividuales_Update", ini_IdIngresosIndividualesParameter, ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter, ini_ComentarioParameter);
         }
     }
 }
