@@ -177,6 +177,7 @@ $('#btnCreateAcumuladosISR').click(function () {
     var empleadoid = $("#Crear #emp_IdCrear").val();
     var descripcion = $("#Crear #aisr_Descripcion").val();
     var aisr_Monto = $("#Crear #aisr_Monto").val();
+    var empId = $("#Crear #emp_IdCrear").val();
     var ModelState = true;
 
     //empleado requerido
@@ -188,6 +189,15 @@ $('#btnCreateAcumuladosISR').click(function () {
         $('#AsteriscoEmpleado').addClass("text-danger");
         $("#Crear #validation_emp_Id").css('display', '');
         ModelState = false;
+    }
+
+    if (empId == 0 || empId == "0" || empId == "") {
+        ModelState = false;
+        $("#Crear #validation_emp_Id").css("display", "");
+        $("#Crear #AsteriscoEmpleado").css("color", "red");
+    } else {
+        $("#Crear #validation_emp_Id").css("display", "none");
+        $("#Crear #AsteriscoEmpleado").css("color", "#676a6c");
     }
 
     // descripcion requerida
@@ -244,15 +254,15 @@ $('#btnCreateAcumuladosISR').click(function () {
 
         //serializar formulario
         var data = $("#frmAcumuladosISRCreate").serializeArray();
-        // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
-        var stringDecimal = data[6].value;
-        data[6].value = stringDecimal.replace(/,/g, '');
-        data[7].value = aisr_DeducirISR;
+
+        let descripcion = $('#Crear #aisr_Descripcion').val();
+        let monto = $('#Crear #aisr_Monto').val().replace(/,/g, '');;
+        let idEmpleado = $('#Crear #emp_IdCrear').val();
 
         $.ajax({
             url: "/AcumuladosISR/Create",
             method: "POST",
-            data: data
+            data: { aisr_Descripcion: descripcion, aisr_Monto: monto, aisr_DeducirISR: deducirISR, emp_ID: idEmpleado }
         }).done(function (data) {
             console.log(data);
             // validar respuesta del servidor
@@ -479,11 +489,12 @@ $("#btnUpdateAISR2").click(function () {
 
     $('#btnUpdateAISR2').attr('disabled', true);
 
+    let deducirISR = false;
     if ($('#Editar #aisr_DeducirISREdit').is(':checked')) {
-        aisr_DeducirISREdit = true;
+        deducirISR = true;
     }
     else {
-        aisr_DeducirISREdit = false;
+        deducirISR = false;
     }
 
     var data = $("#frmEditAcumuladosISR").serializeArray();
@@ -491,15 +502,16 @@ $("#btnUpdateAISR2").click(function () {
     // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
     var stringDecimal = data[5].value;
     data[5].value = stringDecimal.replace(/,/g, '');
-    $("#Editar form input:checkbox").each(function () {
-        data[this.name] = this.checked;
-    });
-    console.table(data);
+
+    let id = $('#Editar #aisr_Id').val();
+    let descripcion = $('#Editar #aisr_Descripcion').val();
+    let monto = $('#Editar #aisr_Monto').val().replace(/,/g, '');;
+    let idEmpleado = $('#Editar #emp_IdEditar').val();
 
     $.ajax({
         url: "/AcumuladosISR/Edit",
         method: "POST",
-        data: data
+        data: { aisr_Id: id, aisr_Descripcion: descripcion, aisr_Monto: monto, aisr_DeducirISR: deducirISR, emp_ID: idEmpleado }
     }).done(function (data) {
         if (data != "error") {
             // cerrar modales y cargar grid

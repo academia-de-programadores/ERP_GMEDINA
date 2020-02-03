@@ -85,8 +85,9 @@ namespace ERP_GMEDINA.Controllers
         #region POST: create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioCrea,aisr_FechaCrea,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo,aisr_DeducirISR,emp_Id")] tbAcumuladosISR tbAcumuladosISR)
+        public ActionResult Create(string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
+            tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
             #region declaracion de variables 
             tbAcumuladosISR.aisr_UsuarioCrea = 1;
             tbAcumuladosISR.aisr_FechaCrea = DateTime.Now;
@@ -156,7 +157,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Edit(int aisr_Id, string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
-            tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { };
+            tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Id = aisr_Id, aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
             // data de auditoria
             tbAcumuladosISR.aisr_UsuarioModifica = 1;
             tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
