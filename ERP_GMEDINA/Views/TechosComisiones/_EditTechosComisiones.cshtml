@@ -1,0 +1,78 @@
+﻿@model ERP_GMEDINA.Models.tbTechosComisiones
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmTechosComisionesEdit" }))
+{
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.tc_Id)
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="pull-left">Número</label>
+                <div class="col-md-8 pull-right">
+                    @Html.EditorFor(model => model.tc_Id, new { htmlAttributes = new { @class = "form-control", @id = "tc_Id", @disabled = "disabled" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="cin_IdIngreso" htmlattributes="{ class = text-box single-line, disabled = disabled }">Comisión</label>
+                        <label class="" id="ComisionAsterisco">*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control" onchange="ValidarCamposEditar(this.value, '-1', '-1', '-1')"></select>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="Validation_IdIngreso">Campo Comisión requerido</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.tc_PorcentajeComision, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled", maxlength = 18 } })
+                        <label id="PorcentajeAsterisco">*</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.tc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1','-1','-1', this.value)" } })
+                        <span class="field-validation-valid text-danger" style="display: none;" id="Porcentaje_Validation">Campo Porcentaje Comisión requerido</span>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="Porcentaje_Validation2">El campo Porcentaje Comisión debe ser mayor que cero</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.tc_RangoInicio, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled", maxlength = 18 } })
+                        <label id="InicioAsterisco">*</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.tc_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1', this.value, '-1', '-1')" } })
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoInicio_Validation">Campo Rango Inicio requerido</span>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoInicio_Validation2">El campo Rango Inicio debe ser mayor que cero</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.tc_RangoFin, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled", maxlength = 18 } })
+                        <label id="FinAsterisco">*</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.tc_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", onkeyup = "ValidarCamposEditar('-1','-1', this.value, '-1')" } })
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoFin_Validation">Campo Rango Fin requerido</span>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoFin_Validation2">El campo Rango Fin debe ser mayor que cero</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary pull-left" id="btnUpdateTechosComisiones">Actualizar</button>
+        <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarTechosComisiones">Inactivar</button>
+        <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
+    </div>
+}
+

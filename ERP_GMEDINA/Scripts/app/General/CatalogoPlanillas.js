@@ -71,17 +71,13 @@ function getDDL() {
                 $("#cpla_FrecuenciaEnDias").append("<option value=0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 if (valorEstaEnEditar)
-                    $("#cpla_FrecuenciaEnDias").append("<option value='" + iter.id + "' " + ((iter.id == valEditar) ? 'selected' : '')+">" + iter.descripcion + "</option>");
+                    $("#cpla_FrecuenciaEnDias").append("<option value='" + iter.id + "' " + ((iter.id == valEditar) ? 'selected' : '') + ">" + iter.descripcion + "</option>");
                 else
                     $("#cpla_FrecuenciaEnDias").append("<option value='" + iter.id + "'>" + iter.descripcion + "</option>");
-
             });
-            
         },
-        () => {
-
-        }
-    )
+        () => { }
+    );
 }
 
 // Funcion para crear y editar

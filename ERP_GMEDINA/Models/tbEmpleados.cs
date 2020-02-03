@@ -30,6 +30,7 @@ namespace ERP_GMEDINA.Models
             this.tbDirectoriosEmpleados = new HashSet<tbDirectoriosEmpleados>();
             this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
             this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
+            this.tbAcumuladosISR = new HashSet<tbAcumuladosISR>();
         }
     
         public int emp_Id { get; set; }
@@ -52,6 +53,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime emp_FechaCrea { get; set; }
         public Nullable<int> emp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
+        public Nullable<bool> emp_Temporal { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
@@ -104,5 +106,7 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAcumuladosISR> tbAcumuladosISR { get; set; }
     }
 }

@@ -76,7 +76,6 @@ namespace ERP_GMEDINA.Controllers
                                     }).ToList();
                     //OBTENER: ANTIGUEDAD
                     int TotalDiasLaborados = (int)Liquidacion.Dias360Mes(fechaFin, IdEmpleado);
-                    //int TotalDiasLaborados = Liquidacion.Calculo_AntiguedadEnDias(IdEmpleado, fechaFin);
 
                     int residuo = 0;
                     //OBTENER AÑOS
@@ -94,8 +93,8 @@ namespace ERP_GMEDINA.Controllers
                     //OBTENER: ABSTRACCION - SALARIO ORDINARIO DIARIO 
                     decimal SalarioOrdinarioMensual = Helpers.Liquidacion.Calculo_SalarioOrdinarioMensual(IdEmpleado);
                     //ALMACENAMIENTO DE VALORES DE RETORNO EN METODOS UTILITARIOS
-                    decimal Monto_Preaviso = Helpers.Liquidacion.Calculo_PagoDePreaviso(IdEmpleado, fechaFin, SalarioOrdinarioMensual, TotalDiasLaborados);
-                    decimal Monto_Cesantia = Helpers.Liquidacion.Calculo_PagoDeCesantia(IdEmpleado, fechaFin, SalarioOrdinarioMensual, TotalDiasLaborados);
+                    decimal Monto_Preaviso = Helpers.Liquidacion.Calculo_PagoDePreaviso(IdEmpleado, SalarioOrdinarioMensual, TotalDiasLaborados);
+                    decimal Monto_Cesantia = Helpers.Liquidacion.Calculo_PagoDeCesantia(IdEmpleado, SalarioOrdinarioMensual, TotalDiasLaborados);
                     decimal Monto_DecimoCuartoProporcional = Helpers.Liquidacion.Calculo_DecimoCuartoMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
                     decimal Monto_DecimoTercerProporcional = Helpers.Liquidacion.Calculo_DecimoTercerMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
                     decimal Monto_VacacionesProporcionales = Helpers.Liquidacion.Calculo_VacacionesProporcionales(IdEmpleado, fechaFin, SalarioOrdinarioMensual, TotalDiasLaborados);

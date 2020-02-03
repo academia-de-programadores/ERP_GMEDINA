@@ -81,10 +81,9 @@ namespace ERP_GMEDINA.Helpers
             {
                 try
                 {
-                    DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
                     //METODO MEDIANTE HISTORIAL DE PAGO
-                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id
-                                                                               && p.sue_FechaCrea >= FechaHistorialPago)
+                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.OrderByDescending(x => x.sue_FechaCrea).ThenByDescending(x => x.sue_Cantidad)
+                                                                               .Where(p => p.emp_Id == Emp_Id)
                                                                                .Select(x => (decimal)x.sue_Cantidad).Take(6);
                     //CAPTURA DEL SALARIO PROMEDIO Y CONVERSIÓN A STRING PARA EL RETORNO 
                     SalarioPromedio = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Average() : 0;
@@ -103,27 +102,27 @@ namespace ERP_GMEDINA.Helpers
         }
         #endregion
 
-        #region CÁLCULO DE SALARIO MAS ALTO
+        #region CÁLCULO DE SALARIO BRUTO MAS ALTO
         //CALCULO DE SALARIO ORDINARIO PROMEDIO MENSUAL
-        public static decimal Calculo_SalarioOrdinarioMensualMasAlto(int Emp_Id)
+        public static decimal Calculo_SalarioBrutoMasAlto(int Emp_Id)
         {
             //Captura de SalarioPromedio
-            decimal SalarioPromedio = 0;
+            decimal SalarioBrutoMasAlto = 0;
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
                     //METODO MEDIANTE HISTORIAL DE PAGO
-                    IQueryable<decimal> SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id
-                                                                               && p.sue_FechaCrea >= FechaHistorialPago)
-                                                                               .Select(x => (decimal)x.sue_Cantidad).Take(6);
+                    IQueryable<decimal> SalariosUlt6Meses = db.tbHistorialDePago.OrderByDescending(x => x.hipa_FechaPago).Where(p => p.emp_Id == Emp_Id)
+                                                                               .Select(x => (decimal)x.hipa_TotalSueldoBruto).Take(6);
                     //CAPTURA DEL SALARIO PROMEDIO Y CONVERSIÓN A STRING PARA EL RETORNO 
-                    SalarioPromedio = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Average() : 0;
-                    if (SalarioPromedio == 0)
+                    SalarioBrutoMasAlto = (SalariosUlt6Meses.Count() > 0) ? SalariosUlt6Meses.Max() : 0;
+                    //VALIDAR EN CASO QUE EL EMPLEADO NO ESTE EN EL HISTORIAL DE PAGO
+                    if (SalarioBrutoMasAlto == 0)
                     {
-                        SalariosUlt6Meses = db.tbSueldos.Where(p => p.emp_Id == Emp_Id).Select(x => (decimal)x.sue_Cantidad).Take(1);
-                        SalarioPromedio = SalariosUlt6Meses.Average();
+                        //CAPTURAR EL SALARIO DEL REINGRESO EN CASO QUE SEA DE REINGRESO EN LA EMPRESA
+                        SalariosUlt6Meses = db.tbSueldos.OrderByDescending(z => z.sue_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => (decimal)x.sue_Cantidad).Take(1);
+                        SalarioBrutoMasAlto = SalariosUlt6Meses.FirstOrDefault();
                     }
                 }
                 catch (Exception Ex)
@@ -131,7 +130,7 @@ namespace ERP_GMEDINA.Helpers
                     Ex.Message.ToString();
                 }
             }
-            return Math.Round(SalarioPromedio, 2);
+            return Math.Round(SalarioBrutoMasAlto, 2);
         }
         #endregion
 
@@ -159,10 +158,10 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO DE PREAVISO
         //CALCULO DE PAGO POR CONCEPTO DE PREAVISO
-        public static decimal Calculo_PagoDePreaviso(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_PagoDePreaviso(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE PREAVISO
-            decimal PagoDePreaviso = 0;
+            decimal PagoDePreavisoTotal = 0;
 
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
@@ -173,7 +172,7 @@ namespace ERP_GMEDINA.Helpers
                     //ALMACENA LA CANTIDAD DE DIAS CORRESPONDIENTES
                     int DiasCorrespondientes = 0;
                     ////ALMACENA LA CANTIDAD DE AÑOS LABORADOS
-                    //int MesesLaborados = Antiguedad / 30;
+                    int MesesLaborados = Antiguedad / 30;
                     //ALMACENA EL SALARIO PROMEDIO DIARIO
                     SalarioPromedioDiario = (Calculo_SalarioOrdinarioMensual(Emp_Id) * 14) / 360;
                     //INICIALIZACION DE LISTA DE LIQUIDACION_PREAVISO
@@ -182,30 +181,40 @@ namespace ERP_GMEDINA.Helpers
                     foreach (tbPreaviso iter in TbLiquidacionPreaviso)
                     {
                         //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
-                        if (Antiguedad > (RangoInicial * 30) && Antiguedad <= (iter.prea_RangoFinMeses * 30))
-                            DiasCorrespondientes = iter.prea_DiasPreaviso;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
-                        else if (Antiguedad > (iter.prea_RangoFinMeses * 30))
+                        if (MesesLaborados >= RangoInicial && MesesLaborados < iter.prea_RangoFinMeses)
+                        {
+                            //ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
                             DiasCorrespondientes = iter.prea_DiasPreaviso;
-                        //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
-                        RangoInicial = iter.prea_RangoFinMeses;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.prea_RangoFinMeses == 0) ? RangoInicial : iter.prea_RangoFinMeses;
+                        }
+                        else if (MesesLaborados >= iter.prea_RangoInicioMeses && iter.prea_RangoFinMeses == 0)
+                        {
+                            DiasCorrespondientes = iter.prea_DiasPreaviso;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.prea_RangoFinMeses == 0) ? RangoInicial : iter.prea_RangoFinMeses;
+                        }
                     }
-                    PagoDePreaviso = (SalarioPromedioDiario * DiasCorrespondientes);
+                    //SETEAR LA VARIABLE DE TOTAL PREAVISO
+                    PagoDePreavisoTotal = (SalarioPromedioDiario * DiasCorrespondientes);
                 }
                 catch (Exception Ex)
                 {
                     Ex.Message.ToString();
                 }
             }
-            return Math.Round(PagoDePreaviso, 2);
+            return Math.Round(PagoDePreavisoTotal, 2);
         }
         #endregion
 
         #region CÁLCULO DE CESANTÍA
         //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
-        public static decimal Calculo_PagoDeCesantia(int Emp_Id, DateTime Fecha, decimal SalarioPromedioDiario, int Antiguedad)
+        public static decimal Calculo_PagoDeCesantia(int Emp_Id, decimal SalarioPromedioDiario, int Antiguedad)
         {
             //ALMACENA MONTO DEL PAGO DE CESANTIA
-            decimal PagoDeCesantia = 0;
+            decimal PagoDeCesantiaCompleta = 0;
+            decimal PagoDeCesantiaProporcional = 0;
+            decimal PagoDeCesantiaTotal = 0;
 
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
@@ -222,42 +231,55 @@ namespace ERP_GMEDINA.Helpers
                     //ALMACENA EL SALARIO PROMEDIO DIARIO
                     SalarioPromedioDiario = (SalarioPromedioDiario * 14) / 360;
                     //INICIALIZACION DE LISTA DE LIQUIDACION_CESANTIA
-                    List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia = db.tbAuxilioDeCesantias.ToList();
+                    List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia = db.tbAuxilioDeCesantias.OrderBy(c => c.aces_RangoInicioMeses).ToList();
                     int Contador = 0;
                     //ITERACION DE LA TABLA LIQUIDACION_CESANTIA
                     foreach (tbAuxilioDeCesantias iter in TbLiquidacionAuxilioCesantia)
                     {
-                        if (Contador == 0)
+                        //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
+                        if (MesesLaborados >= RangoInicial && MesesLaborados < iter.aces_RangoFinMeses)
                         {
-                            //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
-                            if (Antiguedad >= (iter.aces_RangoInicioMeses * 30) && Antiguedad <= (iter.aces_RangoFinMeses * 30))
-                                DiasCorrespondientes = iter.aces_DiasAuxilioCesantia;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
-                            else if (Antiguedad > (iter.aces_RangoFinMeses * 30))
-                                DiasCorrespondientes = MesesLaborados * 30;
+                            //ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
+                            DiasCorrespondientes = iter.aces_DiasAuxilioCesantia;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.aces_RangoFinMeses == 0) ? RangoInicial : iter.aces_RangoFinMeses;
                         }
-                        else
+                        else if (MesesLaborados >= iter.aces_RangoInicioMeses && iter.aces_RangoFinMeses == 0)
                         {
-                            //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
-                            if (MesesLaborados > RangoInicial && MesesLaborados <= iter.aces_RangoFinMeses)
-                                DiasCorrespondientes = iter.aces_DiasAuxilioCesantia;//ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
-                            else if (MesesLaborados > 12)
-                                DiasCorrespondientes = MesesLaborados * 30;
+                            DiasCorrespondientes = (MesesLaborados / iter.aces_RangoInicioMeses) * iter.aces_DiasAuxilioCesantia;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.aces_RangoFinMeses == 0) ? RangoInicial : iter.aces_RangoFinMeses;
                         }
-                        //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
-                        RangoInicial = iter.aces_RangoFinMeses;
                         //SETEAR LA VARIABLE CONTADOR
                         Contador++;
                     }
                     //SETEO DE LA VARIABLE CONTENEDORA DEL MONTO DE AUXILIODECESANTIA
-                    PagoDeCesantia = (MesesLaborados > RangoInicial) ? ((SalarioPromedioDiario * DiasCorrespondientes) + ((DiasLaborados % 360) * ((SalarioPromedioDiario * 30) / 360))) :
-                                                                       (SalarioPromedioDiario * DiasCorrespondientes);
+                    //PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
+
+                    //if (MesesLaborados > 12)
+                    //    PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+                    if (MesesLaborados >= 12)
+                    {
+                        //CESANTÍA EN BASE A RANGO
+                        PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
+                        //CESANTÍA PRO
+                        //PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+
+                        PagoDeCesantiaProporcional = (MesesLaborados / 12) * (((DiasCorrespondientes * SalarioPromedioDiario) / (12 * 30)) * (DiasLaborados % 360));
+                    }
+                    else
+                    {
+                        PagoDeCesantiaCompleta = ((DiasCorrespondientes * SalarioPromedioDiario) / (RangoInicial * 30)) * DiasLaborados;
+                    }
+
+                    PagoDeCesantiaTotal = PagoDeCesantiaCompleta + PagoDeCesantiaProporcional;
                 }
                 catch (Exception Ex)
                 {
                     Ex.Message.ToString();
                 }
             }
-            return Math.Round(PagoDeCesantia, 2);
+            return Math.Round(PagoDeCesantiaTotal, 2);
         }
         #endregion
 
@@ -378,26 +400,29 @@ namespace ERP_GMEDINA.Helpers
                             Historico_DiasVacacionesTomadas += it.hvac_CantDias;
                     }
 
+                    ////OBTENER LA BASE EN DIAS
+                    //int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
+                    //                                                            (iter == 2) ? 12 :
+                    //                                                            (iter == 3) ? 15 :
+                    //                                                            (iter >= 4) ? 20 : 0;
                     //OBTENER LA BASE EN DIAS
-                    int BaseEnDias = Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
-                                                                   (iter == 2) ? 12 :
-                                                                   (iter == 3) ? 15 :
-                                                                   (iter >= 4) ? 20 : 0; 
-                    //VALIDAR VACACIONES PROPORCIONALES
-                    decimal PagoProporcionalDeVacaciones = (
-                                                                 (Antiguedad > 360) ?
-                                                                    ((SalarioOrdinario / 30) * (Antiguedad % (AniosLaborados * 360))) / BaseEnDias :
-                                                                    ((SalarioOrdinario / 30) * Antiguedad) / BaseEnDias
-                                                            );
-
-
+                    int BaseEnDias = (iter == 1) ? 10 :
+                                     (iter == 2) ? 12 :
+                                     (iter == 3) ? 15 :
+                                     (iter >= 4) ? 20 : 0;
 
                     //VALIDAR VACACIONES TOMADAS
                     int DiasVacacionesValidos = (Historico_DiasDeVacacionCorrespondiente >= Historico_DiasVacacionesTomadas) ? (Historico_DiasDeVacacionCorrespondiente - Historico_DiasVacacionesTomadas) : 0;
-                    //int Historico_DiasVacacionestomadas = db.tbHistorialVacaciones.Where(p => p.emp_Id == Emp_Id).Select(c => c.hvac_DiasTomados).Sum();
-                    MontoVacacionesPendientes = ((Antiguedad / 360) > 0) ? DiasVacacionesValidos * SalarioPromedioDiario : 0;
-                    //SUMATORIA DE DÍAS DE VACACIONES PROPORCIONALES
-                    MontoVacacionesPendientes += PagoProporcionalDeVacaciones;
+
+                    //VACACIONES CORRESPONDIENTES
+                    MontoVacacionesPendientes = SalarioPromedioDiario * DiasVacacionesValidos;
+                    if (Antiguedad % (BaseEnDias * 30) > 1)
+                    {
+                        //INCREMENTAR LA BASE EN DÍAS POR EL AÑO QUE ESTA INCOMPLETO
+                        BaseEnDias++;
+                        //CALCULTAR PROPORCIONAL
+                        MontoVacacionesPendientes += ((SalarioPromedioDiario * 30) / (BaseEnDias * 12)) * (Antiguedad % (BaseEnDias * 30));
+                    }
 
                 }
                 catch (Exception Ex)
@@ -406,6 +431,134 @@ namespace ERP_GMEDINA.Helpers
                 }
             }
             return (MontoVacacionesPendientes < 0) ? 0 : Math.Round(MontoVacacionesPendientes, 2);
+        }
+        #endregion
+
+
+        //
+        //CALCULO DE CESANTIA ANUAL
+        //
+
+        #region CÁLCULO DE ANTIGUEDAD EN DÍAS
+
+        //GET DÍAS DE CESANTIA PROPORCIONAL
+        public static double Dias360AcumuladosCesantia(int Emp_Id, DateTime FechaActual)
+        {
+            DateTime FechaInicial = DateTime.MinValue;
+            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    //SETEAR A FECHA CON EL ULTIMO PAGO DE CESANTIA
+                    FechaInicial = (DateTime)db.tbPagoDeCesantiaDetalle.OrderByDescending(c => c.pdcd_FechaCrea).Where(p => p.emp_Id == Emp_Id).Select(x => x.pdcd_FechaCrea).Take(1).FirstOrDefault();
+                    //VALIDAR EN CASO QUE LA FECHA REINGRESO SEA NULL
+                    if (FechaInicial.Year == 1)
+                    {
+                        //SETEAR LA FECHA CON LA DE REINGRESO
+                        FechaInicial = (DateTime)db.tbEmpleados.OrderByDescending(c => c.emp_FechaCrea).Where(p => p.emp_Id == Emp_Id && p.emp_Reingreso == true).Select(x => x.emp_Fechaingreso).Take(1).FirstOrDefault();
+                    }
+                    //VALIDAR EN CASO QUE LA FECHA DE HISTORIAL DE PAGO DE CESANTÍA SEA NULL
+                    if (FechaInicial.Year == 1)
+                    {
+                        //SETEAR A FECHA CON LA FECHA DE INGRESO
+                        FechaInicial = (DateTime)db.tbEmpleados.Where(p => p.emp_Id == Emp_Id).Select(x => x.emp_Fechaingreso).FirstOrDefault();
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Ex.Message.ToString();
+                }
+            }
+            //VALIDAR QUE LA FECHA ACTUAL SEA MENOR QUE LA FECHA INICIAL
+            if (FechaInicial > FechaActual)
+                return 0;
+
+            //DESCOMPOSICIÓN DE FECHAS PARA FACTORIZAR EL VALOR DE RETORNO
+            int diaInicio = FechaInicial.Day;
+            int mesInicio = FechaInicial.Month;
+            int anioInicio = FechaInicial.Year;
+            int diaFin = FechaActual.Day;
+            int mesFin = FechaActual.Month;
+            int anioFin = FechaActual.Year;
+            //VALIDAR FEBRERO EN FORMATO DE DIAS 30
+            if (diaInicio == 31 || EsElUltimoDiaDeFebrero(FechaInicial))
+                diaInicio = 30;
+            //VALIDAR MESES EN FORMATO DE AÑO 360
+            if (diaInicio == 30 && diaFin == 31)
+                diaFin = 30;
+            //VALOR DE RETORNO
+            return ((anioFin - anioInicio) * 360) + ((mesFin - mesInicio) * 30) + (diaFin - diaInicio);
+        }
+
+        #endregion
+
+        #region CÁLCULO - REDUCCION DE PASIVO LABORAL
+        //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
+        public static decimal Calculo_ReduccionPasivoLaboral(int Emp_Id, decimal SalarioBrutoMasAlto, int Antiguedad, List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia)
+        {
+            //ALMACENA MONTO DEL PAGO DE CESANTIA
+            decimal PagoDeCesantiaCompleta = 0;
+            decimal PagoDeCesantiaProporcional = 0;
+            decimal PagoDeCesantiaTotal = 0;
+
+            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    //ALMACENA EL RANGO DE INICIO DE LA VALIDACIÓN POR AÑOS
+                    int RangoInicial = 0;
+                    //ALMACENA LA CANTIDAD DE DIAS CORRESPONDIENTES
+                    int DiasCorrespondientes = 0;
+                    //ALMACENA LA CANTIDAD DE DIAS LABORADOS
+                    int DiasLaborados = Antiguedad;
+                    //ALMACENA LA CANTIDAD DE AÑOS LABORADOS
+                    int MesesLaborados = DiasLaborados / 30;
+                    //CONTADOR
+                    int Contador = 0;
+                    //SETEAR SALARIO BRUTO MENSUAL A DIARIO BRUTO
+                    SalarioBrutoMasAlto = SalarioBrutoMasAlto / 30;
+                    //ITERACION DE LA TABLA LIQUIDACION_CESANTIA
+                    foreach (tbAuxilioDeCesantias iter in TbLiquidacionAuxilioCesantia)
+                    {
+
+                        //VALIDAR LA CANTIDAD DE DIAS CORRESPONDIENTES
+                        if (MesesLaborados >= RangoInicial && MesesLaborados < iter.aces_RangoFinMeses)
+                        {
+                            //ASIGACION EN CASO DE SALIDA LOGICA VERDADERA
+                            DiasCorrespondientes = iter.aces_DiasAuxilioCesantia;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.aces_RangoFinMeses == 0) ? RangoInicial : iter.aces_RangoFinMeses;
+                        }
+                        else if (MesesLaborados >= iter.aces_RangoInicioMeses && iter.aces_RangoFinMeses == 0)
+                        {
+                            DiasCorrespondientes = (MesesLaborados / iter.aces_RangoInicioMeses) * iter.aces_DiasAuxilioCesantia;
+                            //SETEAR LA VARIABLE RangoInicial CON EL VALOR DEL RANGO FINAL DEL ITERADOR
+                            RangoInicial = (iter.aces_RangoFinMeses == 0) ? RangoInicial : iter.aces_RangoFinMeses;
+                        }
+                        //SETEAR LA VARIABLE CONTADOR
+                        Contador++;
+                    }
+                    if(MesesLaborados >= 12)
+                    {
+                        //CESANTÍA EN BASE A RANGO
+                        PagoDeCesantiaCompleta = (MesesLaborados / 12) * ((SalarioBrutoMasAlto * DiasCorrespondientes));
+                        //CESANTÍA PRO
+                        PagoDeCesantiaProporcional = ((DiasLaborados % 360) * ((DiasCorrespondientes * SalarioBrutoMasAlto) / (12 * 30)));
+
+                        //PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioBrutoMasAlto) / (RangoInicial * 30)) * (DiasLaborados % 360);
+                    }
+                    else
+                    {
+                        PagoDeCesantiaCompleta = ((DiasCorrespondientes * SalarioBrutoMasAlto) / (RangoInicial * 30)) * DiasLaborados;
+                    }
+                    PagoDeCesantiaTotal = PagoDeCesantiaCompleta + PagoDeCesantiaProporcional;
+                }
+                catch (Exception Ex)
+                {
+                    Ex.Message.ToString();
+                }
+            }
+            return Math.Round(PagoDeCesantiaTotal, 2);
         }
         #endregion
 

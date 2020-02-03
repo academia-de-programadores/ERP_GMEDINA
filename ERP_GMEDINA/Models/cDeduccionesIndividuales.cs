@@ -25,17 +25,17 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
 
 
-        [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
-        [Display(Name = "Monto Inicial")]
-        public decimal dei_MontoInicial { get; set; }
+        [Required(ErrorMessage = "Campo Monto Requerido")]
+        [Display(Name = "Monto")]
+        public decimal dei_Monto { get; set; }
 
-        [Required(ErrorMessage = "Campo Monto Restante Requerido")]
-        [Display(Name = "Monto Restante")]
-        public decimal dei_MontoRestante { get; set; }
+        [Required(ErrorMessage = "Campo # Cuotas Requerido")]
+        [Display(Name = "# Cuotas")]
+        public int dei_NumeroCuotas { get; set; }
 
-        [Required(ErrorMessage = "Campo Cuota Requerido")]
-        [Display(Name = "Cuota")]
-        public decimal dei_Cuota { get; set; }
+        [Required(ErrorMessage = "Campo Monto Cuota Requerido")]
+        [Display(Name = "Monto de Cuota")]
+        public decimal dei_MontoCuota { get; set; }
 
         [Display(Name = "Siempre Deduce")]
         public Nullable<bool> dei_PagaSiempre { get; set; }
@@ -54,6 +54,9 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Estado")]
         public bool dei_Activo { get; set; }
+
+        [Display(Name = "Deducir ISR")]
+        public bool dei_DeducirISR { get; set; }
 
     }
 }

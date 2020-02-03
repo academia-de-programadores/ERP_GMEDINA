@@ -201,6 +201,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TechoImpuestoVecinalController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\AFPController.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
+    <Compile Include="Controllers\PagoDeCesantiaDetalleController.cs" />
     <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
@@ -259,6 +261,7 @@
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
+    <Compile Include="Controllers\TechosComisionesController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
@@ -356,6 +359,8 @@
     <Compile Include="Models\cSeleccionCandidatos.cs" />
     <Compile Include="Models\cSucursales.cs" />
     <Compile Include="Models\cSueldos.cs" />
+    <Compile Include="Models\cTechoImpuestoVecinal.cs" />
+    <Compile Include="Models\cTechosComisiones.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
@@ -983,6 +988,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbTechoImpuestoVecinal_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosComisiones_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosComisiones_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosComisiones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosComisiones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Activar_Result.cs">
@@ -1792,6 +1809,12 @@
     <Compile Include="Models\V_tbHistorialSalidas_completa.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_tbPagoDeCesantiaDetalle.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbPagoDeCesantiaDetalle_Preview.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_tbPersonas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -2032,6 +2055,7 @@
     <Content Include="Scripts\app\General\IngresosIndividuales.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasIndex.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
+    <Content Include="Scripts\app\General\IV.js" />
     <Content Include="Scripts\app\General\ISR.js" />
     <Content Include="Scripts\app\General\ISRRPT.js" />
     <Content Include="Scripts\app\General\Jornadas\Admin.js" />
@@ -2040,6 +2064,7 @@
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\PagoDeCesantia.js" />
     <Content Include="Scripts\app\General\Periodos.js" />
     <Content Include="Scripts\app\General\Personas\Admin.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
@@ -2068,6 +2093,7 @@
     <Content Include="Scripts\app\General\Sucursales\EditSucursales.js" />
     <Content Include="Scripts\app\General\Sucursales\IndexSucursales.js" />
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
+    <Content Include="Scripts\app\General\TechosComisiones.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
@@ -2962,6 +2988,16 @@
     <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
     <Content Include="Views\Menu\MenuPrincipal.cshtml" />
     <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
+    <Content Include="Views\PagoDeCesantiaDetalle\Index.cshtml" />
+    <Content Include="Views\PagoDeCesantiaDetalle\PagarCesantia.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\Index.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\_CreateIV.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\_EditIV.cshtml" />
+    <Content Include="Views\TechoImpuestoVecinal\_DetailsIV.cshtml" />
+    <Content Include="Views\TechosComisiones\_CreateTechosComisiones.cshtml" />
+    <Content Include="Views\TechosComisiones\_DetailsTechosComisiones.cshtml" />
+    <Content Include="Views\TechosComisiones\_EditTechosComisiones.cshtml" />
+    <Content Include="Views\TechosComisiones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

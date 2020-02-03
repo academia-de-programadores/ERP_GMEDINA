@@ -154,8 +154,8 @@ namespace ERP_GMEDINA.Controllers
                                                                     tbPeriodos.peri_DescripPeriodo,
                                                                     tbPeriodos.peri_UsuarioModifica,
                                                                     tbPeriodos.peri_FechaModifica,
-                                                                    true,
-                                                                    1);
+                                                                    tbPeriodos.peri_RecibeSeptimoDia,
+                                                                    tbPeriodos.peri_CantidadDias);
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPeriodos_Update_Result resultado in listPeriodo)

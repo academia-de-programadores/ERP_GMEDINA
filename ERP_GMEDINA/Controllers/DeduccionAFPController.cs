@@ -42,9 +42,10 @@ namespace ERP_GMEDINA.Controllers
                             dafp_UsuarioModifica = t.dafp_UsuarioModifica,
                             dafp_FechaCrea = t.dafp_FechaCrea,
                             dafp_FechaModifica = t.dafp_FechaModifica,
-                            dafp_Activo = t.dafp_Activo
+                            dafp_Activo = t.dafp_Activo,
+                            dafp_DeducirISR = t.dafp_DeducirISR
                         })
-                        .OrderBy(t => t.dafp_FechaCrea)
+                        //.OrderBy(t => t.dafp_FechaCrea)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -67,7 +68,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Create([Bind(Include = "dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea,dafp_DeducirISR")] tbDeduccionAFP tbDeduccionAFP)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbDeduccionAFP.dafp_UsuarioCrea = 1;
@@ -86,7 +87,8 @@ namespace ERP_GMEDINA.Controllers
                                                                           tbDeduccionAFP.afp_Id,
                                                                           tbDeduccionAFP.emp_Id,
                                                                           tbDeduccionAFP.dafp_UsuarioCrea,
-                                                                          tbDeduccionAFP.dafp_FechaCrea);
+                                                                          tbDeduccionAFP.dafp_FechaCrea,
+                                                                          tbDeduccionAFP.dafp_DeducirISR);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Insert_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;
@@ -160,7 +162,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica,dafp_DeducirISR")] tbDeduccionAFP tbDeduccionAFP)
         {
             //LLENAR DATA DE AUDITORIA
             tbDeduccionAFP.dafp_UsuarioModifica = 1;
@@ -180,7 +182,8 @@ namespace ERP_GMEDINA.Controllers
                                                                           tbDeduccionAFP.afp_Id,
                                                                           tbDeduccionAFP.emp_Id,
                                                                           tbDeduccionAFP.dafp_UsuarioModifica,
-                                                                          tbDeduccionAFP.dafp_FechaModifica);
+                                                                          tbDeduccionAFP.dafp_FechaModifica,
+                                                                          tbDeduccionAFP.dafp_DeducirISR);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Update_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;
@@ -241,7 +244,8 @@ namespace ERP_GMEDINA.Controllers
                                          tbDeduAFP.dafp_FechaCrea,
                                          tbDeduAFP.dafp_UsuarioModifica,
                                          UsuModifica = tbDeduAFP.tbUsuario1.usu_NombreUsuario,
-                                         tbDeduAFP.dafp_FechaModifica
+                                         tbDeduAFP.dafp_FechaModifica,
+                                         tbDeduAFP.dafp_DeducirISR
                                      };
 
             db.Configuration.ProxyCreationEnabled = false;

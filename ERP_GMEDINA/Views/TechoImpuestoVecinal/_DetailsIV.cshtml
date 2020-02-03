@@ -1,0 +1,101 @@
+﻿@model ERP_GMEDINA.Models.tbTechoImpuestoVecinal
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsIV" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Municipio")
+                </div>
+                <div class="col-md-6">
+                    <span id="mun_Codigo">@Html.DisplayFor(model => model.tbMunicipio.mun_Nombre, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.tbMunicipio.mun_Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Tipo Deducción")
+                </div>
+                <div class="col-md-6">
+                    <span id="tde_IdTipoDedu">@Html.DisplayFor(model => model.tbTipoDeduccion.tde_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.tbTipoDeduccion.tde_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Rango Inicio")
+                </div>
+                <div class="col-md-6">
+                    <span id="timv_RangoInicio">@Html.DisplayFor(model => model.timv_RangoInicio, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.timv_RangoInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Rango Fin")
+                </div>
+                <div class="col-md-6">
+                    <span id="timv_RangoFin">@Html.DisplayFor(model => model.timv_RangoFin, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.timv_RangoFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Rango")
+                </div>
+                <div class="col-md-6">
+                    <span id="timv_Rango">@Html.DisplayFor(model => model.timv_Rango, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.timv_Rango, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Impuesto")
+                </div>
+                <div class="col-md-6">
+                    <span id="timv_Impuesto">@Html.DisplayFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.timv_Impuesto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h4>Auditoría</h4>
+        </div>
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <table class="table table-striped table-bordered dataTable">
+                    <thead>
+                        <tr>
+                            <th>Acción</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creado</td>
+                            @Html.HiddenFor(model => model.timv_UsuarioCrea)
+                            <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            <td><span id="FechaCrea">@Html.DisplayFor(model => model.timv_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        </tr>
+                        <tr>
+                            <td>Modificado</td>
+                            @Html.HiddenFor(model => model.timv_UsuarioModifica)
+                            <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            <td><span id="timv_FechaModifica">@Html.DisplayFor(model => model.timv_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

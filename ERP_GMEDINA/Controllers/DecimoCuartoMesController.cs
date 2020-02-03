@@ -1,4 +1,5 @@
-﻿using ERP_GMEDINA.Models;
+﻿using ERP_GMEDINA.Helpers;
+using ERP_GMEDINA.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,10 +88,10 @@ namespace ERP_GMEDINA.Controllers
 			int RegistrosInsertados = db.SaveChanges();
 			return Json(RegistrosInsertados);
 		}
-		#endregion
+        #endregion
 
-		#region POST: FECHAS POR ESPECIFICACIÓN
-		[HttpPost]
+        #region POST: FECHAS POR ESPECIFICACIÓN
+        [HttpPost]
 		public ActionResult FechaEspecifica(int? hipa_FechaInicio)
 		{
 			if (ModelState.IsValid)

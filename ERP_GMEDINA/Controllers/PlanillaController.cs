@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -426,7 +426,7 @@ namespace ERP_GMEDINA.Controllers
                                                             });
                                                             errores++;
                                                         }
-                                                        
+
                                                     }
                                                     // para el voucher
                                                     ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
@@ -506,7 +506,7 @@ namespace ERP_GMEDINA.Controllers
                                                             });
                                                             errores++;
                                                         }
-                                                        
+
                                                     }
                                                 }
                                                 catch (Exception ex)
@@ -581,7 +581,7 @@ namespace ERP_GMEDINA.Controllers
                                                             });
                                                             errores++;
                                                         }
-                                                        
+
                                                     }
                                                 }
                                                 catch (Exception ex)
@@ -646,7 +646,7 @@ namespace ERP_GMEDINA.Controllers
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    
+
                                                 }
                                             }
 
@@ -1141,7 +1141,7 @@ namespace ERP_GMEDINA.Controllers
                                             ////Variable para las Vacaciones Pagadas del Historial de Ingresos de Pago
                                             //var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
 
-                                            ////Validar si los dias a Pagar es mayor a 30 dias 
+                                            ////Validar si los dias a Pagar es mayor a 30 dias
                                             //if (objVacaciones > 30)
                                             //{
                                             //    ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
@@ -1250,7 +1250,7 @@ namespace ERP_GMEDINA.Controllers
                                             // Pendiente testeo
                                             //netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
-                                            #region guardar en el historial de pago    
+                                            #region guardar en el historial de pago
 
                                             idHistorialPago = db.tbHistorialDePago
                                                               .Select(x => x.hipa_IdHistorialDePago)
@@ -1335,7 +1335,7 @@ namespace ERP_GMEDINA.Controllers
 
                                                 if (MensajeError.StartsWith("-1"))
                                                 {
-                                                    // el procedimiento almacenado falló                                            
+                                                    // el procedimiento almacenado falló
                                                     errores++;
                                                 }
                                                 // si el encabezado del historial de pago se registró correctamente, guardar los detalles
@@ -1541,14 +1541,14 @@ namespace ERP_GMEDINA.Controllers
                     PosibleSolucion = "Vuelva a intentarlo"
                 });
             }
-            #endregion 
+            #endregion
 
             // retornar resultado del proceso
             return Json(new { Data = reporte, listaDeErrores = listaErrores, Response = response }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
-        #region previsualizar 
+        #region previsualizar
         public ActionResult PrevisualizarPlanilla(int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
         {
             #region declaracion de instancias
@@ -2114,7 +2114,7 @@ namespace ERP_GMEDINA.Controllers
                                         ////Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
                                         //var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
 
-                                        ////Validar si los dias a Pagar es mayor a 30 dias 
+                                        ////Validar si los dias a Pagar es mayor a 30 dias
                                         //if (objVacaciones > 30)
                                         //{
                                         //    ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
@@ -2291,7 +2291,7 @@ namespace ERP_GMEDINA.Controllers
                 response.Encabezado = "Error";
                 response.Tipo = "error";
             }
-            #endregion 
+            #endregion
 
             // retornar resultado del proceso
             return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
@@ -2333,7 +2333,7 @@ namespace ERP_GMEDINA.Controllers
             else
             {
                 if (DateTime.Now.Month == 12)
-                    //Calcular todas las fechas de este año, aunque haya entrado 
+                    //Calcular todas las fechas de este año, aunque haya entrado
                     SalarioPromedioAnualPagadoAlAnio = mesesPago.Sum();
             }
 

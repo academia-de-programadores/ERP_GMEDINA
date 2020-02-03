@@ -641,11 +641,21 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/InstitucionesFinancierasIndex").Include(
                 "~/Scripts/app/General/InstitucionesFinancierasIndex.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/PagoCesantia").Include(
+                "~/Scripts/app/General/PagoDeCesantia.js",
+                "~/Scripts/app/General/excelexportjs.js",
+                "~/Scripts/plugins/switchery/switchery.js",
+                "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
+                "~/Scripts/app/FileSaver.min.js"));
             #endregion
 
             #region Otros
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FechaPlanilla").Include(
                 "~/Scripts/app/General/FechaPlanilla.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IV").Include(
+                "~/Scripts/app/General/IV.js"));
 
             //mascaras de entrada
             bundles.Add(new ScriptBundle("~/plugins/mascarasDeEntrada").Include(

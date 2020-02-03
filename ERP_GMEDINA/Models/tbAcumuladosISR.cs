@@ -14,8 +14,11 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> aisr_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> aisr_FechaModifica { get; set; }
         public bool aisr_Activo { get; set; }
+        public Nullable<bool> aisr_DeducirISR { get; set; }
+        public int emp_Id { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }
