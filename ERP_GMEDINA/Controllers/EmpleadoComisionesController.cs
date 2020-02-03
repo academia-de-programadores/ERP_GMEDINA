@@ -98,25 +98,42 @@ namespace ERP_GMEDINA.Controllers
 
         #region Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cc_FechaRegistro, cc_Pagado, cc_UsuarioCrea, cc_FechaCrea, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
+
+        
+        public ActionResult Create([Bind(Include = "emp_Id,cin_IdIngreso,cc_FechaRegistro,cc_Pagado,cc_UsuarioCrea,cc_FechaCrea, cc_TotalComision,cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+           
+
+            decimal TotalComision = 0;
+            var TechosComisiones = from a in db.tbTechosComisiones
+                                   where a.tc_Estado == true
+                                   select a;
+            foreach (var a in TechosComisiones)
+            {
+                if (tbEmpleadoComisiones.cc_TotalVenta >= a.tc_RangoInicio && tbEmpleadoComisiones.cc_TotalVenta <= a.tc_RangoFin)
+                {
+                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100));
+                }
+            }
+
+            tbEmpleadoComisiones.cc_TotalComision = TotalComision;
             tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
             tbEmpleadoComisiones.cc_UsuarioCrea = 1;
             tbEmpleadoComisiones.cc_FechaCrea = DateTime.Now;
-
+            tbEmpleadoComisiones.cc_Pagado = false;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listEmpleadoComisiones = null;
             string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
                 try
                 {
-					tbEmpleadoComisiones.cc_TotalComision = tbEmpleadoComisiones.cc_TotalVenta * 0;
-					//EJECUTAR PROCEDIMIENTO ALMACENADO
-					listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Insert(tbEmpleadoComisiones.emp_Id,
+                   
+                    //tbEmpleadoComisiones.cc_TotalComision = tbEmpleadoComisiones.cc_TotalVenta * 0;
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Insert(tbEmpleadoComisiones.emp_Id,
                                                                                             tbEmpleadoComisiones.cin_IdIngreso,
                                                                                             tbEmpleadoComisiones.cc_FechaRegistro,
                                                                                             tbEmpleadoComisiones.cc_Pagado,
@@ -175,6 +192,22 @@ namespace ERP_GMEDINA.Controllers
         {
             tbEmpleadoComisiones.cc_UsuarioModifica = 1;
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
+            decimal TotalComision = 0;
+            var TechosComisiones = from a in db.tbTechosComisiones
+                                   where a.tc_Estado == true
+                                   select a;
+            foreach (var a in TechosComisiones)
+            {
+                if (tbEmpleadoComisiones.cc_TotalVenta >= a.tc_RangoInicio && tbEmpleadoComisiones.cc_TotalVenta <= a.tc_RangoFin)
+                {
+                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100));
+                }
+            }
+
+            tbEmpleadoComisiones.cc_TotalComision = TotalComision;
+
+
+
             IEnumerable<object> listEmpleadoComisiones = null;
             string MensajeError = "";
             string response = "bien";
@@ -312,6 +345,9 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-    }
+
+
+       
+}
 }
 
