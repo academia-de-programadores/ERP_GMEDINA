@@ -150,9 +150,7 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionAFP", function () {
-    let valCreate = $("#Crear #emp_IdCrear").val();
-    if (valCreate != null && valCreate != "")
-        $("#Crear #emp_IdCrear").val('').trigger('change');
+    $("#Crear #emp_IdCrear").val('').trigger('change.select2');
 
     OcultarValidacionesCrear();
     OcultarValidacionesEdit();
@@ -209,7 +207,7 @@ function ValidarCampos(empId, Aporte, AFP) {
             }
     }
     if (empId != "-1") {
-        if (empId == 0 || empId == "0") {
+        if (empId == null || emp_Id == "") {
             estabueno = false;
             $("#Crear #validatione1d, #Editar #e_validatione1d").css("display", "");
             $("#Crear #Asterisco1, #Editar #e_Asterisco1").css("color", "red");
@@ -261,7 +259,6 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
     var Aporte = $("#Crear #dafp_AporteLps").val();
     var AFP = $("#Crear #afp_Id").val();
     var DeducirISR = $("#Crear #dafp_DeducirISR").val();
-    debugger;
     //Obtener valor del checkbox
     if ($('#Crear #dafp_DeducirISR').is(':checked')) {
         DeducirISR = true;
@@ -356,7 +353,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
     })
 
         .done(function (data) {
-            debugger;
             console.table(data)
             if (data.dafp_DeducirISR) {
                 $('#Editar #dafp_DeducirISREdit').prop('checked', true);
@@ -562,7 +558,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                    })
+                })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //LLENAR EL DROPDOWNLIST
@@ -581,7 +577,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                    })
+                })
                     .done(function (data) {
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
