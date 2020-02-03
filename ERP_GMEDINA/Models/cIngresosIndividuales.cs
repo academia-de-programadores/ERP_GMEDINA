@@ -46,6 +46,8 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Estado")]
         public bool ini_Activo { get; set; }
+        [Display(Name = "Comentario")]
+        public string ini_comentario { get; set; }
 
     }
 }
