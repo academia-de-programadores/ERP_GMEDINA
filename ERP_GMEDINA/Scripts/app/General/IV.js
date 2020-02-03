@@ -29,11 +29,8 @@ $("#frmIVCreate").submit(function (e) {
 });
 
 //cargar grid
-<<<<<<< HEAD
-function cargarGridISV() {
-=======
 function cargarGridIV() {
->>>>>>> 69cd995b0f5c14015d70efa37b28caed25b24148
+
     var esAdministrador = $("#rol_Usuario").val();
     $.ajax({
         url: "/TechoImpuestVecinal/GetData",
