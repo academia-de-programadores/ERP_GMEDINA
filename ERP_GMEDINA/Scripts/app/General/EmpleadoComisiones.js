@@ -117,9 +117,7 @@ $(document).ready(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    let valCreate = $("#Crear #emp_IdEmpleado").val();
-    if (valCreate != null && valCreate != "")
-        $("#Crear #emp_IdEmpleado").val('').trigger('change');
+    $("#Crear #emp_IdEmpleado").val('').trigger('change');
     //OCULTAR VALIDACIONES
     OcultarValidacionesCrear();
     //DESBLOQUEAR EL BOTON DE CREAR
