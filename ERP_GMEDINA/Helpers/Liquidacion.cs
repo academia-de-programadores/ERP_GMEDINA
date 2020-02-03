@@ -265,7 +265,7 @@ namespace ERP_GMEDINA.Helpers
                         //CESANTÍA PRO
                         //PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
 
-                        PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioPromedioDiario) / (RangoInicial * 30)) * (DiasLaborados % 360);
+                        PagoDeCesantiaProporcional = (MesesLaborados / 12) * (((DiasCorrespondientes * SalarioPromedioDiario) / (12 * 30)) * (DiasLaborados % 360));
                     }
                     else
                     {
@@ -494,7 +494,7 @@ namespace ERP_GMEDINA.Helpers
 
         #region CÁLCULO - REDUCCION DE PASIVO LABORAL
         //CALCULO DE PAGO POR CONCEPTO DE CESANTIA
-        public static decimal Calculo_ReduccionPasivoLaboral(int Emp_Id, decimal SalarioBrutoMasAlto, int Antiguedad)
+        public static decimal Calculo_ReduccionPasivoLaboral(int Emp_Id, decimal SalarioBrutoMasAlto, int Antiguedad, List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia)
         {
             //ALMACENA MONTO DEL PAGO DE CESANTIA
             decimal PagoDeCesantiaCompleta = 0;
@@ -513,9 +513,10 @@ namespace ERP_GMEDINA.Helpers
                     int DiasLaborados = Antiguedad;
                     //ALMACENA LA CANTIDAD DE AÑOS LABORADOS
                     int MesesLaborados = DiasLaborados / 30;
-                    //INICIALIZACION DE LISTA DE LIQUIDACION_CESANTIA
-                    List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia = db.tbAuxilioDeCesantias.ToList();
+                    //CONTADOR
                     int Contador = 0;
+                    //SETEAR SALARIO BRUTO MENSUAL A DIARIO BRUTO
+                    SalarioBrutoMasAlto = SalarioBrutoMasAlto / 30;
                     //ITERACION DE LA TABLA LIQUIDACION_CESANTIA
                     foreach (tbAuxilioDeCesantias iter in TbLiquidacionAuxilioCesantia)
                     {
@@ -540,11 +541,11 @@ namespace ERP_GMEDINA.Helpers
                     if(MesesLaborados >= 12)
                     {
                         //CESANTÍA EN BASE A RANGO
-                        PagoDeCesantiaCompleta = (SalarioBrutoMasAlto * DiasCorrespondientes);
+                        PagoDeCesantiaCompleta = (MesesLaborados / 12) * ((SalarioBrutoMasAlto * DiasCorrespondientes));
                         //CESANTÍA PRO
-                        //PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+                        PagoDeCesantiaProporcional = ((DiasLaborados % 360) * ((DiasCorrespondientes * SalarioBrutoMasAlto) / (12 * 30)));
 
-                        PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioBrutoMasAlto) / (RangoInicial * 30)) * (DiasLaborados % 360);
+                        //PagoDeCesantiaProporcional = ((DiasCorrespondientes * SalarioBrutoMasAlto) / (RangoInicial * 30)) * (DiasLaborados % 360);
                     }
                     else
                     {

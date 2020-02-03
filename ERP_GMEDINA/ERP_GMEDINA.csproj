@@ -2048,6 +2048,7 @@
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\PagoDeCesantia.js" />
     <Content Include="Scripts\app\General\Periodos.js" />
     <Content Include="Scripts\app\General\Personas\Admin.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />

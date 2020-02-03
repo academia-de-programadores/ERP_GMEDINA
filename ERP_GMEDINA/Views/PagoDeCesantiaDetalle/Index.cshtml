@@ -25,7 +25,6 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Días pagados</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Sueldo Bruto</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Total de la Cesantía</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Fecha de creación</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyDecimoCuartoMes">
@@ -45,13 +44,10 @@
                                         @Html.DisplayFor(modelItem => item.DiasPagados)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ConSueldo)
+                                        @Html.DisplayFor(modelItem => item.SueldoBrutoDiario)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.TotalCesantiaColaborador)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.pdcd_FechaCrea)
+                                        @Html.DisplayFor(modelItem => item.TotalCesantiaPRO)
                                     </td>
                                 </tr>
                             }

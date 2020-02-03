@@ -417,7 +417,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" Width="1.5" PointX="11.375" PointY="28.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" Width="1.5" PointX="5.375" PointY="29.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" Width="1.5" PointX="6.875" PointY="29.5" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" Width="1.5" PointX="29.375" PointY="13.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" Width="1.5" PointX="29.375" PointY="17.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" Width="1.5" PointX="29.375" PointY="24.75" />
@@ -463,8 +463,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_dep_Codigo" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plai_tbTipoDeduccion_tbTechoImpuestoVecinal_tde_IdTipoDedu" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" Width="1.5" PointX="0.75" PointY="29.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" Width="1.5" PointX="2.75" PointY="29.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle_Preview" Width="2.625" PointX="2.875" PointY="29.75" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaDetalle" Width="1.5" PointX="11.25" PointY="181.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPagoDeCesantiaEncabezado" Width="1.5" PointX="3" PointY="206.125" />
@@ -483,6 +482,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialCargos_depto_IdNuevo" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdAnterior" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialCargos_jor_IdNuevo" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPagoDeCesantiaDetalle" Width="1.5" PointX="31.375" PointY="23.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
