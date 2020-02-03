@@ -13,13 +13,13 @@ namespace ERP_GMEDINA.Helpers
 
         public bool SendEmail(ComprobantePagoModel Model)
         {
+            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
             #region Declaracion de variables
             bool response = true;
             string EmailOrigen = "lateos.info@gmail.com";
             string Contraseña = "Admin2305";
             string body = String.Empty;
             StringBuilder trDeduccionesIngresosTemplate = new StringBuilder();
-            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
             #endregion
 
             try
@@ -40,12 +40,12 @@ namespace ERP_GMEDINA.Helpers
                     if (totalIngresos > i)
                     {
                         conceptoIngreso = oIngresosColaborador[i].concepto != null ? Convert.ToString(oIngresosColaborador[i].concepto) : "";
-                        montoIngreso = oIngresosColaborador[i].monto == 0 ? "0" : $"L. {Convert.ToString(oIngresosColaborador[i].monto)}";
+                        montoIngreso = oIngresosColaborador[i].monto == 0 ? "0" : $" {Convert.ToString(oIngresosColaborador[i].monto)}";
                     }
                     if (totalDeducciones > i)
                     {
                         conceptoDeduccion = oDeduccionesColaborador[i].concepto != null ? Convert.ToString(oDeduccionesColaborador[i].concepto) : "";
-                        montoDeduccion = oDeduccionesColaborador[i].monto == 0 ? "0" : $"L. {Convert.ToString(oDeduccionesColaborador[i].monto)}";
+                        montoDeduccion = oDeduccionesColaborador[i].monto == 0 ? "0" : $" {Convert.ToString(oDeduccionesColaborador[i].monto)}";
                     }
 
                     trDeduccionesIngresosTemplate.Append(
