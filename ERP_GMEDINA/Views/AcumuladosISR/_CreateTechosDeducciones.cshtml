@@ -10,10 +10,19 @@
 
             <div class="form-group">
                 <div class="col-md-4">
+                    Empleado<label class="" id="AsteriscoEmpleado" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="emp_IdCrear" name="emp_Id" class="text-box single-line"></select>
+                    <label class="text-danger" id="validation_emp_Id" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado requerido</label>
+                </div>
+             </div>
+            <div class="form-group">
+                <div class="col-md-4">
                     Descripción<label class="" id="AsteriscoDescripcionAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "form-control" , @autocomplete = "off", maxlength = "100" } })
+                    @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", maxlength = "100" } })
                     <span class="text-danger" id="validation_DescripcionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                     <span class="text-danger" id="validation_DescripcionNumerico" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo no admite datos numérico</span>
                 </div>
@@ -27,10 +36,18 @@
                     <span class="text-danger" id="validation_MontoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    Incluir para el ISR
+                </div>
+                <div class="col-md-8">
+                    <input type="checkbox" class="icheckbox_square-green" name="aisr_DeducirISR" id="aisr_DeducirISR">
+                </div>
+            </div>
         </div>
-        </div>
+    </div>
         <div class="modal-footer">
             <input type="button" value="Cerrar" id="btnCerrarCrear" data-dismiss="modal" class="btn btn-default pull-right" />
             <input type="submit" value="Guardar" id="btnCreateAcumuladosISR" class="btn btn-primary pull-left" />
         </div>
-        }
+}

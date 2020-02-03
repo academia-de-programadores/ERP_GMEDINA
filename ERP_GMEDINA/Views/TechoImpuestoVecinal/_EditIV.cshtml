@@ -1,0 +1,108 @@
+﻿@model ERP_GMEDINA.Models.tbTechoImpuestoVecinal
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmIVCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body" id="Editar">
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.timv_FechaCrea)
+            @Html.HiddenFor(model => model.timv_UsuarioCrea)
+
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.timv_IdTechoImpuestoVecinal, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.timv_IdTechoImpuestoVecinal, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.mun_Codigo, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoMunicipio" id="AsteriscoMunicipio">*</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="mun_Codigo" name="mun_Codigo" class="form-control" onchange="DataAnnotationsCrear('-1', '-1', this.value, '-1')"></select>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="mun_CodigoValidacion">El campo Municipio es requerido.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoTipoDeduccion" id="AsteriscoTipoDeduccion">*</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" onchange="DataAnnotationsCrear('-1', '-1', this.value, '-1')"></select>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_TipoDeduccionValidacion">El campo Tipo Deducción es requerido.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.timv_RangoInicio, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoRangoInicio" id="AsteriscoRangoInicio">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.timv_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear(this.value, '-1', '-1', '-1')" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_RangoInicioValidacion">El campo Rango Inicio es requerido.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.timv_RangoFin, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoRangoFin" id="AsteriscoRangoFin">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.timv_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', this.value, '-1', '-1')" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_RangoFinValidacion">El campo Rango Final es requerido.</span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.timv_Rango, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoRango" id="AsteriscoRango">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.timv_Rango, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value)" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_RangoValidacion">El campo Porcentaje es requerido.</span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.timv_Impuesto, htmlAttributes: new { @class = "control-label" })
+                    <label class="AsteriscoImpuesto" id="AsteriscoImpuesto">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value)" } })
+                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_ImpuestoValidacion">El campo Porcentaje es requerido.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default pull-right" />
+        <input type="submit" value="Actualizar" id="btnEditarIV" class="btn btn-primary pull-left" />
+        <input type="button" value="Inactivar" id="btnModalInactivarIV" class="btn btn-danger pull-left" />
+    </div>
+}
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarIV" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.timv_IdTechoImpuestoVecinal)
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

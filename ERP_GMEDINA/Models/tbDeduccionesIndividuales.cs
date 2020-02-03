@@ -9,8 +9,8 @@ namespace ERP_GMEDINA.Models
         public int dei_IdDeduccionesIndividuales { get; set; }
         public string dei_Motivo { get; set; }
         public int emp_Id { get; set; }
-        public decimal dei_Monto { get; set; }
-        public int dei_NumeroCuotas { get; set; }
+        public Nullable<decimal> dei_Monto { get; set; }
+        public Nullable<int> dei_NumeroCuotas { get; set; }
         public decimal dei_MontoCuota { get; set; }
         public Nullable<bool> dei_PagaSiempre { get; set; }
         public bool dei_Pagado { get; set; }

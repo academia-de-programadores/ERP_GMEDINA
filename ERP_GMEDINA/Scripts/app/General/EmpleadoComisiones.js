@@ -149,26 +149,14 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 $('#btnCreateRegistroComisiones').click(function () {
     var Empleado = $("#Crear #emp_IdEmpleado").val();
     var Ingreso = $("#Crear #cin_IdIngreso").val();
-    var Porcentaje = $("#Crear #PorcentajeComision").val();
+    //var Porcentaje = $("#Crear #PorcentajeComision").val();
     var Total = $("#Crear #TotalVenta").val();
-
-    if (ValidarCamposCrear(Empleado, Ingreso, Porcentaje, Total)) {
+   
+    if (ValidarCamposCrear(Empleado, Ingreso, Total)) {
 
         //BLOQUEAR EL BOTON DE CREAR
         $("#btnCreateRegistroComisiones").attr("disabled", true);
-
-        //FORMATEAR LOS VALORES NUMERICOS
-        var indicesp = $("#Crear #PorcentajeComision").val().split(",");
-        //VARIABLE CONTENEDORA DEL PORCENTAJE
-        var PorcentajeFormateado = "";
-        //ITERAR LOS INDICES DEL ARRAY PORCENTAJE
-        for (var i = 0; i < indicesp.length; i++) {
-            //SETEAR LA VARIABLE DE PORCENTAJE
-            PorcentajeFormateado += indicesp[i];
-        }
-        //FORMATEAR A DECIMAL
-        PorcentajeFormateado = parseFloat(PorcentajeFormateado);
-
+        debugger;
         //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
         var indicest = $("#Crear #TotalVenta").val().split(",");
         //VARIABLE CONTENEDORA DEL TOTAL
@@ -180,14 +168,12 @@ $('#btnCreateRegistroComisiones').click(function () {
         }
         TotalFormateado = parseFloat(TotalFormateado);
 
-
         var data = {
             emp_Id: $("#Crear #emp_IdEmpleado").val(),
             cin_IdIngreso: $("#Crear #cin_IdIngreso").val(),
-            cc_PorcentajeComision: PorcentajeFormateado,
             cc_TotalVenta: TotalFormateado,
-            cc_Pagado: false
         };
+        debugger;
 
         //REALIZAR LA PETICION AL SERVIDOR
         $.ajax({
@@ -219,7 +205,7 @@ $('#btnCreateRegistroComisiones').click(function () {
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
-
+            debugger;
         });
     }
 
@@ -330,7 +316,7 @@ $('#btnUpdateComisionesConfirmar').click(function () {
     var idIngreso = $("#Editar #cin_IdIngreso").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();
 
-    if (ValidarCamposEditar(Colaborador, idIngreso, PorcentajeComision, TotalVenta)) {
+    if (ValidarCamposEditar(Colaborador, idIngreso, TotalVenta)) {
         $("#EditarEmpleadoComisiones").modal('hide');
         //DESBLOQUEAR EL BOTON
         $("#btnUpdateComisionesConfirmar2").attr("disabled", false);
@@ -358,18 +344,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
     //BLOQUEAR EL BOTON
     $("#btnUpdateComisionesConfirmar2").attr("disabled", true);
 
-    //FORMATEAR LOS VALORES NUMERICOS
-    var indicesp = $("#Editar #cc_PorcentajeComision").val().split(",");
-    //VARIABLE CONTENEDORA DEL PORCENTAJE
-    var PorcentajeFormateado = "";
-    //ITERAR LOS INDICES DEL ARRAY PORCENTAJE
-    for (var i = 0; i < indicesp.length; i++) {
-        //SETEAR LA VARIABLE DE PORCENTAJE
-        PorcentajeFormateado += indicesp[i];
-    }
-
-    //FORMATEAR A DECIMAL
-    PorcentajeFormateado = parseFloat(PorcentajeFormateado);
+ 
 
     //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
     var indicest = $("#Editar #cc_TotalVenta").val().split(",");
@@ -386,7 +361,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
         cc_Id: $("#Editar #cc_Id").val(),
         emp_Id : $("#Editar #emp_IdEmpleado").val(),
         cin_IdIngreso : $("#Editar #cin_IdIngreso").val(),
-        cc_PorcentajeComision: PorcentajeFormateado,
+        //cc_PorcentajeComision: PorcentajeFormateado,
         cc_TotalVenta: TotalFormateado
     };
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN   
@@ -629,17 +604,17 @@ function ValidarCamposCrear(Empleado, Ingreso, Porcentaje, Total) {
     var pasoValidacion = true;
 
     //CONVERTIR EN ARRAY EL PORCENTAJE A PARTIR DEL SEPARADOR DE MILLARES
-    var indicesp = $("#Crear #PorcentajeComision").val().split(",");
-    //VARIABLE CONTENEDORA DEL PORCENTAJE
-    var PorcentajeFormateado = "";
-    //ITERAR LOS INDICES DEL ARRAY PORCENTAJE
-    for (var i = 0; i < indicesp.length; i++) {
-        //SETEAR LA VARIABLE DE PORCENTAJE
-        PorcentajeFormateado += indicesp[i];
-    }
+    //var indicesp = $("#Crear #PorcentajeComision").val().split(",");
+    ////VARIABLE CONTENEDORA DEL PORCENTAJE
+    //var PorcentajeFormateado = "";
+    ////ITERAR LOS INDICES DEL ARRAY PORCENTAJE
+    //for (var i = 0; i < indicesp.length; i++) {
+    //    //SETEAR LA VARIABLE DE PORCENTAJE
+    //    PorcentajeFormateado += indicesp[i];
+    //}
 
-    //FORMATEAR A DECIMAL
-    PorcentajeFormateado = parseFloat(PorcentajeFormateado);
+    ////FORMATEAR A DECIMAL
+    //PorcentajeFormateado = parseFloat(PorcentajeFormateado);
 
     //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
     var indicest = $("#Crear #TotalVenta").val().split(",");
@@ -676,39 +651,39 @@ function ValidarCamposCrear(Empleado, Ingreso, Porcentaje, Total) {
         }
     }
 
-    if (Porcentaje != "-1") {
-        //VALIDAR EL PORCENTAJE COMISION
-        if (isNaN(PorcentajeFormateado)) {
-            $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
-            $("#Crear #Validation_porcentaje").show();
-            $("#Crear #Validation_porcentaje2").hide();
-            $("#Crear #Validation_porcentaje3").hide();
-            pasoValidacion = false;
-        } else {
-            $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
-            $("#Crear #Validation_porcentaje").hide();
-            if (PorcentajeFormateado <= 0) {
-                $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
-                $("#Crear #Validation_porcentaje").hide();
-                $("#Crear #Validation_porcentaje2").show();
-                $("#Crear #Validation_porcentaje3").hide();
-                pasoValidacion = false;
-            } else {
-                $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
-                $("#Crear #Validation_porcentaje2").hide();
-                if (Porcentaje > 100) {
-                    $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
-                    $("#Crear #Validation_porcentaje").hide();
-                    $("#Crear #Validation_porcentaje2").hide();
-                    $("#Crear #Validation_porcentaje3").show();
-                    pasoValidacion = false;
-                } else {
-                    $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
-                    $("#Crear #Validation_porcentaje3").hide();
-                }
-            }
-        }
-    }
+    //if (Porcentaje != "-1") {
+    //    //VALIDAR EL PORCENTAJE COMISION
+    //    if (isNaN(PorcentajeFormateado)) {
+    //        $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
+    //        $("#Crear #Validation_porcentaje").show();
+    //        $("#Crear #Validation_porcentaje2").hide();
+    //        $("#Crear #Validation_porcentaje3").hide();
+    //        pasoValidacion = false;
+    //    } else {
+    //        $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
+    //        $("#Crear #Validation_porcentaje").hide();
+    //        if (PorcentajeFormateado <= 0) {
+    //            $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
+    //            $("#Crear #Validation_porcentaje").hide();
+    //            $("#Crear #Validation_porcentaje2").show();
+    //            $("#Crear #Validation_porcentaje3").hide();
+    //            pasoValidacion = false;
+    //        } else {
+    //            $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
+    //            $("#Crear #Validation_porcentaje2").hide();
+    //            if (Porcentaje > 100) {
+    //                $("#Crear #AsteriscoPorcentaje").addClass("text-danger");
+    //                $("#Crear #Validation_porcentaje").hide();
+    //                $("#Crear #Validation_porcentaje2").hide();
+    //                $("#Crear #Validation_porcentaje3").show();
+    //                pasoValidacion = false;
+    //            } else {
+    //                $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
+    //                $("#Crear #Validation_porcentaje3").hide();
+    //            }
+    //        }
+    //    }
+    //}
 
     if (Total != "-1") {
         //VALIDAR EL TOTAL DE VENTA
@@ -765,17 +740,17 @@ function ValidarCamposEditar(Empleado, Ingreso, Porcentaje, Total) {
     var pasoValidacion = true;
 
     //CONVERTIR EN ARRAY EL PORCENTAJE A PARTIR DEL SEPARADOR DE MILLARES
-    var indicesp = $("#Editar #cc_PorcentajeComision").val().split(",");
-    //VARIABLE CONTENEDORA DEL PORCENTAJE
-    var PorcentajeFormateado = "";
-    //ITERAR LOS INDICES DEL ARRAY PORCENTAJE
-    for (var i = 0; i < indicesp.length; i++) {
-        //SETEAR LA VARIABLE DE PORCENTAJE
-        PorcentajeFormateado += indicesp[i];
-    }
+    //var indicesp = $("#Editar #cc_PorcentajeComision").val().split(",");
+    ////VARIABLE CONTENEDORA DEL PORCENTAJE
+    //var PorcentajeFormateado = "";
+    ////ITERAR LOS INDICES DEL ARRAY PORCENTAJE
+    //for (var i = 0; i < indicesp.length; i++) {
+    //    //SETEAR LA VARIABLE DE PORCENTAJE
+    //    PorcentajeFormateado += indicesp[i];
+    //}
 
-    //FORMATEAR A DECIMAL
-    PorcentajeFormateado = parseFloat(PorcentajeFormateado);
+    ////FORMATEAR A DECIMAL
+    //PorcentajeFormateado = parseFloat(PorcentajeFormateado);
 
     //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
     var indicest = $("#Editar #cc_TotalVenta").val().split(",");
@@ -812,39 +787,39 @@ function ValidarCamposEditar(Empleado, Ingreso, Porcentaje, Total) {
         }
     }
 
-    if (Porcentaje != "-1") {
-        //VALIDAR EL PORCENTAJE COMISION
-        if (isNaN(PorcentajeFormateado)) {
-            $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
-            $("#Editar #Validation_porcentaje").show();
-            $("#Editar #Validation_porcentaje2").hide();
-            $("#Editar #Validation_porcentaje3").hide();
-            pasoValidacion = false;
-        } else {
-            $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
-            $("#Editar #Validation_porcentaje").hide();
-            if (PorcentajeFormateado <= 0) {
-                $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
-                $("#Editar #Validation_porcentaje").hide();
-                $("#Editar #Validation_porcentaje2").show();
-                $("#Editar #Validation_porcentaje3").hide();
-                pasoValidacion = false;
-            } else {
-                $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
-                $("#Editar #Validation_porcentaje2").hide();
-                if (Porcentaje > 100) {
-                    $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
-                    $("#Editar #Validation_porcentaje").hide();
-                    $("#Editar #Validation_porcentaje2").hide();
-                    $("#Editar #Validation_porcentaje3").show();
-                    pasoValidacion = false;
-                } else {
-                    $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
-                    $("#Editar #Validation_porcentaje3").hide();
-                }
-            }
-        }
-    }
+    //if (Porcentaje != "-1") {
+    //    //VALIDAR EL PORCENTAJE COMISION
+    //    if (isNaN(PorcentajeFormateado)) {
+    //        $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
+    //        $("#Editar #Validation_porcentaje").show();
+    //        $("#Editar #Validation_porcentaje2").hide();
+    //        $("#Editar #Validation_porcentaje3").hide();
+    //        pasoValidacion = false;
+    //    } else {
+    //        $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
+    //        $("#Editar #Validation_porcentaje").hide();
+    //        if (PorcentajeFormateado <= 0) {
+    //            $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
+    //            $("#Editar #Validation_porcentaje").hide();
+    //            $("#Editar #Validation_porcentaje2").show();
+    //            $("#Editar #Validation_porcentaje3").hide();
+    //            pasoValidacion = false;
+    //        } else {
+    //            $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
+    //            $("#Editar #Validation_porcentaje2").hide();
+    //            if (Porcentaje > 100) {
+    //                $("#Editar #AsteriscoPorcentaje").addClass("text-danger");
+    //                $("#Editar #Validation_porcentaje").hide();
+    //                $("#Editar #Validation_porcentaje2").hide();
+    //                $("#Editar #Validation_porcentaje3").show();
+    //                pasoValidacion = false;
+    //            } else {
+    //                $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
+    //                $("#Editar #Validation_porcentaje3").hide();
+    //            }
+    //        }
+    //    }
+    //}
 
     if (Total != "-1") {
         //VALIDAR EL TOTAL DE VENTA

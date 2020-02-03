@@ -45,6 +45,10 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Estado")]
         public bool dafp_Activo { get; set; }
+
+        [Display(Name = "Incluir para el ISR")]
+        public bool dafp_DeducirISR { get; set; }
+
     }
 
 }

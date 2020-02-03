@@ -9,7 +9,15 @@
                 @Html.HiddenFor(model => model.aisr_Id)
                 @Html.HiddenFor(model => model.aisr_UsuarioModifica)
                 @Html.HiddenFor(model => model.aisr_FechaModifica)
-
+                <div class="form-group">
+                    <div class="col-md-4">
+                        Empleado<label class="" id="AsteriscoEmpleadoEditar" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="emp_IdEditar" name="emp_Id" class="text-box single-line"></select>
+                        <label class="text-danger" id="validation_emp_Id" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado requerido</label>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-4">
                         Descripción<label class="" id="AsteriscoDescripcionEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
@@ -29,7 +37,14 @@
                         <span class="text-danger" id="validation_EditarMontoMayorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El monto no puede ser menor o igual a cero</span>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.aisr_DeducirISR)
+                    </div>
+                    <div class="col-md-8">
+                        <input type="checkbox" class="icheckbox_square-green" name="aisr_DeducirISR" id="aisr_DeducirISREdit">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

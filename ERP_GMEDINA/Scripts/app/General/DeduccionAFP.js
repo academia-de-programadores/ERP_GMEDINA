@@ -178,6 +178,7 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
     $("#AgregarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
     $("#dafp_AporteLps").val('');
     $("#Crear #afp_Id").val("0");
+    $('#Crear #dafp_DeducirISR').prop('checked', false);
 });
 
 //Validar campos Crear y Editar
@@ -259,6 +260,15 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
     var empId = $("#Crear #emp_IdCrear").val();
     var Aporte = $("#Crear #dafp_AporteLps").val();
     var AFP = $("#Crear #afp_Id").val();
+    var DeducirISR = $("#Crear #dafp_DeducirISR").val();
+    debugger;
+    //Obtener valor del checkbox
+    if ($('#Crear #dafp_DeducirISR').is(':checked')) {
+        DeducirISR = true;
+    }
+    else {
+        DeducirISR = false;
+    }
 
     if (ValidarCampos(empId, Aporte, AFP)) {
         // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
@@ -268,7 +278,8 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
             __RequestVerificationToken: dataSinFormato[0].value,
             emp_Id: dataSinFormato[1].value,
             dafp_AporteLps: FormatearDecimal(dataSinFormato[2].value),
-            afp_Id: dataSinFormato[3].value
+            afp_Id: dataSinFormato[3].value,
+            dafp_DeducirISR: DeducirISR
         };
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -297,6 +308,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
                 $("#Crear #emp_IdCrear").val("0");
                 $("#Crear #dafp_AporteLps").val('');
                 $("#Crear #afp_Id").val("0");
+                $('#Crear #dafp_DeducirISR').prop('checked', false);
             }
             else {
                 iziToast.error({
@@ -317,6 +329,7 @@ $("#btnCerrarAgregar").click(function () {
     $("#emp_Id").val("0");
     $("#dafp_AporteLps").val('');
     $("#afp_Id").val("0");
+    $('#Crear #dafp_DeducirISR').prop('checked', false);
     OcultarValidacionesCrear();
     OcultarValidacionesEdit();
 });
@@ -343,12 +356,22 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
     })
 
         .done(function (data) {
+            debugger;
+            console.table(data)
+            if (data.dafp_DeducirISR) {
+                $('#Editar #dafp_DeducirISREdit').prop('checked', true);
+            }
+            else {
+                $('#Editar #dafp_DeducirISREdit').prop('checked', false);
+            }
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+
                 let idEmpSelect = data.emp_Id;
                 let NombreSelect = dataEmp[1];
                 $("#Editar #dafp_Id").val(data.dafp_Id);
                 $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
+                $("#Editar #dafp_DeducirISREdit").val(data.dafp_DeducirISR);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
 
                 $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
@@ -432,6 +455,14 @@ $(document).on("click", "#btnRegresar", function () {
 $("#btnEditDeduccionAFPConfirmar").click(function () {
     $("btnEditDeduccionAFPConfirmar").disabled = true;
 
+    if ($('#Editar #dafp_DeducirISREdit').is(':checked')) {
+        dafp_DeducirISREdit = true;
+    }
+    else {
+        dafp_DeducirISREdit = false;
+    }
+
+
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var dataSinFormato = $("#frmEditDeduccionAFP").serializeArray();
     var data = {
@@ -439,7 +470,8 @@ $("#btnEditDeduccionAFPConfirmar").click(function () {
         dafp_Id: dataSinFormato[1].value,
         emp_Id: dataSinFormato[2].value,
         dafp_AporteLps: FormatearDecimal(dataSinFormato[3].value),
-        afp_Id: dataSinFormato[4].value
+        afp_Id: dataSinFormato[4].value,
+        dafp_DeducirISR: dafp_DeducirISREdit
     };
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -483,6 +515,7 @@ $("#btnCerrarEditar").click(function () {
     OcultarValidacionesEditar();
     OcultarValidacionesCrear();
     $("#EditarDeduccionAFP").modal('hide');
+    $('#Editar #dafp_DeducirISR').prop('checked', false);
 });
 
 //Detalles//
@@ -498,6 +531,13 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                if (data[0].dafp_DeducirISR) {
+                    $("#Detalles #dafp_DeducirISRDetails").html("Si");
+                }
+                else {
+                    $("#Detalles #dafp_DeducirISRDetails").html("No");
+                }
+
                 var FechaCrea = FechaFormato(data[0].dafp_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].dafp_FechaModifica);
                 $("#Detalles #dafp_Id").html(data[0].dafp_Id);
@@ -522,7 +562,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //LLENAR EL DROPDOWNLIST
@@ -541,7 +581,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
