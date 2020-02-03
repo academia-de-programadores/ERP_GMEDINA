@@ -215,7 +215,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-					tbEmpleadoComisiones.cc_TotalComision = tbEmpleadoComisiones.cc_TotalVenta * 0;
+					//tbEmpleadoComisiones.cc_TotalComision = tbEmpleadoComisiones.cc_TotalVenta * 0;
 					//EJECUTAR PROCEDIMIENTO ALMACENADO
 					listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Update(tbEmpleadoComisiones.cc_Id,
                                                                                             tbEmpleadoComisiones.emp_Id,
