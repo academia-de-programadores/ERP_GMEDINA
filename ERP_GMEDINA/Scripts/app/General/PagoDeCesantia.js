@@ -32,8 +32,8 @@ function cargarGridCesantia(data) {
                 ListaCesantia[i].NoIdentidad,
                 ListaCesantia[i].NombreCompleto,
                 ListaCesantia[i].DiasPagados,
-                ListaCesantia[i].SueldoBrutoDiario,
-                ListaCesantia[i].TotalCesantiaPRO,
+                (ListaCesantia[i].SueldoBrutoDiario % 1 == 0) ? ListaCesantia[i].SueldoBrutoDiario + ".00" : ListaCesantia[i].SueldoBrutoDiario,
+                (ListaCesantia[i].TotalCesantiaPRO % 1 == 0) ? ListaCesantia[i].TotalCesantiaPRO + ".00" : ListaCesantia[i].TotalCesantiaPRO,
                 ListaCesantia[i].NoDeCuenta]
             );
     }
@@ -85,9 +85,9 @@ $("#ProcesarCalculo").click(function () {
 
 //BOTON: IMPRIMIR EXCEL
 $('#btnImprimirExcel').click(function () {
-
+	var data = FormatearData(listadoCesantia);
     //GENERAR EXCEL
-    ImprimirExcel(listadoCesantia);
+	ImprimirExcel(data);
 
 });
 
@@ -135,8 +135,8 @@ $("#btnGenerarCesantia").click(function () {
             });
             //SetTimeOut
             setTimeout(function () {
-                location.reload();
-            }, 3000);
+            	window.location.href = '/PagoDeCesantiaDetalle/Index';
+            }, 3500);
         }
         //OCULTAR EL SPINNER
         SpinnerElement.empty();
@@ -169,6 +169,23 @@ function ImprimirExcel(data) {
                , columns: getColumns(data)
         });
     //}
+}
+
+//FORMATEAR A TEXTO LOS CAMPOS DE LA LISTA
+function FormatearData(ListaCesantia)
+{
+	for (var i = 0; i < ListaCesantia.length; i++) {
+		
+                ListaCesantia[i].IdCesantia
+                ListaCesantia[i].NoIdentidad = "'" + ListaCesantia[i].NoIdentidad;
+                ListaCesantia[i].NombreCompleto;
+                ListaCesantia[i].DiasPagados;
+                ListaCesantia[i].SueldoBrutoDiario;
+                ListaCesantia[i].TotalCesantiaPRO;
+                ListaCesantia[i].NoDeCuenta = "'" + ListaCesantia[i].NoDeCuenta;
+	}
+
+	return ListaCesantia;
 }
 
 // exportar a csv
