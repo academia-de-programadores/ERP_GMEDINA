@@ -65,8 +65,8 @@ function cargarGridComisiones() {
                     ListaComisiones[i].cc_Id,
                     ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos,
                     ListaComisiones[i].cin_DescripcionIngreso,
-                    (ListaComisiones[i].cc_TotalComision % 1 == 0) ? ListaComisiones[i].cc_TotalComision + ".00" : ListaComisiones[i].cc_TotalComision,
                     (ListaComisiones[i].cc_TotalVenta % 1 == 0) ? ListaComisiones[i].cc_TotalVenta + ".00" : ListaComisiones[i].cc_TotalVenta,
+                    (ListaComisiones[i].cc_TotalComision % 1 == 0) ? ListaComisiones[i].cc_TotalComision + ".00" : ListaComisiones[i].cc_TotalComision,
                     FechaRegistro,
                     estadoRegistro,
                     Check,
@@ -276,6 +276,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
                 $("#Editar #cc_Id").val(data.cc_Id);
                 $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
+                debugger;
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdIng = data.cin_IdIngreso;
@@ -314,10 +315,11 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
 //BOTON DE CONFIRMAR EDICION
 $('#btnUpdateComisionesConfirmar').click(function () {
-    var Colaborador = $("#Editar #emp_IdEmpleado").val();
+    var Colaborador = $("#Editar #emp_Id").val();
     var idIngreso = $("#Editar #cin_IdIngreso").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();
 
+    debugger;
     if (ValidarCamposEditar(Colaborador, idIngreso, TotalVenta)) {
         $("#EditarEmpleadoComisiones").modal('hide');
         //DESBLOQUEAR EL BOTON
@@ -354,7 +356,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
     //ITERAR LOS INDICES DEL ARRAY TOTAL
     var data = {
         cc_Id: $("#Editar #cc_Id").val(),
-        emp_Id: $("#Editar #emp_IdEmpleado").val(),
+        emp_Id: $("#Editar #emp_Id").val(),
         cin_IdIngreso: $("#Editar #cin_IdIngreso").val(),
         //cc_PorcentajeComision: PorcentajeFormateado,
         cc_TotalVenta: indicest
