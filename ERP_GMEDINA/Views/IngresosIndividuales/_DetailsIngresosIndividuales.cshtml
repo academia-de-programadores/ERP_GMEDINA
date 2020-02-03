@@ -9,7 +9,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     @Html.LabelFor(model => model.ini_Motivo)
                 </div>
                 <div class="col-md-6">
@@ -19,7 +19,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     @Html.LabelFor(model => model.emp_Id)
                 </div>
                 <div class="col-md-6">
@@ -28,7 +28,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     @Html.LabelFor(model => model.ini_Monto)
                 </div>
                 <div class="col-md-6">
@@ -38,11 +38,19 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     @Html.LabelFor(model => model.ini_PagaSiempre)
                 </div>
                 <div class="col-md-6">
                     <span id="ini_PagaSiempre">@Html.DisplayFor(model => model.ini_PagaSiempre, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ini_comentario)
+                </div>
+                <div class="col-md-6">
+                    <span id="ini_comentario">@Html.DisplayFor(model => model.ini_comentario, new { htmlAttributes = new { @class = "text-box multi-line", @disabled = "disabled" } })</span>
                 </div>
             </div>
 
