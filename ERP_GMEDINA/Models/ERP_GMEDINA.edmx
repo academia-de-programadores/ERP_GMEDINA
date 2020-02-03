@@ -21617,17 +21617,17 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="cc_TotalComision" Mode="In" Type="Decimal" />
             <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Activar_Result)">
             <Parameter Name="tc_Id" Mode="In" Type="Int32" />
             <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Inactivar_Result)">
             <Parameter Name="tc_Id" Mode="In" Type="Int32" />
             <Parameter Name="tc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Insert_Result)">
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
             <Parameter Name="tc_RangoInicio" Mode="In" Type="Decimal" />
             <Parameter Name="tc_RangoFin" Mode="In" Type="Decimal" />
@@ -21635,7 +21635,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="tc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tc_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosComisiones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Update_Result)">
             <Parameter Name="tc_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
             <Parameter Name="tc_RangoInicio" Mode="In" Type="Decimal" />
@@ -23790,6 +23790,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Plani_tbTechosComisiones_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechosComisiones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechosComisiones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechosComisiones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -28699,10 +28711,34 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosComisiones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosComisiones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result">
