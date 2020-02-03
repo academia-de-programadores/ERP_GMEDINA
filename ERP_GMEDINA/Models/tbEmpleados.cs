@@ -83,7 +83,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
         public virtual tbAreas tbAreas { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
         public virtual tbDepartamentos tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDirectoriosEmpleados> tbDirectoriosEmpleados { get; set; }
@@ -111,5 +110,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
+        public virtual tbCargos tbCargos { get; set; }
     }
 }

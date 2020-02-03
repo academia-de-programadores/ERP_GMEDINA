@@ -63,7 +63,6 @@
         public virtual DbSet<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
         public virtual DbSet<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso { get; set; }
         public virtual DbSet<tbAreas> tbAreas { get; set; }
-        public virtual DbSet<tbCargos> tbCargos { get; set; }
         public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
         public virtual DbSet<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
         public virtual DbSet<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
@@ -164,7 +163,6 @@
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
-        public virtual DbSet<V_tbPagoDeCesantiaDetalle> V_tbPagoDeCesantiaDetalle { get; set; }
         public virtual DbSet<V_tbPagoDeCesantiaDetalle_Preview> V_tbPagoDeCesantiaDetalle_Preview { get; set; }
         public virtual DbSet<V_tbTechosComisiones> V_tbTechosComisiones { get; set; }
         public virtual DbSet<V_TechoImpuestoVecinal> V_TechoImpuestoVecinal { get; set; }
@@ -216,6 +214,8 @@
         public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }
         public virtual DbSet<V_tbtiposalidas> V_tbtiposalidas { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
+        public virtual DbSet<V_tbPagoDeCesantiaDetalle> V_tbPagoDeCesantiaDetalle { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
