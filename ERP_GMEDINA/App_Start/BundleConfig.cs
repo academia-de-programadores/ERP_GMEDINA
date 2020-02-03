@@ -650,6 +650,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FechaPlanilla").Include(
                 "~/Scripts/app/General/FechaPlanilla.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IV").Include(
+                "~/Scripts/app/General/IV.js"));
+
             //mascaras de entrada
             bundles.Add(new ScriptBundle("~/plugins/mascarasDeEntrada").Include(
                  "~/Scripts/plugins/mascarasDeEntrada/js/jquery.inputmask.bundle.js"));

@@ -30,9 +30,10 @@ $("#frmIVCreate").submit(function (e) {
 
 //cargar grid
 function cargarGridIV() {
+
     var esAdministrador = $("#rol_Usuario").val();
     $.ajax({
-        url: "/TechoImpuestoVecinal/GetData",
+        url: "/TechoImpuestVecinal/GetData",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
@@ -178,21 +179,21 @@ $('#btnCreateIV').click(function () {
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-$(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
+$(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
     //DESBLOQUEAR BOTON DE EDITAR
-    $('#btnEditarISR').attr('disabled', false);
+    $('#btnEditarIV').attr('disabled', false);
     //CAPTURAR EL ID
     var ID = $(this).data('id');
-    $('#frmEditISR #Validation_tde_IdTipoDedu').css('display', 'none');
-    $('#frmEditISR .messageValidation').css('display', 'none');
-    $('#frmEditISR .asterisco').removeClass('text-danger');
+    $('#frmIVEdit #Validation_tde_IdTipoDedu').css('display', 'none');
+    $('#frmIVEdit .messageValidation').css('display', 'none');
+    $('#frmIVEdit .asterisco').removeClass('text-danger');
     //SETEAR LA VARIABLE GLOBAL DE INACTIVAR
     InactivarID = ID;
     //OCULTAR VALIDACIONES
     Vaciar_ModalEditar();
     //EJECUTAR LA PETICION AL SERVIDOR
     $.ajax({
-        url: "/ISR/Edit/" + ID,
+        url: "/TechoImpuestoVecinal/EditIV/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -200,18 +201,20 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
     })
         .done(function (data) {
             if (data) {
-                $("#Editar #isr_Id").val(data.isr_Id);
-                $("#Editar #isr_RangoInicial").val((data.isr_RangoInicial % 1 == 0) ? data.isr_RangoInicial + ".00" : data.isr_RangoInicial);
-                $("#Editar #isr_RangoFinal").val((data.isr_RangoFinal % 1 == 0) ? data.isr_RangoFinal + ".00" : data.isr_RangoFinal);
-                $("#Editar #isr_Porcentaje").val((data.isr_Porcentaje % 1 == 0) ? data.isr_Porcentaje + ".00" : data.isr_Porcentaje);
-                $("#Editar #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
-                $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
+                $("#EditarIV #timv_IdTechoImpuestoVecinal").val(data.timv_IdTechoImpuestoVecinal);
+                $("#EditarIV #timv_RangoInicio").val((data.timv_RangoInicio % 1 == 0) ? data.timv_RangoInicio + ".00" : data.timv_RangoInicio);
+                $("#EditarIV #timv_RangoFin").val((data.timv_RangoFin % 1 == 0) ? data.timv_RangoFin + ".00" : data.timv_RangoFin);
+                $("#EditarIV #timv_Rango").val((data.timv_Rango % 1 == 0) ? data.timv_Rango + ".00" : data.timv_Rango);
+                $("#EditarIV #timv_Porcentaje").val((data.timv_Porcentaje % 1 == 0) ? data.timv_Porcentaje + ".00" : data.timv_Porcentaje);
+                $("#EditarIV #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
+                $("#EditarIV #mun_Nombre").val(data.mun_Nombre);
+                $("#EditarIV").modal({ backdrop: 'static', keyboard: false });
                 $(".rangoInicial").focus();
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.tde_IdTipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
-                    url: "/ISR/EditGetDDL",
+                    url: "/TechoImpuestoVecinal/EditGetDDLTipoDedu",
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -238,34 +241,39 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditarISR").click(function () {
-    var rangoInicial = $("#Editar #isr_RangoInicial").val();
-    var rangoFinal = $("#Editar #isr_RangoFinal").val();
-    var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
-    var porcentaje = $("#Editar #isr_Porcentaje").val();
+$("#btnEditarIV").click(function () {
+    var rangoInicial = $("#EditarIV #timv_RangoInicio").val();
+    var rangoFinal = $("#EditarIV #timv_RangoFin").val();
+    var rango = $("#EditarIV #timv_Rango").val();
+    var tipoDeduccion = $("#EditarIV #tde_IdTipoDedu").val();
+    var municipio = $("#EditarIV #mun_Nombre").val();
+    var porcentaje = $("#EditarIV #timv_Porcentaje").val();
 
     if (DataAnnotationsEditar(rangoInicial, rangoFinal, tipoDeduccion, porcentaje)) {
         //BLOQUEAR BOTON DE EDITAR
-        $('#btnEditarISR').attr('disabled', true);
+        $('#btnEditarIV').attr('disabled', true);
         //SERIALIZAR EL FORMULARIO
         //var data = $("#frmEditISR").serializeArray();
 
         var data = {
-            isr_Id: $("#Editar #isr_Id").val(),
-            isr_RangoInicial: FormatearMonto($("#Editar #isr_RangoInicial").val()),
-            isr_RangoFinal: FormatearMonto($("#Editar #isr_RangoFinal").val()),
-            tde_IdTipoDedu: $("#Editar #tde_IdTipoDedu").val(),
-            isr_Porcentaje: FormatearMonto($("#Editar #isr_Porcentaje").val())
+            timv_IdTechoImpuestoVecinal: $("#EditarIV #timv_IdTechoImpuestoVecinal").val(),
+            timv_RangoInicio: FormatearMonto($("#EditarIV #timv_RangoInicio").val()),
+            timv_RangoFin: FormatearMonto($("#EditarIV #timv_RangoFin").val()),
+            tde_IdTipoDedu: $("#EditarIV #tde_IdTipoDedu").val(),
+            timv_Porcentaje: FormatearMonto($("#EditarIV #timv_Porcentaje").val()),
+            timv_Rango: $("#EditarIV #timv_Rango").val(),
+            mun_Nombre: $("#EditarIV #mun_Nombre").val()
+
         };
 
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
-            url: "/ISR/Edit",
+            url: "/TechoImpuestoVecinal/Edit",
             method: "POST",
             data: data
         }).done(function (data) {
             //DESBLOQUEAR BOTON DE EDITAR
-            $('#btnEditarISR').attr('disabled', false);
+            $('#btnEditarIV').attr('disabled', false);
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
@@ -274,11 +282,11 @@ $("#btnEditarISR").click(function () {
             }
             else {
                 //BLOQUEAR BOTON DE EDITAR
-                $('#btnEditarISR').attr('disabled', true);
+                $('#btnEditarIV').attr('disabled', true);
                 //REFRESCAR LA DATA DEL DATATABLE
                 cargarGridISR();
                 //OCULTAR MODAL DE EDICION
-                $("#EditarISR").modal('hide');
+                $("#EditarIV").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
@@ -293,7 +301,7 @@ $("#btnEditarISR").click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     //OCULTAR MODAL DE EDITAR
-    $("#EditarISR").modal('hide');
+    $("#EditarIV").modal('hide');
 });
 
 
@@ -407,45 +415,67 @@ $("#btnActivarISR").click(function () {
 
 
 //DETALLES
-$(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
+$(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
     var ID = $(this).data('id');
     $.ajax({
-        url: "/ISR/Details/" + ID,
+        url: "/TechoImpuestoVecinal/Details/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
+          
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaCrea = FechaFormato(data[0].isr_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].isr_FechaModifica);
-                $("#Detalles #isr_Id").html(data[0].isr_Id);
-                $("#Detalles #isr_RangoInicial").html((data[0].isr_RangoInicial % 1 == 0) ? data[0].isr_RangoInicial + ".00" : data[0].isr_RangoInicial);
-                $("#Detalles #isr_RangoFinal").html((data[0].isr_RangoFinal % 1 == 0) ? data[0].isr_RangoFinal + ".00" : data[0].isr_RangoFinal);
-                $("#Detalles #isr_Porcentaje").html((data[0].isr_Porcentaje % 1 == 0) ? data[0].isr_Porcentaje + ".00" : data[0].isr_Porcentaje);
-                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_Descripcion);
-                $("#Detalles #isr_UsuarioCrea").html(data[0].isr_UsuarioCrea);
+                var FechaCrea = FechaFormato(data[0].timv_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].timv_FechaModifica);
+                $("#DetailsIV #mun_Codigo").html(data[0].mun_Nombre);
+                $("#DetailsIV #tde_IdTipoDedu").html(data[0].tde_Descripcion);
+                $("#DetailsIV #timv_RangoInicio").html((data[0].timv_RangoInicio % 1 == 0) ? data[0].timv_RangoInicio + ".00" : data[0].timv_RangoInicio);
+                $("#DetailsIV #timv_RangoFin").html((data[0].timv_RangoFin % 1 == 0) ? data[0].timv_RangoFin + ".00" : data[0].timv_RangoFin);
+                $("#DetailsIV #timv_Rango").html((data[0].timv_Rango % 1 == 0) ? data[0].timv_Rango + ".00" : data[0].timv_Rango);
+                $("#DetailsIV #timv_Impuesto").html((data[0].timv_Impuesto % 1 == 0) ? data[0].timv_Impuesto + ".00" : data[0].timv_Impuesto);
+                $("#DetailsIV #timv_UsuarioCrea").html(data[0].timv_UsuarioCrea);
                 $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#FechaCrea").html(FechaCrea);
-                $("#isr_UsuarioModifica").html(data.isr_UsuarioModifica);
+                $("#timv_UsuarioModifica").html(data.timv_UsuarioModifica);
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #isr_FechaModifica").html(FechaModifica);
+                $("#DetailsIV #timv_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].tde_IdTipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
-                    url: "/ISR/EditGetDDL",
+                    url: "/TechoImpuestoVecinal/EditGetDDLTipoDedu",
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
                 })
                     .done(function (data) {
-                        $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
+                        $("#DetailsIV #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
                     });
-                $("#DetailsISR").modal({ backdrop: 'static', keyboard: false });
+                $("#DetailsIV").modal({ backdrop: 'static', keyboard: false });
+
+                var SelectedIdmuni = data[0].mun_Codigo;
+                //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+                $.ajax({
+                    url: "/TechoImpuestoVecinal/EditGetDDLMuni",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID })
+                    })
+                    .done(function (data) {
+                        //LLENAR EL DROPDOWNLIST
+                        $.each(data, function (i, iter) {
+                            if (iter.Id == SelectedIdmuni) {
+                                $("#DetailsIV #mun_Codigo").html(iter.mun_Codigo);
+                            }
+                        });
+                    });
+
+                $("#DetailsIV").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
@@ -488,7 +518,7 @@ function Vaciar_ModalCrear() {
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #isr_PorcentajeValidacion").hide();
+    $("#Crear #timv_PorcentajeValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
 
@@ -497,38 +527,51 @@ function Vaciar_ModalCrear() {
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
 function Vaciar_ModalEditar() {
     //VACIADO DE INPUTS
-    $("#Editar #isr_RangoInicial").val("");
-    $("#Editar #isr_RangoFinal").val("");
+    $("#Editar #timv_RangoInicio").val("");
+    $("#Editar #timv_RangoFin").val("");
+    $("#Editar #timv_Rango").val("");
     $("#Editar #tde_IdTipoDedu").val(0);
-    $("#Editar #isr_Porcentaje").val("");
+    $("#Editar #mun_Nombre").val(0);
+    $("#Editar #timv_Porcentaje").val("");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Editar #isr_RangoInicialValidacion").hide();
+    $("#Editar #timv_RangoInicioValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoRangoInicial").removeClass("text-danger");
+    $("#Editar #AsteriscoRangoInicio").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Editar #isr_RangoFinalValidacion").hide();
+    $("#Editar #timv_RangoFinValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
+    $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #timv_RangoValidacion").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #AsteriscoRango").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Editar #isr_TipoDeduccionValidacion").hide();
+    $("#Editar #tde_TipoDeduccionValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Editar #AsteriscoTipoDeduccion").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Editar #isr_PorcentajeValidacion").hide();
+    $("#Editar #mun_NombreValidacion").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #AsteriscoMunicipio").removeClass("text-danger");
+
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #timv_PorcentajeValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
 }
 
 //FUNCION PARA MOSTRAR O QUITAR DATAANNOTATIONS
-function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaje) {
+function DataAnnotationsCrear(RangoInicio, RangoFin, Rango, TipoDeduccion,  Municipio, Porcentaje) {
 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;

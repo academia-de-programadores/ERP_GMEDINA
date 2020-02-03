@@ -6699,7 +6699,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Update_Result>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, emp_IdParameter, cin_IdIngresosParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_TotalComisionParameter, cc_TotalVentaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosComisiones_Activar(Nullable<int> tc_Id, Nullable<int> tc_UsuarioModifica, Nullable<System.DateTime> tc_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbTechosComisiones_Activar_Result> UDP_Plani_tbTechosComisiones_Activar(Nullable<int> tc_Id, Nullable<int> tc_UsuarioModifica, Nullable<System.DateTime> tc_FechaModifica)
         {
             var tc_IdParameter = tc_Id.HasValue ?
                 new ObjectParameter("tc_Id", tc_Id) :
@@ -6713,10 +6713,10 @@
                 new ObjectParameter("tc_FechaModifica", tc_FechaModifica) :
                 new ObjectParameter("tc_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosComisiones_Activar", tc_IdParameter, tc_UsuarioModificaParameter, tc_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosComisiones_Activar_Result>("UDP_Plani_tbTechosComisiones_Activar", tc_IdParameter, tc_UsuarioModificaParameter, tc_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosComisiones_Inactivar(Nullable<int> tc_Id, Nullable<int> tc_UsuarioModifica, Nullable<System.DateTime> tc_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbTechosComisiones_Inactivar_Result> UDP_Plani_tbTechosComisiones_Inactivar(Nullable<int> tc_Id, Nullable<int> tc_UsuarioModifica, Nullable<System.DateTime> tc_FechaModifica)
         {
             var tc_IdParameter = tc_Id.HasValue ?
                 new ObjectParameter("tc_Id", tc_Id) :
@@ -6730,10 +6730,10 @@
                 new ObjectParameter("tc_FechaModifica", tc_FechaModifica) :
                 new ObjectParameter("tc_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosComisiones_Inactivar", tc_IdParameter, tc_UsuarioModificaParameter, tc_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosComisiones_Inactivar_Result>("UDP_Plani_tbTechosComisiones_Inactivar", tc_IdParameter, tc_UsuarioModificaParameter, tc_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosComisiones_Insert(Nullable<int> cin_IdIngreso, Nullable<decimal> tc_RangoInicio, Nullable<decimal> tc_RangoFin, Nullable<decimal> tc_PorcentajeComision, Nullable<int> tc_UsuarioCrea, Nullable<System.DateTime> tc_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbTechosComisiones_Insert_Result> UDP_Plani_tbTechosComisiones_Insert(Nullable<int> cin_IdIngreso, Nullable<decimal> tc_RangoInicio, Nullable<decimal> tc_RangoFin, Nullable<decimal> tc_PorcentajeComision, Nullable<int> tc_UsuarioCrea, Nullable<System.DateTime> tc_FechaCrea)
         {
             var cin_IdIngresoParameter = cin_IdIngreso.HasValue ?
                 new ObjectParameter("cin_IdIngreso", cin_IdIngreso) :
@@ -6759,10 +6759,10 @@
                 new ObjectParameter("tc_FechaCrea", tc_FechaCrea) :
                 new ObjectParameter("tc_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosComisiones_Insert", cin_IdIngresoParameter, tc_RangoInicioParameter, tc_RangoFinParameter, tc_PorcentajeComisionParameter, tc_UsuarioCreaParameter, tc_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosComisiones_Insert_Result>("UDP_Plani_tbTechosComisiones_Insert", cin_IdIngresoParameter, tc_RangoInicioParameter, tc_RangoFinParameter, tc_PorcentajeComisionParameter, tc_UsuarioCreaParameter, tc_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosComisiones_Update(Nullable<int> tc_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> tc_RangoInicio, Nullable<decimal> tc_RangoFin, Nullable<decimal> tc_PorcentajeComision, Nullable<int> tc_UsuarioModifica, Nullable<System.DateTime> tc_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbTechosComisiones_Update_Result> UDP_Plani_tbTechosComisiones_Update(Nullable<int> tc_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> tc_RangoInicio, Nullable<decimal> tc_RangoFin, Nullable<decimal> tc_PorcentajeComision, Nullable<int> tc_UsuarioModifica, Nullable<System.DateTime> tc_FechaModifica)
         {
             var tc_IdParameter = tc_Id.HasValue ?
                 new ObjectParameter("tc_Id", tc_Id) :
@@ -6792,7 +6792,7 @@
                 new ObjectParameter("tc_FechaModifica", tc_FechaModifica) :
                 new ObjectParameter("tc_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosComisiones_Update", tc_IdParameter, cin_IdIngresoParameter, tc_RangoInicioParameter, tc_RangoFinParameter, tc_PorcentajeComisionParameter, tc_UsuarioModificaParameter, tc_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosComisiones_Update_Result>("UDP_Plani_tbTechosComisiones_Update", tc_IdParameter, cin_IdIngresoParameter, tc_RangoInicioParameter, tc_RangoFinParameter, tc_PorcentajeComisionParameter, tc_UsuarioModificaParameter, tc_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbTechoImpuestoVecinal_Activar_Result> UDP_Plani_tbTechoImpuestoVecinal_Activar(Nullable<int> timv_IdTechoImpuestoVecinal, Nullable<int> timv_UsuarioModifica, Nullable<System.DateTime> timv_FechaModifica)
