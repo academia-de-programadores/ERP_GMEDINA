@@ -127,26 +127,10 @@ $('#Crear #emp_IdCrear').keyup(function () {
     }
 });
 
+
+
 // modal create 
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
-
-    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-    $.ajax({
-        url: "/AcumuladosISR/EditGetEmpleadoDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Crear #emp_IdCrear").empty();
-            $("#Crear #emp_IdCrear").append("<option value='0'>Selecione una opción...</option>");
-            //LLENAR EL DROPDOWNLIST
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_IdCrear").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-
     // * empleado
     $('#AsteriscoEmpleado').removeClass('text-danger');
 
@@ -194,7 +178,7 @@ $('#btnCreateAcumuladosISR').click(function () {
     var ModelState = true;
 
     //empleado requerido
-    if (empleadoid != 0 || empleadoid != "0" || empleadoid != '0'){       
+    if (empleadoid != 0 || empleadoid != "0" || empleadoid != '0') {
         $('#AsteriscoEmpleado').removeClass('text-danger');
         $("#Crear #validation_emp_Id").css('display', 'none');
     }
@@ -714,39 +698,78 @@ $("#btnActivarAcumuladosISREjecutar").click(function () {
 
 // datatable
 $(document).ready(function () {
-    $(document).ready(function () {
-        $('.dataTables-AcumuladosISR').DataTable({
-            "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-            responsive: true,
-            pageLength: 10,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                {
-                    extend: 'copy',
-                    text: '<i class="fa fa-copy btn-xs"></i>',
-                    titleAttr: 'Copiar',
-                    exportOptions: {
-                        columns: [0, 1],
-                    },
-                    className: 'btn btn-primary'
-
+    $('.dataTables-AcumuladosISR').DataTable({
+        "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+        responsive: true,
+        pageLength: 10,
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            {
+                extend: 'copy',
+                text: '<i class="fa fa-copy btn-xs"></i>',
+                titleAttr: 'Copiar',
+                exportOptions: {
+                    columns: [0, 1],
                 },
+                className: 'btn btn-primary'
 
-                {
-                    extend: 'excel',
-                    text: '<i class="fa fa-file-excel-o btn-xs"></i>',
-                    titleAttr: 'Excel',
-                    exportOptions: {
-                        columns: [0, 1],
-                    },
-                    className: 'btn btn-primary',
-                    title: 'Acumulados ISR'
-                }
+            },
 
-            ]
-        });
+            {
+                extend: 'excel',
+                text: '<i class="fa fa-file-excel-o btn-xs"></i>',
+                titleAttr: 'Excel',
+                exportOptions: {
+                    columns: [0, 1],
+                },
+                className: 'btn btn-primary',
+                title: 'Acumulados ISR'
+            }
+
+        ]
     });
+
+    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+    $.ajax({
+        url: "/AcumuladosISR/EditGetEmpleadoDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    })
+        .done(function (data) {
+
+            $('#Crear #emp_IdCrear').select2({
+                dropdownParent: $('#Crear'),
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
+                },
+                data: data.results
+            });
+
+            $('#Editar #emp_IdEditar').select2({
+                dropdownParent: $('#Editar'),
+                placeholder: 'Seleccione un empleado',
+                allowClear: true,
+                language: {
+                    noResults: function () {
+                        return 'Resultados no encontrados.';
+                    },
+                    searching: function () {
+                        return 'Buscando...';
+                    }
+                },
+                data: data.results
+            });
+        });
 });
+
 
 // evitar postbacks
 $("#frmEditAcumuladosISR").submit(function (e) {

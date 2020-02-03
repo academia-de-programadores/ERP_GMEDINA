@@ -32,6 +32,15 @@
                 <span id="afp_Id">@Html.DisplayFor(model => model.afp_Id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.dafp_DeducirISR)
+            </div>
+            <div class="col-md-6">
+                <span id="dafp_DeducirISRDetails">@Html.DisplayFor(model => model.dafp_DeducirISR, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
+            </div>
+        </div>
     </div>
 
     <div class="ibox float-e-margins">
