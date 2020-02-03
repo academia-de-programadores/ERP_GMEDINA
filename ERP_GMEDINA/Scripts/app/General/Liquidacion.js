@@ -185,23 +185,24 @@ $(document).ready(function () {
         },
         () => {
 
-            //LLENAR EL DDL DE MOTIVOS 
-            $.ajax({
-                url: "/Liquidacion/GetMotivoLiquidacion",
-                method: "GET",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8"
-            }).done(function (data) {
-                //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-                $("#cmbxMotivos").empty();
-                $("#cmbxMotivos").append("<option value='0'>Selecione un motivo...</option>");
-                $.each(data, function (i, iter) {
-                    $("#cmbxMotivos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                });
-            });
-
         }
     );
+
+	//LLENAR EL DDL DE MOTIVOS 
+    $.ajax({
+    	url: "/Liquidacion/GetMotivoLiquidacion",
+    	method: "GET",
+    	dataType: "json",
+    	contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+    	//LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+    	$("#cmbxMotivos").empty();
+    	$("#cmbxMotivos").append("<option value='0'>Selecione un motivo...</option>");
+    	$.each(data, function (i, iter) {
+    		$("#cmbxMotivos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+    	});
+    });
+
 });
 
 

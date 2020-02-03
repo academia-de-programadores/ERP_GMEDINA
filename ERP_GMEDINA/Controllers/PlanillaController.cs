@@ -902,7 +902,6 @@ namespace ERP_GMEDINA.Controllers
                                                 {
                                                     try
                                                     {
-                                                        throw new Exception();
                                                         totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
 
                                                         // agregar al comprobante de pago
@@ -1492,6 +1491,7 @@ namespace ERP_GMEDINA.Controllers
                                                 oComprobantePagoModel.totalIngresos = totalIngresosEmpleado;
                                                 oComprobantePagoModel.totalDeducciones = totalDeduccionesEmpleado;
                                                 oComprobantePagoModel.NetoPagar = netoAPagarColaborador;
+                                                oComprobantePagoModel.moneda = db.tbSueldos.Where(x=>x.emp_Id == InformacionDelEmpleadoActual.emp_Id).Select(x=>x.tbTipoMonedas.tmon_Descripcion).FirstOrDefault();
 
                                                 // enviar comprobante de pago
                                                 try
@@ -1538,8 +1538,6 @@ namespace ERP_GMEDINA.Controllers
                                             oPlanillaEmpleado.SalarioHora = salarioHora;
                                             oPlanillaEmpleado.totalSalario = totalSalario;
                                             oPlanillaEmpleado.tipoPlanilla = empleadoActual.tbCatalogoDePlanillas.cpla_DescripcionPlanilla;
-                                            oPlanillaEmpleado.procentajeComision = porcentajeComision;
-                                            oPlanillaEmpleado.totalVentas = totalVentas;
                                             oPlanillaEmpleado.totalComisiones = totalComisiones;
                                             oPlanillaEmpleado.horasExtras = horasExtrasTrabajadas;
                                             oPlanillaEmpleado.totalHorasPermiso = totalHorasPermiso;

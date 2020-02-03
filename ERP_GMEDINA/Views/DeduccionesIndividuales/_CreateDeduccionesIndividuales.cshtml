@@ -14,7 +14,7 @@
                     @Html.LabelFor(model => model.dei_Motivo)<span id="astMotivo">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "form-control", @id = "dei_Motivo", @maxlength= "100" } })
+                    @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @id = "dei_Motivo", onkeyup = "ValidarCrearDeduccionIndividual(this.value, '-1', '-1', '-1', '-1')" } })
                     <label class="text-danger" id="valMotivo" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Motivo Requerido.</label>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     @Html.LabelFor(model => model.emp_Id)<span id="astEmpId">*</span>
                 </div>
                 <div class="col-md-8">
-                    <select id="emp_IdCreate" name="emp_Id" class="form-control"></select>
+                    <select id="emp_IdCreate" name="emp_IdCreate" class="form-control" onchange="ValidarCrearDeduccionIndividual('-1', this.value, '-1', '-1', '-1')"></select>
                     <label class="text-danger" id="valEmpId" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido.</label>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     @Html.LabelFor(model => model.dei_Monto)<span id="astMonto">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_Monto, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "dei_Monto" } })
+                    @Html.EditorFor(model => model.dei_Monto, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off", @id = "dei_Monto", onkeyup = "ValidarCrearDeduccionIndividual('-1', '-1', this.value ,'-1', '-1')" } })
                     <span id="valMonto" class="text-danger" style="display:none;">El campo Monto no puede ser menor o igual que cero.</span>
                     <span id="valMontoRequerido" class="text-danger" style="display:none;">Campo Monto Requerido</span>
                 </div>
@@ -45,7 +45,7 @@
                     @Html.LabelFor(model => model.dei_NumeroCuotas)<span id="astNumeroCuotas">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_NumeroCuotas, new { htmlAttributes = new { @class = "form-control MascaraCantidad", id="dei_NumeroCuotas"} })
+                    @Html.EditorFor(model => model.dei_NumeroCuotas, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off", @id = "dei_NumeroCuotas", onkeyup = "ValidarCrearDeduccionIndividual('-1', '-1', '-1', this.value , '-1')" } })
                     <span id="valNumeroCuotasRequerido" class="text-danger" style="display:none;">Campo numero cuotas Requerido</span>
                     <span id="valNumeroCuotasMayor" class="text-danger" style="display:none;">El campo numero cuotas no puede ser menor Cero.</span>
                    
@@ -57,7 +57,7 @@
                     @Html.LabelFor(model => model.dei_MontoCuota)<span id="astMontoCuota">*</span>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.dei_MontoCuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @id = "dei_MontoCuota"} })
+                    @Html.EditorFor(model => model.dei_MontoCuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off", @readonly = "true", @id = "dei_MontoCuota", onkeyup = "ValidarCrearDeduccionIndividual('-1', '-1', '-1', '-1', this.value)" } })
                     <span id="valMontoCuota" class="text-danger" style="display:none;">Campo Cuota Requerido</span>
                 </div>
             </div>
