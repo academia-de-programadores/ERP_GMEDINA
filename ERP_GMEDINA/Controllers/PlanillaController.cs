@@ -1258,6 +1258,18 @@ namespace ERP_GMEDINA.Controllers
 											}
 											#endregion
 
+											if (TotalDeduccionesEquipoTrabajo == null)
+												TotalDeduccionesEquipoTrabajo = 0;
+
+											if (TotalDeduccionesExtras == null)
+												TotalDeduccionesExtras = 0;
+
+											if (TotalDeduccionesAFP == null)
+												TotalDeduccionesAFP = 0;
+
+											if (TotalDeduccionesInstitucionesFinancieras == null)
+												TotalDeduccionesInstitucionesFinancieras = 0;
+
 											#endregion
 
 											#region Calculo del ISR
@@ -2444,24 +2456,26 @@ namespace ERP_GMEDINA.Controllers
             if (esMensual)
             {
                 //Si es el primer mes a cobrar
-                if (mesesPago == null)
-                    sueldoProyeccion = ((sueldoBruto * 12)) ?? 0;
+                if (mesesPago.Count == 0)
+				{
+					salarioPromedioAnualPagadoAlMes = ((sueldoBruto * 12)) ?? 0;
+				}
+				else
+				{
+					int cantidadMesesPagados = mesesPago.Count;
+					//if (netoAPagarColaborador == 0)
+					//    netoAPagarColaborador = 37350.66M;
+					mesesPago.Add((Decimal)sueldoBruto);
 
+					decimal promedioMesesPago = mesesPago.Average();
 
-                int cantidadMesesPagados = mesesPago.Count;
-                //if (netoAPagarColaborador == 0)
-                //    netoAPagarColaborador = 37350.66M;
-                mesesPago.Add((Decimal)sueldoBruto);
+					for (int i = cantidadMesesPagados; i <= 12; i++)
+					{
+						sueldoProyeccion += promedioMesesPago;
+					}
 
-                decimal promedioMesesPago = mesesPago.Average();
-
-                for (int i = cantidadMesesPagados; i <= 12; i++)
-                {
-                    sueldoProyeccion += promedioMesesPago;
-                }
-
-
-                salarioPromedioAnualPagadoAlMes = sueldoProyeccion;
+					salarioPromedioAnualPagadoAlMes = sueldoProyeccion;
+				}
             }
             else
             {

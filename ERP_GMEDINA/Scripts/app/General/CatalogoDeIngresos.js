@@ -473,8 +473,10 @@ function ValidarCamposEditar(Descripcion) {
 function OcultarValidacionesCrear() {
     //OCULTAR EL SPAN
     $("#Crear #DescripcionCrear").hide();
+    $("#Crear #valTipoIngreso").hide();
     //VACIAR EL INPUT
     $("#Crear #cin_DescripcionIngreso").val('');
+    $('#Crear #asteriscoTipoIngreso').removeClass('text-danger');
     //REMOVER EL TEXT DANGER DEL ASTERISCO
     $('#asteriscoCreate').removeClass('text-danger');
 }
@@ -483,10 +485,12 @@ function OcultarValidacionesCrear() {
 function OcultarValidacionesEditar() {
     //OCULTAR EL SPAN
     $("#Editar #DescripcionEditar").hide();
+    $("#Editar #valTipoIngreso").hide();
     //VACIAR EL INPUT
     $("#Editar #cin_DescripcionIngreso").val('');
     //REMOVER EL TEXT DANGER DEL ASTERISCO
     $('#Editar #asteriscoEdit').removeClass('text-danger');
+    $('#Editar #asteriscoTipoIngreso').removeClass('text-danger');
 }
 
 
