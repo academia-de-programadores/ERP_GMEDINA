@@ -113,7 +113,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 if (tbEmpleadoComisiones.cc_TotalVenta >= a.tc_RangoInicio && tbEmpleadoComisiones.cc_TotalVenta <= a.tc_RangoFin)
                 {
-                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100)) ?? 0;
+                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100));
                 }
             }
 
@@ -200,7 +200,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 if (tbEmpleadoComisiones.cc_TotalVenta >= a.tc_RangoInicio && tbEmpleadoComisiones.cc_TotalVenta <= a.tc_RangoFin)
                 {
-                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100)) ?? 0;
+                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100));
                 }
             }
 

@@ -27,7 +27,20 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var otbAcumuladosISR = db.tbAcumuladosISR
-                        .Select(c => new { aisr_Descripcion = c.aisr_Descripcion, aisr_Id = c.aisr_Id, aisr_Monto = c.aisr_Monto, aisr_Activo = c.aisr_Activo, aisr_FechaCrea = c.aisr_FechaCrea, aisr_UsuarioCrea = c.aisr_UsuarioCrea, aisr_UsuarioModifica = c.aisr_UsuarioModifica, aisr_FechaModifica = c.aisr_FechaModifica })
+                        .Select(c => new {
+                            aisr_Descripcion = c.aisr_Descripcion,
+                            aisr_Id = c.aisr_Id,
+                            aisr_Monto = c.aisr_Monto,
+                            aisr_Activo = c.aisr_Activo,
+                            aisr_FechaCrea = c.aisr_FechaCrea,
+                            aisr_UsuarioCrea = c.aisr_UsuarioCrea,
+                            aisr_UsuarioModifica = c.aisr_UsuarioModifica,
+                            aisr_FechaModifica = c.aisr_FechaModifica,
+                            aisr_DeducirISR = c.aisr_DeducirISR,
+                            emp_Id = c.emp_Id,
+                            per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres,
+                            per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos
+                        })
                         //.OrderByDescending(c => c.aisr_FechaCrea)
                         .ToList();
 
@@ -54,7 +67,13 @@ namespace ERP_GMEDINA.Controllers
 
                                           tbAcumuladosISR.aisr_UsuarioModifica,
                                           UsuModifica = tbAcumuladosISR.tbUsuario1.usu_NombreUsuario,
-                                          tbAcumuladosISR.aisr_FechaModifica
+                                          tbAcumuladosISR.aisr_FechaModifica,
+
+                                          tbAcumuladosISR.aisr_DeducirISR,
+
+                                          tbAcumuladosISR.emp_Id,
+                                          tbAcumuladosISR.tbEmpleados.tbPersonas.per_Nombres,
+                                          tbAcumuladosISR.tbEmpleados.tbPersonas.per_Apellidos
                                       };
 
             db.Configuration.ProxyCreationEnabled = false;
@@ -66,7 +85,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioCrea,aisr_FechaCrea,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
+        public ActionResult Create([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioCrea,aisr_FechaCrea,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo,aisr_DeducirISR,emp_Id")] tbAcumuladosISR tbAcumuladosISR)
         {
             #region declaracion de variables 
             tbAcumuladosISR.aisr_UsuarioCrea = 1;
@@ -85,7 +104,9 @@ namespace ERP_GMEDINA.Controllers
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Insert(tbAcumuladosISR.aisr_Descripcion,
                                                                                      tbAcumuladosISR.aisr_Monto,
                                                                                      tbAcumuladosISR.aisr_UsuarioCrea,
-                                                                                     tbAcumuladosISR.aisr_FechaCrea, true, 1);
+                                                                                     tbAcumuladosISR.aisr_FechaCrea,
+                                                                                     tbAcumuladosISR.aisr_DeducirISR,
+                                                                                     tbAcumuladosISR.emp_Id);
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbAcumuladosISR_Insert_Result Resultado in listAcumuladosISR)
@@ -116,6 +137,12 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
+        public string EditGetEmpleadoDDL()
+        {
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Helpers.General.ObtenerEmpleados();
+        }
+
         #region GET: edit
         public JsonResult Edit(int? ID)
         {
@@ -127,17 +154,17 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Editar
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)
+        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_Activo,aisr_DeducirISR,emp_Id")] tbAcumuladosISR tbAcumuladosISR)
         {
             // data de auditoria
             tbAcumuladosISR.aisr_UsuarioModifica = 1;
             tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
 
-            
+
             string response = String.Empty;
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
-            
+
 
             if (ModelState.IsValid)
             {
@@ -148,7 +175,9 @@ namespace ERP_GMEDINA.Controllers
                                                                                             tbAcumuladosISR.aisr_Descripcion,
                                                                                             tbAcumuladosISR.aisr_Monto,
                                                                                             tbAcumuladosISR.aisr_UsuarioModifica,
-                                                                                            tbAcumuladosISR.aisr_FechaModifica, true, 1);
+                                                                                            tbAcumuladosISR.aisr_FechaModifica,
+                                                                                            tbAcumuladosISR.aisr_DeducirISR,
+                                                                                            tbAcumuladosISR.emp_Id);
                     // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAcumuladosISR_Update_Result Resultado in listAcumuladosISR)
                         MensajeError = Resultado.MensajeError;
@@ -170,13 +199,14 @@ namespace ERP_GMEDINA.Controllers
                 // el resultado del proceso fue exitoso
                 response = "bien";
             }
-            else {
+            else
+            {
 
                 // error: el modelo no es válido
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
-            
+
             // retornar resultado
             return Json(response, JsonRequestBehavior.AllowGet);
         }
