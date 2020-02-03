@@ -107,6 +107,30 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult llenarDropDowlistDepartamentos(int id)
+        {
+            var Departamentos = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+
+                    Departamentos.AddRange(db.tbDepartamentos
+                    .Select(tabla => new { Id = tabla.depto_Id, Descripcion = tabla.depto_Descripcion, Estado = tabla.depto_Estado })
+                    .Where(x => x.Estado && x.Id == id).ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Departamentos", Departamentos);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult llenarDropDowlistRequisicion()
         {
             var Requisicion = new List<object> { };

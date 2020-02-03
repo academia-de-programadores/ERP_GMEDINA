@@ -368,7 +368,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.car_Id = new SelectList(db.tbEmpleados.Where(x => x.emp_Estado), "emp_Id", "car_Descripcion");
             ViewBag.car_Id = new SelectList(db.tbCargos.Where(x => x.car_Estado), "car_Id", "car_Descripcion");
             ViewBag.area_Id = new SelectList(db.tbAreas.Where(x => x.area_Estado), "area_Id", "area_Descripcion");
-            ViewBag.depto_Id = new SelectList(db.tbDepartamentos.Where(x => x.depto_Estado), "depto_Id", "depto_Descripcion");
+            //ViewBag.depto_Id = new SelectList(db.tbDepartamentos.Where(x => x.depto_Estado), "depto_Id", "depto_Descripcion");
             ViewBag.jor_Id = new SelectList(db.tbJornadas.Where(x => x.jor_Estado), "jor_Id", "jor_Descripcion");
             ViewBag.cpla_IdPlanilla = new SelectList(db.tbCatalogoDePlanillas.Where(x => x.cpla_Activo), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             ViewBag.fpa_IdFormaPago = new SelectList(db.tbFormaPago.Where(x => x.fpa_Activo), "fpa_IdFormaPago", "fpa_Descripcion");
@@ -437,6 +437,30 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult llenarDropDowlistDepartamentos(int id)
+        {
+            var Departamentos = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+
+                    Departamentos.AddRange(db.tbDepartamentos
+                    .Select(tabla => new { Id = tabla.depto_Id, Descripcion = tabla.depto_Descripcion, Estado = tabla.depto_Estado })
+                    .Where(x => x.Estado && x.Id == id).ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Departamentos", Departamentos);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult llenarDropDowlistTipoMonedas()
         {
             var Monedas = new List<object> { };

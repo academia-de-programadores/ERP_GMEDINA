@@ -142,6 +142,7 @@ namespace ERP_GMEDINA.Controllers
                 empr_Id = tbEmpresas.empr_Id,
                 empr_Nombre = tbEmpresas.empr_Nombre,
                 per_Id = tbEmpresas.tbPersonas.per_Id,
+                per_Nombre = tbEmpresas.tbPersonas.per_Nombres+" "+ tbEmpresas.tbPersonas.per_Apellidos,
                 empr_RTN = tbEmpresas.empr_RTN,
                 empr_Logo = tbEmpresas.empr_Logo,
                 empr_Estado = tbEmpresas.empr_Estado,
