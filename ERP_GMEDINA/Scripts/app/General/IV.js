@@ -29,7 +29,7 @@ $("#frmIVCreate").submit(function (e) {
 });
 
 //cargar grid
-function cargarGridISR() {
+function cargarGridIV() {
     var esAdministrador = $("#rol_Usuario").val();
     $.ajax({
         url: "/TechoImpuestoVecinal/GetData",
@@ -81,7 +81,7 @@ function cargarGridISR() {
     FullBody();
 }
 
-//crear isr
+//crear iv
 $(document).on("click", "#btnAgregarIV", function () {
     //OCULTAR VALIDACIONES
     Vaciar_ModalCrear();
@@ -100,32 +100,51 @@ $(document).on("click", "#btnAgregarIV", function () {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
+
+    $.ajax({
+        url: "/TechoImpuestoVecinal/EditGetDDLMuni",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    })
+        //llenar los dropdownlists
+        .done(function (data) {
+            $("#Crear #mun_Codigo").empty();
+            $("#Crear #mun_Codigo").append("<option value='0'>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Crear #mun_Codigo").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
     //DESPLEGAR MODAL DE CREACION
     $("#AgregarIV").modal({ backdrop: 'static', keyboard: false });
 });
 
-//crear nuevo rango isr
-$('#btnCreateISR').click(function () {
+//crear nuevo rango iv
+$('#btnCreateIV').click(function () {
 
-    var rangoInicial = $("#Crear #isr_RangoInicial").val();
-    var rangoFinal = $("#Crear #isr_RangoFinal").val();
+    var rangoInicio = $("#Crear #timv_RangoInicio").val();
+    var rangoFin = $("#Crear #timv_RangoFin").val();
+    var codmuni = $("#Crear #mun_Codigo").val();
+    var rango = $("#Crear #timv_Rango").val();
     var tipoDeduccion = $("#Crear #tde_IdTipoDedu").val();
-    var porcentaje = $("#Crear #isr_Porcentaje").val();
+    var impuesto = $("#Crear #timv_Impuesto").val();
 
-    if (DataAnnotationsCrear(rangoInicial, rangoFinal, tipoDeduccion, porcentaje)) {
-        $('#btnCreateISR').attr('disabled', true);
+  //  if (DataAnnotationsCrear(codmuni, tipoDeduccion, rangoInicio, rangoFin, rango, impuesto)) {
+        $('#btnCreateIV').attr('disabled', true);
 
 
         //var data = $("#frmISRCreate").serializeArray();
         var data = {
-            isr_RangoInicial: FormatearMonto($("#Crear #isr_RangoInicial").val()),
-            isr_RangoFinal: FormatearMonto($("#Crear #isr_RangoFinal").val()),
+            mun_Codigo: FormatearMonto($("#Crear #mun_Codigo").val()),
             tde_IdTipoDedu: $("#Crear #tde_IdTipoDedu").val(),
-            isr_Porcentaje: FormatearMonto($("#Crear #isr_Porcentaje").val())
+            timv_RangoInicio: FormatearMonto($("#Crear #timv_RangoInicio").val()),
+            timv_RangoFin: FormatearMonto($("#Crear #timv_RangoFin").val()),
+            timv_Rango: FormatearMonto($("#Crear #timv_Rango").val()),
+            timv_Impuesto: FormatearMonto($("#Crear #timv_Impuesto").val())
         };
 
         $.ajax({
-            url: "/ISR/Create",
+            url: "/TechoImpuestoVecinal/Create",
             method: "POST",
             data: data
         }).done(function (data) {
@@ -137,7 +156,7 @@ $('#btnCreateISR').click(function () {
                 });
             }
             else if (data == "bien") {
-                $("#AgregarISR").modal('hide');
+                $("#AgregarIV").modal('hide');
                 cargarGridISR();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -146,8 +165,8 @@ $('#btnCreateISR').click(function () {
                 });
             }
         });
-        $('#btnCreateISR').attr('disabled', false);
-    }
+        $('#btnCreateIV').attr('disabled', false);
+    
 
 });
 
@@ -639,25 +658,25 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
 }
 
 //FUNCION PARA MOSTRAR O QUITAR DATAANNOTATIONS
-function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcentaje) {
+function DataAnnotationsEditar(CodMuni, TipoDeduccion, RangoInicio, RangoFin, Rango, Impuesto) {
 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
 
     if (RangoInicial != "-1") {
 
-        if (parseFloat(FormatearMonto(RangoInicial)) >= parseFloat(FormatearMonto($("#Editar #isr_RangoFinal").val()))) {
-            $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
-            $("#Editar #isr_RangoFinalValidacion").empty();
-            $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
-            $("#Editar #isr_RangoFinalValidacion").show();
+        if (parseFloat(FormatearMonto(RangoInicio)) >= parseFloat(FormatearMonto($("#Editar #timv_RangoInicio").val()))) {
+            $("#Editar #AsteriscoRangoInicio").addClass("text-danger");
+            $("#Editar #timv_RangoInicioValidacion").empty();
+            $("#Editar #timv_RangoInicioValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
+            $("#Editar #timv_RangoInicioValidacion").show();
             ModelState = false;
         }
         else {
-            $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
-            $("#Editar #isr_RangoFinalValidacion").empty();
-            $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
-            $("#Editar #isr_RangoFinalValidacion").hide();
+            $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
+            $("#Editar #timv_RangoFinValidacion").empty();
+            $("#Editar #timv_RangoFinValidacion").html("El campo Rango Final es requerido.");
+            $("#Editar #timv_RangoFinValidacion").hide();
         }
 
         //RANGO INICIAL
