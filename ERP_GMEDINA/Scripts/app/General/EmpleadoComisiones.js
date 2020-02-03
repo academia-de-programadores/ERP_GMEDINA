@@ -155,7 +155,6 @@ $('#btnCreateRegistroComisiones').click(function () {
 
         //BLOQUEAR EL BOTON DE CREAR
         $("#btnCreateRegistroComisiones").attr("disabled", true);
-        debugger;
         //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
         var indicest = $("#Crear #TotalVenta").val().split(",");
         //VARIABLE CONTENEDORA DEL TOTAL
@@ -172,7 +171,6 @@ $('#btnCreateRegistroComisiones').click(function () {
             cin_IdIngreso: $("#Crear #cin_IdIngreso").val(),
             cc_TotalVenta: TotalFormateado,
         };
-        debugger;
 
         //REALIZAR LA PETICION AL SERVIDOR
         $.ajax({
@@ -204,7 +202,6 @@ $('#btnCreateRegistroComisiones').click(function () {
                         message: '¡El registro se agregó de forma exitosa!',
                     });
                 }
-                debugger;
             });
     }
 
@@ -274,7 +271,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
                 $("#Editar #cc_Id").val(data.cc_Id);
                 $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
-                debugger;
+       
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdIng = data.cin_IdIngreso;
@@ -316,8 +313,6 @@ $('#btnUpdateComisionesConfirmar').click(function () {
     var Colaborador = $("#Editar #emp_Id").val();
     var idIngreso = $("#Editar #cin_IdIngreso").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();
-
-    debugger;
     if (ValidarCamposEditar(Colaborador, idIngreso, TotalVenta)) {
         $("#EditarEmpleadoComisiones").modal('hide');
         //DESBLOQUEAR EL BOTON
