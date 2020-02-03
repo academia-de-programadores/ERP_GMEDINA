@@ -106,7 +106,7 @@ namespace ERP_GMEDINA.Controllers
                         //    tbRequisiciones.req_EstadoCivil = null;
                         //}
 
-                        var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, DateTime.Now, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
+                        var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_NivelEducativo ,DateTime.Now, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
 
                         foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in List)
                         {
@@ -484,7 +484,7 @@ namespace ERP_GMEDINA.Controllers
 
                     string ResultI = "";
                     string ResultE = "";
-                    var _list = db.UDP_RRHH_tbRequisiciones_Update(tbRequisiciones.req_Id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
+                    var _list = db.UDP_RRHH_tbRequisiciones_Update(tbRequisiciones.req_Id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_NivelEducativo, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbRequisiciones_Update_Result Update in _list)
                     {
                         msj = Update.MensajeError + "";

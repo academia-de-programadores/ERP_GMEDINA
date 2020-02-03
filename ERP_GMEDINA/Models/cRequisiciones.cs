@@ -41,6 +41,8 @@ namespace ERP_GMEDINA.Models
         public string req_RazonInactivo { get; set; }
         [Display(Name = "Vacantes")]
         public string req_Vacantes { get; set; }
+        [Display(Name = "Nivel educativo")]
+        public string req_NivelEducativo { get; set; }
         [Display(Name = "Fecha Requisición")]
         public Nullable<System.DateTime> req_FechaRequisicion { get; set; }
         [Display(Name = "Fecha contratación")]
