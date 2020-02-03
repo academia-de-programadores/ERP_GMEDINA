@@ -124,7 +124,7 @@
 
                     @*EQUIPO DE TRABAJO*@
                     <li id="Equipo_Trabajo" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("Equipo_Trabajo", "Equipo_Trabajo")"><i class="fa fa-suitcase"></i> <span class="nav-label" data-i18n="nav.dashboard">Herramientas de Trabajo</span> <span class="fa arrow"></span></a>
+                        <a href="@Url.Action("Equipo_Trabajo", "Equipo_Trabajo")"><i class="fa fa-suitcase"></i> <span class="nav-label" data-i18n="nav.dashboard">Herramientas</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Equipo_Trabajo", cssClass: "in") Equipo_Trabajo">
                             <li class="@Html.IsSelected(controller: "EquipoTrabajo")"><a href="@Url.Action("Index", "EquipoTrabajo")">Listado de Herramientas</a></li>
                             <li class="@Html.IsSelected(controller:"EquipoEmpleados")"><a href="@Url.Action("Index", "EquipoEmpleados")">Herramientas por Empleado</a></li>
