@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
             try
             {
-                ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true), "ticn_Id", "ticn_Descripcion");
+                ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true).OrderBy(x => x.ticn_Descripcion), "ticn_Id", "ticn_Descripcion");
                 return View();
             }
             catch
@@ -105,7 +105,7 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
             try
             {
-                ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
+                ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true).OrderBy(x => x.tiho_Descripcion), "tiho_Id", "tiho_Descripcion");
                 return View();
             }
             catch
@@ -180,7 +180,7 @@ namespace ERP_GMEDINA.Controllers
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             try
             {
-                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true).OrderBy(x => x.car_Descripcion), "car_Id", "car_Descripcion");
                 return View();
             }
             catch
@@ -193,8 +193,8 @@ namespace ERP_GMEDINA.Controllers
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             try
             {
-                ViewBag.empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+                ViewBag.empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true).OrderBy(x => x.per_NombreCompleto), "emp_Id", "per_NombreCompleto");
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true).OrderBy(x => x.car_Descripcion), "car_Id", "car_Descripcion");
                 //Codigo que hace que todo truene
                 //int Cero = 0;
                 //int Uno = 1;
@@ -335,8 +335,8 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
             try
             {
-                ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true), "tsal_Id", "tsal_Descripcion");
-                ViewBag.Empleados = new SelectList(db.V_EmpleadoIncapacidades.Where(o => o.emp_Estado == true), "emp_Id", "emp_NombreCompleto");
+                ViewBag.TipoSalida = new SelectList(db.tbTipoSalidas.Where(o => o.tsal_Estado == true).OrderBy(x => x.tsal_Descripcion), "tsal_Id", "tsal_Descripcion");
+                ViewBag.Empleados = new SelectList(db.V_EmpleadoIncapacidades.Where(o => o.emp_Estado == true).OrderBy(x => x.emp_NombreCompleto), "emp_Id", "emp_NombreCompleto");
                 return View();
             }
             catch
@@ -418,9 +418,9 @@ namespace ERP_GMEDINA.Controllers
 
             try
             {
-                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "Per_NombreCompleto");
-                ViewBag.Anios = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_AnioVacaciones", "hvac_AnioVacaciones");
-                ViewBag.Mes = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true), "hvac_MesVacaciones", "hvac_MesVacaciones");
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true).OrderBy(x => x.per_NombreCompleto), "emp_Id", "Per_NombreCompleto");
+                ViewBag.Anios = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true).OrderBy(x => x.hvac_AnioVacaciones), "hvac_AnioVacaciones", "hvac_AnioVacaciones");
+                ViewBag.Mes = new SelectList(db.tbHistorialVacaciones.Where(o => o.hvac_Estado == true).OrderBy(x => x.hvac_MesVacaciones), "hvac_MesVacaciones", "hvac_MesVacaciones");
 
                 return View();
             }
@@ -582,8 +582,8 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
             try
             {
-                ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
-                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+                ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true).OrderBy(x => x.tper_Descripcion), "tper_Id", "tper_Descripcion");
+                ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true).OrderBy(x => x.per_NombreCompleto), "emp_Id", "per_NombreCompleto");
                 return View();
             }
             catch
@@ -815,10 +815,10 @@ namespace ERP_GMEDINA.Controllers
                 //ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
                 //ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
 
-                ViewBag.Jornadas = new SelectList(db.tbJornadas.Where(o => o.jor_Estado == true).OrderBy(x => x.jor_Descripcion),, "jor_Id", "jor_Descripcion");
+                ViewBag.Jornadas = new SelectList(db.tbJornadas.Where(o => o.jor_Estado == true).OrderBy(x => x.jor_Descripcion), "jor_Id", "jor_Descripcion");
                 ViewBag.Departamentos = new SelectList(db.tbDepartamentos.Where(o => o.depto_Estado == true).OrderBy(x => x.depto_Descripcion), "depto_Id", "depto_Descripcion");
                 ViewBag.areas = new SelectList(db.tbAreas.Where(o => o.area_Estado == true).OrderBy(x => x.area_Descripcion), "area_Id", "area_Descripcion");
-                ViewBag.Sucursales = new SelectList(db.tbSucursales.Where(o => o.suc_Estado == true).OrderBy(x => x.area_Descripcion),.OrderBy(x => x.suc_Descripcion), "suc_Id", "suc_Descripcion");
+                ViewBag.Sucursales = new SelectList(db.tbSucursales.Where(o => o.suc_Estado == true).OrderBy(x => x.suc_Descripcion), "suc_Id", "suc_Descripcion");
                 return View();
             }
             catch
