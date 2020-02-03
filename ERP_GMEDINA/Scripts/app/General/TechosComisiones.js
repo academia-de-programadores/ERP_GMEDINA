@@ -56,7 +56,7 @@ function cargarGridTechoComisiones() {
                      ListaTeC[i].cin_DescripcionIngreso,
                     (ListaTeC[i].tc_RangoInicio % 1 == 0) ? ListaTeC[i].tc_RangoInicio + ".00" : ListaTeC[i].tc_RangoInicio,
                     (ListaTeC[i].tc_RangoFin % 1 == 0) ? ListaTeC[i].tc_RangoFin + ".00" : ListaTeC[i].tc_RangoFin,
-                    (ListaTeC[i].tc_PorcentajeComision % 1 == 0) ? ListaTeC[i].tc_PorcentajeComision + ".00" : ListaTeC[i].tc_PorcentajeComision,
+                    (ListaTeC[i].tc_PorcentajeComision % 1 == 0) ? ListaTeC[i].tc_PorcentajeComision + ".00" + '%' : ListaTeC[i].tc_PorcentajeComision + '%',
                    Estado,
                    botonDetalles + botonEditar + botonActivar]
                    );
@@ -99,54 +99,63 @@ $('#btnCrearTechoComis').click(function () {
     var Porcentaje = $("#Crear #tc_PorcentajeComision").val();
     //FUNCION PARA FORMATEAR LOS VALORES NUMERICOS
     var response = FormatearNumericos(Inicio, Fin, Porcentaje);
-
+    InicioFormateado = parseFloat(response[0]);
+    FinFormateado = parseFloat(response[1]);
     // VALIDAR EL MODEL STATE DEL FORMULARIO
     if (ValidarCamposCrear(IdIngreso, Inicio, Fin, Porcentaje)) {
-
-        //BLOQUEAR EL BOTON DE CREAR
-        $("#btnCrearTechoComis").attr("disabled", true);
-        var data = {
-            cin_IdIngreso: IdIngreso,
-            tc_RangoInicio: response[0],
-            tc_RangoFin: response[1],
-            tc_PorcentajeComision: response[2]
-        };
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/TechosComisiones/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            $("#CrearTechoComision").modal('hide');
-            OcultarValidacionesCrear();
-            $("#btnCrearTechoComis").attr("disabled", false);
-
-            if (data == "error") {
+        if (InicioFormateado > FinFormateado) {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se guardó el registro, contacte al administrador',
+                    message: 'El Rango Fin debe ser mayor que el Rango Inicio',
+                });
+            } else {
+                //BLOQUEAR EL BOTON DE CREAR
+                $("#btnCrearTechoComis").attr("disabled", true);
+                var data = {
+                    cin_IdIngreso: IdIngreso,
+                    tc_RangoInicio: response[0],
+                    tc_RangoFin: response[1],
+                    tc_PorcentajeComision: response[2]
+                };
+                //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+                $.ajax({
+                    url: "/TechosComisiones/Create",
+                    method: "POST",
+                    data: data
+                }).done(function (data) {
+                    //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+                    $("#CrearTechoComision").modal('hide');
+                    OcultarValidacionesCrear();
+                    $("#btnCrearTechoComis").attr("disabled", false);
+
+                    if (data == "error") {
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'No se guardó el registro, contacte al administrador',
+                        });
+                    }
+                    else {
+                        //CERRAR EL MODAL DE AGREGAR
+                        $("#CrearTechoComision").modal('hide');
+                        OcultarValidacionesCrear();
+                        $("#btnCrearTechoComis").attr("disabled", false);
+                        cargarGridTechoComisiones();
+                        // Mensaje de exito cuando un registro se ha guardado bien
+                        iziToast.success({
+                            title: 'Éxito',
+                            message: '¡El registro se agregó de forma exitosa!',
+                        });
+                    }
                 });
             }
-            else {
-                //CERRAR EL MODAL DE AGREGAR
-                $("#CrearTechoComision").modal('hide');
-                OcultarValidacionesCrear();
-                $("#btnCrearTechoComis").attr("disabled", false);
-                cargarGridTechoComisiones();
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se agregó de forma exitosa!',
-                });
-            }
-        });
     }
 });
 
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
 function ValidarCamposCrear(IdIngreso, Inicio, Fin, Porcentaje) {
     var pasoValidacion = true;
+    //var ValidarInicio = false;
+    //var ValidarFin = false;
     var response = FormatearNumericos(Inicio, Fin, Porcentaje);
     if (IdIngreso != "-1") {
 
@@ -182,6 +191,7 @@ function ValidarCamposCrear(IdIngreso, Inicio, Fin, Porcentaje) {
                 $("#Crear #InicioAsterisco").addClass("text-danger");
                 $('#Crear #RangoInicio_Validation2').show();
             } else {
+                ValidarInicio = true;
                 $("#Crear #InicioAsterisco").removeClass("text-danger");
                 $('#Crear #RangoInicio_Validation').hide();
                 $('#Crear #RangoInicio_Validation2').hide();
@@ -208,6 +218,7 @@ function ValidarCamposCrear(IdIngreso, Inicio, Fin, Porcentaje) {
                 $("#Crear #FinAsterisco").addClass("text-danger");
                 $('#Crear #RangoFin_Validation2').show();
             } else {
+                ValidarFin = true;
                 $("#Crear #FinAsterisco").removeClass("text-danger");
                 $('#Crear #RangoFin_Validation').hide();
                 $('#Crear #RangoFin_Validation2').hide();
@@ -325,12 +336,10 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnEditarTechosComisiones", f
               });
 
           });
-
                 $("#Editar #tc_Id").val(data.tc_Id);
                 $("#Editar #tc_RangoInicio").val(data.tc_RangoInicio);
                 $("#Editar #tc_RangoFin").val(data.tc_RangoFin);
                 $("#Editar #tc_PorcentajeComision").val(data.tc_PorcentajeComision);
-
                 //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
                 $("#EditarTechoComision").modal({ backdrop: 'static', keyboard: false });
             }
@@ -352,15 +361,26 @@ $("#btnUpdateTechosComisiones").click(function () {
     var Fin = $("#Editar #tc_RangoFin").val();
     var Porcentaje = $("#Editar #tc_PorcentajeComision").val();
 
+    var response = FormatearNumericos(Inicio, Fin, Porcentaje);
+    InicioFormateado = parseFloat(response[0]);
+    FinFormateado = parseFloat(response[1]);
+
     //DESBLOQUEAR EL BOTON DE EDICION
     $("#btnConfirmarEditar").attr("disabled", false);
     //VALIDAR EL FORMULARIO
     if (ValidarCamposEditar(IdIngreso, Inicio, Fin, Porcentaje)) {
-        //OCULTAR EL MODAL DE EDICION
-        $("#EditarTechoComision").modal('hide');
-        //DESPLEGAR EL MODAL DE CONFIRMACION
-        document.getElementById("btnConfirmarEditar").disabled = false;
-        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+        if (InicioFormateado > FinFormateado) {
+            iziToast.error({
+                title: 'Error',
+                message: 'El Rango Fin debe ser mayor que el Rango Inicio',
+            });
+        } else {
+            //OCULTAR EL MODAL DE EDICION
+            $("#EditarTechoComision").modal('hide');
+            //DESPLEGAR EL MODAL DE CONFIRMACION
+            document.getElementById("btnConfirmarEditar").disabled = false;
+            $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+        }
     }
 });
 
@@ -641,7 +661,7 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnDetallesTechosComisiones",
                 $("#Detalles #cin_DescripcionIngreso").html(data.cin_DescripcionIngreso);
                 $("#Detalles #tc_RangoInicio").html((data.tc_RangoInicio % 1 == 0) ? data.tc_RangoInicio + ".00" : data.tc_RangoInicio);
                 $("#Detalles #tc_RangoFin").html((data.tc_RangoFin % 1 == 0) ? data.tc_RangoFin + ".00" : data.tc_RangoFin);
-                $("#Detalles #tc_PorcentajeComision").html((data.tc_PorcentajeComision % 1 == 0) ? data.tc_PorcentajeComision + ".00" : data.tc_PorcentajeComision);
+                $("#Detalles #tc_PorcentajeComision").html((data.tc_PorcentajeComision % 1 == 0) ? data.tc_PorcentajeComision + ".00" + '%' : data.tc_PorcentajeComision + '%');
                 
                 $("#Detalles #NombreUsuarioCrea").html(data.NombreUsuarioCrea);
                 $("#Detalles #tc_FechaCrea").html(FechaCrea);
