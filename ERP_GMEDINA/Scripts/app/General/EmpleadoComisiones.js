@@ -65,6 +65,7 @@ function cargarGridComisiones() {
                     ListaComisiones[i].cc_Id,
                     ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos,
                     ListaComisiones[i].cin_DescripcionIngreso,
+                     (ListaComisiones[i].cc_TotalComision % 1 == 0) ? ListaComisiones[i].cc_TotalComision + ".00" : ListaComisiones[i].cc_TotalComision,
                     (ListaComisiones[i].cc_TotalVenta % 1 == 0) ? ListaComisiones[i].cc_TotalVenta + ".00" : ListaComisiones[i].cc_TotalVenta,
                     FechaRegistro,
                     estadoRegistro,
