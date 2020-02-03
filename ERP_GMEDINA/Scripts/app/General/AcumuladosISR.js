@@ -115,17 +115,32 @@ $('#Crear #aisr_Monto').keyup(function () {
 });
 
 // validar empleado create
-$('#Crear #emp_IdCrear').keyup(function () {
+$('#Crear #emp_IdCrear').change(function () {
     var empleado = $("#Crear #emp_IdCrear").val()
 
     // si es distinto de cero
-    if (empleado != 0 || empleado != '0' || empleado != "0") {
-        $('#AsteriscoEmpleado').removeClass('text-danger');
+    if (empleado != null && empleado != "") {
+        $('#Crear #AsteriscoEmpleado').removeClass('text-danger');
         $("#Crear #validation_emp_Id").css('display', 'none');
     }
     else {
-        $('#AsteriscoEmpleado').addClass("text-danger");
+        $('#Crear #AsteriscoEmpleado').addClass("text-danger");
         $("#Crear #validation_emp_Id").css('display', '');
+    }
+});
+
+// validar empleado create
+$('#Editar #emp_IdEditar').change(function () {
+    var empleado = $("#Editar #emp_IdEditar").val();
+
+    // si es distinto de cero
+    if (empleado != null && empleado != "") {
+        $('#Editar #AsteriscoEmpleadoEditar').removeClass('text-danger');
+        $("#Editar #validation_emp_Id").css('display', 'none');
+    }
+    else {
+        $('#Editar #AsteriscoEmpleadoEditar').addClass("text-danger");
+        $("#Editar #validation_emp_Id").css('display', '');
     }
 });
 
@@ -165,7 +180,7 @@ $(document).on("click", "#btnAgregarAcumuladosISR", function () {
     // habilitar boton 
     $('#btnCreateAcumuladosISR').attr('disabled', false);
 
-    $("#Crear #emp_IdCrear").val('').trigger('change');
+    $("#Crear #emp_IdCrear").val('').trigger('change.select2');
     //mostrar modal
     $("#AgregarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
 });
@@ -191,13 +206,13 @@ $('#btnCreateAcumuladosISR').click(function () {
         ModelState = false;
     }
 
-    if (empId == 0 || empId == "0" || empId == "") {
+    if (empId == null || empId == "") {
         ModelState = false;
         $("#Crear #validation_emp_Id").css("display", "");
-        $("#Crear #AsteriscoEmpleado").css("color", "red");
+        $("#Crear #AsteriscoEmpleado").addClass('text-danger');
     } else {
         $("#Crear #validation_emp_Id").css("display", "none");
-        $("#Crear #AsteriscoEmpleado").css("color", "#676a6c");
+        $("#Crear #AsteriscoEmpleado").removeClass('text-danger');
     }
 
     // descripcion requerida
@@ -252,17 +267,31 @@ $('#btnCreateAcumuladosISR').click(function () {
 
     if (ModelState == true) {
 
+        let deducirISR = false;
+        if ($('#Crear #aisr_DeducirISR').is(':checked')) {
+            deducirISR = true;
+        }
+        else {
+            deducirISR = false;
+        }
+
         //serializar formulario
         var data = $("#frmAcumuladosISRCreate").serializeArray();
 
         let descripcion = $('#Crear #aisr_Descripcion').val();
         let monto = $('#Crear #aisr_Monto').val().replace(/,/g, '');;
         let idEmpleado = $('#Crear #emp_IdCrear').val();
-
+        let token = $('#Crear input[name="__RequestVerificationToken"]').val();
         $.ajax({
             url: "/AcumuladosISR/Create",
             method: "POST",
-            data: { aisr_Descripcion: descripcion, aisr_Monto: monto, aisr_DeducirISR: deducirISR, emp_ID: idEmpleado }
+            data: {
+                aisr_Descripcion: descripcion,
+                aisr_Monto: monto,
+                aisr_DeducirISR: deducirISR,
+                emp_ID: idEmpleado,
+                __RequestVerificationToken: token
+            }
         }).done(function (data) {
             console.log(data);
             // validar respuesta del servidor
@@ -286,10 +315,11 @@ $('#btnCreateAcumuladosISR').click(function () {
                     title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
+
+                $('#btnCreateAcumuladosISR').attr('disabled', false);
             }
         });
     }
-    $('#btnCreateAcumuladosISR').attr('disabled', false);
 });
 
 
@@ -424,7 +454,7 @@ $('#Editar #aisr_Monto').keyup(function () {
 
 // edit 2
 $("#btnEditarAcumulado").click(function () {
-
+    var empleado = $("#Editar #emp_IdEditar").val();
     var descripcion = $("#Editar #aisr_Descripcion").val();
     var aisr_Monto = $("#Editar #aisr_Monto").val();
     var ModelState = true;
@@ -442,6 +472,16 @@ $("#btnEditarAcumulado").click(function () {
         $("#Editar #validation_EditarDescripcionNumerico").css('display', 'none');
         $("#Editar #aisr_Descripcion").focus();
         ModelState = false;
+    }
+
+    if (empleado != null && empleado != "") {
+        $('#Editar #AsteriscoEmpleadoEditar').removeClass('text-danger');
+        $("#Editar #validation_emp_Id").css('display', 'none');
+    }
+    else {
+        ModelState = false;
+        $('#Crear #AsteriscoEmpleadoEditar').addClass("text-danger");
+        $("#Editar #validation_emp_Id").css('display', '');
     }
 
     // si es un número y no está vacio
