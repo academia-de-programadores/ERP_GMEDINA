@@ -687,6 +687,8 @@
           <Property Name="car_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="car_UsuarioModifica" Type="int" />
           <Property Name="car_FechaModifica" Type="datetime" />
+          <Property Name="car_SalarioMinimo" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="car_SalarioMaximo" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
         <EntityType Name="tbCompetencias">
           <Key>
@@ -2071,11 +2073,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InformacionColaborador' does n
           <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" />
           <Property Name="per_Sexo" Type="char" MaxLength="1" />
           <Property Name="per_Edad" Type="int" />
-          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="500" />
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
           <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
-          <Property Name="SalarioBase" Type="decimal" Precision="8" Scale="4" />
+          <Property Name="SalarioBase" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="fpa_IdFormaPago" Type="int" />
@@ -2244,6 +2246,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlani
         <EntityType Name="V_Plani_EncabezadoHistorialPlanilla">
           <Key>
             <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Identidad" />
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="NombreColaborador" />
             <PropertyRef Name="car_Descripcion" />
@@ -2254,6 +2257,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlani
             <PropertyRef Name="peri_DescripPeriodo" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="NombreColaborador" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -2262,7 +2266,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlani
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="fpa_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="date" />
-          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="2" />
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -8283,6 +8287,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbCargos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="car_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="car_SalarioMinimo" Type="decimal" Mode="In" />
+          <Parameter Name="car_SalarioMaximo" Type="decimal" Mode="In" />
           <Parameter Name="car_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="car_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -8295,6 +8301,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <Function Name="UDP_RRHH_tbCargos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="car_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="car_SalarioMinimo" Type="decimal" Mode="In" />
+          <Parameter Name="car_SalarioMaximo" Type="decimal" Mode="In" />
           <Parameter Name="car_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="car_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -9918,6 +9926,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_Plani_EncabezadoHistorialPlanilla" EntityType="Self.V_Plani_EncabezadoHistorialPlanilla" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_Plani_EncabezadoHistorialPlanilla].[emp_Id] AS [emp_Id], 
+    [V_Plani_EncabezadoHistorialPlanilla].[per_Identidad] AS [per_Identidad], 
     [V_Plani_EncabezadoHistorialPlanilla].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
     [V_Plani_EncabezadoHistorialPlanilla].[NombreColaborador] AS [NombreColaborador], 
     [V_Plani_EncabezadoHistorialPlanilla].[car_Descripcion] AS [car_Descripcion], 
@@ -12870,6 +12879,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbCargos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Insert_Result)">
             <Parameter Name="car_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="car_SalarioMinimo" Mode="In" Type="Decimal" />
+            <Parameter Name="car_SalarioMaximo" Mode="In" Type="Decimal" />
             <Parameter Name="car_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -12882,6 +12893,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImport Name="UDP_RRHH_tbCargos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Update_Result)">
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="car_SalarioMinimo" Mode="In" Type="Decimal" />
+            <Parameter Name="car_SalarioMaximo" Mode="In" Type="Decimal" />
             <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -18812,11 +18825,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="per_Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="per_Edad" Type="Int32" />
-          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="SalarioBase" Type="Decimal" Precision="8" Scale="4" />
+          <Property Name="SalarioBase" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="fpa_IdFormaPago" Type="Int32" />
@@ -18975,6 +18988,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="fpa_Descripcion" />
             <PropertyRef Name="peri_DescripPeriodo" />
+            <PropertyRef Name="per_Identidad" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
@@ -18985,8 +18999,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fpa_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hipa_FechaPago" Type="DateTime" Precision="0" />
-          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="2" />
           <Property Name="peri_DescripPeriodo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -23949,6 +23964,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" FromRole="tbCargos" ToRole="tbDepartamentos" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" FromRole="tbCargos" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo" FromRole="tbCargos" ToRole="tbHistorialCargos" />
+          <Property Name="car_SalarioMinimo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="car_SalarioMaximo" Type="Decimal" Precision="16" Scale="4" />
         </EntityType>
         <EntityType Name="V_tbPagoDeCesantiaDetalle">
           <Key>
@@ -28030,6 +28047,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_Plani_EncabezadoHistorialPlanilla">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla">
               <MappingFragment StoreEntitySet="V_Plani_EncabezadoHistorialPlanilla">
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
                 <ScalarProperty Name="peri_DescripPeriodo" ColumnName="peri_DescripPeriodo" />
                 <ScalarProperty Name="hipa_SueldoNeto" ColumnName="hipa_SueldoNeto" />
                 <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
@@ -29198,6 +29216,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbCargos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCargos">
               <MappingFragment StoreEntitySet="tbCargos">
+                <ScalarProperty Name="car_SalarioMaximo" ColumnName="car_SalarioMaximo" />
+                <ScalarProperty Name="car_SalarioMinimo" ColumnName="car_SalarioMinimo" />
                 <ScalarProperty Name="car_FechaModifica" ColumnName="car_FechaModifica" />
                 <ScalarProperty Name="car_UsuarioModifica" ColumnName="car_UsuarioModifica" />
                 <ScalarProperty Name="car_FechaCrea" ColumnName="car_FechaCrea" />

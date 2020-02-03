@@ -21,6 +21,7 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
+    debugger
     id = ID;
     _ajax(null,
         '/Cargos/Edit/' + ID,
@@ -28,6 +29,8 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#car_Descripcion")["0"].innerText = obj.car_Descripcion;
+                $("#ModalDetalles").find("#car_SalarioMinimo")["0"].innerText = obj.car_SalarioMinimo;
+                $("#ModalDetalles").find("#car_SalarioMaximo")["0"].innerText = obj.car_SalarioMaximo;
                 $("#ModalDetalles").find("#car_FechaCrea")["0"].innerText = FechaFormato(obj.car_FechaCrea);
                 $("#ModalDetalles").find("#car_FechaModifica")["0"].innerText = FechaFormato(obj.car_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -84,6 +87,9 @@ $("#btnEditar").click(function () {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
                 $("#ModalEditar").find("#car_Descripcion").val(obj.car_Descripcion);
+                $("#ModalEditar").find("#car_SalarioMinimo").val(obj.car_SalarioMinimo);
+                $("#ModalEditar").find("#car_SalarioMaximo").val(obj.car_SalarioMaximo);
+               
                 $("#ModalEditar").find("#car_Descripcion").focus();
             }
         });

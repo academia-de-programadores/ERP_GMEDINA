@@ -70,7 +70,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion, tbCargos.car_SalarioMinimo, tbCargos.car_SalarioMaximo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -116,6 +116,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 car_Id = tbCargos.car_Id,
                 car_Descripcion = tbCargos.car_Descripcion,
+                car_SalarioMinimo = tbCargos.car_SalarioMinimo,
+                car_SalarioMaximo = tbCargos.car_SalarioMaximo,
                 car_Estado = tbCargos.car_Estado,
                 car_RazonInactivo = tbCargos.car_RazonInactivo,
                 car_UsuarioCrea = tbCargos.car_UsuarioCrea,
@@ -141,7 +143,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCargos_Update(id, tbCargos.car_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCargos_Update(id, tbCargos.car_Descripcion, tbCargos.car_SalarioMinimo, tbCargos.car_SalarioMaximo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";

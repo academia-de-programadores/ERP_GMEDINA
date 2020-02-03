@@ -203,7 +203,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\AFPController.cs" />
-    <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
