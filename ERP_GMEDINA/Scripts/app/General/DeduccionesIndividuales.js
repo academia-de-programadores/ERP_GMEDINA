@@ -529,9 +529,9 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     //#region Declaracion de variables
     let emp_Id = $("#Crear #emp_Id").val();
     let dei_Motivo = $("#Crear #dei_Motivo").val();
-    let dei_Monto = $("#Crear #dei_Monto").val().replace(/,/g, '');;
-    let dei_NumeroCuotas = $("#frmCreateDeduccionIndividual #dei_NumeroCuotas").val().replace(/,/g, '');;
-    let dei_MontoCuota = $("#Crear #dei_MontoCuota").val().replace(/,/g, '');;
+    let dei_Monto = $("#Crear #dei_Monto").val();
+    let dei_NumeroCuotas = $("#frmCreateDeduccionIndividual #dei_NumeroCuotas").val();
+    let dei_MontoCuota = $("#Crear #dei_MontoCuota").val();
     let dei_PagaSiempre = $("#Crear #dei_PagaSiempre").val();
     let dei_DeducirISR = $("#Crear #dei_DeducirISR").val();
     //#endregion
@@ -550,7 +550,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         dei_DeducirISR = false;
     }
-
+    debugger;
     //#region  POST Create
     if (estaTodoValidado("Crear")) {
         document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
