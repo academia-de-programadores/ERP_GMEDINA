@@ -21,6 +21,9 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Periodo de pago")]
         public string PeriodoPago { get; set; }
 
+        [Display(Name = "Tipo de moneda")]
+        public string moneda { get; set; }
+
         [Display(Name = "Lista deducciones")]
         public List<IngresosDeduccionesVoucher> Deducciones { get; set; }
 

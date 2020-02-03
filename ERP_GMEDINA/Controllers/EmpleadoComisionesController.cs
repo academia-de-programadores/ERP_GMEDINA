@@ -109,21 +109,33 @@ namespace ERP_GMEDINA.Controllers
             var TechosComisiones = from a in db.tbTechosComisiones
                                    where a.tc_Estado == true
                                    select a;
+
+            var MaxFin =
+                      (from fin in db.tbTechosComisiones
+                       select fin.tc_RangoFin)
+                      .Max();
+            var PorcentajeMaxFin = (from b in db.tbTechosComisiones
+                                    where b.tc_Estado == true && b.tc_RangoFin == MaxFin
+                                    select b.tc_PorcentajeComision).FirstOrDefault();
+            
             foreach (var a in TechosComisiones)
             {
+
                 if (tbEmpleadoComisiones.cc_TotalVenta >= a.tc_RangoInicio && tbEmpleadoComisiones.cc_TotalVenta <= a.tc_RangoFin)
                 {
                     TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100));
+                    break;
                 }
+                if (tbEmpleadoComisiones.cc_TotalVenta > MaxFin)
+                {
+                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * PorcentajeMaxFin / 100));
+                    break;
+                }
+                
             }
-
-            if (TotalComision == 0)
-            {
-                //Reemplazar el 0.25 por un campo
-                TotalComision = (tbEmpleadoComisiones.cc_TotalVenta * 0.25M);
-            }
-
+         
             tbEmpleadoComisiones.cc_TotalComision = TotalComision;
+
             tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
             tbEmpleadoComisiones.cc_UsuarioCrea = 1;
             tbEmpleadoComisiones.cc_FechaCrea = DateTime.Now;
@@ -202,12 +214,29 @@ namespace ERP_GMEDINA.Controllers
             var TechosComisiones = from a in db.tbTechosComisiones
                                    where a.tc_Estado == true
                                    select a;
+
+            var MaxFin =
+                      (from fin in db.tbTechosComisiones
+                       select fin.tc_RangoFin)
+                      .Max();
+            var PorcentajeMaxFin = (from b in db.tbTechosComisiones
+                                    where b.tc_Estado == true && b.tc_RangoFin == MaxFin
+                                    select b.tc_PorcentajeComision).FirstOrDefault();
+
             foreach (var a in TechosComisiones)
             {
+
                 if (tbEmpleadoComisiones.cc_TotalVenta >= a.tc_RangoInicio && tbEmpleadoComisiones.cc_TotalVenta <= a.tc_RangoFin)
                 {
                     TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * a.tc_PorcentajeComision / 100));
+                    break;
                 }
+                if (tbEmpleadoComisiones.cc_TotalVenta > MaxFin)
+                {
+                    TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * PorcentajeMaxFin / 100));
+                    break;
+                }
+
             }
 
             tbEmpleadoComisiones.cc_TotalComision = TotalComision;

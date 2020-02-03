@@ -62,8 +62,8 @@ namespace ERP_GMEDINA.Controllers
                     //SETEAR LOS CAMPOS PARA MOSTRAR LA PROYECCIÓN
                     ModelPagoDeCesantiaDetalle.IdCesantia = iter;
                     ModelPagoDeCesantiaDetalle.NoColaborador = item.emp_Id;
-                    ModelPagoDeCesantiaDetalle.NoIdentidad = item.NoIdentidad;
-                    ModelPagoDeCesantiaDetalle.NombreCompleto = item.NombreCompleto;
+                    ModelPagoDeCesantiaDetalle.NoIdentidad = item.NoIdentidad.Substring(0, 4) + "-" + item.NoIdentidad.Substring(4, 4) + "-" + item.NoIdentidad.Substring(9, item.NoIdentidad.Length - 9);
+					ModelPagoDeCesantiaDetalle.NombreCompleto = item.NombreCompleto;
                     ModelPagoDeCesantiaDetalle.DiasPagados = (int)Liquidacion.Dias360AcumuladosCesantia(item.emp_Id, FechaPeticion);
                     ModelPagoDeCesantiaDetalle.SueldoBrutoDiario = Liquidacion.Calculo_SalarioBrutoMasAlto(item.emp_Id);
                     ModelPagoDeCesantiaDetalle.TotalCesantiaPRO = Liquidacion.Calculo_ReduccionPasivoLaboral(item.emp_Id, ModelPagoDeCesantiaDetalle.SueldoBrutoDiario, ModelPagoDeCesantiaDetalle.DiasPagados, TbLiquidacionAuxilioCesantia);

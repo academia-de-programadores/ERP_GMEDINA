@@ -3,7 +3,7 @@
 const btnAgregar = $('#btnAgregar'),
     //Div que aparecera cuando se le de click en crear
     cargandoCrear = $('#cargandoCrear'),
-    equipoEmpId = $('#eqemp_Id'),
+    equipoEmpId = $('#eqem_Id'),
     equipoEmpIdEdit = $('#eqem_Id'),
     montoInicial = $('#dex_MontoInicial'),
     montoRestante = $('#dex_MontoRestante'),
@@ -91,7 +91,6 @@ $('#dex_MontoInicial').blur(function () {
 });
 
 $('#dex_MontoRestante').blur(function () {
-    debugger;
     let montoRestante = $(this).val().replace(/,/g, '');
     let hayAlgo = false;
     let montoInicial = $('#dex_MontoInicial').val().replace(/,/g, '');

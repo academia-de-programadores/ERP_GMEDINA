@@ -92,6 +92,90 @@ $('#btnPlanilla').click(function () {
     $('#ConfigurarGenerarPlanilla').modal();
 });
 
+
+//GENERAR PLANILLA
+$('#btnPrevisualizarPlanilla').click(function () {
+
+    var ID = planillaId;
+    var ModelState = true;
+    var GenerarExcel = false, GenerarPDF = false, GenerarCSV = false, EnviarEmailBool = false;
+    EnviarEmailBool = $('#EnviarEmail').is(":checked");
+    GenerarExcel = $('#Excel').is(":checked");
+    GenerarPDF = $('#PDF').is(":checked");
+    GenerarCSV = $('#CSV').is(":checked");
+
+    var fechaInicio = $('#fechaInicio').val();
+    var fechaFin = $('#fechaFin').val();
+
+    fechaInicio == '' ? ModelState = false : fechaInicio == " " ? ModelState = false : fechaInicio == null ? ModelState = false : isNaN(fechaInicio) == false ? ModelState = false : fechaInicio == undefined ? ModelState = false : '';
+    fechaFin == '' ? ModelState = false : fechaFin == " " ? ModelState = false : fechaFin == null ? ModelState = false : isNaN(fechaFin) == false ? ModelState = false : fechaFin == undefined ? ModelState = false : '';
+
+    if (ModelState) {
+        $('#Modal').modal({ backdrop: 'static', keyboard: false });
+        $('#ConfigurarGenerarPlanilla').modal('hide');
+        $('#btnPlanilla').css('display', 'none');
+        $('#Cargando').css('display', '');
+        $('#confirmarGenerarPlanilla').hide();
+        _ajax({
+            ID: planillaId,
+            enviarEmail: EnviarEmailBool,
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin
+        },
+        '/Planilla/PrevisualizarPlanilla/',
+        'POST',
+        (data) => {
+            $('#btnPlanilla').css('display', '');
+            $('#Cargando').css('display', 'none');
+            $('#Modal').modal('hide');
+            var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
+
+            //generar csv
+            GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
+
+            //generar excel
+            if (1==1) {
+                $("#dvjson").excelexportjs({
+                    containerid: "dvjson"
+                       , datatype: 'json'
+                       , dataset: data.Data
+                       , columns: getColumns(data.Data)
+                });
+            }
+
+            if (data.Response.Tipo == 'success') {
+                iziToast.success({
+                    title: data.Response.Encabezado,
+                    message: data.Response.Response,
+                });
+            }
+            else if (data.Response.Tipo == 'error') {
+                iziToast.error({
+                    title: data.Response.Encabezado,
+                    message: data.Response.Response,
+                });
+            }
+            else if (data.Response.Tipo == 'warning') {
+                iziToast.warning({
+                    title: data.Response.Encabezado,
+                    message: data.Response.Response,
+                });
+            }
+
+            $('.modal-backdrop').css('display', 'none');
+            $('.fade').css('display', 'none');
+            $('.in').css('display', 'none');
+        }
+    );
+    }
+    else {
+        iziToast.error({
+            title: 'Error',
+            message: 'Seleccione un rango de fechas válido',
+        });
+    }
+});
+
 //GENERAR PLANILLA
 $('#btnGenerarPlanilla').click(function () {
 
@@ -141,6 +225,18 @@ $('#btnGenerarPlanilla').click(function () {
                        , columns: getColumns(data.Data)
                 });
             }
+            
+            console.log(data.listaDeErrores);
+            if (data.listaDeErrores != '') {
+                $("#dvjson").excelexportjs({
+                    containerid: "dvjson"
+                       , datatype: 'json'
+                       , dataset: data.listaDeErrores
+                       , columns: getColumns(data.listaDeErrores)
+                });
+            }
+            
+            
 
             if (data.Response.Tipo == 'success') {
                 iziToast.success({

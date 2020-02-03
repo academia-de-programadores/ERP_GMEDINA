@@ -601,6 +601,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                console.table(data);
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
                 var FechaCrea = FechaFormato(data.cb_FechaCrea);
                 var FechaModifica = FechaFormato(data.cb_FechaModifica);
@@ -612,6 +613,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 } else {
                     $("#Detalles #cb_Pagado").html("No");
                 }
+                $("#Detalles #emp_Id").html(data.per_Nombres + ' ' + data.per_Apellidos);
                 $("#Detalles #cb_Id").val(data.cb_Id);
                 $("#Detalles #cb_Monto").html(data.cb_Monto);
                 $("#Detalles #cb_FechaRegistro").html(FechaRegistro);
