@@ -154,8 +154,9 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Editar
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_Activo,aisr_DeducirISR,emp_Id")] tbAcumuladosISR tbAcumuladosISR)
+        public ActionResult Edit(int aisr_Id, string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
+            tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { };
             // data de auditoria
             tbAcumuladosISR.aisr_UsuarioModifica = 1;
             tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
@@ -165,9 +166,6 @@ namespace ERP_GMEDINA.Controllers
             IEnumerable<object> listAcumuladosISR = null;
             string MensajeError = "";
 
-
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     // ejecutar procedimiento almacenado
@@ -195,17 +193,6 @@ namespace ERP_GMEDINA.Controllers
                     // error : se generó una excepción
                     response = "error";
                 }
-
-                // el resultado del proceso fue exitoso
-                response = "bien";
-            }
-            else
-            {
-
-                // error: el modelo no es válido
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
-            }
 
             // retornar resultado
             return Json(response, JsonRequestBehavior.AllowGet);

@@ -10,6 +10,8 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+var dataTableAcumuladosISR;
+
 // Cargar grid
 function cargarGridAcumuladosISR() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -131,6 +133,7 @@ $('#Crear #emp_IdCrear').keyup(function () {
 
 // modal create 
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
+
     // * empleado
     $('#AsteriscoEmpleado').removeClass('text-danger');
 
@@ -155,8 +158,6 @@ $(document).on("click", "#btnAgregarAcumuladosISR", function () {
     // vaciar cajas de texto
     $('#Crear input[type=text], input[type=number]').val('');
 
-    //inicializar el dropdownlist del empleado
-    $("#Crear #emp_IdCrear").val("0");
 
     //checkbox desmarcado
     $('#Crear #aisr_DeducirISR').prop('checked', false);
@@ -164,6 +165,7 @@ $(document).on("click", "#btnAgregarAcumuladosISR", function () {
     // habilitar boton 
     $('#btnCreateAcumuladosISR').attr('disabled', false);
 
+    $("#Crear #emp_IdCrear").val('').trigger('change');
     //mostrar modal
     $("#AgregarAcumuladosISR").modal({ backdrop: 'static', keyboard: false });
 });
@@ -288,6 +290,13 @@ var Data_Edit = "";
 
 //edit 1
 $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR", function () {
+    let itemEmpleado = localStorage.getItem('idEmpleado');
+    let dataEmp = dataTableAcumuladosISR.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
+
+    if (itemEmpleado != null) {
+        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+        localStorage.removeItem('idEmpleado');
+    }
 
     var ID = $(this).data('id');
     InactivarID = ID;
@@ -307,24 +316,17 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                 $('#Editar #aisr_DeducirISREdit').prop('checked', false);
             }
             if (data) {
-                // llenar modal del formulario
+                let idEmp = data.emp_Id;
+                let nombreEmp = dataEmp[2];
 
+                $('#Editar #emp_IdEditar').val(idEmp).trigger('change');
 
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-                $.ajax({
-                    url: "/AcumuladosISR/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8"
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_IdEditar").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Crear #emp_IdEditar").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
+                let valor = $('#Editar #emp_IdEditar').val();
+
+                if (valor == null) {
+                    $("#Editar #emp_IdEditar").prepend("<option value='" + idEmp + "' selected>" + nombreEmp + "</option>").trigger('change');
+                    localStorage.setItem('idEmpleado', idEmp);
+                }
 
                 $("#Editar #aisr_Id").val(data.aisr_Id);
                 $("#Editar #aisr_FechaCrea").val(data.aisr_FechaCrea);
@@ -486,12 +488,13 @@ $("#btnUpdateAISR2").click(function () {
 
     var data = $("#frmEditAcumuladosISR").serializeArray();
 
-
     // el indice 5 es el monto, hay que parsearlo a decimal porque se serializa como string
-    var stringDecimal = data[6].value;
-    data[6].value = stringDecimal.replace(/,/g, '');
-    data[7].value = aisr_DeducirISREdit;
-
+    var stringDecimal = data[5].value;
+    data[5].value = stringDecimal.replace(/,/g, '');
+    $("#Editar form input:checkbox").each(function () {
+        data[this.name] = this.checked;
+    });
+    console.table(data);
 
     $.ajax({
         url: "/AcumuladosISR/Edit",
@@ -499,7 +502,6 @@ $("#btnUpdateAISR2").click(function () {
         data: data
     }).done(function (data) {
         if (data != "error") {
-
             // cerrar modales y cargar grid
             $("#EditarAcumuladosISR").modal('hide');
             $("#EditarAISRConfirmacion").modal('hide');
@@ -698,7 +700,7 @@ $("#btnActivarAcumuladosISREjecutar").click(function () {
 
 // datatable
 $(document).ready(function () {
-    $('.dataTables-AcumuladosISR').DataTable({
+    dataTableAcumuladosISR = $('.dataTables-AcumuladosISR').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         pageLength: 10,
