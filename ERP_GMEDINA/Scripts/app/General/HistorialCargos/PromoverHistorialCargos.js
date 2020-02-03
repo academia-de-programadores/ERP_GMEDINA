@@ -48,7 +48,7 @@ $("#btnGuardar").click(function () {
 
 
     var sue_Cantidad = $("#sue_Cantidad").val();
-
+    var hcar_RazonPromocion = $("#hcar_RazonPromocion").val();
     var tbRequisiciones =
         {
             req_Id: $("#req_Id").val(),
@@ -69,6 +69,7 @@ $("#btnGuardar").click(function () {
         data = JSON.stringify({
             tbEmpleados: tbEmpleados,
             sue_Cantidad: sue_Cantidad,
+            hcar_RazonPromocion: hcar_RazonPromocion,
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,

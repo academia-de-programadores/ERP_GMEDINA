@@ -67,8 +67,8 @@ namespace ERP_GMEDINA.Controllers
                             Encargado = t.Nombre_Completo,
                             car_Anterior = t.CargoAnterior,
                             car_Nuevo = t.CargoNuevo,
-                            hcar_Fecha = t.Fecha_de_Historial
-
+                            hcar_Fecha = t.Fecha_de_Historial,
+                            PuedeDeshacer = t.PuedeDeshacer
                         }
                         )
                         .ToList();
@@ -172,7 +172,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, int sue_Cantidad, tbRequisiciones tbRequisiciones)
+        public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
@@ -183,11 +183,42 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                         var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
-                        tbEmpleados.jor_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, 1, DateTime.Now);
+                        tbEmpleados.jor_Id, sue_Cantidad, hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, 1, DateTime.Now);
                         foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";
                         }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public JsonResult Deshacer(int hcar_Id, string hcar_RazonPromocion, DateTime emp_Fechaingreso)
+        {
+            string msj = "";
+            if (hcar_RazonPromocion != "")
+            {
+                var usuario = (tbUsuario)Session["Usuario"];
+
+
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialCargos_Degradar(hcar_Id, hcar_RazonPromocion, emp_Fechaingreso,1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialCargos_Degradar_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -85,8 +85,14 @@ $("#btnGuardar").click(function () {
     {
         
     }
-    var data = $("#FormNuevo").serializeArray();
     debugger
+    var emp_Temporal = false;
+    if ($('#emp_Temporal').prop('checked')) {
+        emp_Temporal = true;
+    }
+
+
+    var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
         if(sue_Cantidad >= 0)
@@ -97,6 +103,7 @@ $("#btnGuardar").click(function () {
         data = JSON.stringify({
             tbSeleccionCandidatos: tbSeleccionCandidatos,
             tbEmpleados: tbEmpleados,
+            emp_Temporal : emp_Temporal,
             sue_Cantidad: sue_Cantidad,
             tmon_Id : tmon_Id,
             tbRequisiciones: tbRequisiciones

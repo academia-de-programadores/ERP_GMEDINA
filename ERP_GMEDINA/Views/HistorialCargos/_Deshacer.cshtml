@@ -1,0 +1,42 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialCargos
+<div class="modal inmodal" id="ModalDeshacer" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">¿Seguro que desea deshacer la promoción?</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormDeshacer" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <input type="text" id="hcar_Id" name="hcar_Id" value="" hidden>
+                        <input type="date" id="hcar_FechaAntigua" name="hcar_FechaAntigua" value="" hidden>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="hcar_RazonPromocion">Razón</label>
+                            <div class="col-md-8">
+                                <input class="form-control required valid text-box single-line" data-val="true" data-val-maxlength="Excedió el número máximo de carácteres" data-val-maxlength-max="255" data-val-required="El campo Razón de promoción es requerido" id="hcar_RazonPromocion" name="hcar_RazonPromocion" type="text" value="">
+                                <span class="field-validation-valid" data-valmsg-for="hcar_RazonPromocion" data-valmsg-replace="true" id="errorhcar_RazonPromocion"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="emp_Fechaingreso">Fecha</label>
+                            <div class="col-md-8">
+                                <input class="form-control required valid text-box single-line" data-val="true" data-val-required="El campo Fecha es requerido" data-val-date="Fecha no tiene el formato correcto" id="emp_Fechaingreso" name="emp_Fechaingreso" min="1900-01-01" max="2999-12-31" type="date" value="">
+                                <span class="field-validation-valid text-danger" data-valmsg-for="emp_Fechaingreso" data-valmsg-replace="true" id="erroremp_Fechaingreso"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger pull-right" id="btnDeshacer">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
+
