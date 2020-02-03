@@ -363,7 +363,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
 
     var data = {
         cc_Id: $("#Editar #cc_Id").val(),
-        emp_Id: $("#Editar #emp_IdEmpleado").val(),
+        emp_Id: $("#Editar #emp_Id").val(),
         cin_IdIngreso: $("#Editar #cin_IdIngreso").val(),
         //cc_PorcentajeComision: PorcentajeFormateado,
         cc_TotalVenta: TotalFormateado
