@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
+        public ActionResult Create([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Rango,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
         {
             // data de auditoria
             tbTechoImpuestoVecinal.timv_UsuarioCrea = 1;
