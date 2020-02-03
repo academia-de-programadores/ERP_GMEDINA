@@ -703,7 +703,7 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
 
-                                        #region Cálculo de ISR
+                                        #region cálculo de ISR
 
                                         #region Declaracion de Variables
                                         int AnioActual = DateTime.Now.Year;
@@ -719,7 +719,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? ExcesoDecimoCuarto = 0;
                                         decimal Exceso = 0;
                                         decimal SueldoAnual = 0;
-                                        decimal AcumuladosISR = 0;
+                                        decimal GastosMedicos = 0;
                                         decimal TotalIngresosGravables = 0;
                                         decimal TotalDeduccionesGravables = 0;
                                         decimal RentaNetaGravable = 0;
@@ -829,7 +829,7 @@ namespace ERP_GMEDINA.Controllers
                                         #region Acumulados ISR
 
                                         //Variable para obtener los registros de los Acumulados ISR del empleado actual
-                                        AcumuladosISR = db.tbAcumuladosISR.Where(x => x.aisr_Activo == true && x.emp_Id == empleadoActual.emp_Id).Select(x => x.Sum(y => y.aisr_Monto)).FirstOrDefault();
+                                        GastosMedicos = db.tbAcumuladosISR.Where(x => x.aisr_Activo == true).Select(x => x.aisr_Monto).FirstOrDefault();
 
                                         #endregion
 
@@ -869,7 +869,7 @@ namespace ERP_GMEDINA.Controllers
                                         TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones + (Decimal)TotalIngresosExtras;
 
                                         //Total Deducciones Gravables
-                                        TotalDeduccionesGravables = AcumuladosISR /*+ (Decimal)TotalDeduccionesEquipoTrabajo + (Decimal)TotalDeduccionesExtras + (Decimal)TotalDeduccionesAFP*/;
+                                        TotalDeduccionesGravables = GastosMedicos /*+ (Decimal)TotalDeduccionesEquipoTrabajo + (Decimal)TotalDeduccionesExtras + (Decimal)TotalDeduccionesAFP*/;
 
                                         //Renta Neta Gravable
                                         RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
