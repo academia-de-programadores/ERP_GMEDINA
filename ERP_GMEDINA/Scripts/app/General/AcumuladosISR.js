@@ -609,7 +609,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
 
             // llenar formulario
             if (data) {
-
+                console.table(data)
                 if (data[0].aisr_DeducirISR) {
                     $("#Detalles #aisr_DeducirISRDetails").html("Si");
                 }
@@ -627,6 +627,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
                 $("#Detalles #aisr_UsuarioCrea").html(data[0].aisr_UsuarioCrea);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#Detalles #aisr_FechaCrea").html(FechaCrea);
+                $("#Detalles #emp_Id").html(data[0].per_Nombres + ' ' + data[0].per_Apellidos);
 
                 $("#Detalles #aisr_UsuarioModifica").html(data.aisr_UsuarioModifica);
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
