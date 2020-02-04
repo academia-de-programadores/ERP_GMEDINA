@@ -3001,7 +3001,6 @@
     <Content Include="Views\TechosComisiones\_DetailsTechosComisiones.cshtml" />
     <Content Include="Views\TechosComisiones\_EditTechosComisiones.cshtml" />
     <Content Include="Views\TechosComisiones\Index.cshtml" />
-    <Content Include="Views\TechoImpuestoVecinal\IndexCalculoImpuestoVecinal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
