@@ -60,7 +60,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: DeduccionesIndividuales/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Create(string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre, bool dei_DeducirISR)
@@ -151,7 +151,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: DeduccionesIndividuales/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Edit(int dei_IdDeduccionesIndividuales, string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre, bool dei_DeducirISR)

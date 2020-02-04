@@ -62,7 +62,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_EdadMinima, htmlAttributes: new { @class = " control-label col-md-2"})
+                                            @Html.LabelFor(model => model.req_EdadMinima, htmlAttributes: new { @class = " control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.req_EdadMinima, new { htmlAttributes = new { @class = "required form-control required", @onkeypress = "return Numericos(event)", @onchange = "SetMinOn_req_EdadMaxima()" } })
                                                 @Html.ValidationMessageFor(model => model.req_EdadMinima, "", new { @class = "text-danger" })
@@ -91,13 +91,19 @@
                                             </div>
                                         </div>
 
+
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_EducacionSuperior, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.req_NivelEducativo, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-
-                                                @Html.EditorFor(model => model.req_EducacionSuperior, new { htmlAttributes = new { @class = "form-check" } })
-                                                @Html.ValidationMessageFor(model => model.req_EducacionSuperior, "", new { @class = "text-danger" })
-
+                                                @Html.DropDownList("req_NivelEducativo", new List<SelectListItem>
+                                                    {
+                                                       new SelectListItem{ Text="Primaria completa", Value = "1" },
+                                                       new SelectListItem{ Text="Secundaria completa", Value = "2" },
+                                                       new SelectListItem{ Text="Pregrado completo", Value = "3" },
+                                                       new SelectListItem{ Text="Postgrado completo", Value = "4" }
+                                                    }
+                                           , htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.req_EstadoCivil, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
@@ -105,7 +111,7 @@
                                             @Html.LabelFor(model => model.req_Permanente, htmlAttributes: new { @class = "control-label col-md-2", @onclick = "Req_check()" })
                                             <div class="col-md-10">
 
-                                                @Html.CheckBoxFor(model => model.req_Permanente, htmlAttributes: new { @onclick = "Req_check()", @class = "form-check"  })
+                                                @Html.CheckBoxFor(model => model.req_Permanente, htmlAttributes: new { @onclick = "Req_check()", @class = "form-check" })
                                                 @Html.ValidationMessageFor(model => model.req_Permanente, "", new { @class = "text-danger" })
 
                                             </div>
@@ -122,18 +128,18 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_Vacantes, htmlAttributes: new { @class = " control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_Vacantes, new { htmlAttributes = new { @class = "required form-control required", @type = "number", @min = "1", @onkeypress = "return Numericos(event)"} })
+                                                @Html.EditorFor(model => model.req_Vacantes, new { htmlAttributes = new { @class = "required form-control required", @type = "number", @min = "1", @onkeypress = "return Numericos(event)" } })
                                                 @Html.ValidationMessageFor(model => model.req_Vacantes, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         @*<div class="form-group">
-                                            @Html.LabelFor(model => model.req_FechaRequisicion, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.TextBoxFor(model => model.req_FechaRequisicion, new { @type = "date", @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.req_FechaRequisicion, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>*@
+            @Html.LabelFor(model => model.req_FechaRequisicion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.req_FechaRequisicion, new { @type = "date", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.req_FechaRequisicion, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_FechaContratacion, htmlAttributes: new { @class = " control-label col-md-2" })
@@ -164,9 +170,9 @@
                                     <h2>Requisitos Especiales</h2>
                                     <select multiple name="SlctReqEspeciales" class="form-control dual_select SlctReqEspeciales"></select>
                                 </div>
-                                <h1>Títulos</h1>
+                                <h1>Educación</h1>
                                 <div>
-                                    <h2>Títulos</h2>
+                                    <h2>Educación</h2>
                                     <select multiple name="SlctTitulos" class="form-control dual_select SlctTitulos"></select>
                                 </div>
                             </div>

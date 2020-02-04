@@ -223,7 +223,8 @@ namespace ERP_GMEDINA.Controllers
                                                  InformacionDelEmpleadoActual));
 
                                             //ISR
-                                            totalISR = CalculoISR.CalcularISR(db, empleadoActual, totalSalario, totalISR);
+                                            TimeSpan tDias = fechaFin - fechaInicio;
+                                            totalISR = CalculoISR.CalcularISR(db, empleadoActual, totalSalario, totalISR, tDias.Days + 1);
 
                                             idHistorialPago = GuardarEnHistorialDePago.GuardarHistorialDePago(fechaInicio,
                                                 fechaFin,

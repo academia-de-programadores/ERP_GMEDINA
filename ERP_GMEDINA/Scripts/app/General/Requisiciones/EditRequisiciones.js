@@ -141,6 +141,7 @@ $(document).ready(function () {
     var Duration = $("#Duration").val();
     var ReqDate = $("#ReqDate").val();
     var ConDate = $("#ConDate").val();
+    var Nivel = $("#Nivel").val();
 
     var _ReqDate = moment(ReqDate).format();
     var _ConDate = moment(ConDate).format();
@@ -153,6 +154,7 @@ $(document).ready(function () {
     $("#req_EstadoCivil").val(EstCivil).change();
     $("#req_FechaRequisicion").val(_ReqDate);
     $("#req_FechaContratacion").val(_ConDate);
+    $("#req_niveleducativo").val(Nivel);
 
     var ischecked = $("#req_Permanente").is(':checked');
     var req_Duracion = $("#req_Duracion");

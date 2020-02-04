@@ -6,19 +6,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.26957in</Width>
+              <Width>2.25833in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71124in</Width>
+              <Width>1.26124in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71124in</Width>
+              <Width>1.11087in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.94457in</Width>
+              <Width>1.85872in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.51124in</Width>
+              <Width>2.08333in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -412,9 +412,9 @@
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.17777in</Top>
-        <Left>0.74613cm</Left>
+        <Left>1.30386cm</Left>
         <Height>0.5in</Height>
-        <Width>10.14786in</Width>
+        <Width>8.57249in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -422,13 +422,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.82281in</Height>
+    <Height>2.08994cm</Height>
     <Style />
   </Body>
-  <Width>10.44162in</Width>
+  <Width>23.07798cm</Width>
   <Page>
     <PageHeader>
-      <Height>0.63648in</Height>
+      <Height>0.98443cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -451,8 +451,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.13417in</Top>
-          <Left>3.77167in</Left>
+          <Left>2.91334in</Left>
           <Height>0.38757in</Height>
           <Width>3.08333in</Width>
           <Style>
@@ -480,8 +479,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox18</rd:DefaultName>
-          <Top>0.34079cm</Top>
-          <Left>8.68329in</Left>
+          <Left>6.44958in</Left>
           <Height>0.25in</Height>
           <Width>1.75833in</Width>
           <ZIndex>1</ZIndex>
@@ -503,7 +501,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.45055in</Height>
+      <Height>0.93273cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -522,8 +520,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox17</rd:DefaultName>
-          <Top>0.06944in</Top>
-          <Left>9.44162in</Left>
+          <Top>0.04167in</Top>
+          <Left>7.20791in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <Style>
@@ -543,10 +541,13 @@
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>21.59cm</PageHeight>
+    <PageWidth>27.94cm</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -609,6 +610,6 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>999c174c-0ae0-4e62-9f4f-2948eb88b7d5</rd:ReportID>
 </Report>

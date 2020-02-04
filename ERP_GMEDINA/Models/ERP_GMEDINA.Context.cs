@@ -18,12 +18,17 @@
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
+        public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
         public virtual DbSet<tbAccesoRol> tbAccesoRol { get; set; }
+        public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
         public virtual DbSet<tbObjeto> tbObjeto { get; set; }
         public virtual DbSet<tbRol> tbRol { get; set; }
         public virtual DbSet<tbRolesUsuario> tbRolesUsuario { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
+        public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
         public virtual DbSet<tbAcumuladosISR> tbAcumuladosISR { get; set; }
         public virtual DbSet<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         public virtual DbSet<tbAFP> tbAFP { get; set; }
@@ -35,8 +40,11 @@
         public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         public virtual DbSet<tbDeduccionAFP> tbDeduccionAFP { get; set; }
         public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
+        public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
+        public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
+        public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
         public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
@@ -45,21 +53,28 @@
         public virtual DbSet<tbISR> tbISR { get; set; }
         public virtual DbSet<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
         public virtual DbSet<tbMotivoLiquidacion> tbMotivoLiquidacion { get; set; }
+        public virtual DbSet<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle { get; set; }
+        public virtual DbSet<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado { get; set; }
         public virtual DbSet<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
         public virtual DbSet<tbPreaviso> tbPreaviso { get; set; }
+        public virtual DbSet<tbTechoImpuestoVecinal> tbTechoImpuestoVecinal { get; set; }
+        public virtual DbSet<tbTechosComisiones> tbTechosComisiones { get; set; }
         public virtual DbSet<tbTechosDeducciones> tbTechosDeducciones { get; set; }
         public virtual DbSet<tbTipoDeduccion> tbTipoDeduccion { get; set; }
         public virtual DbSet<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
         public virtual DbSet<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso { get; set; }
         public virtual DbSet<tbAreas> tbAreas { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
         public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
         public virtual DbSet<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
         public virtual DbSet<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
+        public virtual DbSet<tbDirectoriosEmpleados> tbDirectoriosEmpleados { get; set; }
         public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
         public virtual DbSet<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
         public virtual DbSet<tbEquipoTrabajo> tbEquipoTrabajo { get; set; }
+        public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
         public virtual DbSet<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
@@ -69,6 +84,7 @@
         public virtual DbSet<tbHistorialCargos> tbHistorialCargos { get; set; }
         public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual DbSet<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
+        public virtual DbSet<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
         public virtual DbSet<tbHistorialSalidas> tbHistorialSalidas { get; set; }
@@ -107,9 +123,11 @@
         public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
         public virtual DbSet<V_DecimoCuartoMes_Pagados> V_DecimoCuartoMes_Pagados { get; set; }
         public virtual DbSet<V_DecimoCuartoMes_RPT> V_DecimoCuartoMes_RPT { get; set; }
+        public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
         public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
         public virtual DbSet<V_DecimoTercerMes_Pagados> V_DecimoTercerMes_Pagados { get; set; }
         public virtual DbSet<V_DecimoTercerMes_RPT> V_DecimoTercerMes_RPT { get; set; }
+        public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
         public virtual DbSet<V_Deducciones_RPT> V_Deducciones_RPT { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
@@ -147,6 +165,10 @@
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
+        public virtual DbSet<V_tbPagoDeCesantiaDetalle> V_tbPagoDeCesantiaDetalle { get; set; }
+        public virtual DbSet<V_tbPagoDeCesantiaDetalle_Preview> V_tbPagoDeCesantiaDetalle_Preview { get; set; }
+        public virtual DbSet<V_tbTechosComisiones> V_tbTechosComisiones { get; set; }
+        public virtual DbSet<V_TechoImpuestoVecinal> V_TechoImpuestoVecinal { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_Datos_Empleado> V_Datos_Empleado { get; set; }
         public virtual DbSet<V_DatosProfesionales> V_DatosProfesionales { get; set; }
@@ -156,65 +178,48 @@
         public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }
         public virtual DbSet<V_EmpleadoIncapacidades> V_EmpleadoIncapacidades { get; set; }
         public virtual DbSet<V_Empleados> V_Empleados { get; set; }
+        public virtual DbSet<V_Empleados_Sueldos> V_Empleados_Sueldos { get; set; }
         public virtual DbSet<V_EquipoTrabajoDetalles> V_EquipoTrabajoDetalles { get; set; }
+        public virtual DbSet<V_FaseSeleccion> V_FaseSeleccion { get; set; }
         public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
         public virtual DbSet<V_HistorialAudienciaDescargo> V_HistorialAudienciaDescargo { get; set; }
         public virtual DbSet<V_HistorialCargos> V_HistorialCargos { get; set; }
         public virtual DbSet<V_HistorialContrataciones> V_HistorialContrataciones { get; set; }
         public virtual DbSet<V_HistorialHorasTrabajadas> V_HistorialHorasTrabajadas { get; set; }
         public virtual DbSet<V_HistorialIncapacidades> V_HistorialIncapacidades { get; set; }
+        public virtual DbSet<V_HistorialPermisos> V_HistorialPermisos { get; set; }
         public virtual DbSet<V_HistorialPermisos_Empleados> V_HistorialPermisos_Empleados { get; set; }
+        public virtual DbSet<V_HistorialPermisosEmpleados> V_HistorialPermisosEmpleados { get; set; }
         public virtual DbSet<V_HistorialSalidas_Empleados> V_HistorialSalidas_Empleados { get; set; }
         public virtual DbSet<V_Historialvacaciones> V_Historialvacaciones { get; set; }
         public virtual DbSet<V_HorariosDetalles> V_HorariosDetalles { get; set; }
         public virtual DbSet<V_HVacacionesEmpleados> V_HVacacionesEmpleados { get; set; }
+        public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
+        public virtual DbSet<V_RPT_EmpleadoCurriculum_Personas> V_RPT_EmpleadoCurriculum_Personas { get; set; }
         public virtual DbSet<V_RPT_EquipoEmpleado> V_RPT_EquipoEmpleado { get; set; }
         public virtual DbSet<V_RPT_FaseSeleccion> V_RPT_FaseSeleccion { get; set; }
         public virtual DbSet<V_RPT_HistorialAmonestaciones> V_RPT_HistorialAmonestaciones { get; set; }
+        public virtual DbSet<V_RPT_HistorialAmonestaciones_Empleados> V_RPT_HistorialAmonestaciones_Empleados { get; set; }
+        public virtual DbSet<V_RPT_HistorialAudienciaDescargo> V_RPT_HistorialAudienciaDescargo { get; set; }
+        public virtual DbSet<V_RPT_HistorialAudienciaDescargo_empleados> V_RPT_HistorialAudienciaDescargo_empleados { get; set; }
         public virtual DbSet<V_RPT_HistorialCargos> V_RPT_HistorialCargos { get; set; }
         public virtual DbSet<V_RPT_HistorialContrataciones> V_RPT_HistorialContrataciones { get; set; }
         public virtual DbSet<V_RPT_HistorialIncapacidad> V_RPT_HistorialIncapacidad { get; set; }
         public virtual DbSet<V_RPT_HistorialPermisos> V_RPT_HistorialPermisos { get; set; }
+        public virtual DbSet<V_RPT_HistorialSalidas> V_RPT_HistorialSalidas { get; set; }
+        public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
+        public virtual DbSet<V_RPT_HistorialVacaciones> V_RPT_HistorialVacaciones { get; set; }
         public virtual DbSet<V_RPT_HorasTrabajadas> V_RPT_HorasTrabajadas { get; set; }
+        public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
+        public virtual DbSet<V_RPT_RequisicionesDatos> V_RPT_RequisicionesDatos { get; set; }
         public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
+        public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
         public virtual DbSet<V_tbEmpleados> V_tbEmpleados { get; set; }
         public virtual DbSet<V_tbHistorialPermisos_completa> V_tbHistorialPermisos_completa { get; set; }
         public virtual DbSet<V_tbHistorialSalidas> V_tbHistorialSalidas { get; set; }
         public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }
         public virtual DbSet<V_tbtiposalidas> V_tbtiposalidas { get; set; }
-        public virtual DbSet<V_RPT_HistorialAmonestaciones_Empleados> V_RPT_HistorialAmonestaciones_Empleados { get; set; }
-        public virtual DbSet<V_RPT_HistorialAudienciaDescargo_empleados> V_RPT_HistorialAudienciaDescargo_empleados { get; set; }
-        public virtual DbSet<V_RPT_HistorialSalidas> V_RPT_HistorialSalidas { get; set; }
-        public virtual DbSet<V_RPT_HistorialAudienciaDescargo> V_RPT_HistorialAudienciaDescargo { get; set; }
-        public virtual DbSet<V_RPT_HistorialVacaciones> V_RPT_HistorialVacaciones { get; set; }
-        public virtual DbSet<V_FaseSeleccion> V_FaseSeleccion { get; set; }
-        public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
-        public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
-        public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
-        public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
-        public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
-        public virtual DbSet<tbDirectoriosEmpleados> tbDirectoriosEmpleados { get; set; }
-        public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
-        public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
-        public virtual DbSet<V_HistorialPermisos> V_HistorialPermisos { get; set; }
-        public virtual DbSet<V_RPT_EmpleadoCurriculum_Personas> V_RPT_EmpleadoCurriculum_Personas { get; set; }
-        public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
-        public virtual DbSet<V_tbTechosComisiones> V_tbTechosComisiones { get; set; }
-        public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
-        public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
-        public virtual DbSet<V_DecimoTercerMesFE> V_DecimoTercerMesFE { get; set; }
-        public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
-        public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
-        public virtual DbSet<tbTechoImpuestoVecinal> tbTechoImpuestoVecinal { get; set; }
-        public virtual DbSet<V_TechoImpuestoVecinal> V_TechoImpuestoVecinal { get; set; }
-        public virtual DbSet<V_tbPagoDeCesantiaDetalle_Preview> V_tbPagoDeCesantiaDetalle_Preview { get; set; }
-        public virtual DbSet<tbPagoDeCesantiaDetalle> tbPagoDeCesantiaDetalle { get; set; }
-        public virtual DbSet<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado { get; set; }
-        public virtual DbSet<tbTechosComisiones> tbTechosComisiones { get; set; }
-        public virtual DbSet<V_tbPagoDeCesantiaDetalle> V_tbPagoDeCesantiaDetalle { get; set; }
-        public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
-        public virtual DbSet<tbCargos> tbCargos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -2795,19 +2800,19 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Delete_Result>("UDP_RRHH_tbCargos_Delete", car_IdParameter, car_razon_InactivoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbCargos_Insert_Result> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<decimal> car_SalarioMinimo, Nullable<decimal> car_SalarioMaximo, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Insert_Result> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<decimal> car_SueldoMinimo, Nullable<decimal> car_SueldoMaximo, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
         {
             var car_DescripcionParameter = car_Descripcion != null ?
                 new ObjectParameter("car_Descripcion", car_Descripcion) :
                 new ObjectParameter("car_Descripcion", typeof(string));
     
-            var car_SalarioMinimoParameter = car_SalarioMinimo.HasValue ?
-                new ObjectParameter("car_SalarioMinimo", car_SalarioMinimo) :
-                new ObjectParameter("car_SalarioMinimo", typeof(decimal));
+            var car_SueldoMinimoParameter = car_SueldoMinimo.HasValue ?
+                new ObjectParameter("car_SueldoMinimo", car_SueldoMinimo) :
+                new ObjectParameter("car_SueldoMinimo", typeof(decimal));
     
-            var car_SalarioMaximoParameter = car_SalarioMaximo.HasValue ?
-                new ObjectParameter("car_SalarioMaximo", car_SalarioMaximo) :
-                new ObjectParameter("car_SalarioMaximo", typeof(decimal));
+            var car_SueldoMaximoParameter = car_SueldoMaximo.HasValue ?
+                new ObjectParameter("car_SueldoMaximo", car_SueldoMaximo) :
+                new ObjectParameter("car_SueldoMaximo", typeof(decimal));
     
             var car_UsuarioCreaParameter = car_UsuarioCrea.HasValue ?
                 new ObjectParameter("car_UsuarioCrea", car_UsuarioCrea) :
@@ -2817,7 +2822,7 @@
                 new ObjectParameter("car_FechaCrea", car_FechaCrea) :
                 new ObjectParameter("car_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Insert_Result>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_SalarioMinimoParameter, car_SalarioMaximoParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Insert_Result>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_SueldoMinimoParameter, car_SueldoMaximoParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbCargos_Restore_Result> UDP_RRHH_tbCargos_Restore(Nullable<int> car_Id, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
@@ -2842,7 +2847,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_tbEmpleados_Select_Result>("UDP_RRHH_tbCargos_tbEmpleados_Select");
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbCargos_Update_Result> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<decimal> car_SalarioMinimo, Nullable<decimal> car_SalarioMaximo, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Update_Result> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<decimal> car_SueldoMinimo, Nullable<decimal> car_SueldoMaximo, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
         {
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
@@ -2852,13 +2857,13 @@
                 new ObjectParameter("car_Descripcion", car_Descripcion) :
                 new ObjectParameter("car_Descripcion", typeof(string));
     
-            var car_SalarioMinimoParameter = car_SalarioMinimo.HasValue ?
-                new ObjectParameter("car_SalarioMinimo", car_SalarioMinimo) :
-                new ObjectParameter("car_SalarioMinimo", typeof(decimal));
+            var car_SueldoMinimoParameter = car_SueldoMinimo.HasValue ?
+                new ObjectParameter("car_SueldoMinimo", car_SueldoMinimo) :
+                new ObjectParameter("car_SueldoMinimo", typeof(decimal));
     
-            var car_SalarioMaximoParameter = car_SalarioMaximo.HasValue ?
-                new ObjectParameter("car_SalarioMaximo", car_SalarioMaximo) :
-                new ObjectParameter("car_SalarioMaximo", typeof(decimal));
+            var car_SueldoMaximoParameter = car_SueldoMaximo.HasValue ?
+                new ObjectParameter("car_SueldoMaximo", car_SueldoMaximo) :
+                new ObjectParameter("car_SueldoMaximo", typeof(decimal));
     
             var car_UsuarioModificaParameter = car_UsuarioModifica.HasValue ?
                 new ObjectParameter("car_UsuarioModifica", car_UsuarioModifica) :
@@ -2868,7 +2873,7 @@
                 new ObjectParameter("car_FechaModifica", car_FechaModifica) :
                 new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_SalarioMinimoParameter, car_SalarioMaximoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_SueldoMinimoParameter, car_SueldoMaximoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbCompetencias_Delete_Result> UDP_RRHH_tbCompetencias_Delete(Nullable<int> comp_Id, string comp_razon_Inactivo, Nullable<int> comp_UsuarioModifica, Nullable<System.DateTime> comp_FechaModifica)
@@ -6922,6 +6927,31 @@
                 new ObjectParameter("timv_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechoImpuestoVecinal_Update_Result>("UDP_Plani_tbTechoImpuestoVecinal_Update", timv_IdTechoImpuestoVecinalParameter, mun_CodigoParameter, tde_IdTipoDeduParameter, timv_RangoInicioParameter, timv_RangoFinParameter, timv_RangoParameter, timv_ImpuestoParameter, timv_UsuarioModificaParameter, timv_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialCargos_Degradar_Result> UDP_RRHH_tbHistorialCargos_Degradar(Nullable<int> hcar_Id, string hcar_RazonPromocion, Nullable<System.DateTime> hcar_Fecha, Nullable<int> hcar_UsuarioModifica, Nullable<System.DateTime> hcar_FechaModifica)
+        {
+            var hcar_IdParameter = hcar_Id.HasValue ?
+                new ObjectParameter("hcar_Id", hcar_Id) :
+                new ObjectParameter("hcar_Id", typeof(int));
+    
+            var hcar_RazonPromocionParameter = hcar_RazonPromocion != null ?
+                new ObjectParameter("hcar_RazonPromocion", hcar_RazonPromocion) :
+                new ObjectParameter("hcar_RazonPromocion", typeof(string));
+    
+            var hcar_FechaParameter = hcar_Fecha.HasValue ?
+                new ObjectParameter("hcar_Fecha", hcar_Fecha) :
+                new ObjectParameter("hcar_Fecha", typeof(System.DateTime));
+    
+            var hcar_UsuarioModificaParameter = hcar_UsuarioModifica.HasValue ?
+                new ObjectParameter("hcar_UsuarioModifica", hcar_UsuarioModifica) :
+                new ObjectParameter("hcar_UsuarioModifica", typeof(int));
+    
+            var hcar_FechaModificaParameter = hcar_FechaModifica.HasValue ?
+                new ObjectParameter("hcar_FechaModifica", hcar_FechaModifica) :
+                new ObjectParameter("hcar_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialCargos_Degradar_Result>("UDP_RRHH_tbHistorialCargos_Degradar", hcar_IdParameter, hcar_RazonPromocionParameter, hcar_FechaParameter, hcar_UsuarioModificaParameter, hcar_FechaModificaParameter);
         }
     }
 }

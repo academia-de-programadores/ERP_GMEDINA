@@ -5,6 +5,35 @@
     llenarDropDownList()
 });
 
+function LLenarDepto(sel) {
+    debugger
+    var select = document.getElementById("depto_Id");
+    var i;
+    for (i = select.options.length - 1 ; i >= 0 ; i--) {
+        select.remove(i);
+    }
+
+    _ajax(null,
+       '/HistorialCargos/llenarDropDowlistDepartamentos/' + sel.value,
+       'POST',
+       function (result) {
+           $.each(result, function (id, Lista) {
+               var x = document.getElementById("depto_Id");
+               var option = document.createElement("option");
+               option.text = "**Seleccione una opción**"
+               option.value = "";
+               x.add(option);
+               Lista.forEach(function (value, index) {
+                   var x = document.getElementById("depto_Id");
+                   var option = document.createElement("option");
+                   option.text = value.Descripcion;
+                   option.value = value.Id;
+                   x.add(option);
+               });
+           });
+       });
+}
+
 function llenarDropDownList() {
     _ajax(null,
    '/HistorialCargos/llenarDropDowlistRequisicion',
@@ -48,7 +77,7 @@ $("#btnGuardar").click(function () {
 
 
     var sue_Cantidad = $("#sue_Cantidad").val();
-
+    var hcar_RazonPromocion = $("#hcar_RazonPromocion").val();
     var tbRequisiciones =
         {
             req_Id: $("#req_Id").val(),
@@ -69,6 +98,7 @@ $("#btnGuardar").click(function () {
         data = JSON.stringify({
             tbEmpleados: tbEmpleados,
             sue_Cantidad: sue_Cantidad,
+            hcar_RazonPromocion: hcar_RazonPromocion,
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,

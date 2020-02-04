@@ -54,9 +54,7 @@
                             <li class="@Html.IsSelected(controller:"Cargos",action: "Index")"><a href="@Url.Action("Index", "Cargos")">Cargos</a></li>
                             <li class="@Html.IsSelected(controller:"Empresas",action: "Index")"><a href="@Url.Action("Index", "Empresas")">Empresas</a></li>
                             <li class="@Html.IsSelected(controller:"Sucursales",action: "Index")"><a href="@Url.Action("Index", "Sucursales")">Sucursales</a></li>
-                            <li class="@Html.IsSelected(controller:"Idiomas",action: "Index")"><a href="@Url.Action("Index", "Idiomas")">Idiomas</a></li>
                             <li class="@Html.IsSelected(controller:"TipoMonedas",action: "Index")"><a href="@Url.Action("Index", "TipoMonedas")">Monedas</a></li>
-                            <li class="@Html.IsSelected(controller:"Nacionalidades",action: "Index")"><a href="@Url.Action("Index", "Nacionalidades")">Nacionalidades</a></li>
                             <li class="@Html.IsSelected(controller:"Jornadas")"><a href="@Url.Action("Index", "Jornadas")">Jornadas y Horarios</a></li>
                             <li class="@Html.IsSelected(controller:"Areas")"><a href="@Url.Action("Index", "Areas")">Áreas y Departamentos</a></li>
                             <li class="@Html.IsSelected(controller:"TipoHoras")"><a href="@Url.Action("Index", "TipoHoras")">Tipos de Horas</a></li>
@@ -81,6 +79,9 @@
                             <li class="@Html.IsSelected(controller:"FasesReclutamiento")">
                                 <a href="@Url.Action("Index", "FasesReclutamiento")">Fases de Reclutamiento</a>
                             </li>
+                            <li class="@Html.IsSelected(controller:"Idiomas",action: "Index")"><a href="@Url.Action("Index", "Idiomas")">Idiomas</a></li>
+                            <li class="@Html.IsSelected(controller:"Nacionalidades",action: "Index")"><a href="@Url.Action("Index", "Nacionalidades")">Nacionalidades</a></li>
+
 
                             <li class="@Html.IsSelected(controller:"RequerimientosEspeciales")">
                                 <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requerimientos Especiales</a>
@@ -123,10 +124,10 @@
 
                     @*EQUIPO DE TRABAJO*@
                     <li id="Equipo_Trabajo" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("Equipo_Trabajo", "Equipo_Trabajo")"><i class="fa fa-suitcase"></i> <span class="nav-label" data-i18n="nav.dashboard">Equipo de Trabajo</span> <span class="fa arrow"></span></a>
+                        <a href="@Url.Action("Equipo_Trabajo", "Equipo_Trabajo")"><i class="fa fa-suitcase"></i> <span class="nav-label" data-i18n="nav.dashboard">Herramientas</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Equipo_Trabajo", cssClass: "in") Equipo_Trabajo">
-                            <li class="@Html.IsSelected(controller: "EquipoTrabajo")"><a href="@Url.Action("Index", "EquipoTrabajo")">Listado de Equipos</a></li>
-                            <li class="@Html.IsSelected(controller:"EquipoEmpleados")"><a href="@Url.Action("Index", "EquipoEmpleados")">Equipos por Empleado</a></li>
+                            <li class="@Html.IsSelected(controller: "EquipoTrabajo")"><a href="@Url.Action("Index", "EquipoTrabajo")">Listado de Herramientas</a></li>
+                            <li class="@Html.IsSelected(controller:"EquipoEmpleados")"><a href="@Url.Action("Index", "EquipoEmpleados")">Herramientas por Empleado</a></li>
                         </ul>
                     </li>
                     @*EQUIPO DE TRABAJO*@

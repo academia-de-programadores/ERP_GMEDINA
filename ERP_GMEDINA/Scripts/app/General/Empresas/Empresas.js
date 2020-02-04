@@ -48,10 +48,12 @@ function llenarTabla() {
      '/Empresas/llenarTabla',
      'POST',
      function (Lista) {
-      var tabla = $("#IndexTable").DataTable();
+      if (validarDT(Lista)) {
+       return null;
+      }
       tabla.clear();
       tabla.draw();
-      $.each(Lista, function (index, value) {
+      $.each(Lista.tbEmpresas, function (index, value) {
        var Acciones = value.empr_Estado == 1
                    ? null : Admin ?
                     "<div>" +
@@ -62,21 +64,34 @@ function llenarTabla() {
         ID: value.empr_Id,
         "Número": value.empr_Id,
         Empresa: value.empr_Nombre,
+        "Representantelegal": value.Nombre,
+        RTN: value.RTN,
         Estado: value.empr_Estado ? 'Activo' : 'Inactivo',
         Acciones: Acciones
        }).draw();
+
+      });
+      $("#per_id option").remove();
+      $.each(Lista.ddlEmpl, function (index, value) {
+       $('.modal #per_id').append(new Option(value.Nombre, value.per_Id));
       });
      });
 }
 function tablaEditar(ID) {
-    id = ID;
+ id = ID;
  _ajax(JSON.stringify({ id: ID }),
      '/Empresas/Datos/',
      'POST',
      function (obj) {
+      var item = $("#ModalEditar").find("#per_id option").removeAttr("selected");
+      $("#per_id option").attr("selected", null);
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
-       //$('#UPempr_Logo').val(obj.empr_Logo);
+       $("#FormEditar").find("#empr_RTN").val(obj.empr_RTN);
+
+       $("#ModalEditar").find("#per_id").val(obj.per_Id)
+       var item = $("#ModalEditar").find("#per_id option[value='" + obj.per_Id + "']");
+       $(item).attr('selected', true);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }
@@ -88,13 +103,14 @@ function tablaDetalles(ID) {
      'POST',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
-       $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
+          $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
+          $("#ModalDetalles").find("#empr_RTN")["0"].innerText = obj.empr_RTN;
+          $("#ModalDetalles").find("#representante")["0"].innerText = obj.per_Nombre;
        var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
        $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
        var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
        $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
        var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
-       //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
        $('#ModalDetalles').modal('show');
       }
      });

@@ -20,14 +20,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             var tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-           //.OrderByDescending(x => x.cin_IdIngreso);
+            //.OrderByDescending(x => x.cin_IdIngreso);
             //.Where(x => x.cin_Activo == true);
             return View(tbCatalogoDeIngresos.ToList());
         }
 
         public ActionResult GetData()
         {
-            var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos               
+            var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos
                         .Select(c => new {
                                            cin_IdIngreso = c.cin_IdIngreso,
                                            cin_DescripcionIngreso = c.cin_DescripcionIngreso,
@@ -50,7 +50,7 @@ namespace ERP_GMEDINA.Controllers
             //Auditoria
             tbCatalogoDeIngresos.cin_UsuarioCrea = 1;
             tbCatalogoDeIngresos.cin_FechaCrea = DateTime.Now;
-            
+
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
             string MensajeError = "";
@@ -118,7 +118,7 @@ namespace ERP_GMEDINA.Controllers
                                                UsuCrea = tbCatIngreso.tbUsuario.usu_NombreUsuario,
                                                tbCatIngreso.cin_FechaCrea,
                                                tbCatIngreso.cin_UsuarioModifica,
-                                               UsuModifica= tbCatIngreso.tbUsuario1.usu_NombreUsuario,
+                                               UsuModifica = tbCatIngreso.tbUsuario1.usu_NombreUsuario,
                                                tbCatIngreso.cin_FechaModifica
                                            };
 
@@ -132,7 +132,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit(int id, string cin_DescripcionIngreso, int cin_TipoIngreso)
         {
             tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id, cin_TipoIngreso = cin_TipoIngreso };
-            #region declaracion de variables 
+            #region declaracion de variables
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
             tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
@@ -156,19 +156,19 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
-                    }
-                }
-                catch (Exception)
+                if (MensajeError.StartsWith("-1"))
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                     response = "error";
                 }
+            }
+            catch (Exception)
+            {
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                response = "error";
+            }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }

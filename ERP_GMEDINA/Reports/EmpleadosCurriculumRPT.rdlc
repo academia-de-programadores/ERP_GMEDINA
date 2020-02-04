@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>3.41017cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.47367cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.008cm</Width>
+              <Width>2.64817cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.91817cm</Width>
+              <Width>3.36784cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.135cm</Width>
+              <Width>2.26717cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.21732cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.63634cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.897cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>3.63117cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.28833cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -611,6 +611,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -620,8 +621,9 @@
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.17639cm</Top>
+        <Left>0.49212cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.85134cm</Width>
+        <Width>24.91766cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -632,7 +634,7 @@
     <Height>0.675in</Height>
     <Style />
   </Body>
-  <Width>10.17769in</Width>
+  <Width>10.00385in</Width>
   <Page>
     <PageHeader>
       <Height>1.27cm</Height>
@@ -655,7 +657,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.335cm</Top>
-          <Left>21.64213cm</Left>
+          <Left>20.70845cm</Left>
           <Height>0.6cm</Height>
           <Width>4.20921cm</Width>
           <Style>
@@ -728,7 +730,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.335cm</Top>
-          <Left>22.44646cm</Left>
+          <Left>21.51278cm</Left>
           <Height>0.6cm</Height>
           <Width>3.40488cm</Width>
           <Style>
@@ -748,8 +750,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

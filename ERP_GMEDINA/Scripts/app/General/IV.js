@@ -13,12 +13,12 @@ var InactivarID = 0;
 
 //formato fecha
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
+    .done(function (script, textStatus) {
 
-  })
-  .fail(function (jqxhr, settings, exception) {
+    })
+    .fail(function (jqxhr, settings, exception) {
 
-  });
+    });
 
 // evitar postbacks
 $("#frmEditIV").submit(function (e) {
@@ -89,7 +89,7 @@ function cargarGridIV() {
                 ]);
             }
         }
-        });
+    });
     FullBody();
 }
 
@@ -98,7 +98,7 @@ function cargarGridIV() {
 $(document).on("click", "#btnAgregarIV", function () {
     //OCULTAR VALIDACIONES
     Vaciar_ModalCrear();
-    
+
     //llenar ddls
     $.ajax({
         url: "/TechoImpuestoVecinal/EditGetDDLTipoDedu",
@@ -128,7 +128,7 @@ $(document).on("click", "#btnAgregarIV", function () {
             $.each(data, function (i, iter) {
                 $("#Crear #mun_Codigo").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
-        });    
+        });
     //DESPLEGAR MODAL DE CREACION
     $("#AgregarIV").modal({ backdrop: 'static', keyboard: false });
 });
@@ -152,7 +152,7 @@ $('#btnCreateIV').click(function () {
         //console.log(dataSinFormato);
         var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();
         console.log("Llega hasta aquí: Ln154");
-        var data = {            
+        var data = {
             __RequestVerificati1onToken: __RequestVerificati1onToken1,
             mun_Codigo: codmuni1,
             tde_IdTipoDedu: tipoDeduccion1,
@@ -165,7 +165,7 @@ $('#btnCreateIV').click(function () {
         $.ajax({
             url: "/TechoImpuestoVecinal/Create",
             method: "POST",
-            data:  data
+            data: data
         }).done(function (data) {
             //validar respuesta del backend
             if (data == "error") {
@@ -184,7 +184,7 @@ $('#btnCreateIV').click(function () {
                 });
             }
         });
-        $('#btnCreateIV').attr('disabled', true);    
+        $('#btnCreateIV').attr('disabled', true);
     }
 });
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -269,66 +269,75 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
 });
 
 $("#btnEditarIV").click(function () {
-    $("#EditarIV").modal('hide');
-    $("#EditarIVConfirmacion").modal();
-});
-
-$('#btnRegresarIV').click(function () {
-    $("#EditarIVConfirmacion").modal('hide');
-    $("#EditarIV").modal();    
-});
-
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditIVConfirmacion").click(function () {
     var rangoInicial = $("#Editar #timv_RangoInicio").val();
     var rangoFinal = $("#Editar #timv_RangoFin").val();
     var rango = $("#Editar #timv_Rango").val();
     var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
-    var municipio = $("#Editar #mun_Nombre").val();
+    var municipio = $("#Editar #mun_Codigo").val();
     var impuesto = $("#Editar #timv_Impuesto").val();
 
-    if (DataAnnotationsEditar(rangoInicial, rangoFinal, tipoDeduccion, impuesto)) {
-        //BLOQUEAR BOTON DE EDITAR
-        $('#btnEditIVConfirmacion').attr('disabled', true);
-        //SERIALIZAR EL FORMULARIO
-        var data = {
-            timv_IdTechoImpuestoVecinal: $("#Editar #timv_IdTechoImpuestoVecinal").val(),
-            timv_RangoInicio: FormatearMonto($("#Editar #timv_RangoInicio").val()),
-            timv_RangoFin: FormatearMonto($("#Editar #timv_RangoFin").val()),
-            tde_IdTipoDedu: $("#Editar #tde_IdTipoDedu").val(),
-            timv_Impuesto: FormatearMonto($("#Editar #timv_Impuesto").val()),
-            timv_Rango: FormatearMonto($("#Editar #timv_Rango").val()),
-            mun_Codigo: $("#Editar #mun_Codigo").val()
-        };
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/TechoImpuestoVecinal/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            //DESBLOQUEAR BOTON DE EDITAR
-            $('#btnEditIVConfirmacion').attr('disabled', false);
-            if (data == "error") {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se editó el registro, contacte al administrador',
-                });
-            }
-            else {
-                //BLOQUEAR BOTON DE EDITAR
-                $('#btnEditarIV').attr('disabled', true);
-                //REFRESCAR LA DATA DEL DATATABLE
-                cargarGridIV();
-                //OCULTAR MODAL DE EDICION
-                $("#EditarIVConfirmacion").modal('hide');
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            }
-        });
+    if (DataAnnotationsEditar(municipio, tipoDeduccion, rangoInicial, rangoFinal, rango, impuesto)) {
+        $("#EditarIV").modal('hide');
+        $("#EditarIVConfirmacion").modal();
     }
+});
+
+$('#btnRegresarIV').click(function () {
+    $("#EditarIVConfirmacion").modal('hide');
+    $("#EditarIV").modal();
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditIVConfirmacion").click(function () {
+    //BLOQUEAR BOTON DE EDITAR
+    $('#btnEditIVConfirmacion').attr('disabled', true);
+    //SERIALIZAR EL FORMULARIO
+
+    let timv_IdTechoImpuestoVecinal = $("#Editar #timv_IdTechoImpuestoVecinal").val();
+    let timv_RangoInicio = FormatearMonto($("#Editar #timv_RangoInicio").val());
+    let timv_RangoFin = FormatearMonto($("#Editar #timv_RangoFin").val());
+    let tde_IdTipoDedu = $("#Editar #tde_IdTipoDedu").val();
+    let timv_Impuesto = FormatearMonto($("#Editar #timv_Impuesto").val());
+    let timv_Rango = FormatearMonto($("#Editar #timv_Rango").val());
+    let mun_Codigo = $("#Editar #mun_Codigo").val();
+
+    //, decimal 
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/TechoImpuestoVecinal/Edit",
+        method: "POST",
+        data: {
+            timv_IdTechoImpuestoVecinal: timv_IdTechoImpuestoVecinal,
+            mun_Codigo: mun_Codigo,
+            tde_IdTipoDedu: tde_IdTipoDedu,
+            timv_RangoInicio: timv_RangoInicio,
+            timv_RangoFin: timv_RangoFin,
+            timv_Rango: timv_Rango,
+            timv_Impuesto: timv_Impuesto
+        }
+    }).done(function (data) {
+        //DESBLOQUEAR BOTON DE EDITAR
+        $('#btnEditIVConfirmacion').attr('disabled', false);
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se editó el registro, contacte al administrador',
+            });
+        }
+        else {
+            //BLOQUEAR BOTON DE EDITAR
+            $('#btnEditarIV').attr('disabled', true);
+            //REFRESCAR LA DATA DEL DATATABLE
+            cargarGridIV();
+            //OCULTAR MODAL DE EDICION
+            $("#EditarIVConfirmacion").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se editó de forma exitosa!',
+            });
+        }
+    });
 });
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
@@ -448,7 +457,7 @@ $(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-          
+
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 var FechaCrea = FechaFormato(data[0].timv_FechaCrea);
@@ -488,7 +497,7 @@ $(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                    })
+                })
                     .done(function (data) {
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
@@ -841,10 +850,9 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
         }
     }
 
-
     if (RangoFin != "-1") {
         //RANGO FINAL
-        if (RangoFin == "" || RangoFin == null || RangoFin == undefined) {
+        if (RangoFin == "" || RangoFin == null || RangoFin == undefined || parseFloat(FormatearMonto(RangoFin)) == 0) {
             $("#Editar #AsteriscoRangoFin").addClass("text-danger");
             $("#Editar #timv_RangoFinValidacion").show();
 
@@ -853,7 +861,7 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
             $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
             $("#Editar #timv_RangoFinValidacion").hide();
 
-            if (parseFloat(FormatearMonto(RangoFin)) <= parseFloat(FormatearMonto($("#Editar #timv_RangoFin").val())) || parseFloat(FormatearMonto(RangoFin)) == 0) {
+            if (parseFloat(FormatearMonto(RangoFin)) <= RangoInicio) {
                 $("#Editar #AsteriscoRangoFin").addClass("text-danger");
                 $("#Editar #timv_RangoFinValidacion").empty();
                 $("#Editar #timv_RangoFinValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");

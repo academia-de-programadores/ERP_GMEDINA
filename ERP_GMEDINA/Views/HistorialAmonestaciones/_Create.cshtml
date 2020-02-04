@@ -24,17 +24,25 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.hamo_Observacion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.hamo_Observacion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
+								@Html.TextAreaFor(model => model.hamo_Observacion, htmlAttributes: new { @class = "form-control required valid ", @onkeypress = "return alphanumeric(event)", @style = "width: 349px; margin: 0px 0.65625px 0px 0px; height: 94px;" } )
 
                                 @Html.ValidationMessageFor(model => model.hamo_Observacion, "", new { @class = "text-danger", @id = "errorhamo_Observacion" })
                             </div>
                         </div>
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.hamo_Fecha, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.hamo_Fecha, new { @class = "form-control datepicker", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.hamo_Fecha, "", new { @class = "text-danger", @id = "erroraude_FechaAudiencia" })
+                            </div>
+                        </div>*@
 					</div>
 				}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary pull-left" id="btnGuardar">Guardar</button>
+                <label class="col-md-7" style="color:red" id="msjerror"></label>
             </div>
         </div>
     </div>

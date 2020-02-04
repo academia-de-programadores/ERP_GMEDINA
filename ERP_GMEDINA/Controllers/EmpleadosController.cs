@@ -55,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
                             per_Telefono = x.tbPersonas.per_Telefono,
                             per_CorreoElectronico = x.tbPersonas.per_CorreoElectronico
                         })
-                        .Where(x=>x.Estado==true).ToList();
+                        .Where(x => x.Estado == true).ToList();
                     return Json(tbEmpleados, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -67,16 +67,16 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult ChildRowData(int id)
         {
             List<V_Datos_Empleado> lista = new List<V_Datos_Empleado> { };
-                try
-                {
-            using (db = new ERP_GMEDINAEntities())
+            try
             {
-                    lista = db.V_Datos_Empleado.Where(x => x.emp_Id == id).ToList();
-            }
-                }
-                catch
+                using (db = new ERP_GMEDINAEntities())
                 {
+                    lista = db.V_Datos_Empleado.Where(x => x.emp_Id == id).ToList();
                 }
+            }
+            catch
+            {
+            }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
         public void ArchivoEmpleados()
@@ -84,7 +84,7 @@ namespace ERP_GMEDINA.Controllers
             db = new ERP_GMEDINAEntities();
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
             db = new ERP_GMEDINAEntities();
-            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Edad = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla = "", fpa_IdFormaPago = "", emp_FechaIngreso = "", emp_CuentaBancaria = "", sue_Cantidad="", tmon_Id="" });
+            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Edad = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla = "", fpa_IdFormaPago = "", emp_FechaIngreso = "", emp_CuentaBancaria = "", sue_Cantidad = "", tmon_Id = "" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
             Sheet.Cells["A1:V3"].Merge = true;
@@ -136,7 +136,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //Sheet.Cells["A5:T1000"].AutoFitColumns();
                 //double rowHeight = 15;
-               //Sheet.Row(5).Height = rowHeight;
+                //Sheet.Row(5).Height = rowHeight;
                 //Sheet.Column(5).AutoFit();
                 Sheet.Cells[string.Format("A{0}", row)].Value = item.per_Identidad;
                 Sheet.Cells[string.Format("B{0}", row)].Value = item.per_Nombres;
@@ -150,7 +150,7 @@ namespace ERP_GMEDINA.Controllers
                 per_Sexo.Formula.Values.Add("M");
                 //Sheet.Cells[string.Format("E{0}", row)].Value = item.per_Sexo;
 
-                var Nacionalidades = db.tbNacionalidades.Where(tabla=>tabla.nac_Estado==true)
+                var Nacionalidades = db.tbNacionalidades.Where(tabla => tabla.nac_Estado == true)
                     .Select(tabla => tabla.nac_Descripcion)
                     .ToArray();
                 Sheet.Cells["MB1"].LoadFromCollection<string>(Nacionalidades.ToList<string>());
@@ -262,14 +262,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult UploadEmpleados(HttpPostedFileBase FileUpload)
         {
             try
-                { 
+            {
                 db = new ERP_GMEDINAEntities();
                 if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
                 {//OPEN IF
-                   // string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
-                  string path = Path.Combine(Server.MapPath("~/Downloadable files"),
-                                     Path.GetFileName(FileUpload.FileName));
-                   if (!System.IO.File.Exists(path))
+                 // string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Downloadable files"),
+                                       Path.GetFileName(FileUpload.FileName));
+                    if (!System.IO.File.Exists(path))
                     {//OPEN IF
                         //db = new ERP_GMEDINAEntities();
 
@@ -284,13 +284,13 @@ namespace ERP_GMEDINA.Controllers
                         int Row = 5;
                         while (!string.IsNullOrEmpty(Slight.GetCellValueAsString(Row, 1)))
                         {
-                            string identidad =Slight.GetCellValueAsString(Row, 1);//((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
+                            string identidad = Slight.GetCellValueAsString(Row, 1);//((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
                             string nombre = Slight.GetCellValueAsString(Row, 2);//((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
                             string apellidos = Slight.GetCellValueAsString(Row, 3); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
                             if (identidad != "" && nombre != "" && apellidos != "")
                             {//open if
                                 DateTime fechanacimiento = Slight.GetCellValueAsDateTime(Row, 4); //((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
-                               // DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
+                                                                                                  // DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
                                 string EDAD = Slight.GetCellValueAsString(Row, 5);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
                                 int Edad = Convert.ToInt32(EDAD);
                                 string sexo = Slight.GetCellValueAsString(Row, 6);// ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
@@ -350,7 +350,7 @@ namespace ERP_GMEDINA.Controllers
 
                                 IEnumerable<object> listEmpleados = null;
                                 string MensajeError = "";
-                                listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, Edad, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, Usuario.usu_Id, DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id, Usuario.usu_Id, DateTime.Now, fechaingreso, CuentaBancaria, SUELDO, tmon_id,Usuario.usu_Id,DateTime.Now);
+                                listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, Edad, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, Usuario.usu_Id, DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id, Usuario.usu_Id, DateTime.Now, fechaingreso, CuentaBancaria, SUELDO, tmon_id, Usuario.usu_Id, DateTime.Now);
 
                                 foreach (UDP_RRHH_tbEmpleados_Insert_Result Item in listEmpleados)
                                 {
@@ -372,8 +372,8 @@ namespace ERP_GMEDINA.Controllers
 
                             }//CLOSE ELSE
                             Row++;
-                           }//CLOSE FOR
-                        }//CLOSE IF
+                        }//CLOSE FOR
+                    }//CLOSE IF
                     else
                     {
                         System.IO.File.Delete(path);
@@ -382,13 +382,13 @@ namespace ERP_GMEDINA.Controllers
                 }//CLOSE IF
                 else
                 {
-                   // System.IO.File.Delete(path);
+                    // System.IO.File.Delete(path);
                     return Json(-4, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
             {
-                InsertBitacoraErrores("Empleados_Index", "-2 " +  ex.Message.ToString(), "Insert");
+                InsertBitacoraErrores("Empleados_Index", "-2 " + ex.Message.ToString(), "Insert");
                 return Json(-2, JsonRequestBehavior.AllowGet);
             }
             return Json(1, JsonRequestBehavior.AllowGet);
@@ -419,94 +419,74 @@ namespace ERP_GMEDINA.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                //t.tbCargos.tbEmpleados
+                //           .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
+                //            Empleados = t.tbEmpleados.Count
                 tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
+                var fechaingreso = (from a in db.tbEmpleados where a.emp_Id==id select a.emp_Fechaingreso).ToList()[0];
+                DateTime fechaactual = DateTime.Now;
+                DateTime fechaingresodate = Convert.ToDateTime(fechaingreso);
+                //System.TimeSpan diff = fechaactual.Subtract(fechaingresodate);
+                int timespan = (fechaactual.Year - fechaingresodate.Year);
+                if (timespan==0)
+                {
+                    ViewBag.Antiguedad = "Menos de 1 año";
+                }
+                else
+                {
+                    ViewBag.Antiguedad = timespan+" "+"Años";
+                }
+              //  var Jefe = db.tbEmpleados.Select(t => t.tbDepartamentos.tbCargos.s);
+             //   var Jefe = db.tbDepartamentos.Where(x => x. == id)
+             //.Select(
+             //t => t.tbCargos.tbEmpleados.Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
+             //)
+             //.ToList()[0];
+                //var JEFE = db.tbAreas.Where(X=>db.tbEmpleados)
+                //   .Select(
+                //   t => new
+                //   {
+                //       Encargado = t.tbCargos.tbEmpleados
+                //           .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
+                //   }
+                //   )
+                //   .ToList()[0];
+                //if (JEFE == null)
+                //{
+                //    ViewBag.Jefe = "Sin Asignar";
+                //}
+                //else
+                //{
+                //    ViewBag.Jefe = JEFE;
+                //}
+                // int meses= (fechaactual.Month - fechaingresodate.Month) + 12 * (fechaactual.Year - fechaingresodate.Year);
+                //int timespanMonths = (fechaactual.Month + fechaingresodate.Month);
+
+                // ViewBag.Meses = timespanMonths;
+                //tbEmpleados tbEmpleados = db.tbEmpleados.Include(Antiguedad).SingleOrDefault;
+                //tbEmpleados tbEmpleados = db.tbEmpleados.Include(u => u.).SingleOrDefault(u => u.id == id);
                 if (tbEmpleados == null)
                 {
                     return HttpNotFound();
                 }
+                var JefeArea = tbEmpleados.tbAreas.tbCargos.tbEmpleados.
+                    Select(p => new { Nombres = p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos });
+                var JefeDepto= tbEmpleados.tbDepartamentos.tbCargos.tbEmpleados.
+                    Select(p => new { Nombres = p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos });
+
+                Session["JefeArea"] =JefeArea.Count()==0?"Sin asignar":JefeArea.First().Nombres;
+                Session["JefeDepto"] = JefeDepto.Count() == 0 ? "Sin asignar" : JefeDepto.First().Nombres;
                 return View(tbEmpleados);
-                //aqui termina llenarTabla
             }
-            catch
+            catch (Exception ex)
             {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
         }
 
-        // GET: Empleados/Create
-        public ActionResult Create()
-        {
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion");
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion");
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad");
-            return View();
-        }
-
-        // POST: Empleados/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "emp_Id,per_Id,car_Id,area_Id,depto_Id,jor_Id,cpla_IdPlanilla,fpa_IdFormaPago,emp_CuentaBancaria,emp_Reingreso,emp_Fechaingreso,emp_RazonSalida,emp_CargoAnterior,emp_FechaDeSalida,emp_Estado,emp_RazonInactivo,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleados tbEmpleados)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tbEmpleados.Add(tbEmpleados);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioCrea);
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioModifica);
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion", tbEmpleados.area_Id);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbEmpleados.car_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbEmpleados.per_Id);
-            return View(tbEmpleados);
-        }
-
-        // GET: Empleados/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
-            if (tbEmpleados == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioCrea);
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioModifica);
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion", tbEmpleados.area_Id);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbEmpleados.car_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbEmpleados.per_Id);
-            return View(tbEmpleados);
-        }
-
-        // POST: Empleados/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "emp_Id,per_Id,car_Id,area_Id,depto_Id,jor_Id,cpla_IdPlanilla,fpa_IdFormaPago,emp_CuentaBancaria,emp_Reingreso,emp_Fechaingreso,emp_RazonSalida,emp_CargoAnterior,emp_FechaDeSalida,emp_Estado,emp_RazonInactivo,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleados tbEmpleados)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbEmpleados).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.emp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioCrea);
-            ViewBag.emp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleados.emp_UsuarioModifica);
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion", tbEmpleados.area_Id);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbEmpleados.car_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbEmpleados.per_Id);
-            return View(tbEmpleados);
-        }
-
+    
+     
         /// <summary>
         /// SUBR DOCUMENTOS AL EXPEDIENTE
         /// </summary>
@@ -609,7 +589,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var tbDirectoriosEmpleados = db.tbDirectoriosEmpleados.Include(t => t.tbEmpleados)
                     .Select(
-                    x => new {
+                    x => new
+                    {
 
                         direm_Id = x.direm_Id,
                         direm_Carpeta = x.direm_Carpeta,
@@ -638,7 +619,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var tbDirectoriosEmpleados = db.tbDirectoriosEmpleados.Include(t => t.tbEmpleados)
                     .Select(
-                    x => new {
+                    x => new
+                    {
 
                         direm_Id = x.direm_Id,
                         direm_Carpeta = x.direm_Carpeta,
@@ -722,7 +704,8 @@ namespace ERP_GMEDINA.Controllers
                         {
                             var tbDirectoriosEmpleadosDireccion = db.tbDirectoriosEmpleados
                             .Select(
-                            x => new {
+                            x => new
+                            {
                                 emp_Id = x.emp_Id,
                                 direm_Id = x.direm_Id,
                                 direm_Carpeta = x.direm_Carpeta,

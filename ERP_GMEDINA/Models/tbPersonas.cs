@@ -11,12 +11,12 @@ namespace ERP_GMEDINA.Models
         {
             this.tbCompetenciasPersona = new HashSet<tbCompetenciasPersona>();
             this.tbEmpleados = new HashSet<tbEmpleados>();
+            this.tbEmpresas = new HashSet<tbEmpresas>();
             this.tbHabilidadesPersona = new HashSet<tbHabilidadesPersona>();
             this.tbIdiomaPersona = new HashSet<tbIdiomaPersona>();
             this.tbRequerimientosEspecialesPersona = new HashSet<tbRequerimientosEspecialesPersona>();
             this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbTitulosPersona = new HashSet<tbTitulosPersona>();
-            this.tbEmpresas = new HashSet<tbEmpresas>();
         }
     
         public int per_Id { get; set; }
@@ -46,6 +46,8 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbEmpresas> tbEmpresas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbIdiomaPersona> tbIdiomaPersona { get; set; }
@@ -56,7 +58,5 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosPersona> tbTitulosPersona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpresas> tbEmpresas { get; set; }
     }
 }

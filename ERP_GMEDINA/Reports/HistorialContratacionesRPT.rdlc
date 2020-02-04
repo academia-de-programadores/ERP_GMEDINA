@@ -9,10 +9,10 @@
               <Width>2.54948in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.09115in</Width>
+              <Width>1.5712in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.30782in</Width>
+              <Width>2.00782in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.04948in</Width>
@@ -331,9 +331,9 @@
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.19444in</Top>
-        <Left>1.82563cm</Left>
+        <Left>0.91546cm</Left>
         <Height>0.6632in</Height>
-        <Width>8.99793in</Width>
+        <Width>8.17798in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -344,7 +344,7 @@
     <Height>0.99653in</Height>
     <Style />
   </Body>
-  <Width>9.71668in</Width>
+  <Width>8.5384in</Width>
   <Page>
     <PageHeader>
       <Height>0.53417in</Height>
@@ -370,8 +370,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.13417in</Top>
-          <Left>1.69918in</Left>
+          <Top>0.07861in</Top>
+          <Left>1.34085in</Left>
           <Height>0.4in</Height>
           <Width>5.14807in</Width>
           <Style>
@@ -400,7 +400,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox9</rd:DefaultName>
           <Top>0.34079cm</Top>
-          <Left>8in</Left>
+          <Left>6.9884in</Left>
           <Height>0.25in</Height>
           <Width>1.55in</Width>
           <ZIndex>1</ZIndex>
@@ -442,7 +442,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
           <Top>0.05556in</Top>
-          <Left>8.55in</Left>
+          <Left>7.5384in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <Style>
@@ -462,6 +462,8 @@
         </Border>
       </Style>
     </PageFooter>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
     <TopMargin>1in</TopMargin>

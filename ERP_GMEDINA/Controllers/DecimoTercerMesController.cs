@@ -10,28 +10,28 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-	public class DecimoTercerMesController : Controller
-	{
-		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+    public class DecimoTercerMesController : Controller
+    {
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-		#region GET: INDEX
-		// GET: V_DecimoTercerMes
-		public ActionResult Index()
-		{
-			return View(db.V_DecimoTercerMes.ToList());
-		}
-		#endregion
+        #region GET: INDEX
+        // GET: V_DecimoTercerMes
+        public ActionResult Index()
+        {
+            return View(db.V_DecimoTercerMes.ToList());
+        }
+        #endregion
 
-		#region GET: INDEX PAGADOS 
-		public ActionResult IndexPagado()
-		{
-			return View(db.V_DecimoTercerMes_Pagados.ToList());
-		}
-		#endregion
+        #region GET: INDEX PAGADOS
+        public ActionResult IndexPagado()
+        {
+            return View(db.V_DecimoTercerMes_Pagados.ToList());
+        }
+        #endregion
 
-		#region POST: INSERT 
-		public JsonResult InsertDecimoTercerMes(List<tbDecimoTercerMes> DecimoTercer)
-		{
+        #region POST: INSERT
+        public JsonResult InsertDecimoTercerMes(List<tbDecimoTercerMes> DecimoTercer)
+        {
             if (DecimoTercer != null)
             {
 
@@ -62,7 +62,7 @@ namespace ERP_GMEDINA.Controllers
                             i++;
                             list = db.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
 
-                            //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP                                                  
+                            //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                             foreach (UDP_Plani_tbDecimoTercerMes_Insert_Result resultado in list)
                                 MessageError = Convert.ToString(resultado);
 
@@ -110,11 +110,11 @@ namespace ERP_GMEDINA.Controllers
 
 				try
 				{
-					
-					//Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.				
-					var ConsultaFechas = from HP in db.V_DecimoTercerMesFE									 
+
+					//Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.
+					var ConsultaFechas = from HP in db.V_DecimoTercerMesFE
 										 where
-										 (HP.hipa_Anio == hipa_FechaInicio) 															 
+										 (HP.hipa_Anio == hipa_FechaInicio)
 										 select new ViewModelDecimoTercerMes
 										 {
 											 emp_Id = HP.emp_Id,

@@ -430,7 +430,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>10.50183in</Width>
+  <Width>9.95622in</Width>
   <Page>
     <PageHeader>
       <Height>1.40995cm</Height>
@@ -508,29 +508,63 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.77639cm</Height>
+      <Height>0.75522cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox1">
+        <Textbox Name="Textbox6">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Globals!PageNumber</Value>
+                  <Value>="Página: " &amp; Globals!PageNumber</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>0.14111cm</Top>
-          <Left>21.88393cm</Left>
+          <Left>22.86943cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.40488cm</Width>
+          <Width>2.41938cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox10">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Cantidad total de registros: " &amp; CountRows("ReportesAmonestacionesDS")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox10</rd:DefaultName>
+          <Top>0.15522cm</Top>
+          <Left>17.12501cm</Left>
+          <Height>0.6cm</Height>
+          <Width>5.60331cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -548,8 +582,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

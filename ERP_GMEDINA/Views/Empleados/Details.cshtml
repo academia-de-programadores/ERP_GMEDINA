@@ -6,497 +6,557 @@
 }
 
 <div class="">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
-            <h2>Detalles del Empleado</h2>
+ <div class="ibox float-e-margins">
+  <div class="ibox-title">
+   @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
+   <h2>Detalles del Empleado</h2>
+  </div>
+  <div class="">
+   <div class="ibox">
+    <div class="ibox-content">
+     <div class="row">
+
+      <div class="tabs-container">
+       <div class="panel blank-panel">
+        <div class="panel-heading">
+         <div class="panel-options">
+          <ul class="nav nav-tabs">
+           <li class="active"><a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="fa fa-user"></i>Datos Personales</a></li>
+           <li><a class="nav-link" href="#tab-2" data-toggle="tab"><i class="fa fa-newspaper-o"></i>Datos del Empleado</a></li>
+           <li><a class="nav-link" href="#tab-3" data-toggle="tab"><i class="fa fa-briefcase"></i>Datos del Puesto</a></li>
+           <li><a class="nav-link" href="#tab-4" data-toggle="tab"><i class="fa fa-folder-open"></i>Documento</a></li>
+          </ul>
+         </div>
         </div>
-        <div class="">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <div class="row">
 
-                        <div class="tabs-container">
-                            <div class="panel blank-panel">
-                                <div class="panel-heading">
-                                    <div class="panel-options">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="fa fa-user"></i>Datos Personales</a></li>
-                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab"><i class="fa fa-newspaper-o"></i>Datos del Empleado</a></li>
-                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab"><i class="fa fa-briefcase"></i>Datos del Puesto</a></li>
-                                            <li><a class="nav-link" href="#tab-4" data-toggle="tab"><i class="fa fa-folder-open"></i>Documento</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+        <div class="panel-body">
 
-                                <div class="panel-body">
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab-1">
+         <div class="tab-content">
+          <div class="tab-pane active" id="tab-1">
 
 
-                                            <dl class="dl-horizontal">
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Identidad)
-                                                </dt>
+           <dl class="dl-horizontal">
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Identidad)
+            </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Identidad)
-                                                </dd>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Identidad)
+            </dd>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Nombres)
-                                                </dt>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Nombres)
+            </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Nombres)
-                                                </dd>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Nombres)
+            </dd>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Apellidos)
-                                                </dt>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Apellidos)
+            </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Apellidos)
-                                                </dd>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Apellidos)
+            </dd>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Edad)
-                                                </dt>
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Edad)
-                                                </dd>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Edad)
+            </dt>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Edad)
+            </dd>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Direccion)
-                                                </dt>
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Direccion)
-                                                </dd>
-
-
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_CorreoElectronico)
-                                                </dt>
-
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_CorreoElectronico)
-                                                </dd>
-
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Telefono)
-                                                </dt>
-
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Telefono)
-                                                </dd>
-
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbPersonas.per_Sexo)
-                                                </dt>
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbPersonas.per_Sexo)
-                                                </dd>
-
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.emp_CuentaBancaria)
-                                                </dt>
-
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.emp_CuentaBancaria)
-                                                </dd>
-
-                                            </dl>
-
-                                        </div>
-                                        <div class="tab-pane" id="tab-2">
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Direccion)
+            </dt>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Direccion)
+            </dd>
 
 
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_CorreoElectronico)
+            </dt>
 
-                                            <dl class="dl-horizontal">
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_CorreoElectronico)
+            </dd>
 
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Telefono)
+            </dt>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.emp_Fechaingreso)
-                                                </dt>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Telefono)
+            </dd>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.emp_Fechaingreso)
-                                                </dd>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_Sexo)
+            </dt>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_Sexo)
+            </dd>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.emp_Reingreso)
-                                                </dt>
+            <dt>
+             @Html.DisplayNameFor(model => model.emp_CuentaBancaria)
+            </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.emp_Reingreso)
-                                                </dd>
+            <dd>
+             @Html.DisplayFor(model => model.emp_CuentaBancaria)
+            </dd>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbPersonas.per_EstadoCivil)
+            </dt>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
-                                                </dt>
+            <dd>
+             @Html.DisplayFor(model => model.tbPersonas.per_EstadoCivil)
+            </dd>
+            <dt>
+             Jefe de area
+            </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
-                                                </dd>
+            <dd>
+             @Html.Label((string)Session["JefeArea"])
+            </dd>
+            <dt>
+             Jefe del departamento
+            </dt>
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbFormaPago.fpa_Descripcion)
-                                                </dt>
+            <dd>
+             @Html.Label((string)Session["JefeDepto"])
+             @{
+                 Session["JefeArea"] = null;
+                 Session["JefeDepto"] = null;
+                 Session.Remove("JefeArea");
+                 Session.Remove("JefeDepto");
+             }
+            </dd>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbFormaPago.fpa_Descripcion)
-                                                </dd>
+           </dl>
+
+          </div>
+          <div class="tab-pane" id="tab-2">
 
 
 
-                                                @*<dt>
-                                                        @Html.DisplayNameFor(model => model.emp_RazonSalida)
-                                                    </dt>
-
-                                                    <dd>
-                                                        @Html.DisplayFor(model => model.emp_RazonSalida)
-                                                    </dd>*@
-
-                                                @*<dt>
-                                                        @Html.DisplayNameFor(model => model.emp_FechaDeSalida)
-                                                    </dt>
-
-                                                    <dd>
-                                                        @Html.DisplayFor(model => model.emp_FechaDeSalida)
-                                                    </dd>*@
+           <dl class="dl-horizontal">
 
 
-                                                @*<dt>
-                                                        @Html.DisplayNameFor(model => model.emp_RazonInactivo)
-                                                    </dt>
+            <dt>
+             @Html.DisplayNameFor(model => model.emp_Fechaingreso)
+            </dt>
 
-                                                    <dd>
-                                                        @Html.DisplayFor(model => model.emp_RazonInactivo)
-                                                    </dd>*@
+            <dd>
+             @Html.DisplayFor(model => model.emp_Fechaingreso)
+            </dd>
 
-                                            </dl>
+            <dt>
+             @Html.DisplayNameFor(model => model.emp_Reingreso)
+            </dt>
 
+            <dd>
+             @Html.DisplayFor(model => model.emp_Reingreso)
+            </dd>
 
-                                        </div>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
+            </dt>
 
+            <dd>
+             @Html.DisplayFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
+            </dd>
 
+            <dt>
+             @Html.DisplayNameFor(model => model.tbFormaPago.fpa_Descripcion)
+            </dt>
 
-                                        <div class="tab-pane" id="tab-3">
+            <dd>
+             @Html.DisplayFor(model => model.tbFormaPago.fpa_Descripcion)
+            </dd>
 
-                                            <dl class="dl-horizontal">
+            @*<dt>
+                 @Html.DisplayNameFor(model=>model.tbPersonas.per_Nombres+" "+model.tbPersonas.per_Apellidos.Where)
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.tbFormaPago.fpa_Descripcion)
+             </dd>*@
 
 
                                                 <dt>
-                                                    @Html.DisplayNameFor(model => model.tbAreas.area_Descripcion)
+                                                   Antiguedad
                                                 </dt>
 
                                                 <dd>
-                                                    @Html.DisplayFor(model => model.tbAreas.area_Descripcion)
+                                                    @ViewBag.Antiguedad @*@ViewBag.Meses<label>  Meses</label>*@
                                                 </dd>
 
+            @*<dt>
+                 @Html.DisplayNameFor(model => model.emp_RazonSalida)
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.emp_RazonSalida)
+             </dd>*@
+
+            @*<dt>
+                 @Html.DisplayNameFor(model => model.emp_FechaDeSalida)
+             </dt>
+
+             <dd>
+                 @Html.DisplayFor(model => model.emp_FechaDeSalida)
+             </dd>*@
 
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbDepartamentos.depto_Descripcion)
-                                                </dt>
+            @*<dt>
+                 @Html.DisplayNameFor(model => model.emp_RazonInactivo)
+             </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbDepartamentos.depto_Descripcion)
-                                                </dd>
+             <dd>
+                 @Html.DisplayFor(model => model.emp_RazonInactivo)
+             </dd>*@
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbJornadas.jor_Descripcion)
-                                                </dt>
-
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbJornadas.jor_Descripcion)
-                                                </dd>
+           </dl>
 
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
-                                                </dt>
-
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
-                                                </dd>
+          </div>
 
 
-                                                <dt>
-                                                    @Html.DisplayNameFor(model => model.emp_CargoAnterior)
-                                                </dt>
 
-                                                <dd>
-                                                    @Html.DisplayFor(model => model.emp_CargoAnterior)
-                                                </dd>
+          <div class="tab-pane" id="tab-3">
 
-                                            </dl>
-                                        </div>
+           <dl class="dl-horizontal">
 
-                                        <div class="tab-pane" id="tab-4">
-                                            <div class="tab-pane" id="tab-4">
-                                                <dl class="dl-horizontal"></dl>
-                                                @*<a class='btn btn-success btn-xs ' onclick='tablaEditar(@Html.DisplayFor(model => model.emp_Id))'>Archivos</a>*@
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h3><a class="nav-link active" data-toggle="tab" href="#tab-1"><i class="fa fa-folder-open"></i>Expediente Actual</a></h3>
-                                                        <div class="dd" id="nestable" style="overflow:auto; max-height:400px">
-                                                            <div class="dd" id="nestable2">
-                                                                <ol class="dd-list" id="ArchivosList">
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoAmonestaciones" id="TipoArchivoAmonestaciones">
-                                                                        <button data-action="collapse" id="btnMenosAmonestaciones" name="btnMenosAmonestaciones" onclick="CloseTag('Amonestaciones')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasAmonestaciones" name="btnMasAmonestaciones" onclick="OpenTag('Amonestaciones')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"> <i class="fa fa-warning"></i> </span> Amonestaciones
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoAmonestaciones" onclick="DescargarTodo('Amonestaciones')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListAmonestaciones" name="ListAmonestaciones" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoPermisos" id="TipoArchivoPermisos">
-                                                                        <button data-action="collapse" id="btnMenosPermisos" name="btnMenosPermisos" onclick="CloseTag('Permisos')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasPermisos" name="btnMasPermisos" onclick="OpenTag('Permisos')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-check-square-o"></i> </span> Permisos
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoPermisos" onclick="DescargarTodo('Permisos')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListPermisos" name="ListPermisos" style="display:block"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoIncapacidades" id="TipoArchivoIncapacidades">
-                                                                        <button data-action="collapse" id="btnMenosIncapacidades" name="btnMenosIncapacidades" onclick="CloseTag('Incapacidades')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasIncapacidades" name="btnMasIncapacidades" onclick="OpenTag('Incapacidades')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-user-md"></i> </span> Incapacidades
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoIncapacidades" onclick="DescargarTodo('Incapacidades')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListIncapacidades" name="ListIncapacidades" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoConstancias" id="TipoArchivoConstancias">
-                                                                        <button data-action="collapse" id="btnMenosConstancias" name="btnMenosConstancias" onclick="CloseTag('Constancias')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasConstancias" name="btnMasConstancias" onclick="OpenTag('Constancias')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-file-o"></i> </span> Constancias
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoConstancias" onclick="DescargarTodo('Constancias')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListConstancias" name="ListConstancias" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoSolicitudes" id="TipoArchivoSolicitudes">
-                                                                        <button data-action="collapse" id="btnMenosSolicitudes" name="btnMenosSolicitudes" onclick="CloseTag('Solicitudes')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasSolicitudes" name="btnMasSolicitudes" onclick="OpenTag('Solicitudes')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-paste"></i> </span> Solicitudes
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoSolicitudes" onclick="DescargarTodo('Solicitudes')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListSolicitudes" name="ListSolicitudes" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoFacturas" id="TipoArchivoFacturas">
-                                                                        <button data-action="collapse" id="btnMenosFacturas" name="btnMenosFacturas" onclick="CloseTag('Facturas')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasFacturas" name="btnMasFacturas" onclick="OpenTag('Facturas')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-list-alt"></i> </span> Facturas
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoFacturas" onclick="DescargarTodo('Facturas')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListFacturas" name="ListFacturas" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_Personales" id="TipoArchivoArchivos_Personales">
-                                                                        <button data-action="collapse" id="btnMenosArchivos_Personales" name="btnMenosArchivos_Personales" onclick="CloseTag('Archivos_Personales')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasArchivos_Personales" name="btnMasArchivos_Personales" onclick="OpenTag('Archivos_Personales')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-user"></i> </span> Archivos_Personales
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_Personales" onclick="DescargarTodo('Archivos_Personales')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListArchivos_Personales" name="ListArchivos_Personales" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoOtros" id="TipoArchivoOtros">
-                                                                        <button data-action="collapse" id="btnMenosOtros" name="btnMenosOtros" onclick="CloseTag('Otros')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasOtros" name="btnMasOtros" onclick="OpenTag('Otros')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-file"></i> </span> Otros
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoOtros" onclick="DescargarTodo('Otros')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListOtros" name="ListOtros" style="display:none"></ol>
-                                                                    </li>
-                                                                </ol>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-md-6" id="ExpedienteViejoNestable" hidden="hidden">
-                                                        <h3><a class="nav-link active" data-toggle="tab" href="#tab-1"><i class="fa fa-folder-open-o"></i>Expediente Antiguo</a></h3>
+            <dt>
+             @Html.DisplayNameFor(model => model.tbAreas.area_Descripcion)
+            </dt>
 
-                                                        <div class="dd" id="nestable" style="overflow:auto; max-height:400px">
-                                                            <div class="dd" id="nestable2">
-                                                                <ol class="dd-list" id="ArchivosList">
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoAmonestacionesExpedienteViejo" id="TipoArchivoAmonestacionesExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosAmonestacionesExpedienteViejo" name="btnMenosAmonestacionesExpedienteViejo" onclick="CloseTag('AmonestacionesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasAmonestacionesExpedienteViejo" name="btnMasAmonestacionesExpedienteViejo" onclick="OpenTag('AmonestacionesExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"> <i class="fa fa-warning"></i> </span> Amonestaciones
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoAmonestaciones" onclick="DescargarTodo('Amonestaciones')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListAmonestacionesExpedienteViejo" name="ListAmonestacionesExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoPermisosExpedienteViejo" id="TipoArchivoPermisosExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosPermisosExpedienteViejo" name="btnMenosPermisosExpedienteViejo" onclick="CloseTag('PermisosExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasPermisosExpedienteViejo" name="btnMasPermisosExpedienteViejo" onclick="OpenTag('PermisosExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-check-square-o"></i> </span> Permisos
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoPermisos" onclick="DescargarTodo('Permisos')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListPermisosExpedienteViejo" name="ListPermisosExpedienteViejo" style="display:block"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoIncapacidadesExpedienteViejo" id="TipoArchivoIncapacidadesExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosIncapacidadesExpedienteViejo" name="btnMenosIncapacidadesExpedienteViejo" onclick="CloseTag('IncapacidadesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasIncapacidadesExpedienteViejo" name="btnMasIncapacidadesExpedienteViejo" onclick="OpenTag('IncapacidadesExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-user-md"></i> </span> Incapacidades
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoIncapacidades" onclick="DescargarTodo('Incapacidades')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListIncapacidadesExpedienteViejo" name="ListIncapacidadesExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoConstanciasExpedienteViejo" id="TipoArchivoConstanciasExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosConstanciasExpedienteViejo" name="btnMenosConstanciasExpedienteViejo" onclick="CloseTag('ConstanciasExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasConstanciasExpedienteViejo" name="btnMasConstanciasExpedienteViejo" onclick="OpenTag('ConstanciasExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-file-o"></i> </span> Constancias
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoConstancias" onclick="DescargarTodo('Constancias')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListConstanciasExpedienteViejo" name="ListConstanciasExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoSolicitudesExpedienteViejo" id="TipoArchivoSolicitudesExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosSolicitudesExpedienteViejo" name="btnMenosSolicitudesExpedienteViejo" onclick="CloseTag('SolicitudesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasSolicitudesExpedienteViejo" name="btnMasSolicitudesExpedienteViejo" onclick="OpenTag('SolicitudesExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-paste"></i> </span> Solicitudes
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoSolicitudes" onclick="DescargarTodo('Solicitudes')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListSolicitudesExpedienteViejo" name="ListSolicitudesExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoFacturasExpedienteViejo" id="TipoArchivoFacturasExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosFacturasExpedienteViejo" name="btnMenosFacturasExpedienteViejo" onclick="CloseTag('FacturasExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasFacturasExpedienteViejo" name="btnMasFacturasExpedienteViejo" onclick="OpenTag('FacturasExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-list-alt"></i> </span> Facturas
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoFacturas" onclick="DescargarTodo('Facturas')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListFacturasExpedienteViejo" name="ListFacturasExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_PersonalesExpedienteViejo" id="TipoArchivoArchivos_PersonalesExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosArchivos_PersonalesExpedienteViejo" name="btnMenosArchivos_PersonalesExpedienteViejo" onclick="CloseTag('Archivos_PersonalesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasArchivos_PersonalesExpedienteViejo" name="btnMasArchivos_PersonalesExpedienteViejo" onclick="OpenTag('Archivos_PersonalesExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-user"></i> </span> Archivos_Personales
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_Personales" onclick="DescargarTodo('Archivos_Personales')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListArchivos_PersonalesExpedienteViejo" name="ListArchivos_PersonalesExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                    <li class="dd-item dd-collapsed" data-id="TipoArchivoOtrosExpedienteViejo" id="TipoArchivoOtrosExpedienteViejo">
-                                                                        <button data-action="collapse" id="btnMenosOtrosExpedienteViejo" name="btnMenosOtrosExpedienteViejo" onclick="CloseTag('OtrosExpedienteViejo')" type="button" style="display: none;">Collapse</button>
-                                                                        <button data-action="expand" id="btnMasOtrosExpedienteViejo" name="btnMasOtrosExpedienteViejo" onclick="OpenTag('OtrosExpedienteViejo')" type="button" style="">Expand</button>
-                                                                        <div class="dd-handle">
-                                                                            <span class="label label-info"><i class="fa fa-file"></i> </span> Otros
-                                                                            @*<span class="pull-right">  <a href="#" id="descargarTodoOtros" onclick="DescargarTodo('Otros')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
-                                                                        </div>
-                                                                        <ol class="dd-list" id="ListOtrosExpedienteViejo" name="ListOtrosExpedienteViejo" style="display:none"></ol>
-                                                                    </li>
-                                                                </ol>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <dd>
+             @Html.DisplayFor(model => model.tbAreas.area_Descripcion)
+            </dd>
 
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h4>Auditoría</h4>
-                            </div>
-                            <div class="ibox-content">
-                                <div class="form-horizontal">
-                                    <table class="table table-striped table-bordered dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Acción</th>
-                                                <th>Usuario</th>
-                                                <th>Fecha</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Creado</td>
-                                                @Html.HiddenFor(model => model.emp_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                                <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                                <td><span id="emp_FechaCrea">@Html.DisplayFor(model => model.emp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Modificado</td>
-                                                @Html.HiddenFor(model => model.emp_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                                <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                                <td><span id="emp_FechaModifica">@Html.DisplayFor(model => model.emp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+
+
+            <dt>
+             @Html.DisplayNameFor(model => model.tbDepartamentos.depto_Descripcion)
+            </dt>
+
+            <dd>
+             @Html.DisplayFor(model => model.tbDepartamentos.depto_Descripcion)
+            </dd>
+
+            <dt>
+             @Html.DisplayNameFor(model => model.tbJornadas.jor_Descripcion)
+            </dt>
+
+            <dd>
+             @Html.DisplayFor(model => model.tbJornadas.jor_Descripcion)
+            </dd>
+
+
+            <dt>
+             @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
+            </dt>
+
+            <dd>
+             @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
+            </dd>
+
+
+            <dt>
+             @Html.DisplayNameFor(model => model.emp_CargoAnterior)
+            </dt>
+
+            <dd>
+             @Html.DisplayFor(model => model.emp_CargoAnterior)
+            </dd>
+
+           </dl>
+          </div>
+
+          <div class="tab-pane" id="tab-4">
+           <div class="tab-pane" id="tab-4">
+            <dl class="dl-horizontal"></dl>
+            @*<a class='btn btn-success btn-xs ' onclick='tablaEditar(@Html.DisplayFor(model => model.emp_Id))'>Archivos</a>*@
+            <div class="row">
+             <div class="col-md-6">
+              <h3><a class="nav-link active" data-toggle="tab" href="#tab-1"><i class="fa fa-folder-open"></i>Expediente Actual</a></h3>
+              <div class="dd" id="nestable" style="overflow:auto; max-height:428px">
+               <div class="dd" id="nestable2">
+                <ol class="dd-list" id="ArchivosList">
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoAmonestaciones" id="TipoArchivoAmonestaciones">
+                  <button data-action="collapse" id="btnMenosAmonestaciones" name="btnMenosAmonestaciones" onclick="CloseTag('Amonestaciones')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasAmonestaciones" name="btnMasAmonestaciones" onclick="OpenTag('Amonestaciones')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"> <i class="fa fa-warning"></i> </span> Amonestaciones
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoAmonestaciones" onclick="DescargarTodo('Amonestaciones')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListAmonestaciones" name="ListAmonestaciones" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoPermisos" id="TipoArchivoPermisos">
+                  <button data-action="collapse" id="btnMenosPermisos" name="btnMenosPermisos" onclick="CloseTag('Permisos')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasPermisos" name="btnMasPermisos" onclick="OpenTag('Permisos')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-check-square-o"></i> </span> Permisos
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoPermisos" onclick="DescargarTodo('Permisos')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListPermisos" name="ListPermisos" style="display:block"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoIncapacidades" id="TipoArchivoIncapacidades">
+                  <button data-action="collapse" id="btnMenosIncapacidades" name="btnMenosIncapacidades" onclick="CloseTag('Incapacidades')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasIncapacidades" name="btnMasIncapacidades" onclick="OpenTag('Incapacidades')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-user-md"></i> </span> Incapacidades
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoIncapacidades" onclick="DescargarTodo('Incapacidades')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListIncapacidades" name="ListIncapacidades" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoConstancias" id="TipoArchivoConstancias">
+                  <button data-action="collapse" id="btnMenosConstancias" name="btnMenosConstancias" onclick="CloseTag('Constancias')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasConstancias" name="btnMasConstancias" onclick="OpenTag('Constancias')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-file-o"></i> </span> Constancias
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoConstancias" onclick="DescargarTodo('Constancias')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListConstancias" name="ListConstancias" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoSolicitudes" id="TipoArchivoSolicitudes">
+                  <button data-action="collapse" id="btnMenosSolicitudes" name="btnMenosSolicitudes" onclick="CloseTag('Solicitudes')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasSolicitudes" name="btnMasSolicitudes" onclick="OpenTag('Solicitudes')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-paste"></i> </span> Solicitudes
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoSolicitudes" onclick="DescargarTodo('Solicitudes')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListSolicitudes" name="ListSolicitudes" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoFacturas" id="TipoArchivoFacturas">
+                  <button data-action="collapse" id="btnMenosFacturas" name="btnMenosFacturas" onclick="CloseTag('Facturas')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasFacturas" name="btnMasFacturas" onclick="OpenTag('Facturas')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-list-alt"></i> </span> Facturas
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoFacturas" onclick="DescargarTodo('Facturas')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListFacturas" name="ListFacturas" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_Personales" id="TipoArchivoArchivos_Personales">
+                  <button data-action="collapse" id="btnMenosArchivos_Personales" name="btnMenosArchivos_Personales" onclick="CloseTag('Archivos_Personales')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasArchivos_Personales" name="btnMasArchivos_Personales" onclick="OpenTag('Archivos_Personales')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-user"></i> </span> Archivos_Personales
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_Personales" onclick="DescargarTodo('Archivos_Personales')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListArchivos_Personales" name="ListArchivos_Personales" style="display:none"></ol>
+                 </li>
+                <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_de_Finalizacion_Laboral" id="TipoArchivoArchivos_de_Finalizacion_Laboral">
+                    <button data-action="collapse" id="btnMenosArchivos_de_Finalizacion_Laboral" name="btnMenosArchivos_de_Finalizacion_Laboral" onclick="CloseTag('Archivos_de_Finalizacion_Laboral')" type="button" style="display: none;">Collapse</button>
+                    <button data-action="expand" id="btnMasArchivos_de_Finalizacion_Laboral" name="btnMasArchivos_de_Finalizacion_Laboral" onclick="OpenTag('Archivos_de_Finalizacion_Laboral')" type="button" style="">Expand</button>
+                    <div class="dd-handle">
+                        <span class="label label-info"><i class="fa fa-file"></i> </span> Archivos_de_Finalizacion_Laboral
+                        @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_de_Finalizacion_Laboral" onclick="DescargarTodo('Archivos_de_Finalizacion_Laboral')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
                     </div>
+                    <ol class="dd-list" id="ListArchivos_de_Finalizacion_Laboral" name="ListArchivos_de_Finalizacion_Laboral" style="display:none"></ol>
+                </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoOtros" id="TipoArchivoOtros">
+                  <button data-action="collapse" id="btnMenosOtros" name="btnMenosOtros" onclick="CloseTag('Otros')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasOtros" name="btnMasOtros" onclick="OpenTag('Otros')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-file"></i> </span> Otros
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoOtros" onclick="DescargarTodo('Otros')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListOtros" name="ListOtros" style="display:none"></ol>
+                 </li>
+                </ol>
+               </div>
+              </div>
+             </div>
 
-                </div>
+             <div class="col-md-6" id="ExpedienteViejoNestable" hidden="hidden">
+              <h3><a class="nav-link active" data-toggle="tab" href="#tab-1"><i class="fa fa-folder-open-o"></i>Expediente Antiguo</a></h3>
+
+              <div class="dd" id="nestable" style="overflow:auto; max-height:428px">
+               <div class="dd" id="nestable2">
+                <ol class="dd-list" id="ArchivosList">
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoAmonestacionesExpedienteViejo" id="TipoArchivoAmonestacionesExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosAmonestacionesExpedienteViejo" name="btnMenosAmonestacionesExpedienteViejo" onclick="CloseTag('AmonestacionesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasAmonestacionesExpedienteViejo" name="btnMasAmonestacionesExpedienteViejo" onclick="OpenTag('AmonestacionesExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"> <i class="fa fa-warning"></i> </span> Amonestaciones
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoAmonestaciones" onclick="DescargarTodo('Amonestaciones')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListAmonestacionesExpedienteViejo" name="ListAmonestacionesExpedienteViejo" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoPermisosExpedienteViejo" id="TipoArchivoPermisosExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosPermisosExpedienteViejo" name="btnMenosPermisosExpedienteViejo" onclick="CloseTag('PermisosExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasPermisosExpedienteViejo" name="btnMasPermisosExpedienteViejo" onclick="OpenTag('PermisosExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-check-square-o"></i> </span> Permisos
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoPermisos" onclick="DescargarTodo('Permisos')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListPermisosExpedienteViejo" name="ListPermisosExpedienteViejo" style="display:block"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoIncapacidadesExpedienteViejo" id="TipoArchivoIncapacidadesExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosIncapacidadesExpedienteViejo" name="btnMenosIncapacidadesExpedienteViejo" onclick="CloseTag('IncapacidadesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasIncapacidadesExpedienteViejo" name="btnMasIncapacidadesExpedienteViejo" onclick="OpenTag('IncapacidadesExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-user-md"></i> </span> Incapacidades
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoIncapacidades" onclick="DescargarTodo('Incapacidades')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListIncapacidadesExpedienteViejo" name="ListIncapacidadesExpedienteViejo" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoConstanciasExpedienteViejo" id="TipoArchivoConstanciasExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosConstanciasExpedienteViejo" name="btnMenosConstanciasExpedienteViejo" onclick="CloseTag('ConstanciasExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasConstanciasExpedienteViejo" name="btnMasConstanciasExpedienteViejo" onclick="OpenTag('ConstanciasExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-file-o"></i> </span> Constancias
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoConstancias" onclick="DescargarTodo('Constancias')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListConstanciasExpedienteViejo" name="ListConstanciasExpedienteViejo" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoSolicitudesExpedienteViejo" id="TipoArchivoSolicitudesExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosSolicitudesExpedienteViejo" name="btnMenosSolicitudesExpedienteViejo" onclick="CloseTag('SolicitudesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasSolicitudesExpedienteViejo" name="btnMasSolicitudesExpedienteViejo" onclick="OpenTag('SolicitudesExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-paste"></i> </span> Solicitudes
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoSolicitudes" onclick="DescargarTodo('Solicitudes')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListSolicitudesExpedienteViejo" name="ListSolicitudesExpedienteViejo" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoFacturasExpedienteViejo" id="TipoArchivoFacturasExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosFacturasExpedienteViejo" name="btnMenosFacturasExpedienteViejo" onclick="CloseTag('FacturasExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasFacturasExpedienteViejo" name="btnMasFacturasExpedienteViejo" onclick="OpenTag('FacturasExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-list-alt"></i> </span> Facturas
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoFacturas" onclick="DescargarTodo('Facturas')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListFacturasExpedienteViejo" name="ListFacturasExpedienteViejo" style="display:none"></ol>
+                 </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_PersonalesExpedienteViejo" id="TipoArchivoArchivos_PersonalesExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosArchivos_PersonalesExpedienteViejo" name="btnMenosArchivos_PersonalesExpedienteViejo" onclick="CloseTag('Archivos_PersonalesExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasArchivos_PersonalesExpedienteViejo" name="btnMasArchivos_PersonalesExpedienteViejo" onclick="OpenTag('Archivos_PersonalesExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-user"></i> </span> Archivos_Personales
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_Personales" onclick="DescargarTodo('Archivos_Personales')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListArchivos_PersonalesExpedienteViejo" name="ListArchivos_PersonalesExpedienteViejo" style="display:none"></ol>
+                 </li>
+                <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_de_Finalizacion_LaboralExpedienteViejo" id="TipoArchivoArchivos_de_Finalizacion_LaboralExpedienteViejo">
+                    <button data-action="collapse" id="btnMenosArchivos_de_Finalizacion_LaboralExpedienteViejo" name="btnMenosArchivos_de_Finalizacion_LaboralExpedienteViejo" onclick="CloseTag('Archivos_de_Finalizacion_LaboralExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                    <button data-action="expand" id="btnMasArchivos_de_Finalizacion_LaboralExpedienteViejo" name="btnMasArchivos_de_Finalizacion_LaboralExpedienteViejo" onclick="OpenTag('Archivos_de_Finalizacion_LaboralExpedienteViejo')" type="button" style="">Expand</button>
+                    <div class="dd-handle">
+                        <span class="label label-info"><i class="fa fa-file"></i> </span> Archivos_de_Finalizacion_Laboral
+                        @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_de_Finalizacion_Laboral" onclick="DescargarTodo('Archivos_de_Finalizacion_Laboral')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                    </div>
+                    <ol class="dd-list" id="ListArchivos_de_Finalizacion_LaboralExpedienteViejo" name="ListArchivos_de_Finalizacion_LaboralExpedienteViejo" style="display:none"></ol>
+                </li>
+                 <li class="dd-item dd-collapsed" data-id="TipoArchivoOtrosExpedienteViejo" id="TipoArchivoOtrosExpedienteViejo">
+                  <button data-action="collapse" id="btnMenosOtrosExpedienteViejo" name="btnMenosOtrosExpedienteViejo" onclick="CloseTag('OtrosExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                  <button data-action="expand" id="btnMasOtrosExpedienteViejo" name="btnMasOtrosExpedienteViejo" onclick="OpenTag('OtrosExpedienteViejo')" type="button" style="">Expand</button>
+                  <div class="dd-handle">
+                   <span class="label label-info"><i class="fa fa-file"></i> </span> Otros
+                   @*<span class="pull-right">  <a href="#" id="descargarTodoOtros" onclick="DescargarTodo('Otros')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                  </div>
+                  <ol class="dd-list" id="ListOtrosExpedienteViejo" name="ListOtrosExpedienteViejo" style="display:none"></ol>
+                 </li>
+                </ol>
+               </div>
+              </div>
+             </div>
             </div>
-
+           </div>
+          </div>
+         </div>
         </div>
+       </div>
+      </div>
+
+      <div class="ibox float-e-margins">
+       <div class="ibox-title">
+        <h4>Auditoría</h4>
+       </div>
+       <div class="ibox-content">
+        <div class="form-horizontal">
+         <table class="table table-striped table-bordered dataTable">
+          <thead>
+           <tr>
+            <th>Acción</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td>Creado</td>
+            @Html.HiddenFor(model => model.emp_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+            <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+            <td><span id="emp_FechaCrea">@Html.DisplayFor(model => model.emp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+           </tr>
+           <tr>
+            <td>Modificado</td>
+            @Html.HiddenFor(model => model.emp_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+            <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+            <td><span id="emp_FechaModifica">@Html.DisplayFor(model => model.emp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </div>
+
     </div>
+   </div>
+
+  </div>
+ </div>
 </div>
 
 @* Modal Agregar Archivo *@
 
 <div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content animated fadeIn">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Subir Documento</h4>
-            </div>
-            <div class="modal-body">
+ <div class="modal-dialog">
+  <div class="modal-content animated fadeIn">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+    <h4 class="modal-title">Subir Documento</h4>
+   </div>
+   <div class="modal-body">
 
-                @using (Html.BeginForm("UploadEmpleados", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data", @Id = "FormEmpleados" }))
-                {
-                    <input type="hidden" id="emp_Id" />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                <span class="btn btn-default btn-file">
-                                    <span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span>
-                                    <input type="file" name="FileUpload" accept=".xls,.xlsx" id="btnUpload">
-                                </span>
-                                <span class="fileinput-filename"></span>
-                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                            </div>
-                        </div>
+    @using (Html.BeginForm("UploadEmpleados", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data", @Id = "FormEmpleados" }))
+    {
+        <input type="hidden" id="emp_Id" />
+        <div class="row">
+         <div class="col-md-12">
+          <div class="fileinput fileinput-new" data-provides="fileinput">
+           <span class="btn btn-default btn-file">
+            <span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span>
+            <input type="file" name="FileUpload" accept=".xls,.xlsx" id="btnUpload">
+           </span>
+           <span class="fileinput-filename"></span>
+           <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+          </div>
+         </div>
 
 
-                    </div>
-                    <div class="row float-e-margins">
-                        <label class="col-md-4 control-label">Tipo de Documento</label>
-                        <div class="row col-md-7">
-                            <select class="form-control"></select>
-                        </div>
-                    </div>
-                }
-                <br />
-                <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary pull-left" id="btnGuardar" value="Guardar" />
-                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                    @*<button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Guardar</button>*@
-
-                </div>
-            </div>
         </div>
+        <div class="row float-e-margins">
+         <label class="col-md-4 control-label">Tipo de Documento</label>
+         <div class="row col-md-7">
+          <select class="form-control"></select>
+         </div>
+        </div>
+    }
+    <br />
+    <div class="modal-footer">
+     <input type="submit" class="btn btn-primary pull-left" id="btnGuardar" value="Guardar" />
+     <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+     @*<button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Guardar</button>*@
+
     </div>
+   </div>
+  </div>
+ </div>
 </div>
 
 @Html.Partial("_DetallesExpediente", new ERP_GMEDINA.Models.tbDirectoriosEmpleados())
@@ -504,17 +564,17 @@
 @* Modal Agregar Archivo *@
 
 @section Styles {
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
-    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+ @Styles.Render("~/Content/plugins/izitoast/iziToast")
+ @Styles.Render("~/plugins/jasnyBootstrapStyles")
 
 }
 @section Scripts {
-    @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations")
-    @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/datatables.min")
-    @Scripts.Render("~/Scripts/app/general")
-    @Scripts.Render("~/Scripts/app/general/ExpedienteEmpleado")
-<script src="~/Scripts/app/General/Empleados/AgregarEmpleado.js"></script>
-    @Scripts.Render("~/plugins/jasnyBootstrap")
-    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
-    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
+ @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations")
+ @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/datatables.min")
+ @Scripts.Render("~/Scripts/app/general")
+ @Scripts.Render("~/Scripts/app/general/ExpedienteEmpleado")
+ <script src="~/Scripts/app/General/Empleados/AgregarEmpleado.js"></script>
+ @Scripts.Render("~/plugins/jasnyBootstrap")
+ @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+ @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
 }

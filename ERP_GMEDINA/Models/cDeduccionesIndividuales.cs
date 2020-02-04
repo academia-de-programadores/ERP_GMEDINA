@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Monto de Cuota")]
         public decimal dei_MontoCuota { get; set; }
 
-        [Display(Name = "Siempre Deduce")]
+        [Display(Name = "Deduce Siempre")]
         public Nullable<bool> dei_PagaSiempre { get; set; }
 
         [Display(Name = "Creado por")]
@@ -55,7 +55,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Estado")]
         public bool dei_Activo { get; set; }
 
-        [Display(Name = "Deducir ISR")]
+        [Display(Name = "Incluir para ISR")]
         public bool dei_DeducirISR { get; set; }
 
     }

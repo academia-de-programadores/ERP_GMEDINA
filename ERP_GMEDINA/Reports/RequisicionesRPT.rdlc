@@ -402,6 +402,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -410,7 +411,7 @@
         </TablixRowHierarchy>
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.3175cm</Top>
+        <Top>0.14111cm</Top>
         <Left>1.4605cm</Left>
         <Height>1.2cm</Height>
         <Width>25.33384cm</Width>
@@ -421,13 +422,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.8in</Height>
+    <Height>0.528in</Height>
     <Style />
   </Body>
-  <Width>10.75728in</Width>
+  <Width>10.54895in</Width>
   <Page>
     <PageHeader>
-      <Height>1.22767cm</Height>
+      <Height>0.88336cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -446,8 +447,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.2032cm</Top>
-          <Left>22.58512cm</Left>
+          <Left>22.58513cm</Left>
           <Height>0.6cm</Height>
           <Width>4.20921cm</Width>
           <Style>
@@ -477,8 +477,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox23</rd:DefaultName>
-          <Top>0.2032cm</Top>
-          <Left>8.54183cm</Left>
+          <Left>8.54184cm</Left>
           <Height>0.88336cm</Height>
           <Width>12.025cm</Width>
           <ZIndex>1</ZIndex>
@@ -500,7 +499,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.97367cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -519,8 +518,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.17639cm</Top>
-          <Left>23.38945cm</Left>
+          <Left>23.38946cm</Left>
           <Height>0.6cm</Height>
           <Width>3.40488cm</Width>
           <Style>
@@ -540,12 +538,12 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5cm</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

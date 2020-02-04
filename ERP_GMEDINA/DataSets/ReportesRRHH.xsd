@@ -37,8 +37,10 @@ FROM     rrhh.V_RPT_EmpleadoCurriculum</CommandText>
             <MainSource>
               <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT eqem_Id, Id_Persona, Identidad, Nombre_Completo, Descripcion_del_Equipo, Fecha, eqtra_Descripcion, eqtra_Codigo, eqtra_Id, eqtra_Observacion, FechaInicio, fechaFin FROM rrhh.V_RPT_EquipoEmpleado</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT eqem_Id, Id_Persona, Identidad, Nombre_Completo, Descripcion_del_Equipo, Fecha, eqtra_Descripcion, eqtra_Codigo, eqtra_Id, eqtra_Observacion, FechaInicio, fechaFin, area_Descripcion, area_Id, depto_Id, depto_Descripcion, car_Id, 
+                  car_Descripcion
+FROM     rrhh.V_RPT_EquipoEmpleado</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -57,6 +59,12 @@ FROM     rrhh.V_RPT_EmpleadoCurriculum</CommandText>
               <Mapping SourceColumn="eqtra_Observacion" DataSetColumn="eqtra_Observacion" />
               <Mapping SourceColumn="FechaInicio" DataSetColumn="FechaInicio" />
               <Mapping SourceColumn="fechaFin" DataSetColumn="fechaFin" />
+              <Mapping SourceColumn="area_Descripcion" DataSetColumn="area_Descripcion" />
+              <Mapping SourceColumn="area_Id" DataSetColumn="area_Id" />
+              <Mapping SourceColumn="depto_Id" DataSetColumn="depto_Id" />
+              <Mapping SourceColumn="depto_Descripcion" DataSetColumn="depto_Descripcion" />
+              <Mapping SourceColumn="car_Id" DataSetColumn="car_Id" />
+              <Mapping SourceColumn="car_Descripcion" DataSetColumn="car_Descripcion" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -509,6 +517,30 @@ FROM     rrhh.V_RPT_Requisiciones</CommandText>
               </xs:element>
               <xs:element name="FechaInicio" msprop:Generator_ColumnVarNameInTable="columnFechaInicio" msprop:Generator_ColumnPropNameInRow="FechaInicio" msprop:Generator_ColumnPropNameInTable="FechaInicioColumn" msprop:Generator_UserColumnName="FechaInicio" type="xs:dateTime" />
               <xs:element name="fechaFin" msprop:Generator_ColumnVarNameInTable="columnfechaFin" msprop:Generator_ColumnPropNameInRow="fechaFin" msprop:Generator_ColumnPropNameInTable="fechaFinColumn" msprop:Generator_UserColumnName="fechaFin" type="xs:dateTime" />
+              <xs:element name="area_Descripcion" msprop:Generator_ColumnVarNameInTable="columnarea_Descripcion" msprop:Generator_ColumnPropNameInRow="area_Descripcion" msprop:Generator_ColumnPropNameInTable="area_DescripcionColumn" msprop:Generator_UserColumnName="area_Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="area_Id" msprop:Generator_ColumnVarNameInTable="columnarea_Id" msprop:Generator_ColumnPropNameInRow="area_Id" msprop:Generator_ColumnPropNameInTable="area_IdColumn" msprop:Generator_UserColumnName="area_Id" type="xs:int" />
+              <xs:element name="depto_Id" msprop:Generator_ColumnVarNameInTable="columndepto_Id" msprop:Generator_ColumnPropNameInRow="depto_Id" msprop:Generator_ColumnPropNameInTable="depto_IdColumn" msprop:Generator_UserColumnName="depto_Id" type="xs:int" />
+              <xs:element name="depto_Descripcion" msprop:Generator_ColumnVarNameInTable="columndepto_Descripcion" msprop:Generator_ColumnPropNameInRow="depto_Descripcion" msprop:Generator_ColumnPropNameInTable="depto_DescripcionColumn" msprop:Generator_UserColumnName="depto_Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="car_Id" msprop:Generator_ColumnVarNameInTable="columncar_Id" msprop:Generator_ColumnPropNameInRow="car_Id" msprop:Generator_ColumnPropNameInTable="car_IdColumn" msprop:Generator_UserColumnName="car_Id" type="xs:int" />
+              <xs:element name="car_Descripcion" msprop:Generator_ColumnVarNameInTable="columncar_Descripcion" msprop:Generator_ColumnPropNameInRow="car_Descripcion" msprop:Generator_ColumnPropNameInTable="car_DescripcionColumn" msprop:Generator_UserColumnName="car_Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

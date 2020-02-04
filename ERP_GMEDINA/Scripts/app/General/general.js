@@ -184,6 +184,8 @@ function serializarChild(data, form) {
 function serializarPro(data) {
  var Data = new Object();
  $.each(data, function (index, valor) {
+  if (index == "")
+   index = "per_Direccion";
   var value = valor.value.trim();
   if (value != "") {
    Data[valor.name] = value;
@@ -487,3 +489,8 @@ function validarDT(obj) {
 }
 function RestaurarDT() {
 }
+
+$('.modal').modal({ backdrop: 'static', keyboard: false });
+$(".modal").modal('hide');//ocultamos el modal
+$('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+$('.modal-backdrop').remove();//eliminamos el backdrop del modal

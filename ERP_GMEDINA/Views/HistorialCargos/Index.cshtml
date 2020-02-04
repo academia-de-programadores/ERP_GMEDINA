@@ -25,6 +25,7 @@
                                 <th>Anterior</th>
                                 <th>Nuevo</th>
                                 <th>Fecha</th>
+                                <th>Acción</th>
                                 @*<th>Estado</th>*@
                             </tr>
                         </thead>
@@ -35,7 +36,7 @@
         </div>
     </div>
 </div>
-@Html.Partial("_Create", new ERP_GMEDINA.Models.tbEmpleados())
+@Html.Partial("_Deshacer", new ERP_GMEDINA.Models.tbHistorialCargos())
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

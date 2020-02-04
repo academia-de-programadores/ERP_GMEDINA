@@ -33,15 +33,15 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.area_Id, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
-                                    @Html.DropDownList("area_Id", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                    @Html.DropDownList("area_Id", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid", @onchange = "LLenarDepto(this);" })
                                     @Html.ValidationMessageFor(model => model.area_Id, "", new { @class = "text-danger", @id = "errorarea_Id" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.depto_Id, "Departamento", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <label class="control-label col-md-2" for="depto_Id">Departamento</label>
                                 <div class="col-md-8">
-                                    @Html.DropDownList("depto_Id", null, "**Seleccione una opción**", htmlAttributes: new { @class = "form-control required valid" })
-                                    @Html.ValidationMessageFor(model => model.depto_Id, "", new { @class = "text-danger", @id = "errordepto_Id" })
+                                    <select class="form-control required valid" id="depto_Id" name="depto_Id"></select>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="depto_Id" data-valmsg-replace="true" id="errordepto_Id"></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,12 +94,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="emp_Fechaingreso">Fecha</label>
+                                <label class="control-label col-md-2" for="emp_Fechaingreso">Es Temporal</label>
+                                <div class="col-md-8">
+                                    <input type="checkbox" id="emp_Temporal" name="emp_Temporal" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="emp_Fechaingreso">Fecha de contratación</label>
                                 <div class="col-md-8">
                                     <input class="form-control required valid text-box single-line" data-val="true" data-val-required="El campo Fecha es requerido" data-val-date="Fecha no tiene el formato correcto" id="emp_Fechaingreso" name="emp_Fechaingreso" type="date" value="">
                                     <span class="field-validation-valid text-danger" data-valmsg-for="emp_Fechaingreso" data-valmsg-replace="true" id="erroremp_Fechaingreso"></span>
                                 </div>
                             </div>
+
                         }
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">

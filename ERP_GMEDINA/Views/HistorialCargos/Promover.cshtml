@@ -37,15 +37,15 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.area_Id, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-8">
-                                        @Html.DropDownList("area_Id", null, "**Selecione una opción**", htmlAttributes: new { @class = "form-control required valid" })
+                                        @Html.DropDownList("area_Id", null, "**Selecione una opción**", htmlAttributes: new { @class = "form-control required valid", @onchange = "LLenarDepto(this);" })
                                         @Html.ValidationMessageFor(model => model.area_Id, "", new { @class = "text-danger", @id = "errorarea_Id" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.depto_Id, "Departamento", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <label class="control-label col-md-2" for="depto_Id">Departamento</label>
                                     <div class="col-md-8">
-                                        @Html.DropDownList("depto_Id", null, "**Selecione una opción**", htmlAttributes: new { @class = "form-control required valid" })
-                                        @Html.ValidationMessageFor(model => model.depto_Id, "", new { @class = "text-danger", @id = "errordepto_Id" })
+                                        <select class="form-control required valid" id="depto_Id" name="depto_Id"></select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="depto_Id" data-valmsg-replace="true" id="errordepto_Id"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -53,6 +53,13 @@
                                     <div class="col-md-8">
                                         @Html.DropDownList("jor_Id", null, "**Selecione una opción**", htmlAttributes: new { @class = "form-control required valid" })
                                         @Html.ValidationMessageFor(model => model.jor_Id, "", new { @class = "text-danger", @id = "errorjor_Id" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="hcar_RazonPromocion">Razón de la promoción</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control required valid text-box single-line" data-val="true" data-val-maxlength="Excedió el número máximo de carácteres" data-val-maxlength-max="255" data-val-required="El campo Razón de promoción es requerido" id="hcar_RazonPromocion" name="hcar_RazonPromocion" type="text" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="hcar_RazonPromocion" data-valmsg-replace="true" id="errorhcar_RazonPromocion"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,7 +79,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="emp_Fechaingreso">Fecha</label>
                                     <div class="col-md-8">
-                                        <input class="form-control required valid text-box single-line" data-val="true" data-val-required="El campo Fecha es requerido" data-val-date="Fecha no tiene el formato correcto" id="emp_Fechaingreso" name="emp_Fechaingreso" min="2000-01-01" max="2015-12-31" type="date" value="">
+                                        <input class="form-control required valid text-box single-line" data-val="true" data-val-required="El campo Fecha es requerido" data-val-date="Fecha no tiene el formato correcto" id="emp_Fechaingreso" name="emp_Fechaingreso" min="1900-01-01" max="2500-12-31" type="date" value="">
                                         <span class="field-validation-valid text-danger" data-valmsg-for="emp_Fechaingreso" data-valmsg-replace="true" id="erroremp_Fechaingreso"></span>
                                     </div>
                                 </div>

@@ -6,16 +6,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>4.55988cm</Width>
+              <Width>3.25601cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.27438cm</Width>
+              <Width>4.17888cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.42102cm</Width>
+              <Width>4.62185cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.83505cm</Width>
+              <Width>3.05705cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.26199cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.15617cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.5cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -152,6 +161,114 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox11</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#7292cc</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#4c68a2</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox30">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Departamento</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox30</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#7292cc</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#4c68a2</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox32">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Área</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox32</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#7292cc</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#4c68a2</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox51">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Cargo</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox51</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#7292cc</Color>
@@ -311,12 +428,120 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="depto_Descripcion">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!depto_Descripcion.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>depto_Descripcion</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="area_Descripcion">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!area_Descripcion.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>area_Descripcion</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="car_Descripcion">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!car_Descripcion.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>car_Descripcion</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -336,10 +561,10 @@
         </TablixRowHierarchy>
         <NoRowsMessage>="No se encontraron datos que cumplan con los requisitos actuales."</NoRowsMessage>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.41663cm</Top>
-        <Left>2.12879cm</Left>
+        <Top>0.43717cm</Top>
+        <Left>0.83433cm</Left>
         <Height>1.2cm</Height>
-        <Width>22.09033cm</Width>
+        <Width>24.03194cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -347,13 +572,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.66425in</Height>
+    <Height>0.75in</Height>
     <Style />
   </Body>
-  <Width>9.63981in</Width>
+  <Width>9.83531in</Width>
   <Page>
     <PageHeader>
-      <Height>1.44349cm</Height>
+      <Height>1.67217cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -372,8 +597,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.52917cm</Top>
-          <Left>19.86692cm</Left>
+          <Top>0.49852cm</Top>
+          <Left>20.78924cm</Left>
           <Height>0.6cm</Height>
           <Width>4.07703cm</Width>
           <Style>
@@ -386,7 +611,7 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox13">
+        <Textbox Name="Textbox14">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
@@ -405,8 +630,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>0.35278cm</Top>
-          <Left>6.34846cm</Left>
+          <Top>0.49852cm</Top>
+          <Left>7.51319cm</Left>
           <Height>0.91432cm</Height>
           <Width>12.05675cm</Width>
           <ZIndex>1</ZIndex>
@@ -428,7 +653,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.10067cm</Height>
+      <Height>0.97367cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -447,8 +672,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.31961cm</Top>
-          <Left>21.44395cm</Left>
+          <Top>0.17639cm</Top>
+          <Left>22.36627cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -468,8 +693,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>
@@ -484,7 +709,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>56af8b79-c435-48ef-b95c-15eeaca8b82b</rd:DataSourceID>
+      <rd:DataSourceID>e110e30f-82d2-4551-a2df-c8c8f3d39911</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -518,10 +743,58 @@
           <DataField>Fecha</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
+        <Field Name="eqtra_Descripcion">
+          <DataField>eqtra_Descripcion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="eqtra_Codigo">
+          <DataField>eqtra_Codigo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="eqtra_Id">
+          <DataField>eqtra_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="eqtra_Observacion">
+          <DataField>eqtra_Observacion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaInicio">
+          <DataField>FechaInicio</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="fechaFin">
+          <DataField>fechaFin</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="area_Descripcion">
+          <DataField>area_Descripcion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="area_Id">
+          <DataField>area_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="depto_Id">
+          <DataField>depto_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="depto_Descripcion">
+          <DataField>depto_Descripcion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="car_Id">
+          <DataField>car_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="car_Descripcion">
+          <DataField>car_Descripcion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ReportesRRHH</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Reyna Pineda\Desktop\PROYECTO 17012019\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesRRHH.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Axel Omar\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesRRHH.xsd</rd:SchemaPath>
         <rd:TableName>V_RPT_EquipoEmpleado</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -530,5 +803,5 @@
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>c73613c1-eba5-4238-a04c-8068d3707564</rd:ReportID>
+  <rd:ReportID>e3a4c89f-5e3e-487d-b13e-2e4045a8ca1b</rd:ReportID>
 </Report>

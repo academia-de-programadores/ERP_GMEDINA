@@ -111,8 +111,8 @@ function llenarTabla() {
                 ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                    : Admin ?
                        "<div>" +
-                       "<a class='btn btn-outline btn-primary btn-xs' onclick='tablaDetalles(" + value.hper_Id + ")' >Detalles</a>" +
-                       "<a class='btn btn-outline btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn-primary btn-xs' onclick='tablaDetalles(" + value.hper_Id + ")' >Detalles</a>" +
+                       "<a class='btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>" : '';
                 tabla.row.add({
                     Id: value.hper_Id,

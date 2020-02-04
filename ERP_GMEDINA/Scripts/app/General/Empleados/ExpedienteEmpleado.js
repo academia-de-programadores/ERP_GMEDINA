@@ -6,6 +6,7 @@
 
 var id = sessionStorage.getItem("emp_Id");
 function CargarDatos() {
+    debugger
     var Amonestaciones = "";
     var Permisos = "";
     var Incapacidades = "";
@@ -13,6 +14,7 @@ function CargarDatos() {
     var Solicitudes = "";
     var Facturas = "";
     var Archivos_Personales = "";
+    var Archivos_de_Finalizacion_Laboral = "";
     var Otros = "";
     //id = (id, 16);
     _ajax(null,
@@ -110,6 +112,17 @@ function CargarDatos() {
                                               " </li>";
 
                           break;
+                      case "Archivos_de_Finalizacion_Laboral":
+                          Archivos_de_Finalizacion_Laboral += " <li class='dd-item'> " +
+                                              "     <div class='dd-handle'>" +
+                                              "         <span class='pull-right'> <a href='#' class='btn btn-danger btn-xs fa fa-trash' onclick='InactivarExpediente(" + value.direm_Id + ")'></a></span>" +
+                                              "         <span class='pull-right'><a class='btn btn-info btn-xs fa fa-info-circle' onclick='ModalDetalles(" + value.direm_Id + ")'></a></span>" +
+                                              "         <span class='pull-right'>" + FechaFormato(value.direm_FechaCrea).substring(0, 10) + "<a class='btn btn-success btn-xs fa fa-download' download href='/Expedientes/Expediente_" + value.emp_Id + "/Archivos_de_Finalizacion_Laboral/" + value.direm_NombreArchivo + "'></a></span>" +
+                                              "         <span class='label label-info'></span>" + NombreArchivo +
+                                              "     </div>" +
+                                              " </li>";
+
+                          break;
                       case "Otros":
                           Otros += " <li class='dd-item'> " +
                                               "     <div class='dd-handle'>" +
@@ -136,6 +149,7 @@ function CargarDatos() {
               $("#ListSolicitudes").html(Solicitudes).show();
               $("#ListFacturas").html(Facturas).show();
               $("#ListArchivos_Personales").html(Archivos_Personales).show();
+              $("#ListArchivos_de_Finalizacion_Laboral").html(Archivos_de_Finalizacion_Laboral).show();
               $("#ListOtros").html(Otros).show();
 
               document.getElementById("ListAmonestaciones").style.display = 'none';
@@ -145,6 +159,7 @@ function CargarDatos() {
               document.getElementById("ListSolicitudes").style.display = 'none';
               document.getElementById("ListFacturas").style.display = 'none';
               document.getElementById("ListArchivos_Personales").style.display = 'none';
+              document.getElementById("ListArchivos_de_Finalizacion_Laboral").style.display = 'none';
               document.getElementById("ListOtros").style.display = 'none';
 
               $("#btnMenosAmonestaciones").removeAttr("style").hide();
@@ -162,6 +177,9 @@ function CargarDatos() {
               $("#btnMasFacturas").show();
               $("#btnMenosArchivos_Personales").removeAttr("style").hide();
               $("#btnMasArchivos_Personales").show();
+              $("#btnMenosArchivos_de_Finalizacion_Laboral").removeAttr("style").hide();
+              $("#btnMasArchivos_de_Finalizacion_Laboral").show();
+
               $("#btnMenosOtros").removeAttr("style").hide();
               $("#btnMasOtros").show();
 
@@ -179,6 +197,7 @@ function CargarDatosExpedienteViejo() {
     var Solicitudes = "";
     var Facturas = "";
     var Archivos_Personales = "";
+    var Archivos_de_Finalizacion_Laboral = "";
     var Otros = "";
     //id = (id, 16);
     _ajax(null,
@@ -273,7 +292,16 @@ function CargarDatosExpedienteViejo() {
                                                   " </li>";
 
                               break;
-                          case "Otros":
+                          case "Archivos_de_Finalizacion_Laboral":
+                              Archivos_de_Finalizacion_Laboral += " <li class='dd-item'> " +
+                                                  "     <div class='dd-handle'>" +
+                                                  "         <span class='pull-right'><a class='btn btn-info btn-xs fa fa-info-circle' onclick='ModalDetalles(" + value.direm_Id + ")'></a></span>" +
+                                                  "         <span class='pull-right'>" + FechaFormato(value.direm_FechaCrea).substring(0, 10) + "<a class='btn btn-success btn-xs fa fa-download' download href='/Expedientes/Expediente_" + value.emp_Id + "/Archivos_de_Finalizacion_Laboral/" + value.direm_NombreArchivo + "'></a></span>" +
+                                                  "         <span class='label label-info'></span>" + NombreArchivo +
+                                                  "     </div>" +
+                                                  " </li>";
+
+                              break; case "Archivos_de_Finalizacion_Laboral":
                               Otros += " <li class='dd-item'> " +
                                                   "     <div class='dd-handle'>" +
                                                   "         <span class='pull-right'><a class='btn btn-info btn-xs fa fa-info-circle' onclick='ModalDetalles(" + value.direm_Id + ")'></a></span>" +
@@ -298,6 +326,7 @@ function CargarDatosExpedienteViejo() {
                   $("#ListSolicitudesExpedienteViejo").html(Solicitudes).show();
                   $("#ListFacturasExpedienteViejo").html(Facturas).show();
                   $("#ListArchivos_PersonalesExpedienteViejo").html(Archivos_Personales).show();
+                  $("#ListArchivos_de_Finalizacion_LaboralExpedienteViejo").html(Archivos_de_Finalizacion_Laboral).show();
                   $("#ListOtrosExpedienteViejo").html(Otros).show();
 
                   document.getElementById("ListAmonestacionesExpedienteViejo").style.display = 'none';
@@ -307,6 +336,7 @@ function CargarDatosExpedienteViejo() {
                   document.getElementById("ListSolicitudesExpedienteViejo").style.display = 'none';
                   document.getElementById("ListFacturasExpedienteViejo").style.display = 'none';
                   document.getElementById("ListArchivos_PersonalesExpedienteViejo").style.display = 'none';
+                  document.getElementById("ListArchivos_de_Finalizacion_LaboralExpedienteViejo").style.display = 'none';
                   document.getElementById("ListOtrosExpedienteViejo").style.display = 'none';
 
                   $("#btnMenosAmonestacionesExpedienteViejo").removeAttr("style").hide();
@@ -324,6 +354,9 @@ function CargarDatosExpedienteViejo() {
                   $("#btnMasFacturasExpedienteViejo").show();
                   $("#btnMenosArchivos_PersonalesExpedienteViejo").removeAttr("style").hide();
                   $("#btnMasArchivos_PersonalesExpedienteViejo").show();
+                  $("#btnMenosArchivos_de_Finalizacion_LaboralExpedienteViejo").removeAttr("style").hide();
+                  $("#btnMasArchivos_de_Finalizacion_LaboralExpedienteViejo").show();
+                  
                   $("#btnMenosOtrosExpedienteViejo").removeAttr("style").hide();
                   $("#btnMasOtrosExpedienteViejo").show();
               }
