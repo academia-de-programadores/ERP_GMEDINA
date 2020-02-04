@@ -448,8 +448,7 @@ namespace ERP_GMEDINA.Helpers
                                                                                x.ini_Activo == true &&
                                                                                x.ini_Pagado != true &&
                                                                                x.ini_FechaCrea >= fechaInicio &&
-                                                                               x.ini_FechaCrea <= fechaFin ||
-                                                                               (x.ini_PagaSiempre == true && x.ini_Activo == true))
+                                                                               x.ini_FechaCrea <= fechaFin)
                                                                         .ToList();
 
             if (oIngresosIndiColaboradores.Count > 0)
@@ -464,9 +463,12 @@ namespace ERP_GMEDINA.Helpers
                             totalIngresosIndivuales += Math.Round(oIngresosIndiColaboradoresIterador.ini_Monto.Value, 2);
 
                             //pasar el bono a pagado
-                            oIngresosIndiColaboradoresIterador.ini_Pagado = true;
-                            oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
-                            db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+                            if (oIngresosIndiColaboradoresIterador.ini_PagaSiempre == false)
+                            {
+                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;
+                                oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
+                                db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+                            }
 
                             //agregarlo al voucher
                             ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher

@@ -287,7 +287,14 @@ namespace ERP_GMEDINA.Helpers
 
                         // restar la cuota al monto restante
                         oDeduccionesIndiColaboradorIterador.dei_Monto = oDeduccionesIndiColaboradorIterador.dei_Monto <= oDeduccionesIndiColaboradorIterador.dei_Monto ? oDeduccionesIndiColaboradorIterador.dei_Monto - oDeduccionesIndiColaboradorIterador.dei_MontoCuota : oDeduccionesIndiColaboradorIterador.dei_MontoCuota - oDeduccionesIndiColaboradorIterador.dei_MontoCuota;
+
+                        if (oDeduccionesIndiColaboradorIterador.dei_Monto == 0 && oDeduccionesIndiColaboradorIterador.dei_PagaSiempre == false)
+                        {
+                            oDeduccionesIndiColaboradorIterador.dei_Pagado = true;
+                        }
+                            
                         db.Entry(oDeduccionesIndiColaboradorIterador).State = EntityState.Modified;
+                                                
                     }
                     catch (Exception ex)
                     {
