@@ -118,5 +118,12 @@ namespace ERP_GMEDINA.Helpers
                 return json;
             }
         }
+
+       public class iziToast
+        {
+            public string Response { get; set; }
+            public string Encabezado { get; set; }
+            public string Tipo { get; set; }
+        }
     }
 }

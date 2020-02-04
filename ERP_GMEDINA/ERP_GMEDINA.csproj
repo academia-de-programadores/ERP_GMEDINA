@@ -284,9 +284,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CalculoISR.cs" />
+    <Compile Include="Helpers\Deducciones.cs" />
+    <Compile Include="Helpers\EnviarComprobanteDePago.cs" />
     <Compile Include="Helpers\General.cs" />
+    <Compile Include="Helpers\GuardarEnHistorialDePago.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Helpers\Ingresos.cs" />
     <Compile Include="Helpers\Liquidacion.cs" />
+    <Compile Include="Helpers\ReportePlanilla.cs" />
     <Compile Include="Models\cAcumuladosISR.cs" />
     <Compile Include="Models\cAdelantoSueldo.cs" />
     <Compile Include="Models\cAFP.cs" />
@@ -1849,6 +1855,7 @@
     <Content Include="Content\BTN\BTN-HOME.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
+    <Content Include="Content\img\done.gif" />
     <Content Include="Content\img\header-profile-skin-2.png" />
     <Content Include="Content\img\header-profile.png" />
     <Content Include="Content\img\LoadingIcon.png" />
