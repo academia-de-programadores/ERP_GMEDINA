@@ -516,6 +516,9 @@
     <Compile Include="Models\tbDeduccionesIndividuales.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbDeduccionImpuestoVecinal.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
