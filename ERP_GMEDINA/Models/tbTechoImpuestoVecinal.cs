@@ -6,6 +6,12 @@ namespace ERP_GMEDINA.Models
     
     public partial class tbTechoImpuestoVecinal
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbTechoImpuestoVecinal()
+        {
+            this.tbDeduccionImpuestoVecinal = new HashSet<tbDeduccionImpuestoVecinal>();
+        }
+    
         public int timv_IdTechoImpuestoVecinal { get; set; }
         public string mun_Codigo { get; set; }
         public Nullable<int> tde_IdTipoDedu { get; set; }
@@ -23,5 +29,7 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbTipoDeduccion tbTipoDeduccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
     }
 }

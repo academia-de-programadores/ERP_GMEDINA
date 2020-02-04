@@ -52,7 +52,6 @@
         public virtual DbSet<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
         public virtual DbSet<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso { get; set; }
         public virtual DbSet<tbAreas> tbAreas { get; set; }
-        public virtual DbSet<tbCargos> tbCargos { get; set; }
         public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
         public virtual DbSet<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
         public virtual DbSet<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
@@ -214,6 +213,8 @@
         public virtual DbSet<tbPagoDeCesantiaEncabezado> tbPagoDeCesantiaEncabezado { get; set; }
         public virtual DbSet<tbTechosComisiones> tbTechosComisiones { get; set; }
         public virtual DbSet<V_tbPagoDeCesantiaDetalle> V_tbPagoDeCesantiaDetalle { get; set; }
+        public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -2794,11 +2795,19 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Delete_Result>("UDP_RRHH_tbCargos_Delete", car_IdParameter, car_razon_InactivoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbCargos_Insert_Result> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Insert_Result> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<decimal> car_SalarioMinimo, Nullable<decimal> car_SalarioMaximo, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
         {
             var car_DescripcionParameter = car_Descripcion != null ?
                 new ObjectParameter("car_Descripcion", car_Descripcion) :
                 new ObjectParameter("car_Descripcion", typeof(string));
+    
+            var car_SalarioMinimoParameter = car_SalarioMinimo.HasValue ?
+                new ObjectParameter("car_SalarioMinimo", car_SalarioMinimo) :
+                new ObjectParameter("car_SalarioMinimo", typeof(decimal));
+    
+            var car_SalarioMaximoParameter = car_SalarioMaximo.HasValue ?
+                new ObjectParameter("car_SalarioMaximo", car_SalarioMaximo) :
+                new ObjectParameter("car_SalarioMaximo", typeof(decimal));
     
             var car_UsuarioCreaParameter = car_UsuarioCrea.HasValue ?
                 new ObjectParameter("car_UsuarioCrea", car_UsuarioCrea) :
@@ -2808,7 +2817,7 @@
                 new ObjectParameter("car_FechaCrea", car_FechaCrea) :
                 new ObjectParameter("car_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Insert_Result>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Insert_Result>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_SalarioMinimoParameter, car_SalarioMaximoParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbCargos_Restore_Result> UDP_RRHH_tbCargos_Restore(Nullable<int> car_Id, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
@@ -2833,7 +2842,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_tbEmpleados_Select_Result>("UDP_RRHH_tbCargos_tbEmpleados_Select");
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbCargos_Update_Result> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Update_Result> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<decimal> car_SalarioMinimo, Nullable<decimal> car_SalarioMaximo, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
         {
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
@@ -2843,6 +2852,14 @@
                 new ObjectParameter("car_Descripcion", car_Descripcion) :
                 new ObjectParameter("car_Descripcion", typeof(string));
     
+            var car_SalarioMinimoParameter = car_SalarioMinimo.HasValue ?
+                new ObjectParameter("car_SalarioMinimo", car_SalarioMinimo) :
+                new ObjectParameter("car_SalarioMinimo", typeof(decimal));
+    
+            var car_SalarioMaximoParameter = car_SalarioMaximo.HasValue ?
+                new ObjectParameter("car_SalarioMaximo", car_SalarioMaximo) :
+                new ObjectParameter("car_SalarioMaximo", typeof(decimal));
+    
             var car_UsuarioModificaParameter = car_UsuarioModifica.HasValue ?
                 new ObjectParameter("car_UsuarioModifica", car_UsuarioModifica) :
                 new ObjectParameter("car_UsuarioModifica", typeof(int));
@@ -2851,7 +2868,7 @@
                 new ObjectParameter("car_FechaModifica", car_FechaModifica) :
                 new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_SalarioMinimoParameter, car_SalarioMaximoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbCompetencias_Delete_Result> UDP_RRHH_tbCompetencias_Delete(Nullable<int> comp_Id, string comp_razon_Inactivo, Nullable<int> comp_UsuarioModifica, Nullable<System.DateTime> comp_FechaModifica)

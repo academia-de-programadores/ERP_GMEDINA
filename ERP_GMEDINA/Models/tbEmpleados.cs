@@ -31,6 +31,7 @@ namespace ERP_GMEDINA.Models
             this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
             this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
             this.tbAcumuladosISR = new HashSet<tbAcumuladosISR>();
+            this.tbDeduccionImpuestoVecinal = new HashSet<tbDeduccionImpuestoVecinal>();
         }
     
         public int emp_Id { get; set; }
@@ -74,7 +75,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
         public virtual tbAreas tbAreas { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
         public virtual tbDepartamentos tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
@@ -108,5 +108,8 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAcumuladosISR> tbAcumuladosISR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
+        public virtual tbCargos tbCargos { get; set; }
     }
 }

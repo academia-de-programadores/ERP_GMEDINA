@@ -17,5 +17,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> hipa_FechaPago { get; set; }
         public Nullable<decimal> hipa_SueldoNeto { get; set; }
         public string peri_DescripPeriodo { get; set; }
+        public string per_Identidad { get; set; }
     }
 }
