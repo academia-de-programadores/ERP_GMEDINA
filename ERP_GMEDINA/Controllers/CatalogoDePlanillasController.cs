@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ERP_GMEDINA.Controllers
@@ -124,7 +124,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetIngresosDeducciones(bool esCrear = true, int id = 0, bool esIngreso = true)
+        public async Task<JsonResult> GetIngresosDeducciones(bool esCrear = true, int id = 0, bool esIngreso = true)
         {
             object json = null;
 
@@ -134,25 +134,25 @@ namespace ERP_GMEDINA.Controllers
                 if (esIngreso)
                 {
                     //Obtener la lista de ingresos de la base de datos
-                    var ingresos = (from catalogoIngresos in db.tbCatalogoDeIngresos
+                    var ingresos = await (from catalogoIngresos in db.tbCatalogoDeIngresos
                                     where catalogoIngresos.cin_Activo == true
                                     select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
                                     {
                                         id = catalogoIngresos.cin_IdIngreso,
                                         descripcion = catalogoIngresos.cin_DescripcionIngreso
-                                    }).ToList();
+                                    }).ToListAsync();
 
                     json = new { data = ingresos };
                 }
                 else
                 {
-                    var deducciones = (from catalogoDeducciones in db.tbCatalogoDeDeducciones
+                    var deducciones = await (from catalogoDeducciones in db.tbCatalogoDeDeducciones
                                        where catalogoDeducciones.cde_Activo == true
                                        select new CatalogoDeIngresosDeduccionesViewModel
                                        {
                                            id = catalogoDeducciones.cde_IdDeducciones,
                                            descripcion = catalogoDeducciones.cde_DescripcionDeduccion
-                                       }).ToList();
+                                       }).ToListAsync();
                     json = new { data = deducciones };
                 }
             }
@@ -464,7 +464,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Edit/5/arrayCatalogoPlanillas/arrayCatalogoIngresos/arrayCatalogoDeducciones
         [HttpPost]
-        public ActionResult Edit(int id, /*El id de la planilla*/ string[] catalogoDePlanillas, /*valor 1:string =  Descripcion de la planilla valor 2:int = Frecuencia en días*/ int[] catalogoIngresos, /*Array de enteros con los id de los ingresos para la planilla*/ int[] catalogoDeducciones /*Array de enteros con los id de las deducciones para la planilla*/, bool checkRecibeComision)
+        public async Task<ActionResult> Edit(int id, /*El id de la planilla*/ string[] catalogoDePlanillas, /*valor 1:string =  Descripcion de la planilla valor 2:int = Frecuencia en días*/ int[] catalogoIngresos, /*Array de enteros con los id de los ingresos para la planilla*/ int[] catalogoDeducciones /*Array de enteros con los id de las deducciones para la planilla*/, bool checkRecibeComision)
         {
             #region Declaracion de Variables
             IEnumerable<object> borrarIngresos = null, //Aquí se almacenara el resultado del procedimiento almacenado para borrar el ingreso
@@ -495,10 +495,10 @@ namespace ERP_GMEDINA.Controllers
                      */
 
                     //Lista de deducciones de la planilla que estan en la base de datos
-                    List<int> listadoDetallePlanillaDeduccionesBaseDeDatos = db.tbTipoPlanillaDetalleDeduccion.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cde_IdDeducciones).ToList();
+                    List<int> listadoDetallePlanillaDeduccionesBaseDeDatos = await db.tbTipoPlanillaDetalleDeduccion.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cde_IdDeducciones).ToListAsync();
 
                     //Lista los ingresos de la planilla que estan en la base de datos
-                    List<int> listadoDetallePlanillaIngresosBaseDeDatos = db.tbTipoPlanillaDetalleIngreso.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cin_IdIngreso).ToList();
+                    List<int> listadoDetallePlanillaIngresosBaseDeDatos = await db.tbTipoPlanillaDetalleIngreso.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cin_IdIngreso).ToListAsync();
 
                     //A este listado despues le elimino los id de las deducciones que no quiero eliminar (ni se insertaran), y los que queden entonces los eliminare
                     List<int> listadoDetallePlanillaDeduccionesDelete = new List<int>(listadoDetallePlanillaDeduccionesBaseDeDatos);
