@@ -53,13 +53,11 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Total Comisión")]
         [Required(ErrorMessage = "Campo porcentaje comisión requerido")]
-        [Range(0, 100, ErrorMessage = "El {0} debe estar entre {1} y {2}")]
         public decimal cc_TotalComision { get; set; }
 
 
         [Display(Name = "Total Venta")]
         [Required(ErrorMessage = "Campo total venta requerido")]
-        [Range(1, 99999999.99, ErrorMessage = "El campo {0} debe ser mayor que cero")]   
         public decimal cc_TotalVenta { get; set; }
 
         public virtual tbUsuario tbUsuario { get; set; }

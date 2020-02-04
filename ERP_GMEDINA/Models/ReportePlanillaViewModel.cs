@@ -14,8 +14,6 @@ namespace ERP_GMEDINA.Models
         public decimal SalarioHora { get; set; }
         public decimal totalSalario { get; set; }
         public string tipoPlanilla { get; set; }
-        public decimal? procentajeComision { get; set; }
-        public decimal? totalVentas { get; set; }
         public decimal? totalComisiones { get; set; }
         public int? horasExtras { get; set; }
         public decimal? totalHorasPermiso { get; set; }

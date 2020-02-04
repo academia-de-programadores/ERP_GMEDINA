@@ -34,7 +34,7 @@ namespace ERP_GMEDINA.Helpers
                         listaErrores.Add(new ViewModelListaErrores
                         {
                             Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                             Error = "Error al Enviar comprobante de pago.",
                             PosibleSolucion = "Verifique que la información del perfil del colaborador esté completa y/o correcta."
 
@@ -53,7 +53,7 @@ namespace ERP_GMEDINA.Helpers
                     listaErrores.Add(new ViewModelListaErrores
                     {
                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                         Error = "Error al Enviar comprobante de pago.",
                         PosibleSolucion = "Verifique que la información del perfil del colaborador esté completa y/o correcta."
 
