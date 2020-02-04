@@ -85,7 +85,7 @@
 							@Html.LabelFor(model => model.dex_DeducirISR)
 						</div>
 						<div class="col-md-6">
-							<input type="checkbox" class="icheckbox_square-green" name="dex_DeducirISR" id="dex_DeducirISR">
+							<input type="checkbox" checked="@Model.dex_DeducirISR" class="icheckbox_square-green" name="dex_DeducirISR" id="dex_DeducirISR">
 						</div>
 					</div>
 
@@ -105,6 +105,9 @@
 @section Scripts {
 	@Scripts.Render("~/plugins/dataTables")
 	@Scripts.Render("~/plugins/iCheck")
+	<script>
+		localStorage.setItem('idEmpleado', '@Model.eqem_Id')
+	</script>
 	@Scripts.Render("~/Scripts/app/general/DeduccionesExtraordinarias")
 	@Scripts.Render("~/plugins/select2")
 }
@@ -115,3 +118,4 @@
 	@Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
 	@Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
+

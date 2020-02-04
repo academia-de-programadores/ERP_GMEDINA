@@ -752,6 +752,12 @@ $(document).ready(function () {
 				},
 				data: data.results
 			});
-			$("#eqem_Id").val('').trigger('change.select2');
+			let idEmpleado = localStorage.getItem('idEmpleado');
+			if (idEmpleado == null || idEmpleado == "") {
+				$("#eqem_Id").val('').trigger('change.select2');
+			} else {
+				$("#eqem_Id option[value='" + idEmpleado + "']").remove().trigger('change.select2');
+				localStorage.removeItem('idEmpleado');
+			}
 		});
 });
