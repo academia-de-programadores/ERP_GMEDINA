@@ -111,7 +111,6 @@ namespace ERP_GMEDINA.Controllers
                                         pdcd_IdCesantiaDetalle,
                                         emp_Id,
                                         pdcd_TotalCesantiaColaborador,
-                                        pdcd_CodigoPlanillaCesantias,
                                         pdce_IdCesantiaEncabezado,
                                         pdcd_DiasPagados,
                                         pdcd_ConSueldoBruto,
@@ -123,7 +122,6 @@ namespace ERP_GMEDINA.Controllers
                                         (SELECT ISNULL(MAX(pdcd_IdCesantiaDetalle) + 1, 1) FROM [Plani].[tbPagoDeCesantiaDetalle]),
                                         @empId,
                                         @totalCesantia,
-                                        @codigoPlanillaCesantia,
                                         @idEncabezado,
                                         @diasPagados,
                                         @sueldoBruto,
@@ -175,7 +173,7 @@ namespace ERP_GMEDINA.Controllers
                     #endregion
 
                     //GENERAR CÓDIGO DE PLANILLA
-                    string codigoPlanillaCesantia = "CSC-" + idEncabezado + FechaActual.Month + "-" + FechaActual.Year;
+                    string codigoPlanillaCesantia = "CSC" + idEncabezado + "-" + FechaActual.Day + FechaActual.Month + "-" + FechaActual.Year;
 
                     #region Insertar en el encabezado
                     using (SqlCommand command = new SqlCommand(queryEncabezado, connection, transaccion))
@@ -210,7 +208,6 @@ namespace ERP_GMEDINA.Controllers
                         {
                             command.Parameters.AddWithValue("@empId", item.NoColaborador);
                             command.Parameters.AddWithValue("@totalCesantia", item.TotalCesantiaPRO);
-                            command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
                             command.Parameters.AddWithValue("@idEncabezado", idEncabezado);
                             command.Parameters.AddWithValue("@diasPagados", item.DiasPagados);
                             command.Parameters.AddWithValue("@sueldoBruto", item.SueldoBrutoDiario);
