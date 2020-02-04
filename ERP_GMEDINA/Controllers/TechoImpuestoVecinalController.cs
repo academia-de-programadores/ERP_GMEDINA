@@ -180,8 +180,17 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
+        public ActionResult Edit(int timv_IdTechoImpuestoVecinal, string mun_Codigo, int tde_IdTipoDedu, decimal timv_RangoInicio, decimal timv_RangoFin, decimal timv_Rango, decimal timv_Impuesto)
         {
+            tbTechoImpuestoVecinal tbTechoImpuestoVecinal = new tbTechoImpuestoVecinal() {
+                timv_IdTechoImpuestoVecinal = timv_IdTechoImpuestoVecinal,
+                mun_Codigo = mun_Codigo,
+                timv_RangoInicio = timv_RangoInicio,
+                timv_RangoFin = timv_RangoFin,
+                timv_Rango = timv_Rango,
+                timv_Impuesto = timv_Impuesto,
+                tde_IdTipoDedu = tde_IdTipoDedu
+            };
             // variables de auditoria
             tbTechoImpuestoVecinal.timv_UsuarioModifica = 1;
             tbTechoImpuestoVecinal.timv_FechaModifica = DateTime.Now;
