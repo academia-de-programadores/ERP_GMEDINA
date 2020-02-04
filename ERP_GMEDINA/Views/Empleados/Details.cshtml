@@ -283,7 +283,7 @@
             <div class="row">
              <div class="col-md-6">
               <h3><a class="nav-link active" data-toggle="tab" href="#tab-1"><i class="fa fa-folder-open"></i>Expediente Actual</a></h3>
-              <div class="dd" id="nestable" style="overflow:auto; max-height:400px">
+              <div class="dd" id="nestable" style="overflow:auto; max-height:428px">
                <div class="dd" id="nestable2">
                 <ol class="dd-list" id="ArchivosList">
                  <li class="dd-item dd-collapsed" data-id="TipoArchivoAmonestaciones" id="TipoArchivoAmonestaciones">
@@ -349,6 +349,15 @@
                   </div>
                   <ol class="dd-list" id="ListArchivos_Personales" name="ListArchivos_Personales" style="display:none"></ol>
                  </li>
+                <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_de_Finalizacion_Laboral" id="TipoArchivoArchivos_de_Finalizacion_Laboral">
+                    <button data-action="collapse" id="btnMenosArchivos_de_Finalizacion_Laboral" name="btnMenosArchivos_de_Finalizacion_Laboral" onclick="CloseTag('Archivos_de_Finalizacion_Laboral')" type="button" style="display: none;">Collapse</button>
+                    <button data-action="expand" id="btnMasArchivos_de_Finalizacion_Laboral" name="btnMasArchivos_de_Finalizacion_Laboral" onclick="OpenTag('Archivos_de_Finalizacion_Laboral')" type="button" style="">Expand</button>
+                    <div class="dd-handle">
+                        <span class="label label-info"><i class="fa fa-file"></i> </span> Archivos_de_Finalizacion_Laboral
+                        @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_de_Finalizacion_Laboral" onclick="DescargarTodo('Archivos_de_Finalizacion_Laboral')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                    </div>
+                    <ol class="dd-list" id="ListArchivos_de_Finalizacion_Laboral" name="ListArchivos_de_Finalizacion_Laboral" style="display:none"></ol>
+                </li>
                  <li class="dd-item dd-collapsed" data-id="TipoArchivoOtros" id="TipoArchivoOtros">
                   <button data-action="collapse" id="btnMenosOtros" name="btnMenosOtros" onclick="CloseTag('Otros')" type="button" style="display: none;">Collapse</button>
                   <button data-action="expand" id="btnMasOtros" name="btnMasOtros" onclick="OpenTag('Otros')" type="button" style="">Expand</button>
@@ -366,7 +375,7 @@
              <div class="col-md-6" id="ExpedienteViejoNestable" hidden="hidden">
               <h3><a class="nav-link active" data-toggle="tab" href="#tab-1"><i class="fa fa-folder-open-o"></i>Expediente Antiguo</a></h3>
 
-              <div class="dd" id="nestable" style="overflow:auto; max-height:400px">
+              <div class="dd" id="nestable" style="overflow:auto; max-height:428px">
                <div class="dd" id="nestable2">
                 <ol class="dd-list" id="ArchivosList">
                  <li class="dd-item dd-collapsed" data-id="TipoArchivoAmonestacionesExpedienteViejo" id="TipoArchivoAmonestacionesExpedienteViejo">
@@ -432,6 +441,15 @@
                   </div>
                   <ol class="dd-list" id="ListArchivos_PersonalesExpedienteViejo" name="ListArchivos_PersonalesExpedienteViejo" style="display:none"></ol>
                  </li>
+                <li class="dd-item dd-collapsed" data-id="TipoArchivoArchivos_de_Finalizacion_LaboralExpedienteViejo" id="TipoArchivoArchivos_de_Finalizacion_LaboralExpedienteViejo">
+                    <button data-action="collapse" id="btnMenosArchivos_de_Finalizacion_LaboralExpedienteViejo" name="btnMenosArchivos_de_Finalizacion_LaboralExpedienteViejo" onclick="CloseTag('Archivos_de_Finalizacion_LaboralExpedienteViejo')" type="button" style="display: none;">Collapse</button>
+                    <button data-action="expand" id="btnMasArchivos_de_Finalizacion_LaboralExpedienteViejo" name="btnMasArchivos_de_Finalizacion_LaboralExpedienteViejo" onclick="OpenTag('Archivos_de_Finalizacion_LaboralExpedienteViejo')" type="button" style="">Expand</button>
+                    <div class="dd-handle">
+                        <span class="label label-info"><i class="fa fa-file"></i> </span> Archivos_de_Finalizacion_Laboral
+                        @*<span class="pull-right">  <a href="#" id="descargarTodoArchivos_de_Finalizacion_Laboral" onclick="DescargarTodo('Archivos_de_Finalizacion_Laboral')" class="btn btn-info btn-xs fa fa-download"></a></span>*@
+                    </div>
+                    <ol class="dd-list" id="ListArchivos_de_Finalizacion_LaboralExpedienteViejo" name="ListArchivos_de_Finalizacion_LaboralExpedienteViejo" style="display:none"></ol>
+                </li>
                  <li class="dd-item dd-collapsed" data-id="TipoArchivoOtrosExpedienteViejo" id="TipoArchivoOtrosExpedienteViejo">
                   <button data-action="collapse" id="btnMenosOtrosExpedienteViejo" name="btnMenosOtrosExpedienteViejo" onclick="CloseTag('OtrosExpedienteViejo')" type="button" style="display: none;">Collapse</button>
                   <button data-action="expand" id="btnMasOtrosExpedienteViejo" name="btnMasOtrosExpedienteViejo" onclick="OpenTag('OtrosExpedienteViejo')" type="button" style="">Expand</button>
