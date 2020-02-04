@@ -388,9 +388,11 @@ namespace ERP_GMEDINA.Controllers
             // instancias para el reporte final
             ReportePlanillaViewModel oPlanillaEmpleado;
             List<ReportePlanillaViewModel> reporte = new List<ReportePlanillaViewModel>();
+            ViewModelListaErrores oError;
+            List<ViewModelListaErrores> listaErrores = new List<ViewModelListaErrores>();
 
             // instancia para resultado del proceso en izitoast
-           General.iziToast  response = new General.iziToast();
+            General.iziToast  response = new General.iziToast();
             int errores = 0;
             #endregion
 
@@ -444,6 +446,8 @@ namespace ERP_GMEDINA.Controllers
                                 {
                                     try
                                     {
+                                        #region RESPALDO POR SI LO ARRUINO 
+
                                         #region variables reporte view model
 
                                         string codColaborador = string.Empty,
@@ -460,8 +464,7 @@ namespace ERP_GMEDINA.Controllers
                                             horasExtrasTrabajadas = 0,
                                             cantidadUnidadesBonos = 0;
 
-                                        decimal? porcentajeComision = 0,
-                                            totalVentas = 0,
+                                        decimal?
                                             totalComisiones = 0,
                                             totalHorasExtras = 0,
                                             totalHorasPermiso = 0,
@@ -483,15 +486,65 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         V_InformacionColaborador InformacionDelEmpleadoActual;
-                                        Ingresos.ProcesarIngresosParaPrevisualizacion(fechaInicio, fechaFin, db, empleadoActual, out SalarioBase, out horasTrabajadas, out salarioHora, out totalSalario, ref totalComisiones, out horasExtrasTrabajadas, ref cantidadUnidadesBonos, ref totalHorasExtras, ref totalHorasPermiso, ref totalBonificaciones, ref totalIngresosIndivuales, ref totalVacaciones, out totalIngresosEmpleado, out InformacionDelEmpleadoActual);
+                                        decimal resultSeptimoDia = 0;
 
-                                        Deducciones.ProcesarDeduccionesParaPrevisualizacion(fechaInicio, fechaFin, db, oDeducciones, empleadoActual, SalarioBase, totalIngresosEmpleado, ref colaboradorDeducciones, ref totalAFP, ref totalInstitucionesFinancieras, ref totalOtrasDeducciones, ref adelantosSueldo, out totalDeduccionesEmpleado, ref totalDeduccionesIndividuales, out netoAPagarColaborador);
+                                        // procesa ingresos
+                                        Ingresos.PrevisualizarProcesarIngresos(fechaInicio,
+                                               fechaFin,
+                                               listaErrores,
+                                               ref errores,
+                                               db,
+                                               empleadoActual,
+                                               ref SalarioBase,
+                                               out horasTrabajadas,
+                                               ref salarioHora,
+                                               ref totalSalario,
+                                               ref totalComisiones,
+                                               out horasExtrasTrabajadas,
+                                               ref cantidadUnidadesBonos,
+                                               ref totalHorasExtras,
+                                               ref totalHorasPermiso,
+                                               ref totalBonificaciones,
+                                               ref totalIngresosIndivuales,
+                                               ref totalVacaciones,
+                                               out totalIngresosEmpleado,
+                                               out InformacionDelEmpleadoActual,
+                                               out resultSeptimoDia);
+
+                                        // procesar deducciones
+                                        Deducciones.PrevisualizarProcesarDeducciones(fechaInicio,
+                                             fechaFin,
+                                             listaErrores,
+                                             ref errores,
+                                             db,
+                                             oDeducciones,
+                                             empleadoActual,
+                                             SalarioBase,
+                                             totalIngresosEmpleado,
+                                             ref colaboradorDeducciones,
+                                             ref totalAFP,
+                                             ref totalInstitucionesFinancieras,
+                                             ref totalOtrasDeducciones,
+                                             ref adelantosSueldo,
+                                             out totalDeduccionesEmpleado,
+                                             ref totalDeduccionesIndividuales,
+                                             out netoAPagarColaborador,
+                                             InformacionDelEmpleadoActual);
+
+                                        //Deducciones.ProcesarDeduccionesParaPrevisualizacion(fechaInicio, fechaFin, db, oDeducciones, empleadoActual, SalarioBase, totalIngresosEmpleado, ref colaboradorDeducciones, ref totalAFP, ref totalInstitucionesFinancieras, ref totalOtrasDeducciones, ref adelantosSueldo, out totalDeduccionesEmpleado, ref totalDeduccionesIndividuales, out netoAPagarColaborador);
+
+                                        // procesar isr
                                         totalISR = CalculoISR.CalcularISRParaPrevisualizacion(db, empleadoActual, totalSalario, totalISR);
 
                                         #region crear registro de la planilla del colaborador para el reporte
-                                        ReportePlanilla.ReportePlanillaPrevisualizacion(ref oPlanillaEmpleado, empleadoActual, SalarioBase, horasTrabajadas, salarioHora, totalSalario, porcentajeComision, totalVentas, totalComisiones, horasExtrasTrabajadas, totalHorasExtras, totalHorasPermiso, totalBonificaciones, totalIngresosIndivuales, totalVacaciones, totalIngresosEmpleado, totalISR, colaboradorDeducciones, totalAFP, totalInstitucionesFinancieras, totalOtrasDeducciones, adelantosSueldo, totalDeduccionesEmpleado, totalDeduccionesIndividuales, netoAPagarColaborador, InformacionDelEmpleadoActual);
+                                        
+                                        // reporte
+                                        ReportePlanilla.ReportePlanillaPrevisualizacion(ref oPlanillaEmpleado, empleadoActual, SalarioBase, horasTrabajadas, salarioHora, totalSalario, totalComisiones, horasExtrasTrabajadas, totalHorasExtras, totalHorasPermiso, totalBonificaciones, totalIngresosIndivuales, totalVacaciones, totalIngresosEmpleado, totalISR, colaboradorDeducciones, totalAFP, totalInstitucionesFinancieras, totalOtrasDeducciones, adelantosSueldo, totalDeduccionesEmpleado, totalDeduccionesIndividuales, netoAPagarColaborador, InformacionDelEmpleadoActual);
                                         reporte.Add(oPlanillaEmpleado);
                                         oPlanillaEmpleado = null;
+                                        #endregion
+
+
                                         #endregion
 
                                     }
@@ -529,7 +582,7 @@ namespace ERP_GMEDINA.Controllers
             #endregion
 
             // retornar resultado del proceso
-            return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
+            return Json(new { Data = reporte, listaDeErrores = listaErrores, Response = response }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

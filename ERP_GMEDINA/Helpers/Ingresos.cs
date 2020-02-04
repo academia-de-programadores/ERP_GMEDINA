@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Helpers
                 listaErrores.Add(new ViewModelListaErrores
                 {
                     Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                     Error = "Error al recuperar sueldo. Perfil del colaborador incompleto o incorrecto",
                     PosibleSolucion = "Verifique que la información del perfil del colaborador esté completa y/o correcta."
 
@@ -51,14 +51,14 @@ namespace ERP_GMEDINA.Helpers
             // salario por hora
             try
             {
-                salarioHora = SalarioBase / 240;
+                salarioHora = Math.Round(SalarioBase / 240,2);
             }
             catch (Exception ex)
             {
                 listaErrores.Add(new ViewModelListaErrores
                 {
                     Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                     Error = "Error al calcular sueldo por hora. Perfil del colaborador incompleto o incorrecto",
                     PosibleSolucion = "Verifique que perfil del colaborador (sueldo) esté completo y/o correcto."
 
@@ -84,7 +84,7 @@ namespace ERP_GMEDINA.Helpers
                 listaErrores.Add(new ViewModelListaErrores
                 {
                     Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                     Error = "Error al calcular sueldo bruto.",
                     PosibleSolucion = "Verifique que el sueldo del colaborador esté completo y/o correcto."
 
@@ -123,13 +123,14 @@ namespace ERP_GMEDINA.Helpers
                         });
 
                     }
+                    totalHorasPermiso = Math.Round(totalHorasPermiso.Value, 2);
                 }
                 catch (Exception ex)
                 {
                     listaErrores.Add(new ViewModelListaErrores
                     {
                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                         Error = "Error al procesar horas con permiso.",
                         PosibleSolucion = "Verifique que las horas con permiso sean correctas."
 
@@ -177,7 +178,7 @@ namespace ERP_GMEDINA.Helpers
                             listaErrores.Add(new ViewModelListaErrores
                             {
                                 Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                                 Error = $"Error al procesar comisión número {oComisionesColaboradoresIterador.cc_Id}, con total venta: {oComisionesColaboradoresIterador.cc_TotalVenta}, total comsión: {oComisionesColaboradoresIterador.cc_TotalComision}.",
                                 PosibleSolucion = "Verifique que laa comisión fue registradaa al colaborador de forma correcta."
 
@@ -192,7 +193,7 @@ namespace ERP_GMEDINA.Helpers
                     listaErrores.Add(new ViewModelListaErrores
                     {
                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                         Error = "Error al procesar las comisiones del colaborador.",
                         PosibleSolucion = "Verifique que las comisiones registradas al colaborador sean las correctas."
 
@@ -262,7 +263,7 @@ namespace ERP_GMEDINA.Helpers
                             listaErrores.Add(new ViewModelListaErrores
                             {
                                 Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                                 Error = $"Error al cargar horas extras registradas el dia {iterHorasExtras.htra_Fecha}, cantidad: {iterHorasExtras.htra_CantidadHoras}.",
                                 PosibleSolucion = "Verifique que las horas registradas al colaborador sean las correctas."
 
@@ -283,7 +284,7 @@ namespace ERP_GMEDINA.Helpers
                     listaErrores.Add(new ViewModelListaErrores
                     {
                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                         Error = "Error al calcular horas extras.",
                         PosibleSolucion = "Verifique que las horas registradas al colaborador sean las correctas."
 
@@ -342,7 +343,7 @@ namespace ERP_GMEDINA.Helpers
                             listaErrores.Add(new ViewModelListaErrores
                             {
                                 Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                                 Error = $"Error al cargar bono número {oBonosColaboradoresIterador.cb_Id}, con monto: {oBonosColaboradoresIterador.cb_Monto}.",
                                 PosibleSolucion = "Verifique que el bono registrado al colaborador esté completo y/o correcto."
 
@@ -357,7 +358,7 @@ namespace ERP_GMEDINA.Helpers
                     listaErrores.Add(new ViewModelListaErrores
                     {
                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                         Error = "Error al calcular bonos.",
                         PosibleSolucion = "Verifique que los bonos registrados al colaborador esté completos y/o correctos."
 
@@ -417,7 +418,7 @@ namespace ERP_GMEDINA.Helpers
                             listaErrores.Add(new ViewModelListaErrores
                             {
                                 Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                                 Error = $"Error al cargar vaciones registradas {oVacacionesColaboradoresIterador.hvac_FechaCrea}, con fecha de inicio: {oVacacionesColaboradoresIterador.hvac_FechaInicio} y fecha fin {oVacacionesColaboradoresIterador.hvac_FechaFin}.",
                                 PosibleSolucion = "Verifique que los rangos de fecha registrados son correctos."
 
@@ -432,7 +433,7 @@ namespace ERP_GMEDINA.Helpers
                     listaErrores.Add(new ViewModelListaErrores
                     {
                         Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                         Error = "Error al calcular pago de vaciones.",
                         PosibleSolucion = "Verifique que los rangos de fecha registrados son correctos."
 
@@ -462,9 +463,12 @@ namespace ERP_GMEDINA.Helpers
                             totalIngresosIndivuales += Math.Round(oIngresosIndiColaboradoresIterador.ini_Monto.Value, 2);
 
                             //pasar el bono a pagado
-                            oIngresosIndiColaboradoresIterador.ini_Pagado = true;
-                            oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
-                            db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+                            if (oIngresosIndiColaboradoresIterador.ini_PagaSiempre == false)
+                            {
+                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;
+                                oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
+                                db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+                            }
 
                             //agregarlo al voucher
                             ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
@@ -478,8 +482,8 @@ namespace ERP_GMEDINA.Helpers
                             listaErrores.Add(new ViewModelListaErrores
                             {
                                 Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
-                                Error = $"Error al procesar ingreso inidividual número {oIngresosIndiColaboradoresIterador.ini_IdIngresosIndividuales}, con motivo {oIngresosIndiColaboradoresIterador.ini_Motivo} y monto: {oIngresosIndiColaboradoresIterador.ini_Monto}.",
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al procesar ingreso inidividual número {oIngresosIndiColaboradoresIterador.ini_IdIngresosIndividuales}, con motivo {oIngresosIndiColaboradoresIterador.ini_Motivo}, con monto: {oIngresosIndiColaboradoresIterador.ini_Monto}.",
                                 PosibleSolucion = "Verifique la información de dichos ingresos sea correcta."
 
                             });
@@ -556,7 +560,7 @@ namespace ERP_GMEDINA.Helpers
                 listaErrores.Add(new ViewModelListaErrores
                 {
                     Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
                     Error = "Error al calcular séptimo día.",
                     PosibleSolucion = "Verifique que la información en el historial de horas trabajadas del colaborador esté correcta."
 
@@ -568,7 +572,7 @@ namespace ERP_GMEDINA.Helpers
             #endregion
 
             // total ingresos
-            totalIngresosEmpleado = totalIngresosIndivuales + totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones + totalHorasPermiso + resultSeptimoDia;
+            totalIngresosEmpleado =Math.Round(totalIngresosIndivuales.Value + totalSalario + totalComisiones.Value + totalHorasExtras.Value + totalBonificaciones.Value + totalVacaciones.Value + totalHorasPermiso.Value + resultSeptimoDia,2);
 
             #endregion
         }
@@ -806,5 +810,511 @@ namespace ERP_GMEDINA.Helpers
 
             #endregion
         }
+
+
+        #region  procesar ingresos previsualización
+
+        public static void PrevisualizarProcesarIngresos(DateTime fechaInicio, DateTime fechaFin,  List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
+        {
+            #region Procesar ingresos
+
+            // informacion del colaborador actual
+            InformacionDelEmpleadoActual = db.V_InformacionColaborador
+                                                                      .Where(x => x.emp_Id == empleadoActual.emp_Id)
+                                                                      .FirstOrDefault();
+
+            // salario base del colaborador actual
+            try
+            {
+                SalarioBase = Math.Round(InformacionDelEmpleadoActual.SalarioBase.Value, 2);
+            }
+            catch (Exception ex)
+            {
+                listaErrores.Add(new ViewModelListaErrores
+                {
+                    Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                    Error = "Error al recuperar sueldo. Perfil del colaborador incompleto o incorrecto",
+                    PosibleSolucion = "Verifique que la información del perfil del colaborador esté completa y/o correcta."
+
+                });
+                errores++;
+            }
+
+            // horas normales trabajadas
+            horasTrabajadas = db.tbHistorialHorasTrabajadas
+                                .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                       x.htra_Estado == true &&
+                                       x.tbTipoHoras.tiho_Recargo == 0 &&
+                                       x.htra_Fecha >= fechaInicio &&
+                                       x.htra_Fecha <= fechaFin)
+                                .Select(x => x.htra_CantidadHoras)
+                                .DefaultIfEmpty(0)
+                                .Sum();
+
+
+            // salario por hora
+            try
+            {
+                salarioHora = Math.Round(SalarioBase / 240);
+            }
+            catch (Exception ex)
+            {
+                listaErrores.Add(new ViewModelListaErrores
+                {
+                    Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                    Error = "Error al calcular sueldo por hora. Perfil del colaborador incompleto o incorrecto",
+                    PosibleSolucion = "Verifique que perfil del colaborador (sueldo) esté completo y/o correcto."
+
+                });
+                errores++;
+            }
+
+
+            // total salario o sueldo bruto
+            try
+            {
+                totalSalario = Math.Round((Decimal)salarioHora * horasTrabajadas, 2);
+            }
+            catch (Exception ex)
+            {
+                listaErrores.Add(new ViewModelListaErrores
+                {
+                    Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                    Error = "Error al calcular sueldo bruto.",
+                    PosibleSolucion = "Verifique que el sueldo del colaborador esté completo y/o correcto."
+
+                });
+                errores++;
+            }
+
+
+            // horas con permiso justificado
+            List<tbHistorialPermisos> horasConPermiso = db.tbHistorialPermisos
+                                                          .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                 x.hper_Estado == true &&
+                                                                 x.hper_fechaInicio >= fechaInicio &&
+                                                                 x.hper_fechaFin <= fechaFin)
+                                                          .ToList();
+
+            if (horasConPermiso.Count > 0)
+            {
+                // sumar todas las horas con permiso
+                try
+                {
+                    int CantidadHorasPermisoActual = 0;
+                    foreach (var iterHorasPermiso in horasConPermiso)
+                    {
+                        try
+                        {
+                            CantidadHorasPermisoActual = iterHorasPermiso.hper_Duracion;
+
+                            totalHorasPermiso += CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100));
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al procesa hora con permiso registrada el: {iterHorasPermiso.hper_FechaCrea}, con duracion: {iterHorasPermiso.hper_Duracion}, inicio: {iterHorasPermiso.hper_fechaInicio}, finaliza: {iterHorasPermiso.hper_fechaFin}",
+                                PosibleSolucion = "Verifique que dichas horas con permiso hayan sido registradas de forma correcta."
+
+                            });
+                            errores++;
+                        }
+
+                    }
+                    totalHorasPermiso = Math.Round(totalHorasPermiso.Value,2);
+                }
+                catch (Exception ex)
+                {
+                    listaErrores.Add(new ViewModelListaErrores
+                    {
+                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                        Error = "Error al procesar horas con permiso.",
+                        PosibleSolucion = "Verifique que las horas con permiso sean correctas."
+
+                    });
+                    errores++;
+                }
+
+            }
+
+            // comisiones
+            List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones
+                                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                           x.cc_Activo == true &&
+                                                                           x.cc_Pagado == false &&
+                                                                           x.cc_FechaRegistro >= fechaInicio &&
+                                                                           x.cc_FechaRegistro <= fechaFin)
+                                                                    .ToList();
+            if (oComisionesColaboradores.Count > 0)
+            {
+
+                // sumar todas las comisiones
+                try
+                {
+                    foreach (var oComisionesColaboradoresIterador in oComisionesColaboradores)
+                    {
+                        try
+                        {
+                            totalComisiones += oComisionesColaboradoresIterador.cc_TotalComision;
+
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al procesar comisión número {oComisionesColaboradoresIterador.cc_Id}, con total venta: {oComisionesColaboradoresIterador.cc_TotalVenta}, total comsión: {oComisionesColaboradoresIterador.cc_TotalComision}.",
+                                PosibleSolucion = "Verifique que laa comisión fue registradaa al colaborador de forma correcta."
+
+                            });
+                            errores++;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    listaErrores.Add(new ViewModelListaErrores
+                    {
+                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                        Error = "Error al procesar las comisiones del colaborador.",
+                        PosibleSolucion = "Verifique que las comisiones registradas al colaborador sean las correctas."
+
+                    });
+                    errores++;
+                }
+            }
+
+            // horas extras
+            horasExtrasTrabajadas = 0;
+            try
+            {
+                horasExtrasTrabajadas = db.tbHistorialHorasTrabajadas
+                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                            x.htra_Estado == true &&
+                                            x.tbTipoHoras.tiho_Recargo > 0 &&
+                                            x.htra_Fecha >= fechaInicio &&
+                                            x.htra_Fecha <= fechaFin)
+                                    .Select(x => x.htra_CantidadHoras)
+                                    .DefaultIfEmpty(0)
+                                    .Sum();
+            }
+            catch (Exception ex)
+            {
+                listaErrores.Add(new ViewModelListaErrores
+                {
+                    Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                    Error = "Error al cargar las horas extras del colaborador.",
+                    PosibleSolucion = "Verifique que las horas extras hayan sido registradas al colaborador de forma correcta."
+
+                });
+                errores++;
+            }
+            
+
+            // total ingresos horas extras
+            List<tbHistorialHorasTrabajadas> oHorasExtras = db.tbHistorialHorasTrabajadas
+                                                            .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                   x.htra_Estado == true &&
+                                                                   x.tbTipoHoras.tiho_Recargo > 0 &&
+                                                                   x.htra_Fecha >= fechaInicio &&
+                                                                   x.htra_Fecha <= fechaFin)
+                                                            .ToList();
+            if (oHorasExtras.Count > 0)
+            {
+                int CantidadHorasExtrasActual = 0;
+
+                try
+                {
+                    // sumar todas las horas extras
+                    foreach (var iterHorasExtras in oHorasExtras)
+                    {
+                        try
+                        {
+                            CantidadHorasExtrasActual = db.tbHistorialHorasTrabajadas
+                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.htra_Id == iterHorasExtras.htra_Id)
+                                                    .Select(x => x.htra_CantidadHoras)
+                                                    .DefaultIfEmpty(0)
+                                                    .Sum();
+
+                            totalHorasExtras += Math.Round(CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al cargar horas extras registradas: {iterHorasExtras.htra_Fecha}, cantidad: {iterHorasExtras.htra_CantidadHoras}.",
+                                PosibleSolucion = "Verifique que las horas registradas al colaborador sean las correctas."
+
+                            });
+                            errores++;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    listaErrores.Add(new ViewModelListaErrores
+                    {
+                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                        Error = "Error al procesar horas extras.",
+                        PosibleSolucion = "Verifique que las horas extras hayan sido registradas al colaborador de forma correcta."
+
+                    });
+                    errores++;
+                }
+            }
+
+            // bonos del colaborador
+            List<tbEmpleadoBonos> oBonosColaboradores = db.tbEmpleadoBonos
+                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                               x.cb_Activo == true &&
+                                                               x.cb_Pagado == false &&
+                                                               x.cb_FechaRegistro >= fechaInicio &&
+                                                               x.cb_FechaRegistro <= fechaFin)
+                                                        .ToList();
+
+
+            if (oBonosColaboradores.Count > 0)
+            {
+
+                try
+                {
+                    cantidadUnidadesBonos = oBonosColaboradores.Count;
+
+                    // iterar los bonos
+                    foreach (var oBonosColaboradoresIterador in oBonosColaboradores)
+                    {
+                        try
+                        {
+                            totalBonificaciones += Math.Round(oBonosColaboradoresIterador.cb_Monto.Value, 2);
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al cargar bono número {oBonosColaboradoresIterador.cb_Id}, con monto: {oBonosColaboradoresIterador.cb_Monto}.",
+                                PosibleSolucion = "Verifique que el bono registrado al colaborador esté completo y/o correcto."
+
+                            });
+                            errores++;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    listaErrores.Add(new ViewModelListaErrores
+                    {
+                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                        Error = "Error al calcular bonos.",
+                        PosibleSolucion = "Verifique que los bonos registrados al colaborador esté completos y/o correctos."
+
+                    });
+                    errores++;
+                }
+            }
+
+            // vacaciones
+            List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones
+                                                                    .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                           x.hvac_DiasPagados == false &&
+                                                                           x.hvac_Estado == true &&
+                                                                           x.hvac_FechaInicio >= fechaInicio &&
+                                                                           x.hvac_FechaFin <= fechaFin)
+                                                                    .ToList();
+            if (oVacacionesColaboradores.Count > 0)
+            {
+
+                try
+                {
+                    // sumar todas las comisiones
+                    foreach (var oVacacionesColaboradoresIterador in oVacacionesColaboradores)
+                    {
+                        try
+                        {
+                            int cantidadDias = 0;
+                            DateTime VacacionesfechaInicio;
+                            DateTime VacacionesfechaFin;
+
+                            VacacionesfechaInicio = (from tbEmpVac in db.tbHistorialVacaciones
+                                                     where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                     select tbEmpVac.hvac_FechaInicio).FirstOrDefault();
+
+                            VacacionesfechaFin = (from tbEmpVac in db.tbHistorialVacaciones
+                                                  where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                  select tbEmpVac.hvac_FechaFin).FirstOrDefault();
+
+                            TimeSpan restaFechas = VacacionesfechaFin - VacacionesfechaInicio;
+                            cantidadDias = restaFechas.Days;
+
+                            totalVacaciones += Math.Round((salarioHora * 8) * cantidadDias, 2);
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al cargar vaciones registradas {oVacacionesColaboradoresIterador.hvac_FechaCrea}, con fecha de inicio: {oVacacionesColaboradoresIterador.hvac_FechaInicio} y fecha fin {oVacacionesColaboradoresIterador.hvac_FechaFin}.",
+                                PosibleSolucion = "Verifique que los rangos de fecha registrados son correctos."
+
+                            });
+                            errores++;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    listaErrores.Add(new ViewModelListaErrores
+                    {
+                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                        Error = "Error al procesar pago de vaciones.",
+                        PosibleSolucion = "Verifique que los rangos de fecha registrados son correctos. Verifique que las vacacionese se hayan registrado de forma correcta."
+
+                    });
+                    errores++;
+                }
+            }
+
+            // ingresos individuales
+            List<tbIngresosIndividuales> oIngresosIndiColaboradores = db.tbIngresosIndividuales
+                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                               x.ini_Activo == true &&
+                                                                               x.ini_Pagado != true &&
+                                                                               x.ini_FechaCrea >= fechaInicio &&
+                                                                               x.ini_FechaCrea <= fechaFin)
+                                                                        .ToList();
+
+            if (oIngresosIndiColaboradores.Count > 0)
+            {
+                try
+                {
+                    //iterar los bonos
+                    foreach (var oIngresosIndiColaboradoresIterador in oIngresosIndiColaboradores)
+                    {
+                        try
+                        {
+                            totalIngresosIndivuales += Math.Round(oIngresosIndiColaboradoresIterador.ini_Monto.Value, 2);
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al procesar ingreso inidividual número {oIngresosIndiColaboradoresIterador.ini_IdIngresosIndividuales}, con motivo {oIngresosIndiColaboradoresIterador.ini_Motivo} y monto: {oIngresosIndiColaboradoresIterador.ini_Monto}.",
+                                PosibleSolucion = "Verifique la información de dichos ingresos sea correcta."
+
+                            });
+                            errores++;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    listaErrores.Add(new ViewModelListaErrores
+                    {
+                        Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                        NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                        Error = $"Error al procesar ingresos individuales del colaborador.",
+                        PosibleSolucion = "Verifique que la información de dichos ingresos se hayan registrado de forma correcta."
+
+                    });
+                    errores++;
+
+                }
+            }
+
+            #region Septimo Dia
+            DateTime inicioFecha = fechaInicio;
+            DateTime finFecha = fechaFin;
+            TimeSpan restaFechasSeptimo = finFecha - inicioFecha;
+            int cantidadDiasSeptimo = restaFechasSeptimo.Days + 1;
+            DateTime fechaIterador = inicioFecha;
+            int cantHoras = 0;
+            int cantHorasPermiso = 0;
+            int cantidadSeptimosDias = 0;
+            int contadorSeptimosDias = 1;
+            resultSeptimoDia = 0;
+            try
+            {
+                for (int i = 1; i <= cantidadDiasSeptimo; i++)
+                {
+                    if (fechaIterador.DayOfWeek.ToString() != "Sunday")
+                    {
+                        cantHoras += db.tbHistorialHorasTrabajadas
+                                    .Where(x => x.htra_Fecha == fechaIterador &&
+                                           x.emp_Id == empleadoActual.emp_Id &&
+                                           x.htra_Estado == true)
+                                    .Select(x => x.htra_CantidadHoras)
+                                    .FirstOrDefault();
+
+                        cantHorasPermiso += db.tbHistorialPermisos
+                                            .Where(x => x.hper_fechaInicio <= fechaIterador &&
+                                                   x.hper_fechaFin >= fechaIterador &&
+                                                   x.emp_Id == empleadoActual.emp_Id)
+                                            .Select(x => x.hper_Duracion)
+                                            .FirstOrDefault();
+
+                        if ((cantHoras + (cantHorasPermiso * 8)) >= 48 && contadorSeptimosDias == 7)
+                        {
+                            cantidadSeptimosDias++;
+                            contadorSeptimosDias = 0;
+                            cantHoras = 0;
+                        }
+                    }
+                    if (contadorSeptimosDias == 7)
+                    {
+                        cantHoras = 0;
+                        contadorSeptimosDias = 0;
+                    }
+                    fechaIterador = fechaIterador.Add(new TimeSpan(1, 0, 0, 0, 0));
+                    contadorSeptimosDias++;
+                }
+
+                resultSeptimoDia = (salarioHora * 8) * cantidadSeptimosDias;
+            }
+            catch (Exception ex)
+            {
+                listaErrores.Add(new ViewModelListaErrores
+                {
+                    Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                    NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                    Error = "Error al calcular séptimo día.",
+                    PosibleSolucion = "Verifique que la información en el historial de horas trabajadas del colaborador esté correcta."
+
+                });
+                errores++;
+            }
+
+
+            #endregion
+
+            // total ingresos
+            totalIngresosEmpleado = Math.Round(totalIngresosIndivuales.Value + totalSalario + totalComisiones.Value + totalHorasExtras.Value + totalBonificaciones.Value + totalVacaciones.Value + totalHorasPermiso.Value + resultSeptimoDia,2);
+
+            #endregion
+        }
+        #endregion
     }
 }

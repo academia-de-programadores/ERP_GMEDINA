@@ -24,5 +24,6 @@ namespace ERP_GMEDINA.Models
         public string depto_Descripcion { get; set; }
         public int car_Id { get; set; }
         public string car_Descripcion { get; set; }
+        public bool eqtra_Estado { get; set; }
     }
 }

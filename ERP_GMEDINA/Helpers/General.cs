@@ -40,12 +40,12 @@ namespace ERP_GMEDINA.Helpers
                     if (totalIngresos > i)
                     {
                         conceptoIngreso = oIngresosColaborador[i].concepto != null ? Convert.ToString(oIngresosColaborador[i].concepto) : "";
-                        montoIngreso = oIngresosColaborador[i].monto == 0 ? "0" : $" {Convert.ToString(oIngresosColaborador[i].monto)}";
+                        montoIngreso = oIngresosColaborador[i].monto == 0 ? "0" : oIngresosColaborador[i].concepto == "Horas extras" ? $"{Convert.ToString(oIngresosColaborador[i].monto)}" : $"{Convert.ToString(oIngresosColaborador[i].monto)} {Model.moneda}";
                     }
                     if (totalDeducciones > i)
                     {
                         conceptoDeduccion = oDeduccionesColaborador[i].concepto != null ? Convert.ToString(oDeduccionesColaborador[i].concepto) : "";
-                        montoDeduccion = oDeduccionesColaborador[i].monto == 0 ? "0" : $" {Convert.ToString(oDeduccionesColaborador[i].monto)}";
+                        montoDeduccion = oDeduccionesColaborador[i].monto == 0 ? "0" : $"{Convert.ToString(oDeduccionesColaborador[i].monto)} {Model.moneda}";
                     }
 
                     trDeduccionesIngresosTemplate.Append(
@@ -70,9 +70,9 @@ namespace ERP_GMEDINA.Helpers
                 body = body.Replace("{NombreColaborador}", Model.NombreColaborador);
                 body = body.Replace("{PeriodoPago}", Model.PeriodoPago);
                 body = body.Replace("{trDeduccionesIngresos}", trDeduccionesIngresosTemplate.ToString());
-                body = body.Replace("{totalIngresos}", Model.totalIngresos.ToString());
+                body = body.Replace("{totalIngresos}", Math.Round(Model.totalIngresos.Value, 2).ToString());
                 body = body.Replace("{TotalDeucciones}", Model.totalDeducciones.ToString());
-                body = body.Replace("{TotalPagar}", Model.NetoPagar.ToString());
+                body = body.Replace("{TotalPagar}",Math.Round(Model.NetoPagar.Value,2).ToString());
                 #endregion
 
                 MailMessage oMailMessage = new MailMessage(EmailOrigen, Model.EmailDestino, Model.EmailAsunto, body);

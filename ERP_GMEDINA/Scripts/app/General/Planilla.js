@@ -89,7 +89,9 @@ $('.cargarPlanilla').click(function () {
 $('#btnPlanilla').click(function () {
     $('#fechaInicio').val('');
     $('#fechaFin').val('');
-    $('#ConfigurarGenerarPlanilla').modal();
+    $('#ConfigurarGenerarPlanilla').modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
 });
 
 
@@ -112,6 +114,8 @@ $('#btnPrevisualizarPlanilla').click(function () {
 
     if (ModelState) {
         $('#Modal').modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "auto");
         $('#ConfigurarGenerarPlanilla').modal('hide');
         $('#btnPlanilla').css('display', 'none');
         $('#Cargando').css('display', '');

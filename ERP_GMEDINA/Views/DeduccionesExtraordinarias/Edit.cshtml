@@ -1,107 +1,120 @@
 ﻿@model ERP_GMEDINA.Models.tbDeduccionesExtraordinarias
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+	ViewBag.Title = "Edit";
+	Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
 <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h2>Editar Deducción por Equipo de Trabajo</h2>
-        </div>
+	<div class="ibox float-e-margins">
+		<div class="ibox-title">
+			<h2>Editar Deducción por Equipo de Trabajo</h2>
+		</div>
 
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditar"} ))
-        {
-            <div class="ibox-content">
-                @Html.AntiForgeryToken()
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditar" }))
+		{
+			<div class="ibox-content">
+				@Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
+				<div class="form-horizontal">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					@Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
 
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.LabelFor(model => model.eqem_Id)<span>*</span>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
-                            <label class="text-danger" id="validacionEquipoEmpleado" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Equipo Empleado Requerido</label>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.eqem_Id)<span>*</span>
+						</div>
+						<div class="col-md-6">
+							@Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
+							<label class="text-danger" id="validacionEquipoEmpleado" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Equipo Empleado Requerido</label>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_MontoInicial)<span id="asteriscoMontoInicial">*</span>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero"} })
-                            <label class="text-danger" id="valMontoInicial" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto Inicial Requerido</label>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.dex_MontoInicial)<span id="asteriscoMontoInicial">*</span>
+						</div>
+						<div class="col-md-6">
+							@Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+							<label class="text-danger" id="valMontoInicial" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto Inicial Requerido</label>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_MontoRestante)<span id="asteriscoMontoRestante">*</span>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero"} })
-                            <label class="text-danger" id="valMontoRestante" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto Restante Requerido</label>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.dex_MontoRestante)<span id="asteriscoMontoRestante">*</span>
+						</div>
+						<div class="col-md-6">
+							@Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+							<label class="text-danger" id="valMontoRestante" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto Restante Requerido</label>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_ObservacionesComentarios)<span id="asteriscoObservaciones">*</span>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_ObservacionesComentarios, new { htmlAttributes = new { @class = "form-control" } })
-                            <label class="text-danger" id="validacionObservaciones" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Observaciones Requerido</label>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.dex_ObservacionesComentarios)<span id="asteriscoObservaciones">*</span>
+						</div>
+						<div class="col-md-6">
+							@Html.EditorFor(model => model.dex_ObservacionesComentarios, new { htmlAttributes = new { @class = "form-control" } })
+							<label class="text-danger" id="validacionObservaciones" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Observaciones Requerido</label>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.LabelFor(model => model.cde_IdDeducciones)<span id="asteriscoIdDeducciones">*</span>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
-                            <label class="text-danger" id="validacionIdDeducciones" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Deducción Requerido.</label>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.cde_IdDeducciones)<span id="asteriscoIdDeducciones">*</span>
+						</div>
+						<div class="col-md-6">
+							@Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
+							<label class="text-danger" id="validacionIdDeducciones" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Deducción Requerido.</label>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.LabelFor(model => model.dex_Cuota)<span id="asteriscoCuota">*</span>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
-                            <label class="text-danger" id="valCuota" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Cuota Requerido.</label>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.dex_Cuota)<span id="asteriscoCuota">*</span>
+						</div>
+						<div class="col-md-6">
+							@Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+							<label class="text-danger" id="valCuota" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Cuota Requerido.</label>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" id="btnEditar" value="Actualizar" class="btn btn-primary" />
-                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+					<div class="form-group">
+						<div class="col-md-2">
+							@Html.LabelFor(model => model.dex_DeducirISR)
+						</div>
+						<div class="col-md-6">
+							<input type="checkbox" checked="@Model.dex_DeducirISR" class="icheckbox_square-green" name="dex_DeducirISR" id="dex_DeducirISR">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" id="btnEditar" value="Actualizar" class="btn btn-primary" />
+							@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
 </div>
 
 
 @section Scripts {
-    @Scripts.Render("~/plugins/select2")
-    @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/Scripts/app/general/DeduccionesExtraordinarias")
+	@Scripts.Render("~/plugins/dataTables")
+	@Scripts.Render("~/plugins/iCheck")
+	<script>
+		localStorage.setItem('idEmpleado', '@Model.eqem_Id')
+	</script>
+	@Scripts.Render("~/Scripts/app/general/DeduccionesExtraordinarias")
+	@Scripts.Render("~/plugins/select2")
 }
 
 @section Styles {
-    @Styles.Render("~/plugins/select2Styles")
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+	@Styles.Render("~/plugins/select2Styles")
+	@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+	@Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+	@Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
-

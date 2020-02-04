@@ -58,7 +58,6 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Total Venta")]
         [Required(ErrorMessage = "Campo total venta requerido")]
-        [Range(1, 99999999.99, ErrorMessage = "El campo {0} debe ser mayor que cero")]   
         public decimal cc_TotalVenta { get; set; }
 
         public virtual tbUsuario tbUsuario { get; set; }
