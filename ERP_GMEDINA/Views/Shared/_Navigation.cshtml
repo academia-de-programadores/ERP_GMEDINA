@@ -305,7 +305,7 @@
                         </ul>
                     </li>
 
-                    <li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AcumuladosISR") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "InstitucionesFinancieras") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "AFP") @Html.IsSelected(controller: "Preaviso") @Html.IsSelected(controller: "Periodos") ">
+                    <li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AcumuladosISR") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "InstitucionesFinancieras") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "AFP") @Html.IsSelected(controller: "Preaviso") @Html.IsSelected(controller: "Periodos") @Html.IsSelected(controller: "TechoImpuestoVecinal")">
                         <a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-cog"></i> <span class="nav-label" data-i18n="nav.dashboard">Configuraciones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
                             <li class="@Html.IsSelected(controller: "AcumuladosISR")"><a href="@Url.Action("Index", "AcumuladosISR")">Acumulados ISR</a></li>
@@ -318,6 +318,7 @@
                             <li class="@Html.IsSelected(controller: "Preaviso")"><a href="@Url.Action("Index", "Preaviso")">Preaviso</a></li>
                             <li class="@Html.IsSelected(controller: "TechosComisiones")"><a href="@Url.Action("Index", "TechosComisiones")">Techos Comisiones</a></li>
                             <li class="@Html.IsSelected(controller: "TechosDeducciones")"><a href="@Url.Action("Index", "TechosDeducciones")">Techos de Deducciones</a></li>
+                            <li class="@Html.IsSelected(controller: "TechoImpuestoVecinal")"><a href="@Url.Action("Index", "TechoImpuestoVecinal")">Techo del Impuesto Vecinal</a></li>
                             <li class="@Html.IsSelected(controller: "TipoDeducciones")"><a href="@Url.Action("Index", "TipoDeducciones")">Tipo de Deducciones</a></li>
                         </ul>
                     </li>
