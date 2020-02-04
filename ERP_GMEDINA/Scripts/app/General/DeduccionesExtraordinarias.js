@@ -1,43 +1,43 @@
 ﻿//#region Declaracion de variables
 //Validaciones de Botones de las Pantallas
 const btnAgregar = $('#btnAgregar'),
-    //Div que aparecera cuando se le de click en crear
-    cargandoCrear = $('#cargandoCrear'),
-    equipoEmpId = $('#eqemp_Id'),
-    equipoEmpIdEdit = $('#eqem_Id'),
-    montoInicial = $('#dex_MontoInicial'),
-    montoRestante = $('#dex_MontoRestante'),
-    observaciones = $('#dex_ObservacionesComentarios'),
-    idDeduccion = $('#cde_Id'),
-    cuota = $('#dex_Cuota'),
-    asteriscoEquipoEmpleado = $('#asteriscoEquipoEmpleado'),
-    asteriscoMontoInicial = $('#asteriscoMontoInicial'),
-    asteriscoMontoRestante = $('#asteriscoMontoRestante'),
-    asteriscoObservaciones = $('#asteriscoObservaciones'),
-    asteriscoIdDeducciones = $('#asteriscoIdDeducciones'),
-    asteriscoCuota = $('#asteriscoCuota'),
-    validacionEquipoEmpleado = $('#validacionEquipoEmpleado'),
-    validacionMontoInicial = $('#validacionMontoInicial'),
-    validacionMontoRestante = $('#validacionMontoRestante'),
-    validacionObservaciones = $('#validacionObservaciones'),
-    validacionIdDeducciones = $('#validacionIdDeducciones'),
-    validacionCuota = $('#validacionCuota');
+	//Div que aparecera cuando se le de click en crear
+	cargandoCrear = $('#cargandoCrear'),
+	equipoEmpId = $('#eqem_Id'),
+	equipoEmpIdEdit = $('#eqem_Id'),
+	montoInicial = $('#dex_MontoInicial'),
+	montoRestante = $('#dex_MontoRestante'),
+	observaciones = $('#dex_ObservacionesComentarios'),
+	idDeduccion = $('#cde_Id'),
+	cuota = $('#dex_Cuota'),
+	asteriscoEquipoEmpleado = $('#asteriscoEquipoEmpleado'),
+	asteriscoMontoInicial = $('#asteriscoMontoInicial'),
+	asteriscoMontoRestante = $('#asteriscoMontoRestante'),
+	asteriscoObservaciones = $('#asteriscoObservaciones'),
+	asteriscoIdDeducciones = $('#asteriscoIdDeducciones'),
+	asteriscoCuota = $('#asteriscoCuota'),
+	validacionEquipoEmpleado = $('#validacionEquipoEmpleado'),
+	validacionMontoInicial = $('#validacionMontoInicial'),
+	validacionMontoRestante = $('#validacionMontoRestante'),
+	validacionObservaciones = $('#validacionObservaciones'),
+	validacionIdDeducciones = $('#validacionIdDeducciones'),
+	validacionCuota = $('#validacionCuota');
 
 const btnEditar = $("#btnEditar"),
-    MontoInicial = $('#dex_MontoInicial'),
-    MontoRestante = $('#dex_MontoRestante'),
-    Observaciones = $('#dex_ObservacionesComentarios'),
-    Cuota = $('#dex_Cuota'),
-    asteriscMontoInicial = $('#asteriscMontoInicial'),
-    asteriscMontoRestante = $('#asteriscMontoRestante'),
-    asteriscObservaciones = $('#asteriscObservaciones'),
-    asteriscCuota = $('#asteriscCuota'),
-    validnEquipoEmpleado = $('#validEquipoEmpleado'),
-    validMontoInicial = $('#validMontoInicial'),
-    validMontoRestante = $('#validMontoRestante'),
-    validObservaciones = $('#validObservaciones'),
-    validCuota = $('#validCuota'),
-    MontoRestanteEditar = $('#MontoRestanteEditar');
+	MontoInicial = $('#dex_MontoInicial'),
+	MontoRestante = $('#dex_MontoRestante'),
+	Observaciones = $('#dex_ObservacionesComentarios'),
+	Cuota = $('#dex_Cuota'),
+	asteriscMontoInicial = $('#asteriscMontoInicial'),
+	asteriscMontoRestante = $('#asteriscMontoRestante'),
+	asteriscObservaciones = $('#asteriscObservaciones'),
+	asteriscCuota = $('#asteriscCuota'),
+	validnEquipoEmpleado = $('#validEquipoEmpleado'),
+	validMontoInicial = $('#validMontoInicial'),
+	validMontoRestante = $('#validMontoRestante'),
+	validObservaciones = $('#validObservaciones'),
+	validCuota = $('#validCuota'),
+	MontoRestanteEditar = $('#MontoRestanteEditar');
 
 
 
@@ -91,7 +91,6 @@ $('#dex_MontoInicial').blur(function () {
 });
 
 $('#dex_MontoRestante').blur(function () {
-	debugger;
 	let montoRestante = $(this).val().replace(/,/g, '');
 	let hayAlgo = false;
 	let montoInicial = $('#dex_MontoInicial').val().replace(/,/g, '');
@@ -142,11 +141,11 @@ $('#dex_MontoRestante').blur(function () {
 
 $('#dex_ObservacionesComentarios').blur(function () {
 	let observaciones = $(this)
-        .val()
-        .trim();
+		.val()
+		.trim();
 	if (
-        observaciones == ""
-    ) {
+		observaciones == ""
+	) {
 		$('#validacionObservaciones').html('Campo Observaciones Requerido');
 		$('#validacionObservaciones').show();
 		$('#asteriscoObservaciones').addClass('text-danger');
@@ -240,67 +239,67 @@ function _ajax(params, uri, type, callback) {
 function cargarGridDeducciones() {
 	var esAdministrador = $("#rol_Usuario").val();
 	_ajax(null,
-        '/DeduccionesExtraordinarias/GetData',
-        'GET',
-        (data) => {
-        	if (data.length == 0) {
+		'/DeduccionesExtraordinarias/GetData',
+		'GET',
+		(data) => {
+			if (data.length == 0) {
 
-        		//Validar si se genera un error al cargar de nuevo el Index
-        		iziToast.error({
-        			title: 'Error',
-        			message: '¡No se cargó la información, contacte al administrador!',
-        		});
-        	}
+				//Validar si se genera un error al cargar de nuevo el Index
+				iziToast.error({
+					title: 'Error',
+					message: '¡No se cargó la información, contacte al administrador!',
+				});
+			}
 
-        	//Variable para guardar la data obtenida
-        	var ListaDeduccionesExtraordinarias = data;
+			//Variable para guardar la data obtenida
+			var ListaDeduccionesExtraordinarias = data;
 
-        	//LIMPIAR LA DATA DEL DATATABLE
-        	$('#tblDeduccionesExtraordinarias').DataTable().clear();
+			//LIMPIAR LA DATA DEL DATATABLE
+			$('#tblDeduccionesExtraordinarias').DataTable().clear();
 
-        	//Recorrer la data obtenida a traves de la función anterior y se crea un Template de la Tabla para Actualizarse
-        	for (var i = 0; i < ListaDeduccionesExtraordinarias.length; i++) {
-        		//variable para verificar el estado del registro
-        		var estadoRegistro = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? 'Inactivo' : 'Activo'
+			//Recorrer la data obtenida a traves de la función anterior y se crea un Template de la Tabla para Actualizarse
+			for (var i = 0; i < ListaDeduccionesExtraordinarias.length; i++) {
+				//variable para verificar el estado del registro
+				var estadoRegistro = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? 'Inactivo' : 'Activo'
 
-        		//variable boton detalles
-        		var botonDetalles = '<a type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>';
+				//variable boton detalles
+				var botonDetalles = '<a type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>';
 
-        		//variable boton editar
-        		var botonEditar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" style="margin-right:3px;" class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' : '';
+				//variable boton editar
+				var botonEditar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" style="margin-right:3px;" class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' : '';
 
-        		//variable donde está el boton activar
-        		var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnActivarDeduccionesExtraordinarias" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
+				//variable donde está el boton activar
+				var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnActivarDeduccionesExtraordinarias" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
 
-        		//variable boton inactivar
-        		var botonInactivar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? esAdministrador == "1" ? '<button type="button" name="iddeduccionesextraordinarias" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Inactivar</button>' : '' : '';
+				//variable boton inactivar
+				var botonInactivar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? esAdministrador == "1" ? '<button type="button" name="iddeduccionesextraordinarias" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Inactivar</button>' : '' : '';
 
-        		//AGREGAR EL ROW AL DATATABLE
-        		$('#tblDeduccionesExtraordinarias').dataTable().fnAddData([
-                    ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra,
-                    ListaDeduccionesExtraordinarias[i].per_Nombres + ' ' + ListaDeduccionesExtraordinarias[i].per_Apellidos,
-                    ListaDeduccionesExtraordinarias[i].dex_MontoInicial,
-                    ListaDeduccionesExtraordinarias[i].dex_MontoRestante,
-                    ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios,
-                    ListaDeduccionesExtraordinarias[i].dex_Cuota,
-                    ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion,
-                    estadoRegistro,
-                    botonDetalles + botonEditar + botonInactivar + botonActivar
-        		]);
-        	}
-        });
+				//AGREGAR EL ROW AL DATATABLE
+				$('#tblDeduccionesExtraordinarias').dataTable().fnAddData([
+					ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra,
+					ListaDeduccionesExtraordinarias[i].per_Nombres + ' ' + ListaDeduccionesExtraordinarias[i].per_Apellidos,
+					ListaDeduccionesExtraordinarias[i].dex_MontoInicial,
+					ListaDeduccionesExtraordinarias[i].dex_MontoRestante,
+					ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios,
+					ListaDeduccionesExtraordinarias[i].dex_Cuota,
+					ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion,
+					estadoRegistro,
+					botonDetalles + botonEditar + botonInactivar + botonActivar
+				]);
+			}
+		});
 }
 
 function validaciones(equipoEmpId,
-    montoInicial,
-    montoRestante,
-    observaciones,
-    idDeduccion,
-    cuota) {
+	montoInicial,
+	montoRestante,
+	observaciones,
+	idDeduccion,
+	cuota) {
 	var todoBien = true;
 	let equipoEmpleadoId = equipoEmpId.val();
 	//Equipo Empleado
-	if (equipoEmpleadoId == null || equipoEmpleadoId == "" || equipoEmpleadoId == 0 || equipoEmpleadoId == "0") {
+	if (equipoEmpleadoId == null || equipoEmpleadoId == "") {
 		$("#validacionEquipoEmpleado").html('Campo Equipo Empleado Requerido');
 		$("#validacionEquipoEmpleado").show();
 		$("#asteriscoEquipoEmpleado").addClass('text-danger');
@@ -339,52 +338,54 @@ function validaciones(equipoEmpId,
 			$("#asteriscoMontoInicial").removeClass('text-danger');
 		}
 	}
-
-	let hayAlgoMontoRestante = false;
 	// Monto Restante
-	let valorMontoRestante = montoRestante.val();
-	if (valorMontoRestante != "") {
-		$("#valMontoRestante").html('');
-		$("#valMontoRestante").hide();
-		hayAlgoMontoRestante = true;
-		$("#asteriscoMontoRestante").removeClass('text-danger');
-	} else {
+	let hayAlgo = false;
+	montoRestante = montoRestante.val();
+	if (montoRestante == null || montoRestante == "") {
+		todoBien = false;
 		$("#valMontoRestante").html('Campo Monto Restante Requerido');
 		$("#valMontoRestante").show();
 		$("#asteriscoMontoRestante").addClass('text-danger');
-		todoBien = false;
+	} else {
+		hayAlgo = true
+		$("#valMontoRestante").html('');
+		$("#valMontoRestante").hide();
+		$("#asteriscoMontoRestante").removeClass('text-danger');
 	}
 
-	montoRestante = montoRestante.val().replace(/,/g, "");
-	let compararMontoInial = montoInicial.replace(/,/g, "");
-	if (hayAlgoMontoRestante) {
+	if (hayAlgo) {
 		let esMayorCero = false;
-		if (montoRestante < 0 || montoRestante == 0.0) {
+		if (montoRestante == 0.00 || montoRestante < "0") {
+			todoBien = false;
 			$("#valMontoRestante").html('El campo Monto Restante no puede ser menor o igual que cero.');
 			$("#valMontoRestante").show();
 			$("#asteriscoMontoRestante").addClass('text-danger');
-		} else {
+		}
+		else {
 			esMayorCero = true;
 			$("#valMontoRestante").html('');
-			$("#valMontoRestante").hide();
+			$("#valMontoRestante").hide()
 			$("#asteriscoMontoRestante").removeClass('text-danger');
 		}
 
+		let floatMontoRestante = parseFloat(montoRestante);
+		let floatMontoInicial = parseFloat(montoInicial)
+
 		if (esMayorCero)
-			if (montoRestante > compararMontoInial) {
+			if (floatMontoRestante > floatMontoInicial) {
+				todoBien = false;
 				$("#valMontoRestante").html('El campo Monto Restante no puede ser mayor que Monto Inicial.');
 				$("#valMontoRestante").show();
-				$("#asteriscoMontoRestante").addClass('text-danger')
-				todoBien = false;
+				$("#asteriscoMontoRestante").addClass('text-danger');
+				hayAlgo = false;
 			}
 			else {
+				hayAlgo = false;
 				$("#valMontoRestante").html('');
-				$("#valMontoRestante").hide();
+				$("#valMontoRestante").hide()
 				$("#asteriscoMontoRestante").removeClass('text-danger');
 			}
 	}
-
-
 
 	// Observaciones
 	if (observaciones.val().trim() != '') {
@@ -530,15 +531,14 @@ $("#btnCerrarCreate").click(function () {
 
 $(btnAgregar).click(function () {
 	var data2 = $("#frmCreate").serializeArray();
-	console.table(data2);
 	if (validaciones(equipoEmpId,
-        montoInicial,
-        montoRestante,
-        observaciones,
-        idDeduccion,
-        cuota
+		montoInicial,
+		montoRestante,
+		observaciones,
+		idDeduccion,
+		cuota
 
-    )) {
+	)) {
 
 		if ($('#dex_DeducirISR').is(':checked')) {
 			dex_DeducirISR = true;
@@ -558,7 +558,6 @@ $(btnAgregar).click(function () {
 		else {
 			dex_DeducirISR = false;
 		}
-		console.table(data);
 
 		//ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
 		$.ajax({
@@ -599,14 +598,12 @@ $(btnAgregar).click(function () {
 $("#btnEditar").click(function () {
 	$("#btnEditar").attr('disabled', true);
 	if (validaciones(equipoEmpIdEdit,
-        montoInicial,
-        montoRestante,
-        observaciones,
-        idDeduccion,
-        cuota
-    ) === true) {
-
-		debugger;
+		montoInicial,
+		montoRestante,
+		observaciones,
+		idDeduccion,
+		cuota
+	) === true) {
 		if ($('#dex_DeducirISR').is(':checked')) {
 			dex_DeducirISR = true;
 		}
@@ -614,7 +611,6 @@ $("#btnEditar").click(function () {
 			dex_DeducirISR = false;
 		}
 		var data = $("#frmEditar").serializeArray();
-		console.table(data);
 		data[3].value = data[3].value.replace(/,/g, '');
 		data[4].value = data[4].value.replace(/,/g, '');
 		data[7].value = data[7].value.replace(/,/g, '');
@@ -756,5 +752,6 @@ $(document).ready(function () {
 				},
 				data: data.results
 			});
+			$("#eqem_Id").val('').trigger('change.select2');
 		});
 });
