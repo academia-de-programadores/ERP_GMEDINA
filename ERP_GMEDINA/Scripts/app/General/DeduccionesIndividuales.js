@@ -164,8 +164,39 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 });
 //#endregion
 
+function ValidarPagasiempreCrear(PagaSiempre) {
+    let checked = $('#Crear #dei_PagaSiempre').prop('checked');
+    if (checked == false) {
+        $("#Crear #dei_Monto").removeAttr("readonly");
+        $("#Crear #dei_Monto").removeClass("readOnly");
+        $("#Crear #dei_NumeroCuotas").removeAttr("readonly");
+        $("#Crear #dei_NumeroCuotas").removeClass("readOnly");
+        $("#Crear #dei_MontoCuota").attr("readonly", "readonly");
+        $("#Crear #dei_MontoCuota").addClass("readOnly");
+        $("#Crear #dei_MontoCuota").val('');
+        $("#Crear #dei_Monto").val('');
+        $("#Crear #dei_NumeroCuotas").val('');
+        $("#Crear #valMontoCuota").css("display", "none");
+        $("#Crear #astMontoCuota").css("color", "black");
+    }
+    else {
+        $("#Crear #dei_MontoCuota").val('');
+        $("#Crear #dei_Monto").val('');
+        $("#Crear #dei_NumeroCuotas").val('');
+        $("#Crear #dei_Monto").attr("readonly", "readonly");
+        $("#Crear #dei_Monto").addClass("readOnly");
+        $("#Crear #dei_NumeroCuotas").attr("readonly", "readonly");
+        $("#Crear #dei_NumeroCuotas").addClass("readOnly");
+        $("#Crear #dei_MontoCuota").removeAttr("readonly");
+        $("#Crear #dei_MontoCuota").removeClass("readOnly");
+        $("#Crear #valMontoRequerido").css("display", "none");
+        $("#Crear #valNumeroCuotasRequerido").css("display", "none");
+        $("#Crear #astMonto").css("color", "black");
+        $("#Crear #astNumeroCuotas").css("color", "black");
+    }
+}
 
-function ValidarCrearDeduccionIndividual(Motivo, IdEmp, Monto , NumeroCuotas, MontoCuota) {
+function ValidarCrearDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, MontoCuota) {
     pasoValidacionCrear = true;
 
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
@@ -179,6 +210,18 @@ function ValidarCrearDeduccionIndividual(Motivo, IdEmp, Monto , NumeroCuotas, Mo
     }
     //FORMATEAR A DECIMAL
     MontoFormateado = parseFloat(MontoFormateado);
+
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Crear #dei_MontoCuota").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoCuotaFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoCuotaFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoCuotaFormateado = parseFloat(MontoCuotaFormateado);
 
 
 
@@ -226,23 +269,26 @@ function ValidarCrearDeduccionIndividual(Motivo, IdEmp, Monto , NumeroCuotas, Mo
         var numeroDivC = $("#Crear #dei_NumeroCuotas").val();
         var MontoCuotatotalC = MontoFormateado / numeroDivC;
         $("#Crear #dei_MontoCuota").val(MontoCuotatotalC);
-        if (MontoFormateado == "" || MontoFormateado == null || MontoFormateado == undefined || isNaN(MontoFormateado)) {
-            pasoValidacionCrear = false;
-            $("#Crear #valMontoRequerido").html('Campo Monto Requerido');
-            $("#Crear #valMontoRequerido").css("display", "");
-            $("#Crear #astMonto").css("color", "red");
-        } else {
-            $("#Crear #valMontoRequerido, #Editar #valMontoRequerido").css("display", "none");
-            $("#Crear #astMonto, #Editar #astMonto").css("color", "black");
-            if (MontoFormateado == 0.00 || MontoFormateado < 0) {
+        let checked = $('#Crear #dei_PagaSiempre').prop('checked');
+        if (checked == false) {
+            if (MontoFormateado == "" || MontoFormateado == null || MontoFormateado == undefined || isNaN(MontoFormateado)) {
                 pasoValidacionCrear = false;
-                $("#Crear #valMonto").html('El campo Monto no puede ser menor o igual que cero');
-                $("#Crear #valMonto").css("display", "block");
-                $("#Crear #valMonto").css("color", "red");
-            }
-            else {
-                $("#Crear #valMonto").css("display", "none");
-                $("#Crear #valMonto").css("color", "black");
+                $("#Crear #valMontoRequerido").html('Campo Monto Requerido');
+                $("#Crear #valMontoRequerido").css("display", "");
+                $("#Crear #astMonto").css("color", "red");
+            } else {
+                $("#Crear #valMontoRequerido").css("display", "none");
+                $("#Crear #astMonto").css("color", "black");
+                if (MontoFormateado == 0.00 || MontoFormateado < 0) {
+                    pasoValidacionCrear = false;
+                    $("#Crear #valMonto").html('El campo Monto no puede ser menor o igual que cero');
+                    $("#Crear #valMonto").css("display", "block");
+                    $("#Crear #valMonto").css("color", "red");
+                }
+                else {
+                    $("#Crear #valMonto").css("display", "none");
+                    $("#Crear #valMonto").css("color", "black");
+                }
             }
         }
     }
@@ -252,27 +298,54 @@ function ValidarCrearDeduccionIndividual(Motivo, IdEmp, Monto , NumeroCuotas, Mo
         var numeroDivC = $("#Crear #dei_NumeroCuotas").val();
         var MontoCuotatotalC = MontoFormateado / numeroDivC;
         $("#Crear #dei_MontoCuota").val(MontoCuotatotalC);
-        if (NumeroCuotas == "" || NumeroCuotas == null || NumeroCuotas == undefined) {
-            pasoValidacionCrear = false;
-            $("#Crear #valNumeroCuotasRequerido").css("display", "");
-            $("#Crear #valNumeroCuotasRequerido").css("display", "");
-            $("#Crear #astNumeroCuotas").css("color", "red");
-        } else {
-            $("#Crear #valNumeroCuotasRequerido").css("display", "none");
-            $("#Crear #astNumeroCuotas").css("color", "black");
-            if (NumeroCuotas == 0 || NumeroCuotas < 0) {
+        let checked = $('#Crear #dei_PagaSiempre').prop('checked');
+        if (checked == false) {
+            if (NumeroCuotas == "" || NumeroCuotas == null || NumeroCuotas == undefined) {
                 pasoValidacionCrear = false;
-                $("#Crear #valNumeroCuotasteMayor").css("display", "block");
-                $("#Crear #valNumeroCuotasMayor").css("display", "block");
+                $("#Crear #valNumeroCuotasRequerido").css("display", "");
+                $("#Crear #valNumeroCuotasRequerido").css("display", "");
                 $("#Crear #astNumeroCuotas").css("color", "red");
-
-            }
-            else {
-                $("#Crear #valNumeroCuotasMayor").css("display", "none");
+            } else {
+                $("#Crear #valNumeroCuotasRequerido").css("display", "none");
                 $("#Crear #astNumeroCuotas").css("color", "black");
+                if (NumeroCuotas == 0 || NumeroCuotas < 0) {
+                    pasoValidacionCrear = false;
+                    $("#Crear #valNumeroCuotasteMayor").css("display", "block");
+                    $("#Crear #valNumeroCuotasMayor").css("display", "block");
+                    $("#Crear #astNumeroCuotas").css("color", "red");
+
+                }
+                else {
+                    $("#Crear #valNumeroCuotasMayor").css("display", "none");
+                    $("#Crear #astNumeroCuotas").css("color", "black");
+                }
             }
         }
     }
+
+    if (MontoCuota != "-1") {
+        let checked = $('#Crear #dei_PagaSiempre').prop('checked');
+        if (checked == true) {
+            if (MontoCuotaFormateado == "" || MontoCuotaFormateado == null || MontoCuotaFormateado == undefined || isNaN(MontoCuotaFormateado)) {
+                pasoValidacionCrear = false;
+                $("#Crear #valMontoCuota").css("display", "");
+                $("#Crear #astMontoCuota").css("color", "red");
+            } else {
+                $("#Crear #valMontoCuota").css("display", "none");
+                $("#Crear #astMontoCuota").css("color", "black");
+            }
+            if (MontoCuotaFormateado == 0.00 || MontoCuotaFormateado < 0) {
+                pasoValidacionCrear = false;
+                $("#Crear #valMontoCuotaMayor").css("display", "");
+                $("#Crear #astMontoCuota").css("color", "red");
+            }
+            else {
+                $("#Crear #valMontoCuotaMayor").css("display", "none");
+                $("#Crear #astMontoCuota").css("color", "black");
+            }
+        }
+    }
+
     return pasoValidacionCrear;
 }
 
@@ -312,6 +385,15 @@ $("#btnCerrarCrear").click(function () {
     $("#Crear #dei_PagaSiempre").prop('checked', false);
     $("#Crear #dei_DeducirISR").prop('checked', false);
     $("#AgregarDeduccionesIndividuales").modal('hide');
+    $("#Crear #dei_Monto").removeAttr("readonly");
+    $("#Crear #dei_Monto").removeClass("readOnly");
+    $("#Crear #dei_NumeroCuotas").removeAttr("readonly");
+    $("#Crear #dei_NumeroCuotas").removeClass("readOnly");
+    $("#Crear #dei_MontoCuota").attr("readonly", "readonly");
+    $("#Crear #dei_MontoCuota").addClass("readOnly");
+    $("#Crear #dei_MontoCuota").val('');
+    $("#Crear #dei_Monto").val('');
+    $("#Crear #dei_NumeroCuotas").val('');
 });
 
 
@@ -338,6 +420,15 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
     $("#dei_MontoCuota").val('');
     $('#dei_PagaSiempre').prop('checked', false);
     $('#dei_DeducirISR').prop('checked', false);
+    $("#Crear #dei_Monto").removeAttr("readonly");
+    $("#Crear #dei_Monto").removeClass("readOnly");
+    $("#Crear #dei_NumeroCuotas").removeAttr("readonly");
+    $("#Crear #dei_NumeroCuotas").removeClass("readOnly");
+    $("#Crear #dei_MontoCuota").attr("readonly", "readonly");
+    $("#Crear #dei_MontoCuota").addClass("readOnly");
+    $("#Crear #dei_MontoCuota").val('');
+    $("#Crear #dei_Monto").val('');
+    $("#Crear #dei_NumeroCuotas").val('');
     //$("#Crear #NumeroCuotasCrear").css("display", "none");
 });
 
@@ -590,6 +681,7 @@ $(document).on("click", "#Tabla tbody tr td #btnEditarDeduccionesIndividuales", 
         data: JSON.stringify({ id: id })
     })
         .done(function (data) {
+            
             if (data.dei_PagaSiempre) {
                 $('#Editar #dei_PagaSiempre').prop('checked', true);
             }
@@ -657,7 +749,10 @@ $(document).on("click", "#Tabla tbody tr td #btnEditarDeduccionesIndividuales", 
                 $("#Editar #dei_PagaSiempre").val(data.dei_PagaSiempre);
                 $("#Editar #dei_DeducirISR").val(data.dei_DeducirISR);
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-                document.getElementById("btnEditDeduccionIndividual").disabled = false  ;
+                document.getElementById("btnEditDeduccionIndividual").disabled = false;
+                $("#Editar #dei_PagaSiempre").attr("disabled", true);
+                
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -715,7 +810,7 @@ $("#btnEditDeduccionIndividual").click(function () {
         //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
         ValidarEditarDeduccionIndividual(dei_Motivo, emp_Id, MontoFormateado, dei_NumeroCuotas, MontoFormateadoMontoCuota);
     }
-        
+
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
@@ -873,7 +968,7 @@ $(document).on("click", "#Tabla tbody tr td #btnDetalleDeduccionesIndividuales",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ id })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //$("#Detalles #tde_IdTipoDedu").empty();

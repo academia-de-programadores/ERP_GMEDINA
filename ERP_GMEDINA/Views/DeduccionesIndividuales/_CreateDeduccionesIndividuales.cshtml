@@ -58,7 +58,8 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_MontoCuota, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @autocomplete = "off", @readonly = "true", @id = "dei_MontoCuota", onkeyup = "ValidarCrearDeduccionIndividual('-1', '-1', '-1', '-1', this.value)" } })
-                    <span id="valMontoCuota" class="text-danger" style="display:none;">Campo Cuota Requerido</span>
+                    <span id="valMontoCuota" class="text-danger" style="display:none;">Campo Monto Cuota Requerido</span>
+                    <span id="valMontoCuotaMayor" class="text-danger" style="display:none;">El campo Monto Cuota no puede ser menor Cero.</span>
                 </div>
             </div>
 
@@ -67,7 +68,7 @@
                     @Html.LabelFor(model => model.dei_PagaSiempre)
                 </div>
                 <div class="col-md-8">
-                    <input type="checkbox" class="icheckbox_square-green" name="dei_PagaSiempre" id="dei_PagaSiempre">
+                    <input type="checkbox" class="icheckbox_square-green" name="dei_PagaSiempre" id="dei_PagaSiempre" onclick="ValidarPagasiempreCrear(this.value)">
                 </div>
             </div>
             <div class="form-group">
