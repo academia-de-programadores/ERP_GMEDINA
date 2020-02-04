@@ -264,7 +264,9 @@ namespace ERP_GMEDINA.Helpers
                                                                             .Where(DEX => DEX.emp_Id == empleadoActual.emp_Id &&
                                                                                    DEX.dei_Monto > 0 &&
                                                                                    DEX.dei_Pagado != true &&
-                                                                                   DEX.dei_Activo == true)
+                                                                                   DEX.dei_Activo == true ||
+                                                                                   (DEX.dei_PagaSiempre == true && DEX.dei_Activo == true)
+                                                                                   )
                                                                             .ToList();
 
             if (oDeduccionesIndiColaborador.Count > 0)
@@ -439,6 +441,7 @@ namespace ERP_GMEDINA.Helpers
             #endregion
         }
 
+        // se usa este actualmente
         public static void PrevisualizarProcesarDeducciones(DateTime fechaInicio, DateTime fechaFin, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             #region Procesar deducciones

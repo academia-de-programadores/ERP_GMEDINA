@@ -448,7 +448,8 @@ namespace ERP_GMEDINA.Helpers
                                                                                x.ini_Activo == true &&
                                                                                x.ini_Pagado != true &&
                                                                                x.ini_FechaCrea >= fechaInicio &&
-                                                                               x.ini_FechaCrea <= fechaFin)
+                                                                               x.ini_FechaCrea <= fechaFin ||
+                                                                               (x.ini_PagaSiempre == true && x.ini_Activo == true))
                                                                         .ToList();
 
             if (oIngresosIndiColaboradores.Count > 0)
