@@ -9,7 +9,6 @@ namespace ERP_GMEDINA.Models
         public int pdcd_IdCesantiaDetalle { get; set; }
         public int emp_Id { get; set; }
         public decimal pdcd_TotalCesantiaColaborador { get; set; }
-        public string pdcd_CodigoPlanillaCesantias { get; set; }
         public int pdce_IdCesantiaEncabezado { get; set; }
         public int pdcd_DiasPagados { get; set; }
         public decimal pdcd_ConSueldoBruto { get; set; }
