@@ -5,94 +5,108 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 <div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-        	@Html.ActionLink("Regresar", "Index", null, new {@class= "btn btn-default pull-right" })
-        	<h2>Crear Área</h2>
-        </div>
-
-
-          <div class="ibox-content">
-              <div class="form-horizontal">
-                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
-                 {
-                  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                  <div class="form-group">
-                    @Html.LabelFor(model => model.suc_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                      @Html.DropDownList("suc_Id", null, htmlAttributes: new { @class = "form-control required" })
-                      @Html.ValidationMessageFor(model => model.suc_Id, "", new { @class = "text-danger",@id= "errorSucursales" })
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    @Html.LabelFor(model => model.area_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                      @Html.EditorFor(model => model.area_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
-                      @Html.ValidationMessageFor(model => model.area_Descripcion, "", new { @class = "text-danger",@id= "errorarea_Descripcion" })
-                    </div>
-                  </div>
-                  <div class="form-group">
-                      @Html.LabelFor(model => model.car_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                          @Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
-                          @Html.ValidationMessageFor(model => model.car_Descripcion, "", new { @class = "text-danger",@id= "errorcar_Descripcion" })
-                      </div>
-                  </div>
-                  }
-                  <div class="ibox">
-                          <div class="ibox-title">
-                              <h5>Departamentos</h5>
-                              <div class="ibox-tools">
-                                  <a class="collapse-link">
-                                      <i class="fa fa-chevron-up"></i>
-                                  </a>
-                              </div>
-                          </div>
-                          <div class="ibox-content" style="">
-                              <div class="row">
-                                  @Html.Partial("_CreateDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
-                                  <div class="col-lg-8">
-                                      <table class="table" id="ChildDataTable">
-                                          <thead>
-                                          <tr>
-                                              <th>Descripción</th>
-                                              <th>Cargo</th>
-                                              <th>Acciones</th>
-                                          </tr>
-                                          </thead>
-                                          <tbody></tbody>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                      <input type="button" value="Guardar" class="btn btn-primary" id="btnCrear"/>
-      	            @Html.ActionLink("Cancelar", "Index", null, new { @class="btn btn-default"})
-                    </div>
-                  </div>
-                </div>
-           </div>
-      </div>
+ <div class="row">
+  <div class="col-lg-12">
+   <div class="ibox float-e-margins">
+    <div class="ibox-title">
+     @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
+     <h2>Crear Área</h2>
     </div>
+
+
+    <div class="ibox-content">
+     <div class="form-horizontal">
+      @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
+      {
+          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+          <div class="form-group">
+           @Html.LabelFor(model => model.suc_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+            @Html.DropDownList("suc_Id", null, htmlAttributes: new { @class = "form-control required" })
+            @Html.ValidationMessageFor(model => model.suc_Id, "", new { @class = "text-danger", @id = "errorSucursales" })
+           </div>
+          </div>
+          <div class="form-group">
+           @Html.LabelFor(model => model.area_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+            @Html.EditorFor(model => model.area_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
+            @Html.ValidationMessageFor(model => model.area_Descripcion, "", new { @class = "text-danger", @id = "errorarea_Descripcion" })
+           </div>
+          </div>
+                  <div class="form-group">
+                   @Html.LabelFor(model => model.car_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                   <div class="col-md-10">
+                    @Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
+                    @Html.ValidationMessageFor(model => model.car_Descripcion, "", new { @class = "text-danger", @id = "errorcar_Descripcion" })
+                   </div>
+                  </div>
+                  <div class="form-group">
+                   @Html.LabelFor(model => model.car_SalarioMinimo, htmlAttributes: new { @class = "control-label col-md-2" })
+                   <div class="col-md-8">
+                    @Html.EditorFor(model => model.car_SalarioMinimo, new { htmlAttributes = new { @class = "form-control required", @type = "number", @placeholder = "0.00", @step = "0.01", @min = "0", @max = "10" } })
+                    @Html.ValidationMessageFor(model => model.car_SalarioMinimo, "", new { @class = "text-danger", @id = "errorcar_SalarioMinimo" })
+                   </div>
+                  </div>
+                  <div class="form-group">
+                   @Html.LabelFor(model => model.car_SalarioMaximo, htmlAttributes: new { @class = "control-label col-md-2" })
+                   <div class="col-md-8">
+                    @Html.EditorFor(model => model.car_SalarioMaximo, new { htmlAttributes = new { @class = "form-control required", @type = "number", @placeholder = "0.00", @step = "0.01", @min = "0" , @max = "10" } })
+                    @Html.ValidationMessageFor(model => model.car_SalarioMaximo, "", new { @class = "text-danger", @id = "errorcar_SalarioMaximo" })
+                   </div>
+                  </div>
+      }
+      <div class="ibox">
+       <div class="ibox-title">
+        <h5>Departamentos</h5>
+        <div class="ibox-tools">
+         <a class="collapse-link">
+          <i class="fa fa-chevron-up"></i>
+         </a>
+        </div>
+       </div>
+       <div class="ibox-content" style="">
+        <div class="row">
+         @Html.Partial("_CreateDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
+         <div class="col-lg-8">
+          <table class="table" id="ChildDataTable">
+           <thead>
+            <tr>
+             <th>Descripción</th>
+             <th>Cargo</th>
+             <th>Acciones</th>
+            </tr>
+           </thead>
+           <tbody></tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="form-group">
+       <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Guardar" class="btn btn-primary" id="btnCrear" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
   </div>
+ </div>
 </div>
 
 @section Styles {
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
+ @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+ @Styles.Render("~/Content/plugins/izitoast/iziToast")
+ @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
 }
 
 @section Scripts {
-    @Scripts.Render("~/plugins/customdataTables")
-@*general*@
-@Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
-@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
+ @Scripts.Render("~/plugins/customdataTables")
+ @*general*@
+ @Scripts.Render("~/Scripts/app/general")
+ @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+ @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
 
-    @Scripts.Render("~/Scripts/app/general/CreateArea")
+ @Scripts.Render("~/Scripts/app/general/CreateArea")
 }

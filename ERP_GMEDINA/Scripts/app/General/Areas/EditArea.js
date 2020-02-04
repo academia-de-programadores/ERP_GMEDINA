@@ -7,11 +7,13 @@ var Entidad = '';
 var hablilitar = function () {
 
 };
-function Add(depto_Descripcion, car_Descripcion) {
+function Add(Areas) {
  ChildTable.row.add(
             {
-             Descripcion: depto_Descripcion.trim(),
-             Cargo: car_Descripcion
+             Descripcion: Areas.depto_Descripcion.trim(),
+             Cargo: Areas.car_Descripcion.trim(),
+             car_SalarioMinimo: Areas.car_SalarioMinimo,
+             car_SalarioMaximo: Areas.car_SalarioMaximo
             }
             ).draw();
  $("#FormDepartamentos").find(".required").val("");
@@ -21,17 +23,20 @@ function getJson() {
  //declaramos una lista para recuperar en un formato
  //especifico el json de datatable.
  list = new Array();
- //declaramos el objeto que ira dentro de la vista
- var info = ChildTable.rows().data();
+
  for (var i = 0; i < ChildTable.data().length; i++) {
-  var fila = info[i];
-  var tbDepartamentos =
-   {
-    depto_Id: info[i].Id,
-    depto_Descripcion: fila.Descripcion,
-    car_Descripcion: fila.Cargo,
-    Accion: fila.Accion
-   };
+  var fila = ChildTable.rows().data()[i];
+  //tbDepartamentos.depto_Descripcion = fila.Descripcion;
+  //tbDepartamentos.tbCargos.car_Descripcion = fila.Cargo;
+  var tbDepartamentos = {
+   depto_Descripcion: fila.Descripcion,
+   tbCargos:
+    {
+     car_Descripcion: fila.Cargo,
+     car_SalarioMinimo: fila.car_SalarioMinimo,
+     car_SalarioMaximo: fila.car_SalarioMaximo
+    }
+  };
   list.push(tbDepartamentos);
  }
  return list;
@@ -101,7 +106,7 @@ $(document).ready(function () {
  }
  ChildTable = $(ChildDataTable).DataTable({
   "language": language,
-  pageLength: 3,
+  pageLength: 10,
   lengthChange: false,
   columns:
    [
@@ -150,7 +155,11 @@ $("#add").click(function () {
  if (!valid) {
   return null;
  }
-
+ if (data.car_SalarioMinimo > data.car_SalarioMaximo) {
+  var input = $("#FormDepartamentos #car_SalarioMaximo")[0];
+  $(input).focusout();
+  return null;
+ }
  if (area.cargo == data.car_Descripcion) {
   var span = $("#FormDepartamentos").find("#errorcar_Descripcion")[0];
   span.innerText = "Cargo reservado, por favor cambiar.";
@@ -180,7 +189,7 @@ $("#add").click(function () {
           $(span).addClass("text-danger");
          });
         } else {
-         Add(data.depto_Descripcion, data.car_Descripcion);
+         Add(data);
         }
        }
  );
@@ -192,7 +201,7 @@ $("#btnCrear").click(function () {
  var tbAreas = $("#FormAreas").serializeArray();
  tbAreas = serializar(tbAreas);
  var lista = getJson();
-  if (tbAreas != null) {
+ if (tbAreas != null) {
   data = JSON.stringify({
    cAreas: tbAreas,
    Departamentos: lista,
@@ -206,7 +215,7 @@ $("#btnCrear").click(function () {
        var div = $(input).closest(".form-group")[0];
        var asterisco = $(div).find("label font")[0];
        if (obj.codigo == "-2") {
-           MsgError("Error", "No se editó el registro, contacte al administrador.");
+        MsgError("Error", "No se editó el registro, contacte al administrador.");
        }
        if (obj.codigo == "-3") {
         console.log("Violación de la seguridad.");
@@ -222,7 +231,7 @@ $("#btnCrear").click(function () {
        }
       });
  } else {
-      MsgError("Error", "Por favor llene todas las cajas de texto.");
+  MsgError("Error", "Por favor llene todas las cajas de texto.");
  }
 });
 //$("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
@@ -317,7 +326,7 @@ $("#ModalInactivar").find("#InActivar").on("click", function () {
         //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
         $(location).attr('href', '/Areas/Index');
        } else {
-           MsgError("Error", "No se inactivó el registro, contacte al administrador.");
+        MsgError("Error", "No se inactivó el registro, contacte al administrador.");
        }
       });
  }
@@ -355,3 +364,18 @@ function alerta(div) {
  }
  return false;
 }
+var forms = $("form");
+$.each(forms, function (value, index) {
+ var form = this;
+ $(form).find("#car_SalarioMaximo").focusout(function () {
+  var valor_minimo = $(form).find("#car_SalarioMinimo").val()
+  if (valor_minimo > $(this).val()) {
+   var div = $(this).closest("div")[0];
+   var span = $(div).find("span")[0];
+   span.innerText = "el sueldo máximo debe se mayor ó igual al sueldo minimo "
+   $(span).addClass("text-warning");
+   $(this).val(valor_minimo);
+  }
+ });
+});
+
