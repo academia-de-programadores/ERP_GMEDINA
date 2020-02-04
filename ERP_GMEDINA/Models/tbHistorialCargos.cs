@@ -27,14 +27,14 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbAreas tbAreas { get; set; }
         public virtual tbAreas tbAreas1 { get; set; }
-        public virtual tbDepartamentos tbDepartamentos { get; set; }
-        public virtual tbDepartamentos tbDepartamentos1 { get; set; }
-        public virtual tbJornadas tbJornadas { get; set; }
-        public virtual tbJornadas tbJornadas1 { get; set; }
         public virtual tbCargos tbCargos { get; set; }
         public virtual tbCargos tbCargos1 { get; set; }
+        public virtual tbDepartamentos tbDepartamentos { get; set; }
+        public virtual tbDepartamentos tbDepartamentos1 { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
+        public virtual tbJornadas tbJornadas { get; set; }
+        public virtual tbJornadas tbJornadas1 { get; set; }
     }
 }

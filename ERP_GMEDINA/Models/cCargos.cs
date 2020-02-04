@@ -17,9 +17,19 @@ namespace ERP_GMEDINA.Models
         public int car_Id { get; set; }
 
         [Display(Name = "Cargo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string car_Descripcion { get; set; }
+
+        [Display(Name = "Salario minimo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+       
+        public decimal car_SalarioMinimo { get; set; }
+
+        [Display(Name = "Salario maximo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public Nullable<decimal> car_SalarioMaximo { get; set; }
+
 
         [Display(Name = "Estado")]
         public bool car_Estado { get; set; }

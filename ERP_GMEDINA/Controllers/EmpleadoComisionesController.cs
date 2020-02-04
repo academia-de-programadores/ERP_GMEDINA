@@ -54,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
                 Id = CatIngreso.cin_IdIngreso,
                 Descripcion = CatIngreso.cin_DescripcionIngreso
             };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
 
@@ -117,7 +117,7 @@ namespace ERP_GMEDINA.Controllers
             var PorcentajeMaxFin = (from b in db.tbTechosComisiones
                                     where b.tc_Estado == true && b.tc_RangoFin == MaxFin
                                     select b.tc_PorcentajeComision).FirstOrDefault();
-            
+
             foreach (var a in TechosComisiones)
             {
 
@@ -131,9 +131,9 @@ namespace ERP_GMEDINA.Controllers
                     TotalComision = ((tbEmpleadoComisiones.cc_TotalVenta * PorcentajeMaxFin / 100));
                     break;
                 }
-                
+
             }
-         
+
             tbEmpleadoComisiones.cc_TotalComision = TotalComision;
 
             tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
@@ -385,4 +385,3 @@ namespace ERP_GMEDINA.Controllers
 
     }
 }
-

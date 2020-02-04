@@ -21,6 +21,12 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Empresa")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string empr_Nombre { get; set; }
+
+        [Display(Name = "Representante legal")]
+        public Nullable<int> per_Id { get; set; }
+        [Display(Name = "RTN")]
+        public string empr_RTN { get; set; }
+
         [Display(Name = "Logo")]
         public string empr_Logo { get; set; }
         [Display(Name ="Estado")]

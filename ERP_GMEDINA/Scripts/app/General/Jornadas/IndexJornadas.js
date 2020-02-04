@@ -244,22 +244,35 @@ $("#btnGuardarHorario").click(function () {
     var data = $("#FormNuevoHorario").serializeArray();
     data = serializar(data);
     data.jor_Id = jor_Id;
-    if (data != null) {
-        data = JSON.stringify({ tbHorarios: data });
-        _ajax(data,
-            '/Jornadas/CreateHorario',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $('#btnCerrarModal').click();
-                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-                    LimpiarControles(["hor_Descripcion", "hor_HoraInicio", "hor_HoraFin"]);
-                    llenarTabla();
-                } else {
-                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
-                }
-            });
-    } else {
+    var horaInicio = parseInt($("#hor_HoraInicio").val());
+    var horaFin = parseInt($("#hor_HoraFin").val())
+    var result = horaFin - horaInicio;      
+
+    if (data != null)
+    {
+        if (result <= 8) {
+                data = JSON.stringify({ tbHorarios: data });
+                _ajax(data,
+                    '/Jornadas/CreateHorario',
+                    'POST',
+                    function (obj) {
+                        if (obj != "-1" && obj != "-2" && obj != "-3") {
+                            $('#btnCerrarModal').click();
+                            MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                            LimpiarControles(["hor_Descripcion", "hor_HoraInicio", "hor_HoraFin"]);
+                            llenarTabla();
+                        }
+                        else {
+                            MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                        }
+                    });
+        }
+        else {
+            $("#msgDuracion").show();
+        };
+                
+    }
+    else {
         MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });
@@ -286,26 +299,40 @@ $("#btnActualizar").click(function () {
     }
 });
 $("#btnActualizarHorario").click(function () {
+    //$("#ModalDetallesHorario").find("#hor_HoraFin")["0"].innerText = hor_HoraFin;
     var data = $("#FormEditarHorarios").serializeArray();
+    $("#msgDuracionEdit").hide();
     data = serializar(data);
-    if (data != null) {
-        data.hor_Id = id;
-        data = JSON.stringify({ tbHorarios: data });
-        _ajax(data,
-            '/Jornadas/EditHorario',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalEditarHorarios").modal('hide');//ocultamos el modal
-                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                    llenarTabla();
-                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
-                } else {
-                    MsgError("Error", "No se editó el registro, contacte al administrador.");
-                }
-            });
-    } else {
+    data.hor_Id = id;
+    var horaInicio = data.hor_HoraInicio;
+    var horaFin = data.hor_HoraFin;
+    var result = parseInt(horaFin) - parseInt(horaInicio);
+
+    if (data != null)
+    {
+        if (result <= 8) {            
+            data = JSON.stringify({ tbHorarios: data });
+            _ajax(data,
+                '/Jornadas/EditHorario',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        $("#ModalEditarHorarios").modal('hide');//ocultamos el modal
+                        $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                        $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                        llenarTabla();
+                        MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                    }
+                    else {
+                        MsgError("Error", "No se editó el registro, contacte al administrador.");
+                    }
+                });
+        }
+        else {
+            $("#msgDuracionEdit").show();
+        }
+    }
+    else {
         MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });

@@ -20,14 +20,14 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		#region GET: INDEX PAGADOS 
+		#region GET: INDEX PAGADOS
 		public ActionResult IndexPagado()
 		{
 			return View(db.V_DecimoCuartoMes_Pagados.ToList());
 		}
 		#endregion
 
-		#region POST: INSERT 
+		#region POST: INSERT
 		public JsonResult InsertDecimoCuartoMes(List<tbDecimoCuartoMes> DecimoCuarto)
 		{
 			using (var dbContextTransaction = db.Database.BeginTransaction())
@@ -56,7 +56,7 @@ namespace ERP_GMEDINA.Controllers
 						i++;
 						list = db.UDP_Plani_tbDecimoCuartoMes_Insert(DC.emp_Id, DC.dcm_Monto);
 
-						//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP                                                  
+						//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
 						foreach (UDP_Plani_tbDecimoCuartoMes_Insert_Result resultado in list)
 							MessageError = Convert.ToString(resultado);
 
@@ -97,13 +97,13 @@ namespace ERP_GMEDINA.Controllers
 			if (ModelState.IsValid)
 			{
 				try
-				{					
-					
+				{
+
 
 					var ConsultaFechas = from HP in db.V_DecimoCuartoMesFE
 
 										 where
-										 (HP.hipa_Anio == hipa_FechaInicio)							 
+										 (HP.hipa_Anio == hipa_FechaInicio)
 										 select new ViewModelDecimoCuartoMes
 										 {
 											 emp_Id = HP.emp_Id,

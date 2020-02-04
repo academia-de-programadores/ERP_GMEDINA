@@ -44,13 +44,13 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal> hipa_TotalBonos { get; set; }
         public string hipa_CodigoPlanilla { get; set; }
     
+        public virtual tbPeriodos tbPeriodos { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
-        public virtual tbPeriodos tbPeriodos { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

@@ -173,7 +173,7 @@ namespace ERP_GMEDINA.Controllers
                     Empleados.AddRange(db.V_HistorialPermisos_Empleados
                     .Select(tabla => new {
                         Id = tabla.Id,
-                        Descripcion = tabla.Nombre
+                        Descripcion = tabla.Nombre+"-"+tabla.Departamento
                     })
                     .ToList());
                 }

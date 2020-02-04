@@ -34,7 +34,7 @@ function format(obj) {
     if (Tit.length == 0)
         Tit += '<label style="color:#585858">Sin datos que mostrar.*</label>';
     var TodoPersona = [Comp, Hab, Idi, ReEs, Tit];
-    var Encabezados = ['Competencias', 'Habilidades', 'Idiomas', 'Requerimientos_Especiales', 'Títulos'];
+    var Encabezados = ['Competencias', 'Habilidades', 'Idiomas', 'Requerimientos_Especiales', 'Educación'];
     for (i = 0 ; i < TodoPersona.length ; i++) {
         div += '<div class="panel panel-default">';
         div += '<div class="panel-heading" data-toggle="collapse" data-parent="#accordion' + Id + '" href="#' + Encabezados[i] + Id + '" class="collapsed" aria-expanded="false">';
@@ -148,10 +148,14 @@ function tablaDetalles(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
+                if (obj[0].per_Edad != null)
+                    var edad = obj[0].per_Edad + ' años';
+                else
+                    var edad =' ';
                 $("#ModalDetalles").find("#per_Identidad")["0"].innerText = obj[0].per_Identidad;
                 $("#ModalDetalles").find("#per_Nombres")["0"].innerText = obj[0].per_Nombres + ' ' + obj[0].per_Apellidos;
                 $("#ModalDetalles").find("#tbNacionalidades")["0"].innerText = obj[0].nac_Id;
-                $("#ModalDetalles").find("#per_Edad")["0"].innerText = obj[0].per_Edad + ' años';
+                $("#ModalDetalles").find("#per_Edad")["0"].innerText = edad;
                 $("#ModalDetalles").find("#per_TipoSangre")["0"].innerText = obj[0].per_TipoSangre;
                 $("#ModalDetalles").find("#per_Direccion")["0"].innerText = obj[0].per_Direccion;
                 $("#ModalDetalles").find("#per_Telefono")["0"].innerText = obj[0].per_Telefono;

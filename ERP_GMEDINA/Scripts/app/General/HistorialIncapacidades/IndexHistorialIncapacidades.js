@@ -135,8 +135,9 @@ function Llamarmodaldetalle(ID) {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
                 $("#ModalDetalles").find("#tbTipoIncapacidades_ticn_Descripcion")["0"].innerText = obj.tbTipoIncapacidades.ticn_Descripcion;
-                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico;
+                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico; 
                 $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
+                $("#ModalDetalles").find("#hinc_Doctor")["0"].innerText = obj.hinc_Doctor;
                 $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0, 10);
                 $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = FechaFormato(obj.hinc_FechaFin).substring(0, 10);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;

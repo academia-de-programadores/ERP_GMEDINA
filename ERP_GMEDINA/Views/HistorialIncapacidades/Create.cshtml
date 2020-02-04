@@ -44,7 +44,7 @@
                                           <h4 id="identidad" name="identidad" class="col-md-4"></h4>
 
                                       </div>
-                                      <hr>
+                                      
 
                                   </div>
                               </div>
@@ -73,7 +73,7 @@
                       <div class="form-group">
                           @Html.LabelFor(model => model.hinc_CentroMedico, "Centro Médico", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
-                              @Html.EditorFor(model => model.hinc_CentroMedico, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
+                              @Html.EditorFor(model => model.hinc_CentroMedico, new { htmlAttributes = new { @class = "form-control required valid", @id = "hinc_CentroMedico", @onkeypress = "return alphanumeric(event)" } })
                               @Html.ValidationMessageFor(model => model.hinc_CentroMedico, "", new { @class = "text-danger", @id = "errorhinc_CentroMedico"})
                           </div>
                       </div>
@@ -81,7 +81,7 @@
                       <div class="form-group">
                           @Html.LabelFor(model => model.hinc_Doctor, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
-                              @Html.EditorFor(model => model.hinc_Doctor, "Doctor", new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
+                              @Html.EditorFor(model => model.hinc_Doctor, "Doctor", new { htmlAttributes = new { @class = "form-control required valid", @id = "hinc_Doctor", @onkeypress = "return alphanumeric(event)" } })
                               @Html.ValidationMessageFor(model => model.hinc_Doctor, "", new { @class = "text-danger", @id = "errorhinc_Doctor" })
                           </div>
                       </div>
@@ -89,13 +89,13 @@
                       <div class="form-group">
                           @Html.LabelFor(model => model.hinc_Diagnostico,"Diagnóstico", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
-                              @Html.EditorFor(model => model.hinc_Diagnostico, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
+                              @Html.EditorFor(model => model.hinc_Diagnostico, new { htmlAttributes = new { @class = "form-control required valid", @id = "hinc_Diagnostico", @onkeypress = "return alphanumeric(event)" } })
                               @Html.ValidationMessageFor(model => model.hinc_Diagnostico, "", new { @class = "text-danger", @id = "errorhinc_Diagnostico" })
                           </div>
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio*", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
                               @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker ", @type = "date", @id = "hinc_FechaInicio", @min = "1900-01-01", @max = "2199-12-31" })
                             @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger", @id = "errorhinc_FechaInicio" })
@@ -104,13 +104,26 @@
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin*", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
-                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin", @min = "1900-01-01", @max = "2199-12-31" })
+                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin", @min = "1900-01-01", @max = "2199-12-31", @onchange = "validarfechafin(this);" })
                           @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger", @id = "errorhinc_FechaFin" })
                           </div>
                       </div>
 
+                  <div class="form-group">
+                      <label class="control-label col-md-2">Incapacidad*</label>
+                      <div id="datainc" class="col-md-10">
+                          <select class="form-control" id="hinc_Espermanente" name="hinc_Espermanente">
+                              <option value=1>**Seleccione una opción**</option>
+                              <option value=true>Incapacidad permanente</option>
+                              <option value=false>Incapacidad temporal</option>
+
+                          </select>
+                      </div>
+
+
+                  </div>
                       @*<div class="form-group">
               @Html.LabelFor(model => model.hinc_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
               <div class="col-md-10">
@@ -129,7 +142,7 @@
 
                               </div>
                               <div class="col-md-1 col-md-4">
-                                  <a href="index" class="btn btn-default">Cancelar</a>
+                                  <a href="index" id="btncancelar" class="btn btn-default">Cancelar</a>
 
 
 
@@ -145,6 +158,7 @@
   </div>
 </div>
 
+@Html.Partial("_DetalleIncapacidad", new ERP_GMEDINA.Models.tbHistorialIncapacidades())
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

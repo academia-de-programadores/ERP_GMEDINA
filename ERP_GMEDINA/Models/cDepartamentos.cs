@@ -11,6 +11,9 @@ namespace ERP_GMEDINA.Models
     {
         public string car_Descripcion { get; set; }
         public string Accion { get; set; }
+        public decimal car_SalarioMinimo { get; set; }
+        public Nullable<decimal> car_SalarioMaximo { get; set; }
+
     }
     public class cDepartamentos
     {
@@ -38,5 +41,12 @@ namespace ERP_GMEDINA.Models
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de caracteres.")]
         public string car_Descripcion { get; set; }
         public string Accion { get; set; }
+
+        [Display(Name = "Salario minimo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public decimal car_SalarioMinimo { get; set; }
+        [Display(Name = "Salario maximo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public Nullable<decimal> car_SalarioMaximo { get; set; }
     }
 }

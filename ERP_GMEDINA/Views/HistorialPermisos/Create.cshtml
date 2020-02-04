@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_PorcentajeIndemnizado, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-9">
-                                    @Html.EditorFor(model => model.hper_PorcentajeIndemnizado, new { htmlAttributes = new { @class = "form-control required", Min="1",Max="100" } })
+                                    @Html.EditorFor(model => model.hper_PorcentajeIndemnizado, new { htmlAttributes = new { @class = "form-control required", Min="0",Max="100" } })
                                     @Html.ValidationMessageFor(model => model.hper_PorcentajeIndemnizado, "", new { @class = "text-danger", @id = "errorhper_Observacion" })
                                 </div>
                             </div>

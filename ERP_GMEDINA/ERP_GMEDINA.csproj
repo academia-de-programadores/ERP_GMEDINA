@@ -597,6 +597,9 @@
     <Compile Include="Models\tbHistorialHorasTrabajadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbHistorialIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbHistorialPermisos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1209,6 +1212,9 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialCargos_Degradar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialCargos_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1623,6 +1629,9 @@
     <Compile Include="Models\V_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_Empleados_Sueldos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_EquipoTrabajoDetalles.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1657,6 +1666,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialPermisos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HistorialPermisosEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialPermisos_Empleados.cs">
@@ -1791,7 +1803,13 @@
     <Compile Include="Models\V_RPT_Requisiciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_RequisicionesDatos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Sueldos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbAdelantoSueldo.cs">

@@ -32,11 +32,11 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
-        public virtual tbSucursales tbSucursales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialCargos> tbHistorialCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialCargos> tbHistorialCargos1 { get; set; }
         public virtual tbCargos tbCargos { get; set; }
+        public virtual tbSucursales tbSucursales { get; set; }
     }
 }

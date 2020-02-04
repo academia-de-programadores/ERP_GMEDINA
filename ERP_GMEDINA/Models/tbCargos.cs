@@ -24,8 +24,8 @@ namespace ERP_GMEDINA.Models
         public System.DateTime car_FechaCrea { get; set; }
         public Nullable<int> car_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> car_FechaModifica { get; set; }
-        public decimal car_SalarioMinimo { get; set; }
-        public Nullable<decimal> car_SalarioMaximo { get; set; }
+        public decimal car_SueldoMinimo { get; set; }
+        public Nullable<decimal> car_SueldoMaximo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
