@@ -44,7 +44,7 @@
                                           <h4 id="identidad" name="identidad" class="col-md-4"></h4>
 
                                       </div>
-                                      <hr>
+                                      
 
                                   </div>
                               </div>
@@ -95,7 +95,7 @@
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio*", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
                               @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker ", @type = "date", @id = "hinc_FechaInicio", @min = "1900-01-01", @max = "2199-12-31" })
                             @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger", @id = "errorhinc_FechaInicio" })
@@ -104,15 +104,15 @@
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin*", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-4">
-                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin", @min = "1900-01-01", @max = "2199-12-31" })
+                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin", @min = "1900-01-01", @max = "2199-12-31", @onchange = "validarfechafin(this);" })
                           @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger", @id = "errorhinc_FechaFin" })
                           </div>
                       </div>
 
                   <div class="form-group">
-                      <label class="control-label col-md-2">Incapacidad</label>
+                      <label class="control-label col-md-2">Incapacidad*</label>
                       <div id="datainc" class="col-md-10">
                           <select class="form-control" id="hinc_Espermanente" name="hinc_Espermanente">
                               <option value=1>**Seleccione una opción**</option>

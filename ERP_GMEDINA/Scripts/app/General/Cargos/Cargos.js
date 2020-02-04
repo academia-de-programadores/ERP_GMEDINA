@@ -15,6 +15,8 @@ function tablaEditar(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
+                $("#ModalEditar").find("#car_SalarioMinimo").val(obj.car_SalarioMinimo);
+                $("#ModalEditar").find("#car_SalarioMaximo").val(obj.car_SalarioMaximo);
                 $('#ModalEditar').modal('show');
             }
         });
@@ -87,10 +89,10 @@ $("#btnEditar").click(function () {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
                 $("#ModalEditar").find("#car_Descripcion").val(obj.car_Descripcion);
-                $("#ModalEditar").find("#car_SalarioMinimo").val(obj.car_SalarioMinimo);
-                $("#ModalEditar").find("#car_SalarioMaximo").val(obj.car_SalarioMaximo);
+           
                
                 $("#ModalEditar").find("#car_Descripcion").focus();
+               
             }
         });
 });
@@ -152,6 +154,7 @@ $("#InActivar").click(function () {
 });
 
 $("#btnActualizar").click(function () {
+    debugger
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data != null) {
