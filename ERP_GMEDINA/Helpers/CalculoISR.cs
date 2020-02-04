@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Helpers
 {
     public static class CalculoISR
     {
-        public static decimal CalcularISR(ERP_GMEDINAEntities db, tbEmpleados empleadoActual, decimal totalSalario, decimal totalISR)
+        public static decimal CalcularISR(ERP_GMEDINAEntities db, tbEmpleados empleadoActual, decimal totalSalario, decimal totalISR, int dias)
         {
             #region Cálculo de ISR
 
@@ -34,13 +34,11 @@ namespace ERP_GMEDINA.Helpers
             decimal? ExcesoVacaciones = 0;
             decimal? ExcesoDecimoCuarto = 0;
             decimal Exceso = 0;
-            decimal SueldoAnual = 0;
             decimal? AcumuladosISR = 0;
             decimal TotalIngresosGravables = 0;
             decimal TotalDeduccionesGravables = 0;
             decimal RentaNetaGravable = 0;
             decimal SalarioMinimo = db.tbEmpresas.Select(x => x.empr_SalarioMinimo).FirstOrDefault() ?? 0;
-            var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
             #endregion
 
             #region Sueldo Promedio Anual
@@ -133,7 +131,7 @@ namespace ERP_GMEDINA.Helpers
             //Validar si los dias a Pagar es mayor a 30 dias 
             if (objVacaciones > 30)
             {
-                ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
+                ExcesoVacaciones = ((objVacaciones - 30) * (TotalSalarioAnual / 360));
             }
             else
             {
@@ -313,6 +311,8 @@ namespace ERP_GMEDINA.Helpers
             if (totalISR > 0)
             {
                 totalISR = totalISR / 12;
+                totalISR = totalISR / 30;
+                totalISR = totalISR * dias;
             }
             #endregion
 
