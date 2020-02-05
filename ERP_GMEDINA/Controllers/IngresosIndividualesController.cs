@@ -7,15 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class IngresosIndividualesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-
-        #region Index Ingresos Individuales
-        // GET: IngresosIndividuales
+		Models.Helpers Function = new Models.Helpers();
+		
+		#region Index Ingresos Individuales
+		// GET: IngresosIndividuales
+		[SessionManager("IngresosIndividuales/Index")]
         public ActionResult Index()
         {
             var tbIngresosIndividuales = db.tbIngresosIndividuales.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
@@ -66,7 +69,7 @@ namespace ERP_GMEDINA.Controllers
                 ini_comentario = ini_comentario
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbIngresosIndividuales.ini_UsuarioCrea = 1;
+            tbIngresosIndividuales.ini_UsuarioCrea = Function.GetUser();
             tbIngresosIndividuales.ini_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
@@ -171,7 +174,7 @@ namespace ERP_GMEDINA.Controllers
                 ini_comentario = ini_comentario
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbIngresosIndividuales.ini_UsuarioModifica = 1;
+            tbIngresosIndividuales.ini_UsuarioModifica = Function.GetUser();
             tbIngresosIndividuales.ini_FechaModifica = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
@@ -259,7 +262,7 @@ namespace ERP_GMEDINA.Controllers
             if (id == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             //LLENAR DATA DE AUDITORIA
-            int ini_UsuarioModifica = 1;
+            int ini_UsuarioModifica = Function.GetUser();
             DateTime ini_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
@@ -315,7 +318,7 @@ namespace ERP_GMEDINA.Controllers
             if(id == null)
                 return Json("error", JsonRequestBehavior.AllowGet);
             //LLENAR DATA DE AUDITORIA
-            int ini_UsuarioModifica = 1;
+            int ini_UsuarioModifica = Function.GetUser();
             DateTime ini_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = "bien";

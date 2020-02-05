@@ -7,13 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace PruebaPlanilla.Controllers
 {
     public class CatalogoDeDeduccionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+		Helpers Function = new Helpers();
 
+		[SessionManager("CatalogoDeDeducciones/Index")]
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
@@ -44,7 +47,7 @@ namespace PruebaPlanilla.Controllers
         public ActionResult Create([Bind(Include = "cde_DescripcionDeduccion,tde_IdTipoDedu,cde_PorcentajeColaborador,cde_PorcentajeEmpresa,cde_UsuarioCrea,cde_FechaCrea")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+            tbCatalogoDeDeducciones.cde_UsuarioCrea = Function.GetUser();
             tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
@@ -114,7 +117,7 @@ namespace PruebaPlanilla.Controllers
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+            tbCatalogoDeDeducciones.cde_UsuarioCrea = Function.GetUser();
             tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
 
 
@@ -216,7 +219,7 @@ namespace PruebaPlanilla.Controllers
                 try
                 {
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(id,
-                                                                                         1,
+                                                                                         Function.GetUser(),
                                                                                          DateTime.Now
                                                                                             );
 
@@ -261,7 +264,7 @@ namespace PruebaPlanilla.Controllers
                 try
                 {
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Activar(id,
-                                                                                         1,
+                                                                                         Function.GetUser(),
                                                                                          DateTime.Now
                                                                                             );
                     foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeIngresos)
