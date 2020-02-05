@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Attribute
     public class SessionManager : ActionFilterAttribute
     {
         private readonly string _screenId;
-        General General = new General();
+        Models.Helpers General = new Models.Helpers();
         public SessionManager()
         {
         }

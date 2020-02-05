@@ -11,7 +11,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class LoginController : Controller
     {
-        ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         // GET: Login
         public ActionResult Index()
         {
