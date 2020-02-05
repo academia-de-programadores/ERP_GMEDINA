@@ -72,7 +72,7 @@ namespace ERP_GMEDINA.Models
 
 
         [Display(Name = "Correo")]
-        public string usu_Correos { get; set; }
+        public string usu_Correo { get; set; }
 
 
         [Display(Name = "Activo")]
