@@ -41,15 +41,11 @@ $("#InactivarIV").submit(function (e) {
 
 //cargar grid
 function cargarGridIV() {
-
     var esAdministrador = $("#rol_Usuario").val();
-    $.ajax({
-        url: "/TechoImpuestVecinal/GetData",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    }).done(function (data) {
-
+    _ajax(null,
+        "/TechoImpuestoVecinal/GetData",
+        "GET",        
+    (data) => {
         if (data.length == 0) {
             iziToast.error({
                 title: 'Error',
@@ -78,8 +74,8 @@ function cargarGridIV() {
                 //agregar el row al datatable
                 $('#tblIV').dataTable().fnAddData([
                     LitaIV[i].timv_IdTechoImpuestoVecinal,
-                    LitaIV[i].tbMunicipio.mun_Nombre,
-                    LitaIV[i].tbTipoDeduccion.tde_Descripcion,
+                    LitaIV[i].mun_Nombre,
+                    LitaIV[i].tde_Descripcion,
                     (LitaIV[i].timv_RangoInicio % 1 == 0) ? LitaIV[i].timv_RangoInicio + ".00" : LitaIV[i].timv_RangoInicio,
                     (LitaIV[i].timv_RangoFin % 1 == 0) ? LitaIV[i].timv_RangoFin + ".00" : LitaIV[i].timv_RangoFin,
                     (LitaIV[i].timv_Rango % 1 == 0) ? LitaIV[i].timv_Rango + ".00" : LitaIV[i].timv_Rango,
@@ -92,6 +88,45 @@ function cargarGridIV() {
     });
     FullBody();
 }
+
+
+//cargar grid calculo impuesto vecinal
+function cargarGridCalculoIV() {
+
+    var esAdministrador = $("#rol_Usuario").val();
+    $.ajax({
+        url: "/TechoImpuestoVecinal/GetDataCalculo",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+
+        if (data.length == 0) {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se cargó la información, contacte al administrador',
+            });
+        }
+        else {
+            var LitaCalculoIV = data;
+            //limpiar datatable
+            $('#tblCalculoIV').DataTable().clear();
+            //recorrer data obtenida del backend
+            for (var i = 0; i < LitaCalculoIV.length; i++) {
+        
+                //agregar el row al datatable
+                $('#tblCalculoIV').dataTable().fnAddData([
+                    LitaCalculoIV[i].dimv_Id,
+                    LitaCalculoIV[i].per_Nombres + ' ' + LitaCalculoIV[i].per_Apellidos,
+                    (LitaCalculoIV[i].dimv_MontoTotal % 1 == 0) ? LitaCalculoIV[i].dimv_MontoTotal + ".00" : LitaCalculoIV[i].dimv_MontoTotal,
+                    (LitaCalculoIV[i].dimv_CuotaAPagar % 1 == 0) ? LitaCalculoIV[i].dimv_CuotaAPagar + ".00" : LitaCalculoIV[i].dimv_CuotaAPagar,
+                ]);
+            }
+        }
+    });
+    FullBody();
+}
+
 
 //crear iv
 //crear iv
@@ -150,18 +185,16 @@ $('#btnCreateIV').click(function () {
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)        
         //var dataSinFormato = $("#frmIVCreate").serializeArray();
         //console.log(dataSinFormato);
-        var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();
-        console.log("Llega hasta aquí: Ln154");
+        var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();        
         var data = {
             __RequestVerificati1onToken: __RequestVerificati1onToken1,
             mun_Codigo: codmuni1,
             tde_IdTipoDedu: tipoDeduccion1,
-            timv_RangoInicio: rangoInicio1,
-            timv_RangoFin: rangoFin1,
-            timv_Rango: rango1,
-            timv_Impuesto: impuesto1
+            timv_RangoInicio: FormatearMonto(rangoInicio1),
+            timv_RangoFin: FormatearMonto(rangoFin1),
+            timv_Rango: FormatearMonto(rango1),
+            timv_Impuesto: FormatearMonto(impuesto1)
         };
-        console.log(data);
         $.ajax({
             url: "/TechoImpuestoVecinal/Create",
             method: "POST",
@@ -175,8 +208,9 @@ $('#btnCreateIV').click(function () {
                 });
             }
             else if (data == "bien") {
-                $("#AgregarIV").modal('hide');
                 cargarGridIV();
+                $("#AgregarIV").modal('hide');
+               
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
@@ -214,7 +248,7 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
                 $("#Editar #timv_RangoInicio").val((data.timv_RangoInicio % 1 == 0) ? data.timv_RangoInicio + ".00" : data.timv_RangoInicio);
                 $("#Editar #timv_RangoFin").val((data.timv_RangoFin % 1 == 0) ? data.timv_RangoFin + ".00" : data.timv_RangoFin);
                 $("#Editar #timv_Rango").val((data.timv_Rango % 1 == 0) ? data.timv_Rango + ".00" : data.timv_Rango);
-                $("#Editar #timv_Porcentaje").val((data.timv_Porcentaje % 1 == 0) ? data.timv_Porcentaje + ".00" : data.timv_Porcentaje);
+                $("#Editar #timv_Impuesto").val((data.timv_Impuesto % 1 == 0) ? data.timv_Impuesto + ".00" : data.timv_Impuesto);
                 $("#Editar #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
                 $("#Editar #mun_Nombre").val(data.mun_Nombre);
                 $(".rangoInicial").focus();
@@ -269,14 +303,14 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
 });
 
 $("#btnEditarIV").click(function () {
-    var rangoInicial = $("#Editar #timv_RangoInicio").val();
-    var rangoFinal = $("#Editar #timv_RangoFin").val();
-    var rango = $("#Editar #timv_Rango").val();
-    var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
-    var municipio = $("#Editar #mun_Codigo").val();
-    var impuesto = $("#Editar #timv_Impuesto").val();
+    var rangoInicial1 = $("#Editar #timv_RangoInicio").val();
+    var rangoFinal1 = $("#Editar #timv_RangoFin").val();
+    var rango1 = $("#Editar #timv_Rango").val();
+    var tipoDeduccion1 = $("#Editar #tde_IdTipoDedu").val();
+    var municipio1 = $("#Editar #mun_Codigo").val();
+    var impuesto1 = $("#Editar #timv_Impuesto").val();
 
-    if (DataAnnotationsEditar(municipio, tipoDeduccion, rangoInicial, rangoFinal, rango, impuesto)) {
+    if (DataAnnotationsEditar(municipio1, tipoDeduccion1, rangoInicial1, rangoFinal1, rango1, impuesto1)) {
         $("#EditarIV").modal('hide');
         $("#EditarIVConfirmacion").modal();
     }
@@ -293,51 +327,65 @@ $("#btnEditIVConfirmacion").click(function () {
     $('#btnEditIVConfirmacion').attr('disabled', true);
     //SERIALIZAR EL FORMULARIO
 
-    let timv_IdTechoImpuestoVecinal = $("#Editar #timv_IdTechoImpuestoVecinal").val();
-    let timv_RangoInicio = FormatearMonto($("#Editar #timv_RangoInicio").val());
-    let timv_RangoFin = FormatearMonto($("#Editar #timv_RangoFin").val());
-    let tde_IdTipoDedu = $("#Editar #tde_IdTipoDedu").val();
-    let timv_Impuesto = FormatearMonto($("#Editar #timv_Impuesto").val());
-    let timv_Rango = FormatearMonto($("#Editar #timv_Rango").val());
-    let mun_Codigo = $("#Editar #mun_Codigo").val();
+    var timv_IdTechoImpuestoVecinal1 = $("#Editar #timv_IdTechoImpuestoVecinal").val();
+    var timv_RangoInicio1 = $("#Editar #timv_RangoInicio").val();
+    var timv_RangoFin1 = $("#Editar #timv_RangoFin").val();
+    var tde_IdTipoDedu1 = $("#Editar #tde_IdTipoDedu").val();
+    var timv_Impuesto1 = $("#Editar #timv_Impuesto").val();
+    var timv_Rango1 = $("#Editar #timv_Rango").val();
+    var mun_Codigo1 = $("#Editar #mun_Codigo").val();
+    
 
-    //, decimal 
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/TechoImpuestoVecinal/Edit",
-        method: "POST",
-        data: {
-            timv_IdTechoImpuestoVecinal: timv_IdTechoImpuestoVecinal,
-            mun_Codigo: mun_Codigo,
-            tde_IdTipoDedu: tde_IdTipoDedu,
-            timv_RangoInicio: timv_RangoInicio,
-            timv_RangoFin: timv_RangoFin,
-            timv_Rango: timv_Rango,
-            timv_Impuesto: timv_Impuesto
-        }
-    }).done(function (data) {
-        //DESBLOQUEAR BOTON DE EDITAR
-        $('#btnEditIVConfirmacion').attr('disabled', false);
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se editó el registro, contacte al administrador',
-            });
-        }
-        else {
-            //BLOQUEAR BOTON DE EDITAR
-            $('#btnEditarIV').attr('disabled', true);
-            //REFRESCAR LA DATA DEL DATATABLE
-            cargarGridIV();
-            //OCULTAR MODAL DE EDICION
-            $("#EditarIVConfirmacion").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Éxito',
-                message: '¡El registro se editó de forma exitosa!',
-            });
-        }
-    });
+
+    var data_array = {
+            timv_IdTechoImpuestoVecinal: timv_IdTechoImpuestoVecinal1,
+            mun_Codigo: mun_Codigo1,
+            tde_IdTipoDedu: tde_IdTipoDedu1,
+            timv_RangoInicio: FormatearMonto(timv_RangoInicio1),
+            timv_RangoFin: FormatearMonto(timv_RangoFin1),
+            timv_Rango: FormatearMonto(timv_Rango1),
+            timv_Impuesto: parseFloat(timv_Impuesto1.replace(/,/g,""))
+    };
+    var Matriz = {
+        tbTechoImpuestoVecinal: data_array,
+        Impuesto: timv_Impuesto1
+    };
+
+    console.log(data_array);
+    console.log(Matriz);
+
+
+    if (DataAnnotationsEditar(mun_Codigo1, tde_IdTipoDedu1, timv_RangoInicio1, timv_RangoFin1, timv_Rango1, timv_Impuesto1)) {
+        //, decimal 
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/TechoImpuestoVecinal/Edit",
+            method: "POST",
+            data: Matriz
+        }).done(function (data) {
+            //DESBLOQUEAR BOTON DE EDITAR
+            $('#btnEditIVConfirmacion').attr('disabled', false);
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se editó el registro, contacte al administrador',
+                });
+            }
+            else {
+                //BLOQUEAR BOTON DE EDITAR
+                $('#btnEditarIV').attr('disabled', true);
+                //REFRESCAR LA DATA DEL DATATABLE
+                cargarGridIV();
+                //OCULTAR MODAL DE EDICION
+                $("#EditarIVConfirmacion").modal('hide');
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
+            }
+        });
+    }
 });
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
@@ -384,8 +432,10 @@ $("#btnInactivarIV").click(function () {
             });
         }
         else {
-            $("#InactivarIV").modal('hide');
             cargarGridIV();
+
+            $("#InactivarIV").modal('hide');
+            
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -434,8 +484,9 @@ $("#btnActivarIV").click(function () {
             });
         }
         else {
-            $("#ActivarIV").modal('hide');
             cargarGridIV();
+            $("#ActivarIV").modal('hide');
+           
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Helpers;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -19,6 +20,33 @@ namespace ERP_GMEDINA.Controllers
         {
             var tbTechoImpuestoVecinal = db.tbTechoImpuestoVecinal.OrderBy(t => t.timv_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
             return View(tbTechoImpuestoVecinal.ToList());
+        }
+        #endregion
+
+        #region Index
+        public ActionResult IndexCalculoImpuestoVecinal()
+        {
+            var tbDeduImpuestoVecinal = db.tbDeduccionImpuestoVecinal.OrderBy(t => t.dimv_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTechoImpuestoVecinal).Include(t => t.tbEmpleados);
+            return View(tbDeduImpuestoVecinal.ToList());
+        }
+        #endregion
+
+        #region Get data
+        [HttpGet]
+        // GET: data para refrescar datatable
+        public ActionResult GetDataCalculo()
+        {
+            var otbCalculoImpuestoVecinal = db.tbDeduccionImpuestoVecinal
+                        .Select(c => new {
+                            dimv_Id = c.dimv_Id,
+                            per_Nombre = c.tbEmpleados.tbPersonas.per_Nombres + ' ' + c.tbEmpleados.tbPersonas.per_Apellidos,
+                            dimv_MontoTotal = c.dimv_MontoTotal,
+                            dimv_CuotaAPagar = c.dimv_CuotaAPagar,
+                        }).OrderByDescending(c => c.dimv_Id)
+                        .ToList();
+
+            // retornar data
+            return new JsonResult { Data = otbCalculoImpuestoVecinal, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
 
@@ -180,21 +208,12 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
-        public ActionResult Edit(int timv_IdTechoImpuestoVecinal, string mun_Codigo, int tde_IdTipoDedu, decimal timv_RangoInicio, decimal timv_RangoFin, decimal timv_Rango, decimal timv_Impuesto)
+        public ActionResult Edit([Bind(Include = "timv_IdTechoImpuestoVecinal, timv_Rango, mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal, string Impuesto)
         {
-            tbTechoImpuestoVecinal tbTechoImpuestoVecinal = new tbTechoImpuestoVecinal() {
-                timv_IdTechoImpuestoVecinal = timv_IdTechoImpuestoVecinal,
-                mun_Codigo = mun_Codigo,
-                timv_RangoInicio = timv_RangoInicio,
-                timv_RangoFin = timv_RangoFin,
-                timv_Rango = timv_Rango,
-                timv_Impuesto = timv_Impuesto,
-                tde_IdTipoDedu = tde_IdTipoDedu
-            };
             // variables de auditoria
             tbTechoImpuestoVecinal.timv_UsuarioModifica = 1;
             tbTechoImpuestoVecinal.timv_FechaModifica = DateTime.Now;
-
+            tbTechoImpuestoVecinal.timv_Impuesto = (decimal)tbTechoImpuestoVecinal.timv_Impuesto;
             // variables de resultado del proceso
             IEnumerable<object> listTechoImpuestoVecinal = null;
             string MensajeError = "";
@@ -212,7 +231,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                           tbTechoImpuestoVecinal.timv_RangoInicio,
                                                                                           tbTechoImpuestoVecinal.timv_RangoFin,
                                                                                           tbTechoImpuestoVecinal.timv_Rango,
-                                                                                          tbTechoImpuestoVecinal.timv_Impuesto,
+                                                                                          Convert.ToDecimal(Impuesto),
                                                                                           1,
                                                                                           DateTime.Now);
 
@@ -371,6 +390,198 @@ namespace ERP_GMEDINA.Controllers
             // retornar resultado del proceso
             return Json(JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region Impuesto Vecinal
+        //public JsonResult Calculo()
+        //{
+
+           
+          
+        //    //Variable para guardar el calculo del impuesto vecinal
+
+        //    //Ejemplo
+
+        //    decimal? TotalImpuestoVecinal = 0;
+
+
+
+        //    //Total Salario Devengado
+
+        //    decimal? TotalSalarioDevengado = Liquidacion.Calculo_SalarioBrutoMasAlto(item.emp_Id);
+
+
+
+        //    //Calculo del Impuesto Vecinal
+
+        //    //Variable para validar que entre en cierto momento en cada uno de los rangos
+
+        //    string IV = "PrimerRango";
+
+
+
+        //    //Variable para validar como aparece en la formula del Excel
+
+        //    decimal? RangoInicio = 0;
+
+
+
+        //    //Variable para validar como aparece en la formula del Excel
+
+        //    decimal? RangoFin = 0;
+
+
+
+        //    //Variable para validar que entre justo en el ultimo rango sin importar la cantidad de registros
+
+        //    int iteradorA = 0;
+
+
+
+        //    //Variable de tipo lista para traer los registros de la base de datos de menor a mayor
+
+        //    List<tbTechoImpuestoVecinal> objDeduccionIV = db.tbTechoImpuestoVecinal.Where(x => x.timv_Activo == true)
+
+        //                                                    .OrderBy(x => x.timv_RangoInicio)
+
+        //                                                    .ToList();
+
+
+
+        //    //Comienzo de la formula del calculo del Impuesto Vecinal
+
+        //    foreach (var oIV in objDeduccionIV)
+
+        //    {
+
+        //        //Cada vez que pase de nuevo si sume uno mas, para luego validarlo para que entre en el ultimo registro 
+
+        //        iteradorA = iteradorA + 1;
+
+
+
+        //        //Si trae datos o siquiera uno entre a hacer el calculo 
+
+        //        if (objDeduccionIV.Count() > 0)
+
+        //        {
+
+        //            //Entrada del Primer Rango
+
+        //            if (IV == "PrimerRango")
+
+        //            {
+
+        //                TotalImpuestoVecinal = TotalImpuestoVecinal + (oIV.timv_RangoFin * oIV.timv_Impuesto) / 1000;
+
+        //                IV = "SegundoRango";
+
+        //            }
+
+        //            //Entrada del segundo rango
+
+        //            else if (IV == "SegundoRango")
+
+        //            {
+
+        //                RangoInicio = oIV.timv_RangoInicio;
+
+        //                RangoFin = oIV.timv_RangoFin;
+
+        //                if (TotalSalarioDevengado > RangoFin)
+
+        //                {
+
+        //                    //Formula del Excel
+
+        //                    TotalImpuestoVecinal = TotalImpuestoVecinal + ((oIV.timv_RangoFin - (oIV.timv_RangoInicio - 1)) * (oIV.timv_Impuesto / 1000));
+
+        //                }
+
+        //                else
+
+        //                {
+
+        //                    //Formula del Excel
+
+        //                    TotalImpuestoVecinal = TotalImpuestoVecinal + ((TotalSalarioDevengado - (oIV.timv_RangoInicio - 1)) * (oIV.timv_Impuesto / 1000));
+
+        //                }
+
+        //                IV = "TercerRango";
+
+        //            }
+
+        //            //Entrada de los siguientes rangos hasta el ultimo
+
+        //            else if (IV == "TercerRango")
+
+        //            {
+
+        //                if (TotalSalarioDevengado < RangoInicio)
+
+        //                {
+
+        //                    TotalImpuestoVecinal = 0;
+
+        //                }
+
+        //                //Entrada en especifico del ultimo registro
+
+        //                else if (objDeduccionIV.Count() == iteradorA)
+
+        //                {
+
+        //                    if (TotalSalarioDevengado < (oIV.timv_RangoInicio - 1))
+
+        //                    {
+
+        //                        TotalImpuestoVecinal = TotalImpuestoVecinal + 0;
+
+        //                    }
+
+        //                    else
+
+        //                    {
+
+        //                        //Formula del Excel
+
+        //                        TotalImpuestoVecinal = TotalImpuestoVecinal + ((TotalSalarioDevengado - (oIV.timv_RangoInicio - 1)) * (oIV.timv_Impuesto / 1000));
+
+        //                    }
+
+        //                }
+
+        //                else if (TotalSalarioDevengado > RangoFin)
+
+        //                {
+
+        //                    //Formula del Excel
+
+        //                    TotalImpuestoVecinal = TotalImpuestoVecinal + ((oIV.timv_RangoFin - (oIV.timv_RangoInicio - 1)) * (oIV.timv_Impuesto / 1000));
+
+        //                }
+
+
+
+        //            }
+
+
+
+        //        }
+
+        //    }
+
+            
+
+        //    //Variable para colocar punto de interrupción si desean ver el resultado del Impuesto Vecinal de un Empleado
+
+        //    //Verificar con el Excel, y colocar el valor de la variable TotalSalarioDevengado en el excel "Ingreso Devengado 2019"
+
+        //    TotalImpuestoVecinal = TotalImpuestoVecinal + 0;
+
+        //    return Json(JsonRequestBehavior.AllowGet);
+        //}
         #endregion
 
         #region Dispose

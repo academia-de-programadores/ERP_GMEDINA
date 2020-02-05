@@ -82,7 +82,7 @@
                     <label class="AsteriscoImpuesto" id="AsteriscoImpuesto">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', '-1', '-1', this.value)" } })
+                    @Html.EditorFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', '-1', '-1', this.value)" } })
                     <span class="field-validation-valid text-danger" style="display: none;" id="timv_ImpuestoValidacion">El campo Porcentaje es requerido.</span>
                 </div>
             </div>
