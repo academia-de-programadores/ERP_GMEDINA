@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region Index
+        [SessionManager("TechosDeducciones/Index")]
         public ActionResult Index()
         {
             var tbTechosDeducciones = db.tbTechosDeducciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).OrderBy(t => t.tddu_FechaCrea);
@@ -44,6 +46,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
+        [SessionManager("TechosDeducciones/Details")]
         public JsonResult Details(int? ID)
         {
             // validar que se recibió el ID
@@ -88,6 +91,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Create
         [HttpPost]
+        [SessionManager("TechosDeducciones/Create")]
         public ActionResult Create(tbTechosDeducciones tbTechosDeducciones)
         {
             // data de auditoria
@@ -145,6 +149,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Edit
+        [SessionManager("TechosDeducciones/Edit")]
         public JsonResult Edit(int? id)
         {
             // validar que se recibió el id
@@ -165,6 +170,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
+        [SessionManager("TechosDeducciones/Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(tbTechosDeducciones tbTechosDeducciones)
         {
@@ -236,7 +242,8 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inactivar    
+        #region Inactivar 
+        [SessionManager("TechosDeducciones/Inactivar")]
         public ActionResult Inactivar(int id)
         {
             // validar si se recibió el ID
@@ -292,6 +299,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar
+        [SessionManager("TechosDeducciones/Activar")]
         public ActionResult Activar(int id)
         {
             // vairables de resultado
