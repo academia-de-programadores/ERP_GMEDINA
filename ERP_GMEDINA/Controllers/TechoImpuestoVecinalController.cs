@@ -23,33 +23,6 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Index
-        public ActionResult IndexCalculoImpuestoVecinal()
-        {
-            var tbDeduImpuestoVecinal = db.tbDeduccionImpuestoVecinal.OrderBy(t => t.dimv_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTechoImpuestoVecinal).Include(t => t.tbEmpleados);
-            return View(tbDeduImpuestoVecinal.ToList());
-        }
-        #endregion
-
-        #region Get data
-        [HttpGet]
-        // GET: data para refrescar datatable
-        public ActionResult GetDataCalculo()
-        {
-            var otbCalculoImpuestoVecinal = db.tbDeduccionImpuestoVecinal
-                        .Select(c => new {
-                            dimv_Id = c.dimv_Id,
-                            per_Nombre = c.tbEmpleados.tbPersonas.per_Nombres + ' ' + c.tbEmpleados.tbPersonas.per_Apellidos,
-                            dimv_MontoTotal = c.dimv_MontoTotal,
-                            dimv_CuotaAPagar = c.dimv_CuotaAPagar,
-                        }).OrderByDescending(c => c.dimv_Id)
-                        .ToList();
-
-            // retornar data
-            return new JsonResult { Data = otbCalculoImpuestoVecinal, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
-        #endregion
-
         #region Get data
         [HttpGet]
         // GET: data para refrescar datatable
@@ -113,6 +86,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbTechoImpuestoVecinalJSON, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         //EDITAR ESTE FALTAN VIEWBAGS
         #region GET: Create
         public ActionResult Create()
