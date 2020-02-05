@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class AuxilioDeCesantiasController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
 
         #region index
+        [SessionManager("AuxilioDeCesantias/Index")]
         public ActionResult Index()
         {
             var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -23,6 +26,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Get data
+
         public ActionResult GetData()
         {
             var tbAuxilioCesantia1 = db.tbAuxilioDeCesantias
@@ -46,6 +50,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Details
+        [SessionManager("AuxilioDeCesantias/Details")]
         public JsonResult Details(int? ID)
         {
             var tbAuxCesanJSON = from tbAuxilioDeCesantias in db.tbAuxilioDeCesantias
@@ -72,6 +77,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Create
         [HttpPost]
+        [SessionManager("AuxilioDeCesantias/Create")]
         public ActionResult Create(tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
             
@@ -94,8 +100,9 @@ namespace ERP_GMEDINA.Controllers
                     listAuxCesantias = db.UDP_Plani_tbAuxilioDeCesantias_Insert(tbAuxilioDeCesantias.aces_RangoInicioMeses,
                                                                                 tbAuxilioDeCesantias.aces_RangoFinMeses,
                                                                                 tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,
-                                                                                         tbAuxilioDeCesantias.aces_UsuarioCrea,
-                                                                                         tbAuxilioDeCesantias.aces_FechaCrea, tbAuxilioDeCesantias.aces_Activo);
+                                                                                Function.GetUser(),
+                                                                                Function.DatetimeNow(),
+                                                                                tbAuxilioDeCesantias.aces_Activo);
                     // resultado 
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Insert_Result Resultado in listAuxCesantias)
                         MensajeError = Resultado.MensajeError;
@@ -126,6 +133,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Edit
+        [SessionManager("AuxilioDeCesantias/Edit")]
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -136,6 +144,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
+        [SessionManager("AuxilioDeCesantias/Edit")]
         public ActionResult Edit([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
             // auditoria
@@ -189,6 +198,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Inactivar
         [HttpPost]
+        [SessionManager("AuxilioDeCesantias/Inactivar")]
         public ActionResult Inactivar(int ID)
         {
             // variables de resulado
@@ -232,6 +242,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar
+        [SessionManager("AuxilioDeCesantias/Activar")]
         public ActionResult Activar(int id)
         {
             // variables de resultado
