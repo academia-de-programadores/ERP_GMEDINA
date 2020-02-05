@@ -593,7 +593,7 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
         }
     }
 
-    if (MontoCuota) {
+    if (MontoCuota != "-1") {
         let checked = $('#Editar #dei_PagaSiempre').prop('checked');
         if (checked == true) {
             if (MontoCuotaEditFormateado == "" || MontoCuotaEditFormateado == null || MontoCuotaEditFormateado == undefined) {
@@ -833,6 +833,20 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
                     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
                     document.getElementById("btnEditDeduccionIndividual").disabled = false;
                     $("#Editar #dei_PagaSiempre").attr("disabled", true);
+                    let checked = $('#Editar #dei_PagaSiempre').prop('checked');
+                    if (checked == true) {
+                        $("#Editar #dei_Monto").attr("readonly", "readonly");
+                        $("#Editar #dei_Monto").addClass("readOnly");
+                        $("#Editar #dei_NumeroCuotas").attr("readonly", "readonly");
+                        $("#Editar #dei_NumeroCuotas").addClass("readOnly");
+                        $("#Editar #dei_MontoCuota").removeAttr("readonly");
+                        $("#Editar #dei_MontoCuota").removeClass("readOnly");
+                        $("#Editar #valMontoRequerido").css("display", "none");
+                        $("#Editar #valMontoCuotaMayor").css("display", "none");
+                        $("#Editar #valNumeroCuotasRequerido").css("display", "none");
+                        $("#Editar #astMonto").css("color", "black");
+                        $("#Editar #astNumeroCuotas").css("color", "black");
+                    }
 
 
                 }
@@ -943,6 +957,12 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
         }
         else {
             dei_DeducirISR = false;
+        }
+
+        let checked = $('#Editar #dei_PagaSiempre').prop('checked');
+        if (checked == true) {
+            MontoFormateado = 0.00;
+            dei_NumeroCuotas = 0;
         }
 
         var data = { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: MontoFormateado, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: MontoFormateadoMontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
