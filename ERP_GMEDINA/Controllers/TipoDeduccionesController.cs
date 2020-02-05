@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -16,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region GET: INDEX  
         // GET: TipoDeducciones
+        [SessionManager("TipoDeducciones/Index")]
         public ActionResult Index()
         {
             var tbTipoDeduccion = db.tbTipoDeduccion.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(c => c.tde_FechaCrea);
@@ -53,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: CREATE
-
+        [SessionManager("TipoDeducciones/Create")]
         [HttpPost]
         public ActionResult Create([Bind(Include = "tde_Descripcion, tde_UsuarioCrea, tde_FechaCrea")] tbTipoDeduccion tbTipoDeduccion)
         {
@@ -108,6 +110,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Editar 
+        [SessionManager("TipoDeducciones/Edit")]
         public ActionResult Edit(int? id)
         {
             // validar si se recibió el id
@@ -127,6 +130,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
+        [SessionManager("TipoDeducciones/Details")]
         public JsonResult Details(int? ID)
         {
             // obtener registro con el ID recibido
@@ -157,6 +161,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Editar
         [HttpPost]
+        [SessionManager("TipoDeducciones/Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tde_IdTipoDedu,tde_Descripcion,tde_UsuarioCrea,tde_FechaCrea,tde_UsuarioModifica,tde_FechaModifica,tde_Activo")] tbTipoDeduccion tbTipoDeduccion)
         {
@@ -213,6 +218,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Inactivar
+        [SessionManager("TipoDeducciones/Inactivar")]
         public JsonResult Inactivar(int? ID)
         {
             // validar si se recibó el ID
@@ -255,6 +261,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar
+        [SessionManager("TipoDeducciones/Activar")]
         public JsonResult Activar(int? ID)
         {
             //validar si se recibió el ID 
