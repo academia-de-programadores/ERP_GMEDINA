@@ -1,4 +1,5 @@
-﻿using ERP_GMEDINA.Helpers;
+﻿using ERP_GMEDINA.Attribute;
+using ERP_GMEDINA.Helpers;
 using ERP_GMEDINA.Models;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,21 @@ namespace ERP_GMEDINA.Controllers
 	public class DecimoCuartoMesController : Controller
 	{
 		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new ERP_GMEDINA.Models.Helpers();
 
-		#region GET: INDEX
-		// GET: DecimoCuartoMes
-		public ActionResult Index()
+
+        #region GET: INDEX
+        // GET: DecimoCuartoMes
+        [SessionManager("DecimoCuartoMes/Index")]
+        public ActionResult Index()
 		{
 			return View(db.V_DecimoCuartoMes.ToList());
 		}
-		#endregion
+        #endregion
 
-		#region GET: INDEX PAGADOS
-		public ActionResult IndexPagado()
+        #region GET: INDEX PAGADOS
+        [SessionManager("DecimoCuartoMes/IndexPagado")]
+        public ActionResult IndexPagado()
 		{
 			return View(db.V_DecimoCuartoMes_Pagados.ToList());
 		}
