@@ -19,10 +19,10 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> htra_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> htra_FechaModifica { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbTipoHoras tbTipoHoras { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

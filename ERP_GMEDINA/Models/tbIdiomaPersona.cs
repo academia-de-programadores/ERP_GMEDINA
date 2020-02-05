@@ -16,9 +16,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> idpe_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> idpe_FechaModifica { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbIdiomas tbIdiomas { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

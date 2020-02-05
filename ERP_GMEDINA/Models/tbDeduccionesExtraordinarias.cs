@@ -20,9 +20,9 @@ namespace ERP_GMEDINA.Models
         public bool dex_Activo { get; set; }
         public Nullable<bool> dex_DeducirISR { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
         public virtual tbEquipoEmpleados tbEquipoEmpleados { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

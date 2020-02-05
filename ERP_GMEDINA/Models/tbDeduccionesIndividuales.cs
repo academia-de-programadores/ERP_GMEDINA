@@ -21,8 +21,8 @@ namespace ERP_GMEDINA.Models
         public bool dei_Activo { get; set; }
         public Nullable<bool> dei_DeducirISR { get; set; }
     
+        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

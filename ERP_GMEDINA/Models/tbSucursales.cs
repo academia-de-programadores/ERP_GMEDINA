@@ -28,10 +28,10 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> suc_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> suc_FechaModifica { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAreas> tbAreas { get; set; }
         public virtual tbEmpresas tbEmpresas { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

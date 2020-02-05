@@ -20,10 +20,10 @@ namespace ERP_GMEDINA.Models
         public Nullable<bool> deif_Pagado { get; set; }
         public Nullable<bool> deif_DeducirISR { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
         public virtual tbInstitucionesFinancieras tbInstitucionesFinancieras { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

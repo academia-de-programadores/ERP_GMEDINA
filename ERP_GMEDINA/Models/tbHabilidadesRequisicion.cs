@@ -16,9 +16,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> hreq_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hreq_FechaModifica { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbHabilidades tbHabilidades { get; set; }
         public virtual tbRequisiciones tbRequisiciones { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

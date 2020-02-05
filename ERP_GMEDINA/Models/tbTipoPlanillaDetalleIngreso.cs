@@ -15,9 +15,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> tpdi_FechaModifica { get; set; }
         public bool tpdi_Activo { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCatalogoDeIngresos tbCatalogoDeIngresos { get; set; }
         public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

@@ -26,8 +26,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> area_Usuariomodifica { get; set; }
         public Nullable<System.DateTime> area_Fechamodifica { get; set; }
     
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -38,5 +36,7 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialCargos> tbHistorialCargos1 { get; set; }
         public virtual tbCargos tbCargos { get; set; }
         public virtual tbSucursales tbSucursales { get; set; }
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }
