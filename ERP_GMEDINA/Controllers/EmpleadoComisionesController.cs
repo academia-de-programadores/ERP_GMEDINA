@@ -85,9 +85,7 @@ namespace ERP_GMEDINA.Controllers
                                                tbEmplComisiones.cc_TotalComision,
                                                tbEmplComisiones.cc_TotalVenta
                                            };
-
-
-
+            
 
             db.Configuration.ProxyCreationEnabled = false;
             //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
