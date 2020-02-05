@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="241642d5e4af4d7d8a3af204e0a1d32c" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="241642d5e4af4d7d8a3af204e0a1d32c" Name="Diagram1" ZoomLevel="70">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="205" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbBitacoraErrores" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="184.75" />
