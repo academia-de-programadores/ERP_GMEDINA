@@ -7,14 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class AcumuladosISRController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
         #region GET: AcumuladosISR
+        [SessionManager("AcumuladosISR/Index")]
         public ActionResult Index()
         {
             var tbAcumuladosISR = db.tbAcumuladosISR.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.aisr_FechaCrea);
@@ -24,6 +26,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         [HttpGet]
+
         public ActionResult GetData()
         {
             var otbAcumuladosISR = db.tbAcumuladosISR
@@ -50,6 +53,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
+      //  [SessionManager("AcumuladosISR/Details")]
         public ActionResult Details(int? id)
         {
             var tbAcumuladosISRJSON = from tbAcumuladosISR in db.tbAcumuladosISR
@@ -85,6 +89,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: create
         [HttpPost]
         [ValidateAntiForgeryToken]
+      //  [SessionManager("AcumuladosISR/Create")]
         public ActionResult Create(string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
@@ -145,6 +150,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         #region GET: edit
+     //   [SessionManager("AcumuladosISR/Edit")]
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -155,6 +161,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Editar
         [HttpPost]
+       // [SessionManager("AcumuladosISR/Edit")]
         public ActionResult Edit(int aisr_Id, string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Id = aisr_Id, aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
@@ -201,6 +208,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Inactivar
+    //    [SessionManager("AcumuladosISR/Inactivar")]
         public ActionResult Inactivar(int id)
         {
             IEnumerable<object> listAcumuladosISR = null;
@@ -247,7 +255,8 @@ namespace ERP_GMEDINA.Controllers
 
         #endregion
 
-        #region Activar  
+        #region Activar 
+     //   [SessionManager("AcumuladosISR/Activar")]
         public ActionResult Activar(int id)
         {
             IEnumerable<object> listAcumuladosISR = null;

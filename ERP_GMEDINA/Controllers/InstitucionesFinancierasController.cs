@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.IO;
 using SpreadsheetLight;
+using ERP_GMEDINA.Attribute;
 //using LinqToExcel;
 
 namespace ERP_GMEDINA.Controllers
@@ -16,8 +17,12 @@ namespace ERP_GMEDINA.Controllers
     public class InstitucionesFinancierasController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new ERP_GMEDINA.Models.Helpers();
+
+
 
         #region GET: INDEX
+        [SessionManager("InstitucionesFinancieras/Index")]
         public ActionResult Index()
         {
             var tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -51,6 +56,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: CREATE
+        [SessionManager("InstitucionesFinancieras/Create")]
         [HttpPost]
         public JsonResult Create([Bind(Include = "insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
@@ -108,6 +114,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: EDIT
+        [SessionManager("InstitucionesFinancieras/Edit")]
         public JsonResult Edit(int? id)
         {
             // validar si se recibió algún ID
@@ -147,6 +154,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: EDIT
+        [SessionManager("InstitucionesFinancieras/Edit")]
         [HttpPost]
         public JsonResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
@@ -206,6 +214,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: DETAILS
+        [SessionManager("InstitucionesFinancieras/Details")]
         public JsonResult Details(int? id)
         {
             // validar si se recibió el ID
@@ -238,6 +247,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: INACTIVAR
+        [SessionManager("InstitucionesFinancieras/Inactivar")]
         [HttpPost]
         public ActionResult Inactivar(int ID)
         {
@@ -281,6 +291,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: ACTIVAR
+        [SessionManager("InstitucionesFinancieras/Activar")]
         public ActionResult Activar(int id)
         {
             // variables de resultado
@@ -336,6 +347,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: CARGAR DOCUMENTO
+        [SessionManager("InstitucionesFinancieras/CargaDocumento")]
         public ActionResult CargaDocumento()
         {
             try
@@ -362,6 +374,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: CARGAR DOCUMENTO
+        [SessionManager("InstitucionesFinancieras/_CargaDocumento")]
         [HttpPost]
         public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS, string cboIdDeduccion)
         {

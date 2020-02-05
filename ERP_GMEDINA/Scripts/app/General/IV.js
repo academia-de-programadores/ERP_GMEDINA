@@ -1,135 +1,18 @@
-﻿////FUNCION GENERICA PARA REUTILIZAR AJAX
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data) {
-            callback(data);
-        }
-    });
-}
+﻿////////////////////////////////////////////////////////////////////////
+//////////////////////***** DECLARACIONES *****/////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//DECLARAR LA VARIABLE DE INACTIVACION
 var InactivarID = 0;
-
-//formato fecha
-$.getScript("../Scripts/app/General/SerializeDate.js")
-    .done(function (script, textStatus) {
-
-    })
-    .fail(function (jqxhr, settings, exception) {
-
-    });
-
-// evitar postbacks
-$("#frmEditIV").submit(function (e) {
-    return false;
-});
-$("#frmIVCreate").submit(function (e) {
-    return false;
-});
-
-$("#EditarIV").submit(function (e) {
-    return false;
-});
-$("#ActivarIV").submit(function (e) {
-    return false;
-});
-
-$("#InactivarIV").submit(function (e) {
-    return false;
-});
-
-//cargar grid
-function cargarGridIV() {
-    var esAdministrador = $("#rol_Usuario").val();
-    _ajax(null,
-        "/TechoImpuestoVecinal/GetData",
-        "GET",        
-    (data) => {
-        if (data.length == 0) {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se cargó la información, contacte al administrador',
-            });
-        }
-        else {
-            var LitaIV = data;
-            //limpiar datatable
-            $('#tblIV').DataTable().clear();
-            //recorrer data obtenida del backend
-            for (var i = 0; i < LitaIV.length; i++) {
-
-                //variable para verificar el estado del registro
-                var estadoRegistro = LitaIV[i].timv_Activo == false ? 'Inactivo' : 'Activo';
-
-                //variable boton detalles
-                var botonDetalles = '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleIV">Detalles</button>';
-
-                //variable boton editar
-                var botonEditar = LitaIV[i].timv_Activo == true ? '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarIV">Editar</button>' : '';
-
-                //variable boton activar
-                var botonActivar = LitaIV[i].timv_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" class="btn btn-default btn-xs"  id="btnActivarIVModal">Activar</button>' : '' : '';
-
-                //agregar el row al datatable
-                $('#tblIV').dataTable().fnAddData([
-                    LitaIV[i].timv_IdTechoImpuestoVecinal,
-                    LitaIV[i].mun_Nombre,
-                    LitaIV[i].tde_Descripcion,
-                    (LitaIV[i].timv_RangoInicio % 1 == 0) ? LitaIV[i].timv_RangoInicio + ".00" : LitaIV[i].timv_RangoInicio,
-                    (LitaIV[i].timv_RangoFin % 1 == 0) ? LitaIV[i].timv_RangoFin + ".00" : LitaIV[i].timv_RangoFin,
-                    (LitaIV[i].timv_Rango % 1 == 0) ? LitaIV[i].timv_Rango + ".00" : LitaIV[i].timv_Rango,
-                    (LitaIV[i].timv_Impuesto % 1 == 0) ? LitaIV[i].timv_Impuesto + ".00" : LitaIV[i].timv_Impuesto,
-                    estadoRegistro,
-                    botonDetalles + botonEditar + botonActivar
-                ]);
-            }
-        }
-    });
-    FullBody();
-}
+//DECLARAR LA VARIABLE DE ACTIVACION
+var ActivarID = 0;
 
 
-//cargar grid calculo impuesto vecinal
-function cargarGridCalculoIV() {
+////////////////////////////////////////////////////////////////////////
+//////////////////////***** EVENTOS *****///////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
-    var esAdministrador = $("#rol_Usuario").val();
-    $.ajax({
-        url: "/TechoImpuestoVecinal/GetDataCalculo",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    }).done(function (data) {
-
-        if (data.length == 0) {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se cargó la información, contacte al administrador',
-            });
-        }
-        else {
-            var LitaCalculoIV = data;
-            //limpiar datatable
-            $('#tblCalculoIV').DataTable().clear();
-            //recorrer data obtenida del backend
-            for (var i = 0; i < LitaCalculoIV.length; i++) {
-        
-                //agregar el row al datatable
-                $('#tblCalculoIV').dataTable().fnAddData([
-                    LitaCalculoIV[i].dimv_Id,
-                    LitaCalculoIV[i].per_Nombres + ' ' + LitaCalculoIV[i].per_Apellidos,
-                    (LitaCalculoIV[i].dimv_MontoTotal % 1 == 0) ? LitaCalculoIV[i].dimv_MontoTotal + ".00" : LitaCalculoIV[i].dimv_MontoTotal,
-                    (LitaCalculoIV[i].dimv_CuotaAPagar % 1 == 0) ? LitaCalculoIV[i].dimv_CuotaAPagar + ".00" : LitaCalculoIV[i].dimv_CuotaAPagar,
-                ]);
-            }
-        }
-    });
-    FullBody();
-}
-
-
-//crear iv
-//crear iv
+//EVENTOS: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#btnAgregarIV", function () {
     //OCULTAR VALIDACIONES
     Vaciar_ModalCrear();
@@ -168,7 +51,7 @@ $(document).on("click", "#btnAgregarIV", function () {
     $("#AgregarIV").modal({ backdrop: 'static', keyboard: false });
 });
 
-//crear nuevo rango iv
+//EVENTOS: SEGUNDA FASE DE CREACIÓN
 $('#btnCreateIV').click(function () {
 
     var rangoInicio1 = $("#Crear #timv_RangoInicio").val();
@@ -185,7 +68,7 @@ $('#btnCreateIV').click(function () {
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)        
         //var dataSinFormato = $("#frmIVCreate").serializeArray();
         //console.log(dataSinFormato);
-        var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();        
+        var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();
         var data = {
             __RequestVerificati1onToken: __RequestVerificati1onToken1,
             mun_Codigo: codmuni1,
@@ -210,7 +93,7 @@ $('#btnCreateIV').click(function () {
             else if (data == "bien") {
                 cargarGridIV();
                 $("#AgregarIV").modal('hide');
-               
+
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
@@ -221,7 +104,12 @@ $('#btnCreateIV').click(function () {
         $('#btnCreateIV').attr('disabled', true);
     }
 });
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+
+
+//
+//EDICION
+
+//EVENTOS: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
     //DESBLOQUEAR BOTON DE EDITAR
     $('#btnEditarIV').attr('disabled', false);
@@ -302,20 +190,13 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
         });
 });
 
-$("#btnEditarIV").click(function () {
-    var rangoInicial1 = $("#Editar #timv_RangoInicio").val();
-    var rangoFinal1 = $("#Editar #timv_RangoFin").val();
-    var rango1 = $("#Editar #timv_Rango").val();
-    var tipoDeduccion1 = $("#Editar #tde_IdTipoDedu").val();
-    var municipio1 = $("#Editar #mun_Codigo").val();
-    var impuesto1 = $("#Editar #timv_Impuesto").val();
-
-    if (DataAnnotationsEditar(municipio1, tipoDeduccion1, rangoInicial1, rangoFinal1, rango1, impuesto1)) {
-        $("#EditarIV").modal('hide');
-        $("#EditarIVConfirmacion").modal();
-    }
+//FUNCION: OCULTAR MODAL DE EDICIÓN
+$("#btnCerrarEditar").click(function () {
+    //OCULTAR MODAL DE EDITAR
+    $("#EditarIV").modal('hide');
 });
 
+//EVENTOS: CERRAR MODAL DE CONFIRMACION
 $('#btnRegresarIV').click(function () {
     $("#EditarIVConfirmacion").modal('hide');
     $("#EditarIV").modal();
@@ -334,17 +215,17 @@ $("#btnEditIVConfirmacion").click(function () {
     var timv_Impuesto1 = $("#Editar #timv_Impuesto").val();
     var timv_Rango1 = $("#Editar #timv_Rango").val();
     var mun_Codigo1 = $("#Editar #mun_Codigo").val();
-    
+
 
 
     var data_array = {
-            timv_IdTechoImpuestoVecinal: timv_IdTechoImpuestoVecinal1,
-            mun_Codigo: mun_Codigo1,
-            tde_IdTipoDedu: tde_IdTipoDedu1,
-            timv_RangoInicio: FormatearMonto(timv_RangoInicio1),
-            timv_RangoFin: FormatearMonto(timv_RangoFin1),
-            timv_Rango: FormatearMonto(timv_Rango1),
-            timv_Impuesto: parseFloat(timv_Impuesto1.replace(/,/g,""))
+        timv_IdTechoImpuestoVecinal: timv_IdTechoImpuestoVecinal1,
+        mun_Codigo: mun_Codigo1,
+        tde_IdTipoDedu: tde_IdTipoDedu1,
+        timv_RangoInicio: FormatearMonto(timv_RangoInicio1),
+        timv_RangoFin: FormatearMonto(timv_RangoFin1),
+        timv_Rango: FormatearMonto(timv_Rango1),
+        timv_Impuesto: parseFloat(timv_Impuesto1.replace(/,/g, ""))
     };
     var Matriz = {
         tbTechoImpuestoVecinal: data_array,
@@ -387,13 +268,13 @@ $("#btnEditIVConfirmacion").click(function () {
         });
     }
 });
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    //OCULTAR MODAL DE EDITAR
-    $("#EditarIV").modal('hide');
-});
 
-//DESPLEGAR MODAL DE INACTIVACION
+
+
+//
+//INACTIVAR
+
+//EVENTOS: DESPLEGAR MODAL DE INACTIVACION
 $(document).on("click", "#btnModalInactivarIV", function () {
     //DESBLOQUEAR BOTON
     $("#btnInactivarIV").attr("disabled", false);
@@ -403,15 +284,7 @@ $(document).on("click", "#btnModalInactivarIV", function () {
     $("#InactivarIV").modal({ backdrop: 'static', keyboard: false });
 });
 
-//CERRAR MODAL DE INACTIVACION
-$(document).on("click", "#btnBackIV", function () {
-    //OCULTAR MODAL DE INACTIVACION
-    $("#InactivarIV").modal('hide');
-    //MOSTRAR MODAL DE EDICION
-    $("#EditarIV").modal({ backdrop: 'static', keyboard: false });
-});
-
-//Inactivar registro Techos Deducciones
+//EVENTOS: INACTIVAR REGISTRO DE TECHO DEDUCCION
 $("#btnInactivarIV").click(function () {
     //BLOQUEAR BOTON
     $("#btnInactivarIV").attr("disabled", true);
@@ -446,9 +319,19 @@ $("#btnInactivarIV").click(function () {
     InactivarID = 0;
 });
 
-//DECLARAR LA VARIABLE DE ACTIVACION
-var ActivarID = 0;
-//DESPLEGAR MODAL DE ACTIVACION
+//EVENTOS: CERRAR MODAL DE INACTIVACION
+$(document).on("click", "#btnBackIV", function () {
+    //OCULTAR MODAL DE INACTIVACION
+    $("#InactivarIV").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarIV").modal({ backdrop: 'static', keyboard: false });
+});
+
+
+//
+//ACTIVAR 
+
+//EVENTO: DESPLEGAR MODAL DE ACTIVACION
 $(document).on("click", "#tblIV tbody tr td #btnActivarIVModal", function () {
     //CAPTURAR EL ID DEL REGISTRO
     ActivarID = $(this).data('id');
@@ -456,12 +339,6 @@ $(document).on("click", "#tblIV tbody tr td #btnActivarIVModal", function () {
     $("#btnActivarIV").attr("disabled", false);
     //MOSTRAR MODAL DE ACTIVACION
     $("#ActivarIV").modal({ backdrop: 'static', keyboard: false });
-});
-
-//CERRAR MODAL DE ACTIVACION
-$(document).on("click", "#btnBackActivar", function () {
-    //OCULTAR MODAL DE INACTIVACION
-    $("#ActivarIV").modal('hide');
 });
 
 //ACTIVAR REGISTRO
@@ -495,6 +372,12 @@ $("#btnActivarIV").click(function () {
         }
     });
     ActivarID = 0;
+});
+
+//EVENTO: CERRAR MODAL DE ACTIVACION
+$(document).on("click", "#btnBackActivar", function () {
+    //OCULTAR MODAL DE INACTIVACION
+    $("#ActivarIV").modal('hide');
 });
 
 //DETALLES
@@ -572,6 +455,13 @@ $(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
 
 
 
+////////////////////////////////////////////////////////////////////////
+//////////////////////**** FUNCIONES ****///////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//************
+//VALIDACIONES
 
 //FUNCION: OCULTAR VALIDACIONES DE CREACION
 function Vaciar_ModalCrear() {
@@ -1002,3 +892,99 @@ function FormatearMonto(StringValue) {
     //RETORNAR MONTO FORMATEADO
     return MontoFormateado;
 }
+
+//FUNCION: FUNCION GENERICA PARA REUTILIZAR AJAX
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+                success: function (data) {
+                    callback(data);
+                }
+    });
+}
+
+//FUNCION: OBTENER SCRIPT DE SERIALIZACIÓN DE FECHA
+$.getScript("../Scripts/app/General/SerializeDate.js")
+    .done(function (script, textStatus) {
+
+    })
+    .fail(function (jqxhr, settings, exception) {
+
+    });
+
+//FUNCION: GRID DE TECHOS DE IMPUESTO VECINAL
+function cargarGridIV() {
+    var esAdministrador = $("#rol_Usuario").val();
+    _ajax(null,
+        "/TechoImpuestoVecinal/GetData",
+        "GET",
+    (data) => {
+        if (data.length == 0) {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se cargó la información, contacte al administrador',
+            });
+        }
+        else {
+            var LitaIV = data;
+            //limpiar datatable
+            $('#btnTechosIV').DataTable().clear();
+            //recorrer data obtenida del backend
+            for (var i = 0; i < LitaIV.length; i++) {
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = LitaIV[i].timv_Activo == false ? 'Inactivo' : 'Activo';
+
+                //variable boton detalles
+                var botonDetalles = '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetalleIV">Detalles</button>';
+
+                //variable boton editar
+                var botonEditar = LitaIV[i].timv_Activo == true ? '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarIV">Editar</button>' : '';
+
+                //variable boton activar
+                var botonActivar = LitaIV[i].timv_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" class="btn btn-default btn-xs"  id="btnActivarIVModal">Activar</button>' : '' : '';
+
+                //agregar el row al datatable
+                $('#btnTechosIV').dataTable().fnAddData([
+                    LitaIV[i].timv_IdTechoImpuestoVecinal,
+                    LitaIV[i].mun_Nombre,
+                    LitaIV[i].tde_Descripcion,
+                    (LitaIV[i].timv_RangoInicio % 1 == 0) ? LitaIV[i].timv_RangoInicio + ".00" : LitaIV[i].timv_RangoInicio,
+                    (LitaIV[i].timv_RangoFin % 1 == 0) ? LitaIV[i].timv_RangoFin + ".00" : LitaIV[i].timv_RangoFin,
+                    (LitaIV[i].timv_Rango % 1 == 0) ? LitaIV[i].timv_Rango + ".00" : LitaIV[i].timv_Rango,
+                    (LitaIV[i].timv_Impuesto % 1 == 0) ? LitaIV[i].timv_Impuesto + ".00" : LitaIV[i].timv_Impuesto,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
+            }
+        }
+    });
+    FullBody();
+}
+
+
+
+//*********
+//POSTBACKS
+
+//FUNCION: EVITAR POSTBACK DE CREAR
+$("#frmIVCreate").submit(function (e) {
+    return false;
+});
+
+//FUNCION: EVITAR POSTBACK DE EDITAR
+$("#frmIVEdit").submit(function (e) {
+    return false;
+});
+
+//FUNCION: EVITAR POSTBACK DE ACTIVAR
+$("#ActivarIV").submit(function (e) {
+    return false;
+});
+
+//FUNCION: EVITAR POSTBACK DE INACTIVAR
+$("#InactivarIV").submit(function (e) {
+    return false;
+});

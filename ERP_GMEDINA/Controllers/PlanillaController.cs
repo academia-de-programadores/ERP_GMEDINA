@@ -1,24 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-using SpreadsheetLight;
-using DocumentFormat.OpenXml;
 using ERP_GMEDINA.Helpers;
 using System.Threading.Tasks;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
+    [SessionManager("Planilla/Index")]
     public class PlanillaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region GET: Planilla
+        
         public ActionResult Index()
         {
             List<V_ColaboradoresPorPlanilla> colaboradoresPlanillas = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).ToList();
