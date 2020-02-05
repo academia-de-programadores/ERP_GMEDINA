@@ -7,15 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class EmpleadoComisionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+		Models.Helpers Function = new Models.Helpers();
 
 
         #region Index
+		[SessionManager("EmpleadoComisiones/Index")]
         public ActionResult Index()
         {
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas);
@@ -85,9 +88,7 @@ namespace ERP_GMEDINA.Controllers
                                                tbEmplComisiones.cc_TotalComision,
                                                tbEmplComisiones.cc_TotalVenta
                                            };
-
-
-
+            
 
             db.Configuration.ProxyCreationEnabled = false;
             //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
@@ -137,7 +138,7 @@ namespace ERP_GMEDINA.Controllers
             tbEmpleadoComisiones.cc_TotalComision = TotalComision;
 
             tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
-            tbEmpleadoComisiones.cc_UsuarioCrea = 1;
+            tbEmpleadoComisiones.cc_UsuarioCrea = Function.GetUser();
             tbEmpleadoComisiones.cc_FechaCrea = DateTime.Now;
             tbEmpleadoComisiones.cc_Pagado = false;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
@@ -208,7 +209,7 @@ namespace ERP_GMEDINA.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cc_Id, emp_Id, cin_IdIngreso, cc_UsuarioModifica, cc_FechaModifica, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
-            tbEmpleadoComisiones.cc_UsuarioModifica = 1;
+            tbEmpleadoComisiones.cc_UsuarioModifica = Function.GetUser();
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
             decimal TotalComision = 0;
             var TechosComisiones = from a in db.tbTechosComisiones
@@ -306,7 +307,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Inactivar(id,
-                                                                                         1,
+                                                                                         Function.GetUser(),
                                                                                          DateTime.Now
                                                                                             );
 
@@ -350,7 +351,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(id,
-                                                                                    1,
+                                                                                    Function.GetUser(),
                                                                                     DateTime.Now);
 
                     foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)

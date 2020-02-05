@@ -7,13 +7,16 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.Collections.Generic;
 using System.Web.Mvc.Html;
+using ERP_GMEDINA.Attribute;
 namespace ERP_GMEDINA.Controllers
 {
     public class TechosComisionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        // GET: TechosComisiones
 
+        #region Index Techos Comisiones
+        // GET: TechosComisiones
+        [SessionManager("TechosComisiones/Index")]
         public ActionResult Index()
         {
             try
@@ -53,6 +56,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbTechosComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
+
+        #region Dropdownlist Catalogo De Ingresos
         public JsonResult EditGetDDLIngreso()
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
@@ -67,9 +73,12 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Create Techos Comisiones
         //FUNCION: CREAR UN NUEVO REGISTRO
         [HttpPost]
+        [SessionManager("TechosComisiones/Create")]
         public ActionResult Create([Bind(Include = "cin_IdIngreso, tc_RangoInicio, tc_RangoFin, tc_PorcentajeComision, tc_UsuarioCrea, tc_FechaCrea")] tbTechosComisiones tbTechosComisiones)
         {
             //Para llenar los campos de auditoría
@@ -123,10 +132,12 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Edit Techos Comisiones
         //EDITAR
-
         //OBTENER REGISTRO PARA EDITAR
+        [SessionManager("TechosComisiones/Edit")]
         public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -186,17 +197,23 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Details Techos Comisiones
         //DETALLES
+        [SessionManager("TechosComisiones/Details")]
         public JsonResult Details(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
             V_tbTechosComisiones V_tbTechosComisionesJSON = db.V_tbTechosComisiones.SingleOrDefault(m => m.tc_Id == id);
             return Json(V_tbTechosComisionesJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Inactivar Techos Comisiones
         //INACTIVAR
         [HttpPost]
+        [SessionManager("TechosComisiones/Inactivar")]
         public ActionResult Inactivar(int? Id)
         {
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
@@ -240,9 +257,12 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Activar Techos Comisiones
         //ACTIVAR
         [HttpPost]
+        [SessionManager("TechosComisiones/Activar")]
         public ActionResult Activar(int? Id)
         {
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
@@ -286,5 +306,7 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
     }
 }
