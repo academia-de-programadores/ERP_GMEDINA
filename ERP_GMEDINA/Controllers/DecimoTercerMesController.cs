@@ -7,15 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class DecimoTercerMesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new ERP_GMEDINA.Models.Helpers();
 
         #region GET: INDEX
         // GET: V_DecimoTercerMes
+        [SessionManager("DecimoTercerMes/Index")]
         public ActionResult Index()
         {
             return View(db.V_DecimoTercerMes.ToList());
@@ -23,6 +26,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: INDEX PAGADOS
+        [SessionManager("DecimoTercerMes/IndexPagado")]
         public ActionResult IndexPagado()
         {
             return View(db.V_DecimoTercerMes_Pagados.ToList());
