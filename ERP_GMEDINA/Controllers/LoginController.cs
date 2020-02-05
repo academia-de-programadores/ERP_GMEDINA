@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using Microsoft.Owin.Security;
+using Microsoft.Owin;
 
 
 namespace ERP_GMEDINA.Controllers
@@ -94,8 +95,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult SinAcceso()
         {
             //Validar Inicio de Sesión
-            GeneralFunctions Function = new GeneralFunctions();
-            if (Function.GetUserLogin())
+            Models.Helpers Helpers = new Models.Helpers();
+            if (Helpers.GetUserLogin())
                 return View();
             else
                 return RedirectToAction("Index", "Login");
@@ -104,8 +105,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult NotFound()
         {
             //Validar Inicio de Sesión
-            GeneralFunctions Function = new GeneralFunctions();
-            if (Function.GetUserLogin())
+            Models.Helpers Helpers = new Models.Helpers();
+            if (Helpers.GetUserLogin())
                 return View();
             else
                 return RedirectToAction("Index", "Login");
