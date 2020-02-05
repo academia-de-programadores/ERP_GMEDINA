@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Web;
 
 namespace ERP_GMEDINA.Helpers
 {
@@ -60,7 +61,7 @@ namespace ERP_GMEDINA.Helpers
                     conceptoDeduccion = string.Empty;
                     montoDeduccion = string.Empty;
                 }
-                 
+
                 using (StreamReader reader = new StreamReader(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/app/Voucher/voucher.html")))
                 {
                     body = reader.ReadToEnd();
@@ -72,7 +73,7 @@ namespace ERP_GMEDINA.Helpers
                 body = body.Replace("{trDeduccionesIngresos}", trDeduccionesIngresosTemplate.ToString());
                 body = body.Replace("{totalIngresos}", Math.Round(Model.totalIngresos.Value, 2).ToString());
                 body = body.Replace("{TotalDeucciones}", Model.totalDeducciones.ToString());
-                body = body.Replace("{TotalPagar}",Math.Round(Model.NetoPagar.Value,2).ToString());
+                body = body.Replace("{TotalPagar}", Math.Round(Model.NetoPagar.Value, 2).ToString());
                 #endregion
 
                 MailMessage oMailMessage = new MailMessage(EmailOrigen, Model.EmailDestino, Model.EmailAsunto, body);
@@ -89,12 +90,12 @@ namespace ERP_GMEDINA.Helpers
             catch (Exception ex)
             {
 
-                response = false;                
+                response = false;
 
                 // ejecutar el procedimiento almacenado
-                db.UDP_Acce_tbBitacoraErrores_Insert("sendEmailPlanilla","Error",DateTime.Now, ex.Message.ToString(), "SendMail");
+                db.UDP_Acce_tbBitacoraErrores_Insert("sendEmailPlanilla", "Error", DateTime.Now, ex.Message.ToString(), "SendMail");
 
-                
+
             }
             return response;
         }
@@ -119,7 +120,39 @@ namespace ERP_GMEDINA.Helpers
             }
         }
 
-       public class iziToast
+        public bool GetUserLogin()
+        {
+            bool state = false;
+            int user = 0;
+            try
+            {
+                user = (int)HttpContext.Current.Session["UserLogin"];
+                if (user != 0)
+                    state = true;
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+                state = false;
+            }
+            return state;
+        }
+
+        public int GetUser()
+        {
+            int user = 0;
+            try
+            {
+                user = (int)HttpContext.Current.Session["UserLogin"];
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+            }
+            return user;
+        }
+
+        public class iziToast
         {
             public string Response { get; set; }
             public string Encabezado { get; set; }

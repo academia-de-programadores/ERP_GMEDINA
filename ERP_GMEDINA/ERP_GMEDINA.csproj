@@ -201,6 +201,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attribute\SessionManager.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TechoImpuestoVecinalController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
@@ -1874,8 +1876,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BTN\BTN-HOME.css" />
+    <Content Include="Content\css\master.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
+    <Content Include="Content\img\Business_and_Commerce_Career_Prospects_and_Trends_Report_final_for_web2-1[1].jpg" />
     <Content Include="Content\img\done.gif" />
     <Content Include="Content\img\header-profile-skin-2.png" />
     <Content Include="Content\img\header-profile.png" />
@@ -1995,6 +1999,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Logos\1.png" />
+    <Content Include="Logos\36.png" />
     <Content Include="Models\ERP_GMEDINA.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
@@ -3029,6 +3035,10 @@
     <Content Include="Views\TechosComisiones\_DetailsTechosComisiones.cshtml" />
     <Content Include="Views\TechosComisiones\_EditTechosComisiones.cshtml" />
     <Content Include="Views\TechosComisiones\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\NotFound.cshtml" />
+    <Content Include="Views\Login\SinAcceso.cshtml" />
+    <Content Include="Views\Login\SinRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
