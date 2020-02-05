@@ -52,7 +52,7 @@ namespace ERP_GMEDINA.Controllers
                             return RedirectToAction("ModificarPass/" + Session["UserLogin"], "Usuario");
                         }
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MenuPrincipal", "Menu");
                 }
                 else
                 {
