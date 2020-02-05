@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region INDEX
+        [SessionManager("Preaviso/Index")]
         public ActionResult Index()
         {
             var tbPreaviso = db.tbPreaviso.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.prea_IdPreaviso);
@@ -51,6 +53,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: DETAILS
+        [SessionManager("Preaviso/Details")]
         public JsonResult Details(int? id)
         {
             // validar si se recibió el ID
@@ -87,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("Preaviso/Create")]
         public ActionResult Create([Bind(Include = "prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso,prea_UsuarioCrea,prea_FechaCrea,prea_Activo")] tbPreaviso tbPreaviso)
         {
             // data de auditoria
@@ -141,6 +145,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: EDIT
+        [SessionManager("Preaviso/Edit")]
         public JsonResult Edit(int? id)
         {
             // validar si se recibió el ID
@@ -168,6 +173,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: EDITAR
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("Preaviso/Editar")]
         public ActionResult Editar([Bind(Include = "prea_IdPreaviso,prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso")] tbPreaviso tbPreaviso)
         {
             // data de auditoria
@@ -224,6 +230,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: INACTIVAR
         [HttpPost]
+        [SessionManager("Preaviso/Inactivar")]
         public ActionResult Inactivar(int? id)
         {
             // variables de resultado
@@ -286,6 +293,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: ACTIVAR
         [HttpPost]
+        [SessionManager("Preaviso/Activar")]
         public ActionResult Activar(int? Id)
         {
             // variables de resultado

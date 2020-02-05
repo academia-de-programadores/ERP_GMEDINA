@@ -124,5 +124,11 @@ namespace ERP_GMEDINA.Models
             }
             return state;
         }
+
+        public DateTime DatetimeNow()
+        {
+            DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
+            return dt;
+        }
     }
 }
