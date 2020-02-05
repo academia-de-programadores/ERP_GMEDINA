@@ -9,10 +9,10 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Deducción Impuesto Vecinal</h5>    
+                    <h5>Deducción Impuesto Vecinal</h5>
                     <div class="ibox-tools">
                         <button type="button" class="btn btn-primary btn-xs" id="btnCalcularIV">Calcular Impuesto Vecinal</button>
-                    </div>              
+                    </div>
                 </div>
                 <div class="ibox-content">
                     @{
@@ -38,7 +38,7 @@
                             @foreach (var item in Model)
                             {
                                 <!-- validar el estado del registro (activo/inactivo)-->
-                                
+
 
                                 <tr class="gradeA odd" role="row">
                                     <td>
@@ -46,7 +46,7 @@
                                     </td>
                                     <td>
                                         @{
-                                          string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
+                                            string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
                                         }
                                         @Nombre
                                     </td>
