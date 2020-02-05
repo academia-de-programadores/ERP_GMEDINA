@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region INDEX
+        [SessionManager("FormaPago/Index")]
         // GET: FormaPago
         public ActionResult Index()
         {
@@ -47,6 +49,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: CREATE
+        [SessionManager("FormaPago/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Create([Bind(Include = "fpa_IdFormaPago,fpa_Descripcion,fpa_UsuarioCrea,fpa_FechaCrea")] tbFormaPago tbFormaPago)
@@ -100,6 +103,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: EDITAR 
+        [SessionManager("FormaPago/Edit")]
         public JsonResult Edit(int? id)
 		{
             // si no se recibió ningún ID
@@ -126,6 +130,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: EDITAR
+        [SessionManager("Bodega/Editar")]
         [HttpPost]
 		[ValidateAntiForgeryToken]
 		public JsonResult Editar([Bind(Include = "fpa_IdFormaPago,fpa_Descripcion")] tbFormaPago tbFormaPago)
@@ -180,6 +185,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: DETAILS
+        [SessionManager("FormaPago/Details")]
         public JsonResult Details(int ID)
         {
             // evitar referencias circulares
@@ -208,6 +214,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: INACTIVAR
+        [SessionManager("FormaPago/Inactivar")]
         [HttpPost]
         public ActionResult Inactivar(int? Id)
         {
@@ -272,6 +279,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: ACTIVAR
+        [SessionManager("FormaPago/Activar")]
         [HttpPost]
         public ActionResult Activar(int? Id)
         {

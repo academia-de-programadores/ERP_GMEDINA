@@ -286,6 +286,7 @@
     <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
+    <Compile Include="Controllers\PlanillaImpuestoVecinalController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
@@ -1949,7 +1950,9 @@
     <Content Include="Content\img\LoadingSpinner.gif" />
     <Content Include="Content\img\mas.png" />
     <Content Include="Content\img\menos.png" />
+    <Content Include="Content\img\MicrosoftTeams-image.png" />
     <Content Include="Content\img\payroll.jpg" />
+    <Content Include="Content\img\stop.png" />
     <Content Include="Content\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-indicator.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-video.css" />
@@ -2215,6 +2218,7 @@
     <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Planilla_ImpuestoVecinal.js" />
     <Content Include="Scripts\plugins\dataTablesMatutina\dataTables.buttons.min.js" />
     <Content Include="Scripts\plugins\dataTablesMatutina\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTablesMatutina\DatatablesConfigurations.js" />
@@ -3099,10 +3103,10 @@
     <Content Include="Views\Login\SinAcceso.cshtml" />
     <Content Include="Views\Login\SinRol.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\Index.cshtml" />
-    <Content Include="Views\TechoImpuestoVecinal\IndexCalculoImpuestoVecinal.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\_CreateIV.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\_DetailsIV.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\_EditIV.cshtml" />
+    <Content Include="Views\PlanillaImpuestoVecinal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
