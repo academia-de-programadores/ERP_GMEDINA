@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -14,7 +15,9 @@ namespace ERP_GMEDINA.Controllers
     {
 
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new ERP_GMEDINA.Models.Helpers();
 
+        [SessionManager("ISR/Index")]
         #region Index
         public ActionResult Index()
         {
@@ -38,6 +41,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
+        [SessionManager("ISR/Details")]
         public JsonResult Details(int? ID)
         {
             // validar si se obtuvo un ID
@@ -77,6 +81,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Create
+        [SessionManager("ISR/Create")]
         public ActionResult Create()
         {
             ViewBag.isr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
@@ -87,6 +92,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: Create
+        [SessionManager("ISR/Create")]
         [HttpPost]
         public ActionResult Create([Bind(Include = "isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
@@ -145,6 +151,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Edit
+        [SessionManager("ISR/Edit")]
         public JsonResult Edit(int? id)
         {
             // evitar referencias circulares
@@ -167,6 +174,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: Edit
+        [SessionManager("ISR/Edit")]
         [HttpPost]
         public ActionResult Edit([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
@@ -238,7 +246,8 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inactivar 
+        #region Inactivar
+        [SessionManager("ISR/Inactivar")]
         public ActionResult Inactivar(int id)
         {
             // variables de resultado
@@ -288,6 +297,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar
+        [SessionManager("ISR/Activar")]
         public ActionResult Activar(int id)
         {
             // variables de resultado
