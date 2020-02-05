@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region INDEX
+        [SessionManager("Periodos/Index")]
         public ActionResult Index()
         {
             var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.peri_IdPeriodo);
@@ -51,6 +53,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: CREATE
         [HttpPost]
+        [SessionManager("Periodos/Create")]
         public ActionResult Create([Bind(Include = "peri_DescripPeriodo, peri_CantidadDias, peri_RecibeSeptimoDia")] tbPeriodos tbPeriodos)
         {
             // data de auditoria
@@ -106,6 +109,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: EDIT
+        [SessionManager("Periodos/Edit")]
         public JsonResult Edit(int? id)
         {
             // validar si se recibió el ID
@@ -130,8 +134,9 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region POST: EDITAR
+        #region POST: EDITAR    
         [HttpPost]
+        [SessionManager("Periodos/Editar")]
         public JsonResult Editar([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo, peri_CantidadDias, peri_RecibeSeptimoDia")] tbPeriodos tbPeriodos)
         {
             // data de auditoria
@@ -188,6 +193,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: DETAILS
+        [SessionManager("Periodos/Details")]
         public JsonResult Details(int? id)
         {
             // validar si se recibió el id
@@ -223,6 +229,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: INACTIVAR
         [HttpPost]
+        [SessionManager("Periodos/Inactivar")]
         public ActionResult Inactivar(int? id)
         {
             // validar si se recibió el id 
@@ -284,8 +291,9 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region POST: ACTIVAR
+        #region POST: ACTIVAR      
         [HttpPost]
+        [SessionManager("Periodos/Activar")]
         public ActionResult Activar(int? id)
         {
             // variables de resultaod

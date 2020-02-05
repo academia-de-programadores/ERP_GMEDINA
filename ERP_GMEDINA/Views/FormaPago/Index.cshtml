@@ -4,8 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
-
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -23,7 +21,7 @@
                         var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
-                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+                        bool rol_Usuario = (bool)HttpContext.Current.Session["UserLoginEsAdmin"];
 
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
@@ -57,7 +55,7 @@
                                     <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
                                     <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
                                 }
-                                @if (oUsuario.usu_EsAdministrador == true && item.fpa_Activo == false)
+                                @if (rol_Usuario == true && item.fpa_Activo == false)
                                 {
                                     <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
                                     <!-- ACTIVAR -->
