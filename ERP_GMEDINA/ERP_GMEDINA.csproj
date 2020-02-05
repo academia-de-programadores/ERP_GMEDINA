@@ -1949,7 +1949,9 @@
     <Content Include="Content\img\LoadingSpinner.gif" />
     <Content Include="Content\img\mas.png" />
     <Content Include="Content\img\menos.png" />
+    <Content Include="Content\img\MicrosoftTeams-image.png" />
     <Content Include="Content\img\payroll.jpg" />
+    <Content Include="Content\img\stop.png" />
     <Content Include="Content\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-indicator.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-video.css" />
