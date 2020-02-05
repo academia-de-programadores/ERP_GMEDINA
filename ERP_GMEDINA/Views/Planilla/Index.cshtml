@@ -3,6 +3,20 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
+
+    <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+    bool rol_Usuario = (bool)HttpContext.Current.Session["UserLoginEsAdmin"];
+
+    <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+    <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+
+    ERP_GMEDINA.Models.Helpers General = new ERP_GMEDINA.Models.Helpers();
+
+    if (!General.GetUserRols("Planilla/Index"))
+    {
+        Response.Redirect("~/Login/SinAcceso");
+    }
+
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
