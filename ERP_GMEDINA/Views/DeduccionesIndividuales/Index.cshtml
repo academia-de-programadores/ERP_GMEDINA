@@ -76,7 +76,7 @@
                                                 <button type="button" data-id="@item.dei_IdDeduccionesIndividuales" class="btn btn-default btn-xs" id="btnEditarDeduccionesIndividuales">Editar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
-                                            if (oUsuario.usu_EsAdministrador == true && item.dei_Activo == false)
+                                            if (oUsuario?.usu_EsAdministrador == true && item.dei_Activo == false)
                                             {
                                                 <button type="button" data-id="@item.dei_IdDeduccionesIndividuales" class="btn btn-primary btn-xs" id="btnDetalleDeduccionesIndividuales">Detalles</button>
                                                  <!-- ACTIVAR -->
