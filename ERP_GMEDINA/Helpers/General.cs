@@ -171,47 +171,5 @@ namespace ERP_GMEDINA.Helpers
 				return ModelState;
 			}
 		}
-
-		public Task<VM_ModelState> Cargar_ModelState1Async()
-		{
-			//INSTANCIA DE LA CLASE HELPERS
-			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
-			//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
-			VM_ModelState ModelState = new VM_ModelState();
-			//INICIALIZACION DE AMBITO DE DBCONTEXT
-			//var Task_user = "";
-			using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
-			{
-				 var Task_user = Task.Run(() =>
-				{
-					//SETEO DE ATTR ListaPantallas
-					ModelState.ListaPantallas = new
-					{
-						List = (from tbusuario in db.tbUsuario
-								join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
-								join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
-								join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
-								join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
-								select new { tbObjeto.obj_Referencia }).ToList()
-					};
-
-					//SETEO DE ATTR CantidadRoles
-					ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
-												join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
-												join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
-												select new { tbRol.rol_Id }).Count();
-
-					//SETEO DE ATTR SesionIniciada
-					ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
-
-					//SETEO DE ATTR ContraseniaExpirada
-					ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
-					return ModelState;
-				});
-				//RETORNO DE LA TAREA
-				return Task_user;
-			}
-		}
-
 	}
 }

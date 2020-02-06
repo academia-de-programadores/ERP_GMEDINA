@@ -137,25 +137,5 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		#region GET : LoadUserModelStateAsync
-		public Task<JsonResult> LoadUserModelStateAsync()
-		{
-			//INICIALIAXCION DE LA TAREA
-			Task Task_ModelState;
-			//INICIALIZACION DEL OBJETC VM_ModelState
-			VM_ModelState userModel = new VM_ModelState();
-				Task_ModelState = Task.Run(() =>
-				{
-					//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
-					Helpers.General vm = new Helpers.General();
-					//SOBRECARGA DE OBJECT VM_ModelState
-					userModel = vm.Cargar_ModelState();
-					return userModel;
-				});
-
-			//RETORNO DEL MODEL STATE
-			return (Task<JsonResult>)Task_ModelState;
-		}
-		#endregion
 	}
 }

@@ -11,13 +11,11 @@
 
     // recuperar información del usuario para las validaciones de permisos
     $.ajax({
-        url: "/Login/LoadUserModelState",
+    	url: "/Login/LoadUserModelState",
         method: "GET"
     }).done(function (data) {
-
         // validar respuesta del servidor
         if (data == '') {
-
             // mensaje de error
             iziToast.error({
                 title: 'Error',
