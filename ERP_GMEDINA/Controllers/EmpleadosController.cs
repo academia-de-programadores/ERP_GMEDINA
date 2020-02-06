@@ -558,8 +558,9 @@ namespace ERP_GMEDINA.Controllers
         }
         //  [HttpPost]
         [SessionManager("Empleados/CargarArchivos")]
-        public ActionResult CargarArchivos(int? id)
+        public ActionResult CargarArchivos(string Id)
         {
+            int id = int.Parse(Id);
             try
             {
                 using (db = new ERP_GMEDINAEntities())
@@ -588,8 +589,9 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [SessionManager("Empleados/CargarArchivosExpedienteViejo")]
-        public ActionResult CargarArchivosExpedienteViejo(int? id)
+        public ActionResult CargarArchivosExpedienteViejo(string Id)
         {
+            int id= int.Parse(Id);
             try
             {
                 using (db = new ERP_GMEDINAEntities())

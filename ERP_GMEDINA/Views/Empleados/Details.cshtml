@@ -564,14 +564,12 @@
  </div>
 </div>
 
-@if (Login.GetUserRols("Empleados/DetallesExpediente"))
-{
+
 @Html.Partial("_DetallesExpediente", new ERP_GMEDINA.Models.tbDirectoriosEmpleados())
-}
-@if (Login.GetUserRols("Empleados/Delete"))
-{
+
+
 @Html.Partial("_DeleteExpediente", new ERP_GMEDINA.Models.tbDirectoriosEmpleados())
-}
+
 @* Modal Agregar Archivo *@
 
 @section Styles {
