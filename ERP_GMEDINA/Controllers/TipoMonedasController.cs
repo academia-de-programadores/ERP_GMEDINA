@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
+
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,14 +17,11 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = null;
 
         // GET: TipoMonedas
+        [SessionManager("TipoMonedas/Index")]
+
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
-            tbTipoMonedas tbTipoMonedas = new tbTipoMonedas { };
+            tbTipoMonedas tbTipoMonedas = new tbTipoMonedas {tmon_Estado=true};
             return View(tbTipoMonedas);
         }
 
@@ -49,19 +48,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        //{
-        //    List<tbTipoMonedas> tbTipoMonedas =
-        //        new List<Models.tbTipoMonedas> { };
-        //    foreach (tbTipoMonedas x in db.tbTipoMonedas.ToList().Where(x => x.tmon_Estado == true))
-        //    {
-        //        tbTipoMonedas.Add(new tbTipoMonedas
-        //        {
-        //            tmon_Id = x.tmon_Id,
-        //            tmon_Descripcion = x.tmon_Descripcion
-        //        });
-        //    }
-        //    return Json(tbTipoMonedas, JsonRequestBehavior.AllowGet);
-        //}
+       
 
         // GET: TipoMonedas/Create
         public ActionResult Create()
@@ -75,6 +62,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("TipoMonedas/Create")]
         public JsonResult Create(tbTipoMonedas tbTipoMonedas)
         {
             string msj = "...";
@@ -88,14 +76,12 @@ namespace ERP_GMEDINA.Controllers
                     foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
                     {
                         msj = item.MensajeError;
-                        //return Json(msj, JsonRequestBehavior.AllowGet);
                     }
                 }
                 catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
-                    //return Json(msj,JsonRequestBehavior.AllowGet);
                 }
             }
 
@@ -106,6 +92,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         // GET: TipoMonedas/Edit/5
+        [SessionManager("TipoMonedas/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -148,6 +135,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("TipoMonedas/Edit")]
         public JsonResult Edit(tbTipoMonedas tbTipoMonedas)
         {
             string msj = "";
@@ -178,6 +166,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         // GET: TipoMonedas/Delete/5
+        [HttpPost]
+        [SessionManager("TipoMonedas/Delete")]
         public ActionResult Delete(tbTipoMonedas tbTipoMonedas)
         {
             string msj = "...";
