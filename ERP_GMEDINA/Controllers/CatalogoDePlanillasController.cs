@@ -1,4 +1,5 @@
-﻿using ERP_GMEDINA.Models;
+﻿using ERP_GMEDINA.Attribute;
+using ERP_GMEDINA.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: CatalogoDePlanillas
+        [SessionManager("CatalogoDePlanillas/Index")]
         public ActionResult Index()
         {
             return View();
@@ -88,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: CatalogoDePlanillas/Details/5
+        [SessionManager("CatalogoDePlanillas/Details")]
         public ActionResult Details(int? id)
         {
             string response = "bien";
@@ -118,12 +121,14 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: CatalogoDePlanillas/Create
+        [SessionManager("CatalogoDePlanillas/Create")]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpGet]
+
         public async Task<JsonResult> GetIngresosDeducciones(bool esCrear = true, int id = 0, bool esIngreso = true)
         {
             object json = null;
@@ -180,6 +185,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Create
         [HttpPost]
+        [SessionManager("CatalogoDePlanillas/Create")]
         public ActionResult Create(string[] catalogoDePlanillas, int[] catalogoIngresos, int[] catalogoDeducciones, bool checkRecibeComision)
         {
 
@@ -373,6 +379,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: CatalogoDePlanillas/Edit/5
+        [SessionManager("CatalogoDePlanillas/Edit")]
         public ActionResult Edit(int? id)
         {
             string response = "bien";
@@ -464,6 +471,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Edit/5/arrayCatalogoPlanillas/arrayCatalogoIngresos/arrayCatalogoDeducciones
         [HttpPost]
+        [SessionManager("CatalogoDePlanillas/Edit")]
         public async Task<ActionResult> Edit(int id, /*El id de la planilla*/ string[] catalogoDePlanillas, /*valor 1:string =  Descripcion de la planilla valor 2:int = Frecuencia en días*/ int[] catalogoIngresos, /*Array de enteros con los id de los ingresos para la planilla*/ int[] catalogoDeducciones /*Array de enteros con los id de las deducciones para la planilla*/, bool checkRecibeComision)
         {
             #region Declaracion de Variables
@@ -639,6 +647,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Delete/5
         [HttpPost, ActionName("Delete")]
+        [SessionManager("CatalogoDePlanillas/DeleteConfirmed")]
         public ActionResult DeleteConfirmed(int id)
         {
             string response = "bien";
@@ -670,6 +679,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("CatalogoDePlanillas/Activar")]
         public JsonResult ActivarPlanilla(int id)
         {
             string response = "bien";
@@ -705,6 +715,40 @@ namespace ERP_GMEDINA.Controllers
             object json = new { data = tbCatalogoDePlanillas, response = response };
 
             return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult verificarAutorizacion(string sPantalla)
+        {
+            int UserID = 0;
+            bool EsAdmin = false;
+            bool Retorno = false;
+
+            try
+            {
+                UserID = (int)Session["UserLogin"];
+                EsAdmin = (bool)Session["UserLoginEsAdmin"];
+                if (EsAdmin)
+                {
+                    Retorno = true;
+                }
+                else
+                {
+                    var list = (IEnumerable<SDP_Acce_GetUserRols_Result>)Session["UserLoginRols"];
+                    var BuscarList = list.Where(x => x.obj_Referencia == sPantalla);
+                    int Conteo = BuscarList.Count();
+                    if (Conteo > 0)
+                        Retorno = true;
+                }
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+                Retorno = false;
+            }
+
+            return Json(Retorno, JsonRequestBehavior.AllowGet);
+
         }
 
         protected override void Dispose(bool disposing)
