@@ -175,7 +175,7 @@ namespace ERP_GMEDINA.Controllers
             return View(Empleado);
         }
         [HttpPost]
-        [SessionManager("HistorialCargos/PromoverGuardar")]
+        [SessionManager("HistorialCargos/Promover")]
         public JsonResult Promover(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
