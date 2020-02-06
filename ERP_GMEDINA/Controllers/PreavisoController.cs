@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class PreavisoController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Models.Helpers Function = new Models.Helpers();
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
 
         #region INDEX
         [SessionManager("Preaviso/Index")]
