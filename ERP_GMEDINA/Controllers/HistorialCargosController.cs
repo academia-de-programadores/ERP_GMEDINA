@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -13,16 +14,12 @@ namespace ERP_GMEDINA.Controllers
     public class HistorialCargosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: HistorialCargos
+        [SessionManager("HistorialCargos/Index")]
         public ActionResult Index()
-        {
-
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-            }
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+        {       
             var tbHistorialCargos = new List<tbHistorialCargos> { };
 
             var empleadosddl = db.tbEmpleados.Where(x => x.emp_Estado).Include(t => t.tbPersonas)
@@ -32,8 +29,6 @@ namespace ERP_GMEDINA.Controllers
                     emp_Id = t.emp_Id,
                     emp_descripcion = t.tbPersonas.per_Identidad + " - " + t.tbPersonas.per_Nombres + " " + t.tbPersonas.per_Apellidos
                 }).ToList();
-
-
 
 
             //CARGAR DDL DE EMPLEADOS
@@ -47,12 +42,9 @@ namespace ERP_GMEDINA.Controllers
             return View(tbHistorialCargos);
         }
 
+        [SessionManager("HistorialCargos/Index")]
         public ActionResult llenarTabla()
-        {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-            }
+        {            
             try
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -72,12 +64,6 @@ namespace ERP_GMEDINA.Controllers
                         }
                         )
                         .ToList();
-
-
-
-
-
-
                     return Json(HistorialCargos, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -87,7 +73,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-
+        [SessionManager("HistorialCargos/Index")]
         public ActionResult ChildRowData(int? id)
         {
 
@@ -164,16 +150,11 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("HistorialCargos/Promover")]
         public ActionResult Promover()
-        {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-            }
+        {       
 
             var Empleado = new tbEmpleados();
-
-
             var Empleadosddl = db.tbEmpleados.Where(x => x.emp_Estado).Include(t => t.tbPersonas)
             .Select(
             t => new
@@ -195,19 +176,17 @@ namespace ERP_GMEDINA.Controllers
             return View(Empleado);
         }
 
-
+        [SessionManager("HistorialCargos/PromoverGuardar")]
         public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
             {
                 var usuario = (tbUsuario)Session["Usuario"];
-
-
                 try
                 {
                         var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
-                        tbEmpleados.jor_Id, sue_Cantidad, hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, (int)Session["UserLogin"], DateTime.Now);
+                        tbEmpleados.jor_Id, sue_Cantidad, hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -227,7 +206,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-
+        [SessionManager("HistorialCargos/Deshacer")]
         public JsonResult Deshacer(int hcar_Id, string hcar_RazonPromocion, DateTime emp_Fechaingreso)
         {
             string msj = "";
@@ -238,7 +217,7 @@ namespace ERP_GMEDINA.Controllers
 
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialCargos_Degradar(hcar_Id, hcar_RazonPromocion, emp_Fechaingreso, (int)Session["UserLogin"], DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialCargos_Degradar(hcar_Id, hcar_RazonPromocion, emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialCargos_Degradar_Result item in list)
                     {
                         msj = item.MensajeError + " ";
