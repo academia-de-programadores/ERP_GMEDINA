@@ -467,7 +467,8 @@ var GB_Activar = 0;
 
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-	//DESBLOQUEAR EL BOTON
+    //DESBLOQUEAR EL BOTON
+    
 	$("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
 	//OBTENER EL ID
 	var ID = $(this).data('id');
@@ -662,6 +663,7 @@ $("#btnEditar").click(function () {
 var GB_Inactivar = 0;
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
+   
 	//DESBLOQUEAR EL BOTON
 	$("#btnInactivar").attr("disabled", false);
 	var ID = $(this).data('id');

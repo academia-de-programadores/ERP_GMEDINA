@@ -7,14 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class DeduccionesIndividualesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
+
+
         #region Index Deducciones Individuales
         // GET: DeduccionesIndividuales
+        [SessionManager("DeduccionesIndividuales/Index")]
         public ActionResult Index()
         {
             var tbDeduccionesIndividuales = db.tbDeduccionesIndividuales.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
@@ -54,6 +59,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Crear Deducciones Individuales
         // GET: DeduccionesIndividuales/Create
+        [SessionManager("DeduccionesIndividuales/Create")]
         public ActionResult Create()
         {
             return View();
@@ -63,6 +69,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("DeduccionesIndividuales/Create")]
         public ActionResult Create(string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre, bool dei_DeducirISR)
         {
             tbDeduccionesIndividuales tbDeduccionesIndividuales = new tbDeduccionesIndividuales
@@ -76,10 +83,7 @@ namespace ERP_GMEDINA.Controllers
                 dei_DeducirISR = dei_DeducirISR
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbDeduccionesIndividuales.dei_UsuarioCrea = 1;
-            tbDeduccionesIndividuales.dei_FechaCrea = DateTime.Now;
-            //tbDeduccionesIndividuales.dei_Pagado = false;
-            //tbDeduccionesIndividuales.dei_DeducirISR = false;
+         
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listDeduccionIndividuales = null;
@@ -98,8 +102,8 @@ namespace ERP_GMEDINA.Controllers
                                                                                               tbDeduccionesIndividuales.dei_MontoCuota,
                                                                                               tbDeduccionesIndividuales.dei_PagaSiempre,
                                                                                               tbDeduccionesIndividuales.dei_Pagado,
-                                                                                              tbDeduccionesIndividuales.dei_UsuarioCrea,
-                                                                                              tbDeduccionesIndividuales.dei_FechaCrea,
+                                                                                              Function.GetUser(),
+                                                                                              Function.DatetimeNow(),
                                                                                               tbDeduccionesIndividuales.dei_DeducirISR);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionesIndividuales_Insert_Result Resultado in listDeduccionIndividuales)
@@ -143,17 +147,19 @@ namespace ERP_GMEDINA.Controllers
 
         #region Editar Deducciones Individuales
         // GET: DeduccionesIndividuales/Edit/5
+        [SessionManager("DeduccionesIndividuales/Edit")]
         public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
             tbDeduccionesIndividuales tbDeduccionesIndividualesJSON = db.tbDeduccionesIndividuales.Find(id);
             return Json(tbDeduccionesIndividualesJSON, JsonRequestBehavior.AllowGet);
         }
-
-        // POST: DeduccionesIndividuales/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+          
+// POST: DeduccionesIndividuales/Edit/5
+// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+[HttpPost]
+        [SessionManager("DeduccionesIndividuales/Edit")]
         public ActionResult Edit(int dei_IdDeduccionesIndividuales, string dei_Motivo, int emp_Id, decimal dei_Monto, int dei_NumeroCuotas, decimal dei_MontoCuota, bool dei_PagaSiempre, bool dei_DeducirISR)
         {
             tbDeduccionesIndividuales tbDeduccionesIndividuales = new tbDeduccionesIndividuales
@@ -168,8 +174,7 @@ namespace ERP_GMEDINA.Controllers
                 dei_DeducirISR = dei_DeducirISR
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbDeduccionesIndividuales.dei_UsuarioModifica = 1;
-            tbDeduccionesIndividuales.dei_FechaModifica = DateTime.Now;
+         
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listDeduccionIndividuales = null;
@@ -187,8 +192,8 @@ namespace ERP_GMEDINA.Controllers
                                                                                               tbDeduccionesIndividuales.dei_NumeroCuotas,
                                                                                               tbDeduccionesIndividuales.dei_MontoCuota,
                                                                                               tbDeduccionesIndividuales.dei_PagaSiempre,
-                                                                                              tbDeduccionesIndividuales.dei_UsuarioModifica,
-                                                                                              tbDeduccionesIndividuales.dei_FechaModifica,
+                                                                                              Function.GetUser(),
+                                                                                              Function.DatetimeNow(),
                                                                                               tbDeduccionesIndividuales.dei_DeducirISR);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionesIndividuales_Update_Result Resultado in listDeduccionIndividuales)
@@ -224,6 +229,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Detalles Deducciones Individuales
         // GET: DeduccionesIndividuales/Details/5
+        [SessionManager("DeduccionesIndividuales/Details")]
         public ActionResult Details(int? id)
         {
             var tbDeduccionesIndividualesJSON = from tbDeduIndi in db.tbDeduccionesIndividuales
@@ -253,6 +259,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Inhabilitar Deducciones Individuales
         [HttpPost]
+        [SessionManager("DeduccionesIndividuales/Inactivar")]
         public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
         {
             //LLENAR DATA DE AUDITORIA
@@ -307,6 +314,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Activar Deducciones Individuales
         [HttpPost]
+        [SessionManager("DeduccionesIndividuales/Activar")]
         public ActionResult Activar(int id)
         {
             //LLENAR DATA DE AUDITORIA

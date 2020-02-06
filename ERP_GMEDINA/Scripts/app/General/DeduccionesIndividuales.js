@@ -125,6 +125,7 @@ function cargarGridDeducciones() {
 
 //#region  Activar
 $(document).on("click", "#Tabla tbody tr td #btnActivarDeduccionesIndividuales", function () {
+  
     document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = false;
     var id = $(this).data('id');
 
