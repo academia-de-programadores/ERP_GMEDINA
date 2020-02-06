@@ -34,6 +34,7 @@ namespace ERP_GMEDINA.Controllers
                         var ListadoRol = db.SDP_Acce_GetRolesAsignados(UserLogin.usu_Id).ToList();
                         Session["UserRol"] = ListadoRol.Count();
                         Session["UserLogin"] = UserLogin.usu_Id;
+                        Session["UserName"] = UserLogin.usu_NombreUsuario;
                         Session["UserLoginRols"] = Listado;
                         Session["UserLoginEsAdmin"] = UserLogin.usu_EsAdministrador;
                         Session["UserLoginSesion"] = UserLogin.usu_SesionesValidas;
