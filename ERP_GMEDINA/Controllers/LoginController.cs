@@ -149,7 +149,7 @@ namespace ERP_GMEDINA.Controllers
 					//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
 					Helpers.General vm = new Helpers.General();
 					//SOBRECARGA DE OBJECT VM_ModelState
-					userModel = vm.Cargar_ModelState();
+					//userModel = vm.Cargar_ModelState();
 					return userModel;
 				});
 
