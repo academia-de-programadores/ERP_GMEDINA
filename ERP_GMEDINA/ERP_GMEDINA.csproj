@@ -1602,6 +1602,7 @@
     <Compile Include="Models\ViewModelListaErrores.cs" />
     <Compile Include="Models\ViewModelReportesVarios.cs" />
     <Compile Include="Models\ViewModel_PlanillaImpuestoVecinal.cs" />
+    <Compile Include="Models\VM_ModelState.cs" />
     <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

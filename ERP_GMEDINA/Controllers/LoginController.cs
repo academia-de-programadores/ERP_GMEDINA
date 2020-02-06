@@ -111,5 +111,27 @@ namespace ERP_GMEDINA.Controllers
             else
                 return RedirectToAction("Index", "Login");
         }
-    }
+
+		public JsonResult LoadUserModelState()
+		{
+			//INICIALIZACION DEL OBJETC VM_ModelState
+			VM_ModelState userModel = new VM_ModelState();
+			try
+			{
+				//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+				Helpers.General vm = new Helpers.General();
+				//SOBRECARGA DE OBJECT VM_ModelState
+				userModel = vm.Cargar_ModelState();
+			}
+			catch(Exception Ex)
+			{
+				Ex.Message.ToString();
+				return Json("error", JsonRequestBehavior.AllowGet);
+			}
+
+			//RETORNO DEL MODEL STATE
+			return Json(userModel, JsonRequestBehavior.AllowGet);
+		}
+
+	}
 }

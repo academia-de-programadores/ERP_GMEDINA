@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace ERP_GMEDINA.Models
+{
+	public class VM_ModelState
+	{
+		public object ListaPantallas { get; set; }
+		public int CantidadRoles { get; set; }
+		public bool SesionIniciada { get; set; }
+		public bool ContraseniaExpirada { get; set; }
+	}
+}
