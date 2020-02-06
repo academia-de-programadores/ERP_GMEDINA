@@ -180,7 +180,6 @@ namespace ERP_GMEDINA.Controllers
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
          [SessionManager("Areas/Create")]
         [HttpPost]
-        [SessionManager("Areas/Create")]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
            // declaramos la variable de coneccion solo para recuperar los datos necesarios.

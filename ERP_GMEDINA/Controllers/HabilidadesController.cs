@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Controllers
         Models.Helpers Function = new Models.Helpers();
         [SessionManager("Habilidades/Index")]
         // GET: Habilidades
-        [SessionManager("Habilidades/Index")]
         public ActionResult Index()
         {            
             tbHabilidades tbHabilidades = new tbHabilidades {};

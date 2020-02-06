@@ -104,7 +104,7 @@ $("#btnGuardar").click(function () {
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,
-            '/HistorialCargos/PromoverGuardar',
+            '/HistorialCargos/Promover',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
