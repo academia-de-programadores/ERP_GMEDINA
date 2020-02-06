@@ -58,7 +58,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
-        }
+        }        
 
         public ActionResult RefreshEquipos()
         {
@@ -142,12 +142,11 @@ namespace ERP_GMEDINA.Controllers
         {
             string msj = "";
             if (tbEquipoEmpleados.eqtra_Id != 0)
-            {
-                var Usuario = (tbUsuario)Session["Usuario"];
+            {                
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEquipoEmpleados_Insert(tbEquipoEmpleados.emp_Id, tbEquipoEmpleados.eqtra_Id, tbEquipoEmpleados.eqem_Fecha, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoEmpleados_Insert(tbEquipoEmpleados.emp_Id, tbEquipoEmpleados.eqtra_Id, tbEquipoEmpleados.eqem_Fecha, (int)Session["UserLogin"], Fuction.DatetimeNow());
                     foreach (UDP_RRHH_tbEquipoEmpleados_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -205,12 +204,12 @@ namespace ERP_GMEDINA.Controllers
                 {
                     db = new ERP_GMEDINAEntities();
                     var Restore = db.tbEquipoEmpleados.Where(x => x.eqem_Id == tbEquipoEmpleados.eqem_Id).ToList().First();
-                    var list = db.UDP_RRHH_tbEquipoEmpleados_Delete(tbEquipoEmpleados.eqem_Id, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoEmpleados_Delete(tbEquipoEmpleados.eqem_Id, (int)Session["UserLogin"], Fuction.DatetimeNow());
                     foreach (UDP_RRHH_tbEquipoEmpleados_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
-                    var list2 = db.UDP_RRHH_tbEquipoTrabajo_Restore(Restore.eqtra_Id, 1, DateTime.Now);
+                    var list2 = db.UDP_RRHH_tbEquipoTrabajo_Restore(Restore.eqtra_Id, (int)Session["UserLogin"], Fuction.DatetimeNow());
                 }
                 catch (Exception ex)
                 {
