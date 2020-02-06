@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin;
-
+using System.Threading.Tasks;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -112,6 +112,7 @@ namespace ERP_GMEDINA.Controllers
                 return RedirectToAction("Index", "Login");
         }
 
+		#region GET : LoadUserModelState
 		public JsonResult LoadUserModelState()
 		{
 			//INICIALIZACION DEL OBJETC VM_ModelState
@@ -134,6 +135,27 @@ namespace ERP_GMEDINA.Controllers
 			//RETORNO DEL MODEL STATE
 			return Json(userModel, JsonRequestBehavior.AllowGet);
 		}
+		#endregion
 
+		#region GET : LoadUserModelStateAsync
+		public Task<JsonResult> LoadUserModelStateAsync()
+		{
+			//INICIALIAXCION DE LA TAREA
+			Task Task_ModelState;
+			//INICIALIZACION DEL OBJETC VM_ModelState
+			VM_ModelState userModel = new VM_ModelState();
+				Task_ModelState = Task.Run(() =>
+				{
+					//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+					Helpers.General vm = new Helpers.General();
+					//SOBRECARGA DE OBJECT VM_ModelState
+					userModel = vm.Cargar_ModelState();
+					return userModel;
+				});
+
+			//RETORNO DEL MODEL STATE
+			return (Task<JsonResult>)Task_ModelState;
+		}
+		#endregion
 	}
 }

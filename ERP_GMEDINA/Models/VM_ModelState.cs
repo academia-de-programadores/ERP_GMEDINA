@@ -9,6 +9,7 @@ namespace ERP_GMEDINA.Models
 	{
 		public object ListaPantallas { get; set; }
 		public int CantidadRoles { get; set; }
+		//VALIDAR SI LA SESION NO ESTA EXPIRADA
 		public bool SesionIniciada { get; set; }
 		public bool ContraseniaExpirada { get; set; }
 	}

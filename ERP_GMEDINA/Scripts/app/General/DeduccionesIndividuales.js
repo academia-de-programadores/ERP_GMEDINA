@@ -536,12 +536,12 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
     }
 
     if (Monto != "-1") {
-        var MontoDiv = $("#Editar #dei_Monto").val();
-        var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
-        var MontoCuotatotal = MontoFormateado / numeroDiv;
-        $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
         let checked = $('#Editar #dei_PagaSiempre').prop('checked');
         if (checked == false) {
+            var MontoDiv = $("#Editar #dei_Monto").val();
+            var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
+            var MontoCuotatotal = MontoFormateado / numeroDiv;
+            $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
             if (MontoFormateado == "" || MontoFormateado == null || MontoFormateado == undefined || isNaN(MontoFormateado)) {
                 pasoValidacionCrear = false;
                 $("#Editar #valMontoRequerido").html('Campo Monto Requerido');
@@ -565,12 +565,12 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
     }
 
     if (NumeroCuotas != "-1") {
-        var MontoDiv = $("#Editar #dei_Monto").val();
-        var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
-        var MontoCuotatotal = MontoFormateado / numeroDiv;
-        $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
         let checked = $('#Editar #dei_PagaSiempre').prop('checked');
         if (checked == false) {
+            var MontoDiv = $("#Editar #dei_Monto").val();
+            var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
+            var MontoCuotatotal = MontoFormateado / numeroDiv;
+            $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
             if (NumeroCuotas == "" || NumeroCuotas == null || NumeroCuotas == undefined) {
                 pasoValidacionCrear = false;
                 $("#Editar #valNumeroCuotasRequerido").css("display", "");
@@ -739,6 +739,12 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
         limpiarAsteriscos("Editar");
         limpiarSpan("Editar");
         $("#EditarDeduccionesIndividuales").modal('hide');
+        $("#Editar #dei_Monto").removeAttr("readonly");
+        $("#Editar #dei_Monto").removeClass("readOnly");
+        $("#Editar #dei_NumeroCuotas").removeAttr("readonly");
+        $("#Editar #dei_NumeroCuotas").removeClass("readOnly");
+        $("#Editar #dei_MontoCuota").attr("readonly", "readonly");
+        $("#Editar #dei_MontoCuota").addClass("readOnly");
     });
 
 
@@ -827,6 +833,8 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
                     $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                     $("#Editar #dei_Motivo").val(data.dei_Motivo);
                     $("#Editar #dei_Monto").val(data.dei_Monto);
+                    console.log($("#Editar #dei_Monto").val(data.dei_Monto));
+                    debugger;
                     $("#Editar #dei_NumeroCuotas").val(data.dei_NumeroCuotas);
                     $("#Editar #dei_MontoCuota").val(data.dei_MontoCuota);
                     $("#Editar #dei_PagaSiempre").val(data.dei_PagaSiempre);
@@ -864,19 +872,19 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
     $("#btnEditDeduccionIndividual").click(function () {
         document.getElementById("btnEditDeduccionIndividual").disabled = true;
         // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-        var dei_IdDeduccionesIndividuales = $("#Editar #dei_IdDeduccionesIndividuales").val();
-        var emp_Id = $("#Editar #emp_Id").val();
-        var dei_Motivo = $("#Editar #dei_Motivo").val();
-        var dei_Monto = $("#Editar #dei_Monto").val();
-        var dei_NumeroCuotas = $("#Editar #dei_NumeroCuotas").val();
-        var dei_MontoCuota = $("#Editar #dei_MontoCuota").val();
-        var dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
-        var dei_DeducirISR = $("#Editar #dei_DeducirISR").val();
+        let dei_IdDeduccionesIndividuales = $("#Editar #dei_IdDeduccionesIndividuales").val();
+        let emp_Id = $("#Editar #emp_Id").val();
+        let dei_Motivo = $("#Editar #dei_Motivo").val();
+        let dei_Monto = $("#Editar #dei_Monto").val();
+        let dei_NumeroCuotas = $("#Editar #dei_NumeroCuotas").val();
+        let dei_MontoCuota = $("#Editar #dei_MontoCuota").val();
+        let dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
+        let dei_DeducirISR = $("#Editar #dei_DeducirISR").val();
 
         //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-        var indices = $("#Editar #dei_Monto").val().split(",");
+        let indices = $("#Editar #dei_Monto").val().split(",");
         //VARIABLE CONTENEDORA DEL MONTO
-        var MontoFormateado = "";
+        let MontoFormateado = "";
         //ITERAR LOS INDICES DEL ARRAY MONTO
         for (var i = 0; i < indices.length; i++) {
             //SETEAR LA VARIABLE DE MONTO
@@ -887,16 +895,33 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
 
 
         //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-        var indices = $("#Editar #dei_MontoCuota").val().split(",");
+        let indicesMontoCuota = $("#Editar #dei_MontoCuota").val().split(",");
         //VARIABLE CONTENEDORA DEL MONTO
-        var MontoFormateadoMontoCuota = "";
+        let MontoFormateadoMontoCuota = "";
         //ITERAR LOS INDICES DEL ARRAY MONTO
-        for (var i = 0; i < indices.length; i++) {
+        for (var i = 0; i < indicesMontoCuota.length; i++) {
             //SETEAR LA VARIABLE DE MONTO
-            MontoFormateadoMontoCuota += indices[i];
+            MontoFormateadoMontoCuota += indicesMontoCuota[i];
         }
         //FORMATEAR A DECIMAL
         MontoFormateadoMontoCuota = parseFloat(MontoFormateadoMontoCuota);
+
+        let checked = $('#Editar #dei_PagaSiempre').prop('checked');
+        if (checked == true) {
+            dei_Monto = 0.00;
+            dei_NumeroCuotas = 0;
+
+            if (ValidarEditarDeduccionIndividual(dei_Motivo, emp_Id, dei_Monto, dei_NumeroCuotas, MontoFormateadoMontoCuota)) {
+                $("#EditarDeduccionesIndividuales").modal('hide');
+                $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+            }
+            else {
+                document.getElementById("btnEditDeduccionIndividual").disabled = false;
+                //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
+                ValidarEditarDeduccionIndividual(dei_Motivo, emp_Id, MontoFormateado, dei_NumeroCuotas, MontoFormateadoMontoCuota);
+            }
+        }
+        else {
 
         if (ValidarEditarDeduccionIndividual(dei_Motivo, emp_Id, MontoFormateado, dei_NumeroCuotas, MontoFormateadoMontoCuota)) {
             $("#EditarDeduccionesIndividuales").modal('hide');
@@ -907,24 +932,23 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
             //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
             ValidarEditarDeduccionIndividual(dei_Motivo, emp_Id, MontoFormateado, dei_NumeroCuotas, MontoFormateadoMontoCuota);
         }
-
+        }
     });
 
     //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
     $("#btnEditDeduccionIndividual2").click(function () {
-        var dei_PagaSiempre = false;
-        var dei_IdDeduccionesIndividuales = $("#Editar #dei_IdDeduccionesIndividuales").val();
-        var emp_Id = $("#Editar #emp_Id").val();
-        var dei_Motivo = $("#Editar #dei_Motivo").val();
-        var dei_Monto = $("#Editar #dei_Monto").val();
-        var dei_NumeroCuotas = $("#Editar #dei_NumeroCuotas").val();
-        var dei_MontoCuota = $("#Editar #dei_MontoCuota").val();
-        var dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
-        var dei_DeducirISR = $("#Editar #dei_DeducirISR").val();
+        let dei_IdDeduccionesIndividuales = $("#Editar #dei_IdDeduccionesIndividuales").val();
+        let emp_Id = $("#Editar #emp_Id").val();
+        let dei_Motivo = $("#Editar #dei_Motivo").val();
+        let dei_Monto = $("#Editar #dei_Monto").val();
+        let dei_NumeroCuotas = $("#Editar #dei_NumeroCuotas").val();
+        let dei_MontoCuota = $("#Editar #dei_MontoCuota").val();
+        let dei_PagaSiempre = $("#Editar #dei_PagaSiempre").val();
+        let dei_DeducirISR = $("#Editar #dei_DeducirISR").val();
         //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-        var indices = $("#Editar #dei_Monto").val().split(",");
+        let indices = $("#Editar #dei_Monto").val().split(",");
         //VARIABLE CONTENEDORA DEL MONTO
-        var MontoFormateado = "";
+        let MontoFormateado = "";
         //ITERAR LOS INDICES DEL ARRAY MONTO
         for (var i = 0; i < indices.length; i++) {
             //SETEAR LA VARIABLE DE MONTO
@@ -935,13 +959,13 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
 
 
         //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-        var indices = $("#Editar #dei_MontoCuota").val().split(",");
+        let indicesMontoCuota = $("#Editar #dei_MontoCuota").val().split(",");
         //VARIABLE CONTENEDORA DEL MONTO
-        var MontoFormateadoMontoCuota = "";
+        let MontoFormateadoMontoCuota = "";
         //ITERAR LOS INDICES DEL ARRAY MONTO
-        for (var i = 0; i < indices.length; i++) {
+        for (var i = 0; i < indicesMontoCuota.length; i++) {
             //SETEAR LA VARIABLE DE MONTO
-            MontoFormateadoMontoCuota += indices[i];
+            MontoFormateadoMontoCuota += indicesMontoCuota[i];
         }
         //FORMATEAR A DECIMAL
         MontoFormateadoMontoCuota = parseFloat(MontoFormateadoMontoCuota);
@@ -962,50 +986,88 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
 
         let checked = $('#Editar #dei_PagaSiempre').prop('checked');
         if (checked == true) {
-            MontoFormateado = 0.00;
+            dei_Monto = 0.00;
             dei_NumeroCuotas = 0;
+
+
+            var data = { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: dei_Monto, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: MontoFormateadoMontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
+
+            //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+            $.ajax({
+                url: "/DeduccionesIndividuales/Edit",
+                method: "POST",
+                data: data
+            }).done(function (data) {
+                if (data != "error") {
+                    document.getElementById("btnEditDeduccionIndividual2").disabled = true;
+                    //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                    $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
+                    $("#EditarDeduccionesIndividuales").modal('hide');
+                    // REFRESCAR UNICAMENTE LA TABLA
+                    cargarGridDeducciones();
+                    //Mensaje de exito de la edicion
+                    iziToast.success({
+                        title: 'Exito',
+                        message: '¡El registro se editó de forma exitosa!',
+                    });
+
+                }
+                else {
+                    $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se editó el registro, contacte al administrador!',
+                    });
+                }
+            });
+
         }
+        else {
+            var data = { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: MontoFormateado, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: MontoFormateadoMontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
 
-        var data = { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_Monto: MontoFormateado, dei_NumeroCuotas: dei_NumeroCuotas, dei_MontoCuota: MontoFormateadoMontoCuota, dei_PagaSiempre: dei_PagaSiempre, dei_DeducirISR: dei_DeducirISR };
+            //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+            $.ajax({
+                url: "/DeduccionesIndividuales/Edit",
+                method: "POST",
+                data: data
+            }).done(function (data) {
+                if (data != "error") {
+                    document.getElementById("btnEditDeduccionIndividual2").disabled = true;
+                    //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                    $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
+                    $("#EditarDeduccionesIndividuales").modal('hide');
+                    // REFRESCAR UNICAMENTE LA TABLA
+                    cargarGridDeducciones();
+                    //Mensaje de exito de la edicion
+                    iziToast.success({
+                        title: 'Exito',
+                        message: '¡El registro se editó de forma exitosa!',
+                    });
 
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/DeduccionesIndividuales/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data != "error") {
-                document.getElementById("btnEditDeduccionIndividual2").disabled = true;
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
-                $("#EditarDeduccionesIndividuales").modal('hide');
-                // REFRESCAR UNICAMENTE LA TABLA
-                cargarGridDeducciones();
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-
-            }
-            else {
-                $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se editó el registro, contacte al administrador!',
-                });
-            }
-        });
-
+                }
+                else {
+                    $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se editó el registro, contacte al administrador!',
+                    });
+                }
+            });
+        }
+        
         // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
         $("#frmEditarDeduccionIndividual").submit(function (e) {
             return false;
         });
 
     });
+
+
     $("#EditarDeduccionesIndividuales").submit(function (e) {
         return false;
     });
+
+
     $(document).on("click", "#btnRegresar", function () {
         document.getElementById("btnEditDeduccionIndividual2").disabled = false;
         $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
@@ -1085,6 +1147,14 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
                             });
                         });
                     $("#DetallesDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
+                    //si el check esta activo
+                    let checked = $('#Detalles #dei_PagaSiempre').prop('checked');
+                    let Monto = $("#Detalles #dei_Monto").html(data[0].dei_MontoInicial);
+                    let NumeroCuotas = $("#Detalles #dei_NumeroCuotas").html(data[0].dei_MontoRestante);
+                    if (checked == true) {
+                        Monto = 0.00;
+                        NumeroCuotas = 0;
+                    }
                 }
                 else {
                     //Mensaje de error si no hay data
