@@ -15,6 +15,7 @@ namespace ERP_GMEDINA.Controllers
     public class TipoMonedasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: TipoMonedas
         [SessionManager("TipoMonedas/Index")]
@@ -72,7 +73,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
                     {
                         msj = item.MensajeError;
