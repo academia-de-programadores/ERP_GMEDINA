@@ -17,7 +17,8 @@ namespace ERP_GMEDINA.Controllers
         Models.Helpers Function = new Models.Helpers();
 
         // GET: EquipoEmpleados
-       
+        Models.Helpers Fuction = new Models.Helpers();
+        [SessionManager("EquipoEmpleados/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -136,6 +137,7 @@ namespace ERP_GMEDINA.Controllers
         
         // POST: EquipoEmpleados/Create
         [HttpPost]
+        [SessionManager("EquipoEmpleados/Create")]
         public ActionResult Create(tbEquipoEmpleados tbEquipoEmpleados)
         {
             string msj = "";
@@ -169,6 +171,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: EquipoEmpleados/Edit/5
         [HttpPost]
+        [SessionManager("EquipoEmpleados/Edit")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -191,6 +194,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: EquipoEmpleados/Delete/5
         [HttpPost]
+        [SessionManager("EquipoEmpleados/Delete")]
         public ActionResult Delete(tbEquipoEmpleados tbEquipoEmpleados)
         {
             string msj = "";
