@@ -129,7 +129,7 @@ namespace ERP_GMEDINA.Helpers
             public string Tipo { get; set; }
         }
 
-		public VM_ModelState Cargar_ModelState()
+		public VM_ModelState Cargar_ModelState(int userId)
 		{
 			//INSTANCIA DE LA CLASE HELPERS
 			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
@@ -147,14 +147,16 @@ namespace ERP_GMEDINA.Helpers
 							join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
 							join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
 							join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
-							select new { tbObjeto.obj_Referencia }).ToList()
+                            where tbusuario.usu_Id == userId
+                             select new { tbObjeto.obj_Referencia }).ToList()
 				};
 
 				//SETEO DE ATTR CantidadRoles
 				ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
 											join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
 											join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
-											select new { tbRol.rol_Id }).Count();
+                                            where tbusuario.usu_Id == userId
+                                            select new { tbRol.rol_Id }).Count();
 
 				//SETEO DE ATTR SesionIniciada
 				ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
