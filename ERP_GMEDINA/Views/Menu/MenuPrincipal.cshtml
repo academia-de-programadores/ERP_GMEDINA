@@ -26,9 +26,8 @@
     <div class="row border-bottom">
         <nav class="navbar navbar-fixed-top" role="navigation" id="navMenu">
             <ul class="nav navbar-top-links navbar-right" id="ulMenu">
-                @{var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
-                    string nombreUsuario = oUsuario.usu_NombreUsuario;
-                }
+               @{var oUsuario = HttpContext.Current.Session["UserName"];
+               string nombreUsuario = oUsuario.ToString();
                 <li>
                     <a href="#">
                         Bienvenido @nombreUsuario
@@ -36,7 +35,7 @@
                 </li>
 
                 <li>
-                    <a href="@Url.Action(" Index", "Login" )">
+                    <a href="@Url.Action("CerrarSesion", "Login" )">
                         <i class="fa fa-sign-out"></i> Cerrar sesión
                     </a>
                 </li>
