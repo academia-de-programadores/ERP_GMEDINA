@@ -87,9 +87,13 @@ function _ajax(params, uri, type, callback) {
   data: params,
   success: callback
  }).fail(function (request, status, error) {
-  CierraPopups()
-  MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)");
- });
+  CierraPopups();
+  if (request.status=="500") {
+    MsgError("Error", "Usted no tiene permiso para hacer esta solicitud")
+  } else if (request.status="404") {
+     MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)")
+  }
+});
 }
 function serializar(data) {
  var Modals = $(".modal");
