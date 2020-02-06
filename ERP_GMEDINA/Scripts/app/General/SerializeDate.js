@@ -50,3 +50,74 @@ function sinAccesoIzitoast() {
         message: '¡No se cargó la información, contacte al administrador!',
     });
 }
+
+function userModelState(sPantalla) {
+
+    var response = {
+        status: true,
+        mensajeError : ''
+    }
+
+    // recuperar view model con la información del usuario
+    var VM_ModelState = sessionStorage.getItem("VM_ModelState");
+
+    // validar si el usuario tiene acceso a la accion o pantalla
+    if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas) == false)
+    {
+        response = {
+            status: false,
+            mensajeError: 'No tiene permiso para realizar esta acción'
+        }
+    }
+
+    // validar si la sesion es válida 
+    if (VM_ModelState.SesionIniciada == false)
+    {
+        response = {
+            status: false,
+            mensajeError: 'La sesión es inválida'
+        }
+    }
+
+    // validar los roles del usuario
+    if (VM_ModelState.cantidadRoles == 0)
+    {
+        response = {
+            status: false,
+            mensajeError: 'No tiene permiso para realizar esta acción'
+        }
+    }
+
+    // validar si la contraseña del usuario expiró y debe cambiar
+    if (VM_ModelState.contraseniaExperidad == true)
+    {
+        response = {
+            status: false,
+            mensajeError: 'Contraseña Experidad'
+        }
+    }
+
+    return response;
+}
+
+// funcion para validar si el usuario tiene permiso o acceso a una accion
+function validarPermisoUsuario(sPantalla, arreglo) {
+
+    var status = false;
+
+    // iterar arreglo de la lista de pantallas y acciones a las que tiene acceso el usuario
+    for (var i = 0; i < arreglo.length; i++) {
+
+        // obtener pantalla o accion del indice actual del arreglo
+        var pantallaIndexArreglo = arreglo[i];
+
+        // comprar la pantalla del indice actual del arreglo con la pantalla o accion recibida
+        if (pantallaIndexArreglo == sPantalla) {
+            status = true;
+            break;
+        }
+    }
+
+    // retornar el resultado
+    return status;
+}
