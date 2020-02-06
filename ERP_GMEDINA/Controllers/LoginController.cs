@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Login
         public ActionResult Index()
         {
-                Session["UserLogin"] = null;    
+                Session["UserLogin"] = null;
                 return View();
         }
 
@@ -113,6 +113,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 		#region GET : LoadUserModelState
+        // ESTE ES EL QUE SE ESTÁ USANDO
 		public JsonResult LoadUserModelState()
 		{
 			//INICIALIZACION DEL OBJETC VM_ModelState

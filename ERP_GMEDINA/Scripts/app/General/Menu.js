@@ -25,17 +25,19 @@
         else {
             sessionStorage.setItem("VM_ModelState", JSON.stringify(data));
 
-            // ejemplo  de como implementar
+            // codigo de ejemplo  de como implementar
 
             // validar informacion del usuario
             var validacionPermiso = userModelState("Planilla/Index");
-            
+
             if (validacionPermiso.status == true) {
 
                 // activar
                 console.log('codigo...');
                 // termina activar
             }
+
+            // codigo de ejemplo  de como implementar
         }
     });
 });
