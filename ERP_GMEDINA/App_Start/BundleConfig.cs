@@ -648,6 +648,14 @@ namespace ERP_GMEDINA
                 "~/Scripts/plugins/switchery/switchery.js",
                 "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
                 "~/Scripts/app/FileSaver.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Planilla_ImpuestoVecinal").Include(
+                "~/Scripts/app/General/Planilla_ImpuestoVecinal.js",
+                "~/Scripts/app/General/excelexportjs.js",
+                "~/Scripts/plugins/switchery/switchery.js",
+                "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
+                "~/Scripts/app/FileSaver.min.js"));
+
             #endregion
 
             #region Otros

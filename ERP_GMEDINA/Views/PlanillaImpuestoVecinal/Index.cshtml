@@ -11,7 +11,7 @@
                 <div class="ibox-title">
                     <h5>Historial de deducciones de Impuesto Vecinal</h5>
                     <div class="ibox-tools">
-                        @Html.ActionLink("Nueva proyección", "Index", "PlanillaImpuestoVecinal", null, new { @class= "btn btn-primary btn-xs" })  
+                        @Html.ActionLink("Nueva proyección", "IndexNuevaProyeccion", "PlanillaImpuestoVecinal", null, new { @class= "btn btn-primary btn-xs" })  
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -29,9 +29,11 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Nombre</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dimv_MontoTotal)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dimv_CuotaAPagar)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">No. de Identidad</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Nombre completo</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Deducción mensual</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Total deducción anual</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">No. de Cuenta</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyImpuestoVecinal">
@@ -45,19 +47,25 @@
                                         @Html.DisplayFor(modelItem => item.dimv_Id)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Identidad)
+                                    </td>
+                                    <td>
                                         @{
                                             string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;
                                         }
                                         @Nombre
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.dimv_CuotaAPagar)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.dimv_MontoTotal)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.dimv_CuotaAPagar)
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.emp_CuentaBancaria)
                                     </td>
                                 </tr>
-                                            }
+                            }
                         </tbody>
                         <tfoot>
                         </tfoot>
