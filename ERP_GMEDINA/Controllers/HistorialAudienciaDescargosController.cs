@@ -7,21 +7,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialAudienciaDescargosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: HistorialAudienciaDescargos
+        [SessionManager("AudienciasDescargo/Index")]
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+            
             try
             {
                 db = new ERP_GMEDINAEntities();
@@ -82,6 +81,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("AudienciasDescargo/Create")]
         public JsonResult Create(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
             string msj = "";
@@ -115,7 +115,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        [SessionManager("AudienciasDescargo/Edit")]
         public ActionResult Edit(int? ID)
         {
             if (ID == null)
@@ -155,6 +155,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(Audiencia, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("AudienciasDescargo/Edit2")]
         public JsonResult Edit2(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
             string msj = "";
@@ -197,6 +198,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         // GET: HistorialAudienciaDescargos/Details/5
+        [SessionManager("AudienciasDescargo/Details")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -212,6 +214,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: HistorialAudienciaDescargos/Create
+        [SessionManager("AudienciasDescargo/Create")]
         public ActionResult Create()
         {
             ViewBag.aude_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
@@ -220,6 +223,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
+        [SessionManager("AudienciasDescargo/Delete")]
         public ActionResult Delete(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
             string msj = "";
@@ -252,6 +256,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("AudienciasDescargo/habilitar")]
         public JsonResult habilitar(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
             string result = "";

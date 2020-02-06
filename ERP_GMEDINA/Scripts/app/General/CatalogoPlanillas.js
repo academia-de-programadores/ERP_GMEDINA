@@ -1025,6 +1025,10 @@ $(document).ready(() => {
         urlSinElIndex = URLactual.replace('/Index', '');
     }
 
+    if (ubicacionIndexUrl < 0 && ubicacionCreateUrl < 0 && ubicacionEditUrl < 0) {
+        urlSinElIndex = URLactual;
+    }
+
     if (ubicacionCreateUrl > 0) {
         urlSinElIndex = URLactual.replace('/Create', '');
     }

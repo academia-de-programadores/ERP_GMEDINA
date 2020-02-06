@@ -7,24 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialAmonestacionesController : Controller
     {
+       
         private ERP_GMEDINAEntities db = null;
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: HistorialAmonestaciones
+        [SessionManager("HistorialAmonestaciones/Index")]
         public ActionResult Index()
         {
            
             try 
             {
-                if (Session["Admin"] == null && Session["Usuario"] == null)
-                {
-                    Response.Redirect("~/Inicio/index");
-                    return null;
-                }
+                
+               
                 db = new ERP_GMEDINAEntities();
                 ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
                 //var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -83,10 +83,11 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-       
+
 
         // GET: HistorialAmonestaciones/Details/5
         //Modal de Detalle 
+        [SessionManager("HistorialAmonestaciones/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -205,7 +206,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }
-
+        [SessionManager("HistorialAmonestaciones/Create")]
         // GET: HistorialAmonestaciones/Create
         public JsonResult Create(tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
@@ -232,7 +233,9 @@ namespace ERP_GMEDINA.Controllers
                 }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+       
         [HttpPost]
+        [SessionManager("HistorialAmonestaciones/Delete")]
         public ActionResult Delete(tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
             string msj = "";
@@ -262,7 +265,9 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+       
         [HttpPost]
+        [SessionManager("HistorialAmonestaciones/habilitar")]
         public JsonResult habilitar(tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
             string result = "";

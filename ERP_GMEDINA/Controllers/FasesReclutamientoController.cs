@@ -7,13 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class FasesReclutamientoController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
+        //GET/Index
+        [SessionManager("FasesReclutamiento/Index")]
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -49,6 +53,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: FasesReclutamiento/Create
+        [SessionManager("FasesReclutamiento/Create")]
         [HttpPost]
         public JsonResult Create(tbFasesReclutamiento tbFasesReclutamiento)
         {
@@ -80,6 +85,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Habilidades/Edit/5
+        [SessionManager("FasesReclutamiento/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -120,6 +126,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Habilidades/Edit/5
+        [SessionManager("FasesReclutamiento/Edit")]
         [HttpPost]
         public JsonResult Edit(tbFasesReclutamiento tbFasesReclutamiento)
         {
@@ -152,6 +159,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Habilidades/Delete/5
+        [SessionManager("FasesReclutamiento/Delete")]
         [HttpPost]
         public ActionResult Delete(tbFasesReclutamiento tbFasesReclutamiento)
         {
@@ -184,6 +192,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("FasesReclutamiento/Habilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
