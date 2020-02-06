@@ -269,8 +269,8 @@ namespace ERP_GMEDINA.Controllers
 
 					//Ejecutar Procedimiento Almacenado
 					listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(id,
-																										 1,
-																										 DateTime.Now);
+																										 Function.GetUser(),
+																										 Function.DatetimeNow());
 
 					//El tipo complejo del Procedimiento Almacenado
 					foreach (UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result Resultado in listDeduccionesExtraordinarias)
@@ -311,9 +311,7 @@ namespace ERP_GMEDINA.Controllers
 			if (id == null)
 				return Json("error", JsonRequestBehavior.AllowGet);
 
-			//LLENAR DATA DE AUDITORIA
-			int dex_UsuarioModifica = 1;
-			DateTime dex_FechaModifica = DateTime.Now;
+			
 			//VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
 			string response = "bien";
 			IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -325,8 +323,8 @@ namespace ERP_GMEDINA.Controllers
 				{
 					//EJECUTAR PROCEDIMIENTO ALMACENADO
 					listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Activar(id,
-																									   dex_UsuarioModifica,
-																									   dex_FechaModifica);
+																									   Function.GetUser(),
+																									   Function.DatetimeNow());
 					//RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
 					foreach (UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result Resultado in listDeduccionesExtraordinarias)
 						MensajeError = Resultado.MensajeError;
