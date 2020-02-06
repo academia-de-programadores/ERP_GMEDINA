@@ -134,27 +134,31 @@ $("#IconCerrarCreate").click(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/CatalogoDeDeducciones/EditGetDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+    var validacionPermiso = userModelState("CatalogoDeDeducciones/Create");
+
+    if (validacionPermiso.status == true) {
+        //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+        $.ajax({
+            url: "/CatalogoDeDeducciones/EditGetDDL",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        })
+            //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+            .done(function (data) {
+                $("#Crear #tde_IdTipoDedu").empty();
+                $("#Crear #tde_IdTipoDedu").append("<option value='0'>Seleccione una opción...</option>");
+                $.each(data, function (i, iter) {
+                    $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
             });
+        //MOSTRAR EL MODAL DE AGREGAR
+        $("#AgregarCatalogoDeducciones").modal({
+            backdrop: 'static',
+            keyboard: false
         });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarCatalogoDeducciones").modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    $("#Crear #tde_IdTipoDedu").val("0");
+        $("#Crear #tde_IdTipoDedu").val("0");
+    }
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -327,59 +331,63 @@ $("#btnEditarConfirmacion").click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
-    var ID = $(this).data('id');
-    InactivarID = ID;
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-            ID: ID
-        })
-    }).done(function (data) {
-        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-        if (data) {
-            var PorcentajeColaboradorFormato = (data.cde_PorcentajeColaborador % 1 == 0) ? data.cde_PorcentajeColaborador + ".00" : data.cde_PorcentajeColaborador;
-            var PorcentajeEmpresaFormato = (data.cde_PorcentajeEmpresa % 1 == 0) ? data.cde_PorcentajeEmpresa + ".00" : data.cde_PorcentajeEmpresa;
-            $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
-            $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
-            $("#Editar #cde_PorcentajeColaborador").val(PorcentajeColaboradorFormato);
-            $("#Editar #cde_PorcentajeEmpresa").val(PorcentajeEmpresaFormato);
-            //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-            var SelectedId = data.tde_IdTipoDedu;
-            //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-            $.ajax({
-                url: "/CatalogoDeDeducciones/EditGetDDL",
-                method: "GET",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({
-                    ID
-                })
-            })
-                .done(function (data) {
-                    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                    $("#Editar #tde_IdTipoDedu").empty();
-                    //LLENAR EL DROPDOWNLIST
-                    $.each(data, function (i, iter) {
-                        $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                    });
-                });
-            $("#EditarCatalogoDeducciones").modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-            $('#btnUpdateDeduccion2').attr('disabled', false);
+    var validacionPermiso = userModelState("CatalogoDeDeducciones/Edit");
 
-        } else {
-            //Mensaje de error si no hay data
-            iziToast.error({
-                title: 'Error',
-                message: 'No se cargó la información, contacte al administrador',
-            });
-        }
-    });
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        InactivarID = ID;
+        $.ajax({
+            url: "/CatalogoDeDeducciones/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                ID: ID
+            })
+        }).done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                var PorcentajeColaboradorFormato = (data.cde_PorcentajeColaborador % 1 == 0) ? data.cde_PorcentajeColaborador + ".00" : data.cde_PorcentajeColaborador;
+                var PorcentajeEmpresaFormato = (data.cde_PorcentajeEmpresa % 1 == 0) ? data.cde_PorcentajeEmpresa + ".00" : data.cde_PorcentajeEmpresa;
+                $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
+                $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
+                $("#Editar #cde_PorcentajeColaborador").val(PorcentajeColaboradorFormato);
+                $("#Editar #cde_PorcentajeEmpresa").val(PorcentajeEmpresaFormato);
+                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                var SelectedId = data.tde_IdTipoDedu;
+                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                $.ajax({
+                    url: "/CatalogoDeDeducciones/EditGetDDL",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        ID
+                    })
+                })
+                    .done(function (data) {
+                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                        $("#Editar #tde_IdTipoDedu").empty();
+                        //LLENAR EL DROPDOWNLIST
+                        $.each(data, function (i, iter) {
+                            $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                        });
+                    });
+                $("#EditarCatalogoDeducciones").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                $('#btnUpdateDeduccion2').attr('disabled', false);
+
+            } else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se cargó la información, contacte al administrador',
+                });
+            }
+        });
+    }
 });
 
 
@@ -485,82 +493,88 @@ $("#frmCatalogoDeducciones").submit(function (e) {
 
 //FUNCTION: MOSTRAR DETALLE
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-            ID: ID
+    var validacionPermiso = userModelState("CatalogoDeDeducciones/Details");
+
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        $.ajax({
+            url: "/CatalogoDeDeducciones/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                ID: ID
+            })
         })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                var FechaCrea = FechaFormato(data[0].cde_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].cde_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
-                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
-                $("#Detalles #cde_PorcentajeColaborador").html(data[0].cde_PorcentajeColaborador);
-                $("#Detalles #cde_PorcentajeEmpresa").html(data[0].cde_PorcentajeEmpresa);
-                $("#Detalles #cde_UsuarioCrea").html(data[0].cde_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #cde_FechaCrea").html(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
-                $("#Detalles #cde_FechaModifica").html(FechaModifica);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data[0].tde_IdTipoDedu;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/CatalogoDeDeducciones/EditGetDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        ID
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    var FechaCrea = FechaFormato(data[0].cde_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].cde_FechaModifica);
+                    $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
+                    $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
+                    $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
+                    $("#Detalles #cde_PorcentajeColaborador").html(data[0].cde_PorcentajeColaborador);
+                    $("#Detalles #cde_PorcentajeEmpresa").html(data[0].cde_PorcentajeEmpresa);
+                    $("#Detalles #cde_UsuarioCrea").html(data[0].cde_UsuarioCrea);
+                    $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #cde_FechaCrea").html(FechaCrea);
+                    data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
+                    $("#Detalles #cde_FechaModifica").html(FechaModifica);
+                    //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                    var SelectedId = data[0].tde_IdTipoDedu;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                    $.ajax({
+                        url: "/CatalogoDeDeducciones/EditGetDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            ID
+                        })
                     })
-                })
-                    .done(function (data) {
+                        .done(function (data) {
 
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            if (iter.Id == SelectedId) {
-                                $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
-                            }
+                            //LLENAR EL DROPDOWNLIST
+                            $.each(data, function (i, iter) {
+                                if (iter.Id == SelectedId) {
+                                    $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
+                                }
+                            });
                         });
+
+                    $("#DetallesCatalogoDeducciones").modal({
+                        backdrop: 'static',
+                        keyboard: false
                     });
-
-                $("#DetallesCatalogoDeducciones").modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            } else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+                } else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
-
-
 
 //MOSTRAR MODAL INACTIVAR
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarCatalogoDeducciones").modal({
-        backdrop: 'static',
-        keyboard: false
-    });
+    var validacionPermiso = userModelState("CatalogoDeDeducciones/Inactivar");
 
-    //Ocultar el modal editar
-    $("#EditarCatalogoDeducciones").modal('hide');
+    if (validacionPermiso.status == true) {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#InactivarCatalogoDeducciones").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
+        //Ocultar el modal editar
+        $("#EditarCatalogoDeducciones").modal('hide');
+    }
+    
 });
-
 
 $("#btnCerrarInhabilitar").click(function () {
     $("#InactivarCatalogoDeducciones").modal('hide');
@@ -600,8 +614,6 @@ $("#btnInactivarRegistroDeduccion").click(function () {
                 title: 'Éxito',
                 message: '¡El registro se inactivó de forma exitosa!',
             });
-
-
         }
     });
 });
@@ -609,11 +621,15 @@ $("#btnInactivarRegistroDeduccion").click(function () {
 
 //MOSTRAR MODAL ACTIVAR
 $(document).on("click", "#btnActivarCatalogoDeducciones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#ActivarCatalogoDeducciones").modal({
-        backdrop: 'static',
-        keyboard: false
-    });
+    var validacionPermiso = userModelState("CatalogoDeDeducciones/Activar");
+
+    if (validacionPermiso.status == true) {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#ActivarCatalogoDeducciones").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
 });
 
 

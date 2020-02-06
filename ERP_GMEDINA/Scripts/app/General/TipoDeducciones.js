@@ -73,7 +73,9 @@ function cargarGridTipoDeducciones() {
 
 // create 1 
 $(document).on("click", "#btnAgregarTipoDeducciones", function () {
+var validacionPermiso = userModelState("Planilla/Index");
 
+if (validacionPermiso.status == true) {
     // habilitar boton
     $("#btnCreateRegistroTipoDeducciones").attr("disabled", false);
 
@@ -91,10 +93,8 @@ $(document).on("click", "#btnAgregarTipoDeducciones", function () {
 
     // mostrar modal
     $("#AgregarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-
-
+}
 });
-
 // create validaciones keyup
 $('#Crear #tde_Descripcion').keyup(function () {
 
@@ -194,57 +194,55 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
         $('#btnCreateRegistroTipoDeducciones').attr('disabled', false);
     }
 });
-
-$("#btnCerrarEditar").click(function () {
-
-});
-
 // editar 1 
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeducciones", function () {
+    var validacionPermiso = userModelState("Planilla/Index");
 
-    var ID = $(this).data('id');
-    inactivar = ID;
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        inactivar = ID;
 
-    // habilitar boton
-    $("#btnUpdateTipoDeducciones").attr("disabled", false);
+        // habilitar boton
+        $("#btnUpdateTipoDeducciones").attr("disabled", false);
 
-    // vaciar cajas de texto
-    $('#Editar input[type=text], input[type=number]').val('');
+        // vaciar cajas de texto
+        $('#Editar input[type=text], input[type=number]').val('');
 
-    // * descripcion 
-    $('#EditAsteriscoDescripcion').removeClass('text-danger');
+        // * descripcion 
+        $('#EditAsteriscoDescripcion').removeClass('text-danger');
 
-    // mesanje descripcion requerida
-    $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
+        // mesanje descripcion requerida
+        $("#Editar #validation_EditDescripcionRequerida").css('display', 'none');
 
-    // mesanje descripcion requerida
-    $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
+        // mesanje descripcion requerida
+        $("#Editar #validation_EditDescripcionNumerico").css('display', 'none');
 
-    $.ajax({
-        url: "/TipoDeducciones/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
+        $.ajax({
+            url: "/TipoDeducciones/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
 
-            if (data) {
+                if (data) {
 
-                $.each(data, function (i, iter) {
-                    $("#Editar #tde_IdTipoDedu").val(iter.tde_IdTipoDedu);
-                    $("#Editar #tde_Descripcion").val(iter.tde_Descripcion);
-                });
+                    $.each(data, function (i, iter) {
+                        $("#Editar #tde_IdTipoDedu").val(iter.tde_IdTipoDedu);
+                        $("#Editar #tde_Descripcion").val(iter.tde_Descripcion);
+                    });
 
-                $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+                    $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 // editar validaciones key up
@@ -331,7 +329,6 @@ $("#btnUpdateTipoDeducciones").click(function () {
 $("#denegarEdicion").click(function () {
     $("#btnUpdateTipoDeducciones").attr('disabled', false);
     $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-
 });
 
 // editar 3 ejecutar
@@ -398,7 +395,9 @@ function spinner() {
 }
 
 
-$(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {
+$(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {    
+var validacionPermiso = userModelState("Planilla/Index");
+if (validacionPermiso.status == true) {
     var ID = $(this).data('id');
     //
     $.ajax({
@@ -437,16 +436,18 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
                 });
             }
         });
+    }
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA MENSAJE DE CONFIRMACION
 $("#btnInactivarTipoDeducciones").click(function () {
-    $("#EditarTipoDeducciones").modal('hide');
-    //$("#InactivarTipoDeducciones").modal();
-    $("#InactivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("Planilla/Index");
 
-
-
+    if (validacionPermiso.status == true) {
+        $("#EditarTipoDeducciones").modal('hide');
+        //$("#InactivarTipoDeducciones").modal();
+        $("#InactivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 // inactivar ejecutar
@@ -475,12 +476,8 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
                     title: 'Error',
                     message: 'No se inactivó el registro, contacte al administrador',
                 });
-
             }
-
-
         });
-
 });
 
 //FUNCION: OCULTAR MODAL DE CREACION
@@ -523,9 +520,12 @@ $("#frmTipoDeduccionEdit").submit(function (event) {
 // activar
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeducciones", function () {
     activarID = $(this).data('id');
+    var validacionPermiso = userModelState("Planilla/Index");
 
-    //$("#ActivarTipoDeducciones").modal();
-    $("#ActivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    if (validacionPermiso.status == true) {
+        //$("#ActivarTipoDeducciones").modal();
+        $("#ActivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO
