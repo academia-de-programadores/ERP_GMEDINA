@@ -19,12 +19,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         [SessionManager("HistorialAmonestaciones/Index")]
         public ActionResult Index()
-        {
-           
+        {  
             try 
             {
-                
-               
                 db = new ERP_GMEDINAEntities();
                 ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
                 //var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);

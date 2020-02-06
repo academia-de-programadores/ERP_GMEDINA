@@ -7,14 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class CargosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
-         //GET: Cargos
+        Models.Helpers Function = new Models.Helpers();
+        [SessionManager("Cargos/Index")]
+        //GET: Cargos
         public ActionResult Index()
         {
             tbCargos tbCargos =new tbCargos {car_Estado=true };
@@ -34,6 +36,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbCargos);
         }
 
+      
         [HttpPost]
         public JsonResult llenarTabla()
         {
@@ -60,6 +63,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Cargos/Create")]
         public JsonResult Create(tbCargos tbCargos)
         {
             string msj = "";
@@ -89,6 +93,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("Cargos/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -133,6 +138,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("Cargos/Edit")]
         public JsonResult Edit(tbCargos tbCargos)
         {
             string msj = "";
@@ -164,6 +170,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Cargos/Delete")]
         public ActionResult Delete(tbCargos tbCargos)
         {
             string msj = "";
@@ -208,6 +215,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("Cargos/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";

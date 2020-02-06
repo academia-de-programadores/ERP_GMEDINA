@@ -114,7 +114,8 @@
     $("#btnGuardar").click(function () {
         debugger
         if (compare_dates())
-            if ($("#hinc_Espermanente").val() == "true") {
+            if ($("#hinc_Espermanente").val() == "true" && $("#hinc_Diagnostico").val() != "" && $("#hinc_Doctor").val() != "" && $("#hinc_CentroMedico").val() != "" && $("#ticn_Id").val() != "" && $("#hinc_FechaInicio").val() != "" && $("#hinc_FechaFin").val() != "") {
+                
 
                 llamarmodaldetalle()
 
@@ -154,7 +155,7 @@
                 if (compare_dates())
                     if (data != null) {
                         var incapacidad = data.hinc_Espermanente
-                        if (incapacidad==1)
+                        if (incapacidad == 1  )
                         {
                             MsgError("Error", "Es nesesario seleccionar la incapacidad.");
                         }

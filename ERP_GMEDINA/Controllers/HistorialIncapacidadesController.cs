@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,13 +16,10 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialIncapacidades
+        Models.Helpers Function = new Models.Helpers();
+        [SessionManager("HistorialIncapacidades/Index")]
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
             try
             {
                 db = new ERP_GMEDINAEntities();
@@ -60,6 +58,7 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("HistorialIncapacidades/Create")]
         public JsonResult Create(tbHistorialIncapacidades tbHistorialIncapacidades)
         {
             string msj = "";
@@ -138,6 +137,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
         // GET: HistorialIncapacidades/Details/5
+
+        [SessionManager("HistorialIncapacidades/Details")]
         public ActionResult Details(int? id)
         {
             {
@@ -184,6 +185,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: HistorialIncapacidades/Details/5
+        [SessionManager("HistorialIncapacidades/Detallesempleados")]
         public ActionResult Detallesempleados(int? id)
         {
             {
@@ -274,6 +276,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: HistorialIncapacidades/Edit/5
 
+        [SessionManager("HistorialIncapacidades/Edit")]
         public ActionResult Edit(int? ID)
         {
             if (ID == null)
@@ -368,6 +371,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: HistorialIncapacidades/Delete/5
         [HttpPost]
+        [SessionManager("HistorialIncapacidades/Delete")]
         public ActionResult Delete(tbHistorialIncapacidades tbHistorialIncapacidades)
         {
             string msj = "";
@@ -411,6 +415,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("HistorialIncapacidades/habilitar")]
         public JsonResult habilitar(tbHistorialIncapacidades tbHistorialIncapacidades)
         {
             string result = "";
