@@ -40,80 +40,25 @@
         
         var fecha1 = $("#hinc_FechaInicio").val();
         var fecha2 = $("#hinc_FechaFin").val();
-        var hospital = $("#hinc_CentroMedico").val();
-        var Diagnostico = $("#hinc_Diagnostico").val();
-        var Doctor = $("#hinc_Doctor").val();
+  
         
-   
-        var fechalimite = '01/01/1900';
-        var fechamaxima = '12/31/2199';
-
-        if ($("#ticn_Id").val() == 0 && fecha1 == "" && fecha2 == "" && $("#hinc_Espermanente").val() == 1)
-        {
-            MsgError("Error", "Por favor llene todas las cajas de texto.")
-        }
-       
-
-        else if ($("#ticn_Id").val() == 0) {
-            MsgError("Error", "Es nesesario seleccionar el tipo de incapacidad.")
-        }
-
-        else if (hospital == "" || Diagnostico == "" || Doctor == "") {
-            MsgError("Error", "Por favor llene todas las cajas de texto.")
-        }
-
-
-        else if (fecha1 == "" && fecha2 == "") {
-            MsgError("Error", "Fecha inicio y fecha fin son requeridas.")
-        }
-        else if ($("#hinc_Espermanente").val() == 1) {
-            MsgError("Error", "Es nesesario seleccionar la incapacidad.")
-        }
-
-        else if (fecha1 == "") {
-            MsgError("Error", "Fecha inicio es requerida.")
-
-        }
-        else if (fecha2 == "") {
-            MsgError("Error", "Fecha fin es requerida.")
-
-        }
-
-
-
-        else if ( Date.parse(fecha1) > Date.parse(fecha2) ) {
-            if (Date.parse(fecha1) < Date.parse(fechalimite) || Date.parse(fecha1) > Date.parse(fechamaxima))
-            {
-                
-            }
-            else if(Date.parse(fecha1) > Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite)  )
-            {
-
-            }
-            else {
+         if ( Date.parse(fecha1) > Date.parse(fecha2) ) {
+            
                 MsgError("Error", "La fecha fin debe ser mayor.");
-            }
-        }
+         }
+
+             //else if ($("#hinc_Espermanente").val() == 1) {
+             //    MsgError("Error", "Es nesesario seleccionar la incapacidad.")
+             //}
+        
 
         else if (Date.parse(fecha1) == Date.parse(fecha2)) {
            
-            if (Date.parse(fecha1) < Date.parse(fechalimite) && Date.parse(fecha2) < Date.parse(fechalimite) || Date.parse(fecha1) > Date.parse(fechamaxima) && Date.parse(fecha2) > Date.parse(fechamaxima)) {
-
-            }
-            else {
+          
                 MsgError("Error", "La fecha inicio y la fecha fin no pueden ser iguales.");
-            }
+            
         } 
 
-
-        else if (Date.parse(fecha1) < Date.parse(fechalimite))
-        {
-
-        }
-       
-        else if (Date.parse(fecha2) > Date.parse(fechamaxima)) {
-
-        }
 
         else {
 
@@ -169,16 +114,52 @@
     $("#btnGuardar").click(function () {
         debugger
         if (compare_dates())
-        if ($("#hinc_Espermanente").val() == "true") {
+            if ($("#hinc_Espermanente").val() == "true") {
 
-            llamarmodaldetalle()
+                llamarmodaldetalle()
 
-            $("#btnSi").click(function () {
+                $("#btnSi").click(function () {
 
+                    var data = $("#FormNuevo").serializeArray();
+                    data = serializar(data);
+                    if (compare_dates())
+                        if (data != null) {
+                            data = JSON.stringify({ tbHistorialIncapacidades: data });
+                            if (compare_dates()) {
+                                _ajax(data,
+                                    '/HistorialIncapacidades/Create',
+                                    'POST',
+                                    function (obj) {
+                                        if (obj != "-1" && obj != "-2" && obj != "-3") {
+                                            $("#ModalDetalles").modal('hide');
+                                            MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+
+                                            $("#btnGuardar").attr("disabled", "disabled");
+                                            $("#btncancelar").attr("disabled", "disabled");
+                                            setTimeout(function () { window.location.href = "Index"; }, 4000);
+                                        } else {
+                                            MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                                        }
+                                    })
+                            };
+                        } else {
+                            MsgError("Error", "Por favor llene todas las cajas de texto.");
+                        }
+
+                })
+            }
+            else {
                 var data = $("#FormNuevo").serializeArray();
                 data = serializar(data);
                 if (compare_dates())
                     if (data != null) {
+                        var incapacidad = data.hinc_Espermanente
+                        if (incapacidad==1)
+                        {
+                            MsgError("Error", "Es nesesario seleccionar la incapacidad.");
+                        }
+                        else{
+
                         data = JSON.stringify({ tbHistorialIncapacidades: data });
                         if (compare_dates()) {
                             _ajax(data,
@@ -186,7 +167,6 @@
                                 'POST',
                                 function (obj) {
                                     if (obj != "-1" && obj != "-2" && obj != "-3") {
-                                        $("#ModalDetalles").modal('hide');
                                         MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
 
                                         $("#btnGuardar").attr("disabled", "disabled");
@@ -197,35 +177,9 @@
                                     }
                                 })
                         };
-                    } else {
-                        MsgError("Error", "Por favor llene todas las cajas de texto.");
                     }
-
-            })
-        }
-        else {
-            var data = $("#FormNuevo").serializeArray();
-            data = serializar(data);
-            if (compare_dates())
-                if (data != null) {
-                    data = JSON.stringify({ tbHistorialIncapacidades: data });
-                    if (compare_dates()) {
-                        _ajax(data,
-                            '/HistorialIncapacidades/Create',
-                            'POST',
-                            function (obj) {
-                                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-
-                                    $("#btnGuardar").attr("disabled", "disabled");
-                                    $("#btncancelar").attr("disabled", "disabled");
-                                    setTimeout(function () { window.location.href = "Index"; }, 4000);
-                                } else {
-                                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
-                                }
-                            })
-                    };
-                } else {
+            }
+                else {
                     MsgError("Error", "Por favor llene todas las cajas de texto.");
                 }
         }

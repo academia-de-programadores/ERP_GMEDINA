@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using ERP_GMEDINA.Attribute;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
@@ -13,12 +14,13 @@ namespace ERP_GMEDINA.Controllers
     public class TipoIncapacidadesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
-
+        [SessionManager("TipoIncapacidades/Index")]
         public ActionResult Index()
         {
             tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+           
             try
             {
                 //tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
@@ -33,7 +35,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbTipoIncapacidades);
         }
-
 
         [HttpPost]
         public JsonResult llenarTabla()
@@ -63,6 +64,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("TipoIncapacidades/Create")]
         public JsonResult Create(tbTipoIncapacidades tbTipoIncapacidades)
         {
             string msj = "";
@@ -92,6 +94,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: Habilidades/Edit/5
+        [SessionManager("TipoIncapacidades/Edit")]
         public ActionResult Edit(int? id)
         {
 
@@ -134,6 +137,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("TipoIncapacidades/Edit")]
         public JsonResult Edit(tbTipoIncapacidades tbTipoIncapacidades)
         {
             string msj = "";
@@ -165,6 +169,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("TipoIncapacidades/Delete")]
         public ActionResult Delete(tbTipoIncapacidades tbTipoIncapacidades)
         {
             string msj = "";
@@ -211,6 +216,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("TipoIncapacidades/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";

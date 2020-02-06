@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = null;
 
         // GET: Competencias
+        [SessionManager("Competencias/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -75,6 +77,7 @@ namespace ERP_GMEDINA.Controllers
                 }
         }
         [HttpPost]
+        [SessionManager("Competencias/Create")]
         public JsonResult Create(tbCompetencias tbCompetencias)
         {
             string msj = "";
@@ -104,7 +107,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        [SessionManager("Competencias/Edit")]
         public ActionResult Edit(int? id)
         {
 
@@ -146,6 +149,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(competencias, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("Competencias/Edit")]
         public JsonResult Edit(tbCompetencias tbCompetencias)
         {
             string msj = "";
@@ -178,6 +182,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("Competencias/Delete")]
         public ActionResult Delete(tbCompetencias tbCompetencias)
         {
             string msj = "...";
@@ -222,6 +227,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("Competencias/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";

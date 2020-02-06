@@ -23,10 +23,9 @@
                         {
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             //---TipoPermisos---
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.tper_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
+                                <div class="col-md-5 ">
                                     @Html.DropDownList("tper_Id", null, htmlAttributes: new { @class = "form-control required", @id = "TipoPermisos" })
                                     @Html.ValidationMessageFor(model => model.tper_Id, "", new { @class = "text-danger", @id = "errorTipoPermisos" })
                                 </div>
@@ -35,57 +34,40 @@
                             //---Observaciones---
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_Observacion,"Observaciónes", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.hper_Observacion, new { htmlAttributes = new { @class = "form-control required" } })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.hper_Observacion, new { htmlAttributes = new { @class = "form-control ", maxlength = 50 } })
                                     @Html.ValidationMessageFor(model => model.hper_Observacion, "", new { @class = "text-danger", @id = "errorhper_Observacion" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.hper_PorcentajeIndemnizado, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
-                                    @Html.EditorFor(model => model.hper_PorcentajeIndemnizado, new { htmlAttributes = new { @class = "form-control required", Min="0",Max="100" } })
+                                @Html.LabelFor(model => model.hper_PorcentajeIndemnizado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.hper_PorcentajeIndemnizado, new { htmlAttributes = new { @class = "form-control", Min="0",Max="100" } })
                                     @Html.ValidationMessageFor(model => model.hper_PorcentajeIndemnizado, "", new { @class = "text-danger", @id = "errorhper_Observacion" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_Justificado, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <div class="checkbox">
+                                <div class="col-md-3 form-check abc-checkbox abc-checkbox-success">
                                         @Html.EditorFor(model => model.hper_Justificado)
                                         @Html.ValidationMessageFor(model => model.hper_Justificado, "", new { @class = "text-danger" })
-                                    </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                     <i class="fa fa-calendar"></i>
-                                    @Html.TextBoxFor(model => model.hper_fechaInicio, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date" })
+                                    @Html.TextBoxFor(model => model.hper_fechaInicio, new { htmlAttributes = new { @class = "form-control datepicker required" }, @id = "fechaInicio", type = "date" })
                                     @Html.ValidationMessageFor(model => model.hper_fechaInicio, "", new { @class = "text-danger", @id = "errorhper_fechaInicio" })
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.hper_fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-5">
+                                @Html.LabelFor(model => model.hper_fechaFin, htmlAttributes: new { @class = "control-label col-md-2 left"})
+                                <div class="col-md-3">
                                     <i class="fa fa-calendar"></i>
-                                    @Html.TextBoxFor(model => model.hper_fechaFin, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", min = "2018-12-31" })
+                                    @Html.TextBoxFor(model => model.hper_fechaFin, new { htmlAttributes = new { @class = "form-control datepicker required" }, @id = "fechaFin", type = "date", min = "2018-12-31" })
                                     @Html.ValidationMessageFor(model => model.hper_fechaFin, "", new { @class = "text-danger", @id = "errorhper_fechaFin" })
                                 </div>
                             </div>
-                            @*@Html.TextBoxFor(model => model.EndTime, new { type = "time" })*@
-
-                            @*//---Fechasalida---
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.hsal_FechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-5">
-                                        <i class="fa fa-calendar"></i>
-                                        @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
-                                        @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
-                                    </div>
-                                </div>*@
-
-                            @*@Html.TextBoxFor(model => model.EndTime, new { type = "time" })*@
 
                         }
                         <div class="ibox">
@@ -129,17 +111,17 @@
 </div>
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-@Styles.Render("~/Content/plugins/izitoast/iziToast")
-@Styles.Render("~/Content/plugins/izitoast/iziToast.min")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
     @Styles.Render("~/plugins/select2Styles")
+    @Styles.Render("~/plugins/awesomeCheckboxStyles")
 }
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
-@*general*@
-@Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
-@Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
-    @*@Scripts.Render("~/plugins/customdataTables")*@
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+    @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/Scripts/app/general/HistorialPermisos/CreateHistorialPermisos.js")
     @Scripts.Render("~/plugins/select2")
+    @Scripts.Render("~/Scripts/app/general_Fechas")
 }

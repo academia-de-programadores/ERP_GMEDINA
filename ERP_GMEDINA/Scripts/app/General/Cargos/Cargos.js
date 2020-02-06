@@ -15,8 +15,8 @@ function tablaEditar(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
-                $("#ModalEditar").find("#car_SalarioMinimo").val(obj.car_SalarioMinimo);
-                $("#ModalEditar").find("#car_SalarioMaximo").val(obj.car_SalarioMaximo);
+                $("#ModalEditar").find("#car_SueldoMinimo").val(obj.car_SueldoMinimo);
+                $("#ModalEditar").find("#car_SueldoMaximo").val(obj.car_SueldoMaximo);
                 $('#ModalEditar').modal('show');
             }
         });
@@ -31,8 +31,8 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#car_Descripcion")["0"].innerText = obj.car_Descripcion;
-                $("#ModalDetalles").find("#car_SalarioMinimo")["0"].innerText = obj.car_SalarioMinimo;
-                $("#ModalDetalles").find("#car_SalarioMaximo")["0"].innerText = obj.car_SalarioMaximo;
+                $("#ModalDetalles").find("#car_SueldoMinimo")["0"].innerText = obj.car_SueldoMinimo;
+                $("#ModalDetalles").find("#car_SueldoMaximo")["0"].innerText = obj.car_SueldoMaximo;
                 $("#ModalDetalles").find("#car_FechaCrea")["0"].innerText = FechaFormato(obj.car_FechaCrea);
                 $("#ModalDetalles").find("#car_FechaModifica")["0"].innerText = FechaFormato(obj.car_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -74,6 +74,7 @@ function llenarTabla() {
 }
 
 $("#btnAgregar").click(function () {
+   
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');
     $(modalnuevo).find("#car_Descripcion").val("");
@@ -106,27 +107,42 @@ $("#btnInactivar").click(function () {
 
 //botones POST
 $("#btnGuardar").click(function () {
+
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data = JSON.stringify({ tbCargos: data });
-        _ajax(data,
-            '/Cargos/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
-                    LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
-                    llenarTabla();
+        let a = parseFloat(data.car_SueldoMinimo);
+        let b = parseFloat(data.car_SueldoMaximo);
 
-                } else {
-                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
-                }
-            });
-    } else {
+        if (a>= b)
+        {
+         
+            MsgError("Error", "Sueldo máximo debe ser mayor al sueldo mínimo");
+        
+        }
+        else{
+            data = JSON.stringify({ tbCargos: data });
+            _ajax(data,
+                '/Cargos/Create',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                        LimpiarControles(["car_Descripcion", "car_RazonInactivo","car_SueldoMaximo","car_SueldoMinimo"]);
+                        llenarTabla();
+
+                    } else {
+                        MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                    }
+                });
+        }
+    }
+    else {
         MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
+   
+
 });
 
 $("#InActivar").click(function () {
@@ -154,25 +170,37 @@ $("#InActivar").click(function () {
 });
 
 $("#btnActualizar").click(function () {
-    debugger
     var data = $("#FormEditar").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        data.car_Id = id;
-        data = JSON.stringify({ tbCargos: data });
-        _ajax(data,
-            '/Cargos/Edit',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
-                    llenarTabla();
-                } else {
-                    MsgError("Error", "No se editó el registro, contacte al administrador.");
-                }
-            });
-    } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto.");
+    data = serializar(data); if (data != null) {
+        let a = parseFloat(data.car_SueldoMinimo);
+        let b = parseFloat(data.car_SueldoMaximo);
+
+        if (a >= b) {
+
+            MsgError("Error", "Sueldo máximo debe ser mayor al sueldo mínimo");
+
+        }
+        else {
+
+          
+            if (data != null) {
+                data.car_Id = id;
+                data = JSON.stringify({ tbCargos: data });
+                _ajax(data,
+                    '/Cargos/Edit',
+                    'POST',
+                    function (obj) {
+                        if (obj != "-1" && obj != "-2" && obj != "-3") {
+                            CierraPopups();
+                            MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                            llenarTabla();
+                        } else {
+                            MsgError("Error", "No se editó el registro, contacte al administrador.");
+                        }
+                    });
+            } else {
+                MsgError("Error", "Por favor llene todas las cajas de texto.");
+            }
+        }
     }
 });

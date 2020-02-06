@@ -34,10 +34,9 @@ function compare_dates() {
         return true;
     }
 }
-
 $(document).ready(function () {
     $("#ddlEmpleados").select2();
-
+    $("#hper_PorcentajeIndemnizado").val(0);
     var date = new Date();
 
     var day = date.getDate();
@@ -49,22 +48,9 @@ $(document).ready(function () {
 
     var today = year + "-" + month + "-" + day;
     $("#hper_fechaInicio").attr("value", today);
-    //var today = new Date();
-    //var dd = today.getDate();
-    //var mm = today.getMonth() + 1; //January is 0!
-    //var yyyy = today.getFullYear();
-    //if (dd < 10) {
-    //    dd = '0' + dd
-    //}
-    //if (mm < 10) {
-    //    mm = '0' + mm
-    //}
-    //today = yyyy + '-' + mm + '-' + dd;
-    //$("#hsal_FechaSalida").attr("max", today);
 
     llenarDropDowlistEmpleados();
     llenarDropDowlistTipoPermisos();
-    //llenarDropDowlistRazonSalida();
 
     ChildTable = $(ChildDataTable).DataTable({
         "language": languageChild,
@@ -87,7 +73,6 @@ $(document).ready(function () {
         order: [[0, 'asc']]
     });
 });
-//alert("a");
 function Add(Empleados, ver) {
     if (Empleados.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
@@ -115,33 +100,15 @@ function Add(Empleados, ver) {
         //$("#FormEmpleados").find("#Razon").val("");
         $("#FormEmpleados").find("#ddlEmpleados").focus();
     }
-    //else {
-    //    if (Razon.trim().length == 0) {
-    //        var txt_required = $("#FormEmpleados").find("#Razon").data("val-required");
-    //        var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
-    //        $(span).addClass("text-danger");
-    //        $(span).closest("div").addClass("has-error");
-    //        span.text(txt_required);
-    //        $("#FormEmpleados").find("#Razon").focus();
-    //    }
-    //}
 }
 function getJson() {
-    //declaramos una lista para recuperar en un formato 
-    //especifico el json de datatable.
     list = new Array();
-    //declaramos el objeto que ira dentro de la vista     
     for (var i = 0; i < ChildTable.data().length; i++) {
         var fila = ChildTable.rows().data()[i];
         var tbEmpleados =
         {
             Id: i,
             emp_Id: fila.emp_Id
-            //,
-            //hper_fechaInicio: fila.Salida,
-            //hper_fechaFin: fila.Regreso,
-            //hper_Justificado: fila.justificado
-            ////,tbCargos: { car_Descripcion: fila.Cargo }
         };
         list.push(tbEmpleados);
     }
@@ -166,20 +133,6 @@ function llenarDropDowlistTipoPermisos() {
            });
        });
 }
-//Razon Salida
-//function llenarDropDowlistRazonSalida() {
-//    _ajax(null,
-//        '/HistorialPermisos/llenarDropDowlistRazonSalida',
-//        'POST',
-//        function (result) {
-//            $.each(result, function (id, Lista) {
-//                Lista.forEach(function (value, index) {
-//                    $("#" + id).append(new Option(value.Descripcion, value.Id));
-//                });
-//            });
-//        });
-//}
-//Empleados
 function llenarDropDowlistEmpleados() {
     _ajax(null,
         '/HistorialPermisos/llenarDropDowlistEmpleados',
@@ -192,13 +145,6 @@ function llenarDropDowlistEmpleados() {
             });
         });
 }
-//function Remover(btn) {
-//    ChildTable
-//           .row($(btn).parents('tr'))
-//           .remove()
-//           .draw();
-//}
-//Llamamos los dropdowns
 $("#add").click(function () {
     var Id = $("#FormEmpleados").find("#ddlEmpleados").val();
     if (Id == 0) {
@@ -207,16 +153,10 @@ $("#add").click(function () {
         $(span).closest("div").addClass("has-warning");
         span.text('Seleccione otra opción');
         $("#FormEmpleados").find("#ddlEmpleados").focus();
-        alert();
     }
-        //hsal_FechaSalida: $("#hsal_FechaSalida").val()
     else {
         var Id = $("#FormEmpleados").find("#ddlEmpleados").val();
-        //var Razon = $("#FormEmpleados").find("#Razon").val();
         var ver = $('#ddlEmpleados option:selected').html();
-        //var Salida = $("#hper_fechaInicio").val();
-        //var Regreso = $("#hper_fechaFin").val();
-        //var justificado = $("#hper_Justificado").val();
         var valores = Id + ver;
         for (var i = 0; i < valores.length; i++) {
             if (valores[i] == ">" || valores[i] == "<") {
@@ -239,7 +179,6 @@ $("#hper_PorcentajeIndemnizado").focusout(function () {
 });
 
 $("#btnCrear").click(function () {
-    //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     if ($("#hper_fechaFin").val() <= $("#hper_fechaInicio").val()) {
         MsgError("Error", "Seleccione una fecha de regreso distinta.");
     } else if ($("#TipoPermisos").val() == 0) {
@@ -247,7 +186,6 @@ $("#btnCrear").click(function () {
     } else if ($("#hper_PorcentajeIndemnizado").val() == "") {
         MsgError("Error", "Es nesesario especificar el porcentaje del sueldo del cual el colaborador gozará durante la duración del permiso.");
     } else {
-        //declaramos el objeto principal de nuestra tabla y asignamos sus valores
         var tbHistorialPermisos =
         {
             tper_Id: $("#TipoPermisos").val(),
@@ -261,9 +199,6 @@ $("#btnCrear").click(function () {
         if (lista == "") {
             MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador.");
         }
-            //else if ($("#hper_PorcentajeIndemnizado").val() < '0' || $("#hper_PorcentajeIndemnizado").val() == "") {
-            //    MsgError("Error", "Es nesesario especificar el porcenaje del suelo del cual gozara el colaborador durante laduración del permiso");
-            //}
         else if ($("#hper_fechaInicio").val() == "") {
             MsgError("Error", "Es nesesario seleccionar la fecha de salida.");
         } else if ($("#hper_fechaFin").val() == "") {
@@ -275,13 +210,11 @@ $("#btnCrear").click(function () {
                     tbHistorialPermisos: tbHistorialPermisos,
                     tbEmpleados: lista
                 });
-                //alert(lista);
                 _ajax(data,
                     '/HistorialPermisos/Create',
                     'POST',
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
-                            //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
                             MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                             setTimeout(function () { location.href = "/HistorialPermisos/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");

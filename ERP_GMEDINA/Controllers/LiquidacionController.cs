@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Helpers;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -12,14 +13,17 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         public decimal total { get; set; }
+
         // GET: Liquidacion
+        [SessionManager("Liquidacion/Index")]
         public ActionResult Index()
         {
             Session["Liquidaciones"] = null;
             return View();
         }
-
+        
         [HttpGet]
+        [SessionManager("Liquidacion/Index")]
         public string GetEmpleadosAreas()
         {
             return General.ObtenerEmpleados();
@@ -27,6 +31,7 @@ namespace ERP_GMEDINA.Controllers
 
         //OBTENER LA INFORMACION DE EMPLEADOS
         [HttpPost]
+        [SessionManager("Liquidacion/Index")]
         public JsonResult Obtener_Informacion_Empleado(int IdEmpleado, DateTime fechaFin, int IdMotivo)
         {
             int anios = 0, meses = 0, dias = 0;
@@ -169,6 +174,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //GET: MotivosLiquidacion
+        [SessionManager("Liquidacion/Index")]
         public JsonResult GetMotivoLiquidacion()
         {
             //using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
@@ -186,10 +192,11 @@ namespace ERP_GMEDINA.Controllers
                 }
             //}
         }
-        
+
 
         //GET: CALCULAR LIQUIDACION
         [HttpPost]
+        [SessionManager("Liquidacion/Index")]
         public JsonResult CalcularLiquidacion(LiquidacionViewModel Liquidacion)
         {
             try
@@ -266,6 +273,7 @@ namespace ERP_GMEDINA.Controllers
 
         //REGISTRAR LA LIQUIDACION
         [HttpGet]
+        [SessionManager("Liquidacion/Index")]
         public JsonResult RegistrarLiquidacion()
         {
             //Instancia del objeto tbLiquidaciones

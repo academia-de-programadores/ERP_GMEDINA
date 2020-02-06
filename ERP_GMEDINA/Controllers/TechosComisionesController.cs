@@ -13,6 +13,7 @@ namespace ERP_GMEDINA.Controllers
     public class TechosComisionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region Index Techos Comisiones
         // GET: TechosComisiones
@@ -83,8 +84,8 @@ namespace ERP_GMEDINA.Controllers
         {
             //Para llenar los campos de auditoría
             //tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
-            tbTechosComisiones.tc_UsuarioCrea = 1;
-            tbTechosComisiones.tc_FechaCrea = DateTime.Now;
+            //tbTechosComisiones.tc_UsuarioCrea = 1;
+            //tbTechosComisiones.tc_FechaCrea = DateTime.Now;
 
             //Variable para enviarla al lado del Cliente
             string Response = String.Empty;
@@ -97,11 +98,11 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //Ejecutar Procedimiento Almacenado
                     listTechosComisiones = db.UDP_Plani_tbTechosComisiones_Insert(tbTechosComisiones.cin_IdIngreso,
-                                                                              tbTechosComisiones.tc_RangoInicio,
-                                                                              tbTechosComisiones.tc_RangoFin,
-                                                                              tbTechosComisiones.tc_PorcentajeComision,
-                                                                              tbTechosComisiones.tc_UsuarioCrea,
-                                                                              tbTechosComisiones.tc_FechaCrea);
+                                                                                  tbTechosComisiones.tc_RangoInicio,
+                                                                                  tbTechosComisiones.tc_RangoFin,
+                                                                                  tbTechosComisiones.tc_PorcentajeComision,
+                                                                                  Function.GetUser(),
+                                                                                  Function.DatetimeNow());
 
                     //El tipo complejo del Procedimiento Almacenado
                     foreach (UDP_Plani_tbTechosComisiones_Insert_Result Resultado in listTechosComisiones)
@@ -149,8 +150,8 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "tc_Id, cin_IdIngreso, tc_RangoInicio, tc_RangoFin, tc_PorcentajeComision, tc_UsuarioModifica, tc_FechaModifica")] tbTechosComisiones tbTechosComisiones)
         {
-            tbTechosComisiones.tc_UsuarioModifica = 1;
-            tbTechosComisiones.tc_FechaModifica = DateTime.Now;
+            //tbTechosComisiones.tc_UsuarioModifica = 1;
+            //tbTechosComisiones.tc_FechaModifica = DateTime.Now;
 
             string response = "bien";
             IEnumerable<object> listTechosComisiones = null;
@@ -163,12 +164,12 @@ namespace ERP_GMEDINA.Controllers
                 {
 
                     listTechosComisiones = db.UDP_Plani_tbTechosComisiones_Update(tbTechosComisiones.tc_Id,
-                                                                              tbTechosComisiones.cin_IdIngreso,
-                                                                              tbTechosComisiones.tc_RangoInicio,
-                                                                              tbTechosComisiones.tc_RangoFin,
-                                                                              tbTechosComisiones.tc_PorcentajeComision,
-                                                                              tbTechosComisiones.tc_UsuarioModifica,
-                                                                              tbTechosComisiones.tc_FechaModifica);
+                                                                                  tbTechosComisiones.cin_IdIngreso,
+                                                                                  tbTechosComisiones.tc_RangoInicio,
+                                                                                  tbTechosComisiones.tc_RangoFin,
+                                                                                  tbTechosComisiones.tc_PorcentajeComision,
+                                                                                  Function.GetUser(),
+                                                                                  Function.DatetimeNow());
 
                     foreach (UDP_Plani_tbTechosComisiones_Update_Result resultado in listTechosComisiones)
                         MensajeError = resultado.MensajeError;
@@ -228,14 +229,14 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbTechosComisiones tbTechosComisiones = new tbTechosComisiones();
             tbTechosComisiones.tc_Id = (int)Id;
-            tbTechosComisiones.tc_UsuarioModifica = 1;
-            tbTechosComisiones.tc_FechaModifica = DateTime.Now;
+            //tbTechosComisiones.tc_UsuarioModifica = 1;
+            //tbTechosComisiones.tc_FechaModifica = DateTime.Now;
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
                 listTechosComisiones = db.UDP_Plani_tbTechosComisiones_Inactivar(tbTechosComisiones.tc_Id,
-                                                                            tbTechosComisiones.tc_UsuarioModifica,
-                                                                            tbTechosComisiones.tc_FechaModifica);
+                                                                                 Function.GetUser(),
+                                                                                 Function.DatetimeNow());
 
                 //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                 foreach (UDP_Plani_tbTechosComisiones_Inactivar_Result Resultado in listTechosComisiones)
@@ -277,14 +278,14 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbTechosComisiones tbTechosComisiones = new tbTechosComisiones();
             tbTechosComisiones.tc_Id = (int)Id;
-            tbTechosComisiones.tc_UsuarioModifica = 1;
-            tbTechosComisiones.tc_FechaModifica = DateTime.Now;
+            //tbTechosComisiones.tc_UsuarioModifica = 1;
+            //tbTechosComisiones.tc_FechaModifica = DateTime.Now;
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
                 listTechosComisiones = db.UDP_Plani_tbTechosComisiones_Activar(tbTechosComisiones.tc_Id,
-                                                                                tbTechosComisiones.tc_UsuarioModifica,
-                                                                                tbTechosComisiones.tc_FechaModifica);
+                                                                               Function.GetUser(),
+                                                                               Function.DatetimeNow());
 
                 //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                 foreach (UDP_Plani_tbTechosComisiones_Activar_Result Resultado in listTechosComisiones)
