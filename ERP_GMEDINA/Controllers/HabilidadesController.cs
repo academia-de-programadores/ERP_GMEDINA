@@ -18,12 +18,7 @@ namespace ERP_GMEDINA.Controllers
         [SessionManager("Habilidades/Index")]
         // GET: Habilidades
         public ActionResult Index()
-        {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+        {            
             tbHabilidades tbHabilidades = new tbHabilidades {};
             return View(tbHabilidades);
         }
@@ -86,6 +81,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         // GET: Habilidades/Edit/5
+        //[SessionManager("Habilidades/Edit")]
         [HttpPost]
         [ActionName("Datos")]
         public ActionResult Edit(int? id)

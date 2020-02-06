@@ -149,7 +149,6 @@ namespace ERP_GMEDINA.Controllers
             result.Add("Requisicion", Requisicion);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         [SessionManager("HistorialCargos/Promover")]
         public ActionResult Promover()
         {       
@@ -175,9 +174,9 @@ namespace ERP_GMEDINA.Controllers
 
             return View(Empleado);
         }
-
-        [SessionManager("HistorialCargos/PromoverGuardar")]
-        public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
+        [HttpPost]
+        [SessionManager("HistorialCargos/Promover")]
+        public JsonResult Promover(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)

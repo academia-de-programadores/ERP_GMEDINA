@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
+
 namespace ERP_GMEDINA.Controllers
 {
     public class AreasController : Controller
@@ -17,8 +19,7 @@ namespace ERP_GMEDINA.Controllers
 
         //GET: Areas
         [SessionManager("Areas/Index")]
-        public ActionResult Index()
-        {
+        public ActionResult Index(){
             tbAreas tbAreas = new tbAreas { };
             return View(tbAreas);
         }
@@ -177,8 +178,8 @@ namespace ERP_GMEDINA.Controllers
          //POST: Areas/Create
          //To protect from overposting attacks, please enable the specific properties you want to bind to, for
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
+         [SessionManager("Areas/Create")]
         [HttpPost]
-        [SessionManager("Areas/Create")]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
            // declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -196,7 +197,7 @@ namespace ERP_GMEDINA.Controllers
                         tbAreas.car_Descripcion,
                         tbAreas.car_SalarioMinimo,
                         tbAreas.car_SalarioMaximo,
-                         (int)Session["UserLogin"], 
+                         (int)Session["UserLogin"],
                          Function.DatetimeNow()
                         );
                     foreach (UDP_RRHH_tbCargos_Insert_Result item in cargo)

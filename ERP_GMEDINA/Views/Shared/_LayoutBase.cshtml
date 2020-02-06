@@ -1,4 +1,5 @@
 ﻿@using ERP_GMEDINA.Models
+@using ERP_GMEDINA.Attribute
 @{
     Helpers Login = new Helpers();
     int Sesiones = 0;
@@ -8,12 +9,20 @@
 
     foreach (tbUsuario Usuario in User)
     {
-     Sesiones = (int)Usuario.usu_SesionesValidas;
+        Sesiones = (int)Usuario.usu_SesionesValidas;
     }
     string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
     string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
-    string Editar = controller + " / Edit";
+    string Editar =action;
     string Activar = controller + "/Activar";
+
+    //if (!(Login.GetUserRols(action)))
+    //{
+    //    Response.Redirect("~/Login/Index");
+    //}
+
+    //var lol = new SessionManager("~/Login/Index");
+    //    lol.OnActionExecuted();
 }
 <!DOCTYPE html>
 <html>
@@ -46,8 +55,8 @@
   <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
    <!-- Top Navbar -->
    @Html.Partial("_TopNavbar")
-   <!-- Main view  -->
-   @RenderBody()
+   <!-- Main view  -->   
+    @RenderBody()
    <!-- Footer -->
    @*@Html.Partial("_Footer")*@
   </div>
@@ -68,13 +77,62 @@
  <!-- Handler for local scripts -->
  @RenderSection("scripts", required: false)
  @{
-     if (Login.GetUserRols(Editar))
+     bool datatableEdit = true;
+     string urlError = "";
+     if (Login.GetUserLogin())
+     {
+         if (action != "Usuario/ModificarPass")
+         {
+             if (Login.Sesiones(controller + "/Edit"))
+             {
+                 if (Login.GetRol())
+                 {
+                     if (action != "Menu/Index")
+                     {
+                         if (!Login.GetUserRols(controller + "/UploadDocumento")||!Login.GetUserRols(controller+ "/Edit"))
+                         {
+                             datatableEdit = false;
+                             urlError = "/Login/SinAcceso";
+                             //filterContext.Result = new RedirectToRouteResult(valuesSinAcceso);
+                         }
+
+                     }
+                 }
+                 else
+                 {
+                     datatableEdit = false;
+                     urlError = "/Login/SinRol";
+                     //filterContext.Result = new RedirectToRouteResult(valuesSinRol);
+                 }
+             }
+             else
+             {
+
+                 datatableEdit= false;
+                 urlError = "/Usuario/ModificarPass/" +@HttpContext.Current.Session["UserLogin"];
+                 //filterContext.Result = new RedirectToRouteResult(valuesCambiarPass);
+             }
+         }
+     }
+     else
+     {
+        <script>
+            var datatableEdit=true;
+         var urlError = "/Login/Index";
+        </script>
+     }
+     //filterContext.Result = new RedirectToRouteResult(valuesIndex);
+    <script>
+        var datatableEdit='@datatableEdit';
+        var urlError='@urlError';
+    </script>
+     @*if (Login.GetUserRols(Editar))
      {
          @Scripts.Render("~/Scripts/app/datatableEdit/")
-     }
+     }*@
      if (Login.GetUserRols(Activar))
      {
-         @Scripts.Render("~/Scripts/app/general/"+Activar.Split('/')[0]+"/Admin")
+         @Scripts.Render("~/Scripts/app/general/"+controller+"/Admin")
      }
 
  }

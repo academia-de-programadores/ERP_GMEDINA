@@ -2,7 +2,7 @@
 var Admin = false;
 var textoBoton = 'Mostrar activos';
 var botones = [];
-var datatableEdit = false;
+var datatableEdit = "false";
 $(document).ready(function () {
  var columnas = [];
  var col = 0;
@@ -37,13 +37,14 @@ $(document).ready(function () {
 
    //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
   else if (campo == "Acciones") {
-   var defaultContent = datatableEdit ?
+   var defaultContent = datatableEdit=="True" ?
                      "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                         "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
                     "</div>" :
                     "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                        "<a class='btn btn-default btn-xs ' href='" + urlError + "'>Editar</a>" +
                     "</div>";
    //var defaultContent = "<div>" +
    //                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
@@ -55,13 +56,19 @@ $(document).ready(function () {
    });
   }
   else if (campo == "Info") {
+      var defaultContent = datatableEdit == "True" ?
+                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                        " <a class='btn btn-default btn-xs ' onclick='CallEditar(this)' >Archivos</a>" +
+                    "</div>" :
+                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                        " <a class='btn btn-default btn-xs ' href='" + urlError + "' >Archivos</a>" +
+                    "</div>";
    columnas.push({
     data: null,
     orderable: false,
-    defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                        " <a class='btn btn-default btn-xs ' onclick='CallEditar(this)' >Archivos</a>" +
-                    "</div>"
+    defaultContent: defaultContent
    });
   }
   else {
