@@ -117,31 +117,35 @@ $(document).ready(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    $("#Crear #emp_IdEmpleado").val('').trigger('change');
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesCrear();
-    //DESBLOQUEAR EL BOTON DE CREAR
-    $("#btnCreateRegistroComisiones").attr("disabled", false);
-    //RECUPERAR LA DATA PARA LLENAR EL DROPDOWNLIST DE INGRESO
-    $.ajax({
-        url: "/EmpleadoComisiones/EditGetDDLIngreso",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Crear #cin_IdIngreso").empty();
-            //LLENAR EL DROPDOWNLIST
-            $("#Crear #cin_IdIngreso").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
+    var validacionPermiso = userModelState("EmpleadoComisiones/Create");
 
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    if (validacionPermiso.status == true) {
+        $("#Crear #emp_IdEmpleado").val('').trigger('change');
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesCrear();
+        //DESBLOQUEAR EL BOTON DE CREAR
+        $("#btnCreateRegistroComisiones").attr("disabled", false);
+        //RECUPERAR LA DATA PARA LLENAR EL DROPDOWNLIST DE INGRESO
+        $.ajax({
+            url: "/EmpleadoComisiones/EditGetDDLIngreso",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        })
+            //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+            .done(function (data) {
+                //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                $("#Crear #cin_IdIngreso").empty();
+                //LLENAR EL DROPDOWNLIST
+                $("#Crear #cin_IdIngreso").append("<option value='0'>Selecione una opción...</option>");
+                $.each(data, function (i, iter) {
+                    $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
+            });
+
+        //MOSTRAR EL MODAL DE AGREGAR
+        $("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -225,87 +229,91 @@ $("#btnCerrarModalCrear").click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
-    let itemEmpleado = localStorage.getItem('idEmpleado');
-    let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
-    console.table(dataEmp);
-    if (itemEmpleado != null) {
-        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
-        localStorage.removeItem('idEmpleado');
-    }
-    //OCULTAR DATAANNOTATIONS
-    $("#Editar #Validation_descipcion1e").css("display", "hidden");
-    $("#Editar #Validation_descipcion2e").css("display", "hidden");
-    $("#Editar #Validation_descipcion1").css("display", "none");
-    $("#Editar #Validation_descipcion2").css("display", "hidden");
-    $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
-    $("#Editar #AsteriscoTotal").removeClass("text-danger");
-    var ID = $(this).data('id');
-    Idinactivar = ID;
-    var idEmpSelect = "";
-    var NombreSelect = "";
-    $.ajax({
-        url: "/EmpleadoComisiones/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                if (data.cc_Pagado) {
-                    $("#btnUpdateComisionesConfirmar").attr('disabled', true);
-                } else {
-                    $("#btnUpdateComisionesConfirmar").attr('disabled', false);
-                }
-                idEmpSelect = data.emp_Id;
-                NombreSelect = data.Descripcion;
-                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+    var validacionPermiso = userModelState("EmpleadoComisiones/Edit");
 
-                let valor = $('#Editar #emp_Id').val();
+    if (validacionPermiso.status == true) {
+        let itemEmpleado = localStorage.getItem('idEmpleado');
+        let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
+        console.table(dataEmp);
+        if (itemEmpleado != null) {
+            $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+            localStorage.removeItem('idEmpleado');
+        }
+        //OCULTAR DATAANNOTATIONS
+        $("#Editar #Validation_descipcion1e").css("display", "hidden");
+        $("#Editar #Validation_descipcion2e").css("display", "hidden");
+        $("#Editar #Validation_descipcion1").css("display", "none");
+        $("#Editar #Validation_descipcion2").css("display", "hidden");
+        $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
+        $("#Editar #AsteriscoTotal").removeClass("text-danger");
+        var ID = $(this).data('id');
+        Idinactivar = ID;
+        var idEmpSelect = "";
+        var NombreSelect = "";
+        $.ajax({
+            url: "/EmpleadoComisiones/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    if (data.cc_Pagado) {
+                        $("#btnUpdateComisionesConfirmar").attr('disabled', true);
+                    } else {
+                        $("#btnUpdateComisionesConfirmar").attr('disabled', false);
+                    }
+                    idEmpSelect = data.emp_Id;
+                    NombreSelect = data.Descripcion;
+                    $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
 
-                if (valor == null) {
-                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + dataEmp[1] + "</option>").trigger('change');
-                    localStorage.setItem('idEmpleado', idEmpSelect);
-                }
+                    let valor = $('#Editar #emp_Id').val();
 
-                $("#Editar #cc_Id").val(data.cc_Id);
-                $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
-       
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedIdEmp = data.emp_Id;
-                var SelectedIdIng = data.cin_IdIngreso;
+                    if (valor == null) {
+                        $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + dataEmp[1] + "</option>").trigger('change');
+                        localStorage.setItem('idEmpleado', idEmpSelect);
+                    }
 
-                $.ajax({
-                    url: "/EmpleadoComisiones/EditGetDDLIngreso",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #cin_IdIngreso").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdIng ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                    $("#Editar #cc_Id").val(data.cc_Id);
+                    $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
+
+                    //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                    var SelectedIdEmp = data.emp_Id;
+                    var SelectedIdIng = data.cin_IdIngreso;
+
+                    $.ajax({
+                        url: "/EmpleadoComisiones/EditGetDDLIngreso",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                    })
+                        .done(function (data) {
+                            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                            $("#Editar #cin_IdIngreso").empty();
+                            //LLENAR EL DROPDOWNLIST
+                            $.each(data, function (i, iter) {
+                                $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdIng ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            });
+
                         });
+                    $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
 
+
+                    //$("#DetalleEmpleadoComisiones").modal(hide);
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
                     });
-                $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-
-
-                //$("#DetalleEmpleadoComisiones").modal(hide);
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-            Check = "";
-        });
+                }
+                Check = "";
+            });
+    }
 });
 
 //BOTON DE CONFIRMAR EDICION
@@ -396,107 +404,109 @@ $("#frmEmpleadoComisionesEditar").submit(function (e) {
 
 //EVENTOS DE DETALLES
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoComisiones", function () {
+    var validacionPermiso = userModelState("EmpleadoComisiones/Details");
 
-    var ID = $(this).data('id');
-    Editar = ID;
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        Editar = ID;
 
-    $.ajax({
-        url: "/EmpleadoComisiones/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
-                var FechaCrea = FechaFormato(data[0].cc_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].cc_FechaModifica);
-                if (data[0].cc_Pagado) {
-                    //$('#Detalles #cb_Pagado').prop('checked', true);
-                    $("#Detallar #cc_Pagado").html("Si");
-                } else {
-                    $("#Detallar #cc_Pagado").html("No");
+        $.ajax({
+            url: "/EmpleadoComisiones/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
+                    var FechaCrea = FechaFormato(data[0].cc_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].cc_FechaModifica);
+                    if (data[0].cc_Pagado) {
+                        //$('#Detalles #cb_Pagado').prop('checked', true);
+                        $("#Detallar #cc_Pagado").html("Si");
+                    } else {
+                        $("#Detallar #cc_Pagado").html("No");
+                    }
+                    $("#Detallar #cc_Id").html(data[0].cc_Id);
+                    $("#Detallar #cc_FechaRegistro").html(FechaRegistro);
+                    $("#Detallar #cc_UsuarioCrea").html(data[0].cc_UsuarioCrea);
+                    $("#Detallar #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detallar #tbCatalogoDeIngresos_cin_DescripcionIngreso").html(data[0].Ingreso);
+                    $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
+                    $("#Detallar #emp_Id").html(data[0].emp_Id);
+                    $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").html(data[0].NombreEmpleado + ' ' + data[0].ApellidosEmpleado);
+                    $("#Detallar #cc_FechaCrea").html(FechaCrea);
+                    $("#Detallar #cc_UsuarioModifica").html(data[0].cc_UsuarioModifica);
+                    $("#Detallar #cc_PorcentajeComision").html((data[0].cc_PorcentajeComision % 1 == 0) ? data[0].cc_PorcentajeComision + ".00" : data[0].cc_PorcentajeComision);
+                    $("#Detallar #cc_TotalVenta").html((data[0].cc_TotalVenta % 1 == 0) ? data[0].cc_TotalVenta + ".00" : data[0].cc_TotalVenta);
+                    data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detallar #cc_FechaModifica").html(FechaModifica);
+                    //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                    var SelectedIdEmp = data[0].emp_Id;
+                    var SelectedIdCatIngreso = data[0].cin_IdIngreso;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                    $.ajax({
+                        url: "/EmpleadoComisiones/EditGetDDLEmpleado",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                    })
+                        .done(function (data) {
+                            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                            $("#Detallar #emp_IdEmpleado").empty();
+                            //LLENAR EL DROPDOWNLIST
+                            $("#Detallar #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
+                            $.each(data, function (i, iter) {
+                                $("#Detallar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            });
+                        });
+
+                    $.ajax({
+                        url: "/EmpleadoComisiones/EditGetDDLIngreso",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                    })
+                        .done(function (data) {
+                            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                            $("#Detallar #cin_IdIngreso").empty();
+                            //LLENAR EL DROPDOWNLIST
+
+                            $.each(data, function (i, iter) {
+                                $("#Detallar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            });
+                        });
+                    $("#DetalleEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+
+
                 }
-                $("#Detallar #cc_Id").html(data[0].cc_Id);
-                $("#Detallar #cc_FechaRegistro").html(FechaRegistro);
-                $("#Detallar #cc_UsuarioCrea").html(data[0].cc_UsuarioCrea);
-                $("#Detallar #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detallar #tbCatalogoDeIngresos_cin_DescripcionIngreso").html(data[0].Ingreso);
-                $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
-                $("#Detallar #emp_Id").html(data[0].emp_Id);
-                $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").html(data[0].NombreEmpleado + ' ' + data[0].ApellidosEmpleado);
-                $("#Detallar #cc_FechaCrea").html(FechaCrea);
-                $("#Detallar #cc_UsuarioModifica").html(data[0].cc_UsuarioModifica);
-                $("#Detallar #cc_PorcentajeComision").html((data[0].cc_PorcentajeComision % 1 == 0) ? data[0].cc_PorcentajeComision + ".00" : data[0].cc_PorcentajeComision);
-                $("#Detallar #cc_TotalVenta").html((data[0].cc_TotalVenta % 1 == 0) ? data[0].cc_TotalVenta + ".00" : data[0].cc_TotalVenta);
-                data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detallar #cc_FechaModifica").html(FechaModifica);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedIdEmp = data[0].emp_Id;
-                var SelectedIdCatIngreso = data[0].cin_IdIngreso;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/EmpleadoComisiones/EditGetDDLEmpleado",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detallar #emp_IdEmpleado").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Detallar #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Detallar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
                     });
-
-                $.ajax({
-                    url: "/EmpleadoComisiones/EditGetDDLIngreso",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detallar #cin_IdIngreso").empty();
-                        //LLENAR EL DROPDOWNLIST
-
-                        $.each(data, function (i, iter) {
-                            $("#Detallar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-                $("#DetalleEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-
-
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-        });
+                }
+            });
+    }
 });
-
-
-
 
 //EVENTOS DE INACTIVACION
 $(document).on("click", "#btnInactivarEmpleadoComisiones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#EditarEmpleadoComisiones").modal('hide');
-    $("#InactivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("EmpleadoComisiones/Inactivar");
 
+    if (validacionPermiso.status == true) {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#EditarEmpleadoComisiones").modal('hide');
+        $("#InactivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
 
-
-    document.getElementById("btnInactivarRegistroComisiones").disabled = false;
-    document.getElementById("btnInactivarRegistroComisionesNo").disabled = false;
+        document.getElementById("btnInactivarRegistroComisiones").disabled = false;
+        document.getElementById("btnInactivarRegistroComisionesNo").disabled = false;
+    }
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
@@ -549,11 +559,14 @@ $("#btnInactivarRegistroComisionesNo").click(function () {
 //EVENTOS DE ACTIVACION 
 var IDActivar = 0;
 $(document).on("click", "#btnActivarRegistroComisiones", function () {
-    IDActivar = $(this).data('id');
-    $("#ActivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("EmpleadoComisiones/Activar");
 
+    if (validacionPermiso.status == true) {
+        IDActivar = $(this).data('id');
+        $("#ActivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
 
-    document.getElementById("btnActivarRegistroComisionesEjecutar").disabled = false;
+        document.getElementById("btnActivarRegistroComisionesEjecutar").disabled = false;
+    }
 });
 
 //CONFIRMAR ACTIVACION

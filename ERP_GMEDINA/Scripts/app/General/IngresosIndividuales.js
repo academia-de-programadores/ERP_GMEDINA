@@ -124,14 +124,18 @@ function cargarGridDeducciones() {
 var GB_Activar = 0;
 //Activar
 $(document).on("click", "#IndexTabla tbody tr td #btnActivarIngresosIndividuales", function () {
-    //DESBLOQUEAR EL BOTON DE ACTIVAR
-    $("#btnActivarRegistroIngresoIndividual").attr("disabled", false);
-    //OBTENER EL ID DEL BOTON
-    var id = $(this).data('id');
-    //SETEO DE LA VARIABLE GLOABAL DE ACTIVACION
-    GB_Activar = id;
-    //Mostrar el Modal
-    $("#ActivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("IngresosIndividuales/Activar");
+
+    if (validacionPermiso.status == true) {
+        //DESBLOQUEAR EL BOTON DE ACTIVAR
+        $("#btnActivarRegistroIngresoIndividual").attr("disabled", false);
+        //OBTENER EL ID DEL BOTON
+        var id = $(this).data('id');
+        //SETEO DE LA VARIABLE GLOABAL DE ACTIVACION
+        GB_Activar = id;
+        //Mostrar el Modal
+        $("#ActivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 
@@ -180,21 +184,24 @@ $("#btnCerrarCrear").click(function () {
 const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
 
 $(document).on("click", "#btnAgregarIngresoIndividual", function () {
+    var validacionPermiso = userModelState("IngresosIndividuales/Create");
 
-    //DESBLOQUEAR EL BOTON DE CREAR
-    $("#btnCreateRegistroIngresoIndividual").attr("disabled", false);
-    //INICIALIZAR LOS VALORES DEL MODAL
-    $("#Crear #emp_IdCrear").val("0");
-    $("#ini_Motivo").val('');
-    $("#ini_Monto").val('');
-    $('#Crear #ini_PagaSiempre').prop('checked', false);
-    $("#Crear #ini_comentario").val('');
-    //VALIDAR EL DDL
-    let valCreate = $("#Crear #emp_IdCrear").val();
-    if (valCreate != null && valCreate != "")
-        $("#Crear #emp_IdCrear").val('').trigger('change');
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    if (validacionPermiso.status == true) {
+        //DESBLOQUEAR EL BOTON DE CREAR
+        $("#btnCreateRegistroIngresoIndividual").attr("disabled", false);
+        //INICIALIZAR LOS VALORES DEL MODAL
+        $("#Crear #emp_IdCrear").val("0");
+        $("#ini_Motivo").val('');
+        $("#ini_Monto").val('');
+        $('#Crear #ini_PagaSiempre').prop('checked', false);
+        $("#Crear #ini_comentario").val('');
+        //VALIDAR EL DDL
+        let valCreate = $("#Crear #emp_IdCrear").val();
+        if (valCreate != null && valCreate != "")
+            $("#Crear #emp_IdCrear").val('').trigger('change');
+        //MOSTRAR EL MODAL DE AGREGAR
+        $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 
@@ -387,101 +394,85 @@ $("#btnCerrarEditar").click(function () {
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales", function () {
-    //OBTENER TODA LA DATA DEL ROW SELECCIONADO
-    let dataEmp = table.row($(this).parents('tr')).data();
-    //INICIALIZAR UNA VARIABLE CON EL VALOR DEL ALMACENAMIENTO LOCAL
-    let itemEmpleado = localStorage.getItem('idEmpleado');
+    var validacionPermiso = userModelState("IngresosIndividuales/Edit");
 
-    //VALIDAR QUE NO  ESTE NULL
-    if (itemEmpleado != null) {
-        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
-        localStorage.removeItem('idEmpleado');
-    }
+    if (validacionPermiso.status == true) {
+        //OBTENER TODA LA DATA DEL ROW SELECCIONADO
+        let dataEmp = table.row($(this).parents('tr')).data();
+        //INICIALIZAR UNA VARIABLE CON EL VALOR DEL ALMACENAMIENTO LOCAL
+        let itemEmpleado = localStorage.getItem('idEmpleado');
 
-    //VARIABLE DE CONTEXTO PARA CAPTURAR EL ID DEL EMPLEADO SELCCIONADO
-    var idEmpSelect = "";
-    var NombreSelect = "";
-    //CAPTURAR EL DATAID
-    var id = $(this).data('id');
-    //SETEO DE LA VARIABLE DE INACTIVACION
-    GB_Inactivar = id;
-    //PETICION AL SERVIDOR
-    $.ajax({
-        url: "/IngresosIndividuales/Edit/" + id,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
-    })
-        .done(function (data) {
-            //SETEO DE LA VARIABLE DE idEmpSelect CON EL ID DEL EMPLEADO 
-            idEmpSelect = data.emp_Id;            
-            NombreSelect = dataEmp[2];
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
-                if (data.ini_Pagado) {
-                    $("#btnEditIngresoIndividual").attr('disabled', true);
-                } else {
-                    $("#btnEditIngresoIndividual").attr('disabled', false);
-                }
+        //VALIDAR QUE NO  ESTE NULL
+        if (itemEmpleado != null) {
+            $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+            localStorage.removeItem('idEmpleado');
+        }
 
-                if (data.ini_PagaSiempre) {
-                    $('#Editar #ini_PagaSiempre').prop('checked', true);
+        //VARIABLE DE CONTEXTO PARA CAPTURAR EL ID DEL EMPLEADO SELCCIONADO
+        var idEmpSelect = "";
+        var NombreSelect = "";
+        //CAPTURAR EL DATAID
+        var id = $(this).data('id');
+        //SETEO DE LA VARIABLE DE INACTIVACION
+        GB_Inactivar = id;
+        //PETICION AL SERVIDOR
+        $.ajax({
+            url: "/IngresosIndividuales/Edit/" + id,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: id })
+        })
+            .done(function (data) {
+                //SETEO DE LA VARIABLE DE idEmpSelect CON EL ID DEL EMPLEADO 
+                idEmpSelect = data.emp_Id;
+                NombreSelect = dataEmp[2];
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
+                    if (data.ini_Pagado) {
+                        $("#btnEditIngresoIndividual").attr('disabled', true);
+                    } else {
+                        $("#btnEditIngresoIndividual").attr('disabled', false);
+                    }
+
+                    if (data.ini_PagaSiempre) {
+                        $('#Editar #ini_PagaSiempre').prop('checked', true);
+                    }
+                    else {
+                        $('#Editar #ini_PagaSiempre').prop('checked', false);
+                    }
+
+                    $("#Editar #emp_Id").select2("val", "");
+
+                    $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                    let valor = $('#Editar #emp_Id').val();
+
+                    if (valor == null) {
+                        $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                        localStorage.setItem('idEmpleado', idEmpSelect);
+                    }
+
+                    $("#Editar #ini_IdIngresosIndividuales").val(data.ini_IdIngresosIndividuales);
+                    $("#Editar #ini_Motivo").val(data.ini_Motivo);
+                    $("#Editar #ini_Monto").val(data.ini_Monto);
+                    $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
+                    $("#Editar #ini_comentario").val(data.ini_comentario);
+                    console.log("Data que recoje de la row " + data.ini_comentario);
+
+                    $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+
                 }
                 else {
-                    $('#Editar #ini_PagaSiempre').prop('checked', false);
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
+                    });
                 }
-
-                $("#Editar #emp_Id").select2("val", "");
-
-                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
-
-                let valor = $('#Editar #emp_Id').val();
-
-                if (valor == null) {
-                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
-                    localStorage.setItem('idEmpleado', idEmpSelect);
-                }
-
-                $("#Editar #ini_IdIngresosIndividuales").val(data.ini_IdIngresosIndividuales);
-                $("#Editar #ini_Motivo").val(data.ini_Motivo);
-                $("#Editar #ini_Monto").val(data.ini_Monto);
-                $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
-                $("#Editar #ini_comentario").val(data.ini_comentario);
-                console.log("Data que recoje de la row " + data.ini_comentario);
-
-
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                //var SelectedId = data.emp_Id;
-
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                //$.ajax({
-                //    url: "/IngresosIndividuales/EditGetEmpleadoDDL",
-                //    method: "GET",
-                //    dataType: "json",
-                //    contentType: "application/json; charset=utf-8",
-                //    data: JSON.stringify({ id })
-                //})
-                //    .done(function (data) {
-                //        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                //        $("#Editar #emp_Id").empty();
-                //        //LLENAR EL DROPDOWNLIST                    
-                //        $.each(data, function (i, iter) {
-                //            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                //        });
-                //    });
-                $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-                
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-        });
+            });
+    }
 });
 
 $(document).on("click", "#btnRegresar", function () {
@@ -685,72 +676,76 @@ function OcultarValidacionesEditar() {
 //Detalles//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#IndexTabla tbody tr td #btnDetalleIngresosIndividuales", function () {
-    var id = $(this).data('id');
-    $.ajax({
-        url: "/IngresosIndividuales/Details/" + id,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                if (data[0].ini_PagaSiempre) {
-                    $("#Detalles #ini_PagaSiempre").html("Si");
+    var validacionPermiso = userModelState("IngresosIndividuales/Details");
+
+    if (validacionPermiso.status == true) {
+        var id = $(this).data('id');
+        $.ajax({
+            url: "/IngresosIndividuales/Details/" + id,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: id })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    if (data[0].ini_PagaSiempre) {
+                        $("#Detalles #ini_PagaSiempre").html("Si");
+                    }
+                    else {
+                        $("#Detalles #ini_PagaSiempre").html("No");
+                    }
+                    var FechaCrea = FechaFormato(data[0].ini_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].ini_FechaModifica);
+                    $(".field-validation-error").css('display', 'none');
+                    $("#Detalles #ini_IdIngresosIndividuales").html(data[0].ini_IdIngresosIndividuales);
+                    $("#Detalles #ini_Motivo").html(data[0].ini_Motivo);
+                    $("#Detalles #ini_Monto").html(data[0].ini_Monto);
+                    $("#Detalles #emp_Id").html(data[0].emp_Id);
+                    $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #ini_UsuarioCrea").html(data[0].ini_UsuarioCrea);
+                    $("#Detalles #ini_FechaCrea").html(FechaCrea);
+                    data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #ini_UsuarioModifica").html(data[0].dei_UsuarioModifica);
+                    $("#Detalles #ini_FechaModifica").html(FechaModifica);
+                    $("#Detalles #ini_comentario").html(data[0].ini_comentario);
+
+                    //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                    var SelectedId = data[0].emp_Id;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                    $.ajax({
+                        url: "/IngresosIndividuales/EditGetEmpleadoDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ id })
+                        })
+                        .done(function (data) {
+                            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                            //$("#Detalles #tde_IdTipoDedu").empty();
+                            //LLENAR EL DROPDOWNLIST
+                            //$("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
+                            $.each(data, function (i, iter) {
+                                //$("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                                if (iter.Id == SelectedId) {
+                                    $("#Detalles #emp_Id").html(iter.Descripcion);
+                                }
+                            });
+                        });
+                    $("#DetallesIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+
+
                 }
                 else {
-                    $("#Detalles #ini_PagaSiempre").html("No");
-                }
-                var FechaCrea = FechaFormato(data[0].ini_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].ini_FechaModifica);
-                $(".field-validation-error").css('display', 'none');
-                $("#Detalles #ini_IdIngresosIndividuales").html(data[0].ini_IdIngresosIndividuales);
-                $("#Detalles #ini_Motivo").html(data[0].ini_Motivo);
-                $("#Detalles #ini_Monto").html(data[0].ini_Monto);
-                $("#Detalles #emp_Id").html(data[0].emp_Id);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #ini_UsuarioCrea").html(data[0].ini_UsuarioCrea);
-                $("#Detalles #ini_FechaCrea").html(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #ini_UsuarioModifica").html(data[0].dei_UsuarioModifica);
-                $("#Detalles #ini_FechaModifica").html(FechaModifica);
-                $("#Detalles #ini_comentario").html(data[0].ini_comentario);
-
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data[0].emp_Id;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/IngresosIndividuales/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ id })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        //$("#Detalles #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        //$("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            //$("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                            if (iter.Id == SelectedId) {
-                                $("#Detalles #emp_Id").html(iter.Descripcion);
-                            }
-                        });
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
                     });
-                $("#DetallesIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-                
-                
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-        });
+                }
+            });
+    }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -772,11 +767,14 @@ $(document).on("click", "#btnBa", function () {
 });
 
 $(document).on("click", "#btnInactivarIngresoIndividual", function () {
-    $("#EditarIngresosIndividuales").modal('hide');
-    $("#InactivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    
-    
-    document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = false;
+    var validacionPermiso = userModelState("IngresosIndividuales/Inactivar");
+
+    if (validacionPermiso.status == true) {
+        $("#EditarIngresosIndividuales").modal('hide');
+        $("#InactivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+
+        document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = false;
+    }
 });
 
 //VARIABLE GLOBAL DE INACTIVACION
