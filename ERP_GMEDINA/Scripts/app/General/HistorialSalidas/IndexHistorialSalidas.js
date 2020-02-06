@@ -8,7 +8,6 @@ $(document).ready(function () {
 });
 //Funciones GET
 function tablaEditar(ID) {
-    //alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialSalidas/Edit/' + ID,
@@ -23,7 +22,6 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
-    //alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialSalidas/Edit/' + ID,

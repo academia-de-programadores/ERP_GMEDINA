@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialVacaciones
+        [SessionManager("HistorialVacaciones/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -90,6 +92,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: HistorialAmonestaciones/Create
         [HttpPost]
+        [SessionManager("HistorialVacaciones/Create")]
         public JsonResult Create(tbHistorialVacaciones tbHistorialVacaciones)
         {
             string msj = "";
@@ -115,6 +118,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("HistorialVacaciones/Delete")]
         public ActionResult Delete(tbHistorialVacaciones tbHistorialVacaciones)
         {
             string msj = "";
@@ -143,7 +147,7 @@ namespace ERP_GMEDINA.Controllers
                 }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        [SessionManager("HistorialVacaciones/Edit")]
         public ActionResult Edit(int? id)
         {
             using (db = new ERP_GMEDINAEntities())
@@ -260,6 +264,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         // POST: HistorialVacaciones/Delete/5
+        [SessionManager("HistorialVacaciones/Detalles")]
         public ActionResult Detalles(int? id)
         {
             try
@@ -293,7 +298,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-
+        [SessionManager("HistorialVacaciones/DiasRestantes")]
         public ActionResult DiasRestantes(int? id, int? annio)
         {
             try
@@ -352,6 +357,7 @@ namespace ERP_GMEDINA.Controllers
                 }
         }
         [HttpPost]
+        [SessionManager("HistorialVacaciones/habilitar")]
         public JsonResult habilitar(tbHistorialVacaciones tbHistorialVacaciones)
         {
             string result = "";
