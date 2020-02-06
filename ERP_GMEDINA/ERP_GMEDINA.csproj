@@ -3107,17 +3107,6 @@
     <Content Include="Views\TechoImpuestoVecinal\_DetailsIV.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\_EditIV.cshtml" />
     <Content Include="Views\PlanillaImpuestoVecinal\Index.cshtml" />
-    <Content Include="Views\Usuario\Create.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Details.cshtml" />
-    <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Usuario\Editct.cshtml" />
-    <Content Include="Views\Usuario\Index.cshtml" />
-    <Content Include="Views\Usuario\ModificarCuenta.cshtml" />
-    <Content Include="Views\Usuario\ModificarPass.cshtml" />
-    <Content Include="Views\Usuario\RestaurarPassword.cshtml" />
-    <Content Include="Views\Usuario\_BuscarEmpleado.cshtml" />
-    <Content Include="Views\Usuario\_IndexRolesUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
