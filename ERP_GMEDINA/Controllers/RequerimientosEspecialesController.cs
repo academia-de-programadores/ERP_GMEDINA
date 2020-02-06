@@ -73,7 +73,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Insert(tbRequerimientosEspeciales.resp_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Insert(tbRequerimientosEspeciales.resp_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequerimientosEspeciales_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -146,7 +146,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Update(id, tbRequerimientosEspeciales.resp_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Update(id, tbRequerimientosEspeciales.resp_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequerimientosEspeciales_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -182,7 +182,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequerimientosEspeciales_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -224,7 +224,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequerimientosEspeciales_Restore_Result item in list)
                     {
                         result = item.MensajeError;

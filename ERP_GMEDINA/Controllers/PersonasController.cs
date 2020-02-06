@@ -351,7 +351,7 @@ namespace ERP_GMEDINA.Controllers
                         var fecha = tbPersonas.per_FechaNacimiento.ToString();
                         if (fecha == "01/01/0001 0:00:00")
                             tbPersonas.per_FechaNacimiento = null;
-                        var List = db.UDP_RRHH_tbPersonas_Insert(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
+                        var List = db.UDP_RRHH_tbPersonas_Insert(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, (int)Session["UserLogin"], Function.DatetimeNow());
 
                         foreach (UDP_RRHH_tbPersonas_Insert_Result item in List)
                         {
@@ -519,7 +519,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     string ResultI = "";
                     string ResultE = "";
-                    var _list = db.UDP_RRHH_tbPersonas_Update(tbPersonas.per_Id,tbPersonas.per_Identidad,tbPersonas.per_Nombres,tbPersonas.per_Apellidos,tbPersonas.per_FechaNacimiento,tbPersonas.per_Sexo,tbPersonas.nac_Id,tbPersonas.per_Direccion,tbPersonas.per_Telefono,tbPersonas.per_CorreoElectronico,tbPersonas.per_EstadoCivil,tbPersonas.per_TipoSangre,1,DateTime.Now);
+                    var _list = db.UDP_RRHH_tbPersonas_Update(tbPersonas.per_Id,tbPersonas.per_Identidad,tbPersonas.per_Nombres,tbPersonas.per_Apellidos,tbPersonas.per_FechaNacimiento,tbPersonas.per_Sexo,tbPersonas.nac_Id,tbPersonas.per_Direccion,tbPersonas.per_Telefono,tbPersonas.per_CorreoElectronico,tbPersonas.per_EstadoCivil,tbPersonas.per_TipoSangre, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach(UDP_RRHH_tbPersonas_Update_Result Update in _list)
                     {
                         msj = Update.MensajeError + " ";
@@ -545,7 +545,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (CompV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Insert(tbPersonas.per_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (UDP_RRHH_tbCompetenciasPersona_Insert_Result Com in Competencias)
                                             {
                                                 ResultI = Com.MensajeError + "";
@@ -555,7 +555,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var c in CompV)
                                             {
-                                                var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(c.cope_Id, "Persona Editada", 1, DateTime.Now);
+                                                var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(c.cope_Id, "Persona Editada", (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (UDP_RRHH_tbCompetenciasPersona_Inactivar_Result Com in Competencias)
                                                 {
                                                     ResultE = Com.MensajeError + "";
@@ -577,7 +577,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (habV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Insert(tbPersonas.per_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (UDP_RRHH_tbHabilidadesPersona_Insert_Result hab in Habilidades)
                                             {
                                                 ResultI = hab.MensajeError + "";
@@ -587,7 +587,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var h in habV)
                                             {
-                                                var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Inactivar(h.hape_Id, "Persona Editada", 1, DateTime.Now);
+                                                var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Inactivar(h.hape_Id, "Persona Editada", (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (UDP_RRHH_tbHabilidadesPersona_Inactivar_Result Com in Habilidades)
                                                 {
                                                     ResultE = Com.MensajeError + "";
@@ -609,7 +609,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (IdiV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Insert(tbPersonas.per_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (UDP_RRHH_tbIdiomasPersona_Insert_Result idi in Idiomas)
                                             {
                                                 ResultI = idi.MensajeError + "";
@@ -619,7 +619,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var i in IdiV)
                                             {
-                                                var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Inactivar(i.idpe_Id, "Persona Editada", 1, DateTime.Now);
+                                                var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Inactivar(i.idpe_Id, "Persona Editada", (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (UDP_RRHH_tbIdiomasPersona_Inactivar_Result idio in Idiomas)
                                                 {
                                                     ResultE = idio.MensajeError + "";
@@ -641,7 +641,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (TitV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Titulos = db.UDP_RRHH_tbTitulosPersona_Insert(tbPersonas.per_Id, X.Id, 2019, 1, DateTime.Now);
+                                            var Titulos = db.UDP_RRHH_tbTitulosPersona_Insert(tbPersonas.per_Id, X.Id, 2019, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (UDP_RRHH_tbTitulosPersona_Insert_Result titu in Titulos)
                                             {
                                                 ResultI = titu.MensajeError + "";
@@ -651,7 +651,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var t in TitV)
                                             {
-                                                var Titulos = db.UDP_RRHH_tbTitulosPersona_Inactivar(t.tipe_Id, "Persona Editada", 1, DateTime.Now);
+                                                var Titulos = db.UDP_RRHH_tbTitulosPersona_Inactivar(t.tipe_Id, "Persona Editada", (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (UDP_RRHH_tbTitulosPersona_Inactivar_Result titu in Titulos)
                                                 {
                                                     ResultE = titu.MensajeError + "";
@@ -673,7 +673,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (RepV.Count == 0 && Nuevo == "1")
                                         {
-                                            var REspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            var REspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(tbPersonas.per_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result resp in REspeciales)
                                             {
                                                 ResultI = resp.MensajeError + "";
@@ -683,7 +683,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var r in RepV)
                                             {
-                                                var ReqEspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(r.rep_Id, "Persona Editada", 1, DateTime.Now);
+                                                var ReqEspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(r.rep_Id, "Persona Editada", (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result resp in ReqEspeciales)
                                                 {
                                                     ResultE = resp.MensajeError + "";
@@ -715,7 +715,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,tbPersonas.per_RazonInactivo,1,DateTime.Now);
+                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,tbPersonas.per_RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach(UDP_RRHH_tbPersonas_Inactivar_Result item in _list)
                     {
                         msj = item.MensajeError + " ";
@@ -736,7 +736,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var _list = db.UDP_RRHH_tbPersonas_Habilitar(id, 1, DateTime.Now);
+                    var _list = db.UDP_RRHH_tbPersonas_Habilitar(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbPersonas_Habilitar_Result item in _list)
                     {
                         msj = item.MensajeError + " ";

@@ -90,7 +90,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -220,7 +220,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id,"0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id,"0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -252,7 +252,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbSucursales_Inactivar(tbSucursales.suc_Id,"", 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Inactivar(tbSucursales.suc_Id,"", (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Inactivar_Result item in list)
                     {
                         result = item.MensajeError + " ";
@@ -277,7 +277,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbSucursales_Activar(id,1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Activar(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Activar_Result item in list)
                     {
                         result = item.MensajeError + " ";
