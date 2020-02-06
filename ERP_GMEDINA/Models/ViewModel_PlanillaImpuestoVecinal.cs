@@ -10,9 +10,9 @@ namespace ERP_GMEDINA.Models
         public int No { get; set; }
         public int emp_Id { get; set; }
         public string NoIdentidad { get; set; }
-        public int NombreCompleto { get; set; }
-        public string TotalImpuestoVecinal { get; set; }
-        public string DeduccionMensual { get; set; }
+        public string NombreCompleto { get; set; }
+        public decimal Total_ImpuestoVecinal { get; set; }
+        public decimal DeduccionMensual { get; set; }
         public string NoDeCuenta { get; set; }
     }
 }

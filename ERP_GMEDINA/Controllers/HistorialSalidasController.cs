@@ -62,12 +62,11 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult hablilitar(int id)
         {
             string result = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
             try
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbHistorialSalidas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialSalidas_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialSalidas_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -212,8 +211,6 @@ namespace ERP_GMEDINA.Controllers
             //posteriormente es destruida.
             string result = "";
             db = new ERP_GMEDINAEntities();
-            var Usuario = (tbUsuario)Session["Usuario"];
-            //en esta area ingresamos el registro con el procedimiento almacenado
             try
             {
                 db = new ERP_GMEDINAEntities();
@@ -230,8 +227,8 @@ namespace ERP_GMEDINA.Controllers
                         tbHistorialSalidas.hsal_FechaSalida, 
                         observacion,
                         em.emp_RazonInactivo,
-                        Usuario.usu_Id,
-                        DateTime.Now);
+                        (int)Session["UserLogin"], 
+                        Function.DatetimeNow());
                         string mensajeDB = "";
                         foreach (UDP_RRHH_tbHistorialSalidas_Insert_Result i in emp)
                         {
@@ -305,11 +302,10 @@ namespace ERP_GMEDINA.Controllers
             tbHistorialSalidas.hsal_Observacion = hsal_Observacion;
             if (tbHistorialSalidas.hsal_Observacion != "")
             {
-                var Usuario = (tbUsuario)Session["Usuario"];
                 var id = (int)Session["id"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialSalidas_Update(id, tbHistorialSalidas.hsal_Observacion,Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialSalidas_Update(id, tbHistorialSalidas.hsal_Observacion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialSalidas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -342,11 +338,10 @@ namespace ERP_GMEDINA.Controllers
 
             if (tbHistorialSalidas.hsal_RazonInactivo != "")
             {
-                var Usuario = (tbUsuario)Session["Usuario"];
                 var id = (int)Session["id"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialSalidas_Delete(id, tbHistorialSalidas.hsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialSalidas_Delete(id, tbHistorialSalidas.hsal_RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialSalidas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

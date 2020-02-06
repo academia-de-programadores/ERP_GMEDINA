@@ -13,13 +13,13 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Pago de Cesantías</h5>
+                    <h5>Nueva proyección de impuesto vecinal</h5>
                     <div class="ibox-tools" id="boxTools">
                         <div style="display:inline-block; bottom: 4.4px;" class="col-sm-1 pull-right" hidden id="SpinnerData"></div>
                         @Html.ActionLink("Regresar", "Index", "PlanillaImpuestoVecinal", null, new { @class = "btn btn-primary btn-xs" })
-                        <input type="button" id="ProcesarProyeccion" value="Procesar Cálculo de Cesantía" class="btn btn-primary btn-xs" />
+                        <input type="button" id="ProcesarProyeccion" value="Procesar nueva proyección" class="btn btn-primary btn-xs" />
                         <input type="button" id="btnImprimirExcel" value="Imprimir Excel" class="btn btn-primary btn-xs" />
-                        <input type="button" id="btnGenerarImpuestoVecinal" value="Generar Cesantía" class="btn btn-primary btn-xs" />
+                        <input type="button" id="btnGenerarImpuestoVecinal" value="Crear nueva proyección" class="btn btn-primary btn-xs" />
                     </div>
                     <div id="dvjson" style="visibility:hidden;"></div>
                 </div>
@@ -28,7 +28,7 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Número</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Identidad</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No. de Identidad</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nombre completo</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Deducción mensual</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Total impuesto vecinal</th>
@@ -46,7 +46,7 @@
 
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/Scripts/app/General/PagoCesantia")
+    @Scripts.Render("~/Scripts/app/General/Planilla_ImpuestoVecinal")
 }
 
 @section Styles {

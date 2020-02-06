@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -15,7 +14,6 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        [SessionManager("HistorialCargos/Index")]
         // GET: HistorialCargos
         public ActionResult Index()
         {
@@ -166,7 +164,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //[SessionManager("HistorialCargos/Promover")]
         public ActionResult Promover()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -199,7 +196,6 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        //[SessionManager("HistorialCargos/Promover")]
         public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
@@ -211,7 +207,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                         var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
-                        tbEmpleados.jor_Id, sue_Cantidad, hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, 1, DateTime.Now);
+                        tbEmpleados.jor_Id, sue_Cantidad, hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, (int)Session["UserLogin"], DateTime.Now);
                         foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -232,7 +228,6 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-        //[SessionManager("HistorialCargos/Deshacer")]
         public JsonResult Deshacer(int hcar_Id, string hcar_RazonPromocion, DateTime emp_Fechaingreso)
         {
             string msj = "";
@@ -243,7 +238,7 @@ namespace ERP_GMEDINA.Controllers
 
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialCargos_Degradar(hcar_Id, hcar_RazonPromocion, emp_Fechaingreso,1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialCargos_Degradar(hcar_Id, hcar_RazonPromocion, emp_Fechaingreso, (int)Session["UserLogin"], DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialCargos_Degradar_Result item in list)
                     {
                         msj = item.MensajeError + " ";

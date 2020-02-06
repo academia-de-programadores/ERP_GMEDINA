@@ -96,8 +96,8 @@ namespace ERP_GMEDINA.Controllers
                                                                             tbHistorialAudienciaDescargo.aude_FechaAudiencia,
                                                                             tbHistorialAudienciaDescargo.aude_Testigo,
                                                                             tbHistorialAudienciaDescargo.aude_DireccionArchivo,
-                                                                            Usuario.usu_Id,
-                                                                            DateTime.Now);
+                                                                             (int)Session["UserLogin"],
+                                                                                Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -236,7 +236,9 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, RazonInactivo, 
+                                                                               (int)Session["UserLogin"],
+                                                                                 Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -266,7 +268,9 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Restore(tbHistorialAudienciaDescargo.aude_Id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Restore(tbHistorialAudienciaDescargo.aude_Id, 
+                                                                                            (int)Session["UserLogin"],
+                                                                                             Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result item in list)
                     {
                         result = item.MensajeError;

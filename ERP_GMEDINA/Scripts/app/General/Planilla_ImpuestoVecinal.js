@@ -30,6 +30,7 @@ function spinner() {
 function cargarGridImpuestoVecinal(data) {
     //CAPTURAR LA DATA EN UNA VARIABLE DE CONTEXTO LOCAL
     var ListaImpuestoVecinal = data;
+    console.log(data);
     //LIMPIAR EL DATATABLE
     $('#tblPlanillaImpuestoVecinal').DataTable().clear();
     //ITERAR LA LISTA CON LOS REGISTROS
@@ -40,7 +41,7 @@ function cargarGridImpuestoVecinal(data) {
                 ListaImpuestoVecinal[i].NoIdentidad.replace(/--/g, '-'),
                 ListaImpuestoVecinal[i].NombreCompleto,
                (ListaImpuestoVecinal[i].DeduccionMensual % 1 == 0) ? ListaImpuestoVecinal[i].DeduccionMensual + ".00" : ListaImpuestoVecinal[i].DeduccionMensual,
-               (ListaImpuestoVecinal[i].TotalImpuestoVecinal % 1 == 0) ? ListaImpuestoVecinal[i].TotalImpuestoVecinal + ".00" : ListaImpuestoVecinal[i].TotalImpuestoVecinal,
+               (ListaImpuestoVecinal[i].Total_ImpuestoVecinal % 1 == 0) ? ListaImpuestoVecinal[i].Total_ImpuestoVecinal + ".00" : ListaImpuestoVecinal[i].Total_ImpuestoVecinal,
                ListaImpuestoVecinal[i].NoDeCuenta
         ]);
     }
@@ -58,17 +59,19 @@ function ImprimirExcel(data) {
 
 //FUNCION: FORMATEAR A TEXTO LOS CAMPOS DE LA LISTA
 function FormatearData(ListaImpuesto) {
+    //ALMACENAR LA DATA EN UNA VARIABLE DE CONTEXTO LOCAL
+    var LocalListaImpuesto = ListaImpuesto;
+    //FORMATEAR LA DATA
     for (var i = 0; i < ListaImpuesto.length; i++) {
 
-        ListaImpuesto[i].No;
-        ListaImpuesto[i].NoIdentidad = "'" + ListaImpuesto[i].NoIdentidad.replace(/--/g, '-');
-        ListaImpuesto[i].NombreCompleto;
-        (ListaImpuesto[i].TotalImpuestoVecinal % 1 == 0) ? ListaImpuesto[i].TotalImpuestoVecinal + ".00" : ListaImpuesto[i].TotalImpuestoVecinal;
-        (ListaImpuesto[i].DeduccionMensual % 1 == 0) ? ListaImpuesto[i].DeduccionMensual + ".00" : ListaImpuesto[i].DeduccionMensual;
-        ListaImpuesto[i].NoDeCuenta = "'" + ListaImpuesto[i].NoDeCuenta;
+        LocalListaImpuesto[i].No;
+        LocalListaImpuesto[i].NoIdentidad = LocalListaImpuesto[i].NoIdentidad.replace(/--/g, '-');
+        LocalListaImpuesto[i].NombreCompleto;
+        (LocalListaImpuesto[i].Total_ImpuestoVecinal % 1 == 0) ? "'" + LocalListaImpuesto[i].Total_ImpuestoVecinal + ".00" : "'" + LocalListaImpuesto[i].Total_ImpuestoVecinal;
+        (LocalListaImpuesto[i].DeduccionMensual % 1 == 0) ? "'" + LocalListaImpuesto[i].DeduccionMensual + ".00" : "'" + LocalListaImpuesto[i].DeduccionMensual;
+        LocalListaImpuesto[i].NoDeCuenta = "'" + LocalListaImpuesto[i].NoDeCuenta;
     }
-
-    return ListaImpuesto;
+    return LocalListaImpuesto;
 }
 
 //FUNCION: EXPORTAR A CSV
@@ -170,7 +173,7 @@ $("#ProcesarProyeccion").click(function () {
             //LANZAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
-                message: 'Ocurrio un error al recuperar los registros, contacte al administrador.',
+                message: 'Ocurrio un error al procesar la proyección, contacte al administrador.',
             });
         }
         else {
@@ -179,9 +182,10 @@ $("#ProcesarProyeccion").click(function () {
             //SETEAR LA VARIABLE DEL PROCESAMIENTO
             Procesando = false;
             //ALMACENAR LA LISTA EN UNA VARIABLE GLOBAL
-            listadoCesantia = data;
+            ListaImpuestoVecinal = data;
             //CARGAR EL DATATABLE
-            cargarGridCesantia(data);
+            console.log(data);
+            cargarGridImpuestoVecinal(data);
             //OCULTAR EL SPINNER
             SpinnerElement.empty();
         }
@@ -195,7 +199,7 @@ $("#ProcesarProyeccion").click(function () {
         //LANZAR MENSAJE DE ERROR
         iziToast.error({
             title: 'Error',
-            message: 'Ocurrio un error al recuperar los registros, contacte al administrador.',
+            message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
         });
     });
 });
@@ -214,20 +218,21 @@ $('#btnImprimirExcel').click(function () {
         //LANZAR EL MENSAJE DE ERROR
         iziToast.warning({
             title: 'Advertencia!',
-            message: 'Debe iniciar el proceso antes de generar las cesantias...',
+            message: 'Debe iniciar el proceso antes de imprimir la proyección...',
         });
     }
-    else if (listadoCesantia.length == 0) {
+    else if (ListaImpuestoVecinal.length == 0) {
         //LANZAR EL MENSAJE DE ERROR
         iziToast.warning({
             title: 'Advertencia!',
-            message: 'Debe procesar las cesantias...',
+            message: 'Debe iniciar el proceso antes de imprimir la proyección...',
         });
     }
     else {
-        var data = FormatearData(listadoCesantia);
+        //DECLARACIÓN DE UNA LISTA LOCAL PARA FORMATEAR LA DATA
+        var Lista_Local = FormatearData(ListaImpuestoVecinal);
         //GENERAR EXCEL
-        ImprimirExcel(data);
+        ImprimirExcel(Lista_Local);
     }
 });
 
@@ -245,7 +250,7 @@ $("#btnGenerarImpuestoVecinal").click(function () {
         //LANZAR EL MENSAJE DE ERROR
         iziToast.warning({
             title: 'Advertencia!',
-            message: 'Debe iniciar el proceso antes de generar las cesantias...',
+            message: 'Debe iniciar el proceso de proyección antes de generar...',
         });
     }
     else {
@@ -256,30 +261,30 @@ $("#btnGenerarImpuestoVecinal").click(function () {
             url: "/PlanillaImpuestoVecinal/GenerarPlanillaImpV",
             method: "POST"
         }).done(function (data) {
-            if (data.Obj_response == "error") {
+            if (data == "error") {
                 //DESBLOQUEAR EL BOTON
                 $("#btnGenerarCesantia").attr("disabled", false);
                 //MOSTRAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
-                    message: 'Ocurrio un error al insertar los registros, contacte al administrador.',
+                    message: 'Ocurrio un error al crear la proyección, contacte al administrador.',
                 });
             }
-            else if (data.Obj_response == "bien") {
-                //SETEAR EL LISTADO GLOBAL DE CESANTÍAS
-                listadoCesantia = data.data;
+            else if (data == "bien") {
                 //LIMPIAR EL DATATABLE
                 $('#TablaPagoDeCesantiaDetalle').DataTable().clear();
+                //DECLARACIÓN DE UNA LISTA LOCAL PARA FORMATEAR LA DATA
+                var Lista_Local = FormatearData(ListaImpuestoVecinal);
                 //LLAMAR FUNCION DE IMPRIMIR EXCEL
-                ImprimirExcel(data.data);
+                ImprimirExcel(Lista_Local);
                 //MENSAJE EN CASO DE ÉXITO
                 iziToast.success({
-                    title: 'Completado',
-                    message: 'Los registros se agregaron de forma exitosa!',
+                    title: 'Éxito',
+                    message: 'La proyección se creo de forma exitosa!',
                 });
                 //SetTimeOut
                 setTimeout(function () {
-                    window.location.href = '/PagoDeCesantiaDetalle/Index';
+                    window.location.href = '/PlanillaImpuestoVecinal/Index';
                 }, 3500);
             }
             //OCULTAR EL SPINNER
@@ -291,7 +296,7 @@ $("#btnGenerarImpuestoVecinal").click(function () {
             //LANZAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
-                message: 'Ocurrio un error al insertar los registros, contacte al administrador.',
+                message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
             });
         });
 

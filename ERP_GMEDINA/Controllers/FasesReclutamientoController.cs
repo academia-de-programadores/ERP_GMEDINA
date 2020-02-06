@@ -65,7 +65,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -138,7 +138,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbFasesReclutamiento_Update(id, tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Update(id, tbFasesReclutamiento.fare_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbFasesReclutamiento_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -172,7 +172,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbfasesReclutamiento_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -202,7 +202,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbfasesReclutamiento_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbfasesReclutamiento_Restore_Result item in list)
                     {
                         result = item.MensajeError;

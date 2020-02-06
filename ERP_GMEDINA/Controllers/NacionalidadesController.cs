@@ -63,7 +63,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Insert(tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Insert(tbNacionalidades.nac_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, tbNacionalidades.nac_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -172,7 +172,7 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbNacionalidades_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Restore(id,(int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -207,7 +207,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Delete(id, RazonInactivo,(int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

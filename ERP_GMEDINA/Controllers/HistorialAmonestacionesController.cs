@@ -19,12 +19,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         [SessionManager("HistorialAmonestaciones/Index")]
         public ActionResult Index()
-        {
-           
+        {  
             try 
             {
-                
-               
                 db = new ERP_GMEDINAEntities();
                 ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
                 //var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -219,8 +216,8 @@ namespace ERP_GMEDINA.Controllers
                                                                             tbHistorialAmonestaciones.tamo_Id,
                                                                             DateTime.Now,
                                                                             tbHistorialAmonestaciones.hamo_Observacion,
-                                                                            Usuario.usu_Id,
-                                                                            DateTime.Now);
+                                                                            (int)Session["UserLogin"],
+                                                                            Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -246,7 +243,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, "Predeterminado", Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, "Predeterminado", (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -277,7 +274,9 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Restore(tbHistorialAmonestaciones.hamo_Id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Restore(tbHistorialAmonestaciones.hamo_Id, 
+                                                                                     (int)Session["UserLogin"],
+                                                                                        Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Restore_Result item in list)
                     {
                         result = item.MensajeError;

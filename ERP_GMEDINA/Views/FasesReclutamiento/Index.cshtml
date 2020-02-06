@@ -66,10 +66,7 @@
 @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
 }
 @section Scripts {
-@if ((bool)Session["Admin"])
-    {
-        @Scripts.Render("~/Scripts/app/general/FasesReclutaiento/Admin")
-}
+
 @* datatble *@
 @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations")
 @Scripts.Render("~/Scripts/plugins/dataTablesMatutina/datatables.min")
