@@ -54,37 +54,41 @@ function cargarGridPreaviso() {
 
 // create 1 modal 
 $(document).on("click", "#btnAgregarPreaviso", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("Preaviso/Create");
 
-    // * rango inicio 
-    $('#AsteriscoRangoInicio').removeClass('text-danger');
+    if (validacionPermiso.status == true) {
+        // * rango inicio 
+        $('#AsteriscoRangoInicio').removeClass('text-danger');
 
-    // mesanje rango inicio no puede ser menor a cero
-    $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
+        // mesanje rango inicio no puede ser menor a cero
+        $("#Crear #validation_RangoInicioMenorACero").css('display', 'none');
 
-    // mesanje rango inicio requerido
-    $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
+        // mesanje rango inicio requerido
+        $("#Crear #validation_RangoInicioRequerido").css('display', 'none');
 
-    // * rango final 
-    $('#AsteriscoRangoFinal').removeClass('text-danger');
+        // * rango final 
+        $('#AsteriscoRangoFinal').removeClass('text-danger');
 
-    // mesanje rango final no puede ser menor a cero
-    $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
+        // mesanje rango final no puede ser menor a cero
+        $("#Crear #validation_RangoFinalMenorACero").css('display', 'none');
 
-    // mesanje rango final requerido
-    $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
+        // mesanje rango final requerido
+        $("#Crear #validation_RangoFinalRequerido").css('display', 'none');
 
-    // mesanje rango final no puede ser menor a rango inicial
-    $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+        // mesanje rango final no puede ser menor a rango inicial
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
 
-    // vaciar cajas de texto
-    $('#Crear input[type=text], input[type=number]').val('');
+        // vaciar cajas de texto
+        $('#Crear input[type=text], input[type=number]').val('');
 
 
-    // habilitar boton
-    $("#btnCrearPreavisoConfirmar").attr("disabled", false);
+        // habilitar boton
+        $("#btnCrearPreavisoConfirmar").attr("disabled", false);
 
-    // mostrar modal
-    $("#CrearPreaviso").modal({ backdrop: 'static', keyboard: false });
+        // mostrar modal
+        $("#CrearPreaviso").modal({ backdrop: 'static', keyboard: false });
+    }
 
 });
 
@@ -416,62 +420,66 @@ $('#btnCrearPreavisoConfirmar').click(function () {
 
 // editar 1 modal
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("Preaviso/Edit");
 
-    var ID = $(this).data('id');
-    IDInactivar = ID;
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        IDInactivar = ID;
 
-    // * rango inicio 
-    $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+        // * rango inicio 
+        $('#EditAsteriscoRangoInicio').removeClass('text-danger');
 
-    // mesanje rango inicio no puede ser menor a cero
-    $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
+        // mesanje rango inicio no puede ser menor a cero
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
 
-    // mesanje rango inicio requerido
-    $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+        // mesanje rango inicio requerido
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
 
-    // * rango final 
-    $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        // * rango final 
+        $('#EditAsteriscoRangoFinal').removeClass('text-danger');
 
-    // mesanje rango final no puede ser menor a cero
-    $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        // mesanje rango final no puede ser menor a cero
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
 
-    // mesanje rango final requerido
-    $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        // mesanje rango final requerido
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
 
-    // mesanje rango final no puede ser menor a rango inicial
-    $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+        // mesanje rango final no puede ser menor a rango inicial
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
 
 
-    // habilitar boton 
-    $('#btnUpdatePreaviso').attr('disabled', false);
+        // habilitar boton 
+        $('#btnUpdatePreaviso').attr('disabled', false);
 
-    $.ajax({
-        url: "/Preaviso/Edit/" + ID,
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
+        $.ajax({
+            url: "/Preaviso/Edit/" + ID,
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
 
-            if (data) {
+                if (data) {
 
-                $.each(data, function (i, iter) {
-                    $("#Editar #prea_IdPreaviso").val(iter.prea_IdPreaviso);
-                    $("#Editar #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
-                    $("#Editar #prea_RangoFinMeses").val(iter.prea_RangoFinMeses);
-                    $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
-                });
+                    $.each(data, function (i, iter) {
+                        $("#Editar #prea_IdPreaviso").val(iter.prea_IdPreaviso);
+                        $("#Editar #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
+                        $("#Editar #prea_RangoFinMeses").val(iter.prea_RangoFinMeses);
+                        $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
+                    });
 
-                $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
+                    $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 // validaciones key up update
@@ -835,12 +843,15 @@ $(document).on("click", "#btnCerrarConfirmarEditar", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
-    //OCULTAR EL MODAL DE EDICION
-    $("#EditarPreaviso").modal('hide');
-    //MOSTRAR MODAL DE INACTIVACION
-    $("#InactivarPreaviso").modal({ backdrop: 'static', keyboard: false });
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("Preaviso/Inactivar");
 
-
+    if (validacionPermiso.status == true) {
+        //OCULTAR EL MODAL DE EDICION
+        $("#EditarPreaviso").modal('hide');
+        //MOSTRAR MODAL DE INACTIVACION
+        $("#InactivarPreaviso").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //CERRAR EL MODAL DE INACTIVAR
@@ -886,10 +897,13 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
 // Activar
 var activarID = 0;
 $(document).on("click", "#btnActivarPreaviso", function () {
-    activarID = $(this).data('id');
-    $("#frmActivarPreavis").modal({ backdrop: 'static', keyboard: false });
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("Preaviso/Activar");
 
-
+    if (validacionPermiso.status == true) {
+        activarID = $(this).data('id');
+        $("#frmActivarPreavis").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //activar ejecutar
@@ -923,46 +937,51 @@ $("#btnActivarPreavis").click(function () {
 //FUNCION: DETALLES DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
 $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function () {
-    var ID = $(this).data('id');
-    IDInactivar = ID;
-    $.ajax({
-        url: "/Preaviso/Details/" + ID,
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("Preaviso/Details");
 
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $.each(data, function (i, iter) {
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        IDInactivar = ID;
+        $.ajax({
+            url: "/Preaviso/Details/" + ID,
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
 
-                    var FechaCrea = FechaFormato(data[0].prea_FechaCrea);
-                    var FechaModifica = FechaFormato(data[0].prea_FechaModifica);
-                    $("#Detalles #prea_IdPreaviso").html(iter.prea_IdPreaviso);
-                    $("#Detalles #prea_RangoInicioMeses").html(iter.prea_RangoInicioMeses);
-                    $("#Detalles #prea_RangoFinMeses").html(iter.prea_RangoFinMeses);
-                    $("#Detalles #prea_DiasPreaviso").html(iter.prea_DiasPreaviso);
-                    data[0].prea_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                    $("#Detalles #prea_UsuarioCrea").html(iter.prea_UsuarioCrea);
-                    $("#Detalles #prea_FechaCrea").html(FechaCrea);
-                    data[0].prea_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                    $("#Detalles #prea_UsuarioModifica").html(data[0].prea_UsuarioModifica);
-                    $("#Detalles #prea_FechaModifica").html(FechaModifica);
-                });
-                $("#DetallarPreaviso").modal({ backdrop: 'static', keyboard: false });
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    $.each(data, function (i, iter) {
+
+                        var FechaCrea = FechaFormato(data[0].prea_FechaCrea);
+                        var FechaModifica = FechaFormato(data[0].prea_FechaModifica);
+                        $("#Detalles #prea_IdPreaviso").html(iter.prea_IdPreaviso);
+                        $("#Detalles #prea_RangoInicioMeses").html(iter.prea_RangoInicioMeses);
+                        $("#Detalles #prea_RangoFinMeses").html(iter.prea_RangoFinMeses);
+                        $("#Detalles #prea_DiasPreaviso").html(iter.prea_DiasPreaviso);
+                        data[0].prea_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                        $("#Detalles #prea_UsuarioCrea").html(iter.prea_UsuarioCrea);
+                        $("#Detalles #prea_FechaCrea").html(FechaCrea);
+                        data[0].prea_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                        $("#Detalles #prea_UsuarioModifica").html(data[0].prea_UsuarioModifica);
+                        $("#Detalles #prea_FechaModifica").html(FechaModifica);
+                    });
+                    $("#DetallarPreaviso").modal({ backdrop: 'static', keyboard: false });
 
 
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 
