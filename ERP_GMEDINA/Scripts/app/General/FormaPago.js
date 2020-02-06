@@ -45,6 +45,10 @@ function cargarGridFormaPago() {
 
 // create 1
 $(document).on("click", "#btnAgregarFormaPago", function () {
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("FormaPago/Create");
+
+    if (validacionPermiso.status == true) {
 
     // habilitar boton
     $('#btnCrearFormaPago').attr('disabled', false);
@@ -63,8 +67,7 @@ $(document).on("click", "#btnAgregarFormaPago", function () {
 
     // modal
     $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
-
-
+    }
 });
 
 // validaciones key up create 
@@ -107,7 +110,6 @@ $('#btnCrearFormaPago').click(function () {
     // deshabilitar el boton
     $("#btnCrearFormaPago").attr("disabled", true);
 
-    debugger;
     var modalState = true;
 
     // validaciones 
@@ -181,6 +183,10 @@ $('#btnCrearFormaPago').click(function () {
 
 // editar 1
 $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", function () {
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("FormaPago/Edit");
+
+    if (validacionPermiso.status == true) {
 
     $("#btnConfirmarEditar2").attr('disabled', false);
     $("#btnUpdateFormaPago").attr('disabled', false);
@@ -220,6 +226,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                 });
             }
         });
+    }
 });
 
 
@@ -259,7 +266,6 @@ $('#Editar #fpa_Descripcion').keyup(function () {
 
 // editar 2 validar modal
 $("#btnUpdateFormaPago").click(function () {
-
     $("#btnUpdateFormaPago").attr('disabled', true);
     
     var modelState = true;
@@ -300,12 +306,10 @@ $("#btnUpdateFormaPago").click(function () {
     else {
         $("#btnUpdateFormaPago").attr('disabled', false);
     }
-
 });
 
 //editar 3 ejecutar
-$("#btnConfirmarEditar2").click(function () {
-    
+$("#btnConfirmarEditar2").click(function () {    
     $("#btnConfirmarEditar2").attr('disabled', true);
 
     var data = $("#frmEditFormaPago").serializeArray();
@@ -342,6 +346,10 @@ $("#btnConfirmarEditar2").click(function () {
 });
 
 $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", function () {
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("FormaPago/Details");
+
+    if (validacionPermiso.status == true) {
     var ID = $(this).data('id');
     $.ajax({
         url: "/FormaPago/Details/" + ID,
@@ -372,6 +380,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
                 });
             }
         });
+    }
 });
 
 
@@ -391,11 +400,17 @@ var IDInactivar = 0;
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarFormaPago", function () {
+
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("FormaPago/Inactivar");
+
+    if (validacionPermiso.status == true) {   
     document.getElementById("btnInactivarFormaPagoConfirm").disabled = false;
     //OCULTAR MODAL DE EDICION
     $("#EditarFormaPago").modal('hide');
     //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarFormaPago").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //OCULTAR EL MODAL DE INACTIVAR
@@ -446,9 +461,15 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
 var ActivarID = 0;
 //DESPLEGAR EL MODAL DE ACTIVAR
 $(document).on("click", "#btnActivarFormaPago", function () {
+
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("Planilla/Index");
+
+    if (validacionPermiso.status == true) {    
     document.getElementById("btnActivarFormaPagoConfirm").disabled = false;
     ActivarID = $(this).data('id');
     $("#ActivarFormaPago").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //CONFORMAR ACTIVACION DEL REGISTRO
@@ -564,4 +585,5 @@ function _ajax(params, uri, type, callback) {
                     callback(data);
                 }
     });
+
 }
