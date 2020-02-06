@@ -115,8 +115,8 @@ namespace ERP_GMEDINA.Controllers
                                                         tbISR.isr_RangoFinal,
                                                         tbISR.isr_Porcentaje,
                                                         tbISR.tde_IdTipoDedu,
-                                                        tbISR.isr_UsuarioCrea,
-                                                        tbISR.isr_FechaCrea);
+                                                        Function.GetUser(),
+                                                        Function.DatetimeNow());
 
                     // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbISR_Insert_Result Resultado in listISR)
@@ -198,8 +198,8 @@ namespace ERP_GMEDINA.Controllers
                                                         tbISR.isr_RangoFinal,
                                                         tbISR.isr_Porcentaje,
                                                         tbISR.tde_IdTipoDedu, //ID del tipo de la deducción
-                                                        1,
-                                                        DateTime.Now);
+                                                        Function.GetUser(),
+                                                        Function.DatetimeNow());
 
                     // obtener resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbISR_Update_Result Resultado in listISR.ToList())
@@ -262,8 +262,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Inactivar(id,
-                                                            1,
-                                                            DateTime.Now);
+                                                            Function.GetUser(),
+                                                        Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbISR_Inactivar_Result Resultado in listISR)
@@ -312,8 +312,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Activar(id,
-                                                          1,
-                                                         DateTime.Now);
+                                                          Function.GetUser(),
+                                                        Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbISR_Activar_Result Resultado in listISR)
