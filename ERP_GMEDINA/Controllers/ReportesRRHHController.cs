@@ -21,6 +21,7 @@ namespace ERP_GMEDINA.Controllers
         Models.Helpers Function = new Models.Helpers();
         ReportesRRHH ds = new ReportesRRHH();
 
+        [SessionManager("ReportesRRHH/HistorialIncapacidadesRPT")]
         public ActionResult HistorialIncapacidadesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -102,6 +103,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/HorasTrabajadas")]
         public ActionResult HorasTrabajadas()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -179,19 +181,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
-        public ActionResult HistorialContratacionesRPT()
-        {
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            try
-            {
-                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true).OrderBy(x => x.car_Descripcion), "car_Id", "car_Descripcion");
-                return View();
-            }
-            catch
-            {
-                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
-            }
-        }
+        [SessionManager("ReportesRRHH/HistorialCargosRPT")]
         public ActionResult HistorialCargosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -276,6 +266,20 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/HistorialContratacionesRPT")]
+        public ActionResult HistorialContratacionesRPT()
+        {
+            //Cargar DDL del modal (Tipo de planilla a seleccionar)
+            try
+            {
+                ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true).OrderBy(x => x.car_Descripcion), "car_Id", "car_Descripcion");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
+        }
         [HttpPost]
         [SessionManager("ReportesRRHH/HistorialContratacionesRPT")]
         public ActionResult HistorialContratacionesRPT(int? car_Id, DateTime? FechaContratacion, DateTime? FechaFin)
@@ -335,6 +339,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/HistorialSalidasRPT")]
         public ActionResult HistorialSalidasRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -418,6 +423,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/HistorialVacacionesRPT")]
         public ActionResult HistorialVacacionesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -505,6 +511,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/SueldosRPT")]
         public ActionResult SueldosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -585,6 +592,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/Permisos")]
         public ActionResult Permisos()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -671,6 +679,7 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/FaseSeleccionRPT")]
         public ActionResult FaseSeleccionRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -747,6 +756,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("ReportesRRHH/Requisicion")]
         public ActionResult Requisicion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -820,6 +830,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("ReportesRRHH/Empleado")]
         public ActionResult Empleado()
         {
             try
@@ -918,24 +929,13 @@ namespace ERP_GMEDINA.Controllers
 
 
         //mios
+        [SessionManager("ReportesRRHH/HistorialAmonestacionesRPT")]
         public ActionResult HistorialAmonestacionesRPT()
         {
             try
             {
                 ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true).OrderBy(x => x.tamo_Descripcion), "tamo_Id", "tamo_Descripcion");
                 ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados.OrderBy(x => x.nombre), "per_Identidad", "nombre");
-                return View();
-            }
-            catch
-            {
-                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
-            }
-        }
-        public ActionResult HistorialAudienciaDescargoRPT()
-        {
-            try
-            {
-                ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
                 return View();
             }
             catch
@@ -1014,6 +1014,19 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
+        [SessionManager("ReportesRRHH/HistorialAudienciaDescargoRPT")]
+        public ActionResult HistorialAudienciaDescargoRPT()
+        {
+            try
+            {
+                ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
+                return View();
+            }
+            catch
+            {
+                return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
+            }
+        }
         [HttpPost]
         [SessionManager("ReportesRRHH/HistorialAudienciaDescargoRPT")]
         public ActionResult HistorialAudienciaDescargoRPT(string per_Identidad, DateTime? fechaAudiencia, DateTime? fecha)
@@ -1076,6 +1089,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("ReportesRRHH/EquipoEmpleadosRPT")]
         public ActionResult EquipoEmpleadosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
