@@ -52,9 +52,7 @@ function userModelState(sPantalla) {
 
     // recuperar view model con la información del usuario
     var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
-
-    console.log(VM_ModelState.ListaPantallas);
-
+    
     // validar si el usuario tiene acceso a la accion o pantalla
     if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false)
     {
@@ -110,6 +108,13 @@ function userModelState(sPantalla) {
             title: 'Error',
             message: 'Contraseña expirada',
         });
+    }
+
+    if (VM_ModelState.EsAdmin == true) {
+        response = {
+            status: true,
+            mensajeError: ''
+        }
     }
 
     return response;
