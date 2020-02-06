@@ -7,6 +7,7 @@ namespace ERP_GMEDINA.Models
 {
     public class Helpers
     {
+            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         public bool GetUserLogin()
         {
             bool state = false;
@@ -23,6 +24,26 @@ namespace ERP_GMEDINA.Models
                 state = false;
             }
             return state;
+        }
+
+        public List<tbUsuario> getUserInformation()
+        {
+            int user = 0;
+            List<tbUsuario> UsuarioList = new List<tbUsuario>();
+            try
+            {
+                user = (int)HttpContext.Current.Session["UserLogin"];
+                if (user != 0)
+                {
+                    UsuarioList = db.tbUsuario.Where(s => s.usu_Id == user).ToList();
+                }
+                return UsuarioList;
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+                return UsuarioList;
+            }
         }
 
         public int GetUser()

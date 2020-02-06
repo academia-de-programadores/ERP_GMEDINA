@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -14,7 +15,11 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = null;
 
+        Models.Helpers Function = new Models.Helpers();
+
+
         // GET: Habilidades
+        [SessionManager("TipoHoras/Index")]
         public ActionResult Index()
         {
             tbTipoHoras tbTipoHoras = new tbTipoHoras {tiho_Estado=true };
@@ -51,6 +56,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Create
         [HttpPost]
+        [SessionManager("TipoHoras/Create")]
         public JsonResult Create(string tiho_Descripcion, int tiho_Recargo)
         {
             string msj = "";
@@ -83,6 +89,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Habilidades/Edit/5
+        [SessionManager("TipoHoras/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -125,6 +132,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Edit/5
         [HttpPost]
+        [SessionManager("TipoHoras/Edit")]
         public JsonResult Edit(string tiho_Descripcion, int tiho_Recargo)
         {
             string msj = "";
@@ -161,6 +169,8 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Habilidades/Delete/5
         [HttpPost]
+        [SessionManager("TipoHoras/Delete")]
+
         public ActionResult Delete(string tiho_RazonInactivo)
         {
             string msj = "";
@@ -211,6 +221,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("TipoHoras/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";

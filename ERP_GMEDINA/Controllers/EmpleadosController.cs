@@ -12,6 +12,7 @@ using OfficeOpenXml;
 using LinqToExcel;
 using Microsoft.Office.Interop.Excel;
 using SpreadsheetLight;
+using ERP_GMEDINA.Attribute;
 
 //using Excel = Microsoft.Office.Interop.Excel;
 
@@ -21,8 +22,10 @@ namespace ERP_GMEDINA.Controllers
     public class EmpleadosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Empleados
+        [SessionManager("Empleados/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null || Session["Usuario"] == null)
@@ -79,6 +82,9 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+
+
+        [SessionManager("Empleados/ArchivoEmpleados")]
         public void ArchivoEmpleados()
         {
             db = new ERP_GMEDINAEntities();
@@ -259,6 +265,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Empleados/UploadEmpleados")]
         public ActionResult UploadEmpleados(HttpPostedFileBase FileUpload)
         {
             try
@@ -409,6 +416,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Empleados/Details/5
+        [SessionManager("Empleados/Details")]
         public ActionResult Details(int? id)
         {
             try
@@ -419,62 +427,29 @@ namespace ERP_GMEDINA.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                //t.tbCargos.tbEmpleados
-                //           .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                //            Empleados = t.tbEmpleados.Count
                 tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
-                var fechaingreso = (from a in db.tbEmpleados where a.emp_Id==id select a.emp_Fechaingreso).ToList()[0];
+                var fechaingreso = (from a in db.tbEmpleados where a.emp_Id == id select a.emp_Fechaingreso).ToList()[0];
                 DateTime fechaactual = DateTime.Now;
                 DateTime fechaingresodate = Convert.ToDateTime(fechaingreso);
-                //System.TimeSpan diff = fechaactual.Subtract(fechaingresodate);
                 int timespan = (fechaactual.Year - fechaingresodate.Year);
-                if (timespan==0)
+                if (timespan == 0)
                 {
                     ViewBag.Antiguedad = "Menos de 1 año";
                 }
                 else
                 {
-                    ViewBag.Antiguedad = timespan+" "+"Años";
+                    ViewBag.Antiguedad = timespan + " " + "Años";
                 }
-              //  var Jefe = db.tbEmpleados.Select(t => t.tbDepartamentos.tbCargos.s);
-             //   var Jefe = db.tbDepartamentos.Where(x => x. == id)
-             //.Select(
-             //t => t.tbCargos.tbEmpleados.Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
-             //)
-             //.ToList()[0];
-                //var JEFE = db.tbAreas.Where(X=>db.tbEmpleados)
-                //   .Select(
-                //   t => new
-                //   {
-                //       Encargado = t.tbCargos.tbEmpleados
-                //           .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
-                //   }
-                //   )
-                //   .ToList()[0];
-                //if (JEFE == null)
-                //{
-                //    ViewBag.Jefe = "Sin Asignar";
-                //}
-                //else
-                //{
-                //    ViewBag.Jefe = JEFE;
-                //}
-                // int meses= (fechaactual.Month - fechaingresodate.Month) + 12 * (fechaactual.Year - fechaingresodate.Year);
-                //int timespanMonths = (fechaactual.Month + fechaingresodate.Month);
-
-                // ViewBag.Meses = timespanMonths;
-                //tbEmpleados tbEmpleados = db.tbEmpleados.Include(Antiguedad).SingleOrDefault;
-                //tbEmpleados tbEmpleados = db.tbEmpleados.Include(u => u.).SingleOrDefault(u => u.id == id);
                 if (tbEmpleados == null)
                 {
                     return HttpNotFound();
                 }
                 var JefeArea = tbEmpleados.tbAreas.tbCargos.tbEmpleados.
                     Select(p => new { Nombres = p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos });
-                var JefeDepto= tbEmpleados.tbDepartamentos.tbCargos.tbEmpleados.
+                var JefeDepto = tbEmpleados.tbDepartamentos.tbCargos.tbEmpleados.
                     Select(p => new { Nombres = p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos });
 
-                Session["JefeArea"] =JefeArea.Count()==0?"Sin asignar":JefeArea.First().Nombres;
+                Session["JefeArea"] = JefeArea.Count() == 0 ? "Sin asignar" : JefeArea.First().Nombres;
                 Session["JefeDepto"] = JefeDepto.Count() == 0 ? "Sin asignar" : JefeDepto.First().Nombres;
                 return View(tbEmpleados);
             }
@@ -485,13 +460,14 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-    
-     
+
+
         /// <summary>
         /// SUBR DOCUMENTOS AL EXPEDIENTE
         /// </summary>
         /// 
         [HttpPost]
+        [SessionManager("Empleados/UploadDocumento")]
         public ActionResult UploadDocumento(string tiposArchivo, int id, HttpPostedFileBase File)
         {
 
@@ -581,6 +557,7 @@ namespace ERP_GMEDINA.Controllers
 
         }
         //  [HttpPost]
+        [SessionManager("Empleados/CargarArchivos")]
         public ActionResult CargarArchivos(int? id)
         {
             try
@@ -610,7 +587,7 @@ namespace ERP_GMEDINA.Controllers
                 throw;
             }
         }
-
+        [SessionManager("Empleados/CargarArchivosExpedienteViejo")]
         public ActionResult CargarArchivosExpedienteViejo(int? id)
         {
             try
@@ -640,7 +617,7 @@ namespace ERP_GMEDINA.Controllers
                 throw;
             }
         }
-
+        [SessionManager("Empleados/DetallesExpediente")]
         public ActionResult DetallesExpediente(int? id)
         {
             if (id == null)
@@ -678,7 +655,7 @@ namespace ERP_GMEDINA.Controllers
             };
             return Json(Lista, JsonRequestBehavior.AllowGet);
         }
-
+        [SessionManager("Empleados/Delete")]
         public ActionResult Delete(tbDirectoriosEmpleados tbDirectoriosEmpleados)
         {
             string msj = "";
@@ -754,7 +731,6 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing && db != null)
