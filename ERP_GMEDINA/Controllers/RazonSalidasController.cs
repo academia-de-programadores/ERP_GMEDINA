@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -14,19 +15,13 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+        //[SessionManager("RazonSalidas/")]
+        [SessionManager("RazonSalidas/Index")]
         // GET: RazonSalidas
         public ActionResult Index()
         {
             tbRazonSalidas tbRazonSalidas = new tbRazonSalidas { rsal_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {              
-                return View(tbRazonSalidas);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();            
-            }
             return View(tbRazonSalidas);
         }
 
@@ -53,6 +48,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("RazonSalidas/Create")]
         // POST: RazonSalidas/Create
         [HttpPost]
         public JsonResult Create(tbRazonSalidas tbRazonSalidas)
@@ -83,6 +79,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: RazonSalidas/Edit/5
+        [SessionManager("RazonSalidas/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -122,6 +119,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: RazonSalidas/Edit/5
+        [SessionManager("RazonSalidas/CreEditate")]
         [HttpPost]
         public JsonResult Edit(tbRazonSalidas tbRazonSalidas)
         {
@@ -153,6 +151,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: RazonSalidas/Delete/5
+        [SessionManager("RazonSalidas/Delete")]
         [HttpPost]
         public ActionResult Delete(tbRazonSalidas tbRazonSalidas)
         {
@@ -198,6 +197,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("RazonSalidas/hablilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
