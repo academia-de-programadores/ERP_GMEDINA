@@ -2201,6 +2201,7 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
+    <Content Include="Scripts\app\General\Menu.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\PagoDeCesantia.js" />
