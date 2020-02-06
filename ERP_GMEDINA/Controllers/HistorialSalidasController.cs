@@ -7,16 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialSalidasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-        // GET: Areas
+        Models.Helpers Function = new Models.Helpers();
+        // GET: /EquipoTrabajo/
+        [SessionManager("HistorialSalidas/Index")]
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
+            //bool Admin = (bool)Session["Admin"];
             tbHistorialSalidas tbHistorialSalidas = new tbHistorialSalidas { hsal_Estado = true };
             return View(tbHistorialSalidas);
         }
@@ -54,6 +57,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [SessionManager("HistorialSalidas/hablilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -201,6 +205,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("HistorialSalidas/Create")]
         public ActionResult Create(tbHistorialSalidas tbHistorialSalidas, tbEmpleados[] tbEmpleados)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -249,7 +254,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         ///EDIT Y UPDATE
-        ///
+        [SessionManager("HistorialSalidas/Edit")]
         public ActionResult Edit(int? id)
         {
             db = new ERP_GMEDINAEntities();
@@ -290,6 +295,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Edit/5
         [HttpPost]
+        [SessionManager("HistorialSalidas/Edit")]
         public JsonResult Edit(string hsal_Observacion)
         {
             string msj = "";
@@ -325,6 +331,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Habilidades/Delete/5
         [HttpPost]
+        [SessionManager("HistorialSalidas/Delete")]
         public ActionResult Delete(string hsal_RazonInactivo)
         {
             string msj = "";

@@ -7,16 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class TipoPermisosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
+
+        [SessionManager("TipoPermisos/Index")]
         public ActionResult Index()
         {
-            bool Admin = (bool)Session["Admin"];
             tbTipoPermisos tbTipoPermisos = new tbTipoPermisos { tper_Estado = true };
             return View(tbTipoPermisos);
         }
@@ -45,6 +48,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("TipoPermisos/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -68,6 +72,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("TipoPermisos/Create")]
         public JsonResult Create(tbTipoPermisos tbTipoPermisos)
         {
             string msj = "";
@@ -96,7 +101,8 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        
+        [SessionManager("TipoPermisos/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(competencias, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("TipoPermisos/Edit")]
         public JsonResult Edit(tbTipoPermisos tbTipoPermisos)
         {
             string msj = "";
@@ -167,6 +174,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("TipoPermisos/Delete")]
         public ActionResult Delete(tbTipoPermisos tbTipoPermisos)
         {
             string msj = "...";
