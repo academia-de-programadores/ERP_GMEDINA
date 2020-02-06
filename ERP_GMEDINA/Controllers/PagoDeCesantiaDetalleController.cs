@@ -7,6 +7,7 @@ using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Helpers;
 using System.Data.SqlClient;
 using System.Configuration;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -16,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region GET: INDEX DE CESANTIA PAGADA
+        [SessionManager("PagoDeCesantiaDetalle/Index")]
         public ActionResult Index()
         {
             Session["GenerarPlanillaCesantia"] = "";
