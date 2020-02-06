@@ -75,14 +75,20 @@ function cargarGridINFS() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarInstitucion", function () {
-    //OCULTAR VALIDACIONES
-    Vaciar_ModalCrear();
-    //DESBLOQUEAR EL BOTON DE CREACION
-    $("#btnCrearInstitucion").attr("disabled", false);
-    //VACIAR LOS CAMPOS DEL MODAL
-    Vaciar_ModalCrear();
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#CrearInstitucion").modal({ backdrop: 'static', keyboard: false });
+
+
+    var validacionPermiso = userModelState("InstitucionesFinancieras/Create");
+
+    if (validacionPermiso.status == true) {
+        //OCULTAR VALIDACIONES
+        Vaciar_ModalCrear();
+        //DESBLOQUEAR EL BOTON DE CREACION
+        $("#btnCrearInstitucion").attr("disabled", false);
+        //VACIAR LOS CAMPOS DEL MODAL
+        Vaciar_ModalCrear();
+        //MOSTRAR EL MODAL DE AGREGAR
+        $("#CrearInstitucion").modal({ backdrop: 'static', keyboard: false });
+    }  
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
@@ -148,41 +154,50 @@ $("#frmCreateInstitucionFinanciera").submit(function (e) {
 var IDInactivar = 0;
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#IndexTabla tbody tr td #btnModalEditarINFS", function () {
-    //DESBLOQUEAR EL BOTON
-    $("#btnConfirmarEditar2").attr("disabled", false);
-    //CAPTURAR EL ID DEL REGISTRO SELECCIONADO
-    var ID = $(this).data('id');
-    //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
-    IDInactivar = ID;
-    //OCULTAR EL DATAANNOTATIONS
-    Vaciar_ModalEditar();
-    //EJECUTAR LA PETICION AL SERVIDOR
-    $.ajax({
-        url: "/InstitucionesFinancieras/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    }).done(function (data) {
-        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-        if (data != "error") {
-            $("#Editar #insf_IdInstitucionFinanciera").val(data[0].insf_IdInstitucionFinanciera);
-            $("#Editar #insf_DescInstitucionFinanc").val(data[0].insf_Descripcion);
-            $("#Editar #insf_Contacto").val(data[0].insf_Contacto);
-            $("#Editar #insf_Telefono").val(data[0].insf_Telefono);
-            $("#Editar #insf_Correo").val(data[0].insf_Correo);
-            //DESPLEGAR EL MODAL DE EDICION
-            $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
-        }
-        else {
-            //Mensaje de error si no hay data
-            iziToast.error({
-                title: 'Error',
-                message: '¡No se cargó la información, contacte al administrador!',
-            });
-        }
-    }).fail(function (jqxhr, settings, exception) {
-        
-    });
+
+
+    var validacionPermiso = userModelState("InstitucionesFinancieras/Edit");
+
+    if (validacionPermiso.status == true) {
+
+        //DESBLOQUEAR EL BOTON
+        $("#btnConfirmarEditar2").attr("disabled", false);
+        //CAPTURAR EL ID DEL REGISTRO SELECCIONADO
+        var ID = $(this).data('id');
+        //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
+        IDInactivar = ID;
+        //OCULTAR EL DATAANNOTATIONS
+        Vaciar_ModalEditar();
+        //EJECUTAR LA PETICION AL SERVIDOR
+        $.ajax({
+            url: "/InstitucionesFinancieras/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data != "error") {
+                $("#Editar #insf_IdInstitucionFinanciera").val(data[0].insf_IdInstitucionFinanciera);
+                $("#Editar #insf_DescInstitucionFinanc").val(data[0].insf_Descripcion);
+                $("#Editar #insf_Contacto").val(data[0].insf_Contacto);
+                $("#Editar #insf_Telefono").val(data[0].insf_Telefono);
+                $("#Editar #insf_Correo").val(data[0].insf_Correo);
+                //DESPLEGAR EL MODAL DE EDICION
+                $("#EditarInstitucion").modal({ backdrop: 'static', keyboard: false });
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
+                });
+            }
+        }).fail(function (jqxhr, settings, exception) {
+
+        }); // activar
+        console.log('codigo...');
+        // termina activar
+    }
 });
 
 $("#btnCerrarEditar").click(function () {
@@ -277,47 +292,53 @@ $("#frmEditInstitucionFinanciera").submit(function (e) {
 
 //DETALLES
 $(document).on("click", "#IndexTabla tbody tr td #btnModalDetallesINFS", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/InstitucionesFinancieras/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
 
-                var FechaCrea = FechaFormato(data[0].insf_FechaCrea);
-                var FechaModifica = (FechaFormato(data[0].insf_FechaModifica));
+    var validacionPermiso = userModelState("InstitucionesFinancieras/Details");
 
-                $("#frmDetallesInstitucionFinanciera #insf_IdInstitucionFinanciera").html(data[0].insf_IdInstitucionFinanciera);
-                $("#frmDetallesInstitucionFinanciera #insf_DescInstitucionFinanc").html(data[0].insf_Descripcion);
-                $("#frmDetallesInstitucionFinanciera #insf_Contacto").html(data[0].insf_Contacto);
-                $("#frmDetallesInstitucionFinanciera #insf_Telefono").html(data[0].insf_Telefono);
-                $("#frmDetallesInstitucionFinanciera #insf_Correo").html(data[0].insf_Correo);
+    if (validacionPermiso.status == true) {
 
+        var ID = $(this).data('id');
+        $.ajax({
+            url: "/InstitucionesFinancieras/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
 
-                /* AUDITORIA */
-                $("#frmDetallesInstitucionFinanciera #tbUsuario_usu_NombreUsuario").html(data[0].insf_UsuarioCrea_Nombres);
-                $("#frmDetallesInstitucionFinanciera #fpa_FechaCrea").html(FechaCrea);
+                    var FechaCrea = FechaFormato(data[0].insf_FechaCrea);
+                    var FechaModifica = (FechaFormato(data[0].insf_FechaModifica));
 
-                $("#frmDetallesInstitucionFinanciera #tbUsuario1_usu_NombreUsuario").html((data[0].insf_UsuarioModifica_Nombres == null) ? "Sin modificaciones" : data[0].insf_UsuarioModifica_Nombres);
-                $("#frmDetallesInstitucionFinanciera #insf_FechaModifica").html(FechaModifica);
+                    $("#frmDetallesInstitucionFinanciera #insf_IdInstitucionFinanciera").html(data[0].insf_IdInstitucionFinanciera);
+                    $("#frmDetallesInstitucionFinanciera #insf_DescInstitucionFinanc").html(data[0].insf_Descripcion);
+                    $("#frmDetallesInstitucionFinanciera #insf_Contacto").html(data[0].insf_Contacto);
+                    $("#frmDetallesInstitucionFinanciera #insf_Telefono").html(data[0].insf_Telefono);
+                    $("#frmDetallesInstitucionFinanciera #insf_Correo").html(data[0].insf_Correo);
 
 
-                //DESPLEGAR MODAL 
-                $("#DetailsInstitucion").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-        });
+                    /* AUDITORIA */
+                    $("#frmDetallesInstitucionFinanciera #tbUsuario_usu_NombreUsuario").html(data[0].insf_UsuarioCrea_Nombres);
+                    $("#frmDetallesInstitucionFinanciera #fpa_FechaCrea").html(FechaCrea);
+
+                    $("#frmDetallesInstitucionFinanciera #tbUsuario1_usu_NombreUsuario").html((data[0].insf_UsuarioModifica_Nombres == null) ? "Sin modificaciones" : data[0].insf_UsuarioModifica_Nombres);
+                    $("#frmDetallesInstitucionFinanciera #insf_FechaModifica").html(FechaModifica);
+
+
+                    //DESPLEGAR MODAL 
+                    $("#DetailsInstitucion").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
+                    });
+                }
+            });
+    }  
 });
 
 
@@ -328,12 +349,18 @@ $(document).on("click", "#btnCerrarDetailsInstitucion", function () {
 
 // INACTIVAR 
 $(document).on("click", "#btnModalInactivarINFS", function () {
-    //DESBLOQUEAR EL BOTON
-    $("#btnInactivarINFS").attr("disabled", false);
-    //OCULTAR MODAL DE EDICION
-    $("#EditarInstitucion").modal('hide');
-    //DESPLEGAR EL MODAL DE CONFIRMACION DE INACTIVACION
-    $("#frmInactivarINFS").modal({ backdrop: 'static', keyboard: false });
+
+    var validacionPermiso = userModelState("InstitucionesFinancieras/Inactivar");
+
+    if (validacionPermiso.status == true) {
+
+        //DESBLOQUEAR EL BOTON
+        $("#btnInactivarINFS").attr("disabled", false);
+        //OCULTAR MODAL DE EDICION
+        $("#EditarInstitucion").modal('hide');
+        //DESPLEGAR EL MODAL DE CONFIRMACION DE INACTIVACION
+        $("#frmInactivarINFS").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //CONFIRMAR INACTIVAR
@@ -382,12 +409,17 @@ $("#InactivarInstitucionCerrar").click(function () {
 // ACTIVAR
 var activarID = 0;
 $(document).on("click", "#btnModalActivarINFS", function () {
-    //DESBLOQUEAR EL BOTON
-    $("#btnActivarINFS").attr("disabled", false);
-    //SETEAR LA VARIABLE GLOBAL DE ACTIVAR
-    activarID = $(this).data('id');
-    //DESPLEGAR EL MODAL DE ACTIVAR
-    $("#frmActivarINFS").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("InstitucionesFinancieras/Activar");
+
+    if (validacionPermiso.status == true) {
+
+        //DESBLOQUEAR EL BOTON
+        $("#btnActivarINFS").attr("disabled", false);
+        //SETEAR LA VARIABLE GLOBAL DE ACTIVAR
+        activarID = $(this).data('id');
+        //DESPLEGAR EL MODAL DE ACTIVAR
+        $("#frmActivarINFS").modal({ backdrop: 'static', keyboard: false });
+    }  
 });
 
 //CONFIRMAR ACTIVAR

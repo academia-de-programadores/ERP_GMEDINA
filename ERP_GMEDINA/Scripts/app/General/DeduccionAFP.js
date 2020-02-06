@@ -109,14 +109,21 @@ function cargarGridDeducciones() {
 
 //Activar
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnActivarDeduccionAFP", function () {
-    document.getElementById("btnActivarRegistroDeduccionAFP").disabled = false;
-    var ID = $(this).closest('tr').data('id');
 
-    var ID = $(this).attr('dafpid');
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesAFP/Activar");
 
-    localStorage.setItem('id', ID);
+    if (validacionPermiso.status == true) {
+        document.getElementById("btnActivarRegistroDeduccionAFP").disabled = false;
+        var ID = $(this).closest('tr').data('id');
 
-    $("#ActivarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+        var ID = $(this).attr('dafpid');
+
+        localStorage.setItem('id', ID);
+
+        $("#ActivarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    }
+   
 })
 
 $("#btnActivarRegistroDeduccionAFP").click(function () {
@@ -150,33 +157,40 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionAFP", function () {
-    $("#Crear #emp_IdCrear").val('').trigger('change.select2');
 
-    OcultarValidacionesCrear();
-    OcultarValidacionesEdit();
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesAFP/Create");
 
-    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-    $.ajax({
-        url: "/DeduccionAFP/EditGetAFPDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Crear #afp_Id").empty();
-            $("#Crear #afp_Id").append("<option value='0'>Selecione una opción...</option>");
-            //LLENAR EL DROPDOWNLIST
-            $.each(data, function (i, iter) {
-                $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+    if (validacionPermiso.status == true) {
+        $("#Crear #emp_IdCrear").val('').trigger('change.select2');
+
+        OcultarValidacionesCrear();
+        OcultarValidacionesEdit();
+
+        //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+        $.ajax({
+            url: "/DeduccionAFP/EditGetAFPDDL",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        })
+            .done(function (data) {
+                //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                $("#Crear #afp_Id").empty();
+                $("#Crear #afp_Id").append("<option value='0'>Selecione una opción...</option>");
+                //LLENAR EL DROPDOWNLIST
+                $.each(data, function (i, iter) {
+                    $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
             });
-        });
 
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("#dafp_AporteLps").val('');
-    $("#Crear #afp_Id").val("0");
-    $('#Crear #dafp_DeducirISR').prop('checked', false);
+        //MOSTRAR EL MODAL DE AGREGAR
+        $("#AgregarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+        $("#dafp_AporteLps").val('');
+        $("#Crear #afp_Id").val("0");
+        $('#Crear #dafp_DeducirISR').prop('checked', false);
+    }
+   
 });
 
 //Validar campos Crear y Editar
@@ -334,80 +348,88 @@ $("#Editar #validatione1").css("display", "none");
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
-    let itemEmpleado = localStorage.getItem('idEmpleado');
-    let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
-    if (itemEmpleado != null) {
-        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
-        localStorage.removeItem('idEmpleado');
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesAFP/Edit");
+
+    if (validacionPermiso.status == true) {
+        let itemEmpleado = localStorage.getItem('idEmpleado');
+        let dataEmp = table.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
+        if (itemEmpleado != null) {
+            $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+            localStorage.removeItem('idEmpleado');
+        }
+
+        OcultarValidacionesCrear();
+        OcultarValidacionesEdit();
+        var ID = $(this).data('id');
+        $.ajax({
+            url: "/DeduccionAFP/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+
+            .done(function (data) {
+                console.table(data)
+                if (data.dafp_DeducirISR) {
+                    $('#Editar #dafp_DeducirISREdit').prop('checked', true);
+                }
+                else {
+                    $('#Editar #dafp_DeducirISREdit').prop('checked', false);
+                }
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+
+                    let idEmpSelect = data.emp_Id;
+                    let NombreSelect = dataEmp[1];
+                    $("#Editar #dafp_Id").val(data.dafp_Id);
+                    $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
+                    $("#Editar #dafp_DeducirISREdit").val(data.dafp_DeducirISR);
+                    //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+
+                    $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                    let valor = $('#Editar #emp_Id').val();
+
+                    if (valor == null) {
+                        $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                        localStorage.setItem('idEmpleado', idEmpSelect);
+                    }
+
+                    var SelectedIdAFP = data.afp_Id;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+                    $.ajax({
+                        url: "/DeduccionAFP/EditGetAFPDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                    })
+                        .done(function (data) {
+                            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                            $("#Editar #afp_Id").empty();
+                            //LLENAR EL DROPDOWNLIST
+                            $.each(data, function (i, iter) {
+                                $("#Editar #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            });
+                        });
+                    $("#DetallesDeduccionAFP").modal('hide');
+                    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
     }
 
-    OcultarValidacionesCrear();
-    OcultarValidacionesEdit();
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/DeduccionAFP/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
 
-        .done(function (data) {
-            console.table(data)
-            if (data.dafp_DeducirISR) {
-                $('#Editar #dafp_DeducirISREdit').prop('checked', true);
-            }
-            else {
-                $('#Editar #dafp_DeducirISREdit').prop('checked', false);
-            }
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-
-                let idEmpSelect = data.emp_Id;
-                let NombreSelect = dataEmp[1];
-                $("#Editar #dafp_Id").val(data.dafp_Id);
-                $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
-                $("#Editar #dafp_DeducirISREdit").val(data.dafp_DeducirISR);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-
-                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
-
-                let valor = $('#Editar #emp_Id').val();
-
-                if (valor == null) {
-                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
-                    localStorage.setItem('idEmpleado', idEmpSelect);
-                }
-
-                var SelectedIdAFP = data.afp_Id;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionAFP/EditGetAFPDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #afp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-                $("#DetallesDeduccionAFP").modal('hide');
-                $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+   
 });
 
 //FUNCION: OCULTAR VALIDACIONES EDITAR
@@ -516,88 +538,95 @@ $("#btnCerrarEditar").click(function () {
 
 //Detalles//
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/DeduccionAFP/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                if (data[0].dafp_DeducirISR) {
-                    $("#Detalles #dafp_DeducirISRDetails").html("Si");
+
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesAFP/Details");
+
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        $.ajax({
+            url: "/DeduccionAFP/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    if (data[0].dafp_DeducirISR) {
+                        $("#Detalles #dafp_DeducirISRDetails").html("Si");
+                    }
+                    else {
+                        $("#Detalles #dafp_DeducirISRDetails").html("No");
+                    }
+
+                    var FechaCrea = FechaFormato(data[0].dafp_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].dafp_FechaModifica);
+                    $("#Detalles #dafp_Id").html(data[0].dafp_Id);
+                    $("#Detalles #emp_Id").html(data[0].emp_Id);
+                    $("#Detalles #per_Nombres + #per_Apellidos").html(data[0].per_Nombres + data[0].per_Apellidos);
+                    $("#Detalles #emp_CuentaBancaria").html(data[0].emp_CuentaBancaria);
+                    $("#Detalles #dafp_AporteLps").html(data[0].dafp_AporteLps);
+                    $("#Detalles #afp_Id").html(data[0].afp_Id);
+                    $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
+                    $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #dafp_UsuarioCrea").html(data[0].dafp_UsuarioCrea);
+                    $("#Detalles #dafp_FechaCrea").html(FechaCrea);
+                    data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #dafp_UsuarioModifica").html(data[0].dafp_UsuarioModifica);
+                    $("#Detalles #dafp_FechaModifica").html(FechaModifica);
+
+                    var SelectedIdEmpleado = data[0].emp_Id;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
+                    $.ajax({
+                        url: "/DeduccionAFP/EditGetEmpleadoDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                        })
+                        .done(function (data) {
+                            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                            //LLENAR EL DROPDOWNLIST
+                            $.each(data, function (i, iter) {
+                                if (iter.Id == SelectedIdEmpleado) {
+                                    $("#Detalles #emp_Id").html(iter.Descripcion);
+                                }
+                            });
+                        });
+
+                    var SelectedIdAFP = data[0].afp_Id;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+                    $.ajax({
+                        url: "/DeduccionAFP/EditGetAFPDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                        })
+                        .done(function (data) {
+                            //LLENAR EL DROPDOWNLIST
+                            $.each(data, function (i, iter) {
+                                if (iter.Id == SelectedIdAFP) {
+                                    $("#Detalles #afp_Id").html(iter.Descripcion);
+                                }
+                            });
+                        });
+
+                    $("#DetallesDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+
                 }
                 else {
-                    $("#Detalles #dafp_DeducirISRDetails").html("No");
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
                 }
-
-                var FechaCrea = FechaFormato(data[0].dafp_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].dafp_FechaModifica);
-                $("#Detalles #dafp_Id").html(data[0].dafp_Id);
-                $("#Detalles #emp_Id").html(data[0].emp_Id);
-                $("#Detalles #per_Nombres + #per_Apellidos").html(data[0].per_Nombres + data[0].per_Apellidos);
-                $("#Detalles #emp_CuentaBancaria").html(data[0].emp_CuentaBancaria);
-                $("#Detalles #dafp_AporteLps").html(data[0].dafp_AporteLps);
-                $("#Detalles #afp_Id").html(data[0].afp_Id);
-                $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #dafp_UsuarioCrea").html(data[0].dafp_UsuarioCrea);
-                $("#Detalles #dafp_FechaCrea").html(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #dafp_UsuarioModifica").html(data[0].dafp_UsuarioModifica);
-                $("#Detalles #dafp_FechaModifica").html(FechaModifica);
-
-                var SelectedIdEmpleado = data[0].emp_Id;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionAFP/EditGetEmpleadoDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            if (iter.Id == SelectedIdEmpleado) {
-                                $("#Detalles #emp_Id").html(iter.Descripcion);
-                            }
-                        });
-                    });
-
-                var SelectedIdAFP = data[0].afp_Id;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionAFP/EditGetAFPDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            if (iter.Id == SelectedIdAFP) {
-                                $("#Detalles #afp_Id").html(iter.Descripcion);
-                            }
-                        });
-                    });
-
-                $("#DetallesDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+            });
+    }
+  
 });
 
 //Inactivar//
@@ -607,9 +636,15 @@ $(document).on("click", "#btnBack", function () {
 });
 
 $(document).on("click", "#btnInactivarDeduccionAFP", function () {
-    $("#EditarDeduccionAFP").modal('hide');
-    document.getElementById("btnInactivarRegistroDeduccionAFP").disabled = false;
-    $("#InactivarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesAFP/Inactivar");
+
+    if (validacionPermiso.status == true) {
+        $("#EditarDeduccionAFP").modal('hide');
+        document.getElementById("btnInactivarRegistroDeduccionAFP").disabled = false;
+        $("#InactivarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    }
+  
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
