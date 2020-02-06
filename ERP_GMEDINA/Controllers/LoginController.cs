@@ -137,5 +137,28 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
+
+		#region GET : LoadUserModelStateAsync
+		//public JsonResult LoadUserModelStateAsync()
+		//{
+		//	//INICIALIAXCION DE LA TAREA
+		//	//Task Task_ModelState;
+		//	//INICIALIZACION DEL OBJETC VM_ModelState
+		//	VM_ModelState userModel = new VM_ModelState();
+		//		//Task_ModelState = Task.Run(() =>
+		//		//{
+		//			//ID USUARIO LOGUEADO
+		//			int userId = (int)Session["UserLogin"];
+		//			//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+		//			Helpers.General vm = new Helpers.General();
+		//			//SOBRECARGA DE OBJECT VM_ModelState
+		//			userModel = vm.Cargar_ModelState(userId);
+		//		//});
+
+		//	//RETORNO DEL MODEL STATE
+		//	return Json(userModel, JsonRequestBehavior.AllowGet);
+		//}
+		#endregion
+
 	}
 }
