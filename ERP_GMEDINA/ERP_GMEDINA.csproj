@@ -287,6 +287,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PlanillaImpuestoVecinalController.cs" />
+    <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\ReportesRRHHController.cs" />
@@ -296,6 +297,7 @@
     <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TechoImpuestoVecinalController.cs" />
+    <Compile Include="Controllers\TechosComisionesController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />

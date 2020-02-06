@@ -131,12 +131,18 @@ namespace ERP_GMEDINA.Helpers
         }
 
 		#region GET: Cargar_ModelState
-		public VM_ModelState Cargar_ModelState(int userId)
+		public VM_ModelState Cargar_ModelState(int userId, bool EsAdministrador)
 		{
-			//INSTANCIA DE LA CLASE HELPERS
-			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
 			//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
 			VM_ModelState ModelState = new VM_ModelState();
+			ModelState.EsAdmin = EsAdministrador;
+			//VALIDAR SI EL USUARIO ES ADMIN
+			if (EsAdministrador == true)
+				return ModelState;
+				
+
+			//INSTANCIA DE LA CLASE HELPERS
+			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
 			//INICIALIZACION DE AMBITO DE DBCONTEXT
 			using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
 			{
@@ -166,23 +172,28 @@ namespace ERP_GMEDINA.Helpers
 				//SETEO DE ATTR ContraseniaExpirada
 				ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
 
-				//INICIALIZACION DE VARIABLE DE SESION
-				//HttpContext.Current.Session["ModelState"] = ModelState;
-
 				return ModelState;
 			}
 		}
 		#endregion
 
 		#region GET: Cargar_ModelStateAsync
-		//public Task<VM_ModelState> Cargar_ModelStateAsync(int userId)
+		//public Task<VM_ModelState> Cargar_ModelStateAsync(int userId, bool EsAdministrador)
 		//{
-		//	//INSTANCIA DE LA CLASE HELPERS
-		//	ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
 		//	//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
 		//	VM_ModelState ModelState = new VM_ModelState();
-		//	//INICIALIZACION DE AMBITO DE DBCONTEXT
+		//	ModelState.EsAdmin = EsAdministrador;
+		//	//VALIDAR SI EL USUARIO ES ADMIN
+		//	if (EsAdministrador == true)
+		//		return Task.Run(() =>
+		//		{
+		//			return ModelState;
+		//		});
+		//	//INSTANCIA DE LA CLASE HELPERS
+		//	ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
+		//	//INICIALIZACION DE TAREA
 		//	//var Task_user = "";
+		//	//INICIALIZACION DE AMBITO DE DBCONTEXT
 		//	using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
 		//	{
 		//		var Task_user = Task.Run(() =>
