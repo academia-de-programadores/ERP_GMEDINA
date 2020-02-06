@@ -229,6 +229,7 @@ function cargarGridTechosDeducciones() {
         });
     FullBody();
 }
+
 //Reiniciar DataAnnotations cuando se cierra un modal 
 $("#btnCerrarCreateTechosDeducciones").click(function () {
     $("#frmTechosDeduccionesCreate #Validation_deduccion").css("display", "none");
@@ -249,7 +250,10 @@ $("#btnCerrarEditar").click(function () {
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarTechosDeducciones", function () {
     limpiarMensajes();
-
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosDeducciones/Create");
+            
+    if (validacionPermiso.status == true) {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/TechosDeducciones/EditGetDDL",
@@ -269,6 +273,7 @@ $(document).on("click", "#btnAgregarTechosDeducciones", function () {
     $(".field-validation-error").css('display', 'none');
     $('#Crear input[type=text], input[type=number]').val('');
     $("#AgregarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 function validacionCrear() {
@@ -571,7 +576,10 @@ $('#btnCreateTechoDeducciones').click(function () {
 $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeducciones", function () {
     limpiarMensajes();
     var ID = $(this).data('id');
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosDeducciones/Edit");
 
+    if (validacionPermiso.status == true) {    
     InactivarID = ID;
     $.ajax({
         url: "/TechosDeducciones/Edit/" + ID,
@@ -619,6 +627,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                 });
             }
         });
+    }
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
@@ -671,9 +680,15 @@ $('#btnNoInactivar').click(function () {
     $("#InactivarTechosDeducciones").modal('hide');
     $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
 });
+
+// validar informacion del usuario
+
 $(document).on("click", "#btnInactivarTechoDeducciones", function () {
-    $("#EditarTechosDeducciones").modal('hide');
-    $("#InactivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("TechosDeducciones/Inactivar");
+    if (validacionPermiso.status == true) {
+            $("#EditarTechosDeducciones").modal('hide');
+            $("#InactivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //Inactivar registro Techos Deducciones
@@ -709,66 +724,75 @@ $("#btnInactivarTechosDeducciones").click(function () {
 //DETALLES
 $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDeducciones", function () {
     var ID = $(this).data('id');
-    $.ajax({
-        url: "/TechosDeducciones/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                var FechaCrea = FechaFormato(data[0].tddu_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].tddu_FechaModifica);
-                $("#Detalles #tddu_UsuarioCrea").val(data[0].tddu_UsuarioCrea);
-                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
-                $("#Detalles #tddu_PorcentajeColaboradores").html(data[0].tddu_PorcentajeColaboradores.toFixed(2));
-                $("#Detalles #tddu_PorcentajeEmpresa").html(data[0].tddu_PorcentajeEmpresa.toFixed(2));
-                $("#Detalles #tddu_Techo").html(data[0].tddu_Techo.toFixed(2));
-                $("#Detalles #tede_UsuarioCrea").html(data[0].tede_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #tddu_FechaCrea").html(FechaCrea);
-                $("#Detalles #tddu_UsuarioModifica").html(data.tddu_UsuarioModifica);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #tddu_FechaModifica").html(FechaModifica);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data[0].cde_IdDeducciones;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                //$.ajax({
-                //    url: "/TechosDeducciones/EditGetDDL",
-                //    method: "GET",
-                //    dataType: "json",
-                //    contentType: "application/json; charset=utf-8",
-                //    data: JSON.stringify({ ID })
-                //    })
-                //    .done(function (data) {
-                //        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                //        $("#Detalles #cde_IdDeducciones").empty();
-                //        //LLENAR EL DROPDOWNLIST
-                //        $("#Detalles #cde_IdDeducciones").append("<option value=0>Selecione una opción...</option>");
-                //        $.each(data, function (i, iter) {
-                //            $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                //        });
-                //    });
-                $("#DetailsTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosDeducciones/Details");
+
+    if (validacionPermiso.status == true) {
+        $.ajax({
+            url: "/TechosDeducciones/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    var FechaCrea = FechaFormato(data[0].tddu_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].tddu_FechaModifica);
+                    $("#Detalles #tddu_UsuarioCrea").val(data[0].tddu_UsuarioCrea);
+                    $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
+                    $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
+                    $("#Detalles #tddu_PorcentajeColaboradores").html(data[0].tddu_PorcentajeColaboradores.toFixed(2));
+                    $("#Detalles #tddu_PorcentajeEmpresa").html(data[0].tddu_PorcentajeEmpresa.toFixed(2));
+                    $("#Detalles #tddu_Techo").html(data[0].tddu_Techo.toFixed(2));
+                    $("#Detalles #tede_UsuarioCrea").html(data[0].tede_UsuarioCrea);
+                    $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #tddu_FechaCrea").html(FechaCrea);
+                    $("#Detalles #tddu_UsuarioModifica").html(data.tddu_UsuarioModifica);
+                    data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #tddu_FechaModifica").html(FechaModifica);
+                    //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                    var SelectedId = data[0].cde_IdDeducciones;
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                    //$.ajax({
+                    //    url: "/TechosDeducciones/EditGetDDL",
+                    //    method: "GET",
+                    //    dataType: "json",
+                    //    contentType: "application/json; charset=utf-8",
+                    //    data: JSON.stringify({ ID })
+                    //    })
+                    //    .done(function (data) {
+                    //        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                    //        $("#Detalles #cde_IdDeducciones").empty();
+                    //        //LLENAR EL DROPDOWNLIST
+                    //        $("#Detalles #cde_IdDeducciones").append("<option value=0>Selecione una opción...</option>");
+                    //        $.each(data, function (i, iter) {
+                    //            $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                    //        });
+                    //    });
+                    $("#DetailsTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 // activar
 var activarID = 0;
+// validar informacion del usuario
 $(document).on("click", "#btnActivarTechosDeducciones", function () {
-    activarID = $(this).data('id');
-    $("#ActivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    var validacionPermiso = userModelState("TechosDeducciones/Activar");
+    if (validacionPermiso.status == true) {
+        activarID = $(this).data('id');
+        $("#ActivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //activar ejecutar
