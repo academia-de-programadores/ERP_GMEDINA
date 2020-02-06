@@ -119,10 +119,12 @@ namespace ERP_GMEDINA.Controllers
 			VM_ModelState userModel = new VM_ModelState();
 			try
 			{
-				//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
-				Helpers.General vm = new Helpers.General();
+                //ID USUARIO LOGUEADO
+                int userId = (int)Session["UserLogin"];
+                //UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+                Helpers.General vm = new Helpers.General();
 				//SOBRECARGA DE OBJECT VM_ModelState
-				userModel = vm.Cargar_ModelState();
+				userModel = vm.Cargar_ModelState(userId);
 			}
 			catch(Exception Ex)
 			{
