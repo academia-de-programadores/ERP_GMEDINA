@@ -2099,6 +2099,7 @@
     <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
     <Content Include="Scripts\app\General\Competencias\Admin.js" />
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
+    <Content Include="Scripts\app\General\datatableEdit.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMes.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
     <Content Include="Scripts\app\General\AuxilioCesantia.js" />

@@ -2,6 +2,7 @@
 var Admin = false;
 var textoBoton = 'Mostrar activos';
 var botones = [];
+var datatableEdit = false;
 $(document).ready(function () {
  var columnas = [];
  var col = 0;
@@ -36,12 +37,21 @@ $(document).ready(function () {
 
    //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
   else if (campo == "Acciones") {
-   columnas.push({
-    data: campo,
-    defaultContent: "<div>" +
+   var defaultContent = datatableEdit ?
+                     "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                         "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
-                    "</div>"
+                    "</div>" :
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                    "</div>";
+   //var defaultContent = "<div>" +
+   //                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+   //                     datatableEdit ? "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" : '' +
+   //                 "</div>";
+   columnas.push({
+    data: campo,
+    defaultContent: defaultContent
    });
   }
   else if (campo == "Info") {
@@ -68,8 +78,8 @@ $(document).ready(function () {
   dom: '<"html5buttons"B>lTfgitp',
   buttons: [
             {
-          extend: 'copy',
-          text: '<i class="fa fa-copy btn-xs"></i>',
+             extend: 'copy',
+             text: '<i class="fa fa-copy btn-xs"></i>',
              exportOptions: {
               columns: botones
              }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -14,10 +15,14 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = null;
 
-        // GET: /Sueldos/
+        Models.Helpers Function = new Models.Helpers();
+
+
+        // GET: Titulos
+        [SessionManager("Sueldos/Index")]
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+
             List<tbSueldos> tbSueldos = new List<tbSueldos> { };
             try
             {
@@ -145,6 +150,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: /Sueldos//Edit/5
         [HttpGet]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -227,6 +233,8 @@ namespace ERP_GMEDINA.Controllers
         }
         // GET: /Sueldos//Delete/5
         [HttpPost]
+        [SessionManager("Sueldos/Edit")]
+
         public ActionResult Delete(tbSueldos tbSueldos)
         {
             string msj = "";
@@ -259,6 +267,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+        [SessionManager("Sueldos/Details")]
 
         public ActionResult Details(int? id)
         {

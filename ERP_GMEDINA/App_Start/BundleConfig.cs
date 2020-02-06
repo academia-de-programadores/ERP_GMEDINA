@@ -672,7 +672,8 @@ namespace ERP_GMEDINA
             #endregion
 
             #region Recursos Humanos
-
+            bundles.Add(new ScriptBundle("~/Scripts/app/datatableEdit/").Include(
+            "~/Scripts/app/General/datatableEdit.js"));
             // SCRIPT HABILIDADES ADMIN
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades/Admin").Include(
             "~/Scripts/app/general/Habilidades/Admin.js"));
