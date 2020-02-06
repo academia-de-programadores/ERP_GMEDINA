@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 using System.IO;
 
@@ -14,15 +15,13 @@ namespace ERP_GMEDINA.Controllers
     public class EmpresasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
-         //GET: Empresas
+        //GET: Empresas
+        [SessionManager("Empresas/Index")]
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+
             var per_id = new List<object> { new { emp_id = 0, Nombre = "**Seleccione una opción**" } };
             ViewBag.per_id = new SelectList(per_id, "emp_id", "Nombre");
             var tbEmpresas = new tbEmpresas { };
@@ -30,6 +29,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Empresas/Index")]
         public JsonResult llenarTabla()
         {
             try
@@ -68,6 +68,7 @@ namespace ERP_GMEDINA.Controllers
          //To protect from overposting attacks, please enable the specific properties you want to bind to, for
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598. tbEmpresas tbEmpresas,
         [HttpPost]
+        [SessionManager("Empresas/Create")]
         public JsonResult Create(tbEmpresas tbEmpresas, HttpPostedFileBase file)
         {
             int msj = 0;
@@ -83,7 +84,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, tbEmpresas.per_Id, tbEmpresas.empr_RTN == null ? "N/A" : tbEmpresas.empr_RTN, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, tbEmpresas.per_Id, tbEmpresas.empr_RTN == null ? "N/A" : tbEmpresas.empr_RTN, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEmpresas_Insert_Result item in list)
                     {
                         msj = int.Parse(item.MensajeError);
@@ -111,7 +112,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
-         //GET: Empresas/Edit/5
+        //GET: Empresas/Edit/5
+        [SessionManager("Empresas/Datos")]
         [HttpPost]
         [ActionName("Datos")]
         public ActionResult Edit(int? id)
@@ -158,9 +160,10 @@ namespace ERP_GMEDINA.Controllers
             return Json(empresa, JsonRequestBehavior.AllowGet);
         }
 
-         //POST: Empresas/Edit/5
-         //To protect from overposting attacks, please enable the specific properties you want to bind to, for
-         //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
+        //POST: Empresas/Edit/5
+        //To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
+        [SessionManager("Empresas/Edit")]
         [HttpPost]
         public JsonResult Edit(tbEmpresas tbEmpresas, HttpPostedFileBase file)
         {
@@ -181,7 +184,7 @@ namespace ERP_GMEDINA.Controllers
                     string ruta = "/Logos/" + id + "." + ext;
                     var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, tbEmpresas.per_Id,
                         tbEmpresas.empr_RTN == null ? "N/A" : tbEmpresas.empr_RTN,
-                        ruta, Usuario.usu_Id, DateTime.Now);
+                        ruta, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEmpresas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -206,6 +209,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("Empresas/hablilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -215,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbEmpresas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEmpresas_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -229,7 +233,8 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-         //GET: Empresas/Delete/5
+        //GET: Empresas/Delete/5
+        [SessionManager("Empresas/Delete")]
         [HttpPost]
         public ActionResult Delete(tbEmpresas tbEmpresas)
         {
@@ -241,7 +246,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbEmpresas_Delete(id, tbEmpresas.empr_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Delete(id, tbEmpresas.empr_RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEmpresas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -260,7 +265,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-         //POST: Empresas/Delete/5
+        //POST: Empresas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -42,7 +42,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-
+        [SessionManager("HistorialIncapacidades/Create")]
         public ActionResult Create()
         {
             db = new ERP_GMEDINAEntities();

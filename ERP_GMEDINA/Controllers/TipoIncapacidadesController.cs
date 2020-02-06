@@ -37,6 +37,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("TipoIncapacidades/Index")]
         public JsonResult llenarTabla()
         {
             try

@@ -26,6 +26,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+         [SessionManager("RazonSalidas/Index")]
         public JsonResult llenarTabla()
         {
             try
@@ -119,7 +120,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: RazonSalidas/Edit/5
-        [SessionManager("RazonSalidas/CreEditate")]
+        [SessionManager("RazonSalidas/Edit")]
         [HttpPost]
         public JsonResult Edit(tbRazonSalidas tbRazonSalidas)
         {

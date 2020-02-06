@@ -62,10 +62,8 @@
       <div class="form-group">
        <div class="col-md-offset-2 col-md-10">
         <input type="button" value="Guardar" class="btn btn-primary" id="btnCrear" />
-        @if (Login.GetUserRols("Area/Inactivar"))
-        {
+
         <input type="button" value="Inactivar" class="btn btn-danger" id="btnInactivarArea" />
-        }
         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
        </div>
       </div>
@@ -73,18 +71,13 @@
     </div>
    </div>
   </div>
-@if (Login.GetUserRols("Departamento/Delete"))
-{
+
   @Html.Partial("_DeleteDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
- }
- @if (Login.GetUserRols("Departamento/Edit"))
- {
+
   @Html.Partial("_EditDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
- }
-@if (Login.GetUserRols("Area/Activar"))
-{
+
   @Html.Partial("_Activar")
-}
+
  </div>
 </div>
 
@@ -99,10 +92,9 @@
 @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
  @Scripts.Render("~/plugins/customdataTables")
  @Scripts.Render("~/Scripts/app/general")
- @if (Login.GetUserRols("Area/Activar"))
- {
-         @Scripts.Render("~/Scripts/app/general/Areas/Admin")
-  }
+
+@Scripts.Render("~/Scripts/app/general/Areas/Admin")
+ 
     @Scripts.Render("~/Scripts/app/general/EditArea")
  <script>
   var area_Id=@Html.DisplayFor(model => model.area_Id);
