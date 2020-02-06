@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class HistorialVacacionesController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: HistorialVacaciones
         [SessionManager("HistorialVacaciones/Index")]
@@ -37,34 +38,6 @@ namespace ERP_GMEDINA.Controllers
             return View(tbHistorialVacaciones);
         }
 
-        // GET: HistorialVacaciones/Details/5
-        //public ActionResult llenarTabla()
-        //{
-        //    try
-        //    {
-        //        using (db = new ERP_GMEDINAEntities())
-        //        {
-        //            var Empleados = db.V_HVacacionesEmpleados
-        //                .Select(
-        //                t => new
-        //                {
-        //                    emp_Id = t.emp_Id,
-        //                    Empleado = t.emp_NombreCompleto,
-        //                    Cargo = t.car_Descripcion,
-        //                    //Departamento = t.depto_Descripcion,
-        //                    //FechaContratacion = t.emp_Fechaingreso
-        //                }).ToList();
-
-
-
-        //            return Json(Empleados, JsonRequestBehavior.AllowGet);
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return Json("-2", JsonRequestBehavior.AllowGet);
-        //    }
-        //}
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -102,8 +75,8 @@ namespace ERP_GMEDINA.Controllers
                     var list = db.UDP_RRHH_tbHistorialVacaciones_Insert(tbHistorialVacaciones.emp_Id,
                                                                             tbHistorialVacaciones.hvac_FechaInicio,
                                                                             tbHistorialVacaciones.hvac_FechaFin,
-                                                                            1,
-                                                                            DateTime.Now);
+                                                                            (int)Session["UserLogin"],
+                                                                            Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialVacaciones_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -128,7 +101,10 @@ namespace ERP_GMEDINA.Controllers
                     var Usuario = (tbUsuario)Session["Usuario"];
                     try
                     {
-                        var list = db.UDP_RRHH_tbHistorialVacaciones_Delete(tbHistorialVacaciones.hvac_Id, tbHistorialVacaciones.hvac_RazonInactivo, 1, DateTime.Now);
+                        var list = db.UDP_RRHH_tbHistorialVacaciones_Delete(tbHistorialVacaciones.hvac_Id,
+                                                                            tbHistorialVacaciones.hvac_RazonInactivo,
+                                                                            (int)Session["UserLogin"],
+                                                                            Function.DatetimeNow());
                         foreach (UDP_RRHH_tbHistorialVacaciones_Delete_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -192,78 +168,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(vacaciones, JsonRequestBehavior.AllowGet);
         }
-
-
-        // GET: HistorialVacaciones/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.hvac_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-        //    ViewBag.hvac_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
-        //    return View();
-        //}
-
-        // POST: HistorialVacaciones/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "hvac_Id,emp_Id,hvac_FechaInicio,hvac_FechaFin,hvac_CantDias,hvac_DiasPagados,hvac_MesVacaciones,hvac_AnioVacaciones,hvac_Estado,hvac_RazonInactivo,hvac_UsuarioCrea,hvac_FechaCrea,hvac_UsuarioModifica,hvac_FechaModifica")] tbHistorialVacaciones tbHistorialVacaciones)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.tbHistorialVacaciones.Add(tbHistorialVacaciones);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.hvac_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialVacaciones.hvac_UsuarioCrea);
-        //    ViewBag.hvac_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialVacaciones.hvac_UsuarioModifica);
-        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialVacaciones.emp_Id);
-        //    return View(tbHistorialVacaciones);
-        //}
-
-        //GET: HistorialVacaciones/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbHistorialVacaciones tbHistorialVacaciones = db.tbHistorialVacaciones.Find(id);
-        //    if (tbHistorialVacaciones == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.hvac_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialVacaciones.hvac_UsuarioCrea);
-        //    ViewBag.hvac_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialVacaciones.hvac_UsuarioModifica);
-        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialVacaciones.emp_Id);
-        //    return View(tbHistorialVacaciones);
-        //}
-
-        // POST: HistorialVacaciones/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "hvac_Id,emp_Id,hvac_FechaInicio,hvac_FechaFin,hvac_CantDias,hvac_DiasPagados,hvac_MesVacaciones,hvac_AnioVacaciones,hvac_Estado,hvac_RazonInactivo,hvac_UsuarioCrea,hvac_FechaCrea,hvac_UsuarioModifica,hvac_FechaModifica")] tbHistorialVacaciones tbHistorialVacaciones)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(tbHistorialVacaciones).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.hvac_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialVacaciones.hvac_UsuarioCrea);
-        //    ViewBag.hvac_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialVacaciones.hvac_UsuarioModifica);
-        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialVacaciones.emp_Id);
-        //    return View(tbHistorialVacaciones);
-        //}
-
-        // GET: HistorialVacaciones/Delete/5
-
-
-        // POST: HistorialVacaciones/Delete/5
+        
         [SessionManager("HistorialVacaciones/Detalles")]
         public ActionResult Detalles(int? id)
         {
@@ -366,7 +271,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialVacaciones_Restore(tbHistorialVacaciones.hvac_Id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialVacaciones_Restore(tbHistorialVacaciones.hvac_Id,
+                                                                         (int)Session["UserLogin"],
+                                                                         Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialVacaciones_Restore_Result item in list)
                     {
                         result = item.MensajeError;
