@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -15,7 +14,6 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        [SessionManager("SeleccionCandidatos/Index")]
         public ActionResult Index()
         {
 
@@ -132,7 +130,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-        [SessionManager("SeleccionCandidatos/Create")]
         public JsonResult Create(tbSeleccionCandidatos tbSeleccionCandidatos)
         {
             string msj = "";
@@ -158,7 +155,6 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        [SessionManager("SeleccionCandidatos/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -199,7 +195,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(SeleccionCandidatos, JsonRequestBehavior.AllowGet);
         }
 
-        [SessionManager("SeleccionCandidatos/Edit")]
         [HttpPost]
         public JsonResult Edit(tbSeleccionCandidatos tbSeleccionCandidatos)
         {
@@ -230,7 +225,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        [SessionManager("SeleccionCandidatos/Delete")]
         [HttpPost]
         public ActionResult Delete(tbSeleccionCandidatos tbSeleccionCandidatos)
         {
@@ -272,7 +266,6 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        [SessionManager("SeleccionCandidatos/hablilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -335,7 +328,6 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //EMPLEADO///////////////////////////////////////////////////////////////////////////////////////////////
-        //[SessionManager("SeleccionCandidatos/Contratar")]
         public ActionResult Contratar(int? id)
         {
             if (id == null)
@@ -384,9 +376,11 @@ namespace ERP_GMEDINA.Controllers
             return View(Empleado);
         }
 
+        private static tbSeleccionCandidatos GetTbSeleccionCandidatos(tbSeleccionCandidatos tbSeleccionCandidatos)
+        {
+            return tbSeleccionCandidatos;
+        }
 
-
-        //[SessionManager("SeleccionCandidatos/Contratar")]
         [HttpPost]
         public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados,bool emp_Temporal, Decimal sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
         {
