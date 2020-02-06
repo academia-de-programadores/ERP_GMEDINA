@@ -75,7 +75,7 @@ namespace ERP_GMEDINA.Controllers
                     ViewModel_PlanillaImpuestoVecinal ViewModel_PlanillaImpuestoVecinal = new ViewModel_PlanillaImpuestoVecinal();
                     //SETEAR LOS CAMPOS PARA MOSTRAR LA PROYECCIÓN
                     ViewModel_PlanillaImpuestoVecinal.No = iter;
-                    ViewModel_PlanillaImpuestoVecinal.emp_Id = iter;
+                    ViewModel_PlanillaImpuestoVecinal.emp_Id = item.emp_Id;
                     ViewModel_PlanillaImpuestoVecinal.NoIdentidad = item.NoIdentidad.Substring(0, 4) + "-" + item.NoIdentidad.Substring(4, 4) + "-" + item.NoIdentidad.Substring(9, item.NoIdentidad.Length - 9);
                     ViewModel_PlanillaImpuestoVecinal.NombreCompleto = item.NombreCompleto;
 
