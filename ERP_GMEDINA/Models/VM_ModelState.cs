@@ -12,5 +12,6 @@ namespace ERP_GMEDINA.Models
 		//VALIDAR SI LA SESION NO ESTA EXPIRADA
 		public bool SesionIniciada { get; set; }
 		public bool ContraseniaExpirada { get; set; }
+		public bool EsAdmin { get; set; }
 	}
 }
