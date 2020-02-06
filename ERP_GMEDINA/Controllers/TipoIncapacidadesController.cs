@@ -73,7 +73,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoIncapacidades_Insert(tbTipoIncapacidades.ticn_Descripcion, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoIncapacidades_Insert(tbTipoIncapacidades.ticn_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoIncapacidades_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -147,7 +147,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoIncapacidades_Update(id, tbTipoIncapacidades.ticn_Descripcion, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoIncapacidades_Update(id, tbTipoIncapacidades.ticn_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoIncapacidades_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -182,7 +182,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoIncapacidades_Delete(id, RazonInactivo, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoIncapacidades_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -225,7 +225,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoIncapacidades_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoIncapacidades_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoIncapacidades_Restore_Result item in list)
                     {
                         result = item.MensajeError;

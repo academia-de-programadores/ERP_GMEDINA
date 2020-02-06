@@ -13,6 +13,7 @@ namespace ERP_GMEDINA.Controllers
     public class SeleccionCandidatosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         public ActionResult Index()
         {
@@ -72,7 +73,8 @@ namespace ERP_GMEDINA.Controllers
 
 
             tbSeleccionCandidatos tbSeleccionCandidatos = new tbSeleccionCandidatos { scan_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            
+
             try
             {
                 return View(tbSeleccionCandidatos);
@@ -139,8 +141,8 @@ namespace ERP_GMEDINA.Controllers
                                                                         tbSeleccionCandidatos.fare_Id,
                                                                         tbSeleccionCandidatos.scan_Fecha,
                                                                         tbSeleccionCandidatos.req_Id,
-                                                                        1,
-                                                                        DateTime.Now);
+                                                                        (int)Session["UserLogin"], 
+                                                                        Function.DatetimeNow());
                 foreach (UDP_RRHH_tbSeleccionCandidatos_Insert_Result item in list)
                 {
                     msj = item.MensajeError + " ";
@@ -205,7 +207,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Update(id, tbSeleccionCandidatos.fare_Id, tbSeleccionCandidatos.scan_Fecha, tbSeleccionCandidatos.req_Id, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Update(id, tbSeleccionCandidatos.fare_Id, tbSeleccionCandidatos.scan_Fecha, tbSeleccionCandidatos.req_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSeleccionCandidatos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -234,7 +236,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Delete(tbSeleccionCandidatos.scan_Id, tbSeleccionCandidatos.scan_RazonInactivo, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Delete(tbSeleccionCandidatos.scan_Id, tbSeleccionCandidatos.scan_RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSeleccionCandidatos_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -275,7 +277,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSeleccionCandidatos_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -404,7 +406,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, false, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, false, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -415,7 +417,7 @@ namespace ERP_GMEDINA.Controllers
                         //Si el candidato ah sido empleado se recontratara
                         var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, true, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, true, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
 
                         foreach (UDP_RRHH_tbEmpleados_Recontratar_Result item in list)
                         {
