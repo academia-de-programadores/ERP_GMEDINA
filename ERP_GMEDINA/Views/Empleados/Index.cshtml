@@ -4,7 +4,22 @@
     ViewBag.Title = "Empleados";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
+@using ERP_GMEDINA.Models
+@{
+    Helpers Login = new Helpers();
+    //int Sesiones = 0;
 
+
+    //List<tbUsuario> User = Login.getUserInformation();
+
+    //foreach (tbUsuario Usuario in User)
+    //{
+
+    //    Sesiones = Usuario.usu_SesionesValidas;
+    //}
+}
+
+  
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -13,7 +28,10 @@
                 <div class="ibox-title">
                     <h5>Listado de Empleados</h5>
                     <div class="ibox-tools">
+                    @if (Login.GetUserRols("Empleados/ArchivoEmpleados"))
+                            {
                         <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Empleado" />
+                            }
                     </div>
                 </div>
                 <div class="ibox-content">
