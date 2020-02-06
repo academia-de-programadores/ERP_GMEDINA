@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class IdiomasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: Idiomas Index
         //public ActionResult Index()
         //{
@@ -31,14 +32,10 @@ namespace ERP_GMEDINA.Controllers
         //    }
         //    return View(tbIdiomas);
         //}
+        [SessionManager("Idiomas/Index")]
         public ActionResult Index()
         {
             db = new ERP_GMEDINAEntities();
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
             tbIdiomas tbIdiomas = new tbIdiomas { idi_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
@@ -70,7 +67,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Idiomas/Create
-
+        [SessionManager("Idiomas/Details")]
         public JsonResult Details(int? ID)
         {
             db = new ERP_GMEDINAEntities();
@@ -81,6 +78,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Idiomas/Create
         [HttpPost]
+        [SessionManager("Idiomas/Create")]
         public JsonResult Create(tbIdiomas tbIdiomas)
         {
 
@@ -111,7 +109,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        [SessionManager("Idiomas/Edit")]
         public ActionResult Edit(int? ID)
         {
 
@@ -154,6 +152,7 @@ namespace ERP_GMEDINA.Controllers
         //POST : Idiomas/Edit
 
         [HttpPost]
+        [SessionManager("Idiomas/Edit")]
         public JsonResult Edit(tbIdiomas tbIdiomas)
         {
 
@@ -188,6 +187,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [SessionManager("Idiomas/hablilitar")]
         public JsonResult hablilitar(int id)
         {
 
@@ -214,6 +214,7 @@ namespace ERP_GMEDINA.Controllers
         }
         // Idiomas/Delete
         [HttpPost]
+        [SessionManager("Idiomas/Delete")]
         public ActionResult Delete(tbIdiomas tbIdiomas)
         {
 
