@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -15,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Models.Helpers Function = new Models.Helpers();
 
+        [SessionManager("SeleccionCandidatos/Index")]
         public ActionResult Index()
         {
 
@@ -87,6 +89,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbSeleccionCandidatos);
         }
 
+        [SessionManager("SeleccionCandidatos/Index")]
         public ActionResult llenarTabla()
         {
             try
@@ -114,6 +117,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("SeleccionCandidatos/Index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -132,6 +136,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("SeleccionCandidatos/Create")]
         public JsonResult Create(tbSeleccionCandidatos tbSeleccionCandidatos)
         {
             string msj = "";
@@ -156,7 +161,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-
+        [SessionManager("SeleccionCandidatos/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -198,6 +203,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("SeleccionCandidatos/Edit")]
         public JsonResult Edit(tbSeleccionCandidatos tbSeleccionCandidatos)
         {
             string msj = "";
@@ -228,6 +234,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("SeleccionCandidatos/Delete")]
         public ActionResult Delete(tbSeleccionCandidatos tbSeleccionCandidatos)
         {
             string msj = "";
@@ -269,6 +276,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("SeleccionCandidatos/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -330,6 +338,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //EMPLEADO///////////////////////////////////////////////////////////////////////////////////////////////
+        [SessionManager("SeleccionCandidatos/Contratar")]
         public ActionResult Contratar(int? id)
         {
             if (id == null)
@@ -384,6 +393,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("SeleccionCandidatos/Contratar")]
         public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados,bool emp_Temporal, Decimal sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
@@ -439,6 +449,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
 
         public ActionResult llenarDropDowlistDepartamentos(int id)
         {

@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.car_SueldoMinimo, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.car_SueldoMinimo, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return Numericos(event)", @autocomplete = "off", @id = "car_SueldoMinimo" } })
+                                    @Html.EditorFor(model => model.car_SueldoMinimo, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return Numericos(event)", @autocomplete = "off", @id = "car_SueldoMinimo", @maxlength = "16" } })
                                     @Html.ValidationMessageFor(model => model.car_SueldoMinimo, "", new { @class = "text-danger", @id = "errorcar_SalarioMinimo" })
                                 </div>
                                 </div>
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.car_SueldoMaximo, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
-                                        @Html.EditorFor(model => model.car_SueldoMaximo, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return Numericos(event)", @autocomplete = "off", id = "car_SueldoMaximo" } })
+                                        @Html.EditorFor(model => model.car_SueldoMaximo, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return Numericos(event)", @autocomplete = "off", id = "car_SueldoMaximo", @maxlength = "16" } })
                                         @Html.ValidationMessageFor(model => model.car_SueldoMaximo, "", new { @class = "text-danger", @id = "errorcar_SalarioMaximo" })
                                     </div>
                                 </div>

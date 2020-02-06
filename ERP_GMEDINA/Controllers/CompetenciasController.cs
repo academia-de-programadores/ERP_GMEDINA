@@ -14,46 +14,17 @@ namespace ERP_GMEDINA.Controllers
     public class CompetenciasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Competencias
         [SessionManager("Competencias/Index")]
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
             tbCompetencias tbCompetencias = new tbCompetencias { comp_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-
-                // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbCompetencias);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                // tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
-            }
             return View(tbCompetencias);
-
-            //List<tbCompetencias> tbCompetencias = new List<Models.tbCompetencias> { };
-            //Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            //try
-            //{
-            //    tbCompetencias = db.tbCompetencias.Where(x => x.comp_Estado).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-            //    return View(tbCompetencias);
-            //}
-            //catch (Exception ex)
-            //{
-            //    ex.Message.ToString();
-            //    tbCompetencias.Add(new tbCompetencias { comp_Id = 0, comp_Descripcion = "fallo la conexion" });
-            //}
-            //return View(tbCompetencias);
         }
         [HttpPost]
+        [SessionManager("Competencias/Index")]
         public JsonResult llenarTabla()
         {
             using (db = new ERP_GMEDINAEntities())
@@ -89,7 +60,9 @@ namespace ERP_GMEDINA.Controllers
                     try
                     {
                         var list = db.UDP_RRHH_tbCompetencias_Insert(
-                            tbCompetencias.comp_Descripcion, Usuario.usu_Id, DateTime.Now);
+                                                                     tbCompetencias.comp_Descripcion,
+                                                                     (int)Session["UserLogin"],
+                                                                     Function.DatetimeNow());
                         foreach (UDP_RRHH_tbCompetencias_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -161,8 +134,10 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCompetencias_Update(id,
-                    tbCompetencias.comp_Descripcion, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCompetencias_Update(tbCompetencias.comp_Id,
+                                                                 tbCompetencias.comp_Descripcion,
+                                                                 (int)Session["UserLogin"],
+                                                                 Function.DatetimeNow());
                     foreach (UDP_RRHH_tbCompetencias_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -195,7 +170,10 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCompetencias_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCompetencias_Delete(tbCompetencias.comp_Id,
+                                                                 RazonInactivo,
+                                                                 (int)Session["UserLogin"],
+                                                                 Function.DatetimeNow());
                     foreach (UDP_RRHH_tbCompetencias_Delete_Result item in list)
                     {
                         msj = item.MensajeError = " ";
@@ -236,7 +214,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbCompetencias_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCompetencias_Restore(id, 
+                                                                  (int)Session["UserLogin"],
+                                                                  Function.DatetimeNow());
                     foreach (UDP_RRHH_tbCompetencias_Restore_Result item in list)
                     {
                         result = item.MensajeError;

@@ -68,7 +68,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, (int)Session["UserLogin"], DateTime.Now, tbHistorialIncapacidades.hinc_Espermanente);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, (int)Session["UserLogin"], Function.DatetimeNow(), tbHistorialIncapacidades.hinc_Espermanente);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -381,7 +381,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, "Predeterminado", (int)Session["UserLogin"], DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, "Predeterminado", (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -424,7 +424,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Restore(tbHistorialIncapacidades.hinc_Id, (int)Session["UserLogin"], DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Restore(tbHistorialIncapacidades.hinc_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Restore_Result item in list)
                     {
                         result = item.MensajeError;
