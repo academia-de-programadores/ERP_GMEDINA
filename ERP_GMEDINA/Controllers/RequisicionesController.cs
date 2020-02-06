@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -14,7 +15,9 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = null;
 
-         //GET: Requisiciones
+        //[SessionManager("Requisiciones/")]
+        [SessionManager("Requisiciones/Index")]
+        //GET: Requisiciones
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -23,22 +26,26 @@ namespace ERP_GMEDINA.Controllers
             return View(tbRequisiciones);
         }
 
-         //GET: Requisiciones/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
-            if (tbRequisiciones == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbRequisiciones);
-        }
+        //GET: Requisiciones/Details/5
 
-         //GET: Requisiciones/Create
+        //[SessionManager("Requisiciones/Details")]
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+        //    if (tbRequisiciones == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tbRequisiciones);
+        //}
+
+
+        [SessionManager("Requisiciones/Create")]
+        //GET: Requisiciones/Create
         public ActionResult Create()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -48,6 +55,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+        [SessionManager("Requisiciones/Detalles")]
         public ActionResult Detalles(int? id)
         {
             try
@@ -87,6 +95,7 @@ namespace ERP_GMEDINA.Controllers
          //To protect from over//POSTing attacks, please enable the specific properties you want to bind to, for
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("Requisiciones/Create")]
         public JsonResult Create(tbRequisiciones tbRequisiciones, DatosProfesionalesArray DatosProfesionales)
         {
             string msj = "...";
@@ -188,6 +197,7 @@ namespace ERP_GMEDINA.Controllers
 
         }
 
+
         public ActionResult ChildRowData(int? id)
         {
             try
@@ -281,6 +291,7 @@ namespace ERP_GMEDINA.Controllers
 
         //Nota: Los parametros y nombres de funciones, dependen de la tabla trabajada
         [HttpPost]
+        [SessionManager("Requisiciones/Habilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -437,7 +448,9 @@ namespace ERP_GMEDINA.Controllers
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
 
-         //GET: Requisiciones/Edit/5
+        //GET: Requisiciones/Edit/5
+
+        [SessionManager("Requisiciones/Edit")]
         public ActionResult Edit(int? id)
         {
 
@@ -473,6 +486,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Requisiciones/Edit")]
         public ActionResult Edit(tbRequisiciones tbRequisiciones, DatosProfesionalesArray DatosProfesionales)
         {
 
@@ -714,31 +728,35 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-         //GET: Requisiciones/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                db = new ERP_GMEDINAEntities();
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
-                if (tbRequisiciones == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbRequisiciones);
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
+        //[SessionManager("Requisiciones/Delete")]
+        ////GET: Requisiciones/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    try
+        //    {
+        //        db = new ERP_GMEDINAEntities();
+        //        if (id == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        }
+        //        tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+        //        if (tbRequisiciones == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
+        //        return View(tbRequisiciones);
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
          //POST: Requisiciones/Delete/5
         [HttpPost]
+
+        [SessionManager("Requisiciones/Delete")]
         public ActionResult Delete(tbRequisiciones Requisicion)
         {
             string msj = "";
