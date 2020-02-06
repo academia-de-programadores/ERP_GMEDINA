@@ -353,11 +353,11 @@ namespace ERP_GMEDINA.Controllers
                                 .Select(mon => mon.tmon_Id).ToList()[0]);
 
 
-                                var Usuario = (tbUsuario)Session["Usuario"];
+                               // var Usuario = (tbUsuario)Session["Usuario"];
 
                                 IEnumerable<object> listEmpleados = null;
                                 string MensajeError = "";
-                                listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, Edad, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, Usuario.usu_Id, DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id, Usuario.usu_Id, DateTime.Now, fechaingreso, CuentaBancaria, SUELDO, tmon_id, Usuario.usu_Id, DateTime.Now);
+                                listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, Edad, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, (int)Session["UserLogin"], Function.DatetimeNow(), cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id, (int)Session["UserLogin"], Function.DatetimeNow(), fechaingreso, CuentaBancaria, SUELDO, tmon_id, (int)Session["UserLogin"], Function.DatetimeNow());
 
                                 foreach (UDP_RRHH_tbEmpleados_Insert_Result Item in listEmpleados)
                                 {
@@ -521,7 +521,7 @@ namespace ERP_GMEDINA.Controllers
 
                         IEnumerable<object> listdocumentos = null;
                         string MensajeError = "";
-                        listdocumentos = db.UDP_RRHH_tbDirectoriosEmpleados_Insert(tiposArchivo, File.FileName, id, Usuario.usu_Id, DateTime.Now);
+                        listdocumentos = db.UDP_RRHH_tbDirectoriosEmpleados_Insert(tiposArchivo, File.FileName, id, (int)Session["UserLogin"], Function.DatetimeNow());
 
                         foreach (UDP_RRHH_tbDirectoriosEmpleados_Insert_Result Item in listdocumentos)
                         {
@@ -667,7 +667,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbDirectoriosEmpleados_Delete(tbDirectoriosEmpleados.direm_Id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbDirectoriosEmpleados_Delete(tbDirectoriosEmpleados.direm_Id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbDirectoriosEmpleados_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
