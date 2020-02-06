@@ -20,8 +20,8 @@ namespace ERP_GMEDINA.Controllers
         [SessionManager("HistorialContrataciones/Index")]
         public ActionResult Index()
         {
-            tbHistorialContrataciones tbHistorialContrataciones = new tbHistorialContrataciones { hcon_Estado = true };
-            bool Admin = (bool)Session["Admin"];
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            var tbHistorialContrataciones = new List<tbHistorialContrataciones> { };
             return View(tbHistorialContrataciones);
         }
 
@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Controllers
                         .Select(
                         t => new
                         {
-
+                           
                             hcon_Id = t.Id,
                             Nombre = t.Nombre_Completo,
                             dep_Descripcion = t.Departamento,
@@ -45,7 +45,7 @@ namespace ERP_GMEDINA.Controllers
                             car_Descripcion = t.Cargo,
                             scan_Fecha = t.Fecha_Seleccion_Candidato,
                             hcon_FechaContratado = t.Fecha_Contrato
-
+                            
 
                         }
                         )
@@ -67,7 +67,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialContrataciones.Where(x => x.Id == id).ToList();
+                    lista = db.V_HistorialContrataciones.Where(x => x.Id== id).ToList();
                 }
                 catch
                 {
