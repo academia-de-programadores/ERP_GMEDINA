@@ -138,10 +138,10 @@ function Llamarmodaldetalle(ID) {
                 $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico; 
                 $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
                 $("#ModalDetalles").find("#hinc_Doctor")["0"].innerText = obj.hinc_Doctor;
-                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0,10);
                 $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = FechaFormato(obj.hinc_FechaFin).substring(0, 10);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hinc_FechaCrea")["0"].innerText = FechaFormato(obj.hinc_FechaCrea).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_FechaCrea")["0"].innerText = FechaFormato(obj.hinc_FechaCrea);
                 //$("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
                 //$("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
