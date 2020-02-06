@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Attribute
                     {
                         if (General.GetRol())
                         {
-                            if (_screenId != "Home/Index")
+                            if (_screenId != "Menu/Index")
                             {
                                 if (!General.GetUserRols(_screenId))
                                     filterContext.Result = new RedirectToRouteResult(valuesSinAcceso);

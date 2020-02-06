@@ -43,3 +43,10 @@ function FechaFormatoInvertido(pFecha) {
 function FullBody() {
     $("#Body").css("padding-right", "0px");
 }
+
+function sinAccesoIzitoast() {
+    iziToast.error({
+        title: 'Error',
+        message: '¡No se cargó la información, contacte al administrador!',
+    });
+}
