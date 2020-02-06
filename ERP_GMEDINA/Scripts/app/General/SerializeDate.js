@@ -44,9 +44,94 @@ function FullBody() {
     $("#Body").css("padding-right", "0px");
 }
 
-function sinAccesoIzitoast() {
-    iziToast.error({
-        title: 'Error',
-        message: '¡No se cargó la información, contacte al administrador!',
-    });
+function userModelState(sPantalla) {
+    var response = {
+        status: true,
+        mensajeError : ''
+    }
+
+    // recuperar view model con la información del usuario
+    var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
+
+    console.log(VM_ModelState.ListaPantallas);
+
+    // validar si el usuario tiene acceso a la accion o pantalla
+    if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false)
+    {
+        response = {
+            status: false,
+            mensajeError: 'No tiene permiso para realizar esta acción'
+        }
+        // mensaje de error
+        iziToast.error({
+            title: 'Error',
+            message: 'No tiene permiso para realizar esta acción',
+        });
+    }
+
+    // validar si la sesion es válida 
+    if (VM_ModelState.SesionIniciada == false)
+    {
+        response = {
+            status: false,
+            mensajeError: 'La sesión es inválida'
+        }
+        // mensaje de error
+        iziToast.error({
+            title: 'Error',
+            message: 'La sesión es inválida',
+        });
+    }
+
+    // validar los roles del usuario
+    if (VM_ModelState.CantidadRoles == 0)
+    {
+        response = {
+            status: false,
+            mensajeError: 'Roles de usuario inválidos'
+        }
+
+        // mensaje de error
+        iziToast.error({
+            title: 'Error',
+            message: 'Roles de usuario inválidos',
+        });
+    }
+
+    // validar si la contraseña del usuario expiró y debe cambiar
+    if (VM_ModelState.ContraseniaExpirada == false)
+    {
+        response = {
+            status: false,
+            mensajeError: 'Contraseña expirada'
+        }
+        // mensaje de error
+        iziToast.error({
+            title: 'Error',
+            message: 'Contraseña expirada',
+        });
+    }
+
+    return response;
+}
+
+// funcion para validar si el usuario tiene permiso o acceso a una accion
+function validarPermisoUsuario(sPantalla, arreglo) {
+    var status = false;
+
+    // iterar arreglo de la lista de pantallas y acciones a las que tiene acceso el usuario
+    for (var i = 0; i < arreglo.length; i++) {
+
+        // obtener pantalla o accion del indice actual del arreglo
+        var pantallaIndexArreglo = arreglo[i].obj_Referencia;
+
+        // comprar la pantalla del indice actual del arreglo con la pantalla o accion recibida
+        if (pantallaIndexArreglo == sPantalla) {
+            status = true;
+            break;
+        }
+    }
+
+    // retornar el resultado
+    return status;
 }

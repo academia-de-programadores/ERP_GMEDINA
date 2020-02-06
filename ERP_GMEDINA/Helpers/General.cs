@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
+using ERP_GMEDINA.Helpers;
+using System.Threading.Tasks;
 
 namespace ERP_GMEDINA.Helpers
 {
@@ -126,5 +129,94 @@ namespace ERP_GMEDINA.Helpers
             public string Encabezado { get; set; }
             public string Tipo { get; set; }
         }
-    }
+
+		#region GET: Cargar_ModelState
+		public VM_ModelState Cargar_ModelState(int userId)
+		{
+			//INSTANCIA DE LA CLASE HELPERS
+			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
+			//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
+			VM_ModelState ModelState = new VM_ModelState();
+			//INICIALIZACION DE AMBITO DE DBCONTEXT
+			using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+			{
+
+				//SETEO DE ATTR ListaPantallas
+				ModelState.ListaPantallas = new
+				{
+					 List =	(from tbusuario in db.tbUsuario
+							join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+							join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+							join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
+							join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
+                            where tbusuario.usu_Id == userId
+                             select new { tbObjeto.obj_Referencia }).ToList()
+				};
+
+				//SETEO DE ATTR CantidadRoles
+				ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
+											join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+											join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+                                            where tbusuario.usu_Id == userId
+                                            select new { tbRol.rol_Id }).Count();
+
+				//SETEO DE ATTR SesionIniciada
+				ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
+
+				//SETEO DE ATTR ContraseniaExpirada
+				ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
+
+				//INICIALIZACION DE VARIABLE DE SESION
+				//HttpContext.Current.Session["ModelState"] = ModelState;
+
+				return ModelState;
+			}
+		}
+		#endregion
+
+		#region GET: Cargar_ModelStateAsync
+		//public Task<VM_ModelState> Cargar_ModelStateAsync(int userId)
+		//{
+		//	//INSTANCIA DE LA CLASE HELPERS
+		//	ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
+		//	//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
+		//	VM_ModelState ModelState = new VM_ModelState();
+		//	//INICIALIZACION DE AMBITO DE DBCONTEXT
+		//	//var Task_user = "";
+		//	using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+		//	{
+		//		var Task_user = Task.Run(() =>
+		//		{
+		//			//SETEO DE ATTR ListaPantallas
+		//			ModelState.ListaPantallas = new
+		//			{
+		//				List = (from tbusuario in db.tbUsuario
+		//						join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+		//						join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+		//						join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
+		//						join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
+		//						where tbusuario.usu_Id == userId
+		//						select new { tbObjeto.obj_Referencia }).ToList()
+		//			};
+
+		//			//SETEO DE ATTR CantidadRoles
+		//			ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
+		//										join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+		//										join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+		//										where tbusuario.usu_Id == userId
+		//										select new { tbRol.rol_Id }).Count();
+
+		//			//SETEO DE ATTR SesionIniciada
+		//			ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
+
+		//			//SETEO DE ATTR ContraseniaExpirada
+		//			ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
+		//			return ModelState;
+		//		});
+		//		//RETORNO DE LA TAREA
+		//		return Task_user;
+		//	}
+		//}
+		#endregion
+	}
 }

@@ -666,6 +666,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FechaPlanilla").Include(
                 "~/Scripts/app/General/FechaPlanilla.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Menu").Include(
+                "~/Scripts/app/General/Menu.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IV").Include(
                 "~/Scripts/app/General/IV.js"));
 

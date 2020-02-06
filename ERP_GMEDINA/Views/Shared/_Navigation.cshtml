@@ -577,13 +577,13 @@
                                                 }
 
                                                 //Ingresos individuales
-                                                if (Login.GetUserRols("IngresosIndividuales/Index"))
+                                                if (Login.GetUserRols("DeduccionesAFP/Index"))
                                                 {
                                                     <li class="@Html.IsSelected(controller: "DeduccionAFP")"><a href="@Url.Action("Index", "DeduccionAFP")">Deducciones AFP</a></li>
                                                 }
 
                                                 //Deduccion AFP
-                                                if (Login.GetUserRols("DeduccionAFP/Index"))
+                                                if (Login.GetUserRols("DeduccionesIndividuales/Index"))
                                                 {
                                                     <li class="@Html.IsSelected(controller: "DeduccionesIndividuales")"><a href="@Url.Action("Index", "DeduccionesIndividuales")">Deducciones Extras</a></li>
                                                 }

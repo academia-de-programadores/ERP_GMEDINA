@@ -80,8 +80,8 @@ namespace ERP_GMEDINA.Controllers
                                                                                                   tbInstitucionesFinancieras.insf_Contacto,
                                                                                                   tbInstitucionesFinancieras.insf_Telefono,
                                                                                                   tbInstitucionesFinancieras.insf_Correo,
-                                                                                                  tbInstitucionesFinancieras.insf_UsuarioCrea,
-                                                                                                  tbInstitucionesFinancieras.insf_FechaCrea,
+                                                                                                  Function.GetUser(),
+                                                                                                  Function.DatetimeNow(),
                                                                                                   tbInstitucionesFinancieras.insf_Activo);
 
                     // obtener resultado del procedimiento almacendo
@@ -180,8 +180,8 @@ namespace ERP_GMEDINA.Controllers
                                                         tbInstitucionesFinancieras.insf_Contacto,
                                                         tbInstitucionesFinancieras.insf_Telefono,
                                                         tbInstitucionesFinancieras.insf_Correo,
-                                                        tbInstitucionesFinancieras.insf_UsuarioModifica,
-                                                        tbInstitucionesFinancieras.insf_FechaModifica,
+                                                        Function.GetUser(),
+                                                        Function.DatetimeNow(),
                                                         tbInstitucionesFinancieras.insf_Activo);
 
                     // resultado del procedimiento almacenado
@@ -262,7 +262,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     // ejecutar procedimiento almacenad
-                    listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Inactivar(ID, 1, DateTime.Now);
+                    listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Inactivar(ID, Function.GetUser(),Function.DatetimeNow());
 
                     // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result Resultado in listINFS)
@@ -305,7 +305,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     // ejecutar procedimiento almacenado
-                    listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Activar(id, 1, DateTime.Now);
+                    listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Activar(id, Function.GetUser(), Function.DatetimeNow());
 
                     // validar respuesta del procedimiento almacenado
                     foreach (UDP_Plani_tbInstitucionesFinancieras_Activar_Result Resultado in listINFS)

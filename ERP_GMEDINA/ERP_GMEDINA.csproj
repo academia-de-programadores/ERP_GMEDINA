@@ -1602,6 +1602,7 @@
     <Compile Include="Models\ViewModelListaErrores.cs" />
     <Compile Include="Models\ViewModelReportesVarios.cs" />
     <Compile Include="Models\ViewModel_PlanillaImpuestoVecinal.cs" />
+    <Compile Include="Models\VM_ModelState.cs" />
     <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -2201,6 +2202,7 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
+    <Content Include="Scripts\app\General\Menu.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\PagoDeCesantia.js" />

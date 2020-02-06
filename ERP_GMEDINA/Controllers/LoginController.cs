@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin;
-
+using System.Threading.Tasks;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Login
         public ActionResult Index()
         {
-                Session["UserLogin"] = null;    
+                Session["UserLogin"] = null;
                 return View();
         }
 
@@ -111,5 +111,55 @@ namespace ERP_GMEDINA.Controllers
             else
                 return RedirectToAction("Index", "Login");
         }
-    }
+
+		#region GET : LoadUserModelState
+        // ESTE ES EL QUE SE ESTÁ USANDO
+		public JsonResult LoadUserModelState()
+		{
+			//INICIALIZACION DEL OBJETC VM_ModelState
+			VM_ModelState userModel = new VM_ModelState();
+			try
+			{
+                //ID USUARIO LOGUEADO
+                int userId = (int)Session["UserLogin"];
+                //UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+                Helpers.General vm = new Helpers.General();
+				//SOBRECARGA DE OBJECT VM_ModelState
+				userModel = vm.Cargar_ModelState(userId);
+			}
+			catch(Exception Ex)
+			{
+				Ex.Message.ToString();
+				return Json("error", JsonRequestBehavior.AllowGet);
+			}
+
+			//RETORNO DEL MODEL STATE
+			return Json(userModel, JsonRequestBehavior.AllowGet);
+		}
+		#endregion
+
+
+		#region GET : LoadUserModelStateAsync
+		//public JsonResult LoadUserModelStateAsync()
+		//{
+		//	//INICIALIAXCION DE LA TAREA
+		//	//Task Task_ModelState;
+		//	//INICIALIZACION DEL OBJETC VM_ModelState
+		//	VM_ModelState userModel = new VM_ModelState();
+		//		//Task_ModelState = Task.Run(() =>
+		//		//{
+		//			//ID USUARIO LOGUEADO
+		//			int userId = (int)Session["UserLogin"];
+		//			//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+		//			Helpers.General vm = new Helpers.General();
+		//			//SOBRECARGA DE OBJECT VM_ModelState
+		//			userModel = vm.Cargar_ModelState(userId);
+		//		//});
+
+		//	//RETORNO DEL MODEL STATE
+		//	return Json(userModel, JsonRequestBehavior.AllowGet);
+		//}
+		#endregion
+
+	}
 }

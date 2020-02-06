@@ -76,8 +76,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea,dafp_DeducirISR")] tbDeduccionAFP tbDeduccionAFP)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbDeduccionAFP.dafp_UsuarioCrea = 1;
-            tbDeduccionAFP.dafp_FechaCrea = DateTime.Now;
+   
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listDeduccionAFP = null;
@@ -91,8 +90,8 @@ namespace ERP_GMEDINA.Controllers
                     listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Insert(tbDeduccionAFP.dafp_AporteLps,
                                                                           tbDeduccionAFP.afp_Id,
                                                                           tbDeduccionAFP.emp_Id,
-                                                                          tbDeduccionAFP.dafp_UsuarioCrea,
-                                                                          tbDeduccionAFP.dafp_FechaCrea,
+                                                                          Function.GetUser(),
+                                                                          Function.DatetimeNow(),
                                                                           tbDeduccionAFP.dafp_DeducirISR);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Insert_Result Resultado in listDeduccionAFP)
@@ -172,8 +171,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica,dafp_DeducirISR")] tbDeduccionAFP tbDeduccionAFP)
         {
             //LLENAR DATA DE AUDITORIA
-            tbDeduccionAFP.dafp_UsuarioModifica = 1;
-            tbDeduccionAFP.dafp_FechaModifica = DateTime.Now;
+      
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listDeduccionAFP = null;
@@ -188,8 +186,8 @@ namespace ERP_GMEDINA.Controllers
                                                                           tbDeduccionAFP.dafp_AporteLps,
                                                                           tbDeduccionAFP.afp_Id,
                                                                           tbDeduccionAFP.emp_Id,
-                                                                          tbDeduccionAFP.dafp_UsuarioModifica,
-                                                                          tbDeduccionAFP.dafp_FechaModifica,
+                                                                          Function.GetUser(),
+                                                                          Function.DatetimeNow(),
                                                                           tbDeduccionAFP.dafp_DeducirISR);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Update_Result Resultado in listDeduccionAFP)
@@ -268,8 +266,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Inactivar(int dafp_Id)
         {
             //LLENAR DATA DE AUDITORIA
-            int dafp_UsuarioModifica = 1;
-            DateTime dafp_FechaModifica = DateTime.Now;
+        
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listDeduccionAFP = null;
@@ -281,8 +278,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Inactivar(dafp_Id,
-                                                                             dafp_UsuarioModifica,
-                                                                             dafp_FechaModifica);
+                                                                             Function.GetUser(),
+                                                                             Function.DatetimeNow());
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Inactivar_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;
@@ -321,10 +318,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         [SessionManager("DeduccionesAFP/Activar")]
         public ActionResult Activar(int id)
-        {
-            //LLENAR DATA DE AUDITORIA
-            int dafp_UsuarioModifica = 1;
-            DateTime dafp_FechaModifica = DateTime.Now;
+        { 
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listDeduccionAFP = null;
@@ -336,8 +330,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Activar(id,
-                                                                           dafp_UsuarioModifica,
-                                                                           dafp_FechaModifica);
+                                                                           Function.GetUser(),
+                                                                           Function.DatetimeNow());
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Activar_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;

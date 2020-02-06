@@ -67,27 +67,32 @@ function cargarGridTechoComisiones() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnCreateTechoComision", function () {
-    //LLAMAR LA FUNCION PARA OCULTAR LAS VALIDACIONES
-    OcultarValidacionesCrear();
-    //DESBLOQUEAR EL BOTON DE CREAR
-    $("#btnCrearTechoComis").attr("disabled", false);
-    //FUNCION PARA CARGAR EL INGRESO
-    $.ajax({
-        url: "/TechosComisiones/EditGetDDLIngreso",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #cin_IdIngreso").empty();
-            $("#Crear #cin_IdIngreso").append("<option value='0'>Seleccione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosComisiones/Create");
+
+    if (validacionPermiso.status == true) {
+        //LLAMAR LA FUNCION PARA OCULTAR LAS VALIDACIONES
+        OcultarValidacionesCrear();
+        //DESBLOQUEAR EL BOTON DE CREAR
+        $("#btnCrearTechoComis").attr("disabled", false);
+        //FUNCION PARA CARGAR EL INGRESO
+        $.ajax({
+            url: "/TechosComisiones/EditGetDDLIngreso",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        })
+            //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+            .done(function (data) {
+                $("#Crear #cin_IdIngreso").empty();
+                $("#Crear #cin_IdIngreso").append("<option value='0'>Seleccione una opción...</option>");
+                $.each(data, function (i, iter) {
+                    $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
             });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#CrearTechoComision").modal({ backdrop: 'static', keyboard: false });
+        //MOSTRAR EL MODAL DE AGREGAR
+        $("#CrearTechoComision").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -288,27 +293,18 @@ function OcultarValidacionesCrear() {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblTechoCom tbody tr td #btnEditarTechosComisiones", function () {
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesEditar();
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosComisiones/Edit");
 
-    $("#Editar #cin_IdIngreso").empty();
-    var ID = $(this).data('id');
-    IDInactivar = ID;
+    if (validacionPermiso.status == true) {
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesEditar();
 
-    var idIngresoSelected = "", DescripcionIngresoSelected = "";
+        $("#Editar #cin_IdIngreso").empty();
+        var ID = $(this).data('id');
+        IDInactivar = ID;
 
-    $.ajax({
-        url: "/TechosComisiones/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: ID })
-    }).done(function (data) {
-
-        var SelectedIdIng = data.cin_IdIngreso;
-        DescripcionIngresoSelected = data.cin_DescripcionIngreso;
-        //LLENAR EL DROPDOWNLIST
-        $("#Editar #cin_IdIngreso").append("<option value='" + idIngresoSelected + "' selected>" + DescripcionIngresoSelected + "</option>");
+        var idIngresoSelected = "", DescripcionIngresoSelected = "";
 
         $.ajax({
             url: "/TechosComisiones/Edit/" + ID,
@@ -317,40 +313,54 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnEditarTechosComisiones", f
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: ID })
         }).done(function (data) {
-            if (data) {
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-          
-                $.ajax({
-                    url: "/EmpleadoComisiones/EditGetDDLIngreso",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-          .done(function (data) {
-              //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-              $("#Editar #cin_IdIngreso").empty();
-              //LLENAR EL DROPDOWNLIST
-              $.each(data, function (i, iter) {
-                  $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdIng ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+
+            var SelectedIdIng = data.cin_IdIngreso;
+            DescripcionIngresoSelected = data.cin_DescripcionIngreso;
+            //LLENAR EL DROPDOWNLIST
+            $("#Editar #cin_IdIngreso").append("<option value='" + idIngresoSelected + "' selected>" + DescripcionIngresoSelected + "</option>");
+
+            $.ajax({
+                url: "/TechosComisiones/Edit/" + ID,
+                method: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: ID })
+            }).done(function (data) {
+                if (data) {
+                    //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+
+                    $.ajax({
+                        url: "/EmpleadoComisiones/EditGetDDLIngreso",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                    })
+              .done(function (data) {
+                  //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                  $("#Editar #cin_IdIngreso").empty();
+                  //LLENAR EL DROPDOWNLIST
+                  $.each(data, function (i, iter) {
+                      $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdIng ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                  });
+
               });
+                    $("#Editar #tc_Id").val(data.tc_Id);
+                    $("#Editar #tc_RangoInicio").val(data.tc_RangoInicio);
+                    $("#Editar #tc_RangoFin").val(data.tc_RangoFin);
+                    $("#Editar #tc_PorcentajeComision").val(data.tc_PorcentajeComision);
+                    //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
+                    $("#EditarTechoComision").modal({ backdrop: 'static', keyboard: false });
+                }
+            })
 
-          });
-                $("#Editar #tc_Id").val(data.tc_Id);
-                $("#Editar #tc_RangoInicio").val(data.tc_RangoInicio);
-                $("#Editar #tc_RangoFin").val(data.tc_RangoFin);
-                $("#Editar #tc_PorcentajeComision").val(data.tc_PorcentajeComision);
-                //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
-                $("#EditarTechoComision").modal({ backdrop: 'static', keyboard: false });
-            }
-        })
-
-    }).fail(function (jqXHR, textStatus, error) {
-        iziToast.error({
-            title: 'Error',
-            message: 'No se cargó la información de la comisión, contacte al administrador',
+        }).fail(function (jqXHR, textStatus, error) {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se cargó la información de la comisión, contacte al administrador',
+            });
         });
-    });
+    }
 });
 
 //FUNCION: OCULTAR EL MODAL DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
@@ -639,53 +649,63 @@ $("#btnCerrarEditar").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblTechoCom tbody tr td #btnDetallesTechosComisiones", function () {
-    ActivarID = $(this).data('id');
-    var ID = $(this).data('id');
-    console.log('entrar');
-    $.ajax({
-        url: "/TechosComisiones/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: ID })
-    })
-        .done(function (data) {
-            console.log('vengo del controlador');
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosComisiones/Details");
 
-                var FechaCrea = FechaFormato(data.tc_FechaCrea);
-                var FechaModifica = FechaFormato(data.tc_FechaModifica);
+    if (validacionPermiso.status == true) {
+        ActivarID = $(this).data('id');
+        var ID = $(this).data('id');
+        console.log('entrar');
+        $.ajax({
+            url: "/TechosComisiones/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: ID })
+        })
+            .done(function (data) {
+                console.log('vengo del controlador');
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
 
-                $("#Detalles #tc_Id").html(data.tc_Id);
-                $("#Detalles #cin_DescripcionIngreso").html(data.cin_DescripcionIngreso);
-                $("#Detalles #tc_RangoInicio").html((data.tc_RangoInicio % 1 == 0) ? data.tc_RangoInicio + ".00" : data.tc_RangoInicio);
-                $("#Detalles #tc_RangoFin").html((data.tc_RangoFin % 1 == 0) ? data.tc_RangoFin + ".00" : data.tc_RangoFin);
-                $("#Detalles #tc_PorcentajeComision").html((data.tc_PorcentajeComision % 1 == 0) ? data.tc_PorcentajeComision + ".00" + '%' : data.tc_PorcentajeComision + '%');
-                
-                $("#Detalles #NombreUsuarioCrea").html(data.NombreUsuarioCrea);
-                $("#Detalles #tc_FechaCrea").html(FechaCrea);
-                $("#Detalles #NombreUsuarioModifica").html(data.NombreUsuarioModifica);
-                $("#Detalles #tc_FechaModifica").html(FechaModifica);
-                console.log('desplegar modal')
-                $("#DetallesTechoComision").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+                    var FechaCrea = FechaFormato(data.tc_FechaCrea);
+                    var FechaModifica = FechaFormato(data.tc_FechaModifica);
+
+                    $("#Detalles #tc_Id").html(data.tc_Id);
+                    $("#Detalles #cin_DescripcionIngreso").html(data.cin_DescripcionIngreso);
+                    $("#Detalles #tc_RangoInicio").html((data.tc_RangoInicio % 1 == 0) ? data.tc_RangoInicio + ".00" : data.tc_RangoInicio);
+                    $("#Detalles #tc_RangoFin").html((data.tc_RangoFin % 1 == 0) ? data.tc_RangoFin + ".00" : data.tc_RangoFin);
+                    $("#Detalles #tc_PorcentajeComision").html((data.tc_PorcentajeComision % 1 == 0) ? data.tc_PorcentajeComision + ".00" + '%' : data.tc_PorcentajeComision + '%');
+
+                    $("#Detalles #NombreUsuarioCrea").html(data.NombreUsuarioCrea);
+                    $("#Detalles #tc_FechaCrea").html(FechaCrea);
+                    $("#Detalles #NombreUsuarioModifica").html(data.NombreUsuarioModifica);
+                    $("#Detalles #tc_FechaModifica").html(FechaModifica);
+                    console.log('desplegar modal')
+                    $("#DetallesTechoComision").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 
 //INACTIVAR
 $(document).on("click", "#btnmodalInactivarTechosComisiones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#EditarTechoComision").modal('hide');
-    $("#InactivarTechoComision").modal({ backdrop: 'static', keyboard: false });
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosComisiones/Inactivar");
+
+    if (validacionPermiso.status == true) {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#EditarTechoComision").modal('hide');
+        $("#InactivarTechoComision").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //FUNCION: PRIMERA FASE DE INACTIVACION DE REGISTROS, MOSTRAR MODAL CON MENSAJE DE CONFIRMACION
@@ -741,9 +761,14 @@ $("#btnCerrarInactivar").click(function () {
 });
 
 $(document).on("click", "#tblTechoCom tbody tr td #btnActivarTechosComisiones", function () {
-    IDActivar = $(this).data('id');
-    $("#btnActivarTechoComision").attr("disabled", false);
-    $("#ActivarTechoComision").modal({ backdrop: 'static', keyboard: false });
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("TechosComisiones/Activar");
+
+    if (validacionPermiso.status == true) {
+        IDActivar = $(this).data('id');
+        $("#btnActivarTechoComision").attr("disabled", false);
+        $("#ActivarTechoComision").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
