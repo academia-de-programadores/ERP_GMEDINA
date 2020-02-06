@@ -81,7 +81,7 @@ namespace ERP_GMEDINA.Controllers
 
                     //GET CALCULO DE LA DEDUCCION
                     decimal TotalIngresoBrutoAnual = Proyeccion_ImpuestoVecinal(item.emp_Id);
-                    ViewModel_PlanillaImpuestoVecinal.Total_ImpuestoVecinal = CalculoImpuestoVecinal(TotalIngresoBrutoAnual, objDeduccionIV); 
+                    ViewModel_PlanillaImpuestoVecinal.Total_ImpuestoVecinal = CalculoImpuestoVecinal(TotalIngresoBrutoAnual, objDeduccionIV);
 
                     //string TotalImpuestoVecinal a decimal
                     decimal DeduccionMensual = Math.Round((ViewModel_PlanillaImpuestoVecinal.Total_ImpuestoVecinal / 12), 2);
@@ -93,7 +93,7 @@ namespace ERP_GMEDINA.Controllers
                     ViewModel_PlanillaImpuestoVecinalList.Add(ViewModel_PlanillaImpuestoVecinal);
                 }
                 Session["GenerarPlanillaImpVecinal"] = ViewModel_PlanillaImpuestoVecinalList;
- 
+
             }
             catch (Exception Ex)
             {
@@ -101,13 +101,15 @@ namespace ERP_GMEDINA.Controllers
                 Ex.Message.ToString();
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
-            var ListGeneric = ViewModel_PlanillaImpuestoVecinalList.Select(c => new { No = c.No,
-                                                                                      NoIdentidad = c.NoIdentidad,
-                                                                                      NombreCompleto = c.NombreCompleto,
-                                                                                      Total_ImpuestoVecinal = c.Total_ImpuestoVecinal,
-                                                                                      DeduccionMensual = c.DeduccionMensual,
-                                                                                      NoDeCuenta = c.NoDeCuenta
-                                                                                    }).ToList();
+            var ListGeneric = ViewModel_PlanillaImpuestoVecinalList.Select(c => new
+            {
+                No = c.No,
+                NoIdentidad = c.NoIdentidad,
+                NombreCompleto = c.NombreCompleto,
+                Total_ImpuestoVecinal = c.Total_ImpuestoVecinal,
+                DeduccionMensual = c.DeduccionMensual,
+                NoDeCuenta = c.NoDeCuenta
+            }).ToList();
             return Json(ListGeneric, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -131,7 +133,7 @@ namespace ERP_GMEDINA.Controllers
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
             {
                 //RECUPERAR EL OBJETO DE SESIÓN
-                tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
+                int idUsuarioCrea = (int)HttpContext.Session["UserLogin"];
                 //ABRIR LA CONEXIÓN 
                 connection.Open();
                 //INICIALIZAR LA TRANSACCIÓN
@@ -139,9 +141,9 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //QUERY
-                    string UDP_NAME = "[plani].[UDP_Plani_tbDeduccionImpuestoVecinal_Insert]";
+                    //string UDP_NAME = "[plani].[UDP_Plani_tbDeduccionImpuestoVecinal_Insert] @emp_Id, @dimv_MontoTotal, @dimv_CuotaAPagar, @timv_UsuarioCrea, @timv_FechaCrea";
                     #region Insertar en el encabezado
-                    using (SqlCommand command = new SqlCommand(UDP_NAME, connection, transaccion))
+                    using (SqlCommand command = new SqlCommand("Plani.UDP_Plani_tbDeduccionImpuestoVecinal_Insert", connection, transaccion))
                     {
                         //DECLARACION DE COMANDO TIPO SP
                         command.CommandType = CommandType.StoredProcedure;
@@ -149,27 +151,17 @@ namespace ERP_GMEDINA.Controllers
                         //ITERACION DE LA LISTA DE INSERCION
                         foreach (ViewModel_PlanillaImpuestoVecinal item in ViewModel_PlanillaImpuestoVecinalList)
                         {
-                            
+
                             //SOBRECARGA DE PARAMETROS DEL SP
                             command.Parameters.AddWithValue("@emp_Id", item.emp_Id);
                             command.Parameters.AddWithValue("@dimv_MontoTotal", item.Total_ImpuestoVecinal);
                             command.Parameters.AddWithValue("@dimv_CuotaAPagar", item.DeduccionMensual);
-                            command.Parameters.AddWithValue("@timv_UsuarioCrea", 1);
+                            command.Parameters.AddWithValue("@timv_UsuarioCrea", idUsuarioCrea);
                             command.Parameters.AddWithValue("@timv_FechaCrea", FechaInsercion);
 
                             //ALMACENAR EL NUMERO DE INSERCIONES
                             int result = command.ExecuteNonQuery();
-                            //VALIDAR SI HAY ERRORES EN LA INSERCIÓN
-                            if (result <= 0)
-                                try
-                                {
-                                    transaccion.Rollback();
-                                    response = "error";
-                                }
-                                catch
-                                {
-
-                                }
+                            command.Parameters.Clear();
                         }
 
                     }
@@ -213,7 +205,7 @@ namespace ERP_GMEDINA.Controllers
                     DateTime FechaInicio = (DateTime.Now).AddYears(-1);
                     //METODO MEDIANTE HISTORIAL DE PAGO
                     IQueryable<decimal> SalariosUltMeses = db2.tbHistorialDePago.OrderByDescending(x => x.hipa_FechaPago)
-                                                                               .Where(p => p.emp_Id == Emp_Id  &&
+                                                                               .Where(p => p.emp_Id == Emp_Id &&
                                                                                p.hipa_FechaPago >= FechaInicio && p.hipa_FechaPago <= DateTime.Now)
                                                                                .Select(x => (decimal)x.hipa_TotalSueldoBruto);
                     //REALIZAR PROYECCIÓN EN BASE A PROMEDIO
@@ -247,7 +239,7 @@ namespace ERP_GMEDINA.Controllers
 
             //TOTAL DEDUCCION
             decimal? TotalImpuestoVecinal = 0;
-            
+
             //DECLARACIONES DE VALIDACION
             //Variable para validar que entre en cierto momento en cada uno de los rangos
             string IV = "PrimerRango";
