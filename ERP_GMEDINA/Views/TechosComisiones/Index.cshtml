@@ -70,7 +70,7 @@
 												<button type="button" data-id="@item.tc_Id" class="btn btn-primary btn-xs" id="btnDetallesTechosComisiones">Detalles</button>
 												<button type="button" data-id="@item.tc_Id" class="btn btn-default btn-xs" id="btnEditarTechosComisiones">Editar</button>
                                             }
-                                            if (oUsuario.usu_EsAdministrador == true && item.tc_Estado == false)
+                                            if (oUsuario?.usu_EsAdministrador == true && item.tc_Estado == false)
                                             {
                                                 <button type="button" data-id="@item.tc_Id" class="btn btn-primary btn-xs" id="btnDetallesTechosComisiones">Detalles</button>
 												<button type="button" data-id="@item.tc_Id" class="btn btn-default btn-xs" id="btnActivarTechosComisiones">Activar</button>
