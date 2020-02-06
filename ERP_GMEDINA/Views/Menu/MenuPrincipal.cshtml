@@ -27,7 +27,8 @@
         <nav class="navbar navbar-fixed-top" role="navigation" id="navMenu">
             <ul class="nav navbar-top-links navbar-right" id="ulMenu">
                @{var oUsuario = HttpContext.Current.Session["UserName"];
-               string nombreUsuario = oUsuario.ToString();
+                   string nombreUsuario = oUsuario.ToString();
+               }
                 <li>
                     <a href="#">
                         Bienvenido @nombreUsuario
