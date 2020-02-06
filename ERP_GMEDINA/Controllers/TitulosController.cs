@@ -73,7 +73,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTitulos_Insert(tbtitulos.titu_Descripcion, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTitulos_Insert(tbtitulos.titu_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTitulos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -149,7 +149,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTitulos_Update(id, tbtitulos.titu_Descripcion, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTitulos_Update(id, tbtitulos.titu_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTitulos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -184,7 +184,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTitulos_Delete(id, RazonInactivo, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTitulos_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTitulos_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -231,7 +231,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTitulos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTitulos_Restore(id, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTitulos_Restore_Result item in list)
                     {
                         result = item.MensajeError;

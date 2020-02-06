@@ -74,7 +74,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion, tbCargos.car_SueldoMinimo, tbCargos.car_SueldoMaximo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion, tbCargos.car_SueldoMinimo, tbCargos.car_SueldoMaximo, (int)Session["UserLogin"], DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -149,7 +149,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCargos_Update(id, tbCargos.car_Descripcion, tbCargos.car_SueldoMinimo, tbCargos.car_SueldoMaximo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCargos_Update(id, tbCargos.car_Descripcion, tbCargos.car_SueldoMinimo, tbCargos.car_SueldoMaximo, (int)Session["UserLogin"], DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -181,7 +181,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCargos_Delete(id, tbCargos.car_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCargos_Delete(id, tbCargos.car_RazonInactivo, (int)Session["UserLogin"], DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -225,7 +225,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbCargos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCargos_Restore(id,(int)Session["UserLogin"], DateTime.Now);
                     foreach (UDP_RRHH_tbCargos_Restore_Result item in list)
                     {
                         result = item.MensajeError;

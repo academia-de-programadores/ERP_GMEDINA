@@ -213,7 +213,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSueldos_Insert(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id, Convert.ToDecimal(tbsueldos.sue_Cantidad), Usuario.usu_Id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSueldos_Insert(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id, Convert.ToDecimal(tbsueldos.sue_Cantidad), (int)Session["UserLogin"], (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -268,7 +268,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         [SessionManager("Sueldos/Details")]
-
         public ActionResult Details(int? id)
         {
             if (id == null)

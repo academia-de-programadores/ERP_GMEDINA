@@ -213,8 +213,8 @@ namespace ERP_GMEDINA.Controllers
                         observacion,
                         tbHistorialPermisos.hper_Justificado,
                         tbHistorialPermisos.hper_PorcentajeIndemnizado,
-                        1,
-                        DateTime.Now);
+                        (int)Session["UserLogin"], 
+                        Function.DatetimeNow());
                         string mensajeDB = "";
                         foreach (UDP_RRHH_tbHistorialPermisos_Insert_Result i in emp)
                         {
