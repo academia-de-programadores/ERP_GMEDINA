@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="241642d5e4af4d7d8a3af204e0a1d32c" Name="Diagram1" ZoomLevel="70">
+      <Diagram DiagramId="241642d5e4af4d7d8a3af204e0a1d32c" Name="Diagram1" ZoomLevel="59">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="205" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbBitacoraErrores" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="184.75" />
@@ -25,7 +25,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionAFP" Width="1.5" PointX="12.75" PointY="189.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" Width="1.5" PointX="13.5" PointY="170.5" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionesIndividuales" Width="1.5" PointX="21.75" PointY="196.125" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionImpuestoVecinal" Width="1.5" PointX="10.5" PointY="170.875" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="12.75" PointY="202.125" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleadoBonos" Width="1.5" PointX="10.25" PointY="175.5" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleadoComisiones" Width="1.5" PointX="11.25" PointY="183.375" />
@@ -234,8 +233,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEquipoEmpleados_eqem_Id_Plani_tbDeduccionesExtraordinarias_eqem_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionesIndividuales_emp_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbTechoImpuestoVecinal_tbDeduccionImpuestoVecinal_timv_IdTechoImpuestoVecinal" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDeduccionImpuestoVecinal_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Plani_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbEmpleadoBonos_emp_Id" />
@@ -327,8 +324,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Acce_tbRolesUsuario_rolu_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Acce_tbRolesUsuario_rolu_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Acce_tbRolesUsuario_usu_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaDetalle_pdcd_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbPagoDeCesantiaEncabezado_pdce_UsuarioCrea" />
@@ -499,6 +494,10 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionImpuestoVecinal" Width="1.5" PointX="15.75" PointY="212.125" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDeduccionImpuestoVecinal_emp_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

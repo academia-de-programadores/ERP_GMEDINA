@@ -11,7 +11,7 @@ namespace ERP_GMEDINA.Models
         public byte[] usu_Password { get; set; }
         public string usu_Nombres { get; set; }
         public string usu_Apellidos { get; set; }
-        public string usu_Correo { get; set; }
+        public string usu_Correos { get; set; }
         public bool usu_EsActivo { get; set; }
         public string usu_RazonInactivo { get; set; }
         public bool usu_EsAdministrador { get; set; }

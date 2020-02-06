@@ -1603,6 +1603,7 @@
     <Compile Include="Models\ViewModelingresosReport.cs" />
     <Compile Include="Models\ViewModelListaErrores.cs" />
     <Compile Include="Models\ViewModelReportesVarios.cs" />
+    <Compile Include="Models\ViewModel_PlanillaImpuestoVecinal.cs" />
     <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -2218,7 +2219,7 @@
     <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Planilla_ImpuestoVecinal.js" />
+    <Content Include="Scripts\app\General\Planilla_ImpuestoVecinal.js" />
     <Content Include="Scripts\plugins\dataTablesMatutina\dataTables.buttons.min.js" />
     <Content Include="Scripts\plugins\dataTablesMatutina\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTablesMatutina\DatatablesConfigurations.js" />
@@ -3107,6 +3108,7 @@
     <Content Include="Views\TechoImpuestoVecinal\_DetailsIV.cshtml" />
     <Content Include="Views\TechoImpuestoVecinal\_EditIV.cshtml" />
     <Content Include="Views\PlanillaImpuestoVecinal\Index.cshtml" />
+    <Content Include="Views\PlanillaImpuestoVecinal\IndexNuevaProyeccion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

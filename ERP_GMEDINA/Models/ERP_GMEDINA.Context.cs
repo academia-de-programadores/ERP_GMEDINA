@@ -40,7 +40,6 @@
         public virtual DbSet<tbDeduccionAFP> tbDeduccionAFP { get; set; }
         public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
         public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
-        public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
         public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
@@ -221,6 +220,7 @@
         public virtual DbSet<V_tbtiposalidas> V_tbtiposalidas { get; set; }
         public virtual DbSet<V_Plani_HistorialPlanilla> V_Plani_HistorialPlanilla { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
+        public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -7343,7 +7343,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Estado", usu_IdParameter, usu_EsActivoParameter, usu_RazonInactivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<int> suc_Id, Nullable<short> emp_Id, Nullable<bool> usu_EsAdministrador)
+        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
         {
             var usu_NombreUsuarioParameter = usu_NombreUsuario != null ?
                 new ObjectParameter("usu_NombreUsuario", usu_NombreUsuario) :
@@ -7365,6 +7365,14 @@
                 new ObjectParameter("usu_Correo", usu_Correo) :
                 new ObjectParameter("usu_Correo", typeof(string));
     
+            var usu_EsActivoParameter = usu_EsActivo.HasValue ?
+                new ObjectParameter("usu_EsActivo", usu_EsActivo) :
+                new ObjectParameter("usu_EsActivo", typeof(bool));
+    
+            var usu_EsAdministradorParameter = usu_EsAdministrador.HasValue ?
+                new ObjectParameter("usu_EsAdministrador", usu_EsAdministrador) :
+                new ObjectParameter("usu_EsAdministrador", typeof(bool));
+    
             var suc_IdParameter = suc_Id.HasValue ?
                 new ObjectParameter("suc_Id", suc_Id) :
                 new ObjectParameter("suc_Id", typeof(int));
@@ -7373,11 +7381,7 @@
                 new ObjectParameter("emp_Id", emp_Id) :
                 new ObjectParameter("emp_Id", typeof(short));
     
-            var usu_EsAdministradorParameter = usu_EsAdministrador.HasValue ?
-                new ObjectParameter("usu_EsAdministrador", usu_EsAdministrador) :
-                new ObjectParameter("usu_EsAdministrador", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, suc_IdParameter, emp_IdParameter, usu_EsAdministradorParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
     
         public virtual ObjectResult<string> UDP_Acce_tbUsuario_PasswordRestore(Nullable<int> usu_Id, string usu_Password)
@@ -7454,6 +7458,31 @@
                 new ObjectParameter("emp_Id", typeof(short));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbDeduccionImpuestoVecinal_Insert(Nullable<int> emp_Id, Nullable<decimal> dimv_MontoTotal, Nullable<decimal> dimv_CuotaAPagar, Nullable<int> timv_UsuarioCrea, Nullable<System.DateTime> timv_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var dimv_MontoTotalParameter = dimv_MontoTotal.HasValue ?
+                new ObjectParameter("dimv_MontoTotal", dimv_MontoTotal) :
+                new ObjectParameter("dimv_MontoTotal", typeof(decimal));
+    
+            var dimv_CuotaAPagarParameter = dimv_CuotaAPagar.HasValue ?
+                new ObjectParameter("dimv_CuotaAPagar", dimv_CuotaAPagar) :
+                new ObjectParameter("dimv_CuotaAPagar", typeof(decimal));
+    
+            var timv_UsuarioCreaParameter = timv_UsuarioCrea.HasValue ?
+                new ObjectParameter("timv_UsuarioCrea", timv_UsuarioCrea) :
+                new ObjectParameter("timv_UsuarioCrea", typeof(int));
+    
+            var timv_FechaCreaParameter = timv_FechaCrea.HasValue ?
+                new ObjectParameter("timv_FechaCrea", timv_FechaCrea) :
+                new ObjectParameter("timv_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbDeduccionImpuestoVecinal_Insert", emp_IdParameter, dimv_MontoTotalParameter, dimv_CuotaAPagarParameter, timv_UsuarioCreaParameter, timv_FechaCreaParameter);
         }
     }
 }
