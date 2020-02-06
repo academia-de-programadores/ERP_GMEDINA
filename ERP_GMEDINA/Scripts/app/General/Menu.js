@@ -25,19 +25,26 @@
         else {
             sessionStorage.setItem("VM_ModelState", JSON.stringify(data));
 
-            // codigo de ejemplo  de como implementar
+            //CÓDIGO EJEMPLO: IMPLEMENTAR VALIDACIONES DE PERMISOS DE USUARIO
 
-            // validar informacion del usuario
-            var validacionPermiso = userModelState("Planilla/Index");
+        ////////////////////////////////////////////////////////////////
+        /////////////////***********CODIGO DE EJEMPLO***********////////
+        ////////////////////////////////////////////////////////////////
+		///
+        ///       //validar informacion del usuario
+        ///       var validacionPermiso = userModelState("Planilla/Index");
+		///
+        ///		  if (validacionPermiso.status == true) {
+		///
+        ///           // activar
+        ///           console.log('codigo...');
+        ///           // termina activar
+        ///       }
+		///
+		/////////////////////////////////////////////////////////////////
 
-            if (validacionPermiso.status == true) {
+		//CÓDIGO EJEMPLO
 
-                // activar
-                console.log('codigo...');
-                // termina activar
-            }
-
-            // codigo de ejemplo  de como implementar
         }
     });
 });
