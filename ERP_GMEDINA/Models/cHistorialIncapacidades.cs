@@ -53,6 +53,10 @@ namespace ERP_GMEDINA.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
         public Nullable<System.DateTime> hinc_FechaFin { get; set; }
 
+        [Display(Name = "Incapacidad")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public Nullable<bool> hinc_Espermanente { get; set; }
+
         [Display(Name = "Estado")]
         public bool hinc_Estado { get; set; }
 

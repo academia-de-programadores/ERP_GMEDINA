@@ -7,13 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class FasesReclutamientoController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
+        //GET/Index
+        [SessionManager("FasesReclutamiento/Index")]
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -49,6 +53,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: FasesReclutamiento/Create
+        [SessionManager("FasesReclutamiento/Create")]
         [HttpPost]
         public JsonResult Create(tbFasesReclutamiento tbFasesReclutamiento)
         {
@@ -60,7 +65,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -80,6 +85,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Habilidades/Edit/5
+        [SessionManager("FasesReclutamiento/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -120,6 +126,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Habilidades/Edit/5
+        [SessionManager("FasesReclutamiento/Edit")]
         [HttpPost]
         public JsonResult Edit(tbFasesReclutamiento tbFasesReclutamiento)
         {
@@ -131,7 +138,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbFasesReclutamiento_Update(id, tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Update(id, tbFasesReclutamiento.fare_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbFasesReclutamiento_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -152,6 +159,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Habilidades/Delete/5
+        [SessionManager("FasesReclutamiento/Delete")]
         [HttpPost]
         public ActionResult Delete(tbFasesReclutamiento tbFasesReclutamiento)
         {
@@ -164,7 +172,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbfasesReclutamiento_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -184,6 +192,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("FasesReclutamiento/Habilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -193,7 +202,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbfasesReclutamiento_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbfasesReclutamiento_Restore_Result item in list)
                     {
                         result = item.MensajeError;

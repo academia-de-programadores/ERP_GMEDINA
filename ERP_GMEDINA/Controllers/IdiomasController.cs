@@ -90,8 +90,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Insert(tbIdiomas.idi_Descripcion,
-                                                            Usuario.usu_Id,
-                                                            DateTime.Now);
+                                                            (int)Session["UserLogin"],
+                                                            Function.DatetimeNow());
                     foreach (UDP_RRHH_tbIdiomas_Insert_Result item in list)
                     {
                         msj = item.MensajeError + "";
@@ -166,8 +166,8 @@ namespace ERP_GMEDINA.Controllers
                     db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Update(id,
                                                             tbIdiomas.idi_Descripcion,
-                                                            Usuario.usu_Id,
-                                                            DateTime.Now);
+                                                            (int)Session["UserLogin"],
+                                                            Function.DatetimeNow());
                     foreach (UDP_RRHH_tbIdiomas_Update_Result item in list)
                     {
                         msj = item.MensajeError + "";
@@ -198,7 +198,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbIdiomas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbIdiomas_Restore(id, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbIdiomas_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -230,8 +230,8 @@ namespace ERP_GMEDINA.Controllers
                     db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbIdiomas_Delete(id,
                                                             RazonInactivo,
-                                                            Usuario.usu_Id,
-                                                            DateTime.Now);
+                                                            (int)Session["UserLogin"],
+                                                            Function.DatetimeNow());
                     foreach (UDP_RRHH_tbIdiomas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + "";

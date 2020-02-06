@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class RazonSalidasController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         //[SessionManager("RazonSalidas/")]
         [SessionManager("RazonSalidas/Index")]
@@ -21,11 +22,11 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             tbRazonSalidas tbRazonSalidas = new tbRazonSalidas { rsal_Estado = true };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             return View(tbRazonSalidas);
         }
 
         [HttpPost]
+         [SessionManager("RazonSalidas/Index")]
         public JsonResult llenarTabla()
         {
             try
@@ -59,7 +60,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRazonSalidas_Insert(tbRazonSalidas.rsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRazonSalidas_Insert(tbRazonSalidas.rsal_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRazonSalidas_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -119,7 +120,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: RazonSalidas/Edit/5
-        [SessionManager("RazonSalidas/CreEditate")]
+        [SessionManager("RazonSalidas/Edit")]
         [HttpPost]
         public JsonResult Edit(tbRazonSalidas tbRazonSalidas)
         {
@@ -130,7 +131,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRazonSalida_Update(id, tbRazonSalidas.rsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRazonSalida_Update(id, tbRazonSalidas.rsal_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRazonSalida_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -165,7 +166,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRazonSalidas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRazonSalidas_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRazonSalidas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -207,7 +208,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbRazonSalidas_Restore (id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRazonSalidas_Restore (id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRazonSalidas_Restore_Result item in list)
                     {
                         result = item.MensajeError;

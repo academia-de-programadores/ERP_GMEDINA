@@ -7,34 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
+
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialPermisosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Areas
+        [SessionManager("HistorialPermisoss/Index")]
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
-            try
-            {
-                db = new ERP_GMEDINAEntities();
                 tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos { hper_Estado = true };
-                bool Admin = (bool)Session["Admin"];
                 return View(tbHistorialPermisos);
-
-            }
-            catch (Exception)
-            {
-                return View();
-
-            }
         }
         public ActionResult llenarTabla()
         {
@@ -45,7 +33,7 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 //using (db = new ERP_GMEDINAEntities())
                 db = new ERP_GMEDINAEntities();
-
+            
                 var V_tbHistorialPermisos_completa = db.V_tbHistorialPermisos_completa
                           .Select(
                           t => new
@@ -78,7 +66,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-
+        [SessionManager("HistorialPermisoss/hablilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -198,6 +186,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
+        [SessionManager("HistorialPermisos/Create")]
         public ActionResult Create(tbHistorialPermisos tbHistorialPermisos, tbEmpleados[] tbEmpleados)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -224,8 +213,8 @@ namespace ERP_GMEDINA.Controllers
                         observacion,
                         tbHistorialPermisos.hper_Justificado,
                         tbHistorialPermisos.hper_PorcentajeIndemnizado,
-                        1,
-                        DateTime.Now);
+                        (int)Session["UserLogin"], 
+                        Function.DatetimeNow());
                         string mensajeDB = "";
                         foreach (UDP_RRHH_tbHistorialPermisos_Insert_Result i in emp)
                         {
@@ -249,6 +238,7 @@ namespace ERP_GMEDINA.Controllers
         }
         ///EDIT Y UPDATE
         ///
+        [SessionManager("HistorialPermisos/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -294,6 +284,7 @@ namespace ERP_GMEDINA.Controllers
         }
         // POST: Habilidades/Edit/5
         [HttpPost]
+        [SessionManager("HistorialPermisos/Edit")]
         public JsonResult Edit(string hsal_Observacion)
         {
             string msj = "";
@@ -330,6 +321,7 @@ namespace ERP_GMEDINA.Controllers
         }
         // GET: Habilidades/Delete/5
         [HttpPost]
+        [SessionManager("HistorialPermisos/Delete")]
         public ActionResult Delete(string hper_RazonInactivo)
         {
             string msj = "";

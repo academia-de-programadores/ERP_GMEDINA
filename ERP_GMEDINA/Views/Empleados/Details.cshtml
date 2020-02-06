@@ -4,6 +4,11 @@
     ViewBag.Title = "Detalles de Empleado";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
+@using ERP_GMEDINA.Models
+@{
+    Helpers Login = new Helpers();
+
+}
 
 <div class="">
  <div class="ibox float-e-margins">
@@ -559,8 +564,14 @@
  </div>
 </div>
 
+@if (Login.GetUserRols("Empleados/DetallesExpediente"))
+{
 @Html.Partial("_DetallesExpediente", new ERP_GMEDINA.Models.tbDirectoriosEmpleados())
+}
+@if (Login.GetUserRols("Empleados/Delete"))
+{
 @Html.Partial("_DeleteExpediente", new ERP_GMEDINA.Models.tbDirectoriosEmpleados())
+}
 @* Modal Agregar Archivo *@
 
 @section Styles {

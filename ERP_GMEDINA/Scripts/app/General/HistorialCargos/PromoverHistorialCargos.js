@@ -94,6 +94,8 @@ $("#btnGuardar").click(function () {
     if (data != null) {
         if(sue_Cantidad >= 0)
         {
+            if (sue_Cantidad <= 999999999999.99)
+            {
             if ($("#emp_Fechaingreso").val() > '01/01/1900') {
         data = JSON.stringify({
             tbEmpleados: tbEmpleados,
@@ -118,7 +120,11 @@ $("#btnGuardar").click(function () {
         else
         {
             MsgError("Error", "Fecha no válida.");
-        }
+            }
+            }
+            else {
+                MsgError("Error", "Sueldo no puede ser mayor a 999,999,999,999.99");
+            }
         }         
         else {
             MsgError("Error", "Sueldo no puede ser negativo.");

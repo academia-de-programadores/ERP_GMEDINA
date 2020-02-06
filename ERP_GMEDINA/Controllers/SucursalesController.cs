@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class SucursalesController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Sucursales
+        [SessionManager("Sucursales/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -55,6 +58,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         // GET: Sucursales/Create
+        [SessionManager("Sucursales/Create")]
         public ActionResult Create()
         {
             db = new ERP_GMEDINAEntities();
@@ -76,6 +80,7 @@ namespace ERP_GMEDINA.Controllers
         // POST: Sucursales/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [SessionManager("Sucursales/Create")]
         [HttpPost]
         public ActionResult Create(tbSucursales tbSucursales)
         {
@@ -85,7 +90,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -105,6 +110,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
         }
         //Detalles
+        [SessionManager("Sucursales/Detalles")]
         public ActionResult Detalles(int? id)
         {
             try
@@ -167,6 +173,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Sucursales/Edit/5
+        [SessionManager("Sucursales/Edit")]
         public ActionResult Edit(int? id)
         {
             db = new ERP_GMEDINAEntities();
@@ -203,6 +210,7 @@ namespace ERP_GMEDINA.Controllers
         // POST: Sucursales/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [SessionManager("Sucursales/Edit")]
         [HttpPost]
         public ActionResult Edit( tbSucursales tbSucursales)
         {
@@ -212,7 +220,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id,"0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id,"0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -234,6 +242,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Sucursales/Delete/5
+        [SessionManager("Sucursales/Delete")]
         [HttpPost]
         public ActionResult Delete(tbSucursales tbSucursales)
         {
@@ -243,7 +252,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbSucursales_Inactivar(tbSucursales.suc_Id,"", 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Inactivar(tbSucursales.suc_Id,"", (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Inactivar_Result item in list)
                     {
                         result = item.MensajeError + " ";
@@ -258,6 +267,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         //Activar
+        [SessionManager("Sucursales/habilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -267,7 +277,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbSucursales_Activar(id,1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSucursales_Activar(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Activar_Result item in list)
                     {
                         result = item.MensajeError + " ";

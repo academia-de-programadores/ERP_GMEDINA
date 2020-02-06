@@ -14,11 +14,15 @@ namespace ERP_GMEDINA
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
                       "~/Content/style.css",
-                      "~/Content/BTN/BTN-HOME.css"));
+                      "~/Content/BTN/BTN-HOME.css"
+                      ));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                       "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new StyleBundle("~/Content/background").Include(
+                     "~/Content/background.css", new CssRewriteUrlTransform()));
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -648,6 +652,14 @@ namespace ERP_GMEDINA
                 "~/Scripts/plugins/switchery/switchery.js",
                 "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
                 "~/Scripts/app/FileSaver.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Planilla_ImpuestoVecinal").Include(
+                "~/Scripts/app/General/Planilla_ImpuestoVecinal.js",
+                "~/Scripts/app/General/excelexportjs.js",
+                "~/Scripts/plugins/switchery/switchery.js",
+                "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
+                "~/Scripts/app/FileSaver.min.js"));
+
             #endregion
 
             #region Otros

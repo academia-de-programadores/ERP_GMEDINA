@@ -65,7 +65,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEquipoTrabajo_Insert(tbEquipoTrabajo.eqtra_Codigo, tbEquipoTrabajo.eqtra_Descripcion, tbEquipoTrabajo.eqtra_Observacion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoTrabajo_Insert(tbEquipoTrabajo.eqtra_Codigo, tbEquipoTrabajo.eqtra_Descripcion, tbEquipoTrabajo.eqtra_Observacion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEquipoTrabajo_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -138,7 +138,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEquipoTrabajo_Update(id, tbEquipoTrabajo.eqtra_Codigo, tbEquipoTrabajo.eqtra_Descripcion, tbEquipoTrabajo.eqtra_Observacion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoTrabajo_Update(id, tbEquipoTrabajo.eqtra_Codigo, tbEquipoTrabajo.eqtra_Descripcion, tbEquipoTrabajo.eqtra_Observacion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEquipoTrabajo_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -170,7 +170,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEquipoTrabajo_Inactivar(tbEquipoTrabajo.eqtra_Id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoTrabajo_Inactivar(tbEquipoTrabajo.eqtra_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEquipoTrabajo_Inactivar_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -200,7 +200,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbEquipoTrabajo_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEquipoTrabajo_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbEquipoTrabajo_Restore_Result item in list)
                     {
                         result = item.MensajeError;

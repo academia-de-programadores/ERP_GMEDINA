@@ -52,12 +52,11 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult hablilitar(int id)
         {
             string result = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
             try
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbTipoPermisos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoPermisos_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoPermisos_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -79,11 +78,10 @@ namespace ERP_GMEDINA.Controllers
             if (tbTipoPermisos.tper_Descripcion != "")
             {
                 db = new ERP_GMEDINAEntities();
-                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     var list = db.UDP_RRHH_tbTipoPermisos_Insert(
-                        tbTipoPermisos.tper_Descripcion, Usuario.usu_Id, DateTime.Now);
+                        tbTipoPermisos.tper_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoPermisos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -150,11 +148,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 var id = (int)Session["id"];
-                var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     var list = db.UDP_RRHH_tbTipoPermisos_Update(id,
-                        tbTipoPermisos.tper_Descripcion, usuario.usu_Id, DateTime.Now);
+                        tbTipoPermisos.tper_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoPermisos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -186,7 +183,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, null, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, null, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoPermisos_Delete_Result item in list)
                     {
                         msj = item.MensajeError = " ";

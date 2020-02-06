@@ -7,7 +7,6 @@ $(document).ready(function () {
 });
 //Funciones GET
 function tablaEditar(ID) {
-    //alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialPermisos/Edit/' + ID,
@@ -24,7 +23,6 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
-    //alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialPermisos/Edit/' + ID,
@@ -170,7 +168,6 @@ $("#btnInactivar").click(function () {
 });
 //llamado
 $("#InActivar").click(function () {
-    //alert($("#hper_RazonInactivo").val());
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {

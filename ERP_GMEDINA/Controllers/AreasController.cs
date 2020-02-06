@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Attribute;
 
@@ -14,13 +15,16 @@ namespace ERP_GMEDINA.Controllers
     public class AreasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
-         //GET: Areas
-        public ActionResult Index()
-        {           
+        //GET: Areas
+        [SessionManager("Areas/Index")]
+        public ActionResult Index(){
             tbAreas tbAreas = new tbAreas { };
             return View(tbAreas);
         }
+
+        [SessionManager("Areas/Index")]
         [HttpPost]
         public ActionResult llenarTabla()
         {
@@ -52,6 +56,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [SessionManager("Areas/Index")]
         [HttpPost]
         public ActionResult ChildRowData(int id)
         {
@@ -137,13 +142,10 @@ namespace ERP_GMEDINA.Controllers
             result.Add("suc_Id", Sucursales);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-         //GET: Areas/Details/5
+        //GET: Areas/Details/5
+        [SessionManager("Areas/Details")]
         public ActionResult Details(int? id)
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("");
-            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -162,14 +164,11 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbAreas);
         }
-         //GET: Areas/Create
+        //GET: Areas/Create
+        [SessionManager("Areas/Create")]
         public ActionResult Create()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<tbSucursales> Sucursales = new List<tbSucursales> { };
@@ -181,6 +180,7 @@ namespace ERP_GMEDINA.Controllers
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
          [SessionManager("Areas/Create")]
         [HttpPost]
+        [SessionManager("Areas/Create")]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
            // declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -198,8 +198,8 @@ namespace ERP_GMEDINA.Controllers
                         tbAreas.car_Descripcion,
                         tbAreas.car_SalarioMinimo,
                         tbAreas.car_SalarioMaximo,
-                        Usuario.usu_Id,
-                        DateTime.Now
+                         (int)Session["UserLogin"],
+                         Function.DatetimeNow()
                         );
                     foreach (UDP_RRHH_tbCargos_Insert_Result item in cargo)
                     {
@@ -214,8 +214,8 @@ namespace ERP_GMEDINA.Controllers
                         tbAreas.suc_Id,
                         tbAreas.area_Descripcion,
                         tbAreas.car_Id,
-                        Usuario.usu_Id,
-                        DateTime.Now);
+                        (int)Session["UserLogin"],
+                        Function.DatetimeNow());
                     foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
                     {
                         var resultado = item.MensajeError + "  ";
@@ -231,8 +231,8 @@ namespace ERP_GMEDINA.Controllers
                                                                item.tbCargos.car_Descripcion,
                                                                item.tbCargos.car_SueldoMinimo,
                                                                item.tbCargos.car_SueldoMaximo,
-                                                               Usuario.usu_Id,
-                                                               DateTime.Now
+                                                                (int)Session["UserLogin"],
+                                                                Function.DatetimeNow()
                                                              );
                         foreach (UDP_RRHH_tbCargos_Insert_Result i in deptocargo)
                         {
@@ -247,8 +247,8 @@ namespace ERP_GMEDINA.Controllers
                             tbAreas.area_Id,
                             item.depto_Descripcion,
                             item.tbCargos.car_Id,
-                            Usuario.usu_Id,
-                            DateTime.Now);
+                            (int)Session["UserLogin"],
+                            Function.DatetimeNow());
                         string mensajeDB = "";
                         foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
                         {
@@ -270,14 +270,11 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(new { codigo = result }, JsonRequestBehavior.AllowGet);
         }
-         //GET: Areas/Edit/5
+        [SessionManager("Areas/Edit")]
+        //GET: Areas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -323,6 +320,7 @@ namespace ERP_GMEDINA.Controllers
          //To protect from overposting attacks, please enable the specific properties you want to bind to, for
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("Areas/Edit")]
         public ActionResult Edit(cAreas cAreas, cDepartamentos[] Departamentos, cDepartamentos[] inactivar)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -340,8 +338,8 @@ namespace ERP_GMEDINA.Controllers
                         cAreas.area_Id,
                         cAreas.suc_Id,
                         cAreas.area_Descripcion,
-                        Usuario.usu_Id,
-                        DateTime.Now);
+                        (int)Session["UserLogin"],
+                        Function.DatetimeNow());
                     foreach (UDP_RRHH_tbAreas_Update_Result item in list)
                     {
                         if (item.MensajeError == "-1")
@@ -357,8 +355,8 @@ namespace ERP_GMEDINA.Controllers
                         var depto = db.UDP_RRHH_tbDepartamentos_Delete(
                                 item.depto_Id,
                                 item.depto_RazonInactivo,
-                                Usuario.usu_Id,
-                                DateTime.Now);
+                                (int)Session["UserLogin"],
+                                Function.DatetimeNow());
                         foreach (UDP_RRHH_tbDepartamentos_Delete_Result dep in depto)
                         {
                             dep.ToString();
@@ -372,8 +370,8 @@ namespace ERP_GMEDINA.Controllers
                                                                item.car_Descripcion,
                                                                item.car_SalarioMinimo,
                                                                item.car_SalarioMaximo,
-                                                               Usuario.usu_Id,
-                                                               DateTime.Now
+                                                                (int)Session["UserLogin"],
+                                                                Function.DatetimeNow()
                                                              );
                             foreach (UDP_RRHH_tbCargos_Insert_Result i in deptocargo)
                             {
@@ -388,8 +386,8 @@ namespace ERP_GMEDINA.Controllers
                                 cAreas.area_Id,
                                 item.depto_Descripcion,
                                 item.car_Id,
-                                Usuario.usu_Id,
-                                DateTime.Now);
+                                 (int)Session["UserLogin"],
+                                 Function.DatetimeNow());
                             string mensajeDB = "";
                             foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
                             {
@@ -406,8 +404,8 @@ namespace ERP_GMEDINA.Controllers
                                 item.depto_Id,
                                 cAreas.area_Id,
                                 item.depto_Descripcion,
-                                Usuario.usu_Id,
-                                DateTime.Now);
+                                 (int)Session["UserLogin"],
+                                 Function.DatetimeNow());
                             string mensajeDB = "";
                             foreach (UDP_RRHH_tbDepartamentos_Update_Result i in depto)
                             {
@@ -420,7 +418,9 @@ namespace ERP_GMEDINA.Controllers
                         }
                         else if (item.Accion == "a")
                         {
-                            var depto = db.UDP_RRHH_tbDepartamentos_Restore(item.depto_Id, Usuario.usu_Id, DateTime.Now);
+                            var depto = db.UDP_RRHH_tbDepartamentos_Restore(item.depto_Id,
+                                                                             (int)Session["UserLogin"],
+                                                                             Function.DatetimeNow());
                             foreach (UDP_RRHH_tbDepartamentos_Restore_Result dep in depto)
                             {
                                 dep.ToString();
@@ -440,6 +440,7 @@ namespace ERP_GMEDINA.Controllers
         }
          //POST: Areas/Delete/5
         [HttpPost]
+        [SessionManager("Areas/Delete")]
         public ActionResult Delete(string area_Razoninactivo)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -456,7 +457,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbAreas_Delete(cAreas.area_Id, cAreas.area_Razoninactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbAreas_Delete(cAreas.area_Id, cAreas.area_Razoninactivo,
+                                                                         (int)Session["UserLogin"],
+                                                                         Function.DatetimeNow());
                     foreach (UDP_RRHH_tbAreas_Delete_Result item in list)
                     {
                         result = item.MensajeError;
@@ -473,6 +476,7 @@ namespace ERP_GMEDINA.Controllers
 
          //POST: Areas/Delete/5
         [HttpPost]
+        [SessionManager("Areas/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -481,7 +485,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbAreas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbAreas_Restore(id,
+                                                         (int)Session["UserLogin"],
+                                                         Function.DatetimeNow());
                     foreach (UDP_RRHH_tbAreas_Restore_Result item in list)
                     {
                         result = item.MensajeError;

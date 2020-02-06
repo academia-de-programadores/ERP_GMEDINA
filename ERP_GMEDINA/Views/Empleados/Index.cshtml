@@ -7,16 +7,7 @@
 @using ERP_GMEDINA.Models
 @{
     Helpers Login = new Helpers();
-    //int Sesiones = 0;
 
-
-    //List<tbUsuario> User = Login.getUserInformation();
-
-    //foreach (tbUsuario Usuario in User)
-    //{
-
-    //    Sesiones = Usuario.usu_SesionesValidas;
-    //}
 }
 
   
@@ -28,10 +19,15 @@
                 <div class="ibox-title">
                     <h5>Listado de Empleados</h5>
                     <div class="ibox-tools">
-                    @if (Login.GetUserRols("Empleados/ArchivoEmpleados"))
-                            {
+                 @if (Login.GetUserRols("Empleados/ArchivoEmpleados"))
+                 {
                         <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Empleado" />
-                            }
+                 }
+                 else
+                 {
+                    @*@Html.ActionLink("Registrar Empleado", "Create", null, new { @class = "btn btn-primary btn-xs" })*@
+                    <a href="Login/SinAcceso"  type="button" class="btn btn-primary btn-xs">Registrar Empleado</a>
+                 }
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -108,8 +104,8 @@
 
 @*MODAL AGREGAR EMPLEADOS*@
 
-
-
+@if (Login.GetUserRols("Empleados/UploadDocumento"))
+{
 @*MODAL AGREGAR DOCUMENTO*@
 
 <div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -174,6 +170,7 @@
 </div>
 
 @*MODAL AGREGAR DOCUMENTO*@
+}
 
 
 

@@ -7,24 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class NacionalidadesController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: Nacionalidades
+        [SessionManager("Nacionalidades/Index")]
         public ActionResult Index()
         {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
-            tbNacionalidades tbNacionalidades = new tbNacionalidades { };
+            tbNacionalidades tbNacionalidades = new tbNacionalidades { nac_Estado = true };
+            bool Admin = (bool)Session["Admin"];
             return View(tbNacionalidades);
-
         }
 
         [HttpPost]
@@ -49,22 +46,24 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.ToString();
-                throw;
+                return Json(-2, JsonRequestBehavior.AllowGet);
             }
         }
 
         // POST: Nacionalidades/Create
         [HttpPost]
+        [SessionManager("Nacionalidades/Create")]
         public JsonResult Create(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
+            tbNacionalidades tbNacionalidad = new tbNacionalidades();
             if (tbNacionalidades.nac_Descripcion != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Insert(tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Insert(tbNacionalidades.nac_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -84,6 +83,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Nacionalidades/Edit/5
+        [SessionManager("Nacionalidades/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -125,9 +125,11 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Nacionalidades/Edit/5
         [HttpPost]
+        [SessionManager("Nacionalidades/Edit")]
         public JsonResult Edit(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
+            tbNacionalidades tbNacionalidad = new tbNacionalidades();
             if (tbNacionalidades.nac_Id != 0 && tbNacionalidades.nac_Descripcion != "")
             {
                 var id = (int)Session["id"];
@@ -135,7 +137,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, tbNacionalidades.nac_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -146,8 +148,9 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
+                // Session.Remove("id");
             }
+
             else
             {
                 msj = "-3";
@@ -159,6 +162,7 @@ namespace ERP_GMEDINA.Controllers
         //Código para poder habilitar / activar el registro.
 
         [HttpPost]
+        [SessionManager("Nacionalidades/habilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -166,9 +170,9 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 db = new ERP_GMEDINAEntities();
-                //using (db = new ERP_GMEDINAEntities())
+                using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbNacionalidades_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Restore(id,(int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -188,6 +192,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Nacionalidades/Delete/5
         [HttpPost]
+        [SessionManager("Nacionalidades/Delete")]
         public ActionResult Delete(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
@@ -202,7 +207,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Delete(id, RazonInactivo,(int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbNacionalidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -213,7 +218,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
+                //Session.Remove("id");
             }
             else
             {

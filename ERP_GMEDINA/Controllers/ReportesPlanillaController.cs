@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using Rotativa;
 using ERP_GMEDINA.DataSets;
 using System.Data;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -22,10 +23,11 @@ namespace ERP_GMEDINA.Controllers
 		ReportesPlanillaDS ds = new ReportesPlanillaDS();
 
         //Listo
-		#region deducciones dinamico
+        #region deducciones dinamico
 
-		//parametros del reporte
-		public ActionResult DeduccionesParametros()
+        [SessionManager("ReportesPlanilla/DeduccionesParametros")]
+        //parametros del reporte
+        public ActionResult DeduccionesParametros()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Deducciones = new SelectList(db.tbCatalogoDeDeducciones.Where(o => o.cde_Activo == true), "cde_IdDeducciones", "cde_DescripcionDeduccion");
@@ -35,7 +37,8 @@ namespace ERP_GMEDINA.Controllers
 
 		//parametros del reporte
 		[HttpPost]
-		public ActionResult DeduccionesParametros(int cde_IdDeducciones, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
+        [SessionManager("ReportesPlanilla/DeduccionesParametros")]
+        public ActionResult DeduccionesParametros(int cde_IdDeducciones, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
 		{
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -88,13 +91,14 @@ namespace ERP_GMEDINA.Controllers
 			return View();
 		}
 
-		#endregion
+        #endregion
 
         //Listo
-		#region ingresos dinamico
+        #region ingresos dinamico
 
-		//parametros del reporte
-		public ActionResult IngresosParametros()
+        //parametros del reporte
+        [SessionManager("ReportesPlanilla/IngresosParametros")]
+        public ActionResult IngresosParametros()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Ingresos = new SelectList(db.tbCatalogoDeIngresos.Where(o => o.cin_Activo == true), "cin_IdIngreso", "cin_DescripcionIngreso");
@@ -103,8 +107,9 @@ namespace ERP_GMEDINA.Controllers
 		}
 
 		[HttpPost]
-		//parametros del reporte
-		public ActionResult IngresosParametros(int cin_IdIngreso, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
+        //parametros del reporte
+        [SessionManager("ReportesPlanilla/IngresosParametros")]
+        public ActionResult IngresosParametros(int cin_IdIngreso, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
 		{
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -157,13 +162,14 @@ namespace ERP_GMEDINA.Controllers
 
 			return View();
 		}
-		#endregion
+        #endregion
 
-		//Listo
-		#region reportes varios dinamico
+        //Listo
+        #region reportes varios dinamico
 
-		//parametros del reporte
-		public ActionResult ReportesVariosParametros()
+        //parametros del reporte
+        [SessionManager("ReportesPlanilla/ReportesVariosParametros")]
+        public ActionResult ReportesVariosParametros()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Deducciones = new SelectList(db.tbCatalogoDeDeducciones.Where(o => o.cde_Activo == true), "cde_IdDeducciones", "cde_DescripcionDeduccion");
@@ -173,7 +179,8 @@ namespace ERP_GMEDINA.Controllers
 
 		//Report viewer
 		[HttpPost]
-		public ActionResult ReportesVariosParametros(string reporte, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
+        [SessionManager("ReportesPlanilla/ReportesVariosParametros")]
+        public ActionResult ReportesVariosParametros(string reporte, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
 		{
 
 			ReportViewer reportViewer = new ReportViewer();
@@ -263,13 +270,14 @@ namespace ERP_GMEDINA.Controllers
 			return View();
 		}
 
-		#endregion
+        #endregion
 
         //Listo
-		#region decimo tercer mes
+        #region decimo tercer mes
 
-		//parametros del reporte
-		public ActionResult DecimoTercerParametros()
+        //parametros del reporte
+        [SessionManager("ReportesPlanilla/DecimoTercerParametros")]
+        public ActionResult DecimoTercerParametros()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -278,7 +286,8 @@ namespace ERP_GMEDINA.Controllers
 
 		//parametros del reporte
 		[HttpPost]
-		public ActionResult DecimoTercerParametros(int cpla_IdPlanilla, DateTime dtm_FechaPago)
+        [SessionManager("ReportesPlanilla/DecimoTercerParametros")]
+        public ActionResult DecimoTercerParametros(int cpla_IdPlanilla, DateTime dtm_FechaPago)
 		{
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -319,13 +328,14 @@ namespace ERP_GMEDINA.Controllers
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 			return View();
 		}
-		#endregion
+        #endregion
 
         //Listo
-		#region decimo cuarto mes
+        #region decimo cuarto mes
 
-		//parametros del reporte
-		public ActionResult DecimoCuartoParametros()
+        //parametros del reporte
+        [SessionManager("ReportesPlanilla/DecimoCuartoParametros")]
+        public ActionResult DecimoCuartoParametros()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -334,7 +344,8 @@ namespace ERP_GMEDINA.Controllers
 
 		//parametros del reporte
 		[HttpPost]
-		public ActionResult DecimoCuartoParametros(int cpla_IdPlanilla, DateTime dcm_FechaPago)
+        [SessionManager("ReportesPlanilla/DecimoCuartoParametros")]
+        public ActionResult DecimoCuartoParametros(int cpla_IdPlanilla, DateTime dcm_FechaPago)
 		{
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -377,10 +388,11 @@ namespace ERP_GMEDINA.Controllers
 		}
         #endregion
 
-		//Listo
+        //Listo
         #region instituciones financieras
 
         //parametros del reporte
+        [SessionManager("ReportesPlanilla/InstitucionesFinancierasParametros")]
         public ActionResult InstitucionesFinancierasParametros()
         {
             ViewBag.Instituciones = new SelectList(db.tbInstitucionesFinancieras.Where(o => o.insf_Activo == true), "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
@@ -390,6 +402,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         //parametros del reporte
+        [SessionManager("ReportesPlanilla/InstitucionesFinancierasParametros")]
         public ActionResult InstitucionesFinancierasParametros(int? insf_IdInstitucionFinanciera, int cpla_IdPlanilla, DateTime deif_FechaCrea)
         {
             ReportViewer reportViewer = new ReportViewer();

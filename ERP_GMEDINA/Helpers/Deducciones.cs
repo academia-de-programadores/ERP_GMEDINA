@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
+
 namespace ERP_GMEDINA.Helpers
 {
     public static class Deducciones
@@ -11,6 +13,8 @@ namespace ERP_GMEDINA.Helpers
         public static void ProcesarDeducciones(DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, List<tbHistorialDeduccionPago> lisHistorialDeducciones, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             #region Procesar deducciones
+
+            int idUser = (int)HttpContext.Current.Session["UserLogin"];
 
             if (oDeducciones.Count > 0)
             {
@@ -94,6 +98,8 @@ namespace ERP_GMEDINA.Helpers
                         totalInstitucionesFinancieras += Math.Round((decimal)oDeduInstiFinancierasIterador.deif_Monto, 2);
                         // pasar el estado de la deduccion a pagada
                         oDeduInstiFinancierasIterador.deif_Pagado = true;
+                        oDeduInstiFinancierasIterador.deif_UsuarioModifica = idUser;
+                        oDeduInstiFinancierasIterador.deif_FechaModifica = DateTime.Now;
                         db.Entry(oDeduInstiFinancierasIterador).State = EntityState.Modified;
 
                         // agregar al voucher
@@ -144,6 +150,8 @@ namespace ERP_GMEDINA.Helpers
 
                         //pasar el estado del aporte a pagado
                         oDeduccionAfpIter.dafp_Pagado = true;
+                        oDeduccionAfpIter.dafp_UsuarioModifica = idUser;
+                        oDeduccionAfpIter.dafp_FechaModifica = DateTime.Now;
                         db.Entry(oDeduccionAfpIter).State = EntityState.Modified;
 
                         ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
@@ -193,6 +201,8 @@ namespace ERP_GMEDINA.Helpers
 
                         // restar la cuota al monto restante
                         oDeduccionesExtrasColaboradorIterador.dex_MontoRestante = oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_Cuota;
+                        oDeduccionesExtrasColaboradorIterador.dex_UsuarioModifica = idUser;
+                        oDeduccionesExtrasColaboradorIterador.dex_FechaModifica = DateTime.Now;
                         db.Entry(oDeduccionesExtrasColaboradorIterador).State = EntityState.Modified;
 
                         // Historial de deducciones
@@ -236,6 +246,8 @@ namespace ERP_GMEDINA.Helpers
                         adelantosSueldo += Math.Round((decimal)oAdelantosSueldoIterador.adsu_Monto, 2);
                         // pasar el estado del adelanto a deducido
                         oAdelantosSueldoIterador.adsu_Deducido = true;
+                        oAdelantosSueldoIterador.adsu_UsuarioModifica = idUser;
+                        oAdelantosSueldoIterador.adsu_FechaModifica = DateTime.Now;
                         db.Entry(oAdelantosSueldoIterador).State = EntityState.Modified;
 
                         ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
@@ -292,7 +304,8 @@ namespace ERP_GMEDINA.Helpers
                         {
                             oDeduccionesIndiColaboradorIterador.dei_Pagado = true;
                         }
-                            
+                        oDeduccionesIndiColaboradorIterador.dei_UsuarioModifica = idUser;
+                        oDeduccionesIndiColaboradorIterador.dei_FechaModifica = DateTime.Now;
                         db.Entry(oDeduccionesIndiColaboradorIterador).State = EntityState.Modified;
                                                 
                     }
@@ -458,12 +471,11 @@ namespace ERP_GMEDINA.Helpers
                 // deducciones de la planilla
                 foreach (var iterDeducciones in oDeducciones)
                 {
-                    decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
-                    decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
-                    decimal? montoDeduccionColaborador = SalarioBase;
-
                     try
                     {
+                        decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
+                        decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
+                        decimal? montoDeduccionColaborador = SalarioBase;
 
                         try
                         {

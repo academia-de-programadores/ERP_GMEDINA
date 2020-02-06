@@ -1264,57 +1264,114 @@ $('#inactivar').click(() => {
 
 
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
-    var id = inputIdPlanilla.val();
-    mostrarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
-    _ajax(
-        { id: id },
-        '/CatalogoDePlanillas/Delete',
-        'POST',
-        (data) => {
-            if (data == 'bien') {
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se inactivó de forma exitosa!'
-                });
-                $('#InactivarCatalogoDeducciones').modal('hide');
-                location.href = baseUrl + '/Index';
-            } else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se inactivó el registro, contacte al administrador'
-                });
-            }
-            ocultarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
-        },
-        (enviar) => { }
-    );
+
+    // antes de hacer la peticion al servidor para inactivar el registro
+    // validar si el usuario logueado tiene permisos para inactivar
+    $.ajax({
+        url: "/CatalogoDePlanillas/verificarAutorizacion/",
+        method: "POST",
+        data: { sPantalla: "CatalogoDePlanillas/DeleteConfirmed" }
+    }).done(function (data) {
+
+        // si el resultado obtenido es false, el usuario no tiene permisos para realizar la accion
+        if (data == false) {
+
+            // ocultar modal de inactivar
+            $('#InactivarCatalogoDeducciones').modal('hide');
+
+            // mostrar mensaje de error al usuario
+            iziToast.error({
+                title: 'Error',
+                message: 'No tienes permisos para realizar esta acción'
+            });
+
+        }
+        else {
+
+            // si el usuario tiene acceso, el proceso sigue normal
+
+            var id = inputIdPlanilla.val();
+            mostrarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
+            _ajax(
+                { id: id },
+                '/CatalogoDePlanillas/Delete',
+                'POST',
+                (data) => {
+                    if (data == 'bien') {
+                        iziToast.success({
+                            title: 'Exito',
+                            message: '¡El registro se inactivó de forma exitosa!'
+                        });
+                        $('#InactivarCatalogoDeducciones').modal('hide');
+                        location.href = baseUrl + '/Index';
+                    } else {
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'No se inactivó el registro, contacte al administrador'
+                        });
+                    }
+                    ocultarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
+                },
+                (enviar) => { }
+            );
+        }// else de verificacion de permiso
+    });// fin del .done de la verificacion de permiso
 });
 
 $(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
-    let id = localStorage.getItem('id');
-    mostrarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
-    _ajax({ id: id },
-        '/CatalogoDePlanillas/ActivarPlanilla',
-        'POST',
-        (data) => {
-            if (data.response == 'bien') {
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se activó de forma exitosa!'
-                });
-                $('#frmActivarCatalogoPlanilla').modal('hide');
 
-                table.clear();
-                table.rows.add(data.data).draw();
-            } else {
-                iziToast.error({
-                    title: 'Éxito',
-                    message: 'No se activó el registro, contacte al administrador'
+    // antes de hacer la peticion al servidor para inactivar el registro
+    // validar si el usuario logueado tiene permisos para inactivar
+    $.ajax({
+        url: "/CatalogoDePlanillas/verificarAutorizacion/",
+        method: "POST",
+        data: { sPantalla: "CatalogoDePlanillas/Activar" }
+    }).done(function (data) {
+
+        // si el resultado obtenido es false, el usuario no tiene permisos para realizar la accion
+        if (data == false) {
+
+            // ocultar modal de inactivar
+            $('#frmActivarCatalogoPlanilla').modal('hide');
+
+            // mostrar mensaje de error al usuario
+            iziToast.error({
+                title: 'Error',
+                message: 'No tienes permisos para realizar esta acción'
+            });
+
+        }
+        else {
+
+            // si el usuario tine permisos de activar, el proceso sigue normal 
+            let id = localStorage.getItem('id');
+            mostrarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
+            _ajax({ id: id },
+                '/CatalogoDePlanillas/ActivarPlanilla',
+                'POST',
+                (data) => {
+                    if (data.response == 'bien') {
+                        iziToast.success({
+                            title: 'Éxito',
+                            message: '¡El registro se activó de forma exitosa!'
+                        });
+                        $('#frmActivarCatalogoPlanilla').modal('hide');
+
+                        table.clear();
+                        table.rows.add(data.data).draw();
+                    } else {
+                        iziToast.error({
+                            title: 'Éxito',
+                            message: 'No se activó el registro, contacte al administrador'
+                        });
+                    }
+                    ocultarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
+                },
+                () => {
                 });
-            }
-            ocultarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
-        },
-        () => {
-        })
+
+        }// else de verificacion de permiso
+    });// fin del .done de la verificacion de permiso
+
 });
 //#endregion

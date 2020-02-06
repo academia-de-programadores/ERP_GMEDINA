@@ -11,9 +11,12 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
+    
+
     public class RequisicionesController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         //[SessionManager("Requisiciones/")]
         [SessionManager("Requisiciones/Index")]
@@ -115,7 +118,7 @@ namespace ERP_GMEDINA.Controllers
                             tbRequisiciones.req_EstadoCivil = null;
                         }
 
-                        var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_NivelEducativo ,DateTime.Now, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
+                        var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_NivelEducativo , Function.DatetimeNow(), tbRequisiciones.req_FechaContratacion, (int)Session["UserLogin"], Function.DatetimeNow());
 
                         foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in List)
                         {
@@ -125,7 +128,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 for (int i = 0; i < DatosProfesionales.Competencias.Length; i++)
                                 {
-                                    var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Competencias[i], 1, DateTime.Now);
+                                    var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Competencias[i], (int)Session["UserLogin"], Function.DatetimeNow());
                                     foreach (rrhh_tbCompetenciasRequisicion_Insert_Result comp in Competencias)
                                     {
                                         var result = comp.MensajeError + "";
@@ -137,7 +140,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 for (int i = 0; i < DatosProfesionales.Habilidades.Length; i++)
                                 {
-                                    var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Habilidades[i], 1, DateTime.Now);
+                                    var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Habilidades[i], (int)Session["UserLogin"], Function.DatetimeNow());
                                     foreach (rrhh_tbHabilidadesRequisicion_Insert_Result hab in Habilidades)
                                     {
                                         var result = hab.MensajeError + "";
@@ -149,7 +152,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 for (int i = 0; i < DatosProfesionales.Idiomas.Length; i++)
                                 {
-                                    var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Idiomas[i], 1, DateTime.Now);
+                                    var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Idiomas[i], (int)Session["UserLogin"], Function.DatetimeNow());
                                     foreach (rrhh_tbIdiomasRequisicion_Insert_Result idi in Idiomas)
                                     {
                                         var result = idi.MensajeError + "";
@@ -161,7 +164,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 for (int i = 0; i < DatosProfesionales.ReqEspeciales.Length; i++)
                                 {
-                                    var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.ReqEspeciales[i], 1, DateTime.Now);
+                                    var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.ReqEspeciales[i], (int)Session["UserLogin"], Function.DatetimeNow());
                                     foreach (rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result rep in ReqEspeciales)
                                     {
                                         var result = rep.MensajeError + "";
@@ -173,7 +176,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 for (int i = 0; i < DatosProfesionales.Titulos.Length; i++)
                                 {
-                                    var Titulos = db.rrhh_tbTitulosRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Titulos[i], 1, DateTime.Now);
+                                    var Titulos = db.rrhh_tbTitulosRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Titulos[i], (int)Session["UserLogin"], Function.DatetimeNow());
                                     foreach (rrhh_tbTitulosRequisicion_Insert_Result rep in Titulos)
                                     {
                                         var result = rep.MensajeError + "";
@@ -300,7 +303,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbRequisiciones_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRequisiciones_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequisiciones_Restore_Result item in list)
                     {
                         result = item.MensajeError;
@@ -498,7 +501,7 @@ namespace ERP_GMEDINA.Controllers
 
                     string ResultI = "";
                     string ResultE = "";
-                    var _list = db.UDP_RRHH_tbRequisiciones_Update(tbRequisiciones.req_Id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_NivelEducativo, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
+                    var _list = db.UDP_RRHH_tbRequisiciones_Update(tbRequisiciones.req_Id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_NivelEducativo, Function.DatetimeNow(), tbRequisiciones.req_FechaContratacion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequisiciones_Update_Result Update in _list)
                     {
                         msj = Update.MensajeError + "";
@@ -524,7 +527,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (CompV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(tbRequisiciones.req_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (rrhh_tbCompetenciasRequisicion_Insert_Result Com in Competencias)
                                             {
                                                 ResultI = Com.MensajeError + "";
@@ -534,7 +537,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var c in CompV)
                                             {
-                                                var Competencias = db.rrhh_tbCompetenciasRequisicion_Delete(c.creq_Id, 1, DateTime.Now);
+                                                var Competencias = db.rrhh_tbCompetenciasRequisicion_Delete(c.creq_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (rrhh_tbCompetenciasRequisicion_Delete_Result Com in Competencias)
                                                 {
                                                     ResultE = Com.MensajeError + "";
@@ -556,7 +559,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (habV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(tbRequisiciones.req_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (rrhh_tbHabilidadesRequisicion_Insert_Result hab in Habilidades)
                                             {
                                                 ResultI = hab.MensajeError + "";
@@ -566,7 +569,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var h in habV)
                                             {
-                                                var Habilidades = db.rrhh_tbHabilidadesRequisicion_Delete(h.hreq_Id, 1, DateTime.Now);
+                                                var Habilidades = db.rrhh_tbHabilidadesRequisicion_Delete(h.hreq_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (rrhh_tbHabilidadesRequisicion_Delete_Result Com in Habilidades)
                                                 {
                                                     ResultE = Com.MensajeError + "";
@@ -588,7 +591,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (IdiV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(tbRequisiciones.req_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (rrhh_tbIdiomasRequisicion_Insert_Result idi in Idiomas)
                                             {
                                                 ResultI = idi.MensajeError + "";
@@ -598,7 +601,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var i in IdiV)
                                             {
-                                                var Idiomas = db.rrhh_tbIdiomasRequisicion_Delete(i.idpe_Id, 1, DateTime.Now);
+                                                var Idiomas = db.rrhh_tbIdiomasRequisicion_Delete(i.idpe_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (rrhh_tbIdiomasRequisicion_Delete_Result idio in Idiomas)
                                                 {
                                                     ResultE = idio.MensajeError + "";
@@ -620,7 +623,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (TitV.Count == 0 && Nuevo == "1")
                                         {
-                                            var Titulos = db.rrhh_tbTitulosRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            var Titulos = db.rrhh_tbTitulosRequisicion_Insert(tbRequisiciones.req_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (rrhh_tbTitulosRequisicion_Insert_Result titu in Titulos)
                                             {
                                                 ResultI = titu.MensajeError + "";
@@ -630,7 +633,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var t in TitV)
                                             {
-                                                var Titulos = db.rrhh_tbTitulosRequisicion_Delete(t.tipe_Id, 1, DateTime.Now);
+                                                var Titulos = db.rrhh_tbTitulosRequisicion_Delete(t.tipe_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (rrhh_tbTitulosRequisicion_Delete_Result titu in Titulos)
                                                 {
                                                     ResultE = titu.MensajeError + "";
@@ -652,7 +655,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         if (RepV.Count == 0 && Nuevo == "1")
                                         {
-                                            var REspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            var REspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(tbRequisiciones.req_Id, X.Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                             foreach (rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result resp in REspeciales)
                                             {
                                                 ResultI = resp.MensajeError + "";
@@ -662,7 +665,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var r in RepV)
                                             {
-                                                var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Delete(r.rer_Id, 1, DateTime.Now);
+                                                var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Delete(r.rer_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                                                 foreach (rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result resp in ReqEspeciales)
                                                 {
                                                     ResultE = resp.MensajeError + "";
@@ -765,7 +768,7 @@ namespace ERP_GMEDINA.Controllers
                 using (db = new ERP_GMEDINAEntities())
                 {
 
-                    var _list = db.UDP_RRHH_tbRequisiciones_Delete(Requisicion.req_Id, Requisicion.req_RazonInactivo, 1, DateTime.Now);
+                    var _list = db.UDP_RRHH_tbRequisiciones_Delete(Requisicion.req_Id, Requisicion.req_RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbRequisiciones_Delete_Result item in _list)
                     {
                         msj = item.MensajeError + "";

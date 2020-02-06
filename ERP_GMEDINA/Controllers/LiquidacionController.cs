@@ -279,7 +279,8 @@ namespace ERP_GMEDINA.Controllers
             //Instancia del objeto tbLiquidaciones
             LiquidacionViewModel tbLiquidaciones = (LiquidacionViewModel)Session["Liquidaciones"];
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbLiquidaciones.UsuarioCrea = 1;
+            int idUser = (int)Session["UserLogin"];
+            tbLiquidaciones.UsuarioCrea = idUser;
             tbLiquidaciones.FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = "bien";
