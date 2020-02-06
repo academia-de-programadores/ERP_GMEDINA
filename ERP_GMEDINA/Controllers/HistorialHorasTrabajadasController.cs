@@ -7,18 +7,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialHorasTrabajadasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: HistorialHorasTrabajadas
+        [SessionManager("HistorialHorasTrabajadas/Index")]
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbHistorialHorasTrabajadas = new List<tbHistorialHorasTrabajadas> { };
+            tbHistorialHorasTrabajadas tbHistorialHorasTrabajadas = new tbHistorialHorasTrabajadas { htra_Estado = true };
+            bool Admin = (bool)Session["Admin"];
             return View(tbHistorialHorasTrabajadas);
         }
         public ActionResult llenarTabla()
@@ -37,7 +39,7 @@ namespace ERP_GMEDINA.Controllers
                             Empleado = t.Nombre_Completo,
                             Jornadas = t.Jornada,
                             tiho_Descripcion = t.Tipo_Horas,
-                            Cantidad = t.Cantidad,            
+                            Cantidad = t.Cantidad,
                             tiho_Recargo = t.Recargo,
                             Fecha = t.Fecha
                         }
@@ -80,3 +82,4 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+
