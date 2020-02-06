@@ -7,14 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class TipoSalidasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: Habilidades
+        [SessionManager("TipoSalidas/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -25,6 +27,7 @@ namespace ERP_GMEDINA.Controllers
             tbTipoSalidas tbTipoSalidas = new tbTipoSalidas {  };
             return View(tbTipoSalidas);
         }
+
         [HttpPost]
         public JsonResult llenarTabla()
         {
@@ -53,6 +56,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Create
         [HttpPost]
+        [SessionManager("TipoSalidas/Create")]
         public JsonResult Create(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
@@ -63,7 +67,7 @@ namespace ERP_GMEDINA.Controllers
                     using (db = new ERP_GMEDINAEntities())
                     {
                         var Usuario = (tbUsuario)Session["Usuario"];
-                        var list = db.UDP_RRHH_tbTipoSalidas_Insert(tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                        var list = db.UDP_RRHH_tbTipoSalidas_Insert(tbTipoSalidas.tsal_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbTipoSalidas_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -127,6 +131,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Edit/5
         [HttpPost]
+        [SessionManager("TipoSalidas/Edit")]
         public JsonResult Edit(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
@@ -138,7 +143,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
                     {
-                        var list = db.UDP_RRHH_tbTipoSalidas_Update(id, tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                        var list = db.UDP_RRHH_tbTipoSalidas_Update(id, tbTipoSalidas.tsal_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbTipoSalidas_Update_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -159,6 +164,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Habilidades/Delete/5
         [HttpPost]
+        [SessionManager("TipoSalidas/Delete")]
         public ActionResult Delete(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
@@ -172,7 +178,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
                     {
-                        var list = db.UDP_RRHH_tbTipoSalidas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                        var list = db.UDP_RRHH_tbTipoSalidas_Delete(id, RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbTipoSalidas_Delete_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -191,6 +197,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("TipoSalidas/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -199,7 +206,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoSalidas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoSalidas_Restore(id, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoSalidas_Restore_Result item in list)
                     {
                         result = item.MensajeError.ToString();
