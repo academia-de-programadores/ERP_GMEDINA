@@ -12,8 +12,9 @@ var ActivarID = 0;
 //////////////////////***** EVENTOS *****///////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-//EVENTOS: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+// edit 1
 $(document).on("click", "#btnAgregarIV", function () {
+
     //OCULTAR VALIDACIONES
     Vaciar_ModalCrear();
 
@@ -51,7 +52,7 @@ $(document).on("click", "#btnAgregarIV", function () {
     $("#AgregarIV").modal({ backdrop: 'static', keyboard: false });
 });
 
-//EVENTOS: SEGUNDA FASE DE CREACIÓN
+// edit 2
 $('#btnCreateIV').click(function () {
 
     var rangoInicio1 = $("#Crear #timv_RangoInicio").val();
@@ -105,11 +106,7 @@ $('#btnCreateIV').click(function () {
     }
 });
 
-
-//
-//EDICION
-
-//EVENTOS: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+// edit 3 ejecutar
 $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
     //DESBLOQUEAR BOTON DE EDITAR
     $('#btnEditarIV').attr('disabled', false);
@@ -190,12 +187,13 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
         });
 });
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
+// ocultar modal editar
 $("#btnCerrarEditar").click(function () {
     //OCULTAR MODAL DE EDITAR
     $("#EditarIV").modal('hide');
 });
 
+// cerrar crear
 $("#btnCerrarCrear").click(function () {
     OcultarValidacionesCrear();
 });
@@ -284,7 +282,6 @@ $("#btnEditIVConfirmacion").click(function () {
             }
         });    
 });
-
 
 
 //
@@ -927,7 +924,7 @@ function FormatearMonto(StringValue) {
     return MontoFormateado;
 }
 
-//FUNCION: FUNCION GENERICA PARA REUTILIZAR AJAX
+// funcion generica ajax 
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -939,16 +936,8 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
-//FUNCION: OBTENER SCRIPT DE SERIALIZACIÓN DE FECHA
-$.getScript("../Scripts/app/General/SerializeDate.js")
-    .done(function (script, textStatus) {
 
-    })
-    .fail(function (jqxhr, settings, exception) {
-
-    });
-
-//FUNCION: GRID DE TECHOS DE IMPUESTO VECINAL
+// actualizar datatable
 function cargarGridIV() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
@@ -998,8 +987,6 @@ function cargarGridIV() {
     FullBody();
 }
 
-
-
 //*********
 //POSTBACKS
 
@@ -1022,3 +1009,12 @@ $("#ActivarIV").submit(function (e) {
 $("#InactivarIV").submit(function (e) {
     return false;
 });
+
+//FUNCION: OBTENER SCRIPT DE SERIALIZACIÓN DE FECHA
+$.getScript("../Scripts/app/General/SerializeDate.js")
+    .done(function (script, textStatus) {
+
+    })
+    .fail(function (jqxhr, settings, exception) {
+
+    });
