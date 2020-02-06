@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
 using System.Net;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -13,8 +14,10 @@ namespace ERP_GMEDINA.Controllers
     public class EquipoEmpleadosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: EquipoEmpleados
+       
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)

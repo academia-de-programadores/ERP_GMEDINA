@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -13,12 +14,13 @@ namespace ERP_GMEDINA.Controllers
 	public class EquipoTrabajoController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: /EquipoTrabajo/
+        [SessionManager("EquipoTrabajo/Index")]
         public ActionResult Index()        
 		{
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbEquipoTrabajo = new tbEquipoTrabajo { eqtra_Estado = true };
+            //Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            var tbEquipoTrabajo = new tbEquipoTrabajo {  };
             return View(tbEquipoTrabajo);
         }
 		[HttpPost]
@@ -53,6 +55,7 @@ namespace ERP_GMEDINA.Controllers
         }
         // POST: /EquipoTrabajo/Create
         [HttpPost]
+        [SessionManager("EquipoTrabajo/Create")]
         public JsonResult Create(tbEquipoTrabajo tbEquipoTrabajo)
         {
             string msj = "";
@@ -80,7 +83,8 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-		// GET: /EquipoTrabajo//Edit/5
+        // GET: /EquipoTrabajo//Edit/5
+        [SessionManager("EquipoTrabajo/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -123,6 +127,7 @@ namespace ERP_GMEDINA.Controllers
         }
         // POST: /EquipoTrabajo/Edit/5
         [HttpPost]
+        [SessionManager("EquipoTrabajo/Edit")]
         public JsonResult Edit(tbEquipoTrabajo tbEquipoTrabajo)
         {
             string msj = "";
@@ -154,6 +159,7 @@ namespace ERP_GMEDINA.Controllers
         }
 		// GET: /EquipoTrabajo//Delete/5
         [HttpPost]
+        [SessionManager("EquipoTrabajo/Delete")]
         public ActionResult Delete(tbEquipoTrabajo tbEquipoTrabajo)
         {
             string msj = "";
@@ -184,6 +190,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("EquipoTrabajo/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
