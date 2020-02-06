@@ -114,7 +114,7 @@ namespace ERP_GMEDINA.Controllers
                                                                   tbPreaviso.prea_RangoFinMeses,
                                                                   tbPreaviso.prea_DiasPreaviso,
                                                                   Function.GetUser(),
-                                                                  Function.DateTimeNow());
+                                                                  Function.DatetimeNow());
                     
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Insert_Result resultado in listPreaviso)
@@ -198,7 +198,7 @@ namespace ERP_GMEDINA.Controllers
                                                                  tbPreaviso.prea_RangoFinMeses,
                                                                  tbPreaviso.prea_DiasPreaviso,
                                                                  Function.GetUser(),
-                                                                 Function.DateTimeNow());
+                                                                 Function.DatetimeNow());
                     
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Update_Result resultado in listPeriodo)
@@ -260,7 +260,7 @@ namespace ERP_GMEDINA.Controllers
                     // ejecutar PA
                     listPreaviso = db.UDP_Plani_tbPreaviso_Inactivar(tbPeaviso.prea_IdPreaviso,
                                                                      Function.GetUser(),
-                                                                     Function.DateTimeNow());
+                                                                     Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Inactivar_Result Resultado in listPreaviso)
@@ -323,7 +323,7 @@ namespace ERP_GMEDINA.Controllers
                     // ejecutar PA
                     listPreaviso = db.UDP_Plani_tbPreaviso_Activar(tbPreaviso.prea_IdPreaviso,
                                                                    Function.GetUser(),
-                                                                   Function.DateTimeNow());
+                                                                   Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPreaviso_Activar_Result Resultado in listPreaviso)

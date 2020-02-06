@@ -102,7 +102,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                   tbTechosComisiones.tc_RangoFin,
                                                                                   tbTechosComisiones.tc_PorcentajeComision,
                                                                                   Function.GetUser(),
-                                                                                  Function.DateTimeNow());
+                                                                                  Function.DatetimeNow());
 
                     //El tipo complejo del Procedimiento Almacenado
                     foreach (UDP_Plani_tbTechosComisiones_Insert_Result Resultado in listTechosComisiones)
@@ -169,7 +169,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                   tbTechosComisiones.tc_RangoFin,
                                                                                   tbTechosComisiones.tc_PorcentajeComision,
                                                                                   Function.GetUser(),
-                                                                                  Function.DateTimeNow());
+                                                                                  Function.DatetimeNow());
 
                     foreach (UDP_Plani_tbTechosComisiones_Update_Result resultado in listTechosComisiones)
                         MensajeError = resultado.MensajeError;
@@ -236,7 +236,7 @@ namespace ERP_GMEDINA.Controllers
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
                 listTechosComisiones = db.UDP_Plani_tbTechosComisiones_Inactivar(tbTechosComisiones.tc_Id,
                                                                                  Function.GetUser(),
-                                                                                 Function.DateTimeNow());
+                                                                                 Function.DatetimeNow());
 
                 //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                 foreach (UDP_Plani_tbTechosComisiones_Inactivar_Result Resultado in listTechosComisiones)
@@ -285,7 +285,7 @@ namespace ERP_GMEDINA.Controllers
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
                 listTechosComisiones = db.UDP_Plani_tbTechosComisiones_Activar(tbTechosComisiones.tc_Id,
                                                                                Function.GetUser(),
-                                                                               Function.DateTimeNow());
+                                                                               Function.DatetimeNow());
 
                 //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                 foreach (UDP_Plani_tbTechosComisiones_Activar_Result Resultado in listTechosComisiones)
