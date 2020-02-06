@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -15,13 +16,9 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = null;
 
         // GET: Habilidades
+        [SessionManager("Habilidades/Index")]
         public ActionResult Index()
-        {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+        {            
             tbHabilidades tbHabilidades = new tbHabilidades {};
             return View(tbHabilidades);
         }
@@ -82,6 +79,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         // GET: Habilidades/Edit/5
+        //[SessionManager("Habilidades/Edit")]
         [HttpPost]
         [ActionName("Datos")]
         public ActionResult Edit(int? id)

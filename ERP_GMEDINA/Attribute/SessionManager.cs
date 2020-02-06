@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Attribute
 
         public SessionManager(string screenId)
         {
-            _screenId = screenId;
+            _screenId = screenId;            
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)

@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
+
 namespace ERP_GMEDINA.Controllers
 {
     public class AreasController : Controller
@@ -15,12 +17,7 @@ namespace ERP_GMEDINA.Controllers
 
          //GET: Areas
         public ActionResult Index()
-        {
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
+        {           
             tbAreas tbAreas = new tbAreas { };
             return View(tbAreas);
         }
@@ -182,6 +179,7 @@ namespace ERP_GMEDINA.Controllers
          //POST: Areas/Create
          //To protect from overposting attacks, please enable the specific properties you want to bind to, for
          //more details see http:go.microsoft.com/fwlink/?LinkId=317598.
+         [SessionManager("Areas/Create")]
         [HttpPost]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
