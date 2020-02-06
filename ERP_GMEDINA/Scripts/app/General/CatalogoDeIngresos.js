@@ -87,12 +87,17 @@ function cargarGridIngresos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesCrear();
-    //DESLOQUEAR EL BOTON
-    $("#btnCreateRegistroIngresos").attr("disabled", false);
-    //MOSTRAR EL MODAL DE CREACION
-    $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("CatalogoDeIngresos/Create");
+
+    if (validacionPermiso.status == true) {
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesCrear();
+        //DESLOQUEAR EL BOTON
+        $("#btnCreateRegistroIngresos").attr("disabled", false);
+        //MOSTRAR EL MODAL DE CREACION
+        $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //EVITAR EL POSTBACK DEL FORMULARIO
@@ -149,75 +154,83 @@ $("#btnCerrarCrear").click(function () {
 
 // DETALLES
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/CatalogoDeIngresos/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                let tipoIngreso = getTipoIngreso(data[0].cin_TipoIngreso);
-                console.table(tipoIngreso)
-                var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
-                $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
-                $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
-                $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
-                $("#Detallar #cin_FechaCrea").val(FechaCrea);
-                $("#Detallar #tipoDeIngresoDetalle").html(tipoIngreso);
-                data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
-                $("#Detallar #cin_FechaModifica").val(FechaModifica);
-                $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    let validacionPermiso = userModelState("CatalogoDeIngresos/Details");
 
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
+        $.ajax({
+            url: "/CatalogoDeIngresos/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    let tipoIngreso = getTipoIngreso(data[0].cin_TipoIngreso);
+                    console.table(tipoIngreso)
+                    var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
+                    $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
+                    $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
+                    $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
+                    $("#Detallar #cin_FechaCrea").val(FechaCrea);
+                    $("#Detallar #tipoDeIngresoDetalle").html(tipoIngreso);
+                    data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                    $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
+                    $("#Detallar #cin_FechaModifica").val(FechaModifica);
+                    $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", function () {
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesEditar();
-    //CAPTURAR EL ID DEL REGISTRO
-    var ID = $(this).data('id');
-    //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
-    InactivarID = ID;
-    //REALIZAR LA PETICION AL SERVIDOR
-    $.ajax({
-        url: "/CatalogoDeIngresos/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                //SETEAR LOS CAMPOS
-                $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
-                $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                //MOSTRAR MODAL DE EDICION
-                $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+    let validacionPermiso = userModelState("CatalogoDeIngresos/Edit");
+
+    if (validacionPermiso.status == true) {
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesEditar();
+        //CAPTURAR EL ID DEL REGISTRO
+        var ID = $(this).data('id');
+        //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
+        InactivarID = ID;
+        //REALIZAR LA PETICION AL SERVIDOR
+        $.ajax({
+            url: "/CatalogoDeIngresos/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    //SETEAR LOS CAMPOS
+                    $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
+                    $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
+                    //MOSTRAR MODAL DE EDICION
+                    $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 //DESPLEGAR MODAL DE CONFIRMA EDICION
@@ -299,12 +312,17 @@ $("#btnEditarNo").click(function () {
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
-    //DESBLOQUEAR EL BOTON
-    $("#btnInactivarIngresos").attr("disabled", false);
-    //OCULTAR EL MODAL DE EDICION
-    $("#EditarCatalogoIngresos").modal('hide');
-    //MOSTRAR EL MODAL DE INACTIVACION
-    $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    // validar informacion del usuario
+    let validacionPermiso = userModelState("AcumuladosISR/Create");
+
+    if (validacionPermiso.status == true) {
+        //DESBLOQUEAR EL BOTON
+        $("#btnInactivarIngresos").attr("disabled", false);
+        //OCULTAR EL MODAL DE EDICION
+        $("#EditarCatalogoIngresos").modal('hide');
+        //MOSTRAR EL MODAL DE INACTIVACION
+        $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //CERRAR EL MODAL DE CONFIRMACION DE INACTIVAR
@@ -357,12 +375,16 @@ $("#btnInactivarIngresos").click(function () {
 //FUNCION: PRIMERA FASE DE ACTIVAR
 var IDActivar = 0;
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
-    //DESBLOQUEAR EL BOTON DE ACTIVAR
-    $("#btnActivarIngreso").attr("disabled", false);
-    //SETEAR LA VARIABLE GLOBAL DE ACTIVACION
-    IDActivar = $(this).data('id');
-    //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
-    $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    let validacionPermiso = userModelState("CatalogoDeIngresos/Activar");
+
+    if (validacionPermiso.status == true) {
+        //DESBLOQUEAR EL BOTON DE ACTIVAR
+        $("#btnActivarIngreso").attr("disabled", false);
+        //SETEAR LA VARIABLE GLOBAL DE ACTIVACION
+        IDActivar = $(this).data('id');
+        //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
+        $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //EJECUTAR LA ACTIVACION DEL REGISTRO
