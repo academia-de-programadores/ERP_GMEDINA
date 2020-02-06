@@ -263,8 +263,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
         {
             //LLENAR DATA DE AUDITORIA
-            int dei_UsuarioModifica = 1;
-            DateTime dei_FechaModifica = DateTime.Now;
+          
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listDeduccionesIndividuales = null;
@@ -276,8 +275,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(dei_IdDeduccionesIndividuales,
-                                                                                                   dei_UsuarioModifica,
-                                                                                                   dei_FechaModifica);
+                                                                                                   Function.GetUser(),
+                                                                                                   Function.DatetimeNow());
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result Resultado in listDeduccionesIndividuales)
                         MensajeError = Resultado.MensajeError;
@@ -318,8 +317,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Activar(int id)
         {
             //LLENAR DATA DE AUDITORIA
-            int dei_UsuarioModifica = 1;
-            DateTime dei_FechaModifica = DateTime.Now;
+        
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listDeduccionesIndividuales = null;
@@ -331,8 +329,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Activar(id,
-                                                                                                 dei_UsuarioModifica,
-                                                                                                 dei_FechaModifica);
+                                                                                                 Function.GetUser(),
+                                                                                                 Function.DatetimeNow());
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionesIndividuales_Activar_Result Resultado in listDeduccionesIndividuales)
                         MensajeError = Resultado.MensajeError;
