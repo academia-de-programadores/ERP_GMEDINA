@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using ERP_GMEDINA.Attribute;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 
@@ -13,8 +14,10 @@ namespace ERP_GMEDINA.Controllers
     public class PersonasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Personas
+        [SessionManager("Personas/Index")]
         public ActionResult Index()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -87,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET : Personas/Create
+        [SessionManager("Personas/Create")]
         public ActionResult Create()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -333,6 +337,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Personas/Create
+        [SessionManager("Personas/Create")]
         [HttpPost]
         public ActionResult Create(Personas tbPersonas,DatosProfesionalesArray DatosProfesionalesArray)//,)
         {
@@ -427,6 +432,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
         }        
         // GET: Areas/Edit/5
+        [SessionManager("Personas/Edit")]
         public ActionResult Edit(int? id)
         {
             try
@@ -502,6 +508,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         // POST: Areas/Edit/5
+        [SessionManager("Personas/Edit")]
         [HttpPost]
         public ActionResult Edit(Personas tbPersonas, DatosProfesionalesArray DatosProfesionalesArray)
         {
@@ -699,6 +706,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Delete/5
+        [SessionManager("Personas/Delete")]
         [HttpPost]
         public ActionResult Delete(Personas tbPersonas)
         {
@@ -720,6 +728,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
         }
+        [SessionManager("Personas/Habilitar")]
         public JsonResult hablilitar(int id)
         {
             string msj = "";
