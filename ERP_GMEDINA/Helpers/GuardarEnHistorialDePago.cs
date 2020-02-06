@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web;
 
 
 namespace ERP_GMEDINA.Helpers
@@ -17,6 +18,7 @@ namespace ERP_GMEDINA.Helpers
                               .Select(x => x.hipa_IdHistorialDePago)
                               .DefaultIfEmpty(0)
                               .Max();
+            int idUser = (int)HttpContext.Current.Session["UserLogin"];
 
             try
             {
@@ -30,8 +32,10 @@ namespace ERP_GMEDINA.Helpers
                 oHistorialPagoEncabezado.hipa_Anio = DateTime.Now.Year;
                 oHistorialPagoEncabezado.hipa_Mes = DateTime.Now.Month;
                 oHistorialPagoEncabezado.peri_IdPeriodo = 1;
-                oHistorialPagoEncabezado.hipa_UsuarioCrea = 1;
+
+                oHistorialPagoEncabezado.hipa_UsuarioCrea = idUser;
                 oHistorialPagoEncabezado.hipa_FechaCrea = DateTime.Now;
+
                 oHistorialPagoEncabezado.hipa_TotalISR = totalISR;
                 oHistorialPagoEncabezado.hipa_ISRPendiente = true;
                 oHistorialPagoEncabezado.hipa_AFP = totalAFP;
@@ -111,7 +115,7 @@ namespace ERP_GMEDINA.Helpers
 
                         hisorialDeduccioneIterado.hidp_IdHistorialdeDeduPago = idDetalle + idDetalleDeduccionHisotorialesContador;
                         hisorialDeduccioneIterado.hipa_IdHistorialDePago = int.Parse(MensajeError);
-                        hisorialDeduccioneIterado.hidp_UsuarioCrea = 1;
+                        hisorialDeduccioneIterado.hidp_UsuarioCrea = idUser;
                         hisorialDeduccioneIterado.hidp_FechaCrea = DateTime.Now;
                         db.tbHistorialDeduccionPago.Add(hisorialDeduccioneIterado);
                         idDetalleDeduccionHisotorialesContador++;
@@ -129,7 +133,7 @@ namespace ERP_GMEDINA.Helpers
                         hisorialIngresosIterado.hipa_IdHistorialDePago = int.Parse(MensajeError);
                         hisorialIngresosIterado.hip_FechaInicio = fechaInicio;
                         hisorialIngresosIterado.hip_FechaFinal = fechaFin;
-                        hisorialIngresosIterado.hip_UsuarioCrea = 1;
+                        hisorialIngresosIterado.hip_UsuarioCrea = idUser;
                         hisorialIngresosIterado.hip_FechaCrea = DateTime.Now;
                         db.tbHistorialDeIngresosPago.Add(hisorialIngresosIterado);
                         idDetalleIngresoHisotorialesContador++;

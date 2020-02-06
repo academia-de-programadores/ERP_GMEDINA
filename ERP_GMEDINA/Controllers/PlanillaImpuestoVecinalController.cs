@@ -7,6 +7,7 @@ using ERP_GMEDINA.Models;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -18,6 +19,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region GET: Index
         // GET: PlanillaImpuestoVecinal
+        [SessionManager("PlanillaImpuestoVecinal/Index")]
         public ActionResult Index()
         {
             Session["GenerarPlanillaImpVecinal"] = "";
@@ -36,6 +38,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region GET: Index Nueva Proyeccion
         // GET: PlanillaImpuestoVecinal
+        [SessionManager("PlanillaImpuestoVecinal/Index")]
         public ActionResult IndexNuevaProyeccion()
         {
             return View();
@@ -44,6 +47,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         #region POST: PROCESAR CÁLCULO DE IMPUESTO VECINAL
+        [SessionManager("PlanillaImpuestoVecinal/ProcesarPlanillaImpuestoVecinal")]
         public JsonResult ProcesarPlanillaImpuestoVecinal()
         {
             //VARIABLE DE RESPUESTA PARA LAS EJECUCIONES
@@ -107,6 +111,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         #region POST: GENERAR LA PLANILLA DE IMPUESTO VECINAL
+        [SessionManager("PlanillaImpuestoVecinal/GenerarPlanillaImpV")]
         public JsonResult GenerarPlanillaImpV()
         {
             #region DECLARACION DE VARIABLES 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
+
 namespace ERP_GMEDINA.Controllers
 {
     public class CatalogoDePlanillasController : Controller
@@ -221,7 +222,8 @@ namespace ERP_GMEDINA.Controllers
                 IEnumerable<object> listCatalogoDePlanillas = null;
                 IEnumerable<object> listCatalogoDeIngresos = null;
                 IEnumerable<object> listCatalogoDeDeducciones = null;
-                int cpla_UsuarioCreaModifica = 1; //TODO: Editar el Usuario Crea del catalogo de planillas
+                int idUser = (int)Session["UserLogin"];
+                int cpla_UsuarioCreaModifica = idUser; //TODO: Editar el Usuario Crea del catalogo de planillas
                 DateTime cpla_FechaCreaModifica = DateTime.Now; // Asignarle la fecha actual a la variable cpla_FechaCrea
                 string cpla_DescripcionPlanilla;
                 int cpla_FrecuenciaEnDias;
@@ -334,8 +336,9 @@ namespace ERP_GMEDINA.Controllers
         {
             foreach (int i in catalogoDeducciones)
             {
+                int idUser = (int)Session["UserLogin"];
                 int cde_IdDeducciones = i; // Asignarle el id de la deduccion
-                int tpdd_UsuarioCrea = 1; // TODO: Editar el Usuario Crea del Catalogo de Deducciones
+                int tpdd_UsuarioCrea = idUser; // TODO: Editar el Usuario Crea del Catalogo de Deducciones
                 DateTime tpdd_FechaCrea = DateTime.Now; // Asignar la fecha actual
 
                 //Guardar en el catalogo de deducciones
@@ -480,6 +483,7 @@ namespace ERP_GMEDINA.Controllers
                 agregarIngreso = null, //Se almacena el resultado del procedimiento almacenado para agregar el ingreso
                 agregarDeduccion = null; //Se almacena el resultado del procedimiento almacenado para agregar la deducción
 
+            int idUser = (int)Session["UserLogin"];
             string mensajeErrorIngreso = "", //Para cuando suceda algún error al amacenar un ingreso
                 mensajeErrorDeduccion = "", //Para cuando suceda algún error al amacenar una deducción
                 MensajeErrorCatalogoPlanillas = "", //Para cuando suceda algun error en al guardar en el catalogo de planillas
@@ -487,7 +491,7 @@ namespace ERP_GMEDINA.Controllers
                 cpla_DescripcionPlanilla = catalogoDePlanillas[0], //Descripción de la planilla
                 response = "bien" //Si no hay nada que falle, entonces recibira un mensaje de que todo se hizo bien el cliente
                 , MensajeErrorCatalogoDeDeducciones = ""; //Si hay error al guardar las deduccioenes se le notifica
-            int cpla_UsuarioModifica = 1, //TODO: Editar el usuario modifica
+            int cpla_UsuarioModifica = idUser, //TODO: Editar el usuario modifica
                 cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //Frecuencia en días para generar la planilla
             DateTime cpla_FechaModifica = DateTime.Now;
             #endregion

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 
 namespace ERP_GMEDINA.Helpers
 {
@@ -12,6 +13,8 @@ namespace ERP_GMEDINA.Helpers
         public static void ProcesarIngresos(DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaIngresosVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, List<tbHistorialDeIngresosPago> lisHistorialIngresos, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
         {
             #region Procesar ingresos
+
+            int idUser = (int)HttpContext.Current.Session["UserLogin"];
 
             // informacion del colaborador actual
             InformacionDelEmpleadoActual = db.V_InformacionColaborador
@@ -163,6 +166,8 @@ namespace ERP_GMEDINA.Helpers
                             // pasar el estado de las comisiones a pagadas
                             oComisionesColaboradoresIterador.cc_Pagado = true;
                             oComisionesColaboradoresIterador.cc_FechaPagado = DateTime.Now;
+                            oComisionesColaboradoresIterador.cc_UsuarioModifica = idUser;
+                            oComisionesColaboradoresIterador.cc_FechaModifica = DateTime.Now;
                             db.Entry(oComisionesColaboradoresIterador).State = EntityState.Modified;
 
                             // agregarlas al vocher
@@ -320,6 +325,8 @@ namespace ERP_GMEDINA.Helpers
                             // pasar el bono a pagado
                             oBonosColaboradoresIterador.cb_Pagado = true;
                             oBonosColaboradoresIterador.cb_FechaPagado = DateTime.Now;
+                            oBonosColaboradoresIterador.cb_UsuarioModifica = idUser;
+                            oBonosColaboradoresIterador.cb_FechaModifica = DateTime.Now;
                             db.Entry(oBonosColaboradoresIterador).State = EntityState.Modified;
 
                             // agregarlo al voucher
@@ -404,6 +411,8 @@ namespace ERP_GMEDINA.Helpers
 
                             // cambiar el estado de las vacaciones a pagadas
                             oVacacionesColaboradoresIterador.hvac_DiasPagados = true;
+                            oVacacionesColaboradoresIterador.hvac_UsuarioModifica = idUser;
+                            oVacacionesColaboradoresIterador.hvac_FechaModifica = DateTime.Now;
                             db.Entry(oVacacionesColaboradoresIterador).State = EntityState.Modified;
 
                             // agregarlas al vocher
@@ -465,10 +474,11 @@ namespace ERP_GMEDINA.Helpers
                             //pasar el bono a pagado
                             if (oIngresosIndiColaboradoresIterador.ini_PagaSiempre == false)
                             {
-                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;
-                                oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
-                                db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
+                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;                                
                             }
+                            oIngresosIndiColaboradoresIterador.ini_UsuarioModifica = idUser;
+                            oIngresosIndiColaboradoresIterador.ini_FechaModifica = DateTime.Now;
+                            db.Entry(oIngresosIndiColaboradoresIterador).State = EntityState.Modified;
 
                             //agregarlo al voucher
                             ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
