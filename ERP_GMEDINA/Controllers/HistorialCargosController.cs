@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -14,6 +15,7 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+        [SessionManager("HistorialCargos/Index")]
         // GET: HistorialCargos
         public ActionResult Index()
         {
@@ -116,8 +118,8 @@ namespace ERP_GMEDINA.Controllers
                 {
 
                     Departamentos.AddRange(db.tbDepartamentos
-                    .Select(tabla => new { Id = tabla.depto_Id, Descripcion = tabla.depto_Descripcion, Estado = tabla.depto_Estado })
-                    .Where(x => x.Estado && x.Id == id).ToList());
+                    .Select(tabla => new { Id = tabla.depto_Id, area_Id = tabla.area_Id, Descripcion = tabla.depto_Descripcion, Estado = tabla.depto_Estado })
+                    .Where(x => x.Estado && x.area_Id == id).ToList());
                 }
                 catch
                 {
@@ -164,6 +166,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        //[SessionManager("HistorialCargos/Promover")]
         public ActionResult Promover()
         {
             if (Session["Admin"] == null && Session["Usuario"] == null)
@@ -196,6 +199,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+        //[SessionManager("HistorialCargos/Promover")]
         public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
@@ -228,6 +232,7 @@ namespace ERP_GMEDINA.Controllers
 
 
 
+        //[SessionManager("HistorialCargos/Deshacer")]
         public JsonResult Deshacer(int hcar_Id, string hcar_RazonPromocion, DateTime emp_Fechaingreso)
         {
             string msj = "";
