@@ -833,8 +833,6 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
                     $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                     $("#Editar #dei_Motivo").val(data.dei_Motivo);
                     $("#Editar #dei_Monto").val(data.dei_Monto);
-                    console.log($("#Editar #dei_Monto").val(data.dei_Monto));
-                    debugger;
                     $("#Editar #dei_NumeroCuotas").val(data.dei_NumeroCuotas);
                     $("#Editar #dei_MontoCuota").val(data.dei_MontoCuota);
                     $("#Editar #dei_PagaSiempre").val(data.dei_PagaSiempre);
