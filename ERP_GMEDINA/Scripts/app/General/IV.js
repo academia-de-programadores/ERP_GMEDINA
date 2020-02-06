@@ -196,11 +196,37 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarIV").modal('hide');
 });
 
+$("#btnCerrarCrear").click(function () {
+    OcultarValidacionesCrear();
+});
+
 //EVENTOS: CERRAR MODAL DE CONFIRMACION
 $('#btnRegresarIV').click(function () {
     $("#EditarIVConfirmacion").modal('hide');
     $("#EditarIV").modal();
 });
+
+//VALIDACIÓN DE CAMPOS EN MODAL DE EDITAR
+$("#btnEditarIV").click(function () {    
+    var timv_RangoInicioGet = $("#Editar #timv_RangoInicio").val();
+    var timv_RangoFinGet = $("#Editar #timv_RangoFin").val();
+    var tde_IdTipoDeduGet = $("#Editar #tde_IdTipoDedu").val();
+    var timv_ImpuestoGet = $("#Editar #timv_Impuesto").val();
+    var timv_RangoGet = $("#Editar #timv_Rango").val();
+    var mun_CodigoGet = $("#Editar #mun_Codigo").val();
+
+    if (DataAnnotationsEditar(mun_CodigoGet, tde_IdTipoDeduGet, timv_RangoInicioGet, timv_RangoFinGet, timv_RangoGet, timv_ImpuestoGet))
+    {
+        $("#EditarIV").modal('hide');
+        $("#EditarIVConfirmacion").modal();
+        $('#btnEditarIV').attr('disabled', true);
+    }
+    else {
+        $('#btnEditarIV').attr('disabled', false);
+    }
+    
+});
+
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditIVConfirmacion").click(function () {
@@ -216,8 +242,6 @@ $("#btnEditIVConfirmacion").click(function () {
     var timv_Rango1 = $("#Editar #timv_Rango").val();
     var mun_Codigo1 = $("#Editar #mun_Codigo").val();
 
-
-
     var data_array = {
         timv_IdTechoImpuestoVecinal: timv_IdTechoImpuestoVecinal1,
         mun_Codigo: mun_Codigo1,
@@ -230,13 +254,7 @@ $("#btnEditIVConfirmacion").click(function () {
     var Matriz = {
         tbTechoImpuestoVecinal: data_array,
         Impuesto: timv_Impuesto1
-    };
-
-    console.log(data_array);
-    console.log(Matriz);
-
-
-    if (DataAnnotationsEditar(mun_Codigo1, tde_IdTipoDedu1, timv_RangoInicio1, timv_RangoFin1, timv_Rango1, timv_Impuesto1)) {
+    };    
         //, decimal 
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
@@ -253,8 +271,7 @@ $("#btnEditIVConfirmacion").click(function () {
                 });
             }
             else {
-                //BLOQUEAR BOTON DE EDITAR
-                $('#btnEditarIV').attr('disabled', true);
+                //BLOQUEAR BOTON DE EDITAR                
                 //REFRESCAR LA DATA DEL DATATABLE
                 cargarGridIV();
                 //OCULTAR MODAL DE EDICION
@@ -265,8 +282,7 @@ $("#btnEditIVConfirmacion").click(function () {
                     message: '¡El registro se editó de forma exitosa!',
                 });
             }
-        });
-    }
+        });    
 });
 
 
@@ -383,6 +399,7 @@ $(document).on("click", "#btnBackActivar", function () {
 //DETALLES
 $(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
     var ID = $(this).data('id');
+    $("body").css("overflow", "hidden");
     $.ajax({
         url: "/TechoImpuestoVecinal/Details/" + ID,
         method: "GET",
@@ -453,6 +470,10 @@ $(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
         });
 });
 
+//VOLVER A MOSTRAR SCROLLBAR CUANDO SE CIERRE EL MODAL DE DETAILS
+$("#btnCerrarDetailsIV").click(function () {
+    $("body").css("overflow-y", "scroll");
+});
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -466,35 +487,48 @@ $(document).on("click", "#tblIV tbody tr td #btnDetalleIV", function () {
 //FUNCION: OCULTAR VALIDACIONES DE CREACION
 function Vaciar_ModalCrear() {
     //VACIADO DE INPUTS
-    $("#Crear #isr_RangoInicial").val("");
-    $("#Crear #isr_RangoFinal").val("");
-    $("#Crear #tde_IdTipoDedu").val(0);
-    $("#Crear #isr_Porcentaje").val("");
-
-    //
+    $("#Crear #timv_RangoInicio").val("");
+    $("#Crear #timv_RangoFin").val("");
+    $("#Crear #timv_Rango").val(0);
+    $("#Crear #tde_IdTipoDedu").val("");
+    $("#Crear #mun_Nombre").val("");    
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #isr_RangoInicialValidacion").hide();
+    $("#Crear #mun_CodigoValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Crear #AsteriscoRangoInicial").removeClass("text-danger");
+    $("#Crear #AsteriscoMunicipio").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #isr_RangoFinalValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
-
-    //
-    //OCULTAR DATAANNOTATIONS
-    $("#Crear #isr_TipoDeduccionValidacion").hide();
+    $("#Crear #timv_TipoDeduccionValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoTipoDeduccion").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_PorcentajeValidacion").hide();
+    $("#Crear #timv_RangoInicioValidacion").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Crear #AsteriscoPorcentaje").removeClass("text-danger");
+    $("#Crear #AsteriscoRangoInicio").removeClass("text-danger");
 
+    //
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #timv_RangoFinValidacion").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #timv_RangoFinValidacion").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #timv_RangoValidacion").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #AsteriscoRango").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #timv_ImpuestoValidacion").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #AsteriscoImpuesto").removeClass("text-danger");
 }
 
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
@@ -930,7 +964,7 @@ function cargarGridIV() {
         else {
             var LitaIV = data;
             //limpiar datatable
-            $('#btnTechosIV').DataTable().clear();
+            $('#tblIV').DataTable().clear();
             //recorrer data obtenida del backend
             for (var i = 0; i < LitaIV.length; i++) {
 
@@ -947,7 +981,7 @@ function cargarGridIV() {
                 var botonActivar = LitaIV[i].timv_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + LitaIV[i].timv_IdTechoImpuestoVecinal + '" type="button" class="btn btn-default btn-xs"  id="btnActivarIVModal">Activar</button>' : '' : '';
 
                 //agregar el row al datatable
-                $('#btnTechosIV').dataTable().fnAddData([
+                $('#tblIV').dataTable().fnAddData([
                     LitaIV[i].timv_IdTechoImpuestoVecinal,
                     LitaIV[i].mun_Nombre,
                     LitaIV[i].tde_Descripcion,
