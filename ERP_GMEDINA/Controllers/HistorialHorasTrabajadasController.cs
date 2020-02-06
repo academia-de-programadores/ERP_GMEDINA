@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialHorasTrabajadasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: HistorialHorasTrabajadas
+        [SessionManager("HistorialHorasTrabajadas/Index")]
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };

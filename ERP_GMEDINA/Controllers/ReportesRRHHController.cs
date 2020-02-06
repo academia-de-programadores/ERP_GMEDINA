@@ -10,13 +10,15 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.UI.WebControls;
 using System.Data;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class ReportesRRHHController : Controller
     {
         // GET: ReportesRRHH
-        ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
         ReportesRRHH ds = new ReportesRRHH();
 
         public ActionResult HistorialIncapacidadesRPT()
@@ -34,6 +36,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialIncapacidadesRPT")]
         public ActionResult HistorialIncapacidadesRPT(int? ticn_Id, DateTime? FechaInicio, DateTime? FechaFin)
         {
 
@@ -114,6 +117,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/HorasTrabajadas")]
         public ActionResult HorasTrabajadas(int? tiho_Id, DateTime? Fecha, DateTime? FechaFin)
 
         {
@@ -208,6 +212,7 @@ namespace ERP_GMEDINA.Controllers
 
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialCargosRPT")]
         public ActionResult HistorialCargosRPT(int? car_Id, int? emp_Id, DateTime? Fecha, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -272,6 +277,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialContratacionesRPT")]
         public ActionResult HistorialContratacionesRPT(int? car_Id, DateTime? FechaContratacion, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -345,6 +351,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialSalidasRPT")]
         public ActionResult HistorialSalidasRPT(int? tsal_Id, DateTime? FechaSalida, DateTime? fechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -430,6 +437,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialVacacionesRPT")]
         public ActionResult HistorialVacacionesRPT(int? emp_Id, DateTime? hvac_FechaInicio, DateTime? hvac_FechaFin /*,int hvac_AnioVacaciones, int hvac_MesVacaciones*/)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -514,6 +522,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/SueldosRPT")]
         public ActionResult SueldosRPT(int? emp_Id, DateTime? fechaInicio, DateTime? fechafin, int? Car_Id)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -592,6 +601,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/Permisos")]
         public ActionResult Permisos(int? emp_Id, DateTime? FechaInicio, DateTime? FechaFin, int? tper_Id)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -676,6 +686,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/FaseSeleccionRPT")]
         public ActionResult FaseSeleccionRPT(int? fare_Id, DateTime? Fecha, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -751,6 +762,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/Requisicion")]
         public ActionResult Requisicion(int? req_Id, DateTime? fechaInicio, DateTime? Fechafin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -827,6 +839,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/Empleado")]
         public ActionResult Empleado(int? jor_Id, int? depto_Id, int? area_Id, int? suc_Id, DateTime? fechaInicio, DateTime? Fechafin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -932,6 +945,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialAmonestacionesRPT")]
         public ActionResult HistorialAmonestacionesRPT(int? tamo_Id, string Identidad, DateTime? Fecha, DateTime? FechaAnterior)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -1000,8 +1014,8 @@ namespace ERP_GMEDINA.Controllers
                 return View("~/Views/ErrorPages/ErrorConnectionDB.cshtml", null);
             }
         }
-        //HistorialAudienciaDescargo
         [HttpPost]
+        [SessionManager("ReportesRRHH/HistorialAudienciaDescargoRPT")]
         public ActionResult HistorialAudienciaDescargoRPT(string per_Identidad, DateTime? fechaAudiencia, DateTime? fecha)
         {
 
@@ -1081,6 +1095,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         [HttpPost]
+        [SessionManager("ReportesRRHH/EquipoEmpleadosRPT")]
         public ActionResult EquipoEmpleadosRPT(int? eqtra_Id, int? Id_Persona, DateTime? fechaInicio, DateTime? fechaFin, int? area_Id, int? car_Id, int? depto_Id)
         {
             ReportViewer reportViewer = new ReportViewer();

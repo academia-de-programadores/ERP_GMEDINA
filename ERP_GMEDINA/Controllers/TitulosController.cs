@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using ERP_GMEDINA.Attribute;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 
@@ -13,26 +14,16 @@ namespace ERP_GMEDINA.Controllers
     public class TitulosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
+
 
         // GET: Titulos
+        [SessionManager("Titulos/Index")]
         public ActionResult Index()
-        {
-
-            if (Session["Admin"] == null && Session["Usuario"] == null)
-            {
-                Response.Redirect("~/Inicio/index");
-                return null;
-            }
-            try
-            {
-
-                tbTitulos tbtitulos = new tbTitulos { };
-                return View(tbtitulos);
-            }
-            catch
-            {
-                return View();
-            }
+        {     
+               var  tbtitulos = new tbTitulos { };
+               return View(tbtitulos);
+          
         }
 
         [HttpPost]
@@ -71,6 +62,8 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("Titulos/Create")]
+
         public JsonResult Create(tbTitulos tbtitulos)
         {
             string msj = "";
@@ -103,6 +96,7 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Habilidades/Edit/5
         [HttpGet]
+        [SessionManager("Titulos/Edit")]
         public ActionResult Edit(int? id)
         {
 
@@ -144,6 +138,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Titulos/Edit")]
         public JsonResult Edit(tbTitulos tbtitulos)
         {
             string msj = "";
@@ -176,6 +171,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("Titulos/Delete")]
         public ActionResult Delete(tbTitulos tbtitulos)
         {
             string msj = "";
@@ -225,6 +221,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("Titulos/habilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";

@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialContratacionesController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: HistorialContrataciones
+        [SessionManager("HistorialContrataciones/Index")]
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };

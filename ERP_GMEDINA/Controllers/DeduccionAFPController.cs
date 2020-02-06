@@ -7,15 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class DeduccionAFPController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
 
         #region Index Deducción AFP
         // GET: DeduccionAFP
+        [SessionManager("DeduccionesAFP/Index")]
         public ActionResult Index()
         {
             var tbDeduccionAFP = db.tbDeduccionAFP.OrderBy(t => t.dafp_FechaCrea).Include(t => t.tbAFP).Include(t => t.tbEmpleados);
@@ -54,6 +57,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Crear Deducción AFP
         // GET: DeduccionAFP/Create
+        [SessionManager("DeduccionesAFP/Create")]
         public ActionResult Create()
         {
             /*
@@ -68,6 +72,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("DeduccionesAFP/Create")]
         public ActionResult Create([Bind(Include = "dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea,dafp_DeducirISR")] tbDeduccionAFP tbDeduccionAFP)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
@@ -150,6 +155,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Editar Deducción AFP
         // GET: DeduccionAFP/Edit/5
+        [SessionManager("DeduccionesAFP/Edit")]
         public JsonResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -162,6 +168,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("DeduccionesAFP/Edit")]
         public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica,dafp_DeducirISR")] tbDeduccionAFP tbDeduccionAFP)
         {
             //LLENAR DATA DE AUDITORIA
@@ -224,6 +231,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Detalles Deducción AFP
         // GET: DeduccionAFP/Details/5
+        [SessionManager("DeduccionesAFP/Details")]
         public JsonResult Details(int? ID)
         {
             var tbDeduccionAFPJSON = from tbDeduAFP in db.tbDeduccionAFP
@@ -256,6 +264,7 @@ namespace ERP_GMEDINA.Controllers
         #region Inhabilitar Deducción AFP
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("DeduccionesAFP/Inactivar")]
         public ActionResult Inactivar(int dafp_Id)
         {
             //LLENAR DATA DE AUDITORIA
@@ -310,6 +319,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Activar Deducción AFP
         [HttpPost]
+        [SessionManager("DeduccionesAFP/Activar")]
         public ActionResult Activar(int id)
         {
             //LLENAR DATA DE AUDITORIA

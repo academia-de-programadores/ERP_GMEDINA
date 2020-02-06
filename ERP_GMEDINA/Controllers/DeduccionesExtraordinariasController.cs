@@ -8,16 +8,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
 	public class DeduccionesExtraordinariasController : Controller
 	{
 		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+       private  ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
 
-		#region Index Deducciones Extraordinarias
-		// GET: DeduccionesExtraordinarias
-		public ActionResult Index()
+        #region Index Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias
+        [SessionManager("DeduccionesExtraordinarias/Index")]
+        public ActionResult Index()
 		{
 			var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
 			return View(tbDeduccionesExtraordinarias.ToList());
@@ -52,11 +55,12 @@ namespace ERP_GMEDINA.Controllers
 			//Retornamos un Json en el FrontEnd
 			return new JsonResult { Data = tbDeduccionesExtraordinariasD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 		}
-		#endregion
+        #endregion
 
-		#region Crear Deducciones Extraordinarias
-		// GET: DeduccionesExtraordinarias/Create
-		public ActionResult Create()
+        #region Crear Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias/Create
+        [SessionManager("DeduccionesExtraordinarias/Create")]
+        public ActionResult Create()
 		{
 			//Viewbag para llenar sus respectivos Dropdownlist
 			ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
@@ -89,12 +93,9 @@ namespace ERP_GMEDINA.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea,dex_DeducirISR")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
+        [SessionManager("DeduccionesExtraordinarias/Create")]
+        public ActionResult Create([Bind(Include = "eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea,dex_DeducirISR")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
 		{
-			//Para llenar los campos de auditoria
-			tbDeduccionesExtraordinarias.dex_UsuarioCrea = 1;
-			tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
-
 			//Variable para enviar y validar en el FrontEnd
 			string Response = String.Empty;
 			IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -111,8 +112,8 @@ namespace ERP_GMEDINA.Controllers
 																									  tbDeduccionesExtraordinarias.dex_ObservacionesComentarios,
 																									  tbDeduccionesExtraordinarias.cde_IdDeducciones,
 																									  tbDeduccionesExtraordinarias.dex_Cuota,
-																									  tbDeduccionesExtraordinarias.dex_UsuarioCrea,
-																									  tbDeduccionesExtraordinarias.dex_FechaCrea,
+																									  Function.GetUser(),
+																									  Function.DatetimeNow(),
 																									  tbDeduccionesExtraordinarias.dex_DeducirISR);
 					//El tipo complejo del Procedimiento Almacenado
 					foreach (UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result Resultado in listDeduccionesExtraordinarias)
@@ -149,13 +150,14 @@ namespace ERP_GMEDINA.Controllers
 			return Json(Response, JsonRequestBehavior.AllowGet);
 
 		}
-		#endregion
+        #endregion
 
-		#region Editar Deducciones Extraordinarias
-		// GET: DeduccionesExtraordinarias/Edit/5
-		public ActionResult Edit(int? id)
+        #region Editar Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias/Edit/5
+        [SessionManager("DeduccionesExtraordinarias/Edit")]
+        public ActionResult Edit(int? id)
 		{
-			if (id == null)
+            if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
@@ -176,12 +178,9 @@ namespace ERP_GMEDINA.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "dex_IdDeduccionesExtra,eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioModifica,dex_FechaModifica,dex_DeducirISR")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
+        [SessionManager("DeduccionesExtraordinarias/Edit")]
+        public ActionResult Edit([Bind(Include = "dex_IdDeduccionesExtra,eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioModifica,dex_FechaModifica,dex_DeducirISR")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
 		{
-
-			//Para llenar los campos de auditoria
-			tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
-			tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
 
 			//Variable para enviarla al lado del Cliente
 			string Response = String.Empty;
@@ -197,8 +196,8 @@ namespace ERP_GMEDINA.Controllers
 																								  tbDeduccionesExtraordinarias.dex_ObservacionesComentarios,
 																								  tbDeduccionesExtraordinarias.cde_IdDeducciones,
 																								  tbDeduccionesExtraordinarias.dex_Cuota,
-																								  tbDeduccionesExtraordinarias.dex_UsuarioModifica,
-																								  tbDeduccionesExtraordinarias.dex_FechaModifica,
+																								  Function.GetUser(),
+																								  Function.DatetimeNow(),
 																								  tbDeduccionesExtraordinarias.dex_DeducirISR);
 
 				//El tipo complejo del Procedimiento Almacenado
@@ -228,11 +227,12 @@ namespace ERP_GMEDINA.Controllers
 			return Json(Response, JsonRequestBehavior.AllowGet);
 
 		}
-		#endregion
+        #endregion
 
-		#region Detalles Deducciones Extraordinarias
-		// GET: DeduccionesExtraordinarias/Details/5
-		public ActionResult Details(int? id)
+        #region Detalles Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias/Details/5
+        [SessionManager("DeduccionesExtraordinarias/Details")]
+        public ActionResult Details(int? id)
 		{
 			if (id == null)
 			{
@@ -253,7 +253,8 @@ namespace ERP_GMEDINA.Controllers
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpGet]
-		public JsonResult Inactivar(int? id)
+        [SessionManager("DeduccionesExtraordinarias/Inactivar")]
+        public JsonResult Inactivar(int? id)
 		{
 			if (id == null)
 				return Json("error", JsonRequestBehavior.AllowGet);
@@ -304,7 +305,8 @@ namespace ERP_GMEDINA.Controllers
 
 		#region Activar Deducciones Extraordinarias
 		[HttpGet]
-		public JsonResult Activar(int? id)
+        [SessionManager("DeduccionesExtraordinarias/Activar")]
+        public JsonResult Activar(int? id)
 		{
 			if (id == null)
 				return Json("error", JsonRequestBehavior.AllowGet);

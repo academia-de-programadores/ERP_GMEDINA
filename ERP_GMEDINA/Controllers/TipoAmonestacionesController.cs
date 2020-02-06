@@ -7,35 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class TipoAmonestacionesController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: TipoAmonestaciones
-       
+        [SessionManager("TipoAmonestaciones/Index")]
         public ActionResult Index()
         {
-            if(Session["Admin"]==null && Session["Usuario"]==null)
-            {
-                Response.Redirect("~/Incio/index");
-                return null;
-            }
-            try
-            {
-                db = new ERP_GMEDINAEntities();
-                tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Estado = true };
-                bool Admin = (bool)Session["Admin"];
-                return View(tbTipoAmonestaciones);
-
-            }
-            catch (Exception)
-            {
-                return View();
-
-            }
+            tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Estado = true };
+            bool Admin = (bool)Session["Admin"];
+            return View(tbTipoAmonestaciones);
         }
 
         [HttpPost]
@@ -59,14 +46,16 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.ToString();
-                throw;
+                return Json(-2, JsonRequestBehavior.AllowGet);
             }
         }
         // POST: TipoAmonestaciones/Create
         [HttpPost]
+        [SessionManager("TipoAmonestaciones/Create")]
         public JsonResult Create(tbTipoAmonestaciones tbTipoAmonestaciones)
         {
             string msj = "";
+            tbTipoAmonestaciones tbTipoAmonestacion = new tbTipoAmonestaciones();
             if (tbTipoAmonestaciones.tamo_Descripcion != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
@@ -93,6 +82,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: TipoAmonestaciones/Edit/5
+        [SessionManager("TipoAmonestaciones/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -134,17 +124,19 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: TipoAmonestaciones/Edit/5
         [HttpPost]
+        [SessionManager("TipoAmonestaciones/Edit")]
         public JsonResult Edit(tbTipoAmonestaciones tbTipoAmonestaciones)
         {
             string msj = "";
-            if (tbTipoAmonestaciones.tamo_Id != 0 && tbTipoAmonestaciones.tamo_Descripcion != "")
+            tbTipoAmonestaciones tbTipoAmonestacion = new tbTipoAmonestaciones();
+            if (tbTipoAmonestacion.tamo_Id != 0 && tbTipoAmonestacion.tamo_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTipoAmonestaciones_Update(id, tbTipoAmonestaciones.tamo_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoAmonestaciones_Update(id, tbTipoAmonestacion.tamo_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoAmonestaciones_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -165,6 +157,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("TipoAmonestacion/habilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -191,6 +184,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: TipoAmonestaciones/Delete/5
         [HttpPost]
+        [SessionManager("TipoAmonestaciones/Delete")]
         public ActionResult Delete(tbTipoAmonestaciones tbTipoAmonestaciones)
         {
             string msj = "";
@@ -198,7 +192,7 @@ namespace ERP_GMEDINA.Controllers
 
             string RazonInactivo = "Se ha Inhabilitado este Registro";
 
-            if (tbTipoAmonestaciones.tamo_Id != 0 )
+            if (tbTipoAmonestaciones.tamo_Id != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
