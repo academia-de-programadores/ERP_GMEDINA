@@ -10,10 +10,13 @@
         });
 
     // recuperar información del usuario para las validaciones de permisos
+    var x = 0;
+    setInterval(function () { x+=100},100);
     $.ajax({
         url: "/Login/LoadUserModelState",
         method: "GET"
     }).done(function (data) {
+        console.log(x/1000 + 's');
 
         // validar respuesta del servidor
         if (data == '') {
@@ -27,7 +30,7 @@
         else {
             sessionStorage.setItem("VM_ModelState", JSON.stringify(data));
 
-            // ejemplo  de como implementar
+            // codigo de ejemplo  de como implementar
 
             // validar informacion del usuario
             var validacionPermiso = userModelState("Planilla/Index");
@@ -38,6 +41,8 @@
                 console.log('codigo...');
                 // termina activar
             }
+
+            // codigo de ejemplo  de como implementar
         }
     });
 });
