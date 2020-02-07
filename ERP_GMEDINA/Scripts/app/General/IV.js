@@ -1,10 +1,4 @@
-﻿// variable inactivacion
-var InactivarID = 0;
-
-// variable activacion
-var ActivarID = 0;
-
-// --------- Crear ---------
+﻿// --------- Crear ---------
 
 // create 1 modal
 $(document).on("click", "#btnAgregarIV", function () {
@@ -400,6 +394,9 @@ $('#btnRegresarIV').click(function () {
 
 // --------- Inactivar ---------
 
+// variable inactivacion
+var InactivarID = 0;
+
 // inactivar 1 modal
 $(document).on("click", "#btnModalInactivarIV", function () {
 
@@ -462,6 +459,10 @@ $(document).on("click", "#btnBackIV", function () {
 
 
 // --------- Activar ---------
+
+
+// variable activacion
+var ActivarID = 0;
 
 // activar 1 modal
 $(document).on("click", "#tblIV tbody tr td #btnActivarIVModal", function () {
