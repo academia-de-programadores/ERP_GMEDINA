@@ -29,6 +29,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbPersonas);
         }
         // GET: Personas/Details
+        [SessionManager("Personas/Detalles")]
         public ActionResult Detalles(int? id)
         {
             try

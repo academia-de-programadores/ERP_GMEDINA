@@ -1,4 +1,17 @@
 ﻿@model ERP_GMEDINA.Models.tbPersonas
+@using ERP_GMEDINA.Models
+@{
+    Helpers Login = new Helpers();
+    int Sesiones = 0;
+
+
+    List<tbUsuario> User = Login.getUserInformation();
+
+    foreach (tbUsuario Usuario in User)
+    {
+        Sesiones = (int)Usuario.usu_SesionesValidas;
+    }
+}
 <div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
@@ -67,6 +80,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                @if (Login.GetUserRols("Personas/Delete"))
+                {
+                    <button type="button" class="btn btn-danger pull-left" id="btnInactivar">Inactivar</button>
+                }
                 @*<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>*@
                 @*<button type="button" class="btn btn-danger pull-left" data-id="" id="btnInactivar">Inactivar</button>*@
             </div>

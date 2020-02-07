@@ -52,11 +52,14 @@ function format(obj) {
     return div ;
 }
 function ModalInactivar(id) {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#per_Id").val(id);
-    $("#ModalInactivar").find("#per_RazonInactivo").val("");
-    $("#ModalInactivar").find("#per_RazonInactivo").focus();
+    var validacionPermiso = userModelState("Personas/Detalles");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#per_Id").val(id);
+        $("#ModalInactivar").find("#per_RazonInactivo").val("");
+        $("#ModalInactivar").find("#per_RazonInactivo").focus();
+    }
 };
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
@@ -92,12 +95,11 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                var Acciones = value.per_Estado == 1
-                    ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.Id + ")'>Editar</a><a class='btn btn-danger btn-xs ' onclick='ModalInactivar("+value.Id+")'>Inactivar</a>"
-                    : Admin ?
+                    ? null :
                     "<div>" +
                        "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
                        "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                   "</div>" : '';
+                   "</div>";
                if(value.per_Estado > fill)
                tabla.row.add({
                    Estado: value.per_Estado ? 'Activo' : 'Inactivo',
@@ -143,32 +145,35 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 function tablaDetalles(ID) {
     id = ID;
-    _ajax(null,
-        '/Personas/Detalles/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                if (obj[0].per_Edad != null)
-                    var edad = obj[0].per_Edad + ' años';
-                else
-                    var edad =' ';
-                $("#ModalDetalles").find("#per_Identidad")["0"].innerText = obj[0].per_Identidad;
-                $("#ModalDetalles").find("#per_Nombres")["0"].innerText = obj[0].per_Nombres + ' ' + obj[0].per_Apellidos;
-                $("#ModalDetalles").find("#tbNacionalidades")["0"].innerText = obj[0].nac_Id;
-                $("#ModalDetalles").find("#per_Edad")["0"].innerText = edad;
-                $("#ModalDetalles").find("#per_TipoSangre")["0"].innerText = obj[0].per_TipoSangre;
-                $("#ModalDetalles").find("#per_Direccion")["0"].innerText = obj[0].per_Direccion;
-                $("#ModalDetalles").find("#per_Telefono")["0"].innerText = obj[0].per_Telefono;
-                $("#ModalDetalles").find("#per_CorreoElectronico")["0"].innerText = obj[0].per_CorreoElectronico;
-                $("#ModalDetalles").find("#per_FechaCrea")["0"].innerText = FechaFormato(obj[0].per_FechaCrea);
-                $("#ModalDetalles").find("#per_FechaModifica")["0"].innerText = FechaFormato(obj[0].per_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].per_UsuarioCrea;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].per_UsuarioModifica;
+    var validacionPermiso = userModelState("Personas/Detalles");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/Personas/Detalles/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    if (obj[0].per_Edad != null)
+                        var edad = obj[0].per_Edad + ' años';
+                    else
+                        var edad = ' ';
+                    $("#ModalDetalles").find("#per_Identidad")["0"].innerText = obj[0].per_Identidad;
+                    $("#ModalDetalles").find("#per_Nombres")["0"].innerText = obj[0].per_Nombres + ' ' + obj[0].per_Apellidos;
+                    $("#ModalDetalles").find("#tbNacionalidades")["0"].innerText = obj[0].nac_Id;
+                    $("#ModalDetalles").find("#per_Edad")["0"].innerText = edad;
+                    $("#ModalDetalles").find("#per_TipoSangre")["0"].innerText = obj[0].per_TipoSangre;
+                    $("#ModalDetalles").find("#per_Direccion")["0"].innerText = obj[0].per_Direccion;
+                    $("#ModalDetalles").find("#per_Telefono")["0"].innerText = obj[0].per_Telefono;
+                    $("#ModalDetalles").find("#per_CorreoElectronico")["0"].innerText = obj[0].per_CorreoElectronico;
+                    $("#ModalDetalles").find("#per_FechaCrea")["0"].innerText = FechaFormato(obj[0].per_FechaCrea);
+                    $("#ModalDetalles").find("#per_FechaModifica")["0"].innerText = FechaFormato(obj[0].per_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].per_UsuarioCrea;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].per_UsuarioModifica;
 
 
-                $('#ModalDetalles').modal('show');
-            }
-        });
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function tablaEditar(ID) {
     id = ID;
