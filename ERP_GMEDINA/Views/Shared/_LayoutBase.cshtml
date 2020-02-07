@@ -77,7 +77,7 @@
  <!-- Handler for local scripts -->
  @RenderSection("scripts", required: false)
  @{
-     bool datatableEdit = true;
+     @*bool datatableEdit = true;
      string urlError = "";
      if (Login.GetUserLogin())
      {
@@ -120,20 +120,20 @@
             var datatableEdit=true;
          var urlError = "/Login/Index";
         </script>
-     }
+     }*@
      //filterContext.Result = new RedirectToRouteResult(valuesIndex);
-    <script>
+    @*<script>
         var datatableEdit='@datatableEdit';
         var urlError='@urlError';
-    </script>
+    </script>*@
      @*if (Login.GetUserRols(Editar))
      {
          @Scripts.Render("~/Scripts/app/datatableEdit/")
      }*@
-     if (Login.GetUserRols(Activar))
+     @*if (Login.GetUserRols(Activar))
      {
          @Scripts.Render("~/Scripts/app/general/"+controller+"/Admin")
-     }
+     }*@
 
  }
  <script>

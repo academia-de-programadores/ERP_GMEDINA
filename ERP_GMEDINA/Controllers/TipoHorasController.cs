@@ -22,9 +22,8 @@ namespace ERP_GMEDINA.Controllers
         [SessionManager("TipoHoras/Index")]
         public ActionResult Index()
         {
-            tbTipoHoras tbTipoHoras = new tbTipoHoras {tiho_Estado=true };
-            bool Admin = (bool)Session["Admin"];
-       
+            tbTipoHoras tbTipoHoras = new tbTipoHoras {};
+          
             return View(tbTipoHoras);
         }
         [HttpPost]
