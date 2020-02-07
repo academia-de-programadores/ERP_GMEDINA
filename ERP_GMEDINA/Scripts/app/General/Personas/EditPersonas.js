@@ -66,7 +66,7 @@ $(document).ready(function () {
     function (obj) {
         if (obj != "-1" && obj != "-2" && obj != "-3") {
             var fecha = FechaFormatoSimple(obj[0].per_FechaNacimiento);
-            console.log(fecha);
+            
             $("#tbPersonas").find("#per_Id").val(obj[0].per_Id);
             $("#tbPersonas").find("#per_Identidad").val(obj[0].per_Identidad);
             $("#tbPersonas").find("#per_Nombres").val(obj[0].per_Nombres);
@@ -209,7 +209,7 @@ $("#btnConfirmar").click(function () {
     var Form = $("#tbPersonas").find("select, textarea , input").serializeArray();
     tbPersonas = serializarPro(Form);
     data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
-    console.log(data);
+    
         _ajax(data,
         '/Personas/Edit',
         'POST',

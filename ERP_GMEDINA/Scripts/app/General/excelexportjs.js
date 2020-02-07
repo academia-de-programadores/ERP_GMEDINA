@@ -266,7 +266,7 @@ function getColumns(paramData){
 
 	var header = [];
 	$.each(paramData[0], function (key, value) {
-		//console.log(key + '==' + value);
+		//
 		var obj = {}
 		obj["headertext"] = key;
 		obj["datatype"] = "string";

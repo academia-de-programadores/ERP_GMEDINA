@@ -458,7 +458,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                let valor = $('#Editar #emp_IdEmpleado').val();
 
                if (valor == null) {
-                   console.log(idEmpSelect, NombreSelect);
+                   
                    $("#Editar #emp_IdEmpleado").prepend('<optgroup id="opt-gr-emp-info-incompleta" label="Empleado con información incompleta"></optgroup>').trigger('change');
                    $("#opt-gr-emp-info-incompleta").prepend(`<option value='` + idEmpSelect + `' selected>` + NombreSelect + `</option>`).trigger('change');
                    localStorage.setItem('idEmpleado', idEmpSelect);

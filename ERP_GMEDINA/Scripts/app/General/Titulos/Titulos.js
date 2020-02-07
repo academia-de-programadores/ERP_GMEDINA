@@ -122,7 +122,7 @@ $("#btnInactivar").click(function () {
 
 
 $("#btnGuardar").click(function () {
-    console.log("dfsdf");
+    
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {

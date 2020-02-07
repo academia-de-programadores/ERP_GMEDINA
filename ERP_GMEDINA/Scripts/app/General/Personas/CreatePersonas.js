@@ -167,7 +167,7 @@ $("#btnConfirmar").click(function () {
     var Form = $("#tbPersonas").find("select, textarea , input").serializeArray();
     tbPersonas = serializarPro(Form);
     data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
-    console.log(data);
+    
     _ajax(data,
                 '/Personas/Create',
                 'POST',

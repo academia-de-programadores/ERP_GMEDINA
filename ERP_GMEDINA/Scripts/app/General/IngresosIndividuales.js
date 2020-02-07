@@ -213,7 +213,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var IdEmp = $("#Crear #emp_IdCrear").val();
     var ini_PagaSiempre = false;
     var comentario = document.getElementById("ini_comentario").value;//$("#Crear #ini_comentario").val();
-    console.log(comentario);
+    
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
     var indices = $("#Crear #ini_Monto").val().split(",");
     //VARIABLE CONTENEDORA DEL MONTO
@@ -459,7 +459,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnEditarIngresosIndividuales"
                     $("#Editar #ini_Monto").val(data.ini_Monto);
                     $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
                     $("#Editar #ini_comentario").val(data.ini_comentario);
-                    console.log("Data que recoje de la row " + data.ini_comentario);
+                    
 
                     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
 
@@ -516,9 +516,9 @@ $("#btnEditIngresoIndividual2").click(function () {
     var ini_Motivo = $("#Editar #ini_Motivo").val();
     var ini_Monto = $("#Editar #ini_Monto").val();
     //var comentario1 = $("#ini_comentario").val();
-    //console.log(comentario1);
+    //
     var comentario = $("#Editar #ini_comentario").val(); //document.getElementById("ini_comentario").value;
-    console.log(comentario);
+    
 
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
     var indices = $("#Editar #ini_Monto").val().split(",");

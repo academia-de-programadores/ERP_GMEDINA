@@ -207,7 +207,7 @@ function ValidarPagasiempreCrear(PagaSiempre) {
 
 function ValidarPagasiempreEditar(PagaSiempre) {
     let checked = $('#Editar #dei_PagaSiempre').prop('checked');
-    console.log(checked);
+    
     if (checked == false) {
         $("#Editar #dei_Monto").removeAttr("readonly");
         $("#Editar #dei_Monto").removeClass("readOnly");

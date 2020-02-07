@@ -230,7 +230,7 @@ $('#btnGenerarPlanilla').click(function () {
                 });
             }
             
-            console.log(data.listaDeErrores);
+            
             if (data.listaDeErrores != '') {
                 $("#dvjson").excelexportjs({
                     containerid: "dvjson"

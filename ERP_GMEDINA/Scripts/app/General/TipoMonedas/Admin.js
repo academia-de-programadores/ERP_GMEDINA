@@ -7,7 +7,7 @@ function hablilitar(btn) {
     var row = tabla.row(tr);
     var id = row.data().ID;
     $("#txtIdRestore").val(id);
-    //console.log($("#txtIdRestore").val(id));
+    //
     $('#ModalHabilitar').modal('show');
 }
 

@@ -53,7 +53,7 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                //console.log(item.tiho_Descripcion);
+                //
                 var Acciones = value.tiho_Estado == 1
                        ?null:Admin?
                        "<div>" +
@@ -112,7 +112,7 @@ $("#btnInactivar").click(function () {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    //console.log(data);
+    //
     if (data != null) {
         $.post("/TipoHoras/Create",data).done(function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {

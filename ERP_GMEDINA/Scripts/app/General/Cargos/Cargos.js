@@ -58,7 +58,7 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-               // console.log(value.car_Descripcion);
+               // 
                 var Acciones = value.car_Estado == 1
                    ? null :
 "<div>" +

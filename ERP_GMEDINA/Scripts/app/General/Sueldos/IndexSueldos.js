@@ -170,7 +170,7 @@ $("#btnActualizar").click(function () {
         let a = parseFloat(data.sue_Cantidad);
         let b = parseFloat(data.minimo);
         let c = parseFloat(data.maximo);
-        console.log(a, b, c);
+        
         if (a >= b) {
             if (a <= c) {
                 data = JSON.stringify({ tbsueldos: data });

@@ -218,7 +218,7 @@ $("#btnCrear").click(function () {
         MsgError("Error", "No se editó el registro, contacte al administrador.");
        }
        if (obj.codigo == "-3") {
-        console.log("Violación de la seguridad.");
+        
        }
 
        if (obj.codigo != "-1" && obj.codigo != "-2" && obj.codigo != "-3") {

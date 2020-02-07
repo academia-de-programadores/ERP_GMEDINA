@@ -302,7 +302,7 @@ $('#btnCreateAcumuladosISR').click(function () {
                 __RequestVerificationToken: token
             }
         }).done(function (data) {
-            console.log(data);
+            
             // validar respuesta del servidor
             if (data == "error") {
 

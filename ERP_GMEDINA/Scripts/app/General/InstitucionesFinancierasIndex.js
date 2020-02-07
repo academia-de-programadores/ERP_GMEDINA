@@ -3,7 +3,7 @@
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        //console.log(textStatus);
+        //
     })
     .fail(function (jqxhr, settings, exception) {
         
@@ -195,7 +195,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnModalEditarINFS", function 
         }).fail(function (jqxhr, settings, exception) {
 
         }); // activar
-        console.log('codigo...');
+        
         // termina activar
     }
 });

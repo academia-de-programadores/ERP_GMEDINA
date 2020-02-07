@@ -30,7 +30,7 @@ function spinner() {
 function cargarGridImpuestoVecinal(data) {
     //CAPTURAR LA DATA EN UNA VARIABLE DE CONTEXTO LOCAL
     var ListaImpuestoVecinal = data;
-    console.log(data);
+    
     //LIMPIAR EL DATATABLE
     $('#tblPlanillaImpuestoVecinal').DataTable().clear();
     //ITERAR LA LISTA CON LOS REGISTROS
@@ -185,7 +185,7 @@ $("#ProcesarProyeccion").click(function () {
             //ALMACENAR LA LISTA EN UNA VARIABLE GLOBAL
             ListaImpuestoVecinal = data;
             //CARGAR EL DATATABLE
-            console.log(data);
+            
             cargarGridImpuestoVecinal(data);
             //OCULTAR EL SPINNER
             SpinnerElement.empty();

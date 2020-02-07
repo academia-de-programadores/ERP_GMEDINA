@@ -165,7 +165,7 @@ function ValidarCamposCrear(IdIngreso, Inicio, Fin, Porcentaje) {
     if (IdIngreso != "-1") {
 
         if (IdIngreso <= 0 || isNaN(IdIngreso)) {
-            console.log('Validar ingreso');
+            
             pasoValidacion = false;
             $('#Crear #Validation_IdIngreso').show();
             $("#Crear #ComisionAsterisco").addClass("text-danger");
@@ -179,7 +179,7 @@ function ValidarCamposCrear(IdIngreso, Inicio, Fin, Porcentaje) {
     //VALIDACION DEL RANGO INICIO
     if (Inicio != "-1") {
         InicioFormateado = parseFloat(response[0]);
-        console.log(InicioFormateado);
+        
 
         //VALIDACIONES DE INDEFINIDO Y MENOR QUE CERO
         if (InicioFormateado == null || InicioFormateado == '' || InicioFormateado == undefined || isNaN(InicioFormateado)) {
@@ -655,7 +655,7 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnDetallesTechosComisiones",
     if (validacionPermiso.status == true) {
         ActivarID = $(this).data('id');
         var ID = $(this).data('id');
-        console.log('entrar');
+        
         $.ajax({
             url: "/TechosComisiones/Details/" + ID,
             method: "GET",
@@ -664,7 +664,7 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnDetallesTechosComisiones",
             data: JSON.stringify({ id: ID })
         })
             .done(function (data) {
-                console.log('vengo del controlador');
+                
                 //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
                 if (data) {
 
@@ -681,7 +681,7 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnDetallesTechosComisiones",
                     $("#Detalles #tc_FechaCrea").html(FechaCrea);
                     $("#Detalles #NombreUsuarioModifica").html(data.NombreUsuarioModifica);
                     $("#Detalles #tc_FechaModifica").html(FechaModifica);
-                    console.log('desplegar modal')
+                    
                     $("#DetallesTechoComision").modal({ backdrop: 'static', keyboard: false });
                 }
                 else {

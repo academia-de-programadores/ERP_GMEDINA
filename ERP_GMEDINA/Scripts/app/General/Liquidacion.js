@@ -455,7 +455,7 @@ $("#RegistrarLiquidacion").click(function () {
             if (data == "error") {
                 //DESBLOQUEAR EL BOTON
                 $("#RegistrarLiquidacion").attr("disabled", false);
-                console.log("Response : Error");
+                
                 //MOSTRAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
@@ -463,7 +463,7 @@ $("#RegistrarLiquidacion").click(function () {
                 });
             }
             else {
-                console.log("Response : EXito");
+                
                 //MOSTRAR MENSAJE DE ÉXITO
                 iziToast.success({
                     title: 'Éxito',
@@ -476,7 +476,7 @@ $("#RegistrarLiquidacion").click(function () {
 
             }
         }).fail(function (data) {
-            console.log("Error en la conexion");
+            
             //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',

@@ -37,7 +37,7 @@
         ///		  if (validacionPermiso.status == true) {
 		///
         ///           // activar
-        ///           console.log('codigo...');
+        ///           
         ///           // termina activar
         ///       }
 		///

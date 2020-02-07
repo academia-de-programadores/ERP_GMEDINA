@@ -171,5 +171,5 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 });
 $(document).on("click", "#IndexTable tbody tr td buttton#btnAgregar", function () {
     var Id = $(this).data('id');
-    console.log(Id)
+    
 })

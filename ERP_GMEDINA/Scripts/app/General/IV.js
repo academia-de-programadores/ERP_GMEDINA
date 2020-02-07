@@ -69,7 +69,7 @@ $('#btnCreateIV').click(function () {
         // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)        
         //var dataSinFormato = $("#frmIVCreate").serializeArray();
-        //console.log(dataSinFormato);
+        //
         var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();
         var data = {
             __RequestVerificati1onToken: __RequestVerificati1onToken1,

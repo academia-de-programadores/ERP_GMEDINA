@@ -10,7 +10,7 @@ function hablilitar(btn) {
     var id = row.data().Id;
     $("#txtIdRestore").val(id);
     idadmin = id;
-    //console.log($("#txtIdRestore").val(id));
+    //
     $('#ModalHabilitar').modal('show');
 }
 

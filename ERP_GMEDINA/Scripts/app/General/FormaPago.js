@@ -569,7 +569,7 @@ $("#btnCerrarActivar").click(function () {
 // script serialize date
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      //console.log(textStatus);
+      //
   })
   .fail(function (jqxhr, settings, exception) {
       
