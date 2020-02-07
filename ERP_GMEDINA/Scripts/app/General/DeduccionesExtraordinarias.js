@@ -467,18 +467,24 @@ var GB_Activar = 0;
 
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-    //DESBLOQUEAR EL BOTON
     
-	$("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
-	//OBTENER EL ID
-	var ID = $(this).data('id');
-	GB_Activar = ID;
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesExtraordinarias/Inactivar");
+   
+   	  if (validacionPermiso.status == true) {
+   
+   	      $("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
+   	      //OBTENER EL ID
+   	      var ID = $(this).data('id');
+   	      GB_Activar = ID;
 
-	//var ID = $(this).attr('iddeduccionesextra');
-	//localStorage.setItem('id', ID);
+   	      //var ID = $(this).attr('iddeduccionesextra');
+   	      //localStorage.setItem('id', ID);
 
-	//Mostrar el Modal
-	$("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+   	      //Mostrar el Modal
+   	      $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+          }
+	
 });
 
 //Activar
@@ -663,13 +669,17 @@ $("#btnEditar").click(function () {
 var GB_Inactivar = 0;
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
-   
-	//DESBLOQUEAR EL BOTON
-	$("#btnInactivar").attr("disabled", false);
-	var ID = $(this).data('id');
-	GB_Inactivar = ID;
-	//Mostrar el Modal
-	$("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("DeduccionesExtraordinarias/Inactivar");
+    		  if (validacionPermiso.status == true) {
+    		      //DESBLOQUEAR EL BOTON
+    		      $("#btnInactivar").attr("disabled", false);
+    		      var ID = $(this).data('id');
+    		      GB_Inactivar = ID;
+    		      //Mostrar el Modal
+    		      $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+        }
+	
 
 });
 

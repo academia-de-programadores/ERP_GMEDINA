@@ -8,37 +8,43 @@ var fill = 0;
 var id = 0;
 
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/TipoIncapacidades/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#ticn_Descripcion").val(obj.ticn_Descripcion);
-                $("#ModalEditar").modal('show');
-            }
-        });
+    var validacionPermiso = useModelState("TipoIncapacidades/Edit");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(null,
+            '/TipoIncapacidades/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#ticn_Descripcion").val(obj.ticn_Descripcion);
+                    $("#ModalEditar").modal('show');
+                }
+            });
+    }
 }
 
 function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        '/TipoIncapacidades/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#ticn_Descripcion")["0"].innerText = obj.ticn_Descripcion;
-                //Campos Estado y Razon Inactivo ya no se muestran en el modal de detalle
-                //$("#ModalDetalles").find("#ticn_Estado")["0"].innerText = obj.ticn_Estado;
-                //$("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;
-                $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = FechaFormato(obj.ticn_FechaCrea);
-                $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = FechaFormato(obj.ticn_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionPermiso = useModelState("TipoIncapacidades/Edit");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(null,
+            '/TipoIncapacidades/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#ticn_Descripcion")["0"].innerText = obj.ticn_Descripcion;
+                    //Campos Estado y Razon Inactivo ya no se muestran en el modal de detalle
+                    //$("#ModalDetalles").find("#ticn_Estado")["0"].innerText = obj.ticn_Estado;
+                    //$("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;
+                    $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = FechaFormato(obj.ticn_FechaCrea);
+                    $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = FechaFormato(obj.ticn_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 
 function llenarTabla() {
@@ -71,31 +77,40 @@ function llenarTabla() {
 }
 
 $("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    $("#FormNuevo").find("#ticn_Descripcion").val("");
-    $("#FormEditar").find("#ticn_Descripcion").focus();
-    modalnuevo.modal('show');
+    var validacionPermiso = useModelState("TipoIncapacidades/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        $("#FormNuevo").find("#ticn_Descripcion").val("");
+        $("#FormEditar").find("#ticn_Descripcion").focus();
+        modalnuevo.modal('show');
+    }
 });
 
 $("#btnEditar").click(function () {
-    _ajax(null,
-        'TipoIncapacidades/Edit/' + id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#ticn_Descripcion").val(obj.ticn_Descripcion);
+    var validacionPermiso = useModelState("TipoIncapacidades/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            'TipoIncapacidades/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $('#ModalEditar').modal('show');
+                    $("#FormEditar").find("#ticn_Descripcion").val(obj.ticn_Descripcion);
 
-            }
-        });
+                }
+            });
+    }
 });
 
 $("#btnInactivar").click(function () {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#ticn_Descripcion").val("");
-    $("#ModalInactivar").find("ticn_Descripcion").focus();
+    var validacionPermiso = useModelState("TipoIncapacidades/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#ticn_Descripcion").val("");
+        $("#ModalInactivar").find("ticn_Descripcion").focus();
+    }
 });
 
 $("#btnGuardar").click(function () {
