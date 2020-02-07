@@ -43,6 +43,14 @@ const btnEditar = $("#btnEditar"),
 
 //#endregion
 
+$.getScript("../Scripts/app/General/SerializeDate.js")
+    .done(function (script, textStatus) {
+
+    })
+    .fail(function (jqxhr, settings, exception) {
+
+    });
+
 //#region Obtención de Script para Formateo de Fechas
 //#endregion
 
