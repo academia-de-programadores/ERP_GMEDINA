@@ -53,19 +53,24 @@ var activarID = 0;
 
 // activar 1
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("AFP/Activar");
 
-    // habilitar boton inactivar
-    $("#btnActivarRegistroAFP").attr('disabled', false);
+    if (validacionPermiso.status == true) {
+        // habilitar boton inactivar
+        $("#btnActivarRegistroAFP").attr('disabled', false);
 
-    // obtener ID
-    var ID = $(this).data('id');
-    activarID = ID;
+        // obtener ID
+        var ID = $(this).data('id');
+        activarID = ID;
 
-    // guardar ID en local storage
-    localStorage.setItem('id', ID);
+        // guardar ID en local storage
+        localStorage.setItem('id', ID);
 
-    //mostrar el Modal activar
-    $("#ActivarAFP").modal();
+        //mostrar el Modal activar
+        $("#ActivarAFP").modal();
+    }
+    
 });
 
 // activar 2
@@ -118,81 +123,86 @@ $("#btnCerrarCrear").click(function () {
 
 // crear 1 mostrar modal
 $(document).on("click", "#btnAgregarAFP", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("AFP/Create");
 
-    //llenar DDL
-    $.ajax({
-        url: "/AFP/EditGetTipoDeduccionDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        .done(function (data) {
+    if (validacionPermiso.status == true) {
+        //llenar DDL
+        $.ajax({
+            url: "/AFP/EditGetTipoDeduccionDDL",
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        })
+            .done(function (data) {
 
-            // limpiar DDL
-            $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+                // limpiar DDL
+                $("#Crear #tde_IdTipoDedu").empty();
+                $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
 
-            // setear DDL
-            $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                // setear DDL
+                $.each(data, function (i, iter) {
+                    $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                });
             });
-        });
 
-    //--
-    // * descripcion 
-    $('#asiteriscoDescripcion').removeClass('text-danger');
+        //--
+        // * descripcion 
+        $('#asiteriscoDescripcion').removeClass('text-danger');
 
-    // mesanje descripcion requerida
-    $("#Crear #validation_DescripcionRequerida").css('display', 'none');
+        // mesanje descripcion requerida
+        $("#Crear #validation_DescripcionRequerida").css('display', 'none');
 
-    // mesanje descripcion no es numerico
-    $("#Crear #validation_DescripcionNumerico").css('display', 'none');
+        // mesanje descripcion no es numerico
+        $("#Crear #validation_DescripcionNumerico").css('display', 'none');
 
-    //--
-    // * aporte minimo LPIS
-    $('#astericosAporteMinimoLps').removeClass('text-danger');
+        //--
+        // * aporte minimo LPIS
+        $('#astericosAporteMinimoLps').removeClass('text-danger');
 
-    // mensaje aporte minimo debe ser mayor que cero
-    $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
+        // mensaje aporte minimo debe ser mayor que cero
+        $("#Crear #validation_AporteMinimoMayorACero").css('display', 'none');
 
-    //--
-    // * interes aporte 
-    $('#astericoInteresAporte').removeClass('text-danger');
+        //--
+        // * interes aporte 
+        $('#astericoInteresAporte').removeClass('text-danger');
 
-    // mensaje interes aporte no puede ser menor que cero
-    $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
+        // mensaje interes aporte no puede ser menor que cero
+        $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
 
-    // mensaje interes aporte no puede ser mayor que cién
-    $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
+        // mensaje interes aporte no puede ser mayor que cién
+        $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
 
-    // -- 
-    // * interes anual 
-    $('#astericosInteresAnual').removeClass('text-danger');
+        // -- 
+        // * interes anual 
+        $('#astericosInteresAnual').removeClass('text-danger');
 
-    // mensaje interes anual no puede ser menor que cero
-    $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
+        // mensaje interes anual no puede ser menor que cero
+        $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
 
-    // mensaje interes anual no puede ser mayor que cién
-    $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
+        // mensaje interes anual no puede ser mayor que cién
+        $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
 
-    //--
-    // * tipo de deduccion
-    $('#astericosTipoDeduccion').removeClass('text-danger');
+        //--
+        // * tipo de deduccion
+        $('#astericosTipoDeduccion').removeClass('text-danger');
 
-    // mensaje interes aporte no puede ser menor que cero
-    $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
+        // mensaje interes aporte no puede ser menor que cero
+        $("#Crear #validation_TipoDeduccionRequerida").css('display', 'none');
 
 
-    //--
+        //--
 
-    // vaciar cajas de texto
-    $('#Crear input[type=text], input[type=number]').val('');
+        // vaciar cajas de texto
+        $('#Crear input[type=text], input[type=number]').val('');
 
-    // habilitar boton 
-    $("#btnCreateRegistroAFP").attr('disabled', false);
+        // habilitar boton 
+        $("#btnCreateRegistroAFP").attr('disabled', false);
 
-    //mostrar modal
-    $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
+        //mostrar modal
+        $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
+    }
+    
 
 });
 
@@ -522,61 +532,66 @@ var activarID = 0;
 
 // editar 1
 $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("AFP/Edit");
 
-    $("#btnEditAFP").attr('disabled', false);
-    var ID = $(this).data('id');
-    inactivarID = ID;
+    if (validacionPermiso.status == true) {
+        $("#btnEditAFP").attr('disabled', false);
+        var ID = $(this).data('id');
+        inactivarID = ID;
 
-    $.ajax({
-        url: "/AFP/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            // obtener data y setear cajas de texto
-            if (data) {
-                $("#Editar #afp_Id").val(data.afp_Id);
-                $("#Editar #afp_Descripcion").val(data.afp_Descripcion);
-                $("#Editar #afp_AporteMinimoLps").val((data.afp_AporteMinimoLps % 1 == 0) ? data.afp_AporteMinimoLps + ".00" : data.afp_AporteMinimoLps);
-                $("#Editar #afp_InteresAporte").val((data.afp_InteresAporte % 1 == 0) ? data.afp_InteresAporte + ".00" : data.afp_InteresAporte);
-                $("#Editar #afp_InteresAnual").val((data.afp_InteresAnual % 1 == 0) ? data.afp_InteresAnual + ".00" : data.afp_InteresAnual);
+        $.ajax({
+            url: "/AFP/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                // obtener data y setear cajas de texto
+                if (data) {
+                    $("#Editar #afp_Id").val(data.afp_Id);
+                    $("#Editar #afp_Descripcion").val(data.afp_Descripcion);
+                    $("#Editar #afp_AporteMinimoLps").val((data.afp_AporteMinimoLps % 1 == 0) ? data.afp_AporteMinimoLps + ".00" : data.afp_AporteMinimoLps);
+                    $("#Editar #afp_InteresAporte").val((data.afp_InteresAporte % 1 == 0) ? data.afp_InteresAporte + ".00" : data.afp_InteresAporte);
+                    $("#Editar #afp_InteresAnual").val((data.afp_InteresAnual % 1 == 0) ? data.afp_InteresAnual + ".00" : data.afp_InteresAnual);
 
-                // ID selecciona en el DDL
-                var SelectedId = data.tde_IdTipoDedu;
+                    // ID selecciona en el DDL
+                    var SelectedId = data.tde_IdTipoDedu;
 
-                // llenar DDLs
-                $.ajax({
-                    url: "/AFP/EditGetTipoDeduccionDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
+                    // llenar DDLs
+                    $.ajax({
+                        url: "/AFP/EditGetTipoDeduccionDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                        })
+                        .done(function (data) {
 
-                        // limipiar ddl
-                        $("#Editar #tde_IdTipoDedu").empty();
+                            // limipiar ddl
+                            $("#Editar #tde_IdTipoDedu").empty();
 
-                        // llenar ddl
-                        $.each(data, function (i, iter) {
-                            $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            // llenar ddl
+                            $.each(data, function (i, iter) {
+                                $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            });
                         });
+
+                    // mostrar modal editar
+                    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+
+                    // mostrar error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
                     });
-
-                // mostrar modal editar
-                $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-
-                // mostrar error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-        });
+                }
+            });
+    }
+  
 });
 
 // editar 2
@@ -909,76 +924,82 @@ $("#btnEditAFPConfirmar").click(function () {
 
 // --- Detalles --- 
 $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("AFP/Details");
 
-    // obtener id registro
-    var ID = $(this).data('id');
+    if (validacionPermiso.status == true) {
+        // obtener id registro
+        var ID = $(this).data('id');
 
-    $.ajax({
-        url: "/AFP/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            // si se obtiene data setear items
-            if (data) {
-                var FechaCrea = FechaFormato(data[0].afp_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].afp_FechaModifica);
-                $(".field-validation-error").css('display', 'none');
-                $("#Detalles #afp_Id").html(data[0].afp_Id);
-                $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
-                $("#Detalles #afp_AporteMinimoLps").html((data[0].afp_AporteMinimoLps % 1 == 0) ? data[0].afp_AporteMinimoLps + ".00" : data[0].afp_AporteMinimoLps);
-                $("#Detalles #afp_InteresAporte").html((data[0].afp_InteresAporte % 1 == 0) ? data[0].afp_InteresAporte + ".00" : data[0].afp_InteresAporte);
-                $("#Detalles #afp_InteresAnual").html((data[0].afp_InteresAnual % 1 == 0) ? data[0].afp_InteresAnual + ".00" : data[0].afp_InteresAnual);
-                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #afp_UsuarioCrea").html(data[0].afp_UsuarioCrea);
-                $("#Detalles #afp_FechaCrea").html(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #afp_UsuarioModifica").html(data[0].afp_UsuarioModifica);
-                $("#Detalles #afp_FechaModifica").html(FechaModifica);
+        $.ajax({
+            url: "/AFP/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                // si se obtiene data setear items
+                if (data) {
+                    var FechaCrea = FechaFormato(data[0].afp_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].afp_FechaModifica);
+                    $(".field-validation-error").css('display', 'none');
+                    $("#Detalles #afp_Id").html(data[0].afp_Id);
+                    $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
+                    $("#Detalles #afp_AporteMinimoLps").html((data[0].afp_AporteMinimoLps % 1 == 0) ? data[0].afp_AporteMinimoLps + ".00" : data[0].afp_AporteMinimoLps);
+                    $("#Detalles #afp_InteresAporte").html((data[0].afp_InteresAporte % 1 == 0) ? data[0].afp_InteresAporte + ".00" : data[0].afp_InteresAporte);
+                    $("#Detalles #afp_InteresAnual").html((data[0].afp_InteresAnual % 1 == 0) ? data[0].afp_InteresAnual + ".00" : data[0].afp_InteresAnual);
+                    $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
+                    $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #afp_UsuarioCrea").html(data[0].afp_UsuarioCrea);
+                    $("#Detalles #afp_FechaCrea").html(FechaCrea);
+                    data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #afp_UsuarioModifica").html(data[0].afp_UsuarioModifica);
+                    $("#Detalles #afp_FechaModifica").html(FechaModifica);
 
-                // id selecciona
-                var SelectedId = data[0].tde_IdTipoDedu;
+                    // id selecciona
+                    var SelectedId = data[0].tde_IdTipoDedu;
 
-                // obtener tipo de deduccion descripcion
-                $.ajax({
-                    url: "/AFP/EditGetTipoDeduccionDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
+                    // obtener tipo de deduccion descripcion
+                    $.ajax({
+                        url: "/AFP/EditGetTipoDeduccionDDL",
+                        method: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ ID })
+                        })
+                        .done(function (data) {
 
-                        // setear caja de texto
-                        $.each(data, function (i, iter) {
-                            if (iter.Id == SelectedId) {
-                                $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
-                            }
+                            // setear caja de texto
+                            $.each(data, function (i, iter) {
+                                if (iter.Id == SelectedId) {
+                                    $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
+                                }
+                            });
                         });
+
+                    // mostrar modal de detalles
+                    $("#DetallesAFP").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    // mensaje de error
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
+                    });
+                }
+                if (data == "Error") {
+                    // mensaje de error
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se cargó la información, contacte al administrador!',
                     });
 
-                // mostrar modal de detalles
-                $("#DetallesAFP").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                // mensaje de error
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
-            }
-            if (data == "Error") {
-                // mensaje de error
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se cargó la información, contacte al administrador!',
-                });
+                }
+            });
+    }
 
-            }
-        });
+   
 });
 
 
@@ -1000,13 +1021,18 @@ $(document).on("click", "#btnBack", function () {
 
 // inactivar confirmar
 $(document).on("click", "#btnInactivarAFP", function () {
+    //validar informacion del usuario
+    var validacionPermiso = userModelState("AFP/Inactivar");
 
-    // habilitar boton ejecutar inactivar
-    $("#btnInactivarRegistroAFP").attr('disabled', false);
+    if (validacionPermiso.status == true) {
+        // habilitar boton ejecutar inactivar
+        $("#btnInactivarRegistroAFP").attr('disabled', false);
 
-    // modales
-    $("#EditarAFP").modal('hide');
-    $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
+        // modales
+        $("#EditarAFP").modal('hide');
+        $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
+    }
+    
 
 });
 
