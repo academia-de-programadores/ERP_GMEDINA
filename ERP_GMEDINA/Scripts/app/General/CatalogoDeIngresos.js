@@ -62,15 +62,15 @@ function cargarGridIngresos() {
             for (var i = 0; i < ListaIngresos.length; i++) {
                 var estadoRegistro = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
 
-                var botonDetalles = '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalle" data-id="' + ListaIngresos[i].cin_IdIngreso + '">Detalles</button>';
+                var botonDetalles = '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalle" data-id="' + ListaIngresos[i].cin_IdIngresos + '">Detalles</button>';
 
                 var botonEditar = ListaIngresos[i].cin_Activo == true ?
                     '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
-                    + ListaIngresos[i].cin_IdIngreso + '">Editar</button>' : '';
+                    + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' : '';
 
                 var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
                     '<button type="button" class="btn btn-default btn-xs" id="btnActivar" data-id="'
-                    + ListaIngresos[i].cin_IdIngreso + '">Activar</button>' : '' : '';
+                    + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' : '';
 
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblCatalogoIngresos').dataTable().fnAddData([
@@ -219,7 +219,6 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                     //SETEAR LOS CAMPOS
                     $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                     $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                    $('#idTipoIngreso').val(data.cin_TipoIngreso ?? 4).trigger('change');
                     //MOSTRAR MODAL DE EDICION
                     $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
                 }
@@ -265,10 +264,15 @@ $("#btnEditarIngresos").click(function () {
         //BLOQUEAR EL BOTON DE EDICION
         $("#btnEditarIngresos").attr("disabled", true);
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
             method: "POST",
-            data: { cin_DescripcionIngreso: data, id: id, cin_TipoIngreso: TipoIngreso }
+            data: { cin_DescripcionIngreso: data, id: id, cin_TipoIngreso: TipoIngreso },
+            beforeSend: function(){
+                resetTimeOut();
+                clearInterval(timer);
+            }
         }).done(function (data) {
 
             if (data != "error") {
@@ -515,6 +519,5 @@ function OcultarValidacionesEditar() {
     $('#Editar #asteriscoEdit').removeClass('text-danger');
     $('#Editar #asteriscoTipoIngreso').removeClass('text-danger');
 }
-
 
 

@@ -142,3 +142,23 @@ function validarPermisoUsuario(sPantalla, arreglo) {
     // retornar el resultado
     return status;
 }
+
+var timeOut = 0;
+
+var timer = new Timer(function(){
+    console.log(++timeOut);
+    if(timeOut == 10){
+        cerrarSesion();
+    }
+}, 1);
+
+timer.start();
+
+function cerrarSesion(){
+        sessionStorage.clear();
+        window.location = '/';
+}
+
+function resetTimeOut(){
+    timeOut = 0;
+}
