@@ -8,6 +8,9 @@ var id = 0;
 
 function tablaEditar(ID) {
     id = ID;
+    var validacionPermiso = userModelState("Titulos/Edit");
+    if (validacionPermiso.status == true) {
+
     _ajax(null,
     '/Titulos/Edit/' + ID,
     'GET',
@@ -18,9 +21,12 @@ function tablaEditar(ID) {
         }
     });
 }
-
+}
 function tablaDetalles(ID) {
+   
     id = ID;
+    var validacionPermiso = userModelState("Titulos/Edit");
+    if (validacionPermiso.status == true) {
     _ajax(null,
         '/Titulos/Edit/' + ID,
         'GET',
@@ -35,6 +41,7 @@ function tablaDetalles(ID) {
                 $('#ModalDetalles').modal('show');
             }
         });
+    }
 }
 
 function llenarTabla() {
@@ -75,15 +82,20 @@ function llenarTabla() {
 
 
 $("#btnAgregar").click(function () {
+    var validacionPermiso = userModelState("Titulos/Create");
+    if (validacionPermiso.status == true) {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#titu_Descripcion").val("");
     $("#FormEditar").find("#titu_Descripcion").focus();
     modalnuevo.modal('show');
+    }
 });
 
 
 
 $("#btnEditar").click(function () {
+    var validacionPermiso = userModelState("Titulos/Create");
+    if (validacionPermiso.status == true) {
     _ajax(null,
         '/Titulos/Edit/' + id,
         'GET',
@@ -95,13 +107,17 @@ $("#btnEditar").click(function () {
 
             }
         });
+    }
 });
 
 $("#btnInactivar").click(function () {
+    var validacionPermiso = userModelState("Titulos/Create");
+    if (validacionPermiso.status == true) {
     CierraPopups();
     $('#ModalInactivar').modal('show');
     $("#ModalInactivar").find("#titu_Descripcion").val("");
     $("#ModalInactivar").find("titu_Descripcion").focus();
+         }
 });
 
 
