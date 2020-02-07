@@ -8,7 +8,7 @@ var fill = 0;
 var id = 0;
 
 function tablaEditar(ID) {
-    var validacionPermiso = useModelState("TipoIncapacidades/Edit");
+    var validacionPermiso = userModelState("TipoIncapacidades/Edit");
     if (validacionPermiso.status == true) {
         id = ID;
         _ajax(null,
@@ -24,7 +24,7 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
-    var validacionPermiso = useModelState("TipoIncapacidades/Edit");
+    var validacionPermiso = userModelState("TipoIncapacidades/Edit");
     if (validacionPermiso.status == true) {
         id = ID;
         _ajax(null,
@@ -77,7 +77,7 @@ function llenarTabla() {
 }
 
 $("#btnAgregar").click(function () {
-    var validacionPermiso = useModelState("TipoIncapacidades/Create");
+    var validacionPermiso = userModelState("TipoIncapacidades/Create");
     if (validacionPermiso.status == true) {
         var modalnuevo = $('#ModalNuevo');
         $("#FormNuevo").find("#ticn_Descripcion").val("");
@@ -87,7 +87,7 @@ $("#btnAgregar").click(function () {
 });
 
 $("#btnEditar").click(function () {
-    var validacionPermiso = useModelState("TipoIncapacidades/Edit");
+    var validacionPermiso = userModelState("TipoIncapacidades/Edit");
     if (validacionPermiso.status == true) {
         _ajax(null,
             'TipoIncapacidades/Edit/' + id,
@@ -104,7 +104,7 @@ $("#btnEditar").click(function () {
 });
 
 $("#btnInactivar").click(function () {
-    var validacionPermiso = useModelState("TipoIncapacidades/Delete");
+    var validacionPermiso = userModelState("TipoIncapacidades/Delete");
     if (validacionPermiso.status == true) {
         CierraPopups();
         $('#ModalInactivar').modal('show');
