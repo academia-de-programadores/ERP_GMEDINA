@@ -548,12 +548,12 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
     }
 
     if (Monto != "-1") {
-        var MontoDiv = $("#Editar #dei_Monto").val();
-        var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
-        var MontoCuotatotal = MontoFormateado / numeroDiv;
-        $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
         let checked = $('#Editar #dei_PagaSiempre').prop('checked');
         if (checked == false) {
+            var MontoDiv = $("#Editar #dei_Monto").val();
+            var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
+            var MontoCuotatotal = MontoFormateado / numeroDiv;
+            $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
             if (MontoFormateado == "" || MontoFormateado == null || MontoFormateado == undefined || isNaN(MontoFormateado)) {
                 pasoValidacionCrear = false;
                 $("#Editar #valMontoRequerido").html('Campo Monto Requerido');
@@ -577,12 +577,12 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
     }
 
     if (NumeroCuotas != "-1") {
-        var MontoDiv = $("#Editar #dei_Monto").val();
-        var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
-        var MontoCuotatotal = MontoFormateado / numeroDiv;
-        $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
         let checked = $('#Editar #dei_PagaSiempre').prop('checked');
         if (checked == false) {
+            var MontoDiv = $("#Editar #dei_Monto").val();
+            var numeroDiv = $("#Editar #dei_NumeroCuotas").val();
+            var MontoCuotatotal = MontoFormateado / numeroDiv;
+            $("#Editar #dei_MontoCuota").val(MontoCuotatotal);
             if (NumeroCuotas == "" || NumeroCuotas == null || NumeroCuotas == undefined) {
                 pasoValidacionCrear = false;
                 $("#Editar #valNumeroCuotasRequerido").css("display", "");
