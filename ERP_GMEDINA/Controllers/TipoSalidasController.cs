@@ -129,6 +129,47 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
+        [SessionManager("TipoSalidas/Details")]
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tbTipoSalidas tbTipoSalidas = null;
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    tbTipoSalidas = db.tbTipoSalidas.Find(id);
+                    if (tbTipoSalidas == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    Session["id"] = id;
+                    var TipoSalida = new tbTipoSalidas
+                    {
+                        tsal_Id = tbTipoSalidas.tsal_Id,
+                        tsal_Descripcion = tbTipoSalidas.tsal_Descripcion,
+                        tsal_Estado = tbTipoSalidas.tsal_Estado,
+                        tsal_RazonInactivo = tbTipoSalidas.tsal_RazonInactivo,
+                        tsal_UsuarioCrea = tbTipoSalidas.tsal_UsuarioCrea,
+                        tsal_FechaCrea = tbTipoSalidas.tsal_FechaCrea,
+                        tsal_UsuarioModifica = tbTipoSalidas.tsal_UsuarioModifica,
+                        tsal_FechaModifica = tbTipoSalidas.tsal_FechaModifica,
+                        tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoSalidas.tbUsuario).usu_NombreUsuario },
+                        tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoSalidas.tbUsuario1).usu_NombreUsuario }
+                    };
+                    return Json(TipoSalida, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
 
         // POST: Habilidades/Edit/5
         [HttpPost]

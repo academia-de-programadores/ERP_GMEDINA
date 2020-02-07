@@ -18,10 +18,10 @@ function tablaEditar(ID) {
 }
 function tablaDetalles(ID) {
     //id = ID;
-    var validacionPermiso = userModelState("TipoSalidas/Edit");
+    var validacionPermiso = userModelState("TipoSalidas/Details");
     if (validacionPermiso.status == true) {
         _ajax(JSON.stringify({ id: ID }),
-            '/TipoSalidas/Datos/',
+            '/TipoSalidas/Details/',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
