@@ -80,10 +80,13 @@ function llenarTabla() {
 
 
 $("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    modalnuevo.modal('show');
-    $(modalnuevo).find("#comp_Descripcion").val("");
-    $(modalnuevo).find("#comp_Descripcion").focus();
+    var validacionPermiso = userModelState("Competencias/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#comp_Descripcion").val("");
+        $(modalnuevo).find("#comp_Descripcion").focus();
+    }
 });
 $("#btnEditar").click(function () {
     _ajax(null,
