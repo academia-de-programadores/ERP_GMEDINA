@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Controllers
     public class PlanillaImpuestoVecinalController : Controller
     {
         //INSTANCIA DEL MODELO
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();        
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         #region GET: Index
         // GET: PlanillaImpuestoVecinal
         [SessionManager("PlanillaImpuestoVecinal/Index")]
@@ -159,7 +159,19 @@ namespace ERP_GMEDINA.Controllers
                             command.Parameters.AddWithValue("@timv_FechaCrea", FechaInsercion);
 
                             //ALMACENAR EL NUMERO DE INSERCIONES
-                            int result = command.ExecuteNonQuery();
+                            int result = int.Parse(((command.ExecuteScalar() as string) ?? "-1"));
+
+                            if (result <= 0)
+                                try
+                                {
+                                    transaccion.Rollback();
+                                    response = "error";
+                                }
+                                catch
+                                {
+
+                                }
+
                             command.Parameters.Clear();
                         }
 
