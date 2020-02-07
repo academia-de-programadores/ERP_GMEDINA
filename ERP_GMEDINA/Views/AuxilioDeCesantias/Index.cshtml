@@ -16,7 +16,7 @@
 					</div>
 				</div>
                 <div class="ibox-content">
-                   
+
                         @{
                             <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
                             var oUsuario = (ERP_GMEDINA.Models.UDP_Acce_Login_Result)HttpContext.Current.Session["sesionUsuario"];
@@ -121,9 +121,9 @@
 			<div class="modal-header">
 				<h4 class="modal-title">Editar auxilio de cesantia</h4>
 			</div>
-			
+
 				@Html.Partial("_EditAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
-			
+
 			<div class="modal-footer">
 				<input type="button" class="btn btn-primary pull-left" id="btnUpdateAuxCes" value="Actualizar" />
 				<button type="button" class="btn btn-danger pull-left" id="btnModalEliminar">Inactivar</button>
