@@ -101,7 +101,7 @@ function userModelState(sPantalla) {
         // mensaje de error
         iziToast.error({
             title: 'Error',
-            message: 'Roles de usuario inválidos',
+            message: 'No tiene roles asignados',
         });
     }
 
