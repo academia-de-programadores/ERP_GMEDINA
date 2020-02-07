@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Helpers;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -16,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region Index
+        [SessionManager("TechoImpuestoVecinal/Index")]
         public ActionResult Index()
         {
             var tbTechoImpuestoVecinal = db.tbTechoImpuestoVecinal.OrderBy(t => t.timv_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoDeduccion);
@@ -45,6 +47,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
+        [SessionManager("TechoImpuestoVecinal/Details")]
         public JsonResult Details(int? ID)
         {
             // validar si se obtuvo un ID
@@ -100,6 +103,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Create
         [HttpPost]
+        [SessionManager("TechoImpuestoVecinal/Create")]
         public ActionResult Create([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Rango,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
         {
             // data de auditoria
@@ -159,6 +163,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Edit
+        [SessionManager("TechoImpuestoVecinal/Edit")]
         public JsonResult Edit(int? id)
         {
             // evitar referencias circulares
@@ -182,6 +187,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Edit
         [HttpPost]
+        [SessionManager("TechoImpuestoVecinal/Edit")]
         public ActionResult Edit([Bind(Include = "timv_IdTechoImpuestoVecinal, timv_Rango, mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal, string Impuesto)
         {
             // variables de auditoria
@@ -269,6 +275,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Inactivar 
+        [SessionManager("TechoImpuestoVecinal/Inactivar")]
         public ActionResult Inactivar(int id)
         {
             // variables de resultado
@@ -318,6 +325,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar
+        [SessionManager("TechoImpuestoVecinal/Activar")]
         public ActionResult Activar(int id)
         {
             // variables de resultado
