@@ -137,27 +137,36 @@ namespace ERP_GMEDINA.Helpers
 			VM_ModelState ModelState = new VM_ModelState();
 			ModelState.EsAdmin = EsAdministrador;
 			//VALIDAR SI EL USUARIO ES ADMIN
-			if (EsAdministrador == true)
-				return ModelState;
+
 				
 
 			//INSTANCIA DE LA CLASE HELPERS
 			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
-			//INICIALIZACION DE AMBITO DE DBCONTEXT
-			using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
-			{
+            //INICIALIZACION DE AMBITO DE DBCONTEXT
+            using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+            {
 
-				//SETEO DE ATTR ListaPantallas
-				ModelState.ListaPantallas = new
-				{
-					 List =	(from tbusuario in db.tbUsuario
-							join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
-							join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
-							join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
-							join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
-                            where tbusuario.usu_Id == userId
-                             select new { tbObjeto.obj_Referencia }).ToList()
-				};
+                if (EsAdministrador == true)
+                {
+                    ModelState.ListaPantallas = new
+                    {
+                        List = db.tbObjeto.Select(x => x.obj_Referencia).ToList()
+                    };
+                }
+                else
+                {
+                    //SETEO DE ATTR ListaPantallas
+                    ModelState.ListaPantallas = new
+                    {
+                        List = (from tbusuario in db.tbUsuario
+                                join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+                                join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+                                join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
+                                join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
+                                where tbusuario.usu_Id == userId
+                                select new { tbObjeto.obj_Referencia }).ToList()
+                    };
+                }
 
 				//SETEO DE ATTR CantidadRoles
 				ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
