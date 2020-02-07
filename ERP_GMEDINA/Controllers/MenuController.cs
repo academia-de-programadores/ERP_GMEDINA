@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         // GET: Menu
 
-        [SessionManager("Menu/Index")]
+        //[SessionManager("Menu/Index")]
         public ActionResult Index(int idmenu)
         {
             if(idmenu != 0)
@@ -30,7 +30,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        [SessionManager("Menu/MenuPrincipal")]
+        //[SessionManager("Menu/MenuPrincipal")]
         public ActionResult MenuPrincipal()
         {
            // tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
