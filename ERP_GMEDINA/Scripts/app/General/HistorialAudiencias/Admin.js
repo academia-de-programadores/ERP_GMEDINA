@@ -2,7 +2,7 @@
 
 function llamarmodalhabilitar(ID) {
     var validacionPermiso = userModalState("AudienciasDescargo/habilitar");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var modalhabilitar = $("#ModalHabilitar");
         $("#ModalHabilitar").find("#aude_Id").val(ID);
         modalhabilitar.modal('show');

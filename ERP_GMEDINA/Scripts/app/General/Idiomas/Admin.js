@@ -3,7 +3,7 @@
 //Esta funcion llama al modal de Habilitar
 function hablilitar(btn) {
     var validacionPermiso = userModalState("Idiomas/hablilitar");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var tr = $(btn).closest('tr');
         var row = tabla.row(tr);
         var id = row.data().ID;

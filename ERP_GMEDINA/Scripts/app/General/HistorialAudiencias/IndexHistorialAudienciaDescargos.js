@@ -95,7 +95,7 @@ var idEditar = 0;
 
 function Llamarmodaldetalle(ID) {
     var validacionPermiso = userModalState("AudienciasDescargo/Edit");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         idEditar = ID;
         var modalnuevo = $("#ModalDetalles");
         _ajax({ ID: parseInt(ID) },
@@ -123,7 +123,7 @@ function Llamarmodaldetalle(ID) {
 
 function Llamarmodalcreate() {
     var validacionPermiso = userModalState("AudienciasDescargo/Create");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var modalnuevo = $("#ModalNuevo");
         $("#aude_FechaAudiencia1").attr("min", Fecha());
         $("#ModalNuevo").find("#emp_Id").val(idEmpleado);
@@ -190,7 +190,7 @@ $("#btnGuardar").click(function () {
 
 function Llamarmodaldelete(ID) {
     var validacionPermiso = userModalState("AudienciasDescargo/Delete");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var modalnuevo = $("#ModalInactivar");
         $("#ModalInactivar").find("#aude_Id").val(ID);
         idEditar = ID;

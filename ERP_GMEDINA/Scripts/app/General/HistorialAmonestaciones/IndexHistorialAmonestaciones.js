@@ -104,7 +104,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 function llamarmodal() {
     var validacionPermiso = userModalState("HistorialAmonestaciones/Create");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         debugger
         _ajax({ ID: parseInt(IdEmpleado) },
             '/HistorialAmonestaciones/Fecha/',
@@ -122,7 +122,7 @@ function llamarmodal() {
 }
 function llamarmodaldelete(ID) {
     var validacionPermiso = userModalState("HistorialAmonestaciones/Delete");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var modaldelete = $("#ModalInhabilitar");
         $("#ModalInhabilitar").find("#hamo_Id").val(ID);
         modaldelete.modal('show');
@@ -131,7 +131,7 @@ function llamarmodaldelete(ID) {
 
 function llamarmodaldetalles(ID) {
     var validacionPermiso = userModalState("HistorialAmonestaciones/Edit");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var modaldetalle = $("#ModalDetalles");
         _ajax({ ID: parseInt(ID) },
             '/HistorialAmonestaciones/Edit/',

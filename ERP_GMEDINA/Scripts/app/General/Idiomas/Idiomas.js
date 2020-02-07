@@ -7,7 +7,7 @@ var fill = 0;
 //Funciones GET
 function tablaEditar(ID) {
     var validacionPermiso = userModalState("Idiomas/Edit");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         id = ID;
         _ajax(null,
             '/Idiomas/Edit/' + ID,
@@ -22,7 +22,7 @@ function tablaEditar(ID) {
 }
 function tablaDetalles(ID) {
     var validacionPermiso = userModalState("Idiomas/Edit");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         id = ID;
         _ajax(null,
             '/Idiomas/Edit/' + ID,
@@ -75,7 +75,7 @@ function llenarTabla() {
 //Botones GET
 $("#btnAgregar").click(function () {
     var validacionPermiso = userModalState("Idiomas/Create");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         var modalnuevo = $('#ModalNuevo');
         modalnuevo.modal('show');
         $(modalnuevo).find("#idi_Descripcion").val("");
@@ -97,7 +97,7 @@ $("#btnEditar").click(function () {
 });
 $("#btnInactivar").click(function () {
     var validacionPermiso = userModalState("Idiomas/Delete");
-    if (validacionPermiso.status) {
+    if (validacionPermiso.status == true) {
         CierraPopups();
         $('#ModalInactivar').modal('show');
         $("#ModalInactivar").find("#idi_RazonInactivo").val("");
