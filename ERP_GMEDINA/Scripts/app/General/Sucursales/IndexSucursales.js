@@ -46,7 +46,7 @@ $("#InActivar").click(function () {
     }
 });
 function tablaDetalles(id) {
-    var validacionPermiso = userModelState("FasesReclutamiento/Detalles");
+    var validacionPermiso = userModelState("Sucursales/Detalles");
     if (validacionPermiso.status == true) {
         _ajax(null,
             '/Sucursales/Detalles/' + id,
