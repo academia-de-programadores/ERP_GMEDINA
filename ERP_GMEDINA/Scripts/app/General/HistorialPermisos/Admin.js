@@ -2,6 +2,8 @@
 var idadmin = 0;
 //Esta funcion llama al modal de Habilitar
 function hablilitar(btn) {
+    var validacionPermiso = useModelState("HistorialPermisos/hablilitar");
+    if (validacionPermiso.status == true) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var lolis = row.data();
