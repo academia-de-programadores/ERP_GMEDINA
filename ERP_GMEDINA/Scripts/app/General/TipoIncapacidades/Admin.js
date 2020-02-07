@@ -2,7 +2,7 @@
 
 //Esta funcion llama al modal de Habilitar
 function hablilitar(btn) {
-    var validacionPermiso = useModelState("TipoIncapacidades/hablilitar");
+    var validacionPermiso = userModelState("TipoIncapacidades/hablilitar");
     if (validacionPermiso.status == true) {
         var tr = $(btn).closest('tr');
         var row = tabla.row(tr);
