@@ -7,7 +7,6 @@ var id = 0;
 //Funciones GET
 
 function tablaEditar(ID) {
-    debugger
     var validacionPermiso = userModelState("RazonSalidas/Edit")
     if (validacionPermiso.status == true)
     {
@@ -60,7 +59,7 @@ function llenarTabla() {
                    ?null:
                    "<div>" +
                        "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='habilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.rsal_Estado > fill) {
                     tabla.row.add({
