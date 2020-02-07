@@ -26,7 +26,6 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: INDEX PAGADOS
-        [SessionManager("DecimoTercerMes/IndexPagado")]
         public ActionResult IndexPagado()
         {
             return View(db.V_DecimoTercerMes_Pagados.ToList());

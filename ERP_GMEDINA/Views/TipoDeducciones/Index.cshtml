@@ -20,6 +20,7 @@
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
                         int rol_Usuario = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? 1 : 2);
+                        bool esAdmin = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? true : false);
 
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
@@ -61,7 +62,7 @@
                                                 <button type="button" data-id="@item.tde_IdTipoDedu" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
-                                            if (rol_Usuario == true && item.tde_Activo == false)
+                                            if (esAdmin == true && item.tde_Activo == false)
                                             {
                                                 <button type="button" data-id="@item.tde_IdTipoDedu" class="btn btn-primary btn-xs" id="btnDetalleTipoDeducciones">Detalles</button>
                                                 <!-- ACTIVAR -->
@@ -70,7 +71,7 @@
                                         }
                                     </td>
                                 </tr>
-                            }
+                                            }
                         </tbody>
                     </table>
                 </div>
@@ -111,7 +112,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" id="btnEditarTipoDedu" value="Sí" class="btn btn-primary " />
-                
+
                 <button type="button" class="btn btn-white" id="denegarEdicion" data-dismiss="modal">No</button>
             </div>
         </div>
