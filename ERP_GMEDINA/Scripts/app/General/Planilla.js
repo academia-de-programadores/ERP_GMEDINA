@@ -208,381 +208,394 @@ $('#btnPlanilla').click(function () {
 //GENERAR PLANILLA
 $('#btnPrevisualizarPlanilla').click(function () {
 
-    var ID = planillaId;
-    var modelState = true;
-    var GenerarExcel = false, GenerarPDF = false, GenerarCSV = false, EnviarEmailBool = false;
-    EnviarEmailBool = $('#EnviarEmail').is(":checked");
-    GenerarExcel = $('#Excel').is(":checked");
-    GenerarPDF = $('#PDF').is(":checked");
-    GenerarCSV = $('#CSV').is(":checked");
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("Planilla/Index");
 
-    // validar fecha inicio    
-    var date = $('#fechaInicio').val();
-    var dateFin = $('#fechaFin').val();
+    if (validacionPermiso.status == true) {
 
-    // validar que sea mayor que 1920
-    if (date < '1920-01-01') {
-        $("#validation_FechaInicioMenor1920").css('display', '');
-        $("#AsteriscoFechaInicio").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaInicioMenor1920").css('display', 'none');
-        $("#AsteriscoFechaInicio").removeClass('text-danger');
-    }
+        var ID = planillaId;
+        var modelState = true;
+        var GenerarExcel = false, GenerarPDF = false, GenerarCSV = false, EnviarEmailBool = false;
+        EnviarEmailBool = $('#EnviarEmail').is(":checked");
+        GenerarExcel = $('#Excel').is(":checked");
+        GenerarPDF = $('#PDF').is(":checked");
+        GenerarCSV = $('#CSV').is(":checked");
 
-    // validar que no sea mayor que el rango fin
-    if (date >= dateFin) {
+        // validar fecha inicio    
+        var date = $('#fechaInicio').val();
+        var dateFin = $('#fechaFin').val();
 
-        $("#validation_FechaInicioRequerida").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', 'none');
-
-        $("#validation_FechaFinMenorFechaInicio").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-
-        if (date >= '1920-01-01') {
+        // validar que sea mayor que 1920
+        if (date < '1920-01-01') {
+            $("#validation_FechaInicioMenor1920").css('display', '');
+            $("#AsteriscoFechaInicio").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+            $("#validation_FechaInicioMenor1920").css('display', 'none');
             $("#AsteriscoFechaInicio").removeClass('text-danger');
         }
 
-        $("#AsteriscoFechaFin").removeClass("text-danger");
-    }
+        // validar que no sea mayor que el rango fin
+        if (date >= dateFin) {
 
+            $("#validation_FechaInicioRequerida").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', 'none');
 
-    // validar que no esté vacío
-    if (date == '') {
-
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-        $("#validation_FechaInicioMenor1920").css('display', 'none');
-        $("#validation_FechaInicioRequerida").css('display', '');
-        $("#AsteriscoFechaInicio").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-
-        $("#validation_FechaInicioRequerida").css('display', 'none');
-        if (date >= '1920-01-01') {
-            $("#AsteriscoFechaInicio").removeClass('text-danger');
+            $("#validation_FechaFinMenorFechaInicio").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
         }
-    }
+        else {
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
 
-    // validar fecha fin 
+            if (date >= '1920-01-01') {
+                $("#AsteriscoFechaInicio").removeClass('text-danger');
+            }
 
-    // validar que sea mayor que 1920
-    if (dateFin < '1920-01-01') {
+            $("#AsteriscoFechaFin").removeClass("text-danger");
+        }
 
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', 'none');
-        $("#validation_FechaFinMenor192").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaFinMenor192").css('display', 'none');
-        $("#AsteriscoFechaFin").removeClass('text-danger');
-    }
 
-    // validar que no sea mayor que el rango fin
-    if (date >= dateFin) {
+        // validar que no esté vacío
+        if (date == '') {
 
-        $("#validation_FechaFinMenor192").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', 'none');
-        $("#validation_FechaFinMenorFechaInicio").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaInicioMenor1920").css('display', 'none');
+            $("#validation_FechaInicioRequerida").css('display', '');
+            $("#AsteriscoFechaInicio").addClass("text-danger");
+            modelState = false;
+        }
+        else {
 
-        if (dateFin >= '1920-01-01') {
+            $("#validation_FechaInicioRequerida").css('display', 'none');
+            if (date >= '1920-01-01') {
+                $("#AsteriscoFechaInicio").removeClass('text-danger');
+            }
+        }
+
+        // validar fecha fin 
+
+        // validar que sea mayor que 1920
+        if (dateFin < '1920-01-01') {
+
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', 'none');
+            $("#validation_FechaFinMenor192").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+            $("#validation_FechaFinMenor192").css('display', 'none');
             $("#AsteriscoFechaFin").removeClass('text-danger');
         }
-    }
 
+        // validar que no sea mayor que el rango fin
+        if (date >= dateFin) {
 
-    // validar que no esté vacío
-    if (dateFin == '') {
-
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-        $("#validation_FechaFinMenor192").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-
-        $("#validation_FechaFinRequerida").css('display', 'none');
-        if (dateFin >= '1920-01-01') {
-            $("#AsteriscoFechaFin").removeClass('text-danger');
+            $("#validation_FechaFinMenor192").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', 'none');
+            $("#validation_FechaFinMenorFechaInicio").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
         }
-    }
+        else {
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
 
-    if (parseInt(cantidadColaboradores) == 0) {
-        modelState = false;
-        iziToast.error({
-            title: 'Error',
-            message: 'No hay colaboradores registrados en planilla',
-        });
-    }
-
-    if (modelState == true) {
-        $('#Modal').modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "auto");
-        $('#ConfigurarGenerarPlanilla').modal('hide');
-        $('#btnPlanilla').css('display', 'none');
-        $('#Cargando').css('display', '');
-        $('#confirmarGenerarPlanilla').hide();
-        _ajax({
-            ID: planillaId,
-            enviarEmail: EnviarEmailBool,
-            fechaInicio: date,
-            fechaFin: dateFin
-        },
-        '/Planilla/PrevisualizarPlanilla/',
-        'POST',
-        (data) => {
-            $('#btnPlanilla').css('display', '');
-            $('#Cargando').css('display', 'none');
-            $('#Modal').modal('hide');
-            var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
-
-            //generar csv
-            GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
-
-            //generar excel
-            if (1==1) {
-                $("#dvjson").excelexportjs({
-                    containerid: "dvjson"
-                       , datatype: 'json'
-                       , dataset: data.Data
-                       , columns: getColumns(data.Data)
-                });
+            if (dateFin >= '1920-01-01') {
+                $("#AsteriscoFechaFin").removeClass('text-danger');
             }
-
-            if (data.Response.Tipo == 'success') {
-                iziToast.success({
-                    title: data.Response.Encabezado,
-                    message: data.Response.Response,
-                });
-            }
-            else if (data.Response.Tipo == 'error') {
-                iziToast.error({
-                    title: data.Response.Encabezado,
-                    message: data.Response.Response,
-                });
-            }
-            else if (data.Response.Tipo == 'warning') {
-                iziToast.warning({
-                    title: data.Response.Encabezado,
-                    message: data.Response.Response,
-                });
-            }
-
-            $('.modal-backdrop').css('display', 'none');
-            $('.fade').css('display', 'none');
-            $('.in').css('display', 'none');
         }
-    );
+
+
+        // validar que no esté vacío
+        if (dateFin == '') {
+
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaFinMenor192").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+
+            $("#validation_FechaFinRequerida").css('display', 'none');
+            if (dateFin >= '1920-01-01') {
+                $("#AsteriscoFechaFin").removeClass('text-danger');
+            }
+        }
+
+        if (parseInt(cantidadColaboradores) == 0) {
+            modelState = false;
+            iziToast.error({
+                title: 'Error',
+                message: 'No hay colaboradores registrados en planilla',
+            });
+        }
+
+        if (modelState == true) {
+            $('#Modal').modal({ backdrop: 'static', keyboard: false });
+            $("html, body").css("overflow", "hidden");
+            $("html, body").css("overflow", "auto");
+            $('#ConfigurarGenerarPlanilla').modal('hide');
+            $('#btnPlanilla').css('display', 'none');
+            $('#Cargando').css('display', '');
+            $('#confirmarGenerarPlanilla').hide();
+            _ajax({
+                ID: planillaId,
+                enviarEmail: EnviarEmailBool,
+                fechaInicio: date,
+                fechaFin: dateFin
+            },
+            '/Planilla/PrevisualizarPlanilla/',
+            'POST',
+            (data) => {
+                $('#btnPlanilla').css('display', '');
+                $('#Cargando').css('display', 'none');
+                $('#Modal').modal('hide');
+                var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
+
+                //generar csv
+                GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
+
+                //generar excel
+                if (1 == 1) {
+                    $("#dvjson").excelexportjs({
+                        containerid: "dvjson"
+                           , datatype: 'json'
+                           , dataset: data.Data
+                           , columns: getColumns(data.Data)
+                    });
+                }
+
+                if (data.Response.Tipo == 'success') {
+                    iziToast.success({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+                else if (data.Response.Tipo == 'error') {
+                    iziToast.error({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+                else if (data.Response.Tipo == 'warning') {
+                    iziToast.warning({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+
+                $('.modal-backdrop').css('display', 'none');
+                $('.fade').css('display', 'none');
+                $('.in').css('display', 'none');
+            }
+        );
+        }
     }
 });
 
 //GENERAR PLANILLA
 $('#btnGenerarPlanilla').click(function () {
 
-    var ID = planillaId;
-    var modelState = true;
-    var GenerarExcel = false, GenerarPDF = false, GenerarCSV = false, EnviarEmailBool = false;
-    EnviarEmailBool = $('#EnviarEmail').is(":checked");
-    GenerarExcel = $('#Excel').is(":checked");
-    GenerarPDF = $('#PDF').is(":checked");
-    GenerarCSV = $('#CSV').is(":checked");
+    // validar informacion del usuario
+    var validacionPermiso = userModelState("Planilla/GenerarPlanilla");
 
-    // validar fecha inicio    
-    var date = $('#fechaInicio').val();
-    var dateFin = $('#fechaFin').val();
+    if (validacionPermiso.status == true) {
 
-    // validar que sea mayor que 1920
-    if (date < '1920-01-01') {
-        $("#validation_FechaInicioMenor1920").css('display', '');
-        $("#AsteriscoFechaInicio").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaInicioMenor1920").css('display', 'none');
-        $("#AsteriscoFechaInicio").removeClass('text-danger');
-    }
+        var ID = planillaId;
+        var modelState = true;
+        var GenerarExcel = false, GenerarPDF = false, GenerarCSV = false, EnviarEmailBool = false;
+        EnviarEmailBool = $('#EnviarEmail').is(":checked");
+        GenerarExcel = $('#Excel').is(":checked");
+        GenerarPDF = $('#PDF').is(":checked");
+        GenerarCSV = $('#CSV').is(":checked");
 
-    // validar que no sea mayor que el rango fin
-    if (date >= dateFin) {
+        // validar fecha inicio    
+        var date = $('#fechaInicio').val();
+        var dateFin = $('#fechaFin').val();
 
-        $("#validation_FechaInicioRequerida").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', 'none');
-
-        $("#validation_FechaFinMenorFechaInicio").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-
-        if (date >= '1920-01-01') {
+        // validar que sea mayor que 1920
+        if (date < '1920-01-01') {
+            $("#validation_FechaInicioMenor1920").css('display', '');
+            $("#AsteriscoFechaInicio").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+            $("#validation_FechaInicioMenor1920").css('display', 'none');
             $("#AsteriscoFechaInicio").removeClass('text-danger');
         }
 
-        $("#AsteriscoFechaFin").removeClass("text-danger");
-    }
+        // validar que no sea mayor que el rango fin
+        if (date >= dateFin) {
 
+            $("#validation_FechaInicioRequerida").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', 'none');
 
-    // validar que no esté vacío
-    if (date == '') {
-
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-        $("#validation_FechaInicioMenor1920").css('display', 'none');
-        $("#validation_FechaInicioRequerida").css('display', '');
-        $("#AsteriscoFechaInicio").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-
-        $("#validation_FechaInicioRequerida").css('display', 'none');
-        if (date >= '1920-01-01') {
-            $("#AsteriscoFechaInicio").removeClass('text-danger');
+            $("#validation_FechaFinMenorFechaInicio").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
         }
-    }
+        else {
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
 
-    // validar fecha fin 
+            if (date >= '1920-01-01') {
+                $("#AsteriscoFechaInicio").removeClass('text-danger');
+            }
 
-    // validar que sea mayor que 1920
-    if (dateFin < '1920-01-01') {
+            $("#AsteriscoFechaFin").removeClass("text-danger");
+        }
 
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', 'none');
-        $("#validation_FechaFinMenor192").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaFinMenor192").css('display', 'none');
-        $("#AsteriscoFechaFin").removeClass('text-danger');
-    }
 
-    // validar que no sea mayor que el rango fin
-    if (date >= dateFin) {
+        // validar que no esté vacío
+        if (date == '') {
 
-        $("#validation_FechaFinMenor192").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', 'none');
-        $("#validation_FechaFinMenorFechaInicio").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaInicioMenor1920").css('display', 'none');
+            $("#validation_FechaInicioRequerida").css('display', '');
+            $("#AsteriscoFechaInicio").addClass("text-danger");
+            modelState = false;
+        }
+        else {
 
-        if (dateFin >= '1920-01-01') {
+            $("#validation_FechaInicioRequerida").css('display', 'none');
+            if (date >= '1920-01-01') {
+                $("#AsteriscoFechaInicio").removeClass('text-danger');
+            }
+        }
+
+        // validar fecha fin 
+
+        // validar que sea mayor que 1920
+        if (dateFin < '1920-01-01') {
+
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', 'none');
+            $("#validation_FechaFinMenor192").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+            $("#validation_FechaFinMenor192").css('display', 'none');
             $("#AsteriscoFechaFin").removeClass('text-danger');
         }
-    }
 
-    // validar que no esté vacío
-    if (dateFin == '') {
+        // validar que no sea mayor que el rango fin
+        if (date >= dateFin) {
 
-        $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
-        $("#validation_FechaFinMenor192").css('display', 'none');
-        $("#validation_FechaFinRequerida").css('display', '');
-        $("#AsteriscoFechaFin").addClass("text-danger");
-        modelState = false;
-    }
-    else {
+            $("#validation_FechaFinMenor192").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', 'none');
+            $("#validation_FechaFinMenorFechaInicio").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
 
-        $("#validation_FechaFinRequerida").css('display', 'none');
-        if (dateFin >= '1920-01-01') {
-            $("#AsteriscoFechaFin").removeClass('text-danger');
+            if (dateFin >= '1920-01-01') {
+                $("#AsteriscoFechaFin").removeClass('text-danger');
+            }
+        }
+
+        // validar que no esté vacío
+        if (dateFin == '') {
+
+            $("#validation_FechaFinMenorFechaInicio").css('display', 'none');
+            $("#validation_FechaFinMenor192").css('display', 'none');
+            $("#validation_FechaFinRequerida").css('display', '');
+            $("#AsteriscoFechaFin").addClass("text-danger");
+            modelState = false;
+        }
+        else {
+
+            $("#validation_FechaFinRequerida").css('display', 'none');
+            if (dateFin >= '1920-01-01') {
+                $("#AsteriscoFechaFin").removeClass('text-danger');
+            }
+        }
+
+        if (parseInt(cantidadColaboradores) == 0) {
+            modelState = false;
+            iziToast.error({
+                title: 'Error',
+                message: 'No hay colaboradores registrados en planilla',
+            });
+        }
+
+
+        if (modelState == true) {
+            $('#Modal').modal({ backdrop: 'static', keyboard: false });
+            $('#ConfigurarGenerarPlanilla').modal('hide');
+            $('#btnPlanilla').css('display', 'none');
+            $('#Cargando').css('display', '');
+            $('#confirmarGenerarPlanilla').hide();
+            _ajax({
+                ID: planillaId,
+                enviarEmail: EnviarEmailBool,
+                fechaInicio: date,
+                fechaFin: dateFin
+            },
+            '/Planilla/GenerarPlanilla/',
+            'POST',
+            (data) => {
+                $('#btnPlanilla').css('display', '');
+                $('#Cargando').css('display', 'none');
+                $('#Modal').modal('hide');
+                var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
+
+                //generar csv
+                GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
+
+                //generar excel
+                if (GenerarExcel) {
+                    $("#dvjson").excelexportjs({
+                        containerid: "dvjson"
+                           , datatype: 'json'
+                           , dataset: data.Data
+                           , columns: getColumns(data.Data)
+                    });
+                }
+
+
+                if (data.listaDeErrores != '') {
+                    $("#dvjson").excelexportjs({
+                        containerid: "dvjson"
+                           , datatype: 'json'
+                           , dataset: data.listaDeErrores
+                           , columns: getColumns(data.listaDeErrores)
+                    });
+                }
+
+
+
+                if (data.Response.Tipo == 'success') {
+                    iziToast.success({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+                else if (data.Response.Tipo == 'error') {
+                    iziToast.error({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+                else if (data.Response.Tipo == 'warning') {
+                    iziToast.warning({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+
+                $('.modal-backdrop').css('display', 'none');
+                $('.fade').css('display', 'none');
+                $('.in').css('display', 'none');
+            }
+        );
         }
     }
-
-    if (parseInt(cantidadColaboradores) == 0) {
-        modelState = false;
-        iziToast.error({
-            title: 'Error',
-            message: 'No hay colaboradores registrados en planilla',
-        });
-    }
-
-
-    if (modelState == true) {
-        $('#Modal').modal({ backdrop: 'static', keyboard: false });
-        $('#ConfigurarGenerarPlanilla').modal('hide');
-        $('#btnPlanilla').css('display', 'none');
-        $('#Cargando').css('display', '');
-        $('#confirmarGenerarPlanilla').hide();
-        _ajax({
-            ID: planillaId,
-            enviarEmail: EnviarEmailBool,
-            fechaInicio: date,
-            fechaFin: dateFin
-        },
-        '/Planilla/GenerarPlanilla/',
-        'POST',
-        (data) => {
-            $('#btnPlanilla').css('display', '');
-            $('#Cargando').css('display', 'none');
-            $('#Modal').modal('hide');
-            var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
-
-            //generar csv
-            GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
-
-            //generar excel
-            if (GenerarExcel) {
-                $("#dvjson").excelexportjs({
-                    containerid: "dvjson"
-                       , datatype: 'json'
-                       , dataset: data.Data
-                       , columns: getColumns(data.Data)
-                });
-            }
-            
-            
-            if (data.listaDeErrores != '') {
-                $("#dvjson").excelexportjs({
-                    containerid: "dvjson"
-                       , datatype: 'json'
-                       , dataset: data.listaDeErrores
-                       , columns: getColumns(data.listaDeErrores)
-                });
-            }
-            
-            
-
-            if (data.Response.Tipo == 'success') {
-                iziToast.success({
-                    title: data.Response.Encabezado,
-                    message: data.Response.Response,
-                });
-            }
-            else if (data.Response.Tipo == 'error') {
-                iziToast.error({
-                    title: data.Response.Encabezado,
-                    message: data.Response.Response,
-                });
-            }
-            else if (data.Response.Tipo == 'warning') {
-                iziToast.warning({
-                    title: data.Response.Encabezado,
-                    message: data.Response.Response,
-                });
-            }
-
-            $('.modal-backdrop').css('display', 'none');
-            $('.fade').css('display', 'none');
-            $('.in').css('display', 'none');
-        }
-    );
-    }
+    
 });
 
 // =====================================================================================================
