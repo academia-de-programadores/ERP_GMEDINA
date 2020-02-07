@@ -103,41 +103,51 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 function llamarmodal() {
-    debugger
-    _ajax({ ID: parseInt(IdEmpleado) },
-        '/HistorialAmonestaciones/Fecha/',
-        'GET',
-        function (obj) {
-            debugger
-            $("#msjerror").html(obj);
+    var validacionPermiso = userModalState("HistorialAmonestaciones/Create");
+    if (validacionPermiso.status) {
+        debugger
+        _ajax({ ID: parseInt(IdEmpleado) },
+            '/HistorialAmonestaciones/Fecha/',
+            'GET',
+            function (obj) {
+                debugger
+                $("#msjerror").html(obj);
 
-        });
+            });
 
-    var modalnuevo = $("#ModalNuevo");
-    $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
-    modalnuevo.modal('show');
+        var modalnuevo = $("#ModalNuevo");
+        $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
+        modalnuevo.modal('show');
+    }
 }
 function llamarmodaldelete(ID) {
-    var modaldelete = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#hamo_Id").val(ID);
-    modaldelete.modal('show');
+    var validacionPermiso = userModalState("HistorialAmonestaciones/Delete");
+    if (validacionPermiso.status) {
+        var modaldelete = $("#ModalInhabilitar");
+        $("#ModalInhabilitar").find("#hamo_Id").val(ID);
+        modaldelete.modal('show');
+    }
 }
 
 function llamarmodaldetalles(ID) {
-    var modaldetalle = $("#ModalDetalles");
-    _ajax({ ID: parseInt(ID) },
-        '/HistorialAmonestaciones/Edit/',
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hamo_Observacion")["0"].innerText = obj.hamo_Observacion;
-                $("#ModalDetalles").find("#tbTipoAmonestaciones_tamo_Descripcion")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
-                $("#ModalDetalles").find("#hamo_Fecha")["0"].innerText = FechaFormato(obj.hamo_Fecha);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = FechaFormato(obj.hamo_FechaCrea);
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionPermiso = userModalState("HistorialAmonestaciones/Edit");
+    if (validacionPermiso.status) {
+        var modaldetalle = $("#ModalDetalles");
+        _ajax({ ID: parseInt(ID) },
+            '/HistorialAmonestaciones/Edit/',
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#hamo_Observacion")["0"].innerText = obj.hamo_Observacion;
+                    $("#ModalDetalles").find("#tbTipoAmonestaciones_tamo_Descripcion")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
+                    $("#ModalDetalles").find("#hamo_Fecha")["0"].innerText = FechaFormato(obj.hamo_Fecha);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = FechaFormato(obj.hamo_FechaCrea);
+                    $('#ModalDetalles').modal('show');
+
+                }
+            });
+    }
 }
 
 $("#InActivar").click(function () {
