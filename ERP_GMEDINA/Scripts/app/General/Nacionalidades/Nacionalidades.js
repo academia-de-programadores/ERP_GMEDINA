@@ -9,7 +9,6 @@ $(document).ready(function () {
 var fill = 0
 
 
-
 $(document).ready(function () {
     llenarTabla();
 });
@@ -80,9 +79,8 @@ function llenarTabla() {
                     }).draw();
                 }
             });
-        });
+        });http://localhost:51144/../HistorialAudiencias
 }
-
 
 
 

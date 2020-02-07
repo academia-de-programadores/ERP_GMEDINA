@@ -10,6 +10,8 @@ var id = 0;
 function tablaEditar(ID) {
 
     id = ID;
+    var validacionPermiso = userModelState("Sueldos/Edit");
+    if (validacionPermiso.status == true) {
     _ajax(null,
 
         '/Sueldos/Edit/' + ID,
@@ -24,11 +26,9 @@ function tablaEditar(ID) {
                 $("#FormEditar").find("#tmon_Id").val(obj[0].Id_Amonestacion);
                 $("#FormEditar").find("#sue_Cantidad").val(obj[0].Sueldo);
                 $("#ModalEditar").modal('show');
-
-
-
             }
         });
+    }
 }
 
 
@@ -109,6 +109,8 @@ function llenarTabla() {
 
 function tablaDetalles(ID) {
     id = ID;
+    var validacionPermiso = userModelState("Sueldos/Edit");
+    if (validacionPermiso.status == true) {
     _ajax(null,
         '/Sueldos/Edit/' + ID,
         'GET',
@@ -121,6 +123,7 @@ function tablaDetalles(ID) {
                 $('#ModalDetalles').modal('show');
             }
         });
+    }
 }
 
 
@@ -209,6 +212,8 @@ $("#btnActualizar").click(function () {
 
 
 $("#btnEditar").click(function tablaEditar() {
+    var validacionPermiso = userModelState("Sueldos/Edit");
+    if (validacionPermiso.status == true) {
     _ajax(null,
         '/Sueldos/Edit/' + id,
         'GET',
@@ -226,8 +231,7 @@ $("#btnEditar").click(function tablaEditar() {
                 $("#ModalEditar").find("#sue_Cantidad").focus();
 
             }
-
-
-
         });
+    }
 });
+

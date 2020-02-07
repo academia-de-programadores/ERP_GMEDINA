@@ -1,7 +1,7 @@
 ﻿Admin = true;
 //Esta funcion llama al modal de Habilitar
 function hablilitar(btn) {
-    var validacionPermiso = userModalState("RazonSalidas/Habilitar")
+    var validacionPermiso = userModelState("RazonSalidas/Hablilitar");
     if (validacionPermiso.status)
     {
     var tr = $(btn).closest('tr');

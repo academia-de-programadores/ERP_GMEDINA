@@ -7,96 +7,54 @@ $(document).ready(function () {
 });
 //Funciones GET
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/HistorialPermisos/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
-                //$("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
-                $('#ModalInactivar').modal('show');
-                $("#ModalInactivar").find("#hper_RazonInactivo").val("");
-                $("#ModalInactivar").find("#hper_RazonInactivo").focus();
-            }
-        });
+    var validacionPermiso = userModelState("HistorialPermisos/Edit");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(null,
+            '/HistorialPermisos/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
+                    //$("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
+                    $('#ModalInactivar').modal('show');
+                    $("#ModalInactivar").find("#hper_RazonInactivo").val("");
+                    $("#ModalInactivar").find("#hper_RazonInactivo").focus();
+                }
+            });
+    }
 }
 
 function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        '/HistorialPermisos/Edit/' + ID,
-        'GET',
-        function (obj) {
-            var o = obj.hper_Observacion == null ? "Ninguna" : obj.hper_Observacion;
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetallesAX").find("#hper_Observacion")["0"].innerText = o;
-                $("#ModalDetallesAX").find("#hper_FechaCrea")["0"].innerText = FechaFormato(obj.hper_FechaCrea);
-                $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio).substring(0, 10);
-                $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin).substring(0, 10);
-                $("#ModalDetallesAX").find("#hper_Duracion")["0"].innerText = obj.hper_Duracion;
-                $("#ModalDetallesAX").find("#hper_PorcentajeIndemnizado")["0"].innerText = obj.hper_PorcentajeIndemnizado+"%";
+    var validacionPermiso = userModelState("HistorialPermisos/details");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(null,
+            '/HistorialPermisos/Edit/' + ID,
+            'GET',
+            function (obj) {
+                var o = obj.hper_Observacion == null ? "Ninguna" : obj.hper_Observacion;
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetallesAX").find("#hper_Observacion")["0"].innerText = o;
+                    $("#ModalDetallesAX").find("#hper_FechaCrea")["0"].innerText = FechaFormato(obj.hper_FechaCrea);
+                    $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio).substring(0, 10);
+                    $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin).substring(0, 10);
+                    $("#ModalDetallesAX").find("#hper_Duracion")["0"].innerText = obj.hper_Duracion;
+                    $("#ModalDetallesAX").find("#hper_PorcentajeIndemnizado")["0"].innerText = obj.hper_PorcentajeIndemnizado + "%";
 
 
 
-                //$("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
-                $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                //$("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+                    //$("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
+                    $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    //$("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//function llenarTabla() {
-//    _ajax(null,
-//        '/HistorialSalidas/llenarTabla',
-//        'POST',
-//        function (Lista) {
-//            tabla.clear();
-//            tabla.draw();
-//            $.each(Lista, function (index, value) {
-//                tabla.row.add({
-//                    Id: value.hsal_Id,
-//                    tsal_Id: value.tsal_Id,
-//                    TipoSalida: value.tsal_Descripcion,
-//                    rsal_Id: value.rsal_Id,
-//                    rsal_Descripcion: value.rsal_Descripcion,
-//                    NombreCompleto: value.per_Nombres,
-//                    per_CorreoElectronico: value.per_CorreoElectronico,
-//                    per_Telefono: value.per_Telefono,
-//                    per_Direccion: value.per_Direccion,
-//                    per_Edad: value.per_Edad,
-//                    per_EstadoCivil: value.per_EstadoCivil,
-//                    hsal_Observacion: value.hsal_Observacion,
-//                    hsal_FechaSalida: value.hsal_FechaSalida,
-//                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hsal_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hsal_Id + ")'>Editar</a>"
-//                });
-//            });
-//            tabla.draw();
-//        });
-//}
 function llenarTabla() {
     _ajax(null,
         '/HistorialPermisos/llenarTabla',
@@ -138,27 +96,22 @@ function llenarTabla() {
 
 
 
-
-
-
-
-
-
-
-
-
 $("#btnEditar").click(function () {
-    _ajax(null,
-        '/HistorialPermisos/Edit/' + id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
-            }
-        });
+    var validacionPermiso = userModelState("Areas/details");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/HistorialPermisos/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $('#ModalEditar').modal('show');
+                    $("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
+                }
+            });
+    }
 });
+
 
 $("#btnInactivar").click(function () {
     CierraPopups();
@@ -168,48 +121,49 @@ $("#btnInactivar").click(function () {
 });
 //llamado
 $("#InActivar").click(function () {
-    var data = $("#FormInactivar").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        //data.tiho_Id = id;
-        // data = JSON.stringify({ tbTipoHoras: data });
-        $.post("/HistorialPermisos/Delete", data).done(function (obj) {
-            if (obj != "-1") {
-                CierraPopups();
-                llenarTabla();
-                LimpiarControles(["hper_Observacion", "hper_RazonInactivo"]);
-                MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
-            } else {
-                MsgError("Error", "No se inactivó el registro, contacte al administrador.");
-            }
-        });
-    } else {
-        MsgWarning("¡Éxito!", "La eliminación de información debe ser justificada.");
+    var validacionPermiso = userModelState("HistorialPermisos/Delete");
+    if (validacionPermiso.status == true) {
+        var data = $("#FormInactivar").serializeArray();
+        data = serializar(data);
+        if (data != null) {
+            //data.tiho_Id = id;
+            // data = JSON.stringify({ tbTipoHoras: data });
+            $.post("/HistorialPermisos/Delete", data).done(function (obj) {
+                if (obj != "-1") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["hper_Observacion", "hper_RazonInactivo"]);
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
+                } else {
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
+                }
+            });
+        } else {
+            MsgWarning("¡Éxito!", "La eliminación de información debe ser justificada.");
+        }
     }
 });
 
 $("#btnActualizar").click(function () {
-    var data = $("#FormEditar").serializeArray();
-    //data = serializar(data);
-    if (data != null) {
-        data.tiho_Id = id;
-        //data = JSON.stringify({ tbTipoHoras: data });
-        $.post("/HistorialSalidas/Edit", data).done(function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                llenarTabla();
-                LimpiarControles(["hper_Observacion"]);
-                MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
-            } else {
-                MsgError("Error", "No se editó el registro, contacte al administrador.");
-            }
-        });
-    }
+          var data = $("#FormEditar").serializeArray();
+          //data = serializar(data);
+          if (data != null) {
+              data.tper_Id = id;
+              //data = JSON.stringify({ tbTipoHoras: data });
+              $.post("/HistorialPermisos/Edit", data).done(function (obj) {
+                  if (obj != "-1" && obj != "-2" && obj != "-3") {
+                      CierraPopups();
+                      llenarTabla();
+                      LimpiarControles(["hper_Observacion"]);
+                      MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                  } else {
+                      MsgError("Error", "No se editó el registro, contacte al administrador.");
+                  }
+              });
+          }
 });
 //aqui estaba
 function format(obj) {
-    //var EstadoCivil = '';
-    //var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ];
     var div = '<div class="ibox"><div class="ibox-title"><h5>Información personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         index.per_EstadoCivil.toUpperCase() == ('S') ? EstadoCivil = 'Soltero(a)'
@@ -231,24 +185,6 @@ function format(obj) {
         '</div>' +
         '</div>'
     });
-    //div += '<div class="ibox"><div class="ibox-title"><h5>Informacion sobre la salida: </h5></div><div class="ibox-content"><div class="row">';
-    //obj.forEach(function (index, value) {
-    //    fecha = new Date(parseInt(index.hper_FechaInicio.replace("/Date(", "").replace(")/", ""), 10));
-    //    var dia = fecha.getDate();
-    //    var mes = meses[fecha.getMonth()];
-    //    var annio = fecha.getFullYear();
-    //    var hora = fecha.getHours();
-    //    var fechamnsj = dia + " de " + mes + " del " + annio;
-    //    var observa = index.hper_Observacion == null ? "Ninguna" : index.hper_Observacion;
-    //    div = div
-    //        //+ '<div class="col-md-2"><b>Tipo de salida: </b></div><div class="col-md-10">' + index.rsal_Descripcion + '</div>'
-    //        //+ '<div class="col-md-2"><b>Razon salida: </b></div><div class="col-md-10">' + index.tsal_Descripcion + '</div>'
-    //        + '<div class="col-md-2"><b>Observaciones: </b></div><div class="col-md-10">' + observa + '</div>'
-    //        + '<div class="col-md-2"><b>Fecha salida: </b></div><div class="col-md-10">' + fechamnsj + '</div>'
-    //        + '</div>' +
-    //        '</div>' +
-    //        '</div>'
-    //});
     return div + '</div></div></div>';
 }
 

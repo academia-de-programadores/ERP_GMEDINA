@@ -115,30 +115,31 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 //EDITAR///////////////////////////////////////////////////////////////////////////////////////////////////////
 function tablaEditar(id) {
-    scan_Id = id;
-
-            _ajax(null,
-                '/SeleccionCandidatos/Edit/' + id,
-               'GET',
-               function (obj) {
-                   if (obj != "-1" && obj != "-2" && obj != "-3") {
-                       CierraPopups();
-                       $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-                       $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
-                       $("#ModalEditar").find("#req_Id").val(obj.req_Id);
-                       if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
-                           $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
-                       }
-                       else {
-                           $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
-
-                       }
-                       $('#ModalEditar').modal('show');
+    var validacionPermiso = userModelState("SeleccionCandidatos/Edit");
+    if (validacionPermiso.status == true) {
+        scan_Id = id;
+        _ajax(null,
+            '/SeleccionCandidatos/Edit/' + id,
+           'GET',
+           function (obj) {
+               if (obj != "-1" && obj != "-2" && obj != "-3") {
+                   CierraPopups();
+                   $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+                   $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
+                   $("#ModalEditar").find("#req_Id").val(obj.req_Id);
+                   if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
+                       $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
+                   }
+                   else {
+                       $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
 
                    }
-               })
-        ;
+                   $('#ModalEditar').modal('show');
 
+               }
+           })
+        ;
+    }
 }
 
 function CallEditar(btn) {
@@ -151,7 +152,6 @@ function CallEditar(btn) {
 
 
 $("#btnActualizar").click(function () {
-    debugger
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     var Fechaeditar = $("#ModalEditar").find("#scan_Fecha").val();
@@ -188,7 +188,9 @@ $("#btnActualizar").click(function () {
 //DETALLES///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function tablaDetalles(ID) {
-    scan_Id = ID;
+    var validacionPermiso = userModelState("SeleccionCandidatos/Edit");
+    if (validacionPermiso.status==true){   
+        scan_Id = ID;
     _ajax(null,
         '/SeleccionCandidatos/Edit/' + ID,
         'GET',
@@ -207,12 +209,16 @@ function tablaDetalles(ID) {
                 $('#ModalDetalles').modal('show');
             }
         });
+    }
 }
 
 //AGREGAR///////////////////////////////////////////////////////////////////////////////////////////
 function btnAgregar() {
-    var modalnuevo = $("#ModalNuevo");
-    modalnuevo.modal('show');
+    var validacionPermiso = userModelState("SeleccionCandidatos/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $("#ModalNuevo");
+        modalnuevo.modal('show');
+    }
 }
 
 $("#btnGuardar").click(function () {
@@ -246,24 +252,25 @@ $("#btnGuardar").click(function () {
 
 //INACIVAR//////////////////////////////////////////////////////////////////////////////
 function CallEliminar(btn) {
-    var tr = $(btn).closest('tr');
-    var row = tabla.row(tr);
-    var id = row.data().ID;
+    var validacionPermiso = userModelState("SeleccionCandidatos/Delete");
+    if (validacionPermiso.status == true) {
+        var tr = $(btn).closest('tr');
+        var row = tabla.row(tr);
+        var id = row.data().ID;
+        CierraPopups();
+        $("#ModalInhabilitar").find("#scan_Id").val(id);
+        _ajax(null,
+            '/SeleccionCandidatos/Edit/' + id,
+           'GET',
+           function (obj) {
+               if (obj != "-1" && obj != "-2" && obj != "-3") {
+                   $("#ModalInhabilitar").find("#per_Id").val(obj.per_Id);
+                   $("#ModalInhabilitar").find("#per_Descripcion").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+                   $('#ModalInhabilitar').modal('show');
+               }
+           });
 
-    CierraPopups();
-    $("#ModalInhabilitar").find("#scan_Id").val(id);
-    _ajax(null,
-        '/SeleccionCandidatos/Edit/' + id,
-       'GET',
-       function (obj) {
-           if (obj != "-1" && obj != "-2" && obj != "-3") {
-               $("#ModalInhabilitar").find("#per_Id").val(obj.per_Id);
-               $("#ModalInhabilitar").find("#per_Descripcion").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-               $('#ModalInhabilitar').modal('show');
-           }
-       });
-
-
+    }
 }
 
 $("#InActivar").click(function () {
@@ -294,36 +301,40 @@ $("#InActivar").click(function () {
 
 
 function btnInactivar() {
-    var modalnuevo = $("#ModalInactivar");
-    modalnuevo.modal('show');
+    var validacionPermiso = userModelState("SeleccionCandidatos/Delete");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $("#ModalInactivar");
+        modalnuevo.modal('show');
+    }
 }
 
 $("#btnEditar").click(function () {
-
-
+    var validacionPermiso = userModelState("SeleccionCandidatos/Edit");
+    if (validacionPermiso.status == true) {
         _ajax(null,
             '/SeleccionCandidatos/Edit/' + scan_Id,
             'GET',
 
             function (obj) {
 
-                    if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        CierraPopups();
-                        $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-                        $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
-                        $("#ModalEditar").find("#req_Id").val(obj.req_Id);
-                        if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
-                            $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
-                        }
-                        else {
-                            $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
-
-                        }
-                        $('#ModalEditar').modal('show');
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+                    $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
+                    $("#ModalEditar").find("#req_Id").val(obj.req_Id);
+                    if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
+                        $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
+                    }
+                    else {
+                        $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
 
                     }
+                    $('#ModalEditar').modal('show');
+
                 }
-            ) ;
+            }
+            );
+    }
 });
 
 
