@@ -29,7 +29,9 @@ function format(obj, emp_Id) {
     return div + '</div></div></div>';
 }
 function llenarTabla() {
-    _ajax(null, '/EquipoEmpleados/llenarTabla', 'POST',
+    var validacionPermiso = userModelState("EquipoEmpleados/Index");
+    if (validacionPermiso.status == true) {
+        _ajax(null, '/EquipoEmpleados/llenarTabla', 'POST',
         function (lista) {
             tabla.clear();
             tabla.draw();
@@ -48,14 +50,18 @@ function llenarTabla() {
             });
             tabla.draw();
         });
+    }
 }
 function ShowModalCreate(btn) {
-    emp_Id = $(btn).data('id');
-    var modalnuevo = $('#ModalNuevo');
-    modalnuevo.modal('show');
-    $(modalnuevo).find("#eqtra_Id").focus();
-    $(modalnuevo).find("#eqtra_Id").val("");
-    $(modalnuevo).find("#eqem_Fecha").val("");
+    var validacionPermiso = userModelState("EquipoEmpleados/Create");
+    if (validacionPermiso.status == true) {
+        emp_Id = $(btn).data('id');
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#eqtra_Id").focus();
+        $(modalnuevo).find("#eqtra_Id").val("");
+        $(modalnuevo).find("#eqem_Fecha").val("");
+    }    
 }
 
 function RefreshEquipos() {
@@ -80,36 +86,39 @@ function RefreshEquipos() {
 }
 
 $("#btnGuardar").click(function () {
-    var data = $("#FormNuevo").serializeArray();
-    data = serializar(data);
-    data.emp_Id = emp_Id;
-    if (data != null) {
-        data = JSON.stringify({ tbEquipoEmpleados: data });
-        _ajax(data, '/EquipoEmpleados/Create', 'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    MsgSuccess("¡Éxito!","El registro se agregó de forma exitosa.");
-                    LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
-                    $("#ModalNuevo").find("#eqtra_Id").empty();
-                    llenarTabla();
-                    RefreshEquipos();
-                }
-                else {
-                    MsgError("Error", "Error","No se agregó el registro, contacte al administrador.");
-                }
-            });
-    }
-    else {
-        MsgError("Error", "Por favor llene todas las cajas de texto.");
-    }
+        var data = $("#FormNuevo").serializeArray();
+        data = serializar(data);
+        data.emp_Id = emp_Id;
+        if (data != null) {
+            data = JSON.stringify({ tbEquipoEmpleados: data });
+            _ajax(data, '/EquipoEmpleados/Create', 'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa.");
+                        LimpiarControles(["eqtra_Id", "eqem_Fecha"]);
+                        $("#ModalNuevo").find("#eqtra_Id").empty();
+                        llenarTabla();
+                        RefreshEquipos();
+                    }
+                    else {
+                        MsgError("Error", "Error", "No se agregó el registro, contacte al administrador.");
+                    }
+                });
+        }
+        else {
+            MsgError("Error", "Por favor llene todas las cajas de texto.");
+        }
 })
 
 function Inactivar(btn) {
-    Id = $(btn).data('id');
-    $("#FormInactivar input").val(Id);
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
+    var validacionPermiso = userModelState("EquipoEmpleados/Delete");
+    if (validacionPermiso.status == true) {
+        Id = $(btn).data('id');
+        $("#FormInactivar input").val(Id);
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+    }    
 };
 
 $("#InActivar").click(function () {
