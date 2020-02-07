@@ -235,7 +235,7 @@ $(document).ready(function () {
 });
 
 $("#btnInactivar").click(function () {
-    var validacionPermiso = userModelState("Requisiciones/Detalles");
+    var validacionPermiso = userModelState("Requisiciones/Delete");
     if (validacionPermiso.status == true) {
         CierraPopups();
         $('#ModalInactivar').modal('show');

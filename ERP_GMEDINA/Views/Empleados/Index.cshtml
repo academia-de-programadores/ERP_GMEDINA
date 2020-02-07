@@ -19,15 +19,9 @@
                 <div class="ibox-title">
                     <h5>Listado de Empleados</h5>
                     <div class="ibox-tools">
-                 @if (Login.GetUserRols("Empleados/ArchivoEmpleados"))
-                 {
+          
                         <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Empleado" />
-                 }
-                 else
-                 {
-                    @*@Html.ActionLink("Registrar Empleado", "Create", null, new { @class = "btn btn-primary btn-xs" })*@
-                    <a href="Login/SinAcceso"  type="button" class="btn btn-primary btn-xs">Registrar Empleado</a>
-                 }
+          
                     </div>
                 </div>
                 <div class="ibox-content">
