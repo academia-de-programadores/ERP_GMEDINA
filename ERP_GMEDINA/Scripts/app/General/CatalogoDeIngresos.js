@@ -272,6 +272,12 @@ $("#btnEditarIngresos").click(function () {
             beforeSend: function(){
                 resetTimeOut();
                 clearInterval(timer);
+                timer = setInterval(()=>{
+                    console.log(++timeOut);
+                    if(timeOut == 10){
+                        cerrarSesion();
+                    }
+                }, 5000);
             }
         }).done(function (data) {
 

@@ -53,16 +53,6 @@ function userModelState(sPantalla) {
     // recuperar view model con la información del usuario
     var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
 
-    if (VM_ModelState == '' || VM_ModelState == null)
-    {
-    	// mensaje de error
-    	iziToast.warning({
-    		title: 'Advertencia',
-    		message: 'Se está cargando la información de usuario',
-    	});
-    	return false;
-    }
-
     // validar si el usuario es administrador
     if (VM_ModelState.EsAdmin == true) {
         response = {
@@ -155,18 +145,16 @@ function validarPermisoUsuario(sPantalla, arreglo) {
 
 var timeOut = 0;
 
-var timer = new Timer(function(){
+var timer = setInterval(()=>{
     console.log(++timeOut);
     if(timeOut == 10){
         cerrarSesion();
     }
-}, 1);
-
-timer.start();
+}, 100000);
 
 function cerrarSesion(){
         sessionStorage.clear();
-        window.location = '/';
+        window.location = '/Login/CerrarSesion';
 }
 
 function resetTimeOut(){
