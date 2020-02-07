@@ -112,7 +112,7 @@ $("#btnCerrarCrear").click(function () {
     OcultarValidacionesCrear();
 });
 
-// validaciones key up
+// validaciones key up create
 
 // validar municipio create
 $('#Crear #mun_Codigo').change(function () {
@@ -145,7 +145,6 @@ $('#Crear #tde_IdTipoDedu').change(function () {
         $("#Crear #Validation_TipoDeduccionRequerida").css('display', 'none');
     }
 });
-
 
 // validar rango inicio create
 $('#Crear #timv_RangoInicio').keyup(function () {
