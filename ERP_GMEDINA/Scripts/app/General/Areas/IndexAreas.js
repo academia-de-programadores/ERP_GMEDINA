@@ -1,10 +1,16 @@
 ﻿var fill = 0;
 var Admin = false;
 function tablaDetalles(id) {
-    $(location).attr('href', "/Areas/details/" + id);
+    var validacionPermiso = userModelState("Areas/details");
+    if (validacionPermiso.status == true) {
+        $(location).attr('href', "/Areas/details/" + id);
+    }
 }
 function tablaEditar(id) {
-    $(location).attr('href', "/Areas/Edit/" + id);
+    var validacionPermiso = userModelState("Areas/Edit");
+    if (validacionPermiso.status == true) {
+        $(location).attr('href', "/Areas/Edit/" + id);
+    }
 }
 function format(obj) {
     var div = '<div class="ibox">' +

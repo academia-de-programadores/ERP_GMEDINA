@@ -3,33 +3,39 @@ var fill = 0;
 var Admin = false;
 //Funciones GET
 function tablaEditar(id) {
- var data = { id: id };
- _POST(data,
-  '/Habilidades/Datos/',
-  function (obj) {
-   if (obj != "-1" && obj != "-2" && obj != "-3") {
-    ID = obj.habi_Id;
-    $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
-    $('#ModalEditar').modal('show');
-   }
-  });
+    var validacionPermiso = userModelState("Habilidades/Edit");
+    if (validacionPermiso.status == true) {
+        var data = { id: id };
+        _POST(data,
+            '/Habilidades/Datos/',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    ID = obj.habi_Id;
+                    $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(id) {
- var data = { id: id };
- _POST(data,
-  '/Habilidades/Datos/',
-  function (obj) {
-   if (obj != "-1" && obj != "-2" && obj != "-3") {
-    ID = obj.habi_Id;
-    $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
-    $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
-    $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
-    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-    $('#ModalDetalles').modal('show');
-   }
-  });
+    var validacionPermiso = userModelState("Habilidades/Details");
+    if (validacionPermiso.status == true) {
+        var data = { id: id };
+        _POST(data,
+            '/Habilidades/Datos/',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    ID = obj.habi_Id;
+                    $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
+                    $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
+                    $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 //fill = -1 para cargar toda la data
 //fill = 0 para cargar solo los activos
@@ -67,10 +73,13 @@ $(document).ready(function () {
 });
 //Botones GET
 $("#btnAgregar").click(function () {
- var modalnuevo = $('#ModalNuevo');
- modalnuevo.modal('show');
- $(modalnuevo).find("#habi_Descripcion").val("");
- $(modalnuevo).find("#habi_Descripcion").focus();
+    var validacionPermiso = userModelState("Habilidades/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#habi_Descripcion").val("");
+        $(modalnuevo).find("#habi_Descripcion").focus();
+    }
 });
 $("#btnEditar").click(function () {
  _ajax(null,

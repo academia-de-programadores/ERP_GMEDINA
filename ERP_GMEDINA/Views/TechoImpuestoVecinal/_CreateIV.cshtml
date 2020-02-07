@@ -42,6 +42,8 @@
                 </div>
             </div>
 
+
+
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.timv_RangoFin, htmlAttributes: new { @class = "control-label" })
@@ -50,7 +52,7 @@
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.timv_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
                     <label class="text-danger" id="Validation_RangoFinRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el rango fin es requerido</label>
-                    <label class="text-danger" id="Validation_RangoFinMenor" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango fin no puede ser menor o igual que el rango inicio</label>
+                    <span class="text-danger" id="validation_RangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
                 </div>
             </div>
 

@@ -118,7 +118,7 @@ function llenarTabla() {
 $(document).ready(function () {
     fill = Admin == undefined ? 0 : -1;
     llenarTabla();
-    sessionStorage.clear();
+    sessionStorage.setItem("IdPersona", null);
 });
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

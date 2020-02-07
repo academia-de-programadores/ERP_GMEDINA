@@ -294,6 +294,9 @@ $("#btnActualizar").click(function () {
 
 function tablaEditar(ID) {
     id = ID;
-    sessionStorage.setItem("IdRequisicion", id);
-    window.location.href = "/Requisiciones/Edit/" + id;
+    var validacionPermiso = userModelState("Requisiciones/Edit");
+    if (validacionPermiso.status == true) {
+        sessionStorage.setItem("IdRequisicion", id);
+        window.location.href = "/Requisiciones/Edit/" + id;
+    }
 };
