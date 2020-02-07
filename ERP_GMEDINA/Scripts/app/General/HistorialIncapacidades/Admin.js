@@ -1,9 +1,11 @@
 ﻿Admin = true;
 function Llamarmodalhabilitar(ID) {
-
-    var modalhabilitar = $("#ModalHabilitar");
-    Id = $("#ModalHabilitar").find("#hinc_Id").val(ID);
-    modalhabilitar.modal('show');
+    var validacionPermiso = userModelState("HistorialIncapacidades/habilitar");
+    if (validacionPermiso.status == true) {
+        var modalhabilitar = $("#ModalHabilitar");
+        Id = $("#ModalHabilitar").find("#hinc_Id").val(ID);
+        modalhabilitar.modal('show');
+    }
 }
 
 
