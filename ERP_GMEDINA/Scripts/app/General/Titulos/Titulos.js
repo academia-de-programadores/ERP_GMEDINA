@@ -94,7 +94,7 @@ $("#btnAgregar").click(function () {
 
 
 $("#btnEditar").click(function () {
-    var validacionPermiso = userModelState("Titulos/Create");
+    var validacionPermiso = userModelState("Titulos/Edit");
     if (validacionPermiso.status == true) {
     _ajax(null,
         '/Titulos/Edit/' + id,
@@ -111,7 +111,7 @@ $("#btnEditar").click(function () {
 });
 
 $("#btnInactivar").click(function () {
-    var validacionPermiso = userModelState("Titulos/Create");
+    var validacionPermiso = userModelState("Titulos/Delete");
     if (validacionPermiso.status == true) {
     CierraPopups();
     $('#ModalInactivar').modal('show');
