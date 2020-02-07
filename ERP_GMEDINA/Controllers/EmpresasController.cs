@@ -209,8 +209,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
-        [SessionManager("Empresas/hablilitar")]
         [HttpPost]
+        [SessionManager("Empresas/hablilitar")]
         public JsonResult hablilitar(int id)
         {
             string result = "";
@@ -234,8 +234,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //GET: Empresas/Delete/5
-        [SessionManager("Empresas/Delete")]
         [HttpPost]
+        [SessionManager("Empresas/Delete")]
         public ActionResult Delete(tbEmpresas tbEmpresas)
         {
             db = new ERP_GMEDINAEntities();

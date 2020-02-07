@@ -1,6 +1,9 @@
 ﻿$("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    modalnuevo.modal('show');
+    var validacionPermiso = userModelState("Empleados/ArchivoEmpleados");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+    }
     
 });
 $("#btnUpload").change(function () {
@@ -53,7 +56,10 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
 
 
 function tablaDetalles(ID) {
-    id = ID;
-    sessionStorage.setItem("emp_Id", ID);
-    $(location).attr('href', "/Empleados/details/" + id);
+    var validacionPermiso = userModelState("Empleados/Details");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        sessionStorage.setItem("emp_Id", ID);
+        $(location).attr('href', "/Empleados/details/" + id);
+    }
 }

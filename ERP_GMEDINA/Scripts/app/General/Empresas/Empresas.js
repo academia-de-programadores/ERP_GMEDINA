@@ -78,70 +78,85 @@ function llenarTabla() {
      });
 }
 function tablaEditar(ID) {
- id = ID;
- _ajax(JSON.stringify({ id: ID }),
-     '/Empresas/Datos/',
-     'POST',
-     function (obj) {
-      var item = $("#ModalEditar").find("#per_id option").removeAttr("selected");
-      $("#per_id option").attr("selected", null);
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
-       $("#FormEditar").find("#empr_RTN").val(obj.empr_RTN);
+    var validacionPermiso = userModelState("Empresas/Datos");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(JSON.stringify({ id: ID }),
+            '/Empresas/Datos/',
+            'POST',
+            function (obj) {
+                var item = $("#ModalEditar").find("#per_id option").removeAttr("selected");
+                $("#per_id option").attr("selected", null);
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+                    $("#FormEditar").find("#empr_RTN").val(obj.empr_RTN);
 
-       $("#ModalEditar").find("#per_id").val(obj.per_Id)
-       var item = $("#ModalEditar").find("#per_id option[value='" + obj.per_Id + "']");
-       $(item).attr('selected', true);
-       $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
-       $('#ModalEditar').modal('show');
-      }
-     });
+                    $("#ModalEditar").find("#per_id").val(obj.per_Id)
+                    var item = $("#ModalEditar").find("#per_id option[value='" + obj.per_Id + "']");
+                    $(item).attr('selected', true);
+                    $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(ID) {
- _ajax(JSON.stringify({ id: ID }),
-     '/Empresas/Datos/',
-     'POST',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-          $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
-          $("#ModalDetalles").find("#empr_RTN")["0"].innerText = obj.empr_RTN;
-          $("#ModalDetalles").find("#representante")["0"].innerText = obj.per_Nombre;
-       var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
-       $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-       var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
-       $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-       var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
-       $('#ModalDetalles').modal('show');
-      }
-     });
+    var validacionPermiso = userModelState("Empresas/Datos");
+    if (validacionPermiso.status == true) {
+        _ajax(JSON.stringify({ id: ID }),
+            '/Empresas/Datos/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
+                    $("#ModalDetalles").find("#empr_RTN")["0"].innerText = obj.empr_RTN;
+                    $("#ModalDetalles").find("#representante")["0"].innerText = obj.per_Nombre;
+                    var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    var lol = $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    var lol = $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 //Botones GET
 $("#btnAgregar").click(function () {
- var modalnuevo = $('#ModalNuevo');
- modalnuevo.modal('show');
- $(modalnuevo).find("#empr_Nombre").val("");
- $(modalnuevo).find("#empr_Nombre").focus();
- $(modalnuevo).find("#empr_Logo").val(null);
- $("#ModalNuevo").find("#img1")[0].src = '';
+    var validacionPermiso = userModelState("Empresas/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#empr_Nombre").val("");
+        $(modalnuevo).find("#empr_Nombre").focus();
+        $(modalnuevo).find("#empr_Logo").val(null);
+        $("#ModalNuevo").find("#img1")[0].src = '';
+    }
 });
 $("#btnEditar").click(function () {
- _ajax(null,
-     '/Empresas/Edit/' + id,
-     'GET',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       CierraPopups();
-       $('#ModalEditar').modal('show');
-       var img = $("#ModalEditar").find("#img2");
-       $("#ModalEditar").find("#empr_Nombre").focus();
-      }
-     });
+    var validacionPermiso = userModelState("Empresas/Datos");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/Empresas/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $('#ModalEditar').modal('show');
+                    var img = $("#ModalEditar").find("#img2");
+                    $("#ModalEditar").find("#empr_Nombre").focus();
+                }
+            });
+    }
 });
 $("#btnInactivar").click(function () {
- CierraPopups();
- $('#ModalInactivar').modal('show');
- $("#ModalInactivar").find("#empr_RazonInactivo").val("");
- $("#ModalInactivar").find("#empr_RazonInactivo").focus();
+    var validacionPermiso = userModelState("Empresas/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#empr_RazonInactivo").val("");
+        $("#ModalInactivar").find("#empr_RazonInactivo").focus();
+    }
 });
 $("#FormNuevo").on("submit", function (event) {
  var data = $("#FormNuevo").serializeArray();

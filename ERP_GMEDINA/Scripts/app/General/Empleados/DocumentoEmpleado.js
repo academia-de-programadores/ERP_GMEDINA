@@ -1,16 +1,15 @@
 ﻿var id = 0;
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/Cargos/Edit/' + ID,//no tocar...
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                // $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
-                $('#ModalEditar').modal('show');
-                $("#ModalNuevo").find("#FileUpload")[0] = '';
-            }
-        });
+    var validacionPermiso = userModelState("Empleados/ArchivoEmpleados");
+    if (validacionPermiso.status == true) {
+        id = ID;
+     
+                    // $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
+                    $('#ModalEditar').modal('show');
+                    $("#ModalNuevo").find("#FileUpload")[0] = '';
+                
+      
+    }
 }
 $("#btnUploadDocument").change(function () {
     var fileExtension = ['xls', 'xlsx', 'jpeg', 'jpg', 'png', 'pdf', 'svg', 'doc', 'docx'];

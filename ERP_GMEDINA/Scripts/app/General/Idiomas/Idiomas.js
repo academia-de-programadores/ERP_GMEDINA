@@ -6,33 +6,39 @@ var id = 0;
 var fill = 0;
 //Funciones GET
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/Idiomas/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#idi_Descripcion").val(obj.idi_Descripcion);
-                $('#ModalEditar').modal('show');
-            }
-        });
+    var validacionPermiso = userModalState("Idiomas/Edit");
+    if (validacionPermiso.status) {
+        id = ID;
+        _ajax(null,
+            '/Idiomas/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#idi_Descripcion").val(obj.idi_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        '/Idiomas/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#idi_Descripcion")["0"].innerText = obj.idi_Descripcion;
-                $("#ModalDetalles").find("#idi_FechaCrea")["0"].innerText = FechaFormato(obj.idi_FechaCrea);
-                $("#ModalDetalles").find("#idi_FechaModifica")["0"].innerText = FechaFormato(obj.idi_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionPermiso = userModalState("Idiomas/Edit");
+    if (validacionPermiso.status) {
+        id = ID;
+        _ajax(null,
+            '/Idiomas/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#idi_Descripcion")["0"].innerText = obj.idi_Descripcion;
+                    $("#ModalDetalles").find("#idi_FechaCrea")["0"].innerText = FechaFormato(obj.idi_FechaCrea);
+                    $("#ModalDetalles").find("#idi_FechaModifica")["0"].innerText = FechaFormato(obj.idi_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function llenarTabla() {
     _ajax(null,
@@ -68,10 +74,13 @@ function llenarTabla() {
 //}
 //Botones GET
 $("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    modalnuevo.modal('show');
-    $(modalnuevo).find("#idi_Descripcion").val("");
-    $(modalnuevo).find("#idi_Descripcion").focus();
+    var validacionPermiso = userModalState("Idiomas/Create");
+    if (validacionPermiso.status) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#idi_Descripcion").val("");
+        $(modalnuevo).find("#idi_Descripcion").focus();
+    }
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -87,10 +96,13 @@ $("#btnEditar").click(function () {
         });
 });
 $("#btnInactivar").click(function () {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#idi_RazonInactivo").val("");
-    $("#ModalInactivar").find("#idi_RazonInactivo").focus();
+    var validacionPermiso = userModalState("Idiomas/Delete");
+    if (validacionPermiso.status) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#idi_RazonInactivo").val("");
+        $("#ModalInactivar").find("#idi_RazonInactivo").focus();
+    }
 });
 //botones POST
 $("#btnGuardar").click(function () {

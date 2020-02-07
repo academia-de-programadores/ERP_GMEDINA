@@ -7,19 +7,26 @@ var id = 0;
 //Funciones GET
 
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/RazonSalidas/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#rsal_Descripcion").val(obj.rsal_Descripcion);
-                $('#ModalEditar').modal('show');
-            }
-        });
+    var validacionPermiso = userModalState("RazonSalidas/Edit")
+    if (validacionPermiso.status == true)
+    {
+        id = ID;
+        _ajax(null,
+            '/RazonSalidas/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#rsal_Descripcion").val(obj.rsal_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 
 function tablaDetalles(ID) {
+    var validacionPermiso = userModalState("RazonSalidas/Detalles")
+    if (validacionPermiso.status == true)
+    {
     id = ID;
     _ajax(null,
         '/RazonSalidas/Edit/' + ID,
@@ -35,6 +42,7 @@ function tablaDetalles(ID) {
                 $('#ModalDetalles').modal('show');
             }
         });
+    }
 }
 
 function llenarTabla() {
@@ -68,12 +76,21 @@ function llenarTabla() {
 
 //Botones GET
 $("#btnAgregar").click(function () {
+    var validacionPermiso = userModalState("RazonSalidas/Create")
+    if (validacionPermiso.status == true)
+    {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#rsal_Descripcion").val("");
     modalnuevo.modal('show');
     $("#FormNuevo").find("#rsal_Descripcion").focus();
-});
-$("#btnEditar").click(function () {
+    }
+    });
+
+
+    $("#btnEditar").click(function () {
+        var validacionPermiso = userModalState("RazonSalidas/Edit")
+        if (validacionPermiso.status == true)
+        {
     _ajax(null,
         '/RazonSalidas/Edit/' + id,
         'GET',
@@ -84,12 +101,17 @@ $("#btnEditar").click(function () {
                 $("#FormEditar").find("#rsal_Descripcion").val(obj.rsal_Descripcion);
             }
         });
+        }
 });
 $("#btnInactivar").click(function () {
+    var validacionPermiso = userModalState("RazonSalidas/Delete")
+    if (validacionPermiso.status == true)
+    {
     CierraPopups();
     $('#ModalInactivar').modal('show');
     $("#ModalInactivar").find("#rsal_RazonInactivo").val("");
     $("#ModalInactivar").find("#rsal_RazonInactivo").focus();
+    }
 });
 //botones POST
 $("#btnGuardar").click(function () {
