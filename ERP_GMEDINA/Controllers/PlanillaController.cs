@@ -173,8 +173,9 @@ namespace ERP_GMEDINA.Controllers
                                             V_InformacionColaborador InformacionDelEmpleadoActual = null;
                                             decimal resultSeptimoDia = 0;
 
+                                            int userId = (int)Session["UserLogin"];
                                             //Procesar Ingresos
-                                            await Task.Run(() => Ingresos.ProcesarIngresos(fechaInicio,
+                                            await Task.Run(() => Ingresos.ProcesarIngresos(userId,fechaInicio,
                                                    fechaFin,
                                                    ListaIngresosVoucher,
                                                    listaErrores,
@@ -199,7 +200,7 @@ namespace ERP_GMEDINA.Controllers
                                                    out resultSeptimoDia));
 
                                             //Procesar Deducciones
-                                            await Task.Run(() => Deducciones.ProcesarDeducciones(fechaInicio,
+                                            await Task.Run(() => Deducciones.ProcesarDeducciones(userId,fechaInicio,
                                                  fechaFin,
                                                  ListaDeduccionesVoucher,
                                                  listaErrores,

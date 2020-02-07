@@ -153,6 +153,10 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
 
 //CLICK: CARGAR LA DATA DEL DATATABLE
 $("#ProcesarProyeccion").click(function () {
+//validar informacion del usuario
+    var validacionPermiso = userModelState("PlanillaImpuestoVecinal/ProcesarPlanillaImpuestoVecinal");
+
+if (validacionPermiso.status == true) {
     //SETEAR LA VARIABLE DEL PROCESAMIENTO
     Procesando = true;
     //MOSTRAR EL SPINNER
@@ -202,103 +206,111 @@ $("#ProcesarProyeccion").click(function () {
             message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
         });
     });
+}
 });
 
 //CLICK: IMPRIMIR EXCEL
 $('#btnImprimirExcel').click(function () {
-    //VALIDAR QUE NO ESTE SIENDO PROCESADO
-    if (Procesando == true) {
-        //LANZAR EL MENSAJE DE ERROR
-        iziToast.warning({
-            title: 'Advertencia!',
-            message: 'Continua siendo procesado, por favor espere...',
-        });
-    }
-    else if (ProcesadoCompleto == false) {
-        //LANZAR EL MENSAJE DE ERROR
-        iziToast.warning({
-            title: 'Advertencia!',
-            message: 'Debe iniciar el proceso antes de imprimir la proyección...',
-        });
-    }
-    else if (ListaImpuestoVecinal.length == 0) {
-        //LANZAR EL MENSAJE DE ERROR
-        iziToast.warning({
-            title: 'Advertencia!',
-            message: 'Debe iniciar el proceso antes de imprimir la proyección...',
-        });
-    }
-    else {
-        //DECLARACIÓN DE UNA LISTA LOCAL PARA FORMATEAR LA DATA
-        var Lista_Local = FormatearData(ListaImpuestoVecinal);
-        //GENERAR EXCEL
-        ImprimirExcel(Lista_Local);
+    var validacionPermiso = userModelState("Planilla/Index");
+
+    if (validacionPermiso.status == true) {
+        //VALIDAR QUE NO ESTE SIENDO PROCESADO
+        if (Procesando == true) {
+            //LANZAR EL MENSAJE DE ERROR
+            iziToast.warning({
+                title: 'Advertencia!',
+                message: 'Continua siendo procesado, por favor espere...',
+            });
+        }
+        else if (ProcesadoCompleto == false) {
+            //LANZAR EL MENSAJE DE ERROR
+            iziToast.warning({
+                title: 'Advertencia!',
+                message: 'Debe iniciar el proceso antes de imprimir la proyección...',
+            });
+        }
+        else if (ListaImpuestoVecinal.length == 0) {
+            //LANZAR EL MENSAJE DE ERROR
+            iziToast.warning({
+                title: 'Advertencia!',
+                message: 'Debe iniciar el proceso antes de imprimir la proyección...',
+            });
+        }
+        else {
+            //DECLARACIÓN DE UNA LISTA LOCAL PARA FORMATEAR LA DATA
+            var Lista_Local = FormatearData(ListaImpuestoVecinal);
+            //GENERAR EXCEL
+            ImprimirExcel(Lista_Local);
+        }
     }
 });
 
 //CLICK: GENERAR INSERCIÓN
 $("#btnGenerarImpuestoVecinal").click(function () {
-    //VALIDAR QUE NO ESTE SIENDO PROCESADO
-    if (Procesando == true) {
-        //LANZAR EL MENSAJE DE ERROR
-        iziToast.warning({
-            title: 'Advertencia!',
-            message: 'Continua siendo procesado, por favor espere...',
-        });
-    }
-    else if (ProcesadoCompleto == false) {
-        //LANZAR EL MENSAJE DE ERROR
-        iziToast.warning({
-            title: 'Advertencia!',
-            message: 'Debe iniciar el proceso de proyección antes de generar...',
-        });
-    }
-    else {
-        //MOSTRAR EL SPINNER
-        SpinnerElement.html(spinner());
-        //REALIZAR LA PETICION DE LA DATA
-        $.ajax({
-            url: "/PlanillaImpuestoVecinal/GenerarPlanillaImpV",
-            method: "POST"
-        }).done(function (data) {
-            if (data == "error") {
-                //DESBLOQUEAR EL BOTON
-                $("#btnGenerarCesantia").attr("disabled", false);
-                //MOSTRAR MENSAJE DE ERROR
+    var validacionPermiso = userModelState("PlanillaImpuestoVecinal/GenerarPlanillaImpV");
+
+    if (validacionPermiso.status == true) {
+        //VALIDAR QUE NO ESTE SIENDO PROCESADO
+        if (Procesando == true) {
+            //LANZAR EL MENSAJE DE ERROR
+            iziToast.warning({
+                title: 'Advertencia!',
+                message: 'Continua siendo procesado, por favor espere...',
+            });
+        }
+        else if (ProcesadoCompleto == false) {
+            //LANZAR EL MENSAJE DE ERROR
+            iziToast.warning({
+                title: 'Advertencia!',
+                message: 'Debe iniciar el proceso de proyección antes de generar...',
+            });
+        }
+        else {
+            //MOSTRAR EL SPINNER
+            SpinnerElement.html(spinner());
+            //REALIZAR LA PETICION DE LA DATA
+            $.ajax({
+                url: "/PlanillaImpuestoVecinal/GenerarPlanillaImpV",
+                method: "POST"
+            }).done(function (data) {
+                if (data == "error") {
+                    //DESBLOQUEAR EL BOTON
+                    $("#btnGenerarCesantia").attr("disabled", false);
+                    //MOSTRAR MENSAJE DE ERROR
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'Ocurrio un error al crear la proyección, contacte al administrador.',
+                    });
+                }
+                else if (data == "bien") {
+                    //LIMPIAR EL DATATABLE
+                    $('#TablaPagoDeCesantiaDetalle').DataTable().clear();
+                    //DECLARACIÓN DE UNA LISTA LOCAL PARA FORMATEAR LA DATA
+                    var Lista_Local = FormatearData(ListaImpuestoVecinal);
+                    //LLAMAR FUNCION DE IMPRIMIR EXCEL
+                    ImprimirExcel(Lista_Local);
+                    //MENSAJE EN CASO DE ÉXITO
+                    iziToast.success({
+                        title: 'Éxito',
+                        message: 'La proyección se creo de forma exitosa!',
+                    });
+                    //SetTimeOut
+                    setTimeout(function () {
+                        window.location.href = '/PlanillaImpuestoVecinal/Index';
+                    }, 3500);
+                }
+                //OCULTAR EL SPINNER
+                SpinnerElement.empty();
+
+            }).fail(function () {
+                //OCULTAR SPINNER 
+                SpinnerElement.empty();
+                //LANZAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
-                    message: 'Ocurrio un error al crear la proyección, contacte al administrador.',
+                    message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
                 });
-            }
-            else if (data == "bien") {
-                //LIMPIAR EL DATATABLE
-                $('#TablaPagoDeCesantiaDetalle').DataTable().clear();
-                //DECLARACIÓN DE UNA LISTA LOCAL PARA FORMATEAR LA DATA
-                var Lista_Local = FormatearData(ListaImpuestoVecinal);
-                //LLAMAR FUNCION DE IMPRIMIR EXCEL
-                ImprimirExcel(Lista_Local);
-                //MENSAJE EN CASO DE ÉXITO
-                iziToast.success({
-                    title: 'Éxito',
-                    message: 'La proyección se creo de forma exitosa!',
-                });
-                //SetTimeOut
-                setTimeout(function () {
-                    window.location.href = '/PlanillaImpuestoVecinal/Index';
-                }, 3500);
-            }
-            //OCULTAR EL SPINNER
-            SpinnerElement.empty();
-
-        }).fail(function () {
-            //OCULTAR SPINNER 
-            SpinnerElement.empty();
-            //LANZAR MENSAJE DE ERROR
-            iziToast.error({
-                title: 'Error',
-                message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
             });
-        });
-
+        }
     }
 });
