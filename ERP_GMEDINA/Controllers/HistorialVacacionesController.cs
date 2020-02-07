@@ -228,9 +228,6 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-
-
-
         [HttpPost]
         public JsonResult llenarTabla()
         {

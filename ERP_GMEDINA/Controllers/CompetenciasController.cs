@@ -80,7 +80,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-        [SessionManager("Competencias/Edit")]
+        [SessionManager("Competencias/Index")]
         public ActionResult Edit(int? id)
         {
 
