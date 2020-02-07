@@ -53,6 +53,16 @@ function userModelState(sPantalla) {
     // recuperar view model con la información del usuario
     var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
 
+    if (VM_ModelState == '' || VM_ModelState == null)
+    {
+    	// mensaje de error
+    	iziToast.warning({
+    		title: 'Advertencia',
+    		message: 'Se está cargando la información de usuario',
+    	});
+    	return false;
+    }
+
     // validar si el usuario es administrador
     if (VM_ModelState.EsAdmin == true) {
         response = {

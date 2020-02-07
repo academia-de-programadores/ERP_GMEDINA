@@ -266,8 +266,9 @@ namespace ERP_GMEDINA.Helpers
                         PagoDeCesantiaCompleta = (SalarioPromedioDiario * DiasCorrespondientes);
                         //CESANTÍA PRO
                         //PagoDeCesantiaProporcional = ((DiasLaborados % 360) * (SalarioPromedioDiario / RangoInicial));
+						if(TbLiquidacionAuxilioCesantia.Count() > 0)
+							PagoDeCesantiaProporcional = (((30 * SalarioPromedioDiario) / (12 * 30)) * (DiasLaborados % 360));
 
-                        PagoDeCesantiaProporcional = (((30 * SalarioPromedioDiario) / (12 * 30)) * (DiasLaborados % 360));
                     }
                     else
                     {
@@ -367,8 +368,6 @@ namespace ERP_GMEDINA.Helpers
             decimal MontoVacacionesPendientes = 0;
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
-                //SALARIO ORDINADIO
-                decimal SalarioOrdinario = SalarioPromedioDiario;
                 //ACUMULADOR DE DIAS DE VACACIONES
                 int Historico_DiasDeVacacionCorrespondiente = 0;
                 //ACUMULADOR DE VACACIONES TOMADAS
@@ -378,7 +377,7 @@ namespace ERP_GMEDINA.Helpers
                     //ALMACENA LA CANTIDAD DE AÑOS LABORADOS
                     int AniosLaborados = Antiguedad / 360;
                     //SETEO DEL SALARIO PROMEDIO DIARIO 
-                    SalarioPromedioDiario = (SalarioPromedioDiario * 14) / 360;
+                    SalarioPromedioDiario = (((SalarioPromedioDiario * 30) * 14) / 12) / 30;
                     //ITERADOR DEL CICLO
                     int iter = 0;
                     //ITERAR AÑOS PARA INCREMENTAR LOS DIAS DE VACACIONES ACUMULADAS
