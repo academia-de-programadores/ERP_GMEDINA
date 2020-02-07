@@ -197,10 +197,7 @@ function userModelStateNoTzt(sPantalla) {
             mensajeError: 'La sesión es inválida'
         }
         // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'La sesión es inválida',
-        });
+      
     }
 
     // validar los roles del usuario
@@ -211,10 +208,7 @@ function userModelStateNoTzt(sPantalla) {
         }
 
         // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'Roles de usuario inválidos',
-        });
+       
     }
 
     // validar si la contraseña del usuario expiró y debe cambiar
