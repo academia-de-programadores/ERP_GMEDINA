@@ -169,15 +169,50 @@ $('#Crear #timv_RangoInicio').keyup(function () {
     // requerido
     if ($("#Crear #timv_RangoInicio").val().trim() != '') {
 
-        if (parseInt(rangoInicio) >= 0) {
-            $('#AsteriscoRangoInicio').removeClass('text-danger');
-        }
-
+        $('#AsteriscoRangoInicio').removeClass('text-danger');
         $("#Crear #validation_RangoInicioRequerida").css('display', 'none');
     }
     else {
         $('#AsteriscoRangoInicio').addClass("text-danger");
         $("#Crear #validation_RangoInicioRequerida").css('display', '');
+    }
+
+});
+
+// validar rango final create
+$('#Crear #timv_RangoFin').keyup(function () {
+
+    debugger;
+    var rangoFin = $("#Crear #timv_RangoFin").val().replace(/,/g, '');
+    var rangoInicio = $("#Crear #timv_RangoInicio").val().replace(/,/g, '');
+
+
+    // si rango fin es mayor que rango inicio
+    if (parseInt(rangoFin) > parseInt(rangoInicio) || rangoFin.trim() == '' || rangoInicio.trim() == '') {
+
+        $('#AsteriscoRangoFin').removeClass('text-danger');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFin').addClass("text-danger");
+        $("#Crear #Validation_RangoFinRequerida").css('display', 'none');
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
+    }
+    
+    // requerido
+    if ($("#Crear #timv_RangoFin").val().trim() != '') {
+
+        if (parseInt(rangoFin) > parseInt(rangoInicio))
+        {
+            $('#AsteriscoRangoFin').removeClass('text-danger');       
+        }        
+
+        $("#Crear #Validation_RangoFinRequerida").css('display', 'none');
+    }
+    else {
+        $('#AsteriscoRangoFin').addClass("text-danger");
+        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
+        $("#Crear #Validation_RangoFinRequerida").css('display', '');
     }
 
 });
@@ -763,7 +798,7 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
 
             ModelState = false;
         } else {
-            $("#Crear #AsteriscoRangoFinal").removeClass("text-danger");
+            $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
             $("#Crear #timv_RangoFinValidacion").hide();
 
             if (parseFloat(FormatearMonto(RangoFin)) <= parseFloat(FormatearMonto($("#Crear #timv_RangoInicio").val())) || parseFloat(FormatearMonto(RangoFin)) == 0) {
@@ -929,7 +964,7 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
 
             ModelState = false;
         } else {
-            $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
+            $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
             $("#Editar #timv_RangoFinValidacion").hide();
 
             if (parseFloat(FormatearMonto(RangoFin)) <= RangoInicio) {
