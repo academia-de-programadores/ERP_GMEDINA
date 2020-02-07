@@ -106,14 +106,20 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 function llamarmodal() {
-    var modalnuevo = $("#ModalNuevo");
-    $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
-    modalnuevo.modal('show');
+    var validacionPermiso = userModelState("HistorialVacaciones/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $("#ModalNuevo");
+        $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
+        modalnuevo.modal('show');
+    }
 }
 function llamarmodaldelete(ID) {
-    var modaldelete = $("#ModalInactivar");
-    $("#ModalInactivar").find("#hvac_Id").val(ID);
-    modaldelete.modal('show');
+    var validacionPermiso = userModelState("HistorialVacaciones/Delete");
+    if (validacionPermiso.status == true) {
+        var modaldelete = $("#ModalInactivar");
+        $("#ModalInactivar").find("#hvac_Id").val(ID);
+        modaldelete.modal('show');
+    }
 }
 
 //function llamarmodaldetalles(ID) {
@@ -135,22 +141,25 @@ function llamarmodaldetalles(ID) {
         '/HistorialVacaciones/Detalles',
         'GET',
         function (obj) {
-            $('#ModalDetalles').modal('show');
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj[0].hvac_FechaInicio).substring(0, 10);
-                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj[0].hvac_FechaFin).substring(0, 10);
-                $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj[0].hvac_CantDias;
-                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj[0].hvac_DiasPagados ? "Si":"No";
-                $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj[0].hvac_MesVacaciones;
-                $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj[0].hvac_AnioVacaciones;
-                //$("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj[0].hvac_Estado;
-                //$("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj[0].hvac_RazonInactivo;
-                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj[0].hvac_FechaCrea).substring(0, 10);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioCrea;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioModifica;
-                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj[0].hvac_FechaModifica).substring(0, 10);
+            var validacionPermiso = userModelState("HistorialVacaciones/Detalles");
+            if (validacionPermiso.status == true) {
+                $('#ModalDetalles').modal('show');
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj[0].hvac_FechaInicio).substring(0, 10);
+                    $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj[0].hvac_FechaFin).substring(0, 10);
+                    $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj[0].hvac_CantDias;
+                    $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj[0].hvac_DiasPagados ? "Si" : "No";
+                    $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj[0].hvac_MesVacaciones;
+                    $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj[0].hvac_AnioVacaciones;
+                    //$("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj[0].hvac_Estado;
+                    //$("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj[0].hvac_RazonInactivo;
+                    $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj[0].hvac_FechaCrea).substring(0, 10);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioCrea;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioModifica;
+                    $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj[0].hvac_FechaModifica).substring(0, 10);
 
 
+                }
             }
         });
 }
@@ -215,12 +224,14 @@ $("#btnGuardar").click(function () {
     var fecha2 = moment(fechaFinal);
     var diasRestantes = 0;
 
-    var diasTomados = fecha2.diff(fecha1, 'days') +1;
+    var diasTomados = fecha2.diff(fecha1, 'days') + 1;
 
 
 
-    _ajax({     id: parseInt($("#emp_Id").val()),
-                annio: parseInt(fechaInicio.substring(0, 4))},
+    _ajax({
+        id: parseInt($("#emp_Id").val()),
+        annio: parseInt(fechaInicio.substring(0, 4))
+    },
     '/HistorialVacaciones/DiasRestantes',
     'GET',
     function (obj) {
@@ -228,24 +239,21 @@ $("#btnGuardar").click(function () {
             var permiso = true;
             debugger
 
-            if (obj.length > 0)
-            {
+            if (obj.length > 0) {
                 diasRestantes = obj[0].hvac_DiasRestantes;
-                if (diasRestantes - diasTomados < 0)
-                {
+                if (diasRestantes - diasTomados < 0) {
                     permiso = false
                 }
             }
 
-            if (permiso)
-            {
+            if (permiso) {
                 if (fechaInicio <= fechaFinal) {
                     var data = $("#FormNuevo").serializeArray();
                     data = serializar(data);
 
                     if (data != null) {
 
-                            data = JSON.stringify({ tbHistorialVacaciones: data });
+                        data = JSON.stringify({ tbHistorialVacaciones: data });
                         if (compare_dates()) {
                             _ajax(data,
                                 '/HistorialVacaciones/Create',
@@ -269,12 +277,11 @@ $("#btnGuardar").click(function () {
                     MsgError("Error", "Por favor ingrese un rango de fecha positivo.");
                 }
             }
-            else
-            {
+            else {
                 MsgError("Error", "Está tratando de ingresar más días de los respectivos.");
             }
 
-            }
+        }
     });
 
 });
