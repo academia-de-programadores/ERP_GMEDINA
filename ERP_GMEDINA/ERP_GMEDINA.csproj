@@ -2340,7 +2340,6 @@
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\App.pubxml" />
-    <Content Include="Scripts\app\General\desktop.ini" />
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresos.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresosRPT.rdlc" />

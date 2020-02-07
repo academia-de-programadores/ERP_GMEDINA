@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class EmpleadoBonosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: EmpleadoBonos
+        [SessionManager("EmpleadoBonos/Index")]
         public ActionResult Index()
         {
             var tbEmpleadoBonos = db.tbEmpleadoBonos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas).OrderByDescending(x => x.cb_FechaCrea);
@@ -30,13 +33,13 @@ namespace ERP_GMEDINA.Controllers
                         .Select(c => new { cb_Id = c.cb_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cb_Monto = c.cb_Monto, cb_FechaRegistro = c.cb_FechaRegistro, cb_Pagado = c.cb_Pagado, NombreUsarioCrea = c.tbUsuario.usu_NombreUsuario, cb_UsuarioCrea = c.cb_UsuarioCrea, cb_FechaCrea = c.cb_FechaCrea, usuarioModifica = c.tbUsuario1.usu_NombreUsuario, cb_UsuarioModifica = c.cb_UsuarioModifica, cb_FechaModifica = c.cb_FechaModifica, cb_Activo = c.cb_Activo })
                         .OrderByDescending(x => x.cb_FechaCrea)
                         .ToList();
-                        //.Where(p => p.cb_Activo == true);
+            //.Where(p => p.cb_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoBonos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         public string EditGetDDLEmpleado()
-        {                        
+        {
             return Helpers.General.ObtenerEmpleados();
         }
 
@@ -58,6 +61,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: EmpleadoBonos/Details/5
+        [SessionManager("EmpleadoBonos/Details")]
         public JsonResult Details(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -71,14 +75,15 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: EmpleadoBonos/Create
+        [SessionManager("EmpleadoBonos/Create")]
         [HttpPost]
         public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cb_Monto")] tbEmpleadoBonos tbEmpleadoBonos)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbEmpleadoBonos.cb_FechaRegistro = DateTime.Now;
+            tbEmpleadoBonos.cb_FechaRegistro = Function.DatetimeNow();
             tbEmpleadoBonos.cb_Pagado = false;
-            tbEmpleadoBonos.cb_UsuarioCrea = 1;
-            tbEmpleadoBonos.cb_FechaCrea = DateTime.Now;
+            tbEmpleadoBonos.cb_UsuarioCrea = Function.GetUser();
+            tbEmpleadoBonos.cb_FechaCrea = Function.DatetimeNow();
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = "bien";
             IEnumerable<object> listEmpleadoBonos = null;
@@ -137,11 +142,12 @@ namespace ERP_GMEDINA.Controllers
         // POST: EmpleadoBonos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [SessionManager("EmpleadoBonos/Edit")]
         [HttpPost]
         public ActionResult edit([Bind(Include = "cb_Id, emp_Id, cin_IdIngreso, cb_Monto")] tbEmpleadoBonos tbEmpleadoBonos)
         {
-            tbEmpleadoBonos.cb_UsuarioModifica = 1;
-            tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
+            tbEmpleadoBonos.cb_UsuarioModifica = Function.GetUser();
+            tbEmpleadoBonos.cb_FechaModifica = Function.DatetimeNow();
             DateTime FechaRegistro = db.tbEmpleadoBonos.Where(x => x.cb_Id == tbEmpleadoBonos.cb_Id).Select(c => c.cb_FechaRegistro).FirstOrDefault();
             tbEmpleadoBonos.cb_FechaRegistro = (FechaRegistro == null) ? DateTime.Now : FechaRegistro;
             IEnumerable<object> listEmpleadoBonos = null;
@@ -218,6 +224,7 @@ namespace ERP_GMEDINA.Controllers
             return RedirectToAction("Index");
         }
 
+        [SessionManager("EmpleadoBonos/Inactivar")]
         [HttpPost]
         public ActionResult Inactivar(int? Id)
         {
@@ -233,8 +240,8 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbEmpleadoBonos tbEmpleadoBonos = new tbEmpleadoBonos();
             tbEmpleadoBonos.cb_Id = (int)Id;
-            tbEmpleadoBonos.cb_UsuarioModifica = 1;
-            tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
+            tbEmpleadoBonos.cb_UsuarioModifica = Function.GetUser();
+            tbEmpleadoBonos.cb_FechaModifica = Function.DatetimeNow();
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
@@ -263,6 +270,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("EmpleadoBonos/Activar")]
         [HttpPost]
         public ActionResult Activar(int? Id)
         {
@@ -278,8 +286,8 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbEmpleadoBonos tbEmpleadoBonos = new tbEmpleadoBonos();
             tbEmpleadoBonos.cb_Id = (int)Id;
-            tbEmpleadoBonos.cb_UsuarioModifica = 1;
-            tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
+            tbEmpleadoBonos.cb_UsuarioModifica = Function.GetUser();
+            tbEmpleadoBonos.cb_FechaModifica = Function.DatetimeNow();
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO

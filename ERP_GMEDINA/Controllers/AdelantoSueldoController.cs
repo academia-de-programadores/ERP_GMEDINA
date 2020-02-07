@@ -7,23 +7,27 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.Collections.Generic;
 using System.Web.Mvc.Html;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class AdelantoSueldoController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
         // GET: AdelantoSueldo
+
+        [SessionManager("AdelantoSueldo/Index")]
         public ActionResult Index()
         {
             try
             {
                 var tbAdelantoSueldo = db.tbAdelantoSueldo.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
-                    //.OrderBy(t => t.adsu_IdAdelantoSueldo).OrderByDescending(t => t.adsu_IdAdelantoSueldo);
+                //.OrderBy(t => t.adsu_IdAdelantoSueldo).OrderByDescending(t => t.adsu_IdAdelantoSueldo);
                 //.Where(t => t.adsu_Activo == true);
                 return View(tbAdelantoSueldo.ToList());
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 Ex.Message.ToString();
                 return View(db.tbAdelantoSueldo.ToList());
@@ -37,7 +41,7 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbAdelantoSueldo = db.tbAdelantoSueldo
-                        .Select(c => new 
+                        .Select(c => new
                         {
                             adsu_IdAdelantoSueldo = c.adsu_IdAdelantoSueldo,
                             adsu_RazonAdelanto = c.adsu_RazonAdelanto,
@@ -54,12 +58,12 @@ namespace ERP_GMEDINA.Controllers
                         //.OrderBy(t => t.adsu_IdAdelantoSueldo)
                         //.OrderByDescending(x => x.adsu_IdAdelantoSueldo)
                         .ToList();
-             
+
             //.Where(p => p.adsu_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbAdelantoSueldo, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-        
+
         //OBTENER INFORMACION DE LOS REGISTROS DE LOS EMPLEADOS PARA LLENAR EL MODAL DE INSERTAR, SELECCIONA LOS QUE NO TIENEN
         //UN ADELANTO ACTIVO
         public string EmpleadoGetDDL()
@@ -75,10 +79,10 @@ namespace ERP_GMEDINA.Controllers
             decimal SueldoNetoPromedio = 0;
             try
             {
-                if(id == null)
+                if (id == null)
                     return Json("Id_Vacio", JsonRequestBehavior.AllowGet);
                 //LA CONSULTA DEVUELVE LOS REGISTROS QUE NO TENGAN ADELANTOS ACTIVOS
-                DateTime FechaHistorialPago = (DateTime.Now).AddMonths(-6);
+                DateTime FechaHistorialPago = (Function.DatetimeNow()).AddMonths(-6);
                 //METODO MEDIANTE HISTORIAL DE PAGO
                 List<tbHistorialDePago> HistorialDePago = (List<tbHistorialDePago>)db.tbHistorialDePago.OrderByDescending(x => x.hipa_FechaPago).Where(x => x.emp_Id == id).ToList();
                 //Contador
@@ -108,28 +112,28 @@ namespace ERP_GMEDINA.Controllers
                 //    SueldoNetoPromedio = Sueldo.Average();
                 //}
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 Ex.Message.ToString();
             }
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE
-            return Json( Math.Round(SueldoNetoPromedio, 2), JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(SueldoNetoPromedio, 2), JsonRequestBehavior.AllowGet);
         }
 
         //FUNCION: CREAR UN NUEVO REGISTRO
         [HttpPost]
+        [SessionManager("AdelantoSueldo/Create")]
         public ActionResult Create([Bind(Include = "emp_Id, adsu_FechaAdelanto, adsu_RazonAdelanto, adsu_Monto")] tbAdelantoSueldo tbAdelantoSueldo)
         {
             //Para llenar los campos de auditoría
-            //tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
-            tbAdelantoSueldo.adsu_UsuarioCrea = 1;
-            tbAdelantoSueldo.adsu_FechaCrea = DateTime.Now;
+            tbAdelantoSueldo.adsu_UsuarioCrea = Function.GetUser();
+            tbAdelantoSueldo.adsu_FechaCrea = Function.DatetimeNow();
 
             //Variable para enviarla al lado del Cliente
             string Response = String.Empty;
             IEnumerable<object> listAdelantoSueldo = null;
             string MensajeError = "";
-            
+
             if (ModelState.IsValid)
             {
                 try
@@ -175,7 +179,7 @@ namespace ERP_GMEDINA.Controllers
 
         //EDITAR
 
-            //OBTENER REGISTRO PARA EDITAR
+        //OBTENER REGISTRO PARA EDITAR
         public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -184,11 +188,12 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //FUNCION: EDITAR UN REGISTRO
+        [SessionManager("AdelantoSueldo/Edit")]
         [HttpPost]
         public ActionResult Edit([Bind(Include = "adsu_IdAdelantoSueldo,emp_Id,adsu_RazonAdelanto,adsu_Monto,adsu_UsuarioModifica,adsu_FechaModifica")] tbAdelantoSueldo tbAdelantoSueldo)
         {
-            tbAdelantoSueldo.adsu_UsuarioModifica = 1;
-            tbAdelantoSueldo.adsu_FechaModifica = DateTime.Now;
+            tbAdelantoSueldo.adsu_UsuarioModifica = Function.GetUser();
+            tbAdelantoSueldo.adsu_FechaModifica = Function.DatetimeNow();
 
             string response = "bien";
             IEnumerable<object> listAdelantoSueldo = null;
@@ -235,6 +240,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("AdelantoSueldo/Details")]
         //DETALLES
         public JsonResult Details(int? id)
         {
@@ -244,6 +250,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //INACTIVAR
+        [SessionManager("AdelantoSueldo/Inactivar")]
         [HttpPost]
         public ActionResult Inactivar(int? Id)
         {
@@ -259,8 +266,8 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbAdelantoSueldo tbAdelantoSueldo = new tbAdelantoSueldo();
             tbAdelantoSueldo.adsu_IdAdelantoSueldo = (int)Id;
-            tbAdelantoSueldo.adsu_UsuarioModifica = 1;
-            tbAdelantoSueldo.adsu_FechaModifica = DateTime.Now;
+            tbAdelantoSueldo.adsu_UsuarioModifica = Function.GetUser();
+            tbAdelantoSueldo.adsu_FechaModifica = Function.DatetimeNow();
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
@@ -290,6 +297,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //ACTIVAR
+        [SessionManager("AdelantoSueldo/Activar")]
         [HttpPost]
         public ActionResult Activar(int? Id)
         {
@@ -305,8 +313,8 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbAdelantoSueldo tbAdelantoSueldo = new tbAdelantoSueldo();
             tbAdelantoSueldo.adsu_IdAdelantoSueldo = (int)Id;
-            tbAdelantoSueldo.adsu_UsuarioModifica = 1;
-            tbAdelantoSueldo.adsu_FechaModifica = DateTime.Now;
+            tbAdelantoSueldo.adsu_UsuarioModifica = Function.GetUser();
+            tbAdelantoSueldo.adsu_FechaModifica = Function.DatetimeNow();
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO

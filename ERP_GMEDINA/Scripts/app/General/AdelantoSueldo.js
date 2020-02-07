@@ -83,16 +83,28 @@ function cargarGridAdelantos() {
 
 }
 
+
+
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
-    let valCreate = $("#Crear #emp_IdEmpleado").val();
-    if (valCreate != null && valCreate != "")
-        $("#Crear #emp_IdEmpleado").val('').trigger('change');
-    //OCULTAR TODAS LAS VALIDACIONES
-    OcultarValidacionesCrear();
-    //DESBLOQUEAR EL BOTON DE CREAR
-    $("#btnCreateRegistroAdelantos").attr("disabled", false);
-    $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
+
+    var validacionPermiso = userModelState("AdelantoSueldo/Create");
+
+    if (validacionPermiso.status == true) {
+
+        // crear
+        let valCreate = $("#Crear #emp_IdEmpleado").val();
+        if (valCreate != null && valCreate != "")
+            $("#Crear #emp_IdEmpleado").val('').trigger('change');
+        //OCULTAR TODAS LAS VALIDACIONES
+        OcultarValidacionesCrear();
+        //DESBLOQUEAR EL BOTON DE CREAR
+        $("#btnCreateRegistroAdelantos").attr("disabled", false);
+        $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
+        // termina crear
+    }
+
+
 });
 
 $(document).ready(function () {
@@ -419,97 +431,103 @@ $('#btnCerrarCrearAdelanto').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
-    let itemEmpleado = localStorage.getItem('idEmpleado');
 
-    if (itemEmpleado != null) {
-        $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
-        localStorage.removeItem('idEmpleado');
-    }
+    var validacionPermiso = userModelState("AdelantoSueldo/Edit");
 
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesEditar();
+    if (validacionPermiso.status == true) {
+        let itemEmpleado = localStorage.getItem('idEmpleado');
 
-    var ID = $(this).data('id');
-    IDInactivar = ID;
+        if (itemEmpleado != null) {
+            $("#Editar #emp_Id option[value='" + itemEmpleado + "']").remove();
+            localStorage.removeItem('idEmpleado');
+        }
 
-    var idEmpSelect = "";
-    var NombreSelect = "";
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesEditar();
 
-    $.ajax({
-        url: "/AdelantoSueldo/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: ID })
-    }).done(function (data) {
+        var ID = $(this).data('id');
+        IDInactivar = ID;
 
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
+        var idEmpSelect = "";
+        var NombreSelect = "";
+
         $.ajax({
-            url: "/AdelantoSueldo/GetSueldoNetoProm",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: data.emp_Id })
-        }).done(function (dataEmpleado) {
-            //ACCIONES EN CASO DE EXITO
-            MaxSueldoCreate = dataEmpleado;
-        }).fail(function (data) {
-            //ACCIONES EN CASO DE ERROR
-            $("#AgregarAdelantos").modal('hide');
-            iziToast.error({
-                title: 'Error',
-                message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
-            });
-        });
-        idEmpSelect = data.emp_Id;
-        NombreSelect = data.per_Nombres;
-        $.ajax({
-            url: "/AdelantoSueldo/Edit/" + ID,
+            url: "/AdelantoSueldo/Details/" + ID,
             method: "GET",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: ID })
-        }).done(function (dataAdelantoSueldo) {
-            if (dataAdelantoSueldo) {
-                //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO
-                if (dataAdelantoSueldo.adsu_Deducido) {
-                    document.getElementById("btnUpdateAdelantos").disabled = true;
-                } else {
-                    $("#btnUpdateAdelantos").attr('disabled', false);
-                }
+        }).done(function (data) {
 
-                $("#Editar #emp_Id").select2("val", "");
-
-                $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
-
-                let valor = $('#Editar #emp_Id').val();
-
-                if (valor == null) {
-                    $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
-                    localStorage.setItem('idEmpleado', idEmpSelect);
-                }
-
-                $("#Editar #adsu_IdAdelantoSueldo").val(dataAdelantoSueldo.adsu_IdAdelantoSueldo);
-                $("#Editar #adsu_RazonAdelanto").val(dataAdelantoSueldo.adsu_RazonAdelanto);
-                $("#Editar #adsu_Monto").val(dataAdelantoSueldo.adsu_Monto);
-
-                //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
-                $("#EditarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
-
-            } else if (dataAdelantoSueldo.adsu_Deducido) {
+            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
+            $.ajax({
+                url: "/AdelantoSueldo/GetSueldoNetoProm",
+                method: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: data.emp_Id })
+            }).done(function (dataEmpleado) {
+                //ACCIONES EN CASO DE EXITO
+                MaxSueldoCreate = dataEmpleado;
+            }).fail(function (data) {
+                //ACCIONES EN CASO DE ERROR
+                $("#AgregarAdelantos").modal('hide');
                 iziToast.error({
                     title: 'Error',
-                    message: 'No puede editar un registro deducido',
+                    message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
                 });
-            }
-        })
+            });
+            idEmpSelect = data.emp_Id;
+            NombreSelect = data.per_Nombres;
+            $.ajax({
+                url: "/AdelantoSueldo/Edit/" + ID,
+                method: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: ID })
+            }).done(function (dataAdelantoSueldo) {
+                if (dataAdelantoSueldo) {
+                    //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO
+                    if (dataAdelantoSueldo.adsu_Deducido) {
+                        document.getElementById("btnUpdateAdelantos").disabled = true;
+                    } else {
+                        $("#btnUpdateAdelantos").attr('disabled', false);
+                    }
 
-    }).fail(function (jqXHR, textStatus, error) {
-        iziToast.error({
-            title: 'Error',
-            message: 'No se cargó la información del colaborador, contacte al administrador',
+                    $("#Editar #emp_Id").select2("val", "");
+
+                    $('#Editar #emp_Id').val(idEmpSelect).trigger('change');
+
+                    let valor = $('#Editar #emp_Id').val();
+
+                    if (valor == null) {
+                        $("#Editar #emp_Id").prepend("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>").trigger('change');
+                        localStorage.setItem('idEmpleado', idEmpSelect);
+                    }
+
+                    $("#Editar #adsu_IdAdelantoSueldo").val(dataAdelantoSueldo.adsu_IdAdelantoSueldo);
+                    $("#Editar #adsu_RazonAdelanto").val(dataAdelantoSueldo.adsu_RazonAdelanto);
+                    $("#Editar #adsu_Monto").val(dataAdelantoSueldo.adsu_Monto);
+
+                    //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
+                    $("#EditarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
+
+                } else if (dataAdelantoSueldo.adsu_Deducido) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No puede editar un registro deducido',
+                    });
+                }
+            })
+
+        }).fail(function (jqXHR, textStatus, error) {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se cargó la información del colaborador, contacte al administrador',
+            });
         });
-    });
+    }
+
 });
 
 $('#Crear #emp_IdEmpleado').change(() => {
@@ -811,55 +829,64 @@ $("#btnCerrarEditar").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueldo", function () {
-    ActivarID = $(this).data('id');
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/AdelantoSueldo/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
 
-                var FechaCrea = FechaFormato(data.adsu_FechaCrea);
-                var FechaModifica = FechaFormato(data.adsu_FechaModifica);
-                var FechaRegistro = FechaFormato(data.adsu_FechaAdelanto);
-                if (data.adsu_Deducido) {
-                    $("#Detalles #adsu_Deducido").html("Si");
-                } else {
-                    $("#Detalles #adsu_Deducido").html("No");
+    var validacionPermiso = userModelState("AdelantoSueldo/Details");
+
+    if (validacionPermiso.status == true) {
+        ActivarID = $(this).data('id');
+        var ID = $(this).data('id');
+        $.ajax({
+            url: "/AdelantoSueldo/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: ID })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+
+                    var FechaCrea = FechaFormato(data.adsu_FechaCrea);
+                    var FechaModifica = FechaFormato(data.adsu_FechaModifica);
+                    var FechaRegistro = FechaFormato(data.adsu_FechaAdelanto);
+                    if (data.adsu_Deducido) {
+                        $("#Detalles #adsu_Deducido").html("Si");
+                    } else {
+                        $("#Detalles #adsu_Deducido").html("No");
+                    }
+
+                    $("#Detalles #per_Nombres").html(data.per_Nombres);
+                    $("#Detalles #adsu_FechaAdelanto").html(FechaRegistro);
+                    $("#Detalles #adsu_RazonAdelanto").html(data.adsu_RazonAdelanto);
+                    $("#Detalles #adsu_Monto").html((data.adsu_Monto % 1 == 0) ? data.adsu_Monto + ".00" : data.adsu_Monto);
+
+                    $("#Detalles #UsuarioCrea").html(data.UsuarioCrea);
+                    $("#Detalles #adsu_FechaCrea").html(FechaCrea);
+                    $("#Detalles #UsuarioModifica").html(data.UsuarioModifica);
+                    $("#Detalles #adsu_FechaModifica").html(FechaModifica);
+
+                    $("#DetallesAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
                 }
-
-                $("#Detalles #per_Nombres").html(data.per_Nombres);
-                $("#Detalles #adsu_FechaAdelanto").html(FechaRegistro);
-                $("#Detalles #adsu_RazonAdelanto").html(data.adsu_RazonAdelanto);
-                $("#Detalles #adsu_Monto").html((data.adsu_Monto % 1 == 0) ? data.adsu_Monto + ".00" : data.adsu_Monto);
-
-                $("#Detalles #UsuarioCrea").html(data.UsuarioCrea);
-                $("#Detalles #adsu_FechaCrea").html(FechaCrea);
-                $("#Detalles #UsuarioModifica").html(data.UsuarioModifica);
-                $("#Detalles #adsu_FechaModifica").html(FechaModifica);
-
-                $("#DetallesAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se cargó la información, contacte al administrador',
-                });
-            }
-        });
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se cargó la información, contacte al administrador',
+                    });
+                }
+            });
+    }
 });
 
 //FUNCION: MOSTRAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnmodalInactivarAdelantoSueldo", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#EditarAdelantoSueldo").modal('hide');
-    $("#InactivarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
+
+    var validacionPermiso = userModelState("AdelantoSueldo/Inactivar");
+    if (validacionPermiso.status == true) {
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#EditarAdelantoSueldo").modal('hide');
+        $("#InactivarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //FUNCION: PRIMERA FASE DE INACTIVACION DE REGISTROS, MOSTRAR MODAL CON MENSAJE DE CONFIRMACION
@@ -913,8 +940,12 @@ $("#btnCerrarInactivar").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnActivarRegistroAdelantos", function () {
-    IDActivar = $(this).data('id');
-    $("#ActivarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
+
+    var validacionPermiso = userModelState("AdelantoSueldo/Activar");
+    if (validacionPermiso.status == true) {
+        IDActivar = $(this).data('id');
+        $("#ActivarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
+    }
 });
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
