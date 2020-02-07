@@ -2,33 +2,39 @@
 var fill = 0;
 //Funciones GET
 function tablaEditar(ID) {
- id = ID;
- _ajax(JSON.stringify({ id: ID }),
-     '/TipoSalidas/Datos/',
-     'POST',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       $("#FormEditar").find("#tsal_Descripcion").val(obj.tsal_Descripcion);
-       $('#ModalEditar').modal('show');
-      }
-     });
+    var validacionPermiso = userModelState("TipoSalidas/Edit");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(JSON.stringify({ id: ID }),
+            '/TipoSalidas/Datos/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#tsal_Descripcion").val(obj.tsal_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(ID) {
- //id = ID;
- _ajax(JSON.stringify({ id: ID }),
-     '/TipoSalidas/Datos/',
-     'POST',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       $("#ModalDetalles").find("#tsal_Descripcion")["0"].innerText = obj.tsal_Descripcion;
-       $("#ModalDetalles").find("#tsal_FechaCrea")["0"].innerText = FechaFormato(obj.tsal_FechaCrea);
-       $("#ModalDetalles").find("#tsal_FechaModifica")["0"].innerText = FechaFormato(obj.tsal_FechaModifica);
-       $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-       $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-       //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
-       $('#ModalDetalles').modal('show');
-      }
-     });
+    //id = ID;
+    var validacionPermiso = userModelState("TipoSalidas/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(JSON.stringify({ id: ID }),
+            '/TipoSalidas/Datos/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#tsal_Descripcion")["0"].innerText = obj.tsal_Descripcion;
+                    $("#ModalDetalles").find("#tsal_FechaCrea")["0"].innerText = FechaFormato(obj.tsal_FechaCrea);
+                    $("#ModalDetalles").find("#tsal_FechaModifica")["0"].innerText = FechaFormato(obj.tsal_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function llenarTabla() {
  _ajax(null,
@@ -66,29 +72,38 @@ $(document).ready(function () {
 });
 //Botones GET
 $("#btnAgregar").click(function () {
- var modalnuevo = $('#ModalNuevo');
- $("#FormEditar").find("#errortsal_Descripcion").val('');
- $("#FormNuevo").find("#tsal_Descripcion").val("");
- modalnuevo.modal('show');
- $("#FormNuevo").find("#tsal_Descripcion").focus();
+    var validacionPermiso = userModelState("TipoSalidas/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        $("#FormEditar").find("#errortsal_Descripcion").val('');
+        $("#FormNuevo").find("#tsal_Descripcion").val("");
+        modalnuevo.modal('show');
+        $("#FormNuevo").find("#tsal_Descripcion").focus();
+    }
 });
 $("#btnEditar").click(function () {
- _ajax(null,
-     '/TipoSalidas/Edit/' + id,
-     'GET',
-     function (obj) {
-      if (obj != "-1" && obj != "-2" && obj != "-3") {
-       CierraPopups();
-       $('#ModalEditar').modal('show');
-       $("#FormEditar").find("#tsal_Descripcion").val(obj.tsal_Descripcion);
-      }
-     });
+    var validacionPermiso = userModelState("TipoSalidas/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/TipoSalidas/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $('#ModalEditar').modal('show');
+                    $("#FormEditar").find("#tsal_Descripcion").val(obj.tsal_Descripcion);
+                }
+            });
+    }
 });
 $("#btnInactivar").click(function () {
- CierraPopups();
- $('#ModalInactivar').modal('show');
- $("#ModalInactivar").find("#tsal_RazonInactivo").val("");
- $("#ModalInactivar").find("#tsal_RazonInactivo").focus();
+    var validacionPermiso = userModelState("TipoSalidas/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#tsal_RazonInactivo").val("");
+        $("#ModalInactivar").find("#tsal_RazonInactivo").focus();
+    }
 });
 //botones POST
 $("#btnGuardar").click(function () {

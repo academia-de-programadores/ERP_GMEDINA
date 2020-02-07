@@ -56,7 +56,7 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
 
 
 function tablaDetalles(ID) {
-    var validacionPermiso = userModelState("Empleados/DetailsDetails");
+    var validacionPermiso = userModelState("Empleados/Details");
     if (validacionPermiso.status == true) {
         id = ID;
         sessionStorage.setItem("emp_Id", ID);

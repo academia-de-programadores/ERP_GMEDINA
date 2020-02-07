@@ -89,6 +89,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Habilidades/Edit/5
         [HttpPost]
         [ActionName("Datos")]
+        [SessionManager("TipoSalidas/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
