@@ -112,44 +112,47 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 function Llamarmodaldelete(ID) {
+    var validacionPermiso = userModelState("HistorialIncapacidades/Delete");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $("#ModalInhabilitar");
+        $("#ModalInhabilitar").find("#hinc_Id").val(ID);
+        modalnuevo.modal('show');
 
-    var modalnuevo = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#hinc_Id").val(ID);
-    modalnuevo.modal('show');
-
-
+    }
 }
 
 
 
 
 function Llamarmodaldetalle(ID) {
-    debugger
-    var modalnuevo = $("#ModalDetalles");
-    _ajax({ ID: parseInt(ID) },
-        '/HistorialIncapacidades/Edit/',
-        'GET',
-        function (obj) {
+    var validacionPermiso = userModelState("HistorialIncapacidades/Edit");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $("#ModalDetalles");
+        _ajax({ ID: parseInt(ID) },
+            '/HistorialIncapacidades/Edit/',
+            'GET',
+            function (obj) {
 
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
-                $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
-                $("#ModalDetalles").find("#tbTipoIncapacidades_ticn_Descripcion")["0"].innerText = obj.tbTipoIncapacidades.ticn_Descripcion;
-                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico; 
-                $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
-                $("#ModalDetalles").find("#hinc_Doctor")["0"].innerText = obj.hinc_Doctor;
-                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0,10);
-                $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = FechaFormato(obj.hinc_FechaFin).substring(0, 10);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hinc_FechaCrea")["0"].innerText = FechaFormato(obj.hinc_FechaCrea);
-                //$("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
-                //$("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
-                //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
-                $('#ModalDetalles').modal('show');
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
+                    $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
+                    $("#ModalDetalles").find("#tbTipoIncapacidades_ticn_Descripcion")["0"].innerText = obj.tbTipoIncapacidades.ticn_Descripcion;
+                    $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico;
+                    $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
+                    $("#ModalDetalles").find("#hinc_Doctor")["0"].innerText = obj.hinc_Doctor;
+                    $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0, 10);
+                    $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = FechaFormato(obj.hinc_FechaFin).substring(0, 10);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#hinc_FechaCrea")["0"].innerText = FechaFormato(obj.hinc_FechaCrea);
+                    //$("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
+                    //$("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
+                    //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
+                    $('#ModalDetalles').modal('show');
 
-            }
-        });
+                }
+            });
 
+    }
 }
 
 
@@ -188,7 +191,6 @@ function Llamarmodaldetalle(ID) {
 
 function tablaEditar(ID) {
     id = ID;
-    debugger
     sessionStorage.setItem("IdPersona", ID);
     window.location.href = "/HistorialIncapacidades/Create";
 
@@ -232,43 +234,47 @@ function tablaEditar(ID) {
 
 
 $("#InActivar").click(function () {
-    var data = $("#FormInactivar").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        data = JSON.stringify({ tbHistorialIncapacidades: data });
-        _ajax(data,
-            '/HistorialIncapacidades/Delete',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalInhabilitar").modal("hide");
-                    CierraPopups();
-                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
-                    LimpiarControles(["hinc_Id"]);
-                    llenarTabla();
-                } else {
-                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
-                }
-            });
-    } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto.");
-    }
+   
+        var data = $("#FormInactivar").serializeArray();
+        data = serializar(data);
+        if (data != null) {
+            data = JSON.stringify({ tbHistorialIncapacidades: data });
+            _ajax(data,
+                '/HistorialIncapacidades/Delete',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        $("#ModalInhabilitar").modal("hide");
+                        CierraPopups();
+                        MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
+                        LimpiarControles(["hinc_Id"]);
+                        llenarTabla();
+                    } else {
+                        MsgError("Error", "No se inactivó el registro, contacte al administrador.");
+                    }
+                });
+        } else {
+            MsgError("Error", "Por favor llene todas las cajas de texto.");
+        }
+    
 });
 
 
 
 
 
-Admin = true;
+
 
 
 function Llamarmodalhabilitar(ID) {
+    var validacionPermiso = userModelState("HistorialIncapacidades/habilitar");
+    if (validacionPermiso.status == true) {
 
-    var modalhabilitar = $("#ModalHabilitar");
-    Id = $("#ModalHabilitar").find("#hinc_Id").val(ID);
-    modalhabilitar.modal('show');
+        var modalhabilitar = $("#ModalHabilitar");
+        Id = $("#ModalHabilitar").find("#hinc_Id").val(ID);
+        modalhabilitar.modal('show');
 
-
+    }
 }
 
 

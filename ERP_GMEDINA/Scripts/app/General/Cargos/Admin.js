@@ -11,19 +11,22 @@ function hablilitar(btn) {
 
 //Cambiar el controlador para ejecutar el UDP de restaurar
 $("#btnActivar").click(function () {
-    var Id = $("#txtIdRestore").val();
-    _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
-        '/Cargos/hablilitar/',
-        'POST',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                MsgSuccess("¡Éxito!", "El registro se activó de forma exitosa.");
-                llenarTabla(-1);
-            }
+    var validacionPermiso = userModelState("HistorialIncapacidades/hablilitar");
+    if (validacionPermiso.status == true) {
+        var Id = $("#txtIdRestore").val();
+        _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
+            '/Cargos/hablilitar/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    MsgSuccess("¡Éxito!", "El registro se activó de forma exitosa.");
+                    llenarTabla(-1);
+                }
 
-            else {
-                MsgError("Error", "No se activó el registro, contacte al administrador.");
-            }
-        });
-    CierraPopups();
+                else {
+                    MsgError("Error", "No se activó el registro, contacte al administrador.");
+                }
+            });
+        CierraPopups();
+    }
 });

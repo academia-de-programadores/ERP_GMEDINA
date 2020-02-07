@@ -2,7 +2,6 @@
     id = sessionStorage.getItem("IdPersona");
     $("#MeterId").find("#emp_idd").val(id)
 
-
     function Fecha() {
         var today = new Date();
         var dd = today.getDate();
@@ -17,24 +16,11 @@
         return today = yyyy + '-' + mm + '-' + dd;
     }
 
-
-
- 
-   
-   
-  
-
-
     //$("#hinc_FechaInicio").attr("min", Fecha());
     //$("#hinc_FechaFin").attr("min", Fecha());
  
-
-    
     var fecha1 = $("#hinc_FechaInicio").val;
-
     var fecha2 = $("#hinc_FechaFin").val;
-
-
 
     function compare_dates() {
         
@@ -72,47 +58,45 @@
 
 
     function llamarmodaldetalle() {
-        
+        var validacionPermiso = userModelState("HistorialIncapacidades/Detallesempleados");
+        if (validacionPermiso.status == true) {
+            //var identidad = $("#llamardataa").find("#identidad").val();
+            //var empleado = $("#llamardata").find("#nombre").val();
+            var hospital = $("#hinc_CentroMedico").val();
+            var Diagnostico = $("#hinc_Diagnostico").val();
+            var FechaInicio = $("#hinc_FechaInicio").val();
+            var Fechafin = $("#hinc_FechaFin").val();
+            var incapacidad = "Permanente";
+            _ajax({ ID: parseInt(id) },
+            '/HistorialIncapacidades/Detallesempleados/',
+            'GET',
+            function (obj) {
 
-        //var identidad = $("#llamardataa").find("#identidad").val();
-        //var empleado = $("#llamardata").find("#nombre").val();
-        var hospital = $("#hinc_CentroMedico").val();
-        var Diagnostico = $("#hinc_Diagnostico").val();
-        var FechaInicio = $("#hinc_FechaInicio").val();
-        var Fechafin = $("#hinc_FechaFin").val();
-        var incapacidad = "Permanente";
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
 
-        debugger
-        _ajax({ ID: parseInt(id) },
-        '/HistorialIncapacidades/Detallesempleados/',
-        'GET',
-        function (obj) {
+                    var empleado = $("#llamardata").find("#nombre")["0"].innerText = obj.tbPersonas.per_Nombres;
+                    var identidad = $("#llamardataa").find("#identidad")["0"].innerText = obj.tbPersonas.per_Identidad;
 
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-              
-                var empleado = $("#llamardata").find("#nombre")["0"].innerText = obj.tbPersonas.per_Nombres;
-                var identidad = $("#llamardataa").find("#identidad")["0"].innerText = obj.tbPersonas.per_Identidad;
-         
 
-                var modalnuevo = $("#ModalDetalles");
-                $("#ModalDetalles").find("#nombre")["0"].innerText = empleado;
-                $("#ModalDetalles").find("#identidad")["0"].innerText = identidad;
-                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = hospital;
-                $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = Diagnostico;
-                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaInicio;
-                $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = Fechafin;
-                $("#ModalDetalles").find("#tipincapacidad")["0"].innerText = incapacidad;
-                modalnuevo.modal('show');
-            }
-        });
-  
+                    var modalnuevo = $("#ModalDetalles");
+                    $("#ModalDetalles").find("#nombre")["0"].innerText = empleado;
+                    $("#ModalDetalles").find("#identidad")["0"].innerText = identidad;
+                    $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = hospital;
+                    $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = Diagnostico;
+                    $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaInicio;
+                    $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = Fechafin;
+                    $("#ModalDetalles").find("#tipincapacidad")["0"].innerText = incapacidad;
+                    modalnuevo.modal('show');
+                }
+            });
+
+        }
     }
-
 
     
 
     $("#btnGuardar").click(function () {
-        debugger
+        
         if (compare_dates())
             if ($("#hinc_Espermanente").val() == "true" && $("#hinc_Diagnostico").val() != "" && $("#hinc_Doctor").val() != "" && $("#hinc_CentroMedico").val() != "" && $("#ticn_Id").val() != "" && $("#hinc_FechaInicio").val() != "" && $("#hinc_FechaFin").val() != "") {
                 
