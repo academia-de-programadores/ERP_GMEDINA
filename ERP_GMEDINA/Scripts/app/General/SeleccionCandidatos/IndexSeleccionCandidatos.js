@@ -340,6 +340,8 @@ $("#btnEditar").click(function () {
 
 //EMPLEADO
 function CallContratar(btn) {
+    var validacionPermiso = userModelState("SeleccionCandidatos/Contratar");
+    if (validacionPermiso.status == true) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var scan_Id = row.data().ID;
@@ -352,4 +354,5 @@ function CallContratar(btn) {
     sessionStorage.setItem("per_Descripcion", Identidad + " - " + Nombre);
 
     $(location).attr('href', "/SeleccionCandidatos/Contratar/" + scan_Id);
+    }
 }
