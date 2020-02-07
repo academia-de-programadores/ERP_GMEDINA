@@ -47,70 +47,67 @@ function FullBody() {
 function userModelState(sPantalla) {
     var response = {
         status: true,
-        mensajeError : ''
+        mensajeError: ''
     }
 
     // recuperar view model con la información del usuario
     var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
-    
+
     // validar si el usuario tiene acceso a la accion o pantalla
-    if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false)
-    {
-        response = {
-            status: false,
-            mensajeError: 'No tiene permiso para realizar esta acción'
+    if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false) {
+        if (VM_ModelState.EsAdmin != true) {
+            response = {
+                status: false,
+                mensajeError: 'No tiene permiso para realizar esta acción'
+            }
+            // mensaje de error
+            iziToast.error({
+                title: 'Error',
+                message: 'No tiene permiso para realizar esta acción',
+            });
         }
-        // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'No tiene permiso para realizar esta acción',
-        });
     }
-
-    // validar si la sesion es válida 
-    if (VM_ModelState.SesionIniciada == false)
-    {
-        response = {
-            status: false,
-            mensajeError: 'La sesión es inválida'
-        }
-        // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'La sesión es inválida',
-        });
-    }
-
-    // validar los roles del usuario
-    if (VM_ModelState.CantidadRoles == 0)
-    {
-        response = {
-            status: false,
-            mensajeError: 'Roles de usuario inválidos'
+    if (VM_ModelState.EsAdmin != true) {
+        // validar si la sesion es válida 
+        if (VM_ModelState.SesionIniciada == false) {
+            response = {
+                status: false,
+                mensajeError: 'La sesión es inválida'
+            }
+            // mensaje de error
+            iziToast.error({
+                title: 'Error',
+                message: 'La sesión es inválida',
+            });
         }
 
-        // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'Roles de usuario inválidos',
-        });
-    }
+        // validar los roles del usuario
+        if (VM_ModelState.CantidadRoles == 0) {
+            response = {
+                status: false,
+                mensajeError: 'Roles de usuario inválidos'
+            }
 
-    // validar si la contraseña del usuario expiró y debe cambiar
-    if (VM_ModelState.ContraseniaExpirada == false)
-    {
-        response = {
-            status: false,
-            mensajeError: 'Contraseña expirada'
+            // mensaje de error
+            iziToast.error({
+                title: 'Error',
+                message: 'Roles de usuario inválidos',
+            });
         }
-        // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'Contraseña expirada',
-        });
-    }
 
-    if (VM_ModelState.EsAdmin == true) {
+        // validar si la contraseña del usuario expiró y debe cambiar
+        if (VM_ModelState.ContraseniaExpirada == false) {
+            response = {
+                status: false,
+                mensajeError: 'Contraseña expirada'
+            }
+            // mensaje de error
+            iziToast.error({
+                title: 'Error',
+                message: 'Contraseña expirada',
+            });
+        }
+    } else {
         response = {
             status: true,
             mensajeError: ''
