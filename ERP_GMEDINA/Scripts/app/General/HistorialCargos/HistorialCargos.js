@@ -53,8 +53,13 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 });
 //Promoción
 function btnAgregar() {
-    $(location).attr('href', "/HistorialCargos/Promover");
+    var validacionPermiso = userModelState("HistorialCargos/Promover");
+    if (validacionPermiso.status == true) {
+$(location).attr('href', "/HistorialCargos/Promover");
 }
+}
+
+
 $("#btnGuardar").click(function () {
     var data1 = $("#FormNuevo").serializeArray();
     data = serializar(data1);
@@ -83,6 +88,8 @@ $("#btnGuardar").click(function () {
 
 //Degradar
 function CallDeshacer(btn) {
+    var validacionPermiso = userModelState("HistorialCargos/Deshacer");
+    if (validacionPermiso.status == true) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var id = row.data().Id;
@@ -98,7 +105,7 @@ function CallDeshacer(btn) {
 
     }
 
-
+    }
 }
 
 

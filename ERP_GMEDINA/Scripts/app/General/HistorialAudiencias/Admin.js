@@ -1,8 +1,8 @@
 ﻿Admin = true;
 
 function llamarmodalhabilitar(ID) {
-    var validacionPermiso = userModalState("AudienciasDescargo/habilitar");
-    if (validacionPermiso.status) {
+    var validacionPermiso = userModelState("AudienciasDescargo/habilitar");
+    if (validacionPermiso.status == true) {
         var modalhabilitar = $("#ModalHabilitar");
         $("#ModalHabilitar").find("#aude_Id").val(ID);
         modalhabilitar.modal('show');

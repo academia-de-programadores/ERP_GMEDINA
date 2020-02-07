@@ -8,36 +8,42 @@ $(document).ready(function () {
 });
 //Funciones GET
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/HistorialSalidas/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
-                $("#FormEditar").find("#hsal_Observacion").val(obj.hsal_Observacion);
-                $('#ModalEditar').modal('show');
-            }
-        });
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
+        id = ID;
+        _ajax(null,
+            '/HistorialSalidas/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
+                    $("#FormEditar").find("#hsal_Observacion").val(obj.hsal_Observacion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 
 function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        '/HistorialSalidas/Edit/' + ID,
-        'GET',
-        function (obj) {
-            var o = obj.hsal_Observacion == null ? "Ninguna" : obj.hsal_Observacion;
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText = o;
-                $("#ModalDetallesAX").find("#hsal_FechaCrea")["0"].innerText = FechaFormato(obj.hsal_FechaCrea);
-                $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText = FechaFormato(obj.hsal_FechaModifica);
-                $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
+        id = ID;
+        _ajax(null,
+            '/HistorialSalidas/Edit/' + ID,
+            'GET',
+            function (obj) {
+                var o = obj.hsal_Observacion == null ? "Ninguna" : obj.hsal_Observacion;
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText = o;
+                    $("#ModalDetallesAX").find("#hsal_FechaCrea")["0"].innerText = FechaFormato(obj.hsal_FechaCrea);
+                    $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText = FechaFormato(obj.hsal_FechaModifica);
+                    $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function llenarTabla() {
     _ajax(null,
@@ -86,62 +92,74 @@ function llenarTabla() {
         });
 }
 $("#btnEditar").click(function () {
-    _ajax(null,
-        '/HistorialSalidas/Edit/' + id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#hsal_Observacion").val(obj.hsal_Observacion);
-            }
-        });
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
+        _ajax(null,
+            '/HistorialSalidas/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $('#ModalEditar').modal('show');
+                    $("#FormEditar").find("#hsal_Observacion").val(obj.hsal_Observacion);
+                }
+            });
+    }
 });
 
 $("#btnInactivar").click(function () {
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
     CierraPopups();
     $('#ModalInactivar').modal('show');
     $("#ModalInactivar").find("#hsal_RazonInactivo").val("");
     $("#ModalInactivar").find("#hsal_RazonInactivo").focus();
+    }
 });
 
 $("#InActivar").click(function () {
-    var data = $("#FormInactivar").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        //data.tiho_Id = id;
-        // data = JSON.stringify({ tbTipoHoras: data });
-        $.post("/HistorialSalidas/Delete", data).done(function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
-                LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
-                llenarTabla();
-            } else {
-                MsgError("Error", "No se inactivó el registro, contacte al administrador.");
-            }
-        });
-    } else {
-        MsgError(" ", "La eliminación de información debe ser justificada.");
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
+        var data = $("#FormInactivar").serializeArray();
+        data = serializar(data);
+        if (data != null) {
+            //data.tiho_Id = id;
+            // data = JSON.stringify({ tbTipoHoras: data });
+            $.post("/HistorialSalidas/Delete", data).done(function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    MsgSuccess("¡Éxito!", "El registro se inactivó de forma exitosa.");
+                    LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
+                    llenarTabla();
+                } else {
+                    MsgError("Error", "No se inactivó el registro, contacte al administrador.");
+                }
+            });
+        } else {
+            MsgError(" ", "La eliminación de información debe ser justificada.");
+        }
     }
 });
 
 $("#btnActualizar").click(function () {
-    var data = $("#FormEditar").serializeArray();
-    //data = serializar(data);
-    if (data != null) {
-        data.tiho_Id = id;
-        //data = JSON.stringify({ tbTipoHoras: data });
-        $.post("/HistorialSalidas/Edit", data).done(function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
-                LimpiarControles(["hsal_Observacion"]);
-                llenarTabla();
-            } else {
-                MsgError("Error", "No se editó el registro, contacte al administrador.");
-            }
-        });
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
+        var data = $("#FormEditar").serializeArray();
+        //data = serializar(data);
+        if (data != null) {
+            data.tiho_Id = id;
+            //data = JSON.stringify({ tbTipoHoras: data });
+            $.post("/HistorialSalidas/Edit", data).done(function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    MsgSuccess("¡Éxito!", "El registro se editó de forma exitosa.");
+                    LimpiarControles(["hsal_Observacion"]);
+                    llenarTabla();
+                } else {
+                    MsgError("Error", "No se editó el registro, contacte al administrador.");
+                }
+            });
+        }
     }
 });
 //aqui estaba
@@ -189,24 +207,26 @@ function format(obj) {
 
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
-    var tr = $(this).closest('tr');
-    var row = tabla.row(tr);
-    if (row.child.isShown()) {
-        row.child.hide();
-        tr.removeClass('shown');
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    if (validacionHistorialsalidas.status == true) {
+        var tr = $(this).closest('tr');
+        var row = tabla.row(tr);
+        if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            id = row.data().Id;
+            hola = row.data().hola;
+            _ajax({ id: parseInt(id) },
+                '/HistorialSalidas/ChildRowData',
+                'GET',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        row.child(format(obj)).show();
+                        tr.addClass('shown');
+                    }
+                });
+        }
     }
-    else {
-        id = row.data().Id;
-        hola = row.data().hola;
-        _ajax({ id: parseInt(id) },
-            '/HistorialSalidas/ChildRowData',
-            'GET',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    row.child(format(obj)).show();
-                    tr.addClass('shown');
-                }
-            });
-    }
-
 });

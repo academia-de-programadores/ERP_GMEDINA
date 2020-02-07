@@ -79,7 +79,7 @@ function llenarTabla() {
                     }).draw();
                 }
             });
-        });http://localhost:51144/../HistorialAudiencias
+        });
 }
 
 

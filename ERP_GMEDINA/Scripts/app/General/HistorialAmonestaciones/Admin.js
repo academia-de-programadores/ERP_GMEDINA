@@ -1,8 +1,8 @@
 ﻿Admin = true;
 
 function llamarmodalhabilitar(ID) {
-    var validacionPermiso = userModalState("HistorialAmonestaciones/habilitar");
-    if (validacionPermiso.status) {
+    var validacionPermiso = userModelState("HistorialAmonestaciones/habilitar");
+    if (validacionPermiso.status == true) {
         var modalhabilitar = $("#ModalHabilitar");
         $("#ModalHabilitar").find("#hamo_Id").val(ID);
         modalhabilitar.modal('show');

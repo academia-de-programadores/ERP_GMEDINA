@@ -12,10 +12,10 @@ using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
-	public class DeduccionesExtraordinariasController : Controller
-	{
-		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-       private  ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
+    public class DeduccionesExtraordinariasController : Controller
+    {
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
 
         #region Index Deducciones Extraordinarias
         // GET: DeduccionesExtraordinarias
