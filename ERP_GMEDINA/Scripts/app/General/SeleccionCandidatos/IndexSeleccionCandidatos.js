@@ -115,7 +115,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 //EDITAR///////////////////////////////////////////////////////////////////////////////////////////////////////
 function tablaEditar(id) {
-    var validacionPermiso = useModelState("SeleccionCandidatos/Edit");
+    var validacionPermiso = userModelState("SeleccionCandidatos/Edit");
     if (validacionPermiso.status == true) {
         scan_Id = id;
         _ajax(null,
@@ -188,7 +188,7 @@ $("#btnActualizar").click(function () {
 //DETALLES///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function tablaDetalles(ID) {
-    var validacionPermiso = useModelState("SeleccionCandidatos/Edit");
+    var validacionPermiso = userModelState("SeleccionCandidatos/Edit");
     if (validacionPermiso.status==true){   
         scan_Id = ID;
     _ajax(null,
@@ -214,7 +214,7 @@ function tablaDetalles(ID) {
 
 //AGREGAR///////////////////////////////////////////////////////////////////////////////////////////
 function btnAgregar() {
-    var validacionPermiso = useModelState("SeleccionCandidatos/Create");
+    var validacionPermiso = userModelState("SeleccionCandidatos/Create");
     if (validacionPermiso.status == true) {
         var modalnuevo = $("#ModalNuevo");
         modalnuevo.modal('show');
@@ -252,7 +252,7 @@ $("#btnGuardar").click(function () {
 
 //INACIVAR//////////////////////////////////////////////////////////////////////////////
 function CallEliminar(btn) {
-    var validacionPermiso = useModelState("SeleccionCandidatos/Delete");
+    var validacionPermiso = userModelState("SeleccionCandidatos/Delete");
     if (validacionPermiso.status == true) {
         var tr = $(btn).closest('tr');
         var row = tabla.row(tr);
@@ -301,7 +301,7 @@ $("#InActivar").click(function () {
 
 
 function btnInactivar() {
-    var validacionPermiso = useModelState("SeleccionCandidatos/Delete");
+    var validacionPermiso = userModelState("SeleccionCandidatos/Delete");
     if (validacionPermiso.status == true) {
         var modalnuevo = $("#ModalInactivar");
         modalnuevo.modal('show');
@@ -309,7 +309,7 @@ function btnInactivar() {
 }
 
 $("#btnEditar").click(function () {
-    var validacionPermiso = useModelState("SeleccionCandidatos/Edit");
+    var validacionPermiso = userModelState("SeleccionCandidatos/Edit");
     if (validacionPermiso.status == true) {
         _ajax(null,
             '/SeleccionCandidatos/Edit/' + scan_Id,

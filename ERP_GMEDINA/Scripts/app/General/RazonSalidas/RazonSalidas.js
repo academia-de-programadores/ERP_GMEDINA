@@ -7,7 +7,8 @@ var id = 0;
 //Funciones GET
 
 function tablaEditar(ID) {
-    var validacionPermiso = userModalState("RazonSalidas/Edit")
+    debugger
+    var validacionPermiso = userModelState("RazonSalidas/Edit")
     if (validacionPermiso.status == true)
     {
         id = ID;
@@ -24,7 +25,7 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
-    var validacionPermiso = userModalState("RazonSalidas/Detalles")
+    var validacionPermiso = userModelState("RazonSalidas/Edit")
     if (validacionPermiso.status == true)
     {
     id = ID;
@@ -76,7 +77,7 @@ function llenarTabla() {
 
 //Botones GET
 $("#btnAgregar").click(function () {
-    var validacionPermiso = userModalState("RazonSalidas/Create")
+    var validacionPermiso = userModelState("RazonSalidas/Create")
     if (validacionPermiso.status == true)
     {
     var modalnuevo = $('#ModalNuevo');
@@ -88,7 +89,7 @@ $("#btnAgregar").click(function () {
 
 
     $("#btnEditar").click(function () {
-        var validacionPermiso = userModalState("RazonSalidas/Edit")
+        var validacionPermiso = userModelState("RazonSalidas/Edit")
         if (validacionPermiso.status == true)
         {
     _ajax(null,
@@ -104,7 +105,7 @@ $("#btnAgregar").click(function () {
         }
 });
 $("#btnInactivar").click(function () {
-    var validacionPermiso = userModalState("RazonSalidas/Delete")
+    var validacionPermiso = userModelState("RazonSalidas/Delete")
     if (validacionPermiso.status == true)
     {
     CierraPopups();

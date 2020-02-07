@@ -169,7 +169,7 @@ namespace ERP_GMEDINA.Controllers
             var Usuario = (tbUsuario)Session["Usuario"];
             try
             {
-                db = new ERP_GMEDINAEntities();
+              
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var list = db.UDP_RRHH_tbNacionalidades_Restore(id,(int)Session["UserLogin"], Function.DatetimeNow());

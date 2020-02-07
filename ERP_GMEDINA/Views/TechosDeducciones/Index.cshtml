@@ -16,7 +16,7 @@
                 <div class="ibox-content">
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
-                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+                        var oUsuario = (ERP_GMEDINA.Models.UDP_Acce_Login_Result)HttpContext.Current.Session["sesionUsuario"];
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
                         bool rol_Usuario = (bool)HttpContext.Current.Session["UserLoginEsAdmin"];
