@@ -13,11 +13,14 @@ $(document).ready(function () {
 });
 
 function ModalInactivar(id) {
-    CierraPopups();
-    $("#ModalInactivar").find("#suc_Id").val(id);
-    $("#ModalInactivar").find("#suc_RazonInactivo").val("");
-    $("#ModalInactivar").find("#scu_RazonInactivo").focus();
-    $('#ModalInactivar').modal('show');
+    var validacionPermiso = userModelState("Sucursales/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $("#ModalInactivar").find("#suc_Id").val(id);
+        $("#ModalInactivar").find("#suc_RazonInactivo").val("");
+        $("#ModalInactivar").find("#scu_RazonInactivo").focus();
+        $('#ModalInactivar').modal('show');
+    }
 };
 
 $("#InActivar").click(function () {
@@ -43,32 +46,31 @@ $("#InActivar").click(function () {
     }
 });
 function tablaDetalles(id) {
-    //var tr = $(btn).closest("tr");
-    //var row = tabla.row(tr);
-    //id = row.data().id;
-
-    _ajax(null,
-        '/Sucursales/Detalles/' + id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                ID = obj.habi_Id;
-                $("#ModalDetalles").find("#mun_Codigo")["0"].innerText = obj[0].mun_Codigo;
-                $("#ModalDetalles").find("#bod_Id")["0"].innerText = obj[0].bod_Id;
-                $("#ModalDetalles").find("#pemi_Id")["0"].innerText = obj[0].pemi_Id;
-                $("#ModalDetalles").find("#tbEmpresas")["0"].innerText = obj[0].empr_Nombre;//empresa
-                $("#ModalDetalles").find("#suc_Descripcion")["0"].innerText = obj[0].suc_Descripcion;
-                $("#ModalDetalles").find("#suc_Correo")["0"].innerText = obj[0].suc_Correo;
-                $("#ModalDetalles").find("#suc_Direccion")["0"].innerText = obj[0].suc_Direccion;
-                $("#ModalDetalles").find("#suc_Telefono")["0"].innerText = obj[0].suc_Telefono;
-                $("#ModalDetalles").find("#suc_FechaCrea")["0"].innerText = FechaFormato(obj[0].suc_FechaCrea);
-                $("#ModalDetalles").find("#suc_FechaModifica")["0"].innerText = FechaFormato(obj[0].suc_FechaModifica);
-                $("#ModalDetalles").find("#suc_UsuarioCrea")["0"].innerText = obj[0].suc_UsuarioCrea;
-                $("#ModalDetalles").find("#suc_UsuarioModifica")["0"].innerText = obj[0].suc_UsuarioModifica;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionPermiso = userModelState("FasesReclutamiento/Detalles");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/Sucursales/Detalles/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    ID = obj.habi_Id;
+                    $("#ModalDetalles").find("#mun_Codigo")["0"].innerText = obj[0].mun_Codigo;
+                    $("#ModalDetalles").find("#bod_Id")["0"].innerText = obj[0].bod_Id;
+                    $("#ModalDetalles").find("#pemi_Id")["0"].innerText = obj[0].pemi_Id;
+                    $("#ModalDetalles").find("#tbEmpresas")["0"].innerText = obj[0].empr_Nombre;//empresa
+                    $("#ModalDetalles").find("#suc_Descripcion")["0"].innerText = obj[0].suc_Descripcion;
+                    $("#ModalDetalles").find("#suc_Correo")["0"].innerText = obj[0].suc_Correo;
+                    $("#ModalDetalles").find("#suc_Direccion")["0"].innerText = obj[0].suc_Direccion;
+                    $("#ModalDetalles").find("#suc_Telefono")["0"].innerText = obj[0].suc_Telefono;
+                    $("#ModalDetalles").find("#suc_FechaCrea")["0"].innerText = FechaFormato(obj[0].suc_FechaCrea);
+                    $("#ModalDetalles").find("#suc_FechaModifica")["0"].innerText = FechaFormato(obj[0].suc_FechaModifica);
+                    $("#ModalDetalles").find("#suc_UsuarioCrea")["0"].innerText = obj[0].suc_UsuarioCrea;
+                    $("#ModalDetalles").find("#suc_UsuarioModifica")["0"].innerText = obj[0].suc_UsuarioModifica;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 //fill = -1 para cargar toda la data
 //fill = 0 para cargar solo los activos

@@ -10,34 +10,40 @@ $(document).ready(function () {
 
 function tablaEditar(ID) {
     id = ID;
-    _ajax(null,
-        '/FasesReclutamiento/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#fare_Descripcion").val(obj.fare_Descripcion);
-                $('#ModalEditar').modal('show');
-            }
-        });
+    var validacionPermiso = userModelState("FasesReclutamiento/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/FasesReclutamiento/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#fare_Descripcion").val(obj.fare_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(ID) {
     id = ID;
-    _ajax(null,
-        '/FasesReclutamiento/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#fare_Descripcion")["0"].innerText = obj.fare_Descripcion;
-                //$("#ModalDetalles").find("#fare_Estado")["0"].innerText = obj.fare_Estado;
-                //$("#ModalDetalles").find("#fare_RazonInactivo")["0"].innerText = obj.fare_RazonInactivo;
-                $("#ModalDetalles").find("#fare_FechaCrea")["0"].innerText = FechaFormato(obj.fare_FechaCrea);
-                $("#ModalDetalles").find("#fare_FechaModifica")["0"].innerText = FechaFormato(obj.fare_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionPermiso = userModelState("FasesReclutamiento/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/FasesReclutamiento/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#fare_Descripcion")["0"].innerText = obj.fare_Descripcion;
+                    //$("#ModalDetalles").find("#fare_Estado")["0"].innerText = obj.fare_Estado;
+                    //$("#ModalDetalles").find("#fare_RazonInactivo")["0"].innerText = obj.fare_RazonInactivo;
+                    $("#ModalDetalles").find("#fare_FechaCrea")["0"].innerText = FechaFormato(obj.fare_FechaCrea);
+                    $("#ModalDetalles").find("#fare_FechaModifica")["0"].innerText = FechaFormato(obj.fare_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function llenarTabla() {
     _ajax(null,
@@ -73,29 +79,38 @@ function llenarTabla() {
 
 //Botones GET
 $("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    modalnuevo.modal('show');
-    $(modalnuevo).find("#fare_Descripcion").val("");
-    $(modalnuevo).find("#fare_Descripcion").focus();
+    var validacionPermiso = userModelState("FasesReclutamiento/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#fare_Descripcion").val("");
+        $(modalnuevo).find("#fare_Descripcion").focus();
+    }
 });
 $("#btnEditar").click(function () {
-    _ajax(null,
-        '/FasesReclutamiento/Edit/' + id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                $('#ModalEditar').modal('show');
-                $("#ModalEditar").find("#fare_Descripcion").val(obj.fare_Descripcion);
-                $("#ModalEditar").find("#fare_Descripcion").focus();
-            }
-        });
+    var validacionPermiso = userModelState("FasesReclutamiento/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/FasesReclutamiento/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    $('#ModalEditar').modal('show');
+                    $("#ModalEditar").find("#fare_Descripcion").val(obj.fare_Descripcion);
+                    $("#ModalEditar").find("#fare_Descripcion").focus();
+                }
+            });
+    }
 });
 $("#btnInactivar").click(function () {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#fare_RazonInactivo").val("");
-    $("#ModalInactivar").find("#fare_RazonInactivo").focus();
+    var validacionPermiso = userModelState("FasesReclutamiento/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#fare_RazonInactivo").val("");
+        $("#ModalInactivar").find("#fare_RazonInactivo").focus();
+    }
 });
 //botones POST
 $("#btnGuardar").click(function () {
