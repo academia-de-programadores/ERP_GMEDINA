@@ -10,13 +10,13 @@ using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
-    [SessionManager("Planilla/Index")]
+    
     public class PlanillaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region GET: Planilla
-
+        [SessionManager("Planilla/Index")]
         public ActionResult Index()
         {
             List<V_ColaboradoresPorPlanilla> colaboradoresPlanillas = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).ToList();
@@ -41,6 +41,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GenerarPlanilla
+        [SessionManager("Planilla/GenerarPlanilla")]
         public async Task<ActionResult> GenerarPlanilla(int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
         {
             #region declaracion de instancias
@@ -377,6 +378,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region previsualizar
+        [SessionManager("Planilla/Index")]
         public ActionResult PrevisualizarPlanilla(int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
         {
             #region declaracion de instancias
