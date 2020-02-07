@@ -10,11 +10,11 @@ namespace ERP_GMEDINA.Helpers
 {
     public static class Ingresos
     {
-        public static void ProcesarIngresos(DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaIngresosVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, List<tbHistorialDeIngresosPago> lisHistorialIngresos, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
+        public static void ProcesarIngresos(int user_Id,DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaIngresosVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, List<tbHistorialDeIngresosPago> lisHistorialIngresos, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
         {
             #region Procesar ingresos
 
-            int idUser = (int)HttpContext.Current.Session["UserLogin"];
+            int idUser = user_Id;
 
             // informacion del colaborador actual
             InformacionDelEmpleadoActual = db.V_InformacionColaborador
