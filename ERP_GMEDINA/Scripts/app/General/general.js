@@ -187,10 +187,7 @@ function userModelStateNoTzt(sPantalla) {
             mensajeError: 'No tiene permiso para realizar esta acción'
         }
         // mensaje de error
-        iziToast.error({
-            title: 'Error',
-            message: 'No tiene permiso para realizar esta acción',
-        });
+       
     }
 
     // validar si la sesion es válida 
