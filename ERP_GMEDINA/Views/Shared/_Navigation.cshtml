@@ -268,9 +268,9 @@
                             {
                             <li class="@Html.IsSelected(controller: "TipoAmonestaciones")"><a href="@Url.Action("Index", "TipoAmonestaciones")">Tipos de Amonestaciones</a></li>
                             }
-                            @if (Login.GetUserRols("HistorialAudienciaDescargos/Index"))
+                            @if (Login.GetUserRols("AudienciasDescargo/Index"))
                             {
-                             <li class="@Html.IsSelected(controller: "HistorialAudienciaDescargos")"><a href="@Url.Action("Index", "HistorialAudienciaDescargos")">Audiencias de Descargo</a></li>
+                             <li class="@Html.IsSelected(controller: "HistorialAudienciaDescargo")"><a href="@Url.Action("Index", "HistorialAudienciaDescargos")">Audiencias de Descargo</a></li>
                             }
                             @if (Login.GetUserRols("HistorialAmonestaciones/Index"))
                             {
