@@ -1,15 +1,20 @@
 ﻿Admin = true;
 //Esta funcion llama al modal de Habilitar
 function hablilitar(btn) {
+    var validacionPermiso = userModalState("RazonSalidas/Habilitar")
+    if (validacionPermiso.status)
+    {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var id = row.data().ID;
     $("#txtIdRestore").val(id);
     $('#ModalHabilitar').modal('show');
+    }
 }
 
 //Cambiar el controlador para ejecutar el UDP de restaurar
 $("#btnActivar").click(function () {
+
     var Id = $("#txtIdRestore").val();
     _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
         '/RazonSalidas/hablilitar/',
@@ -23,4 +28,5 @@ $("#btnActivar").click(function () {
             }
         });
     CierraPopups();
+    
 });

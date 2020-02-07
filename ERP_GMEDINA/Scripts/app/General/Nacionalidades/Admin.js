@@ -11,6 +11,8 @@ function hablilitar(btn) {
 
 //Cambiar el controlador para ejecutar el UDP de restaurar
 $("#btnActivar").click(function () {
+    var validacionPermiso = userModelState("Nacionalidades/Habilitar");
+    if (validacionPermiso.status == true) {
     var Id = $("#txtIdRestore").val();
     _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
         '/Nacionalidades/hablilitar/',
@@ -24,4 +26,5 @@ $("#btnActivar").click(function () {
             }
         });
     CierraPopups();
+    }
 });
