@@ -53,7 +53,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
-      //  [SessionManager("AcumuladosISR/Details")]
+        [SessionManager("AcumuladosISR/Details")]
         public ActionResult Details(int? id)
         {
             var tbAcumuladosISRJSON = from tbAcumuladosISR in db.tbAcumuladosISR
@@ -89,7 +89,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: create
         [HttpPost]
         [ValidateAntiForgeryToken]
-      //  [SessionManager("AcumuladosISR/Create")]
+        [SessionManager("AcumuladosISR/Create")]
         public ActionResult Create(string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
@@ -150,7 +150,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         #region GET: edit
-     //   [SessionManager("AcumuladosISR/Edit")]
+        [SessionManager("AcumuladosISR/Edit")]
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -161,7 +161,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: Editar
         [HttpPost]
-       // [SessionManager("AcumuladosISR/Edit")]
+        [SessionManager("AcumuladosISR/Edit")]
         public ActionResult Edit(int aisr_Id, string aisr_Descripcion, decimal aisr_Monto, bool aisr_DeducirISR, int emp_ID)
         {
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Id = aisr_Id, aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
@@ -208,7 +208,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Inactivar
-    //    [SessionManager("AcumuladosISR/Inactivar")]
+        [SessionManager("AcumuladosISR/Inactivar")]
         public ActionResult Inactivar(int id)
         {
             IEnumerable<object> listAcumuladosISR = null;
@@ -256,7 +256,7 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar 
-     //   [SessionManager("AcumuladosISR/Activar")]
+       [SessionManager("AcumuladosISR/Activar")]
         public ActionResult Activar(int id)
         {
             IEnumerable<object> listAcumuladosISR = null;

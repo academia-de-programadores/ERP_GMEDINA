@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ERP_GMEDINA.Attribute;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
@@ -16,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Index AFP
         // GET: AFP
+        [SessionManager("AFP/Index")]
         public ActionResult Index()
         {
             var tbAFP = db.tbAFP.OrderBy(t => t.afp_FechaCrea).Include(a => a.tbTipoDeduccion);
@@ -52,13 +54,14 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Crear AFP
-
+        [SessionManager("AFP/Create")]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [SessionManager("AFP/Create")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea")] tbAFP tbAFP)
         {
@@ -132,6 +135,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Editar AFP
         // GET: AFP/Edit/5
+        [SessionManager("AFP/Edit")]
         public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -140,6 +144,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("AFP/Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "afp_Id,afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea,afp_UsuarioModifica,afp_FechaModifica")] tbAFP tbAFP)
         {
@@ -202,6 +207,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Detalles AFP
         // GET: AFP/Details/5
+        [SessionManager("AFP/Details")]
         public JsonResult Details(int? ID)
         {
             var tbAFPJSON = from tbAFP in db.tbAFP
@@ -229,6 +235,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Inhabilitar AFP
         [HttpPost]
+        [SessionManager("AFP/Inactivar")]
         public ActionResult Inactivar(int afp_Id)
         {
             // data de auditoria
@@ -285,6 +292,7 @@ namespace ERP_GMEDINA.Controllers
 
         #region Activar AFP
         [HttpPost]
+        [SessionManager("AFP/Activar")]
         public ActionResult Activar(int id)
         {
             // data de auditoria
