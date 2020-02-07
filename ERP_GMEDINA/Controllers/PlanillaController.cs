@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         #region GET: Planilla
-        
+
         public ActionResult Index()
         {
             List<V_ColaboradoresPorPlanilla> colaboradoresPlanillas = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).ToList();
@@ -62,7 +62,7 @@ namespace ERP_GMEDINA.Controllers
             List<ViewModelListaErrores> listaErrores = new List<ViewModelListaErrores>();
 
             // instancia para resultado del proceso en izitoast
-           General.iziToast response = new General.iziToast();
+            General.iziToast response = new General.iziToast();
             int errores = 0;
             string codigoDePlanillaGenerada = String.Empty;
             #endregion
@@ -390,7 +390,7 @@ namespace ERP_GMEDINA.Controllers
             List<ViewModelListaErrores> listaErrores = new List<ViewModelListaErrores>();
 
             // instancia para resultado del proceso en izitoast
-            General.iziToast  response = new General.iziToast();
+            General.iziToast response = new General.iziToast();
             int errores = 0;
             #endregion
 
@@ -532,10 +532,11 @@ namespace ERP_GMEDINA.Controllers
                                         //Deducciones.ProcesarDeduccionesParaPrevisualizacion(fechaInicio, fechaFin, db, oDeducciones, empleadoActual, SalarioBase, totalIngresosEmpleado, ref colaboradorDeducciones, ref totalAFP, ref totalInstitucionesFinancieras, ref totalOtrasDeducciones, ref adelantosSueldo, out totalDeduccionesEmpleado, ref totalDeduccionesIndividuales, out netoAPagarColaborador);
 
                                         // procesar isr
-                                        totalISR = CalculoISR.CalcularISRParaPrevisualizacion(db, empleadoActual, totalSalario, totalISR);
+                                        TimeSpan tDias = fechaFin - fechaInicio;
+                                        totalISR = CalculoISR.CalcularISR(db, empleadoActual, totalSalario, totalISR, tDias.Days + 1);
 
                                         #region crear registro de la planilla del colaborador para el reporte
-                                        
+
                                         // reporte
                                         ReportePlanilla.ReportePlanillaPrevisualizacion(ref oPlanillaEmpleado, empleadoActual, SalarioBase, horasTrabajadas, salarioHora, totalSalario, totalComisiones, horasExtrasTrabajadas, totalHorasExtras, totalHorasPermiso, totalBonificaciones, totalIngresosIndivuales, totalVacaciones, totalIngresosEmpleado, totalISR, colaboradorDeducciones, totalAFP, totalInstitucionesFinancieras, totalOtrasDeducciones, adelantosSueldo, totalDeduccionesEmpleado, totalDeduccionesIndividuales, netoAPagarColaborador, InformacionDelEmpleadoActual);
                                         reporte.Add(oPlanillaEmpleado);
