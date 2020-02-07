@@ -1,9 +1,12 @@
 ﻿Admin = true;
 
 function llamarmodalhabilitar(ID) {
-    var modalhabilitar = $("#ModalHabilitar");
-    $("#ModalHabilitar").find("#hamo_Id").val(ID);
-    modalhabilitar.modal('show');
+    var validacionPermiso = userModalState("HistorialAmonestaciones/habilitar");
+    if (validacionPermiso.status) {
+        var modalhabilitar = $("#ModalHabilitar");
+        $("#ModalHabilitar").find("#hamo_Id").val(ID);
+        modalhabilitar.modal('show');
+    }
 }
 
 

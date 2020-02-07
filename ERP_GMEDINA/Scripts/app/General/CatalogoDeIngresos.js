@@ -313,7 +313,7 @@ $("#btnEditarNo").click(function () {
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
     // validar informacion del usuario
-    let validacionPermiso = userModelState("AcumuladosISR/Create");
+    let validacionPermiso = userModelState("CatalogoDeIngresos/Inactivar");
 
     if (validacionPermiso.status == true) {
         //DESBLOQUEAR EL BOTON

@@ -36,6 +36,7 @@ namespace ERP_GMEDINA.Controllers
                         Session["UserLogin"] = UserLogin.usu_Id;
                         Session["UserName"] = UserLogin.usu_NombreUsuario;
                         Session["UserLoginRols"] = Listado;
+                        Session["sesionUsuario"] = UserLogin;
                         Session["UserLoginEsAdmin"] = UserLogin.usu_EsAdministrador;
                         Session["UserLoginSesion"] = UserLogin.usu_SesionesValidas;
                         if (!UserLogin.usu_EsActivo)

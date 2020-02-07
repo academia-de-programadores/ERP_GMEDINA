@@ -1,9 +1,12 @@
 ﻿Admin = true;
 
 function llamarmodalhabilitar(ID) {
-    var modalhabilitar = $("#ModalHabilitar");
-    $("#ModalHabilitar").find("#aude_Id").val(ID);
-    modalhabilitar.modal('show');
+    var validacionPermiso = userModalState("AudienciasDescargo/habilitar");
+    if (validacionPermiso.status) {
+        var modalhabilitar = $("#ModalHabilitar");
+        $("#ModalHabilitar").find("#aude_Id").val(ID);
+        modalhabilitar.modal('show');
+    }
 }
 
 
