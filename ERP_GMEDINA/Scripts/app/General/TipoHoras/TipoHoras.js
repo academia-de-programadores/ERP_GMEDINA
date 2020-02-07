@@ -8,36 +8,42 @@ var Admin = false;
 var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/TipoHoras/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-               // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
-                $("#FormEditar").find("#tiho_Descripcion").val(obj.tiho_Descripcion);
-                $("#FormEditar").find("#tiho_Recargo").val(obj.tiho_Recargo);
-                $('#ModalEditar').modal('show');
-            }
-        });
+    var validacionPermiso = userModelState("TipoHoras/Edit");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(null,
+            '/TipoHoras/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
+                    $("#FormEditar").find("#tiho_Descripcion").val(obj.tiho_Descripcion);
+                    $("#FormEditar").find("#tiho_Recargo").val(obj.tiho_Recargo);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(ID) {
     //id = ID;
-    _ajax(null,
-        '/TipoHoras/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = obj.tiho_Descripcion;
-                $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = obj.tiho_Recargo;
-                $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(obj.tiho_FechaCrea);
-                $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(obj.tiho_FechaModifica);
-                $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    var validacionPermiso = userModelState("TipoHoras/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/TipoHoras/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = obj.tiho_Descripcion;
+                    $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = obj.tiho_Recargo;
+                    $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(obj.tiho_FechaCrea);
+                    $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(obj.tiho_FechaModifica);
+                    $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function llenarTabla() {
     _ajax(null,
@@ -71,12 +77,14 @@ function llenarTabla() {
 }
 //Botones GET
 $("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    modalnuevo.modal('show');
-    $("#FormNuevo").find("#tiho_Descripcion").val("");
-    $("#FormNuevo").find("#tiho_Recargo").val(0);
-    $("#FormNuevo").find("#tiho_Descripcion").focus();
-    
+    var validacionPermiso = userModelState("TipoHoras/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $("#FormNuevo").find("#tiho_Descripcion").val("");
+        $("#FormNuevo").find("#tiho_Recargo").val(0);
+        $("#FormNuevo").find("#tiho_Descripcion").focus();
+    }
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -92,10 +100,13 @@ $("#btnEditar").click(function () {
         });
 });
 $("#btnInactivar").click(function () {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#habi_RazonInactivo").val("");
-    $("#ModalInactivar").find("#habi_RazonInactivo").focus();
+    var validacionPermiso = userModelState("TipoHoras/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#habi_RazonInactivo").val("");
+        $("#ModalInactivar").find("#habi_RazonInactivo").focus();
+    }
 });
 //botones POST
 $("#btnGuardar").click(function () {
