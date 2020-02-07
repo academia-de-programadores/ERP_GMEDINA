@@ -1,7 +1,7 @@
 ﻿Admin = true;
 //Esta funcion llama al modal de Habilitar
-function hablilitar(btn) {
-    var validacionPermiso = userModelState("RazonSalidas/Hablilitar");
+function habilitar(btn) {
+    var validacionPermiso = userModelState("RazonSalidas/habilitar");
     if (validacionPermiso.status)
     {
     var tr = $(btn).closest('tr');
@@ -17,7 +17,7 @@ $("#btnActivar").click(function () {
 
     var Id = $("#txtIdRestore").val();
     _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
-        '/RazonSalidas/hablilitar/',
+        '/RazonSalidas/habilitar/',
         'POST',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {

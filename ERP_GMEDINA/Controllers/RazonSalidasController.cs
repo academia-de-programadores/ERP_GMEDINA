@@ -198,9 +198,9 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        [SessionManager("RazonSalidas/hablilitar")]
+        [SessionManager("RazonSalidas/habilitar")]
         [HttpPost]
-        public JsonResult hablilitar(int id)
+        public JsonResult habilitar(int id)
         {
             string result = "";
             var Usuario = (tbUsuario)Session["Usuario"];
