@@ -32,7 +32,7 @@
                     @Html.LabelFor(model => model.dei_Monto)
                 </div>
                 <div class="col-md-6">
-                    <span id="dei_MontoInicial">@Html.DisplayFor(model => model.dei_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    <span id="dei_Monto">@Html.DisplayFor(model => model.dei_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     @Html.ValidationMessageFor(model => model.dei_Monto, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     @Html.LabelFor(model => model.dei_NumeroCuotas)
                 </div>
                 <div class="col-md-6">
-                    <span id="dei_MontoRestante">@Html.DisplayFor(model => model.dei_NumeroCuotas, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    <span id="dei_NumeroCuotas">@Html.DisplayFor(model => model.dei_NumeroCuotas, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     @Html.ValidationMessageFor(model => model.dei_NumeroCuotas, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     @Html.LabelFor(model => model.dei_MontoCuota)
                 </div>
                 <div class="col-md-6">
-                    <span id="dei_Cuota">@Html.DisplayFor(model => model.dei_MontoCuota, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    <span id="dei_MontoCuota">@Html.DisplayFor(model => model.dei_MontoCuota, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     @Html.ValidationMessageFor(model => model.dei_MontoCuota, "", new { @class = "text-danger" })
                 </div>
             </div>
