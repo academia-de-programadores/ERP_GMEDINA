@@ -15,8 +15,7 @@ namespace ERP_GMEDINA.Controllers
     public class PlanillaImpuestoVecinalController : Controller
     {
         //INSTANCIA DEL MODELO
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();        
         #region GET: Index
         // GET: PlanillaImpuestoVecinal
         [SessionManager("PlanillaImpuestoVecinal/Index")]
@@ -231,7 +230,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-
+        #region CÁCULO DE IMPUESTO VECINAL
         public decimal CalculoImpuestoVecinal(decimal TotalSalarioDevengado, List<tbTechoImpuestoVecinal> objDeduccionIV)
         {
 
@@ -319,6 +318,6 @@ namespace ERP_GMEDINA.Controllers
             //RETURN
             return (decimal)TotalImpuestoVecinal;
         }
-
+        #endregion
     }
 }
