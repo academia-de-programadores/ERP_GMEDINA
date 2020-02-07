@@ -1,42 +1,54 @@
-﻿
-var fill = 0;
-var id = 0;
-var Admin = false;
-//Funciones GET
-$(document).ready(function () {
+﻿$(document).ready(function () {
     fill = Admin == undefined ? 0 : -1;
     llenarTabla();
+
 });
 
+var fill = 0;
+var Admin = false;
+var id = 0;
+
+
+////Funciones GET
+//$(document).ready(function () {
+//    llenarTabla();
+//});
+
 function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/TipoAmonestaciones/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#tamo_Descripcion").val(obj.tamo_Descripcion);
-                $('#ModalEditar').modal('show');
-            }
-        });
+    var validacionPermiso = userModelState("TipoAmonestaciones/Edit");
+    if (validacionPermiso.status == true) {
+        id = ID;
+        _ajax(null,
+            '/TipoAmonestaciones/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#FormEditar").find("#tamo_Descripcion").val(obj.tamo_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
+    }
 }
 function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        '/TipoAmonestaciones/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#tamo_Descripcion")["0"].innerText = obj.tamo_Descripcion;
-               
-                $("#ModalDetalles").find("#tamo_FechaCrea")["0"].innerText = FechaFormato(obj.tamo_FechaCrea);
-                $("#ModalDetalles").find("#tamo_FechaModifica")["0"].innerText = FechaFormato(obj.tamo_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
-                $('#ModalDetalles').modal('show');
-            }
-        });
+    //id = ID;
+    var validacionPermiso = userModelState("TipoAmonestaciones/Edit");
+    if (validacionPermiso.status == true) {
+        _ajax(null,
+            '/TipoAmonestaciones/Edit/' + ID,
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalDetalles").find("#tamo_Descripcion")["0"].innerText = obj.tamo_Descripcion;
+
+                    $("#ModalDetalles").find("#tamo_FechaCrea")["0"].innerText = FechaFormato(obj.tamo_FechaCrea);
+                    $("#ModalDetalles").find("#tamo_FechaModifica")["0"].innerText = FechaFormato(obj.tamo_FechaModifica);
+                    $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                    //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                    $('#ModalDetalles').modal('show');
+                }
+            });
+    }
 }
 function llenarTabla() {
     _ajax(null,
@@ -49,21 +61,21 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                 var Acciones = value.tamo_Estado == 1
-                   ?null:
-                   "<div>" +
-                       "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
-                   "</div>";
+                var Acciones = value.tamo_Estado == 1
+                  ? null : 
+                  "<div>" +
+                      "<a class='btn btn-primary btn-xs' onclick='CallDetalles(this)' >Detalles</a>" +
+                      "<a class='btn btn-default btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                  "</div>" 
                 if (value.tamo_Estado > fill) {
                     tabla.row.add({
                         ID: value.tamo_Id,
                         "Número": value.tamo_Id,
-                        Estado: value.tamo_Estado ?"Activo":"Inactivo",
+                        Estado: value.tamo_Estado ? "Activo" : "Inactivo",
                         Descripcion: value.tamo_Descripcion,
                         "Descripción": value.tamo_Descripcion,
 
-                        Acciones:Acciones
+                        Acciones: Acciones
                     })
                 }
             });
@@ -72,11 +84,16 @@ function llenarTabla() {
 }
 //Botones GET
 $("#btnAgregar").click(function () {
-    var modalnuevo = $('#ModalNuevo');
-    $("#FormNuevo").find("#tamo_Descripcion").val("");
-    modalnuevo.modal('show');
-    $("#FormNuevo").find("#tamo_Descripcion").focus();
+    var validacionPermiso = userModelState("TipoAmonestaciones/Create");
+    if (validacionPermiso.status == true) {
+        var modalnuevo = $('#ModalNuevo');
+        modalnuevo.modal('show');
+        $(modalnuevo).find("#tamo_Descripcion").val("");
+        $(modalnuevo).find("#tamo_Descripcion").focus();
+    }
 });
+
+
 $("#btnEditar").click(function () {
     _ajax(null,
         '/TipoAmonestaciones/Edit/' + id,
@@ -85,15 +102,19 @@ $("#btnEditar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#tamo_Descripcion").val(obj.tamo_Descripcion);
+                $("#ModalEditar").find("#tamo_Descripcion").val(obj.tamo_Descripcion);
+                $("#ModalEditar").find("#tamo_Descripcion").focus();
             }
         });
 });
 $("#btnInactivar").click(function () {
-    CierraPopups();
-    $('#ModalInactivar').modal('show');
-    $("#ModalInactivar").find("#tamo_RazonInactivo").val("");
-    $("#ModalInactivar").find("#tamo_RazonInactivo").focus();
+    var validacionPermiso = userModelState("TipoAmonestaciones/Delete");
+    if (validacionPermiso.status == true) {
+        CierraPopups();
+        $('#ModalInactivar').modal('show');
+        $("#ModalInactivar").find("#tamo_RazonInactivo").val("");
+        $("#ModalInactivar").find("#tamo_RazonInactivo").focus();
+    }
 });
 //botones POST
 $("#btnGuardar").click(function () {
