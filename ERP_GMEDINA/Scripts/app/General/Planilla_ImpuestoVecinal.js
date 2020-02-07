@@ -154,9 +154,6 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
 //CLICK: CARGAR LA DATA DEL DATATABLE
 $("#ProcesarProyeccion").click(function () {
 //validar informacion del usuario
-    var validacionPermiso = userModelState("PlanillaImpuestoVecinal/ProcesarPlanillaImpuestoVecinal");
-
-if (validacionPermiso.status == true) {
     //SETEAR LA VARIABLE DEL PROCESAMIENTO
     Procesando = true;
     //MOSTRAR EL SPINNER
@@ -206,14 +203,10 @@ if (validacionPermiso.status == true) {
             message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
         });
     });
-}
 });
 
 //CLICK: IMPRIMIR EXCEL
 $('#btnImprimirExcel').click(function () {
-    var validacionPermiso = userModelState("Planilla/Index");
-
-    if (validacionPermiso.status == true) {
         //VALIDAR QUE NO ESTE SIENDO PROCESADO
         if (Procesando == true) {
             //LANZAR EL MENSAJE DE ERROR
@@ -242,14 +235,10 @@ $('#btnImprimirExcel').click(function () {
             //GENERAR EXCEL
             ImprimirExcel(Lista_Local);
         }
-    }
 });
 
 //CLICK: GENERAR INSERCIÓN
-$("#btnGenerarImpuestoVecinal").click(function () {
-    var validacionPermiso = userModelState("PlanillaImpuestoVecinal/GenerarPlanillaImpV");
-
-    if (validacionPermiso.status == true) {
+$("#btnGenerarImpuestoVecinal").click(function () {  
         //VALIDAR QUE NO ESTE SIENDO PROCESADO
         if (Procesando == true) {
             //LANZAR EL MENSAJE DE ERROR
@@ -311,6 +300,5 @@ $("#btnGenerarImpuestoVecinal").click(function () {
                     message: 'Ocurrio un error al conectar con el servidor, contacte al administrador.',
                 });
             });
-        }
-    }
+        }    
 });
