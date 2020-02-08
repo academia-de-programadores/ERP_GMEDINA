@@ -190,6 +190,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+
+        [SessionManager("HistorialSalidas/Create")]
         public ActionResult Create()
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
