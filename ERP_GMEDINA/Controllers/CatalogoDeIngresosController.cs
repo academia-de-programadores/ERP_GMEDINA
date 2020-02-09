@@ -140,7 +140,7 @@ namespace ERP_GMEDINA.Controllers
             tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id, cin_TipoIngreso = cin_TipoIngreso };
             #region declaracion de variables
             //LLENAR DATA DE AUDITORIA
-            tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
+            tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
             tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;

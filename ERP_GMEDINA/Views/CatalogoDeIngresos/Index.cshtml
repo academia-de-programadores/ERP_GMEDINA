@@ -72,12 +72,11 @@
                                     </td>
                                     <td>
                                         @{
+                                            <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
                                             if (item.cin_Activo == true)
                                             {
-                                                <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
                                                 <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
                                             }
-                                            <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
                                             if (oUsuario?.usu_EsAdministrador == true == true && item.cin_Activo == false)
                                             {
                                                 <!-- ACTIVAR -->
@@ -86,7 +85,7 @@
                                         }
                                     </td>
                                 </tr>
-                                            }
+                            }
                         </tbody>
                     </table>
                 </div>
