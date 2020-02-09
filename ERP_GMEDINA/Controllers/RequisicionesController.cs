@@ -74,7 +74,7 @@ namespace ERP_GMEDINA.Controllers
                         req_EdadMinima = x.req_EdadMinima,
                         req_EdadMaxima = x.req_EdadMaxima,
                         req_EstadoCivil = x.req_EstadoCivil,
-                        req_EducacionSuperior = x.req_EducacionSuperior,
+                        req_NivelEducativo = x.req_NivelEducativo,
                         req_Permanente = x.req_Permanente,
                         req_Duracion = x.req_Duracion,
                         req_Vacantes = x.req_Vacantes,
