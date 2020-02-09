@@ -361,7 +361,6 @@ $("#btnActualizarHorario").click(function () {
     }
 });
 $("#InActivar").click(function () {
-    if (validacionPermiso.status == true) {
         var data = $("#FormInactivar").serializeArray();
         data = serializar(data);
         if (data != null) {
@@ -383,7 +382,7 @@ $("#InActivar").click(function () {
         } else {
             MsgError("Error", "Por favor llene todas las cajas de texto");
         }
-    }    
+        
 });
 $("#InActivarHorario").click(function () {
     if (validacionPermiso.status == true) {
