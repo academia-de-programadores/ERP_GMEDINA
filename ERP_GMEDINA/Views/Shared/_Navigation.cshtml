@@ -65,7 +65,7 @@
 
                     @*MENU GENERAL*@
                     <li id="General" class="@Html.IsSelected(controller: "General")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">General</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">General</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "General", cssClass: "in") General">
                             @if (Login.GetUserRols("Cargos/Index"))
                             {
@@ -101,7 +101,7 @@
 
                     @*DATOS PROFESIONALES*@
                     <li id="Datos_Profesionales" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-file-text-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Datos Profesionales</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Datos Profesionales</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Datos_Profesionales">
                         @if (Login.GetUserRols("Competencias/Index"))
                         {
@@ -148,7 +148,7 @@
 
                     @*RECLUTAMIENTO*@
                     <li id="Reclutamiento" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.dashboard">Reclutamiento</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.dashboard">Reclutamiento</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Reclutamiento">
                             @if (Login.GetUserRols("Personas/Index"))
                             {
@@ -174,7 +174,7 @@
 
                     @*EMPLEADOS*@
                     <li id="Empleados" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Empleados</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Empleados</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Empleados", cssClass: "in") Empleados">
                             @if (Login.GetUserRols("Empleados/Index"))
                             {
@@ -206,7 +206,7 @@
 
                     @*EQUIPO DE TRABAJO*@
                     <li id="Equipo_Trabajo" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("Equipo_Trabajo", "Equipo_Trabajo")"><i class="fa fa-suitcase"></i> <span class="nav-label" data-i18n="nav.dashboard">Herramientas</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-suitcase"></i> <span class="nav-label" data-i18n="nav.dashboard">Herramientas</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Equipo_Trabajo", cssClass: "in") Equipo_Trabajo">
                         @if (Login.GetUserRols("EquipoTrabajo/Index"))
                         {
@@ -222,7 +222,7 @@
 
                     @*INCAPACIDADES*@
                     <li id="Incapacidades" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-plus-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Incapacidades</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-plus-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Incapacidades</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Incapacidades">
                             @if (Login.GetUserRols("TipoIncapacidades/Index"))
                             {   
@@ -242,7 +242,7 @@
 
                     @*PERMISOS*@
                     <li id="Permisos" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-check-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Permisos</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-check-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Permisos</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Permisos">
                             @if (Login.GetUserRols("TipoPermisos/Index"))
                             {
@@ -262,7 +262,7 @@
 
                     @*AMONESTACIONES*@
                     <li id="Amonestaciones" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-warning"></i> <span class="nav-label" data-i18n="nav.dashboard">Amonestaciones</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-warning"></i> <span class="nav-label" data-i18n="nav.dashboard">Amonestaciones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Amonestaciones">
                             @if (Login.GetUserRols("TipoAmonestaciones/Index"))
                             {
@@ -282,7 +282,7 @@
 
                     @*Salidas*@
                     <li id="Salidas" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-external-link"></i> <span class="nav-label" data-i18n="nav.dashboard">Finalización Laboral</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-external-link"></i> <span class="nav-label" data-i18n="nav.dashboard">Finalización Laboral</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Salidas">
                              @if (Login.GetUserRols("RazonSalidas/Index"))
                              {
@@ -309,7 +309,7 @@
 
                     @*REPORTES*@
                     <li id="ReportesRRHH" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="@Url.Action("General", "General")"><i class="fa fa-clipboard"></i> <span class="nav-label" data-i18n="nav.dashboard">Reportes</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-clipboard"></i> <span class="nav-label" data-i18n="nav.dashboard">Reportes</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level  @Html.IsSelected(controller: "ReportesRRHH", cssClass: "in")">
                             @if (Login.GetUserRols("ReportesRRHH/HistorialAmonestacionesRPT"))
                             {
