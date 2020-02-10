@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.Data.Entity.Core.Objects;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -17,6 +18,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: tbCatalogoDeIngresos
+        [SessionManager("CatalogoDeIngresos/Index")]
         public ActionResult Index()
         {
             var tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -44,6 +46,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("CatalogoDeIngresos/Create")]
         public ActionResult Create([Bind(Include = "cin_IdIngreso,cin_DescripcionIngreso,cin_UsuarioCrea,cin_FechaCrea,cin_TipoIngreso,cin_UsuarioModifica,cin_FechaModifica,cin_Activo")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
         {
             #region declaracion de variables
@@ -96,6 +99,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: CatalogoDeIngresos/Edit/5
+        [SessionManager("CatalogoDeIngresos/Edit")]
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -103,6 +107,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbCatalogoDeIngresosJSON, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("CatalogoDeIngresos/Details")]
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeIngresosJSON = from tbCatIngreso in db.tbCatalogoDeIngresos
@@ -129,12 +134,13 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
+        [SessionManager("CatalogoDeIngresos/Edit")]
         public ActionResult Edit(int id, string cin_DescripcionIngreso, int cin_TipoIngreso)
         {
             tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id, cin_TipoIngreso = cin_TipoIngreso };
             #region declaracion de variables
             //LLENAR DATA DE AUDITORIA
-            tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
+            tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
             tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
@@ -173,6 +179,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("CatalogoDeIngresos/Inactivar")]
         public JsonResult Inactivar(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -182,6 +189,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("CatalogoDeIngresos/Inactivar")]
         public ActionResult Inactivar(int ID)
         {
             string response = String.Empty;
@@ -221,7 +229,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-
+        [SessionManager("CatalogoDeIngresos/Activar")]
         public ActionResult Activar(int? ID)
         {
             string response = String.Empty;
@@ -266,6 +274,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: CatalogoDeDeducciones/Delete/5
+        [SessionManager("CatalogoDeIngresos/Inactivar")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -283,6 +292,7 @@ namespace ERP_GMEDINA.Controllers
         // POST: CatalogoDeDeducciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionManager("CatalogoDeIngresos/Inactivar")]
         public ActionResult DeleteConfirmed(int id)
         {
             tbCatalogoDeIngresos tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Find(id);

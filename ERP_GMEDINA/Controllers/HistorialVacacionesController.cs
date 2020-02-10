@@ -203,7 +203,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        [SessionManager("HistorialVacaciones/DiasRestantes")]
+
         public ActionResult DiasRestantes(int? id, int? annio)
         {
             try

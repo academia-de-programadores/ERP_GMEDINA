@@ -178,6 +178,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                     $("#Detallar #cin_FechaCrea").val(FechaCrea);
                     $("#Detallar #tipoDeIngresoDetalle").html(tipoIngreso);
                     data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                    $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
                     $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
                     $("#Detallar #cin_FechaModifica").val(FechaModifica);
                     $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
@@ -268,6 +269,17 @@ $("#btnEditarIngresos").click(function () {
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
             method: "POST",
+            data: { cin_DescripcionIngreso: data, id: id, cin_TipoIngreso: TipoIngreso },
+            beforeSend: function () {
+                resetTimeOut();
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    console.log(++timeOut);
+                    if (timeOut == 10) {
+                        cerrarSesion();
+                    }
+                }, 5000);
+            },
             data: { cin_DescripcionIngreso: data, id: id, cin_TipoIngreso: TipoIngreso }
         }).done(function (data) {
 
@@ -515,6 +527,3 @@ function OcultarValidacionesEditar() {
     $('#Editar #asteriscoEdit').removeClass('text-danger');
     $('#Editar #asteriscoTipoIngreso').removeClass('text-danger');
 }
-
-
-

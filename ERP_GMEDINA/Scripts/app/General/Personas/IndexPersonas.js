@@ -51,16 +51,18 @@ function format(obj) {
     div += '</div>';
     return div ;
 }
-function ModalInactivar(id) {
+$("#btnInactivar").click(function () {
     var validacionPermiso = userModelState("Personas/Detalles");
     if (validacionPermiso.status == true) {
         CierraPopups();
+        id = sessionStorage.getItem("IdPersona")
         $('#ModalInactivar').modal('show');
         $("#ModalInactivar").find("#per_Id").val(id);
         $("#ModalInactivar").find("#per_RazonInactivo").val("");
         $("#ModalInactivar").find("#per_RazonInactivo").focus();
+        llenarTabla();
     }
-};
+});
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -84,6 +86,7 @@ $("#InActivar").click(function () {
     }
 });
 function llenarTabla() {
+    sessionStorage.setItem("IdPersona", null);
     _ajax(null,
        '/Personas/llenarTabla',
        'POST',
@@ -118,7 +121,6 @@ function llenarTabla() {
 $(document).ready(function () {
     fill = Admin == undefined ? 0 : -1;
     llenarTabla();
-    sessionStorage.setItem("IdPersona", null);
 });
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
@@ -156,6 +158,7 @@ function tablaDetalles(ID) {
                         var edad = obj[0].per_Edad + ' años';
                     else
                         var edad = ' ';
+                    sessionStorage.setItem("IdPersona", obj[0].per_Id);
                     $("#ModalDetalles").find("#per_Identidad")["0"].innerText = obj[0].per_Identidad;
                     $("#ModalDetalles").find("#per_Nombres")["0"].innerText = obj[0].per_Nombres + ' ' + obj[0].per_Apellidos;
                     $("#ModalDetalles").find("#tbNacionalidades")["0"].innerText = obj[0].nac_Id;

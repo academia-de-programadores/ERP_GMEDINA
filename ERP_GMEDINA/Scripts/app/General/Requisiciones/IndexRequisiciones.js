@@ -163,6 +163,20 @@ function tablaDetalles(ID) {
             '/Requisiciones/Detalles/' + ID,
             'GET',
             function (obj) {
+
+                var NivelEducativo = obj[0].req_NivelEducativo;
+
+                if (NivelEducativo == "1")
+                    NivelEducativo = "Primaria completa";
+                else if (NivelEducativo == "2")
+                    NivelEducativo = "Secundaria completa";
+                else if (NivelEducativo == "3")
+                    NivelEducativo = "Pregrado completo";
+                else if (NivelEducativo == "4")
+                    NivelEducativo = "Postgrado completo";
+                else
+                    NivelEducativo = "--";
+
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $("#ModalDetalles").find("#req_Experiencia")["0"].innerText = obj[0].req_Experiencia;
                     $("#ModalDetalles").find("#req_Sexo")["0"].innerText = obj[0].req_Sexo == "N" ? "Indiferente" : obj[0].req_Sexo == "M" ? "Masulino" : "Femenino";
@@ -170,7 +184,7 @@ function tablaDetalles(ID) {
                     $("#ModalDetalles").find("#req_EdadMinima")["0"].innerText = obj[0].req_EdadMinima;
                     $("#ModalDetalles").find("#req_EdadMaxima")["0"].innerText = obj[0].req_EdadMaxima;
                     $("#ModalDetalles").find("#req_EstadoCivil")["0"].innerText = obj[0].req_EstadoCivil == "N" ? "Indiferente" : obj[0].req_Sexo == "C" ? "Casado(a)" : "Soltero(a)";
-                    $("#ModalDetalles").find("#req_EducacionSuperior")["0"].innerText = obj[0].req_EducacionSuperior == "true" ? "Si" : "No";
+                    $("#ModalDetalles").find("#req_NivelEducativo")["0"].innerText = NivelEducativo;
                     $("#ModalDetalles").find("#req_Permanente")["0"].innerText = obj[0].req_Permanente == "true" ? "Si" : "No";
                     $("#ModalDetalles").find("#req_Duracion")["0"].innerText = obj[0].req_Duracion == null ? "N/A" : obj[0].req_Duracion;
                     $("#ModalDetalles").find("#req_Vacantes")["0"].innerText = obj[0].req_Vacantes;
@@ -181,6 +195,13 @@ function tablaDetalles(ID) {
                     $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioCrea;
                     $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioModifica;
 
+
+                    /*
+                     *{ Text="Primaria completa", Value = "1" },
+                                                       new SelectListItem{ Text="Secundaria completa", Value = "2" },
+                                                       new SelectListItem{ Text="Pregrado completo", Value = "3" },
+                                                       new SelectListItem{ Text="Postgrado completo", Value = "4" }
+                     * */
                     $('#ModalDetalles').modal('show');
                 }
             });
@@ -294,6 +315,7 @@ $("#btnActualizar").click(function () {
 
 function tablaEditar(ID) {
     id = ID;
+    useModelState
     var validacionPermiso = userModelState("Requisiciones/Edit");
     if (validacionPermiso.status == true) {
         sessionStorage.setItem("IdRequisicion", id);

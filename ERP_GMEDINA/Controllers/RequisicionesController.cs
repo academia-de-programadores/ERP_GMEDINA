@@ -52,8 +52,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            //ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            //ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
         }
 
@@ -74,7 +74,7 @@ namespace ERP_GMEDINA.Controllers
                         req_EdadMinima = x.req_EdadMinima,
                         req_EdadMaxima = x.req_EdadMaxima,
                         req_EstadoCivil = x.req_EstadoCivil,
-                        req_EducacionSuperior = x.req_EducacionSuperior,
+                        req_NivelEducativo = x.req_NivelEducativo,
                         req_Permanente = x.req_Permanente,
                         req_Duracion = x.req_Duracion,
                         req_Vacantes = x.req_Vacantes,

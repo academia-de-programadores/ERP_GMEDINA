@@ -53,6 +53,16 @@ function userModelState(sPantalla) {
     // recuperar view model con la información del usuario
     var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
 
+    // validar si la información del usuario ya se cargó en el AJAX del menú
+    if (VM_ModelState == '' || VM_ModelState == null) {
+        // mensaje de error
+        iziToast.warning({
+            title: 'Advertencia',
+            message: 'Se está cargando la información de usuario',
+        });
+        return false;
+    }
+
     // validar si el usuario es administrador
     if (VM_ModelState.EsAdmin == true) {
         response = {
@@ -101,7 +111,7 @@ function userModelState(sPantalla) {
         // mensaje de error
         iziToast.error({
             title: 'Error',
-            message: 'Roles de usuario inválidos',
+            message: 'No tiene roles asignados',
         });
     }
 
@@ -141,4 +151,22 @@ function validarPermisoUsuario(sPantalla, arreglo) {
 
     // retornar el resultado
     return status;
+}
+
+var timeOut = 0;
+
+var timer = setInterval(()=>{
+    console.log(++timeOut);
+    if(timeOut == 10){
+        cerrarSesion();
+    }
+}, 100000);
+
+function cerrarSesion(){
+        sessionStorage.clear();
+        window.location = '/Login/CerrarSesion';
+}
+
+function resetTimeOut(){
+    timeOut = 0;
 }

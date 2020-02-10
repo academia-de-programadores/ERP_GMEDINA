@@ -3,9 +3,13 @@ $(document).ready(function () {
     llenarTabla();
     fill = Admin == undefined ? 0 : -1;
 });
+var fill = 0;
+
+var id = 0;
+
 //Funciones GET
 function tablaEditar(ID) {
-    var validacionPermiso = useModelState("TipoMonedas/Edit");
+    var validacionPermiso = userModelState("TipoMonedas/Edit");
     if (validacionPermiso.status == true) {
         id = ID;
         _ajax(null,
@@ -20,7 +24,7 @@ function tablaEditar(ID) {
     }
 }
 function tablaDetalles(ID) {
-    var validacionPermiso = useModelState("TipoMonedas/Edit");
+    var validacionPermiso = userModelState("TipoMonedas/Edit");
     if (validacionPermiso.status == true) {
         id = ID;
         _ajax(null,
@@ -76,7 +80,7 @@ function llenarTabla() {
         });
 }
 $("#btnAgregar").click(function () {
-    var validacionPermiso = useModelState("TipoMonedas/Create");
+    var validacionPermiso = userModelState("TipoMonedas/Create");
     if (validacionPermiso.status == true) {
         var modalnuevo = $('#ModalNuevo');
         modalnuevo.modal('show');
@@ -85,7 +89,7 @@ $("#btnAgregar").click(function () {
     }
 });
 $("#btnEditar").click(function () {
-    var validacionPermiso = useModelState("TipoMonedas/Edit");
+    var validacionPermiso = userModelState("TipoMonedas/Edit");
     if (validacionPermiso.status == true) {
         _ajax(null,
             '/TipoMonedas/Edit/' + id,
@@ -101,7 +105,7 @@ $("#btnEditar").click(function () {
     }
 });
 $("#btnInactivar").click(function () {
-    var validacionPermiso = useModelState("TipoMonedas/Delete");
+    var validacionPermiso = userModelState("TipoMonedas/Delete");
     if (validacionPermiso.status == true) {
         CierraPopups();
         $('#ModalInactivar').modal('show');
@@ -133,8 +137,8 @@ $("#btnGuardar").click(function () {
     }
 });
 $("#InActivar").click(function () {
-    var validacionPermiso = useModelState("TipoMonedas/Edit");
-    if (validacionPermiso.status == true) {
+    //var validacionPermiso = userModelState("TipoMonedas/Edit");
+    //if (validacionPermiso.status == true) {
         var data = $("#FormInactivar").serializeArray();
         data = serializar(data);
         if (data != null) {
@@ -156,7 +160,7 @@ $("#InActivar").click(function () {
         } else {
             MsgError("Error", "Por favor llene todas las cajas de texto.");
         }
-    }
+    //}
 });
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();

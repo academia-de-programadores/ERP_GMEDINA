@@ -3147,6 +3147,8 @@
     <Content Include="Views\TechoImpuestoVecinal\_EditIV.cshtml" />
     <Content Include="Views\PlanillaImpuestoVecinal\Index.cshtml" />
     <Content Include="Views\PlanillaImpuestoVecinal\IndexNuevaProyeccion.cshtml" />
+    <Content Include="Views\HistorialCargos\_Deshacer.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_DetalleIncapacidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

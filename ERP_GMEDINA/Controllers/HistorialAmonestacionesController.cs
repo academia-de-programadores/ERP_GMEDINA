@@ -151,13 +151,12 @@ namespace ERP_GMEDINA.Controllers
                 tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
                 if (tbHistorialAmonestaciones == null)
                 {
-                    return HttpNotFound();
+                    return Json("", JsonRequestBehavior.AllowGet);
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                ex.Message.ToString();
-                return HttpNotFound();
+                return Json("", JsonRequestBehavior.AllowGet);
             }
 
             db = new ERP_GMEDINAEntities();

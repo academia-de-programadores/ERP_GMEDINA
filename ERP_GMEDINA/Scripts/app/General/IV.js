@@ -1,10 +1,4 @@
-﻿// variable inactivacion
-var InactivarID = 0;
-
-// variable activacion
-var ActivarID = 0;
-
-// --------- Crear ---------
+﻿// --------- Crear ---------
 
 // create 1 modal
 $(document).on("click", "#btnAgregarIV", function () {
@@ -112,7 +106,7 @@ $("#btnCerrarCrear").click(function () {
     OcultarValidacionesCrear();
 });
 
-// validaciones key up
+// validaciones key up create
 
 // validar municipio create
 $('#Crear #mun_Codigo').change(function () {
@@ -145,7 +139,6 @@ $('#Crear #tde_IdTipoDedu').change(function () {
         $("#Crear #Validation_TipoDeduccionRequerida").css('display', 'none');
     }
 });
-
 
 // validar rango inicio create
 $('#Crear #timv_RangoInicio').keyup(function () {
@@ -401,6 +394,9 @@ $('#btnRegresarIV').click(function () {
 
 // --------- Inactivar ---------
 
+// variable inactivacion
+var InactivarID = 0;
+
 // inactivar 1 modal
 $(document).on("click", "#btnModalInactivarIV", function () {
 
@@ -463,6 +459,10 @@ $(document).on("click", "#btnBackIV", function () {
 
 
 // --------- Activar ---------
+
+
+// variable activacion
+var ActivarID = 0;
 
 // activar 1 modal
 $(document).on("click", "#tblIV tbody tr td #btnActivarIVModal", function () {

@@ -138,7 +138,7 @@ $("#btnGuardar").click(function () {
 });
 $("#InActivar").click(function () {
     
-    var validacionTipopermisos = userModelState("TipoPermisos/Edit");
+    var validacionTipopermisos = userModelState("TipoPermisos/Delete");
     if (validacionTipopermisos.status == true) {
         var data = $("#FormInactivar").serializeArray();
         data = serializar(data);

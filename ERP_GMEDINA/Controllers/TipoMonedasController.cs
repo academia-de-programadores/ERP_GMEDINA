@@ -66,17 +66,17 @@ namespace ERP_GMEDINA.Controllers
         [SessionManager("TipoMonedas/Create")]
         public JsonResult Create(tbTipoMonedas tbTipoMonedas)
         {
-            string msj = "...";
+            string msj = "";
             if (tbTipoMonedas.tmon_Descripcion != "")
             {
-                var Usuario = (tbUsuario)Session["Usuario"];
+                db = new ERP_GMEDINAEntities();
                 try
                 {
-                    db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
+                    var list = db.UDP_RRHH_tbTipoMonedas_Insert(
+                        tbTipoMonedas.tmon_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
                     {
-                        msj = item.MensajeError;
+                        msj = item.MensajeError + " ";
                     }
                 }
                 catch (Exception ex)
@@ -85,13 +85,13 @@ namespace ERP_GMEDINA.Controllers
                     ex.Message.ToString();
                 }
             }
-
             else
             {
                 msj = "-3";
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+       
         // GET: TipoMonedas/Edit/5
         [SessionManager("TipoMonedas/Edit")]
         public ActionResult Edit(int? id)
@@ -143,11 +143,10 @@ namespace ERP_GMEDINA.Controllers
             if (tbTipoMonedas.tmon_Id != 0 && tbTipoMonedas.tmon_Descripcion != "")
             {
                 var id = (int)Session["id"];
-                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTipoMoneda_Update(id, tbTipoMonedas.tmon_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoMoneda_Update(id, tbTipoMonedas.tmon_Descripcion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoMoneda_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";

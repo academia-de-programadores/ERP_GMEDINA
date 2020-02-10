@@ -20,6 +20,7 @@
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
                         int rol_Usuario = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? 1 : 2);
+                        bool esAdmin = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? true : false);
 
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
@@ -73,7 +74,9 @@
                                                 <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-default btn-xs" id="btnEditarTechosDeducciones">Editar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
-                                            if (rol_Usuario == 1 && item.tddu_Activo == false)
+                                            @* if (rol_Usuario == 1 && item.tddu_Activo == false) *@
+
+                                            if (esAdmin == true && item.tddu_Activo == false)
                                             {
                                                 <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnDetalleTechosDeducciones">Detalles</button>
                                                  <!-- ACTIVAR -->
@@ -96,22 +99,22 @@
 <div class="modal fade" id="EditarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">                
+            <div class="modal-header">
                 <h4 class="modal-title">Editar techo de deducción</h4>
-            </div>            
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
-            </div>        
+            </div>
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
+        </div>
     </div>
 </div>
 @* MODAL DE CREACIÓN *@
 <div class="modal fade" id="AgregarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">               
+            <div class="modal-header">
                 <h4 class="modal-title">Agregar techo de deducción</h4>
-            </div>            
-                @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())           
+            </div>
+            @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
         </div>
     </div>
 </div>
@@ -119,7 +122,7 @@
 <div class="modal fade" id="DetailsTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">                
+            <div class="modal-header">
                 <h4 class="modal-title">Detalle del techo de la deducción</h4>
             </div>
             <div class="modal-body" style="padding-bottom:0px;" id="Detalles">
@@ -135,7 +138,7 @@
 <div class="modal fade" id="InactivarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">                
+            <div class="modal-header">
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
@@ -153,7 +156,7 @@
 <div class="modal fade" id="ActivarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">                
+            <div class="modal-header">
                 <h4 class="modal-title">Activar techo de deducción</h4>
             </div>
             <div class="modal-body" id="Inactivar">

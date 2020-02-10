@@ -31,6 +31,7 @@
                             <div class="col-xs-2">
                                 <i class="fa fa-user fa-3x"></i>
                                 <h2 class="font-bold pull-left"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.colaboradoresGeneral</font></font></h2>
+                                <input type="hidden" id="cantidad" value="@ViewBag.colaboradoresGeneral" />
                             </div>
                             <div class="col-xs-10 text-right">
                                 <span>
@@ -210,6 +211,8 @@
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fechaInicio" readonly style="background-color:white" class="form-control" placeholder="Fecha inicio" value="">
                                     </div>
+                                    <span class="text-danger" id="validation_FechaInicioRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                                    <span class="text-danger" id="validation_FechaInicioMenor1920" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha no puede ser menor que 1920</span>
                                 </div>
                             </div>
                             <div class="form-horizontal col-md-1">
@@ -219,6 +222,9 @@
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fechaFin" readonly style="background-color:white" class="form-control" placeholder="Fecha fin" value="">
                                     </div>
+                                    <span class="text-danger" id="validation_FechaFinRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
+                                    <span class="text-danger" id="validation_FechaFinMenor192" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha no puede ser menor que 1920</span>
+                                    <span class="text-danger" id="validation_FechaFinMenorFechaInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">La fecha fin no puede ser menor o igual que la fecha inicio</span>
                                 </div>
                             </div>
                         </div>

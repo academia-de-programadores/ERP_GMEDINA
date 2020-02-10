@@ -118,7 +118,7 @@ $("#btnInactivar").click(function () {
 });
 
 $("#InActivar").click(function () {
-    var validacionHistorialsalidas = userModelState("HistorialSalidas/Edit");
+    var validacionHistorialsalidas = userModelState("HistorialSalidas/Delete");
     if (validacionHistorialsalidas.status == true) {
         var data = $("#FormInactivar").serializeArray();
         data = serializar(data);
