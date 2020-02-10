@@ -178,8 +178,10 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
                     $("#Editar #peri_IdPeriodo").val(iter.peri_IdPeriodo);
                     $("#Editar #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
                     $("#Editar #peri_CantidadDias").val(iter.peri_CantidadDias);
-                    if (iter.peri_RecibeSeptimoDia == true)
+                    if (iter.peri_RecibeSeptimoDia)
                         $("#Editar #peri_RecibeSeptimoDia").prop('checked', true);
+                    else
+                        $("#Editar #peri_RecibeSeptimoDia").prop('checked', false);
                 });
                 $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
             }
