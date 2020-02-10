@@ -36,6 +36,7 @@ namespace ERP_GMEDINA.Controllers
             tbEmpleados tbEmpleados = new tbEmpleados { };
             return View(tbEmpleados);
         }
+        [SessionManager("Empleados/Index")]
         public ActionResult llenarTabla()
         {
             try
@@ -67,6 +68,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [SessionManager("Empleados/Index")]
         public ActionResult ChildRowData(int id)
         {
             List<V_Datos_Empleado> lista = new List<V_Datos_Empleado> { };
