@@ -405,13 +405,18 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
             if (data) {
                 $.each(data, function (i, iter) {
 
+                    if (iter.peri_RecibeSeptimoDia) {
+                        $("#Detalles #peri_RecibeSeptimoDia").html("Si");
+                    }
+                    else {
+                        $("#Detalles #peri_RecibeSeptimoDia").html("No");
+                    }
+
                     var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
                     $("#Detalles #peri_IdPeriodo").html(iter.peri_IdPeriodo);
                     $("#Detalles #peri_DescripPeriodo").html(iter.peri_DescripPeriodo);
                     $("#Detalles #peri_CantidadDias").html(iter.peri_CantidadDias);
-                    if (iter.peri_RecibeSeptimoDia == true)
-                        $("#Detalles #peri_RecibeSeptimoDia").prop('checked', true);
                     data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                     $("#Detalles #peri_UsuarioCrea").html(iter.peri_UsuarioCrea);
                     $("#Detalles #peri_FechaCrea").html(FechaCrea);
