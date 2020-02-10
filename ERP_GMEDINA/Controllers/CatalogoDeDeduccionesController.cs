@@ -122,7 +122,7 @@ namespace PruebaPlanilla.Controllers
 
 
             //LLENAR DATA DE AUDITORIA
-            tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;
+            tbCatalogoDeDeducciones.cde_UsuarioModifica = Function.GetUser();
             tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = "bien";

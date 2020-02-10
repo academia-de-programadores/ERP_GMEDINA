@@ -73,7 +73,7 @@ function cargarGridTipoDeducciones() {
 
 // create 1 
 $(document).on("click", "#btnAgregarTipoDeducciones", function () {
-var validacionPermiso = userModelState("Planilla/Index");
+    var validacionPermiso = userModelState("TipoDeducciones/Create");
 
 if (validacionPermiso.status == true) {
     // habilitar boton
@@ -196,7 +196,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
 });
 // editar 1 
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeducciones", function () {
-    var validacionPermiso = userModelState("Planilla/Index");
+    var validacionPermiso = userModelState("TipoDeducciones/Edit");
 
     if (validacionPermiso.status == true) {
         var ID = $(this).data('id');
@@ -396,7 +396,7 @@ function spinner() {
 
 
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {    
-var validacionPermiso = userModelState("Planilla/Index");
+    var validacionPermiso = userModelState("TipoDeducciones/Details");
 if (validacionPermiso.status == true) {
     var ID = $(this).data('id');
     //
@@ -441,7 +441,7 @@ if (validacionPermiso.status == true) {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA MENSAJE DE CONFIRMACION
 $("#btnInactivarTipoDeducciones").click(function () {
-    var validacionPermiso = userModelState("Planilla/Index");
+    var validacionPermiso = userModelState("TipoDeducciones/Inactivar");
 
     if (validacionPermiso.status == true) {
         $("#EditarTipoDeducciones").modal('hide');
@@ -520,7 +520,7 @@ $("#frmTipoDeduccionEdit").submit(function (event) {
 // activar
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeducciones", function () {
     activarID = $(this).data('id');
-    var validacionPermiso = userModelState("Planilla/Index");
+    var validacionPermiso = userModelState("TipoDeducciones/Activar");
 
     if (validacionPermiso.status == true) {
         //$("#ActivarTipoDeducciones").modal();
