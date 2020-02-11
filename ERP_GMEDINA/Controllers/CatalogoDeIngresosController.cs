@@ -144,7 +144,7 @@ namespace ERP_GMEDINA.Controllers
             #region declaracion de variables
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
-            tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
+            tbCatalogoDeIngresos.cin_FechaModifica = General.DateTimeNow;
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
             string MensajeError = "";
@@ -205,7 +205,7 @@ namespace ERP_GMEDINA.Controllers
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Inactivar(ID,
                                                                                         Session["UserLogin"] as int?,
-                                                                                        DateTime.Now
+                                                                                        General.DateTimeNow
                                                                                         );
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result Resultado in listCatalogoDeIngresos)
@@ -247,7 +247,7 @@ namespace ERP_GMEDINA.Controllers
             tbCatalogoDeIngresos tbCatalogoDeIngresos = new tbCatalogoDeIngresos();
             tbCatalogoDeIngresos.cin_IdIngreso = (int)ID;
             tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
-            tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
+            tbCatalogoDeIngresos.cin_FechaModifica = General.DateTimeNow;
             try
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
