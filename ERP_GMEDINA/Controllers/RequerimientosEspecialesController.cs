@@ -35,6 +35,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbRequerimientosEspeciales);
         }
 
+        [SessionManager("RequerimientosEspeciales/Index")]
         [HttpPost]
         public JsonResult llenarTabla()
         {

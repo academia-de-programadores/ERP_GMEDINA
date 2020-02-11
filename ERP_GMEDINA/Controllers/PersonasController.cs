@@ -130,6 +130,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         // GET : Personas/LlenarTabla
+        [SessionManager("Personas/Index")]
         public ActionResult llenarTabla()
         {
             try
@@ -157,6 +158,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         // GET : Personas/ChildRowData
+        [SessionManager("Personas/Index")]
         public ActionResult ChildRowData(int? id)
         {
             using (db = new ERP_GMEDINAEntities())

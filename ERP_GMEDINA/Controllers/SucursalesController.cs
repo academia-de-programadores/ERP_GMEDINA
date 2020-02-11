@@ -29,6 +29,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbSucursales);
         }
         //Llenar Tabla
+        [SessionManager("Sucursales/Index")]
         [HttpPost]
         public JsonResult llenarTabla()
         {
