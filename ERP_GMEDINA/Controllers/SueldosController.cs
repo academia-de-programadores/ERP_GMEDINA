@@ -38,6 +38,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbSueldos);
         }
 
+        [SessionManager("Sueldos/Index")]
         public ActionResult llenarTabla()
         {
             try
@@ -84,6 +85,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [SessionManager("Sueldos/Index")]
         public ActionResult ChildRowData(int? id)
         {
             List<V_Sueldos> lista = new List<V_Sueldos> { };
