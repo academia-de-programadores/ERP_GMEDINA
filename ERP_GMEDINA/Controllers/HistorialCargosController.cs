@@ -149,6 +149,36 @@ namespace ERP_GMEDINA.Controllers
             result.Add("Requisicion", Requisicion);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult SueldoMaxMin(int id)
+        {
+
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var Cargos = db.tbCargos
+                   .Select(
+                   x => new
+                   {
+                       car_Id = x.car_Id,
+                       sueldoMin = x.car_SueldoMinimo,
+                       sueldoMax = x.car_SueldoMaximo
+                   }
+
+                   ).Where(x => x.car_Id == id).ToList().Last();
+                    return Json(Cargos, JsonRequestBehavior.AllowGet);
+
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+
+        }
+
         [SessionManager("HistorialCargos/Promover")]
         public ActionResult Promover()
         {       

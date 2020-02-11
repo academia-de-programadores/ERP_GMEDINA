@@ -58,12 +58,10 @@ $('#btnCreateIV').click(function () {
     var impuesto1 = $("#Crear #timv_Impuesto").val();
 
     $('#btnCreateIV').attr('disabled', false);
-    //var data = $("#frmIVCreate").serializeArray();
+
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     if (DataAnnotationsCrear(codmuni1, tipoDeduccion1, rangoInicio1, rangoFin1, rango1, impuesto1)) {
-        // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)        
-        //var dataSinFormato = $("#frmIVCreate").serializeArray();
-        //
+
         var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();
         var data = {
             __RequestVerificati1onToken: __RequestVerificati1onToken1,
@@ -103,7 +101,7 @@ $('#btnCreateIV').click(function () {
 
 // cerrar modal crear
 $("#btnCerrarCrear").click(function () {
-    OcultarValidacionesCrear();
+    Vaciar_ModalCrear();
 });
 
 // validaciones key up create
@@ -264,7 +262,6 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
                             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                             $("#Editar #tde_IdTipoDedu").empty();
                             //LLENAR EL DROPDOWNLIST
-                            $("#Editar #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
                             $.each(data, function (i, iter) {
                                 $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                             });
@@ -283,7 +280,6 @@ $(document).on("click", "#tblIV tbody tr td #btnModalEditarIV", function () {
                             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                             $("#Editar #mun_Codigo").empty();
                             //LLENAR EL DROPDOWNLIST
-                            $("#Editar #mun_Codigo").append("<option value=0>Selecione una opción...</option>");
                             $.each(data, function (i, iter) {
                                 $("#Editar #mun_Codigo").append("<option" + (iter.Id == SelectedIdMuni ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                             });
@@ -381,6 +377,8 @@ $("#btnEditIVConfirmacion").click(function () {
 
 // edit ocultar modal editar
 $("#btnCerrarEditar").click(function () {
+    //VACIAR LAS VALIDACIONES DE EDITAR
+    Vaciar_ModalEditar()
     //OCULTAR MODAL DE EDITAR
     $("#EditarIV").modal('hide');
 });
@@ -622,44 +620,40 @@ function Vaciar_ModalCrear() {
     $("#Crear #timv_RangoFin").val("");
     $("#Crear #timv_Rango").val(0);
     $("#Crear #tde_IdTipoDedu").val("");
-    $("#Crear #mun_Nombre").val("");    
+    $("#Crear #mun_Nombre").val(""); 
+    $("#Crear #timv_Impuesto").val("");
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #mun_CodigoValidacion").hide();
+    $("#Crear #Validation_MunicipioRequerida").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoMunicipio").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_TipoDeduccionValidacion").hide();
+    $("#Crear #Validation_TipoDeduccionRequerida").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoTipoDeduccion").removeClass("text-danger");
 
-    //
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_RangoInicioValidacion").hide();
+    $("#Crear #Validation_RangoInicioRequerida").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoRangoInicio").removeClass("text-danger");
 
-    //
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_RangoFinValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
-
-    //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_RangoFinValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
-
-    //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_RangoValidacion").hide();
+    $("#Crear #Validation_RangoFinRequerida").hide();
+    $("#Crear #validation_RangoFinalMayoRangoInicio").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoRango").removeClass("text-danger");
 
     //OCULTAR DATAANNOTATIONS
-    $("#Crear #timv_ImpuestoValidacion").hide();
+    $("#Crear #Validation_RangoRequerida").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Crear #Validation_ImpuestoRequerido").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #AsteriscoImpuesto").removeClass("text-danger");
+
 }
 
 //FUNCION: OCULTAR VALIDACIONES DE EDICION
@@ -667,45 +661,42 @@ function Vaciar_ModalEditar() {
     //VACIADO DE INPUTS
     $("#Editar #timv_RangoInicio").val("");
     $("#Editar #timv_RangoFin").val("");
-    $("#Editar #timv_Rango").val("");
-    $("#Editar #tde_IdTipoDedu").val(0);
-    $("#Editar #mun_Nombre").val(0);
-    $("#Editar #timv_Porcentaje").val("");
-
-    //
+    $("#Editar #timv_Rango").val(0);
+    $("#Editar #tde_IdTipoDedu").val("");
+    $("#Editar #mun_Nombre").val("");
+    $("#Editar #timv_Impuesto").val("");
     //OCULTAR DATAANNOTATIONS
-    $("#Editar #timv_RangoInicioValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoRangoInicio").removeClass("text-danger");
-
-    //
-    //OCULTAR DATAANNOTATIONS
-    $("#Editar #timv_RangoFinValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
-
-    //OCULTAR DATAANNOTATIONS
-    $("#Editar #timv_RangoValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoRango").removeClass("text-danger");
-
-    //
-    //OCULTAR DATAANNOTATIONS
-    $("#Editar #tde_TipoDeduccionValidacion").hide();
-    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoTipoDeduccion").removeClass("text-danger");
-
-    //
-    //OCULTAR DATAANNOTATIONS
-    $("#Editar #mun_NombreValidacion").hide();
+    $("#Editar #Validation_MunicipioRequerida").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Editar #AsteriscoMunicipio").removeClass("text-danger");
 
     //
     //OCULTAR DATAANNOTATIONS
-    $("#Editar #timv_PorcentajeValidacion").hide();
+    $("#Editar #Validation_TipoDeduccionRequerida").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-    $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
+    $("#Editar #AsteriscoTipoDeduccion").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Validation_RangoInicioRequerida").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #AsteriscoRangoInicio").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Validation_RangoFinRequerida").hide();
+    $("#Editar #validation_RangoFinalMayoRangoInicio").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #AsteriscoRango").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Validation_RangoRequerida").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
+
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Validation_ImpuestoRequerido").hide();
+    //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+    $("#Editar #AsteriscoImpuesto").removeClass("text-danger");
+
 }
 
 //FUNCION PARA MOSTRAR O QUITAR DATAANNOTATIONS
@@ -714,18 +705,18 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
 
-    if (Municipio != "") {
+    if (Municipio != "1") {
         //Telefono
-        if (Municipio == "" || Municipio == null) {
+        if (Municipio == "" || Municipio == null || Municipio == 0) {
             //MOSTRAR DATAANNOTATIONS
-            $("#Crear #mun_CodigoValidacion").show();
+            $("#Crear #Validation_MunicipioRequerida").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Crear #AsteriscoMunicipio").addClass("text-danger");
             ModelState = false;
         }
         else {
             //OCULTAR DATAANNOTATIONS
-            $("#Crear #mun_CodigoValidacion").hide();
+            $("#Crear #Validation_MunicipioRequerida").hide();
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Crear #AsteriscoMunicipio").removeClass("text-danger");
         }
@@ -735,14 +726,14 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
         //Telefono
         if (TipoDeduccion == "" || TipoDeduccion == "0" || TipoDeduccion == 0) {
             //MOSTRAR DATAANNOTATIONS
-            $("#Crear #timv_TipoDeduccionValidacion").show();
+            $("#Crear #Validation_TipoDeduccionRequerida").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Crear #AsteriscoTipoDeduccion").addClass("text-danger");
             ModelState = false;
         }
         else {
             //OCULTAR DATAANNOTATIONS
-            $("#Crear #timv_TipoDeduccionValidacion").hide();
+            $("#Crear #Validation_TipoDeduccionRequerida").hide();
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Crear #AsteriscoTipoDeduccion").removeClass("text-danger");
         }
@@ -753,124 +744,123 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
 
         if (parseFloat(FormatearMonto(RangoInicio)) >= parseFloat(FormatearMonto($("#Crear #timv_RangoFin").val()))) {
             $("#Crear #AsteriscoRangoInicio").addClass("text-danger");
-            $("#Crear #timv_RangoInicioValidacion").empty();
-            $("#Crear #timv_RangoInicioValidacion").html("El campo Rango Inicio debe ser mayor que el rango fin.");
-            $("#Crear #timv_RangoInicioValidacion").show();
+            $("#Crear #Validation_RangoInicioRequerida").empty();
+            $("#Crear #Validation_RangoInicioRequerida").html("El campo Rango Inicio debe ser mayor que el rango fin.");
+            $("#Crear #Validation_RangoInicioRequerida").show();
             ModelState = false;
         }
         else {
             $("#Crear #AsteriscoRangoInicio").removeClass("text-danger");
-            $("#Crear #timv_RangoInicioValidacion").empty();
-            $("#Crear #timv_RangoInicioValidacion").html("El campo Rango Final es requerido.");
-            $("#Crear #timv_RangoInicioValidacion").hide();
+            $("#Crear #Validation_RangoInicioRequerida").empty();
+            $("#Crear #Validation_RangoInicioRequerida").html("El campo Rango Final es requerido.");
+            $("#Crear #Validation_RangoInicioRequerida").hide();
         }
 
         if (RangoInicio == "" || RangoInicio == null || RangoInicio == undefined) {
             $("#Crear #AsteriscoRangoInicio").addClass("text-danger");
-            $("#Crear #timv_RangoInicioValidacion").show();
+            $("#Crear #Validation_RangoInicioRequerida").show();
 
             ModelState = false;
         } else {
             $("#Crear #AsteriscoRangoInicio").removeClass("text-danger");
-            $("#Crear #timv_RangoInicioValidacion").hide();
+            $("#Crear #Validation_RangoInicioRequerida").hide();
             if (parseInt(RangoInicio) < 0 || parseFloat(RangoInicio) < 0.00) {
 
                 $("#Crear #AsteriscoRangoInicio").addClass("text-danger");
-                $("#Crear #timv_RangoInicioValidacion").empty();
-                $("#Crear #timv_RangoInicioValidacion").html("El campo Rango Inicial no puede ser menor que cero.");
-                $("#Crear #timv_RangoInicioValidacion").show();
+                $("#Crear #Validation_RangoInicioRequerida").empty();
+                $("#Crear #Validation_RangoInicioRequerida").html("El campo Rango Inicial no puede ser menor que cero.");
+                $("#Crear #Validation_RangoInicioRequerida").show();
                 ModelState = false;
             } else {
-                $("#Crear #timv_RangoInicioValidacion").empty();
-                $("#Crear #timv_RangoInicioValidacion").html("El campo Rango Inicial es requerido.");
+                $("#Crear #Validation_RangoInicioRequerida").empty();
+                $("#Crear #Validation_RangoInicioRequerida").html("El campo Rango Inicial es requerido.");
                 $("#Crear #AsteriscoRangoInicio").removeClass("text-danger");
-                $("#Crear #timv_RangoInicioValidacion").hide();
+                $("#Crear #Validation_RangoInicioRequerida").hide();
             }
         }
     }
-
 
     if (RangoFin != "-1") {
         //RANGO FINAL
         if (RangoFin == "" || RangoFin == null || RangoFin == undefined) {
             $("#Crear #AsteriscoRangoFin").addClass("text-danger");
-            $("#Crear #timv_RangoFinValidacion").show();
+            $("#Crear #Validation_RangoFinRequerida").show();
 
             ModelState = false;
         } else {
             $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
-            $("#Crear #timv_RangoFinValidacion").hide();
+            $("#Crear #Validation_RangoFinRequerida").hide();
 
             if (parseFloat(FormatearMonto(RangoFin)) <= parseFloat(FormatearMonto($("#Crear #timv_RangoInicio").val())) || parseFloat(FormatearMonto(RangoFin)) == 0) {
                 $("#Crear #AsteriscoRangoFin").addClass("text-danger");
-                $("#Crear #timv_RangoFinValidacion").empty();
-                $("#Crear #timv_RangoFinValidacion").html("El campo Rango Fin debe ser mayor que el rango inicio.");
-                $("#Crear #timv_RangoFinValidacion").show();
+                $("#Crear #Validation_RangoFinRequerida").empty();
+                $("#Crear #Validation_RangoFinRequerida").html("El campo Rango Fin debe ser mayor que el rango inicio.");
+                $("#Crear #Validation_RangoFinRequerida").show();
                 ModelState = false;
             } else {
-                $("#Crear #timv_RangoFinValidacion").empty();
-                $("#Crear #timv_RangoFinValidacion").html("El campo Rango Final es requerido.");
+                $("#Crear #Validation_RangoFinRequerida").empty();
+                $("#Crear #Validation_RangoFinRequerida").html("El campo Rango Final es requerido.");
                 $("#Crear #AsteriscoRangoFin").removeClass("text-danger");
-                $("#Crear #timv_RangoFinValidacion").hide();
+                $("#Crear #Validation_RangoFinRequerida").hide();
             }
 
         }
     }
 
-
     if (Rango != "-1") {
         //PORCENTAJE
-        if (Rango == "" || Rango == null || Rango == undefined) {
+        if (Rango == "" || Rango == null || Rango == undefined || Rango == 0) {
             $("#Crear #AsteriscoRango").addClass("text-danger");
-            $("#Crear #timv_RangoValidacion").show();
+            $("#Crear #Validation_RangoRequerida").show();
 
             ModelState = false;
         } else {
             $("#Crear #AsteriscoRango").removeClass("text-danger");
-            $("#Crear #timv_RangoValidacion").hide();
+            $("#Crear #Validation_RangoRequerida").hide();
             //CONVERTIR EN DECIMAL EL PORCENTAJE
             Rango = parseFloat(FormatearMonto(Rango));
             if (parseInt(Rango) < 0 || parseFloat(Rango) < 0.00) {
                 $("#Crear #AsteriscoRango").addClass("text-danger");
-                $("#Crear #timv_RangoValidacion").empty();
-                $("#Crear #timv_RangoValidacion").html("El campo Porcentaje no puede ser menor a 0.");
-                $("#Crear #timv_RangoValidacion").show();
+                $("#Crear #Validation_RangoRequerida").empty();
+                $("#Crear #Validation_RangoRequerida").html("El campo Porcentaje no puede ser menor a 0.");
+                $("#Crear #Validation_RangoRequerida").show();
                 ModelState = false;
             } else {
-                $("#Crear #timv_RangoValidacion").empty();
-                $("#Crear #timv_RangoValidacion").html("El campo Porcentaje es requerido.");
+                $("#Crear #Validation_RangoRequerida").empty();
+                $("#Crear #Validation_RangoRequerida").html("El campo Porcentaje es requerido.");
                 $("#Crear #AsteriscoRango").removeClass("text-danger");
-                $("#Crear #timv_RangoValidacion").hide();
+                $("#Crear #Validation_RangoRequerida").hide();
             }
         }
     }
 
     if (Impuesto != "-1") {
         //PORCENTAJE
-        if (Impuesto == "" || Impuesto == null || Impuesto == undefined) {
+        if (Impuesto == "" || Impuesto == null || Impuesto == undefined || Impuesto == 0) {
             $("#Crear #AsteriscoImpuesto").addClass("text-danger");
-            $("#Crear #timv_RangoValidacion").show();
+            $("#Crear #Validation_ImpuestoRequerido").show();
 
             ModelState = false;
         } else {
             $("#Crear #AsteriscoImpuesto").removeClass("text-danger");
-            $("#Crear #timv_RangoValidacion").hide();
+            $("#Crear #Validation_ImpuestoRequerido").hide();
             //CONVERTIR EN DECIMAL EL PORCENTAJE
             Impuesto = parseFloat(FormatearMonto(Impuesto));
             if (parseInt(Impuesto) < 0 || parseFloat(Impuesto) < 0.00) {
                 $("#Crear #AsteriscoImpuesto").addClass("text-danger");
-                $("#Crear #timv_ImpuestoValidacion").empty();
-                $("#Crear #timv_ImpuestoValidacion").html("El campo Porcentaje no puede ser menor a 0.");
-                $("#Crear #timv_ImpuestoValidacion").show();
+                $("#Crear #Validation_ImpuestoRequerido").empty();
+                $("#Crear #Validation_ImpuestoRequerido").html("El campo Porcentaje no puede ser menor a 0.");
+                $("#Crear #Validation_ImpuestoRequerido").show();
                 ModelState = false;
             } else {
-                $("#Crear #timv_ImpuestoValidacion").empty();
-                $("#Crear #timv_ImpuestoValidacion").html("El campo Porcentaje es requerido.");
+                $("#Crear #Validation_ImpuestoRequerido").empty();
+                $("#Crear #Validation_ImpuestoRequerido").html("El campo Porcentaje es requerido.");
                 $("#Crear #AsteriscoImpuesto").removeClass("text-danger");
-                $("#Crear #timv_ImpuestoValidacion").hide();
+                $("#Crear #Validation_ImpuestoRequerido").hide();
             }
         }
     }
+
     //RETURN DEL ESTADO DEL MODELO
     return ModelState;
 }
@@ -881,18 +871,18 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
 
-    if (Municipio != "") {
+    if (Municipio != "1") {
         //Telefono
-        if (Municipio == "" || Municipio == null) {
+        if (Municipio == "" || Municipio == null || Municipio == 0 || Municipio == "0") {
             //MOSTRAR DATAANNOTATIONS
-            $("#Editar #mun_CodigoValidacion").show();
+            $("#Editar #Validation_MunicipioRequerida").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Editar #AsteriscoMunicipio").addClass("text-danger");
             ModelState = false;
         }
         else {
             //OCULTAR DATAANNOTATIONS
-            $("#Editar #mun_CodigoValidacion").hide();
+            $("#Editar #Validation_MunicipioRequerida").hide();
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Editar #AsteriscoMunicipio").removeClass("text-danger");
         }
@@ -900,16 +890,16 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
 
     if (TipoDeduccion != "-1") {
         //Telefono
-        if (TipoDeduccion == "" || TipoDeduccion == "0" || TipoDeduccion == 0) {
+        if (TipoDeduccion == "" || TipoDeduccion == null || TipoDeduccion == 0 || TipoDeduccion == "0") {
             //MOSTRAR DATAANNOTATIONS
-            $("#Editar #timv_TipoDeduccionValidacion").show();
+            $("#Editar #Validation_TipoDeduccionRequerida").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Editar #AsteriscoTipoDeduccion").addClass("text-danger");
             ModelState = false;
         }
         else {
             //OCULTAR DATAANNOTATIONS
-            $("#Editar #timv_TipoDeduccionValidacion").hide();
+            $("#Editar #Validation_TipoDeduccionRequerida").hide();
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Editar #AsteriscoTipoDeduccion").removeClass("text-danger");
         }
@@ -920,126 +910,127 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
 
         if (parseFloat(FormatearMonto(RangoInicio)) >= parseFloat(FormatearMonto($("#Editar #timv_RangoFin").val()))) {
             $("#Editar #AsteriscoRangoInicio").addClass("text-danger");
-            $("#Editar #timv_RangoInicioValidacion").empty();
-            $("#Editar #timv_RangoInicioValidacion").html("El campo Rango Inicio debe ser mayor que el rango fin.");
-            $("#Editar #timv_RangoInicioValidacion").show();
+            $("#Editar #Validation_RangoInicioRequerida").empty();
+            $("#Editar #Validation_RangoInicioRequerida").html("El campo Rango Inicio debe ser mayor que el rango fin.");
+            $("#Editar #Validation_RangoInicioRequerida").show();
             ModelState = false;
         }
         else {
             $("#Editar #AsteriscoRangoInicio").removeClass("text-danger");
-            $("#Editar #timv_RangoInicioValidacion").empty();
-            $("#Editar #timv_RangoInicioValidacion").html("El campo Rango Final es requerido.");
-            $("#Editar #timv_RangoInicioValidacion").hide();
+            $("#Editar #Validation_RangoInicioRequerida").empty();
+            $("#Editar #Validation_RangoInicioRequerida").html("El campo Rango Final es requerido.");
+            $("#Editar #Validation_RangoInicioRequerida").hide();
         }
 
         if (RangoInicio == "" || RangoInicio == null || RangoInicio == undefined) {
             $("#Editar #AsteriscoRangoInicio").addClass("text-danger");
-            $("#Editar #timv_RangoInicioValidacion").show();
+            $("#Editar #Validation_RangoInicioRequerida").show();
 
             ModelState = false;
         } else {
             $("#Editar #AsteriscoRangoInicio").removeClass("text-danger");
-            $("#Editar #timv_RangoInicioValidacion").hide();
+            $("#Editar #Validation_RangoInicioRequerida").hide();
             if (parseInt(RangoInicio) < 0 || parseFloat(RangoInicio) < 0.00) {
 
                 $("#Editar #AsteriscoRangoInicio").addClass("text-danger");
-                $("#Editar #timv_RangoInicioValidacion").empty();
-                $("#Editar #timv_RangoInicioValidacion").html("El campo Rango Inicial no puede ser menor que cero.");
-                $("#Editar #timv_RangoInicioValidacion").show();
+                $("#Editar #Validation_RangoInicioRequerida").empty();
+                $("#Editar #Validation_RangoInicioRequerida").html("El campo Rango Inicial no puede ser menor que cero.");
+                $("#Editar #Validation_RangoInicioRequerida").show();
                 ModelState = false;
             } else {
-                $("#Editar #timv_RangoInicioValidacion").empty();
-                $("#Editar #timv_RangoInicioValidacion").html("El campo Rango Inicial es requerido.");
+                $("#Editar #Validation_RangoInicioRequerida").empty();
+                $("#Editar #Validation_RangoInicioRequerida").html("El campo Rango Inicial es requerido.");
                 $("#Editar #AsteriscoRangoInicio").removeClass("text-danger");
-                $("#Editar #timv_RangoInicioValidacion").hide();
+                $("#Editar #Validation_RangoInicioRequerida").hide();
             }
         }
     }
 
     if (RangoFin != "-1") {
         //RANGO FINAL
-        if (RangoFin == "" || RangoFin == null || RangoFin == undefined || parseFloat(FormatearMonto(RangoFin)) == 0) {
+        if (RangoFin == "" || RangoFin == null || RangoFin == undefined) {
             $("#Editar #AsteriscoRangoFin").addClass("text-danger");
-            $("#Editar #timv_RangoFinValidacion").show();
+            $("#Editar #Validation_RangoFinRequerida").show();
 
             ModelState = false;
         } else {
             $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
-            $("#Editar #timv_RangoFinValidacion").hide();
+            $("#Editar #Validation_RangoFinRequerida").hide();
 
-            if (parseFloat(FormatearMonto(RangoFin)) <= RangoInicio) {
+            if (parseFloat(FormatearMonto(RangoFin)) <= parseFloat(FormatearMonto($("#Editar #timv_RangoInicio").val())) || parseFloat(FormatearMonto(RangoFin)) == 0) {
                 $("#Editar #AsteriscoRangoFin").addClass("text-danger");
-                $("#Editar #timv_RangoFinValidacion").empty();
-                $("#Editar #timv_RangoFinValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
-                $("#Editar #timv_RangoFinValidacion").show();
+                $("#Editar #Validation_RangoFinRequerida").empty();
+                $("#Editar #Validation_RangoFinRequerida").html("El campo Rango Fin debe ser mayor que el rango inicio.");
+                $("#Editar #Validation_RangoFinRequerida").show();
                 ModelState = false;
             } else {
-                $("#Editar #timv_RangoFinValidacion").empty();
-                $("#Editar #timv_RangoFinValidacion").html("El campo Rango Final es requerido.");
+                $("#Editar #Validation_RangoFinRequerida").empty();
+                $("#Editar #Validation_RangoFinRequerida").html("El campo Rango Final es requerido.");
                 $("#Editar #AsteriscoRangoFin").removeClass("text-danger");
-                $("#Editar #timv_RangoFinValidacion").hide();
+                $("#Editar #Validation_RangoFinRequerida").hide();
             }
 
         }
     }
 
-
     if (Rango != "-1") {
         //PORCENTAJE
-        if (Rango == "" || Rango == null || Rango == undefined) {
+        if (Rango == "" || Rango == null || Rango == undefined || Rango == 0) {
             $("#Editar #AsteriscoRango").addClass("text-danger");
-            $("#Editar #timv_RangoValidacion").show();
+            $("#Editar #Validation_RangoRequerida").show();
 
             ModelState = false;
         } else {
             $("#Editar #AsteriscoRango").removeClass("text-danger");
-            $("#Editar #timv_RangoValidacion").hide();
+            $("#Editar #Validation_RangoRequerida").hide();
             //CONVERTIR EN DECIMAL EL PORCENTAJE
             Rango = parseFloat(FormatearMonto(Rango));
             if (parseInt(Rango) < 0 || parseFloat(Rango) < 0.00) {
                 $("#Editar #AsteriscoRango").addClass("text-danger");
-                $("#Editar #timv_RangoValidacion").empty();
-                $("#Editar #timv_RangoValidacion").html("El campo Rango no puede ser menor a 0.");
-                $("#Editar #timv_RangoValidacion").show();
+                $("#Editar #Validation_RangoRequerida").empty();
+                $("#Editar #Validation_RangoRequerida").html("El campo Porcentaje no puede ser menor a 0.");
+                $("#Editar #Validation_RangoRequerida").show();
                 ModelState = false;
             } else {
-                $("#Editar #timv_RangoValidacion").empty();
-                $("#Editar #timv_RangoValidacion").html("El campo Rango es requerido.");
+                $("#Editar #Validation_RangoRequerida").empty();
+                $("#Editar #Validation_RangoRequerida").html("El campo Porcentaje es requerido.");
                 $("#Editar #AsteriscoRango").removeClass("text-danger");
-                $("#Editar #timv_RangoValidacion").hide();
+                $("#Editar #Validation_RangoRequerida").hide();
             }
         }
     }
 
     if (Impuesto != "-1") {
         //PORCENTAJE
-        if (Impuesto == "" || Impuesto == null || Impuesto == undefined) {
+        if (Impuesto == "" || Impuesto == null || Impuesto == undefined || Impuesto == 0) {
             $("#Editar #AsteriscoImpuesto").addClass("text-danger");
-            $("#Editar #timv_RangoValidacion").show();
+            $("#Editar #Validation_ImpuestoRequerido").show();
 
             ModelState = false;
         } else {
             $("#Editar #AsteriscoImpuesto").removeClass("text-danger");
-            $("#Editar #timv_RangoValidacion").hide();
+            $("#Editar #Validation_ImpuestoRequerido").hide();
             //CONVERTIR EN DECIMAL EL PORCENTAJE
             Impuesto = parseFloat(FormatearMonto(Impuesto));
             if (parseInt(Impuesto) < 0 || parseFloat(Impuesto) < 0.00) {
                 $("#Editar #AsteriscoImpuesto").addClass("text-danger");
-                $("#Editar #timv_ImpuestoValidacion").empty();
-                $("#Editar #timv_ImpuestoValidacion").html("El campo Impuesto no puede ser menor a 0.");
-                $("#Editar #timv_ImpuestoValidacion").show();
+                $("#Editar #Validation_ImpuestoRequerido").empty();
+                $("#Editar #Validation_ImpuestoRequerido").html("El campo Porcentaje no puede ser menor a 0.");
+                $("#Editar #Validation_ImpuestoRequerido").show();
                 ModelState = false;
             } else {
-                $("#Editar #timv_ImpuestoValidacion").empty();
-                $("#Editar #timv_ImpuestoValidacion").html("El campo Impuesto es requerido.");
+                $("#Editar #Validation_ImpuestoRequerido").empty();
+                $("#Editar #Validation_ImpuestoRequerido").html("El campo Porcentaje es requerido.");
                 $("#Editar #AsteriscoImpuesto").removeClass("text-danger");
-                $("#Editar #timv_ImpuestoValidacion").hide();
+                $("#Editar #Validation_ImpuestoRequerido").hide();
             }
         }
     }
+
     //RETURN DEL ESTADO DEL MODELO
     return ModelState;
 }
+
 
 //FUNCION: FORMATEAR MONTOS A DECIMAL
 function FormatearMonto(StringValue) {

@@ -200,7 +200,7 @@ namespace ERP_GMEDINA.Controllers
 
         }
 
-
+        [SessionManager("Requisiciones/Index")]
         public ActionResult ChildRowData(int? id)
         {
             try
@@ -256,6 +256,7 @@ namespace ERP_GMEDINA.Controllers
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("Requisiciones/Index")]
         public JsonResult llenarTabla()
         {
             try

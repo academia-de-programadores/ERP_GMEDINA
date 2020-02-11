@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-using ERP_GMEDINA.Helpers;
 using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
@@ -15,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class TechoImpuestoVecinalController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region Index
         [SessionManager("TechoImpuestoVecinal/Index")]
@@ -107,11 +107,11 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_Rango,timv_Impuesto,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal)
         {
             // data de auditoria
-            tbTechoImpuestoVecinal.timv_UsuarioCrea = 1;
-            tbTechoImpuestoVecinal.timv_FechaCrea = DateTime.Now;
+            tbTechoImpuestoVecinal.timv_UsuarioCrea = Function.GetUser();
+            tbTechoImpuestoVecinal.timv_FechaCrea = Function.DatetimeNow();
 
             // variables de resultado del proceso
-            string response = String.Empty;
+            string response = "bien";
             IEnumerable<object> listTechoImpuestoVecinal = null;
             string MensajeError = "";
 
@@ -140,9 +140,6 @@ namespace ERP_GMEDINA.Controllers
                         ModelState.AddModelError("", "No se pudo ingresar el registro. Contacte al administrador.");
                         response = "error";
                     }
-
-                    // el proceso fue exitoso
-                    response = "bien";
                 }
                 catch (Exception Ex)
                 {
@@ -191,8 +188,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit([Bind(Include = "timv_IdTechoImpuestoVecinal, timv_Rango, mun_Codigo,tde_IdTipoDedu,timv_RangoInicio,timv_RangoFin,timv_UsuarioCrea,timv_FechaCrea")] tbTechoImpuestoVecinal tbTechoImpuestoVecinal, string Impuesto)
         {
             // variables de auditoria
-            tbTechoImpuestoVecinal.timv_UsuarioModifica = 1;
-            tbTechoImpuestoVecinal.timv_FechaModifica = DateTime.Now;
+            tbTechoImpuestoVecinal.timv_UsuarioModifica = Function.GetUser();
+            tbTechoImpuestoVecinal.timv_FechaModifica = Function.DatetimeNow();
             tbTechoImpuestoVecinal.timv_Impuesto = (decimal)tbTechoImpuestoVecinal.timv_Impuesto;
             // variables de resultado del proceso
             IEnumerable<object> listTechoImpuestoVecinal = null;

@@ -60,8 +60,7 @@ namespace ERP_GMEDINA.Controllers
                                       tp.per_Estado == true &&
                                       tc.car_Estado == true &&
                                       ts.sue_Estado == true &&
-                                      ttm.tmon_Estado == true &&
-									  ts.sue_Estado == true
+                                      ttm.tmon_Estado == true
 									select new
                                     {
                                         NúmeroIdentidad = tp.per_Identidad.Substring(0, 4) + "-" + tp.per_Identidad.Substring(4, 4) + "-" + tp.per_Identidad.Substring(9, tp.per_Identidad.Length - 9),

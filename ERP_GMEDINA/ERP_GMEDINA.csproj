@@ -1597,6 +1597,9 @@
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDV_Acce_Usuario_Roles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModelDecimoCuartoMes.cs" />
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
     <Compile Include="Models\ViewModelDeduccionesReport.cs" />
@@ -1618,9 +1621,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_ColaboradoresPorPlanilla.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_ComisionesColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_DatosProfesionales.cs">
@@ -1707,9 +1707,6 @@
     <Compile Include="Models\V_FormaDePago.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_GeneralTotales_RPT.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1770,7 +1767,7 @@
     <Compile Include="Models\V_ISR_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_Liquidaciones_RPT.cs">
+    <Compile Include="Models\V_Objetos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_PlanillaDeducciones.cs">
@@ -3045,7 +3042,6 @@
     <Content Include="Views\Requisiciones\_Delete.cshtml" />
     <Content Include="Views\Requisiciones\_Detalles.cshtml" />
     <Content Include="Views\SeleccionCandidatos\Contratar.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Contratar.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Create.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Delete.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />

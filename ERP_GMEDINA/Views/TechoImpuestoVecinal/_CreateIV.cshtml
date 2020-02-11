@@ -15,7 +15,7 @@
                     <label class="AsteriscoMunicipio" id="AsteriscoMunicipio">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="mun_Codigo" name="mun_Codigo" class="form-control" ></select>
+                    <select id="mun_Codigo" name="mun_Codigo" class="form-control" onchange="DataAnnotationsCrear(this.value, '-1', '-1', '-1', '-1', '-1')"></select>
                     <label class="text-danger" id="Validation_MunicipioRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo municipio es requerido.</label>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <label class="AsteriscoTipoDeduccion" id="AsteriscoTipoDeduccion">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
+                    <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" onchange="DataAnnotationsCrear('-1', this.value, '-1', '-1', '-1', '-1')"></select>
                     <label class="text-danger" id="Validation_TipoDeduccionRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el tipo deduccion es requerido</label>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <label class="AsteriscoRangoInicio" id="AsteriscoRangoInicio">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.timv_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+                    @Html.EditorFor(model => model.timv_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', '-1', this.value, '-1', '-1', '-1')" } })
                     <label class="text-danger" id="Validation_RangoInicioRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el rango inicio es requerido</label>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     <label class="AsteriscoRangoFin" id="AsteriscoRangoFin">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.timv_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+                    @Html.EditorFor(model => model.timv_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value, '-1', '-1')" } })
                     <label class="text-danger" id="Validation_RangoFinRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el rango fin es requerido</label>
                     <label class="text-danger" id="validation_RangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</label>
                 </div>
@@ -62,7 +62,7 @@
                     <label class="AsteriscoRango" id="AsteriscoRango">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.timv_Rango, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
+                    @Html.EditorFor(model => model.timv_Rango, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', '-1', this.value, '-1')" } })
                     <label class="text-danger" id="Validation_RangoRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el rango es requerido</label>
                 </div>
             </div>
@@ -74,14 +74,14 @@
                     <label class="AsteriscoImpuesto" id="AsteriscoImpuesto">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero" } })
-                    <label class="text-danger" id="Validation_RangoRequerida" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el rango es requerido</label>
+                    @Html.EditorFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', '-1', '-1', this.value)" } })
+                    <label class="text-danger" id="Validation_ImpuestoRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo el impuesto es requerido</label>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <input type="button" data-dismiss="modal" value="Cerrar" id="btnCerrarCrear" class="btn btn-default pull-right" />
         <input type="submit" value="Guardar" id="btnCreateIV" class="btn btn-primary pull-left" />
+        <input type="button" data-dismiss="modal" value="Cerrar" id="btnCerrarCrear" class="btn btn-default pull-right" />
     </div>
 }

@@ -31,6 +31,9 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Código del Equipo")]
         public string eqtra_Codigo { get; set; }
 
+        [Display(Name = "Descripción del equipo")]
+        public string eqtra_Descripcion { get; set; }
+
         [Display(Name = "Id Deducción")]
         public int cde_IdDeducciones { get; set; }
 

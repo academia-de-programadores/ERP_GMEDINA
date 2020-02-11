@@ -137,7 +137,6 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
                 //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                 $("#Crear #cin_IdIngreso").empty();
                 //LLENAR EL DROPDOWNLIST
-                $("#Crear #cin_IdIngreso").append("<option value='0'>Selecione una opción...</option>");
                 $.each(data, function (i, iter) {
                     $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                 });
@@ -157,8 +156,7 @@ $('#btnCreateRegistroComisiones').click(function () {
 
     if (ValidarCamposCrear(Empleado, Ingreso, Total)) {
 
-        //BLOQUEAR EL BOTON DE CREAR
-        $("#btnCreateRegistroComisiones").attr("disabled", true);
+        //BLOQUEAR EL BOTON DE CREAR        $("#btnCreateRegistroComisiones").attr("disabled", true);
         //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
         var indicest = $("#Crear #TotalVenta").val().split(",");
         //VARIABLE CONTENEDORA DEL TOTAL
@@ -632,7 +630,7 @@ function ValidarCamposCrear(Empleado, Ingreso, Porcentaje, Total) {
 
     if (Empleado != "-1") {
         //VALIDAR EL ID DEL EMPLEADO
-        if (Empleado == "0" || Empleado == 0) {
+        if (Empleado == null || Empleado == "") {
             $("#Crear #AsteriscoEmpleado").addClass("text-danger");
             $("#Crear #Validation_empleado").show();
             pasoValidacion = false;
@@ -641,7 +639,6 @@ function ValidarCamposCrear(Empleado, Ingreso, Porcentaje, Total) {
             $("#Crear #Validation_empleado").hide();
         }
     }
-
     if (Ingreso != "-1") {
         //VALIDAR EL ID DEL INGRESO
         if (Ingreso == "0") {

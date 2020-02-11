@@ -347,6 +347,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
         if (validacionPermiso.status == true) {
 
             let itemEmpleado = localStorage.getItem('idEmpleado');
+
             let dataEmp = dataTableAcumuladosISR.row($(this).parents('tr')).data(); //obtener la data de la fila seleccionada
 
             if (itemEmpleado != null) {
@@ -365,6 +366,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                 data: JSON.stringify({ ID: ID })
             })
                 .done(function (data) {
+                    console.log(data.redirect);
                     if (data.aisr_DeducirISR) {
                         $('#Editar #aisr_DeducirISREdit').prop('checked', true);
                     }
@@ -418,7 +420,13 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                             message: 'No cargó la información, contacte al administrador',
                         });
                     }
-                });
+                }).error(function (data) {
+                if (data.status == 200) {
+                    sessionStorage.clear();
+                    timeOut = true;
+                    window.location = '/Login/CerrarSesion';
+                }
+            });
         }
     
 });

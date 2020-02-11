@@ -117,8 +117,6 @@
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
         public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
         public virtual DbSet<V_ColaboradoresPorPlanilla> V_ColaboradoresPorPlanilla { get; set; }
-        public virtual DbSet<V_ComisionesColaborador> V_ComisionesColaborador { get; set; }
-        public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
         public virtual DbSet<V_DecimoCuartoMes_Pagados> V_DecimoCuartoMes_Pagados { get; set; }
         public virtual DbSet<V_DecimoCuartoMes_RPT> V_DecimoCuartoMes_RPT { get; set; }
         public virtual DbSet<V_DecimoCuartoMesFE> V_DecimoCuartoMesFE { get; set; }
@@ -135,7 +133,6 @@
         public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
-        public virtual DbSet<V_GeneralTotales_RPT> V_GeneralTotales_RPT { get; set; }
         public virtual DbSet<V_HistorialEmpleadosLiquidados> V_HistorialEmpleadosLiquidados { get; set; }
         public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
         public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
@@ -143,7 +140,6 @@
         public virtual DbSet<V_Ingresos_RPT> V_Ingresos_RPT { get; set; }
         public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
         public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
-        public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
         public virtual DbSet<V_Plani_AnioPlanilla> V_Plani_AnioPlanilla { get; set; }
         public virtual DbSet<V_Plani_DecimoCuarto> V_Plani_DecimoCuarto { get; set; }
         public virtual DbSet<V_Plani_DecimoTercer> V_Plani_DecimoTercer { get; set; }
@@ -151,7 +147,6 @@
         public virtual DbSet<V_Plani_EncabezadoHistorialPlanilla> V_Plani_EncabezadoHistorialPlanilla { get; set; }
         public virtual DbSet<V_Plani_HistorialDeducciones> V_Plani_HistorialDeducciones { get; set; }
         public virtual DbSet<V_Plani_HistorialIngreso> V_Plani_HistorialIngreso { get; set; }
-        public virtual DbSet<V_Plani_Prueba> V_Plani_Prueba { get; set; }
         public virtual DbSet<V_Plani_TipoPlani> V_Plani_TipoPlani { get; set; }
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
@@ -221,6 +216,10 @@
         public virtual DbSet<V_Plani_HistorialPlanilla> V_Plani_HistorialPlanilla { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
+        public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
+        public virtual DbSet<UDV_Acce_Usuario_Roles> UDV_Acce_Usuario_Roles { get; set; }
+        public virtual DbSet<V_Objetos> V_Objetos { get; set; }
+        public virtual DbSet<V_Plani_Prueba> V_Plani_Prueba { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -8,8 +8,8 @@ namespace ERP_GMEDINA.Models
     {
         public int isr_Id { get; set; }
         public decimal isr_RangoInicial { get; set; }
-        public decimal isr_RangoFinal { get; set; }
-        public decimal isr_Porcentaje { get; set; }
+        public Nullable<decimal> isr_RangoFinal { get; set; }
+        public Nullable<decimal> isr_Porcentaje { get; set; }
         public int tde_IdTipoDedu { get; set; }
         public int isr_UsuarioCrea { get; set; }
         public System.DateTime isr_FechaCrea { get; set; }

@@ -25,9 +25,9 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("Nacionalidades/Index")]
         public JsonResult llenarTabla()
-        {
-
+        {     
             try
             {
                 db = new ERP_GMEDINAEntities();

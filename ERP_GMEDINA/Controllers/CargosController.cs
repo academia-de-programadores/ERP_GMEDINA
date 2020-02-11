@@ -38,6 +38,7 @@ namespace ERP_GMEDINA.Controllers
 
       
         [HttpPost]
+        [SessionManager("Cargos/Index")]
         public JsonResult llenarTabla()
         {
             try

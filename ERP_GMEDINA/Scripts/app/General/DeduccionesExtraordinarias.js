@@ -44,19 +44,18 @@ const btnEditar = $("#btnEditar"),
 //#endregion
 
 $.getScript("../Scripts/app/General/SerializeDate.js")
-    .done(function (script, textStatus) {
+	.done(function (script, textStatus) {
 
-    })
-    .fail(function (jqxhr, settings, exception) {
+	})
+	.fail(function (jqxhr, settings, exception) {
 
-    });
+	});
 
 //#region Obtención de Script para Formateo de Fechas
 //#endregion
 
 //#region Blur
-
-$('#eqemp_Id').blur(function () {
+$('#eqem_Id').blur(function () {
 	let equipoEmpleadoId = $(this).val();
 	if (equipoEmpleadoId == null || equipoEmpleadoId == "" || equipoEmpleadoId == 0 || equipoEmpleadoId == "0") {
 		$("#validacionEquipoEmpleado").html('Campo Equipo Empleado Requerido');
@@ -69,6 +68,7 @@ $('#eqemp_Id').blur(function () {
 		$("#asteriscoEquipoEmpleado").removeClass('text-danger');
 	}
 });
+
 
 $('#dex_MontoInicial').blur(function () {
 	let montoInicial = $(this).val();
@@ -144,7 +144,9 @@ $('#dex_MontoRestante').blur(function () {
 				$("#valMontoRestante").hide()
 				$("#asteriscoMontoRestante").removeClass('text-danger');
 			}
+
 	}
+	debugger;
 });
 
 $('#dex_ObservacionesComentarios').blur(function () {
@@ -377,7 +379,7 @@ function validaciones(equipoEmpId,
 		}
 
 		let floatMontoRestante = parseFloat(montoRestante);
-		let floatMontoInicial = parseFloat(montoInicial)
+		let floatMontoInicial = parseFloat(montoInicial.replace(/,/g, ''))
 
 		if (esMayorCero)
 			if (floatMontoRestante > floatMontoInicial) {
@@ -475,24 +477,24 @@ var GB_Activar = 0;
 
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-    
-    //validar informacion del usuario
-    var validacionPermiso = userModelState("DeduccionesExtraordinarias/Inactivar");
-   
-   	  if (validacionPermiso.status == true) {
-   
-   	      $("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
-   	      //OBTENER EL ID
-   	      var ID = $(this).data('id');
-   	      GB_Activar = ID;
 
-   	      //var ID = $(this).attr('iddeduccionesextra');
-   	      //localStorage.setItem('id', ID);
+	//validar informacion del usuario
+	var validacionPermiso = userModelState("DeduccionesExtraordinarias/Inactivar");
 
-   	      //Mostrar el Modal
-   	      $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-          }
-	
+	if (validacionPermiso.status == true) {
+
+		$("#btnActivarRegistroDeduccionesExtraordinarias").attr("disabled", false);
+		//OBTENER EL ID
+		var ID = $(this).data('id');
+		GB_Activar = ID;
+
+		//var ID = $(this).attr('iddeduccionesextra');
+		//localStorage.setItem('id', ID);
+
+		//Mostrar el Modal
+		$("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+	}
+
 });
 
 //Activar
@@ -677,17 +679,17 @@ $("#btnEditar").click(function () {
 var GB_Inactivar = 0;
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
-    //validar informacion del usuario
-    var validacionPermiso = userModelState("DeduccionesExtraordinarias/Inactivar");
-    		  if (validacionPermiso.status == true) {
-    		      //DESBLOQUEAR EL BOTON
-    		      $("#btnInactivar").attr("disabled", false);
-    		      var ID = $(this).data('id');
-    		      GB_Inactivar = ID;
-    		      //Mostrar el Modal
-    		      $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-        }
-	
+	//validar informacion del usuario
+	var validacionPermiso = userModelState("DeduccionesExtraordinarias/Inactivar");
+	if (validacionPermiso.status == true) {
+		//DESBLOQUEAR EL BOTON
+		$("#btnInactivar").attr("disabled", false);
+		var ID = $(this).data('id');
+		GB_Inactivar = ID;
+		//Mostrar el Modal
+		$("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+	}
+
 
 });
 

@@ -35,6 +35,7 @@ namespace ERP_GMEDINA.Controllers
             }
             
         }
+        [SessionManager("HistorialAmonestaciones/Index")]
         public ActionResult llenarTabla()
         {
             try
@@ -59,6 +60,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [SessionManager("HistorialAmonestaciones/Index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
