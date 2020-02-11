@@ -359,7 +359,7 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
     //VALIDACIONES DEL CAMPO FECHA
     if (Fecha != "-1") {
         if (Fecha == "" || Fecha == null || Fecha == undefined) {
-
+            $('#Crear #Validation_adsu_FechaAdelantoMenor').hide();
             $("#Crear #AsteriscoFecha").addClass("text-danger");
             $("#Crear #Validation_adsu_FechaAdelanto").empty();
             $("#Crear #Validation_adsu_FechaAdelanto").html("El campo Fecha es requerido.");
@@ -397,6 +397,8 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 //FUNCION: OCULTAR LOS MENSAJES DE ERROR DE VALIDACIONES, AL CERRAR EL MODAL
 function OcultarValidacionesCrear() {
 
+
+
     //SETEAR LOS CAMPOS
     $("#Crear #adsu_RazonAdelanto").val("");
     $("#Crear #adsu_Monto").val("");
@@ -420,6 +422,10 @@ function OcultarValidacionesCrear() {
     //OCULTAR VALIDACIONES DE FECHA
     $("#Crear #AsteriscoFecha").removeClass("text-danger");
     $("#Crear #Validation_adsu_FechaAdelanto").hide();
+
+    $('#Crear #Validation_adsu_FechaAdelantoMenor').hide();
+    $("#Crear #AsteriscoFecha").removeClass("text-danger");
+
 }
 
 //FUNCION: OCULTAR EL MODAL DE CREAR
