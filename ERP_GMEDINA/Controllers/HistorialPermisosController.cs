@@ -24,6 +24,7 @@ namespace ERP_GMEDINA.Controllers
                 tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos { hper_Estado = true };
                 return View(tbHistorialPermisos);
         }
+        [SessionManager("HistorialPermisoss/index")]
         public ActionResult llenarTabla()
         {
             //string estado =
@@ -91,6 +92,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [SessionManager("HistorialPermisoss/index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.

@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Controllers
             tbTipoMonedas tbTipoMonedas = new tbTipoMonedas {tmon_Estado=true};
             return View(tbTipoMonedas);
         }
-
+        [SessionManager("TipoMonedas/Index")]
         [HttpPost]
         public JsonResult llenarTabla()
         {

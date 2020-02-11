@@ -453,20 +453,14 @@ function limpiarClases(form) {
   asterisco.color = 'black';
  });
 }
-$.each($(".modal"), function (index, value) {
-    $(value).on('hidden.bs.modal', function () {
-        limpiarClases(value);
-        var INPUT = $(value).find('input');
-        $.each(INPUT, function (index, value) {
-            $(value).val("");
-            $(value).prop("checked",false);
-        });
-        var SELECT = $(value).find('select');
-        $.each(SELECT, function (index, value) {
-            $(value).val("");
-            $(value).val("0");
-        });
-    });
+$("#ModalNuevo").on('hidden.bs.modal', function () {
+ limpiarClases(this);
+});
+$("#ModalEditar").on('hidden.bs.modal', function () {
+ limpiarClases(this);
+});
+$("#ModalInactivar").on('hidden.bs.modal', function () {
+ limpiarClases(this);
 });
 $(".required").each(function (indice, input) {
  var maxlength = $(input).data("val-maxlength-max");
