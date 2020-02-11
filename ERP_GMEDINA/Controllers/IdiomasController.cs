@@ -49,6 +49,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbIdiomas);
         }
         //Llenar la tabla de algun lado
+        [SessionManager("Idiomas/Index")]
         [HttpPost]
         public JsonResult llenarTabla()
         {
