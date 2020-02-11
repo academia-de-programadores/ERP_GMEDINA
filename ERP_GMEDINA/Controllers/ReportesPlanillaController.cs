@@ -20,6 +20,8 @@ namespace ERP_GMEDINA.Controllers
     {
 		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+
+
 		ReportesPlanillaDS ds = new ReportesPlanillaDS();
 
         //Listo
@@ -68,8 +70,11 @@ namespace ERP_GMEDINA.Controllers
             List<ReportParameter> parameters = new List<ReportParameter>();
             //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-            string nombreUsuario = oUsuario.usu_NombreUsuario;
+
+            var oUsuario = HttpContext.Session["UserName"];
+            string nombreUsuario = oUsuario.ToString();
+
+
             parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
 
@@ -139,8 +144,8 @@ namespace ERP_GMEDINA.Controllers
             List<ReportParameter> parameters = new List<ReportParameter>();
             //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            var oUsuario = HttpContext.Session["UserName"];
+            string nombreUsuario = oUsuario.ToString();
             parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
             var titulo = (from D in db.tbCatalogoDeIngresos where D.cin_IdIngreso == cin_IdIngreso select D).First().cin_DescripcionIngreso;
@@ -250,11 +255,11 @@ namespace ERP_GMEDINA.Controllers
 			//Setiar parametros del reporte para asignar logo y usuario crea del reporte.
 			reportViewer.LocalReport.EnableExternalImages = true;
 			List<ReportParameter> parameters = new List<ReportParameter>();
-			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)Session["sesionUsuario"];
-			string nombreUsuario = oUsuario.usu_NombreUsuario;
-			parameters.Add(new ReportParameter("usuario", nombreUsuario));
+            var oUsuario = HttpContext.Session["UserName"];
+            string nombreUsuario = oUsuario.ToString();
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
 			reportViewer.LocalReport.SetParameters(parameters);
 			reportViewer.LocalReport.Refresh();
@@ -315,8 +320,8 @@ namespace ERP_GMEDINA.Controllers
             List<ReportParameter> parameters = new List<ReportParameter>();
             //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            var oUsuario = HttpContext.Session["UserName"];
+            string nombreUsuario = oUsuario.ToString();
             parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
             reportViewer.LocalReport.SetParameters(parameters);
@@ -373,8 +378,8 @@ namespace ERP_GMEDINA.Controllers
             List<ReportParameter> parameters = new List<ReportParameter>();
             //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-            var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-            string nombreUsuario = oUsuario.usu_NombreUsuario;
+            var oUsuario = HttpContext.Session["UserName"];
+            string nombreUsuario = oUsuario.ToString();
             parameters.Add(new ReportParameter("usuario", nombreUsuario));
 
             reportViewer.LocalReport.SetParameters(parameters);
@@ -431,11 +436,11 @@ namespace ERP_GMEDINA.Controllers
 			//Setiar parametros del reporte para asignar logo y usuario crea del reporte.
 			reportViewer.LocalReport.EnableExternalImages = true;
 			List<ReportParameter> parameters = new List<ReportParameter>();
-			//parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
+            //parameters.Add(new ReportParameter("logo", "file:" + @"C:\Users\LAB02\Desktop\Proyecto AHM\GITHUB\Proyecto_ERP_GMEDINA\ERP_GMEDINA\ReportesPlanilla\intel.jpg"));
 
-			var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Session["sesionUsuario"];
-			string nombreUsuario = oUsuario.usu_NombreUsuario;
-			parameters.Add(new ReportParameter("usuario", nombreUsuario));
+            var oUsuario = HttpContext.Session["UserName"];
+            string nombreUsuario = oUsuario.ToString();
+            parameters.Add(new ReportParameter("usuario", nombreUsuario));
                        
 
             reportViewer.LocalReport.SetParameters(parameters);
