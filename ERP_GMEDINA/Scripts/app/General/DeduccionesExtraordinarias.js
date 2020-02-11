@@ -55,8 +55,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 //#endregion
 
 //#region Blur
-
-$('#eqemp_Id').blur(function () {
+$('#eqem_Id').blur(function () {
 	let equipoEmpleadoId = $(this).val();
 	if (equipoEmpleadoId == null || equipoEmpleadoId == "" || equipoEmpleadoId == 0 || equipoEmpleadoId == "0") {
 		$("#validacionEquipoEmpleado").html('Campo Equipo Empleado Requerido');
@@ -69,6 +68,7 @@ $('#eqemp_Id').blur(function () {
 		$("#asteriscoEquipoEmpleado").removeClass('text-danger');
 	}
 });
+
 
 $('#dex_MontoInicial').blur(function () {
 	let montoInicial = $(this).val();
@@ -144,7 +144,9 @@ $('#dex_MontoRestante').blur(function () {
 				$("#valMontoRestante").hide()
 				$("#asteriscoMontoRestante").removeClass('text-danger');
 			}
+       
 	}
+	debugger;
 });
 
 $('#dex_ObservacionesComentarios').blur(function () {
