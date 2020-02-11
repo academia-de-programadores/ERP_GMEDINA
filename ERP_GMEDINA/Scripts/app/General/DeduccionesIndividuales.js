@@ -1080,7 +1080,7 @@ $(document).on("click", "#Tabla tbody tr td #btnDetalleDeduccionesIndividuales",
                     $("#Detalles #dei_Monto").html(data[0].dei_Monto);
                     $("#Detalles #dei_NumeroCuotas").html(data[0].dei_NumeroCuotas);
                     $("#Detalles #dei_MontoCuota").html(data[0].dei_MontoCuota);
-                    $("#Detalles #emp_Id").html(data[0].emp_Id);
+                    $("#Detalles #emp_Id").html(data[0].per_Nombres + ' ' + data[0].per_Apellidos);
                     $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                     $("#Detalles #dei_UsuarioCrea").html(data[0].dei_UsuarioCrea);
                     $("#Detalles #dei_FechaCrea").html(FechaCrea);
