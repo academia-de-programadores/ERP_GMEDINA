@@ -217,6 +217,9 @@
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
         public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
+        public virtual DbSet<UDV_Acce_Usuario_Roles> UDV_Acce_Usuario_Roles { get; set; }
+        public virtual DbSet<V_Objetos> V_Objetos { get; set; }
+        public virtual DbSet<V_Plani_Prueba> V_Plani_Prueba { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

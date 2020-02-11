@@ -494,6 +494,9 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDeduccionImpuestoVecinal_emp_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" Width="1.5" PointX="33.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles" Width="1.5" PointX="25.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Objetos" Width="1.5" PointX="27.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_Prueba" Width="1.5" PointX="33.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

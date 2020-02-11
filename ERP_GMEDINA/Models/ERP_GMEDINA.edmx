@@ -1462,8 +1462,46 @@
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Acce.UDV_Acce_Usuario_Roles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="UDV_Acce_Usuario_Roles">
+          <Key>
+            <PropertyRef Name="rolu_Id" />
+            <PropertyRef Name="acrol_Id" />
+            <PropertyRef Name="obj_Estado" />
+          </Key>
+          <Property Name="rolu_Id" Type="int" Nullable="false" />
+          <Property Name="rol_Id" Type="int" />
+          <Property Name="usu_Id" Type="int" />
+          <Property Name="rolu_UsuarioCrea" Type="int" />
+          <Property Name="rolu_FechaCrea" Type="datetime" />
+          <Property Name="rolu_UsuarioModifica" Type="int" />
+          <Property Name="rolu_FechaModifica" Type="datetime" />
+          <Property Name="acrol_Id" Type="int" Nullable="false" />
+          <Property Name="obj_Id" Type="int" />
+          <Property Name="acrol_UsuarioCrea" Type="int" />
+          <Property Name="acrol_FechaCrea" Type="datetime" />
+          <Property Name="acrol_UsuarioModifica" Type="int" />
+          <Property Name="acrol_FechaModifica" Type="datetime" />
+          <Property Name="obj_Pantalla" Type="nvarchar" MaxLength="50" />
+          <Property Name="obj_Referencia" Type="varchar" MaxLength="100" />
+          <Property Name="obj_UsuarioCrea" Type="int" />
+          <Property Name="obj_FechaCrea" Type="datetime" />
+          <Property Name="obj_UsuarioModifica" Type="int" />
+          <Property Name="obj_FechaModifica" Type="datetime" />
+          <Property Name="obj_Estado" Type="bit" Nullable="false" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Acce.V_Objetos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_Objetos">
+          <Key>
+            <PropertyRef Name="obj_Id" />
+          </Key>
+          <Property Name="obj_Id" Type="int" Nullable="false" />
+          <Property Name="obj_Pantalla" Type="nvarchar" MaxLength="50" />
+          <Property Name="usu_NombreUsuario" Type="varchar" MaxLength="100" />
+          <Property Name="obj_FechaCrea" Type="datetime" />
+          <Property Name="obj_UsuarioModifica" Type="int" />
+          <Property Name="obj_FechaModifica" Type="datetime" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.EmpleadosVendedores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EmpleadosVendedores">
@@ -2218,6 +2256,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistoria
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="V_Plani_FechaPlani">
+          <Property Name="hipa_FechaPago" Type="int" />
+        </EntityType>-->
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -2317,6 +2360,25 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialPlanilla'
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_Prueba' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_Plani_Prueba">
+          <Key>
+            <PropertyRef Name="usu_Id" />
+            <PropertyRef Name="usu_EsActivo" />
+            <PropertyRef Name="usu_EsAdministrador" />
+          </Key>
+          <Property Name="usu_Id" Type="int" Nullable="false" />
+          <Property Name="usu_NombreUsuario" Type="varchar" MaxLength="100" />
+          <Property Name="usu_Password" Type="varbinary" MaxLength="64" />
+          <Property Name="usu_Nombres" Type="varchar" MaxLength="150" />
+          <Property Name="usu_Apellidos" Type="varchar" MaxLength="150" />
+          <Property Name="usu_Correo" Type="varchar" MaxLength="150" />
+          <Property Name="usu_EsActivo" Type="bit" Nullable="false" />
+          <Property Name="usu_RazonInactivo" Type="varchar" MaxLength="150" />
+          <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
+          <Property Name="usu_SesionesValidas" Type="tinyint" />
+          <Property Name="suc_Id" Type="int" />
+          <Property Name="emp_Id" Type="smallint" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_TipoPlani">
@@ -9699,6 +9761,40 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="UDV_Acce_Usuario_Roles" EntityType="Self.UDV_Acce_Usuario_Roles" store:Type="Views" store:Schema="Acce">
+            <DefiningQuery>SELECT 
+    [UDV_Acce_Usuario_Roles].[rolu_Id] AS [rolu_Id], 
+    [UDV_Acce_Usuario_Roles].[rol_Id] AS [rol_Id], 
+    [UDV_Acce_Usuario_Roles].[usu_Id] AS [usu_Id], 
+    [UDV_Acce_Usuario_Roles].[rolu_UsuarioCrea] AS [rolu_UsuarioCrea], 
+    [UDV_Acce_Usuario_Roles].[rolu_FechaCrea] AS [rolu_FechaCrea], 
+    [UDV_Acce_Usuario_Roles].[rolu_UsuarioModifica] AS [rolu_UsuarioModifica], 
+    [UDV_Acce_Usuario_Roles].[rolu_FechaModifica] AS [rolu_FechaModifica], 
+    [UDV_Acce_Usuario_Roles].[acrol_Id] AS [acrol_Id], 
+    [UDV_Acce_Usuario_Roles].[obj_Id] AS [obj_Id], 
+    [UDV_Acce_Usuario_Roles].[acrol_UsuarioCrea] AS [acrol_UsuarioCrea], 
+    [UDV_Acce_Usuario_Roles].[acrol_FechaCrea] AS [acrol_FechaCrea], 
+    [UDV_Acce_Usuario_Roles].[acrol_UsuarioModifica] AS [acrol_UsuarioModifica], 
+    [UDV_Acce_Usuario_Roles].[acrol_FechaModifica] AS [acrol_FechaModifica], 
+    [UDV_Acce_Usuario_Roles].[obj_Pantalla] AS [obj_Pantalla], 
+    [UDV_Acce_Usuario_Roles].[obj_Referencia] AS [obj_Referencia], 
+    [UDV_Acce_Usuario_Roles].[obj_UsuarioCrea] AS [obj_UsuarioCrea], 
+    [UDV_Acce_Usuario_Roles].[obj_FechaCrea] AS [obj_FechaCrea], 
+    [UDV_Acce_Usuario_Roles].[obj_UsuarioModifica] AS [obj_UsuarioModifica], 
+    [UDV_Acce_Usuario_Roles].[obj_FechaModifica] AS [obj_FechaModifica], 
+    [UDV_Acce_Usuario_Roles].[obj_Estado] AS [obj_Estado]
+    FROM [Acce].[UDV_Acce_Usuario_Roles] AS [UDV_Acce_Usuario_Roles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Objetos" EntityType="Self.V_Objetos" store:Type="Views" store:Schema="Acce">
+            <DefiningQuery>SELECT 
+    [V_Objetos].[obj_Id] AS [obj_Id], 
+    [V_Objetos].[obj_Pantalla] AS [obj_Pantalla], 
+    [V_Objetos].[usu_NombreUsuario] AS [usu_NombreUsuario], 
+    [V_Objetos].[obj_FechaCrea] AS [obj_FechaCrea], 
+    [V_Objetos].[obj_UsuarioModifica] AS [obj_UsuarioModifica], 
+    [V_Objetos].[obj_FechaModifica] AS [obj_FechaModifica]
+    FROM [Acce].[V_Objetos] AS [V_Objetos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="EmpleadosVendedores" EntityType="Self.EmpleadosVendedores" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [EmpleadosVendedores].[Id] AS [Id], 
@@ -10228,6 +10324,22 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_Plani_HistorialPlanilla].[hipa_TotalBonos] AS [hipa_TotalBonos], 
     [V_Plani_HistorialPlanilla].[hipa_CodigoPlanilla] AS [hipa_CodigoPlanilla]
     FROM [Plani].[V_Plani_HistorialPlanilla] AS [V_Plani_HistorialPlanilla]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Plani_Prueba" EntityType="Self.V_Plani_Prueba" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_Plani_Prueba].[usu_Id] AS [usu_Id], 
+    [V_Plani_Prueba].[usu_NombreUsuario] AS [usu_NombreUsuario], 
+    [V_Plani_Prueba].[usu_Password] AS [usu_Password], 
+    [V_Plani_Prueba].[usu_Nombres] AS [usu_Nombres], 
+    [V_Plani_Prueba].[usu_Apellidos] AS [usu_Apellidos], 
+    [V_Plani_Prueba].[usu_Correo] AS [usu_Correo], 
+    [V_Plani_Prueba].[usu_EsActivo] AS [usu_EsActivo], 
+    [V_Plani_Prueba].[usu_RazonInactivo] AS [usu_RazonInactivo], 
+    [V_Plani_Prueba].[usu_EsAdministrador] AS [usu_EsAdministrador], 
+    [V_Plani_Prueba].[usu_SesionesValidas] AS [usu_SesionesValidas], 
+    [V_Plani_Prueba].[suc_Id] AS [suc_Id], 
+    [V_Plani_Prueba].[emp_Id] AS [emp_Id]
+    FROM [Plani].[V_Plani_Prueba] AS [V_Plani_Prueba]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_TipoPlani" EntityType="Self.V_Plani_TipoPlani" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -15899,6 +16011,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="timv_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_DecimoCuartoMes" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" />
+          <EntitySet Name="UDV_Acce_Usuario_Roles" EntityType="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles" />
+          <EntitySet Name="V_Objetos" EntityType="ERP_GMEDINAModel.V_Objetos" />
+          <EntitySet Name="V_Plani_Prueba" EntityType="ERP_GMEDINAModel.V_Plani_Prueba" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -24796,6 +24911,63 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
+        <EntityType Name="UDV_Acce_Usuario_Roles">
+          <Key>
+            <PropertyRef Name="rolu_Id" />
+            <PropertyRef Name="acrol_Id" />
+            <PropertyRef Name="obj_Estado" />
+          </Key>
+          <Property Name="rolu_Id" Type="Int32" Nullable="false" />
+          <Property Name="rol_Id" Type="Int32" />
+          <Property Name="usu_Id" Type="Int32" />
+          <Property Name="rolu_UsuarioCrea" Type="Int32" />
+          <Property Name="rolu_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="rolu_UsuarioModifica" Type="Int32" />
+          <Property Name="rolu_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="acrol_Id" Type="Int32" Nullable="false" />
+          <Property Name="obj_Id" Type="Int32" />
+          <Property Name="acrol_UsuarioCrea" Type="Int32" />
+          <Property Name="acrol_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="acrol_UsuarioModifica" Type="Int32" />
+          <Property Name="acrol_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="obj_Pantalla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="obj_Referencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="obj_UsuarioCrea" Type="Int32" />
+          <Property Name="obj_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="obj_UsuarioModifica" Type="Int32" />
+          <Property Name="obj_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="obj_Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_Objetos">
+          <Key>
+            <PropertyRef Name="obj_Id" />
+          </Key>
+          <Property Name="obj_Id" Type="Int32" Nullable="false" />
+          <Property Name="obj_Pantalla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="obj_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="obj_UsuarioModifica" Type="Int32" />
+          <Property Name="obj_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_Plani_Prueba">
+          <Key>
+            <PropertyRef Name="usu_Id" />
+            <PropertyRef Name="usu_EsActivo" />
+            <PropertyRef Name="usu_EsAdministrador" />
+          </Key>
+          <Property Name="usu_Id" Type="Int32" Nullable="false" />
+          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Password" Type="Binary" MaxLength="64" FixedLength="false" />
+          <Property Name="usu_Nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Correo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_EsActivo" Type="Boolean" Nullable="false" />
+          <Property Name="usu_RazonInactivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_EsAdministrador" Type="Boolean" Nullable="false" />
+          <Property Name="usu_SesionesValidas" Type="Byte" />
+          <Property Name="suc_Id" Type="Int32" />
+          <Property Name="emp_Id" Type="Int16" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -30239,6 +30411,62 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDV_Acce_Usuario_Roles">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles">
+              <MappingFragment StoreEntitySet="UDV_Acce_Usuario_Roles">
+                <ScalarProperty Name="obj_Estado" ColumnName="obj_Estado" />
+                <ScalarProperty Name="obj_FechaModifica" ColumnName="obj_FechaModifica" />
+                <ScalarProperty Name="obj_UsuarioModifica" ColumnName="obj_UsuarioModifica" />
+                <ScalarProperty Name="obj_FechaCrea" ColumnName="obj_FechaCrea" />
+                <ScalarProperty Name="obj_UsuarioCrea" ColumnName="obj_UsuarioCrea" />
+                <ScalarProperty Name="obj_Referencia" ColumnName="obj_Referencia" />
+                <ScalarProperty Name="obj_Pantalla" ColumnName="obj_Pantalla" />
+                <ScalarProperty Name="acrol_FechaModifica" ColumnName="acrol_FechaModifica" />
+                <ScalarProperty Name="acrol_UsuarioModifica" ColumnName="acrol_UsuarioModifica" />
+                <ScalarProperty Name="acrol_FechaCrea" ColumnName="acrol_FechaCrea" />
+                <ScalarProperty Name="acrol_UsuarioCrea" ColumnName="acrol_UsuarioCrea" />
+                <ScalarProperty Name="obj_Id" ColumnName="obj_Id" />
+                <ScalarProperty Name="acrol_Id" ColumnName="acrol_Id" />
+                <ScalarProperty Name="rolu_FechaModifica" ColumnName="rolu_FechaModifica" />
+                <ScalarProperty Name="rolu_UsuarioModifica" ColumnName="rolu_UsuarioModifica" />
+                <ScalarProperty Name="rolu_FechaCrea" ColumnName="rolu_FechaCrea" />
+                <ScalarProperty Name="rolu_UsuarioCrea" ColumnName="rolu_UsuarioCrea" />
+                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
+                <ScalarProperty Name="rol_Id" ColumnName="rol_Id" />
+                <ScalarProperty Name="rolu_Id" ColumnName="rolu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Objetos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Objetos">
+              <MappingFragment StoreEntitySet="V_Objetos">
+                <ScalarProperty Name="obj_FechaModifica" ColumnName="obj_FechaModifica" />
+                <ScalarProperty Name="obj_UsuarioModifica" ColumnName="obj_UsuarioModifica" />
+                <ScalarProperty Name="obj_FechaCrea" ColumnName="obj_FechaCrea" />
+                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
+                <ScalarProperty Name="obj_Pantalla" ColumnName="obj_Pantalla" />
+                <ScalarProperty Name="obj_Id" ColumnName="obj_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Plani_Prueba">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_Prueba">
+              <MappingFragment StoreEntitySet="V_Plani_Prueba">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="suc_Id" ColumnName="suc_Id" />
+                <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
+                <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
+                <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
+                <ScalarProperty Name="usu_EsActivo" ColumnName="usu_EsActivo" />
+                <ScalarProperty Name="usu_Correo" ColumnName="usu_Correo" />
+                <ScalarProperty Name="usu_Apellidos" ColumnName="usu_Apellidos" />
+                <ScalarProperty Name="usu_Nombres" ColumnName="usu_Nombres" />
+                <ScalarProperty Name="usu_Password" ColumnName="usu_Password" />
+                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
+                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
