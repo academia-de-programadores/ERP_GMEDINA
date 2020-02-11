@@ -24,8 +24,8 @@
                     <label class="AsteriscoMunicipio" id="AsteriscoMunicipio">*</label>
                 </div>
                 <div class="col-md-8">
-                    <select id="mun_Codigo" name="mun_Codigo" class="form-control" onchange="DataAnnotationsEditar(this.value, '-1', '-1', '-1', '-1','-1')"></select>
-                    <span class="field-validation-valid text-danger" style="display: none;" id="mun_CodigoValidacion">El campo Municipio es requerido.</span>
+                    <select id="mun_Codigo" name="mun_Codigo" class="form-control" onchange="DataAnnotationsCrear(this.value, '-1', '-1', '-1', '-1', '-1')"></select>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_MunicipioRequerida">El campo Municipio es requerido.</span>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" onchange="DataAnnotationsEditar('-1', this.value, '-1', '-1', '-1', '-1')"></select>
-                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_TipoDeduccionValidacion">El campo Tipo Deducción es requerido.</span>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_TipoDeduccionRequerida">El campo Tipo Deducción es requerido.</span>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.timv_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsEditar('-1', '-1', this.value, '-1', '-1', '-1')" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_RangoInicioValidacion">El campo Rango Inicio es requerido.</span>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_RangoInicioRequerida">El campo Rango Inicio es requerido.</span>
                 </div>
             </div>
 
@@ -58,7 +58,8 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.timv_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', this.value, '-1', '-1')" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_RangoFinValidacion">El campo Rango Final es requerido.</span>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_RangoFinRequerida">El campo Rango Final es requerido.</span>
+                    <span class="text-danger" id="validation_RangoFinalMayoRangoInicio" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final debe ser mayor que el rango inicial</span>
                 </div>
             </div>
 
@@ -71,7 +72,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.timv_Rango, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', '-1', this.value, '-1')" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_RangoValidacion">El campo Porcentaje es requerido.</span>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_RangoRequerida">El campo rango es requerido.</span>
                 </div>
             </div>
 
@@ -83,7 +84,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.timv_Impuesto, new { htmlAttributes = new { @class = "form-control MascaraCantidad", @onkeyup = "DataAnnotationsEditar('-1', '-1', '-1', '-1', '-1', this.value)" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="timv_ImpuestoValidacion">El campo Porcentaje es requerido.</span>
+                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_ImpuestoRequerido">El campo impuesto es requerido.</span>
                 </div>
             </div>
         </div>

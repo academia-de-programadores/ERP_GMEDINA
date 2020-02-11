@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Helpers
                 }
                 catch (Exception ex)
                 {
-
+                    ex.Message.ToString();
                 }
             }
 
@@ -377,10 +377,11 @@ namespace ERP_GMEDINA.Helpers
                     //ALMACENA LA CANTIDAD DE AÑOS LABORADOS
                     int AniosLaborados = Antiguedad / 360;
                     //SETEO DEL SALARIO PROMEDIO DIARIO 
-                    SalarioPromedioDiario = (((SalarioPromedioDiario * 30) * 14) / 12) / 30;
+                    SalarioPromedioDiario = ((SalarioPromedioDiario * 14) / 12) / 30;
                     //ITERADOR DEL CICLO
-                    int iter = 0;
+                    int iter = 1;
                     //ITERAR AÑOS PARA INCREMENTAR LOS DIAS DE VACACIONES ACUMULADAS
+
                     while (iter <= AniosLaborados)
                     {
                         Historico_DiasDeVacacionCorrespondiente += (iter == 1) ? 10 :
@@ -417,12 +418,16 @@ namespace ERP_GMEDINA.Helpers
 
                     //VACACIONES CORRESPONDIENTES
                     MontoVacacionesPendientes = SalarioPromedioDiario * DiasVacacionesValidos;
-                    if (Antiguedad % (BaseEnDias * 30) > 1)
+                    if (Antiguedad % 360 > 1)
                     {
                         //INCREMENTAR LA BASE EN DÍAS POR EL AÑO QUE ESTA INCOMPLETO
-                        BaseEnDias++;
+                        iter++;
+                        BaseEnDias = (iter == 1) ? 10 :
+                                     (iter == 2) ? 12 :
+                                     (iter == 3) ? 15 :
+                                     (iter >= 4) ? 20 : 0;
                         //CALCULTAR PROPORCIONAL
-                        MontoVacacionesPendientes += ((SalarioPromedioDiario * 30) / (BaseEnDias * 12)) * (Antiguedad % (BaseEnDias * 30));
+                        MontoVacacionesPendientes += ((SalarioPromedioDiario * BaseEnDias) / 360) * (Antiguedad % 360);
                     }
 
                 }

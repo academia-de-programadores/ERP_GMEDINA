@@ -9,12 +9,12 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Attribute;
 
-namespace PruebaPlanilla.Controllers
+namespace ERP_GMEDINA.Controllers
 {
     public class CatalogoDeDeduccionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-		Helpers Function = new Helpers();
+		Models.Helpers Function = new Models.Helpers();
 
 		[SessionManager("CatalogoDeDeducciones/Index")]
         // GET: CatalogoDeDeducciones editado
