@@ -172,10 +172,10 @@ namespace ERP_GMEDINA.Controllers
                         Id = 0,
                         Descripcion = "**Seleccione una opción**"
                     });
-                    Empleados.AddRange(db.V_HistorialSalidas_Empleados
+                    Empleados.AddRange(db.V_Empleados
                     .Select(tabla => new {
-                        Id = tabla.Id,
-                        Descripcion = tabla.Nombre
+                        Id = tabla.emp_Id,
+                        Descripcion = tabla.per_NombreCompleto
                     })
                     .ToList());
                 }

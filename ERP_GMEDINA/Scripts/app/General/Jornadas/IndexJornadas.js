@@ -216,6 +216,17 @@ function showmodalDetalle(btn) {
     }    
 }
 
+//$("#hor_HoraInicio").click(() => {
+//    $("#msgDuracion").hide();
+//    $("#msgDuracionEdit").hide();
+//});
+$("#hor_HoraFin,#hor_HoraInicio").change(() => {
+    $("#msgDuracion").hide();
+    $("#msgDuracionEdit").hide();
+});
+$("#btnCerrarModal").click(() => {
+    $("#msgDuracion").hide();
+});
 
 $("#btnEditar").click(function () {
     var validacionPermiso = userModelState("Jornadas/Edit");
@@ -244,7 +255,9 @@ $("#btnInactivar").click(function () {
 });
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
+    console.log(data);
     data = serializar(data);
+    console.log(data);
     if (data != null) {
         data = JSON.stringify({ tbJornadas: data });
         _ajax(data,
@@ -265,12 +278,22 @@ $("#btnGuardar").click(function () {
     }
 });
 $("#btnGuardarHorario").click(function () {
+
     var data = $("#FormNuevoHorario").serializeArray();
+    debugger;
+
     data = serializar(data);
     data.jor_Id = jor_Id;
-    var horaInicio = parseInt($("#hor_HoraInicio").val());
-    var horaFin = parseInt($("#hor_HoraFin").val())
-    var result = horaFin - horaInicio;      
+    let horaInicio = parseInt($("#hor_HoraInicio").val());
+    let horaFin = parseInt($("#hor_HoraFin").val());
+
+    let result = 0;
+    if (horaInicio > horaFin){
+        result = 24 - horaInicio + horaFin;
+    }
+    else{
+        result = horaFin-horaInicio;
+    }
 
     if (data != null)
     {
