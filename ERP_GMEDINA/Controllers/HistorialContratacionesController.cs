@@ -24,7 +24,7 @@ namespace ERP_GMEDINA.Controllers
             var tbHistorialContrataciones = new List<tbHistorialContrataciones> { };
             return View(tbHistorialContrataciones);
         }
-
+        [SessionManager("HistorialContrataciones/Index")]
         public ActionResult llenarTabla()
         {
             try

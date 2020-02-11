@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbHistorialVacaciones);
         }
-
+        [SessionManager("HistorialVacaciones/Index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -230,8 +230,9 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-
+        
         [HttpPost]
+        [SessionManager("HistorialVacaciones/Index")]
         public JsonResult llenarTabla()
         {
             using (db = new ERP_GMEDINAEntities())

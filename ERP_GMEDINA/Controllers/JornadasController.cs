@@ -34,6 +34,8 @@ namespace ERP_GMEDINA.Controllers
 
             }
         }
+
+        [SessionManager("Jornadas/Index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -66,6 +68,8 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
+
+        [SessionManager("Jornadas/Index")]
         public ActionResult llenarTabla()
         {
             try

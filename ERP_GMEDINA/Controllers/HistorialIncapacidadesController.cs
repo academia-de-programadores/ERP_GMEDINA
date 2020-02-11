@@ -88,6 +88,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+        [SessionManager("HistorialIncapacidades/Index")]
         public ActionResult llenarTabla()
         {
             try
@@ -116,7 +117,7 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-
+        [SessionManager("HistorialIncapacidades/Index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
