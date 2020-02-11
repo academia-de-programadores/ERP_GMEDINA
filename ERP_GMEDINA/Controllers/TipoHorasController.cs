@@ -26,6 +26,7 @@ namespace ERP_GMEDINA.Controllers
           
             return View(tbTipoHoras);
         }
+        [SessionManager("TipoHoras/Index")]
         [HttpPost]
         public JsonResult llenarTabla()
         {

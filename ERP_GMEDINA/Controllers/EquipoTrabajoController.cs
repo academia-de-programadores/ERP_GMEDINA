@@ -23,7 +23,8 @@ namespace ERP_GMEDINA.Controllers
             var tbEquipoTrabajo = new tbEquipoTrabajo {  };
             return View(tbEquipoTrabajo);
         }
-		[HttpPost]
+        [SessionManager("EquipoTrabajo/Index")]
+        [HttpPost]
         public JsonResult llenarTabla()
         {
             try
