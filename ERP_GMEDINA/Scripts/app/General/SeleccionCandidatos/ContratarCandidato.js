@@ -5,8 +5,8 @@
     llenarDropDownList()
 });
 
+
 function LLenarDepto(sel) {
-    debugger
     var select = document.getElementById("depto_Id");
     var i;
     for (i = select.options.length - 1 ; i >= 0 ; i--) {
@@ -79,42 +79,41 @@ function llenarDropDownList() {
 }
 
 $("#btnGuardar").click(function () {
-    //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    try
-    {
 
-    
+
+    //declaramos el objeto principal de nuestra tabla y asignamos sus valores
+    try {
+
+
         var tbSeleccionCandidatos =
     {
         scan_Id: sessionStorage.getItem("scan_Id"),
     };
 
-    var tbEmpleados =
-        {
-            per_id:     sessionStorage.getItem("per_Id"),
-            car_Id:     document.getElementById("car_Id").value,
-            area_Id:    document.getElementById("area_Id").value,
-            depto_Id:   document.getElementById("depto_Id").value,
-            jor_Id:     document.getElementById("jor_Id").value,
-            cpla_IdPlanilla: document.getElementById("cpla_IdPlanilla").value,
-            fpa_IdFormaPago: document.getElementById("fpa_IdFormaPago").value,
-            emp_CuentaBancaria: $("#emp_CuentaBancaria").val(),
-            emp_Fechaingreso: $("#emp_Fechaingreso").val(),
-        };
-    var sue_Cantidad = $("#sue_Cantidad").val();
-    var tmon_Id = document.getElementById("tmon_Id").value;
+        var tbEmpleados =
+            {
+                per_id: sessionStorage.getItem("per_Id"),
+                car_Id: document.getElementById("car_Id").value,
+                area_Id: document.getElementById("area_Id").value,
+                depto_Id: document.getElementById("depto_Id").value,
+                jor_Id: document.getElementById("jor_Id").value,
+                cpla_IdPlanilla: document.getElementById("cpla_IdPlanilla").value,
+                fpa_IdFormaPago: document.getElementById("fpa_IdFormaPago").value,
+                emp_CuentaBancaria: $("#emp_CuentaBancaria").val(),
+                emp_Fechaingreso: $("#emp_Fechaingreso").val(),
+            };
+        var sue_Cantidad = $("#sue_Cantidad").val();
+        var tmon_Id = document.getElementById("tmon_Id").value;
 
-    var tbRequisiciones =
-        {
-            req_Id: $("#req_Id").val(),
+        var tbRequisiciones =
+            {
+                req_Id: $("#req_Id").val(),
 
-        };
+            };
     }
-    catch(Exception)
-    {
-        
+    catch (Exception) {
+
     }
-    debugger
     var emp_Temporal = false;
     if ($('#emp_Temporal').prop('checked')) {
         emp_Temporal = true;
@@ -124,53 +123,69 @@ $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
-        if(sue_Cantidad >= 0)
-        {
+        if (sue_Cantidad >= 0) {
             if (sue_Cantidad <= 999999999999.99) {
-            if ($("#emp_Fechaingreso").val() > '01/01/1900')
-            {         
-        
-        data = JSON.stringify({
-            tbSeleccionCandidatos: tbSeleccionCandidatos,
-            tbEmpleados: tbEmpleados,
-            emp_Temporal : emp_Temporal,
-            sue_Cantidad: sue_Cantidad,
-            tmon_Id : tmon_Id,
-            tbRequisiciones: tbRequisiciones
-        });
-        _ajax(data,
-            '/SeleccionCandidatos/Contratar',
+                if ($("#emp_Fechaingreso").val() > '01/01/1900') {
+
+                    data = JSON.stringify({
+                        tbSeleccionCandidatos: tbSeleccionCandidatos,
+                        tbEmpleados: tbEmpleados,
+                        emp_Temporal: emp_Temporal,
+                        sue_Cantidad: sue_Cantidad,
+                        tmon_Id: tmon_Id,
+                        tbRequisiciones: tbRequisiciones
+                    });
+
+                    _ajax(null,
+            '/SeleccionCandidatos/SueldoMaxMin/' + document.getElementById("car_Id").value,
             'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-                    sessionStorage.clear();
-                    $(location).attr('href', "/SeleccionCandidatos/Index");
+            function (result) {
+                var sueldoMin = result.sueldoMin;
+                var sueldoMax = result.sueldoMax;
+                if ($("#sue_Cantidad").val() >= sueldoMin || sueldoMin == null) {
+                    if ($("#sue_Cantidad").val() <= sueldoMax || sueldoMax == null) {
+                        _ajax(data,
+                       '/SeleccionCandidatos/Contratar',
+                       'POST',
+                       function (obj) {
+                           if (obj != "-1" && obj != "-2" && obj != "-3") {
+                               MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                               sessionStorage.clear();
+                               $(location).attr('href', "/SeleccionCandidatos/Index");
 
-                } else {
-                    MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                           } else {
+                               MsgError("Error", "No se agregó el registro, contacte al administrador.");
+                           }
+                       });
+                    }
+                    else {
+                        MsgError("Error", "Para el cargo seleccionado el sueldo máximo es " + sueldoMax);
+                    }
                 }
+                else {
+                    MsgError("Error", "Para el cargo seleccionado el sueldo mínimo es " + sueldoMin);
+                }
+
+
             });
-            }
-            else
-            {
-                MsgError("Error", "La fecha es muy antigua");
-            }
 
+                }
+                else {
+                    MsgError("Error", "La fecha es muy antigua");
+                }
+
+            }
+            else {
+                MsgError("Error", "Sueldo no puede ser mayor a 999,999,999,999.99");
+            }
         }
+
+
         else {
-            MsgError("Error", "Sueldo no puede ser mayor a 999,999,999,999.99");
-        }
-        }
-  
-
-        else
-        {
-        MsgError("Error", "Sueldo no puede ser negativo");
+            MsgError("Error", "Sueldo no puede ser negativo");
         }
     }
-    else 
-    {
+    else {
         MsgError("Error", "Por favor llene todas las cajas de texto.");
     }
 });

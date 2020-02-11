@@ -450,7 +450,34 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SueldoMaxMin(int id)
+        {
 
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                     var Cargos = db.tbCargos
+                    .Select(
+                    x => new
+                    {
+                        car_Id = x.car_Id,
+                        sueldoMin = x.car_SueldoMinimo,
+                        sueldoMax = x.car_SueldoMaximo
+                    }
+
+                    ).Where(x => x.car_Id == id).ToList().Last();
+                    return Json(Cargos, JsonRequestBehavior.AllowGet);
+
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+
+        }
         public ActionResult llenarDropDowlistDepartamentos(int id)
         {
             var Departamentos = new List<object> { };

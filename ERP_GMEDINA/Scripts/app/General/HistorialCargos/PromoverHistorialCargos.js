@@ -103,19 +103,42 @@ $("#btnGuardar").click(function () {
             hcar_RazonPromocion: hcar_RazonPromocion,
             tbRequisiciones: tbRequisiciones
         });
-        _ajax(data,
-            '/HistorialCargos/Promover',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    MsgSuccess("¡Éxito!", "Promoción exitosa.");
-                    sessionStorage.clear();
-                    $(location).attr('href', "/HistorialCargos/Index");
 
-                } else {
-                    MsgError("Error", "No se promovió el registro, contacte con el administrador.");
+
+                _ajax(null,
+        '/HistorialCargos/SueldoMaxMin/' + document.getElementById("car_Id").value,
+        'POST',
+        function (result) {
+            var sueldoMin = result.sueldoMin;
+            var sueldoMax = result.sueldoMax;
+            if ($("#sue_Cantidad").val() >= sueldoMin || sueldoMin == null) {
+                if ($("#sue_Cantidad").val() <= sueldoMax || sueldoMax == null) {
+
+                    _ajax(data,
+                '/HistorialCargos/Promover',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        MsgSuccess("¡Éxito!", "Promoción exitosa.");
+                        sessionStorage.clear();
+                        $(location).attr('href', "/HistorialCargos/Index");
+
+                    } else {
+                        MsgError("Error", "No se promovió el registro, contacte con el administrador.");
+                    }
+                });
                 }
-            });
+                else {
+                    MsgError("Error", "Para el cargo seleccionado el sueldo máximo es " + sueldoMax);
+                }
+            }
+            else {
+                MsgError("Error", "Para el cargo seleccionado el sueldo mínimo es " + sueldoMin);
+            }
+
+
+        });
+
         }
         else
         {
