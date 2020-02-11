@@ -248,3 +248,18 @@ $("#InActivar").click(function () {
   MsgError("Error", "Por favor llene todas las cajas de texto.");
  }
 });
+$.each($(".modal"), function (index, value) {
+    $(value).on('hidden.bs.modal', function () {
+        limpiarClases(value);
+        var INPUT = $(value).find('input');
+        $.each(INPUT, function (index, value) {
+            $(value).val("");
+            $(value).prop("checked", false);
+        });
+        var SELECT = $(value).find('select');
+        $.each(SELECT, function (index, value) {
+            $(value).val("");
+            $(value).val("0");
+        });
+    });
+});
