@@ -10,6 +10,7 @@ function hablilitar(btn) {
         //
         $('#ModalHabilitar').modal('show');
     }
+}
 
     //Cambiar el controlador para ejecutar el UDP de restaurar
     $("#btnActivar").click(function () {
@@ -27,4 +28,3 @@ function hablilitar(btn) {
             });
         CierraPopups();
     });
-}
