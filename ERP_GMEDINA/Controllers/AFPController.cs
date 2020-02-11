@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class AFPController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-
+        private ERP_GMEDINA.Models.Helpers Function = new Models.Helpers();
         #region Index AFP
         // GET: AFP
         [SessionManager("AFP/Index")]
@@ -85,8 +85,8 @@ namespace ERP_GMEDINA.Controllers
                                                         tbAFP.afp_InteresAporte,
                                                         tbAFP.afp_InteresAnual,
                                                         tbAFP.tde_IdTipoDedu,
-                                                        tbAFP.afp_UsuarioCrea,
-                                                        tbAFP.afp_FechaCrea);
+                                                        Function.GetUser(),
+                                                        Function.DatetimeNow());
 
                     // verificar resultado del PA
                     foreach (UDP_Plani_tbAFP_Insert_Result Resultado in listAFP)
@@ -169,8 +169,8 @@ namespace ERP_GMEDINA.Controllers
                                                         tbAFP.afp_InteresAporte,
                                                         tbAFP.afp_InteresAnual,
                                                         tbAFP.tde_IdTipoDedu,
-                                                        tbAFP.afp_UsuarioModifica,
-                                                        tbAFP.afp_FechaModifica);
+                                                         Function.GetUser(),
+                                                         Function.DatetimeNow());
 
                     // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Update_Result Resultado in listAFP)
@@ -254,8 +254,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar procedimiento almacenado
                     listAFP = db.UDP_Plani_tbAFP_Inactivar(afp_Id,
-                                                           afp_UsuarioModifica,
-                                                           afp_FechaModifica);
+                                                           Function.GetUser(),
+                                                           Function.DatetimeNow());
 
                     // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Inactivar_Result Resultado in listAFP)
@@ -311,8 +311,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar procedimiento almacenado
                     listAFP = db.UDP_Plani_tbAFP_Activar(id,
-                                                         afp_UsuarioModifica,
-                                                         afp_FechaModifica);
+                                                         Function.GetUser(),
+                                                         Function.DatetimeNow());
 
                     // validar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Activar_Result Resultado in listAFP)
