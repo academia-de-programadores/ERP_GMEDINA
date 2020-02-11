@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult getPlanilla()
         {
             //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
-            tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
+            UDP_Acce_Login_Result sesion = Session["sesionUsuario"] as UDP_Acce_Login_Result;
 
             IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = GetPlanilla(sesion?.usu_EsAdministrador);
             object json = new { data = tbCatalogoDePlanillas };

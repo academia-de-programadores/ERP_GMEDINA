@@ -406,7 +406,7 @@ function listar() {
                 orderable: false,
                 data: 'activoAdmin',
                 render: function (data) {
-                    if (!data.activo && data.esAdmin) {
+                    if (data.activo == false && data.esAdmin == true) {
                         return Activar;
                     }
                     else if (data.activo && data.esAdmin) {
