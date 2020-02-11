@@ -152,16 +152,17 @@ $(document).ready(function () {
             tbPersonas = serializarPro(Form);
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
             //
-            var campos = "";
+            var campos = [];
             if ($("#per_FechaNacimiento").val() == "")
-                campos += "fecha de nacimiento, "
+                campos.push('fecha de nacimiento');
             if ($("#per_Direccion").val() == "")
-                campos += "dirección, "
+                campos.push('dirección');
             if ($("#per_Telefono").val() == "")
-                campos += "teléfono, "
+                campos.push('teléfono');
             if ($("#per_CorreoElectronico").val() == "")
-                campos += "correo electrónico ,"
-            if (campos != "") {
+                campos.push('correo electrónico');
+            if (campos.length >= 0)
+            {
                 $('#ModalHabilitar').modal('show');
                 $("#ModalHabilitar").find("#campos")["0"].innerText = campos;
             }

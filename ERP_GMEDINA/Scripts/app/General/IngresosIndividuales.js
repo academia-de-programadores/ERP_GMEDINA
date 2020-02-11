@@ -187,11 +187,14 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     var validacionPermiso = userModelState("IngresosIndividuales/Create");
 
     if (validacionPermiso.status == true) {
+        console.log($("#Crear #emp_IdCrear").val());
+
         //DESBLOQUEAR EL BOTON DE CREAR
         $("#btnCreateRegistroIngresoIndividual").attr("disabled", false);
         //INICIALIZAR LOS VALORES DEL MODAL
         $("#Crear #emp_IdCrear").val("0");
         $("#ini_Motivo").val('');
+        $("#ini_Monto").attr("disabled", false);
         $("#ini_Monto").val('');
         $('#Crear #ini_PagaSiempre').prop('checked', false);
         $("#Crear #ini_comentario").val('');
@@ -201,6 +204,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
             $("#Crear #emp_IdCrear").val('').trigger('change');
         //MOSTRAR EL MODAL DE AGREGAR
         $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+        console.log($("#Crear #emp_IdCrear").val());
     }
 });
 
@@ -309,7 +313,7 @@ function ValidarCamposCrear(Motivo, IdEmp, Monto) {
 
     //VALIDACIONES DEL CAMPO EMP_ID
     if (IdEmp != "-1") {
-        if (IdEmp == 0) {
+        if (IdEmp == '' || IdEmp == null) {
             pasoValidacionCrear = false;
             $("#Crear #ast2").addClass("text-danger");
             $("#Crear #validatione_empleadoID").css("display", "");

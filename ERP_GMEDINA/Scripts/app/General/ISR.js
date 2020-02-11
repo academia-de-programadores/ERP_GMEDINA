@@ -569,7 +569,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
             $("#Crear #isr_RangoFinalValidacion").hide();
         }
 
-        if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined) {
+        if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined || RangoInicial == 0 || RangoInicial == 0.00) {
             $("#Crear #AsteriscoRangoInicial").addClass("text-danger");
             $("#Crear #isr_RangoInicialValidacion").show();
 
@@ -664,6 +664,7 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
                 $("#Crear #isr_PorcentajeValidacion").empty();
                 $("#Crear #isr_PorcentajeValidacion").html("El campo Porcentaje no puede ser mayor a 100.");
                 $("#Crear #isr_PorcentajeValidacion").show();
+                ModelState = false;
             } else {
                 $("#Crear #isr_PorcentajeValidacion").empty();
                 $("#Crear #isr_PorcentajeValidacion").html("El campo Porcentaje es requerido.");
@@ -700,8 +701,8 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
         // }
 
         //RANGO INICIAL
-        if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined) {
-            $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
+        if (RangoInicial == "" || RangoInicial == null || RangoInicial == undefined || RangoInicial == 0 || RangoInicial == 0.00) {
+            $("#Editar #AsteriscoRangoInicial").addClass("text-danger");
             $("#Editar #isr_RangoInicialValidacion").show();
 
             ModelState = false;
@@ -735,20 +736,20 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
             $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
             $("#Editar #isr_RangoFinalValidacion").hide();
 
-            //Validacion rango final comentada
-            // if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Editar #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
+    //        //Validacion rango final comentada
+    //        // if (parseFloat(FormatearMonto(RangoFinal)) <= parseFloat(FormatearMonto($("#Editar #isr_RangoInicial").val())) || parseFloat(FormatearMonto(RangoFinal)) == 0) {
 
-            //     $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
-            //     $("#Editar #isr_RangoFinalValidacion").empty();
-            //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
-            //     $("#Editar #isr_RangoFinalValidacion").show();
-            //     ModelState = false;
-            // } else {
-            //     $("#Editar #isr_RangoFinalValidacion").empty();
-            //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
-            //     $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
-            //     $("#Editar #isr_RangoFinalValidacion").hide();
-            // }
+    //        //     $("#Editar #AsteriscoRangoFinal").addClass("text-danger");
+    //        //     $("#Editar #isr_RangoFinalValidacion").empty();
+    //        //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final debe ser mayor que el rango inicial.");
+    //        //     $("#Editar #isr_RangoFinalValidacion").show();
+    //        //     ModelState = false;
+    //        // } else {
+    //        //     $("#Editar #isr_RangoFinalValidacion").empty();
+    //        //     $("#Editar #isr_RangoFinalValidacion").html("El campo Rango Final es requerido.");
+    //        //     $("#Editar #AsteriscoRangoFinal").removeClass("text-danger");
+    //        //     $("#Editar #isr_RangoFinalValidacion").hide();
+    //        // }
 
         }
     }
@@ -760,7 +761,7 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
             //MOSTRAR DATAANNOTATIONS
             $("#Editar #isr_TipoDeduccionValidacion").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
-            $("#Editar #Asterisco_insf_Telefono").addClass("text-danger");
+            $("#Editar #AsteriscoTipoDeduccion").addClass("text-danger");
             ModelState = false;
         }
         else {
@@ -795,6 +796,7 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
                 $("#Editar #isr_PorcentajeValidacion").empty();
                 $("#Editar #isr_PorcentajeValidacion").html("El campo Porcentaje no puede ser mayor a 100.");
                 $("#Editar #isr_PorcentajeValidacion").show();
+                ModelState = false;
             } else {
                 $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
                 $("#Editar #isr_PorcentajeValidacion").hide();

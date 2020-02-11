@@ -85,6 +85,9 @@ $("#btnAgregar").click(function () {
         modalnuevo.modal('show');
         $(modalnuevo).find("#car_Descripcion").val("");
         $(modalnuevo).find("#car_Descripcion").focus();
+        $(modalnuevo).find("#car_SueldoMinimo").val("");
+        $(modalnuevo).find("#car_SueldoMaximo").val("");
+
     }
 });
 
