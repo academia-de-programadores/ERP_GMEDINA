@@ -220,7 +220,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                     //SETEAR LOS CAMPOS
                     $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                     $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                    $('#idTipoIngreso').val(data.cin_TipoIngreso ?? 4).trigger('change');
+                    $('#idTipoIngreso').val((data.cin_TipoIngreso == null) ? 4 : data.cin_TipoIngreso).trigger('change');
                     //MOSTRAR MODAL DE EDICION
                     $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
                 }
