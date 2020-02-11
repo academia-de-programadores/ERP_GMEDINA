@@ -24,6 +24,7 @@ namespace ERP_GMEDINA.Controllers
             var tbHistorialHorasTrabajadas = new List<tbHistorialHorasTrabajadas> { };
             return View(tbHistorialHorasTrabajadas);
         }
+        [SessionManager("HistorialHorasTrabajadas/Index")]
         public ActionResult llenarTabla()
         {
             try

@@ -26,6 +26,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
+        [SessionManager("TipoAmonestaciones/Index")]
         public JsonResult llenarTabla()
         {
             try
