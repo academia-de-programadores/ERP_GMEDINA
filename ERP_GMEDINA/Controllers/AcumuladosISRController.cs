@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using ERP_GMEDINA.Helpers;
 using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
@@ -166,7 +167,7 @@ namespace ERP_GMEDINA.Controllers
         {
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Id = aisr_Id, aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
             // data de auditoria
-            tbAcumuladosISR.aisr_UsuarioModifica = 1;
+            tbAcumuladosISR.aisr_UsuarioModifica = Function.GetUser();
             tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
 
 

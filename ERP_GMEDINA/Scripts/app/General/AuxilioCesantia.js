@@ -77,6 +77,15 @@ $(document).on("click", "#btnModalCrear", function () {
         // mesanje rango final no puede ser menor a rango inicial
         $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
 
+        // mesanje rango final no puede ser menor a rango inicial
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', 'none');
+
+        // mesanje rango final no puede ser menor a rango inicial
+        $("#Crear #validation_CantidadDiasRequerido").css('display', 'none');
+
+        // * rango final 
+        $('#AsteriscoCantidadDia').removeClass('text-danger');
+
         // vaciar cajas de texto
         $('#Crear input[type=text], input[type=number]').val('');
 

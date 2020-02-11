@@ -102,8 +102,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CatalogoDeIngresos" Width="1.5" PointX="4.75" PointY="5.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CatalogoDePlanillasConIngresosYDeducciones" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ColaboradoresPorPlanilla" Width="1.5" PointX="6.75" PointY="4.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ComisionesColaborador" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" Width="1.5" PointX="6.75" PointY="7.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes_Pagados" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes_RPT" Width="1.5" PointX="8.75" PointY="4.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" Width="1.5" PointX="8.75" PointY="8.75" />
@@ -120,7 +118,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesInstitucionesFinancierasColaboradres" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoBonos" Width="1.5" PointX="14.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_FormaDePago" Width="1.5" PointX="14.75" PointY="5.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_GeneralTotales_RPT" Width="1.5" PointX="14.75" PointY="9.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados" Width="1.5" PointX="14.75" PointY="13.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_IHSS_RPT" Width="1.5" PointX="2.75" PointY="15.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_INFOP_RPT" Width="1.5" PointX="8.75" PointY="15.75" />
@@ -128,7 +125,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Ingresos_RPT" Width="1.5" PointX="16.75" PointY="7.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT" Width="1.5" PointX="10.75" PointY="16.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ISR_RPT" Width="1.5" PointX="16.75" PointY="11.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Liquidaciones_RPT" Width="1.5" PointX="16.75" PointY="15.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_AnioPlanilla" Width="1.5" PointX="4.75" PointY="17.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DecimoCuarto" Width="1.5" PointX="12.75" PointY="17.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DecimoTercer" Width="1.5" PointX="18.75" PointY="0.75" />
@@ -136,7 +132,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla" Width="1.5" PointX="18.75" PointY="7.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" Width="1.5" PointX="18.75" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" Width="1.5" PointX="18.75" PointY="17.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_Prueba" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_TipoPlani" Width="1.5" PointX="2.75" PointY="19.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_PlanillaDeducciones" Width="1.5" PointX="4.75" PointY="19.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_PlanillaIngresos" Width="1.5" PointX="6.75" PointY="19.75" />
@@ -498,6 +493,10 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDeduccionImpuestoVecinal_emp_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" Width="1.5" PointX="33.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles" Width="1.5" PointX="25.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Objetos" Width="1.5" PointX="27.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_Prueba" Width="1.5" PointX="33.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

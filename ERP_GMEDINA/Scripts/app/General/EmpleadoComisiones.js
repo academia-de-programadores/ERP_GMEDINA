@@ -137,7 +137,6 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
                 //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                 $("#Crear #cin_IdIngreso").empty();
                 //LLENAR EL DROPDOWNLIST
-                $("#Crear #cin_IdIngreso").append("<option value='0'>Selecione una opción...</option>");
                 $.each(data, function (i, iter) {
                     $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                 });

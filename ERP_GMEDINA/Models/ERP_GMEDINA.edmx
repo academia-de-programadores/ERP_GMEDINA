@@ -153,7 +153,7 @@
           <Property Name="afp_Id" Type="int" Nullable="false" />
           <Property Name="afp_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="afp_AporteMinimoLps" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="afp_InteresAporte" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="afp_InteresAporte" Type="decimal" Precision="16" Scale="4" />
           <Property Name="afp_InteresAnual" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="tde_IdTipoDedu" Type="int" Nullable="false" />
           <Property Name="afp_UsuarioCrea" Type="int" Nullable="false" />
@@ -483,8 +483,8 @@
           </Key>
           <Property Name="isr_Id" Type="int" Nullable="false" />
           <Property Name="isr_RangoInicial" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="isr_RangoFinal" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="isr_Porcentaje" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="isr_RangoFinal" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="isr_Porcentaje" Type="decimal" Precision="16" Scale="4" />
           <Property Name="tde_IdTipoDedu" Type="int" Nullable="false" />
           <Property Name="isr_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="isr_FechaCrea" Type="datetime" Nullable="false" />
@@ -598,8 +598,8 @@
           <Property Name="timv_IdTechoImpuestoVecinal" Type="int" Nullable="false" />
           <Property Name="mun_Codigo" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="tde_IdTipoDedu" Type="int" />
-          <Property Name="timv_RangoInicio" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="timv_RangoFin" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="timv_RangoInicio" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="timv_RangoFin" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="timv_Rango" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="timv_Impuesto" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="timv_UsuarioCrea" Type="int" Nullable="false" />
@@ -1271,7 +1271,7 @@
           <Property Name="req_Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="req_EdadMinima" Type="int" Nullable="false" />
           <Property Name="req_EdadMaxima" Type="int" Nullable="false" />
-          <Property Name="req_EstadoCivil" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="req_EstadoCivil" Type="char" MaxLength="2" />
           <Property Name="req_EducacionSuperior" Type="bit" Nullable="false" />
           <Property Name="req_Permanente" Type="bit" Nullable="false" />
           <Property Name="req_Duracion" Type="nvarchar" MaxLength="50" />
@@ -1461,6 +1461,48 @@
           <Property Name="treq_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Acce.UDV_Acce_Usuario_Roles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="UDV_Acce_Usuario_Roles">
+          <Key>
+            <PropertyRef Name="rolu_Id" />
+            <PropertyRef Name="acrol_Id" />
+            <PropertyRef Name="obj_Estado" />
+          </Key>
+          <Property Name="rolu_Id" Type="int" Nullable="false" />
+          <Property Name="rol_Id" Type="int" />
+          <Property Name="usu_Id" Type="int" />
+          <Property Name="rolu_UsuarioCrea" Type="int" />
+          <Property Name="rolu_FechaCrea" Type="datetime" />
+          <Property Name="rolu_UsuarioModifica" Type="int" />
+          <Property Name="rolu_FechaModifica" Type="datetime" />
+          <Property Name="acrol_Id" Type="int" Nullable="false" />
+          <Property Name="obj_Id" Type="int" />
+          <Property Name="acrol_UsuarioCrea" Type="int" />
+          <Property Name="acrol_FechaCrea" Type="datetime" />
+          <Property Name="acrol_UsuarioModifica" Type="int" />
+          <Property Name="acrol_FechaModifica" Type="datetime" />
+          <Property Name="obj_Pantalla" Type="nvarchar" MaxLength="50" />
+          <Property Name="obj_Referencia" Type="varchar" MaxLength="100" />
+          <Property Name="obj_UsuarioCrea" Type="int" />
+          <Property Name="obj_FechaCrea" Type="datetime" />
+          <Property Name="obj_UsuarioModifica" Type="int" />
+          <Property Name="obj_FechaModifica" Type="datetime" />
+          <Property Name="obj_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Acce.V_Objetos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_Objetos">
+          <Key>
+            <PropertyRef Name="obj_Id" />
+          </Key>
+          <Property Name="obj_Id" Type="int" Nullable="false" />
+          <Property Name="obj_Pantalla" Type="nvarchar" MaxLength="50" />
+          <Property Name="usu_NombreUsuario" Type="varchar" MaxLength="100" />
+          <Property Name="obj_FechaCrea" Type="datetime" />
+          <Property Name="obj_UsuarioModifica" Type="int" />
+          <Property Name="obj_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.EmpleadosVendedores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EmpleadosVendedores">
           <Key>
@@ -1477,18 +1519,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_AFP_RPT' no tiene defini
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="per_Nombres" />
             <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="hipa_AFP" />
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="hipa_AFP" />
             <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_BonosColaborador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1561,33 +1603,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ColaboradoresPorPlanilla
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CantidadColaboradores" Type="int" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ComisionesColaborador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_ComisionesColaborador">
-          <Key>
-            <PropertyRef Name="cc_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="cc_FechaRegistro" />
-            <PropertyRef Name="cc_Pagado" />
-            <PropertyRef Name="cc_UsuarioCrea" />
-            <PropertyRef Name="cc_FechaCrea" />
-            <PropertyRef Name="cc_Activo" />
-            <PropertyRef Name="cin_IdIngreso" />
-            <PropertyRef Name="cin_DescripcionIngreso" />
-          </Key>
-          <Property Name="cc_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="cc_Monto" Type="decimal" Precision="37" Scale="12" />
-          <Property Name="cc_FechaRegistro" Type="datetime" Nullable="false" />
-          <Property Name="cc_Pagado" Type="bit" Nullable="false" />
-          <Property Name="cc_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="cc_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="cc_UsuarioModifica" Type="int" />
-          <Property Name="cc_FechaModifica" Type="datetime" />
-          <Property Name="cc_Activo" Type="bit" Nullable="false" />
-          <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
-          <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1760,11 +1775,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Deducciones_RPT' no tien
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="hipa_FechaInicio" />
             <PropertyRef Name="hipa_FechaFin" />
             <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -1772,9 +1787,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Deducciones_RPT' no tien
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -1976,24 +1991,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_FormaDePago' no tiene de
           <Property Name="fpa_Activo" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_GeneralTotales_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_GeneralTotales_RPT">
-          <Key>
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
-          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="cde_TotalISR" Type="decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalAFP" Type="decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalIHSS" Type="decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalRAP" Type="decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalINFOP" Type="decimal" Precision="38" Scale="4" />
-          <Property Name="cde_OtrasDeducciones" Type="decimal" Precision="38" Scale="4" />
-        </EntityType>
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_HistorialEmpleadosLiquidados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialEmpleadosLiquidados">
           <Key>
@@ -2022,11 +2019,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_IHSS_RPT' no tiene defin
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="hipa_FechaInicio" />
             <PropertyRef Name="hipa_FechaFin" />
             <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -2034,9 +2031,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_IHSS_RPT' no tiene defin
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -2049,11 +2046,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene defi
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="hipa_FechaInicio" />
             <PropertyRef Name="hipa_FechaFin" />
             <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -2061,9 +2058,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene defi
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -2110,11 +2107,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Ingresos_RPT' no tiene d
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="cin_IdIngreso" />
             <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="hipa_FechaInicio" />
             <PropertyRef Name="hipa_FechaFin" />
             <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -2122,9 +2119,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Ingresos_RPT' no tiene d
           <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -2137,11 +2134,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="hipa_FechaInicio" />
             <PropertyRef Name="hipa_FechaFin" />
             <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -2149,9 +2146,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -2172,35 +2169,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ISR_RPT' no tiene defini
           <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Liquidaciones_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_Liquidaciones_RPT">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="NombreCompleto" />
-            <PropertyRef Name="depto_descripcion" />
-            <PropertyRef Name="area_Descripcion" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hliq_fechaIngreso" />
-            <PropertyRef Name="hliq_fechaLiquidacion" />
-            <PropertyRef Name="hliq_PorcentajeLiquidacion" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="depto_descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hliq_fechaIngreso" Type="datetime" Nullable="false" />
-          <Property Name="hliq_fechaLiquidacion" Type="datetime" Nullable="false" />
-          <Property Name="hliq_PorcentajeLiquidacion" Type="int" Nullable="false" />
-          <Property Name="hliq_Observaciones" Type="nvarchar" MaxLength="25" />
+          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_AnioPlanilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2286,29 +2256,34 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistoria
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="V_Plani_FechaPlani">
+          <Property Name="hipa_FechaPago" Type="int" />
+        </EntityType>-->
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="hidp_IdHistorialdeDeduPago" />
-            <PropertyRef Name="hipa_TotalISR" />
-            <PropertyRef Name="hipa_AFP" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
             <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
             <PropertyRef Name="nombreEmpleado" />
             <PropertyRef Name="identidadEmpleado" />
+            <PropertyRef Name="hipa_TotalISR" />
+            <PropertyRef Name="hipa_AFP" />
+            <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="hidp_IdHistorialdeDeduPago" Type="int" Nullable="false" />
-          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="TotalDeducciones" Type="int" />
@@ -2320,16 +2295,16 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' 
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="cin_DescripcionIngreso" />
-            <PropertyRef Name="hipa_FechaPago" />
             <PropertyRef Name="nombreEmpleado" />
             <PropertyRef Name="identidadEmpleado" />
             <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="nombreEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="identidadEmpleado" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
@@ -2396,11 +2371,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_Prueba' no tiene d
           <Property Name="usu_Password" Type="varbinary" MaxLength="64" />
           <Property Name="usu_Nombres" Type="varchar" MaxLength="150" />
           <Property Name="usu_Apellidos" Type="varchar" MaxLength="150" />
-          <Property Name="usu_Correos" Type="varchar" MaxLength="150" />
+          <Property Name="usu_Correo" Type="varchar" MaxLength="150" />
           <Property Name="usu_EsActivo" Type="bit" Nullable="false" />
           <Property Name="usu_RazonInactivo" Type="varchar" MaxLength="150" />
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
+          <Property Name="suc_Id" Type="int" />
+          <Property Name="emp_Id" Type="smallint" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2472,7 +2449,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_PreviewPlanilla' no tien
           <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="per_Sexo" Type="char" MaxLength="1" />
           <Property Name="per_Edad" Type="int" />
-          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="500" />
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
           <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
@@ -2491,11 +2468,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_RAP_RPT' no tiene defini
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="hipa_FechaInicio" />
             <PropertyRef Name="hipa_FechaFin" />
             <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -2503,9 +2480,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_RAP_RPT' no tiene defini
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -2552,13 +2529,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ReportesVarios' no tiene
             <PropertyRef Name="cpla_RecibeComision" />
             <PropertyRef Name="cpla_Activo" />
             <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="hipa_FechaInicio" />
-            <PropertyRef Name="hipa_FechaFin" />
-            <PropertyRef Name="hipa_FechaPago" />
             <PropertyRef Name="hipa_Anio" />
             <PropertyRef Name="hipa_Mes" />
             <PropertyRef Name="peri_IdPeriodo" />
             <PropertyRef Name="hipa_FechaCrea" />
+            <PropertyRef Name="hipa_FechaInicio" />
+            <PropertyRef Name="hipa_FechaFin" />
+            <PropertyRef Name="hipa_FechaPago" />
             <PropertyRef Name="hipa_TotalISR" />
             <PropertyRef Name="hipa_AFP" />
           </Key>
@@ -2574,24 +2551,24 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_ReportesVarios' no tiene
           <Property Name="cpla_RecibeComision" Type="bit" Nullable="false" />
           <Property Name="cpla_Activo" Type="bit" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
           <Property Name="hipa_Anio" Type="int" Nullable="false" />
           <Property Name="hipa_Mes" Type="int" Nullable="false" />
           <Property Name="peri_IdPeriodo" Type="int" Nullable="false" />
           <Property Name="hipa_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="hipa_ISRPendiente" Type="bit" />
-          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalComisiones" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasExtras" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalVacaciones" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSeptimoDia" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_AdelantoSueldo" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSalario" Type="decimal" Precision="16" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_tbAdelantoSueldo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3036,7 +3013,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' no
           <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hamo_Id" Type="int" Nullable="false" />
           <Property Name="hamo_Fecha" Type="date" />
-          <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
+          <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="500" />
           <Property Name="hamo_Estado" Type="bit" Nullable="false" />
           <Property Name="hamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="hamo_UsuarioCrea" Type="int" Nullable="false" />
@@ -3782,7 +3759,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
           <Property Name="FaseReclutamientoId" Type="int" Nullable="false" />
           <Property Name="Fase" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RequisionId" Type="int" Nullable="false" />
-          <Property Name="Plaza_Solicitada" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Plaza_Solicitada" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Fecha" Type="date" />
           <Property Name="Fecha_Crea" Type="datetime" Nullable="false" />
           <Property Name="Usuario_Crea" Type="int" Nullable="false" />
@@ -3870,6 +3847,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbEmpleados' no tiene def
           <Property Name="emp_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="emp_UsuarioModifica" Type="int" />
           <Property Name="emp_FechaModifica" Type="datetime" />
+          <Property Name="emp_Temporal" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3879,7 +3857,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_compl
             <PropertyRef Name="per_Identidad" />
             <PropertyRef Name="per_Nombres" />
             <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="per_FechaNacimiento" />
             <PropertyRef Name="nac_Id" />
             <PropertyRef Name="per_Estado" />
             <PropertyRef Name="per_UsuarioCrea" />
@@ -3895,6 +3872,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_compl
             <PropertyRef Name="hper_PorcentajeIndemnizado" />
             <PropertyRef Name="hper_Estado" />
             <PropertyRef Name="hper_FechaCrea" />
+            <PropertyRef Name="per_FechaNacimiento" />
           </Key>
           <Property Name="per_Id" Type="int" Nullable="false" />
           <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
@@ -3904,7 +3882,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_compl
           <Property Name="per_Sexo" Type="char" MaxLength="1" />
           <Property Name="per_Edad" Type="int" />
           <Property Name="nac_Id" Type="int" Nullable="false" />
-          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="500" />
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
           <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
@@ -3966,7 +3944,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
             <PropertyRef Name="per_Identidad" />
             <PropertyRef Name="per_Nombres" />
             <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="per_FechaNacimiento" />
             <PropertyRef Name="nac_Id" />
             <PropertyRef Name="per_Estado" />
             <PropertyRef Name="per_UsuarioCrea" />
@@ -3979,6 +3956,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
             <PropertyRef Name="hsal_Estado" />
             <PropertyRef Name="hsal_UsuarioCrea" />
             <PropertyRef Name="hsal_FechaCrea" />
+            <PropertyRef Name="per_FechaNacimiento" />
           </Key>
           <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="rsal_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -3990,7 +3968,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
           <Property Name="per_Sexo" Type="char" MaxLength="1" />
           <Property Name="per_Edad" Type="int" />
           <Property Name="nac_Id" Type="int" Nullable="false" />
-          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="500" />
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
           <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
@@ -9783,6 +9761,40 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="UDV_Acce_Usuario_Roles" EntityType="Self.UDV_Acce_Usuario_Roles" store:Type="Views" store:Schema="Acce">
+            <DefiningQuery>SELECT 
+    [UDV_Acce_Usuario_Roles].[rolu_Id] AS [rolu_Id], 
+    [UDV_Acce_Usuario_Roles].[rol_Id] AS [rol_Id], 
+    [UDV_Acce_Usuario_Roles].[usu_Id] AS [usu_Id], 
+    [UDV_Acce_Usuario_Roles].[rolu_UsuarioCrea] AS [rolu_UsuarioCrea], 
+    [UDV_Acce_Usuario_Roles].[rolu_FechaCrea] AS [rolu_FechaCrea], 
+    [UDV_Acce_Usuario_Roles].[rolu_UsuarioModifica] AS [rolu_UsuarioModifica], 
+    [UDV_Acce_Usuario_Roles].[rolu_FechaModifica] AS [rolu_FechaModifica], 
+    [UDV_Acce_Usuario_Roles].[acrol_Id] AS [acrol_Id], 
+    [UDV_Acce_Usuario_Roles].[obj_Id] AS [obj_Id], 
+    [UDV_Acce_Usuario_Roles].[acrol_UsuarioCrea] AS [acrol_UsuarioCrea], 
+    [UDV_Acce_Usuario_Roles].[acrol_FechaCrea] AS [acrol_FechaCrea], 
+    [UDV_Acce_Usuario_Roles].[acrol_UsuarioModifica] AS [acrol_UsuarioModifica], 
+    [UDV_Acce_Usuario_Roles].[acrol_FechaModifica] AS [acrol_FechaModifica], 
+    [UDV_Acce_Usuario_Roles].[obj_Pantalla] AS [obj_Pantalla], 
+    [UDV_Acce_Usuario_Roles].[obj_Referencia] AS [obj_Referencia], 
+    [UDV_Acce_Usuario_Roles].[obj_UsuarioCrea] AS [obj_UsuarioCrea], 
+    [UDV_Acce_Usuario_Roles].[obj_FechaCrea] AS [obj_FechaCrea], 
+    [UDV_Acce_Usuario_Roles].[obj_UsuarioModifica] AS [obj_UsuarioModifica], 
+    [UDV_Acce_Usuario_Roles].[obj_FechaModifica] AS [obj_FechaModifica], 
+    [UDV_Acce_Usuario_Roles].[obj_Estado] AS [obj_Estado]
+    FROM [Acce].[UDV_Acce_Usuario_Roles] AS [UDV_Acce_Usuario_Roles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Objetos" EntityType="Self.V_Objetos" store:Type="Views" store:Schema="Acce">
+            <DefiningQuery>SELECT 
+    [V_Objetos].[obj_Id] AS [obj_Id], 
+    [V_Objetos].[obj_Pantalla] AS [obj_Pantalla], 
+    [V_Objetos].[usu_NombreUsuario] AS [usu_NombreUsuario], 
+    [V_Objetos].[obj_FechaCrea] AS [obj_FechaCrea], 
+    [V_Objetos].[obj_UsuarioModifica] AS [obj_UsuarioModifica], 
+    [V_Objetos].[obj_FechaModifica] AS [obj_FechaModifica]
+    FROM [Acce].[V_Objetos] AS [V_Objetos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="EmpleadosVendedores" EntityType="Self.EmpleadosVendedores" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [EmpleadosVendedores].[Id] AS [Id], 
@@ -9844,22 +9856,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_ColaboradoresPorPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_ColaboradoresPorPlanilla].[CantidadColaboradores] AS [CantidadColaboradores]
     FROM [Plani].[V_ColaboradoresPorPlanilla] AS [V_ColaboradoresPorPlanilla]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_ComisionesColaborador" EntityType="Self.V_ComisionesColaborador" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_ComisionesColaborador].[cc_Id] AS [cc_Id], 
-    [V_ComisionesColaborador].[emp_Id] AS [emp_Id], 
-    [V_ComisionesColaborador].[cc_Monto] AS [cc_Monto], 
-    [V_ComisionesColaborador].[cc_FechaRegistro] AS [cc_FechaRegistro], 
-    [V_ComisionesColaborador].[cc_Pagado] AS [cc_Pagado], 
-    [V_ComisionesColaborador].[cc_UsuarioCrea] AS [cc_UsuarioCrea], 
-    [V_ComisionesColaborador].[cc_FechaCrea] AS [cc_FechaCrea], 
-    [V_ComisionesColaborador].[cc_UsuarioModifica] AS [cc_UsuarioModifica], 
-    [V_ComisionesColaborador].[cc_FechaModifica] AS [cc_FechaModifica], 
-    [V_ComisionesColaborador].[cc_Activo] AS [cc_Activo], 
-    [V_ComisionesColaborador].[cin_IdIngreso] AS [cin_IdIngreso], 
-    [V_ComisionesColaborador].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso]
-    FROM [Plani].[V_ComisionesColaborador] AS [V_ComisionesColaborador]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoCuartoMes" EntityType="Self.V_DecimoCuartoMes" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -10101,19 +10097,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_FormaDePago].[fpa_Activo] AS [fpa_Activo]
     FROM [Plani].[V_FormaDePago] AS [V_FormaDePago]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_GeneralTotales_RPT" EntityType="Self.V_GeneralTotales_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_GeneralTotales_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_GeneralTotales_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_GeneralTotales_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_GeneralTotales_RPT].[cde_TotalISR] AS [cde_TotalISR], 
-    [V_GeneralTotales_RPT].[cde_TotalAFP] AS [cde_TotalAFP], 
-    [V_GeneralTotales_RPT].[cde_TotalIHSS] AS [cde_TotalIHSS], 
-    [V_GeneralTotales_RPT].[cde_TotalRAP] AS [cde_TotalRAP], 
-    [V_GeneralTotales_RPT].[cde_TotalINFOP] AS [cde_TotalINFOP], 
-    [V_GeneralTotales_RPT].[cde_OtrasDeducciones] AS [cde_OtrasDeducciones]
-    FROM [Plani].[V_GeneralTotales_RPT] AS [V_GeneralTotales_RPT]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="Self.V_HistorialEmpleadosLiquidados" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_HistorialEmpleadosLiquidados].[hdli_Id] AS [hdli_Id], 
@@ -10227,21 +10210,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_ISR_RPT].[hipa_TotalISR] AS [hipa_TotalISR], 
     [V_ISR_RPT].[hipa_FechaPago] AS [hipa_FechaPago]
     FROM [Plani].[V_ISR_RPT] AS [V_ISR_RPT]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_Liquidaciones_RPT" EntityType="Self.V_Liquidaciones_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Liquidaciones_RPT].[emp_Id] AS [emp_Id], 
-    [V_Liquidaciones_RPT].[per_Identidad] AS [per_Identidad], 
-    [V_Liquidaciones_RPT].[NombreCompleto] AS [NombreCompleto], 
-    [V_Liquidaciones_RPT].[depto_descripcion] AS [depto_descripcion], 
-    [V_Liquidaciones_RPT].[area_Descripcion] AS [area_Descripcion], 
-    [V_Liquidaciones_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Liquidaciones_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_Liquidaciones_RPT].[hliq_fechaIngreso] AS [hliq_fechaIngreso], 
-    [V_Liquidaciones_RPT].[hliq_fechaLiquidacion] AS [hliq_fechaLiquidacion], 
-    [V_Liquidaciones_RPT].[hliq_PorcentajeLiquidacion] AS [hliq_PorcentajeLiquidacion], 
-    [V_Liquidaciones_RPT].[hliq_Observaciones] AS [hliq_Observaciones]
-    FROM [Plani].[V_Liquidaciones_RPT] AS [V_Liquidaciones_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_AnioPlanilla" EntityType="Self.V_Plani_AnioPlanilla" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -10364,11 +10332,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_Plani_Prueba].[usu_Password] AS [usu_Password], 
     [V_Plani_Prueba].[usu_Nombres] AS [usu_Nombres], 
     [V_Plani_Prueba].[usu_Apellidos] AS [usu_Apellidos], 
-    [V_Plani_Prueba].[usu_Correos] AS [usu_Correos], 
+    [V_Plani_Prueba].[usu_Correo] AS [usu_Correo], 
     [V_Plani_Prueba].[usu_EsActivo] AS [usu_EsActivo], 
     [V_Plani_Prueba].[usu_RazonInactivo] AS [usu_RazonInactivo], 
     [V_Plani_Prueba].[usu_EsAdministrador] AS [usu_EsAdministrador], 
-    [V_Plani_Prueba].[usu_SesionesValidas] AS [usu_SesionesValidas]
+    [V_Plani_Prueba].[usu_SesionesValidas] AS [usu_SesionesValidas], 
+    [V_Plani_Prueba].[suc_Id] AS [suc_Id], 
+    [V_Plani_Prueba].[emp_Id] AS [emp_Id]
     FROM [Plani].[V_Plani_Prueba] AS [V_Plani_Prueba]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_TipoPlani" EntityType="Self.V_Plani_TipoPlani" store:Type="Views" store:Schema="Plani">
@@ -11274,7 +11244,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
     [V_tbEmpleados].[emp_UsuarioCrea] AS [emp_UsuarioCrea], 
     [V_tbEmpleados].[emp_FechaCrea] AS [emp_FechaCrea], 
     [V_tbEmpleados].[emp_UsuarioModifica] AS [emp_UsuarioModifica], 
-    [V_tbEmpleados].[emp_FechaModifica] AS [emp_FechaModifica]
+    [V_tbEmpleados].[emp_FechaModifica] AS [emp_FechaModifica], 
+    [V_tbEmpleados].[emp_Temporal] AS [emp_Temporal]
     FROM [rrhh].[V_tbEmpleados] AS [V_tbEmpleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="Self.V_tbHistorialPermisos_completa" store:Type="Views" store:Schema="rrhh">
@@ -14586,8 +14557,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="V_CatalogoDeIngresos" EntityType="ERP_GMEDINAModel.V_CatalogoDeIngresos" />
           <EntitySet Name="V_CatalogoDePlanillasConIngresosYDeducciones" EntityType="ERP_GMEDINAModel.V_CatalogoDePlanillasConIngresosYDeducciones" />
           <EntitySet Name="V_ColaboradoresPorPlanilla" EntityType="ERP_GMEDINAModel.V_ColaboradoresPorPlanilla" />
-          <EntitySet Name="V_ComisionesColaborador" EntityType="ERP_GMEDINAModel.V_ComisionesColaborador" />
-          <EntitySet Name="V_DecimoCuartoMes" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" />
           <EntitySet Name="V_DecimoCuartoMes_Pagados" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes_Pagados" />
           <EntitySet Name="V_DecimoCuartoMes_RPT" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes_RPT" />
           <EntitySet Name="V_DecimoCuartoMesFE" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMesFE" />
@@ -14604,7 +14573,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="V_DeduccionesInstitucionesFinancierasColaboradres" EntityType="ERP_GMEDINAModel.V_DeduccionesInstitucionesFinancierasColaboradres" />
           <EntitySet Name="V_EmpleadoBonos" EntityType="ERP_GMEDINAModel.V_EmpleadoBonos" />
           <EntitySet Name="V_FormaDePago" EntityType="ERP_GMEDINAModel.V_FormaDePago" />
-          <EntitySet Name="V_GeneralTotales_RPT" EntityType="ERP_GMEDINAModel.V_GeneralTotales_RPT" />
           <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados" />
           <EntitySet Name="V_IHSS_RPT" EntityType="ERP_GMEDINAModel.V_IHSS_RPT" />
           <EntitySet Name="V_INFOP_RPT" EntityType="ERP_GMEDINAModel.V_INFOP_RPT" />
@@ -14612,7 +14580,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="V_Ingresos_RPT" EntityType="ERP_GMEDINAModel.V_Ingresos_RPT" />
           <EntitySet Name="V_InstitucionesFinancieras_RPT" EntityType="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT" />
           <EntitySet Name="V_ISR_RPT" EntityType="ERP_GMEDINAModel.V_ISR_RPT" />
-          <EntitySet Name="V_Liquidaciones_RPT" EntityType="ERP_GMEDINAModel.V_Liquidaciones_RPT" />
           <EntitySet Name="V_Plani_AnioPlanilla" EntityType="ERP_GMEDINAModel.V_Plani_AnioPlanilla" />
           <EntitySet Name="V_Plani_DecimoCuarto" EntityType="ERP_GMEDINAModel.V_Plani_DecimoCuarto" />
           <EntitySet Name="V_Plani_DecimoTercer" EntityType="ERP_GMEDINAModel.V_Plani_DecimoTercer" />
@@ -14620,7 +14587,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="V_Plani_EncabezadoHistorialPlanilla" EntityType="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla" />
           <EntitySet Name="V_Plani_HistorialDeducciones" EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" />
           <EntitySet Name="V_Plani_HistorialIngreso" EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" />
-          <EntitySet Name="V_Plani_Prueba" EntityType="ERP_GMEDINAModel.V_Plani_Prueba" />
           <EntitySet Name="V_Plani_TipoPlani" EntityType="ERP_GMEDINAModel.V_Plani_TipoPlani" />
           <EntitySet Name="V_PlanillaDeducciones" EntityType="ERP_GMEDINAModel.V_PlanillaDeducciones" />
           <EntitySet Name="V_PlanillaIngresos" EntityType="ERP_GMEDINAModel.V_PlanillaIngresos" />
@@ -16044,6 +16010,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="timv_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="timv_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_DecimoCuartoMes" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" />
+          <EntitySet Name="UDV_Acce_Usuario_Roles" EntityType="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles" />
+          <EntitySet Name="V_Objetos" EntityType="ERP_GMEDINAModel.V_Objetos" />
+          <EntitySet Name="V_Plani_Prueba" EntityType="ERP_GMEDINAModel.V_Plani_Prueba" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -17128,7 +17098,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="afp_Id" Type="Int32" Nullable="false" />
           <Property Name="afp_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="afp_AporteMinimoLps" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="afp_InteresAporte" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="afp_InteresAporte" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="afp_InteresAnual" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
           <Property Name="tde_IdTipoDedu" Type="Int32" Nullable="false" />
           <Property Name="afp_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -17486,8 +17456,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </Key>
           <Property Name="isr_Id" Type="Int32" Nullable="false" />
           <Property Name="isr_RangoInicial" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="isr_RangoFinal" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="isr_Porcentaje" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="isr_RangoFinal" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="isr_Porcentaje" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="tde_IdTipoDedu" Type="Int32" Nullable="false" />
           <Property Name="isr_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="isr_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
@@ -17606,8 +17576,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="timv_IdTechoImpuestoVecinal" Type="Int32" Nullable="false" />
           <Property Name="mun_Codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Name="tde_IdTipoDedu" Type="Int32" />
-          <Property Name="timv_RangoInicio" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="timv_RangoFin" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="timv_RangoInicio" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="timv_RangoFin" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="timv_Rango" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="timv_Impuesto" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="timv_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -18503,7 +18473,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="req_Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="req_EdadMinima" Type="Int32" Nullable="false" />
           <Property Name="req_EdadMaxima" Type="Int32" Nullable="false" />
-          <Property Name="req_EstadoCivil" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="req_EstadoCivil" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="req_EducacionSuperior" Type="Boolean" Nullable="false" />
           <Property Name="req_Permanente" Type="Boolean" Nullable="false" />
           <Property Name="req_Duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -18768,10 +18738,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="V_BonosColaborador">
           <Key>
@@ -18836,47 +18806,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CantidadColaboradores" Type="Int32" />
-        </EntityType>
-        <EntityType Name="V_ComisionesColaborador">
-          <Key>
-            <PropertyRef Name="cc_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="cc_FechaRegistro" />
-            <PropertyRef Name="cc_Pagado" />
-            <PropertyRef Name="cc_UsuarioCrea" />
-            <PropertyRef Name="cc_FechaCrea" />
-            <PropertyRef Name="cc_Activo" />
-            <PropertyRef Name="cin_IdIngreso" />
-            <PropertyRef Name="cin_DescripcionIngreso" />
-          </Key>
-          <Property Name="cc_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="cc_Monto" Type="Decimal" Precision="37" Scale="12" />
-          <Property Name="cc_FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cc_Pagado" Type="Boolean" Nullable="false" />
-          <Property Name="cc_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="cc_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cc_UsuarioModifica" Type="Int32" />
-          <Property Name="cc_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="cc_Activo" Type="Boolean" Nullable="false" />
-          <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
-          <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_DecimoCuartoMes">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Apellido" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Planilla" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Planilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
         <EntityType Name="V_DecimoCuartoMes_Pagados">
           <Key>
@@ -19027,9 +18956,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -19214,22 +19143,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="fpa_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="fpa_Activo" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="V_GeneralTotales_RPT">
-          <Key>
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cde_TotalISR" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalAFP" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalIHSS" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalRAP" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="cde_TotalINFOP" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="cde_OtrasDeducciones" Type="Decimal" Precision="38" Scale="4" />
-        </EntityType>
         <EntityType Name="V_HistorialEmpleadosLiquidados">
           <Key>
             <PropertyRef Name="per_Identidad" />
@@ -19267,9 +19180,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -19292,9 +19205,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -19349,9 +19262,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -19374,9 +19287,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -19395,33 +19308,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_Liquidaciones_RPT">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="NombreCompleto" />
-            <PropertyRef Name="depto_descripcion" />
-            <PropertyRef Name="area_Descripcion" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hliq_fechaIngreso" />
-            <PropertyRef Name="hliq_fechaLiquidacion" />
-            <PropertyRef Name="hliq_PorcentajeLiquidacion" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="depto_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hliq_fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hliq_fechaLiquidacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hliq_PorcentajeLiquidacion" Type="Int32" Nullable="false" />
-          <Property Name="hliq_Observaciones" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="V_Plani_AnioPlanilla">
           <Key>
@@ -19512,12 +19400,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
           <Property Name="hidp_IdHistorialdeDeduPago" Type="Int32" Nullable="false" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="TotalDeducciones" Type="Int32" />
@@ -19536,27 +19424,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
           <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="nombreEmpleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="identidadEmpleado" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_Plani_Prueba">
-          <Key>
-            <PropertyRef Name="usu_Id" />
-            <PropertyRef Name="usu_EsActivo" />
-            <PropertyRef Name="usu_EsAdministrador" />
-          </Key>
-          <Property Name="usu_Id" Type="Int32" Nullable="false" />
-          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="usu_Password" Type="Binary" MaxLength="64" FixedLength="false" />
-          <Property Name="usu_Nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="usu_Apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="usu_Correos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="usu_EsActivo" Type="Boolean" Nullable="false" />
-          <Property Name="usu_RazonInactivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="usu_EsAdministrador" Type="Boolean" Nullable="false" />
-          <Property Name="usu_SesionesValidas" Type="Byte" />
         </EntityType>
         <EntityType Name="V_Plani_TipoPlani">
           <Key>
@@ -19620,7 +19491,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="per_Edad" Type="Int32" />
-          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -19649,9 +19520,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -19716,24 +19587,24 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="cpla_RecibeComision" Type="Boolean" Nullable="false" />
           <Property Name="cpla_Activo" Type="Boolean" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
           <Property Name="hipa_Mes" Type="Int32" Nullable="false" />
           <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="hipa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="hipa_ISRPendiente" Type="Boolean" />
-          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="2" />
         </EntityType>
         <EntityType Name="V_tbAdelantoSueldo">
           <Key>
@@ -20136,7 +20007,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Id" Type="Int32" Nullable="false" />
           <Property Name="hamo_Fecha" Type="DateTime" Precision="0" />
-          <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hamo_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="hamo_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -20820,7 +20691,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="FaseReclutamientoId" Type="Int32" Nullable="false" />
           <Property Name="Fase" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RequisionId" Type="Int32" Nullable="false" />
-          <Property Name="Plaza_Solicitada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Plaza_Solicitada" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
@@ -20904,6 +20775,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="emp_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="emp_UsuarioModifica" Type="Int32" />
           <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="emp_Temporal" Type="Boolean" />
         </EntityType>
         <EntityType Name="V_tbHistorialPermisos_completa">
           <Key>
@@ -20936,7 +20808,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="per_Edad" Type="Int32" />
           <Property Name="nac_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -21018,7 +20890,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="per_Edad" Type="Int32" />
           <Property Name="nac_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -25023,6 +24895,79 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_DecimoCuartoMes">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Apellido" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Planilla" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Planilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Monto" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="UDV_Acce_Usuario_Roles">
+          <Key>
+            <PropertyRef Name="rolu_Id" />
+            <PropertyRef Name="acrol_Id" />
+            <PropertyRef Name="obj_Estado" />
+          </Key>
+          <Property Name="rolu_Id" Type="Int32" Nullable="false" />
+          <Property Name="rol_Id" Type="Int32" />
+          <Property Name="usu_Id" Type="Int32" />
+          <Property Name="rolu_UsuarioCrea" Type="Int32" />
+          <Property Name="rolu_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="rolu_UsuarioModifica" Type="Int32" />
+          <Property Name="rolu_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="acrol_Id" Type="Int32" Nullable="false" />
+          <Property Name="obj_Id" Type="Int32" />
+          <Property Name="acrol_UsuarioCrea" Type="Int32" />
+          <Property Name="acrol_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="acrol_UsuarioModifica" Type="Int32" />
+          <Property Name="acrol_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="obj_Pantalla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="obj_Referencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="obj_UsuarioCrea" Type="Int32" />
+          <Property Name="obj_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="obj_UsuarioModifica" Type="Int32" />
+          <Property Name="obj_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="obj_Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_Objetos">
+          <Key>
+            <PropertyRef Name="obj_Id" />
+          </Key>
+          <Property Name="obj_Id" Type="Int32" Nullable="false" />
+          <Property Name="obj_Pantalla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="obj_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="obj_UsuarioModifica" Type="Int32" />
+          <Property Name="obj_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_Plani_Prueba">
+          <Key>
+            <PropertyRef Name="usu_Id" />
+            <PropertyRef Name="usu_EsActivo" />
+            <PropertyRef Name="usu_EsAdministrador" />
+          </Key>
+          <Property Name="usu_Id" Type="Int32" Nullable="false" />
+          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Password" Type="Binary" MaxLength="64" FixedLength="false" />
+          <Property Name="usu_Nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Correo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_EsActivo" Type="Boolean" Nullable="false" />
+          <Property Name="usu_RazonInactivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_EsAdministrador" Type="Boolean" Nullable="false" />
+          <Property Name="usu_SesionesValidas" Type="Byte" />
+          <Property Name="suc_Id" Type="Int32" />
+          <Property Name="emp_Id" Type="Int16" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -28593,37 +28538,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_ComisionesColaborador">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_ComisionesColaborador">
-              <MappingFragment StoreEntitySet="V_ComisionesColaborador">
-                <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
-                <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
-                <ScalarProperty Name="cc_Activo" ColumnName="cc_Activo" />
-                <ScalarProperty Name="cc_FechaModifica" ColumnName="cc_FechaModifica" />
-                <ScalarProperty Name="cc_UsuarioModifica" ColumnName="cc_UsuarioModifica" />
-                <ScalarProperty Name="cc_FechaCrea" ColumnName="cc_FechaCrea" />
-                <ScalarProperty Name="cc_UsuarioCrea" ColumnName="cc_UsuarioCrea" />
-                <ScalarProperty Name="cc_Pagado" ColumnName="cc_Pagado" />
-                <ScalarProperty Name="cc_FechaRegistro" ColumnName="cc_FechaRegistro" />
-                <ScalarProperty Name="cc_Monto" ColumnName="cc_Monto" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="cc_Id" ColumnName="cc_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoCuartoMes">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMes">
-              <MappingFragment StoreEntitySet="V_DecimoCuartoMes">
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-                <ScalarProperty Name="Planilla" ColumnName="Planilla" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_DecimoCuartoMes_Pagados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMes_Pagados">
               <MappingFragment StoreEntitySet="V_DecimoCuartoMes_Pagados">
@@ -28885,21 +28799,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_GeneralTotales_RPT">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_GeneralTotales_RPT">
-              <MappingFragment StoreEntitySet="V_GeneralTotales_RPT">
-                <ScalarProperty Name="cde_OtrasDeducciones" ColumnName="cde_OtrasDeducciones" />
-                <ScalarProperty Name="cde_TotalINFOP" ColumnName="cde_TotalINFOP" />
-                <ScalarProperty Name="cde_TotalRAP" ColumnName="cde_TotalRAP" />
-                <ScalarProperty Name="cde_TotalIHSS" ColumnName="cde_TotalIHSS" />
-                <ScalarProperty Name="cde_TotalAFP" ColumnName="cde_TotalAFP" />
-                <ScalarProperty Name="cde_TotalISR" ColumnName="cde_TotalISR" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_HistorialEmpleadosLiquidados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados">
               <MappingFragment StoreEntitySet="V_HistorialEmpleadosLiquidados">
@@ -29028,23 +28927,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_Liquidaciones_RPT">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Liquidaciones_RPT">
-              <MappingFragment StoreEntitySet="V_Liquidaciones_RPT">
-                <ScalarProperty Name="hliq_Observaciones" ColumnName="hliq_Observaciones" />
-                <ScalarProperty Name="hliq_PorcentajeLiquidacion" ColumnName="hliq_PorcentajeLiquidacion" />
-                <ScalarProperty Name="hliq_fechaLiquidacion" ColumnName="hliq_fechaLiquidacion" />
-                <ScalarProperty Name="hliq_fechaIngreso" ColumnName="hliq_fechaIngreso" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
-                <ScalarProperty Name="depto_descripcion" ColumnName="depto_descripcion" />
-                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
-                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_Plani_AnioPlanilla">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_AnioPlanilla">
               <MappingFragment StoreEntitySet="V_Plani_AnioPlanilla">
@@ -29133,22 +29015,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
                 <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Plani_Prueba">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_Prueba">
-              <MappingFragment StoreEntitySet="V_Plani_Prueba">
-                <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
-                <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
-                <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
-                <ScalarProperty Name="usu_EsActivo" ColumnName="usu_EsActivo" />
-                <ScalarProperty Name="usu_Correos" ColumnName="usu_Correos" />
-                <ScalarProperty Name="usu_Apellidos" ColumnName="usu_Apellidos" />
-                <ScalarProperty Name="usu_Nombres" ColumnName="usu_Nombres" />
-                <ScalarProperty Name="usu_Password" ColumnName="usu_Password" />
-                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
-                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -30156,6 +30022,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="V_tbEmpleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbEmpleados">
               <MappingFragment StoreEntitySet="V_tbEmpleados">
+                <ScalarProperty Name="emp_Temporal" ColumnName="emp_Temporal" />
                 <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
                 <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
                 <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
@@ -30534,6 +30401,75 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionImpuestoVecinal_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionImpuestoVecinal_Insert" />
+          <EntitySetMapping Name="V_DecimoCuartoMes">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMes">
+              <MappingFragment StoreEntitySet="V_DecimoCuartoMes">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="Planilla" ColumnName="Planilla" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDV_Acce_Usuario_Roles">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles">
+              <MappingFragment StoreEntitySet="UDV_Acce_Usuario_Roles">
+                <ScalarProperty Name="obj_Estado" ColumnName="obj_Estado" />
+                <ScalarProperty Name="obj_FechaModifica" ColumnName="obj_FechaModifica" />
+                <ScalarProperty Name="obj_UsuarioModifica" ColumnName="obj_UsuarioModifica" />
+                <ScalarProperty Name="obj_FechaCrea" ColumnName="obj_FechaCrea" />
+                <ScalarProperty Name="obj_UsuarioCrea" ColumnName="obj_UsuarioCrea" />
+                <ScalarProperty Name="obj_Referencia" ColumnName="obj_Referencia" />
+                <ScalarProperty Name="obj_Pantalla" ColumnName="obj_Pantalla" />
+                <ScalarProperty Name="acrol_FechaModifica" ColumnName="acrol_FechaModifica" />
+                <ScalarProperty Name="acrol_UsuarioModifica" ColumnName="acrol_UsuarioModifica" />
+                <ScalarProperty Name="acrol_FechaCrea" ColumnName="acrol_FechaCrea" />
+                <ScalarProperty Name="acrol_UsuarioCrea" ColumnName="acrol_UsuarioCrea" />
+                <ScalarProperty Name="obj_Id" ColumnName="obj_Id" />
+                <ScalarProperty Name="acrol_Id" ColumnName="acrol_Id" />
+                <ScalarProperty Name="rolu_FechaModifica" ColumnName="rolu_FechaModifica" />
+                <ScalarProperty Name="rolu_UsuarioModifica" ColumnName="rolu_UsuarioModifica" />
+                <ScalarProperty Name="rolu_FechaCrea" ColumnName="rolu_FechaCrea" />
+                <ScalarProperty Name="rolu_UsuarioCrea" ColumnName="rolu_UsuarioCrea" />
+                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
+                <ScalarProperty Name="rol_Id" ColumnName="rol_Id" />
+                <ScalarProperty Name="rolu_Id" ColumnName="rolu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Objetos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Objetos">
+              <MappingFragment StoreEntitySet="V_Objetos">
+                <ScalarProperty Name="obj_FechaModifica" ColumnName="obj_FechaModifica" />
+                <ScalarProperty Name="obj_UsuarioModifica" ColumnName="obj_UsuarioModifica" />
+                <ScalarProperty Name="obj_FechaCrea" ColumnName="obj_FechaCrea" />
+                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
+                <ScalarProperty Name="obj_Pantalla" ColumnName="obj_Pantalla" />
+                <ScalarProperty Name="obj_Id" ColumnName="obj_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Plani_Prueba">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_Prueba">
+              <MappingFragment StoreEntitySet="V_Plani_Prueba">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="suc_Id" ColumnName="suc_Id" />
+                <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
+                <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
+                <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
+                <ScalarProperty Name="usu_EsActivo" ColumnName="usu_EsActivo" />
+                <ScalarProperty Name="usu_Correo" ColumnName="usu_Correo" />
+                <ScalarProperty Name="usu_Apellidos" ColumnName="usu_Apellidos" />
+                <ScalarProperty Name="usu_Nombres" ColumnName="usu_Nombres" />
+                <ScalarProperty Name="usu_Password" ColumnName="usu_Password" />
+                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
+                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

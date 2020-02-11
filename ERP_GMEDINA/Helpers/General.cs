@@ -150,7 +150,7 @@ namespace ERP_GMEDINA.Helpers
                 {
                     ModelState.ListaPantallas = new
                     {
-                        List = db.tbObjeto.Select(x => x.obj_Referencia).ToList()
+                        List = db.tbObjeto.Select(x=> x.obj_Referencia).ToList()
                     };
                 }
                 else
