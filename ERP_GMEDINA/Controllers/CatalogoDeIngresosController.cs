@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.Data.Entity.Core.Objects;
 using ERP_GMEDINA.Attribute;
+using ERP_GMEDINA.Helpers;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -30,15 +31,17 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos
-                        .Select(c => new {
-                                           cin_IdIngreso = c.cin_IdIngreso,
-                                           cin_DescripcionIngreso = c.cin_DescripcionIngreso,
-                                           cin_Activo = c.cin_Activo,
-                                           cin_UsuarioCrea = c.cin_UsuarioCrea,
-                                           cin_FechaCrea = c.cin_FechaCrea,
-                                          cin_TipoIngreso = c.cin_TipoIngreso,
-                                           cin_UsuarioModifica= c.cin_UsuarioModifica,
-                                           cin_FechaModifica = c.cin_FechaModifica})
+                        .Select(c => new
+                        {
+                            cin_IdIngreso = c.cin_IdIngreso,
+                            cin_DescripcionIngreso = c.cin_DescripcionIngreso,
+                            cin_Activo = c.cin_Activo,
+                            cin_UsuarioCrea = c.cin_UsuarioCrea,
+                            cin_FechaCrea = c.cin_FechaCrea,
+                            cin_TipoIngreso = c.cin_TipoIngreso,
+                            cin_UsuarioModifica = c.cin_UsuarioModifica,
+                            cin_FechaModifica = c.cin_FechaModifica
+                        })
                                            .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeIngresos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -51,8 +54,8 @@ namespace ERP_GMEDINA.Controllers
         {
             #region declaracion de variables
             //Auditoria
-            tbCatalogoDeIngresos.cin_UsuarioCrea = 1;
-            tbCatalogoDeIngresos.cin_FechaCrea = DateTime.Now;
+            tbCatalogoDeIngresos.cin_UsuarioCrea = (Session["UserLogin"] as int?) ?? 1;
+            tbCatalogoDeIngresos.cin_FechaCrea = General.DateTimeNow;
 
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
@@ -64,10 +67,10 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Insert(tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                                                         tbCatalogoDeIngresos.cin_TipoIngreso,
-                                                                                         tbCatalogoDeIngresos.cin_UsuarioCrea,
-                                                                                         tbCatalogoDeIngresos.cin_FechaCrea);
+                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Insert(tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_TipoIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_UsuarioCrea,
+                                                                                        tbCatalogoDeIngresos.cin_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbCatalogoDeIngresos_Insert_Result Resultado in listCatalogoDeIngresos)
                         MensajeError = Resultado.MensajeError;
@@ -147,18 +150,18 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             #endregion
 
-                try
-                {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
-                                                                                            tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                                                            tbCatalogoDeIngresos.cin_TipoIngreso,
-                                                                                            tbCatalogoDeIngresos.cin_UsuarioModifica,
-                                                                                            tbCatalogoDeIngresos.cin_FechaModifica
-                                                                                            );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeIngresos_Update_Result Resultado in listCatalogoDeIngresos)
-                        MensajeError = Resultado.MensajeError;
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_TipoIngreso,
+                                                                                        tbCatalogoDeIngresos.cin_UsuarioModifica,
+                                                                                        tbCatalogoDeIngresos.cin_FechaModifica
+                                                                                        );
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_tbCatalogoDeIngresos_Update_Result Resultado in listCatalogoDeIngresos)
+                    MensajeError = Resultado.MensajeError;
 
 
 
@@ -201,7 +204,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Inactivar(ID,
-                                                                                        1,
+                                                                                        Session["UserLogin"] as int?,
                                                                                         DateTime.Now
                                                                                         );
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
@@ -243,7 +246,7 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos tbCatalogoDeIngresos = new tbCatalogoDeIngresos();
             tbCatalogoDeIngresos.cin_IdIngreso = (int)ID;
-            tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
+            tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
             tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
             try
             {

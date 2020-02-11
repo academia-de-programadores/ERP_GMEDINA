@@ -130,18 +130,18 @@ namespace ERP_GMEDINA.Helpers
             public string Tipo { get; set; }
         }
 
-		#region GET: Cargar_ModelState
-		public VM_ModelState Cargar_ModelState(int userId, bool EsAdministrador)
-		{
-			//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
-			VM_ModelState ModelState = new VM_ModelState();
-			ModelState.EsAdmin = EsAdministrador;
-			//VALIDAR SI EL USUARIO ES ADMIN
+        #region GET: Cargar_ModelState
+        public VM_ModelState Cargar_ModelState(int userId, bool EsAdministrador)
+        {
+            //INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
+            VM_ModelState ModelState = new VM_ModelState();
+            ModelState.EsAdmin = EsAdministrador;
+            //VALIDAR SI EL USUARIO ES ADMIN
 
-				
 
-			//INSTANCIA DE LA CLASE HELPERS
-			ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
+
+            //INSTANCIA DE LA CLASE HELPERS
+            ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
             //INICIALIZACION DE AMBITO DE DBCONTEXT
             using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
             {
@@ -168,75 +168,83 @@ namespace ERP_GMEDINA.Helpers
                     };
                 }
 
-				//SETEO DE ATTR CantidadRoles
-				ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
-											join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
-											join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+                //SETEO DE ATTR CantidadRoles
+                ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
+                                            join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+                                            join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
                                             where tbusuario.usu_Id == userId
                                             select new { tbRol.rol_Id }).Count();
 
-				//SETEO DE ATTR SesionIniciada
-				ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
+                //SETEO DE ATTR SesionIniciada
+                ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
 
-				//SETEO DE ATTR ContraseniaExpirada
-				ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
+                //SETEO DE ATTR ContraseniaExpirada
+                ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
 
-				return ModelState;
-			}
-		}
-		#endregion
+                return ModelState;
+            }
+        }
+        #endregion
 
-		#region GET: Cargar_ModelStateAsync
-		//public Task<VM_ModelState> Cargar_ModelStateAsync(int userId, bool EsAdministrador)
-		//{
-		//	//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
-		//	VM_ModelState ModelState = new VM_ModelState();
-		//	ModelState.EsAdmin = EsAdministrador;
-		//	//VALIDAR SI EL USUARIO ES ADMIN
-		//	if (EsAdministrador == true)
-		//		return Task.Run(() =>
-		//		{
-		//			return ModelState;
-		//		});
-		//	//INSTANCIA DE LA CLASE HELPERS
-		//	ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
-		//	//INICIALIZACION DE TAREA
-		//	//var Task_user = "";
-		//	//INICIALIZACION DE AMBITO DE DBCONTEXT
-		//	using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
-		//	{
-		//		var Task_user = Task.Run(() =>
-		//		{
-		//			//SETEO DE ATTR ListaPantallas
-		//			ModelState.ListaPantallas = new
-		//			{
-		//				List = (from tbusuario in db.tbUsuario
-		//						join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
-		//						join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
-		//						join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
-		//						join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
-		//						where tbusuario.usu_Id == userId
-		//						select new { tbObjeto.obj_Referencia }).ToList()
-		//			};
+        #region GET: Cargar_ModelStateAsync
+        //public Task<VM_ModelState> Cargar_ModelStateAsync(int userId, bool EsAdministrador)
+        //{
+        //	//INSTANCIA DEL VIEW MODEL CONTENEDOR DEL MODEL STATE
+        //	VM_ModelState ModelState = new VM_ModelState();
+        //	ModelState.EsAdmin = EsAdministrador;
+        //	//VALIDAR SI EL USUARIO ES ADMIN
+        //	if (EsAdministrador == true)
+        //		return Task.Run(() =>
+        //		{
+        //			return ModelState;
+        //		});
+        //	//INSTANCIA DE LA CLASE HELPERS
+        //	ERP_GMEDINA.Models.Helpers ClassHelpers = new ERP_GMEDINA.Models.Helpers();
+        //	//INICIALIZACION DE TAREA
+        //	//var Task_user = "";
+        //	//INICIALIZACION DE AMBITO DE DBCONTEXT
+        //	using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
+        //	{
+        //		var Task_user = Task.Run(() =>
+        //		{
+        //			//SETEO DE ATTR ListaPantallas
+        //			ModelState.ListaPantallas = new
+        //			{
+        //				List = (from tbusuario in db.tbUsuario
+        //						join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+        //						join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+        //						join tbAccesoRol in db.tbAccesoRol on tbRol.rol_Id equals tbAccesoRol.rol_Id
+        //						join tbObjeto in db.tbObjeto on tbAccesoRol.obj_Id equals tbObjeto.obj_Id
+        //						where tbusuario.usu_Id == userId
+        //						select new { tbObjeto.obj_Referencia }).ToList()
+        //			};
 
-		//			//SETEO DE ATTR CantidadRoles
-		//			ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
-		//										join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
-		//										join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
-		//										where tbusuario.usu_Id == userId
-		//										select new { tbRol.rol_Id }).Count();
+        //			//SETEO DE ATTR CantidadRoles
+        //			ModelState.CantidadRoles = (from tbusuario in db.tbUsuario
+        //										join tbUsuarioRoles in db.tbRolesUsuario on tbusuario.usu_Id equals tbUsuarioRoles.usu_Id
+        //										join tbRol in db.tbRol on tbUsuarioRoles.rol_Id equals tbRol.rol_Id
+        //										where tbusuario.usu_Id == userId
+        //										select new { tbRol.rol_Id }).Count();
 
-		//			//SETEO DE ATTR SesionIniciada
-		//			ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
+        //			//SETEO DE ATTR SesionIniciada
+        //			ModelState.SesionIniciada = ClassHelpers.GetUserLogin();
 
-		//			//SETEO DE ATTR ContraseniaExpirada
-		//			ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
-		//			return ModelState;
-		//		});
-		//		//RETORNO DE LA TAREA
-		//		return Task_user;
-		//	}
-		//}
-		#endregion
-	}
+        //			//SETEO DE ATTR ContraseniaExpirada
+        //			ModelState.ContraseniaExpirada = ClassHelpers.Sesiones("Something");
+        //			return ModelState;
+        //		});
+        //		//RETORNO DE LA TAREA
+        //		return Task_user;
+        //	}
+        //}
+        #endregion
+ 
+        public static DateTime DateTimeNow
+        {
+            get
+            {
+                return DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
+            }
+        }
+    }
 }
