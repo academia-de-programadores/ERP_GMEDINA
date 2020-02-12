@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class TechosDeduccionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region Index
         [SessionManager("TechosDeducciones/Index")]
@@ -95,8 +96,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create(tbTechosDeducciones tbTechosDeducciones)
         {
             // data de auditoria
-            tbTechosDeducciones.tddu_UsuarioCrea = 1;
-            tbTechosDeducciones.tddu_FechaCrea = DateTime.Now;
+            tbTechosDeducciones.tddu_UsuarioCrea = Function.GetUser();
+            tbTechosDeducciones.tddu_FechaCrea = Function.DatetimeNow();
             
             // variables de resultado
             string response = String.Empty;
@@ -175,8 +176,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit(tbTechosDeducciones tbTechosDeducciones)
         {
             // data de auditoria
-            tbTechosDeducciones.tddu_UsuarioModifica = 1;
-            tbTechosDeducciones.tddu_FechaModifica = DateTime.Now;
+            tbTechosDeducciones.tddu_UsuarioModifica = Function.GetUser();
+            tbTechosDeducciones.tddu_FechaModifica  = Function.DatetimeNow();
             
             // variables de resultados
             IEnumerable<object> listTechosDeducciones = null;
@@ -194,9 +195,8 @@ namespace ERP_GMEDINA.Controllers
                                                                                      tbTechosDeducciones.tddu_PorcentajeEmpresa,
                                                                                      tbTechosDeducciones.tddu_Techo,
                                                                                      tbTechosDeducciones.cde_IdDeducciones, //ID del porcentaje de deducción
-                                                                                     1,
-                                                                                     DateTime.Now);
-
+                                                                                     tbTechosDeducciones.tddu_UsuarioModifica,
+                                                                                     tbTechosDeducciones.tddu_FechaModifica);  
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbTechosDeducciones_Update_Result Resultado in listTechosDeducciones.ToList())
                         MensajeError = Resultado.MensajeError;
@@ -264,8 +264,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Inactivar(id,
-                                                                                        1,
-                                                                                        DateTime.Now);
+                                                                                       Function.GetUser(),
+                                                                                       Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbTechosDeducciones_Inactivar_Result Resultado in listTechosDeducciones)
@@ -314,8 +314,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Activar(id,
-                                                                                        1,
-                                                                                        DateTime.Now);
+                                                                                     Function.GetUser(),
+                                                                                     Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbTechosDeducciones_Activar_Result Resultado in listTechosDeducciones)
