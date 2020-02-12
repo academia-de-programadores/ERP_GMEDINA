@@ -8,7 +8,7 @@ namespace ERP_GMEDINA.Models
 {
     public class Helpers
     {
-        ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         private IAuthenticationManager AuthenticationManager
         {
             get
