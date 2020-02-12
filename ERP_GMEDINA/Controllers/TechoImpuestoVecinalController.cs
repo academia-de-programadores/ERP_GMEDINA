@@ -209,8 +209,8 @@ namespace ERP_GMEDINA.Controllers
                                                                                           tbTechoImpuestoVecinal.timv_RangoFin,
                                                                                           tbTechoImpuestoVecinal.timv_Rango,
                                                                                           Convert.ToDecimal(Impuesto),
-                                                                                          1,
-                                                                                          DateTime.Now);
+                                                                                          tbTechoImpuestoVecinal.timv_UsuarioModifica,
+                                                                                          tbTechoImpuestoVecinal.timv_FechaModifica);
 
                     // obtener resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbTechoImpuestoVecinal_Update_Result Resultado in listTechoImpuestoVecinal.ToList())
@@ -287,8 +287,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listTechoImpuestoVecinal = db.UDP_Plani_tbTechoImpuestoVecinal_Inactivar(id,
-                                                                                             1,
-                                                                                             DateTime.Now);
+                                                                                             Function.GetUser(),
+                                                                                             Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbTechoImpuestoVecinal_Inactivar_Result Resultado in listTechoImpuestoVecinal)
@@ -337,8 +337,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listTechoImpuestoVecinal = db.UDP_Plani_tbTechoImpuestoVecinal_Activar(id,
-                                                                                           1,
-                                                                                           DateTime.Now);
+                                                                                           Function.GetUser(),
+                                                                                           Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbTechoImpuestoVecinal_Activar_Result Resultado in listTechoImpuestoVecinal)
