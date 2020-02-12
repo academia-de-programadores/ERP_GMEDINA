@@ -15,6 +15,7 @@ namespace ERP_GMEDINA.Controllers
     {
         //INSTANCIA DEL MODELO
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region GET: INDEX DE CESANTIA PAGADA
         [SessionManager("PagoDeCesantiaDetalle/Index")]
@@ -52,7 +53,7 @@ namespace ERP_GMEDINA.Controllers
                 //OBTENER LOS RANGOS DE AUXILIO DE CESANTIA
                 List<tbAuxilioDeCesantias> TbLiquidacionAuxilioCesantia = db.tbAuxilioDeCesantias.ToList();
                 //FECHA DE LA PETICION
-                DateTime FechaPeticion = DateTime.Now;
+                DateTime FechaPeticion = Function.DatetimeNow();
                 //INICIALIZACION DEL OBJETO TIPO V_tbPagoDeCesantiaDetalle_Preview
                 var ListEmpleados = db.V_tbPagoDeCesantiaDetalle_Preview.OrderBy(x => x.NombreCompleto).ToList();
                 //Iterador
@@ -102,7 +103,7 @@ namespace ERP_GMEDINA.Controllers
             #region Declaración de variables
             tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
             string response = "bien";
-            DateTime FechaActual = DateTime.Now;
+            DateTime FechaActual = Function.DatetimeNow();
             int idEncabezado = 0;
             SqlTransaction transaccion = null;
 
