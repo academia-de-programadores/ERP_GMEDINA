@@ -2256,11 +2256,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistoria
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="V_Plani_FechaPlani">
-          <Property Name="hipa_FechaPago" Type="int" />
-        </EntityType>-->
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -6264,6 +6259,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbTechoImpuestoVecinal">
               <PropertyRef Name="tde_IdTipoDedu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+          <End Role="tbPeriodos" Type="Self.tbPeriodos" Multiplicity="1" />
+          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPeriodos">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_FrecuenciaEnDias" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12107,6 +12114,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
             <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" Association="Self.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id" Association="Self.FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
             <End Role="tbAFP" EntitySet="tbAFP" />
             <End Role="tbDeduccionAFP" EntitySet="tbDeduccionAFP" />
@@ -14335,11 +14346,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="ini_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tbHistorialDePago" EntityType="ERP_GMEDINAModel.tbHistorialDePago" />
-          <EntitySet Name="tbPeriodos" EntityType="ERP_GMEDINAModel.tbPeriodos" />
-          <AssociationSet Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" Association="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
-            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
-            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
-          </AssociationSet>
           <FunctionImport Name="UDP_RRHH_tbConceptosArchivos_Delete">
             <Parameter Name="cona_Id" Mode="In" Type="Int32" />
             <Parameter Name="cona_RazonInactivo" Mode="In" Type="String" />
@@ -14474,7 +14480,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="tbAuxilioDeCesantias" EntityType="ERP_GMEDINAModel.tbAuxilioDeCesantias" />
           <EntitySet Name="tbCatalogoDeDeducciones" EntityType="ERP_GMEDINAModel.tbCatalogoDeDeducciones" />
           <EntitySet Name="tbCatalogoDeIngresos" EntityType="ERP_GMEDINAModel.tbCatalogoDeIngresos" />
-          <EntitySet Name="tbCatalogoDePlanillas" EntityType="ERP_GMEDINAModel.tbCatalogoDePlanillas" />
           <EntitySet Name="tbDecimoCuartoMes" EntityType="ERP_GMEDINAModel.tbDecimoCuartoMes" />
           <EntitySet Name="tbDecimoTercerMes" EntityType="ERP_GMEDINAModel.tbDecimoTercerMes" />
           <EntitySet Name="tbDeduccionAFP" EntityType="ERP_GMEDINAModel.tbDeduccionAFP" />
@@ -14732,26 +14737,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_tbTechosComisiones_cin_IdIngreso">
             <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
             <End Role="tbTechosComisiones" EntitySet="tbTechosComisiones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla">
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-            <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla">
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-            <End Role="tbTipoPlanillaDetalleDeduccion" EntitySet="tbTipoPlanillaDetalleDeduccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla">
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-            <End Role="tbTipoPlanillaDetalleIngreso" EntitySet="tbTipoPlanillaDetalleIngreso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoCuartoMes_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoCuartoMes_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -15374,14 +15359,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
@@ -15509,14 +15486,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbLiquidacionVacaciones" EntitySet="tbLiquidacionVacaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -16014,6 +15983,52 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySet Name="UDV_Acce_Usuario_Roles" EntityType="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles" />
           <EntitySet Name="V_Objetos" EntityType="ERP_GMEDINAModel.V_Objetos" />
           <EntitySet Name="V_Plani_Prueba" EntityType="ERP_GMEDINAModel.V_Plani_Prueba" />
+          <EntitySet Name="tbCatalogoDePlanillas" EntityType="ERP_GMEDINAModel.tbCatalogoDePlanillas" />
+          <EntitySet Name="tbPeriodos" EntityType="ERP_GMEDINAModel.tbPeriodos" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" Association="ERP_GMEDINAModel.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbTipoPlanillaDetalleDeduccion" EntitySet="tbTipoPlanillaDetalleDeduccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbTipoPlanillaDetalleIngreso" EntitySet="tbTipoPlanillaDetalleIngreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" Association="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+            <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -16857,43 +16872,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="hipa_CantidadUnidadesHorasExtras" Type="Int32" />
           <Property Name="hipa_CantidadUnidadesBonos" Type="Int32" />
           <Property Name="hipa_TotalBonos" Type="Decimal" Precision="16" Scale="2" />
-          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbHistorialDePago" ToRole="tbPeriodos" />
           <Property Name="hipa_CodigoPlanilla" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbHistorialDeduccionPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeduccionPago" />
           <NavigationProperty Name="tbHistorialDeIngresosPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDePago" ToRole="tbHistorialDeIngresosPago" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbHistorialDePago_emp_Id" FromRole="tbHistorialDePago" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioCrea" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDePago_hipa_UsuarioModifica" FromRole="tbHistorialDePago" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbHistorialDePago" ToRole="tbPeriodos" />
         </EntityType>
-        <EntityType Name="tbPeriodos">
-          <Key>
-            <PropertyRef Name="peri_IdPeriodo" />
-          </Key>
-          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="peri_DescripPeriodo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="peri_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="peri_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="peri_UsuarioModifica" Type="Int32" />
-          <Property Name="peri_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="peri_Activo" Type="Boolean" Nullable="false" />
-          <Property Name="peri_RecibeSeptimoDia" Type="Boolean" />
-          <Property Name="peri_CantidadDias" Type="Int32" />
-          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
-          </EntityType>
-        <Association Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
-          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPeriodos">
-              <PropertyRef Name="peri_IdPeriodo" />
-            </Principal>
-            <Dependent Role="tbHistorialDePago">
-              <PropertyRef Name="peri_IdPeriodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="UDP_RRHH_tbDirectoriosEmpleados_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
@@ -17170,27 +17156,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeIngresos_cin_UsuarioCrea" FromRole="tbCatalogoDeIngresos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeIngresos_cin_UsuarioModifica" FromRole="tbCatalogoDeIngresos" ToRole="tbUsuario" />
         </EntityType>
-        <EntityType Name="tbCatalogoDePlanillas">
-          <Key>
-            <PropertyRef Name="cpla_IdPlanilla" />
-          </Key>
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_FrecuenciaEnDias" Type="Int32" Nullable="false" />
-          <Property Name="cpla_RecibeComision" Type="Boolean" Nullable="false" />
-          <Property Name="cpla_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="cpla_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cpla_UsuarioModifica" Type="Int32" />
-          <Property Name="cpla_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="cpla_Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tbDecimoCuartoMes" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbDecimoCuartoMes" />
-          <NavigationProperty Name="tbTipoPlanillaDetalleDeduccion" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbTipoPlanillaDetalleDeduccion" />
-          <NavigationProperty Name="tbTipoPlanillaDetalleIngreso" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbTipoPlanillaDetalleIngreso" />
-          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbDecimoTercerMes" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbDecimoTercerMes" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" FromRole="tbCatalogoDePlanillas" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" FromRole="tbCatalogoDePlanillas" ToRole="tbUsuario" />
-        </EntityType>
         <EntityType Name="tbDecimoCuartoMes">
           <Key>
             <PropertyRef Name="dcm_IdDecimoCuartoMes" />
@@ -17205,10 +17170,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="dcm_CodigoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="dcm_IdDecimoCuartoMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" FromRole="tbDecimoCuartoMes" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoCuartoMes_emp_Id" FromRole="tbDecimoCuartoMes" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioCrea" FromRole="tbDecimoCuartoMes" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioModifica" FromRole="tbDecimoCuartoMes" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" FromRole="tbDecimoCuartoMes" ToRole="tbCatalogoDePlanillas" />
         </EntityType>
         <EntityType Name="tbDecimoTercerMes">
           <Key>
@@ -17224,10 +17189,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="dtm_Monto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="dtm_CodigoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" FromRole="tbDecimoTercerMes" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id" FromRole="tbDecimoTercerMes" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea" FromRole="tbDecimoTercerMes" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioModifica" FromRole="tbDecimoTercerMes" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" FromRole="tbDecimoTercerMes" ToRole="tbCatalogoDePlanillas" />
         </EntityType>
         <EntityType Name="tbDeduccionAFP">
           <Key>
@@ -17657,9 +17622,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="tpdd_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="tpdd_Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTipoPlanillaDetalleDeduccion_cde_IdDeducciones" FromRole="tbTipoPlanillaDetalleDeduccion" ToRole="tbCatalogoDeDeducciones" />
-          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" FromRole="tbTipoPlanillaDetalleDeduccion" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTipoPlanillaDetalleDeduccion_tpdd_UsuarioCrea" FromRole="tbTipoPlanillaDetalleDeduccion" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTipoPlanillaDetalleDeduccion_tpdd_UsuarioModifica" FromRole="tbTipoPlanillaDetalleDeduccion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" FromRole="tbTipoPlanillaDetalleDeduccion" ToRole="tbCatalogoDePlanillas" />
         </EntityType>
         <EntityType Name="tbTipoPlanillaDetalleIngreso">
           <Key>
@@ -17674,9 +17639,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="tpdi_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="tpdi_Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbCatalogoDeIngresos" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbTipoPlanillaDetalleIngreso_cin_IdIngreso" FromRole="tbTipoPlanillaDetalleIngreso" ToRole="tbCatalogoDeIngresos" />
-          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" FromRole="tbTipoPlanillaDetalleIngreso" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTipoPlanillaDetalleIngreso_tpdi_UsuarioCrea" FromRole="tbTipoPlanillaDetalleIngreso" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTipoPlanillaDetalleIngreso_tpdi_UsuarioModifica" FromRole="tbTipoPlanillaDetalleIngreso" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" FromRole="tbTipoPlanillaDetalleIngreso" ToRole="tbCatalogoDePlanillas" />
         </EntityType>
         <EntityType Name="tbAreas">
           <Key>
@@ -17844,7 +17809,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="emp_Temporal" Type="Boolean" />
           <NavigationProperty Name="tbAcumuladosISR" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAcumuladosISR_emp_Id" FromRole="tbEmpleados" ToRole="tbAcumuladosISR" />
           <NavigationProperty Name="tbAdelantoSueldo" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAdelantoSueldo_emp_Id" FromRole="tbEmpleados" ToRole="tbAdelantoSueldo" />
-          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbEmpleados" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbDecimoCuartoMes" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoCuartoMes_emp_Id" FromRole="tbEmpleados" ToRole="tbDecimoCuartoMes" />
           <NavigationProperty Name="tbDecimoTercerMes" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id" FromRole="tbEmpleados" ToRole="tbDecimoTercerMes" />
           <NavigationProperty Name="tbDeduccionAFP" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionAFP" />
@@ -17875,6 +17839,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbEmpleados" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
           <NavigationProperty Name="tbDeduccionImpuestoVecinal" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDeduccionImpuestoVecinal_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionImpuestoVecinal" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbEmpleados" ToRole="tbCatalogoDePlanillas" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -21181,66 +21146,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla">
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbDecimoCuartoMes" Role="tbDecimoCuartoMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Principal>
-            <Dependent Role="tbDecimoCuartoMes">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla">
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbTipoPlanillaDetalleDeduccion" Role="tbTipoPlanillaDetalleDeduccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Principal>
-            <Dependent Role="tbTipoPlanillaDetalleDeduccion">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla">
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbTipoPlanillaDetalleIngreso" Role="tbTipoPlanillaDetalleIngreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Principal>
-            <Dependent Role="tbTipoPlanillaDetalleIngreso">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Principal>
-            <Dependent Role="tbEmpleados">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbDecimoTercerMes" Role="tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="cpla_IdPlanilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoCuartoMes_emp_Id">
           <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbDecimoCuartoMes" Role="tbDecimoCuartoMes" Multiplicity="*" />
@@ -22489,8 +22394,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbCatalogoDeDeducciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCatalogoDeDeducciones" />
           <NavigationProperty Name="tbCatalogoDeIngresos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeIngresos_cin_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCatalogoDeIngresos" />
           <NavigationProperty Name="tbCatalogoDeIngresos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeIngresos_cin_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCatalogoDeIngresos" />
-          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
-          <NavigationProperty Name="tbCatalogoDePlanillas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbDecimoCuartoMes" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDecimoCuartoMes" />
           <NavigationProperty Name="tbDecimoCuartoMes1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDecimoCuartoMes" />
           <NavigationProperty Name="tbDecimoTercerMes" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDecimoTercerMes" />
@@ -22523,8 +22426,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbISR1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbISR_isr_UsuarioModifica" FromRole="tbUsuario" ToRole="tbISR" />
           <NavigationProperty Name="tbLiquidacionVacaciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioCrea" FromRole="tbUsuario" ToRole="tbLiquidacionVacaciones" />
           <NavigationProperty Name="tbLiquidacionVacaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" FromRole="tbUsuario" ToRole="tbLiquidacionVacaciones" />
-          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPeriodos" />
-          <NavigationProperty Name="tbPeriodos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPeriodos" />
           <NavigationProperty Name="tbPreaviso" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPreaviso" />
           <NavigationProperty Name="tbPreaviso1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPreaviso_prea_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPreaviso" />
           <NavigationProperty Name="tbTechosDeducciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tddu_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTechosDeducciones" />
@@ -22645,6 +22546,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <NavigationProperty Name="tbPorcentajeMotivoLiquidacion1" Relationship="ERP_GMEDINAModel.FK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
           <NavigationProperty Name="tbDeduccionImpuestoVecinal" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionImpuestoVecinal" />
           <NavigationProperty Name="tbDeduccionImpuestoVecinal1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbDeduccionImpuestoVecinal_dimv_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionImpuestoVecinal" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
+          <NavigationProperty Name="tbCatalogoDePlanillas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
+          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPeriodos" />
+          <NavigationProperty Name="tbPeriodos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPeriodos" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_Acce_tbAccesoRol_acrol_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
@@ -22991,30 +22896,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbCatalogoDeIngresos">
               <PropertyRef Name="cin_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbCatalogoDePlanillas">
-              <PropertyRef Name="cpla_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -23399,30 +23280,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Principal>
             <Dependent Role="tbLiquidacionVacaciones">
               <PropertyRef Name="pvac_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPeriodos">
-              <PropertyRef Name="peri_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPeriodos">
-              <PropertyRef Name="peri_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -24968,6 +24825,178 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Name="suc_Id" Type="Int32" />
           <Property Name="emp_Id" Type="Int16" />
         </EntityType>
+        <EntityType Name="tbCatalogoDePlanillas">
+          <Key>
+            <PropertyRef Name="cpla_IdPlanilla" />
+          </Key>
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_FrecuenciaEnDias" Type="Int32" Nullable="false" />
+          <Property Name="cpla_RecibeComision" Type="Boolean" Nullable="false" />
+          <Property Name="cpla_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="cpla_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cpla_UsuarioModifica" Type="Int32" />
+          <Property Name="cpla_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="cpla_Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" FromRole="tbCatalogoDePlanillas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" FromRole="tbCatalogoDePlanillas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINAModel.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" FromRole="tbCatalogoDePlanillas" ToRole="tbPeriodos" />
+          <NavigationProperty Name="tbDecimoCuartoMes" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbDecimoCuartoMes" />
+          <NavigationProperty Name="tbTipoPlanillaDetalleDeduccion" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbTipoPlanillaDetalleDeduccion" />
+          <NavigationProperty Name="tbTipoPlanillaDetalleIngreso" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbTipoPlanillaDetalleIngreso" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbDecimoTercerMes" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbDecimoTercerMes" />
+        </EntityType>
+        <EntityType Name="tbPeriodos">
+          <Key>
+            <PropertyRef Name="peri_IdPeriodo" />
+          </Key>
+          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="peri_DescripPeriodo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="peri_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="peri_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="peri_UsuarioModifica" Type="Int32" />
+          <Property Name="peri_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="peri_Activo" Type="Boolean" Nullable="false" />
+          <Property Name="peri_RecibeSeptimoDia" Type="Boolean" />
+          <Property Name="peri_CantidadDias" Type="Int32" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbCatalogoDePlanillas" />
+          <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPeriodos">
+              <PropertyRef Name="peri_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPeriodos">
+              <PropertyRef Name="peri_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPeriodos">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_FrecuenciaEnDias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDecimoCuartoMes" Role="tbDecimoCuartoMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbDecimoCuartoMes">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleDeduccion_cpla_IdPlanilla">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoPlanillaDetalleDeduccion" Role="tbTipoPlanillaDetalleDeduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbTipoPlanillaDetalleDeduccion">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoPlanillaDetalleIngreso" Role="tbTipoPlanillaDetalleIngreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbTipoPlanillaDetalleIngreso">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDecimoTercerMes" Role="tbDecimoTercerMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbDecimoTercerMes">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo">
+          <End Type="ERP_GMEDINAModel.tbPeriodos" Role="tbPeriodos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDePago" Role="tbHistorialDePago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPeriodos">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Principal>
+            <Dependent Role="tbHistorialDePago">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -26881,21 +26910,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbPeriodos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPeriodos">
-              <MappingFragment StoreEntitySet="tbPeriodos">
-                <ScalarProperty Name="peri_CantidadDias" ColumnName="peri_CantidadDias" />
-                <ScalarProperty Name="peri_RecibeSeptimoDia" ColumnName="peri_RecibeSeptimoDia" />
-                <ScalarProperty Name="peri_Activo" ColumnName="peri_Activo" />
-                <ScalarProperty Name="peri_FechaModifica" ColumnName="peri_FechaModifica" />
-                <ScalarProperty Name="peri_UsuarioModifica" ColumnName="peri_UsuarioModifica" />
-                <ScalarProperty Name="peri_FechaCrea" ColumnName="peri_FechaCrea" />
-                <ScalarProperty Name="peri_UsuarioCrea" ColumnName="peri_UsuarioCrea" />
-                <ScalarProperty Name="peri_DescripPeriodo" ColumnName="peri_DescripPeriodo" />
-                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbConceptosArchivos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbConceptosArchivos_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbConceptosArchivos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbConceptosArchivos_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbConceptosArchivos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbConceptosArchivos_Restore" />
@@ -27191,21 +27205,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="cin_UsuarioCrea" ColumnName="cin_UsuarioCrea" />
                 <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
                 <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbCatalogoDePlanillas">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCatalogoDePlanillas">
-              <MappingFragment StoreEntitySet="tbCatalogoDePlanillas">
-                <ScalarProperty Name="cpla_Activo" ColumnName="cpla_Activo" />
-                <ScalarProperty Name="cpla_FechaModifica" ColumnName="cpla_FechaModifica" />
-                <ScalarProperty Name="cpla_UsuarioModifica" ColumnName="cpla_UsuarioModifica" />
-                <ScalarProperty Name="cpla_FechaCrea" ColumnName="cpla_FechaCrea" />
-                <ScalarProperty Name="cpla_UsuarioCrea" ColumnName="cpla_UsuarioCrea" />
-                <ScalarProperty Name="cpla_RecibeComision" ColumnName="cpla_RecibeComision" />
-                <ScalarProperty Name="cpla_FrecuenciaEnDias" ColumnName="cpla_FrecuenciaEnDias" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -30467,6 +30466,36 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
                 <ScalarProperty Name="usu_Password" ColumnName="usu_Password" />
                 <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
                 <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCatalogoDePlanillas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCatalogoDePlanillas">
+              <MappingFragment StoreEntitySet="tbCatalogoDePlanillas">
+                <ScalarProperty Name="cpla_Activo" ColumnName="cpla_Activo" />
+                <ScalarProperty Name="cpla_FechaModifica" ColumnName="cpla_FechaModifica" />
+                <ScalarProperty Name="cpla_UsuarioModifica" ColumnName="cpla_UsuarioModifica" />
+                <ScalarProperty Name="cpla_FechaCrea" ColumnName="cpla_FechaCrea" />
+                <ScalarProperty Name="cpla_UsuarioCrea" ColumnName="cpla_UsuarioCrea" />
+                <ScalarProperty Name="cpla_RecibeComision" ColumnName="cpla_RecibeComision" />
+                <ScalarProperty Name="cpla_FrecuenciaEnDias" ColumnName="cpla_FrecuenciaEnDias" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPeriodos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPeriodos">
+              <MappingFragment StoreEntitySet="tbPeriodos">
+                <ScalarProperty Name="peri_CantidadDias" ColumnName="peri_CantidadDias" />
+                <ScalarProperty Name="peri_RecibeSeptimoDia" ColumnName="peri_RecibeSeptimoDia" />
+                <ScalarProperty Name="peri_Activo" ColumnName="peri_Activo" />
+                <ScalarProperty Name="peri_FechaModifica" ColumnName="peri_FechaModifica" />
+                <ScalarProperty Name="peri_UsuarioModifica" ColumnName="peri_UsuarioModifica" />
+                <ScalarProperty Name="peri_FechaCrea" ColumnName="peri_FechaCrea" />
+                <ScalarProperty Name="peri_UsuarioCrea" ColumnName="peri_UsuarioCrea" />
+                <ScalarProperty Name="peri_DescripPeriodo" ColumnName="peri_DescripPeriodo" />
+                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

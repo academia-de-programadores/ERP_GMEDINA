@@ -61,7 +61,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbAcumuladosISR> tbAcumuladosISR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
-        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -114,5 +113,6 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionImpuestoVecinal> tbDeduccionImpuestoVecinal { get; set; }
+        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace ERP_GMEDINA.Models
         public int dcm_IdDecimoCuartoMes { get; set; }
         public int cpla_IdPlanilla { get; set; }
     
-        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
     }
 }

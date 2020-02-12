@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var listaPeriodos = db.tbPeriodos
                         .Where(x => x.peri_Activo == true)
-                        .Select(x => new { id = x.peri_CantidadDias, descripcion = x.peri_DescripPeriodo }).ToList();
+                        .Select(x => new { id = x.peri_IdPeriodo, descripcion = x.peri_DescripPeriodo }).ToList();
                     return Json(json = new { data = listaPeriodos, status = response }, JsonRequestBehavior.AllowGet);
                 }
             }
