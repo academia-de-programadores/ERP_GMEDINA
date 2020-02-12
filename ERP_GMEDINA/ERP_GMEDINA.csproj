@@ -3145,6 +3145,8 @@
     <Content Include="Views\PlanillaImpuestoVecinal\IndexNuevaProyeccion.cshtml" />
     <Content Include="Views\HistorialCargos\_Deshacer.cshtml" />
     <Content Include="Views\HistorialIncapacidades\_DetalleIncapacidad.cshtml" />
+    <Content Include="Views\Shared\_LayoutBasePlanillas.cshtml" />
+    <Content Include="Views\Shared\_NavigationPlanillas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
