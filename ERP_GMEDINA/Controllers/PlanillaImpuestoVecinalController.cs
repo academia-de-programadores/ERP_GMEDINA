@@ -16,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
     {
         //INSTANCIA DEL MODELO
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
         #region GET: Index
         // GET: PlanillaImpuestoVecinal
         [SessionManager("PlanillaImpuestoVecinal/Index")]
@@ -60,7 +61,7 @@ namespace ERP_GMEDINA.Controllers
                 var ListaEmpleados = db.V_tbPagoDeCesantiaDetalle_Preview.OrderBy(x => x.NombreCompleto).ToList();
 
                 //FECHA DE LA PETICION
-                DateTime FechaPeticion = DateTime.Now;
+                DateTime FechaPeticion = Function.DatetimeNow();
                 //ITERADOR DEL CICLO
                 int iter = 1;
                 //Variable de tipo lista para traer los registros de la base de datos de menor a mayor
@@ -126,7 +127,7 @@ namespace ERP_GMEDINA.Controllers
             //INICIALIZACION DE LA TRANSACCION
             SqlTransaction transaccion = null;
             //FECHA DE LA INSERCIÓN
-            DateTime FechaInsercion = DateTime.Now;
+            DateTime FechaInsercion = Function.DatetimeNow();
             #endregion
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString))
