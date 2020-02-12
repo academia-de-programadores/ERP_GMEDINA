@@ -16,7 +16,8 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 		Models.Helpers Function = new Models.Helpers();
 
-		[SessionManager("CatalogoDeDeducciones/Index")]
+        #region Index Catalogo de Deducciones
+        [SessionManager("CatalogoDeDeducciones/Index")]
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
@@ -36,19 +37,20 @@ namespace ERP_GMEDINA.Controllers
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeDeducciones1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }   
+        }
+#endregion
 
-
-
+        #region Crear Catalogo de Deducciones
         // POST: CatalogoDeDeducciones/Create REALIZAR LA INSERCIÓN
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("CatalogoDeDeducciones/Create")]
         public ActionResult Create([Bind(Include = "cde_DescripcionDeduccion,tde_IdTipoDedu,cde_PorcentajeColaborador,cde_PorcentajeEmpresa,cde_UsuarioCrea,cde_FechaCrea")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbCatalogoDeDeducciones.cde_UsuarioCrea = Function.GetUser();
-            tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_FechaCrea = Function.DatetimeNow();
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeDeducciones = null;
@@ -98,9 +100,11 @@ namespace ERP_GMEDINA.Controllers
             object json = new { response = response, data = GetData() };
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Editar Catalogo de Deducciones
         // GET: CatalogoDeDeducciones/Edit/5
+        [SessionManager("CatalogoDeDeducciones/Edit")]
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -112,18 +116,19 @@ namespace ERP_GMEDINA.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionManager("CatalogoDeDeducciones/Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cde_IdDeducciones,cde_DescripcionDeduccion,tde_IdTipoDedu,cde_PorcentajeColaborador,cde_PorcentajeEmpresa,cde_UsuarioCrea,cde_FechaCrea")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
             tbCatalogoDeDeducciones.cde_UsuarioCrea = Function.GetUser();
-            tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_FechaCrea = Function.DatetimeNow();
 
 
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeDeducciones.cde_UsuarioModifica = Function.GetUser();
-            tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_FechaModifica = Function.DatetimeNow();
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = "bien";
             IEnumerable<object> listCatalogoDeDeducciones = null;
@@ -164,8 +169,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+#endregion
 
-
+        #region Dropdownlist Tipo Deduccion
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
         public JsonResult EditGetDDL()
         {
@@ -178,10 +184,10 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-
-
+        #region Detalles Catalogo de Deducciones
+        [SessionManager("CatalogoDeDeducciones/Details")]
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeDeduccionesJSON = from tbCatDedu in db.tbCatalogoDeDeducciones
@@ -205,8 +211,11 @@ namespace ERP_GMEDINA.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
+#endregion
 
+        #region Inactivar Catalogo de Deducciones
         [HttpPost]
+        [SessionManager("CatalogoDeDeducciones/Inactivar")]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int id)
         {
@@ -219,9 +228,8 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(id,
-                                                                                         Function.GetUser(),
-                                                                                         DateTime.Now
-                                                                                            );
+                                                                                            Function.GetUser(),
+                                                                                            Function.DatetimeNow());
 
                     foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeIngresos)
                         MensajeError = Resultado.MensajeError;
@@ -249,9 +257,11 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+#endregion
 
-
+        #region Activar Catalogo de Deducciones
         [HttpPost]
+        [SessionManager("CatalogoDeDeducciones/Activar")]
         [ValidateAntiForgeryToken]
         public ActionResult Activar(int id)
         {
@@ -264,9 +274,8 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Activar(id,
-                                                                                         Function.GetUser(),
-                                                                                         DateTime.Now
-                                                                                            );
+                                                                                          Function.GetUser(),
+                                                                                          Function.DatetimeNow());
                     foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeIngresos)
                         MensajeError = Resultado.MensajeError;
 
@@ -293,8 +302,9 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+#endregion
 
-
+        #region Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -303,5 +313,7 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }
