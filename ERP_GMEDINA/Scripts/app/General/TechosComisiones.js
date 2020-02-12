@@ -679,7 +679,7 @@ $(document).on("click", "#tblTechoCom tbody tr td #btnDetallesTechosComisiones",
 
                     $("#Detalles #NombreUsuarioCrea").html(data.NombreUsuarioCrea);
                     $("#Detalles #tc_FechaCrea").html(FechaCrea);
-                    $("#Detalles #NombreUsuarioModifica").html(data.NombreUsuarioModifica);
+                    $("#Detalles #NombreUsuarioModifica").html((data.NombreUsuarioModifica != null ? data.NombreUsuarioModifica : 'Sin Modificaciones'));
                     $("#Detalles #tc_FechaModifica").html(FechaModifica);
                     
                     $("#DetallesTechoComision").modal({ backdrop: 'static', keyboard: false });
