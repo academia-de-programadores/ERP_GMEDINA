@@ -70,7 +70,7 @@ namespace ERP_GMEDINA.Controllers
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbIngresosIndividuales.ini_UsuarioCrea = Function.GetUser();
-            tbIngresosIndividuales.ini_FechaCrea = DateTime.Now;
+            tbIngresosIndividuales.ini_FechaCrea = Function.DatetimeNow();
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listIngresosIndividuales = null;
@@ -175,7 +175,7 @@ namespace ERP_GMEDINA.Controllers
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbIngresosIndividuales.ini_UsuarioModifica = Function.GetUser();
-            tbIngresosIndividuales.ini_FechaModifica = DateTime.Now;
+            tbIngresosIndividuales.ini_FechaModifica = Function.DatetimeNow();
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listIngresosIndividuales = null;
@@ -255,7 +255,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inhabilitar Ingresos Individuales
+        #region Inactivar Ingresos Individuales
         [HttpGet]
         public ActionResult Inactivar(int? id)
         {
@@ -263,7 +263,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("error", JsonRequestBehavior.AllowGet);
             //LLENAR DATA DE AUDITORIA
             int ini_UsuarioModifica = Function.GetUser();
-            DateTime ini_FechaModifica = DateTime.Now;
+            DateTime ini_FechaModifica = Function.DatetimeNow();
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listIngresosIndividuales = null;
@@ -319,7 +319,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("error", JsonRequestBehavior.AllowGet);
             //LLENAR DATA DE AUDITORIA
             int ini_UsuarioModifica = Function.GetUser();
-            DateTime ini_FechaModifica = DateTime.Now;
+            DateTime ini_FechaModifica = Function.DatetimeNow();
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = "bien";
             IEnumerable<object> listIngresosIndividuales = null;
@@ -364,7 +364,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Ejecutable Ingresos Individuales
+        #region Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class FormaPagoController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region INDEX
         [SessionManager("FormaPago/Index")]
@@ -55,8 +56,8 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Create([Bind(Include = "fpa_IdFormaPago,fpa_Descripcion,fpa_UsuarioCrea,fpa_FechaCrea")] tbFormaPago tbFormaPago)
         {
             // data de auditoria
-            tbFormaPago.fpa_UsuarioCrea = 1;
-            tbFormaPago.fpa_FechaCrea = DateTime.Now;
+            tbFormaPago.fpa_UsuarioCrea = Function.GetUser();
+            tbFormaPago.fpa_FechaCrea = Function.DatetimeNow();
             
             // variables de resultado
             string response = "bien";
@@ -136,8 +137,8 @@ namespace ERP_GMEDINA.Controllers
 		public JsonResult Editar([Bind(Include = "fpa_IdFormaPago,fpa_Descripcion")] tbFormaPago tbFormaPago)
 		{
 			// variables auditoria
-			tbFormaPago.fpa_UsuarioModifica = 1;
-			tbFormaPago.fpa_FechaModifica = DateTime.Now;
+			tbFormaPago.fpa_UsuarioModifica = Function.GetUser();
+			tbFormaPago.fpa_FechaModifica = Function.DatetimeNow();
 			
             // variables de resultado
 			string response = "bien";
@@ -235,8 +236,8 @@ namespace ERP_GMEDINA.Controllers
 
             // data de auditoria
             tbFormaPago.fpa_IdFormaPago = (int)Id;
-            tbFormaPago.fpa_UsuarioModifica = 1;
-            tbFormaPago.fpa_FechaModifica = DateTime.Now;
+            tbFormaPago.fpa_UsuarioModifica = Function.GetUser();
+            tbFormaPago.fpa_FechaModifica = Function.DatetimeNow();
             
             // validar si el ID es válido
             if (tbFormaPago.fpa_IdFormaPago > 0)
@@ -300,8 +301,8 @@ namespace ERP_GMEDINA.Controllers
             
             // data de auditoria
             tbFormaPago.fpa_IdFormaPago = (int)Id;
-            tbFormaPago.fpa_UsuarioModifica = 1;
-            tbFormaPago.fpa_FechaModifica = DateTime.Now;
+            tbFormaPago.fpa_UsuarioModifica = Function.GetUser();
+            tbFormaPago.fpa_FechaModifica = Function.DatetimeNow();
             
             // validar si el ID es válido
             if (tbFormaPago.fpa_IdFormaPago > 0)
