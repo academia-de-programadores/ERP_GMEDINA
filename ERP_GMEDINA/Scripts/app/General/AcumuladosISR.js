@@ -195,9 +195,7 @@ $(document).on("click", "#btnAgregarAcumuladosISR", function () {
 });
 
 // crear acumulados isr
-$('#btnCreateAcumuladosISR').click(function () {
-    $('#btnCreateAcumuladosISR').attr('disabled', true);
-
+$('#btnCreateAcumuladosISR').click(function () {    
     var empleadoid = $("#Crear #emp_IdCrear").val();
     var descripcion = $("#Crear #aisr_Descripcion").val();
     var aisr_Monto = $("#Crear #aisr_Monto").val();
@@ -275,7 +273,7 @@ $('#btnCreateAcumuladosISR').click(function () {
 
 
     if (ModelState == true) {
-
+        $('#btnCreateAcumuladosISR').attr('disabled', true);
         let deducirISR = false;
         if ($('#Crear #aisr_DeducirISR').is(':checked')) {
             deducirISR = true;
@@ -323,9 +321,7 @@ $('#btnCreateAcumuladosISR').click(function () {
                 iziToast.success({
                     title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
-                });
-
-                $('#btnCreateAcumuladosISR').attr('disabled', false);
+                });                
             }
         });
     }
