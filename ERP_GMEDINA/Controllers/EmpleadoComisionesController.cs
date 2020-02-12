@@ -137,9 +137,9 @@ namespace ERP_GMEDINA.Controllers
 
             tbEmpleadoComisiones.cc_TotalComision = TotalComision;
 
-            tbEmpleadoComisiones.cc_FechaRegistro = DateTime.Now;
+            tbEmpleadoComisiones.cc_FechaRegistro = Function.DatetimeNow();
             tbEmpleadoComisiones.cc_UsuarioCrea = Function.GetUser();
-            tbEmpleadoComisiones.cc_FechaCrea = DateTime.Now;
+            tbEmpleadoComisiones.cc_FechaCrea = Function.DatetimeNow();
             tbEmpleadoComisiones.cc_Pagado = false;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
@@ -210,7 +210,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit([Bind(Include = "cc_Id, emp_Id, cin_IdIngreso, cc_UsuarioModifica, cc_FechaModifica, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             tbEmpleadoComisiones.cc_UsuarioModifica = Function.GetUser();
-            tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
+            tbEmpleadoComisiones.cc_FechaModifica = Function.DatetimeNow();
             decimal TotalComision = 0;
             var TechosComisiones = from a in db.tbTechosComisiones
                                    where a.tc_Estado == true
@@ -308,7 +308,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Inactivar(id,
                                                                                          Function.GetUser(),
-                                                                                         DateTime.Now
+                                                                                         Function.DatetimeNow()
                                                                                             );
 
                     foreach (UDP_Plani_EmpleadoComisiones_Inactivar_Result Resultado in listEmpleadoComisiones)
@@ -352,7 +352,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(id,
                                                                                     Function.GetUser(),
-                                                                                    DateTime.Now);
+                                                                                    Function.DatetimeNow());
 
                     foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
                         MensajeError = Resultado.MensajeError;
