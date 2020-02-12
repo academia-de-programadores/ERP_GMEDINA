@@ -97,8 +97,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
             // data de auditoria
-            tbISR.isr_UsuarioCrea = 1;
-            tbISR.isr_FechaCrea = DateTime.Now;
+            //tbISR.isr_UsuarioCrea = 1;
+            //tbISR.isr_FechaCrea = DateTime.Now;
             
             // variables de resultado del proceso
             string response = String.Empty;
@@ -179,8 +179,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit([Bind(Include = "isr_Id,isr_RangoInicial,isr_RangoFinal,isr_Porcentaje,tde_IdTipoDedu,isr_UsuarioCrea,isr_FechaCrea")] tbISR tbISR)
         {
             // variables de auditoria
-            tbISR.isr_UsuarioModifica = 1;
-            tbISR.isr_FechaModifica = DateTime.Now;
+            //tbISR.isr_UsuarioModifica = 1;
+            //tbISR.isr_FechaModifica = DateTime.Now;
 
             // variables de resultado del proceso
             IEnumerable<object> listISR = null;
@@ -262,8 +262,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Inactivar(id,
-                                                            Function.GetUser(),
-                                                        Function.DatetimeNow());
+                                                           Function.GetUser(),
+                                                           Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbISR_Inactivar_Result Resultado in listISR)
@@ -312,8 +312,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listISR = db.UDP_Plani_tbISR_Activar(id,
-                                                          Function.GetUser(),
-                                                        Function.DatetimeNow());
+                                                         Function.GetUser(),
+                                                         Function.DatetimeNow());
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbISR_Activar_Result Resultado in listISR)
