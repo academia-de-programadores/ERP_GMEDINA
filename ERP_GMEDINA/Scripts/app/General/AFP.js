@@ -263,7 +263,7 @@ $('#btnCreateRegistroAFP').click(function () {
     // validar interes aporte
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
+    if (parseInt($("#Crear #afp_InteresAporte").val()) > 0) {
 
         $('#astericoInteresAporte').removeClass('text-danger');
         $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
@@ -280,7 +280,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
     if (parseFloat(interesAporteSinComas).toFixed(2) <= 100.00) {
 
-        if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0)
+        if (parseInt($("#Crear #afp_InteresAporte").val()) > 0)
             $('#astericoInteresAporte').removeClass('text-danger');
 
         $("#Crear #validation_InteresAporteMenorACien").css('display', 'none');
@@ -297,7 +297,7 @@ $('#btnCreateRegistroAFP').click(function () {
     // validar interes anual
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0) {
+    if (parseInt($("#Crear #afp_InteresAnual").val()) > 0) {
 
         $('#astericosInteresAnual').removeClass('text-danger');
         $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
@@ -314,7 +314,7 @@ $('#btnCreateRegistroAFP').click(function () {
 
     if (parseFloat(interesAnualSinComas).toFixed(2) <= 100.00) {
 
-        if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0)
+        if (parseInt($("#Crear #afp_InteresAnual").val()) > 0)
             $('#astericosInteresAnual').removeClass('text-danger');
 
         $("#Crear #validation_InteresAnualMenorACien").css('display', 'none');
@@ -441,7 +441,7 @@ $('#Crear #afp_AporteMinimoLps').keyup(function () {
 $('#Crear #afp_InteresAporte').keyup(function () {
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
+    if (parseInt($("#Crear #afp_InteresAporte").val()) > 0) {
 
         $('#astericoInteresAporte').removeClass('text-danger');
         $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
@@ -474,7 +474,7 @@ $('#Crear #afp_InteresAporte').keyup(function () {
 $('#Crear #afp_InteresAnual').keyup(function () {
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAnual").val()) >= 0) {
+    if (parseInt($("#Crear #afp_InteresAnual").val()) > 0) {
 
         $('#astericosInteresAnual').removeClass('text-danger');
         $("#Crear #validation_InteresAnualMenorACero").css('display', 'none');
@@ -578,6 +578,54 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                             });
                         });
 
+                    //--
+                    // * descripcion 
+                    $('#EditarasiteriscoDescripcion').removeClass('text-danger');
+
+                    // mesanje descripcion requerida
+                    $("#Editar #validation_EditarDescripcionRequerida").css('display', 'none');
+
+                    // mesanje descripcion no es numerico
+                    $("#Editar #validation_EditarDescripcionNumerico").css('display', 'none');
+
+                    //--
+                    // * aporte minimo LPIS
+                    $('#EditarastericosAporteMinimoLps').removeClass('text-danger');
+
+                    // mensaje aporte minimo debe ser mayor que cero
+                    $("#Editar #validation_EditarAporteMinimoMayorACero").css('display', 'none');
+
+                    //--
+                    // * interes aporte 
+                    $('#EditarastericoInteresAporte').removeClass('text-danger');
+
+                    // mensaje interes aporte no puede ser menor que cero
+                    $("#Editar #validation_EditarInteresAporteMenorACero").css('display', 'none');
+
+                    // mensaje interes aporte no puede ser mayor que cién
+                    $("#Editar #validation_EditarInteresAporteMenorACien").css('display', 'none');
+
+                    // -- 
+                    // * interes anual 
+                    $('#EditarastericosInteresAnual').removeClass('text-danger');
+
+                    // mensaje interes anual no puede ser menor que cero
+                    $("#Editar #validation_EditarInteresAnualMenorACero").css('display', 'none');
+
+                    // mensaje interes anual no puede ser mayor que cién
+                    $("#Editar #validation_EditarInteresAnualMenorACien").css('display', 'none');
+
+                    //--
+                    // * tipo de deduccion
+                    $('#EditarastericosTipoDeduccion').removeClass('text-danger');
+
+                    // mensaje interes aporte no puede ser menor que cero
+                    $("#Editar #validation_EditarTipoDeduccionRequerida").css('display', 'none');
+
+                    // habilitar boton 
+                    $("#btnEditAFP").attr('disabled', false);
+
+
                     // mostrar modal editar
                     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
                 }
@@ -652,7 +700,7 @@ $("#btnEditAFP").click(function () {
     // validar interes aporte
 
     // si es menor que cero
-    if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0) {
+    if (parseInt($("#Editar #afp_InteresAporte").val()) > 0) {
 
         $('#EditarastericoInteresAporte').removeClass('text-danger');
         $("#Editar #validation_EditarInteresAporteMenorACero").css('display', 'none');
@@ -686,7 +734,7 @@ $("#btnEditAFP").click(function () {
     // validar interes anual
 
     // si es menor que cero
-    if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0) {
+    if (parseInt($("#Editar #afp_InteresAnual").val()) > 0) {
 
         $('#EditarastericosInteresAnual').removeClass('text-danger');
         $("#Editar #validation_EditarInteresAnualMenorACero").css('display', 'none');
@@ -734,9 +782,11 @@ $("#btnEditAFP").click(function () {
     if (modalState == true) {
         $("#EditarAFP").modal('hide');
         $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("#btnEditAFPConfirmar").attr('disabled', false);
     }
     else {
         $("#btnEditAFP").attr('disabled', false);
+       
     }
 
 
@@ -918,7 +968,6 @@ $("#btnEditAFPConfirmar").click(function () {
             $("#btnEditAFPConfirmar").attr('disabled', false);
         }
     });
-    $("#btnEditAFPConfirmar").attr('disabled', false);
 });
 
 
