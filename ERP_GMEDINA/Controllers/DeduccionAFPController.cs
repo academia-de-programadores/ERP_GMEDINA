@@ -259,7 +259,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inhabilitar Deducción AFP
+        #region Inactivar Deducción AFP
         [HttpPost]
         [ValidateAntiForgeryToken]
         [SessionManager("DeduccionesAFP/Inactivar")]
@@ -366,7 +366,7 @@ namespace ERP_GMEDINA.Controllers
 
         #endregion
 
-        #region Ejecutable Deducción AFP
+        #region Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
