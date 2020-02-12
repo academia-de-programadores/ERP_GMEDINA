@@ -239,9 +239,9 @@
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\AFPController.cs" />
-    <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\AreasController.cs" />
     <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
-    <Compile Include="Controllers\CargosController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\CargosController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
     <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
@@ -254,7 +254,7 @@
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
-    <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\EmpresasController.cs" />
     <Compile Include="Controllers\EquipoEmpleadosController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
@@ -269,7 +269,7 @@
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
-    <Compile Include="Controllers\HistorialPermisosController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\Permisos\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -278,13 +278,13 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
-    <Compile Include="Controllers\JornadasController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\JornadasController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
     <Compile Include="Controllers\PagoDeCesantiaDetalleController.cs" />
     <Compile Include="Controllers\PeriodosController.cs" />
-    <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\Reclutamiento\PersonasController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PlanillaImpuestoVecinalController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
@@ -292,19 +292,19 @@
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
-    <Compile Include="Controllers\RequisicionesController.cs" />
-    <Compile Include="Controllers\SeleccionCandidatosController.cs" />
-    <Compile Include="Controllers\SucursalesController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\Reclutamiento\RequisicionesController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\Reclutamiento\SeleccionCandidatosController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\SucursalesController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TechoImpuestoVecinalController.cs" />
     <Compile Include="Controllers\TechosComisionesController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
-    <Compile Include="Controllers\TipoHorasController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
-    <Compile Include="Controllers\TipoMonedasController.cs" />
-    <Compile Include="Controllers\TipoPermisosController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\General\TipoMonedasController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\Permisos\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
@@ -3396,6 +3396,9 @@
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\Inventario\Catalogos\" />
+    <Folder Include="Controllers\Inventario\Inventario\" />
+    <Folder Include="Controllers\Inventario\Seguridad\" />
     <Folder Include="Controllers\RecursosHumanos\General\" />
     <Folder Include="Controllers\RecursosHumanos\Permisos\" />
     <Folder Include="Controllers\RecursosHumanos\Reclutamiento\" />
