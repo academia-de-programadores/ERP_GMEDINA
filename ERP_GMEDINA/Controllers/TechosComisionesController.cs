@@ -83,7 +83,6 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "cin_IdIngreso, tc_RangoInicio, tc_RangoFin, tc_PorcentajeComision, tc_UsuarioCrea, tc_FechaCrea")] tbTechosComisiones tbTechosComisiones)
         {
             //Para llenar los campos de auditoría
-            //tbAdelantoSueldo.adsu_FechaAdelanto = DateTime.Now;
             //tbTechosComisiones.tc_UsuarioCrea = 1;
             //tbTechosComisiones.tc_FechaCrea = DateTime.Now;
 
@@ -148,6 +147,7 @@ namespace ERP_GMEDINA.Controllers
 
         //FUNCION: EDITAR UN REGISTRO
         [HttpPost]
+        [SessionManager("TechosComisiones/Edit")]
         public ActionResult Edit([Bind(Include = "tc_Id, cin_IdIngreso, tc_RangoInicio, tc_RangoFin, tc_PorcentajeComision, tc_UsuarioModifica, tc_FechaModifica")] tbTechosComisiones tbTechosComisiones)
         {
             //tbTechosComisiones.tc_UsuarioModifica = 1;
@@ -306,6 +306,17 @@ namespace ERP_GMEDINA.Controllers
             }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Dispose
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
         #endregion
 
