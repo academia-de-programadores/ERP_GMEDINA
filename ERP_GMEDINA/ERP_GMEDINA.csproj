@@ -333,6 +333,16 @@
     <Compile Include="Models\cAdelantoSueldo.cs" />
     <Compile Include="Models\cAFP.cs" />
     <Compile Include="Models\cAFPRPT.cs" />
+    <Compile Include="Models\RecursosHumanos\Amonestaciones\cHistorialAmonestaciones.cs" />
+    <Compile Include="Models\RecursosHumanos\Amonestaciones\cHistorialAudienciaDescargo.cs" />
+    <Compile Include="Models\RecursosHumanos\Amonestaciones\cTipoAmonestaciones.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cCompetencias.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cFasesReclutamiento.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cHabilidades.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cIdiomas.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cNacionalidades.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cRequerimientosEspeciales.cs" />
+    <Compile Include="Models\RecursosHumanos\Datos Profesionales\cTitulos.cs" />
     <Compile Include="Models\RecursosHumanos\General\cAreas.cs" />
     <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\cAuxilioDeCesantias.cs" />
@@ -364,6 +374,8 @@
     <Compile Include="Models\RecursosHumanos\Empleados\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\RecursosHumanos\Empleados\cHistorialHorasTrabajadas.cs" />
+    <Compile Include="Models\RecursosHumanos\Incapacidades\cHistorialIncapacidades.cs" />
+    <Compile Include="Models\RecursosHumanos\Incapacidades\cTipoIncapacidades.cs" />
     <Compile Include="Models\RecursosHumanos\Permisos\cHistorialPermisos.cs" />
     <Compile Include="Models\RecursosHumanos\Permisos\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\RecursosHumanos\FinalizacionLaboral\cHistorialSalidas.cs" />
