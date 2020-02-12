@@ -61,8 +61,8 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Create([Bind(Include = "insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             // data de auditoria
-            tbInstitucionesFinancieras.insf_UsuarioCrea = 1;
-            tbInstitucionesFinancieras.insf_FechaCrea = DateTime.Now;
+            //tbInstitucionesFinancieras.insf_UsuarioCrea = 1;
+            //tbInstitucionesFinancieras.insf_FechaCrea = DateTime.Now;
             tbInstitucionesFinancieras.insf_Activo = true;
 
             // variables de resultados
@@ -159,8 +159,8 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             // variables de auditoria
-            tbInstitucionesFinancieras.insf_UsuarioModifica = 1;
-            tbInstitucionesFinancieras.insf_FechaModifica = DateTime.Now;
+            //tbInstitucionesFinancieras.insf_UsuarioModifica = 1;
+            //tbInstitucionesFinancieras.insf_FechaModifica = DateTime.Now;
             tbInstitucionesFinancieras.insf_Activo = true;
 
             // variables de resultado
@@ -460,8 +460,8 @@ namespace ERP_GMEDINA.Controllers
                                     oMiExcel.deif_Monto = monto;
                                     oMiExcel.deif_Comentarios = comentario;
                                     oMiExcel.cde_IdDeducciones = idCatDeduc;
-                                    oMiExcel.deif_UsuarioCrea = 1;
-                                    oMiExcel.deif_FechaCrea = DateTime.Now;
+                                    oMiExcel.deif_UsuarioCrea = Function.GetUser();
+                                    oMiExcel.deif_FechaCrea = Function.DatetimeNow();
                                     oMiExcel.deif_UsuarioModifica = null;
                                     oMiExcel.deif_FechaModifica = null;
                                     oMiExcel.deif_Activo = true;
