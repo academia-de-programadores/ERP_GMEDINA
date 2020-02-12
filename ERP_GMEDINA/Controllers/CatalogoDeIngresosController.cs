@@ -16,8 +16,9 @@ namespace ERP_GMEDINA.Controllers
     public class CatalogoDeIngresosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
-
+        #region Index Catalogo de Ingresos
         // GET: tbCatalogoDeIngresos
         [SessionManager("CatalogoDeIngresos/Index")]
         public ActionResult Index()
@@ -42,11 +43,13 @@ namespace ERP_GMEDINA.Controllers
                             cin_UsuarioModifica = c.cin_UsuarioModifica,
                             cin_FechaModifica = c.cin_FechaModifica
                         })
-                                           .ToList();
+                        .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeIngresos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
+        #region Crear Catalogo de Ingresos
         [HttpPost]
         [ValidateAntiForgeryToken]
         [SessionManager("CatalogoDeIngresos/Create")]
@@ -68,9 +71,9 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Insert(tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                                                        tbCatalogoDeIngresos.cin_TipoIngreso,
-                                                                                        tbCatalogoDeIngresos.cin_UsuarioCrea,
-                                                                                        tbCatalogoDeIngresos.cin_FechaCrea);
+                                                                                      tbCatalogoDeIngresos.cin_TipoIngreso,
+                                                                                      tbCatalogoDeIngresos.cin_UsuarioCrea,
+                                                                                      tbCatalogoDeIngresos.cin_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbCatalogoDeIngresos_Insert_Result Resultado in listCatalogoDeIngresos)
                         MensajeError = Resultado.MensajeError;
@@ -100,7 +103,9 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.cin_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeIngresos.cin_UsuarioModifica);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Editar Catalogo de Ingresos
         // GET: CatalogoDeIngresos/Edit/5
         [SessionManager("CatalogoDeIngresos/Edit")]
         public JsonResult Edit(int? ID)
@@ -110,6 +115,53 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbCatalogoDeIngresosJSON, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [SessionManager("CatalogoDeIngresos/Edit")]
+        public ActionResult Edit(int id, string cin_DescripcionIngreso, int cin_TipoIngreso)
+        {
+            tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id, cin_TipoIngreso = cin_TipoIngreso };
+            #region declaracion de variables
+            //LLENAR DATA DE AUDITORIA
+            tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
+            tbCatalogoDeIngresos.cin_FechaModifica = General.DateTimeNow;
+            string response = String.Empty;
+            IEnumerable<object> listCatalogoDeIngresos = null;
+            string MensajeError = "";
+            #endregion
+
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
+                                                                                  tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                                                                  tbCatalogoDeIngresos.cin_TipoIngreso,
+                                                                                  tbCatalogoDeIngresos.cin_UsuarioModifica,
+                                                                                  tbCatalogoDeIngresos.cin_FechaModifica);
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_tbCatalogoDeIngresos_Update_Result Resultado in listCatalogoDeIngresos)
+                    MensajeError = Resultado.MensajeError;
+
+
+
+                if (MensajeError.StartsWith("-1"))
+                {
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                    response = "error";
+                }
+            }
+            catch (Exception)
+            {
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Detalles Catalogo de Ingresos
         [SessionManager("CatalogoDeIngresos/Details")]
         public JsonResult Details(int? ID)
         {
@@ -134,54 +186,9 @@ namespace ERP_GMEDINA.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             return Json(tbCatalogoDeIngresosJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-        [HttpPost]
-        [SessionManager("CatalogoDeIngresos/Edit")]
-        public ActionResult Edit(int id, string cin_DescripcionIngreso, int cin_TipoIngreso)
-        {
-            tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id, cin_TipoIngreso = cin_TipoIngreso };
-            #region declaracion de variables
-            //LLENAR DATA DE AUDITORIA
-            tbCatalogoDeIngresos.cin_UsuarioModifica = Session["UserLogin"] as int?;
-            tbCatalogoDeIngresos.cin_FechaModifica = General.DateTimeNow;
-            string response = String.Empty;
-            IEnumerable<object> listCatalogoDeIngresos = null;
-            string MensajeError = "";
-            #endregion
-
-            try
-            {
-                //EJECUTAR PROCEDIMIENTO ALMACENADO
-                listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Update(tbCatalogoDeIngresos.cin_IdIngreso,
-                                                                                        tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                                                        tbCatalogoDeIngresos.cin_TipoIngreso,
-                                                                                        tbCatalogoDeIngresos.cin_UsuarioModifica,
-                                                                                        tbCatalogoDeIngresos.cin_FechaModifica
-                                                                                        );
-                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                foreach (UDP_Plani_tbCatalogoDeIngresos_Update_Result Resultado in listCatalogoDeIngresos)
-                    MensajeError = Resultado.MensajeError;
-
-
-
-                if (MensajeError.StartsWith("-1"))
-                {
-                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                    response = "error";
-                }
-            }
-            catch (Exception)
-            {
-                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
-            }
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
-        }
-
+        #region Inactivar Catalogo de Ingresos
         [SessionManager("CatalogoDeIngresos/Inactivar")]
         public JsonResult Inactivar(int? ID)
         {
@@ -231,7 +238,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Activar Catalogo de Ingresos
         [SessionManager("CatalogoDeIngresos/Activar")]
         public ActionResult Activar(int? ID)
         {
@@ -252,8 +261,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 //EJECUTAR PROCEDIMIENTO ALMACENADO
                 listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Activar(tbCatalogoDeIngresos.cin_IdIngreso,
-                                                                              tbCatalogoDeIngresos.cin_UsuarioModifica,
-                                                                              tbCatalogoDeIngresos.cin_FechaModifica);
+                                                                                   tbCatalogoDeIngresos.cin_UsuarioModifica,
+                                                                                   tbCatalogoDeIngresos.cin_FechaModifica);
 
                 //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                 foreach (UDP_Plani_tbCatalogoDeIngresos_Activar_Result Resultado in listCatalogoDeIngresos)
@@ -275,7 +284,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Delete Catalogo de Ingresos
         // GET: CatalogoDeDeducciones/Delete/5
         [SessionManager("CatalogoDeIngresos/Inactivar")]
         public ActionResult Delete(int? id)
@@ -303,7 +314,9 @@ namespace ERP_GMEDINA.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -312,5 +325,7 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }
