@@ -66,8 +66,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea")] tbAFP tbAFP)
         {
             // data de auditoria
-            tbAFP.afp_UsuarioCrea = 1;
-            tbAFP.afp_FechaCrea = DateTime.Now;
+            //tbAFP.afp_UsuarioCrea = 1;
+            //tbAFP.afp_FechaCrea = DateTime.Now;
 
             // variables para validar resultados
             string response = String.Empty;
@@ -148,9 +148,9 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "afp_Id,afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea,afp_UsuarioModifica,afp_FechaModifica")] tbAFP tbAFP)
         {
-            // data de auditoria
-            tbAFP.afp_UsuarioModifica = 1;
-            tbAFP.afp_FechaModifica = DateTime.Now;
+            //// data de auditoria
+            //tbAFP.afp_UsuarioModifica = 1;
+            //tbAFP.afp_FechaModifica = DateTime.Now;
 
             // variables de resultados
             string response = String.Empty;
@@ -169,8 +169,8 @@ namespace ERP_GMEDINA.Controllers
                                                         tbAFP.afp_InteresAporte,
                                                         tbAFP.afp_InteresAnual,
                                                         tbAFP.tde_IdTipoDedu,
-                                                         Function.GetUser(),
-                                                         Function.DatetimeNow());
+                                                        Function.GetUser(),
+                                                        Function.DatetimeNow());
 
                     // verificar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAFP_Update_Result Resultado in listAFP)
@@ -239,8 +239,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Inactivar(int afp_Id)
         {
             // data de auditoria
-            int afp_UsuarioModifica = 1;
-            DateTime afp_FechaModifica = DateTime.Now;
+            //int afp_UsuarioModifica = 1;
+            //DateTime afp_FechaModifica = DateTime.Now;
             
             // variables de resultados
             string response = String.Empty;
@@ -296,8 +296,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Activar(int id)
         {
             // data de auditoria
-            int afp_UsuarioModifica = 1;
-            DateTime afp_FechaModifica = DateTime.Now;
+            //int afp_UsuarioModifica = 1;
+            //DateTime afp_FechaModifica = DateTime.Now;
 
             //variables de resultados
             string response = String.Empty;
