@@ -3400,6 +3400,7 @@
     <Folder Include="Expedientes\Expediente_2\Constancia\" />
     <Folder Include="fonts\font-awesome\less\" />
     <Folder Include="fonts\font-awesome\scss\" />
+    <Folder Include="Models\RecursosHumanos\" />
     <Folder Include="Views\Box\Box\" />
   </ItemGroup>
   <PropertyGroup>
