@@ -95,8 +95,8 @@ namespace ERP_GMEDINA.Controllers
         {
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
             #region declaracion de variables 
-            tbAcumuladosISR.aisr_UsuarioCrea = 1;
-            tbAcumuladosISR.aisr_FechaCrea = DateTime.Now;
+            //tbAcumuladosISR.aisr_UsuarioCrea = 1;
+            //tbAcumuladosISR.aisr_FechaCrea = DateTime.Now;
             //Variable para almacenar el resultado del proceso y enviarlo al lado del cliente
             string response = String.Empty;
             IEnumerable<object> listAcumuladosISR = null;
@@ -110,8 +110,8 @@ namespace ERP_GMEDINA.Controllers
                     //Ejecutar el procedimiento almacenado
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Insert(tbAcumuladosISR.aisr_Descripcion,
                                                                                      tbAcumuladosISR.aisr_Monto,
-                                                                                     tbAcumuladosISR.aisr_UsuarioCrea,
-                                                                                     tbAcumuladosISR.aisr_FechaCrea,
+                                                                                     Function.GetUser(),
+                                                                                     Function.DatetimeNow(),
                                                                                      tbAcumuladosISR.aisr_DeducirISR,
                                                                                      tbAcumuladosISR.emp_Id);
 
@@ -168,7 +168,7 @@ namespace ERP_GMEDINA.Controllers
             tbAcumuladosISR tbAcumuladosISR = new tbAcumuladosISR() { aisr_Id = aisr_Id, aisr_Descripcion = aisr_Descripcion, aisr_Monto = aisr_Monto, aisr_DeducirISR = aisr_DeducirISR, emp_Id = emp_ID };
             // data de auditoria
             tbAcumuladosISR.aisr_UsuarioModifica = Function.GetUser();
-            tbAcumuladosISR.aisr_FechaModifica = DateTime.Now;
+            tbAcumuladosISR.aisr_FechaModifica = Function.DatetimeNow();
 
 
             string response = String.Empty;
@@ -223,8 +223,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Inactivar(id,
-                                                                                1,
-                                                                                DateTime.Now);
+                                                                               Function.GetUser(),
+                                                                               Function.DatetimeNow());
 
                     // verificar resultado del PA
                     foreach (UDP_Plani_tbAcumuladosISR_Inactivar_Result Resultado in listAcumuladosISR)
@@ -271,8 +271,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listAcumuladosISR = db.UDP_Plani_tbAcumuladosISR_Activar(id,
-                                                                                    1,
-                                                                                    DateTime.Now);
+                                                                             Function.GetUser(),
+                                                                             Function.DatetimeNow());
 
                     // verificar resultado del PA
                     foreach (UDP_Plani_tbAcumuladosISR_Activar_Result Resultado in listAcumuladosISR)
