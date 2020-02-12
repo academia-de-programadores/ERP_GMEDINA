@@ -1,0 +1,253 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbBoxDetalle>
+@using ERP_GMEDINA.Models
+@{
+    tbBoxDetalle BoxDet = new tbBoxDetalle();
+}
+
+    
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                    
+                <div class="ibox-content">   
+                    <table id="tbProducto" class="table table-striped table-responsive table-bordered table-hover" style:width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.prod_Codigo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.prod_Descripcion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.prod_Marca)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.prod_Modelo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.prod_Talla)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.pcat_Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbProducto.uni_Id)
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.boxd_Cantidad)*@
+                                    Cantidad
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr tr data-id="@item.prod_Codigo" , tr data-content="@item.tbProducto.prod_Descripcion" , tr data-container="@item.tbProducto.tbProductoSubcategoria.pscat_Descripcion" , tr data-keyboard="@item.tbProducto.tbUnidadMedida.uni_Descripcion" , tr data-pcat="@item.tbProducto.tbProductoSubcategoria.tbProductoCategoria.pcat_Nombre" , tr data-sal_Id="@item.box_Codigo">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.prod_Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.prod_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.prod_Marca)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.prod_Modelo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.prod_Talla)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.tbProductoSubcategoria.tbProductoCategoria.pcat_Nombre)  @Html.DisplayFor(modelItem => item.tbProducto.tbProductoSubcategoria.pscat_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbProducto.tbUnidadMedida.uni_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.boxd_Cantidad)
+                                    </td>
+                                    <td>
+                                        @if (item.tbBox.box_Estado == Helpers.vbox_Abrierta)
+                                        {
+                                            <button type="button" class="btn btn-white btn-xs" onclick="EditBoxDetalles('@item.boxd_Id')">Editar</button>
+                                            <input type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalEliminarDetalle" value="Quitar" />
+                                        }
+                                        else
+                                        {
+                                            <label class="danger">No se Puede Modificar</label>
+                                        }
+                                    </td>
+
+                                    <div class="modal fade" id="ModalEliminarDetalle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">Desea Eliminar Este Elemento la Salida</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(m => BoxDet.tbProducto.prod_Codigo, new { @class = "control-label col-sm-2" })
+                                                            <div class="col-sm-10">
+                                                                @Html.EditorFor(model => item.prod_Codigo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(m => BoxDet.tbProducto.prod_Descripcion, new { @class = "control-label col-sm-2" })
+                                                            <div class="col-sm-10">
+                                                                @Html.EditorFor(model => item.tbProducto.prod_Descripcion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(m => BoxDet.tbProducto.pcat_Id, new { @class = "control-label col-sm-2" })
+                                                            <div class="col-sm-10">
+                                                                @Html.EditorFor(model => item.tbProducto.tbProductoSubcategoria.tbProductoCategoria.pcat_Nombre, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(m => BoxDet.tbProducto.pscat_Id, new { @class = "control-label col-sm-2" })
+                                                            <div class="col-sm-10">
+                                                                @Html.EditorFor(model => item.tbProducto.tbProductoSubcategoria.pscat_Descripcion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(m => BoxDet.tbProducto.uni_Id, new { @class = "control-label col-sm-2" })
+                                                            <div class="col-sm-10">
+                                                                @Html.EditorFor(model => item.tbProducto.tbUnidadMedida.uni_Descripcion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(m => BoxDet.boxd_Cantidad,"Cantidad", new { @class = "control-label col-sm-2" })
+                                                            <div class="col-sm-10">
+                                                                @Html.EditorFor(model => item.boxd_Cantidad, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" onclick="DeleteBoxDetalles('@item.boxd_Id')">Eliminar</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditBoxDetalle">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Editar Box Detalle</h4>
+            </div>
+                <div class="modal-body">
+                    <fieldset id="SubmitForm">
+
+                        <div class="form-horizontal">
+                            <label id="MsjError">
+                            </label>
+                            <input type="hidden" id="box_Id_SD" name="box_Codigo" class="form-control" />
+                            <input type="hidden" id="boxd_Id_SD" name="boxd_Id" class="form-control" />
+                            <div class="form-group">
+                                @Html.LabelFor(m => BoxDet.tbProducto.prod_Codigo, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="prod_Codigo_SD" name="prod_Codigo" class="form-control" readonly />
+                                    @Html.ValidationMessageFor(m => BoxDet.prod_Codigo)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => BoxDet.tbProducto.prod_Descripcion, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="prod_Descripcion_SD" name="prod_Descripcion" class="form-control" readonly />
+                                    @Html.ValidationMessageFor(m => BoxDet.tbProducto.prod_Descripcion)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => BoxDet.tbProducto.pcat_Id, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="pcat_Nombre_SD" name="pcat_Nombre" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => BoxDet.tbProducto.pscat_Id, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="pscat_Descripcion_SD" name="pscat_Descripcion" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => BoxDet.tbProducto.uni_Id, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="uni_Descripcion_SD" name="uni_Descripcion" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => BoxDet.boxd_Cantidad ,"Cantidad",new { @class = "control-label col-sm-2 required" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="boxd_Cantidad_SD" name="boxd_Cantidad" class="form-control" />
+                                    <div id="validationsald_Cantidad">
+                                        @Html.ValidationMessageFor(m => BoxDet.boxd_Cantidad)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="sald_FechaCrea_SD" name="sald_FechaCrea" />
+                            <input type="hidden" id="sald_UsuarioCrea_SD" name="sald_UsuarioCrea" />
+
+                            <div class="form-group">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-primary" type="button" id="BtnsubmitEdit" tabindex="10"> Guardar </button>
+                                    <button type="button" class="btn btn-white" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+</div>
+</div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/app/DataTable.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tbProducto').DataTable({
+
+        "searching": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+            },
+            "sEmptyTable": "No hay registros",
+            "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+            "sSearch": "Buscar",
+            "sLengthMenu": "Mostrar _MENU_ Registros por página",
+            "sInfo": "Mostrando _START_ a _END_ Entradas",
+
+        },
+
+    });
+    });
+</script>
+

@@ -1,0 +1,106 @@
+﻿@model ERP_GMEDINA.Models.tbTipoDevolucion
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+  
+    .validation-error {
+        color: red;
+        font-size: small;
+    }
+    .validation-summary-errors
+     {
+        color: red;
+        font-size: small;
+                        }
+     #tdev_Descripcion {
+        text-transform: uppercase;
+    }
+    #tdev_Descripcion {
+        text-transform: uppercase;
+    }
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Tipo Devolocion</h2>
+
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Registrar Tipo Devolucion</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Descripcion<span style="color:red">*</span></label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.tdev_Descripcion, new { htmlAttributes = new { @onkeypress = "return soloLetras(event)", @maxlength = "50", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.tdev_Descripcion)
+            </div>
+        </div>
+
+      
+
+        <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Guardar" class="btn btn-primary" id="btnGuardar" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-white" })
+    </div>
+</div>
+    </div>
+}
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+ <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/app/TipoDevolucion.js"></script>
+<script>
+    $("#tdev_Descripcion").focus();
+    $("#tdev_Descripcion").change(function () {
+        var str = $("#tdev_Descripcion").val();
+        var res = str.toUpperCase();
+        $("#tdev_Descripcion").val(res);
+    });
+
+        $("#tdev_Descripcion").keypress(function (e) {
+
+            if (e.which == 13) {
+
+                // Acciones a realizar, por ej: enviar formulario.
+
+                $('#btnGuardar').click();
+
+            }
+
+        });
+</script>
