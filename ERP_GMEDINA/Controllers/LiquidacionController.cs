@@ -12,6 +12,7 @@ namespace ERP_GMEDINA.Controllers
     public class LiquidacionController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
         public decimal total { get; set; }
 
         // GET: Liquidacion
@@ -275,7 +276,7 @@ namespace ERP_GMEDINA.Controllers
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             int idUser = (int)Session["UserLogin"];
             tbLiquidaciones.UsuarioCrea = idUser;
-            tbLiquidaciones.FechaCrea = DateTime.Now;
+            tbLiquidaciones.FechaCrea = Function.DatetimeNow();
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = "bien";
             IEnumerable<object> listLiquidacion = null;
