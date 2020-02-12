@@ -355,7 +355,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		#region Ejecutable Deducciones Extraordinarias
+		#region Dispose
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
