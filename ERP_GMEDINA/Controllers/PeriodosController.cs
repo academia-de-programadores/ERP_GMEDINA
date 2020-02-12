@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class PeriodosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region INDEX
         [SessionManager("Periodos/Index")]
@@ -57,8 +58,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "peri_DescripPeriodo, peri_CantidadDias, peri_RecibeSeptimoDia")] tbPeriodos tbPeriodos)
         {
             // data de auditoria
-            tbPeriodos.peri_UsuarioCrea = 1;
-            tbPeriodos.peri_FechaCrea = DateTime.Now;
+            tbPeriodos.peri_UsuarioCrea = Function.GetUser();
+            tbPeriodos.peri_FechaCrea = Function.DatetimeNow();
             tbPeriodos.peri_Activo = true;
 
             // variables de resultado
@@ -136,12 +137,12 @@ namespace ERP_GMEDINA.Controllers
 
         #region POST: EDITAR    
         [HttpPost]
-        [SessionManager("Periodos/Editar")]
+        [SessionManager("Periodos/Edit")]
         public JsonResult Editar([Bind(Include = "peri_IdPeriodo,peri_DescripPeriodo, peri_CantidadDias, peri_RecibeSeptimoDia")] tbPeriodos tbPeriodos)
         {
             // data de auditoria
-            tbPeriodos.peri_UsuarioModifica = 1;
-            tbPeriodos.peri_FechaModifica = DateTime.Now;
+            tbPeriodos.peri_UsuarioModifica = Function.GetUser();
+            tbPeriodos.peri_FechaModifica = Function.DatetimeNow();
             tbPeriodos.peri_Activo = true;
 
             // variables de resultado
@@ -248,8 +249,8 @@ namespace ERP_GMEDINA.Controllers
 
             // data del objeto
             tbPeriodos.peri_IdPeriodo = (int)id;
-            tbPeriodos.peri_UsuarioModifica = 1;
-            tbPeriodos.peri_FechaModifica = DateTime.Now;
+            tbPeriodos.peri_UsuarioModifica = Function.GetUser();
+            tbPeriodos.peri_FechaModifica = Function.DatetimeNow();
 
             // validar que el id sea válido
             if (tbPeriodos.peri_IdPeriodo > 0)
@@ -258,8 +259,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listPeriodo = db.UDP_Plani_tbPeriodos_Inactivar(tbPeriodos.peri_IdPeriodo,
-                                                                               tbPeriodos.peri_UsuarioModifica,
-                                                                               tbPeriodos.peri_FechaModifica);
+                                                                    tbPeriodos.peri_UsuarioModifica,
+                                                                    tbPeriodos.peri_FechaModifica);
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbPeriodos_Inactivar_Result Resultado in listPeriodo)
@@ -313,8 +314,8 @@ namespace ERP_GMEDINA.Controllers
 
             // data del objeto
             tbPeriodos.peri_IdPeriodo = (int)id;
-            tbPeriodos.peri_UsuarioModifica = 1;
-            tbPeriodos.peri_FechaModifica = DateTime.Now;
+            tbPeriodos.peri_UsuarioModifica = Function.GetUser();
+            tbPeriodos.peri_FechaModifica = Function.DatetimeNow();
 
             // validar si el ID es válido
             if (tbPeriodos.peri_IdPeriodo > 0)
@@ -323,8 +324,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     // ejecutar PA
                     listPeriodo = db.UDP_Plani_tbPeriodos_Activar(tbPeriodos.peri_IdPeriodo,
-                                                                               tbPeriodos.peri_UsuarioModifica,
-                                                                               tbPeriodos.peri_FechaModifica);
+                                                                  tbPeriodos.peri_UsuarioModifica,
+                                                                  tbPeriodos.peri_FechaModifica);
 
                     // obetener resultado del PA
                     foreach (UDP_Plani_tbPeriodos_Activar_Result Resultado in listPeriodo)
