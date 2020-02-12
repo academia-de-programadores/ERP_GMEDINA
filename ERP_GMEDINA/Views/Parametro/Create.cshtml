@@ -1,0 +1,194 @@
+﻿@model ERP_GMEDINA.Models.tbParametro
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Crear parametro</h2>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+        </div>
+    </div>
+</div>
+
+@Html.HiddenFor(model => model.par_UsuarioCrea)
+@Html.HiddenFor(model => model.par_FechaCrea)
+@Html.HiddenFor(model => model.par_UsuarioModifica)
+@Html.HiddenFor(model => model.par_FechaModifica)
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+			@using (Html.BeginForm("Create", "Parametro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="form-group col-md-12">
+                                                @Html.LabelFor(model => model.par_PathLogo, new { @class = "control-label col-md-2" })
+                                                <div class="col-md-4">
+                                                    <img id="imgpreview" height="170" width="170" src="#" style="border-width: 0px;" />
+                                                    <input class="btn btn-primary" type="file" id="CargarFoto" value="Cargar Fotografía" name="FotoPath">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                @if (ViewBag.smserror != "" && ViewBag.smserror != null)
+                                                {     <div class="col-md-12" id="mensaje">
+                                                        <p style="color:red" id="errorlogo">El campo Logo es obligatorio.</p>
+                                                </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+    <div class="form-horizontal" >
+        <p style="color:red">
+            @Html.ValidationSummary(true)</p>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.par_Id, new { @Value = "1", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.par_Id)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Nombre Empresa<span style="color:red">*</span></label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.par_NombreEmpresa)
+                     @Html.ValidationMessageFor(model => model.par_NombreEmpresa,null,new { style = "color:red" , id = "errornombreempresa" })
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Telefono Empresa<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.par_TelefonoEmpresa, new { htmlAttributes = new { onkeypress = "return validartel(event)" } })
+                <div id="errortelefono">
+                    @Html.ValidationMessageFor(model => model.par_TelefonoEmpresa, null, new { style = "color:red", id = "errortelefonoempresa" })
+                </div>
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Correo Empresa<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.par_CorreoEmpresa, new { @class = "form-control", type = "email", maxlength = 5000, @autocomplete = "off", @onKeyPress = "return Caracteres_Email(event)", @onkeyup = "this.value=CorreoElectronico(this.value)" })
+                <div id="errorcorreo" style="color:red">
+                    @Html.ValidationMessageFor(model => model.par_CorreoEmpresa, null, new { style = "color:red", id = "errorcorreoempresa" })
+                </div>  
+                 </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Moneda<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("mnda_Id", (IEnumerable<SelectListItem>)ViewBag.mnda_Id, "Seleccione", new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.mnda_Id, null, new { style = "color:red", id = "errormoneda" }) 
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Gerente de Tienda<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("par_RolGerenteTienda", (IEnumerable<SelectListItem>)ViewBag.Id_Rol3, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.par_RolGerenteTienda, null, new { style = "color:red", id = "errorgerentetienda" })
+</div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-2">Credito-Cobranza<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("par_RolCreditoCobranza", (IEnumerable<SelectListItem>)ViewBag.Id_Rol2, "Seleccione", new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.par_RolCreditoCobranza, null, new { style = "color:red", id = "errorcreditocobranza" })
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Supervisor de Caja<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("par_RolSupervisorCaja", (IEnumerable<SelectListItem>)ViewBag.Id_Rol4, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.par_RolSupervisorCaja, null, new { style = "color:red", id = "errorsupervisorcaja" }) 
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Cajero<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("par_RolCajero", (IEnumerable<SelectListItem>)ViewBag.Id_Rol1, "Seleccione", new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.par_RolCajero, null, new { style = "color:red", id = "errorcajero" })
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Auditor<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("par_RolAuditor", (IEnumerable<SelectListItem>)ViewBag.Id_Rol, "Seleccione", new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.par_RolAuditor, null, new { style = "color:red", id = "errorauditor" })
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Sucursal Principal<span style="color:red">*</span></label>
+            <div class="col-md-10">
+               @Html.DropDownList("par_SucursalPrincipal", (IEnumerable<SelectListItem>)ViewBag.sucursal, "Seleccione", new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.par_SucursalPrincipal, null, new { style = "color:red", id = "errorsucursalprincipal" })
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Porcentaje Descuento TE<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.par_PorcentajeDescuentoTE)
+                @Html.ValidationMessageFor(model => model.par_PorcentajeDescuentoTE, null, new { style = "color:red", id = "errorporcentajedescuento" }) 
+</div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Consumidor Final<span style="color:red">*</span></label>
+            <div class="col-md-10">
+                @Html.DropDownList("par_IdConsumidorFinal",  (IEnumerable<SelectListItem>)ViewBag.consumidor,"Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.par_IdConsumidorFinal, null, new { style = "color:red", id = "errorconsumidorfinal" }) 
+</div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+                    }
+                
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/app/Parametro.js"></script>
+<script src="~/Scripts/jquery.maskedinput.min.js"></script>
+                
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
