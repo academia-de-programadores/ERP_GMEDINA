@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class PlanillaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region GET: Planilla
         [SessionManager("Planilla/Index")]
@@ -90,7 +91,7 @@ namespace ERP_GMEDINA.Controllers
                         // procesar todas las planillas seleccionadas
                         foreach (var iter in oIDSPlanillas)
                         {
-                            codigoDePlanillaGenerada = $"PLANI_{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}_{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}";
+                            codigoDePlanillaGenerada = $"PLANI_{Function.DatetimeNow().Year}{Function.DatetimeNow().Month}{Function.DatetimeNow().Day}_{Function.DatetimeNow().Hour}{Function.DatetimeNow().Minute}{Function.DatetimeNow().Second}";
                             try
                             {
                                 // planilla actual del foreach
