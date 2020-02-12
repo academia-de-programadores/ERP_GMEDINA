@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbBox>
+
+@using ERP_GMEDINA.Models;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Caja</h2>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listado de Cajas</h5>
+                    <div class="ibox-tools">
+                        @Html.ActionLink("Registrar Caja", "Create", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-responsive table-bordered table-hover" style="width:100%"  id="DataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.box_Codigo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.box_Descripcion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tbBodega.bod_Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.box_Estado)
+                                </th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.box_Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.box_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbBodega.bod_Nombre)
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.box_Estado == Helpers.vbox_Abrierta)
+                                            {
+                                                <p>@Helpers.box_Abrierta</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@Helpers.box_Abrierta</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.box_Codigo }, new { @class = "btn btn-primary btn-xs" })
+                                        @{
+                                            if (item.box_Estado == Helpers.vbox_Abrierta)
+                                            {
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.box_Codigo }, new { @class = "btn btn-white btn-xs" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.box_Codigo }, new { @class = "btn btn-white btn-xs", @disabled = "disabled" })
+                                            }
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#DataTable').DataTable({
+
+        "searching": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+            },
+            "sEmptyTable": "No hay registros",
+            "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+            "sSearch": "Buscar",
+            "sLengthMenu": "Mostrar _MENU_ Registros por página",
+            "sInfo": "Mostrando _START_ a _END_ Entradas",
+
+        },
+
+    });
+    });
+</script>
+
