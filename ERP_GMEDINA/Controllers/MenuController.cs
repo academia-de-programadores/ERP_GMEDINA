@@ -19,8 +19,6 @@ namespace ERP_GMEDINA.Controllers
             if(idmenu != 0)
             {
                 int idUsuario = (int)HttpContext.Session["UserLogin"];
-                //tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == idUsuario).FirstOrDefault();
-                //Session["sesionUsuario"] = sesionUsuario;
                 Session["sesionIdMenu"] = idmenu;
                 return View();
             }
@@ -30,7 +28,6 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        //[SessionManager("Menu/MenuPrincipal")]
         public ActionResult MenuPrincipal()
         {
            // tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
