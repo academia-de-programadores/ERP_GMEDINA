@@ -45,6 +45,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CRVsPackageLib, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.TemplateEngine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonControls, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonObjectModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CubeDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportAppServer.ReportDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.XmlSerialize, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.VSDesigner, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
@@ -235,6 +276,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attribute\SessionManager.cs" />
+    <Compile Include="Controllers\Facturacion\Caja\DenominacionArqueoController.cs" />
+    <Compile Include="Controllers\Facturacion\Caja\DenominacionController.cs" />
+    <Compile Include="Controllers\Facturacion\Caja\MovimientoCajaController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\ActividadEconomicaController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\BancoController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\CuentaBancoController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\DocumentoFiscalController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\EstadoFacturaController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\EstadoPedidoController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\EstadoSolicitudCreditoController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\MonedaController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\TipoIdentificacionController.cs" />
+    <Compile Include="Controllers\Facturacion\Catalogos\TipoPagoController.cs" />
+    <Compile Include="Controllers\Facturacion\Configuracion\CajaController.cs" />
+    <Compile Include="Controllers\Facturacion\Configuracion\PuntoEmisionController.cs" />
+    <Compile Include="Controllers\Facturacion\Configuracion\SucursalController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\ClienteController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\CuponDescuentoController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\DevolucionController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\ExoneracionController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\FacturaController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\ListaPreciosController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\NotaCreditoController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\PagoController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\PagosArqueoController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\PedidoController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\SolicitudCreditoController.cs" />
+    <Compile Include="Controllers\Facturacion\Ventas\SolicitudEfectivoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Planillas\Configuraciones\AcumuladosISRController.cs" />
     <Compile Include="Controllers\Planillas\Ingresos\AdelantoSueldoController.cs" />
@@ -270,6 +339,8 @@
     <Compile Include="Controllers\Planillas\Configuraciones\TechosComisionesController.cs" />
     <Compile Include="Controllers\Planillas\Configuraciones\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\Planillas\Configuraciones\TipoDeduccionesController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,6 +350,60 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\ArqueoCaja.Designer.cs" />
+    <Compile Include="Dataset\ArqueoCaja1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\DSCuponDescuento.Designer.cs" />
+    <Compile Include="Dataset\DSCuponDescuento1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCuponDescuento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\DsFactura.Designer.cs" />
+    <Compile Include="Dataset\DsFactura1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\DSNotaCredito.Designer.cs" />
+    <Compile Include="Dataset\DSNotaCredito1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSNotaCredito.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\dsPago.Designer.cs" />
+    <Compile Include="Dataset\dsPago1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPago.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\PuntoEmision.Designer.cs" />
+    <Compile Include="Dataset\PuntoEmision1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\Reportes.cs">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\Reportes.Designer.cs">
+      <DependentUpon>Reportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\Reportes1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\SolicitudEFectivo.Designer.cs" />
+    <Compile Include="Dataset\SolicitudEFectivo1.Designer.cs" />
+    <Compile Include="Dataset\SolicitudEFectivo2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SolicitudEFectivo.xsd</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -292,95 +417,53 @@
     <Compile Include="Helpers\Ingresos.cs" />
     <Compile Include="Helpers\Liquidacion.cs" />
     <Compile Include="Helpers\ReportePlanilla.cs" />
-    <Compile Include="Models\cAcumuladosISR.cs" />
-    <Compile Include="Models\cAdelantoSueldo.cs" />
-    <Compile Include="Models\cAFP.cs" />
-    <Compile Include="Models\cAFPRPT.cs" />
-    <Compile Include="Models\cAreas.cs" />
-    <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
-    <Compile Include="Models\cAuxilioDeCesantias.cs" />
-    <Compile Include="Models\cCargos.cs" />
-    <Compile Include="Models\cCatalogoDeDeducciones.cs" />
-    <Compile Include="Models\cCatalogoDePlanillas.cs" />
-    <Compile Include="Models\cCatalogoIngresos.cs" />
-    <Compile Include="Models\cCompetencias.cs" />
-    <Compile Include="Models\cDecimoCuartoMes.cs" />
-    <Compile Include="Models\cDecimoCuartoMesPagado.cs" />
-    <Compile Include="Models\cDecimoCuartoMesRPT.cs" />
-    <Compile Include="Models\cDecimoTercerMes.cs" />
-    <Compile Include="Models\cDecimoTercerMesPagado.cs" />
-    <Compile Include="Models\cDecimoTercerMesRPT.cs" />
-    <Compile Include="Models\cDeduccionAFP.cs" />
-    <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
-    <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
-    <Compile Include="Models\cDeduccionesIndividuales.cs" />
-    <Compile Include="Models\cDeduccionesRPT.cs" />
-    <Compile Include="Models\cDepartamentos.cs" />
-    <Compile Include="Models\cDropDownList.cs" />
-    <Compile Include="Models\cEmpleadoBonos.cs" />
-    <Compile Include="Models\cEmpleadoComisiones.cs" />
-    <Compile Include="Models\cEmpleados.cs" />
-    <Compile Include="Models\cEmpresas.cs" />
-    <Compile Include="Models\cEquipoEmpleados.cs" />
-    <Compile Include="Models\cEquipoTrabajo.cs" />
-    <Compile Include="Models\cFasesReclutamiento.cs" />
-    <Compile Include="Models\cFormaPago.cs" />
-    <Compile Include="Models\cGeneralTotalesRPT.cs" />
-    <Compile Include="Models\cHabilidades.cs" />
-    <Compile Include="Models\cHistorialAmonestaciones.cs" />
-    <Compile Include="Models\cHistorialAudienciaDescargo.cs" />
-    <Compile Include="Models\cHistorialCargos.cs" />
-    <Compile Include="Models\cHistorialDePago.cs" />
-    <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
-    <Compile Include="Models\cHistorialIncapacidades.cs" />
-    <Compile Include="Models\cHistorialPermisos.cs" />
-    <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
-    <Compile Include="Models\cHistorialSalidas.cs" />
-    <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
-    <Compile Include="Models\CHistorialVacaciones.cs" />
-    <Compile Include="Models\cHorarios.cs" />
-    <Compile Include="Models\cIdiomas.cs" />
-    <Compile Include="Models\cIHSSRPT.cs" />
-    <Compile Include="Models\cINFOPRPT.cs" />
-    <Compile Include="Models\cIngresosIndividuales.cs" />
-    <Compile Include="Models\cIngresosRPT.cs" />
-    <Compile Include="Models\cInstitucionesFinancieras.cs" />
-    <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
-    <Compile Include="Models\cISR.cs" />
-    <Compile Include="Models\cISRRPT.cs" />
-    <Compile Include="Models\cJornadas.cs" />
-    <Compile Include="Models\cLiquidacionesRPT.cs" />
-    <Compile Include="Models\cNacionalidades.cs" />
-    <Compile Include="Models\ComprobantePagoModel.cs" />
-    <Compile Include="Models\ComprobantePagoSessionViewModel.cs" />
-    <Compile Include="Models\cPeriodos.cs" />
-    <Compile Include="Models\cPersonas.cs" />
-    <Compile Include="Models\cPreaviso.cs" />
-    <Compile Include="Models\cPreviewPlanilla.cs" />
-    <Compile Include="Models\cRAPRPT.cs" />
-    <Compile Include="Models\cRazonSalidas.cs" />
-    <Compile Include="Models\cRequerimientosEspeciales.cs" />
-    <Compile Include="Models\cRequisiciones.cs" />
-    <Compile Include="Models\cSeleccionCandidatos.cs" />
-    <Compile Include="Models\cSucursales.cs" />
-    <Compile Include="Models\cSueldos.cs" />
-    <Compile Include="Models\cTechoImpuestoVecinal.cs" />
-    <Compile Include="Models\cTechosComisiones.cs" />
-    <Compile Include="Models\cTechosDeducciones.cs" />
-    <Compile Include="Models\cTipoAmonestaciones.cs" />
-    <Compile Include="Models\cTipoDeducciones.cs" />
-    <Compile Include="Models\cTipoHoras.cs" />
-    <Compile Include="Models\cTipoIncapacidades.cs" />
-    <Compile Include="Models\cTipoMonedas.cs" />
-    <Compile Include="Models\cTipoPermisos.cs" />
-    <Compile Include="Models\cTipoSalidas.cs" />
-    <Compile Include="Models\cTitulos.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cAcumuladosISR.cs" />
+    <Compile Include="Models\Planillas\Ingresos\cAdelantoSueldo.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cAFP.cs" />
+    <Compile Include="Models\Planillas\Reportes\cAFPRPT.cs" />
+    <Compile Include="Models\Planillas\Ingresos\CatalogoDeIngresosViewModel.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cAuxilioDeCesantias.cs" />
+    <Compile Include="Models\Planillas\Deducciones\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\Planillas\Planilla\cCatalogoDePlanillas.cs" />
+    <Compile Include="Models\Planillas\Ingresos\cCatalogoIngresos.cs" />
+    <Compile Include="Models\Planillas\Planilla\cDecimoCuartoMes.cs" />
+    <Compile Include="Models\Planillas\Planilla\cDecimoCuartoMesPagado.cs" />
+    <Compile Include="Models\Planillas\Reportes\cDecimoCuartoMesRPT.cs" />
+    <Compile Include="Models\Planillas\Planilla\cDecimoTercerMes.cs" />
+    <Compile Include="Models\Planillas\Planilla\cDecimoTercerMesPagado.cs" />
+    <Compile Include="Models\Planillas\Reportes\cDecimoTercerMesRPT.cs" />
+    <Compile Include="Models\Planillas\Deducciones\cDeduccionAFP.cs" />
+    <Compile Include="Models\Planillas\Deducciones\cDeduccionesExtraordinarias.cs" />
+    <Compile Include="Models\Planillas\Deducciones\cDeduccionesExtraordinariasDetalles.cs" />
+    <Compile Include="Models\Planillas\Deducciones\cDeduccionesIndividuales.cs" />
+    <Compile Include="Models\Planillas\Reportes\cDeduccionesRPT.cs" />
+    <Compile Include="Models\Planillas\Ingresos\cEmpleadoBonos.cs" />
+    <Compile Include="Models\Planillas\Ingresos\cEmpleadoComisiones.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cFormaPago.cs" />
+    <Compile Include="Models\Planillas\Reportes\cGeneralTotalesRPT.cs" />
+    <Compile Include="Models\Planillas\Planilla\cHistorialDePago.cs" />
+    <Compile Include="Models\Planillas\Reportes\cIHSSRPT.cs" />
+    <Compile Include="Models\Planillas\Reportes\cINFOPRPT.cs" />
+    <Compile Include="Models\Planillas\Ingresos\cIngresosIndividuales.cs" />
+    <Compile Include="Models\Planillas\Reportes\cIngresosRPT.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cInstitucionesFinancieras.cs" />
+    <Compile Include="Models\Planillas\Reportes\cInstitucionesFinancierasRPT.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cISR.cs" />
+    <Compile Include="Models\Planillas\Reportes\cISRRPT.cs" />
+    <Compile Include="Models\Planillas\Reportes\cLiquidacionesRPT.cs" />
+    <Compile Include="Models\Planillas\Planilla\ComprobantePagoModel.cs" />
+    <Compile Include="Models\Planillas\Planilla\ComprobantePagoSessionViewModel.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cPeriodos.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cPreaviso.cs" />
+    <Compile Include="Models\Planillas\Planilla\cPreviewPlanilla.cs" />
+    <Compile Include="Models\Planillas\Reportes\cRAPRPT.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cTechoImpuestoVecinal.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cTechosComisiones.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cTechosDeducciones.cs" />
+    <Compile Include="Models\Planillas\Configuraciones\cTipoDeducciones.cs" />
     <Compile Include="Models\cUsuarios.cs" />
-    <Compile Include="Models\cV_tbAdelantoSueldo.cs" />
-    <Compile Include="Models\cV_HistorialEmpleadosLiquidados.cs" />
-    <Compile Include="Models\DatosProfesionales.cs" />
-    <Compile Include="Models\DatosProfesionalesArray.cs" />
-    <Compile Include="Models\DatosProfessionalesEdit.cs" />
+    <Compile Include="Models\Planillas\Ingresos\cV_tbAdelantoSueldo.cs" />
+    <Compile Include="Models\Planillas\Planilla\cV_HistorialEmpleadosLiquidados.cs" />
     <Compile Include="Models\EmpleadosVendedores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -399,15 +482,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ExcelEmpleados.cs" />
-    <Compile Include="Models\FechaPlanilla.cs" />
-    <Compile Include="Models\FechaPlanillaViewModel.cs" />
+    <Compile Include="Models\Planillas\Planilla\ExcelEmpleados.cs" />
     <Compile Include="Models\Helpers.cs" />
-    <Compile Include="Models\LiquidacionViewModel.cs" />
-    <Compile Include="Models\Personas.cs" />
-    <Compile Include="Models\PersonasData.cs" />
-    <Compile Include="Models\ReportePlanillaViewModel.cs" />
-    <Compile Include="Models\RequisicionesData.cs" />
+    <Compile Include="Models\Planillas\Planilla\LiquidacionViewModel.cs" />
+    <Compile Include="Models\Planillas\Reportes\ReportePlanillaViewModel.cs" />
     <Compile Include="Models\rrhh_tbCompetenciasRequisicion_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1563,13 +1641,13 @@
     <Compile Include="Models\UDV_Acce_Usuario_Roles.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModelDecimoCuartoMes.cs" />
-    <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
-    <Compile Include="Models\ViewModelDeduccionesReport.cs" />
-    <Compile Include="Models\ViewModelingresosReport.cs" />
-    <Compile Include="Models\ViewModelListaErrores.cs" />
-    <Compile Include="Models\ViewModelReportesVarios.cs" />
-    <Compile Include="Models\ViewModel_PlanillaImpuestoVecinal.cs" />
+    <Compile Include="Models\Planillas\Planilla\ViewModelDecimoCuartoMes.cs" />
+    <Compile Include="Models\Planillas\Planilla\ViewModelDecimoTercerMes.cs" />
+    <Compile Include="Models\Planillas\Reportes\ViewModelDeduccionesReport.cs" />
+    <Compile Include="Models\Planillas\Reportes\ViewModelingresosReport.cs" />
+    <Compile Include="Models\Planillas\Planilla\ViewModelListaErrores.cs" />
+    <Compile Include="Models\Planillas\Reportes\ViewModelReportesVarios.cs" />
+    <Compile Include="Models\Planillas\Planilla\ViewModel_PlanillaImpuestoVecinal.cs" />
     <Compile Include="Models\VM_ModelState.cs" />
     <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
@@ -1887,6 +1965,90 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\AnalisisDeMora.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ArqueoCaja.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CuponDescuento.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DescuentosPorFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DevolucionesPorFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\EstadoCuenta.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Factura.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\FacturasPendienteDePago.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ImprimirCuponDescuento.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ImprimirNotaCreditoclteJuridicoxDEV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ImprimirNotaCreditoclteJuridicoxOtros.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ImprimirNotaCreditoclteNaturalxDEV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ImprimirNotaCreditoclteNaturalxOtros.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ListadoPrecio2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\NotaCredito.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PagoImprimir1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PagosPorFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Pedidos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptInventarioNumeraciones.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptPedidoEntreFechas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptSolicitudEfectivoEntreFechasCajaCajero.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptSolicitudEfectivoEntrefechasGeneral.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptVentasExoneradas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptVentasPorCajaEntreFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SolicitudEfectivo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SolicitudesCreditosPorAprobar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VentasConsumidorFinal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas_entre_Fechas.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2299,6 +2461,94 @@
     <Content Include="DataSets\ReportesRRHH.xss">
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Content>
+    <Content Include="Dataset\ArqueoCaja.xsc">
+      <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\ArqueoCaja.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ArqueoCaja1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\ArqueoCaja.xss">
+      <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\DSCuponDescuento.xsc">
+      <DependentUpon>DSCuponDescuento.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\DSCuponDescuento.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCuponDescuento1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\DSCuponDescuento.xss">
+      <DependentUpon>DSCuponDescuento.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\DsFactura.xsc">
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\DsFactura.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsFactura1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\DsFactura.xss">
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\DSNotaCredito.xsc">
+      <DependentUpon>DSNotaCredito.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\DSNotaCredito.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSNotaCredito1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\DSNotaCredito.xss">
+      <DependentUpon>DSNotaCredito.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\dsPago.xsc">
+      <DependentUpon>dsPago.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\dsPago.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPago1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\dsPago.xss">
+      <DependentUpon>dsPago.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\PuntoEmision.xsc">
+      <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\PuntoEmision.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PuntoEmision1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\PuntoEmision.xss">
+      <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\Reportes.xsc">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\Reportes.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Reportes1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\Reportes.xss">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\SolicitudEFectivo.xsc">
+      <DependentUpon>SolicitudEFectivo.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\SolicitudEFectivo.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SolicitudEFectivo2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\SolicitudEFectivo.xss">
+      <DependentUpon>SolicitudEFectivo.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\App.pubxml" />
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresos.rdlc" />
@@ -2307,6 +2557,34 @@
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion_ERP_GMEDINA.pubxml" />
+    <Content Include="Reports\AnalisisDeMora.rpt" />
+    <Content Include="Reports\ArqueoCaja.rpt" />
+    <Content Include="Reports\CuponDescuento.rpt" />
+    <Content Include="Reports\DescuentosPorFecha.rpt" />
+    <Content Include="Reports\DevolucionesPorFecha.rpt" />
+    <Content Include="Reports\EstadoCuenta.rpt" />
+    <Content Include="Reports\Factura.rpt" />
+    <Content Include="Reports\FacturasPendienteDePago.rpt" />
+    <Content Include="Reports\ImprimirCuponDescuento.rpt" />
+    <Content Include="Reports\ImprimirNotaCreditoclteJuridicoxDEV.rpt" />
+    <Content Include="Reports\ImprimirNotaCreditoclteJuridicoxOtros.rpt" />
+    <Content Include="Reports\ImprimirNotaCreditoclteNaturalxDEV.rpt" />
+    <Content Include="Reports\ImprimirNotaCreditoclteNaturalxOtros.rpt" />
+    <Content Include="Reports\ListadoPrecio.rpt" />
+    <Content Include="Reports\NotaCredito.rpt" />
+    <Content Include="Reports\PagoImprimir.rpt" />
+    <Content Include="Reports\PagosPorFecha.rpt" />
+    <Content Include="Reports\Pedidos.rpt" />
+    <Content Include="Reports\rptInventarioNumeraciones.rpt" />
+    <Content Include="Reports\rptPedidoEntreFechas.rpt" />
+    <Content Include="Reports\rptSolicitudEfectivoEntreFechasCajaCajero.rpt" />
+    <Content Include="Reports\rptSolicitudEfectivoEntrefechasGeneral.rpt" />
+    <Content Include="Reports\rptVentasExoneradas.rpt" />
+    <Content Include="Reports\rptVentasPorCajaEntreFecha.rpt" />
+    <Content Include="Reports\SolicitudEfectivo.rpt" />
+    <Content Include="Reports\SolicitudesCreditosPorAprobar.rpt" />
+    <Content Include="Reports\VentasConsumidorFinal.rpt" />
+    <Content Include="Reports\Ventas_entre_Fechas.rpt" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
