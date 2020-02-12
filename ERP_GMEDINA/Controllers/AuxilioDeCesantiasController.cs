@@ -82,8 +82,8 @@ namespace ERP_GMEDINA.Controllers
         {
             
             // Auditoria
-            tbAuxilioDeCesantias.aces_UsuarioCrea = 1;
-            tbAuxilioDeCesantias.aces_FechaCrea = DateTime.Now;
+            //tbAuxilioDeCesantias.aces_UsuarioCrea = 1;
+            //tbAuxilioDeCesantias.aces_FechaCrea = DateTime.Now;
             tbAuxilioDeCesantias.aces_Activo = true;
 
             // variables de resultados
@@ -148,8 +148,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
             // auditoria
-            tbAuxilioDeCesantias.aces_UsuarioModifica = 1;
-            tbAuxilioDeCesantias.aces_FechaModifica = DateTime.Now;
+            //tbAuxilioDeCesantias.aces_UsuarioModifica = 1;
+            //tbAuxilioDeCesantias.aces_FechaModifica = DateTime.Now;
 
             // variables de resultado
             string response = String.Empty;
@@ -162,9 +162,12 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     // ejecutar procedimiento almacenad
-                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update(tbAuxilioDeCesantias.aces_IdAuxilioCesantia, tbAuxilioDeCesantias.aces_RangoInicioMeses,
-                                                                                            tbAuxilioDeCesantias.aces_RangoFinMeses,
-                                                                                            tbAuxilioDeCesantias.aces_DiasAuxilioCesantia, tbAuxilioDeCesantias.aces_UsuarioModifica, tbAuxilioDeCesantias.aces_FechaModifica);
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update(tbAuxilioDeCesantias.aces_IdAuxilioCesantia, 
+                                                                          tbAuxilioDeCesantias.aces_RangoInicioMeses,
+                                                                          tbAuxilioDeCesantias.aces_RangoFinMeses,
+                                                                          tbAuxilioDeCesantias.aces_DiasAuxilioCesantia, 
+                                                                          Function.GetUser(),
+                                                                          Function.DatetimeNow());
                     
                     // validar resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Update_Result Resultado in listAuxCes)
@@ -212,7 +215,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     // ejecutar el procedimiento almacenado
-                    listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID, 1, DateTime.Now);
+                    listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID, Function.GetUser(), Function.DatetimeNow());
 
                     // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Delete_Result Resultado in listAuxilioCesantia)
@@ -256,7 +259,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     // ejecutar procedimiento almacenado
-                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Activar(id, 1, DateTime.Now);
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Activar(id, Function.GetUser(), Function.DatetimeNow());
 
                     // resultado del procedimiento almacenado
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Activar_Result Resultado in listAuxCes)
