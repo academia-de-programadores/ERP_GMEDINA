@@ -19,8 +19,7 @@
                         var oUsuario = (ERP_GMEDINA.Models.UDP_Acce_Login_Result)HttpContext.Current.Session["sesionUsuario"];
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
-                        int rol_Usuario = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? 1 : 2);
-                        bool esAdmin = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? true : false);
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
 
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
@@ -40,8 +39,7 @@
                                 <!-- validar el estado del registro (activo/inactivo)-->
                                 string estadoISR = item.tde_Activo == false ? "Inactivo" : "Activo";
 
-                                var Usuario_Modifica = !(item.tde_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres;
-                                var Fecha_FechaModifica = Convert.ToString(item.tde_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.tde_FechaModifica);
+                               
 
                                 <tr class="gradeA odd" role="row" data-id="@item.tde_IdTipoDedu">
                                     <td>
@@ -62,7 +60,7 @@
                                                 <button type="button" data-id="@item.tde_IdTipoDedu" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
-                                            if (esAdmin == true && item.tde_Activo == false)
+                                            if (oUsuario?.usu_EsAdministrador == true && item.tde_Activo == false)
                                             {
                                                 <button type="button" data-id="@item.tde_IdTipoDedu" class="btn btn-primary btn-xs" id="btnDetalleTipoDeducciones">Detalles</button>
                                                 <!-- ACTIVAR -->
