@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class TipoDeduccionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         #region GET: INDEX  
         // GET: TipoDeducciones
@@ -166,9 +167,12 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit([Bind(Include = "tde_IdTipoDedu,tde_Descripcion,tde_UsuarioCrea,tde_FechaCrea,tde_UsuarioModifica,tde_FechaModifica,tde_Activo")] tbTipoDeduccion tbTipoDeduccion)
         {
             // data de auditoria
-            tbTipoDeduccion.tde_UsuarioCrea = 1;
-            tbTipoDeduccion.tde_FechaCrea = DateTime.Now;
+            tbTipoDeduccion.tde_UsuarioCrea = Function.GetUser();
+            tbTipoDeduccion.tde_FechaCrea = Function.DatetimeNow();
 
+
+            tbTipoDeduccion.tde_UsuarioModifica = Function.GetUser();
+            tbTipoDeduccion.tde_FechaModifica = Function.DatetimeNow();
             // vairable de resultados
             string response = String.Empty;
             IEnumerable<object> listTipoDeduccion = null;
@@ -182,8 +186,8 @@ namespace ERP_GMEDINA.Controllers
                     // ejecutar PA
                     listTipoDeduccion = db.UDP_Plani_tbTipoDeduccion_Update(tbTipoDeduccion.tde_IdTipoDedu,
                                                                             tbTipoDeduccion.tde_Descripcion,
-                                                                            1,
-                                                                            DateTime.Now);
+                                                                            tbTipoDeduccion.tde_UsuarioModifica,
+                                                                            tbTipoDeduccion.tde_FechaModifica);
 
                     // obtener resultado del PA
                     foreach (UDP_Plani_tbTipoDeduccion_Update_Result resultado in listTipoDeduccion)
