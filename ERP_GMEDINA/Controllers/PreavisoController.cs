@@ -174,7 +174,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: EDITAR
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [SessionManager("Preaviso/Editar")]
+        [SessionManager("Preaviso/Edit")]
         public ActionResult Editar([Bind(Include = "prea_IdPreaviso,prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso")] tbPreaviso tbPreaviso)
         {
             // data de auditoria
