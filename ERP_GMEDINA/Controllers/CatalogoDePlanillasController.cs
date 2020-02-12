@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class CatalogoDePlanillasController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: CatalogoDePlanillas
         [SessionManager("CatalogoDePlanillas/Index")]
@@ -224,7 +225,7 @@ namespace ERP_GMEDINA.Controllers
                 IEnumerable<object> listCatalogoDeDeducciones = null;
                 int idUser = (int)Session["UserLogin"];
                 int cpla_UsuarioCreaModifica = idUser; //TODO: Editar el Usuario Crea del catalogo de planillas
-                DateTime cpla_FechaCreaModifica = DateTime.Now; // Asignarle la fecha actual a la variable cpla_FechaCrea
+                DateTime cpla_FechaCreaModifica = Function.DatetimeNow(); // Asignarle la fecha actual a la variable cpla_FechaCrea
                 string cpla_DescripcionPlanilla;
                 int cpla_FrecuenciaEnDias;
 
@@ -339,7 +340,7 @@ namespace ERP_GMEDINA.Controllers
                 int idUser = (int)Session["UserLogin"];
                 int cde_IdDeducciones = i; // Asignarle el id de la deduccion
                 int tpdd_UsuarioCrea = idUser; // TODO: Editar el Usuario Crea del Catalogo de Deducciones
-                DateTime tpdd_FechaCrea = DateTime.Now; // Asignar la fecha actual
+                DateTime tpdd_FechaCrea = Function.DatetimeNow(); // Asignar la fecha actual
 
                 //Guardar en el catalogo de deducciones
                 listCatalogoDeDeducciones = db.UDP_tbTipoPlanillaDetalleDeduccion_Insert(cde_IdDeducciones,
@@ -363,7 +364,7 @@ namespace ERP_GMEDINA.Controllers
             foreach (int i in catalogoIngresos)
             {
                 int cin_IdIngreso = i; // Asignarle el id del ingreso 
-                DateTime tpdi_FechaCrea = DateTime.Now; //Asignarle la fecha y hora actual a la variable tpdi_FechaCrea
+                DateTime tpdi_FechaCrea = Function.DatetimeNow(); //Asignarle la fecha y hora actual a la variable tpdi_FechaCrea
 
                 // Insertar en el Catalogo de Ingresos
                 listCatalogoDeIngresos = db.UDP_tbTipoPlanillaDetalleIngreso_Insert(cin_IdIngreso,
@@ -493,7 +494,7 @@ namespace ERP_GMEDINA.Controllers
                 , MensajeErrorCatalogoDeDeducciones = ""; //Si hay error al guardar las deduccioenes se le notifica
             int cpla_UsuarioModifica = idUser, //TODO: Editar el usuario modifica
                 cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //Frecuencia en días para generar la planilla
-            DateTime cpla_FechaModifica = DateTime.Now;
+            DateTime cpla_FechaModifica = Function.DatetimeNow();
             #endregion
 
             using (var dbContextTransaccion = db.Database.BeginTransaction())
@@ -688,8 +689,8 @@ namespace ERP_GMEDINA.Controllers
         {
             string response = "bien";
             string mensajeError = "";
-            int usuarioModifica = 1; //TOOD: Agregar usuario modifica
-            DateTime fechaModifica = DateTime.Now;
+            int usuarioModifica = Function.GetUser(); //TOOD: Agregar usuario modifica
+            DateTime fechaModifica = Function.DatetimeNow();
             IEnumerable<object> planillaActivada = null;
             IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = null;
 
