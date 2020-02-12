@@ -3205,6 +3205,9 @@
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\Inventario\Catalogos\" />
+    <Folder Include="Controllers\Inventario\Inventario\" />
+    <Folder Include="Controllers\Inventario\Seguridad\" />
     <Folder Include="Downloadable files\" />
     <Folder Include="Expedientes\Expediente_2\Constancia\" />
     <Folder Include="fonts\font-awesome\less\" />
