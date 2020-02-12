@@ -65,7 +65,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 idPlanilla = x.cpla_IdPlanilla,
                                 descripcionPlanilla = x.cpla_DescripcionPlanilla,
-                                frecuenciaDias = x.cpla_FrecuenciaEnDias,
+                                descripcionPeriodo = x.tbPeriodos.peri_DescripPeriodo,
                                 recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"),
                                 activoAdmin = new ActivoAdmin { activo = x.cpla_Activo, esAdmin = usuario ?? false }
                             });

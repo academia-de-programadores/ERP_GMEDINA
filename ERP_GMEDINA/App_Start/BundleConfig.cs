@@ -565,7 +565,7 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/AcumuladosISR.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
-                "~/Scripts/app/General/CatalogoPlanillas.js"));
+                "~/Scripts/app/General/CatalogoPlanillas.min.js"));
 
             // SCRIPT GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
@@ -592,10 +592,7 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/TechosDeducciones.js"));
 
             // SELVIN
-
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
-                "~/Scripts/app/General/CatalogoPlanillas.js"));
-
+            
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));
 
