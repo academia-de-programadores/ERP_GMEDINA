@@ -241,7 +241,7 @@ function userModelStateNoTzt(sPantalla) {
 function _POST(params, uri, callback) {
  $.post(uri, params)
  .done(callback)
- .error(function (e) {
+ .fail(function (e) {
   CierraPopups()
   MsgError("Error", "Verifique su conexión a internet. (Si el problema persiste contacte al administrador.)");
  });
