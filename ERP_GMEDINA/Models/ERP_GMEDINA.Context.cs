@@ -7646,7 +7646,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Gral_Padres_Insert", nombresPadreParameter, apellidosPadreParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbActividadEconomica_Insert(string acte_Descripcion, Nullable<int> acte_UsuarioCrea, Nullable<System.DateTime> acte_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbActividadEconomica_Insert_Result> UDP_Gral_tbActividadEconomica_Insert(string acte_Descripcion, Nullable<int> acte_UsuarioCrea, Nullable<System.DateTime> acte_FechaCrea)
         {
             var acte_DescripcionParameter = acte_Descripcion != null ?
                 new ObjectParameter("acte_Descripcion", acte_Descripcion) :
@@ -7660,10 +7660,10 @@
                 new ObjectParameter("acte_FechaCrea", acte_FechaCrea) :
                 new ObjectParameter("acte_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbActividadEconomica_Insert", acte_DescripcionParameter, acte_UsuarioCreaParameter, acte_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbActividadEconomica_Insert_Result>("UDP_Gral_tbActividadEconomica_Insert", acte_DescripcionParameter, acte_UsuarioCreaParameter, acte_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbActividadEconomica_Update(Nullable<short> acte_Id, string acte_Descripcion, Nullable<int> acte_UsuarioCrea, Nullable<System.DateTime> acte_FechaCrea, Nullable<int> acte_UsuarioModifica, Nullable<System.DateTime> acte_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbActividadEconomica_Update_Result> UDP_Gral_tbActividadEconomica_Update(Nullable<short> acte_Id, string acte_Descripcion, Nullable<int> acte_UsuarioCrea, Nullable<System.DateTime> acte_FechaCrea, Nullable<int> acte_UsuarioModifica, Nullable<System.DateTime> acte_FechaModifica)
         {
             var acte_IdParameter = acte_Id.HasValue ?
                 new ObjectParameter("acte_Id", acte_Id) :
@@ -7689,10 +7689,10 @@
                 new ObjectParameter("acte_FechaModifica", acte_FechaModifica) :
                 new ObjectParameter("acte_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbActividadEconomica_Update", acte_IdParameter, acte_DescripcionParameter, acte_UsuarioCreaParameter, acte_FechaCreaParameter, acte_UsuarioModificaParameter, acte_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbActividadEconomica_Update_Result>("UDP_Gral_tbActividadEconomica_Update", acte_IdParameter, acte_DescripcionParameter, acte_UsuarioCreaParameter, acte_FechaCreaParameter, acte_UsuarioModificaParameter, acte_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbBanco_Insert(string ban_Nombre, string ban_NombreContacto, string ban_TelefonoContacto, Nullable<int> ban_UsuarioCrea, Nullable<System.DateTime> ban_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbBanco_Insert_Result> UDP_Gral_tbBanco_Insert(string ban_Nombre, string ban_NombreContacto, string ban_TelefonoContacto, Nullable<int> ban_UsuarioCrea, Nullable<System.DateTime> ban_FechaCrea)
         {
             var ban_NombreParameter = ban_Nombre != null ?
                 new ObjectParameter("ban_Nombre", ban_Nombre) :
@@ -7714,10 +7714,10 @@
                 new ObjectParameter("ban_FechaCrea", ban_FechaCrea) :
                 new ObjectParameter("ban_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbBanco_Insert", ban_NombreParameter, ban_NombreContactoParameter, ban_TelefonoContactoParameter, ban_UsuarioCreaParameter, ban_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbBanco_Insert_Result>("UDP_Gral_tbBanco_Insert", ban_NombreParameter, ban_NombreContactoParameter, ban_TelefonoContactoParameter, ban_UsuarioCreaParameter, ban_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbBanco_Update(Nullable<short> ban_Id, string ban_Nombre, string ban_NombreContacto, string ban_TelefonoContacto, Nullable<int> ban_UsuarioCrea, Nullable<System.DateTime> ban_FechaCrea, Nullable<int> ban_UsuarioModifica, Nullable<System.DateTime> ban_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbBanco_Update_Result> UDP_Gral_tbBanco_Update(Nullable<short> ban_Id, string ban_Nombre, string ban_NombreContacto, string ban_TelefonoContacto, Nullable<int> ban_UsuarioCrea, Nullable<System.DateTime> ban_FechaCrea, Nullable<int> ban_UsuarioModifica, Nullable<System.DateTime> ban_FechaModifica)
         {
             var ban_IdParameter = ban_Id.HasValue ?
                 new ObjectParameter("ban_Id", ban_Id) :
@@ -7751,10 +7751,10 @@
                 new ObjectParameter("ban_FechaModifica", ban_FechaModifica) :
                 new ObjectParameter("ban_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbBanco_Update", ban_IdParameter, ban_NombreParameter, ban_NombreContactoParameter, ban_TelefonoContactoParameter, ban_UsuarioCreaParameter, ban_FechaCreaParameter, ban_UsuarioModificaParameter, ban_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbBanco_Update_Result>("UDP_Gral_tbBanco_Update", ban_IdParameter, ban_NombreParameter, ban_NombreContactoParameter, ban_TelefonoContactoParameter, ban_UsuarioCreaParameter, ban_FechaCreaParameter, ban_UsuarioModificaParameter, ban_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbCuentasBanco_Insert(Nullable<short> ban_Id, Nullable<short> mnda_Id, Nullable<byte> bcta_TipoCuenta, Nullable<decimal> bcta_TotalCredito, Nullable<decimal> bcta_TotalDebito, Nullable<System.DateTime> bcta_FechaApertura, string bcta_Numero, Nullable<int> bcta_UsuarioCrea, Nullable<System.DateTime> bcta_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbCuentasBanco_Insert_Result> UDP_Gral_tbCuentasBanco_Insert(Nullable<short> ban_Id, Nullable<short> mnda_Id, Nullable<byte> bcta_TipoCuenta, Nullable<decimal> bcta_TotalCredito, Nullable<decimal> bcta_TotalDebito, Nullable<System.DateTime> bcta_FechaApertura, string bcta_Numero, Nullable<int> bcta_UsuarioCrea, Nullable<System.DateTime> bcta_FechaCrea)
         {
             var ban_IdParameter = ban_Id.HasValue ?
                 new ObjectParameter("ban_Id", ban_Id) :
@@ -7792,10 +7792,10 @@
                 new ObjectParameter("bcta_FechaCrea", bcta_FechaCrea) :
                 new ObjectParameter("bcta_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbCuentasBanco_Insert", ban_IdParameter, mnda_IdParameter, bcta_TipoCuentaParameter, bcta_TotalCreditoParameter, bcta_TotalDebitoParameter, bcta_FechaAperturaParameter, bcta_NumeroParameter, bcta_UsuarioCreaParameter, bcta_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbCuentasBanco_Insert_Result>("UDP_Gral_tbCuentasBanco_Insert", ban_IdParameter, mnda_IdParameter, bcta_TipoCuentaParameter, bcta_TotalCreditoParameter, bcta_TotalDebitoParameter, bcta_FechaAperturaParameter, bcta_NumeroParameter, bcta_UsuarioCreaParameter, bcta_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbCuentasBanco_Update(Nullable<short> bcta_Id, Nullable<short> ban_Id, Nullable<short> mnda_Id, Nullable<byte> bcta_TipoCuenta, Nullable<decimal> bcta_TotalCredito, Nullable<decimal> bcta_TotalDebito, Nullable<System.DateTime> bcta_FechaApertura, string bcta_Numero, Nullable<int> bcta_UsuarioCrea, Nullable<System.DateTime> bcta_FechaCrea, Nullable<int> bcta_UsuarioModifica, Nullable<System.DateTime> bcta_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbCuentasBanco_Update_Result> UDP_Gral_tbCuentasBanco_Update(Nullable<short> bcta_Id, Nullable<short> ban_Id, Nullable<short> mnda_Id, Nullable<byte> bcta_TipoCuenta, Nullable<decimal> bcta_TotalCredito, Nullable<decimal> bcta_TotalDebito, Nullable<System.DateTime> bcta_FechaApertura, string bcta_Numero, Nullable<int> bcta_UsuarioCrea, Nullable<System.DateTime> bcta_FechaCrea, Nullable<int> bcta_UsuarioModifica, Nullable<System.DateTime> bcta_FechaModifica)
         {
             var bcta_IdParameter = bcta_Id.HasValue ?
                 new ObjectParameter("bcta_Id", bcta_Id) :
@@ -7845,10 +7845,10 @@
                 new ObjectParameter("bcta_FechaModifica", bcta_FechaModifica) :
                 new ObjectParameter("bcta_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbCuentasBanco_Update", bcta_IdParameter, ban_IdParameter, mnda_IdParameter, bcta_TipoCuentaParameter, bcta_TotalCreditoParameter, bcta_TotalDebitoParameter, bcta_FechaAperturaParameter, bcta_NumeroParameter, bcta_UsuarioCreaParameter, bcta_FechaCreaParameter, bcta_UsuarioModificaParameter, bcta_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbCuentasBanco_Update_Result>("UDP_Gral_tbCuentasBanco_Update", bcta_IdParameter, ban_IdParameter, mnda_IdParameter, bcta_TipoCuentaParameter, bcta_TotalCreditoParameter, bcta_TotalDebitoParameter, bcta_FechaAperturaParameter, bcta_NumeroParameter, bcta_UsuarioCreaParameter, bcta_FechaCreaParameter, bcta_UsuarioModificaParameter, bcta_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbDenominacion_Insert(string deno_Descripcion, Nullable<byte> deno_Tipo, Nullable<decimal> deno_valor, Nullable<int> mnda_Id, Nullable<int> deno_UsuarioCrea, Nullable<System.DateTime> deno_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbDenominacion_Insert_Result> UDP_Gral_tbDenominacion_Insert(string deno_Descripcion, Nullable<byte> deno_Tipo, Nullable<decimal> deno_valor, Nullable<int> mnda_Id, Nullable<int> deno_UsuarioCrea, Nullable<System.DateTime> deno_FechaCrea)
         {
             var deno_DescripcionParameter = deno_Descripcion != null ?
                 new ObjectParameter("deno_Descripcion", deno_Descripcion) :
@@ -7874,7 +7874,7 @@
                 new ObjectParameter("deno_FechaCrea", deno_FechaCrea) :
                 new ObjectParameter("deno_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbDenominacion_Insert", deno_DescripcionParameter, deno_TipoParameter, deno_valorParameter, mnda_IdParameter, deno_UsuarioCreaParameter, deno_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDenominacion_Insert_Result>("UDP_Gral_tbDenominacion_Insert", deno_DescripcionParameter, deno_TipoParameter, deno_valorParameter, mnda_IdParameter, deno_UsuarioCreaParameter, deno_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbDenominacion_Select_Result> UDP_Gral_tbDenominacion_Select()
@@ -7882,7 +7882,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDenominacion_Select_Result>("UDP_Gral_tbDenominacion_Select");
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbDenominacion_Update(Nullable<short> deno_Id, string deno_Descripcion, Nullable<byte> deno_Tipo, Nullable<decimal> deno_valor, Nullable<short> mnda_Id, Nullable<int> deno_UsuarioCrea, Nullable<System.DateTime> deno_FechaCrea, Nullable<int> deno_UsuarioModifica, Nullable<System.DateTime> deno_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbDenominacion_Update_Result> UDP_Gral_tbDenominacion_Update(Nullable<short> deno_Id, string deno_Descripcion, Nullable<byte> deno_Tipo, Nullable<decimal> deno_valor, Nullable<short> mnda_Id, Nullable<int> deno_UsuarioCrea, Nullable<System.DateTime> deno_FechaCrea, Nullable<int> deno_UsuarioModifica, Nullable<System.DateTime> deno_FechaModifica)
         {
             var deno_IdParameter = deno_Id.HasValue ?
                 new ObjectParameter("deno_Id", deno_Id) :
@@ -7920,19 +7920,19 @@
                 new ObjectParameter("deno_FechaModifica", deno_FechaModifica) :
                 new ObjectParameter("deno_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbDenominacion_Update", deno_IdParameter, deno_DescripcionParameter, deno_TipoParameter, deno_valorParameter, mnda_IdParameter, deno_UsuarioCreaParameter, deno_FechaCreaParameter, deno_UsuarioModificaParameter, deno_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDenominacion_Update_Result>("UDP_Gral_tbDenominacion_Update", deno_IdParameter, deno_DescripcionParameter, deno_TipoParameter, deno_valorParameter, mnda_IdParameter, deno_UsuarioCreaParameter, deno_FechaCreaParameter, deno_UsuarioModificaParameter, deno_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<Nullable<short>> UDP_Gral_tbDenominacion_using(Nullable<int> dENO_ID)
+        public virtual ObjectResult<UDP_Gral_tbDenominacion_using_Result> UDP_Gral_tbDenominacion_using(Nullable<int> dENO_ID)
         {
             var dENO_IDParameter = dENO_ID.HasValue ?
                 new ObjectParameter("DENO_ID", dENO_ID) :
                 new ObjectParameter("DENO_ID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<short>>("UDP_Gral_tbDenominacion_using", dENO_IDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDenominacion_using_Result>("UDP_Gral_tbDenominacion_using", dENO_IDParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbDepartamento_Insert(string dep_Codigo, string dep_Nombre, Nullable<int> dep_UsuarioCrea, Nullable<System.DateTime> dep_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbDepartamento_Insert_Result> UDP_Gral_tbDepartamento_Insert(string dep_Codigo, string dep_Nombre, Nullable<int> dep_UsuarioCrea, Nullable<System.DateTime> dep_FechaCrea)
         {
             var dep_CodigoParameter = dep_Codigo != null ?
                 new ObjectParameter("dep_Codigo", dep_Codigo) :
@@ -7950,10 +7950,10 @@
                 new ObjectParameter("dep_FechaCrea", dep_FechaCrea) :
                 new ObjectParameter("dep_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbDepartamento_Insert", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioCreaParameter, dep_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDepartamento_Insert_Result>("UDP_Gral_tbDepartamento_Insert", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioCreaParameter, dep_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbDepartamento_Update(string dep_Codigo, string dep_Nombre, Nullable<int> dep_UsuarioCrea, Nullable<System.DateTime> dep_FechaCrea, Nullable<int> dep_UsuarioModifica, Nullable<System.DateTime> dep_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbDepartamento_Update_Result> UDP_Gral_tbDepartamento_Update(string dep_Codigo, string dep_Nombre, Nullable<int> dep_UsuarioCrea, Nullable<System.DateTime> dep_FechaCrea, Nullable<int> dep_UsuarioModifica, Nullable<System.DateTime> dep_FechaModifica)
         {
             var dep_CodigoParameter = dep_Codigo != null ?
                 new ObjectParameter("dep_Codigo", dep_Codigo) :
@@ -7979,10 +7979,10 @@
                 new ObjectParameter("dep_FechaModifica", dep_FechaModifica) :
                 new ObjectParameter("dep_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbDepartamento_Update", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioCreaParameter, dep_FechaCreaParameter, dep_UsuarioModificaParameter, dep_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDepartamento_Update_Result>("UDP_Gral_tbDepartamento_Update", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioCreaParameter, dep_FechaCreaParameter, dep_UsuarioModificaParameter, dep_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEmpleado_Update_Estado(Nullable<int> emp_Id, Nullable<bool> emp_Estado, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbEmpleado_Update_Estado_Result> UDP_Gral_tbEmpleado_Update_Estado(Nullable<int> emp_Id, Nullable<bool> emp_Estado, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -8000,10 +8000,10 @@
                 new ObjectParameter("emp_FechaModifica", emp_FechaModifica) :
                 new ObjectParameter("emp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEmpleado_Update_Estado", emp_IdParameter, emp_EstadoParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleado_Update_Estado_Result>("UDP_Gral_tbEmpleado_Update_Estado", emp_IdParameter, emp_EstadoParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEmpleado_Update_RazonInactivacion(Nullable<int> emp_Id, Nullable<bool> emp_Estado, string emp_RazonInactivacion, Nullable<int> obj_UsuarioModifica, Nullable<System.DateTime> obj_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbEmpleado_Update_RazonInactivacion_Result> UDP_Gral_tbEmpleado_Update_RazonInactivacion(Nullable<int> emp_Id, Nullable<bool> emp_Estado, string emp_RazonInactivacion, Nullable<int> obj_UsuarioModifica, Nullable<System.DateTime> obj_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -8025,10 +8025,10 @@
                 new ObjectParameter("obj_FechaModifica", obj_FechaModifica) :
                 new ObjectParameter("obj_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEmpleado_Update_RazonInactivacion", emp_IdParameter, emp_EstadoParameter, emp_RazonInactivacionParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleado_Update_RazonInactivacion_Result>("UDP_Gral_tbEmpleado_Update_RazonInactivacion", emp_IdParameter, emp_EstadoParameter, emp_RazonInactivacionParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEmpleado_Update_RazonSalida(Nullable<int> emp_Id, Nullable<bool> emp_Estado, string emp_RazonSalida, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbEmpleado_Update_RazonSalida_Result> UDP_Gral_tbEmpleado_Update_RazonSalida(Nullable<int> emp_Id, Nullable<bool> emp_Estado, string emp_RazonSalida, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -8050,10 +8050,10 @@
                 new ObjectParameter("emp_FechaModifica", emp_FechaModifica) :
                 new ObjectParameter("emp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEmpleado_Update_RazonSalida", emp_IdParameter, emp_EstadoParameter, emp_RazonSalidaParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleado_Update_RazonSalida_Result>("UDP_Gral_tbEmpleado_Update_RazonSalida", emp_IdParameter, emp_EstadoParameter, emp_RazonSalidaParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEmpleados_Insert(string emp_Nombres, string emp_Apellidos, string emp_Sexo, Nullable<System.DateTime> emp_FechaNacimiento, Nullable<byte> tpi_Id, string emp_Identificacion, string emp_Telefono, string emp_Correoelectronico, string emp_TipoSangre, string emp_Puesto, Nullable<System.DateTime> emp_FechaIngreso, string emp_Direccion, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbEmpleados_Insert_Result> UDP_Gral_tbEmpleados_Insert(string emp_Nombres, string emp_Apellidos, string emp_Sexo, Nullable<System.DateTime> emp_FechaNacimiento, Nullable<byte> tpi_Id, string emp_Identificacion, string emp_Telefono, string emp_Correoelectronico, string emp_TipoSangre, string emp_Puesto, Nullable<System.DateTime> emp_FechaIngreso, string emp_Direccion, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
         {
             var emp_NombresParameter = emp_Nombres != null ?
                 new ObjectParameter("emp_Nombres", emp_Nombres) :
@@ -8111,10 +8111,10 @@
                 new ObjectParameter("emp_FechaCrea", emp_FechaCrea) :
                 new ObjectParameter("emp_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEmpleados_Insert", emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, tpi_IdParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoelectronicoParameter, emp_TipoSangreParameter, emp_PuestoParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleados_Insert_Result>("UDP_Gral_tbEmpleados_Insert", emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, tpi_IdParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoelectronicoParameter, emp_TipoSangreParameter, emp_PuestoParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEmpleados_Update(Nullable<short> emp_Id, string emp_Nombres, string emp_Apellidos, string emp_Sexo, Nullable<System.DateTime> emp_FechaNacimiento, Nullable<byte> tpi_Id, string emp_Identificacion, string emp_Telefono, string emp_Correoelectronico, string emp_TipoSangre, string emp_Puesto, Nullable<System.DateTime> emp_FechaIngreso, string emp_Direccion, string emp_RazonInactivacion, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea, string emp_RazonSalida, Nullable<System.DateTime> emp_fechaSalida, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbEmpleados_Update_Result> UDP_Gral_tbEmpleados_Update(Nullable<short> emp_Id, string emp_Nombres, string emp_Apellidos, string emp_Sexo, Nullable<System.DateTime> emp_FechaNacimiento, Nullable<byte> tpi_Id, string emp_Identificacion, string emp_Telefono, string emp_Correoelectronico, string emp_TipoSangre, string emp_Puesto, Nullable<System.DateTime> emp_FechaIngreso, string emp_Direccion, string emp_RazonInactivacion, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea, string emp_RazonSalida, Nullable<System.DateTime> emp_fechaSalida, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -8196,10 +8196,10 @@
                 new ObjectParameter("emp_FechaModifica", emp_FechaModifica) :
                 new ObjectParameter("emp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEmpleados_Update", emp_IdParameter, emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, tpi_IdParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoelectronicoParameter, emp_TipoSangreParameter, emp_PuestoParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_RazonInactivacionParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter, emp_RazonSalidaParameter, emp_fechaSalidaParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleados_Update_Result>("UDP_Gral_tbEmpleados_Update", emp_IdParameter, emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, tpi_IdParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoelectronicoParameter, emp_TipoSangreParameter, emp_PuestoParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_RazonInactivacionParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter, emp_RazonSalidaParameter, emp_fechaSalidaParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbMoneda_Insert(string mnda_Abreviatura, string mnda_Nombre, Nullable<int> mnda_UsuarioCrea, Nullable<System.DateTime> mnda_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbMoneda_Insert_Result> UDP_Gral_tbMoneda_Insert(string mnda_Abreviatura, string mnda_Nombre, Nullable<int> mnda_UsuarioCrea, Nullable<System.DateTime> mnda_FechaCrea)
         {
             var mnda_AbreviaturaParameter = mnda_Abreviatura != null ?
                 new ObjectParameter("mnda_Abreviatura", mnda_Abreviatura) :
@@ -8217,10 +8217,10 @@
                 new ObjectParameter("mnda_FechaCrea", mnda_FechaCrea) :
                 new ObjectParameter("mnda_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbMoneda_Insert", mnda_AbreviaturaParameter, mnda_NombreParameter, mnda_UsuarioCreaParameter, mnda_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Insert_Result>("UDP_Gral_tbMoneda_Insert", mnda_AbreviaturaParameter, mnda_NombreParameter, mnda_UsuarioCreaParameter, mnda_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbMoneda_Update(Nullable<short> mnda_Id, string mnda_Abreviatura, string mnda_Nombre, Nullable<int> mnda_UsuarioCrea, Nullable<System.DateTime> mnda_FechaCrea, Nullable<int> mnda_UsuarioModifica, Nullable<System.DateTime> mnda_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbMoneda_Update_Result> UDP_Gral_tbMoneda_Update(Nullable<short> mnda_Id, string mnda_Abreviatura, string mnda_Nombre, Nullable<int> mnda_UsuarioCrea, Nullable<System.DateTime> mnda_FechaCrea, Nullable<int> mnda_UsuarioModifica, Nullable<System.DateTime> mnda_FechaModifica)
         {
             var mnda_IdParameter = mnda_Id.HasValue ?
                 new ObjectParameter("mnda_Id", mnda_Id) :
@@ -8250,19 +8250,19 @@
                 new ObjectParameter("mnda_FechaModifica", mnda_FechaModifica) :
                 new ObjectParameter("mnda_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbMoneda_Update", mnda_IdParameter, mnda_AbreviaturaParameter, mnda_NombreParameter, mnda_UsuarioCreaParameter, mnda_FechaCreaParameter, mnda_UsuarioModificaParameter, mnda_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Update_Result>("UDP_Gral_tbMoneda_Update", mnda_IdParameter, mnda_AbreviaturaParameter, mnda_NombreParameter, mnda_UsuarioCreaParameter, mnda_FechaCreaParameter, mnda_UsuarioModificaParameter, mnda_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbMunicipio_Delete(string mun_Codigo)
+        public virtual ObjectResult<UDP_Gral_tbMunicipio_Delete_Result> UDP_Gral_tbMunicipio_Delete(string mun_Codigo)
         {
             var mun_CodigoParameter = mun_Codigo != null ?
                 new ObjectParameter("mun_Codigo", mun_Codigo) :
                 new ObjectParameter("mun_Codigo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbMunicipio_Delete", mun_CodigoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMunicipio_Delete_Result>("UDP_Gral_tbMunicipio_Delete", mun_CodigoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbMunicipio_Insert(string mun_Codigo, string dep_Codigo, string mun_Nombre, Nullable<int> mun_UsuarioCrea, Nullable<System.DateTime> mun_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbMunicipio_Insert_Result> UDP_Gral_tbMunicipio_Insert(string mun_Codigo, string dep_Codigo, string mun_Nombre, Nullable<int> mun_UsuarioCrea, Nullable<System.DateTime> mun_FechaCrea)
         {
             var mun_CodigoParameter = mun_Codigo != null ?
                 new ObjectParameter("mun_Codigo", mun_Codigo) :
@@ -8284,10 +8284,10 @@
                 new ObjectParameter("mun_FechaCrea", mun_FechaCrea) :
                 new ObjectParameter("mun_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbMunicipio_Insert", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioCreaParameter, mun_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMunicipio_Insert_Result>("UDP_Gral_tbMunicipio_Insert", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioCreaParameter, mun_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbMunicipio_Update(string mun_Codigo, string dep_Codigo, string mun_Nombre, Nullable<int> mun_UsuarioCrea, Nullable<System.DateTime> mun_FechaCrea, Nullable<int> mun_UsuarioModifica, Nullable<System.DateTime> mun_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbMunicipio_Update_Result> UDP_Gral_tbMunicipio_Update(string mun_Codigo, string dep_Codigo, string mun_Nombre, Nullable<int> mun_UsuarioCrea, Nullable<System.DateTime> mun_FechaCrea, Nullable<int> mun_UsuarioModifica, Nullable<System.DateTime> mun_FechaModifica)
         {
             var mun_CodigoParameter = mun_Codigo != null ?
                 new ObjectParameter("mun_Codigo", mun_Codigo) :
@@ -8317,10 +8317,10 @@
                 new ObjectParameter("mun_FechaModifica", mun_FechaModifica) :
                 new ObjectParameter("mun_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbMunicipio_Update", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioCreaParameter, mun_FechaCreaParameter, mun_UsuarioModificaParameter, mun_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMunicipio_Update_Result>("UDP_Gral_tbMunicipio_Update", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioCreaParameter, mun_FechaCreaParameter, mun_UsuarioModificaParameter, mun_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbParametro_Insert(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_PathLogo, Nullable<short> mnda_Id, Nullable<int> par_RolGerenteTienda, Nullable<int> par_RolCreditoCobranza, Nullable<int> par_RolSupervisorCaja, Nullable<int> par_RolCajero, Nullable<int> par_RolAuditor, Nullable<int> par_SucursalPrincipal, Nullable<decimal> par_PorcentajeDescuentoTE, Nullable<int> par_IdConsumidorFinal, Nullable<int> par_UsuarioCrea, Nullable<System.DateTime> par_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbParametro_Insert_Result> UDP_Gral_tbParametro_Insert(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_PathLogo, Nullable<short> mnda_Id, Nullable<int> par_RolGerenteTienda, Nullable<int> par_RolCreditoCobranza, Nullable<int> par_RolSupervisorCaja, Nullable<int> par_RolCajero, Nullable<int> par_RolAuditor, Nullable<int> par_SucursalPrincipal, Nullable<decimal> par_PorcentajeDescuentoTE, Nullable<int> par_IdConsumidorFinal, Nullable<int> par_UsuarioCrea, Nullable<System.DateTime> par_FechaCrea)
         {
             var par_IdParameter = par_Id.HasValue ?
                 new ObjectParameter("par_Id", par_Id) :
@@ -8386,10 +8386,10 @@
                 new ObjectParameter("par_FechaCrea", par_FechaCrea) :
                 new ObjectParameter("par_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbParametro_Insert", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_PathLogoParameter, mnda_IdParameter, par_RolGerenteTiendaParameter, par_RolCreditoCobranzaParameter, par_RolSupervisorCajaParameter, par_RolCajeroParameter, par_RolAuditorParameter, par_SucursalPrincipalParameter, par_PorcentajeDescuentoTEParameter, par_IdConsumidorFinalParameter, par_UsuarioCreaParameter, par_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbParametro_Insert_Result>("UDP_Gral_tbParametro_Insert", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_PathLogoParameter, mnda_IdParameter, par_RolGerenteTiendaParameter, par_RolCreditoCobranzaParameter, par_RolSupervisorCajaParameter, par_RolCajeroParameter, par_RolAuditorParameter, par_SucursalPrincipalParameter, par_PorcentajeDescuentoTEParameter, par_IdConsumidorFinalParameter, par_UsuarioCreaParameter, par_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbParametro_Update(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_PathLogo, Nullable<short> mnda_Id, Nullable<int> par_RolGerenteTienda, Nullable<int> par_RolCreditoCobranza, Nullable<int> par_RolSupervisorCaja, Nullable<int> par_RolCajero, Nullable<int> par_RolAuditor, Nullable<int> par_SucursalPrincipal, Nullable<int> par_UsuarioCrea, Nullable<System.DateTime> par_FechaCrea, Nullable<decimal> par_PorcentajeDescuentoTE, Nullable<int> par_IdConsumidorFinal, Nullable<int> par_UsuarioModifica, Nullable<System.DateTime> par_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbParametro_Update_Result> UDP_Gral_tbParametro_Update(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_PathLogo, Nullable<short> mnda_Id, Nullable<int> par_RolGerenteTienda, Nullable<int> par_RolCreditoCobranza, Nullable<int> par_RolSupervisorCaja, Nullable<int> par_RolCajero, Nullable<int> par_RolAuditor, Nullable<int> par_SucursalPrincipal, Nullable<int> par_UsuarioCrea, Nullable<System.DateTime> par_FechaCrea, Nullable<decimal> par_PorcentajeDescuentoTE, Nullable<int> par_IdConsumidorFinal, Nullable<int> par_UsuarioModifica, Nullable<System.DateTime> par_FechaModifica)
         {
             var par_IdParameter = par_Id.HasValue ?
                 new ObjectParameter("par_Id", par_Id) :
@@ -8463,10 +8463,10 @@
                 new ObjectParameter("par_FechaModifica", par_FechaModifica) :
                 new ObjectParameter("par_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_PathLogoParameter, mnda_IdParameter, par_RolGerenteTiendaParameter, par_RolCreditoCobranzaParameter, par_RolSupervisorCajaParameter, par_RolCajeroParameter, par_RolAuditorParameter, par_SucursalPrincipalParameter, par_UsuarioCreaParameter, par_FechaCreaParameter, par_PorcentajeDescuentoTEParameter, par_IdConsumidorFinalParameter, par_UsuarioModificaParameter, par_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbParametro_Update_Result>("UDP_Gral_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_PathLogoParameter, mnda_IdParameter, par_RolGerenteTiendaParameter, par_RolCreditoCobranzaParameter, par_RolSupervisorCajaParameter, par_RolCajeroParameter, par_RolAuditorParameter, par_SucursalPrincipalParameter, par_UsuarioCreaParameter, par_FechaCreaParameter, par_PorcentajeDescuentoTEParameter, par_IdConsumidorFinalParameter, par_UsuarioModificaParameter, par_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbTipoIdentificacion_Insert(string tpi_Descripcion, Nullable<int> tpi_UsuarioCrea, Nullable<System.DateTime> tpi_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbTipoIdentificacion_Insert_Result> UDP_Gral_tbTipoIdentificacion_Insert(string tpi_Descripcion, Nullable<int> tpi_UsuarioCrea, Nullable<System.DateTime> tpi_FechaCrea)
         {
             var tpi_DescripcionParameter = tpi_Descripcion != null ?
                 new ObjectParameter("tpi_Descripcion", tpi_Descripcion) :
@@ -8480,10 +8480,10 @@
                 new ObjectParameter("tpi_FechaCrea", tpi_FechaCrea) :
                 new ObjectParameter("tpi_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoIdentificacion_Insert", tpi_DescripcionParameter, tpi_UsuarioCreaParameter, tpi_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoIdentificacion_Insert_Result>("UDP_Gral_tbTipoIdentificacion_Insert", tpi_DescripcionParameter, tpi_UsuarioCreaParameter, tpi_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbTipoIdentificacion_Update(Nullable<byte> tpi_Id, string tpi_Descripcion, Nullable<int> tpi_UsuarioCrea, Nullable<System.DateTime> tpi_FechaCrea, Nullable<int> tpi_UsuarioModifica, Nullable<System.DateTime> tpi_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbTipoIdentificacion_Update_Result> UDP_Gral_tbTipoIdentificacion_Update(Nullable<byte> tpi_Id, string tpi_Descripcion, Nullable<int> tpi_UsuarioCrea, Nullable<System.DateTime> tpi_FechaCrea, Nullable<int> tpi_UsuarioModifica, Nullable<System.DateTime> tpi_FechaModifica)
         {
             var tpi_IdParameter = tpi_Id.HasValue ?
                 new ObjectParameter("tpi_Id", tpi_Id) :
@@ -8509,10 +8509,10 @@
                 new ObjectParameter("tpi_FechaModifica", tpi_FechaModifica) :
                 new ObjectParameter("tpi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoIdentificacion_Update", tpi_IdParameter, tpi_DescripcionParameter, tpi_UsuarioCreaParameter, tpi_FechaCreaParameter, tpi_UsuarioModificaParameter, tpi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoIdentificacion_Update_Result>("UDP_Gral_tbTipoIdentificacion_Update", tpi_IdParameter, tpi_DescripcionParameter, tpi_UsuarioCreaParameter, tpi_FechaCreaParameter, tpi_UsuarioModificaParameter, tpi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbUnidadMedida_Insert(string uni_Descripcion, string uni_Abreviatura, Nullable<int> uni_UsuarioCrea, Nullable<System.DateTime> uni_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbUnidadMedida_Insert_Result> UDP_Gral_tbUnidadMedida_Insert(string uni_Descripcion, string uni_Abreviatura, Nullable<int> uni_UsuarioCrea, Nullable<System.DateTime> uni_FechaCrea)
         {
             var uni_DescripcionParameter = uni_Descripcion != null ?
                 new ObjectParameter("uni_Descripcion", uni_Descripcion) :
@@ -8530,10 +8530,10 @@
                 new ObjectParameter("uni_FechaCrea", uni_FechaCrea) :
                 new ObjectParameter("uni_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbUnidadMedida_Insert", uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioCreaParameter, uni_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Insert_Result>("UDP_Gral_tbUnidadMedida_Insert", uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioCreaParameter, uni_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbUnidadMedida_Update(Nullable<int> uni_Id, string uni_Descripcion, string uni_Abreviatura, Nullable<int> uni_UsuarioCrea, Nullable<System.DateTime> uni_FechaCrea, Nullable<int> uni_UsuarioModifica, Nullable<System.DateTime> uni_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbUnidadMedida_Update_Result> UDP_Gral_tbUnidadMedida_Update(Nullable<int> uni_Id, string uni_Descripcion, string uni_Abreviatura, Nullable<int> uni_UsuarioCrea, Nullable<System.DateTime> uni_FechaCrea, Nullable<int> uni_UsuarioModifica, Nullable<System.DateTime> uni_FechaModifica)
         {
             var uni_IdParameter = uni_Id.HasValue ?
                 new ObjectParameter("uni_Id", uni_Id) :
@@ -8563,7 +8563,7 @@
                 new ObjectParameter("uni_FechaModifica", uni_FechaModifica) :
                 new ObjectParameter("uni_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioCreaParameter, uni_FechaCreaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Update_Result>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioCreaParameter, uni_FechaCreaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> ACtualizar_Cantidad_BOdegaDetalle(Nullable<int> iDBodega, string iDProducto, Nullable<decimal> cantidadSolicitadad, Nullable<System.DateTime> fechaElaboracion, Nullable<int> bodegaDestino)
