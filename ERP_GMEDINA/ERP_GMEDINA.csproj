@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
@@ -237,25 +240,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attribute\SessionManager.cs" />
     <Compile Include="Controllers\DecimoCuartoMesController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\DepartamentoController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\EstadoInventarioFisicoController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\EstadoMovimientoController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\ProductoCategoriaController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\ProductoController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\SalidaController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\TipoDevolucionController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\TipoEntradaController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\UnidadMedidaController.cs" />
-    <Compile Include="Controllers\Inventario\Configuracion\ProveedorController.cs" />
-    <Compile Include="Controllers\Inventario\Inventario\BodegaController.cs" />
-    <Compile Include="Controllers\Inventario\Inventario\BoxController.cs" />
-    <Compile Include="Controllers\Inventario\Inventario\ConsultarExistenciaProductosController.cs" />
     <Compile Include="Controllers\Inventario\Inventario\EntradaController.cs" />
-    <Compile Include="Controllers\Inventario\Inventario\InventarioFisicoController.cs" />
-    <Compile Include="Controllers\Inventario\Inventario\TipoSalidaController.cs" />
-    <Compile Include="Controllers\Seguridad\ObjetoController.cs" />
-    <Compile Include="Controllers\Seguridad\RolController.cs" />
-    <Compile Include="Controllers\Seguridad\UsuarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
@@ -334,6 +319,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\Reportes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reportes.xsd</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1243,6 +1233,24 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_Consultar_Existencias_Productos_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbEntradaDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbEntradaDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbEntrada_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbEntrada_Update_Anular_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbEntrada_Update_Estado_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbEntrada_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbInventarioFisico_ListaProductos_Result.cs">
@@ -2658,6 +2666,23 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ImprimirEntradaPorId.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImprimirEntradaPorId.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReporteTipoEntrada.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteTipoEntrada.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3070,6 +3095,17 @@
     <Content Include="DataSets\ReportesRRHH.xss">
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Content>
+    <Content Include="Dataset\Reportes.xsc">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\Reportes.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Reportes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\Reportes.xss">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\App.pubxml" />
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />
     <Content Include="ReportesPlanilla\HistorialIngresos.rdlc" />
@@ -3078,6 +3114,10 @@
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion_ERP_GMEDINA.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -4101,6 +4141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoRPT.rdlc" />
@@ -4127,12 +4168,21 @@
     <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
     <EmbeddedResource Include="Reports\HistorialVacacionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
+    <EmbeddedResource Include="Reports\ImprimirEntradaPorId.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImprimirEntradaPorId.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PermisosRPT.rdlc" />
+    <EmbeddedResource Include="Reports\ReporteTipoEntrada.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteTipoEntrada.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Inventario\Seguridad\" />
+    <Folder Include="Controllers\Seguridad\" />
     <Folder Include="Downloadable files\" />
     <Folder Include="Expedientes\Expediente_2\Constancia\" />
     <Folder Include="fonts\font-awesome\less\" />

@@ -231,7 +231,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
             ViewBag.bod_Idd = new SelectList(db.tbBodega, "bod_Id", "bod_Nombre");
             ViewBag.Producto = db.SDP_Inv_tbProducto_Select().ToList();
-            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
+            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Models.Helpers.sal_Aplicada).Any()).Any()).ToList();
             Session["_CrearDetalleEntrada"] =null;
             return View();
         }
@@ -267,7 +267,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.prod_Codigo = new SelectList(db.tbProducto, "prod_Codigo", "prod_Descripcion");
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
             ViewBag.bod_Idd = new SelectList(db.tbBodega, "bod_Id", "bod_Nombre");
-            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
+            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Models.Helpers.sal_Aplicada).Any()).Any()).ToList();
             ViewBag.Producto = db.SDP_Inv_tbProducto_Select().ToList();
             Session["_CrearDetalleEntrada"] =null;
             return View(tbEntrada);
@@ -392,7 +392,7 @@ namespace ERP_GMEDINA.Controllers
         {
             IEnumerable<object> ENTRADA = null;
             IEnumerable<object> DETALLE = null;
-            tbEntrada.estm_Id = Helpers.EntradaEmitida;
+            tbEntrada.estm_Id = Models.Helpers.EntradaEmitida;
             string MensajeError = "";
             string MsjError = "";
             
@@ -403,7 +403,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbEntrada.prov_Id);
             ViewBag.tent_Id = new SelectList(db.tbTipoEntrada, "tent_Id", "tent_Descripcion", tbEntrada.tent_Id);
             ViewBag.ent_BodegaDestino = new SelectList(db.tbBodega, "bod_Id", "bod_Nombre", tbEntrada.ent_BodegaDestino);
-            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
+            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Models.Helpers.sal_Aplicada).Any()).Any()).ToList();
             ViewBag.Producto = db.SDP_Inv_tbProducto_Select().ToList();
             
             if (ModelState.IsValid)
@@ -512,7 +512,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.prod_Codigo = new SelectList(db.tbProducto, "prod_Codigo", "prod_Descripcion");
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
             ViewBag.Producto = db.SDP_Inv_tbProducto_Select().ToList();
-            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
+            ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Models.Helpers.sal_Aplicada).Any()).Any()).ToList();
             if (ModelState.IsValid)
             {
                 using (TransactionScope _Tran = new TransactionScope())
@@ -600,7 +600,7 @@ namespace ERP_GMEDINA.Controllers
                 tbEntrada obj = db.tbEntrada.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbEntrada_Update_Estado(id, Helpers.EntradaInactivada, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbEntrada_Update_Estado(id, Models.Helpers.EntradaInactivada, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbEntrada_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -633,7 +633,7 @@ namespace ERP_GMEDINA.Controllers
                 tbEntrada obj = db.tbEntrada.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbEntrada_Update_Estado(id, Helpers.EntradaEmitida, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbEntrada_Update_Estado(id, Models.Helpers.EntradaEmitida, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbEntrada_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -669,7 +669,7 @@ namespace ERP_GMEDINA.Controllers
 
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbEntrada_Update_Anular(cambiaAnular.ent_Id, Helpers.EntradaAnulada, cambiaAnular.entd_RazonAnulada, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbEntrada_Update_Anular(cambiaAnular.ent_Id, Models.Helpers.EntradaAnulada, cambiaAnular.entd_RazonAnulada, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbEntrada_Update_Anular_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -701,7 +701,7 @@ namespace ERP_GMEDINA.Controllers
                 tbEntrada obj = db.tbEntrada.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbEntrada_Update_Estado(id, Helpers.EntradaAplicada, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbEntrada_Update_Estado(id, Models.Helpers.EntradaAplicada, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbEntrada_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 
