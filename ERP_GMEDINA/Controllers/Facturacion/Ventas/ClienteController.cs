@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class ClienteController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Models.Helpers Function = new Models.Helpers();
         // GET: /Cliente/
         [SessionManager("Cliente/Index")]
@@ -33,7 +33,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //var resultado = 0;
                 List<UDV_Vent_Busqueda_Clientes> list = new List<UDV_Vent_Busqueda_Clientes>();
-                using (var db = new ERP_ZORZALEntities())
+                using (var db = new ERP_GMEDINAEntities())
                 {
                     using (var oCmd = db.Database.Connection.CreateCommand())
                     {

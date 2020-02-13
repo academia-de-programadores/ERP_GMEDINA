@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class DocumentoFiscalController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Models.Helpers Function = new Models.Helpers();
         // GET: /DocumentoFiscal/
         public ActionResult Index()

@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class SolicitudEfectivoController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Models.Helpers Function = new Models.Helpers();
 
 
@@ -137,14 +137,14 @@ namespace ERP_GMEDINA.Controllers
         // GET: /SolicitudEfectivo/Create
         public JsonResult GetModena()
         {
-            ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
             var moneda = db.tbMoneda.Select(x => new { mnda_Id = x.mnda_Id, Text = x.mnda_Nombre }).Distinct();
             return Json(moneda, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetDenominacion(short moneda)
         {
-            ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<tbDenominacion> Denomination = db.tbDenominacion.Where(x => x.mnda_Id == moneda).OrderByDescending(x => x.deno_valor).ToList();
             return Json(Denomination, JsonRequestBehavior.AllowGet);

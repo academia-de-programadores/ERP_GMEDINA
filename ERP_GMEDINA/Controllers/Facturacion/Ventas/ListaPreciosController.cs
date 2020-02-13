@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class ListaPreciosController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Models.Helpers Function = new Models.Helpers();
         // GET: /ListaPrecios/
         [SessionManager("ListaPrecios/Index")]

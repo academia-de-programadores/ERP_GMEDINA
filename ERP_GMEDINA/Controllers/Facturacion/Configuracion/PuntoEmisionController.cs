@@ -18,8 +18,8 @@ namespace ERP_ZORZAL.Controllers
 {
     public class PuntoEmisionController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Models.Helpers Function = new Models.Helpers();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        Helpers Function = new Helpers();
         // GET: /PuntoEmision/
         public ActionResult Index()
         {
