@@ -134,7 +134,7 @@ namespace ERP_GMEDINA.Controllers
                                 suc_Telefono = t.suc_Telefono,
                                 suc_FechaCrea = t.suc_FechaCrea,
                                 suc_FechaModifica = t.suc_FechaModifica,
-                                suc_UsuarioCrea = t.tbUsuario.usu_Nombres + " " + t.tbUsuario.usu_Apellidos,
+                                suc_UsuarioCrea = t.tbUsuario1.usu_Nombres + " " + t.tbUsuario1.usu_Apellidos,
                                 suc_UsuarioModifica = t.tbUsuario1.usu_Nombres + " " + t.tbUsuario1.usu_Apellidos
                             }
                         )

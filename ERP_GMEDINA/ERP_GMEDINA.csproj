@@ -235,6 +235,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attribute\SessionManager.cs" />
+    <Compile Include="Controllers\DecimoCuartoMesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
@@ -244,9 +245,7 @@
     <Compile Include="Controllers\RecursosHumanos\General\CargosController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
-    <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
     <Compile Include="Controllers\RecursosHumanos\DatosProfesionales\CompetenciasController.cs" />
-    <Compile Include="Controllers\DecimoCuartoMesController.cs" />
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionAFPController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
@@ -285,7 +284,6 @@
     <Compile Include="Controllers\PagoDeCesantiaDetalleController.cs" />
     <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\RecursosHumanos\Reclutamiento\PersonasController.cs" />
-    <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PlanillaImpuestoVecinalController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\RecursosHumanos\FinalizacionLaboral\RazonSalidasController.cs" />
@@ -320,7 +318,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CalculoISR.cs" />
     <Compile Include="Helpers\Deducciones.cs" />
     <Compile Include="Helpers\EnviarComprobanteDePago.cs" />
     <Compile Include="Helpers\General.cs" />
