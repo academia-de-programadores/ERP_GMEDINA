@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
     public class LoginController : Controller
     {
         ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         Helpers Help = new Helpers();
 
         // GET: Login

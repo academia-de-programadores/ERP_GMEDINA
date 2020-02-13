@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Controllers
     public class RolController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Rol/
         [SessionManager("Rol/Index")]
         public ActionResult Index()

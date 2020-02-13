@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
     public class ParametroController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Parametro/
         [SessionManager("Parametro/Index")]
         public ActionResult Index()

@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
     public class UsuarioController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         Helpers Help = new Helpers();
         // GET: /Usuario/
         [SessionManager("Usuario/Index")]

@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Controllers
     public class InventarioFisicoController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: /InventarioFisico/
         [SessionManager("InventarioFisico/Index")]

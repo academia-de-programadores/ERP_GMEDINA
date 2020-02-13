@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
     public class ProductoCategoriaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /ProductoCategoria/
         [SessionManager("ProductoCategoria/Index")]
         public ActionResult Index()

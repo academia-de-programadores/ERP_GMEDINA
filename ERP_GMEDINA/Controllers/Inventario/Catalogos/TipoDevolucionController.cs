@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class TipoDevolucionController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /TipoDevolucion/
         [SessionManager("TipoDevolucion/Index")]
         public ActionResult Index()

@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
     public class BoxController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        private Helpers Function = new Helpers();
+        private Models.Helpers Function = new Models.Helpers();
 
         public object ACTUALIZAR_tbBoxDetalle { get; private set; }
 

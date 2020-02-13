@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class ProveedorController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Proveedor/
         [SessionManager("Proveedor/Index")]
         public ActionResult Index()

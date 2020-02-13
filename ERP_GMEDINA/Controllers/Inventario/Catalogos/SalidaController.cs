@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
     public class SalidaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        private Helpers Function = new Helpers();
+        private Models.Helpers Function = new Models.Helpers();
 
         // GET: /Salida/
         [SessionManager("Salida/Index")]

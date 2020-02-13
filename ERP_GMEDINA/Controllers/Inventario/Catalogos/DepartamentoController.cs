@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Controllers
     public class DepartamentoController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Departamento/
         [SessionManager("Departamento/Index")]
         public ActionResult Index()

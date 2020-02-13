@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
     public class ConsultarExistenciaProductosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: ConsultarExistenciaProductos
         [SessionManager("ConsultarExistenciaProductos/Index")]
         public ActionResult Index()

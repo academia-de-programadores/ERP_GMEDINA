@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Controllers
     public class EntradaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Entrada/
         [SessionManager("Entrada/Index")]
         public ActionResult Index()
