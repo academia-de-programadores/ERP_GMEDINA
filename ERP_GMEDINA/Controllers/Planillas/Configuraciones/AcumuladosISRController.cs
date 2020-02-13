@@ -7,8 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-using ERP_GMEDINA.Models.Helpers;
 using ERP_GMEDINA.Attribute;
+using ERP_GMEDINA.Helpers;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -147,7 +147,7 @@ namespace ERP_GMEDINA.Controllers
         public string EditGetEmpleadoDDL()
         {
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Models.Helpers.General.ObtenerEmpleados();
+            return General.ObtenerEmpleados();
         }
 
         #region GET: edit

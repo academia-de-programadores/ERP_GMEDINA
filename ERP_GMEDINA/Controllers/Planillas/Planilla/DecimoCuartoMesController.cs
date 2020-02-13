@@ -1,5 +1,5 @@
 ﻿using ERP_GMEDINA.Attribute;
-using ERP_GMEDINA.Models.Helpers;
+using ERP_GMEDINA.Helpers;
 using ERP_GMEDINA.Models;
 using System;
 using System.Collections.Generic;

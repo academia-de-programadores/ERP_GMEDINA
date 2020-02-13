@@ -254,5 +254,19 @@ namespace ERP_GMEDINA.Models
         public const int vbox_Cerrada = 2;
         public const string box_Abrierta = "Abrierta";
         public const string box_Cerrada = "Cerrada";
+
+        public void InsertBitacoraErrores(string sPantalla, string biteMensajeError, string biteAccion)
+        {
+            IEnumerable<object> List = null;
+            string UserName = (string)HttpContext.Current.Session["UserLogin"];
+            try
+            {
+                List = db.UDP_Acce_tbBitacoraErrores_Insert(sPantalla, UserName, DatetimeNow(), biteMensajeError, biteAccion);
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+            }
+        }
     }
 }
