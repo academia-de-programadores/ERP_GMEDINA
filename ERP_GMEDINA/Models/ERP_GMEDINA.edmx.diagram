@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a84e15c1fd4c484ba34b4a75ed4ef05e" Name="Diagram1">
+      <Diagram DiagramId="a84e15c1fd4c484ba34b4a75ed4ef05e" Name="Diagram1" ZoomLevel="51">
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbAccesoRol" Width="1.5" PointX="5.25" PointY="290.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbBitacoraErrores" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbObjeto" Width="1.5" PointX="3" PointY="222.25" IsExpanded="true" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbUsuario" Width="1.5" PointX="0.75" PointY="283.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbActividadEconomica" Width="1.5" PointX="3" PointY="232.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbBanco" Width="1.5" PointX="3" PointY="235.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbCuentasBanco" Width="1.5" PointX="11.25" PointY="290.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbCuentasBanco" Width="1.5" PointX="11" PointY="290.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbDenominacion" Width="1.5" PointX="5.25" PointY="303" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbDepartamento" Width="1.5" PointX="3" PointY="244.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINA2Model.tbEmpleado" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
