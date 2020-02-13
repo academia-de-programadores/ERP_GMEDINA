@@ -17,9 +17,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> tipe_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tipe_FechaModifica { get; set; }
     
-        public virtual tbPersonas tbPersonas { get; set; }
-        public virtual tbTitulos tbTitulos { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbPersonas tbPersonas { get; set; }
+        public virtual tbTitulos tbTitulos { get; set; }
     }
 }

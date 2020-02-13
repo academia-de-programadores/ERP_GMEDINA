@@ -18,8 +18,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> adsu_FechaModifica { get; set; }
         public bool adsu_Activo { get; set; }
     
-        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

@@ -23,9 +23,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> hinc_FechaModifica { get; set; }
         public Nullable<bool> hinc_Espermanente { get; set; }
     
-        public virtual tbEmpleados tbEmpleados { get; set; }
-        public virtual tbTipoIncapacidades tbTipoIncapacidades { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
+        public virtual tbTipoIncapacidades tbTipoIncapacidades { get; set; }
     }
 }

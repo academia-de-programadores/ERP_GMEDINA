@@ -21,8 +21,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> hvac_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hvac_FechaModifica { get; set; }
     
-        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

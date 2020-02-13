@@ -16,6 +16,7 @@ namespace ERP_GMEDINA.Models
         public string eqtra_Codigo { get; set; }
         public int eqtra_Id { get; set; }
         public string eqtra_Observacion { get; set; }
+        public bool eqtra_Estado { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime fechaFin { get; set; }
         public string area_Descripcion { get; set; }
@@ -24,6 +25,5 @@ namespace ERP_GMEDINA.Models
         public string depto_Descripcion { get; set; }
         public int car_Id { get; set; }
         public string car_Descripcion { get; set; }
-        public bool eqtra_Estado { get; set; }
     }
 }

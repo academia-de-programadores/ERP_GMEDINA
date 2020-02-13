@@ -9,8 +9,8 @@ namespace ERP_GMEDINA.Models
         public int timv_IdTechoImpuestoVecinal { get; set; }
         public string mun_Codigo { get; set; }
         public Nullable<int> tde_IdTipoDedu { get; set; }
-        public decimal timv_RangoInicio { get; set; }
-        public decimal timv_RangoFin { get; set; }
+        public Nullable<decimal> timv_RangoInicio { get; set; }
+        public Nullable<decimal> timv_RangoFin { get; set; }
         public decimal timv_Rango { get; set; }
         public decimal timv_Impuesto { get; set; }
         public int timv_UsuarioCrea { get; set; }
@@ -19,9 +19,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> timv_FechaModifica { get; set; }
         public bool timv_Activo { get; set; }
     
-        public virtual tbMunicipio tbMunicipio { get; set; }
-        public virtual tbTipoDeduccion tbTipoDeduccion { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbMunicipio tbMunicipio { get; set; }
+        public virtual tbTipoDeduccion tbTipoDeduccion { get; set; }
     }
 }

@@ -19,8 +19,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> hor_FechaModifica { get; set; }
         public int hor_CantidadHoras { get; set; }
     
-        public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbJornadas tbJornadas { get; set; }
     }
 }

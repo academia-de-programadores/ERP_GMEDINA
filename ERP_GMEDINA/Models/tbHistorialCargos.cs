@@ -25,6 +25,8 @@ namespace ERP_GMEDINA.Models
         public int jor_IdAnterior { get; set; }
         public int jor_IdNuevo { get; set; }
     
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbAreas tbAreas { get; set; }
         public virtual tbAreas tbAreas1 { get; set; }
         public virtual tbCargos tbCargos { get; set; }
@@ -34,7 +36,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbJornadas tbJornadas1 { get; set; }
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<bool> aisr_DeducirISR { get; set; }
         public int emp_Id { get; set; }
     
-        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

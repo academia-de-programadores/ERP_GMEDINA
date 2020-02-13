@@ -18,9 +18,9 @@ namespace ERP_GMEDINA.Models
         public bool dafp_Activo { get; set; }
         public Nullable<bool> dafp_DeducirISR { get; set; }
     
-        public virtual tbAFP tbAFP { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbAFP tbAFP { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

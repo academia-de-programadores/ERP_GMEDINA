@@ -11,7 +11,7 @@ namespace ERP_GMEDINA.Models
         public string per_Apellidos { get; set; }
         public int cpla_IdPlanilla { get; set; }
         public string cpla_DescripcionPlanilla { get; set; }
-        public decimal hipa_TotalISR { get; set; }
-        public System.DateTime hipa_FechaPago { get; set; }
+        public Nullable<decimal> hipa_TotalISR { get; set; }
+        public Nullable<System.DateTime> hipa_FechaPago { get; set; }
     }
 }

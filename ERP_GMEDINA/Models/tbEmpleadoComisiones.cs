@@ -20,9 +20,9 @@ namespace ERP_GMEDINA.Models
         public decimal cc_TotalVenta { get; set; }
         public Nullable<System.DateTime> cc_FechaPagado { get; set; }
     
-        public virtual tbCatalogoDeIngresos tbCatalogoDeIngresos { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbCatalogoDeIngresos tbCatalogoDeIngresos { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

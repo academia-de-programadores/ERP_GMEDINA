@@ -20,8 +20,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<bool> pml_Activo { get; set; }
         public string pml_RazonInactivo { get; set; }
     
-        public virtual tbMotivoLiquidacion tbMotivoLiquidacion { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbMotivoLiquidacion tbMotivoLiquidacion { get; set; }
     }
 }

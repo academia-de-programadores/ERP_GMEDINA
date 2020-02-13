@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> tddu_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tddu_FechaModifica { get; set; }
     
-        public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
     }
 }

@@ -19,16 +19,16 @@ namespace ERP_GMEDINA.Models
         public bool cpla_Activo { get; set; }
         public int hipa_IdHistorialDePago { get; set; }
         public Nullable<decimal> hipa_SueldoNeto { get; set; }
-        public System.DateTime hipa_FechaInicio { get; set; }
-        public System.DateTime hipa_FechaFin { get; set; }
-        public System.DateTime hipa_FechaPago { get; set; }
+        public Nullable<System.DateTime> hipa_FechaInicio { get; set; }
+        public Nullable<System.DateTime> hipa_FechaFin { get; set; }
+        public Nullable<System.DateTime> hipa_FechaPago { get; set; }
         public int hipa_Anio { get; set; }
         public int hipa_Mes { get; set; }
         public int peri_IdPeriodo { get; set; }
         public System.DateTime hipa_FechaCrea { get; set; }
-        public decimal hipa_TotalISR { get; set; }
+        public Nullable<decimal> hipa_TotalISR { get; set; }
         public Nullable<bool> hipa_ISRPendiente { get; set; }
-        public decimal hipa_AFP { get; set; }
+        public Nullable<decimal> hipa_AFP { get; set; }
         public Nullable<decimal> hipa_TotalHorasConPermisoJustificado { get; set; }
         public Nullable<decimal> hipa_TotalComisiones { get; set; }
         public Nullable<decimal> hipa_TotalHorasExtras { get; set; }
