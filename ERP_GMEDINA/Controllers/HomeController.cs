@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ERP_GMEDINA.Attribute;
+using ERP_GMEDINA.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +10,13 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        [SessionManager("Home/Index")]
+        public ActionResult Index(int idmenu)
         {
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            Session["Admin"] = true;
+            Session["sesionIdMenu"] = idmenu;
             return View();
         }
 

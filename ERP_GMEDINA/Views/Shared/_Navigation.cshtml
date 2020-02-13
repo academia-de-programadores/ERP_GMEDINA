@@ -74,27 +74,27 @@
                             @if (Login.GetUserRols("Empresas/Index"))
                             {
                             <li class="@Html.IsSelected(controller: "Empresas", action: "Index")"><a href="@Url.Action("Index", "Empresas")">Empresas</a></li>
-                               }
+                            }
                             @if (Login.GetUserRols("Sucursales/Index"))
                             {
                             <li class="@Html.IsSelected(controller: "Sucursales", action: "Index")"><a href="@Url.Action("Index", "Sucursales")">Sucursales</a></li>
                             }
                             @if (Login.GetUserRols("TipoMonedas/Index"))
-                             {
+                            {
                               <li class="@Html.IsSelected(controller: "TipoMonedas", action: "Index")"><a href="@Url.Action("Index", "TipoMonedas")">Monedas</a></li>
-                             }
+                            }
                              @if (Login.GetUserRols("Jornadas/Index"))
                              {
                                <li class="@Html.IsSelected(controller: "Jornadas")"><a href="@Url.Action("Index", "Jornadas")">Jornadas y Horarios</a></li>
-                              }
+                             }
                             @if (Login.GetUserRols("Areas/Index"))
-                                {
+                            {
                                 <li class="@Html.IsSelected(controller: "Areas")"><a href="@Url.Action("Index", "Areas")">Áreas y Departamentos</a></li>
-                                }
+                            }
                             @if (Login.GetUserRols("TipoHoras/Index"))
-                                {
+                            {
                                 <li class="@Html.IsSelected(controller: "TipoHoras")"><a href="@Url.Action("Index", "TipoHoras")">Tipos de Horas</a></li>
-                                }
+                            }
                         </ul>
                     </li>
                     @*MENU GENERAL*@
@@ -108,7 +108,7 @@
                             <li class="@Html.IsSelected(controller: "Competencias")">
                                 <a href="@Url.Action("Index", "Competencias")">Listado de Competencias</a>
                             </li>
-                            }
+                        }
                             @if (Login.GetUserRols("Habilidades/Index"))
                             {
                             <li class="@Html.IsSelected(controller: "Habilidades")">
@@ -116,7 +116,7 @@
                             </li>
                             }
                             @if (Login.GetUserRols("Titulos/Index"))
-                            { 
+                            {
                             <li class="@Html.IsSelected(controller: "Titulos")">
                                 <a href="@Url.Action("Index", "Titulos")">Listado de Títulos</a>
                             </li>
@@ -167,7 +167,7 @@
                             <li class="@Html.IsSelected(controller: "SeleccionCandidatos")">
                                 <a href="@Url.Action("Index", "SeleccionCandidatos")">Selección de Candidatos</a>
                             </li>
-                                }
+                            }
                         </ul>
                     </li>
                     @*RECLUTAMIENTO*@
@@ -225,11 +225,11 @@
                         <a href="#"><i class="fa fa-plus-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Incapacidades</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level Incapacidades">
                             @if (Login.GetUserRols("TipoIncapacidades/Index"))
-                            {   
+                            {
                             <li class="@Html.IsSelected(controller: "TipoIncapacidades")">
                                 <a href="@Url.Action("Index", "TipoIncapacidades")">Tipos de Incapacidades</a>
                             </li>
-                             }
+                            }
                                 @if (Login.GetUserRols("HistorialIncapacidades/Index"))
                                 {
                             <li class="@Html.IsSelected(controller: "HistorialIncapacidades")">
@@ -249,7 +249,7 @@
                             <li class="@Html.IsSelected(controller: "TipoPermisos")">
                                 <a href="@Url.Action("Index", "TipoPermisos")">Tipos de Permisos</a>
                             </li>
-                                }
+                            }
                         @if (Login.GetUserRols("HistorialPermisos/Index"))
                         {
                             <li class="@Html.IsSelected(controller: "HistorialPermisos")">
@@ -430,34 +430,34 @@
                         <!-- #region Menu Planillas -->
 
                             <!--#region Menú Principal-->
-                                //Menu principal (donde están todos los modulos)
-                                if (Login.GetUserRols("Menu/MenuPrincipal"))
-                                {
+                        //Menu principal (donde están todos los modulos)
+                        if (Login.GetUserRols("Menu/MenuPrincipal"))
+                        {
                                     <li class="">
                                         <a href="@Url.Action("MenuPrincipal", "Menu")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Menú Principal</span></a>
                                     </li>
-                                }
+                        }
                             <!--#endregion-->
 
                             <!--#region Inicio-->
-                                //Menu de planillas
-                                if (Login.GetUserRols("Menu/Index"))
-                                {
+                        //Menu de planillas
+                        if (Login.GetUserRols("Menu/Index"))
+                        {
                                     <li class="@Html.IsSelected(controller: "Menu")">
                                         <a href="@Url.Action("Index", "Menu", new { idmenu = 1 })"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Inicio</span></a>
                                     </li>
-                                }
+                        }
                             <!--#endregion-->
 
                             <!--#region Planilla-->
-                                if (Login.GetUserRols("Planilla/Index") ||
-                                    Login.GetUserRols("DecimoTercerMes/Index") ||
-                                    Login.GetUserRols("CatalogoDePlanillas/Index") ||
-                                    Login.GetUserRols("Liquidacion/Index") ||
-                                    Login.GetUserRols("PagoDeCesantiaDetalle/Index") ||
-                                    Login.GetUserRols("PlanillaImpuestoVecinal/Index")
-                                )
-                                {
+                        if (Login.GetUserRols("Planilla/Index") ||
+                            Login.GetUserRols("DecimoTercerMes/Index") ||
+                            Login.GetUserRols("CatalogoDePlanillas/Index") ||
+                            Login.GetUserRols("Liquidacion/Index") ||
+                            Login.GetUserRols("PagoDeCesantiaDetalle/Index") ||
+                            Login.GetUserRols("PlanillaImpuestoVecinal/Index")
+                        )
+                        {
                                     <li class="@Html.IsSelected(controller: "Planilla")  @Html.IsSelected(controller: "CatalogoDePlanillas")  @Html.IsSelected(controller: "DecimoCuartoMes")  @Html.IsSelected(controller: "DecimoTercerMes") @Html.IsSelected(controller: "Liquidacion") @Html.IsSelected(controller: "FechaPlanilla") @Html.IsSelected(controller: "PagoDeCesantiaDetalle") @Html.IsSelected(controller: "PlanillaImpuestoVecinal")">
                                         <a href="#"><i class="fa fa-group"></i> <span class="nav-label" data-i18n="nav.dashboard">Planilla</span> <span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "CatalogoDePlanillas", cssClass: "in") @Html.IsSelected(controller: "DecimoCuartoMes", cssClass: "in") @Html.IsSelected(controller: "DecimoTercerMes", cssClass: "in") @Html.IsSelected(controller: "Planilla", cssClass: "in")">
@@ -506,19 +506,19 @@
                                             }
                                         </ul>
                                     </li>
-                                }
+                                                }
                             <!--#endregion-->
 
                             <!--#region Ingresos-->
-                                // Ingresos
-                                if (Login.GetUserRols("CatalogoDeIngresos/Index") ||
-                                Login.GetUserRols("AdelantoSueldo/Index") ||
-                                Login.GetUserRols("EmpleadoBonos/Index") ||
-                                Login.GetUserRols("EmpleadoComisiones/Index") ||
-                                Login.GetUserRols("IngresosIndividuales/Index") ||
-                                Login.GetUserRols("IngresosIndividuales/Index")
-                                )
-                                {
+                                                // Ingresos
+                                                if (Login.GetUserRols("CatalogoDeIngresos/Index") ||
+                                                Login.GetUserRols("AdelantoSueldo/Index") ||
+                                                Login.GetUserRols("EmpleadoBonos/Index") ||
+                                                Login.GetUserRols("EmpleadoComisiones/Index") ||
+                                                Login.GetUserRols("IngresosIndividuales/Index") ||
+                                                Login.GetUserRols("IngresosIndividuales/Index")
+                                                )
+                                                {
                                     <li class="@Html.IsSelected(controller: "CatalogoDeIngresos") @Html.IsSelected(controller: "EmpleadoBonos") @Html.IsSelected(controller: "EmpleadoComisiones") @Html.IsSelected(controller: "IngresosIndividuales") @Html.IsSelected(controller: "AdelantoSueldo")">
                                         <a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-money"></i> <span class="nav-label" data-i18n="nav.dashboard">Ingresos</span> <span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
@@ -555,17 +555,17 @@
                                             }
                                         </ul>
                                     </li>
-                             }
+                                                }
                             <!--#endregion-->
 
                             <!--#region Deducciones-->
-                                //Deducciones
-                                if (Login.GetUserRols("CatalogoDeDeducciones/Index") ||
-                                        Login.GetUserRols("IngresosIndividuales/Index") ||
-                                        Login.GetUserRols("DeduccionAFP/Index") ||
-                                        Login.GetUserRols("DeduccionesExtraordinarias/Index")
-                                  )
-                                {
+                                                //Deducciones
+                                                if (Login.GetUserRols("CatalogoDeDeducciones/Index") ||
+                                                        Login.GetUserRols("IngresosIndividuales/Index") ||
+                                                        Login.GetUserRols("DeduccionAFP/Index") ||
+                                                        Login.GetUserRols("DeduccionesExtraordinarias/Index")
+                                                  )
+                                                {
                                     <li class="@Html.IsSelected(controller: "CatalogoDeDeducciones") @Html.IsSelected(controller: "DeduccionesExtraordinarias") @Html.IsSelected(controller: "DeduccionAFP") @Html.IsSelected(controller: "DeduccionesIndividuales")">
                                         <a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-money"></i> <span class="nav-label" data-i18n="nav.dashboard">Deducciones</span> <span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
@@ -596,25 +596,25 @@
                                             }
                                         </ul>
                                     </li>
-                                }
+                                                }
                                     <!--#endregion-->
 
                             <!--#region Configuraciones-->
-                                //Configuraciones
-                                if (Login.GetUserRols("AcumuladosISR/Index") ||
-                                    Login.GetUserRols("AFP/Index") ||
-                                    Login.GetUserRols("AuxilioDeCesantias/Index") ||
-                                    Login.GetUserRols("FormaPago/Index") ||
-                                    Login.GetUserRols("InstitucionesFinancieras/Index") ||
-                                    Login.GetUserRols("ISR/Index") ||
-                                    Login.GetUserRols("Periodos/Index") ||
-                                    Login.GetUserRols("Preaviso/Index") ||
-                                    Login.GetUserRols("TechosComisiones/Index") ||
-                                    Login.GetUserRols("TechosDeducciones/Index") ||
-                                    Login.GetUserRols("TechoImpuestoVecinal/Index") ||
-                                    Login.GetUserRols("TipoDeducciones/Index")
-                                )
-                                {
+                                                //Configuraciones
+                                                if (Login.GetUserRols("AcumuladosISR/Index") ||
+                                                    Login.GetUserRols("AFP/Index") ||
+                                                    Login.GetUserRols("AuxilioDeCesantias/Index") ||
+                                                    Login.GetUserRols("FormaPago/Index") ||
+                                                    Login.GetUserRols("InstitucionesFinancieras/Index") ||
+                                                    Login.GetUserRols("ISR/Index") ||
+                                                    Login.GetUserRols("Periodos/Index") ||
+                                                    Login.GetUserRols("Preaviso/Index") ||
+                                                    Login.GetUserRols("TechosComisiones/Index") ||
+                                                    Login.GetUserRols("TechosDeducciones/Index") ||
+                                                    Login.GetUserRols("TechoImpuestoVecinal/Index") ||
+                                                    Login.GetUserRols("TipoDeducciones/Index")
+                                                )
+                                                {
                                     <li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AcumuladosISR") @Html.IsSelected(controller: "TechosComisiones") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "InstitucionesFinancieras") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "AFP") @Html.IsSelected(controller: "Preaviso") @Html.IsSelected(controller: "Periodos") @Html.IsSelected(controller: "TechoImpuestoVecinal")">
                                         <a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-cog"></i> <span class="nav-label" data-i18n="nav.dashboard">Configuraciones</span> <span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
@@ -692,19 +692,19 @@
                                             }
                                         </ul>
                                     </li>
-                                  }
+                                                }
                             <!--#endregion-->
 
                             <!--#region Reportes Planillas-->
-                                //Reportes del modulo de planillas
-                                if (Login.GetUserRols("ReportesPlanilla/InstitucionesFinancierasParametros") ||
-                                    Login.GetUserRols("ReportesPlanilla/DeduccionesParametros") ||
-                                    Login.GetUserRols("ReportesPlanilla/DecimoTercerParametros") ||
-                                    Login.GetUserRols("ReportesPlanilla/DecimoCuartoParametros") ||
-                                    Login.GetUserRols("ReportesPlanilla/IngresosParametros") ||
-                                    Login.GetUserRols("ReportesPlanilla/ReportesVariosParametros")
-                                    )
-                                {
+                                                //Reportes del modulo de planillas
+                                                if (Login.GetUserRols("ReportesPlanilla/InstitucionesFinancierasParametros") ||
+                                                    Login.GetUserRols("ReportesPlanilla/DeduccionesParametros") ||
+                                                    Login.GetUserRols("ReportesPlanilla/DecimoTercerParametros") ||
+                                                    Login.GetUserRols("ReportesPlanilla/DecimoCuartoParametros") ||
+                                                    Login.GetUserRols("ReportesPlanilla/IngresosParametros") ||
+                                                    Login.GetUserRols("ReportesPlanilla/ReportesVariosParametros")
+                                                    )
+                                                {
                                     <li class="@Html.IsSelected(controller: "ReportesPlanilla")">
                                         <a href="#"><i class="fa fa-print"></i> <span class="nav-label" data-i18n="nav.dashboard">Reportes</span> <span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ReportesPlanilla", cssClass: "in")">
@@ -747,25 +747,206 @@
                                             }
                                         </ul>
                                     </li>
-                                  }
+                                                }
                               <!--#endregion-->
 
                       <!-- #endregion -->
-                    }
+                     }
+                      }
+                 else if (idmenu == 3)
+              {
 
-                    @*if (Sesiones > 1)
-                    {
-                        <!--#region Módulo de seguridad-->
-                            <li class="@Html.IsSelected(controller: "Dashboards")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-lock"></i> <span class="nav-label" data-i18n="nav.dashboard">Seguridad</span> <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
-                                    <li class="@Html.IsSelected(action: "Dashboard_2")"><a href="@Url.Action("Dashboard_2", "Dashboards")">Seguridad</a></li>
-                                </ul>
+                        <!-- #region Header Inventario -->
+                     <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
+                                                        <div class="dropdown profile-element">
+
+                                                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                                                <span class="clear">
+                                                                    <span class="block m-t-xs">
+                                                                        <strong class="font-bold">Inventario </strong>
+                                                                    </span> <span class="text-muted text-xs block">Otras Acciones<b class="caret"></b></span>
+                                                                </span>
+                                                            </a>
+                                                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+
+
+                                                                <li><a href="@Url.Action("CerrarSesion", "Login")">Cerrar Sesión</a></li>
+
+                                                            </ul>
+                                                        </div>
+                                                        <div class="logo-element">
+                                                            ERP
+                                                        </div>
+                                                    </li>
+                    <!-- #endregion-->
+               @* INICIO *@
+                     <li>
+                        <a href="@Url.Action("MenuPrincipal", "Menu")"><i class="fa fa-home"></i>Menú Principal</a>
+                     </li>
+                  <li class="@Html.IsSelected(controller: "Home", action: "Index")">
+                       <a href="@Url.Action("Index", "Home", new { idmenu = 3 })"><i class="fa fa-home"></i>Inicio</a>
+                    </li>
+               @* INICIO *@
+
+                <li>
+                    <a href="#"><i class="fa fa-tag"></i><span class="nav-label">Inventario</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        @if (Login.GetUserAccesoRol("Bodega/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Bodega")"><i class="fa fa-home fa-fw"></i>Bodegas<span class="nav-label"></span> </a>
                             </li>
-                        <!--#endregion-->
-                    }*@
-             }
-            }
+                        }
+                        @if (Login.GetUserAccesoRol("Entrada/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Entrada")"><i class="fa fa-folder-open-o fa-fw"></i>Entradas<span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("Salida/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Salida")"><i class="fa fa-folder-open-o fa-fw"></i>Salidas<span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("ConsultarExistenciaProductos/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "ConsultarExistenciaProductos")"><i class="fa fa-search"></i>Consultar Existencias <span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("Box/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Box")"><i class="fa fa-cube fa-fw"></i> Caja <span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("InventarioFisico/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "InventarioFisico")"><i class="fa fa-file fa-fw"></i>Inventario Fisico<span class="nav-label"></span> </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-folder-open"></i><span class="nav-label">Catálagos</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        @if (Login.GetUserAccesoRol("Producto/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Producto")"><i class="fa fa-cube fa-fw"></i>Producto <span class="nav-label"></span> </a>
+                            </li>
+                        }
+
+                        @if (Login.GetUserAccesoRol("ProductoCategoria/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "ProductoCategoria")"><i class="fa fa-cubes fa-fw"></i>Producto Categoría<span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("UnidadMedida/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "UnidadMedida")"><i class="fa fa-balance-scale"></i><span class="nav-label">Unidades de Medida</span> </a>
+                            </li>
+                        }
+
+                        @if (Login.GetUserAccesoRol("Departamento/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Departamento")"><i class="fa fa-map fa-fw"></i><span class="nav-label">División Política</span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("TipoEntrada/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "TipoEntrada")"><i class="fa fa-bookmark-o fa-fw"></i>Tipo Entrada<span class="nav-label"></span> </a>
+                            </li>
+                        }
+
+                        @if (Login.GetUserAccesoRol("TipoSalida/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "TipoSalida")"><i class="fa fa-bookmark-o fa-fw"></i><span class="nav-label">Tipos Salidas</span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("TipoDevolucion/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "TipoDevolucion")"><i class="fa fa-recycle fa-fw"></i><span class="nav-label">Tipo Devolucion</span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("EstadoMovimiento/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "EstadoMovimiento")"><i class="fa fa-bar-chart-o fa-fw"></i>Estado Movimiento<span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("EstadoInventarioFisico/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "EstadoInventarioFisico")"><i class="fa fa-bar-chart-o fa-fw"></i>Estado Inventario Fisico<span class="nav-label"></span> </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-cogs fa-fw"></i><span class="nav-label">Configuración</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        @if (Login.GetUserAccesoRol("Empleado/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Empleado")"><i class="fa fa-user"></i>Empleado <span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("Proveedor/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Proveedor")"><i class="fa fa-truck fa-fw"></i>Proveedor <span class="nav-label"></span> </a>
+                            </li>
+                        }
+                        @if (Login.GetUserAccesoRol("Parametro/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Parametro")"><i class="fa fa-desktop fa-fw"></i><span class="nav-label">Parametro</span> </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-lock"></i><span class="nav-label">Seguridad</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        @if (Login.GetUserAccesoRol("Usuario/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-users fa-fw"></i>Usuario <span class="nav-label"></span> </a>
+                            </li>
+                        }
+
+                        @if (Login.GetUserAccesoRol("Rol/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Rol")"><i class="fa fa-ticket fa-fw"></i>Roles<span class="nav-label"></span> </a>
+                            </li>
+                        }
+
+                        @if (Login.GetUserAccesoRol("Objeto/Index"))
+                        {
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "Objeto")"><i class="fa fa-desktop fa-fw"></i><span class="nav-label">Objeto</span> </a>
+                            </li>
+                        }
+                    </ul>
+
+                </li>
+                }
+              }
+
         </ul>
     </div>
 </nav>

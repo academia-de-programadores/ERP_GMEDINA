@@ -235,6 +235,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attribute\SessionManager.cs" />
+    <Compile Include="Controllers\Inventario\Configuracion\EmpleadoController.cs" />
+    <Compile Include="Controllers\Inventario\Configuracion\ParametroController.cs" />
+    <Compile Include="Controllers\Inventario\Configuracion\ProveedorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
@@ -1948,6 +1951,7 @@
     <Content Include="Content\img\header-profile.png" />
     <Content Include="Content\img\LoadingIcon.png" />
     <Content Include="Content\img\LoadingSpinner.gif" />
+    <Content Include="Content\img\Logo_GM.png" />
     <Content Include="Content\img\mas.png" />
     <Content Include="Content\img\menos.png" />
     <Content Include="Content\img\MicrosoftTeams-image.png" />
