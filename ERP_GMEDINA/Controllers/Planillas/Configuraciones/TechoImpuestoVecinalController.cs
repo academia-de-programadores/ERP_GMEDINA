@@ -115,7 +115,7 @@ namespace ERP_GMEDINA.Controllers
             IEnumerable<object> listTechoImpuestoVecinal = null;
             string MensajeError = "";
 
-            // validar si el modelo es válid
+            // validar si el modelo es vï¿½lid
             if (ModelState.IsValid)
             {
                 try
@@ -136,21 +136,21 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        // el procedimiento almacenado falló
+                        // el procedimiento almacenado fallï¿½
                         ModelState.AddModelError("", "No se pudo ingresar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    // se generó una excepción 
+                    // se generï¿½ una excepciï¿½n 
                     response = "error";
                 }
 
             }
             else
             {
-                // el modelo no es válido
+                // el modelo no es vï¿½lido
                 response = "error";
             }
 
@@ -166,7 +166,7 @@ namespace ERP_GMEDINA.Controllers
             // evitar referencias circulares
             db.Configuration.ProxyCreationEnabled = false;
 
-            // validar si se recibió algún ID
+            // validar si se recibiï¿½ algï¿½n ID
             if (id == null)
             {
                 string response = String.Empty;
@@ -196,7 +196,7 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             string response = String.Empty;
 
-            // validar si el modelo es válido
+            // validar si el modelo es vï¿½lido
             if (ModelState.IsValid)
             {
                 try
@@ -218,14 +218,14 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        // el PA falló
+                        // el PA fallï¿½
                         ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception Ex)
                 {
-                    // se generó una excepción
+                    // se generï¿½ una excepciï¿½n
                     response = Ex.Message.ToString();
                 }
 
@@ -234,7 +234,7 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-                // el modelo no es válido
+                // el modelo no es vï¿½lido
                 response = "error";
             }
 
@@ -280,7 +280,7 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             string response = String.Empty;
 
-            // validar si el model es válido
+            // validar si el model es vï¿½lido
             if (ModelState.IsValid)
             {
                 try
@@ -296,14 +296,14 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        // el PA falló
+                        // el PA fallï¿½
                         ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
-                    // se generó una excepción
+                    // se generï¿½ una excepciï¿½n
                     response = "error";
                 }
 
@@ -312,7 +312,7 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-                // el modelo es inválido
+                // el modelo es invï¿½lido
                 response = "error";
             }
 
@@ -330,7 +330,7 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             string response = String.Empty;
 
-            // validar si el modelo es válido
+            // validar si el modelo es vï¿½lido
             if (ModelState.IsValid)
             {
                 try
@@ -346,14 +346,14 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MensajeError.StartsWith("-1"))
                     {
-                        // el PA falló
+                        // el PA fallï¿½
                         ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
                 catch (Exception)
                 {
-                    // se generó una excepción
+                    // se generï¿½ una excepciï¿½n
                     response = "error";
                 }
 
@@ -362,7 +362,7 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-                // el modelo es inválido
+                // el modelo es invï¿½lido
                 response = "error";
             }
 
@@ -553,7 +553,7 @@ namespace ERP_GMEDINA.Controllers
 
             
 
-        //    //Variable para colocar punto de interrupción si desean ver el resultado del Impuesto Vecinal de un Empleado
+        //    //Variable para colocar punto de interrupciï¿½n si desean ver el resultado del Impuesto Vecinal de un Empleado
 
         //    //Verificar con el Excel, y colocar el valor de la variable TotalSalarioDevengado en el excel "Ingreso Devengado 2019"
 

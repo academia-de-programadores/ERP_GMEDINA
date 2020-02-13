@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Controllers
     public class FacturaController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         
         // GET: /Factura/
         [SessionManager("Factura/Index")]
@@ -206,7 +206,7 @@ namespace ERP_GMEDINA.Controllers
             Response.ClearHeaders();
             try
             {
-                var list = db.UDP_Vent_tbFactura_EstadoImpreso(id, Helpers.EstadoImpreso).ToList();
+                var list = db.UDP_Vent_tbFactura_EstadoImpreso(id, Models.Helpers.EstadoImpreso).ToList();
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf");
             }
@@ -840,7 +840,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult AnularFactura(int CodFactura, bool FacturaAnulado, string RazonAnulado)
         {
-            var list = db.UDP_Vent_tbFactura_Estado(CodFactura, Helpers.AnuladoFactura, RazonAnulado).ToList();
+            var list = db.UDP_Vent_tbFactura_Estado(CodFactura, Models.Helpers.AnuladoFactura, RazonAnulado).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
@@ -973,9 +973,9 @@ namespace ERP_GMEDINA.Controllers
                                                         tbCliente.mun_Codigo,
                                                         tbCliente.clte_Direccion,
                                                         tbCliente.clte_CorreoElectronico,
-                                                        Helpers.ClienteActivo,
+                                                        Models.Helpers.ClienteActivo,
                                                         tbCliente.clte_RazonInactivo,
-                                                        Helpers.ClienteCredito,
+                                                        Models.Helpers.ClienteCredito,
                                                         tbCliente.clte_EsMinorista,
                                                         tbCliente.clte_Observaciones,
                                                         tbCliente.clte_MontoCredito,

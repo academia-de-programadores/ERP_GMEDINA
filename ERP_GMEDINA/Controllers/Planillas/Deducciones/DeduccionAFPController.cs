@@ -136,7 +136,7 @@ namespace ERP_GMEDINA.Controllers
         public string EditGetEmpleadoDDL()
         {
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Helpers.General.ObtenerEmpleados();
+            return Models.Helpers.General.ObtenerEmpleados();
         }
 
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN

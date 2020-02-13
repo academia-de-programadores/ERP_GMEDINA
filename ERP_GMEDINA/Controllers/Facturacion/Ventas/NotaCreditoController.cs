@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Controllers
     public class NotaCreditoController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /NotaCredito/
         public ActionResult Index()
         {
@@ -389,7 +389,7 @@ namespace ERP_GMEDINA.Controllers
             Response.ClearHeaders();
             try
             {
-                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Helpers.EsImpreso).ToList();
+                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Models.Helpers.EsImpreso).ToList();
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf");
             }
@@ -428,7 +428,7 @@ namespace ERP_GMEDINA.Controllers
             Response.ClearHeaders();
             try
             {
-                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Helpers.EsImpreso).ToList();
+                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Models.Helpers.EsImpreso).ToList();
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf");
             }
@@ -467,7 +467,7 @@ namespace ERP_GMEDINA.Controllers
             Response.ClearHeaders();
             try
             {
-                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Helpers.EsImpreso).ToList();
+                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Models.Helpers.EsImpreso).ToList();
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf");
             }
@@ -505,7 +505,7 @@ namespace ERP_GMEDINA.Controllers
             Response.ClearHeaders();
             try
             {
-                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Helpers.EsImpreso).ToList();
+                var list = db.UDP_Vent_tbNotaCredito_EsImpreso(id, Models.Helpers.EsImpreso).ToList();
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf");
             }

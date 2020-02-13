@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
     public class MovimientoCajaController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         public ActionResult Index()
         {
             var tbArqueoCaja = db.UDV_Vent_ArqueoCaja_Select;
@@ -338,7 +338,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult GetRol(int Sucursal)
         {
-            var list = db.UDP_Vent_tbUsuario_Rol_Apertura(Sucursal, Helpers.rol_Id).ToList();
+            var list = db.UDP_Vent_tbUsuario_Rol_Apertura(Sucursal, Models.Helpers.rol_Id).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

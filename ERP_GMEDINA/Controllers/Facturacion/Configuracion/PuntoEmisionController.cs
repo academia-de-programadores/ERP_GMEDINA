@@ -19,7 +19,7 @@ namespace ERP_ZORZAL.Controllers
     public class PuntoEmisionController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /PuntoEmision/
         public ActionResult Index()
         {

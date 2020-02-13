@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
     public class PedidoController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         public ActionResult Index()
         {
             var tbpedido = db.tbPedido.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCliente).Include(t => t.tbEstadoPedido).Include(t => t.tbSucursal);
@@ -119,7 +119,7 @@ namespace ERP_GMEDINA.Controllers
             Session["tbPedidoDetalle"] = null;
             ViewBag.Producto = db.tbProducto.ToList();
             tbPedido Pedido = new tbPedido();
-            Pedido.esped_Id = Helpers.Pendiente;
+            Pedido.esped_Id = Models.Helpers.Pendiente;
             Pedido.suc_Id = Usuario();
                         tbSucursal tbSucursal = new tbSucursal();
                         int suc = Usuario();
@@ -383,7 +383,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Producto = db.tbProducto.ToList();
             tbPedido Pedido = new tbPedido();
             ViewBag.Cliente = db.tbCliente.ToList();
-            tbPedido.esped_Id = Helpers.Pendiente;
+            tbPedido.esped_Id = Models.Helpers.Pendiente;
 
             Session["ID"] = Convert.ToString(tbPedido.tbCliente.clte_Id) ;
             Session["PEDID"] = tbPedido.ped_Id;

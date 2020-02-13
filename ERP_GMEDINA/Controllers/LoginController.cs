@@ -97,8 +97,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult SinAcceso()
         {
             //Validar Inicio de Sesión
-            Models.Helpers Helpers = new Models.Helpers();
-            if (Helpers.GetUserLogin())
+            Models.Helpers Models.Helpers = new Models.Helpers();
+            if (Models.Helpers.GetUserLogin())
                 return View();
             else
                 return RedirectToAction("Index", "Login");
@@ -107,8 +107,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult NotFound()
         {
             //Validar Inicio de Sesión
-            Models.Helpers Helpers = new Models.Helpers();
-            if (Helpers.GetUserLogin())
+            Models.Helpers Models.Helpers = new Models.Helpers();
+            if (Models.Helpers.GetUserLogin())
                 return View();
             else
                 return RedirectToAction("Index", "Login");
@@ -127,7 +127,7 @@ namespace ERP_GMEDINA.Controllers
 				//GET: ESADMIN
 				bool EsAdmin = (bool)Session["UserLoginEsAdmin"];
 				//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
-				Helpers.General vm = new Helpers.General();
+				Models.Helpers.General vm = new Models.Helpers.General();
 				//SOBRECARGA DE OBJECT VM_ModelState
 				userModel = vm.Cargar_ModelState(userId, EsAdmin);
 			}
@@ -155,7 +155,7 @@ namespace ERP_GMEDINA.Controllers
         //	//GET: ESADMIN
         //			bool EsAdmin = (bool)Session["UserLoginEsAdmin"];
         //	//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
-        //	Helpers.General vm = new Helpers.General();
+        //	Models.Helpers.General vm = new Models.Helpers.General();
         //	//SOBRECARGA DE OBJECT VM_ModelState
         //	userModel = vm.Cargar_ModelState(userId, EsAdmin);
         //	//});

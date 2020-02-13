@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class EstadoPedidoController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: /EstadoPedido/
         [SessionManager("EstadoPedido/Index")]

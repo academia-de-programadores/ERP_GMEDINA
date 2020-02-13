@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
     public class SolicitudCreditoController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
      //   private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
 
         // GET: /SolicitudCredito/
@@ -122,7 +122,7 @@ namespace ERP_GMEDINA.Controllers
                         ViewBag.escre_Descripcion = new SelectList(db.tbEstadoSolicitudCredito, "escre_Id", "escre_Descripcion");
 
                         tbSolicitudCredito SolicitudCredito = new tbSolicitudCredito();
-                        SolicitudCredito.escre_Id = Helpers.SolicitudPendiente;
+                        SolicitudCredito.escre_Id = Models.Helpers.SolicitudPendiente;
 
                         ViewBag.Cliente = db.tbCliente.ToList();
                         return View();
@@ -150,7 +150,7 @@ namespace ERP_GMEDINA.Controllers
              ViewBag.escre_Descripcion = new SelectList(db.tbEstadoSolicitudCredito, "escre_Id", "escre_Descripcion");
 
              tbSolicitudCredito SolicitudCredito = new tbSolicitudCredito();
-             SolicitudCredito.escre_Id = Helpers.SolicitudPendiente;
+             SolicitudCredito.escre_Id = Models.Helpers.SolicitudPendiente;
 
              ViewBag.Cliente = db.tbCliente.ToList();
              return View();*/
@@ -617,7 +617,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult DenegarSolCredito(int credID, byte Denegado)
         {
-            var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Helpers.SolicitudDenegado).ToList();
+            var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Models.Helpers.SolicitudDenegado).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

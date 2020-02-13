@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
     public class CajaController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Caja/
         [SessionManager("Caja/Index")]
         public ActionResult Index()

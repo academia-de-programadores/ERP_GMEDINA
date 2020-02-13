@@ -41,7 +41,7 @@ namespace ERP_GMEDINA.Controllers
         #region DDLEmpleado
         public string EditGetDDLEmpleado()
         {
-            return Helpers.General.ObtenerEmpleados();
+            return Models.Helpers.General.ObtenerEmpleados();
         }
         #endregion
 

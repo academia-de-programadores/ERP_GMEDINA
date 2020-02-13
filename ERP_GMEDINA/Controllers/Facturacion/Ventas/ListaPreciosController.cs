@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
     public class ListaPreciosController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /ListaPrecios/
         [SessionManager("ListaPrecios/Index")]
         public ActionResult Index()
@@ -327,14 +327,14 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult InactivarListaPrecio(int CodLp, bool Activo)
         {
-            var list = db.UDP_Vent_tbListaPrecio_Estado(CodLp, Helpers.ListaPrecioInactivo).ToList();
+            var list = db.UDP_Vent_tbListaPrecio_Estado(CodLp, Models.Helpers.ListaPrecioInactivo).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult ActivarListaPrecio(int CodLp, bool Activo)
         {
-            var list = db.UDP_Vent_tbListaPrecio_Estado(CodLp, Helpers.ListaPrecioActivo).ToList();
+            var list = db.UDP_Vent_tbListaPrecio_Estado(CodLp, Models.Helpers.ListaPrecioActivo).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

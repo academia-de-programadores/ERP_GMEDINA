@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ERP_GMEDINA.Helpers;
+using ERP_GMEDINA.Models.Helpers;
 using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Attribute;
 
@@ -92,15 +92,15 @@ namespace ERP_GMEDINA.Controllers
                     //OBTENER DIAS
                     dias = residuo;
 
-                    salarios = Helpers.Liquidacion.EjecutarCalculosSalarios(IdEmpleado);
+                    salarios = Models.Helpers.Liquidacion.EjecutarCalculosSalarios(IdEmpleado);
                     //OBTENER: ABSTRACCION - SALARIO ORDINARIO DIARIO 
-                    decimal SalarioOrdinarioMensual = Helpers.Liquidacion.Calculo_SalarioOrdinarioMensual(IdEmpleado);
+                    decimal SalarioOrdinarioMensual = Models.Helpers.Liquidacion.Calculo_SalarioOrdinarioMensual(IdEmpleado);
                     //ALMACENAMIENTO DE VALORES DE RETORNO EN METODOS UTILITARIOS
-                    decimal Monto_Preaviso = Helpers.Liquidacion.Calculo_PagoDePreaviso(IdEmpleado, SalarioOrdinarioMensual, TotalDiasLaborados);
-                    decimal Monto_Cesantia = Helpers.Liquidacion.Calculo_PagoDeCesantia(IdEmpleado, SalarioOrdinarioMensual, TotalDiasLaborados);
-                    decimal Monto_DecimoCuartoProporcional = Helpers.Liquidacion.Calculo_DecimoCuartoMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
-                    decimal Monto_DecimoTercerProporcional = Helpers.Liquidacion.Calculo_DecimoTercerMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
-                    decimal Monto_VacacionesProporcionales = Helpers.Liquidacion.Calculo_VacacionesProporcionales(IdEmpleado, fechaFin, SalarioOrdinarioMensual, TotalDiasLaborados);
+                    decimal Monto_Preaviso = Models.Helpers.Liquidacion.Calculo_PagoDePreaviso(IdEmpleado, SalarioOrdinarioMensual, TotalDiasLaborados);
+                    decimal Monto_Cesantia = Models.Helpers.Liquidacion.Calculo_PagoDeCesantia(IdEmpleado, SalarioOrdinarioMensual, TotalDiasLaborados);
+                    decimal Monto_DecimoCuartoProporcional = Models.Helpers.Liquidacion.Calculo_DecimoCuartoMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
+                    decimal Monto_DecimoTercerProporcional = Models.Helpers.Liquidacion.Calculo_DecimoTercerMesProporcional(IdEmpleado, fechaFin, SalarioOrdinarioMensual);
+                    decimal Monto_VacacionesProporcionales = Models.Helpers.Liquidacion.Calculo_VacacionesProporcionales(IdEmpleado, fechaFin, SalarioOrdinarioMensual, TotalDiasLaborados);
                     
 
                     //CALCULAR EL PAGO DE CONCEPTOS PROPORCIONAL AL MOTIVO DE LIQUIDACION
@@ -199,7 +199,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 LiquidacionViewModel list = (LiquidacionViewModel)Session["Liquidaciones"];
                 //OBTENER: ABSTRACCION - SALARIO ORDINARIO DIARIO 
-                decimal SalarioOrdinarioMensual = Helpers.Liquidacion.Calculo_SalarioOrdinarioMensual((int)list.emp_Id);
+                decimal SalarioOrdinarioMensual = Models.Helpers.Liquidacion.Calculo_SalarioOrdinarioMensual((int)list.emp_Id);
                 //SETEO DE VARIABLES EN EL OBJETO DE LIQUIDACION
                 list.SalariosAdeudados = Liquidacion.SalariosAdeudados;
                 list.OtrosPagos = Liquidacion.OtrosPagos;

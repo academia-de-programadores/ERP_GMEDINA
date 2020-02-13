@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
     public class ExoneracionController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         public ActionResult ClientesnoExonerado()
         {
             return View(db.UDP_Vent_listExoneracion_Select);
@@ -73,7 +73,7 @@ namespace ERP_GMEDINA.Controllers
                     string MensajeError = "";
                     IEnumerable<object> list = null;
                     list = db.UDP_Vent_tbExoneracion_Insert(tbExoneracion.exo_Documento,
-                                                            Helpers.ExoneracionActiva,
+                                                            Models.Helpers.ExoneracionActiva,
                                                             tbExoneracion.exo_FechaInicialVigencia,
                                                             tbExoneracion.exo_FechaIFinalVigencia,
                                                             tbExoneracion.clte_Id,
@@ -202,14 +202,14 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult InactivarCliente(int CodExoneracion, bool Activo)
         {
-            var list = db.UDP_Vent_tbExoneracion_Estado(CodExoneracion, Helpers.ExoneracionInactiva, Function.GetUser(), Function.DatetimeNow()).ToList();
+            var list = db.UDP_Vent_tbExoneracion_Estado(CodExoneracion, Models.Helpers.ExoneracionInactiva, Function.GetUser(), Function.DatetimeNow()).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult ActivarCliente(int CodExoneracion, bool Activo)
         {
-            var list = db.UDP_Vent_tbExoneracion_Estado(CodExoneracion, Helpers.ExoneracionActiva, Function.GetUser(), Function.DatetimeNow()).ToList();
+            var list = db.UDP_Vent_tbExoneracion_Estado(CodExoneracion, Models.Helpers.ExoneracionActiva, Function.GetUser(), Function.DatetimeNow()).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

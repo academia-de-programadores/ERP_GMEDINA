@@ -145,7 +145,7 @@ namespace ERP_GMEDINA.Controllers
         //UN ADELANTO ACTIVO
         public string EmpleadoGetDDL()
         {
-            return Helpers.General.ObtenerEmpleados();
+            return Models.Helpers.General.ObtenerEmpleados();
         }
         #endregion
 

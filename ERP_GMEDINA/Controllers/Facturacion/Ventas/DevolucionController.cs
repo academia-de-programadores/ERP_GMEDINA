@@ -25,7 +25,7 @@ namespace ERP_ZORZAL.Controllers
     public class DevolucionController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Devolucion/
         [SessionManager("Devolucion/Index")]
         public ActionResult Index()

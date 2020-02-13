@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.Data.Entity.Core.Objects;
 using ERP_GMEDINA.Attribute;
-using ERP_GMEDINA.Helpers;
+using ERP_GMEDINA.Models.Helpers;
 
 namespace ERP_GMEDINA.Controllers
 {

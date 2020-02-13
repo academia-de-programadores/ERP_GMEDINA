@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class MonedaController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Moneda/
         [SessionManager("Moneda/Index")]
         public ActionResult Index()

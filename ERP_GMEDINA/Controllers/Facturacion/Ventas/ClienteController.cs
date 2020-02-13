@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
     public class ClienteController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Cliente/
         [SessionManager("Cliente/Index")]
         public ActionResult Index()
@@ -186,7 +186,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 tpi_Id = s.tpi_Id,
                 tpi_Descripcion = s.tpi_Descripcion
-            }).Where(x => x.tpi_Id == Helpers.RTN).ToList();
+            }).Where(x => x.tpi_Id == Models.Helpers.RTN).ToList();
             ViewBag.tpi_Id = new SelectList(TipoIdentificacion, "tpi_Id", "tpi_Descripcion");
             return View();
 
@@ -224,14 +224,14 @@ namespace ERP_GMEDINA.Controllers
                                                         tbCliente.mun_Codigo,
                                                         tbCliente.clte_Direccion,
                                                         tbCliente.clte_CorreoElectronico,
-                                                        Helpers.ClienteActivo,
+                                                        Models.Helpers.ClienteActivo,
                                                         tbCliente.clte_RazonInactivo,
-                                                        Helpers.ClienteCredito,
+                                                        Models.Helpers.ClienteCredito,
                                                         tbCliente.clte_EsMinorista,
                                                         tbCliente.clte_Observaciones,
                                                         tbCliente.clte_MontoCredito,
                                                         tbCliente.clte_DiasCredito,
-                                                        Helpers.ClienteExonerado,
+                                                        Models.Helpers.ClienteExonerado,
                                                         Function.GetUser(),
                                                         Function.DatetimeNow());
                     foreach (UDP_Vent_tbCliente_Insert_Result cliente in list)
@@ -298,7 +298,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     tpi_Id = s.tpi_Id,
                     tpi_Descripcion = s.tpi_Descripcion
-                }).Where(x => x.tpi_Id == Helpers.RTN).ToList();
+                }).Where(x => x.tpi_Id == Models.Helpers.RTN).ToList();
                 ViewBag.tpi_Id = new SelectList(TipoIdentificacion, "tpi_Id", "tpi_Descripcion", tbCliente.tpi_Id);
             }
 
@@ -421,7 +421,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     tpi_Id = s.tpi_Id,
                     tpi_Descripcion = s.tpi_Descripcion
-                }).Where(x => x.tpi_Id == Helpers.RTN).ToList();
+                }).Where(x => x.tpi_Id == Models.Helpers.RTN).ToList();
             }
             return Json(TipoIdentificacion, JsonRequestBehavior.AllowGet);
         }
@@ -429,14 +429,14 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult InactivarCliente(int CodCliente, bool Activo, string RazonInactivo)
         {
-            var list = db.UDP_Vent_tbCliente_Estado(CodCliente, Helpers.ClienteInactivo, RazonInactivo).ToList();
+            var list = db.UDP_Vent_tbCliente_Estado(CodCliente, Models.Helpers.ClienteInactivo, RazonInactivo).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult ActivarCliente(int CodCliente, bool Activo, string RazonInactivo)
         {
-            var list = db.UDP_Vent_tbCliente_Estado(CodCliente, Helpers.ClienteActivo, RazonInactivo).ToList();
+            var list = db.UDP_Vent_tbCliente_Estado(CodCliente, Models.Helpers.ClienteActivo, RazonInactivo).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

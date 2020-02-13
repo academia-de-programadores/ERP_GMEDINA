@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-using ERP_GMEDINA.Helpers;
+using ERP_GMEDINA.Models.Helpers;
 using System.Threading.Tasks;
 using ERP_GMEDINA.Attribute;
 

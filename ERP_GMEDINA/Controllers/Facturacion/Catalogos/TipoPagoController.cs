@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Controllers
     public class TipoPagoController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         [SessionManager("TipoPago/Index")]
 
         // GET: /TipoPago/

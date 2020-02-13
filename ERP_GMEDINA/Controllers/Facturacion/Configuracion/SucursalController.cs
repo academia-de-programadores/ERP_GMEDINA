@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Controllers
     public class SucursalController : Controller
     {
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: /Sucursal/
         public ActionResult Index()
         {

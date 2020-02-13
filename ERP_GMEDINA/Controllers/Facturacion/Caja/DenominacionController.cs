@@ -30,7 +30,7 @@ namespace ERP_GMEDINA.Controllers
         //____________________________
 
         private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         tbDenominacion TipoDenominacion = new tbDenominacion();
         // GET: /Denominacion/
         [SessionManager("Denominacion/Index")]
