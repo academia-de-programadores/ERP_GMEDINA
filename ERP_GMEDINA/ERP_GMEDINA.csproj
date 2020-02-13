@@ -164,6 +164,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -236,6 +237,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attribute\SessionManager.cs" />
     <Compile Include="Controllers\DecimoCuartoMesController.cs" />
+    <Compile Include="Controllers\Inventario\Catalogos\DepartamentoController.cs" />
+    <Compile Include="Controllers\Inventario\Catalogos\EstadoInventarioFisicoController.cs" />
+    <Compile Include="Controllers\Inventario\Catalogos\EstadoMovimientoController.cs" />
+    <Compile Include="Controllers\Inventario\Catalogos\ProductoCategoriaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
@@ -4031,7 +4036,6 @@
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\Inventario\Catalogos\" />
     <Folder Include="Controllers\Inventario\Inventario\" />
     <Folder Include="Controllers\Inventario\Seguridad\" />
     <Folder Include="Downloadable files\" />
