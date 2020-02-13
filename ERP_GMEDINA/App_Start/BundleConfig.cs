@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace ERP_GMEDINA
 {
@@ -8,6 +7,43 @@ namespace ERP_GMEDINA
 
         public static void RegisterBundles(BundleCollection bundles)
         {
+            #region Plantilla Inventario y facturación
+
+            // jQuery Validation
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            "~/Scripts/jquery.validate.min.js"));
+
+            // jQuery plugins
+            bundles.Add(new ScriptBundle("~/plugins/Menu").Include(
+                      "~/Scripts/plugins/metisMenu/metisMenu.min.js"));
+
+            bundles.Add(new ScriptBundle("~/plugins/pace").Include(
+                      "~/Scripts/plugins/pace/pace.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/DataTabla")
+                .Include("~/Content/DataTables/css/dataTables.bootstrap.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/DataTabla")
+          .Include(
+                "~/Scripts/DataTables/jquery.dataTables.min.js",
+                "~/Scripts/DataTables/dataTables.responsive.min.js",
+                "~/Scripts/DataTables/dataTables.bootstrap.min.js"
+    ));
+
+            //Date picker
+            bundles.Add(new StyleBundle("~/Content/picker").Include(
+                        "~/Content/themes/base/jquery-ui.min.css"
+            ));
+            // Font Awesome icons
+            bundles.Add(new StyleBundle("~/Content/font-Style").Include(
+                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new ScriptBundle("~/Scripts/picker").Include(
+    "~/Scripts/jquery-ui-1.12.1.min.js"
+    ));
+
+            #endregion
+
             #region Plantilla
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -26,7 +62,7 @@ namespace ERP_GMEDINA
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.1.1.min.js",
+                        "~/Scripts/jquery-3.4.1.min.js",
                         "~/Scripts/app/Menu/Menu.js"));
 
             // jQueryUI CSS
@@ -592,7 +628,7 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/TechosDeducciones.js"));
 
             // SELVIN
-            
+
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));
 
