@@ -224,7 +224,7 @@ namespace ERP_GMEDINA.Controllers
                 IEnumerable<object> listCatalogoDeIngresos = null;
                 IEnumerable<object> listCatalogoDeDeducciones = null;
                 int idUser = (int)Session["UserLogin"];
-                int cpla_UsuarioCreaModifica = idUser; //TODO: Editar el Usuario Crea del catalogo de planillas
+                int cpla_UsuarioCreaModifica = idUser;
                 DateTime cpla_FechaCreaModifica = Function.DatetimeNow(); // Asignarle la fecha actual a la variable cpla_FechaCrea
                 string cpla_DescripcionPlanilla;
                 int cpla_FrecuenciaEnDias;
@@ -339,7 +339,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 int idUser = (int)Session["UserLogin"];
                 int cde_IdDeducciones = i; // Asignarle el id de la deduccion
-                int tpdd_UsuarioCrea = idUser; // TODO: Editar el Usuario Crea del Catalogo de Deducciones
+                int tpdd_UsuarioCrea = idUser;
                 DateTime tpdd_FechaCrea = Function.DatetimeNow(); // Asignar la fecha actual
 
                 //Guardar en el catalogo de deducciones
@@ -492,7 +492,7 @@ namespace ERP_GMEDINA.Controllers
                 cpla_DescripcionPlanilla = catalogoDePlanillas[0], //Descripción de la planilla
                 response = "bien" //Si no hay nada que falle, entonces recibira un mensaje de que todo se hizo bien el cliente
                 , MensajeErrorCatalogoDeDeducciones = ""; //Si hay error al guardar las deduccioenes se le notifica
-            int cpla_UsuarioModifica = idUser, //TODO: Editar el usuario modifica
+            int cpla_UsuarioModifica = idUser, 
                 cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //Frecuencia en días para generar la planilla
             DateTime cpla_FechaModifica = Function.DatetimeNow();
             #endregion
@@ -587,7 +587,6 @@ namespace ERP_GMEDINA.Controllers
                     }
                     else
                     {
-                        //TODO: Filtrar por el id de la planilla
                         #region Eliminaciones
                         //Eliminar los registros de las deducciones que desmarco el cliente
                         if (listadoDetallePlanillaDeduccionesDelete.Count != 0)
@@ -597,7 +596,7 @@ namespace ERP_GMEDINA.Controllers
                                 borrarDeduccion = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(id, i); //Eliminar la deducción de la base de datos
 
                                 foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeduccion)
-                                    mensajeErrorDeduccion = result.MensajeError; //TODO: Verificar como detectar si hay errores aqui
+                                    mensajeErrorDeduccion = result.MensajeError; 
                             }
                         }
 
@@ -606,10 +605,9 @@ namespace ERP_GMEDINA.Controllers
                         {
                             foreach (var i in listadoDetallePlanillaIngresosDelete)
                             {
-                                //TODO: 
                                 borrarIngresos = db.UDP_tbTipoPlanillaDetalleIngreso_Update(id, i);
                                 foreach (UDP_tbTipoPlanillaDetalleIngreso_Update_Result result in borrarIngresos)
-                                    mensajeErrorIngreso = result.MensajeError; //TODO: Verificar como detectar si hay errores aqui
+                                    mensajeErrorIngreso = result.MensajeError; 
                             }
                         }
                         #endregion
