@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class RolController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Helpers Function = new Helpers();
         // GET: /Rol/
         [SessionManager("Rol/Index")]

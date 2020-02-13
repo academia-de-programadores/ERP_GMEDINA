@@ -29,11 +29,11 @@ using ERP_GMEDINA.Dataset;
 using ERP_GMEDINA.Dataset.ReportesTableAdapters;
 using ERP_GMEDINA.Reports;
 
-namespace ERP_ZORZAL.Controllers
+namespace ERP_GMEDINA.Controllers
 {
     public class TipoSalidaController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Helpers Function = new Helpers();
 
         // GET: /TipoSalida/

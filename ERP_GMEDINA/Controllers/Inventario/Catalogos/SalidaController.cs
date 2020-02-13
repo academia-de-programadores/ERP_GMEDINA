@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class SalidaController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         private Helpers Function = new Helpers();
 
         // GET: /Salida/

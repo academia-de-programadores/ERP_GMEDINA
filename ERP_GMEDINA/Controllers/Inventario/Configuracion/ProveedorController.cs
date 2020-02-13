@@ -9,11 +9,11 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using ERP_GMEDINA.Attribute;
 
-namespace ERP_ZORZAL.Controllers
+namespace ERP_GMEDINA.Controllers
 {
     public class ProveedorController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Helpers Function = new Helpers();
         // GET: /Proveedor/
         [SessionManager("Proveedor/Index")]

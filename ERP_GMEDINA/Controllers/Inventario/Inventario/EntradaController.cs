@@ -15,11 +15,11 @@ using ERP_GMEDINA.Reports;
 using CrystalDecisions.CrystalReports.Engine;
 using ERP_GMEDINA.Dataset.ReportesTableAdapters;
 
-namespace ERP_ZORZAL.Controllers
+namespace ERP_GMEDINA.Controllers
 {
     public class EntradaController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Helpers Function = new Helpers();
         // GET: /Entrada/
         [SessionManager("Entrada/Index")]

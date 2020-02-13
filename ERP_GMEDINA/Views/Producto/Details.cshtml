@@ -148,7 +148,7 @@
                     </dl>
 
                     @{
-                        ERP_ZORZALEntities db2 = new ERP_ZORZALEntities();
+                        ERP_GMEDINAEntities db2 = new ERP_GMEDINAEntities();
                         var id2 = Model.prod_Codigo;
                         string query = "SELECT COUNT(prod_Codigo) FROM Inv.tbBodegaDetalle WHERE prod_Codigo ='" + id2 + "'";
                         var count = db2.Database.SqlQuery<int>(query, id2).Single();

@@ -14,11 +14,11 @@ using ERP_GMEDINA.Dataset.ReportesTableAdapters;
 using ERP_GMEDINA.Reports;
 using ERP_GMEDINA.Dataset;
 
-namespace ERP_ZORZAL.Controllers
+namespace ERP_GMEDINA.Controllers
 {
     public class BoxController : Controller
     {
-        private ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         private Helpers Function = new Helpers();
 
         public object ACTUALIZAR_tbBoxDetalle { get; private set; }
