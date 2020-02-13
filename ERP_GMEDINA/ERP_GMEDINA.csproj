@@ -290,7 +290,7 @@
     <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\RecursosHumanos\FinalizacionLaboral\RazonSalidasController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
-    <Compile Include="Controllers\ReportesRRHHController.cs" />
+    <Compile Include="Controllers\RecursosHumanos\Reportes\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RecursosHumanos\DatosProfesionales\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RecursosHumanos\Reclutamiento\RequisicionesController.cs" />
     <Compile Include="Controllers\RecursosHumanos\Reclutamiento\SeleccionCandidatosController.cs" />
