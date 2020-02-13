@@ -3969,6 +3969,8 @@
     <Content Include="Views\Usuario\RestaurarPassword.cshtml" />
     <Content Include="Views\Usuario\_BuscarEmpleado.cshtml" />
     <Content Include="Views\Usuario\_IndexRolesUsuario.cshtml" />
+    <Content Include="Views\Shared\_LayoutBaseRRHH.cshtml" />
+    <Content Include="Views\Shared\_NavigationRRHH.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
