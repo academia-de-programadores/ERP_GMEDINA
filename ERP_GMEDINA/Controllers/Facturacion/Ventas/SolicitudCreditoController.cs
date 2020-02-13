@@ -617,7 +617,9 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult DenegarSolCredito(int credID, byte Denegado)
         {
-            var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Models.Helpers.SolicitudDenegado).ToList();
+            //TODO: Editar estos parametros.
+            var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Denegado, "").ToList();
+            //var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Models.Helpers.SolicitudDenegado).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

@@ -141,7 +141,7 @@ namespace ERP_GMEDINA.Controllers
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
         public string EditGetEmpleadoDDL()
         {
-            return Models.Helpers.General.ObtenerEmpleados();
+            return Helpers.General.ObtenerEmpleados();
         }
         #endregion
 

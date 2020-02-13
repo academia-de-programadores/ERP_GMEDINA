@@ -40,7 +40,7 @@ namespace ERP_GMEDINA.Controllers
 
         public string EditGetDDLEmpleado()
         {
-            return Models.Helpers.General.ObtenerEmpleados();
+            return Helpers.General.ObtenerEmpleados();
         }
 
         public JsonResult EditGetDDLIngreso()
