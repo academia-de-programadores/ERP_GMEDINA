@@ -687,7 +687,7 @@ $('#Editar #aces_DiasAuxilioCesantia').keyup(function () {
 
 
 $("#btnUpdateAuxCes").click(function () {
-
+    $("#btnConfirmarEditar").attr('disabled', false);
     $("#btnUpdateAuxCes").attr('disabled', true);
 
     var modalState = true;
@@ -824,7 +824,7 @@ $("#btnUpdateAuxCes").click(function () {
     if (modalState == true) {
 
         $("#frmEditarAuxCes").modal('hide');
-        $("#btnUpdateAuxCes").attr('disabled', false);
+        $("#btnUpdateAuxCes").attr('disabled', true);
         $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
     }
     else {
@@ -835,6 +835,8 @@ $("#btnUpdateAuxCes").click(function () {
 
 // editar 3 ejecutar
 $("#btnConfirmarEditar").click(function () {
+
+    $("#btnConfirmarEditar").attr('disabled', true);
 
     var data = $("#frmEditarAuxCesan").serializeArray();
 
@@ -863,7 +865,6 @@ $("#btnConfirmarEditar").click(function () {
             $("#ConfirmarEdicion").modal('hide');
         }
         else {
-
             $("#ConfirmarEdicion").modal('hide');
             $("#frmEditarAuxCes").modal('hide');
             cargarGridAuxilioCesantia();
@@ -878,6 +879,8 @@ $("#btnConfirmarEditar").click(function () {
 
 // no confirmar edicion
 $("#btnCerrarConfirmarEditar").click(function () {
+    //Deshabilitar boton Editar
+    $("#btnUpdateAuxCes").attr('disabled', false);
 
     // cerrar modal confirmacion
     $("#ConfirmarEdicion").modal('hide');
@@ -903,7 +906,6 @@ $("#btnModalEliminar").click(function () {
 
     if (validacionPermiso.status == true) {
         $('#btnEliminarAuxCes').attr('disabled', false);
-
         $("#frmEditarAuxCes").modal('hide');
         $("#frmEliminarAuxCes").modal({ backdrop: 'static', keyboard: false });
     }
@@ -912,6 +914,7 @@ $("#btnModalEliminar").click(function () {
 
 // ejecutar inactivar
 $("#btnEliminarAuxCes").click(function () {
+    $("#btnEliminarAuxCes").attr('disabled', true);
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEliminarAuxCes").serializeArray();
     var ID = EliminarID;
@@ -953,6 +956,7 @@ $(document).on("click", "#btnModalActivarAuxCes", function () {
     if (validacionPermiso.status == true) {
         activarID = $(this).data('id');
         $("#frmActivarAuxCes").modal({ backdrop: 'static', keyboard: false });
+        $("#btnActivarAuxCes").attr('disabled', false);
     }
 
    
@@ -960,7 +964,7 @@ $(document).on("click", "#btnModalActivarAuxCes", function () {
 
 //activar ejecutar
 $("#btnActivarAuxCes").click(function () {
-
+    $("#btnActivarAuxCes").attr('disabled', true);
     $.ajax({
         url: "/AuxilioDeCesantias/Activar/" + activarID,
         method: "POST",

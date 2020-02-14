@@ -16,7 +16,7 @@
 		<div class="form-horizontal">
 			<div class="row">
 				<div class="col-md-6">
-					@Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+					@Html.LabelFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
 				</div>
 				<div class="col-md-6">
 					<span id="aces_RangoInicioMeses">@Html.DisplayFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
@@ -70,6 +70,9 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
