@@ -42,6 +42,12 @@ namespace ERP_GMEDINA
     "~/Scripts/jquery-ui-1.12.1.min.js"
     ));
 
+            // CSS style (bootstrap/inspinia)
+            bundles.Add(new StyleBundle("~/Content/Style").Include(
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/animate.css",
+                      "~/Content/style.css"));
+
             #endregion
 
             #region Plantilla
