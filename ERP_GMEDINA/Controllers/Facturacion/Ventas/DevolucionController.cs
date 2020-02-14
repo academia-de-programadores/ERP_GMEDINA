@@ -458,8 +458,10 @@ namespace ERP_ZORZAL.Controllers
         [HttpPost]
         public ActionResult BuscarCodigoProducto(int CodFactura, string CodProducto)
         {
-            var list = db.UDP_Vent_tbDevolucion_Filtrado_CodProducto(CodFactura, CodProducto).ToList();
-            return Json(list, JsonRequestBehavior.AllowGet);
+            //TODO: Cambiar esto
+            //var list = db.UDP_Vent_tbDevolucion_Filtrado_CodProducto(CodFactura, CodProducto).ToList();
+            //return Json(list, JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

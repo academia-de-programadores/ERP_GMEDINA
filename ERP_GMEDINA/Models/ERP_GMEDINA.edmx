@@ -11246,6 +11246,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbSucursal" Type="Self.tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="suc_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbSucursal" Type="Self.tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="suc_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTechoImpuestoVecinal" Type="Self.tbTechoImpuestoVecinal" Multiplicity="*" />
@@ -13703,6 +13727,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Principal>
             <Dependent Role="tbBodega">
               <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inv_tbBodega_tbSucursal_bod_Id">
+          <End Role="tbBodega" Type="Self.tbBodega" Multiplicity="1" />
+          <End Role="tbSucursal" Type="Self.tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBodega">
+              <PropertyRef Name="bod_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="bod_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -24867,6 +24903,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbSolicitudEfectivoDetalle" EntitySet="tbSolicitudEfectivoDetalle" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
@@ -25686,6 +25730,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <AssociationSet Name="FK_Inv_tbBodega_tbMunicipio_mun_Id" Association="Self.FK_Inv_tbBodega_tbMunicipio_mun_Id">
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
             <End Role="tbBodega" EntitySet="tbBodega" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inv_tbBodega_tbSucursal_bod_Id" Association="Self.FK_Inv_tbBodega_tbSucursal_bod_Id">
+            <End Role="tbBodega" EntitySet="tbBodega" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
           </AssociationSet>
           <AssociationSet Name="FK_Inv_tbBodega_tbUsuario_bod_UsuarioCrea" Association="Self.FK_Inv_tbBodega_tbUsuario_bod_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -27158,6 +27206,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbCliente" Relationship="Self.FK_Vent_tbUsuario_tbCliente_usu_Id_Crea" FromRole="tbUsuario" ToRole="tbCliente" />
           <NavigationProperty Name="tbCliente1" Relationship="Self.FK_Vent_tbUsuario_tbCliente_usu_Id_Modifica" FromRole="tbUsuario" ToRole="tbCliente" />
           <NavigationProperty Name="tbEmpleados2" Relationship="Self.rrhh_tbempleados_Acce_tbUsuario_emp_Id" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbSucursal" Relationship="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbSucursal" />
+          <NavigationProperty Name="tbSucursal1" Relationship="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbSucursal" />
         </EntityType>
         <EntityType Name="tbActividadEconomica">
           <Key>
@@ -27492,6 +27542,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbSalida1" Relationship="Self.FK_Inv_tbSalida_tbBodega_sal_BodDestino" FromRole="tbBodega" ToRole="tbSalida" />
           <NavigationProperty Name="tbSucursales" Relationship="Self.FK_rrhh_tbSucursales_bod_Id_Inv_tbBodega_bod_Id" FromRole="tbBodega" ToRole="tbSucursales" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.rrhh_tbempleados_Inv_tbBodega_bod_ResponsableBodega" FromRole="tbBodega" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbSucursal" Relationship="ERP_GMEDINA2Model.FK_Inv_tbBodega_tbSucursal_bod_Id" FromRole="tbBodega" ToRole="tbSucursal" />
         </EntityType>
         <EntityType Name="tbBodegaDetalle">
           <Key>
@@ -30504,6 +30555,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Name="suc_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="suc_UsuarioModifica" Type="Int32" />
           <Property Name="suc_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" FromRole="tbSucursal" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" FromRole="tbSucursal" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbBodega" Relationship="ERP_GMEDINA2Model.FK_Inv_tbBodega_tbSucursal_bod_Id" FromRole="tbSucursal" ToRole="tbBodega" />
         </EntityType>
         <EntityType Name="tbTipoPago">
           <Key>
@@ -50130,7 +50184,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <Parameter Name="Motivo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_Details" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Details_Result)">
-            <Parameter Name="IDSOLICITUD" Mode="In" Type="Int32" />
+          <Parameter Name="IDSOLICITUD" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_EsImpresa" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_EsImpresa_Result)">
             <Parameter Name="solef_Id" Mode="In" Type="Int32" />
@@ -50138,11 +50192,23 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbDenominacionArqueo_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbDenominacionArqueo_Select_Result)" />
           <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Imprimir_Result)">
-            <Parameter Name="SOLEF_ID" Mode="In" Type="Int32" />
+          <Parameter Name="SOLEF_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_Recargo" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Recargo_Result)">
-            <Parameter Name="USER_ID" Mode="In" Type="Int32" />
+          <Parameter Name="USER_ID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" Association="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" Association="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inv_tbBodega_tbSucursal_bod_Id" Association="ERP_GMEDINA2Model.FK_Inv_tbBodega_tbSucursal_bod_Id">
+            <End Role="tbBodega" EntitySet="tbBodega" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SDP_Acce_GetObjetos_Result">
           <Property Type="Int32" Name="obj_Id" Nullable="false" />
@@ -51963,6 +52029,42 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
           <Property Type="DateTime" Name="mocja_FechaApertura" Nullable="true" Precision="23" />
         </ComplexType>
+        <Association Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea">
+          <End Type="ERP_GMEDINA2Model.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINA2Model.tbSucursal" Role="tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="suc_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica">
+          <End Type="ERP_GMEDINA2Model.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINA2Model.tbSucursal" Role="tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="suc_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inv_tbBodega_tbSucursal_bod_Id">
+          <End Type="ERP_GMEDINA2Model.tbBodega" Role="tbBodega" Multiplicity="1" />
+          <End Type="ERP_GMEDINA2Model.tbSucursal" Role="tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBodega">
+              <PropertyRef Name="bod_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="bod_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -1046,6 +1046,9 @@
         <AssociationConnector Association="ERP_GMEDINA2Model.FK_Vent_tbPuntoEmision_tbPuntoEmisionDetalle_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINA2Model.FK_Vent_tbPuntoEmisionDetalle_tbPuntoEmision_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINA2Model.FK_Vent_tbSolicitudEfectivo_tbSolicitudEfectivoDetalle_solef_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINA2Model.FK_Inv_tbBodega_tbSucursal_bod_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

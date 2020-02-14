@@ -18,5 +18,9 @@ namespace ERP_GMEDINA.Models
         public System.DateTime suc_FechaCrea { get; set; }
         public Nullable<int> suc_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> suc_FechaModifica { get; set; }
+    
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbBodega tbBodega { get; set; }
     }
 }
