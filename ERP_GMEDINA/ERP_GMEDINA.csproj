@@ -376,6 +376,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CalculoISR.cs" />
     <Compile Include="Helpers\Deducciones.cs" />
     <Compile Include="Helpers\EnviarComprobanteDePago.cs" />
     <Compile Include="Helpers\General.cs" />

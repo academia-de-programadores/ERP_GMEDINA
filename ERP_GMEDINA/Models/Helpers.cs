@@ -248,6 +248,27 @@ namespace ERP_GMEDINA.Models
             return dt;
         }
 
+        #region revision willian diaz
+
+        public List<Genero> GeneroList()
+        {
+            List<Genero> list = new List<Genero>();
+
+            list.Add(new Genero()
+            {
+                ID_GENERO = "H",
+                DESCRIPCION = "Hombre"
+            });
+            list.Add(new Genero()
+            {
+                ID_GENERO = "M",
+                DESCRIPCION = "Mujer"
+            });
+            return list;
+        }
+
+        #endregion
+
         public const bool AnuladoFactura = true;
         public const bool EsImpreso = true; // este se habia eliminado, lo volví a agregar
         public const int EstadoImpreso = 2; // este se habia eliminado, lo volví a agregar
