@@ -14541,5 +14541,50 @@
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_DatosEncabezado_Result>("UDP_Vent_tbSolicitudEfectivo_DatosEncabezado", uSER_IDParameter);
         }
+    
+        public virtual ObjectResult<UDP_Vent_tbPuntoEmisionDetalle_Update_Result> UDP_Vent_tbPuntoEmisionDetalle_Update(Nullable<int> pemid_Id, string dfisc_Id, string pemid_RangoInicio, string pemid_RangoFinal, string pemid_NumeroActual, Nullable<System.DateTime> pemid_FechaLimite, Nullable<int> pemid_UsuarioCrea, Nullable<System.DateTime> pemid_FechaCrea, Nullable<int> pemid_UsuarioModifica, Nullable<System.DateTime> pemid_FechaModifica)
+        {
+            var pemid_IdParameter = pemid_Id.HasValue ?
+                new ObjectParameter("pemid_Id", pemid_Id) :
+                new ObjectParameter("pemid_Id", typeof(int));
+    
+            var dfisc_IdParameter = dfisc_Id != null ?
+                new ObjectParameter("dfisc_Id", dfisc_Id) :
+                new ObjectParameter("dfisc_Id", typeof(string));
+    
+            var pemid_RangoInicioParameter = pemid_RangoInicio != null ?
+                new ObjectParameter("pemid_RangoInicio", pemid_RangoInicio) :
+                new ObjectParameter("pemid_RangoInicio", typeof(string));
+    
+            var pemid_RangoFinalParameter = pemid_RangoFinal != null ?
+                new ObjectParameter("pemid_RangoFinal", pemid_RangoFinal) :
+                new ObjectParameter("pemid_RangoFinal", typeof(string));
+    
+            var pemid_NumeroActualParameter = pemid_NumeroActual != null ?
+                new ObjectParameter("pemid_NumeroActual", pemid_NumeroActual) :
+                new ObjectParameter("pemid_NumeroActual", typeof(string));
+    
+            var pemid_FechaLimiteParameter = pemid_FechaLimite.HasValue ?
+                new ObjectParameter("pemid_FechaLimite", pemid_FechaLimite) :
+                new ObjectParameter("pemid_FechaLimite", typeof(System.DateTime));
+    
+            var pemid_UsuarioCreaParameter = pemid_UsuarioCrea.HasValue ?
+                new ObjectParameter("pemid_UsuarioCrea", pemid_UsuarioCrea) :
+                new ObjectParameter("pemid_UsuarioCrea", typeof(int));
+    
+            var pemid_FechaCreaParameter = pemid_FechaCrea.HasValue ?
+                new ObjectParameter("pemid_FechaCrea", pemid_FechaCrea) :
+                new ObjectParameter("pemid_FechaCrea", typeof(System.DateTime));
+    
+            var pemid_UsuarioModificaParameter = pemid_UsuarioModifica.HasValue ?
+                new ObjectParameter("pemid_UsuarioModifica", pemid_UsuarioModifica) :
+                new ObjectParameter("pemid_UsuarioModifica", typeof(int));
+    
+            var pemid_FechaModificaParameter = pemid_FechaModifica.HasValue ?
+                new ObjectParameter("pemid_FechaModifica", pemid_FechaModifica) :
+                new ObjectParameter("pemid_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbPuntoEmisionDetalle_Update_Result>("UDP_Vent_tbPuntoEmisionDetalle_Update", pemid_IdParameter, dfisc_IdParameter, pemid_RangoInicioParameter, pemid_RangoFinalParameter, pemid_NumeroActualParameter, pemid_FechaLimiteParameter, pemid_UsuarioCreaParameter, pemid_FechaCreaParameter, pemid_UsuarioModificaParameter, pemid_FechaModificaParameter);
+        }
     }
 }
