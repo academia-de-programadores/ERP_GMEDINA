@@ -265,7 +265,7 @@ namespace ERP_GMEDINA.Controllers
                             //Caja
                             ViewBag.cja_Id = new SelectList(db.tbCaja, "cja_Id", "cja_Descripcion", tbMovimientoCaja.cja_Id);
                             ///Sucursal
-                            ViewBag.suc_Id = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                             ///Moneda
                             ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Nombre", tbSolicitudEfectivo.mnda_Id);
 
@@ -283,7 +283,7 @@ namespace ERP_GMEDINA.Controllers
                     //Usuario
                     ViewBag.usu_Id = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbMovimientoCaja.usu_Id);
                     ///Sucursal
-                    ViewBag.suc_Id = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                    ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                     //Caja
                     ViewBag.cja_Id = new SelectList(db.tbCaja, "cja_Id", "cja_Descripcion", tbMovimientoCaja.cja_Id);
                     ///Moneda
