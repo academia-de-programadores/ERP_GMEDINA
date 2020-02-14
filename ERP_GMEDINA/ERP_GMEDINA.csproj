@@ -2892,6 +2892,12 @@
       <DependentUpon>ReporteTipoEntrada.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Salida.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Salida.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4409,6 +4415,10 @@
       <LastGenOutput>ReporteTipoEntrada.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
+    <EmbeddedResource Include="Reports\Salida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Salida.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
   </ItemGroup>
   <ItemGroup>
