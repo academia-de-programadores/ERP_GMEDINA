@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINA2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINA2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -829,42 +829,6 @@
           <Property Name="hip_UsuarioModifica" Type="int" />
           <Property Name="hip_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ERP_GMEDINA2.Plani.tbHistorialDeLiquidaciones' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="tbHistorialDeLiquidaciones">
-          <Property Name="hdli_Id" Type="int" />
-          <Property Name="emp_Id" Type="int" />
-          <Property Name="hdli_FechaLiquidacion" Type="datetime" />
-          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioOrdinarioDiario_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioDiario_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_Preaviso_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_Cesantia_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoTercerMesProporcional_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoCuartoMesProporcional_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_VacacionesPendientes_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalariosAdeudados" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_OtrosPagos" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoHEPendiente" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_ValorBonoEducativo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoSeptimoDia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_BonoPorVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_ReajusteSalarial" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoTercerMesAdeudado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoCuartoMesAdeudado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_BonificacionVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorEmbarazo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorLactancia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PrePosNatal" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorDiasFeriado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_MontoTotalLiquidacion" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_UsuarioCrea" Type="int" />
-          <Property Name="hdli_FechaCrea" Type="datetime" />
-          <Property Name="hdli_UsuarioModifica" Type="int" />
-          <Property Name="hdli_FechaModifica" Type="datetime" />
-          <Property Name="moli_IdMotivo" Type="int" />
-        </EntityType>-->
         <EntityType Name="tbHistorialDePago">
           <Key>
             <PropertyRef Name="hipa_IdHistorialDePago" />
@@ -3891,11 +3855,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Plani.V_Plani_EncabezadoHistori
           <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="2" />
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ERP_GMEDINA2.Plani.V_Plani_FechaPlani' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="V_Plani_FechaPlani">
-          <Property Name="hipa_FechaPago" Type="int" />
-        </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
@@ -13027,9 +12986,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHistorialDeLiquidaciones', pero no se encuentra la tabla.
-        <Association Name="FK_Plani_Historial_De_Liquidaciones_emp_Id" />-->
         <Association Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
           <End Role="tbAFP" Type="Self.tbAFP" Multiplicity="1" />
           <End Role="tbDeduccionAFP" Type="Self.tbDeduccionAFP" Multiplicity="*" />
@@ -13234,9 +13190,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHistorialDeLiquidaciones', pero no se encuentra la tabla.
-        <Association Name="FK_Plani_tbHistorialDeLiquidaciones_tbMotivos_moli_IdMotivo" />-->
         <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
           <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="1" />
           <End Role="tbHistorialDeduccionPago" Type="Self.tbHistorialDeduccionPago" Multiplicity="*" />
@@ -15690,7 +15643,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
         </Function>
         <Function Name="UDP_Inv_tbBodega_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="bod_Nombre" Type="varchar" Mode="In" />
-          <Parameter Name="bod_ResponsableBodega" Type="smallint" Mode="In" />
+          <Parameter Name="bod_ResponsableBodega" Type="int" Mode="In" />
           <Parameter Name="bod_Direccion" Type="varchar" Mode="In" />
           <Parameter Name="bod_Correo" Type="varchar(max)" Mode="In" />
           <Parameter Name="bod_Telefono" Type="varchar" Mode="In" />
@@ -15701,7 +15654,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
         <Function Name="UDP_Inv_tbBodega_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="bod_Id" Type="int" Mode="In" />
           <Parameter Name="bod_Nombre" Type="varchar" Mode="In" />
-          <Parameter Name="bod_ResponsableBodega" Type="smallint" Mode="In" />
+          <Parameter Name="bod_ResponsableBodega" Type="int" Mode="In" />
           <Parameter Name="bod_Direccion" Type="varchar" Mode="In" />
           <Parameter Name="bod_Correo" Type="varchar(max)" Mode="In" />
           <Parameter Name="bod_Telefono" Type="varchar" Mode="In" />
@@ -18978,6 +18931,19 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           <Parameter Name="pemid_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="pemid_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Vent_tbSolicitudCredito_Aprobar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
+          <Parameter Name="cred_Id" Type="int" Mode="In" />
+          <Parameter Name="escre_Id" Type="tinyint" Mode="In" />
+          <Parameter Name="cred_FechaAprobacion" Type="datetime" Mode="In" />
+          <Parameter Name="cred_MontoSolicitado" Type="decimal" Mode="In" />
+          <Parameter Name="cred_MontoAprobado" Type="decimal" Mode="In" />
+          <Parameter Name="cred_DiasSolicitado" Type="int" Mode="In" />
+          <Parameter Name="cred_DiasAprobado" Type="int" Mode="In" />
+          <Parameter Name="cred_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="cred_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="cred_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cred_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Vent_tbSolicitudCredito_Denegar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
           <Parameter Name="cred_Id" Type="int" Mode="In" />
           <Parameter Name="escre_Id" Type="tinyint" Mode="In" />
@@ -18987,9 +18953,33 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           <Parameter Name="cred_Id" Type="int" Mode="In" />
           <Parameter Name="escre_Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_Vent_tbSolicitudCredito_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
+          <Parameter Name="clte_Id" Type="int" Mode="In" />
+          <Parameter Name="escre_Id" Type="tinyint" Mode="In" />
+          <Parameter Name="cred_FechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="cred_MontoSolicitado" Type="decimal" Mode="In" />
+          <Parameter Name="cred_DiasSolicitado" Type="int" Mode="In" />
+          <Parameter Name="cred_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="cred_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Vent_tbSolicitudCredito_RolGerenteCreditosCobranza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
           <Parameter Name="UsuarioId" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UDP_Vent_tbSolicitudCredito_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
+          <Parameter Name="cred_Id" Type="int" Mode="In" />
+          <Parameter Name="clte_Id" Type="int" Mode="In" />
+          <Parameter Name="escre_Id" Type="tinyint" Mode="In" />
+          <Parameter Name="cred_FechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="cred_FechaAprobacion" Type="datetime" Mode="In" />
+          <Parameter Name="cred_MontoSolicitado" Type="decimal" Mode="In" />
+          <Parameter Name="cred_MontoAprobado" Type="decimal" Mode="In" />
+          <Parameter Name="cred_DiasSolicitado" Type="int" Mode="In" />
+          <Parameter Name="cred_DiasAprobado" Type="int" Mode="In" />
+          <Parameter Name="cred_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="cred_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="cred_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cred_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Vent_tbSolicitudEfectivo_Apertura_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
           <Parameter Name="mocja_Id" Type="int" Mode="In" />
@@ -24646,8 +24636,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <End Role="tbBodega" EntitySet="tbBodega" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINA2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -44119,18 +44108,18 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           </AssociationSet>
           <FunctionImport Name="SDP_Acce_GetObjetos" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetObjetos_Result)" />
           <FunctionImport Name="SDP_Acce_GetObjetosAsignados" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetObjetosAsignados_Result)">
-            <Parameter Name="rol_Id" Mode="In" Type="Int32" />
+          <Parameter Name="rol_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Acce_GetObjetosDisponibles" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetObjetosDisponibles_Result)">
-            <Parameter Name="rol_Id" Mode="In" Type="Int32" />
+          <Parameter Name="rol_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Acce_GetReportes" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetReportes_Result)" />
           <FunctionImport Name="SDP_Acce_GetRoles" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetRoles_Result)" />
           <FunctionImport Name="SDP_Acce_GetRolesAsignados" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetRolesAsignados_Result)">
-            <Parameter Name="usu_Id" Mode="In" Type="Int32" />
+          <Parameter Name="usu_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Acce_GetRolesDisponibles" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetRolesDisponibles_Result)">
-            <Parameter Name="usu_Id" Mode="In" Type="Int32" />
+          <Parameter Name="usu_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Acce_GetUserRols" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Acce_GetUserRols_Result)">
             <Parameter Name="usu_Id" Mode="In" Type="Int32" />
@@ -44261,17 +44250,17 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="emp_Id" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="SDP_Gral_tbEmpleado_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Gral_tbEmpleado_Select_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int16" />
+          <Parameter Name="emp_Id" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbEmpleado_Consulta" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbEmpleado_Consulta_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+          <Parameter Name="emp_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbEmpleado_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbEmpleado_Select_Result)" />
           <FunctionImport Name="SDP_tbMunicipio_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbMunicipio_Select_Result)">
-            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+          <Parameter Name="mun_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetDenominacionesMoneda" ReturnType="Collection(ERP_GMEDINA2Model.spGetDenominacionesMoneda_Result)">
-            <Parameter Name="CodMoneda" Mode="In" Type="Int32" />
+          <Parameter Name="CodMoneda" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_Padres_Insert">
             <Parameter Name="NombresPadre" Mode="In" Type="String" />
@@ -44279,7 +44268,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbDenominacion_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Gral_tbDenominacion_Select_Result)" />
           <FunctionImport Name="UDP_Gral_tbDenominacion_using" ReturnType="Collection(Int16)">
-            <Parameter Name="DENO_ID" Mode="In" Type="Int32" />
+          <Parameter Name="DENO_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbDepartamento_Insert" ReturnType="Collection(String)">
             <Parameter Name="dep_Codigo" Mode="In" Type="String" />
@@ -44354,7 +44343,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="emp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbMunicipio_Delete" ReturnType="Collection(String)">
-            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+          <Parameter Name="mun_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbMunicipio_Insert" ReturnType="Collection(String)">
             <Parameter Name="mun_Codigo" Mode="In" Type="String" />
@@ -44433,38 +44422,38 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="BodegaDestino" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ConteoParametro" ReturnType="Collection(Int32)">
-            <Parameter Name="conteo" Mode="In" Type="Int32" />
+          <Parameter Name="conteo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="crud_tbProductoSelect" ReturnType="Collection(ERP_GMEDINA2Model.crud_tbProductoSelect_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ObtenerRol" ReturnType="Collection(ERP_GMEDINA2Model.ObtenerRol_Result)">
-            <Parameter Name="usu_Id" Mode="In" Type="Int32" />
+          <Parameter Name="usu_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_Cantidad_Salida_Emitida" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_Cantidad_Salida_Emitida_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_CatalogoProductos" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_CatalogoProductos_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_PackingList" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_PackingList_Result)">
-            <Parameter Name="box_Codigo" Mode="In" Type="String" />
+          <Parameter Name="box_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_Proyeccion_de_Movimiento_de_Producto" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_Proyeccion_de_Movimiento_de_Producto_Result)">
-            <Parameter Name="Prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="Prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_Salida_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_Salida_Imprimir_Result)">
-            <Parameter Name="sal_Id" Mode="In" Type="Int32" />
+          <Parameter Name="sal_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_Salida_Imprimir_Reporte" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_Salida_Imprimir_Reporte_Result)">
             <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="Fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbBodegaDetalle_Select_Producto" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbBodegaDetalle_Select_Producto_Result)">
-            <Parameter Name="bod_Id" Mode="In" Type="Int32" />
+          <Parameter Name="bod_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbBoxDetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbBoxDetalle_Select_Result)">
-            <Parameter Name="boxd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="boxd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbProducto_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbProducto_Select_Result)" />
           <FunctionImport Name="SDP_Inv_tbProducto_Select_CodBar" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbProducto_Select_CodBar_Result)">
@@ -44472,22 +44461,22 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbProducto_Select_OUT" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbProducto_Select_OUT_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbSalida_Factura_Exist" ReturnType="Collection(Int64)">
-            <Parameter Name="fact_Codigo" Mode="In" Type="String" />
+          <Parameter Name="fact_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbSalidaDetalle_Edit_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbSalidaDetalle_Edit_Select_Result)">
-            <Parameter Name="sald_Id" Mode="In" Type="Int32" />
+          <Parameter Name="sald_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Inv_tbSalidaDetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Inv_tbSalidaDetalle_Select_Result)">
-            <Parameter Name="sald_Id" Mode="In" Type="Int32" />
+          <Parameter Name="sald_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbBodega_Listado" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbBodega_Listado_Result)">
-            <Parameter Name="bod_Id" Mode="In" Type="Int32" />
+          <Parameter Name="bod_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbentradadetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbentradadetalle_Select_Result)">
-            <Parameter Name="entd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="entd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbentradaImprimir_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbentradaImprimir_Select_Result)">
             <Parameter Name="TipoEntrada" Mode="In" Type="Int32" />
@@ -44496,53 +44485,53 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="bodega" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbentradaImprimirCompra_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbentradaImprimirCompra_Select_Result)">
-            <Parameter Name="TipoEntrada" Mode="In" Type="Int32" />
+          <Parameter Name="TipoEntrada" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbentradaImprimirPorID_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbentradaImprimirPorID_Select_Result)">
-            <Parameter Name="ent_id" Mode="In" Type="Int32" />
+          <Parameter Name="ent_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbInventarioFisicoDetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbInventarioFisicoDetalle_Select_Result)">
-            <Parameter Name="invfd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="invfd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbProductoCategoria_tbProductoSubCategoria_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbProductoCategoria_tbProductoSubCategoria_Select_Result)">
-            <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbProductoSubcategoria_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbProductoSubcategoria_Select_Result)">
-            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_tbEntrada_ProductosRepetidos" ReturnType="Collection(ERP_GMEDINA2Model.SP_tbEntrada_ProductosRepetidos_Result)">
-            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
+          <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_tbInventariofisico_ProductosRepetidos" ReturnType="Collection(ERP_GMEDINA2Model.SP_tbInventariofisico_ProductosRepetidos_Result)">
-            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
+          <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetActividadEconomica" ReturnType="Collection(ERP_GMEDINA2Model.spGetActividadEconomica_Result)">
-            <Parameter Name="acte_Id" Mode="In" Type="Int16" />
+          <Parameter Name="acte_Id" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="spGetCategoria" ReturnType="Collection(ERP_GMEDINA2Model.spGetCategoria_Result)">
-            <Parameter Name="pcat_id" Mode="In" Type="Int32" />
+          <Parameter Name="pcat_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetProducto" ReturnType="Collection(ERP_GMEDINA2Model.spGetProducto_Result)">
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetProducto_BodegaDetalle" ReturnType="Collection(ERP_GMEDINA2Model.spGetProducto_BodegaDetalle_Result)">
-            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
+          <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SPGetResponsableBodega" ReturnType="Collection(ERP_GMEDINA2Model.SPGetResponsableBodega_Result)">
-            <Parameter Name="bod_id" Mode="In" Type="Int32" />
+          <Parameter Name="bod_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SPGetRTNproveedor" ReturnType="Collection(String)">
-            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
+          <Parameter Name="prov_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetSubCategoria" ReturnType="Collection(String)">
-            <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetSuCategoria" ReturnType="Collection(ERP_GMEDINA2Model.spGetSuCategoria_Result)">
-            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="tbInventarioFisico_ImprimirConciliacion" ReturnType="Collection(ERP_GMEDINA2Model.tbInventarioFisico_ImprimirConciliacion_Result)">
-            <Parameter Name="invf_Id" Mode="In" Type="Int32" />
+          <Parameter Name="invf_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_CantidadExistente" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_CantidadExistente_Result)">
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
@@ -44564,7 +44553,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBodega_Insert" ReturnType="Collection(String)">
             <Parameter Name="bod_Nombre" Mode="In" Type="String" />
-            <Parameter Name="bod_ResponsableBodega" Mode="In" Type="Int16" />
+            <Parameter Name="bod_ResponsableBodega" Mode="In" Type="Int32" />
             <Parameter Name="bod_Direccion" Mode="In" Type="String" />
             <Parameter Name="bod_Correo" Mode="In" Type="String" />
             <Parameter Name="bod_Telefono" Mode="In" Type="String" />
@@ -44575,7 +44564,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           <FunctionImport Name="UDP_Inv_tbBodega_Update" ReturnType="Collection(String)">
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
             <Parameter Name="bod_Nombre" Mode="In" Type="String" />
-            <Parameter Name="bod_ResponsableBodega" Mode="In" Type="Int16" />
+            <Parameter Name="bod_ResponsableBodega" Mode="In" Type="Int32" />
             <Parameter Name="bod_Direccion" Mode="In" Type="String" />
             <Parameter Name="bod_Correo" Mode="In" Type="String" />
             <Parameter Name="bod_Telefono" Mode="In" Type="String" />
@@ -44598,7 +44587,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="bodd_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBodegaDetalle_Delete" ReturnType="Collection(String)">
-            <Parameter Name="bodd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="bodd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBodegaDetalle_Insert" ReturnType="Collection(String)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
@@ -44626,7 +44615,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="bodd_CostoPromedio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBox_Delete" ReturnType="Collection(String)">
-            <Parameter Name="box_Codigo" Mode="In" Type="String" />
+          <Parameter Name="box_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBox_Insert" ReturnType="Collection(String)">
             <Parameter Name="box_Codigo" Mode="In" Type="String" />
@@ -44646,7 +44635,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="box_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBoxDetalle_Delete" ReturnType="Collection(String)">
-            <Parameter Name="boxd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="boxd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbBoxDetalle_Insert" ReturnType="Collection(String)">
             <Parameter Name="box_Codigo" Mode="In" Type="String" />
@@ -44741,7 +44730,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="estif_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Delete" ReturnType="Collection(String)">
-            <Parameter Name="estm_Id" Mode="In" Type="Int32" />
+          <Parameter Name="estm_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Insert" ReturnType="Collection(String)">
             <Parameter Name="estm_Id" Mode="In" Type="Byte" />
@@ -44765,7 +44754,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="invf_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbInventarioFisico_ListaProductos" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbInventarioFisico_ListaProductos_Result)">
-            <Parameter Name="bod_Id" Mode="In" Type="Int32" />
+          <Parameter Name="bod_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbInventarioFisico_ReporteFaltantes" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbInventarioFisico_ReporteFaltantes_Result)">
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
@@ -44811,7 +44800,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="invfd_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_Consulta" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbProducto_Consulta_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_Estado" ReturnType="Collection(String)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
@@ -44825,16 +44814,16 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_Existencia" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbProducto_Existencia_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_GetCategoria" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbProducto_GetCategoria_Result)">
-            <Parameter Name="codsubcategoria" Mode="In" Type="Int32" />
+          <Parameter Name="codsubcategoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_GetSubCategoia" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbProducto_GetSubCategoia_Result)">
-            <Parameter Name="CodCategoria" Mode="In" Type="Int32" />
+          <Parameter Name="CodCategoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_GetSubCategoria" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Inv_tbProducto_GetSubCategoria_Result)">
-            <Parameter Name="CodCategoria" Mode="In" Type="Int32" />
+          <Parameter Name="CodCategoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProducto_Insert" ReturnType="Collection(String)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
@@ -44894,7 +44883,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="prod_Codigo" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProductoCategoria_Delete" ReturnType="Collection(String)">
-            <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProductoCategoria_Insert" ReturnType="Collection(String)">
             <Parameter Name="pcat_Nombre" Mode="In" Type="String" />
@@ -44920,7 +44909,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="ESTADO" Mode="In" Type="Byte" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Delete" ReturnType="Collection(String)">
-            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProductoSubcategoria_Insert" ReturnType="Collection(String)">
             <Parameter Name="pscat_Descripcion" Mode="In" Type="String" />
@@ -45027,7 +45016,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="CANTIDAD_EXISTENTE" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Delete" ReturnType="Collection(String)">
-            <Parameter Name="sald_Id" Mode="In" Type="Int32" />
+          <Parameter Name="sald_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Insert" ReturnType="Collection(String)">
             <Parameter Name="sal_Id" Mode="In" Type="Int32" />
@@ -45085,10 +45074,10 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeduccionesEdit_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Plani_CatalogoDeduccionesEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeIngresosEdit_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Plani_CatalogoDeIngresosEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionImpuestoVecinal_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -45419,7 +45408,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_RRHH_tbEmpresas_Select_Result)">
-            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+          <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(String)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
@@ -45733,7 +45722,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHistrialVacaciones_Periodos" ReturnType="Collection(ERP_GMEDINA2Model.UDP_RRHH_tbHistrialVacaciones_Periodos_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+          <Parameter Name="emp_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Delete" ReturnType="Collection(String)">
             <Parameter Name="hor_id" Mode="In" Type="Int32" />
@@ -46089,7 +46078,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_RRHH_tbTipoHoras_Select_Result)">
-            <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(String)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
@@ -46136,7 +46125,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(String)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -46258,44 +46247,44 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="pemi_NumeroCAI" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SDP_tbPedidoDetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_tbPedidoDetalle_Select_Result)">
-            <Parameter Name="pedd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pedd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Vent_tbCuponDescuentoSelectGet" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Vent_tbCuponDescuentoSelectGet_Result)">
-            <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
+          <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SDP_Vent_tbPedidoDetalle_tbPedido_Select" ReturnType="Collection(ERP_GMEDINA2Model.SDP_Vent_tbPedidoDetalle_tbPedido_Select_Result)">
-            <Parameter Name="ped_Id" Mode="In" Type="Int32" />
+          <Parameter Name="ped_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetDetallePedido" ReturnType="Collection(ERP_GMEDINA2Model.sp_GetDetallePedido_Result)">
-            <Parameter Name="ped_Id" Mode="In" Type="Int32" />
+          <Parameter Name="ped_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetCaja" ReturnType="Collection(ERP_GMEDINA2Model.spGetCaja_Result)">
-            <Parameter Name="CodUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="CodUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetDenominacion" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdDenominacion" Mode="In" Type="Int32" />
+          <Parameter Name="IdDenominacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetDepartamento" ReturnType="Collection(ERP_GMEDINA2Model.spGetDepartamento_Result)">
-            <Parameter Name="CodMunicipio" Mode="In" Type="String" />
+          <Parameter Name="CodMunicipio" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetMunicipios" ReturnType="Collection(ERP_GMEDINA2Model.spGetMunicipios_Result)">
-            <Parameter Name="CodDepartamento" Mode="In" Type="String" />
+          <Parameter Name="CodDepartamento" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetMunicipios1" ReturnType="Collection(ERP_GMEDINA2Model.spGetMunicipios1_Result)">
-            <Parameter Name="CodDepartamento" Mode="In" Type="String" />
+          <Parameter Name="CodDepartamento" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetParametro" ReturnType="Collection(ERP_GMEDINA2Model.spGetParametro_Result)" />
           <FunctionImport Name="spGetProducto1" ReturnType="Collection(String)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+          <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetTipoIdentificacion" ReturnType="Collection(ERP_GMEDINA2Model.spGetTipoIdentificacion_Result)">
-            <Parameter Name="PersonaNatural" Mode="In" Type="Boolean" />
+          <Parameter Name="PersonaNatural" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbPedidoDetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_tbPedidoDetalle_Select_Result)">
-            <Parameter Name="pedd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pedd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbPedidoDetalle_Select_Edit" ReturnType="Collection(ERP_GMEDINA2Model.UDP_tbPedidoDetalle_Select_Edit_Result)">
-            <Parameter Name="pedd_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pedd_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_DatosConsumidorFinal_Insert" ReturnType="Collection(String)">
             <Parameter Name="fact_Id" Mode="In" Type="Int64" />
@@ -46311,7 +46300,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="Fecha_final" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_Efectivos_y_Pagos" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_Efectivos_y_Pagos_Result)">
-            <Parameter Name="caja" Mode="In" Type="Int16" />
+          <Parameter Name="caja" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_Factura_VentasporFecha_Reporte" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_Factura_VentasporFecha_Reporte_Result)">
             <Parameter Name="Nombres" Mode="In" Type="String" />
@@ -46320,7 +46309,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="Fecha_final" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_FacturasPagoSelect" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_FacturasPagoSelect_Result)">
-            <Parameter Name="fact_Id" Mode="In" Type="Int32" />
+          <Parameter Name="fact_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_FacturasPendientesDePago" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_FacturasPendientesDePago_Result)">
             <Parameter Name="clte_Identificacion" Mode="In" Type="String" />
@@ -46333,7 +46322,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="TIPOCLIENTE" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_ReporteConsumidorFinal" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_ReporteConsumidorFinal_Result)">
-            <Parameter Name="fact_Fecha" Mode="In" Type="DateTime" />
+          <Parameter Name="fact_Fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_SolicitudCredito_SolicitudesPorAprobarReporte">
             <Parameter Name="FECHADESDE" Mode="In" Type="DateTime" />
@@ -46356,7 +46345,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="cdto_EsImpreso" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbCuponDescuento_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbCuponDescuento_Imprimir_Result)">
-            <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
+          <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbCuponDescuento_Redimido" ReturnType="Collection(String)">
             <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
@@ -46368,17 +46357,17 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbCuponDescuentoSelect" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbCuponDescuentoSelect_Result)" />
           <FunctionImport Name="UDP_Vent_tbCuponDescuentoSelectGet" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbCuponDescuentoSelectGet_Result)">
-            <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
+          <Parameter Name="cdto_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbDevolucion_Estado" ReturnType="Collection(String)">
             <Parameter Name="dev_Id" Mode="In" Type="Int32" />
             <Parameter Name="dev_Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbDevolucion_GetDetalle" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbDevolucion_GetDetalle_Result)">
-            <Parameter Name="DEVOLUCION_ID" Mode="In" Type="Int64" />
+          <Parameter Name="DEVOLUCION_ID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbDevolucion_GetDetalle_Editar" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbDevolucion_GetDetalle_Editar_Result)">
-            <Parameter Name="DEVOLUCIONDD_ID" Mode="In" Type="Int64" />
+          <Parameter Name="DEVOLUCIONDD_ID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbExoneracion_Estado" ReturnType="Collection(String)">
             <Parameter Name="exo_Id" Mode="In" Type="Int32" />
@@ -46410,13 +46399,13 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="IDCLIENTE" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbFactura_GetDetalle" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbFactura_GetDetalle_Result)">
-            <Parameter Name="FACTURA_ID" Mode="In" Type="Int64" />
+          <Parameter Name="FACTURA_ID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbFactura_GetDetalle_Edit" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbFactura_GetDetalle_Edit_Result)">
-            <Parameter Name="FACTURA_IDD" Mode="In" Type="Int32" />
+          <Parameter Name="FACTURA_IDD" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbFactura_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbFactura_Imprimir_Result)">
-            <Parameter Name="fact_Id" Mode="In" Type="Int64" />
+          <Parameter Name="fact_Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbFactura_Insert_mejorado">
             <Parameter Name="fact_Codigo" Mode="In" Type="String" />
@@ -46462,23 +46451,23 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="facth_Fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbListadoPrecioDetalle_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbListadoPrecioDetalle_Select_Result)">
-            <Parameter Name="IDLISTAPRECIO" Mode="In" Type="Int32" />
+          <Parameter Name="IDLISTAPRECIO" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbListaPrecio_Estado" ReturnType="Collection(String)">
             <Parameter Name="listp_Id" Mode="In" Type="Int32" />
             <Parameter Name="listp_EsActivo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbListaPrecio_UltimaFechaVigente" ReturnType="Collection(DateTime)">
-            <Parameter Name="PRIORIDAD" Mode="In" Type="Int16" />
+          <Parameter Name="PRIORIDAD" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbMovimientoCaja_Apertura_Details" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbMovimientoCaja_Apertura_Details_Result)">
-            <Parameter Name="IdMovimiento" Mode="In" Type="Int32" />
+          <Parameter Name="IdMovimiento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbMovimientoCaja_GetUsuarioApertura" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbMovimientoCaja_GetUsuarioApertura_Result)">
-            <Parameter Name="UsuarioApertura" Mode="In" Type="Int32" />
+          <Parameter Name="UsuarioApertura" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbMovimientoCaja_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbMovimientoCaja_Imprimir_Result)">
-            <Parameter Name="mocja_Id" Mode="In" Type="Int32" />
+          <Parameter Name="mocja_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbNotaCredito_Anulado" ReturnType="Collection(String)">
             <Parameter Name="nocre_Id" Mode="In" Type="Int16" />
@@ -46486,7 +46475,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="nocre_RazonAnulado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbNotaCredito_Caja" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbNotaCredito_Caja_Result)">
-            <Parameter Name="CodUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="CodUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbNotaCredito_CodigoNotaCredito" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbNotaCredito_CodigoNotaCredito_Result)">
             <Parameter Name="IDSucursal" Mode="In" Type="Int32" />
@@ -46497,7 +46486,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="nocre_EsImpreso" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbNotaCredito_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbNotaCredito_Imprimir_Result)">
-            <Parameter Name="nocre_Id" Mode="In" Type="Int32" />
+          <Parameter Name="nocre_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbNotaCredito_Redimido" ReturnType="Collection(String)">
             <Parameter Name="nocre_Id" Mode="In" Type="Int16" />
@@ -46511,7 +46500,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbNotaCredito_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbNotaCredito_Select_Result)" />
           <FunctionImport Name="UDP_Vent_tbNotaCreditoSelect" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbNotaCreditoSelect_Result)">
-            <Parameter Name="clte_Id" Mode="In" Type="Int32" />
+          <Parameter Name="clte_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbPago_Anulado" ReturnType="Collection(String)">
             <Parameter Name="pago_Id" Mode="In" Type="Int32" />
@@ -46523,7 +46512,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="pago_EstaImpreso" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbPago_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbPago_Imprimir_Result)">
-            <Parameter Name="pago_Id" Mode="In" Type="Int32" />
+          <Parameter Name="pago_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbPago_ImprimirEstaImpreso" ReturnType="Collection(String)">
             <Parameter Name="pago_Id" Mode="In" Type="Int32" />
@@ -46539,7 +46528,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="fact_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbPedido_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbPedido_Select_Result)">
-            <Parameter Name="ped_Id" Mode="In" Type="Int32" />
+          <Parameter Name="ped_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbSolicitudCredito_Aprobar" ReturnType="Collection(String)">
             <Parameter Name="cred_Id" Mode="In" Type="Int32" />
@@ -46600,10 +46589,10 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="CAJERO" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_VentasExoneradas" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_VentasExoneradas_Result)">
-            <Parameter Name="fact_Codigo" Mode="In" Type="String" />
+          <Parameter Name="fact_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_vFacturaPago" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_vFacturaPago_Result)">
-            <Parameter Name="clte_Id" Mode="In" Type="Int32" />
+          <Parameter Name="clte_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Activar" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Plani_tbEmpleadoBonos_Activar_Result)">
             <Parameter Name="cb_Id" Mode="In" Type="Int32" />
@@ -46815,7 +46804,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Insert" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Plani_tbCatalogoDePlanillas_Insert_Result)">
             <Parameter Name="cpla_DescripcionPlanilla" Mode="In" Type="String" />
@@ -47297,7 +47286,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="soled_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbSolicitudEfectivoDetalle_Detalle" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivoDetalle_Detalle_Result1)">
-            <Parameter Name="IDSOLICITUD" Mode="In" Type="Int32" />
+          <Parameter Name="IDSOLICITUD" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbSolicitudEfectivoDetalle_CantidadSolicitada_Update" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivoDetalle_CantidadSolicitada_Update_Result)">
             <Parameter Name="soled_Id" Mode="In" Type="Int32" />
@@ -48102,6 +48091,43 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
             <Parameter Name="hipa_CantidadUnidadesBonos" Mode="In" Type="Int32" />
             <Parameter Name="hipa_TotalBonos" Mode="In" Type="Decimal" />
             <Parameter Name="hipa_CodigoPlanilla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudCredito_Aprobar1" ReturnType="Collection(String)">
+            <Parameter Name="cred_Id" Mode="In" Type="Int32" />
+            <Parameter Name="escre_Id" Mode="In" Type="Byte" />
+            <Parameter Name="cred_FechaAprobacion" Mode="In" Type="DateTime" />
+            <Parameter Name="cred_MontoSolicitado" Mode="In" Type="Decimal" />
+            <Parameter Name="cred_MontoAprobado" Mode="In" Type="Decimal" />
+            <Parameter Name="cred_DiasSolicitado" Mode="In" Type="Int32" />
+            <Parameter Name="cred_DiasAprobado" Mode="In" Type="Int32" />
+            <Parameter Name="cred_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="cred_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="cred_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cred_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudCredito_Insert1" ReturnType="Collection(String)">
+            <Parameter Name="clte_Id" Mode="In" Type="Int32" />
+            <Parameter Name="escre_Id" Mode="In" Type="Byte" />
+            <Parameter Name="cred_FechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="cred_MontoSolicitado" Mode="In" Type="Decimal" />
+            <Parameter Name="cred_DiasSolicitado" Mode="In" Type="Int32" />
+            <Parameter Name="cred_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="cred_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudCredito_Update1" ReturnType="Collection(String)">
+            <Parameter Name="cred_Id" Mode="In" Type="Int32" />
+            <Parameter Name="clte_Id" Mode="In" Type="Int32" />
+            <Parameter Name="escre_Id" Mode="In" Type="Byte" />
+            <Parameter Name="cred_FechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="cred_FechaAprobacion" Mode="In" Type="DateTime" />
+            <Parameter Name="cred_MontoSolicitado" Mode="In" Type="Decimal" />
+            <Parameter Name="cred_MontoAprobado" Mode="In" Type="Decimal" />
+            <Parameter Name="cred_DiasSolicitado" Mode="In" Type="Int32" />
+            <Parameter Name="cred_DiasAprobado" Mode="In" Type="Int32" />
+            <Parameter Name="cred_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="cred_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="cred_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cred_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SDP_Acce_GetObjetos_Result">
@@ -58314,6 +58340,9 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudCredito_Aprobar1" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudCredito_Aprobar" />
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudCredito_Insert1" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudCredito_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudCredito_Update1" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudCredito_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
