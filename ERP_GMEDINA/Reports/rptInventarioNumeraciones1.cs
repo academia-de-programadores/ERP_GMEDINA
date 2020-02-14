@@ -16,14 +16,14 @@ namespace ERP_GMEDINA.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptVentasPorCajaEntreFecha : ReportClass {
+    public class rptInventarioNumeraciones : ReportClass {
         
-        public rptVentasPorCajaEntreFecha() {
+        public rptInventarioNumeraciones() {
         }
         
         public override string ResourceName {
             get {
-                return "rptVentasPorCajaEntreFecha.rpt";
+                return "rptInventarioNumeraciones.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ERP_GMEDINA.Reports {
         
         public override string FullResourceName {
             get {
-                return "ERP_GMEDINA.Reports.rptVentasPorCajaEntreFecha.rpt";
+                return "ERP_GMEDINA.Reports.rptInventarioNumeraciones.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace ERP_GMEDINA.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptVentasPorCajaEntreFecha : Component, ICachedReport {
+    public class CachedrptInventarioNumeraciones : Component, ICachedReport {
         
-        public CachedrptVentasPorCajaEntreFecha() {
+        public CachedrptInventarioNumeraciones() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptVentasPorCajaEntreFecha rpt = new rptVentasPorCajaEntreFecha();
+            rptInventarioNumeraciones rpt = new rptInventarioNumeraciones();
             rpt.Site = this.Site;
             return rpt;
         }

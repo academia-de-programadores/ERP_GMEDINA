@@ -16,14 +16,14 @@ namespace ERP_GMEDINA.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptVentasPorCajaEntreFecha : ReportClass {
+    public class NotaCredito : ReportClass {
         
-        public rptVentasPorCajaEntreFecha() {
+        public NotaCredito() {
         }
         
         public override string ResourceName {
             get {
-                return "rptVentasPorCajaEntreFecha.rpt";
+                return "NotaCredito.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ERP_GMEDINA.Reports {
         
         public override string FullResourceName {
             get {
-                return "ERP_GMEDINA.Reports.rptVentasPorCajaEntreFecha.rpt";
+                return "ERP_GMEDINA.Reports.NotaCredito.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace ERP_GMEDINA.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_usuario {
+        public CrystalDecisions.Shared.IParameterField Parameter_USUARIO {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,9 +98,9 @@ namespace ERP_GMEDINA.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptVentasPorCajaEntreFecha : Component, ICachedReport {
+    public class CachedNotaCredito : Component, ICachedReport {
         
-        public CachedrptVentasPorCajaEntreFecha() {
+        public CachedNotaCredito() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptVentasPorCajaEntreFecha rpt = new rptVentasPorCajaEntreFecha();
+            NotaCredito rpt = new NotaCredito();
             rpt.Site = this.Site;
             return rpt;
         }

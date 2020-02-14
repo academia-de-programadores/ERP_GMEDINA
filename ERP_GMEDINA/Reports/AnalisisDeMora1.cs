@@ -16,14 +16,14 @@ namespace ERP_GMEDINA.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptVentasPorCajaEntreFecha : ReportClass {
+    public class AnalisisDeMora : ReportClass {
         
-        public rptVentasPorCajaEntreFecha() {
+        public AnalisisDeMora() {
         }
         
         public override string ResourceName {
             get {
-                return "rptVentasPorCajaEntreFecha.rpt";
+                return "AnalisisDeMora.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ERP_GMEDINA.Reports {
         
         public override string FullResourceName {
             get {
-                return "ERP_GMEDINA.Reports.rptVentasPorCajaEntreFecha.rpt";
+                return "ERP_GMEDINA.Reports.AnalisisDeMora.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace ERP_GMEDINA.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptVentasPorCajaEntreFecha : Component, ICachedReport {
+    public class CachedAnalisisDeMora : Component, ICachedReport {
         
-        public CachedrptVentasPorCajaEntreFecha() {
+        public CachedAnalisisDeMora() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptVentasPorCajaEntreFecha rpt = new rptVentasPorCajaEntreFecha();
+            AnalisisDeMora rpt = new AnalisisDeMora();
             rpt.Site = this.Site;
             return rpt;
         }

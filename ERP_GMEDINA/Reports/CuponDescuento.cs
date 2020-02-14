@@ -18,8 +18,6 @@ namespace ERP_GMEDINA.Reports {
     
     public class CuponDescuento : ReportClass {
         
-        public CuponDescuento() {
-        }
         
         public override string ResourceName {
             get {
