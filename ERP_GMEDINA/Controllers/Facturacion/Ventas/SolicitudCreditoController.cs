@@ -618,7 +618,8 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult DenegarSolCredito(int credID, byte Denegado)
         {
             //TODO: Editar estos parametros.
-            var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Denegado, "").ToList();
+            //Lo dejo asi por que en estos momentos no se de donde obtener la razon de la denegacion (supongo que el controlador esta desactualiazado)
+            var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Denegado, "-").ToList();
             //var list = db.UDP_Vent_tbSolicitudCredito_Denegar(credID, Models.Helpers.SolicitudDenegado).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }

@@ -321,7 +321,6 @@
     <Compile Include="Controllers\Planillas\Ingresos\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\Planillas\Ingresos\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
-    <Compile Include="Controllers\Planillas\Planilla\FechaPlanillaController.cs" />
     <Compile Include="Controllers\Planillas\Configuraciones\FormaPagoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Planillas\Ingresos\IngresosIndividualesController.cs" />
