@@ -50,7 +50,7 @@
                     <div class="col-lg-10 col-lg-offset-1">
                         @* ------------------------- INVENTARIO  -------------------------*@
                         <div class="col-lg-6">
-                            <div onclick="userModelState('Menu/ModuloInventario').status ? location.href = '@Url.Action("Index","Inicio",new { idmenu=3})' : ''">
+                            <div onclick="userModelState('Menu/ModuloInventario').status ? location.href = '@Url.Action("Index","Inicio")' : ''">
                                 <div class="widget navy-bg p-lg text-center animated bounceIn ">
                                     <div class="m-b-md">
                                         <i class="fa fa-book fa-4x"></i>
@@ -64,7 +64,7 @@
 
                         @* ------------------------- FACTURACION  -------------------------*@
                         <div class="col-lg-6">
-                            <div onclick="userModelState('Menu/ModuloFacturacion').status ? location.href = '@Url.Action("Index","Inicio",new { idmenu=2})' : ''">
+                            <div onclick="userModelState('Menu/ModuloFacturacion').status ? location.href = '@Url.Action("Index","Home")' : ''">
                                 <div class="widget navy-bg p-lg text-center animated bounceIn">
                                     <div class="m-b-md">
                                         <i class="fa fa-calculator fa-4x"></i>
@@ -80,7 +80,7 @@
                     <div class="col-lg-10 col-lg-offset-1">
                         @* --------------------------- RRHH  --------------------------*@
                         <div class="col-lg-6">
-                            <a onclick="(userModelState('Menu/ModuloRecursosHumanos')).status ? location.href = '@Url.Action("Index","Inicio",new { idmenu=0})' : ''" id="btnMenuRRHH">
+                            <a onclick="(userModelState('Menu/ModuloRecursosHumanos')).status ? location.href = '@Url.Action("Index","Inicio")' : ''" id="btnMenuRRHH">
                                 <div class="widget navy-bg p-lg text-center animated bounceIn">
                                     <div class="m-b-md">
                                         <i class="fa fa-users fa-4x"></i>
@@ -93,7 +93,7 @@
 
                         @* ------------------------- PLANILLA -------------------------*@
                         <div class="col-lg-6">
-                            <a onclick="userModelState('Menu/ModuloPlanilla').status ? location.href = '@Url.Action("Index","Menu",new { idmenu=1})' : ''" id="btnMenuPlanilla">
+                            <a onclick="userModelState('Menu/ModuloPlanilla').status ? location.href = '@Url.Action("Index","Menu")' : ''" id="btnMenuPlanilla">
                                 <div class="widget navy-bg p-lg text-center animated bounceIn">
                                     <div class="m-b-md">
                                         <i class="fa fa-money fa-4x"></i>
