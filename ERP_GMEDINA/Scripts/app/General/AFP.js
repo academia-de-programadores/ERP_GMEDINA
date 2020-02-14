@@ -263,7 +263,7 @@ $('#btnCreateRegistroAFP').click(function () {
     // validar interes aporte
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAporte").val()) > 0) {
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
 
         $('#astericoInteresAporte').removeClass('text-danger');
         $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
@@ -441,7 +441,7 @@ $('#Crear #afp_AporteMinimoLps').keyup(function () {
 $('#Crear #afp_InteresAporte').keyup(function () {
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAporte").val()) > 0) {
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
 
         $('#astericoInteresAporte').removeClass('text-danger');
         $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
@@ -700,7 +700,7 @@ $("#btnEditAFP").click(function () {
     // validar interes aporte
 
     // si es menor que cero
-    if (parseInt($("#Editar #afp_InteresAporte").val()) > 0) {
+    if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0) {
 
         $('#EditarastericoInteresAporte').removeClass('text-danger');
         $("#Editar #validation_EditarInteresAporteMenorACero").css('display', 'none');
@@ -873,7 +873,7 @@ $('#Editar #afp_InteresAporte').keyup(function () {
 $('#Editar #afp_InteresAnual').keyup(function () {
 
     // si es menor que cero
-    if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0) {
+    if (parseInt($("#Editar #afp_InteresAnual").val()) > 0) {
 
         $('#EditarastericosInteresAnual').removeClass('text-danger');
         $("#Editar #validation_EditarInteresAnualMenorACero").css('display', 'none');
