@@ -560,6 +560,7 @@
     <Compile Include="Models\Planillas\Planilla\ViewModelDecimoCuartoMes.cs" />
     <Compile Include="Models\Planillas\Planilla\ViewModelDecimoTercerMes.cs" />
     <Compile Include="Models\Planillas\Planilla\ViewModelListaErrores.cs" />
+    <Compile Include="Models\Planillas\Planilla\ViewModelTasasDeCambio.cs" />
     <Compile Include="Models\Planillas\Planilla\ViewModel_PlanillaImpuestoVecinal.cs" />
     <Compile Include="Models\Planillas\Reportes\cAFPRPT.cs" />
     <Compile Include="Models\Planillas\Reportes\cDecimoCuartoMesRPT.cs" />
@@ -3246,202 +3247,189 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Startup.cs" />
-
     <Compile Include="Models\UDP_Vent_tbCaja_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbCaja_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbCliente_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbCliente_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
-
-     <Compile Include="Models\UDP_Vent_tbCuponDescuento_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
-      <Compile Include="Models\UDP_Vent_tbCuponDescuento_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
-
-     <Compile Include="Models\UDP_Vent_tbDenominacionArqueo_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbCaja_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbCliente_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbCliente_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbCuponDescuento_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbCuponDescuento_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbDenominacionArqueo_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Vent_tbDenominacionArqueo_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbDevolucionDetalle_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbDevolucionDetalle_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
-
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbDevolucionDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbDevolucionDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Vent_tbDevolucion_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbDevolucion_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbDocumentoFiscal_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbDocumentoFiscal_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbEstadoFactura_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbEstadoFactura_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbEstadoPedido_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbEstadoPedido_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbEstadoSolicitudCredito_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbEstadoSolicitudCredito_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbExoneracion_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
-     <Compile Include="Models\UDP_Vent_tbExoneracion_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbFacturaDetalle_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbFacturaDetalle_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
-
-     <Compile Include="Models\UDP_Vent_tbFactura_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbFactura_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbListadoPrecioDetalle_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbListadoPrecioDetalle_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbListaPrecio_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbListaPrecio_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbMovimientoCaja_Apertura_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbDevolucion_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbDocumentoFiscal_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbDocumentoFiscal_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbEstadoFactura_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbEstadoFactura_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbEstadoPedido_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbEstadoPedido_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbEstadoSolicitudCredito_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbEstadoSolicitudCredito_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbExoneracion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbExoneracion_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbFacturaDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbFacturaDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbFactura_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbFactura_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbListadoPrecioDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbListadoPrecioDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbListaPrecio_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbListaPrecio_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbMovimientoCaja_Apertura_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Vent_tbMovimientoCaja_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbMovimientoCaja_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbNotaCredito_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbNotaCredito_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPagosArqueo_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbPago_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPago_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPedidoDetalle_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPedidoDetalle_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPedido_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbPedido_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPuntoEmisionDetalle_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPuntoEmisionDetalle_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPuntoEmision_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbPuntoEmision_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Aprobar_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_Apertura_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_CantidadSolicitada_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Apertura_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-     <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Update_Entrega_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSucursal_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbSucursal_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbTipoPago_Insert_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-        <Compile Include="Models\UDP_Vent_tbTipoPago_Update_Result.cs">
-          <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-        </Compile>
-
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbMovimientoCaja_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbNotaCredito_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbNotaCredito_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPagosArqueo_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPago_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPago_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPedidoDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPedidoDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPedido_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPedido_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPuntoEmisionDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPuntoEmisionDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPuntoEmision_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbPuntoEmision_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Aprobar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_Apertura_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_CantidadSolicitada_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivoDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Apertura_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Update_Entrega_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudEfectivo_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSucursal_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbSucursal_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbTipoPago_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Vent_tbTipoPago_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />

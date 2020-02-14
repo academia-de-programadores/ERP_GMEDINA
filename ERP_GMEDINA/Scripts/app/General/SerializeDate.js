@@ -47,11 +47,11 @@ function FullBody() {
 function userModelState(sPantalla) {
     var response = {
         status: true,
-        mensajeError : ''
+        mensajeError: ''
     }
 
     // recuperar view model con la información del usuario
-    var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
+    var VM_ModelState = JSON.parse(localStorage.getItem("VM_ModelState"));
 
     // validar si la información del usuario ya se cargó en el AJAX del menú
     if (VM_ModelState == '' || VM_ModelState == null) {
@@ -71,10 +71,9 @@ function userModelState(sPantalla) {
         }
         return response;
     }
-    
+
     // validar si el usuario tiene acceso a la accion o pantalla
-    if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false)
-    {
+    if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false) {
         response = {
             status: false,
             mensajeError: 'No tiene permiso para realizar esta acción'
@@ -87,8 +86,7 @@ function userModelState(sPantalla) {
     }
 
     // validar si la sesion es válida 
-    if (VM_ModelState.SesionIniciada == false)
-    {
+    if (VM_ModelState.SesionIniciada == false) {
         response = {
             status: false,
             mensajeError: 'La sesión es inválida'
@@ -101,8 +99,7 @@ function userModelState(sPantalla) {
     }
 
     // validar los roles del usuario
-    if (VM_ModelState.CantidadRoles == 0)
-    {
+    if (VM_ModelState.CantidadRoles == 0) {
         response = {
             status: false,
             mensajeError: 'Roles de usuario inválidos'
@@ -116,8 +113,7 @@ function userModelState(sPantalla) {
     }
 
     // validar si la contraseña del usuario expiró y debe cambiar
-    if (VM_ModelState.ContraseniaExpirada == false)
-    {
+    if (VM_ModelState.ContraseniaExpirada == false) {
         response = {
             status: false,
             mensajeError: 'Contraseña expirada'
@@ -155,18 +151,18 @@ function validarPermisoUsuario(sPantalla, arreglo) {
 
 var timeOut = 0;
 
-var timer = setInterval(()=>{
+var timer = setInterval(() => {
     console.log(++timeOut);
-    if(timeOut == 10){
+    if (timeOut == 10) {
         cerrarSesion();
     }
 }, 100000);
 
-function cerrarSesion(){
-        sessionStorage.clear();
-        window.location = '/Login/CerrarSesion';
+function cerrarSesion() {
+    sessionStorage.clear();
+    window.location = '/Login/CerrarSesion';
 }
 
-function resetTimeOut(){
+function resetTimeOut() {
     timeOut = 0;
 }

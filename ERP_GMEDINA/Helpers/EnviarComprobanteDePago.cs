@@ -8,12 +8,12 @@ namespace ERP_GMEDINA.Helpers
 {
     public class EnviarComprobanteDePago
     {
-        public static void EnviarComprobanteDePagoColaborador(bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin, General utilities, ref List<IngresosDeduccionesVoucher> ListaIngresosVoucher, ref List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, ComprobantePagoModel oComprobantePagoModel, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, decimal? totalIngresosEmpleado, decimal? totalDeduccionesEmpleado, decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
+        public static void EnviarComprobanteDePagoColaborador(string moneda, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin, General utilities, ref List<IngresosDeduccionesVoucher> ListaIngresosVoucher, ref List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, ComprobantePagoModel oComprobantePagoModel, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, decimal? totalIngresosEmpleado, decimal? totalDeduccionesEmpleado, decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             #region Enviar comprobante de pago por email
             if (enviarEmail != null && enviarEmail == true)
             {
-                oComprobantePagoModel.moneda = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).Select(x => x.tbTipoMonedas.tmon_Descripcion).FirstOrDefault();
+                oComprobantePagoModel.moneda = moneda;
                 oComprobantePagoModel.EmailAsunto = "Comprobante de pago";
                 oComprobantePagoModel.NombreColaborador = empleadoActual.tbPersonas.per_Nombres + " " + empleadoActual.tbPersonas.per_Apellidos;
                 oComprobantePagoModel.idColaborador = empleadoActual.emp_Id;
@@ -24,7 +24,6 @@ namespace ERP_GMEDINA.Helpers
                 oComprobantePagoModel.totalIngresos = totalIngresosEmpleado;
                 oComprobantePagoModel.totalDeducciones = totalDeduccionesEmpleado;
                 oComprobantePagoModel.NetoPagar = netoAPagarColaborador;
-                oComprobantePagoModel.moneda = db.tbSueldos.Where(x => x.emp_Id == InformacionDelEmpleadoActual.emp_Id).Select(x => x.tbTipoMonedas.tmon_Descripcion).FirstOrDefault();
 
                 // enviar comprobante de pago
                 try

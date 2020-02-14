@@ -11,7 +11,7 @@
 
     // recuperar información del usuario para las validaciones de permisos
     $.ajax({
-    	url: "/Login/LoadUserModelState",
+        url: "/Login/LoadUserModelState",
         method: "GET"
     }).done(function (data) {
         // validar respuesta del servidor
@@ -23,27 +23,27 @@
             });
         }
         else {
-            sessionStorage.setItem("VM_ModelState", JSON.stringify(data));
+            localStorage.setItem("VM_ModelState", JSON.stringify(data));
 
             //CÓDIGO EJEMPLO: IMPLEMENTAR VALIDACIONES DE PERMISOS DE USUARIO
 
-        ////////////////////////////////////////////////////////////////
-        /////////////////***********CODIGO DE EJEMPLO***********////////
-        ////////////////////////////////////////////////////////////////
-		///
-        ///       //validar informacion del usuario
-        ///       var validacionPermiso = userModelState("Planilla/Index");
-		///
-        ///		  if (validacionPermiso.status == true) {
-		///
-        ///           // activar
-        ///           
-        ///           // termina activar
-        ///       }
-		///
-		/////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////
+            /////////////////***********CODIGO DE EJEMPLO***********////////
+            ////////////////////////////////////////////////////////////////
+            ///
+            ///       //validar informacion del usuario
+            ///       var validacionPermiso = userModelState("Planilla/Index");
+            ///
+            ///		  if (validacionPermiso.status == true) {
+            ///
+            ///           // activar
+            ///           
+            ///           // termina activar
+            ///       }
+            ///
+            /////////////////////////////////////////////////////////////////
 
-		//CÓDIGO EJEMPLO
+            //CÓDIGO EJEMPLO
 
         }
     });
