@@ -26,9 +26,9 @@
     <div class="row border-bottom">
         <nav class="navbar navbar-fixed-top" role="navigation" id="navMenu">
             <ul class="nav navbar-top-links navbar-right" id="ulMenu">
-               @{var oUsuario = HttpContext.Current.Session["UserName"];
-                   string nombreUsuario = oUsuario?.ToString();
-               }
+                @{var oUsuario = HttpContext.Current.Session["UserName"];
+                    string nombreUsuario = oUsuario?.ToString();
+                }
                 <li>
                     <a href="#">
                         Bienvenido @nombreUsuario
@@ -49,30 +49,31 @@
             <div class="wrapper white-bg" id="wrapper">
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1">
+
                         @* ------------------------- INVENTARIO  -------------------------*@
                         <div class="col-lg-6">
-                            <div onclick="userModelState('Menu/ModuloInventario').status ? location.href = '@Url.Action("Index","Inicio")' : ''">
-                                <div class="widget navy-bg p-lg text-center animated bounceIn ">
+                            <a onclick="userModelState('Menu/ModuloInventario').status ? location.href = '@Url.Action("Index","Inicio")' : ''" id="btnMenuRRHH">
+                                <div class="widget navy-bg p-lg text-center animated bounceIn">
                                     <div class="m-b-md">
                                         <i class="fa fa-book fa-4x"></i>
-                                        <h3 class="m-xs">INVENTARIO</h3>
+                                        <h3 class="m-xs"><b>INVENTARIO</b></h3>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @* ------------------------- INVENTARIO  -------------------------*@
 
 
                         @* ------------------------- FACTURACION  -------------------------*@
                         <div class="col-lg-6">
-                            <div onclick="userModelState('Menu/ModuloFacturacion').status ? location.href = '@Url.Action("Index","Home")' : ''">
+                            <a onclick="userModelState('Menu/ModuloFacturacion').status ? location.href = '@Url.Action("Index","Home")' : ''" id="btnMenuPlanilla">
                                 <div class="widget navy-bg p-lg text-center animated bounceIn">
                                     <div class="m-b-md">
                                         <i class="fa fa-calculator fa-4x"></i>
-                                        <h3 class="m-xs">FACTURACIÓN</h3>
+                                        <h3 class="m-xs"><b>FACTURACIÓN</b></h3>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @* ------------------------- FACTURACION  -------------------------*@
                     </div>
