@@ -14,18 +14,18 @@ namespace ERP_GMEDINA.Controllers
 		// GET: Menu
 
 		[SessionManager("Menu/Index")]
-		public ActionResult Index(int idmenu)
+		public ActionResult Index(/*int idmenu*/)
         {
-            if(idmenu != 0)
-            {
+            //if(idmenu != 0)
+            //{
                 int idUsuario = (int)HttpContext.Session["UserLogin"];
-                Session["sesionIdMenu"] = idmenu;
+                //Session["sesionIdMenu"] = idmenu;
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("MenuPrincipal");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("MenuPrincipal");
+            //}
         }
 
         public ActionResult MenuPrincipal()
