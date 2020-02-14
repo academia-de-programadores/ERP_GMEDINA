@@ -59,55 +59,57 @@
                                         <h3 class="m-xs"><b>INVENTARIO</b></h3>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        @* ------------------------- INVENTARIO  -------------------------*@
+                                </a>
+                            </div>
+                            @* ------------------------- INVENTARIO  -------------------------*@
 
 
-                        @* ------------------------- FACTURACION  -------------------------*@
-                        <div class="col-lg-6">
-                            <a onclick="userModelState('Menu/ModuloFacturacion').status ? location.href = '@Url.Action("Main","Home")' : ''" id="btnMenuPlanilla">
-                                <div class="widget navy-bg p-lg text-center animated bounceIn">
-                                    <div class="m-b-md">
-                                        <i class="fa fa-calculator fa-4x"></i>
-                                        <h3 class="m-xs"><b>FACTURACIÓN</b></h3>
+                            @* ------------------------- FACTURACION  -------------------------*@
+                            <div class="col-lg-6">
+                                <a onclick="userModelState('Menu/ModuloFacturacion').status ? location.href = '@Url.Action("Index","Home")' : ''" id="btnMenuPlanilla">
+                                    <div class="widget navy-bg p-lg text-center animated bounceIn">
+                                        <div class="m-b-md">
+                                            <i class="fa fa-calculator fa-4x"></i>
+                                            <h3 class="m-xs"><b>FACTURACIÓN</b></h3>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
+                            @* ------------------------- FACTURACION  -------------------------*@
                         </div>
-                        @* ------------------------- FACTURACION  -------------------------*@
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1">
-                        @* --------------------------- RRHH  --------------------------*@
-                        <div class="col-lg-6">
-                            <a onclick="(userModelState('Menu/ModuloRecursosHumanos')).status ? location.href = '@Url.Action("Index","Inicio")' : ''" id="btnMenuRRHH">
-                                <div class="widget navy-bg p-lg text-center animated bounceIn">
-                                    <div class="m-b-md">
-                                        <i class="fa fa-users fa-4x"></i>
-                                        <h3 class="m-xs"><b>RECURSOS HUMANOS</b></h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        @* ---------------------------- RRHH  -------------------------*@
-
-                        @* ------------------------- PLANILLA -------------------------*@
-                        <div class="col-lg-6">
-                            <a onclick="userModelState('Menu/ModuloPlanilla').status ? location.href = '@Url.Action("Index","Menu")' : ''" id="btnMenuPlanilla">
-                                <div class="widget navy-bg p-lg text-center animated bounceIn">
-                                    <div class="m-b-md">
-                                        <i class="fa fa-money fa-4x"></i>
-                                        <h3 class="m-xs"><b>PLANILLA</b></h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        @* ------------------------- PLANILLA -------------------------*@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    @* --------------------------- RRHH  --------------------------*@
+                    <div class="col-lg-6">
+                        <a onclick="(userModelState('Menu/ModuloRecursosHumanos')).status ? location.href = '@Url.Action("Index","Inicio")' : ''" id="btnMenuRRHH">
+                            <div class="widget navy-bg p-lg text-center animated bounceIn">
+                                <div class="m-b-md">
+                                    <i class="fa fa-users fa-4x"></i>
+                                    <h3 class="m-xs"><b>RECURSOS HUMANOS</b></h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    @* ---------------------------- RRHH  -------------------------*@
+
+                    @* ------------------------- PLANILLA -------------------------*@
+                    <div class="col-lg-6">
+                        <a onclick="userModelState('Menu/ModuloPlanilla').status ? location.href = '@Url.Action("Index","Menu")' : ''" id="btnMenuPlanilla">
+                            <div class="widget navy-bg p-lg text-center animated bounceIn">
+                                <div class="m-b-md">
+                                    <i class="fa fa-money fa-4x"></i>
+                                    <h3 class="m-xs"><b>PLANILLA</b></h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    @* ------------------------- PLANILLA -------------------------*@
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 

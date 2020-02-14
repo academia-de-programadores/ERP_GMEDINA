@@ -5203,6 +5203,10 @@
     <Content Include="Views\UnidadesMedida\Details.cshtml" />
     <Content Include="Views\UnidadesMedida\Edit.cshtml" />
     <Content Include="Views\UnidadesMedida\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMenu.cshtml" />
+    <Content Include="Views\Shared\_NavigationFacturacion.cshtml" />
+    <Content Include="Views\Shared\_NavigationPlanillas.cshtml" />
+    <Content Include="Views\Shared\_LayoutBasePlanillas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
