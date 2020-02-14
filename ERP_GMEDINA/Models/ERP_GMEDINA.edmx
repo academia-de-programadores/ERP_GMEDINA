@@ -20431,18 +20431,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Parameter Name="pemid_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="pemid_FechaCrea" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_Vent_tbPuntoEmisionDetalle_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
-          <Parameter Name="pemid_Id" Type="int" Mode="In" />
-          <Parameter Name="dfisc_Id" Type="char" Mode="In" />
-          <Parameter Name="pemid_RangoInicio" Type="varchar" Mode="In" />
-          <Parameter Name="pemid_RangoFinal" Type="varchar" Mode="In" />
-          <Parameter Name="pemid_NumeroActual" Type="varchar" Mode="In" />
-          <Parameter Name="pemid_FechaLimite" Type="date" Mode="In" />
-          <Parameter Name="pemid_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="pemid_FechaCrea" Type="datetime" Mode="In" />
-          <Parameter Name="pemid_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="pemid_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_Vent_tbSolicitudCredito_Aprobar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
           <Parameter Name="cred_Id" Type="int" Mode="In" />
           <Parameter Name="escre_Id" Type="tinyint" Mode="In" />
@@ -51704,9 +51692,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Vent_tbCaja_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Vent_tbPuntoEmisionDetalle_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Vent_tbPuntoEmisionDetalle_Insert_Prueba_Result">
