@@ -742,7 +742,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Estado", usu_IdParameter, usu_EsActivoParameter, usu_RazonInactivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_Insert_Result> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
         {
             var usu_NombreUsuarioParameter = usu_NombreUsuario != null ?
                 new ObjectParameter("usu_NombreUsuario", usu_NombreUsuario) :
@@ -780,7 +780,7 @@
                 new ObjectParameter("emp_Id", emp_Id) :
                 new ObjectParameter("emp_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Insert_Result>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
     
         public virtual ObjectResult<string> UDP_Acce_tbUsuario_Select()
@@ -14487,7 +14487,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Update1", cred_IdParameter, clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result1> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -14529,7 +14529,7 @@
                 new ObjectParameter("emp_Id", emp_Id) :
                 new ObjectParameter("emp_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Update_Result>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Update_Result1>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
     
         public virtual ObjectResult<spGetProducto_Result1> spGetProducto(Nullable<int> bod_Id, string prod_CodigoBarras)
