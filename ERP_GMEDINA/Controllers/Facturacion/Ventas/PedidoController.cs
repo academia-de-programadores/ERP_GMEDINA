@@ -114,16 +114,16 @@ namespace ERP_GMEDINA.Controllers
 
                         ViewBag.esped_Id = new SelectList(db.tbEstadoPedido, "esped_Id", "esped_Descripcion");
      
-            ViewBag.suc_Id = new SelectList(db.tbSucursal, "suc_Id", "mun_Codigo");
+            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "mun_Codigo");
             ViewBag.Cliente = db.tbCliente.ToList();
             Session["tbPedidoDetalle"] = null;
             ViewBag.Producto = db.tbProducto.ToList();
             tbPedido Pedido = new tbPedido();
             Pedido.esped_Id = Models.Helpers.Pendiente;
             Pedido.suc_Id = Usuario();
-                        tbSucursal tbSucursal = new tbSucursal();
+                        tbSucursales tbSucursal = new tbSucursales();
                         int suc = Usuario();
-                        ViewBag.Sucursal = db.tbSucursal.Find(suc).suc_Descripcion;
+                        ViewBag.Sucursal = db.tbSucursales.Find(suc).suc_Descripcion;
 
             return View(Pedido);
                     }
