@@ -72,7 +72,7 @@ namespace ERP_GMEDINA.Controllers
                     // ejecutar procedimiento almacenado
                     listFormaPago = db.UDP_Plani_tbFormaPago_Insert(tbFormaPago.fpa_Descripcion,
                                                                             tbFormaPago.fpa_UsuarioCrea,
-                                                                            tbFormaPago.fpa_FechaCrea);
+																			tbFormaPago.fpa_FechaCrea);
 
                     // resultado del procedimiento almacenado                                               
                     foreach (UDP_Plani_tbFormaPago_Insert_Result resultado in listFormaPago)
