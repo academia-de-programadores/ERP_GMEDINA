@@ -7,7 +7,294 @@ namespace ERP_GMEDINA.Models
 {
     public class Helpers
     {
-            ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+
+        #region Constantes
+        public const int rptVentasFechas = 195;
+        public const bool AnuladoFactura = true;
+        public const bool EsImpreso = true;
+        public const int EstadoImpreso = 2;
+        public const int RTN = 3;
+        public const int ID = 2;
+        public const int rol_Id = 2; //Rol de cajero
+
+        //Estados Cliente 
+        public const bool ClienteActivo = true;
+        public const bool ClienteCredito = false;
+        public const bool ClienteInactivo = false;
+        public const bool ClienteExonerado = false;
+
+        //Lista Precios
+        public const bool ListaPrecioActivo = true;
+        public const bool ListaPrecioInactivo = false;
+
+
+        //Estados Pedido
+        public const int Pendiente = 1;
+        public const int Facturado = 2;
+
+
+        //Estado Solicitud Credito
+        public const int SolicitudPendiente = 1;
+        public const int SolicitudAprobado = 2;
+        public const int SolicitudDenegado = 3;
+
+        //Estados Exoneración 
+        public const bool ExoneracionActiva = true;
+        public const bool ExoneracionInactiva = false;
+
+        //Reportes
+        public const int rptVentasCajaFechas = 196;
+        public const int rptFacturasPendientesPago = 197;
+        public const int rptVentasConsumidorFinal = 198;
+        public const int rptNotasCreditoEntreFechas = 199;
+        public const int rptAnalisisMora = 200;
+        public const int rptSolicitudesCreditoAprobar = 202;
+        public const int rptCuponesDescuentoFechas = 205;
+
+        ///ESTADO ENTRADA
+        public const int EntradaAnulada = 1;
+
+        public const int EntradaEmitida = 2;
+        public const int EntradaInactivada = 4;
+        public const int EntradaAplicada = 1;
+
+        //estado movimiento
+        public const int EntradaEstadoAnulada = 3;
+
+        //Salida
+        public const int sal_Aplicada = 1;
+
+        public const int sal_Emitida = 2;
+        public const int sal_Anulada = 3;
+        public const int sal_Inactiva = 4;
+        public const int sal_Activa = 5;
+
+        public const int sal_Impresa = 6;
+        public const bool sal_EsAnulada = true;
+        public const int sal_Prestamo = 1;
+
+        public const int sal_Venta = 2;
+        public const int sal_Devolucion = 3;
+        public const int esfac_Pagada = 3;
+        public const int esfac_PagoPendiente = 4;
+        public const bool fact_EsAnulada = true;
+        public const string sal_Estado = "Emitida";
+
+
+        ///ESTADO OBJETO
+        public const bool ObjetoActivo = true;
+        public const bool ObjetoInactivo = false;
+
+        //Estado Rol
+        public const bool RolActivo = true;//1
+        public const bool RolInactivo = false;//0
+
+        //Inventario Físico
+        public const int InvFisicoActivo = 1;
+        public const int InvFisicoConciliado = 2;
+        public const int InvFisicoReconteo = 3;
+
+        //BODEGA
+        public const int BodegaActivo = 1;
+        public const int BodegaInactivo = 0;
+
+        //Empleado
+        public const bool EmpleadoActivo = true;//1
+        public const bool EmpleadoInactivo = false;//0
+
+        //Estados Producto
+        public const bool ProductoActivo = true;
+        public const bool ProductoInactivo = false;
+
+        //Estado Categoria
+        public const int CategoriaActivo = 1;
+        public const int CategoriaInactivo = 2;
+
+        //Estado Subcategoria
+        public const int SubcategoriaActivo = 1;
+        public const int SubcategoriaInactivo = 2;
+
+        //Estado Box
+        public const int vbox_Abrierta = 1;
+        public const int vbox_Cerrada = 2;
+        public const string box_Abrierta = "Abrierta";
+        public const string box_Cerrada = "Cerrada";
+        #endregion
+
+        #region Métodos
+        public void InsertBitacoraErrores(string sPantalla, string biteMensajeError, string biteAccion)
+        {
+            IEnumerable<object> List = null;
+            string UserName = (string)HttpContext.Current.Session["UserLogin"];
+            try
+            {
+                List = db.UDP_Acce_tbBitacoraErrores_Insert(sPantalla, UserName, DatetimeNow(), biteMensajeError, biteAccion);
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+            }
+        }
+
+        //Listas
+        public List<cMinorista> MinoristaList()
+        {
+            List<cMinorista> list = new List<cMinorista>();
+
+            list.Add(new cMinorista()
+            {
+                ID_MINORISTA = "1",
+                DESCRIPCION = "Si"
+            });
+            list.Add(new cMinorista()
+            {
+                ID_MINORISTA = "0",
+                DESCRIPCION = "No"
+            });
+            return list;
+        }
+
+        public List<cActivo> EstadoList()
+        {
+            List<cActivo> list = new List<cActivo>();
+
+            list.Add(new cActivo()
+            {
+                ID_ACTIVO = "1",
+                DESCRIPCION = "Si"
+            });
+            list.Add(new cActivo()
+            {
+                ID_ACTIVO = "0",
+                DESCRIPCION = "No"
+            });
+            return list;
+        }
+
+        public List<cTipoCuenta> TipoCuentaList()
+        {
+            List<cTipoCuenta> list = new List<cTipoCuenta>();
+
+            list.Add(new cTipoCuenta()
+            {
+                ID_TIPOCUENTA = 1,
+                DESCRIPCION = "Ahorro"
+            });
+            list.Add(new cTipoCuenta()
+            {
+                ID_TIPOCUENTA = 0,
+                DESCRIPCION = "Cheques"
+            });
+            return list;
+        }
+
+        public List<Genero> GeneroList()
+        {
+            List<Genero> list = new List<Genero>();
+
+            list.Add(new Genero()
+            {
+                ID_GENERO = "H",
+                DESCRIPCION = "Hombre"
+            });
+            list.Add(new Genero()
+            {
+                ID_GENERO = "M",
+                DESCRIPCION = "Mujer"
+            });
+            return list;
+        }
+
+        public List<Nacionalidad> NacionalidadList()
+        {
+            List<Nacionalidad> list = new List<Nacionalidad>();
+
+            list.Add(new Nacionalidad()
+            {
+                DESCRIPCION = "Hondureña",
+            });
+            list.Add(new Nacionalidad()
+            {
+                DESCRIPCION = "Mexicano",
+            });
+            list.Add(new Nacionalidad()
+            {
+                DESCRIPCION = "EstadoUnidense"
+            });
+            return list;
+        }
+
+        public List<cDepartamento> DepartamentoList()
+        {
+            List<cDepartamento> list = new List<cDepartamento>();
+
+            list.Add(new cDepartamento()
+            {
+                DESCRIPCION = "Olancho",
+            });
+            list.Add(new cDepartamento()
+            {
+                DESCRIPCION = "Atlántida",
+            });
+            list.Add(new cDepartamento()
+            {
+                DESCRIPCION = "La Ceiba"
+            });
+            list.Add(new cDepartamento()
+            {
+                DESCRIPCION = "Choluteca"
+            });
+            list.Add(new cDepartamento()
+            {
+                DESCRIPCION = "Cortes"
+            });
+
+            return list;
+        }
+
+        public List<DenominacionList> DenominacionList()
+        {
+            List<DenominacionList> list = new List<DenominacionList>();
+
+            list.Add(new DenominacionList()
+            {
+                ID_TipoDenominacion = 1,
+                Tipo_Denominacion = "Billete"
+            });
+            list.Add(new DenominacionList()
+            {
+                ID_TipoDenominacion = 2,
+                Tipo_Denominacion = "Moneda"
+            });
+
+
+            return list;
+        }
+
+        public bool EsPersonaNatural(int clte_Id)
+        {
+            bool Retorno = false;
+            try
+            {
+                var Cliente = (from vCliente in db.tbCliente where vCliente.clte_Id == clte_Id select vCliente.clte_EsPersonaNatural).FirstOrDefault();
+                if (Cliente)
+                {
+                    Retorno = true;
+                }
+                else
+                {
+                    Retorno = false;
+                }
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+                Retorno = false;
+            }
+            return Retorno;
+        }
+
         public bool GetUserLogin()
         {
             bool state = false;
@@ -143,130 +430,6 @@ namespace ERP_GMEDINA.Models
             DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
             return dt;
         }
-
-        public const int rptVentasFechas = 195;
-        public const bool AnuladoFactura = true;
-        public const bool EsImpreso = true;
-        public const int EstadoImpreso = 2;
-        public const int RTN = 3;
-        public const int ID = 2;
-        public const int rol_Id = 2; //Rol de cajero
-
-        //Estados Cliente 
-        public const bool ClienteActivo = true;
-        public const bool ClienteCredito = false;
-        public const bool ClienteInactivo = false;
-        public const bool ClienteExonerado = false;
-
-        //Lista Precios
-        public const bool ListaPrecioActivo = true;
-        public const bool ListaPrecioInactivo = false;
-
-
-        //Estados Pedido
-        public const int Pendiente = 1;
-        public const int Facturado = 2;
-
-
-        //Estado Solicitud Credito
-        public const int SolicitudPendiente = 1;
-        public const int SolicitudAprobado = 2;
-        public const int SolicitudDenegado = 3;
-
-        //Estados Exoneración 
-        public const bool ExoneracionActiva = true;
-        public const bool ExoneracionInactiva = false;
-
-        //Reportes
-        public const int rptVentasCajaFechas = 196;
-        public const int rptFacturasPendientesPago = 197;
-        public const int rptVentasConsumidorFinal = 198;
-        public const int rptNotasCreditoEntreFechas = 199;
-        public const int rptAnalisisMora = 200;
-        public const int rptSolicitudesCreditoAprobar = 202;
-        public const int rptCuponesDescuentoFechas = 205;
-
-        ///ESTADO ENTRADA
-        public const int EntradaAnulada = 1;
-
-        public const int EntradaEmitida = 2;
-        public const int EntradaInactivada = 4;
-        public const int EntradaAplicada = 1;
-
-        //estado movimiento
-        public const int EntradaEstadoAnulada = 3;
-
-        //Salida
-        public const int sal_Aplicada = 1;
-
-        public const int sal_Emitida = 2;
-        public const int sal_Anulada = 3;
-        public const int sal_Inactiva = 4;
-        public const int sal_Activa = 5;
-
-        public const int sal_Impresa = 6;
-        public const bool sal_EsAnulada = true;
-        public const int sal_Prestamo = 1;
-
-        public const int sal_Venta = 2;
-        public const int sal_Devolucion = 3;
-        public const int esfac_Pagada = 3;
-        public const int esfac_PagoPendiente = 4;
-        public const bool fact_EsAnulada = true;
-        public const string sal_Estado = "Emitida";
-
-
-        ///ESTADO OBJETO
-        public const bool ObjetoActivo = true;
-        public const bool ObjetoInactivo = false;
-
-        //Estado Rol
-        public const bool RolActivo = true;//1
-        public const bool RolInactivo = false;//0
-
-        //Inventario Físico
-        public const int InvFisicoActivo = 1;
-        public const int InvFisicoConciliado = 2;
-        public const int InvFisicoReconteo = 3;
-
-        //BODEGA
-        public const int BodegaActivo = 1;
-        public const int BodegaInactivo = 0;
-
-        //Empleado
-        public const bool EmpleadoActivo = true;//1
-        public const bool EmpleadoInactivo = false;//0
-
-        //Estados Producto
-        public const bool ProductoActivo = true;
-        public const bool ProductoInactivo = false;
-
-        //Estado Categoria
-        public const int CategoriaActivo = 1;
-        public const int CategoriaInactivo = 2;
-
-        //Estado Subcategoria
-        public const int SubcategoriaActivo = 1;
-        public const int SubcategoriaInactivo = 2;
-
-        //Estado Box
-        public const int vbox_Abrierta = 1;
-        public const int vbox_Cerrada = 2;
-        public const string box_Abrierta = "Abrierta";
-        public const string box_Cerrada = "Cerrada";
-
-        public void InsertBitacoraErrores(string sPantalla, string biteMensajeError, string biteAccion)
-        {
-            IEnumerable<object> List = null;
-            string UserName = (string)HttpContext.Current.Session["UserLogin"];
-            try
-            {
-                List = db.UDP_Acce_tbBitacoraErrores_Insert(sPantalla, UserName, DatetimeNow(), biteMensajeError, biteAccion);
-            }
-            catch (Exception Ex)
-            {
-                Ex.Message.ToString();
-            }
-        }
+        #endregion
     }
 }

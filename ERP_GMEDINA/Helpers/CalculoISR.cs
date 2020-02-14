@@ -290,7 +290,7 @@ namespace ERP_GMEDINA.Helpers
                         {
                             if (VI == "FirstRange")
                             {
-                                totalISR = totalISR + (RentaNetaGravable - oISR.isr_RangoInicial) * (((oISR.isr_Porcentaje) ?? 0) / 100);
+                                totalISR = totalISR + (RentaNetaGravable - oISR.isr_RangoInicial) * (((oISR.isr_Porcentaje) ) / 100);
                                 VI = "No";
                             }
                             else if (VI == "No")
@@ -299,7 +299,7 @@ namespace ERP_GMEDINA.Helpers
                             }
                             if (VI == "SecondRange")
                             {
-                                totalISR = totalISR + ((oISR.isr_RangoFinal ?? 0) - oISR.isr_RangoInicial) * ((oISR.isr_Porcentaje ?? 0) / 100);
+                                totalISR = totalISR + ((oISR.isr_RangoFinal) - oISR.isr_RangoInicial) * ((oISR.isr_Porcentaje) / 100);
                                 VI = "No";
                             }
                         }

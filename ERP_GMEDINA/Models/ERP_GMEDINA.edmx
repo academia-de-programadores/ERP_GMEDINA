@@ -18514,11 +18514,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           <Parameter Name="fact_Id" Type="bigint" Mode="In" />
           <Parameter Name="esfac_Id" Type="int" Mode="In" />
         </Function>
-        <Function Name="UDP_Vent_tbFactura_Filtrado_CodBarra_Sucursal_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
-          <Parameter Name="IDSUCURSAL" Type="int" Mode="In" />
-          <Parameter Name="CODIGOBARRAS" Type="varchar" Mode="In" />
-          <Parameter Name="IDCLIENTE" Type="int" Mode="In" />
-        </Function>
         <Function Name="UDP_Vent_tbFactura_GetDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Vent">
           <Parameter Name="FACTURA_ID" Type="bigint" Mode="In" />
         </Function>
@@ -46403,11 +46398,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA2.Plani.tbHisto
           <FunctionImport Name="UDP_Vent_tbFactura_EstadoImpreso" ReturnType="Collection(String)">
             <Parameter Name="fact_Id" Mode="In" Type="Int64" />
             <Parameter Name="esfac_Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Vent_tbFactura_Filtrado_CodBarra_Sucursal_Cliente">
-            <Parameter Name="IDSUCURSAL" Mode="In" Type="Int32" />
-            <Parameter Name="CODIGOBARRAS" Mode="In" Type="String" />
-            <Parameter Name="IDCLIENTE" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Vent_tbFactura_GetDetalle" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbFactura_GetDetalle_Result)">
             <Parameter Name="FACTURA_ID" Mode="In" Type="Int64" />
