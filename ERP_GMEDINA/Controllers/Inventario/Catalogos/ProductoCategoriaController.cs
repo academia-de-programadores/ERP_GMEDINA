@@ -374,7 +374,7 @@ namespace ERP_GMEDINA.Controllers
                 tbProductoCategoria obj = db.tbProductoCategoria.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion(id, Function.GetUser(), Function.DatetimeNow(), Helpers.CategoriaActivo);
+                list = db.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion(id, Function.GetUser(), Function.DatetimeNow(), Models.Helpers.CategoriaActivo);
                 foreach (UDP_Inv_tbProductoCategoria_Update_Estado_Validacion_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -412,7 +412,7 @@ namespace ERP_GMEDINA.Controllers
                 tbProductoSubcategoria obj = db.tbProductoSubcategoria.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion(id, Helpers.SubcategoriaActivo, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion(id, Models.Helpers.SubcategoriaActivo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -444,7 +444,7 @@ namespace ERP_GMEDINA.Controllers
                 tbProductoSubcategoria obj = db.tbProductoSubcategoria.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion(id, Helpers.SubcategoriaInactivo, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion(id, Models.Helpers.SubcategoriaInactivo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -477,7 +477,7 @@ namespace ERP_GMEDINA.Controllers
                 tbProductoCategoria obj = db.tbProductoCategoria.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion(id, Function.GetUser(), Function.DatetimeNow(), Helpers.CategoriaInactivo);
+                list = db.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion(id, Function.GetUser(), Function.DatetimeNow(), Models.Helpers.CategoriaInactivo);
                 foreach (UDP_Inv_tbProductoCategoria_Update_Estado_Validacion_Result obje in list)
                     MsjError = obje.MensajeError;
 

@@ -245,10 +245,10 @@ namespace ERP_GMEDINA.Controllers
                 ViewBag.sal_BodDestino = new SelectList(db.tbBodega.Where(x => x.bod_Id != vbod_Id.bodId), "bod_Id", "bod_Nombre");
                 ViewBag.estm_Id = new SelectList(db.tbEstadoMovimiento, "estm_Id", "estm_Descripcion");
                 ViewBag.tsal_Id = new SelectList(db.tbTipoSalida, "tsal_Id", "tsal_Descripcion");
-                ViewBag.Factura = db.tbFactura.Where(x => x.fact_EsAnulada != Helpers.fact_EsAnulada && x.esfac_Id == Helpers.esfac_Pagada || x.esfac_Id == Helpers.esfac_PagoPendiente).ToList();
+                ViewBag.Factura = db.tbFactura.Where(x => x.fact_EsAnulada != Models.Helpers.fact_EsAnulada && x.esfac_Id == Models.Helpers.esfac_Pagada || x.esfac_Id == Models.Helpers.esfac_PagoPendiente).ToList();
                 ViewBag.Producto = db.tbBodegaDetalle.Where(x => x.bod_Id == vbod_Id.bodId && x.bodd_CantidadExistente > x.bodd_CantidadMinima).ToList();
                 //ViewBag.Box = (from Box in db.tbBox where !db.tbSalidaDetalle.Any(es => (es.box_Codigo == Box.box_Codigo))).ToList();
-                ViewBag.Box = db.tbBox.Where(s => !db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
+                ViewBag.Box = db.tbBox.Where(s => !db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Models.Helpers.sal_Aplicada).Any()).Any()).ToList();
                 //ViewBag.BoxD = db.tbBox.Where(s => db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
 
                 ViewBag.tdev_Id = new SelectList(db.tbTipoDevolucion, "tdev_Id", "tdev_Descripcion");
@@ -276,7 +276,7 @@ namespace ERP_GMEDINA.Controllers
                 ViewBag.BodegaSelec = vbod_Id.bod_Nombre;
                 ViewBag.bod_Id = vbod_Id.bodId;
                 ViewBag.Producto = db.tbBodegaDetalle.Where(x => x.bod_Id == vbod_Id.bodId && x.bodd_CantidadExistente > x.bodd_CantidadMinima).ToList();
-                ViewBag.Factura = db.tbFactura.Where(x => x.fact_EsAnulada != Helpers.fact_EsAnulada && x.esfac_Id == Helpers.esfac_Pagada || x.esfac_Id == Helpers.esfac_PagoPendiente).ToList();
+                ViewBag.Factura = db.tbFactura.Where(x => x.fact_EsAnulada != Models.Helpers.fact_EsAnulada && x.esfac_Id == Models.Helpers.esfac_Pagada || x.esfac_Id == Models.Helpers.esfac_PagoPendiente).ToList();
                 ViewBag.estm_Id = new SelectList(db.tbEstadoMovimiento, "estm_Id", "estm_Descripcion");
                 ViewBag.tsal_Id = new SelectList(db.tbTipoSalida, "tsal_Id", "tsal_Descripcion");
                 ViewBag.prod_Codigo = new SelectList(db.tbProducto, "prod_Codigo", "prod_Descripcion");
@@ -295,7 +295,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         var vFactura = db.tbFactura.Where(x => x.fact_Codigo == tbSalida.fact_Codigo).Select(x => x.fact_Id).SingleOrDefault();
                         //tbSalida.bod_Id
-                        listSalida = db.UDP_Inv_tbSalida_Insert(tbSalida.bod_Id, vFactura, tbSalida.sal_FechaElaboracion, Helpers.sal_Emitida, tbSalida.tsal_Id, tbSalida.sal_BodDestino, tbSalida.sal_EsAnulada, tbSalida.tdev_Id, tbSalida.sal_RazonAnulada, Function.GetUser(), Function.DatetimeNow());
+                        listSalida = db.UDP_Inv_tbSalida_Insert(tbSalida.bod_Id, vFactura, tbSalida.sal_FechaElaboracion, Models.Helpers.sal_Emitida, tbSalida.tsal_Id, tbSalida.sal_BodDestino, tbSalida.sal_EsAnulada, tbSalida.tdev_Id, tbSalida.sal_RazonAnulada, Function.GetUser(), Function.DatetimeNow());
                         foreach (UDP_Inv_tbSalida_Insert_Result Salida in listSalida)
                             MensajeError = Salida.MensajeError;
                         if (MensajeError.StartsWith("-1"))
@@ -558,7 +558,7 @@ namespace ERP_GMEDINA.Controllers
             int idUser = Empleado();
 
             ViewBag.IdSal = id;
-            if (tbSalida.tsal_Id != Helpers.sal_Prestamo)
+            if (tbSalida.tsal_Id != Models.Helpers.sal_Prestamo)
             {
                var vbfact_Codigo = db.tbFactura.Find(tbSalida.fact_Id).fact_Codigo.ToString();
 
@@ -581,7 +581,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.tsal_Id = new SelectList(db.tbTipoSalida, "tsal_Id", "tsal_Descripcion", tbSalida.tsal_Id);
             ViewBag.fact_Id = new SelectList(db.tbFactura, "fact_Id", "fact_Codigo", tbSalida.fact_Id);
             ViewBag.box_Codigo = new SelectList(db.tbSalidaDetalle, "sald_Id", "box_Codigo", tbSalida.estm_Id);
-            ViewBag.Box = db.tbBox.Where(s => !db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Helpers.sal_Aplicada).Any()).Any()).ToList();
+            ViewBag.Box = db.tbBox.Where(s => !db.tbSalidaDetalle.Where(es => es.box_Codigo == s.box_Codigo && db.tbSalida.Where(sd => sd.sal_Id == es.sal_Id && sd.estm_Id == Models.Helpers.sal_Aplicada).Any()).Any()).ToList();
 
             ViewBag.sal_Id = new SelectList(db.tbProductoSubcategoria, "sal_Id", "sal_Id", tbSalida.sal_Id);
             ViewBag.Producto = db.tbBodegaDetalle.Where(x => x.bod_Id == tbSalida.bod_Id && x.bodd_CantidadExistente > x.bodd_CantidadMinima).ToList();
@@ -915,7 +915,7 @@ namespace ERP_GMEDINA.Controllers
                                 }
                                 else
                                 {
-                                    if (vFacturaID.esfac_Id == Helpers.esfac_Pagada || vFacturaID.esfac_Id == Helpers.esfac_PagoPendiente)
+                                    if (vFacturaID.esfac_Id == Models.Helpers.esfac_Pagada || vFacturaID.esfac_Id == Models.Helpers.esfac_PagoPendiente)
                                     {
                                         vSalida = db.tbSalida.Where(x => x.fact_Id == vFacturaID.fact_Id && x.sal_EsAnulada != true).ToList();
                                         if (vSalida.Count() > 0)
@@ -973,7 +973,7 @@ namespace ERP_GMEDINA.Controllers
                                                     tbSalida.bod_Id,
                                                     tbSalida.fact_Id,
                                                     tbSalida.sal_FechaElaboracion,
-                                                    Helpers.sal_Aplicada,
+                                                    Models.Helpers.sal_Aplicada,
                                                     tbSalida.tsal_Id,
                                                     tbSalida.sal_BodDestino,
                                                     tbSalida.sal_EsAnulada,
@@ -1018,10 +1018,10 @@ namespace ERP_GMEDINA.Controllers
                                                 vSalida.bod_Id,
                                                 vSalida.fact_Id,
                                                 vSalida.sal_FechaElaboracion,
-                                                Helpers.sal_Anulada,
+                                                Models.Helpers.sal_Anulada,
                                                 vSalida.tsal_Id,
                                                 vSalida.sal_BodDestino,
-                                                Helpers.sal_EsAnulada,
+                                                Models.Helpers.sal_EsAnulada,
                                                 vSalida.tdev_Id,
                                                 Salida.sal_RazonAnulada,
                                                 vSalida.sal_UsuarioCrea,

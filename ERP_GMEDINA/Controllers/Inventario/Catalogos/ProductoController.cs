@@ -105,7 +105,7 @@ namespace ERP_GMEDINA.Controllers
                                                             tbProducto.prod_Color,
                                                             tbProducto.pscat_Id,
                                                             tbProducto.uni_Id,
-                                                            Helpers.ProductoActivo,
+                                                            Models.Helpers.ProductoActivo,
                                                             tbProducto.prod_CodigoBarras,
                                                             tbProducto.prov_Id,
                                                             Function.GetUser(),
@@ -273,7 +273,7 @@ namespace ERP_GMEDINA.Controllers
             tbProducto vProducto = db.tbProducto.Find(tbProducto.prod_Codigo);
             try
             {
-                var list = db.UDP_Inv_tbProducto_Update_RazonInactivacion(tbProducto.prod_Codigo, Helpers.ProductoInactivo, Razon_Inactivacion, vProducto.prod_UsuarioCrea, vProducto.prod_FechaCrea, Function.GetUser(), Function.DatetimeNow()).ToList();
+                var list = db.UDP_Inv_tbProducto_Update_RazonInactivacion(tbProducto.prod_Codigo, Models.Helpers.ProductoInactivo, Razon_Inactivacion, vProducto.prod_UsuarioCrea, vProducto.prod_FechaCrea, Function.GetUser(), Function.DatetimeNow()).ToList();
                 return Json("Éxito", JsonRequestBehavior.AllowGet);
             }
             catch (Exception Ex)
@@ -291,7 +291,7 @@ namespace ERP_GMEDINA.Controllers
                 tbProducto producto = new tbProducto();
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbProducto_Estado_Prueba(prod_Codigo, Helpers.ProductoActivo);
+                list = db.UDP_Inv_tbProducto_Estado_Prueba(prod_Codigo, Models.Helpers.ProductoActivo);
                 foreach (UDP_Inv_tbProducto_Estado_Prueba_Result obje in list)
                     MsjError = obje.MensajeError;
 

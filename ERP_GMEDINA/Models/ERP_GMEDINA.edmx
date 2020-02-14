@@ -27264,28 +27264,28 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="entd_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="entd_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbEstadoInventarioFisico_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbEstadoInventarioFisico_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbEstadoInventarioFisico_Insert_Result)">
             <Parameter Name="estif_Id" Mode="In" Type="Byte" />
             <Parameter Name="estif_Descripcion" Mode="In" Type="String" />
             <Parameter Name="estif_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="estif_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbEstadoInventarioFisico_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbEstadoInventarioFisico_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbEstadoInventarioFisico_Update_Result)">
             <Parameter Name="estif_Id" Mode="In" Type="Byte" />
             <Parameter Name="estif_Descripcion" Mode="In" Type="String" />
             <Parameter Name="estif_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="estif_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbEstadoMovimiento_Delete_Result)">
           <Parameter Name="estm_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbEstadoMovimiento_Insert_Result)">
             <Parameter Name="estm_Id" Mode="In" Type="Byte" />
             <Parameter Name="estm_Descripcion" Mode="In" Type="String" />
             <Parameter Name="estm_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="estm_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbEstadoMovimiento_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbEstadoMovimiento_Update_Result)">
             <Parameter Name="estm_Id" Mode="In" Type="Byte" />
             <Parameter Name="estm_Descripcion" Mode="In" Type="String" />
             <Parameter Name="estm_UsuarioCrea" Mode="In" Type="Int32" />
@@ -27356,7 +27356,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="prod_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="prod_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProducto_Estado_Prueba" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProducto_Estado_Prueba" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProducto_Estado_Prueba_Result)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
           </FunctionImport>
@@ -27372,7 +27372,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
           <FunctionImport Name="UDP_Inv_tbProducto_GetSubCategoria" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProducto_GetSubCategoria_Result)">
           <Parameter Name="CodCategoria" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProducto_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProducto_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProducto_Insert_Result)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="prod_Descripcion" Mode="In" Type="String" />
             <Parameter Name="prod_Marca" Mode="In" Type="String" />
@@ -27387,7 +27387,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="prod_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="prod_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProducto_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProducto_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProducto_Update_Result)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="prod_Descripcion" Mode="In" Type="String" />
             <Parameter Name="prod_Marca" Mode="In" Type="String" />
@@ -27419,7 +27419,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="prod_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="prod_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProducto_ValorCodigo" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProducto_ValorCodigo" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProducto_ValorCodigo_Result)">
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_Codigo" Mode="InOut" Type="String" />
@@ -27429,15 +27429,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_Codigo" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Delete_Result)">
           <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Insert_Result)">
             <Parameter Name="pcat_Nombre" Mode="In" Type="String" />
             <Parameter Name="pcat_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="pcat_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Update_Result)">
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pcat_Nombre" Mode="In" Type="String" />
             <Parameter Name="pcat_UsuarioCrea" Mode="In" Type="Int32" />
@@ -27449,23 +27449,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="ESTADO" Mode="In" Type="Byte" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Update_Estado_Validacion" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Update_Estado_Validacion" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion_Result)">
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pcat_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="pcat_FechaModifica" Mode="In" Type="DateTime" />
             <Parameter Name="ESTADO" Mode="In" Type="Byte" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoSubCategoria_Delete_Result)">
           <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoSubcategoria_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoSubcategoria_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoSubcategoria_Insert_Result)">
             <Parameter Name="pscat_Descripcion" Mode="In" Type="String" />
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pscat_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="pscat_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="pscat_ISV" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoSubcategoria_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoSubcategoria_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoSubcategoria_Update_Result)">
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pscat_Descripcion" Mode="In" Type="String" />
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
@@ -27475,11 +27475,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="pscat_FechaModifica" Mode="In" Type="DateTime" />
             <Parameter Name="pscat_ISV" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Update_Estado" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Update_Estado" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoSubCategoria_Update_Estado_Result)">
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pscat_EsActiva" Mode="In" Type="Byte" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion_Result)">
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pscat_EsActiva" Mode="In" Type="Byte" />
             <Parameter Name="pscat_UsuarioModifica" Mode="In" Type="Int32" />
@@ -27510,7 +27510,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="prov_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="prov_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalida_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalida_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalida_Insert_Result)">
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
             <Parameter Name="fact_Id" Mode="In" Type="Int64" />
             <Parameter Name="sal_FechaElaboracion" Mode="In" Type="DateTime" />
@@ -27523,18 +27523,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="sal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="sal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbsalida_InsertarEntradaPorPrestamo" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbsalida_InsertarEntradaPorPrestamo" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbsalida_InsertarEntradaPorPrestamo_Result)">
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
             <Parameter Name="estm_Id" Mode="In" Type="Byte" />
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="entd_Cantidad" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo_Result)">
             <Parameter Name="ent_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="entd_Cantidad" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalida_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalida_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalida_Update_Result)">
             <Parameter Name="sal_Id" Mode="In" Type="Int32" />
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
             <Parameter Name="fact_Id" Mode="In" Type="Int64" />
@@ -27550,7 +27550,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="sal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalidaBodegaDestino_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalidaBodegaDestino_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalidaBodegaDestino_Insert_Result)">
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="bod_Id" Mode="In" Type="Int32" />
             <Parameter Name="bodd_CantidadMinima" Mode="In" Type="Decimal" />
@@ -27562,10 +27562,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="bodd_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="CANTIDAD_EXISTENTE" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalidaDetalle_Delete_Result)">
           <Parameter Name="sald_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalidaDetalle_Insert_Result)">
             <Parameter Name="sal_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
             <Parameter Name="sald_Cantidad" Mode="In" Type="Decimal" />
@@ -27573,7 +27573,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="sald_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="sald_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbSalidaDetalle_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbSalidaDetalle_Update_Result)">
             <Parameter Name="sald_Id" Mode="In" Type="Int32" />
             <Parameter Name="sal_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_Codigo" Mode="In" Type="String" />
@@ -27584,12 +27584,12 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="sald_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sald_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbTipoDevolucion_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbTipoDevolucion_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbTipoDevolucion_Insert_Result)">
             <Parameter Name="tdev_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tdev_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tdev_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbTipoDevolucion_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbTipoDevolucion_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbTipoDevolucion_Update_Result)">
             <Parameter Name="tdev_Id" Mode="In" Type="Int32" />
             <Parameter Name="tdev_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tdev_UsuarioCrea" Mode="In" Type="Int32" />
@@ -27597,12 +27597,12 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="tdev_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tdev_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbTipoEntrada_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbTipoEntrada_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbTipoEntrada_Insert_Result)">
             <Parameter Name="tent_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tent_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tent_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbTipoEntrada_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbTipoEntrada_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbTipoEntrada_Update_Result)">
             <Parameter Name="tent_Id" Mode="In" Type="Byte" />
             <Parameter Name="tent_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tent_UsuarioCrea" Mode="In" Type="Int32" />
@@ -50355,6 +50355,96 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
         <ComplexType Name="UDP_Inv_tbEntradaDetalle_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Inv_tbEstadoInventarioFisico_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="51" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbEstadoInventarioFisico_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbEstadoMovimiento_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbEstadoMovimiento_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbEstadoMovimiento_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoCategoria_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="69" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoCategoria_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoCategoria_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoCategoria_Update_Estado_Validacion_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="73" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoSubCategoria_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="73" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoSubcategoria_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoSubcategoria_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoSubCategoria_Update_Estado_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="76" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_ValorCodigo_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Estado_Prueba_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbTipoDevolucion_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbTipoDevolucion_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbTipoEntrada_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbTipoEntrada_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalida_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbsalida_InsertarEntradaPorPrestamo_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalida_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalidaBodegaDestino_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalidaDetalle_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalidaDetalle_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbSalidaDetalle_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53385,11 +53475,41 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoInventarioFisico_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoInventarioFisico_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoInventarioFisico_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoInventarioFisico_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoMovimiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoMovimiento_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoMovimiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoMovimiento_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoMovimiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoMovimiento_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoInventarioFisico_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoInventarioFisico_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbEstadoInventarioFisico_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoInventarioFisico_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoInventarioFisico_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbEstadoInventarioFisico_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoMovimiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoMovimiento_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbEstadoMovimiento_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoMovimiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoMovimiento_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbEstadoMovimiento_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbEstadoMovimiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbEstadoMovimiento_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbEstadoMovimiento_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbInventarioFisico_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbInventarioFisico_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbInventarioFisico_ListaProductos" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbInventarioFisico_ListaProductos">
             <ResultMapping>
@@ -53450,7 +53570,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Estado" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Estado" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Estado_Prueba" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Estado_Prueba" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Estado_Prueba" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Estado_Prueba" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProducto_Estado_Prueba_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Existencia" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Existencia">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProducto_Existencia_Result">
@@ -53486,36 +53612,180 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProducto_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProducto_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_INV_tbProducto_Update_EstadoActivar" FunctionName="ERP_GMEDINAModel.Store.UDP_INV_tbProducto_Update_EstadoActivar" />
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Update_RazonInactivacion" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_Update_RazonInactivacion" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_ValorCodigo" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_ValorCodigo" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_ValorCodigo" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_ValorCodigo" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProducto_ValorCodigo_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_ValorCodigo1" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProducto_ValorCodigo1" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Update_Estado" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Update_Estado" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Update_Estado_Validacion" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubCategoria_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubCategoria_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubcategoria_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubcategoria_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubcategoria_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubcategoria_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubCategoria_Update_Estado" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubCategoria_Update_Estado" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Update_Estado_Validacion" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoCategoria_Update_Estado_Validacion_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubCategoria_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubCategoria_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoSubCategoria_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubcategoria_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubcategoria_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoSubcategoria_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubcategoria_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubcategoria_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoSubcategoria_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubCategoria_Update_Estado" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubCategoria_Update_Estado" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoSubCategoria_Update_Estado_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProveedor_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProveedor_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbsalida_InsertarEntradaPorPrestamo" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbsalida_InsertarEntradaPorPrestamo" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaBodegaDestino_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaBodegaDestino_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaDetalle_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaDetalle_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaDetalle_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaDetalle_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaDetalle_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaDetalle_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoDevolucion_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoDevolucion_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoDevolucion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoDevolucion_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoEntrada_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoEntrada_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoEntrada_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoEntrada_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalida_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbsalida_InsertarEntradaPorPrestamo" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbsalida_InsertarEntradaPorPrestamo" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbsalida_InsertarEntradaPorPrestamo_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalida_InsertEntradaDetallePorPrestamo_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalida_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaBodegaDestino_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaBodegaDestino_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalidaBodegaDestino_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaDetalle_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaDetalle_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalidaDetalle_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaDetalle_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaDetalle_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalidaDetalle_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalidaDetalle_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalidaDetalle_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalidaDetalle_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoDevolucion_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoDevolucion_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbTipoDevolucion_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoDevolucion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoDevolucion_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbTipoDevolucion_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoEntrada_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoEntrada_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbTipoEntrada_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoEntrada_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoEntrada_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbTipoEntrada_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoSalida_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoSalida_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbTipoSalida_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbTipoSalida_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Inv_ValidacionCantidadExistente" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_ValidacionCantidadExistente" />
