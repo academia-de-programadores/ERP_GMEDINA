@@ -363,14 +363,14 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
             if (data) {
                 var FechaCrea = FechaFormato(data[0].fpa_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].fpa_FechaModifica);
+                $(".field-validation-error").css('display', 'none');
                 $("#frmDetailFormaPago #fpa_Descripcion").html(data[0].fpa_Descripcion);
                 $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#fpa_FechaCrea").html(FechaCrea);
+                $("#frmDetailFormaPago #fpa_FechaCrea").html(FechaCrea);
                 data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#fpa_UsuarioModifica").val(data[0].fpa_UsuarioModifica);
-                $("#fpa_FechaModifica").html(FechaModifica);
+                $("#frmDetailFormaPago #fpa_FechaModifica").html(FechaModifica);
                 $("#frmDetailFormaPago").modal({ backdrop: 'static', keyboard: false });
-
             }
             else {
                 //Mensaje de error si no hay data
