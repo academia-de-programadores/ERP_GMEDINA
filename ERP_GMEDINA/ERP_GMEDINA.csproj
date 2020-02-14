@@ -4108,6 +4108,9 @@
     <Content Include="Views\Usuario\RestaurarPassword.cshtml" />
     <Content Include="Views\Usuario\_BuscarEmpleado.cshtml" />
     <Content Include="Views\Usuario\_IndexRolesUsuario.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\Minor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
