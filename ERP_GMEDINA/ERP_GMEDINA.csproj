@@ -4123,6 +4123,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\Home\Minor.cshtml" />
+    <Content Include="Views\Shared\_NavigationFacturacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
