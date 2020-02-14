@@ -257,12 +257,12 @@ namespace ERP_GMEDINA.Controllers
             }
 
             int idUser = Function.GetUser();
-            int IDSucursal = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            int IDSucursal = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             short IDCaja = 0;
             ViewBag.usu_Id = idUser;
             var Fact_Id = db.tbFactura.OrderBy(x => x.fact_Id).Select(x => x.fact_Id).ToList().LastOrDefault();
             ViewBag.fact_Id = Fact_Id + 1;
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
             ViewBag.suc_Id = IDSucursal;
             var ListCaja = db.spGetCaja(idUser).ToList();
             foreach (spGetCaja_Result Caja in ListCaja)
@@ -446,8 +446,8 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Cliente = db.tbCliente.ToList();
             ViewBag.Producto = db.tbProducto.ToList();
             ViewBag.usu_Id = idUser;
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             Session["IDCLIENTE"] = null;
             Session["IDENTIFICACION"] = null;
             Session["NOMBRES"] = null;
@@ -469,8 +469,8 @@ namespace ERP_GMEDINA.Controllers
                 return RedirectToAction("NotFound", "Login");
             }
             int idUser = Function.GetUser();
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             ViewBag.fact_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbFactura.fact_UsuarioCrea);
             ViewBag.fact_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbFactura.fact_UsuarioModifica);
             ViewBag.cja_Id = new SelectList(db.tbCaja, "cja_Id", "cja_Descripcion", tbFactura.cja_Id);
@@ -639,8 +639,8 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Cliente = db.tbCliente.ToList();
             ViewBag.Producto = db.tbProducto.ToList();
             int idUser = Function.GetUser();
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             return View(tbFactura);
         }
 
@@ -847,7 +847,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult GetPrecio(int Cliente, string idItem)
         {
-            var list = db.UDP_Vent_tbFactura_BuscarListaPrecio(Cliente, idItem).ToArray();
+            var list = db.UDP_Vent_tbFactura_BuscarListaPrecio(Cliente, idItem);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -881,7 +881,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult BuscarCodigoBarras(int IDSucursal, string CodBarra, int IDCliente)
         {
-            var list = db.UDP_Vent_tbFactura_Filtrado_CodBarra_Sucursal_Cliente(IDSucursal, CodBarra, IDCliente).ToList();
+            var list = db.UDP_Vent_tbFactura_Filtrado_CodBarra_Sucursal_Cliente(IDSucursal, CodBarra, IDCliente);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

@@ -30,7 +30,7 @@ namespace ERP_GMEDINA.Controllers
         [SessionManager("CuponDescuento/Index")]
         public ActionResult Index()
         {
-            var tbcupondescuento = db.tbCuponDescuento.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbSucursal);
+            var tbcupondescuento = db.tbCuponDescuento.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbSucursales);
             return View(tbcupondescuento.ToList());
         }
 
@@ -60,8 +60,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 idUser = Convert.ToInt32(Usuario.emp_Id);
             }
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             return View();
         }
 
@@ -100,8 +100,8 @@ namespace ERP_GMEDINA.Controllers
                         MensajeError = CuponDescuento.MensajeError;
                     if (MensajeError.StartsWith("-1"))
                     {
-                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                         Function.InsertBitacoraErrores("CuponDescuento/Create", MensajeError, "Create");
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbCuponDescuento);
@@ -113,15 +113,15 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                    ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                    ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                    ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                     Function.InsertBitacoraErrores("CuponDescuento/Create", Ex.Message.ToString(), "Create");
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View(tbCuponDescuento);
                 }
             }
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             return View(tbCuponDescuento);
         }
 
@@ -136,8 +136,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 idUser = Convert.ToInt32(Usuario.emp_Id);
             }
-            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+            ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -188,8 +188,8 @@ namespace ERP_GMEDINA.Controllers
                                     MensajeError = CuponDescuento.MensajeError;
                                 if (MensajeError.StartsWith("-1"))
                                 {
-                                    ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                                    ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                                    ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                                    ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                                     Function.InsertBitacoraErrores("CuponDescuento/Create", MensajeError, "Create");
                                     ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
                                     return View(tbCuponDescuento);
@@ -201,16 +201,16 @@ namespace ERP_GMEDINA.Controllers
                             }
                             catch (Exception Ex)
                             {
-                                ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                                ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                                ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                                ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                                 Function.InsertBitacoraErrores("CuponDescuento/Create", Ex.Message.ToString(), "Create");
                                 ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
                                 return View(tbCuponDescuento);
                             }
 
                         }
-                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                         return View(tbCuponDescuento);
         }
 

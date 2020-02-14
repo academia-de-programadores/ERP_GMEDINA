@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     if (Function.GetUserRols("NotaCredito/Index"))
                     {
-                        var tbnotacredito = db.tbNotaCredito.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCliente).Include(t => t.tbDevolucion).Include(t => t.tbSucursal);
+                        var tbnotacredito = db.tbNotaCredito.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCliente).Include(t => t.tbDevolucion).Include(t => t.tbSucursales);
                         return View(tbnotacredito.ToList());
                     }
                     else
@@ -109,8 +109,8 @@ namespace ERP_GMEDINA.Controllers
                             idUser = Convert.ToInt32(Usuario.emp_Id);
                         }
                         ViewBag.usu_Id = idUser;
-                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.FirstOrDefault().suc_Descripcion).SingleOrDefault();
+                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.FirstOrDefault().suc_Id).SingleOrDefault();
                         ViewBag.Devolucion = db.tbDevolucionDetalle.ToList();
                         ViewBag.Cliente = db.tbCliente.ToList();
                         return View();
@@ -188,8 +188,8 @@ namespace ERP_GMEDINA.Controllers
                         }
                         ViewBag.Devolucion = db.tbDevolucionDetalle.ToList();
                         ViewBag.Cliente = db.tbCliente.ToList();
-                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                         return View(tbNotaCredito);
                     }
                     else
