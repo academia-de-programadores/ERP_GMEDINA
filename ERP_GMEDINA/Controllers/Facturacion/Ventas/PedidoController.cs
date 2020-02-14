@@ -123,9 +123,17 @@ namespace ERP_GMEDINA.Controllers
             Pedido.suc_Id = Usuario();
                         tbSucursales tbSucursal = new tbSucursales();
                         int suc = Usuario();
-                        ViewBag.Sucursal = db.tbSucursales.Find(suc).suc_Descripcion;
+                        try
+                        {
+                            ViewBag.Sucursal = db.tbSucursales.Find(suc).suc_Descripcion;
+                        }
+                        catch (Exception)
+                        {
 
-            return View(Pedido);
+                        }
+                        
+
+                     return View(Pedido);
                     }
                     else
                     {

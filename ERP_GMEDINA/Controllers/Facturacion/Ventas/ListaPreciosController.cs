@@ -351,7 +351,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Validar()
         {
-            int? listpreId = (int)Session["IdListadoDetalles"];
+            int? listpreId = (int?)Session["IdListadoDetalles"];
             return Json(listpreId);
         }
 
