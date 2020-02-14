@@ -140,29 +140,38 @@ namespace ERP_GMEDINA.Controllers
 			//RETORNO DEL MODEL STATE
 			return Json(userModel, JsonRequestBehavior.AllowGet);
 		}
-		#endregion
+        #endregion
 
 
-		#region GET : LoadUserModelStateAsync
-		//public JsonResult LoadUserModelStateAsync()
-		//{
-		//	//INICIALIZACION DEL OBJETC VM_ModelState
-		//	VM_ModelState userModel = new VM_ModelState();
-		//	//Task_ModelState = Task.Run(() =>
-		//	//{
-		//	//ID USUARIO LOGUEADO
-		//	int userId = (int)Session["UserLogin"];
-		//	//GET: ESADMIN
-		//			bool EsAdmin = (bool)Session["UserLoginEsAdmin"];
-		//	//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
-		//	Helpers.General vm = new Helpers.General();
-		//	//SOBRECARGA DE OBJECT VM_ModelState
-		//	userModel = vm.Cargar_ModelState(userId, EsAdmin);
-		//	//});
-		//	//RETORNO DEL MODEL STATE
-		//	return Json(userModel, JsonRequestBehavior.AllowGet);
-		//}
-		#endregion
+        #region GET : LoadUserModelStateAsync
+        //public JsonResult LoadUserModelStateAsync()
+        //{
+        //	//INICIALIZACION DEL OBJETC VM_ModelState
+        //	VM_ModelState userModel = new VM_ModelState();
+        //	//Task_ModelState = Task.Run(() =>
+        //	//{
+        //	//ID USUARIO LOGUEADO
+        //	int userId = (int)Session["UserLogin"];
+        //	//GET: ESADMIN
+        //			bool EsAdmin = (bool)Session["UserLoginEsAdmin"];
+        //	//UTILITARIO PARA OBTENER LA DATA DE VM_ModelState
+        //	Models.Helpers.General vm = new Models.Helpers.General();
+        //	//SOBRECARGA DE OBJECT VM_ModelState
+        //	userModel = vm.Cargar_ModelState(userId, EsAdmin);
+        //	//});
+        //	//RETORNO DEL MODEL STATE
+        //	return Json(userModel, JsonRequestBehavior.AllowGet);
+        //}
+        #endregion
 
-	}
+        public ActionResult SinRol()
+        {
+            //Validar Inicio de Sesión
+            Models.Helpers Function = new Models.Helpers();
+            if (Function.GetUserLogin())
+                return View();
+            else
+                return RedirectToAction("Index", "Login");
+        }
+    }
 }

@@ -1,0 +1,172 @@
+﻿@using ERP_GMEDINA.Models
+@using ERP_GMEDINA.Attribute
+@{
+    Helpers Login = new Helpers();
+    int Sesiones = 0;
+
+
+    List<tbUsuario> User = Login.getUserInformation();
+
+    foreach (tbUsuario Usuario in User)
+    {
+        Sesiones = (int)Usuario.usu_SesionesValidas;
+    }
+    string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    string Editar =action;
+    string Activar = controller + "/Activar";
+
+   
+}
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ @*<link rel="icon" href="@Url.Content("~/Content/IconoInicial.ico")" />*@
+ <title>ERP GMEDINA | @ViewBag.Title</title>
+ <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+ <!-- Add local styles, mostly for plugins css file -->
+ @if (IsSectionDefined("Styles"))
+ {@RenderSection("Styles", required: false)}
+
+ <!-- Add jQuery Style direct - used for jQGrid plugin -->
+ <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+ <!-- Primary Inspinia style -->
+ @Styles.Render("~/Content/css")
+ @Styles.Render("~/font-awesome/css")
+
+</head>
+<body class="pace-done  fixed-sidebar">
+ <!-- Wrapper-->
+ <!-- PageClass give you ability to specify custom style for specific view based on action -->
+ <div id="wrapper" class="@Html.PageClass()">
+  <!-- Navigation -->
+  @Html.Partial("_NavigationPlanillas")
+  <!-- Page wraper -->
+  <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+   <!-- Top Navbar -->
+   @Html.Partial("_TopNavbar")
+   <!-- Main view  -->   
+    @RenderBody()
+   <!-- Footer -->
+   @*@Html.Partial("_Footer")*@
+  </div>
+ </div>
+ <!-- End wrapper-->
+ <!-- Section for main scripts render -->
+
+ @Scripts.Render("~/bundles/jquery")
+ @Scripts.Render("~/bundles/bootstrap")
+ @Scripts.Render("~/plugins/slimScroll")
+  @Scripts.Render("~/bundles/inspinia")
+
+ @Styles.Render("~/Content/plugins/izitoast/iziToast.min")
+ <!-- Skin config script - only for demo purpose-->
+ @Scripts.Render("~/bundles/skinConfig")
+ @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
+ @Scripts.Render("~/plugins/mascarasDeEntrada")
+ <!-- Handler for local scripts -->
+ @RenderSection("scripts", required: false)
+ <script>
+  $('#menuDesplegar').click(function () {
+   $('#menulateral').removeClass("custom-scrollbar");
+  });
+
+
+  $(document).ready(function () {
+
+   $(".MascaraCantidad").inputmask("decimal", {
+    alias: 'numeric',
+    groupSeparator: ',',
+    digits: 2,
+    integerDigits: 18,
+    digitsOptional: false,
+    placeholder: '0',
+    radixPoint: ".",
+    autoGroup: true
+   });
+
+   $(".MascaraCantidadIndex").inputmask("decimal", {
+    alias: 'numeric',
+    groupSeparator: ',',
+    digits: 2,
+    digitsOptional: false,
+    placeholder: '0',
+    radixPoint: ".",
+    autoGroup: true
+   });
+
+   $(".Telefono").inputmask("(999) 9999-9999");
+
+
+
+   $(".MascaraPorcentaje").inputmask("decimal", {
+    alias: 'numeric',
+    groupSeparator: ',',
+    digits: 2,
+    digitsOptional: false,
+    placeholder: '0',
+    radixPoint: ".",
+    autoGroup: true,
+    min: 0.00,
+    max: 100
+   });
+
+   Inputmask.extendAliases({
+    'decimal': {
+     integerDigits: 18,
+     digits: 2,
+     digitsOptional: false,
+     numericInput: true,
+     autoGroup: true,
+     groupSeparator: ",",
+     radixPoint: ".",
+     placeholder: "0",
+    }
+   });
+
+   $('.decimal').inputmask('decimal');
+
+   $(".MascaraEnteros").inputmask("integer", {
+    alias: 'numeric',
+    groupSeparator: ',',
+    digits: 0,
+    min: 0,
+    digitsOptional: false,
+    placeholder: '0',
+    autoGroup: true
+   });
+  });
+  //PERMITIR SOLO NUMEROS
+  $(document).ready(function () {
+   $(".soloNumero").ForceNumericOnly();
+  });
+
+  jQuery.fn.ForceNumericOnly =
+          function () {
+           return this.each(function () {
+            $(this).keydown(function (e) {
+             var key = e.charCode || e.keyCode || 0;
+             // allow backspace, tab, delete, arrows, numbers and keypad numbers ONLY
+             return (
+                key == 8 ||
+                key == 9 ||
+                key == 46 ||
+                key == 190 ||
+                key == 110 ||
+               (key >= 37 && key <= 40) ||
+               (key >= 48 && key <= 57) ||
+               (key >= 96 && key <= 105));
+            });
+           });
+          };
+     
+  setTimeout(() => {
+
+  }, 2000);
+ </script>
+</body>
+</html>

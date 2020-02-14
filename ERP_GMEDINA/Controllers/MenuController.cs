@@ -14,23 +14,20 @@ namespace ERP_GMEDINA.Controllers
 		// GET: Menu
 
 		[SessionManager("Menu/Index")]
-		public ActionResult Index(int idmenu)
+		public ActionResult Index(/*int idmenu*/)
         {
-            if(idmenu != 0)
-            {
+            //if(idmenu != 0)
+            //{
                 int idUsuario = (int)HttpContext.Session["UserLogin"];
-                //tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == idUsuario).FirstOrDefault();
-                //Session["sesionUsuario"] = sesionUsuario;
-                Session["sesionIdMenu"] = idmenu;
+                //Session["sesionIdMenu"] = idmenu;
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("MenuPrincipal");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("MenuPrincipal");
+            //}
         }
 
-        //[SessionManager("Menu/MenuPrincipal")]
         public ActionResult MenuPrincipal()
         {
            // tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();

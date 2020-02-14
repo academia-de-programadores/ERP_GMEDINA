@@ -9,7 +9,7 @@
 			@{
                 //var oUsuario = (ERP_GMEDINA.Models.UDP_Acce_Login_Result)HttpContext.Current.Session["sesionUsuario"];
                 var oUsuario = HttpContext.Current.Session["UserName"];
-            string nombreUsuario = oUsuario.ToString();
+            string nombreUsuario = oUsuario?.ToString();
             }			
 		
 

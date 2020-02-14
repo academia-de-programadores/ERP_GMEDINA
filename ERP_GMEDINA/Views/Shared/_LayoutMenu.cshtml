@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal | ERP GMEDINA</title>
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            text-align: center;
+            left: 0;
+        }
+    </style>
+    @Styles.Render("~/Content/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <br />
+        <footer class="base">
+            <p>&copy; @DateTime.Now.Year - Asociación Hondureña de Maquiladores &copy;</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

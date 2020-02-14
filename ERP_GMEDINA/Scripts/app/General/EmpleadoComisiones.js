@@ -156,7 +156,8 @@ $('#btnCreateRegistroComisiones').click(function () {
 
     if (ValidarCamposCrear(Empleado, Ingreso, Total)) {
 
-        //BLOQUEAR EL BOTON DE CREAR        $("#btnCreateRegistroComisiones").attr("disabled", true);
+        //BLOQUEAR EL BOTON DE CREAR       
+        $("#btnCreateRegistroComisiones").attr("disabled", true);
         //CONVERTIR EN ARRAY EL TOTAL A PARTIR DEL SEPARADOR DE MILLARES
         var indicest = $("#Crear #TotalVenta").val().split(",");
         //VARIABLE CONTENEDORA DEL TOTAL
@@ -193,7 +194,7 @@ $('#btnCreateRegistroComisiones').click(function () {
                     });
                 }
                 else {
-                    //REFRESCAR LA DATA DEL DATATABLE
+                    //REFRESCAR LA DATA DEL DATATABLE                    
                     cargarGridComisiones();
                     //OCULTAR MODAL DE CREACION
                     $("#AgregarEmpleadoComisiones").modal('hide');

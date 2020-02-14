@@ -1,51 +1,56 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal | ERP GMEDINA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ERP GMEDINA | @ViewBag.Title</title>
+    @Styles.Render("~/Content/Style")
+    @Styles.Render("~/Content/font-Style")
+    @Styles.Render("~/Content/DataTabla")
+    @Styles.Render("~/Content/picker")
     <style>
-        footer{
-            position:fixed; 
-            bottom: 0px;
-            width:100%;
-            text-align:center;
-            left:0;
+        .AsteriscoRojo:after {
+            content: "*";
+            color: red;
         }
     </style>
-    @Styles.Render("~/Content/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
-    <div class="container body-content">
-        @RenderBody()
-        <br />
-        <footer class="base">
-            <p>&copy; @DateTime.Now.Year - Asociación Hondureña de Maquiladores &copy;</p>
-        </footer>
+
+    <!-- Wrapper-->
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        @Html.Partial("_NavigationFacturacion")
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg">
+
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar")
+
+            <!-- Main view  -->
+            @RenderBody()
+
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+
+        </div>
+        <!-- End page wrapper-->
+
     </div>
+    <!-- End wrapper-->
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/Menu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @Scripts.Render("~/Scripts/DataTabla")
+    @Scripts.Render("~/Scripts/picker")
     @RenderSection("scripts", required: false)
 </body>
 </html>
