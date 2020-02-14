@@ -7387,7 +7387,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Acce_tbRolesUsuario_Delete", usu_IdParameter, rol_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbRolesUsuario_Insert(Nullable<int> usu_Id, Nullable<int> rol_Id, Nullable<int> rolu_UsuarioCrea, Nullable<System.DateTime> rolu_FechaCrea)
+        public virtual ObjectResult<UDP_Acce_tbRolesUsuario_Insert_Result> UDP_Acce_tbRolesUsuario_Insert(Nullable<int> usu_Id, Nullable<int> rol_Id, Nullable<int> rolu_UsuarioCrea, Nullable<System.DateTime> rolu_FechaCrea)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -7405,7 +7405,7 @@
                 new ObjectParameter("rolu_FechaCrea", rolu_FechaCrea) :
                 new ObjectParameter("rolu_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbRolesUsuario_Insert", usu_IdParameter, rol_IdParameter, rolu_UsuarioCreaParameter, rolu_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbRolesUsuario_Insert_Result>("UDP_Acce_tbRolesUsuario_Insert", usu_IdParameter, rol_IdParameter, rolu_UsuarioCreaParameter, rolu_FechaCreaParameter);
         }
     
         public virtual int UDP_Acce_tbRolesUsuario_Update(Nullable<int> rolu_Id, Nullable<int> rol_Id, Nullable<int> usu_Id, Nullable<int> rolu_UsuarioCrea, Nullable<System.DateTime> rolu_FechaCrea)
@@ -7450,7 +7450,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Estado", usu_IdParameter, usu_EsActivoParameter, usu_RazonInactivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_Insert_Result> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
         {
             var usu_NombreUsuarioParameter = usu_NombreUsuario != null ?
                 new ObjectParameter("usu_NombreUsuario", usu_NombreUsuario) :
@@ -7488,10 +7488,10 @@
                 new ObjectParameter("emp_Id", emp_Id) :
                 new ObjectParameter("emp_Id", typeof(short));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Insert_Result>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_PasswordRestore(Nullable<int> usu_Id, string usu_Password)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_PasswordRestore_Result> UDP_Acce_tbUsuario_PasswordRestore(Nullable<int> usu_Id, string usu_Password)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -7501,10 +7501,10 @@
                 new ObjectParameter("usu_Password", usu_Password) :
                 new ObjectParameter("usu_Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_PasswordRestore", usu_IdParameter, usu_PasswordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_PasswordRestore_Result>("UDP_Acce_tbUsuario_PasswordRestore", usu_IdParameter, usu_PasswordParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_PasswordUpdate(Nullable<int> usu_Id, string usu_Password)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_PasswordUpdate_Result> UDP_Acce_tbUsuario_PasswordUpdate(Nullable<int> usu_Id, string usu_Password)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -7514,7 +7514,7 @@
                 new ObjectParameter("usu_Password", usu_Password) :
                 new ObjectParameter("usu_Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_PasswordUpdate", usu_IdParameter, usu_PasswordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_PasswordUpdate_Result>("UDP_Acce_tbUsuario_PasswordUpdate", usu_IdParameter, usu_PasswordParameter);
         }
     
         public virtual ObjectResult<string> UDP_Acce_tbUsuario_Select()
@@ -7522,7 +7522,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Select");
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -7564,7 +7564,7 @@
                 new ObjectParameter("emp_Id", emp_Id) :
                 new ObjectParameter("emp_Id", typeof(short));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Update_Result>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbDeduccionImpuestoVecinal_Insert(Nullable<int> emp_Id, Nullable<decimal> dimv_MontoTotal, Nullable<decimal> dimv_CuotaAPagar, Nullable<int> timv_UsuarioCrea, Nullable<System.DateTime> timv_FechaCrea)

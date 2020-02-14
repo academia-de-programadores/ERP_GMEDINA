@@ -26632,7 +26632,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <Parameter Name="usu_Id" Mode="In" Type="Int32" />
             <Parameter Name="rol_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Acce_tbRolesUsuario_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Acce_tbRolesUsuario_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Acce_tbRolesUsuario_Insert_Result)">
             <Parameter Name="usu_Id" Mode="In" Type="Int32" />
             <Parameter Name="rol_Id" Mode="In" Type="Int32" />
             <Parameter Name="rolu_UsuarioCrea" Mode="In" Type="Int32" />
@@ -26650,7 +26650,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <Parameter Name="usu_EsActivo" Mode="In" Type="Boolean" />
             <Parameter Name="usu_RazonInactivo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Acce_tbUsuario_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Acce_tbUsuario_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Acce_tbUsuario_Insert_Result)">
             <Parameter Name="usu_NombreUsuario" Mode="In" Type="String" />
             <Parameter Name="usu_Password" Mode="In" Type="String" />
             <Parameter Name="usu_Nombres" Mode="In" Type="String" />
@@ -26661,16 +26661,16 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int16" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Acce_tbUsuario_PasswordRestore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Acce_tbUsuario_PasswordRestore" ReturnType="Collection(ERP_GMEDINAModel.UDP_Acce_tbUsuario_PasswordRestore_Result)">
             <Parameter Name="usu_Id" Mode="In" Type="Int32" />
             <Parameter Name="usu_Password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Acce_tbUsuario_PasswordUpdate" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Acce_tbUsuario_PasswordUpdate" ReturnType="Collection(ERP_GMEDINAModel.UDP_Acce_tbUsuario_PasswordUpdate_Result)">
             <Parameter Name="usu_Id" Mode="In" Type="Int32" />
             <Parameter Name="usu_Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Acce_tbUsuario_Select" ReturnType="Collection(String)" />
-          <FunctionImport Name="UDP_Acce_tbUsuario_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Acce_tbUsuario_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Acce_tbUsuario_Update_Result)">
             <Parameter Name="usu_Id" Mode="In" Type="Int32" />
             <Parameter Name="usu_NombreUsuario" Mode="In" Type="String" />
             <Parameter Name="usu_Nombres" Mode="In" Type="String" />
@@ -50515,6 +50515,21 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
         <ComplexType Name="UDP_Inv_tbTipoSalida_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Acce_tbUsuario_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Acce_tbUsuario_PasswordRestore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Acce_tbUsuario_PasswordUpdate_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Acce_tbUsuario_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Acce_tbRolesUsuario_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52658,14 +52673,44 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <FunctionImportMapping FunctionImportName="UDP_Acce_tbRol_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbRol_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Acce_tbRolEstado_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbRolEstado_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Acce_tbRolesUsuario_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbRolesUsuario_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbRolesUsuario_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbRolesUsuario_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbRolesUsuario_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbRolesUsuario_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Acce_tbRolesUsuario_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Acce_tbRolesUsuario_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbRolesUsuario_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_Estado" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_Estado" />
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_PasswordRestore" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_PasswordRestore" />
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_PasswordUpdate" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_PasswordUpdate" />
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Acce_tbUsuario_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_PasswordRestore" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_PasswordRestore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Acce_tbUsuario_PasswordRestore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_PasswordUpdate" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_PasswordUpdate" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Acce_tbUsuario_PasswordUpdate_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_Select" />
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbUsuario_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Acce_tbUsuario_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Acce_tbUsuario_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionImpuestoVecinal_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionImpuestoVecinal_Insert" />
           <FunctionImportMapping FunctionImportName="SDP_Gral_tbEmpleado_Select" FunctionName="ERP_GMEDINAModel.Store.SDP_Gral_tbEmpleado_Select">
             <ResultMapping>

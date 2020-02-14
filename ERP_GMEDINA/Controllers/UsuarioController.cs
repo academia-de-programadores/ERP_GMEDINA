@@ -161,7 +161,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     try
                     {
-                        List = db.UDP_Acce_tbUsuario_Insert(tbUsuario.usu_NombreUsuario, usu_Password, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo,tbUsuario.usu_EsActivo, tbUsuario.usu_EsAdministrador ,tbUsuario.suc_Id, tbUsuario.emp_Id);
+                        List = db.UDP_Acce_tbUsuario_Insert(tbUsuario.usu_NombreUsuario, usu_Password, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo,tbUsuario.usu_EsActivo, tbUsuario.usu_EsAdministrador ,tbUsuario.suc_Id, (short)tbUsuario.emp_Id);
                         foreach (UDP_Acce_tbUsuario_Insert_Result Usuario in List)
                             MsjError = Usuario.MensajeError;
                         if (MsjError.StartsWith("-1"))
@@ -247,7 +247,7 @@ namespace ERP_GMEDINA.Controllers
                     IEnumerable<object> List = null;
                     var MsjError = "0";
                     List = db.UDP_Acce_tbUsuario_Update(tbUsuario.usu_Id, tbUsuario.usu_NombreUsuario, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo, usu_EsActivo, tbUsuario.usu_RazonInactivo, tbUsuario.usu_EsAdministrador,
-                        tbUsuario.suc_Id, tbUsuario.emp_Id);
+                        tbUsuario.suc_Id, (short)tbUsuario.emp_Id);
                     foreach (ERP_GMEDINA.Models.UDP_Acce_tbUsuario_Update_Result Usuario in List)
                         MsjError = Usuario.MensajeError;
 
@@ -309,7 +309,7 @@ namespace ERP_GMEDINA.Controllers
                     IEnumerable<object> List = null;
                     var MsjError = "0";
                     List = db.UDP_Acce_tbUsuario_Update(tbUsuario.usu_Id, tbUsuario.usu_NombreUsuario, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo, usu_EsActivo, tbUsuario.usu_RazonInactivo, tbUsuario.usu_EsAdministrador,
-                        tbUsuario.suc_Id, tbUsuario.emp_Id);
+                        tbUsuario.suc_Id, (short)tbUsuario.emp_Id);
                     foreach (UDP_Acce_tbUsuario_Update_Result Usuario in List)
                         MsjError = Usuario.MensajeError;
 

@@ -38,6 +38,5 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
-        public virtual tbPeriodos tbPeriodos { get; set; }
     }
 }
