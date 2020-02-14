@@ -2,11 +2,11 @@
 @using ERP_GMEDINA.Models
 
 @{
-    var sucursal = new ERP_GMEDINA.Models.tbSucursal();
+    var sucursal = new ERP_GMEDINA.Models.tbSucursales();
 }
 
 @{
-    var test = new ERP_GMEDINA.Models.tbSucursal();
+    var test = new ERP_GMEDINA.Models.tbSucursales();
 }
 
 @{
@@ -46,8 +46,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => sucursal.suc_Descripcion, new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.tbMovimientoCaja.tbCaja.tbSucursal.suc_Descripcion, new { htmlAttributes = new { id = "sucursales", @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.tbMovimientoCaja.tbCaja.tbSucursal.suc_Descripcion)
+                                    @Html.EditorFor(model => model.tbMovimientoCaja.tbCaja.tbSucursales.suc_Descripcion, new { htmlAttributes = new { id = "sucursales", @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.tbMovimientoCaja.tbCaja.tbSucursales.suc_Descripcion)
                                 </div>
 
                                 @Html.LabelFor(model => model.tbMovimientoCaja.cja_Id, new { @class = "control-label col-md-2" })
@@ -62,7 +62,7 @@
                                     @Html.EditorFor(model => model.mocja_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.mocja_Id, "", new { style = "Color:red" })
                                 </div>
-                                @*@Html.LabelFor(model => model.tbMovimientoCaja.tbCaja.tbSucursal.suc_Descripcion, "Moneda", new { @class = "control-label col-md-2" })*@
+                                @*@Html.LabelFor(model => model.tbMovimientoCaja.tbCaja.tbSucursales.suc_Descripcion, "Moneda", new { @class = "control-label col-md-2" })*@
                                 <label class="control-label col-md-2" id="moneda">Moneda</label>
                                  <div class="col-md-4">
                                     <select id="mnda_Id" name="mnda_Id" class="form-control select2 select2-hidden-accessible"
