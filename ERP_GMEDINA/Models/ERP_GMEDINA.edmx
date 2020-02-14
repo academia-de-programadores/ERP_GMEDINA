@@ -14534,6 +14534,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+          <End Role="tbPeriodos" Type="Self.tbPeriodos" Multiplicity="1" />
+          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPeriodos">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_FrecuenciaEnDias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
           <End Role="tbAFP" Type="Self.tbAFP" Multiplicity="1" />
           <End Role="tbDeduccionAFP" Type="Self.tbDeduccionAFP" Multiplicity="*" />
@@ -25999,6 +26011,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
             <End Role="tbTechoImpuestoVecinal" EntitySet="tbTechoImpuestoVecinal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" Association="Self.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id" Association="Self.FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
             <End Role="tbAFP" EntitySet="tbAFP" />
             <End Role="tbDeduccionAFP" EntitySet="tbDeduccionAFP" />
@@ -28036,6 +28052,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbTipoPlanillaDetalleIngreso" Relationship="Self.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbTipoPlanillaDetalleIngreso" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbDecimoTercerMes" Relationship="Self.FK_Plani_tbCatalogoDePlanillas_Plani_tbDecimoTercerMes_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbDecimoTercerMes" />
+          <NavigationProperty Name="tbPeriodos" Relationship="ERP_GMEDINA2Model.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" FromRole="tbCatalogoDePlanillas" ToRole="tbPeriodos" />
         </EntityType>
         <EntityType Name="tbDecimoCuartoMes">
           <Key>
@@ -28452,6 +28469,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINA2Model.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbCatalogoDePlanillas" />
         </EntityType>
         <EntityType Name="tbPorcentajeMotivoLiquidacion">
           <Key>
@@ -50209,6 +50227,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbBodega" EntitySet="tbBodega" />
             <End Role="tbSucursal" EntitySet="tbSucursal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" Association="ERP_GMEDINA2Model.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+            <End Role="tbPeriodos" EntitySet="tbPeriodos" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SDP_Acce_GetObjetos_Result">
           <Property Type="Int32" Name="obj_Id" Nullable="false" />
@@ -52062,6 +52084,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Principal>
             <Dependent Role="tbSucursal">
               <PropertyRef Name="bod_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo">
+          <End Type="ERP_GMEDINA2Model.tbPeriodos" Role="tbPeriodos" Multiplicity="1" />
+          <End Type="ERP_GMEDINA2Model.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPeriodos">
+              <PropertyRef Name="peri_IdPeriodo" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_FrecuenciaEnDias" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
