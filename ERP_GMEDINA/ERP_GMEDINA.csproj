@@ -386,6 +386,7 @@
     <Compile Include="Helpers\ReportePlanilla.cs" />
     <Compile Include="Models\cActivo.cs" />
     <Compile Include="Models\cDepartamento.cs" />
+    <Compile Include="Models\cDropDownList.cs" />
     <Compile Include="Models\cMinorista.cs" />
     <Compile Include="Models\ConteoParametro_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
@@ -396,6 +397,9 @@
     <Compile Include="Models\DatosConsumidorFinal.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatosProfesionales.cs" />
+    <Compile Include="Models\DatosProfesionalesArray.cs" />
+    <Compile Include="Models\DatosProfessionalesEdit.cs" />
     <Compile Include="Models\EmpleadosVendedores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -441,16 +445,49 @@
     <Compile Include="Models\Facturacion\Ventas\SolicitudCredito.cs" />
     <Compile Include="Models\Facturacion\Ventas\VistaCliente.cs" />
     <Compile Include="Models\Facturacion\Ventas\VistaFactura.cs" />
+    <Compile Include="Models\FechaPlanillaViewModel.cs" />
     <Compile Include="Models\General\Catalogos\Genero.cs" />
     <Compile Include="Models\General\Catalogos\Nacionalidad.cs" />
+    <Compile Include="Models\Inventario\Catalogo\departamento.cs" />
+    <Compile Include="Models\Inventario\Catalogo\EstadoCategoria.cs" />
+    <Compile Include="Models\Inventario\Catalogo\EstadoInventariosFisico.cs" />
+    <Compile Include="Models\Inventario\Catalogo\estadomovimientos.cs" />
+    <Compile Include="Models\Inventario\Catalogo\Estados.cs" />
+    <Compile Include="Models\Inventario\Catalogo\EstadoSubCategoria.cs" />
+    <Compile Include="Models\Inventario\Catalogo\InventariosFisicos.cs" />
+    <Compile Include="Models\Inventario\Catalogo\InventariosFisicosDetalle.cs" />
+    <Compile Include="Models\Inventario\Catalogo\ModelERP.Context.cs" />
+    <Compile Include="Models\Inventario\Catalogo\municipios.cs" />
+    <Compile Include="Models\Inventario\Catalogo\Productos.cs" />
+    <Compile Include="Models\Inventario\Catalogo\ProductosCategorias.cs" />
+    <Compile Include="Models\Inventario\Catalogo\ProductosSubCategorias.cs" />
+    <Compile Include="Models\Inventario\Catalogo\TipoDevolucion.cs" />
+    <Compile Include="Models\Inventario\Catalogo\TipoEntrada.cs" />
+    <Compile Include="Models\Inventario\Catalogo\TipoSalida.cs" />
+    <Compile Include="Models\Inventario\Catalogo\UnidadMedida.cs" />
+    <Compile Include="Models\Inventario\Configuracion\Empleado.cs" />
+    <Compile Include="Models\Inventario\Configuracion\Parametros.cs" />
+    <Compile Include="Models\Inventario\Configuracion\proveedor.cs" />
+    <Compile Include="Models\Inventario\Inventario\Bodega.cs" />
+    <Compile Include="Models\Inventario\Inventario\BodegaDetalle.cs" />
+    <Compile Include="Models\Inventario\Inventario\Box.cs" />
+    <Compile Include="Models\Inventario\Inventario\BoxDetalle.cs" />
+    <Compile Include="Models\Inventario\Inventario\ConsultarExistenciaProductos.cs" />
+    <Compile Include="Models\Inventario\Inventario\DetalleEntrada.cs" />
+    <Compile Include="Models\Inventario\Inventario\Entrada.cs" />
     <Compile Include="Models\Inventario\Inventario\EstadoBodega.cs" />
+    <Compile Include="Models\Inventario\Inventario\InventariosFisicos.cs" />
+    <Compile Include="Models\Inventario\Inventario\InventariosFisicosDetalle.cs" />
     <Compile Include="Models\Inventario\Inventario\Salida.cs" />
+    <Compile Include="Models\Inventario\Inventario\SalidaDetalle.cs" />
     <Compile Include="Models\Listado_CAI_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ObtenerRol_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Personas.cs" />
+    <Compile Include="Models\PersonasData.cs" />
     <Compile Include="Models\Planillas\Configuraciones\cAcumuladosISR.cs" />
     <Compile Include="Models\Planillas\Configuraciones\cAFP.cs" />
     <Compile Include="Models\Planillas\Configuraciones\cAuxilioDeCesantias.cs" />
