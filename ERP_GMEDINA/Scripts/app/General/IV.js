@@ -290,6 +290,7 @@ $("#btnCerrarEditar").click(function () {
 $('#btnRegresarIV').click(function () {
     $("#EditarIVConfirmacion").modal('hide');
     $("#EditarIV").modal();
+    $("#btnEditarIV").attr("disabled", false);
 });
 
 
