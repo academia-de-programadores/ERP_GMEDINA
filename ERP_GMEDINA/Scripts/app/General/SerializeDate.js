@@ -51,7 +51,7 @@ function userModelState(sPantalla) {
     }
 
     // recuperar view model con la información del usuario
-    var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
+    var VM_ModelState = JSON.parse(localStorage.getItem("VM_ModelState"));
 
     // validar si la información del usuario ya se cargó en el AJAX del menú
     if (VM_ModelState == '' || VM_ModelState == null) {
