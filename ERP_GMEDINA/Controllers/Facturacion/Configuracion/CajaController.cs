@@ -92,7 +92,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 SucursalId = (int)User.suc_Id;
             }
-            var Sucursal = db.tbSucursal.Select(s => new
+            var Sucursal = db.tbSucursales.Select(s => new
             {
                 suc_Id = s.suc_Id,
                 suc_Descripcion = s.suc_Descripcion
@@ -149,7 +149,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 SucursalId = (int)User.suc_Id;
             }
-            var Sucursal = db.tbSucursal.Select(s => new
+            var Sucursal = db.tbSucursales.Select(s => new
             {
                 suc_Id = s.suc_Id,
                 suc_Descripcion = s.suc_Descripcion
@@ -172,7 +172,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 SucursalId = (int)User.suc_Id;
             }
-            var Sucursal = db.tbSucursal.Select(s => new
+            var Sucursal = db.tbSucursales.Select(s => new
             {
                 suc_Id = s.suc_Id,
                 suc_Descripcion = s.suc_Descripcion

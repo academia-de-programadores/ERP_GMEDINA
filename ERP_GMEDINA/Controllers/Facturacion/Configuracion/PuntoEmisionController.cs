@@ -26,8 +26,8 @@ namespace ERP_ZORZAL.Controllers
             var tbpuntoemision = db.tbPuntoEmision.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             
             //Reporte
-            tbSucursal Sucursal = new tbSucursal();
-            ViewBag.ReporteSucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion", Sucursal.suc_Id);
+            tbSucursales Sucursal = new tbSucursales();
+            ViewBag.ReporteSucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion", Sucursal.suc_Id);
 
             return View(tbpuntoemision.ToList());
         }
