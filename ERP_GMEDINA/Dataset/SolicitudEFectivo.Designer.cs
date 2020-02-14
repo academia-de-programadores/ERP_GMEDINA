@@ -303,6 +303,8 @@ namespace ERP_GMEDINA.Dataset {
             
             private global::System.Data.DataColumn columndeno_Descripcion;
             
+            private global::System.Data.DataColumn columndeno_valor;
+            
             private global::System.Data.DataColumn columnsoled_CantidadSolicitada;
             
             private global::System.Data.DataColumn columnMontoSolicitado;
@@ -442,6 +444,14 @@ namespace ERP_GMEDINA.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn deno_valorColumn {
+                get {
+                    return this.columndeno_valor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn soled_CantidadSolicitadaColumn {
                 get {
                     return this.columnsoled_CantidadSolicitada;
@@ -509,7 +519,7 @@ namespace ERP_GMEDINA.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbSolicitudEfectivo_ImprimirRow AddUDP_Vent_tbSolicitudEfectivo_ImprimirRow(string cja_Descripcion, string suc_Descripcion, int mocja_Id, string TipoSolicitus, System.DateTime solef_FechaEntrega, string UsuarioEntrega, string Cajero, string mnda_Nombre, short deno_Id, string deno_Descripcion, short soled_CantidadSolicitada, decimal MontoSolicitado, short soled_CantidadEntregada, decimal MontoEntregado) {
+            public UDP_Vent_tbSolicitudEfectivo_ImprimirRow AddUDP_Vent_tbSolicitudEfectivo_ImprimirRow(string cja_Descripcion, string suc_Descripcion, int mocja_Id, string TipoSolicitus, System.DateTime solef_FechaEntrega, string UsuarioEntrega, string Cajero, string mnda_Nombre, short deno_Id, string deno_Descripcion, decimal deno_valor, short soled_CantidadSolicitada, decimal MontoSolicitado, short soled_CantidadEntregada, decimal MontoEntregado) {
                 UDP_Vent_tbSolicitudEfectivo_ImprimirRow rowUDP_Vent_tbSolicitudEfectivo_ImprimirRow = ((UDP_Vent_tbSolicitudEfectivo_ImprimirRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -524,6 +534,7 @@ namespace ERP_GMEDINA.Dataset {
                         null,
                         deno_Id,
                         deno_Descripcion,
+                        deno_valor,
                         soled_CantidadSolicitada,
                         MontoSolicitado,
                         soled_CantidadEntregada,
@@ -562,6 +573,7 @@ namespace ERP_GMEDINA.Dataset {
                 this.columnsoled_Id = base.Columns["soled_Id"];
                 this.columndeno_Id = base.Columns["deno_Id"];
                 this.columndeno_Descripcion = base.Columns["deno_Descripcion"];
+                this.columndeno_valor = base.Columns["deno_valor"];
                 this.columnsoled_CantidadSolicitada = base.Columns["soled_CantidadSolicitada"];
                 this.columnMontoSolicitado = base.Columns["MontoSolicitado"];
                 this.columnsoled_CantidadEntregada = base.Columns["soled_CantidadEntregada"];
@@ -595,6 +607,8 @@ namespace ERP_GMEDINA.Dataset {
                 base.Columns.Add(this.columndeno_Id);
                 this.columndeno_Descripcion = new global::System.Data.DataColumn("deno_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeno_Descripcion);
+                this.columndeno_valor = new global::System.Data.DataColumn("deno_valor", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeno_valor);
                 this.columnsoled_CantidadSolicitada = new global::System.Data.DataColumn("soled_CantidadSolicitada", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsoled_CantidadSolicitada);
                 this.columnMontoSolicitado = new global::System.Data.DataColumn("MontoSolicitado", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -629,6 +643,7 @@ namespace ERP_GMEDINA.Dataset {
                 this.columndeno_Id.AllowDBNull = false;
                 this.columndeno_Descripcion.AllowDBNull = false;
                 this.columndeno_Descripcion.MaxLength = 50;
+                this.columndeno_valor.AllowDBNull = false;
                 this.columnsoled_CantidadSolicitada.AllowDBNull = false;
                 this.columnMontoSolicitado.ReadOnly = true;
                 this.columnsoled_CantidadEntregada.AllowDBNull = false;
@@ -926,6 +941,17 @@ namespace ERP_GMEDINA.Dataset {
                 }
                 set {
                     this[this.tableUDP_Vent_tbSolicitudEfectivo_Imprimir.deno_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal deno_valor {
+                get {
+                    return ((decimal)(this[this.tableUDP_Vent_tbSolicitudEfectivo_Imprimir.deno_valorColumn]));
+                }
+                set {
+                    this[this.tableUDP_Vent_tbSolicitudEfectivo_Imprimir.deno_valorColumn] = value;
                 }
             }
             
@@ -1229,6 +1255,7 @@ namespace ERP_GMEDINA.Dataset.SolicitudEFectivoTableAdapters {
             tableMapping.ColumnMappings.Add("soled_Id", "soled_Id");
             tableMapping.ColumnMappings.Add("deno_Id", "deno_Id");
             tableMapping.ColumnMappings.Add("deno_Descripcion", "deno_Descripcion");
+            tableMapping.ColumnMappings.Add("deno_valor", "deno_valor");
             tableMapping.ColumnMappings.Add("soled_CantidadSolicitada", "soled_CantidadSolicitada");
             tableMapping.ColumnMappings.Add("MontoSolicitado", "MontoSolicitado");
             tableMapping.ColumnMappings.Add("soled_CantidadEntregada", "soled_CantidadEntregada");
@@ -1240,7 +1267,7 @@ namespace ERP_GMEDINA.Dataset.SolicitudEFectivoTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString1"].ConnectionString;
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
