@@ -229,8 +229,8 @@ $("#btnCerrarConfirmarEditar").click(function () {
 
 //editar 3 ejecutar 
 $(document).on("click", "#btnConfirmarEditar", function () {
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
-    $("#btnConfirmarEditar").attr("disabled", false);
+    //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
+    $("#btnConfirmarEditar").attr("disabled", true);
 
     var recibe = ($('#Editar #peri_RecibeSeptimoDia').is(':checked')) ? true : false;
 
