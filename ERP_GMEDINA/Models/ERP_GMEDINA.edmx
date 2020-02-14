@@ -6818,6 +6818,510 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DatosCons__fact___365CE7DF">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___37510C18">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___38453051">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3939548A">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3A2D78C3">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3B219CFC">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3C15C135">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3D09E56E">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3DFE09A7">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3EF22DE0">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___3FE65219">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___40DA7652">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___41CE9A8B">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___42C2BEC4">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___43B6E2FD">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___44AB0736">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___459F2B6F">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___46934FA8">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___478773E1">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___487B981A">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___496FBC53">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___4A63E08C">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___4B5804C5">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___4C4C28FE">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___4D404D37">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___4E347170">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___4F2895A9">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___501CB9E2">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___5110DE1B">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___52050254">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___52F9268D">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___53ED4AC6">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___54E16EFF">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___55D59338">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___56C9B771">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___57BDDBAA">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___58B1FFE3">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___59A6241C">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___5A9A4855">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___5B8E6C8E">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___5C8290C7">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosCons__fact___5D76B500">
+          <End Role="tbFactura" Type="Self.tbFactura" Multiplicity="1" />
+          <End Role="DatosConsumidorFinal" Type="Self.DatosConsumidorFinal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFactura">
+              <PropertyRef Name="fact_Id" />
+            </Principal>
+            <Dependent Role="DatosConsumidorFinal">
+              <PropertyRef Name="fact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbCliente__clte___153BEB36">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
@@ -7826,6 +8330,78 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tbCliente__mun_C__00BFF13D">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__01B41576">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__02A839AF">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__039C5DE8">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__04908221">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__0584A65A">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbCliente__mun_C__09E968C4">
           <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
           <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
@@ -8327,6 +8903,942 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Principal>
             <Dependent Role="tbCliente_copy1">
               <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__5E6AD939">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__5F5EFD72">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__605321AB">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__614745E4">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__623B6A1D">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__632F8E56">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6423B28F">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6517D6C8">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__660BFB01">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__67001F3A">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__67F44373">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__68E867AC">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__69DC8BE5">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6AD0B01E">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6BC4D457">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6CB8F890">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6DAD1CC9">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6EA14102">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__6F95653B">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__70898974">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__717DADAD">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7271D1E6">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7365F61F">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__745A1A58">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__754E3E91">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__764262CA">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__77368703">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__782AAB3C">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__791ECF75">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7A12F3AE">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7B0717E7">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7BFB3C20">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7CEF6059">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7DE38492">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7ED7A8CB">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__mun_C__7FCBCD04">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0678CA93">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__076CEECC">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__08611305">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0955373E">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0A495B77">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0B3D7FB0">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0C31A3E9">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0D25C822">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0E19EC5B">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__0F0E1094">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__100234CD">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__10F65906">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__11EA7D3F">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__12DEA178">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__13D2C5B1">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__14C6E9EA">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__15BB0E23">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__16AF325C">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__17A35695">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__18977ACE">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__198B9F07">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__1A7FC340">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__1B73E779">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__1C680BB2">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__1D5C2FEB">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__1E505424">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__1F44785D">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__20389C96">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__212CC0CF">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__2220E508">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__23150941">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__24092D7A">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__24FD51B3">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__25F175EC">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__26E59A25">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__27D9BE5E">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__28CDE297">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__29C206D0">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__2AB62B09">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__2BAA4F42">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__2C9E737B">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCliente__tpi_I__2D9297B4">
+          <End Role="tbTipoIdentificacion" Type="Self.tbTipoIdentificacion" Multiplicity="1" />
+          <End Role="tbCliente_copy1" Type="Self.tbCliente_copy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIdentificacion">
+              <PropertyRef Name="tpi_Id" />
+            </Principal>
+            <Dependent Role="tbCliente_copy1">
+              <PropertyRef Name="tpi_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -21879,6 +23391,174 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbFactura" EntitySet="tbFactura" />
             <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
           </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___365CE7DF" Association="Self.FK__DatosCons__fact___365CE7DF">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___37510C18" Association="Self.FK__DatosCons__fact___37510C18">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___38453051" Association="Self.FK__DatosCons__fact___38453051">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3939548A" Association="Self.FK__DatosCons__fact___3939548A">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3A2D78C3" Association="Self.FK__DatosCons__fact___3A2D78C3">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3B219CFC" Association="Self.FK__DatosCons__fact___3B219CFC">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3C15C135" Association="Self.FK__DatosCons__fact___3C15C135">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3D09E56E" Association="Self.FK__DatosCons__fact___3D09E56E">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3DFE09A7" Association="Self.FK__DatosCons__fact___3DFE09A7">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3EF22DE0" Association="Self.FK__DatosCons__fact___3EF22DE0">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___3FE65219" Association="Self.FK__DatosCons__fact___3FE65219">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___40DA7652" Association="Self.FK__DatosCons__fact___40DA7652">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___41CE9A8B" Association="Self.FK__DatosCons__fact___41CE9A8B">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___42C2BEC4" Association="Self.FK__DatosCons__fact___42C2BEC4">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___43B6E2FD" Association="Self.FK__DatosCons__fact___43B6E2FD">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___44AB0736" Association="Self.FK__DatosCons__fact___44AB0736">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___459F2B6F" Association="Self.FK__DatosCons__fact___459F2B6F">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___46934FA8" Association="Self.FK__DatosCons__fact___46934FA8">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___478773E1" Association="Self.FK__DatosCons__fact___478773E1">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___487B981A" Association="Self.FK__DatosCons__fact___487B981A">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___496FBC53" Association="Self.FK__DatosCons__fact___496FBC53">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___4A63E08C" Association="Self.FK__DatosCons__fact___4A63E08C">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___4B5804C5" Association="Self.FK__DatosCons__fact___4B5804C5">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___4C4C28FE" Association="Self.FK__DatosCons__fact___4C4C28FE">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___4D404D37" Association="Self.FK__DatosCons__fact___4D404D37">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___4E347170" Association="Self.FK__DatosCons__fact___4E347170">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___4F2895A9" Association="Self.FK__DatosCons__fact___4F2895A9">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___501CB9E2" Association="Self.FK__DatosCons__fact___501CB9E2">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___5110DE1B" Association="Self.FK__DatosCons__fact___5110DE1B">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___52050254" Association="Self.FK__DatosCons__fact___52050254">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___52F9268D" Association="Self.FK__DatosCons__fact___52F9268D">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___53ED4AC6" Association="Self.FK__DatosCons__fact___53ED4AC6">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___54E16EFF" Association="Self.FK__DatosCons__fact___54E16EFF">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___55D59338" Association="Self.FK__DatosCons__fact___55D59338">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___56C9B771" Association="Self.FK__DatosCons__fact___56C9B771">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___57BDDBAA" Association="Self.FK__DatosCons__fact___57BDDBAA">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___58B1FFE3" Association="Self.FK__DatosCons__fact___58B1FFE3">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___59A6241C" Association="Self.FK__DatosCons__fact___59A6241C">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___5A9A4855" Association="Self.FK__DatosCons__fact___5A9A4855">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___5B8E6C8E" Association="Self.FK__DatosCons__fact___5B8E6C8E">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___5C8290C7" Association="Self.FK__DatosCons__fact___5C8290C7">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosCons__fact___5D76B500" Association="Self.FK__DatosCons__fact___5D76B500">
+            <End Role="tbFactura" EntitySet="tbFactura" />
+            <End Role="DatosConsumidorFinal" EntitySet="DatosConsumidorFinal" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbCliente__clte___153BEB36" Association="Self.FK__tbCliente__clte___153BEB36">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
@@ -22215,6 +23895,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
           </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__00BFF13D" Association="Self.FK__tbCliente__mun_C__00BFF13D">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__01B41576" Association="Self.FK__tbCliente__mun_C__01B41576">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__02A839AF" Association="Self.FK__tbCliente__mun_C__02A839AF">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__039C5DE8" Association="Self.FK__tbCliente__mun_C__039C5DE8">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__04908221" Association="Self.FK__tbCliente__mun_C__04908221">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__0584A65A" Association="Self.FK__tbCliente__mun_C__0584A65A">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbCliente__mun_C__09E968C4" Association="Self.FK__tbCliente__mun_C__09E968C4">
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
             <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
@@ -22381,6 +24085,318 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           </AssociationSet>
           <AssociationSet Name="FK__tbCliente__mun_C__310335E5" Association="Self.FK__tbCliente__mun_C__310335E5">
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__5E6AD939" Association="Self.FK__tbCliente__mun_C__5E6AD939">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__5F5EFD72" Association="Self.FK__tbCliente__mun_C__5F5EFD72">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__605321AB" Association="Self.FK__tbCliente__mun_C__605321AB">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__614745E4" Association="Self.FK__tbCliente__mun_C__614745E4">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__623B6A1D" Association="Self.FK__tbCliente__mun_C__623B6A1D">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__632F8E56" Association="Self.FK__tbCliente__mun_C__632F8E56">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6423B28F" Association="Self.FK__tbCliente__mun_C__6423B28F">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6517D6C8" Association="Self.FK__tbCliente__mun_C__6517D6C8">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__660BFB01" Association="Self.FK__tbCliente__mun_C__660BFB01">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__67001F3A" Association="Self.FK__tbCliente__mun_C__67001F3A">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__67F44373" Association="Self.FK__tbCliente__mun_C__67F44373">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__68E867AC" Association="Self.FK__tbCliente__mun_C__68E867AC">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__69DC8BE5" Association="Self.FK__tbCliente__mun_C__69DC8BE5">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6AD0B01E" Association="Self.FK__tbCliente__mun_C__6AD0B01E">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6BC4D457" Association="Self.FK__tbCliente__mun_C__6BC4D457">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6CB8F890" Association="Self.FK__tbCliente__mun_C__6CB8F890">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6DAD1CC9" Association="Self.FK__tbCliente__mun_C__6DAD1CC9">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6EA14102" Association="Self.FK__tbCliente__mun_C__6EA14102">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__6F95653B" Association="Self.FK__tbCliente__mun_C__6F95653B">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__70898974" Association="Self.FK__tbCliente__mun_C__70898974">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__717DADAD" Association="Self.FK__tbCliente__mun_C__717DADAD">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7271D1E6" Association="Self.FK__tbCliente__mun_C__7271D1E6">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7365F61F" Association="Self.FK__tbCliente__mun_C__7365F61F">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__745A1A58" Association="Self.FK__tbCliente__mun_C__745A1A58">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__754E3E91" Association="Self.FK__tbCliente__mun_C__754E3E91">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__764262CA" Association="Self.FK__tbCliente__mun_C__764262CA">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__77368703" Association="Self.FK__tbCliente__mun_C__77368703">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__782AAB3C" Association="Self.FK__tbCliente__mun_C__782AAB3C">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__791ECF75" Association="Self.FK__tbCliente__mun_C__791ECF75">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7A12F3AE" Association="Self.FK__tbCliente__mun_C__7A12F3AE">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7B0717E7" Association="Self.FK__tbCliente__mun_C__7B0717E7">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7BFB3C20" Association="Self.FK__tbCliente__mun_C__7BFB3C20">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7CEF6059" Association="Self.FK__tbCliente__mun_C__7CEF6059">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7DE38492" Association="Self.FK__tbCliente__mun_C__7DE38492">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7ED7A8CB" Association="Self.FK__tbCliente__mun_C__7ED7A8CB">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__mun_C__7FCBCD04" Association="Self.FK__tbCliente__mun_C__7FCBCD04">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0678CA93" Association="Self.FK__tbCliente__tpi_I__0678CA93">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__076CEECC" Association="Self.FK__tbCliente__tpi_I__076CEECC">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__08611305" Association="Self.FK__tbCliente__tpi_I__08611305">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0955373E" Association="Self.FK__tbCliente__tpi_I__0955373E">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0A495B77" Association="Self.FK__tbCliente__tpi_I__0A495B77">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0B3D7FB0" Association="Self.FK__tbCliente__tpi_I__0B3D7FB0">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0C31A3E9" Association="Self.FK__tbCliente__tpi_I__0C31A3E9">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0D25C822" Association="Self.FK__tbCliente__tpi_I__0D25C822">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0E19EC5B" Association="Self.FK__tbCliente__tpi_I__0E19EC5B">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__0F0E1094" Association="Self.FK__tbCliente__tpi_I__0F0E1094">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__100234CD" Association="Self.FK__tbCliente__tpi_I__100234CD">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__10F65906" Association="Self.FK__tbCliente__tpi_I__10F65906">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__11EA7D3F" Association="Self.FK__tbCliente__tpi_I__11EA7D3F">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__12DEA178" Association="Self.FK__tbCliente__tpi_I__12DEA178">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__13D2C5B1" Association="Self.FK__tbCliente__tpi_I__13D2C5B1">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__14C6E9EA" Association="Self.FK__tbCliente__tpi_I__14C6E9EA">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__15BB0E23" Association="Self.FK__tbCliente__tpi_I__15BB0E23">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__16AF325C" Association="Self.FK__tbCliente__tpi_I__16AF325C">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__17A35695" Association="Self.FK__tbCliente__tpi_I__17A35695">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__18977ACE" Association="Self.FK__tbCliente__tpi_I__18977ACE">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__198B9F07" Association="Self.FK__tbCliente__tpi_I__198B9F07">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__1A7FC340" Association="Self.FK__tbCliente__tpi_I__1A7FC340">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__1B73E779" Association="Self.FK__tbCliente__tpi_I__1B73E779">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__1C680BB2" Association="Self.FK__tbCliente__tpi_I__1C680BB2">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__1D5C2FEB" Association="Self.FK__tbCliente__tpi_I__1D5C2FEB">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__1E505424" Association="Self.FK__tbCliente__tpi_I__1E505424">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__1F44785D" Association="Self.FK__tbCliente__tpi_I__1F44785D">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__20389C96" Association="Self.FK__tbCliente__tpi_I__20389C96">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__212CC0CF" Association="Self.FK__tbCliente__tpi_I__212CC0CF">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__2220E508" Association="Self.FK__tbCliente__tpi_I__2220E508">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__23150941" Association="Self.FK__tbCliente__tpi_I__23150941">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__24092D7A" Association="Self.FK__tbCliente__tpi_I__24092D7A">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__24FD51B3" Association="Self.FK__tbCliente__tpi_I__24FD51B3">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__25F175EC" Association="Self.FK__tbCliente__tpi_I__25F175EC">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__26E59A25" Association="Self.FK__tbCliente__tpi_I__26E59A25">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__27D9BE5E" Association="Self.FK__tbCliente__tpi_I__27D9BE5E">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__28CDE297" Association="Self.FK__tbCliente__tpi_I__28CDE297">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__29C206D0" Association="Self.FK__tbCliente__tpi_I__29C206D0">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__2AB62B09" Association="Self.FK__tbCliente__tpi_I__2AB62B09">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__2BAA4F42" Association="Self.FK__tbCliente__tpi_I__2BAA4F42">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__2C9E737B" Association="Self.FK__tbCliente__tpi_I__2C9E737B">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
+            <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCliente__tpi_I__2D9297B4" Association="Self.FK__tbCliente__tpi_I__2D9297B4">
+            <End Role="tbTipoIdentificacion" EntitySet="tbTipoIdentificacion" />
             <End Role="tbCliente_copy1" EntitySet="tbCliente_copy1" />
           </AssociationSet>
           <AssociationSet Name="FK__tbCliente__tpi_I__31F75A1E" Association="Self.FK__tbCliente__tpi_I__31F75A1E">
@@ -48093,6 +50109,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <Parameter Name="cred_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cred_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_DatosEncabezado" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_DatosEncabezado_Result)">
+            <Parameter Name="USER_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SDP_Acce_GetObjetos_Result">
           <Property Type="Int32" Name="obj_Id" Nullable="false" />
@@ -49240,15 +51259,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Type="Int32" Name="ped_UsuarioModifica" Nullable="true" />
           <Property Type="DateTime" Name="ped_FechaModifica" Nullable="true" Precision="23" />
         </ComplexType>
-        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_DatosEncabezado_Result">
-          <Property Type="Int32" Name="solef_Id" Nullable="false" />
-          <Property Type="Int32" Name="mocja_Id" Nullable="false" />
-          <Property Type="Int32" Name="solef_UsuarioCrea" Nullable="false" />
-          <Property Type="String" Name="suc_Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Int16" Name="cja_Id" Nullable="false" />
-          <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
-          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
-        </ComplexType>
         <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Details_Result">
           <Property Type="Int32" Name="soled_Id" Nullable="false" />
           <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
@@ -49903,6 +51913,15 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
         </ComplexType>
         <ComplexType Name="UDP_Vent_tbSolicitudCredito_Aprobar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_DatosEncabezado_Result">
+          <Property Type="Int32" Name="solef_Id" Nullable="false" />
+          <Property Type="Int32" Name="mocja_Id" Nullable="false" />
+          <Property Type="Int32" Name="solef_UsuarioCrea" Nullable="false" />
+          <Property Type="String" Name="suc_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Int16" Name="cja_Id" Nullable="false" />
+          <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -58380,6 +60399,19 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudCredito_Aprobar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_DatosEncabezado" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_DatosEncabezado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_DatosEncabezado_Result">
+                <ScalarProperty Name="solef_Id" ColumnName="solef_Id" />
+                <ScalarProperty Name="mocja_Id" ColumnName="mocja_Id" />
+                <ScalarProperty Name="solef_UsuarioCrea" ColumnName="solef_UsuarioCrea" />
+                <ScalarProperty Name="suc_Descripcion" ColumnName="suc_Descripcion" />
+                <ScalarProperty Name="cja_Id" ColumnName="cja_Id" />
+                <ScalarProperty Name="cja_Descripcion" ColumnName="cja_Descripcion" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
