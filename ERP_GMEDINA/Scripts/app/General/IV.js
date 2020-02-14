@@ -56,13 +56,13 @@ $('#btnCreateIV').click(function () {
     var codmuni1 = $("#Crear #mun_Codigo").val();
     var rango1 = $("#Crear #timv_Rango").val();
     var tipoDeduccion1 = $("#Crear #tde_IdTipoDedu").val();
-    var impuesto1 = $("#Crear #timv_Impuesto").val();
-
-	//INHABILITAR EL BOTON
-    $('#btnCreateIV').attr('disabled', true);
+    var impuesto1 = $("#Crear #timv_Impuesto").val();	
 
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     if (DataAnnotationsCrear(codmuni1, tipoDeduccion1, rangoInicio1, rangoFin1, rango1, impuesto1)) {
+
+    	//INHABILITAR EL BOTON
+    	$('#btnCreateIV').attr('disabled', true);
 
         var __RequestVerificati1onToken1 = $("input[name=__RequestVerificationToken]").val();
         var data = {
@@ -627,14 +627,14 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
         //Telefono
         if (TipoDeduccion == "" || TipoDeduccion == "0" || TipoDeduccion == 0) {
             //MOSTRAR DATAANNOTATIONS
-            $("#Crear #Validation_TipoDeduccionRequerida").show();
+            $("#Crear #Validation_TipoDeduccionRequerida").css("display","block");
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Crear #AsteriscoTipoDeduccion").addClass("text-danger");
             ModelState = false;
         }
         else {
             //OCULTAR DATAANNOTATIONS
-            $("#Crear #Validation_TipoDeduccionRequerida").hide();
+            $("#Crear #Validation_TipoDeduccionRequerida").css("display","none");
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Crear #AsteriscoTipoDeduccion").removeClass("text-danger");
         }
