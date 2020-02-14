@@ -642,3 +642,35 @@ namespace ERP_GMEDINA.Controllers
 
 
 
+
+namespace ERP_GMEDINA.Models
+{
+    using System;
+
+    public class 
+        UDP_Vent_tbSolicitudEfectivo_Apertura_Insert_Result
+    {
+        public string MensajeError { get; set; }
+    }
+}
+
+namespace ERP_GMEDINA.Models
+{
+    using System;
+
+    public class UDP_Vent_tbEstadoSolicitudCredito_Insert_Result
+    {
+        public string MensajeError { get; set; }
+    }
+}
+
+
+namespace ERP_GMEDINA.Models
+{
+    using System;
+
+    public class UDP_Vent_tbEstadoSolicitudCredito_Update_Result
+    {
+        public string MensajeError { get; set; }
+    }
+}
