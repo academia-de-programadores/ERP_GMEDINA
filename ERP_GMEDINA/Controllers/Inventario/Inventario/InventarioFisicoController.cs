@@ -188,7 +188,7 @@ namespace ERP_GMEDINA.Controllers
                             INVENTARIOFISICO = db.UDP_Inv_tbInventarioFisico_Insert(tbInventarioFisico.invf_Descripcion
                                                                                     ,tbInventarioFisico.invf_ResponsableBodega
                                                                                     ,tbInventarioFisico.bod_Id
-                                                                                    ,Helpers.InvFisicoActivo
+                                                                                    ,Models.Helpers.InvFisicoActivo
                                                                                     ,tbInventarioFisico.invf_FechaInventario
                                                                                     ,Function.GetUser()
                                                                                     ,Function.DatetimeNow());
@@ -493,7 +493,7 @@ namespace ERP_GMEDINA.Controllers
                 tbInventarioFisico obj = db.tbInventarioFisico.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbInventarioFisico_Update_Estado(id, Helpers.InvFisicoConciliado, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbInventarioFisico_Update_Estado(id, Models.Helpers.InvFisicoConciliado, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbInventarioFisico_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -552,7 +552,7 @@ namespace ERP_GMEDINA.Controllers
                     tbInventarioFisico obj = db.tbInventarioFisico.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Inv_tbInventarioFisico_Update_Estado(id, Helpers.InvFisicoReconteo, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Inv_tbInventarioFisico_Update_Estado(id, Models.Helpers.InvFisicoReconteo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Inv_tbInventarioFisico_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 

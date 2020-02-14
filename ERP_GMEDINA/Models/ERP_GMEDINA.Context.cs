@@ -8982,7 +8982,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Inv_ConsultarExistenciaProductos", sucursalParameter, bodegaParameter, productoParameter, marcaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_SolicitarProducto_ValidacionPorBodega(Nullable<int> iDBodega, string iDProducto)
+        public virtual ObjectResult<UDP_Inv_SolicitarProducto_ValidacionPorBodega_Result> UDP_Inv_SolicitarProducto_ValidacionPorBodega(Nullable<int> iDBodega, string iDProducto)
         {
             var iDBodegaParameter = iDBodega.HasValue ?
                 new ObjectParameter("IDBodega", iDBodega) :
@@ -8992,7 +8992,7 @@
                 new ObjectParameter("IDProducto", iDProducto) :
                 new ObjectParameter("IDProducto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_SolicitarProducto_ValidacionPorBodega", iDBodegaParameter, iDProductoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_SolicitarProducto_ValidacionPorBodega_Result>("UDP_Inv_SolicitarProducto_ValidacionPorBodega", iDBodegaParameter, iDProductoParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbBodega_Insert_Result> UDP_Inv_tbBodega_Insert(string bod_Nombre, Nullable<short> bod_ResponsableBodega, string bod_Direccion, string bod_Correo, string bod_Telefono, string mun_Codigo, Nullable<int> bod_UsuarioCrea, Nullable<System.DateTime> bod_FechaCrea)
@@ -9226,16 +9226,16 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBodegaDetalle_Update_Result>("UDP_Inv_tbBodegaDetalle_Update", bodd_IdParameter, prod_CodigoParameter, bod_IdParameter, bodd_CantidadMinimaParameter, bodd_CantidadMaximaParameter, bodd_PuntoReordenParameter, bodd_UsuarioCreaParameter, bodd_FechaCreaParameter, bodd_UsuarioModificaParameter, bodd_FechaModificaParameter, bodd_CostoParameter, bodd_CostoPromedioParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbBox_Delete(string box_Codigo)
+        public virtual ObjectResult<UDP_Inv_tbBox_Delete_Result> UDP_Inv_tbBox_Delete(string box_Codigo)
         {
             var box_CodigoParameter = box_Codigo != null ?
                 new ObjectParameter("box_Codigo", box_Codigo) :
                 new ObjectParameter("box_Codigo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbBox_Delete", box_CodigoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBox_Delete_Result>("UDP_Inv_tbBox_Delete", box_CodigoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbBox_Insert(string box_Codigo, string box_Descripcion, Nullable<int> bod_Id, Nullable<int> box_UsuarioCrea, Nullable<System.DateTime> box_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbBox_Insert_Result> UDP_Inv_tbBox_Insert(string box_Codigo, string box_Descripcion, Nullable<int> bod_Id, Nullable<int> box_UsuarioCrea, Nullable<System.DateTime> box_FechaCrea)
         {
             var box_CodigoParameter = box_Codigo != null ?
                 new ObjectParameter("box_Codigo", box_Codigo) :
@@ -9257,10 +9257,10 @@
                 new ObjectParameter("box_FechaCrea", box_FechaCrea) :
                 new ObjectParameter("box_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbBox_Insert", box_CodigoParameter, box_DescripcionParameter, bod_IdParameter, box_UsuarioCreaParameter, box_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBox_Insert_Result>("UDP_Inv_tbBox_Insert", box_CodigoParameter, box_DescripcionParameter, bod_IdParameter, box_UsuarioCreaParameter, box_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbBox_Update(string box_Codigo, string box_Descripcion, Nullable<int> bod_Id, Nullable<byte> box_Estado, Nullable<int> box_UsuarioCrea, Nullable<System.DateTime> box_FechaCrea, Nullable<int> box_UsuarioModifica, Nullable<System.DateTime> box_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbBox_Update_Result> UDP_Inv_tbBox_Update(string box_Codigo, string box_Descripcion, Nullable<int> bod_Id, Nullable<byte> box_Estado, Nullable<int> box_UsuarioCrea, Nullable<System.DateTime> box_FechaCrea, Nullable<int> box_UsuarioModifica, Nullable<System.DateTime> box_FechaModifica)
         {
             var box_CodigoParameter = box_Codigo != null ?
                 new ObjectParameter("box_Codigo", box_Codigo) :
@@ -9294,19 +9294,19 @@
                 new ObjectParameter("box_FechaModifica", box_FechaModifica) :
                 new ObjectParameter("box_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbBox_Update", box_CodigoParameter, box_DescripcionParameter, bod_IdParameter, box_EstadoParameter, box_UsuarioCreaParameter, box_FechaCreaParameter, box_UsuarioModificaParameter, box_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBox_Update_Result>("UDP_Inv_tbBox_Update", box_CodigoParameter, box_DescripcionParameter, bod_IdParameter, box_EstadoParameter, box_UsuarioCreaParameter, box_FechaCreaParameter, box_UsuarioModificaParameter, box_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbBoxDetalle_Delete(Nullable<int> boxd_Id)
+        public virtual ObjectResult<UDP_Inv_tbBoxDetalle_Delete_Result> UDP_Inv_tbBoxDetalle_Delete(Nullable<int> boxd_Id)
         {
             var boxd_IdParameter = boxd_Id.HasValue ?
                 new ObjectParameter("boxd_Id", boxd_Id) :
                 new ObjectParameter("boxd_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbBoxDetalle_Delete", boxd_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBoxDetalle_Delete_Result>("UDP_Inv_tbBoxDetalle_Delete", boxd_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbBoxDetalle_Insert(string box_Codigo, string prod_Codigo, Nullable<decimal> boxd_Cantidad, Nullable<int> boxd_UsuarioCrea, Nullable<System.DateTime> boxd_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbBoxDetalle_Insert_Result> UDP_Inv_tbBoxDetalle_Insert(string box_Codigo, string prod_Codigo, Nullable<decimal> boxd_Cantidad, Nullable<int> boxd_UsuarioCrea, Nullable<System.DateTime> boxd_FechaCrea)
         {
             var box_CodigoParameter = box_Codigo != null ?
                 new ObjectParameter("box_Codigo", box_Codigo) :
@@ -9328,10 +9328,10 @@
                 new ObjectParameter("boxd_FechaCrea", boxd_FechaCrea) :
                 new ObjectParameter("boxd_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbBoxDetalle_Insert", box_CodigoParameter, prod_CodigoParameter, boxd_CantidadParameter, boxd_UsuarioCreaParameter, boxd_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBoxDetalle_Insert_Result>("UDP_Inv_tbBoxDetalle_Insert", box_CodigoParameter, prod_CodigoParameter, boxd_CantidadParameter, boxd_UsuarioCreaParameter, boxd_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbBoxDetalle_Update(Nullable<int> boxd_Id, string box_Codigo, string prod_Codigo, Nullable<decimal> boxd_Cantidad, Nullable<int> boxd_UsuarioCrea, Nullable<System.DateTime> boxd_FechaCrea, Nullable<int> boxd_UsuarioModifica, Nullable<System.DateTime> boxd_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbBoxDetalle_Update_Result> UDP_Inv_tbBoxDetalle_Update(Nullable<int> boxd_Id, string box_Codigo, string prod_Codigo, Nullable<decimal> boxd_Cantidad, Nullable<int> boxd_UsuarioCrea, Nullable<System.DateTime> boxd_FechaCrea, Nullable<int> boxd_UsuarioModifica, Nullable<System.DateTime> boxd_FechaModifica)
         {
             var boxd_IdParameter = boxd_Id.HasValue ?
                 new ObjectParameter("boxd_Id", boxd_Id) :
@@ -9365,7 +9365,7 @@
                 new ObjectParameter("boxd_FechaModifica", boxd_FechaModifica) :
                 new ObjectParameter("boxd_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbBoxDetalle_Update", boxd_IdParameter, box_CodigoParameter, prod_CodigoParameter, boxd_CantidadParameter, boxd_UsuarioCreaParameter, boxd_FechaCreaParameter, boxd_UsuarioModificaParameter, boxd_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBoxDetalle_Update_Result>("UDP_Inv_tbBoxDetalle_Update", boxd_IdParameter, box_CodigoParameter, prod_CodigoParameter, boxd_CantidadParameter, boxd_UsuarioCreaParameter, boxd_FechaCreaParameter, boxd_UsuarioModificaParameter, boxd_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbEntrada_Insert_Result> UDP_Inv_tbEntrada_Insert(Nullable<System.DateTime> ent_FechaElaboracion, Nullable<int> bod_Id, Nullable<byte> estm_Id, Nullable<int> prov_Id, string ent_FacturaCompra, Nullable<System.DateTime> ent_FechaCompra, string fact_Id, Nullable<int> ent_RazonDevolucion, Nullable<int> ent_BodegaDestino, Nullable<byte> tent_Id, Nullable<int> ent_UsuarioCrea, Nullable<System.DateTime> ent_FechaCrea)
@@ -9695,7 +9695,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbEstadoMovimiento_Update_Result>("UDP_Inv_tbEstadoMovimiento_Update", estm_IdParameter, estm_DescripcionParameter, estm_UsuarioCreaParameter, estm_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbInventarioFisico_Insert(string invf_Descripcion, string invf_ResponsableBodega, Nullable<int> bod_Id, Nullable<byte> estif_Id, Nullable<System.DateTime> invf_FechaInventario, Nullable<int> invf_UsuarioCrea, Nullable<System.DateTime> invf_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbInventarioFisico_Insert_Result> UDP_Inv_tbInventarioFisico_Insert(string invf_Descripcion, string invf_ResponsableBodega, Nullable<int> bod_Id, Nullable<byte> estif_Id, Nullable<System.DateTime> invf_FechaInventario, Nullable<int> invf_UsuarioCrea, Nullable<System.DateTime> invf_FechaCrea)
         {
             var invf_DescripcionParameter = invf_Descripcion != null ?
                 new ObjectParameter("invf_Descripcion", invf_Descripcion) :
@@ -9725,16 +9725,16 @@
                 new ObjectParameter("invf_FechaCrea", invf_FechaCrea) :
                 new ObjectParameter("invf_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbInventarioFisico_Insert", invf_DescripcionParameter, invf_ResponsableBodegaParameter, bod_IdParameter, estif_IdParameter, invf_FechaInventarioParameter, invf_UsuarioCreaParameter, invf_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisico_Insert_Result>("UDP_Inv_tbInventarioFisico_Insert", invf_DescripcionParameter, invf_ResponsableBodegaParameter, bod_IdParameter, estif_IdParameter, invf_FechaInventarioParameter, invf_UsuarioCreaParameter, invf_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbInventarioFisico_ListaProductos_Result> UDP_Inv_tbInventarioFisico_ListaProductos(Nullable<int> bod_Id)
+        public virtual int UDP_Inv_tbInventarioFisico_ListaProductos(Nullable<int> bod_Id)
         {
             var bod_IdParameter = bod_Id.HasValue ?
                 new ObjectParameter("bod_Id", bod_Id) :
                 new ObjectParameter("bod_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisico_ListaProductos_Result>("UDP_Inv_tbInventarioFisico_ListaProductos", bod_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Inv_tbInventarioFisico_ListaProductos", bod_IdParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbInventarioFisico_ReporteFaltantes_Result> UDP_Inv_tbInventarioFisico_ReporteFaltantes(Nullable<int> bod_Id, Nullable<System.DateTime> fecha1, Nullable<System.DateTime> fecha2, string prod_Codigo)
@@ -9758,7 +9758,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisico_ReporteFaltantes_Result>("UDP_Inv_tbInventarioFisico_ReporteFaltantes", bod_IdParameter, fecha1Parameter, fecha2Parameter, prod_CodigoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbInventarioFisico_Update(Nullable<int> invf_Id, string invf_Descripcion, string invf_ResponsableBodega, Nullable<int> bod_Id, Nullable<byte> estif_Id, Nullable<System.DateTime> invf_FechaInventario, Nullable<int> invf_UsuarioCrea, Nullable<System.DateTime> invf_FechaCrea, Nullable<int> invf_UsuarioModifica, Nullable<System.DateTime> invf_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbInventarioFisico_Update_Result> UDP_Inv_tbInventarioFisico_Update(Nullable<int> invf_Id, string invf_Descripcion, string invf_ResponsableBodega, Nullable<int> bod_Id, Nullable<byte> estif_Id, Nullable<System.DateTime> invf_FechaInventario, Nullable<int> invf_UsuarioCrea, Nullable<System.DateTime> invf_FechaCrea, Nullable<int> invf_UsuarioModifica, Nullable<System.DateTime> invf_FechaModifica)
         {
             var invf_IdParameter = invf_Id.HasValue ?
                 new ObjectParameter("invf_Id", invf_Id) :
@@ -9800,10 +9800,10 @@
                 new ObjectParameter("invf_FechaModifica", invf_FechaModifica) :
                 new ObjectParameter("invf_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbInventarioFisico_Update", invf_IdParameter, invf_DescripcionParameter, invf_ResponsableBodegaParameter, bod_IdParameter, estif_IdParameter, invf_FechaInventarioParameter, invf_UsuarioCreaParameter, invf_FechaCreaParameter, invf_UsuarioModificaParameter, invf_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisico_Update_Result>("UDP_Inv_tbInventarioFisico_Update", invf_IdParameter, invf_DescripcionParameter, invf_ResponsableBodegaParameter, bod_IdParameter, estif_IdParameter, invf_FechaInventarioParameter, invf_UsuarioCreaParameter, invf_FechaCreaParameter, invf_UsuarioModificaParameter, invf_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbInventarioFisico_Update_Estado(Nullable<int> invf_Id, Nullable<byte> estif_Id, Nullable<int> invf_UsuarioModifica, Nullable<System.DateTime> invf_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbInventarioFisico_Update_Estado_Result> UDP_Inv_tbInventarioFisico_Update_Estado(Nullable<int> invf_Id, Nullable<byte> estif_Id, Nullable<int> invf_UsuarioModifica, Nullable<System.DateTime> invf_FechaModifica)
         {
             var invf_IdParameter = invf_Id.HasValue ?
                 new ObjectParameter("invf_Id", invf_Id) :
@@ -9821,10 +9821,10 @@
                 new ObjectParameter("invf_FechaModifica", invf_FechaModifica) :
                 new ObjectParameter("invf_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbInventarioFisico_Update_Estado", invf_IdParameter, estif_IdParameter, invf_UsuarioModificaParameter, invf_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisico_Update_Estado_Result>("UDP_Inv_tbInventarioFisico_Update_Estado", invf_IdParameter, estif_IdParameter, invf_UsuarioModificaParameter, invf_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbInventarioFisicoDetalle_Insert(Nullable<int> invf_Id, string prod_Codigo, Nullable<decimal> invfd_Cantidad, Nullable<decimal> invfd_CantidadSistema, Nullable<int> uni_Id, Nullable<int> invfd_UsuarioCrea, Nullable<System.DateTime> invfd_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbInventarioFisicoDetalle_Insert_Result> UDP_Inv_tbInventarioFisicoDetalle_Insert(Nullable<int> invf_Id, string prod_Codigo, Nullable<decimal> invfd_Cantidad, Nullable<decimal> invfd_CantidadSistema, Nullable<int> uni_Id, Nullable<int> invfd_UsuarioCrea, Nullable<System.DateTime> invfd_FechaCrea)
         {
             var invf_IdParameter = invf_Id.HasValue ?
                 new ObjectParameter("invf_Id", invf_Id) :
@@ -9854,10 +9854,10 @@
                 new ObjectParameter("invfd_FechaCrea", invfd_FechaCrea) :
                 new ObjectParameter("invfd_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbInventarioFisicoDetalle_Insert", invf_IdParameter, prod_CodigoParameter, invfd_CantidadParameter, invfd_CantidadSistemaParameter, uni_IdParameter, invfd_UsuarioCreaParameter, invfd_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisicoDetalle_Insert_Result>("UDP_Inv_tbInventarioFisicoDetalle_Insert", invf_IdParameter, prod_CodigoParameter, invfd_CantidadParameter, invfd_CantidadSistemaParameter, uni_IdParameter, invfd_UsuarioCreaParameter, invfd_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbInventarioFisicoDetalle_Update(Nullable<int> invfd_Id, Nullable<int> invf_Id, string prod_Codigo, Nullable<decimal> invfd_Cantidad, Nullable<decimal> invfd_CantidadSistema, Nullable<int> uni_Id, Nullable<int> invfd_UsuarioModifica, Nullable<System.DateTime> invfd_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbInventarioFisicoDetalle_Update_Result> UDP_Inv_tbInventarioFisicoDetalle_Update(Nullable<int> invfd_Id, Nullable<int> invf_Id, string prod_Codigo, Nullable<decimal> invfd_Cantidad, Nullable<decimal> invfd_CantidadSistema, Nullable<int> uni_Id, Nullable<int> invfd_UsuarioModifica, Nullable<System.DateTime> invfd_FechaModifica)
         {
             var invfd_IdParameter = invfd_Id.HasValue ?
                 new ObjectParameter("invfd_Id", invfd_Id) :
@@ -9891,7 +9891,7 @@
                 new ObjectParameter("invfd_FechaModifica", invfd_FechaModifica) :
                 new ObjectParameter("invfd_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbInventarioFisicoDetalle_Update", invfd_IdParameter, invf_IdParameter, prod_CodigoParameter, invfd_CantidadParameter, invfd_CantidadSistemaParameter, uni_IdParameter, invfd_UsuarioModificaParameter, invfd_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbInventarioFisicoDetalle_Update_Result>("UDP_Inv_tbInventarioFisicoDetalle_Update", invfd_IdParameter, invf_IdParameter, prod_CodigoParameter, invfd_CantidadParameter, invfd_CantidadSistemaParameter, uni_IdParameter, invfd_UsuarioModificaParameter, invfd_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbProducto_Consulta_Result> UDP_Inv_tbProducto_Consulta(string prod_Codigo)
@@ -10831,7 +10831,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbTipoEntrada_Update_Result>("UDP_Inv_tbTipoEntrada_Update", tent_IdParameter, tent_DescripcionParameter, tent_UsuarioCreaParameter, tent_FechaCreaParameter, tent_UsuarioModificaParameter, tent_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbTipoSalida_Insert(string tsal_Descripcion, Nullable<int> tsal_UsuarioCrea, Nullable<System.DateTime> tsal_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbTipoSalida_Insert_Result> UDP_Inv_tbTipoSalida_Insert(string tsal_Descripcion, Nullable<int> tsal_UsuarioCrea, Nullable<System.DateTime> tsal_FechaCrea)
         {
             var tsal_DescripcionParameter = tsal_Descripcion != null ?
                 new ObjectParameter("tsal_Descripcion", tsal_Descripcion) :
@@ -10845,10 +10845,10 @@
                 new ObjectParameter("tsal_FechaCrea", tsal_FechaCrea) :
                 new ObjectParameter("tsal_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbTipoSalida_Insert", tsal_DescripcionParameter, tsal_UsuarioCreaParameter, tsal_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbTipoSalida_Insert_Result>("UDP_Inv_tbTipoSalida_Insert", tsal_DescripcionParameter, tsal_UsuarioCreaParameter, tsal_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbTipoSalida_Update(Nullable<byte> tsal_Id, string tsal_Descripcion, Nullable<int> tsal_UsuarioCrea, Nullable<System.DateTime> tsal_FechaCrea, Nullable<int> tsal_UsuarioModifica, Nullable<System.DateTime> tsal_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbTipoSalida_Update_Result> UDP_Inv_tbTipoSalida_Update(Nullable<byte> tsal_Id, string tsal_Descripcion, Nullable<int> tsal_UsuarioCrea, Nullable<System.DateTime> tsal_FechaCrea, Nullable<int> tsal_UsuarioModifica, Nullable<System.DateTime> tsal_FechaModifica)
         {
             var tsal_IdParameter = tsal_Id.HasValue ?
                 new ObjectParameter("tsal_Id", tsal_Id) :
@@ -10874,10 +10874,10 @@
                 new ObjectParameter("tsal_FechaModifica", tsal_FechaModifica) :
                 new ObjectParameter("tsal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbTipoSalida_Update", tsal_IdParameter, tsal_DescripcionParameter, tsal_UsuarioCreaParameter, tsal_FechaCreaParameter, tsal_UsuarioModificaParameter, tsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbTipoSalida_Update_Result>("UDP_Inv_tbTipoSalida_Update", tsal_IdParameter, tsal_DescripcionParameter, tsal_UsuarioCreaParameter, tsal_FechaCreaParameter, tsal_UsuarioModificaParameter, tsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_ValidacionCantidadExistente(Nullable<decimal> cantidadSolicitadad, Nullable<int> iDBodega, string iDProducto, Nullable<System.DateTime> fechaElaboracion, Nullable<int> bodegaDestino, Nullable<decimal> cantidadDisponible, Nullable<int> usuarioCrea, Nullable<System.DateTime> fechaCrea)
+        public virtual ObjectResult<UDP_Inv_ValidacionCantidadExistente_Result> UDP_Inv_ValidacionCantidadExistente(Nullable<decimal> cantidadSolicitadad, Nullable<int> iDBodega, string iDProducto, Nullable<System.DateTime> fechaElaboracion, Nullable<int> bodegaDestino, Nullable<decimal> cantidadDisponible, Nullable<int> usuarioCrea, Nullable<System.DateTime> fechaCrea)
         {
             var cantidadSolicitadadParameter = cantidadSolicitadad.HasValue ?
                 new ObjectParameter("CantidadSolicitadad", cantidadSolicitadad) :
@@ -10911,7 +10911,7 @@
                 new ObjectParameter("FechaCrea", fechaCrea) :
                 new ObjectParameter("FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_ValidacionCantidadExistente", cantidadSolicitadadParameter, iDBodegaParameter, iDProductoParameter, fechaElaboracionParameter, bodegaDestinoParameter, cantidadDisponibleParameter, usuarioCreaParameter, fechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_ValidacionCantidadExistente_Result>("UDP_Inv_ValidacionCantidadExistente", cantidadSolicitadadParameter, iDBodegaParameter, iDProductoParameter, fechaElaboracionParameter, bodegaDestinoParameter, cantidadDisponibleParameter, usuarioCreaParameter, fechaCreaParameter);
         }
     
         public virtual ObjectResult<string> crud_tbExoneracionInsert(string exo_Documento, Nullable<bool> exo_ExoneracionActiva, Nullable<System.DateTime> exo_FechaInicialVigencia, Nullable<System.DateTime> exo_FechaIFinalVigencia, Nullable<int> clte_Id)

@@ -39,7 +39,7 @@ namespace ERP_GMEDINA.Controllers
                 tbBox vBox = db.tbBox.Find(box_Codigo);
                 IEnumerable<object> List = null;
                 string MsjError = "";
-                List = db.UDP_Inv_tbBox_Update(box_Codigo, vBox.box_Descripcion, vBox.bod_Id, Helpers.vbox_Cerrada, vBox.box_UsuarioCrea, vBox.box_FechaCrea, Function.GetUser(), Function.DatetimeNow());
+                List = db.UDP_Inv_tbBox_Update(box_Codigo, vBox.box_Descripcion, vBox.bod_Id, Models.Helpers.vbox_Cerrada, vBox.box_UsuarioCrea, vBox.box_FechaCrea, Function.GetUser(), Function.DatetimeNow());
 
                 foreach (UDP_Inv_tbBox_Update_Result Box in List)
                     MsjError = Box.MensajeError;
