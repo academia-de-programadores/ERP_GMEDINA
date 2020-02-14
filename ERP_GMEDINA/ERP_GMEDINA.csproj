@@ -1864,6 +1864,9 @@
     <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Aprobar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Vent_tbSolicitudCredito_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

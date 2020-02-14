@@ -50066,7 +50066,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <FunctionImport Name="spGetProducto1" ReturnType="Collection(String)">
           <Parameter Name="prod_Codigo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Vent_tbSolicitudCredito_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Vent_tbSolicitudCredito_Insert" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudCredito_Insert_Result)">
             <Parameter Name="clte_Id" Mode="In" Type="Int32" />
             <Parameter Name="escre_Id" Mode="In" Type="Byte" />
             <Parameter Name="cred_FechaSolicitud" Mode="In" Type="DateTime" />
@@ -51922,6 +51922,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Type="Int16" Name="cja_Id" Nullable="false" />
           <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
           <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudCredito_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -60380,7 +60383,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spGetProducto1" FunctionName="ERP_GMEDINA2Model.Store.spGetProducto1" />
-          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudCredito_Insert" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudCredito_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudCredito_Insert" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudCredito_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudCredito_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_Insert" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_Insert">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Insert_Result">

@@ -14373,7 +14373,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spGetProducto1", prod_CodigoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Insert(Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<decimal> cred_MontoSolicitado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea)
+        public virtual ObjectResult<UDP_Vent_tbSolicitudCredito_Insert_Result> UDP_Vent_tbSolicitudCredito_Insert(Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<decimal> cred_MontoSolicitado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea)
         {
             var clte_IdParameter = clte_Id.HasValue ?
                 new ObjectParameter("clte_Id", clte_Id) :
@@ -14403,7 +14403,7 @@
                 new ObjectParameter("cred_FechaCrea", cred_FechaCrea) :
                 new ObjectParameter("cred_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Insert", clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_MontoSolicitadoParameter, cred_DiasSolicitadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudCredito_Insert_Result>("UDP_Vent_tbSolicitudCredito_Insert", clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_MontoSolicitadoParameter, cred_DiasSolicitadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_Insert_Result> UDP_Vent_tbSolicitudEfectivo_Insert(Nullable<int> mocja_Id, Nullable<short> mnda_Id, Nullable<int> solef_UsuarioCrea, Nullable<System.DateTime> solef_FechaCrea)
