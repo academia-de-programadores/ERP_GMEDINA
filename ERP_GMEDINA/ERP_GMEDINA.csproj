@@ -497,6 +497,7 @@
     <Compile Include="Models\Planillas\Configuraciones\cAcumuladosISR.cs" />
     <Compile Include="Models\Planillas\Ingresos\cAdelantoSueldo.cs" />
     <Compile Include="Models\Planillas\Configuraciones\cAFP.cs" />
+    <Compile Include="Models\Planillas\Planilla\ViewModelTasasDeCambio.cs" />
     <Compile Include="Models\Planillas\Reportes\cAFPRPT.cs" />
     <Compile Include="Models\Planillas\Ingresos\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\Planillas\Configuraciones\cAuxilioDeCesantias.cs" />

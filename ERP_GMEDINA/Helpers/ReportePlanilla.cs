@@ -6,10 +6,11 @@ namespace ERP_GMEDINA.Helpers
 {
     public static class ReportePlanilla
     {
-        public static void ReporteColaboradorPlanilla(ref ReportePlanillaViewModel oPlanillaEmpleado, tbEmpleados empleadoActual, decimal SalarioBase, int horasTrabajadas, decimal salarioHora, decimal totalSalario, decimal? totalComisiones, int horasExtrasTrabajadas, decimal? totalHorasExtras, decimal? totalHorasPermiso, decimal? totalBonificaciones, decimal? totalIngresosIndivuales, decimal? totalVacaciones, decimal? totalIngresosEmpleado, decimal totalISR, decimal? colaboradorDeducciones, decimal totalAFP, decimal? totalInstitucionesFinancieras, decimal? totalOtrasDeducciones, decimal? adelantosSueldo, decimal? totalDeduccionesEmpleado, decimal? totalDeduccionesIndividuales, decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
+        public static void ReporteColaboradorPlanilla(string moneda, ref ReportePlanillaViewModel oPlanillaEmpleado, tbEmpleados empleadoActual, decimal SalarioBase, int horasTrabajadas, decimal salarioHora, decimal totalSalario, decimal? totalComisiones, int horasExtrasTrabajadas, decimal? totalHorasExtras, decimal? totalHorasPermiso, decimal? totalBonificaciones, decimal? totalIngresosIndivuales, decimal? totalVacaciones, decimal? totalIngresosEmpleado, decimal totalISR, decimal? colaboradorDeducciones, decimal totalAFP, decimal? totalInstitucionesFinancieras, decimal? totalOtrasDeducciones, decimal? adelantosSueldo, decimal? totalDeduccionesEmpleado, decimal? totalDeduccionesIndividuales, decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             oPlanillaEmpleado.CodColaborador = InformacionDelEmpleadoActual.emp_Id.ToString();
             oPlanillaEmpleado.NombresColaborador = $"{empleadoActual.tbPersonas.per_Nombres} {empleadoActual.tbPersonas.per_Apellidos}";
+            oPlanillaEmpleado.Moneda = moneda;
             oPlanillaEmpleado.SalarioBase = SalarioBase;
             oPlanillaEmpleado.horasTrabajadas = horasTrabajadas;
             oPlanillaEmpleado.SalarioHora = salarioHora;
@@ -34,10 +35,11 @@ namespace ERP_GMEDINA.Helpers
             oPlanillaEmpleado.totalAPagar = Math.Round((decimal)netoAPagarColaborador, 2);
         }
 
-        public static void ReportePlanillaPrevisualizacion(ref ReportePlanillaViewModel oPlanillaEmpleado, tbEmpleados empleadoActual, decimal SalarioBase, int horasTrabajadas, decimal salarioHora, decimal totalSalario, decimal? totalComisiones, int horasExtrasTrabajadas, decimal? totalHorasExtras, decimal? totalHorasPermiso, decimal? totalBonificaciones, decimal? totalIngresosIndivuales, decimal? totalVacaciones, decimal? totalIngresosEmpleado, decimal totalISR, decimal? colaboradorDeducciones, decimal totalAFP, decimal? totalInstitucionesFinancieras, decimal? totalOtrasDeducciones, decimal? adelantosSueldo, decimal? totalDeduccionesEmpleado, decimal? totalDeduccionesIndividuales, decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
+        public static void ReportePlanillaPrevisualizacion(string moneda, ref ReportePlanillaViewModel oPlanillaEmpleado, tbEmpleados empleadoActual, decimal SalarioBase, int horasTrabajadas, decimal salarioHora, decimal totalSalario, decimal? totalComisiones, int horasExtrasTrabajadas, decimal? totalHorasExtras, decimal? totalHorasPermiso, decimal? totalBonificaciones, decimal? totalIngresosIndivuales, decimal? totalVacaciones, decimal? totalIngresosEmpleado, decimal totalISR, decimal? colaboradorDeducciones, decimal totalAFP, decimal? totalInstitucionesFinancieras, decimal? totalOtrasDeducciones, decimal? adelantosSueldo, decimal? totalDeduccionesEmpleado, decimal? totalDeduccionesIndividuales, decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             oPlanillaEmpleado.CodColaborador = InformacionDelEmpleadoActual.emp_Id.ToString();
             oPlanillaEmpleado.NombresColaborador = $"{empleadoActual.tbPersonas.per_Nombres} {empleadoActual.tbPersonas.per_Apellidos}";
+            oPlanillaEmpleado.Moneda = moneda;
             oPlanillaEmpleado.SalarioBase = SalarioBase;
             oPlanillaEmpleado.horasTrabajadas = horasTrabajadas;
             oPlanillaEmpleado.SalarioHora = salarioHora;

@@ -38,7 +38,7 @@
                         <div class="input-group date">
                             Días Preaviso<label class="asterisco" id="AsteriscoCantidadDia">*</label>
                             
-                            @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @type = "text", @autocomplete = "off" } })<br />
+                            @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control MascaraEnteros soloNumero", @id = "prea_DiasPreaviso", @type = "text", @autocomplete = "off" } })<br />
                             <span class="text-danger" id="validation_CantidadDiasMenorACero" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El rango final no puede ser menor a cero</span>
                             <span class="text-danger" id="validation_CantidadDiasRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido</span>
                         </div>

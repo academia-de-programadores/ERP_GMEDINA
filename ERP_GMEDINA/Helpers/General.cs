@@ -77,6 +77,7 @@ namespace ERP_GMEDINA.Helpers
                 body = body.Replace("{totalIngresos}", Math.Round(Model.totalIngresos.Value, 2).ToString());
                 body = body.Replace("{TotalDeucciones}", Model.totalDeducciones.ToString());
                 body = body.Replace("{TotalPagar}", Math.Round(Model.NetoPagar.Value, 2).ToString());
+                body = body.Replace("{moneda}", Model.moneda);
                 #endregion
 
                 MailMessage oMailMessage = new MailMessage(EmailOrigen, Model.EmailDestino, Model.EmailAsunto, body);

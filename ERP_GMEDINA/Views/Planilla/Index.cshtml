@@ -151,7 +151,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    
+
                     <h4 class="modal-title">Generar planilla</h4>
                 </div>
                 <div class="modal-body" id="Inactivar">
@@ -169,10 +169,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                
+
                 <h4 class="modal-title">Configuración</h4>
             </div>
-            <div class="modal-body" id="Inactivar">
+            <div class="modal-body" id="Inactivar" style="margin-bottom:0px;">
                 <form method="post" id="frmConfiguracionPlanilla" class="form-horizontal wizard-big">
 
                     <div class="form-group">
@@ -197,9 +197,6 @@
 
                                     <input type="checkbox" class="i-checks" id="CSV" name="CSV" /> &nbsp;
                                     CSV &nbsp;&nbsp;&nbsp;
-
-                                    <input type="checkbox" disabled class="i-checks" id="PDF" name="PDF" /> &nbsp;
-                                    PDF &nbsp;&nbsp;&nbsp;
                                 </div>
 
                             </div>
@@ -229,6 +226,81 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- monedas -->
+                    <div class="form-group">
+
+                        <div class="col-sm-12">
+
+                            <div class="ibox" style="margin-bottom: 0px;">
+                                <div class="ibox-title">
+                                    <h5>Tasas de cambio para deducciones de planilla</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link" id="barra">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content" style="display: block;">
+
+                                    <div class="form-horizontal">
+                                        <div class="col-md-6">
+                                            Moneda de deducciones de planilla
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <select id="tmon_IdMonedaDeduccionesDePlanilla" name="tmon_IdMonedaDeduccionesDePlanilla" class="form-control"></select>
+                                            <label class="text-danger" id="Validation_MonedaDeduccionPlanillaRequerido" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Este campo es requerido.</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="center-block" style="display:none;" id="cargarSpinner">
+                                        <div class="sk-spinner sk-spinner-wave">
+                                            <div class="sk-rect1"></div>
+                                            <div class="sk-rect2"></div>
+                                            <div class="sk-rect3"></div>
+                                            <div class="sk-rect4"></div>
+                                            <div class="sk-rect5"></div>
+                                        </div>
+                                    </div>
+
+                                    <div id="configuracionTasasDeCambio" style="display:none;">
+
+                                        <div class="form-horizontal">
+                                            <div class="col-md-6">
+                                                <!-- espacio-->
+                                                <br /><br />
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                                <!-- espacio-->
+                                            </div>
+                                        </div>
+
+                                        <span class="text-success pull-left">¿Cuántos <span id="descripcionMoneda"></span> hay en las siguientes monedas?</span>
+                                        <table id="tblTasasCambio" class="table" style="margin-bottom: 0px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Moneda</th>
+                                                    <th>cambio</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbBodyTasasDeCambio">
+
+                                                <!-- td's de las tasas de cambio -->
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- termina monedas -->
+
                 </form>
             </div>
             <div class="modal-footer">

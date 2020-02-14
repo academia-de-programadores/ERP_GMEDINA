@@ -169,9 +169,6 @@ $('#btnCreateRegistroDeduccion').click(function () {
     var cde_PorcentajeEmpresaA = $("#Crear #cde_PorcentajeEmpresaA").val();
     var tde_IdTipoDeduc = $("#Crear #tde_IdTipoDedu").val();
     var Correcto = true;
-    var Correcto2 = true;
-    var Correcto3 = true;
-    var Correcto4 = true;
 
     if (cde_DescripcionDeduccionA == "" || cde_DescripcionDeduccionA == null || cde_DescripcionDeduccionA == undefined) {
         $("#Crear #cde_DescripcionDeduccionA").val("");
@@ -186,18 +183,17 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #Validation_descipcion2A").css("display", "");
         $("#Crear #tde_IdTipoDedu").val("0");
         $("#Crear #AsteriscoTipoDedu").addClass("text-danger");
-        Correcto2 = false;
+        Correcto = false;
     } else {
         $("#Crear #Validation_descipcion2A").css("display", "none");
         $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-        Correcto2 = true;
     }
     //Porcentaje Colaborador
     if (cde_PorcentajeColaboradorA == "" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA == 0 || cde_PorcentajeColaboradorA == "0" || cde_PorcentajeColaboradorA == 0.0 || cde_PorcentajeColaboradorA == "0.0") {
         $("#Crear #Validation_descipcion3AR").html('Campo Porcentaje Colaborador requerido.');
         $("#Crear #Validation_descipcion3AR").css("display", "");
         $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
-        Correcto3 = false;
+        Correcto = false;
     } else {
         $("#Crear #Validation_descipcion3AR").html('');
         $("#Crear #Validation_descipcion3AR").css("display", "none");
@@ -207,7 +203,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
             $("#Crear #Validation_descipcion3AR").html('Campo Porcentaje Colaborador no puede ser menor a cero.');
             $("#Crear #Validation_descipcion3AR").css("display", "");
             $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
-            Correcto3 = false;
+            Correcto = false;
         } else {
             $("#Crear #Validation_descipcion3AR").html('');
             $("#Crear #Validation_descipcion3AR").css("display", "none");
@@ -222,7 +218,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #Validation_descipcion4AR").html('Campo Porcentaje Empresa requerido');
         $("#Crear #Validation_descipcion4AR").css("display", "");
         $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
-        Correcto4 = false;
+        Correcto = false;
     } else {
         $("#Crear #Validation_descipcion4AR").html('');
         $("#Crear #Validation_descipcion4AR").css("display", "none");
@@ -230,8 +226,8 @@ $('#btnCreateRegistroDeduccion').click(function () {
     }
     //
 
-    if (Correcto == false || Correcto2 == false || Correcto3 == false || Correcto4 == false) {
-
+    if (Correcto == false) {
+        $('#btnCreateRegistroDeduccion').attr('disabled', false);
     } else {
         $("#Editar #validareditar3").css("display", "none");
         $("#Editar #validareditar2").css("display", "none");
@@ -244,6 +240,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
         $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
         $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
+        $('#btnCreateRegistroDeduccion').attr('disabled', true);
         //mostrarCargandoCrear();
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
@@ -263,7 +260,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
 
                 //ocultar el modal
                 $("#AgregarCatalogoDeducciones").modal('hide');
-
+                $('#btnCreateRegistroDeduccion').attr('disabled', false);
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',

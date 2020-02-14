@@ -8,10 +8,11 @@ $(document).on("click", "#btnAgregarIV", function () {
     
     if (validacionPermiso.status == true) {
 
-        // limpiar cajas de texto y mensajes de error
-
-
-        // llenar ddl's
+    	//HABILITAR EL BOTON
+    	$('#btnCreateIV').attr('disabled', false);
+    	//VACIAR EL FORMULARIO DEL MODAL
+    	Vaciar_ModalCrear();
+        //LLENAR DDL´s
         $.ajax({
             url: "/TechoImpuestoVecinal/EditGetDDLTipoDedu",
             method: "GET",
@@ -57,7 +58,8 @@ $('#btnCreateIV').click(function () {
     var tipoDeduccion1 = $("#Crear #tde_IdTipoDedu").val();
     var impuesto1 = $("#Crear #timv_Impuesto").val();
 
-    $('#btnCreateIV').attr('disabled', false);
+	//INHABILITAR EL BOTON
+    $('#btnCreateIV').attr('disabled', true);
 
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     if (DataAnnotationsCrear(codmuni1, tipoDeduccion1, rangoInicio1, rangoFin1, rango1, impuesto1)) {
@@ -72,30 +74,36 @@ $('#btnCreateIV').click(function () {
             timv_Rango: FormatearMonto(rango1),
             timv_Impuesto: FormatearMonto(impuesto1)
         };
+
         $.ajax({
             url: "/TechoImpuestoVecinal/Create",
             method: "POST",
             data: data
         }).done(function (data) {
             //validar respuesta del backend
-            if (data == "error") {
+        	if (data == "error") {
+        		//HABILITAR EL BOTON
+        		$('#btnCreateIV').attr('disabled', false);
+				//MOSTRAR MENSAJE DE ERROR
                 iziToast.error({
                     title: 'Error',
                     message: 'No guardó el registro, contacte al administrador',
                 });
             }
-            else if (data == "bien") {
-                cargarGridIV();
+        	else if (data == "bien") {
+				//RECARGAR EL DATATABLE
+            	cargarGridIV();
+				//OCULTAR EL MODAL
                 $("#AgregarIV").modal('hide');
-
-                // Mensaje de exito cuando un registro se ha guardado bien
+				//VACIAR EL FORMULARIO DEL MODAL
+                Vaciar_ModalCrear();
+                //MOSTRAR MENSAJE DE ÉXITO
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
-        $('#btnCreateIV').attr('disabled', true);
     }
 });
 
@@ -103,111 +111,6 @@ $('#btnCreateIV').click(function () {
 $("#btnCerrarCrear").click(function () {
     Vaciar_ModalCrear();
 });
-
-// validaciones key up create
-
-// validar municipio create
-$('#Crear #mun_Codigo').change(function () {
-    
-    var empleado = $("#Crear #mun_Codigo").val();
-
-    // si es distinto de cero
-    if (empleado == null || empleado == '0') {
-        $('#Crear #AsteriscoMunicipio').addClass("text-danger");
-        $("#Crear #Validation_MunicipioRequerida").css('display', '');        
-    }
-    else {
-        $('#Crear #AsteriscoMunicipio').removeClass('text-danger');
-        $("#Crear #Validation_MunicipioRequerida").css('display', 'none');
-    }
-});
-
-// validar tipo de deduccion create
-$('#Crear #tde_IdTipoDedu').change(function () {
-
-    var empleado = $("#Crear #tde_IdTipoDedu").val();
-
-    // si es distinto de cero
-    if (empleado == null || empleado == '0') {
-        $('#Crear #AsteriscoTipoDeduccion').addClass("text-danger");
-        $("#Crear #Validation_TipoDeduccionRequerida").css('display', '');
-    }
-    else {
-        $('#Crear #AsteriscoTipoDeduccion').removeClass('text-danger');
-        $("#Crear #Validation_TipoDeduccionRequerida").css('display', 'none');
-    }
-});
-
-// validar rango inicio create
-$('#Crear #timv_RangoInicio').keyup(function () {
-
-    var rangoFin = $("#Crear #timv_RangoFin").val().replace(/,/g, '');
-    var rangoInicio = $("#Crear #timv_RangoInicio").val().replace(/,/g, '');
-
-    // si rango fin es mayor que rango inicio
-    if (parseInt(rangoFin) > parseInt(rangoInicio) || $("#Crear #timv_RangoFin").val().trim() == '' || $("#Crear #timv_RangoInicio").val().trim() == '') {
-
-        $('#AsteriscoRangoFin').removeClass('text-danger');
-        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
-    }
-    else {
-        $('#AsteriscoRangoFin').addClass("text-danger");
-        $("#Crear #Validation_RangoFinRequerida").css('display', 'none');
-        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
-    }
-    
-
-    // requerido
-    if ($("#Crear #timv_RangoInicio").val().trim() != '') {
-
-        $('#AsteriscoRangoInicio').removeClass('text-danger');
-        $("#Crear #validation_RangoInicioRequerida").css('display', 'none');
-    }
-    else {
-        $('#AsteriscoRangoInicio').addClass("text-danger");
-        $("#Crear #validation_RangoInicioRequerida").css('display', '');
-    }
-
-});
-
-// validar rango final create
-$('#Crear #timv_RangoFin').keyup(function () {
-
-    debugger;
-    var rangoFin = $("#Crear #timv_RangoFin").val().replace(/,/g, '');
-    var rangoInicio = $("#Crear #timv_RangoInicio").val().replace(/,/g, '');
-
-
-    // si rango fin es mayor que rango inicio
-    if (parseInt(rangoFin) > parseInt(rangoInicio) || rangoFin.trim() == '' || rangoInicio.trim() == '') {
-
-        $('#AsteriscoRangoFin').removeClass('text-danger');
-        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
-    }
-    else {
-        $('#AsteriscoRangoFin').addClass("text-danger");
-        $("#Crear #Validation_RangoFinRequerida").css('display', 'none');
-        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', '');
-    }
-    
-    // requerido
-    if ($("#Crear #timv_RangoFin").val().trim() != '') {
-
-        if (parseInt(rangoFin) > parseInt(rangoInicio))
-        {
-            $('#AsteriscoRangoFin').removeClass('text-danger');       
-        }        
-
-        $("#Crear #Validation_RangoFinRequerida").css('display', 'none');
-    }
-    else {
-        $('#AsteriscoRangoFin').addClass("text-danger");
-        $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
-        $("#Crear #Validation_RangoFinRequerida").css('display', '');
-    }
-
-});
-
 
 // --------- Editar ---------
 
@@ -608,8 +511,6 @@ $("#btnCerrarDetailsIV").click(function () {
     $("body").css("overflow-y", "scroll");
 });
 
-
-
 // --------- Funciones ---------
 
 
@@ -705,7 +606,7 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
 
-    if (Municipio != "1") {
+    if (Municipio != "-1") {
         //Telefono
         if (Municipio == "" || Municipio == null || Municipio == 0) {
             //MOSTRAR DATAANNOTATIONS
@@ -755,7 +656,6 @@ function DataAnnotationsCrear(Municipio, TipoDeduccion, RangoInicio, RangoFin, R
             $("#Crear #Validation_RangoInicioRequerida").html("El campo Rango Final es requerido.");
             $("#Crear #Validation_RangoInicioRequerida").hide();
         }
-
         if (RangoInicio == "" || RangoInicio == null || RangoInicio == undefined) {
             $("#Crear #AsteriscoRangoInicio").addClass("text-danger");
             $("#Crear #Validation_RangoInicioRequerida").show();
@@ -871,7 +771,7 @@ function DataAnnotationsEditar(Municipio, TipoDeduccion, RangoInicio, RangoFin, 
     //VARIABLE DE VALIDACION DEL MODELO
     var ModelState = true;
 
-    if (Municipio != "1") {
+    if (Municipio != "-1") {
         //Telefono
         if (Municipio == "" || Municipio == null || Municipio == 0 || Municipio == "0") {
             //MOSTRAR DATAANNOTATIONS

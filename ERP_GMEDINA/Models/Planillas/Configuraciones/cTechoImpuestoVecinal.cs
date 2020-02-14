@@ -17,27 +17,21 @@ namespace ERP_GMEDINA.Models
         public int timv_IdTechoImpuestoVecinal { get; set; }
 
         [Display(Name = "Código Municipio")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
         public string mun_Codigo { get; set; }
 
         [Display(Name = "Tipo deducción")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
         public Nullable<int> tde_IdTipoDedu { get; set; }
 
         [Display(Name = "Rango inicio")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
         public Nullable<decimal> timv_RangoInicio { get; set; }
 
         [Display(Name = "Rango fin")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
         public Nullable<decimal> timv_RangoFin { get; set; }
 
         [Display(Name = "Rango")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
         public decimal timv_Rango { get; set; }
 
         [Display(Name = "Impuesto")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
         public decimal timv_Impuesto { get; set; }
 
         [Display(Name = "Creado por")]

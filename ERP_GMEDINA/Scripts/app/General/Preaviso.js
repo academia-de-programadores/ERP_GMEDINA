@@ -369,7 +369,6 @@ $('#btnCrearPreavisoConfirmar').click(function () {
     //----
 
     if (modalState == true) {
-        debugger;
         var data = $("#frmCreatePreaviso").serializeArray();
 
         
@@ -1012,6 +1011,9 @@ $("#btnCerrarCrear").click(function () {
     $("#Crear #Validation_descripcion2").css("display", "none");
     $("#Crear #AsteriscoDias").removeClass("text-danger");
     $("#CrearPreaviso #Validation_descripcion").css("display", "none");
+    $("#Crear #validation_CantidadDiasMenorACero").css("display", "none");
+    $("#Crear #validation_CantidadDiasRequerido").css("display", "none");
+    $("#Crear #AsteriscoCantidadDia").removeClass("text-danger");
     $("#CrearPreaviso").modal("hide");
 });
 

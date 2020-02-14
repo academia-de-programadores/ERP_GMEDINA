@@ -4,56 +4,48 @@
     @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <div class="form-group">
+            <div class="row">
                 <div class="col-md-6">
-                    <label class="control-label" style="margin-left:20px;">Número</label>
+                    <label class="">Número</label>
                 </div>
                 <div class="col-md-6">
                     <span id="cde_IdDeducciones" name="cde_IdDeducciones">Código</span>
                 </div>
             </div>
-        </div>
-        <hr class="col-md-11" style="margin:0px 15px 0px 0px;"/>
+			<div class="row">
+				<div class="col-md-6">
+					<label class="">Deducción</label>
+				</div>
+				<div class="col-md-6">
+					<span id="cde_DescripcionDeduccion" name="cde_DescripcionDeduccion">@Html.DisplayFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<label class="">Techo</label>
+				</div>
+				<div class="col-md-6">
+					<span id="tddu_Techo">@Html.DisplayFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
+				</div>
+			</div>
 
-        <div class="ibox-content" style="border-color:#fff;">
-            <div class="form-horizontal">
+			<div class="row">
+				<div class="col-md-6">
+					<label class="">Porcentaje colaboradores</label>
+				</div>
+				<div class="col-md-6">
+					<span id="tddu_PorcentajeColaboradores">@Html.DisplayFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
+				</div>
+			</div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="">Deducción</label>
-                    </div>
-                    <div class="col-md-6">
-                        <span id="cde_DescripcionDeduccion" name="cde_DescripcionDeduccion">@Html.DisplayFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                    </div>
-                </div><br>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="">Techo</label>
-                    </div>
-                    <div class="col-md-6">
-                        <span id="tddu_Techo">@Html.DisplayFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                    </div>
-                </div><br>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="">Porcentaje colaboradores</label>
-                    </div>
-                    <div class="col-md-6">
-                        <span id="tddu_PorcentajeColaboradores">@Html.DisplayFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                    </div>
-                </div><br>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="">Porcentaje empresa</label>
-                    </div>
-                    <div class="col-md-6">
-                        <span id="tddu_PorcentajeEmpresa">@Html.DisplayFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                    </div>
-                </div>
-            </div>
+			<div class="row">
+				<div class="col-md-6">
+					<label class="">Porcentaje empresa</label>
+				</div>
+				<div class="col-md-6">
+					<span id="tddu_PorcentajeEmpresa">@Html.DisplayFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
+				</div>
+			</div>
         </div>
 
 

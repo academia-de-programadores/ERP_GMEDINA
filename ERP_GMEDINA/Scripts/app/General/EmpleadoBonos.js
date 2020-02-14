@@ -80,9 +80,10 @@ function cargarGridBonos() {
                 //variable boton editar
                 var botonEditar = ListaBonos[i].cb_Activo == true ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarEmpleadoBonos">Editar</button>' : '';
 
-                //variable donde está el boton activar
-                var botonActivar = ListaBonos[i].cb_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnActivarEmpleadoBonos">Activar</button>' : '' : '';
 
+                //variable donde está el boton activar
+                var botonActivar = ListaBonos[i].cb_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" style="margin right:3px;" class="btn btn-default btn-xs"  id="btnActivarEmpleadoBonos">Activar</button>' : '' : '';
+       
                 //VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
                 var Check = "";
                 //ESTA VARIABLE GUARDA CODIGO HTML DE UN CHECKBOX, PARA ENVIARLO A LA TABLA

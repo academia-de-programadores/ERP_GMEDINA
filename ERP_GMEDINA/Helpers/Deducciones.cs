@@ -10,20 +10,45 @@ namespace ERP_GMEDINA.Helpers
 {
     public static class Deducciones
     {
-        public static void ProcesarDeducciones(int userId,DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, List<tbHistorialDeduccionPago> lisHistorialDeducciones, V_InformacionColaborador InformacionDelEmpleadoActual)
+        public static void ProcesarDeducciones(int monedaDeducciones, List<ViewModelTasasDeCambio> objMonedas, int userId,DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, List<tbHistorialDeduccionPago> lisHistorialDeducciones, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             #region Procesar deducciones
 
+            // instancia de los helpers
+            Models.Helpers objHelpers = new Models.Helpers();
+
+            // id del usuario logueado
             int idUser = userId; 
 
+            // validar que la planilla tenga deducciones
             if (oDeducciones.Count > 0)
             {
+
+                // obtener id del tipo de moneda del sueldo del colaborador
+                int idMonedaColaborador = db.tbSueldos.Where(x => x.emp_Id == InformacionDelEmpleadoActual.emp_Id && x.sue_Estado == true).Select(x => x.tmon_Id).FirstOrDefault();
+
+                ViewModelTasasDeCambio tasaDeCambio = new ViewModelTasasDeCambio();
+
+                // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
+                if (idMonedaColaborador != monedaDeducciones)
+                {
+                    // no tengo idea de que estaba haciendo aquí gg  
+                    tasaDeCambio = objMonedas.Where(x => x.tmon_Id == idMonedaColaborador).FirstOrDefault();
+                }
+
                 // deducciones de la planilla
                 foreach (var iterDeducciones in oDeducciones)
                 {
                     decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
                     decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
                     decimal? montoDeduccionColaborador = SalarioBase;
+                    decimal? montoDeduccionVoucher = 0;
+
+                    // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
+                    if (idMonedaColaborador != monedaDeducciones)
+                    {
+                        montoDeduccionColaborador = (SalarioBase * tasaDeCambio.tmon_Cambio);
+                    }
 
                     try
                     {
@@ -37,7 +62,7 @@ namespace ERP_GMEDINA.Helpers
                         {
                             foreach (var techosDeduccionesIter in oTechosDeducciones)
                             {
-                                if (SalarioBase > techosDeduccionesIter.tddu_Techo)
+                                if (montoDeduccionColaborador > techosDeduccionesIter.tddu_Techo)
                                 {
                                     montoDeduccionColaborador = techosDeduccionesIter.tddu_Techo;
                                     porcentajeColaborador = techosDeduccionesIter.tddu_PorcentajeColaboradores;
@@ -47,19 +72,27 @@ namespace ERP_GMEDINA.Helpers
                         }
                         //sumar las deducciones
                         colaboradorDeducciones += Math.Round((decimal)(montoDeduccionColaborador * porcentajeColaborador) / 100, 2);
+                        montoDeduccionVoucher = colaboradorDeducciones;
+
+                        // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
+                        if (idMonedaColaborador != monedaDeducciones)
+                        {
+                            montoDeduccionVoucher = Math.Round((decimal)( ( (montoDeduccionColaborador * porcentajeColaborador /100) ) / tasaDeCambio.tmon_Cambio),2);
+                        }
+
 
                         //Voucher
                         ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
                         {
                             concepto = iterDeducciones.cde_DescripcionDeduccion,
-                            monto = Math.Round((decimal)(SalarioBase * porcentajeColaborador) / 100, 2)
+                            monto = montoDeduccionVoucher
                         });
 
                         //Historial de deducciones
                         lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
                         {
                             cde_IdDeducciones = iterDeducciones.cde_IdDeducciones,
-                            hidp_Total = Math.Round((decimal)(SalarioBase * porcentajeColaborador) / 100, 2)
+                            hidp_Total = montoDeduccionVoucher
                         });
                     }
                     catch (Exception ex)
@@ -74,6 +107,14 @@ namespace ERP_GMEDINA.Helpers
                         });
                         errores++;
                     }
+                }
+
+                // si la moneda de las deducciones es distintas al tipo de moneda del colaborador, convertir a la moneda del colaborador
+                // antes de agregarlo al reporte final
+                
+                if (idMonedaColaborador != monedaDeducciones)
+                {
+                    colaboradorDeducciones = Math.Round(((decimal)colaboradorDeducciones) / tasaDeCambio.tmon_Cambio, 2);
                 }
             }
 
@@ -99,7 +140,7 @@ namespace ERP_GMEDINA.Helpers
                         // pasar el estado de la deduccion a pagada
                         oDeduInstiFinancierasIterador.deif_Pagado = true;
                         oDeduInstiFinancierasIterador.deif_UsuarioModifica = idUser;
-                        oDeduInstiFinancierasIterador.deif_FechaModifica = DateTime.Now;
+                        oDeduInstiFinancierasIterador.deif_FechaModifica = objHelpers.DatetimeNow();
                         db.Entry(oDeduInstiFinancierasIterador).State = EntityState.Modified;
 
                         // agregar al voucher
@@ -133,11 +174,13 @@ namespace ERP_GMEDINA.Helpers
             // deducciones afp
             List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP
                                                 .Where(af => af.emp_Id == empleadoActual.emp_Id &&
-                                                       af.dafp_Pagado != true &&
-                                                       af.dafp_Activo == true &&
-                                                       af.dafp_FechaCrea >= fechaInicio &&
-                                                       af.dafp_FechaCrea <= fechaFin)
+                                                       af.dafp_Activo == true
+                                                       )
                                                 .ToList();
+
+            // respaldo de where's de deduccion afp
+            //af.dafp_FechaCrea >= fechaInicio &&
+            //af.dafp_FechaCrea <= fechaFin
 
             if (oDeduccionAfp.Count > 0)
             {
@@ -149,9 +192,9 @@ namespace ERP_GMEDINA.Helpers
                         totalAFP += Math.Round(oDeduccionAfpIter.dafp_AporteLps, 2);
 
                         //pasar el estado del aporte a pagado
-                        oDeduccionAfpIter.dafp_Pagado = true;
+                        //oDeduccionAfpIter.dafp_Pagado = true;
                         oDeduccionAfpIter.dafp_UsuarioModifica = idUser;
-                        oDeduccionAfpIter.dafp_FechaModifica = DateTime.Now;
+                        oDeduccionAfpIter.dafp_FechaModifica = objHelpers.DatetimeNow();
                         db.Entry(oDeduccionAfpIter).State = EntityState.Modified;
 
                         ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
@@ -202,7 +245,7 @@ namespace ERP_GMEDINA.Helpers
                         // restar la cuota al monto restante
                         oDeduccionesExtrasColaboradorIterador.dex_MontoRestante = oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_MontoRestante - oDeduccionesExtrasColaboradorIterador.dex_Cuota;
                         oDeduccionesExtrasColaboradorIterador.dex_UsuarioModifica = idUser;
-                        oDeduccionesExtrasColaboradorIterador.dex_FechaModifica = DateTime.Now;
+                        oDeduccionesExtrasColaboradorIterador.dex_FechaModifica = objHelpers.DatetimeNow();
                         db.Entry(oDeduccionesExtrasColaboradorIterador).State = EntityState.Modified;
 
                         // Historial de deducciones
@@ -247,7 +290,7 @@ namespace ERP_GMEDINA.Helpers
                         // pasar el estado del adelanto a deducido
                         oAdelantosSueldoIterador.adsu_Deducido = true;
                         oAdelantosSueldoIterador.adsu_UsuarioModifica = idUser;
-                        oAdelantosSueldoIterador.adsu_FechaModifica = DateTime.Now;
+                        oAdelantosSueldoIterador.adsu_FechaModifica = objHelpers.DatetimeNow();
                         db.Entry(oAdelantosSueldoIterador).State = EntityState.Modified;
 
                         ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
@@ -305,7 +348,7 @@ namespace ERP_GMEDINA.Helpers
                             oDeduccionesIndiColaboradorIterador.dei_Pagado = true;
                         }
                         oDeduccionesIndiColaboradorIterador.dei_UsuarioModifica = idUser;
-                        oDeduccionesIndiColaboradorIterador.dei_FechaModifica = DateTime.Now;
+                        oDeduccionesIndiColaboradorIterador.dei_FechaModifica = objHelpers.DatetimeNow();
                         db.Entry(oDeduccionesIndiColaboradorIterador).State = EntityState.Modified;
                                                 
                     }
@@ -324,6 +367,298 @@ namespace ERP_GMEDINA.Helpers
                 }
             }
 
+
+            // totales
+            totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo + totalDeduccionesIndividuales;
+            netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
+
+            #endregion
+        }
+
+        // se usa este actualmente
+        public static void PrevisualizarProcesarDeducciones(int monedaDeducciones, List<ViewModelTasasDeCambio> objMonedas, int userId,DateTime fechaInicio, DateTime fechaFin, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
+        {
+            #region Procesar deducciones
+
+            // instancia del helper
+            Models.Helpers objHelpers = new Models.Helpers();
+
+            // id del usuario logueado
+            int idUser = userId;
+
+            // validar que la planilla tenga deducciones
+            if (oDeducciones.Count > 0)
+            {
+                // obtener id del tipo de moneda del sueldo del colaborador
+                int idMonedaColaborador = db.tbSueldos.Where(x => x.emp_Id == InformacionDelEmpleadoActual.emp_Id && x.sue_Estado == true).Select(x => x.tmon_Id).FirstOrDefault();
+                
+                ViewModelTasasDeCambio tasaDeCambio = new ViewModelTasasDeCambio();
+
+                // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
+                if (idMonedaColaborador != monedaDeducciones)
+                {
+                    // no tengo idea de que estaba haciendo aquí gg  
+                    tasaDeCambio = objMonedas.Where(x => x.tmon_Id == idMonedaColaborador).FirstOrDefault();
+                }
+
+                // deducciones de la planilla
+                foreach (var iterDeducciones in oDeducciones)
+                {
+                    try
+                    {
+                        decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
+                        decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
+                        decimal? montoDeduccionColaborador = SalarioBase;
+
+                        // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
+                        if (idMonedaColaborador != monedaDeducciones)
+                        {
+                            montoDeduccionColaborador = (SalarioBase * tasaDeCambio.tmon_Cambio);
+                        }
+
+                        try
+                        {
+                            // verificar techos deducciones
+                            List<tbTechosDeducciones> oTechosDeducciones = db.tbTechosDeducciones
+                                                                             .Where(x => x.cde_IdDeducciones == iterDeducciones.cde_IdDeducciones &&
+                                                                                    x.tddu_Activo == true)
+                                                                             .OrderBy(x => x.tddu_Techo)
+                                                                             .ToList();
+                            if (oTechosDeducciones.Count() > 0)
+                            {
+                                foreach (var techosDeduccionesIter in oTechosDeducciones)
+                                {
+                                    try
+                                    {
+                                        if (SalarioBase > techosDeduccionesIter.tddu_Techo)
+                                        {
+                                            montoDeduccionColaborador = techosDeduccionesIter.tddu_Techo;
+                                            porcentajeColaborador = techosDeduccionesIter.tddu_PorcentajeColaboradores;
+                                            porcentajeEmpresa = techosDeduccionesIter.tddu_PorcentajeEmpresa;
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        listaErrores.Add(new ViewModelListaErrores
+                                        {
+                                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                            Error = $"Error al cargar techo de la deducción: {iterDeducciones.cde_DescripcionDeduccion}. Detalles del techo: Techo {techosDeduccionesIter.tddu_Techo}, porcentaje colaborador : {techosDeduccionesIter.tddu_PorcentajeColaboradores}, porcentaje empresa: {techosDeduccionesIter.tddu_PorcentajeEmpresa}.",
+                                            PosibleSolucion = "Verifique que la información de esta deducción y sus respectivos techos esté completa y/o correcta."
+
+                                        });
+                                        errores++;
+
+                                    }
+                                }
+                                // si la moneda de las deducciones es distintas al tipo de moneda del colaborador, convertir a la moneda del colaborador
+                                // antes de agregarlo al reporte final
+
+                                if (idMonedaColaborador != monedaDeducciones)
+                                {
+                                    colaboradorDeducciones = Math.Round(((decimal)colaboradorDeducciones) / tasaDeCambio.tmon_Cambio, 2);
+                                }
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            listaErrores.Add(new ViewModelListaErrores
+                            {
+                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                                Error = $"Error al cargar techos de la deducción: {iterDeducciones.cde_DescripcionDeduccion}.",
+                                PosibleSolucion = "Verifique que la información de esta deducción y sus respectivos techos esté completa y/o correcta."
+
+                            });
+                            errores++;
+                        }
+
+                        //sumar las deducciones
+                        colaboradorDeducciones += Math.Round((decimal)(montoDeduccionColaborador * porcentajeColaborador) / 100, 2);
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        listaErrores.Add(new ViewModelListaErrores
+                        {
+                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                            Error = $"Error al procesar deducción {iterDeducciones.cde_DescripcionDeduccion}.",
+                            PosibleSolucion = "Verifique que la información de esta deducción y sus respectivos techos (si los tiene) esté completa y/o correcta."
+
+                        });
+                        errores++;
+                    }
+                }
+            }
+
+
+            //instituciones financieras
+            List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras = db.tbDeduccionInstitucionFinanciera
+                                                                            .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                                                   x.deif_Activo == true &&
+                                                                                   x.deif_Pagado == false &&
+                                                                                   x.deif_FechaCrea >= fechaInicio &&
+                                                                                   x.deif_FechaCrea <= fechaFin)
+                                                                            .ToList();
+
+            if (oDeduInstiFinancieras.Count > 0)
+            {
+                // sumarlas todas
+                foreach (var oDeduInstiFinancierasIterador in oDeduInstiFinancieras)
+                {
+
+                    try
+                    {
+                        totalInstitucionesFinancieras += Math.Round((decimal)oDeduInstiFinancierasIterador.deif_Monto, 2);
+                    }
+                    catch (Exception ex)
+                    {
+                        listaErrores.Add(new ViewModelListaErrores
+                        {
+                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                            Error = $"Error al procesar deduccion por institución financiera {oDeduInstiFinancierasIterador.tbInstitucionesFinancieras.insf_DescInstitucionFinanc} - {oDeduInstiFinancierasIterador.deif_Comentarios} - {oDeduInstiFinancierasIterador.deif_Monto}.",
+                            PosibleSolucion = "Verifique que la información de esta deducción sea correcta de acuerdo al formato leído por el sistema."
+
+                        });
+                        errores++;
+                    }
+                }
+            }
+            // deducciones afp
+            List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP
+                                                .Where(af => af.emp_Id == empleadoActual.emp_Id &&
+                                                       af.dafp_Activo == true)
+                                                .ToList();
+
+            // respaldo de where's comentados de deduccion afp
+            // af.dafp_Pagado != true &&
+            // af.dafp_FechaCrea >= fechaInicio &&
+            // af.dafp_FechaCrea <= fechaFin
+
+            if (oDeduccionAfp.Count > 0)
+            {
+                // sumarlas todas
+                foreach (var oDeduccionAfpIter in oDeduccionAfp)
+                {
+                    try
+                    {
+                        totalAFP += Math.Round(oDeduccionAfpIter.dafp_AporteLps, 2);
+                    }
+                    catch (Exception ex)
+                    {
+                        listaErrores.Add(new ViewModelListaErrores
+                        {
+                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                            Error = $"Error al procesar deduccion AFP. {oDeduccionAfpIter.tbAFP.afp_Descripcion} - {oDeduccionAfpIter.dafp_AporteLps}",
+                            PosibleSolucion = "Verifique que la información de esta deducción esté correcta y/o completa."
+
+                        });
+                        errores++;
+                    }
+
+                }
+            }
+
+            // deducciones por equipo de trabajo
+            List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador = db.tbDeduccionesExtraordinarias
+                                                                                .Where(DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id &&
+                                                                                       DEX.dex_MontoRestante > 0 &&
+                                                                                       DEX.dex_Activo == true)
+                                                                                .ToList();
+
+            if (oDeduccionesExtrasColaborador.Count > 0)
+            {
+                // sumarlas todas
+                foreach (var oDeduccionesExtrasColaboradorIterador in oDeduccionesExtrasColaborador)
+                {
+                    try
+                    {
+                        totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        listaErrores.Add(new ViewModelListaErrores
+                        {
+                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                            Error = $"Error al procesar deduccion extra. {oDeduccionesExtrasColaboradorIterador.dex_ObservacionesComentarios} - {oDeduccionesExtrasColaboradorIterador.dex_Cuota}",
+                            PosibleSolucion = "Verifique que la información de esta deducción esté correcta y/o completa."
+
+                        });
+                        errores++;
+                    }
+                }
+            }
+
+            // adelantos de sueldo
+            List<tbAdelantoSueldo> oAdelantosSueldo = db.tbAdelantoSueldo
+                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id &&
+                                                               x.adsu_Activo == true && x.adsu_Deducido == false &&
+                                                               x.adsu_FechaAdelanto >= fechaInicio &&
+                                                               x.adsu_FechaAdelanto <= fechaFin)
+                                                        .ToList();
+
+            if (oAdelantosSueldo.Count > 0)
+            {
+                // sumarlas todas
+                foreach (var oAdelantosSueldoIterador in oAdelantosSueldo)
+                {
+
+                    try
+                    {
+                        adelantosSueldo += Math.Round((decimal)oAdelantosSueldoIterador.adsu_Monto, 2);
+                    }
+                    catch (Exception ex)
+                    {
+                        listaErrores.Add(new ViewModelListaErrores
+                        {
+                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                            Error = $"Error al procesar adelanto de sueldo. {oAdelantosSueldoIterador.adsu_RazonAdelanto} - {oAdelantosSueldoIterador.adsu_Monto}",
+                            PosibleSolucion = "Verifique que la información de dicho adelanto esté completa y/o correcta."
+
+                        });
+                        errores++;
+                    }
+                }
+            }
+
+            // deducciones individuales
+            List<tbDeduccionesIndividuales> oDeduccionesIndiColaborador = db.tbDeduccionesIndividuales
+                                                                            .Where(DEX => DEX.emp_Id == empleadoActual.emp_Id &&
+                                                                                   DEX.dei_Monto > 0 &&
+                                                                                   DEX.dei_Pagado != true &&
+                                                                                   DEX.dei_Activo == true)
+                                                                            .ToList();
+
+            if (oDeduccionesIndiColaborador.Count > 0)
+            {
+                // sumarlas todas
+                foreach (var oDeduccionesIndiColaboradorIterador in oDeduccionesIndiColaborador)
+                {
+                    try
+                    {
+                        totalDeduccionesIndividuales += oDeduccionesIndiColaboradorIterador.dei_Monto <= oDeduccionesIndiColaboradorIterador.dei_MontoCuota ? oDeduccionesIndiColaboradorIterador.dei_MontoCuota : oDeduccionesIndiColaboradorIterador.dei_MontoCuota;
+                    }
+                    catch (Exception ex)
+                    {
+                        listaErrores.Add(new ViewModelListaErrores
+                        {
+                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
+                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
+                            Error = $"Error al procesar deducción individual. {oDeduccionesIndiColaboradorIterador.dei_Motivo} - {oDeduccionesIndiColaboradorIterador.dei_MontoCuota}",
+                            PosibleSolucion = "Verifique que la de dicha deducción esté completa y/o correcta."
+
+                        });
+                        errores++;
+                    }
+                }
+            }
 
             // totales
             totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo + totalDeduccionesIndividuales;
@@ -461,261 +796,5 @@ namespace ERP_GMEDINA.Helpers
             #endregion
         }
 
-        // se usa este actualmente
-        public static void PrevisualizarProcesarDeducciones(DateTime fechaInicio, DateTime fechaFin, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
-        {
-            #region Procesar deducciones
-
-            if (oDeducciones.Count > 0)
-            {
-                // deducciones de la planilla
-                foreach (var iterDeducciones in oDeducciones)
-                {
-                    try
-                    {
-                        decimal? porcentajeColaborador = iterDeducciones.cde_PorcentajeColaborador;
-                        decimal? porcentajeEmpresa = iterDeducciones.cde_PorcentajeEmpresa;
-                        decimal? montoDeduccionColaborador = SalarioBase;
-
-                        try
-                        {
-                            // verificar techos deducciones
-                            List<tbTechosDeducciones> oTechosDeducciones = db.tbTechosDeducciones
-                                                                             .Where(x => x.cde_IdDeducciones == iterDeducciones.cde_IdDeducciones &&
-                                                                                    x.tddu_Activo == true)
-                                                                             .OrderBy(x => x.tddu_Techo)
-                                                                             .ToList();
-                            if (oTechosDeducciones.Count() > 0)
-                            {
-                                foreach (var techosDeduccionesIter in oTechosDeducciones)
-                                {
-                                    try
-                                    {
-                                        if (SalarioBase > techosDeduccionesIter.tddu_Techo)
-                                        {
-                                            montoDeduccionColaborador = techosDeduccionesIter.tddu_Techo;
-                                            porcentajeColaborador = techosDeduccionesIter.tddu_PorcentajeColaboradores;
-                                            porcentajeEmpresa = techosDeduccionesIter.tddu_PorcentajeEmpresa;
-                                        }
-                                    }
-                                    catch(Exception ex)
-                                    {
-                                        listaErrores.Add(new ViewModelListaErrores
-                                        {
-                                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                                            Error = $"Error al cargar techo de la deducción: {iterDeducciones.cde_DescripcionDeduccion}. Detalles del techo: Techo {techosDeduccionesIter.tddu_Techo}, porcentaje colaborador : {techosDeduccionesIter.tddu_PorcentajeColaboradores}, porcentaje empresa: {techosDeduccionesIter.tddu_PorcentajeEmpresa}.",
-                                            PosibleSolucion = "Verifique que la información de esta deducción y sus respectivos techos esté completa y/o correcta."
-
-                                        });
-                                        errores++;
-
-                                    }
-                                }
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            listaErrores.Add(new ViewModelListaErrores
-                            {
-                                Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                                NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                                Error = $"Error al cargar techos de la deducción: {iterDeducciones.cde_DescripcionDeduccion}.",
-                                PosibleSolucion = "Verifique que la información de esta deducción y sus respectivos techos esté completa y/o correcta."
-
-                            });
-                            errores++;
-                        }
-
-                        //sumar las deducciones
-                        colaboradorDeducciones += Math.Round((decimal)(montoDeduccionColaborador * porcentajeColaborador) / 100, 2);
-                    }
-                    catch (Exception ex)
-                    {
-                        listaErrores.Add(new ViewModelListaErrores
-                        {
-                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                            Error = $"Error al procesar deducción {iterDeducciones.cde_DescripcionDeduccion}.",
-                            PosibleSolucion = "Verifique que la información de esta deducción y sus respectivos techos (si los tiene) esté completa y/o correcta."
-
-                        });
-                        errores++;
-                    }
-                }
-            }
-
-
-            //instituciones financieras
-            List<tbDeduccionInstitucionFinanciera> oDeduInstiFinancieras = db.tbDeduccionInstitucionFinanciera
-                                                                            .Where(x => x.emp_Id == empleadoActual.emp_Id &&
-                                                                                   x.deif_Activo == true &&
-                                                                                   x.deif_Pagado == false &&
-                                                                                   x.deif_FechaCrea >= fechaInicio &&
-                                                                                   x.deif_FechaCrea <= fechaFin)
-                                                                            .ToList();
-
-            if (oDeduInstiFinancieras.Count > 0)
-            {
-                // sumarlas todas
-                foreach (var oDeduInstiFinancierasIterador in oDeduInstiFinancieras)
-                {
-
-                    try
-                    {
-                        totalInstitucionesFinancieras += Math.Round((decimal)oDeduInstiFinancierasIterador.deif_Monto, 2);
-                    }
-                    catch (Exception ex)
-                    {
-                        listaErrores.Add(new ViewModelListaErrores
-                        {
-                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                            Error = $"Error al procesar deduccion por institución financiera {oDeduInstiFinancierasIterador.tbInstitucionesFinancieras.insf_DescInstitucionFinanc} - {oDeduInstiFinancierasIterador.deif_Comentarios} - {oDeduInstiFinancierasIterador.deif_Monto}.",
-                            PosibleSolucion = "Verifique que la información de esta deducción sea correcta de acuerdo al formato leído por el sistema."
-
-                        });
-                        errores++;
-                    }
-                }
-            }
-            // deducciones afp
-            List<tbDeduccionAFP> oDeduccionAfp = db.tbDeduccionAFP
-                                                .Where(af => af.emp_Id == empleadoActual.emp_Id &&
-                                                       af.dafp_Pagado != true &&
-                                                       af.dafp_Activo == true &&
-                                                       af.dafp_FechaCrea >= fechaInicio &&
-                                                       af.dafp_FechaCrea <= fechaFin)
-                                                .ToList();
-
-            if (oDeduccionAfp.Count > 0)
-            {
-                // sumarlas todas
-                foreach (var oDeduccionAfpIter in oDeduccionAfp)
-                {
-                    try
-                    {
-                        totalAFP += Math.Round(oDeduccionAfpIter.dafp_AporteLps, 2);
-                    }
-                    catch (Exception ex)
-                    {
-                        listaErrores.Add(new ViewModelListaErrores
-                        {
-                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                            Error = $"Error al procesar deduccion AFP. {oDeduccionAfpIter.tbAFP.afp_Descripcion} - {oDeduccionAfpIter.dafp_AporteLps}",
-                            PosibleSolucion = "Verifique que la información de esta deducción esté correcta y/o completa."
-
-                        });
-                        errores++;
-                    }
-
-                }
-            }
-
-            // deducciones por equipo de trabajo
-            List<tbDeduccionesExtraordinarias> oDeduccionesExtrasColaborador = db.tbDeduccionesExtraordinarias
-                                                                                .Where(DEX => DEX.tbEquipoEmpleados.emp_Id == empleadoActual.emp_Id &&
-                                                                                       DEX.dex_MontoRestante > 0 &&
-                                                                                       DEX.dex_Activo == true)
-                                                                                .ToList();
-
-            if (oDeduccionesExtrasColaborador.Count > 0)
-            {
-                // sumarlas todas
-                foreach (var oDeduccionesExtrasColaboradorIterador in oDeduccionesExtrasColaborador)
-                {
-                    try
-                    {
-                        totalOtrasDeducciones += oDeduccionesExtrasColaboradorIterador.dex_MontoRestante <= oDeduccionesExtrasColaboradorIterador.dex_Cuota ? oDeduccionesExtrasColaboradorIterador.dex_MontoRestante : oDeduccionesExtrasColaboradorIterador.dex_Cuota;
-                        
-                    }
-                    catch (Exception ex)
-                    {
-                        listaErrores.Add(new ViewModelListaErrores
-                        {
-                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                            Error = $"Error al procesar deduccion extra. {oDeduccionesExtrasColaboradorIterador.dex_ObservacionesComentarios} - {oDeduccionesExtrasColaboradorIterador.dex_Cuota}",
-                            PosibleSolucion = "Verifique que la información de esta deducción esté correcta y/o completa."
-
-                        });
-                        errores++;
-                    }
-                }
-            }
-
-            // adelantos de sueldo
-            List<tbAdelantoSueldo> oAdelantosSueldo = db.tbAdelantoSueldo
-                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id &&
-                                                               x.adsu_Activo == true && x.adsu_Deducido == false &&
-                                                               x.adsu_FechaAdelanto >= fechaInicio &&
-                                                               x.adsu_FechaAdelanto <= fechaFin)
-                                                        .ToList();
-
-            if (oAdelantosSueldo.Count > 0)
-            {
-                // sumarlas todas
-                foreach (var oAdelantosSueldoIterador in oAdelantosSueldo)
-                {
-
-                    try
-                    {
-                        adelantosSueldo += Math.Round((decimal)oAdelantosSueldoIterador.adsu_Monto, 2);
-                    }
-                    catch (Exception ex)
-                    {
-                        listaErrores.Add(new ViewModelListaErrores
-                        {
-                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                            Error = $"Error al procesar adelanto de sueldo. {oAdelantosSueldoIterador.adsu_RazonAdelanto} - {oAdelantosSueldoIterador.adsu_Monto}",
-                            PosibleSolucion = "Verifique que la información de dicho adelanto esté completa y/o correcta."
-
-                        });
-                        errores++;
-                    }
-                }
-            }
-
-            // deducciones individuales
-            List<tbDeduccionesIndividuales> oDeduccionesIndiColaborador = db.tbDeduccionesIndividuales
-                                                                            .Where(DEX => DEX.emp_Id == empleadoActual.emp_Id &&
-                                                                                   DEX.dei_Monto > 0 &&
-                                                                                   DEX.dei_Pagado != true &&
-                                                                                   DEX.dei_Activo == true)
-                                                                            .ToList();
-
-            if (oDeduccionesIndiColaborador.Count > 0)
-            {
-                // sumarlas todas
-                foreach (var oDeduccionesIndiColaboradorIterador in oDeduccionesIndiColaborador)
-                {
-                    try
-                    {
-                        totalDeduccionesIndividuales += oDeduccionesIndiColaboradorIterador.dei_Monto <= oDeduccionesIndiColaboradorIterador.dei_MontoCuota ? oDeduccionesIndiColaboradorIterador.dei_MontoCuota : oDeduccionesIndiColaboradorIterador.dei_MontoCuota;
-                    }
-                    catch (Exception ex)
-                    {
-                        listaErrores.Add(new ViewModelListaErrores
-                        {
-                            Identidad = InformacionDelEmpleadoActual.per_Identidad,
-                            NombreColaborador = InformacionDelEmpleadoActual.per_Nombres + " " + InformacionDelEmpleadoActual.per_Apellidos,
-                            Error = $"Error al procesar deducción individual. {oDeduccionesIndiColaboradorIterador.dei_Motivo} - {oDeduccionesIndiColaboradorIterador.dei_MontoCuota}",
-                            PosibleSolucion = "Verifique que la de dicha deducción esté completa y/o correcta."
-
-                        });
-                        errores++;
-                    }
-                }
-            }
-
-            // totales
-            totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo + totalDeduccionesIndividuales;
-            netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
-
-            #endregion
-        }
     }
 }

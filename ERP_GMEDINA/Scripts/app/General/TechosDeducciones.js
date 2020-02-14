@@ -630,13 +630,53 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
     }
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+//FUNCION: OCULTAR EL MODAL DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
 $("#btnEditarTecho").click(function () {
+
+
+
+	var deduccionE = $("#Editar #cde_IdDeducciones").val();
+	var techoE = $("#Editar #tddu_Techo").val();
+	var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
+	var porcentajeEmpresaE = $("#Editar #tddu_PorcentajeEmpresa").val();
+
+	//DESBLOQUEAR EL BOTON DE EDICION
+	$("#btnConfirmarEditar").attr("disabled", false);
+	//VALIDAR EL FORMULARIO
+	if (validacionEditar()) {
+	document.getElementById("btnEditarrTechosDeducciones").disabled = false;
+			//OCULTAR EL MODAL DE EDICION
+			$("#EditarTechosDeducciones").modal('hide');
+			//DESPLEGAR EL MODAL DE CONFIRMACION
+			$("#EditTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+	} else {
+		//OCULTAR EL MODAL DE CONFIRMACION
+		$("#EditTechosDeducciones").modal('hide');
+		//DESPLEGAR EL MODAL DE EDICION
+		$("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+	}
+
+});
+
+//FUNCION: OCULTAR EL MODAL DE CONFIRMACION Y MOSTRAR EL MODAL DE EDITAR
+$("#btnNoEditar").click(function () {
+
+	debugger;
+	//OCULTAR EL MODAL DE EDICION
+	$("#EditTechosDeducciones").modal('hide');
+	//DESPLEGAR EL MODAL DE CONFIRMACION
+	$("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditarrTechosDeducciones").click(function () {
     var deduccionE = $("#Editar #cde_IdDeducciones").val();
     var techoE = $("#Editar #tddu_Techo").val();
     var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
     var porcentajeEmpresaE = $("#Editar #tddu_PorcentajeEmpresa").val();
     if (validacionEditar()) {
+    	document.getElementById("btnEditarrTechosDeducciones").disabled = true;
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditTechosDeducciones").serializeArray();
         data[5].value = data[5].value.replace(/,/g, '');
@@ -656,9 +696,10 @@ $("#btnEditarTecho").click(function () {
                 });
             }
             else {
-                cargarGridTechosDeducciones();
+            	cargarGridTechosDeducciones();
+            	debugger;
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarTechosDeducciones").modal('hide');
+            	$("#EditTechosDeducciones").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
