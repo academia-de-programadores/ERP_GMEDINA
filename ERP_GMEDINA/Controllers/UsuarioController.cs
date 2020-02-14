@@ -161,7 +161,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     try
                     {
-                        List = db.UDP_Acce_tbUsuario_Insert(tbUsuario.usu_NombreUsuario, usu_Password, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo, tbUsuario.suc_Id, tbUsuario.emp_Id, tbUsuario.usu_EsAdministrador);
+                        List = db.UDP_Acce_tbUsuario_Insert(tbUsuario.usu_NombreUsuario, usu_Password, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo,tbUsuario.usu_EsActivo, tbUsuario.usu_EsAdministrador ,tbUsuario.suc_Id, tbUsuario.emp_Id);
                         foreach (UDP_Acce_tbUsuario_Insert_Result Usuario in List)
                             MsjError = Usuario.MensajeError;
                         if (MsjError.StartsWith("-1"))
@@ -569,22 +569,4 @@ namespace ERP_GMEDINA.Controllers
     }
 }
 
-namespace ERP_GMEDINA.Models
-{
-    using System;
 
-    public class UDP_Acce_tbRolesUsuario_Insert_Result
-    {
-        public string MensajeError { get; set; }
-    }
-}
-
-namespace ERP_GMEDINA.Models
-{
-    using System;
-
-    public partial class UDP_Acce_tbUsuario_Update_Result
-    {
-        public string MensajeError { get; set; }
-    }
-}
