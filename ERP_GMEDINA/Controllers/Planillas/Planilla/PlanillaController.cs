@@ -10,7 +10,7 @@ using ERP_GMEDINA.Attribute;
 
 namespace ERP_GMEDINA.Controllers
 {
-    
+
     public class PlanillaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
@@ -32,7 +32,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult getMonedas()
         {
             var objMonedas = db.tbTipoMonedas
-                        .Where(c=>c.tmon_Estado == true)
+                        .Where(c => c.tmon_Estado == true)
                         .Select(c => new { tmon_Id = c.tmon_Id, tmon_Descripcion = c.tmon_Descripcion })
                         .ToList();
 
@@ -204,7 +204,7 @@ namespace ERP_GMEDINA.Controllers
 
                                             int userId = (int)Session["UserLogin"];
                                             //Procesar Ingresos
-                                            await Task.Run(() => Ingresos.ProcesarIngresos(userId,fechaInicio,
+                                            await Task.Run(() => Ingresos.ProcesarIngresos(userId, fechaInicio,
                                                    fechaFin,
                                                    ListaIngresosVoucher,
                                                    listaErrores,
@@ -231,7 +231,7 @@ namespace ERP_GMEDINA.Controllers
                                             //Procesar Deducciones
                                             await Task.Run(() => Deducciones.ProcesarDeducciones(tmon_IdMonedaDeduccionesDePlanilla,
                                                  monedas,
-                                                 userId,fechaInicio,
+                                                 userId, fechaInicio,
                                                  fechaFin,
                                                  ListaDeduccionesVoucher,
                                                  listaErrores,
@@ -310,7 +310,7 @@ namespace ERP_GMEDINA.Controllers
                                                   InformacionDelEmpleadoActual));
 
                                             #region crear registro de la planilla del colaborador para el reporte
-                                            await Task.Run(() => ReportePlanilla.ReporteColaboradorPlanilla(moneda, 
+                                            await Task.Run(() => ReportePlanilla.ReporteColaboradorPlanilla(moneda,
                                                    ref oPlanillaEmpleado,
                                                    empleadoActual,
                                                    SalarioBase,
@@ -549,7 +549,7 @@ namespace ERP_GMEDINA.Controllers
                                         // procesar deducciones
                                         Deducciones.PrevisualizarProcesarDeducciones(tmon_IdMonedaDeduccionesDePlanilla,
                                              monedas,
-                                             userId, 
+                                             userId,
                                              fechaInicio,
                                              fechaFin,
                                              listaErrores,
@@ -578,7 +578,7 @@ namespace ERP_GMEDINA.Controllers
                                         #region crear registro de la planilla del colaborador para el reporte
 
                                         // reporte
-                                        ReportePlanilla.ReportePlanillaPrevisualizacion(moneda,ref oPlanillaEmpleado, empleadoActual, SalarioBase, horasTrabajadas, salarioHora, totalSalario, totalComisiones, horasExtrasTrabajadas, totalHorasExtras, totalHorasPermiso, totalBonificaciones, totalIngresosIndivuales, totalVacaciones, totalIngresosEmpleado, totalISR, colaboradorDeducciones, totalAFP, totalInstitucionesFinancieras, totalOtrasDeducciones, adelantosSueldo, totalDeduccionesEmpleado, totalDeduccionesIndividuales, netoAPagarColaborador, InformacionDelEmpleadoActual);
+                                        ReportePlanilla.ReportePlanillaPrevisualizacion(moneda, ref oPlanillaEmpleado, empleadoActual, SalarioBase, horasTrabajadas, salarioHora, totalSalario, totalComisiones, horasExtrasTrabajadas, totalHorasExtras, totalHorasPermiso, totalBonificaciones, totalIngresosIndivuales, totalVacaciones, totalIngresosEmpleado, totalISR, colaboradorDeducciones, totalAFP, totalInstitucionesFinancieras, totalOtrasDeducciones, adelantosSueldo, totalDeduccionesEmpleado, totalDeduccionesIndividuales, netoAPagarColaborador, InformacionDelEmpleadoActual);
                                         reporte.Add(oPlanillaEmpleado);
                                         oPlanillaEmpleado = null;
                                         #endregion
