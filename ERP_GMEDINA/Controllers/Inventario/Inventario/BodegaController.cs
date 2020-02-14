@@ -70,7 +70,7 @@ namespace ERP_GMEDINA.Controllers
                     try
                     {
                         BODEGA = db.UDP_Inv_tbBodega_Insert(tbBodega.bod_Nombre,
-                                                         tbBodega.bod_ResponsableBodega
+                                                            tbBodega.bod_ResponsableBodega
                                                         , tbBodega.bod_Direccion
                                                         , tbBodega.bod_Correo
                                                         , tbBodega.bod_Telefono

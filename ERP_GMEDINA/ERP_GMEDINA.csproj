@@ -244,11 +244,13 @@
     <Compile Include="Controllers\Inventario\Catalogos\EstadoInventarioFisicoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\EstadoMovimientoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\ProductoCategoriaController.cs" />
+    <Compile Include="Controllers\Inventario\Catalogos\ProductoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\TipoDevolucionController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\TipoEntradaController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\UnidadMedidaController.cs" />
     <Compile Include="Controllers\Inventario\Configuracion\ParametroController.cs" />
     <Compile Include="Controllers\Inventario\Configuracion\ProveedorController.cs" />
+    <Compile Include="Controllers\Inventario\Inventario\BoxController.cs" />
     <Compile Include="Controllers\Inventario\Inventario\EntradaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
@@ -1245,6 +1247,27 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_Consultar_Existencias_Productos_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodegaDetalle_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodegaDetalle_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodegaDetalle_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodega_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodega_Update_Estado_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodega_Update_Estado_Validacion_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbBodega_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbEntradaDetalle_Insert_Result.cs">
@@ -2779,6 +2802,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reports\CatalogoProducto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogoProducto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ImprimirEntradaPorId.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4268,6 +4297,10 @@
     <EmbeddedResource Include="ReportesPlanilla\ReporteVacacionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\AmonestacionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\AudienciasDescargo.rdlc" />
+    <EmbeddedResource Include="Reports\CatalogoProducto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CatalogoProducto.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\EquipoEmpleadosRPT.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
