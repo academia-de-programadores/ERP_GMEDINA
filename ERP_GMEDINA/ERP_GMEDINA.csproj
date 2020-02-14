@@ -681,7 +681,13 @@
     <Compile Include="Models\spGetMunicipios1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spGetMunicipios1_Result1.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spGetMunicipios_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetMunicipios_Result1.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spGetParametro_Result.cs">
@@ -691,6 +697,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spGetProducto_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetProducto_Result1.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SPGetResponsableBodega_Result.cs">
@@ -1176,10 +1185,16 @@
     <Compile Include="Models\UDP_Acce_Login_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Acce_tbRolesUsuario_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Acce_tbUsuario_PasswordRestore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Acce_tbUsuario_PasswordUpdate_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Acce_tbUsuario_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbActividadEconomica_Insert_Result.cs">

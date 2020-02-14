@@ -248,7 +248,7 @@ namespace ERP_GMEDINA.Controllers
                     var MsjError = "0";
                     List = db.UDP_Acce_tbUsuario_Update(tbUsuario.usu_Id, tbUsuario.usu_NombreUsuario, tbUsuario.usu_Nombres, tbUsuario.usu_Apellidos, tbUsuario.usu_Correo, usu_EsActivo, tbUsuario.usu_RazonInactivo, tbUsuario.usu_EsAdministrador,
                         tbUsuario.suc_Id, tbUsuario.emp_Id);
-                    foreach (UDP_Acce_tbUsuario_Update_Result Usuario in List)
+                    foreach (ERP_GMEDINA.Models.UDP_Acce_tbUsuario_Update_Result Usuario in List)
                         MsjError = Usuario.MensajeError;
 
                     if (MsjError.StartsWith("-1"))
@@ -566,5 +566,25 @@ namespace ERP_GMEDINA.Controllers
             var EmpleadoList = db.SDP_Gral_tbEmpleado_Select((short)EmpleadoID).ToList();
             return Json(EmpleadoList, JsonRequestBehavior.AllowGet);
         }
+    }
+}
+
+namespace ERP_GMEDINA.Models
+{
+    using System;
+
+    public class UDP_Acce_tbRolesUsuario_Insert_Result
+    {
+        public string MensajeError { get; set; }
+    }
+}
+
+namespace ERP_GMEDINA.Models
+{
+    using System;
+
+    public partial class UDP_Acce_tbUsuario_Update_Result
+    {
+        public string MensajeError { get; set; }
     }
 }
