@@ -293,7 +293,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (TransactionScope Tran = new TransactionScope())
                     {
-                        var vFactura = db.tbFactura.Where(x => x.fact_Codigo == tbSalida.fact_Codigo).Select(x => x.fact_Id).SingleOrDefault();
+                        var vFactura = db.tbFactura.Where(x => x.fact_Codigo == tbSalida.tbFactura.fact_Codigo).Select(x => x.fact_Id).SingleOrDefault();
                         //tbSalida.bod_Id
                         listSalida = db.UDP_Inv_tbSalida_Insert(tbSalida.bod_Id, vFactura, tbSalida.sal_FechaElaboracion, Models.Helpers.sal_Emitida, tbSalida.tsal_Id, tbSalida.sal_BodDestino, tbSalida.sal_EsAnulada, tbSalida.tdev_Id, tbSalida.sal_RazonAnulada, Function.GetUser(), Function.DatetimeNow());
                         foreach (UDP_Inv_tbSalida_Insert_Result Salida in listSalida)
@@ -562,11 +562,11 @@ namespace ERP_GMEDINA.Controllers
             {
                var vbfact_Codigo = db.tbFactura.Find(tbSalida.fact_Id).fact_Codigo.ToString();
 
-                tbSalida.fact_Codigo = vbfact_Codigo;
+                tbSalida.tbFactura.fact_Codigo = vbfact_Codigo;
             }
             else
             {
-                tbSalida.fact_Codigo = "0";
+                tbSalida.tbFactura.fact_Codigo = "0";
             }
 
             ViewBag.bod_Id = new SelectList(db.tbBodega.Where(x => x.bod_ResponsableBodega == idUser).ToList(), "bod_Id", "bod_Nombre");
