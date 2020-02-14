@@ -79,6 +79,6 @@ namespace ERP_GMEDINA.Models
 
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbSucursales tbSucursal { get; set; }
+        public virtual tbSucursales tbSucursales { get; set; }
     }
 }

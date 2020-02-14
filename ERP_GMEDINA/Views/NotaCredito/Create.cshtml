@@ -7,8 +7,8 @@
 }
 @{
     string UserName = "";
-    
-    List<tbUsuario> User = Login.getUserInformation();
+    Helpers helpers = new Helpers();
+    List<tbUsuario> User = helpers.getUserInformation();
     foreach (tbUsuario Usuario in User)
     {
         UserName = Usuario.usu_Nombres + " " + Usuario.usu_Apellidos;
@@ -68,8 +68,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.tbUsuario.tbEmpleado.emp_Nombres, "Cajero", new { @class = "control-label col-md-2" })
+                            <div class="form-group">@* TODO: Descomentar esta linea cuando este la relacion*@\
+                                @*@Html.LabelFor(model => model.tbEmpleado.emp_Nombres, "Cajero", new { @class = "control-label col-md-2" })*@
                                 <div class="col-md-3">
                                     <input class="form-control" readonly value="@UserName" />
                                 </div>
