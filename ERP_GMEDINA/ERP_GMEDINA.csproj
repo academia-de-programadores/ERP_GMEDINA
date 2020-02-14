@@ -368,8 +368,36 @@
     <Compile Include="Models\EmpleadosVendedores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Inventario\AccountViewModels.cs" />
+    <Compile Include="Models\Inventario\Catalogo\departamento.cs" />
+    <Compile Include="Models\Inventario\Catalogo\EstadoCategoria.cs" />
+    <Compile Include="Models\Inventario\Catalogo\EstadoInventariosFisico.cs" />
+    <Compile Include="Models\Inventario\Catalogo\estadomovimientos.cs" />
+    <Compile Include="Models\Inventario\Catalogo\Estados.cs" />
+    <Compile Include="Models\Inventario\Catalogo\EstadoSubCategoria.cs" />
+    <Compile Include="Models\Inventario\Catalogo\InventariosFisicos.cs" />
+    <Compile Include="Models\Inventario\Catalogo\InventariosFisicosDetalle.cs" />
+    <Compile Include="Models\Inventario\Catalogo\municipios.cs" />
+    <Compile Include="Models\Inventario\Catalogo\Productos.cs" />
+    <Compile Include="Models\Inventario\Catalogo\ProductosCategorias.cs" />
+    <Compile Include="Models\Inventario\Catalogo\ProductosSubCategorias.cs" />
+    <Compile Include="Models\Inventario\Catalogo\TipoDevolucion.cs" />
+    <Compile Include="Models\Inventario\Catalogo\TipoEntrada.cs" />
+    <Compile Include="Models\Inventario\Catalogo\TipoSalida.cs" />
+    <Compile Include="Models\Inventario\Catalogo\UnidadMedida.cs" />
+    <Compile Include="Models\Inventario\Configuracion\Empleado.cs" />
+    <Compile Include="Models\Inventario\Configuracion\Parametros.cs" />
+    <Compile Include="Models\Inventario\Configuracion\proveedor.cs" />
+    <Compile Include="Models\Inventario\Inventario\Bodega.cs" />
+    <Compile Include="Models\Inventario\Inventario\BodegaDetalle.cs" />
+    <Compile Include="Models\Inventario\Inventario\Box.cs" />
+    <Compile Include="Models\Inventario\Inventario\BoxDetalle.cs" />
+    <Compile Include="Models\Inventario\Inventario\ConsultarExistenciaProductos.cs" />
+    <Compile Include="Models\Inventario\Inventario\DetalleEntrada.cs" />
+    <Compile Include="Models\Inventario\Inventario\Entrada.cs" />
     <Compile Include="Models\Inventario\Inventario\EstadoBodega.cs" />
     <Compile Include="Models\Inventario\Inventario\Salida.cs" />
+    <Compile Include="Models\Inventario\Inventario\SalidaDetalle.cs" />
     <Compile Include="Models\Listado_CAI_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -644,6 +672,10 @@
     <Compile Include="Models\SDP_Vent_tbPedidoDetalle_tbPedido_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Seguridad\accesorol.cs" />
+    <Compile Include="Models\Seguridad\Objeto.cs" />
+    <Compile Include="Models\Seguridad\rol.cs" />
+    <Compile Include="Models\Seguridad\RolesUsuario.cs" />
     <Compile Include="Models\spGetActividadEconomica_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
