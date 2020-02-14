@@ -368,6 +368,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DatasetVent\Reportes.cs">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetVent\Reportes1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Dataset\ArqueoCaja2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -397,6 +405,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\Reportes.cs">
+      <DependentUpon>Reportes.xsd</DependentUpon>
     </Compile>
     <Compile Include="Dataset\Reportes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3022,7 +3033,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisisDeMora.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ArqueoCaja.cs">
       <SubType>Component</SubType>
@@ -3031,7 +3041,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ArqueoCaja.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\CatalogoProducto.cs">
       <AutoGen>True</AutoGen>
@@ -3046,7 +3055,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CuponDescuento.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DescuentosPorFecha.cs">
       <SubType>Component</SubType>
@@ -3055,7 +3063,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DescuentosPorFecha.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DevolucionesPorFecha.cs">
       <SubType>Component</SubType>
@@ -3064,7 +3071,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DevolucionesPorFecha.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\EstadoCuenta.cs">
       <AutoGen>True</AutoGen>
@@ -3924,6 +3930,17 @@
     </Content>
     <Content Include="Dataset\ArqueoCaja.xsc">
       <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Content>
+    <Content Include="DatasetVent\Reportes.xsc">
+      <DependentUpon>Reportes.xsd</DependentUpon>
+    </Content>
+    <None Include="DatasetVent\Reportes.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Reportes1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DatasetVent\Reportes.xss">
+      <DependentUpon>Reportes.xsd</DependentUpon>
     </Content>
     <None Include="Dataset\ArqueoCaja.xsd">
       <Generator>MSDataSetGenerator</Generator>
