@@ -8995,7 +8995,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_SolicitarProducto_ValidacionPorBodega_Result>("UDP_Inv_SolicitarProducto_ValidacionPorBodega", iDBodegaParameter, iDProductoParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbBodega_Insert_Result> UDP_Inv_tbBodega_Insert(string bod_Nombre, Nullable<short> bod_ResponsableBodega, string bod_Direccion, string bod_Correo, string bod_Telefono, string mun_Codigo, Nullable<int> bod_UsuarioCrea, Nullable<System.DateTime> bod_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbBodega_Insert_Result> UDP_Inv_tbBodega_Insert(string bod_Nombre, Nullable<int> bod_ResponsableBodega, string bod_Direccion, string bod_Correo, string bod_Telefono, string mun_Codigo, Nullable<int> bod_UsuarioCrea, Nullable<System.DateTime> bod_FechaCrea)
         {
             var bod_NombreParameter = bod_Nombre != null ?
                 new ObjectParameter("bod_Nombre", bod_Nombre) :
@@ -9003,7 +9003,7 @@
     
             var bod_ResponsableBodegaParameter = bod_ResponsableBodega.HasValue ?
                 new ObjectParameter("bod_ResponsableBodega", bod_ResponsableBodega) :
-                new ObjectParameter("bod_ResponsableBodega", typeof(short));
+                new ObjectParameter("bod_ResponsableBodega", typeof(int));
     
             var bod_DireccionParameter = bod_Direccion != null ?
                 new ObjectParameter("bod_Direccion", bod_Direccion) :
@@ -9032,7 +9032,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbBodega_Insert_Result>("UDP_Inv_tbBodega_Insert", bod_NombreParameter, bod_ResponsableBodegaParameter, bod_DireccionParameter, bod_CorreoParameter, bod_TelefonoParameter, mun_CodigoParameter, bod_UsuarioCreaParameter, bod_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbBodega_Update_Result> UDP_Inv_tbBodega_Update(Nullable<int> bod_Id, string bod_Nombre, Nullable<short> bod_ResponsableBodega, string bod_Direccion, string bod_Correo, string bod_Telefono, string mun_Codigo, Nullable<int> bod_UsuarioCrea, Nullable<System.DateTime> bod_Fechacrea, Nullable<int> bod_UsuarioModifica, Nullable<System.DateTime> bod_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbBodega_Update_Result> UDP_Inv_tbBodega_Update(Nullable<int> bod_Id, string bod_Nombre, Nullable<int> bod_ResponsableBodega, string bod_Direccion, string bod_Correo, string bod_Telefono, string mun_Codigo, Nullable<int> bod_UsuarioCrea, Nullable<System.DateTime> bod_Fechacrea, Nullable<int> bod_UsuarioModifica, Nullable<System.DateTime> bod_FechaModifica)
         {
             var bod_IdParameter = bod_Id.HasValue ?
                 new ObjectParameter("bod_Id", bod_Id) :
@@ -9044,7 +9044,7 @@
     
             var bod_ResponsableBodegaParameter = bod_ResponsableBodega.HasValue ?
                 new ObjectParameter("bod_ResponsableBodega", bod_ResponsableBodega) :
-                new ObjectParameter("bod_ResponsableBodega", typeof(short));
+                new ObjectParameter("bod_ResponsableBodega", typeof(int));
     
             var bod_DireccionParameter = bod_Direccion != null ?
                 new ObjectParameter("bod_Direccion", bod_Direccion) :

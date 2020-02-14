@@ -251,6 +251,7 @@
     <Compile Include="Controllers\Inventario\Catalogos\UnidadMedidaController.cs" />
     <Compile Include="Controllers\Inventario\Configuracion\ParametroController.cs" />
     <Compile Include="Controllers\Inventario\Configuracion\ProveedorController.cs" />
+    <Compile Include="Controllers\Inventario\Inventario\BodegaController.cs" />
     <Compile Include="Controllers\Inventario\Inventario\BoxController.cs" />
     <Compile Include="Controllers\Inventario\Inventario\ConsultarExistenciaProductosController.cs" />
     <Compile Include="Controllers\Inventario\Inventario\EntradaController.cs" />
