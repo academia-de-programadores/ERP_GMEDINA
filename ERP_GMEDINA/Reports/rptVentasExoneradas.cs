@@ -18,9 +18,6 @@ namespace ERP_GMEDINA.Reports {
     
     public class rptVentasExoneradas : ReportClass {
         
-        public rptVentasExoneradas() {
-        }
-        
         public override string ResourceName {
             get {
                 return "rptVentasExoneradas.rpt";
