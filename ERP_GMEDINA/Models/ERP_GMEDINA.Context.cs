@@ -742,7 +742,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Estado", usu_IdParameter, usu_EsActivoParameter, usu_RazonInactivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
+        public virtual ObjectResult<string> UDP_Acce_tbUsuario_Insert(string usu_NombreUsuario, string usu_Password, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
         {
             var usu_NombreUsuarioParameter = usu_NombreUsuario != null ?
                 new ObjectParameter("usu_NombreUsuario", usu_NombreUsuario) :
@@ -778,7 +778,7 @@
     
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(short));
+                new ObjectParameter("emp_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbUsuario_Insert", usu_NombreUsuarioParameter, usu_PasswordParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
@@ -14487,7 +14487,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Update1", cred_IdParameter, clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<short> emp_Id)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -14527,7 +14527,7 @@
     
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(short));
+                new ObjectParameter("emp_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Update_Result>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
@@ -14617,46 +14617,5 @@
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Insert", clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_MontoSolicitadoParameter, cred_DiasSolicitadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter);
         }
-    }
-}
-
-
-namespace ERP_GMEDINA.Models
-{
-    using System;
-
-    public partial class spGetProducto_Result1
-    {
-        public string prod_CodigoBarras { get; set; }
-        public string prod_Codigo { get; set; }
-        public string prod_Descripcion { get; set; }
-        public string pscat_Descripcion { get; set; }
-        public string uni_Descripcion { get; set; }
-        public string pcat_Nombre { get; set; }
-    }
-}
-
-
-
-namespace ERP_GMEDINA.Models
-{
-    using System;
-
-    public partial class spGetMunicipios_Result1
-    {
-        public string mun_Codigo { get; set; }
-        public string mun_Nombre { get; set; }
-    }
-}
-
-
-namespace ERP_GMEDINA.Models
-{
-    using System;
-
-    public partial class spGetMunicipios1_Result1
-    {
-        public string mun_Codigo { get; set; }
-        public string mun_Nombre { get; set; }
     }
 }
