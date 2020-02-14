@@ -15974,6 +15974,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbMunicipio_tbSucursal_mun_Codigo">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbSucursal" Type="Self.tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPuntoEmision_tbSucursal_pemi_Id">
+          <End Role="tbPuntoEmision" Type="Self.tbPuntoEmision" Multiplicity="1" />
+          <End Role="tbSucursal" Type="Self.tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPuntoEmision">
+              <PropertyRef Name="pemi_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="pemi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vent_tbCaja_tbDevolucion_cja_Id">
           <End Role="tbCaja" Type="Self.tbCaja" Multiplicity="1" />
           <End Role="tbDevolucion" Type="Self.tbDevolucion" Multiplicity="*" />
@@ -26491,6 +26515,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <AssociationSet Name="FK_tbMunicipio_tbSucursal_mun_Codigo" Association="Self.FK_tbMunicipio_tbSucursal_mun_Codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPuntoEmision_tbSucursal_pemi_Id" Association="Self.FK_tbPuntoEmision_tbSucursal_pemi_Id">
+            <End Role="tbPuntoEmision" EntitySet="tbPuntoEmision" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
           <AssociationSet Name="FK_Vent_tbCaja_tbDevolucion_cja_Id" Association="Self.FK_Vent_tbCaja_tbDevolucion_cja_Id">
             <End Role="tbCaja" EntitySet="tbCaja" />
             <End Role="tbDevolucion" EntitySet="tbDevolucion" />
@@ -27423,6 +27455,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbBodega" Relationship="Self.FK_Inv_tbBodega_tbMunicipio_mun_Id" FromRole="tbMunicipio" ToRole="tbBodega" />
           <NavigationProperty Name="tbSucursales" Relationship="Self.FK_rrhh_tbSucursales_mun_Codigo_Gral_tbMunicipio_mun_Codigo" FromRole="tbMunicipio" ToRole="tbSucursales" />
           <NavigationProperty Name="tbCliente" Relationship="Self.FK_Vent_tbMunicipio_tbCliente_mun_Codigo" FromRole="tbMunicipio" ToRole="tbCliente" />
+          <NavigationProperty Name="tbSucursal" Relationship="ERP_GMEDINA2Model.FK_tbMunicipio_tbSucursal_mun_Codigo" FromRole="tbMunicipio" ToRole="tbSucursal" />
         </EntityType>
         <EntityType Name="tbParametro">
           <Key>
@@ -30468,6 +30501,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbSucursales" Relationship="Self.FK_rrhh_tbSucursales_pemi_Id_Vent_tbPuntoEmision_pemi_Id" FromRole="tbPuntoEmision" ToRole="tbSucursales" />
           <NavigationProperty Name="tbPuntoEmisionDetalle" Relationship="Self.FK_Vent_tbPuntoEmision_tbPuntoEmisionDetalle_pemi_Id" FromRole="tbPuntoEmision" ToRole="tbPuntoEmisionDetalle" />
           <NavigationProperty Name="tbPuntoEmisionDetalle1" Relationship="Self.FK_Vent_tbPuntoEmisionDetalle_tbPuntoEmision_pemi_Id" FromRole="tbPuntoEmision" ToRole="tbPuntoEmisionDetalle" />
+          <NavigationProperty Name="tbSucursal" Relationship="ERP_GMEDINA2Model.FK_tbPuntoEmision_tbSucursal_pemi_Id" FromRole="tbPuntoEmision" ToRole="tbSucursal" />
         </EntityType>
         <EntityType Name="tbPuntoEmisionDetalle">
           <Key>
@@ -30576,6 +30610,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" FromRole="tbSucursal" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINA2Model.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" FromRole="tbSucursal" ToRole="tbUsuario" />
           <NavigationProperty Name="tbBodega" Relationship="ERP_GMEDINA2Model.FK_Inv_tbBodega_tbSucursal_bod_Id" FromRole="tbSucursal" ToRole="tbBodega" />
+          <NavigationProperty Name="tbMunicipio" Relationship="ERP_GMEDINA2Model.FK_tbMunicipio_tbSucursal_mun_Codigo" FromRole="tbSucursal" ToRole="tbMunicipio" />
+          <NavigationProperty Name="tbPuntoEmision" Relationship="ERP_GMEDINA2Model.FK_tbPuntoEmision_tbSucursal_pemi_Id" FromRole="tbSucursal" ToRole="tbPuntoEmision" />
         </EntityType>
         <EntityType Name="tbTipoPago">
           <Key>
@@ -50231,6 +50267,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <End Role="tbPeriodos" EntitySet="tbPeriodos" />
             <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
           </AssociationSet>
+          <AssociationSet Name="FK_tbMunicipio_tbSucursal_mun_Codigo" Association="ERP_GMEDINA2Model.FK_tbMunicipio_tbSucursal_mun_Codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPuntoEmision_tbSucursal_pemi_Id" Association="ERP_GMEDINA2Model.FK_tbPuntoEmision_tbSucursal_pemi_Id">
+            <End Role="tbPuntoEmision" EntitySet="tbPuntoEmision" />
+            <End Role="tbSucursal" EntitySet="tbSucursal" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SDP_Acce_GetObjetos_Result">
           <Property Type="Int32" Name="obj_Id" Nullable="false" />
@@ -52096,6 +52140,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             </Principal>
             <Dependent Role="tbCatalogoDePlanillas">
               <PropertyRef Name="cpla_FrecuenciaEnDias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMunicipio_tbSucursal_mun_Codigo">
+          <End Type="ERP_GMEDINA2Model.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
+          <End Type="ERP_GMEDINA2Model.tbSucursal" Role="tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_Codigo" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="mun_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPuntoEmision_tbSucursal_pemi_Id">
+          <End Type="ERP_GMEDINA2Model.tbPuntoEmision" Role="tbPuntoEmision" Multiplicity="1" />
+          <End Type="ERP_GMEDINA2Model.tbSucursal" Role="tbSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPuntoEmision">
+              <PropertyRef Name="pemi_Id" />
+            </Principal>
+            <Dependent Role="tbSucursal">
+              <PropertyRef Name="pemi_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
