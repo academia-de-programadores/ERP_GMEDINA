@@ -368,10 +368,45 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dataset\ArqueoCaja2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\DSCuponDescuento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCuponDescuento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\DsFactura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\DSNotaCredito.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSNotaCredito.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\dsPago.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPago.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\PuntoEmision.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Dataset\Reportes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\SolicitudEFectivo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SolicitudEFectivo.xsd</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2979,17 +3014,23 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Reports\AnalisisDeMora.cs" />
+    <Compile Include="Reports\AnalisisDeMora.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\AnalisisDeMora1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisisDeMora.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ArqueoCaja.cs" />
+    <Compile Include="Reports\ArqueoCaja.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ArqueoCaja1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ArqueoCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\CatalogoProducto.cs">
       <AutoGen>True</AutoGen>
@@ -3559,6 +3600,72 @@
     <Content Include="Dataset\Reportes.xsc">
       <DependentUpon>Reportes.xsd</DependentUpon>
     </Content>
+    <Content Include="Dataset\ArqueoCaja.xsc">
+      <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\ArqueoCaja.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ArqueoCaja2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\ArqueoCaja.xss">
+      <DependentUpon>ArqueoCaja.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\DSCuponDescuento.xsc">
+      <DependentUpon>DSCuponDescuento.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\DSCuponDescuento.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCuponDescuento.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\DSCuponDescuento.xss">
+      <DependentUpon>DSCuponDescuento.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\DsFactura.xsc">
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\DsFactura.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsFactura.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\DsFactura.xss">
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\DSNotaCredito.xsc">
+      <DependentUpon>DSNotaCredito.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\DSNotaCredito.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSNotaCredito.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\DSNotaCredito.xss">
+      <DependentUpon>DSNotaCredito.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\dsPago.xsc">
+      <DependentUpon>dsPago.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\dsPago.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPago.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\dsPago.xss">
+      <DependentUpon>dsPago.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\PuntoEmision.xsc">
+      <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\PuntoEmision.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PuntoEmision.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\PuntoEmision.xss">
+      <DependentUpon>PuntoEmision.xsd</DependentUpon>
+    </Content>
     <None Include="Dataset\Reportes.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>Reportes.Designer.cs</LastGenOutput>
@@ -3566,6 +3673,17 @@
     </None>
     <Content Include="Dataset\Reportes.xss">
       <DependentUpon>Reportes.xsd</DependentUpon>
+    </Content>
+    <Content Include="Dataset\SolicitudEFectivo.xsc">
+      <DependentUpon>SolicitudEFectivo.xsd</DependentUpon>
+    </Content>
+    <None Include="Dataset\SolicitudEFectivo.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SolicitudEFectivo.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Dataset\SolicitudEFectivo.xss">
+      <DependentUpon>SolicitudEFectivo.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\App.pubxml" />
     <Content Include="ReportesPlanilla\HistorialDeduccionesRPT.rdlc" />

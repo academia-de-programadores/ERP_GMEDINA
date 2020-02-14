@@ -20,17 +20,17 @@ namespace ERP_GMEDINA.Dataset {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("dsPago")]
+    [global::System.Xml.Serialization.XmlRootAttribute("ArqueoCaja")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class dsPago : global::System.Data.DataSet {
+    public partial class ArqueoCaja : global::System.Data.DataSet {
         
-        private UDP_Vent_tbPago_ImprimirDataTable tableUDP_Vent_tbPago_Imprimir;
+        private UDP_Vent_tbMovimientoCaja_ImprimirDataTable tableUDP_Vent_tbMovimientoCaja_Imprimir;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public dsPago() {
+        public ArqueoCaja() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace ERP_GMEDINA.Dataset {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected dsPago(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected ArqueoCaja(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace ERP_GMEDINA.Dataset {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["UDP_Vent_tbPago_Imprimir"] != null)) {
-                    base.Tables.Add(new UDP_Vent_tbPago_ImprimirDataTable(ds.Tables["UDP_Vent_tbPago_Imprimir"]));
+                if ((ds.Tables["UDP_Vent_tbMovimientoCaja_Imprimir"] != null)) {
+                    base.Tables.Add(new UDP_Vent_tbMovimientoCaja_ImprimirDataTable(ds.Tables["UDP_Vent_tbMovimientoCaja_Imprimir"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace ERP_GMEDINA.Dataset {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public UDP_Vent_tbPago_ImprimirDataTable UDP_Vent_tbPago_Imprimir {
+        public UDP_Vent_tbMovimientoCaja_ImprimirDataTable UDP_Vent_tbMovimientoCaja_Imprimir {
             get {
-                return this.tableUDP_Vent_tbPago_Imprimir;
+                return this.tableUDP_Vent_tbMovimientoCaja_Imprimir;
             }
         }
         
@@ -127,7 +127,7 @@ namespace ERP_GMEDINA.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            dsPago cln = ((dsPago)(base.Clone()));
+            ArqueoCaja cln = ((ArqueoCaja)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace ERP_GMEDINA.Dataset {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["UDP_Vent_tbPago_Imprimir"] != null)) {
-                    base.Tables.Add(new UDP_Vent_tbPago_ImprimirDataTable(ds.Tables["UDP_Vent_tbPago_Imprimir"]));
+                if ((ds.Tables["UDP_Vent_tbMovimientoCaja_Imprimir"] != null)) {
+                    base.Tables.Add(new UDP_Vent_tbMovimientoCaja_ImprimirDataTable(ds.Tables["UDP_Vent_tbMovimientoCaja_Imprimir"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace ERP_GMEDINA.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableUDP_Vent_tbPago_Imprimir = ((UDP_Vent_tbPago_ImprimirDataTable)(base.Tables["UDP_Vent_tbPago_Imprimir"]));
+            this.tableUDP_Vent_tbMovimientoCaja_Imprimir = ((UDP_Vent_tbMovimientoCaja_ImprimirDataTable)(base.Tables["UDP_Vent_tbMovimientoCaja_Imprimir"]));
             if ((initTable == true)) {
-                if ((this.tableUDP_Vent_tbPago_Imprimir != null)) {
-                    this.tableUDP_Vent_tbPago_Imprimir.InitVars();
+                if ((this.tableUDP_Vent_tbMovimientoCaja_Imprimir != null)) {
+                    this.tableUDP_Vent_tbMovimientoCaja_Imprimir.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace ERP_GMEDINA.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "dsPago";
+            this.DataSetName = "ArqueoCaja";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/dsPago.xsd";
+            this.Namespace = "http://tempuri.org/ArqueoCaja.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableUDP_Vent_tbPago_Imprimir = new UDP_Vent_tbPago_ImprimirDataTable();
-            base.Tables.Add(this.tableUDP_Vent_tbPago_Imprimir);
+            this.tableUDP_Vent_tbMovimientoCaja_Imprimir = new UDP_Vent_tbMovimientoCaja_ImprimirDataTable();
+            base.Tables.Add(this.tableUDP_Vent_tbMovimientoCaja_Imprimir);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeUDP_Vent_tbPago_Imprimir() {
+        private bool ShouldSerializeUDP_Vent_tbMovimientoCaja_Imprimir() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace ERP_GMEDINA.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            dsPago ds = new dsPago();
+            ArqueoCaja ds = new ArqueoCaja();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,45 +270,57 @@ namespace ERP_GMEDINA.Dataset {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void UDP_Vent_tbPago_ImprimirRowChangeEventHandler(object sender, UDP_Vent_tbPago_ImprimirRowChangeEvent e);
+        public delegate void UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEventHandler(object sender, UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class UDP_Vent_tbPago_ImprimirDataTable : global::System.Data.TypedTableBase<UDP_Vent_tbPago_ImprimirRow> {
+        public partial class UDP_Vent_tbMovimientoCaja_ImprimirDataTable : global::System.Data.TypedTableBase<UDP_Vent_tbMovimientoCaja_ImprimirRow> {
             
-            private global::System.Data.DataColumn columnpago_Id;
+            private global::System.Data.DataColumn columnmocja_Id;
             
-            private global::System.Data.DataColumn columnfact_Id;
+            private global::System.Data.DataColumn columnmocja_FechaApertura;
             
-            private global::System.Data.DataColumn columnfact_Codigo;
+            private global::System.Data.DataColumn columnmocja_UsuarioApertura;
             
-            private global::System.Data.DataColumn columnclte_Identificacion;
+            private global::System.Data.DataColumn columnmocja_FechaArqueo;
             
-            private global::System.Data.DataColumn columnclte_Nombres;
+            private global::System.Data.DataColumn columnmocja_UsuarioArquea;
+            
+            private global::System.Data.DataColumn columnmocja_FechaAceptacion;
+            
+            private global::System.Data.DataColumn columnmocja_UsuarioAceptacion;
+            
+            private global::System.Data.DataColumn columncja_Descripcion;
+            
+            private global::System.Data.DataColumn columnsuc_Descripcion;
+            
+            private global::System.Data.DataColumn columnarqde_CantidadDenominacion;
+            
+            private global::System.Data.DataColumn columnarqde_MontoDenominacion;
+            
+            private global::System.Data.DataColumn columndeno_Descripcion;
+            
+            private global::System.Data.DataColumn columndeno_valor;
+            
+            private global::System.Data.DataColumn columnarqpg_PagosSistema;
+            
+            private global::System.Data.DataColumn columnarqpg_PagosConteo;
             
             private global::System.Data.DataColumn columntpa_Descripcion;
             
-            private global::System.Data.DataColumn columnpago_FechaElaboracion;
+            private global::System.Data.DataColumn columnUsuario_Apertura;
             
-            private global::System.Data.DataColumn columnpago_SaldoAnterior;
+            private global::System.Data.DataColumn columnUsuario_Arquea;
             
-            private global::System.Data.DataColumn columnpago_TotalPago;
-            
-            private global::System.Data.DataColumn columnpago_MontoEfectivo;
-            
-            private global::System.Data.DataColumn columnpago_TotalCambio;
-            
-            private global::System.Data.DataColumn columnpago_Emisor;
-            
-            private global::System.Data.DataColumn columnpago_Titular;
+            private global::System.Data.DataColumn columnUsuario_Aceptacion;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbPago_ImprimirDataTable() {
-                this.TableName = "UDP_Vent_tbPago_Imprimir";
+            public UDP_Vent_tbMovimientoCaja_ImprimirDataTable() {
+                this.TableName = "UDP_Vent_tbMovimientoCaja_Imprimir";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -316,7 +328,7 @@ namespace ERP_GMEDINA.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal UDP_Vent_tbPago_ImprimirDataTable(global::System.Data.DataTable table) {
+            internal UDP_Vent_tbMovimientoCaja_ImprimirDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -333,48 +345,128 @@ namespace ERP_GMEDINA.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected UDP_Vent_tbPago_ImprimirDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected UDP_Vent_tbMovimientoCaja_ImprimirDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_IdColumn {
+            public global::System.Data.DataColumn mocja_IdColumn {
                 get {
-                    return this.columnpago_Id;
+                    return this.columnmocja_Id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn fact_IdColumn {
+            public global::System.Data.DataColumn mocja_FechaAperturaColumn {
                 get {
-                    return this.columnfact_Id;
+                    return this.columnmocja_FechaApertura;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn fact_CodigoColumn {
+            public global::System.Data.DataColumn mocja_UsuarioAperturaColumn {
                 get {
-                    return this.columnfact_Codigo;
+                    return this.columnmocja_UsuarioApertura;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn clte_IdentificacionColumn {
+            public global::System.Data.DataColumn mocja_FechaArqueoColumn {
                 get {
-                    return this.columnclte_Identificacion;
+                    return this.columnmocja_FechaArqueo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn clte_NombresColumn {
+            public global::System.Data.DataColumn mocja_UsuarioArqueaColumn {
                 get {
-                    return this.columnclte_Nombres;
+                    return this.columnmocja_UsuarioArquea;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn mocja_FechaAceptacionColumn {
+                get {
+                    return this.columnmocja_FechaAceptacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn mocja_UsuarioAceptacionColumn {
+                get {
+                    return this.columnmocja_UsuarioAceptacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn cja_DescripcionColumn {
+                get {
+                    return this.columncja_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn suc_DescripcionColumn {
+                get {
+                    return this.columnsuc_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn arqde_CantidadDenominacionColumn {
+                get {
+                    return this.columnarqde_CantidadDenominacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn arqde_MontoDenominacionColumn {
+                get {
+                    return this.columnarqde_MontoDenominacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn deno_DescripcionColumn {
+                get {
+                    return this.columndeno_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn deno_valorColumn {
+                get {
+                    return this.columndeno_valor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn arqpg_PagosSistemaColumn {
+                get {
+                    return this.columnarqpg_PagosSistema;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn arqpg_PagosConteoColumn {
+                get {
+                    return this.columnarqpg_PagosConteo;
                 }
             }
             
@@ -388,57 +480,25 @@ namespace ERP_GMEDINA.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_FechaElaboracionColumn {
+            public global::System.Data.DataColumn Usuario_AperturaColumn {
                 get {
-                    return this.columnpago_FechaElaboracion;
+                    return this.columnUsuario_Apertura;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_SaldoAnteriorColumn {
+            public global::System.Data.DataColumn Usuario_ArqueaColumn {
                 get {
-                    return this.columnpago_SaldoAnterior;
+                    return this.columnUsuario_Arquea;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_TotalPagoColumn {
+            public global::System.Data.DataColumn Usuario_AceptacionColumn {
                 get {
-                    return this.columnpago_TotalPago;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_MontoEfectivoColumn {
-                get {
-                    return this.columnpago_MontoEfectivo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_TotalCambioColumn {
-                get {
-                    return this.columnpago_TotalCambio;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_EmisorColumn {
-                get {
-                    return this.columnpago_Emisor;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pago_TitularColumn {
-                get {
-                    return this.columnpago_Titular;
+                    return this.columnUsuario_Aceptacion;
                 }
             }
             
@@ -453,57 +513,88 @@ namespace ERP_GMEDINA.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbPago_ImprimirRow this[int index] {
+            public UDP_Vent_tbMovimientoCaja_ImprimirRow this[int index] {
                 get {
-                    return ((UDP_Vent_tbPago_ImprimirRow)(this.Rows[index]));
+                    return ((UDP_Vent_tbMovimientoCaja_ImprimirRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event UDP_Vent_tbPago_ImprimirRowChangeEventHandler UDP_Vent_tbPago_ImprimirRowChanging;
+            public event UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEventHandler UDP_Vent_tbMovimientoCaja_ImprimirRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event UDP_Vent_tbPago_ImprimirRowChangeEventHandler UDP_Vent_tbPago_ImprimirRowChanged;
+            public event UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEventHandler UDP_Vent_tbMovimientoCaja_ImprimirRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event UDP_Vent_tbPago_ImprimirRowChangeEventHandler UDP_Vent_tbPago_ImprimirRowDeleting;
+            public event UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEventHandler UDP_Vent_tbMovimientoCaja_ImprimirRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event UDP_Vent_tbPago_ImprimirRowChangeEventHandler UDP_Vent_tbPago_ImprimirRowDeleted;
+            public event UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEventHandler UDP_Vent_tbMovimientoCaja_ImprimirRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddUDP_Vent_tbPago_ImprimirRow(UDP_Vent_tbPago_ImprimirRow row) {
+            public void AddUDP_Vent_tbMovimientoCaja_ImprimirRow(UDP_Vent_tbMovimientoCaja_ImprimirRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbPago_ImprimirRow AddUDP_Vent_tbPago_ImprimirRow(string fact_Codigo, string clte_Identificacion, string clte_Nombres, string tpa_Descripcion, System.DateTime pago_FechaElaboracion, decimal pago_SaldoAnterior, decimal pago_TotalPago, decimal pago_MontoEfectivo, decimal pago_TotalCambio, string pago_Emisor, string pago_Titular) {
-                UDP_Vent_tbPago_ImprimirRow rowUDP_Vent_tbPago_ImprimirRow = ((UDP_Vent_tbPago_ImprimirRow)(this.NewRow()));
+            public UDP_Vent_tbMovimientoCaja_ImprimirRow AddUDP_Vent_tbMovimientoCaja_ImprimirRow(
+                        System.DateTime mocja_FechaApertura, 
+                        int mocja_UsuarioApertura, 
+                        System.DateTime mocja_FechaArqueo, 
+                        int mocja_UsuarioArquea, 
+                        System.DateTime mocja_FechaAceptacion, 
+                        int mocja_UsuarioAceptacion, 
+                        string cja_Descripcion, 
+                        string suc_Descripcion, 
+                        short arqde_CantidadDenominacion, 
+                        decimal arqde_MontoDenominacion, 
+                        string deno_Descripcion, 
+                        decimal deno_valor, 
+                        decimal arqpg_PagosSistema, 
+                        decimal arqpg_PagosConteo, 
+                        string tpa_Descripcion, 
+                        string Usuario_Apertura, 
+                        string Usuario_Arquea, 
+                        string Usuario_Aceptacion) {
+                UDP_Vent_tbMovimientoCaja_ImprimirRow rowUDP_Vent_tbMovimientoCaja_ImprimirRow = ((UDP_Vent_tbMovimientoCaja_ImprimirRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        null,
-                        fact_Codigo,
-                        clte_Identificacion,
-                        clte_Nombres,
+                        mocja_FechaApertura,
+                        mocja_UsuarioApertura,
+                        mocja_FechaArqueo,
+                        mocja_UsuarioArquea,
+                        mocja_FechaAceptacion,
+                        mocja_UsuarioAceptacion,
+                        cja_Descripcion,
+                        suc_Descripcion,
+                        arqde_CantidadDenominacion,
+                        arqde_MontoDenominacion,
+                        deno_Descripcion,
+                        deno_valor,
+                        arqpg_PagosSistema,
+                        arqpg_PagosConteo,
                         tpa_Descripcion,
-                        pago_FechaElaboracion,
-                        pago_SaldoAnterior,
-                        pago_TotalPago,
-                        pago_MontoEfectivo,
-                        pago_TotalCambio,
-                        pago_Emisor,
-                        pago_Titular};
-                rowUDP_Vent_tbPago_ImprimirRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowUDP_Vent_tbPago_ImprimirRow);
-                return rowUDP_Vent_tbPago_ImprimirRow;
+                        Usuario_Apertura,
+                        Usuario_Arquea,
+                        Usuario_Aceptacion};
+                rowUDP_Vent_tbMovimientoCaja_ImprimirRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUDP_Vent_tbMovimientoCaja_ImprimirRow);
+                return rowUDP_Vent_tbMovimientoCaja_ImprimirRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public UDP_Vent_tbMovimientoCaja_ImprimirRow FindBymocja_Id(int mocja_Id) {
+                return ((UDP_Vent_tbMovimientoCaja_ImprimirRow)(this.Rows.Find(new object[] {
+                            mocja_Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                UDP_Vent_tbPago_ImprimirDataTable cln = ((UDP_Vent_tbPago_ImprimirDataTable)(base.Clone()));
+                UDP_Vent_tbMovimientoCaja_ImprimirDataTable cln = ((UDP_Vent_tbMovimientoCaja_ImprimirDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -511,109 +602,121 @@ namespace ERP_GMEDINA.Dataset {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new UDP_Vent_tbPago_ImprimirDataTable();
+                return new UDP_Vent_tbMovimientoCaja_ImprimirDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnpago_Id = base.Columns["pago_Id"];
-                this.columnfact_Id = base.Columns["fact_Id"];
-                this.columnfact_Codigo = base.Columns["fact_Codigo"];
-                this.columnclte_Identificacion = base.Columns["clte_Identificacion"];
-                this.columnclte_Nombres = base.Columns["clte_Nombres"];
+                this.columnmocja_Id = base.Columns["mocja_Id"];
+                this.columnmocja_FechaApertura = base.Columns["mocja_FechaApertura"];
+                this.columnmocja_UsuarioApertura = base.Columns["mocja_UsuarioApertura"];
+                this.columnmocja_FechaArqueo = base.Columns["mocja_FechaArqueo"];
+                this.columnmocja_UsuarioArquea = base.Columns["mocja_UsuarioArquea"];
+                this.columnmocja_FechaAceptacion = base.Columns["mocja_FechaAceptacion"];
+                this.columnmocja_UsuarioAceptacion = base.Columns["mocja_UsuarioAceptacion"];
+                this.columncja_Descripcion = base.Columns["cja_Descripcion"];
+                this.columnsuc_Descripcion = base.Columns["suc_Descripcion"];
+                this.columnarqde_CantidadDenominacion = base.Columns["arqde_CantidadDenominacion"];
+                this.columnarqde_MontoDenominacion = base.Columns["arqde_MontoDenominacion"];
+                this.columndeno_Descripcion = base.Columns["deno_Descripcion"];
+                this.columndeno_valor = base.Columns["deno_valor"];
+                this.columnarqpg_PagosSistema = base.Columns["arqpg_PagosSistema"];
+                this.columnarqpg_PagosConteo = base.Columns["arqpg_PagosConteo"];
                 this.columntpa_Descripcion = base.Columns["tpa_Descripcion"];
-                this.columnpago_FechaElaboracion = base.Columns["pago_FechaElaboracion"];
-                this.columnpago_SaldoAnterior = base.Columns["pago_SaldoAnterior"];
-                this.columnpago_TotalPago = base.Columns["pago_TotalPago"];
-                this.columnpago_MontoEfectivo = base.Columns["pago_MontoEfectivo"];
-                this.columnpago_TotalCambio = base.Columns["pago_TotalCambio"];
-                this.columnpago_Emisor = base.Columns["pago_Emisor"];
-                this.columnpago_Titular = base.Columns["pago_Titular"];
+                this.columnUsuario_Apertura = base.Columns["Usuario Apertura"];
+                this.columnUsuario_Arquea = base.Columns["Usuario Arquea"];
+                this.columnUsuario_Aceptacion = base.Columns["Usuario Aceptacion"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnpago_Id = new global::System.Data.DataColumn("pago_Id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_Id);
-                this.columnfact_Id = new global::System.Data.DataColumn("fact_Id", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfact_Id);
-                this.columnfact_Codigo = new global::System.Data.DataColumn("fact_Codigo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfact_Codigo);
-                this.columnclte_Identificacion = new global::System.Data.DataColumn("clte_Identificacion", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnclte_Identificacion);
-                this.columnclte_Nombres = new global::System.Data.DataColumn("clte_Nombres", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnclte_Nombres);
+                this.columnmocja_Id = new global::System.Data.DataColumn("mocja_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_Id);
+                this.columnmocja_FechaApertura = new global::System.Data.DataColumn("mocja_FechaApertura", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_FechaApertura);
+                this.columnmocja_UsuarioApertura = new global::System.Data.DataColumn("mocja_UsuarioApertura", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_UsuarioApertura);
+                this.columnmocja_FechaArqueo = new global::System.Data.DataColumn("mocja_FechaArqueo", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_FechaArqueo);
+                this.columnmocja_UsuarioArquea = new global::System.Data.DataColumn("mocja_UsuarioArquea", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_UsuarioArquea);
+                this.columnmocja_FechaAceptacion = new global::System.Data.DataColumn("mocja_FechaAceptacion", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_FechaAceptacion);
+                this.columnmocja_UsuarioAceptacion = new global::System.Data.DataColumn("mocja_UsuarioAceptacion", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmocja_UsuarioAceptacion);
+                this.columncja_Descripcion = new global::System.Data.DataColumn("cja_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncja_Descripcion);
+                this.columnsuc_Descripcion = new global::System.Data.DataColumn("suc_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsuc_Descripcion);
+                this.columnarqde_CantidadDenominacion = new global::System.Data.DataColumn("arqde_CantidadDenominacion", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarqde_CantidadDenominacion);
+                this.columnarqde_MontoDenominacion = new global::System.Data.DataColumn("arqde_MontoDenominacion", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarqde_MontoDenominacion);
+                this.columndeno_Descripcion = new global::System.Data.DataColumn("deno_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeno_Descripcion);
+                this.columndeno_valor = new global::System.Data.DataColumn("deno_valor", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeno_valor);
+                this.columnarqpg_PagosSistema = new global::System.Data.DataColumn("arqpg_PagosSistema", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarqpg_PagosSistema);
+                this.columnarqpg_PagosConteo = new global::System.Data.DataColumn("arqpg_PagosConteo", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarqpg_PagosConteo);
                 this.columntpa_Descripcion = new global::System.Data.DataColumn("tpa_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntpa_Descripcion);
-                this.columnpago_FechaElaboracion = new global::System.Data.DataColumn("pago_FechaElaboracion", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_FechaElaboracion);
-                this.columnpago_SaldoAnterior = new global::System.Data.DataColumn("pago_SaldoAnterior", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_SaldoAnterior);
-                this.columnpago_TotalPago = new global::System.Data.DataColumn("pago_TotalPago", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_TotalPago);
-                this.columnpago_MontoEfectivo = new global::System.Data.DataColumn("pago_MontoEfectivo", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_MontoEfectivo);
-                this.columnpago_TotalCambio = new global::System.Data.DataColumn("pago_TotalCambio", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_TotalCambio);
-                this.columnpago_Emisor = new global::System.Data.DataColumn("pago_Emisor", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_Emisor);
-                this.columnpago_Titular = new global::System.Data.DataColumn("pago_Titular", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpago_Titular);
-                this.columnpago_Id.AutoIncrement = true;
-                this.columnpago_Id.AutoIncrementSeed = -1;
-                this.columnpago_Id.AutoIncrementStep = -1;
-                this.columnpago_Id.AllowDBNull = false;
-                this.columnpago_Id.ReadOnly = true;
-                this.columnfact_Id.AutoIncrement = true;
-                this.columnfact_Id.AutoIncrementSeed = -1;
-                this.columnfact_Id.AutoIncrementStep = -1;
-                this.columnfact_Id.AllowDBNull = false;
-                this.columnfact_Id.ReadOnly = true;
-                this.columnfact_Codigo.AllowDBNull = false;
-                this.columnfact_Codigo.MaxLength = 19;
-                this.columnclte_Identificacion.AllowDBNull = false;
-                this.columnclte_Identificacion.MaxLength = 26;
-                this.columnclte_Nombres.AllowDBNull = false;
-                this.columnclte_Nombres.MaxLength = 50;
-                this.columntpa_Descripcion.AllowDBNull = false;
+                this.columnUsuario_Apertura = new global::System.Data.DataColumn("Usuario Apertura", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUsuario_Apertura);
+                this.columnUsuario_Arquea = new global::System.Data.DataColumn("Usuario Arquea", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUsuario_Arquea);
+                this.columnUsuario_Aceptacion = new global::System.Data.DataColumn("Usuario Aceptacion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUsuario_Aceptacion);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnmocja_Id}, true));
+                this.columnmocja_Id.AutoIncrement = true;
+                this.columnmocja_Id.AutoIncrementSeed = -1;
+                this.columnmocja_Id.AutoIncrementStep = -1;
+                this.columnmocja_Id.AllowDBNull = false;
+                this.columnmocja_Id.ReadOnly = true;
+                this.columnmocja_Id.Unique = true;
+                this.columnmocja_UsuarioApertura.AllowDBNull = false;
+                this.columnmocja_UsuarioArquea.AllowDBNull = false;
+                this.columnmocja_UsuarioAceptacion.AllowDBNull = false;
+                this.columncja_Descripcion.MaxLength = 10;
+                this.columnsuc_Descripcion.MaxLength = 40;
+                this.columndeno_Descripcion.MaxLength = 50;
                 this.columntpa_Descripcion.MaxLength = 50;
-                this.columnpago_FechaElaboracion.AllowDBNull = false;
-                this.columnpago_SaldoAnterior.AllowDBNull = false;
-                this.columnpago_TotalPago.AllowDBNull = false;
-                this.columnpago_MontoEfectivo.ReadOnly = true;
-                this.columnpago_TotalCambio.ReadOnly = true;
-                this.columnpago_Emisor.ReadOnly = true;
-                this.columnpago_Emisor.MaxLength = 25;
-                this.columnpago_Titular.ReadOnly = true;
-                this.columnpago_Titular.MaxLength = 50;
+                this.columnUsuario_Apertura.ReadOnly = true;
+                this.columnUsuario_Apertura.MaxLength = 301;
+                this.columnUsuario_Arquea.ReadOnly = true;
+                this.columnUsuario_Arquea.MaxLength = 301;
+                this.columnUsuario_Aceptacion.ReadOnly = true;
+                this.columnUsuario_Aceptacion.MaxLength = 301;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbPago_ImprimirRow NewUDP_Vent_tbPago_ImprimirRow() {
-                return ((UDP_Vent_tbPago_ImprimirRow)(this.NewRow()));
+            public UDP_Vent_tbMovimientoCaja_ImprimirRow NewUDP_Vent_tbMovimientoCaja_ImprimirRow() {
+                return ((UDP_Vent_tbMovimientoCaja_ImprimirRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new UDP_Vent_tbPago_ImprimirRow(builder);
+                return new UDP_Vent_tbMovimientoCaja_ImprimirRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(UDP_Vent_tbPago_ImprimirRow);
+                return typeof(UDP_Vent_tbMovimientoCaja_ImprimirRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.UDP_Vent_tbPago_ImprimirRowChanged != null)) {
-                    this.UDP_Vent_tbPago_ImprimirRowChanged(this, new UDP_Vent_tbPago_ImprimirRowChangeEvent(((UDP_Vent_tbPago_ImprimirRow)(e.Row)), e.Action));
+                if ((this.UDP_Vent_tbMovimientoCaja_ImprimirRowChanged != null)) {
+                    this.UDP_Vent_tbMovimientoCaja_ImprimirRowChanged(this, new UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent(((UDP_Vent_tbMovimientoCaja_ImprimirRow)(e.Row)), e.Action));
                 }
             }
             
@@ -621,8 +724,8 @@ namespace ERP_GMEDINA.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.UDP_Vent_tbPago_ImprimirRowChanging != null)) {
-                    this.UDP_Vent_tbPago_ImprimirRowChanging(this, new UDP_Vent_tbPago_ImprimirRowChangeEvent(((UDP_Vent_tbPago_ImprimirRow)(e.Row)), e.Action));
+                if ((this.UDP_Vent_tbMovimientoCaja_ImprimirRowChanging != null)) {
+                    this.UDP_Vent_tbMovimientoCaja_ImprimirRowChanging(this, new UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent(((UDP_Vent_tbMovimientoCaja_ImprimirRow)(e.Row)), e.Action));
                 }
             }
             
@@ -630,8 +733,8 @@ namespace ERP_GMEDINA.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.UDP_Vent_tbPago_ImprimirRowDeleted != null)) {
-                    this.UDP_Vent_tbPago_ImprimirRowDeleted(this, new UDP_Vent_tbPago_ImprimirRowChangeEvent(((UDP_Vent_tbPago_ImprimirRow)(e.Row)), e.Action));
+                if ((this.UDP_Vent_tbMovimientoCaja_ImprimirRowDeleted != null)) {
+                    this.UDP_Vent_tbMovimientoCaja_ImprimirRowDeleted(this, new UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent(((UDP_Vent_tbMovimientoCaja_ImprimirRow)(e.Row)), e.Action));
                 }
             }
             
@@ -639,14 +742,14 @@ namespace ERP_GMEDINA.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.UDP_Vent_tbPago_ImprimirRowDeleting != null)) {
-                    this.UDP_Vent_tbPago_ImprimirRowDeleting(this, new UDP_Vent_tbPago_ImprimirRowChangeEvent(((UDP_Vent_tbPago_ImprimirRow)(e.Row)), e.Action));
+                if ((this.UDP_Vent_tbMovimientoCaja_ImprimirRowDeleting != null)) {
+                    this.UDP_Vent_tbMovimientoCaja_ImprimirRowDeleting(this, new UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent(((UDP_Vent_tbMovimientoCaja_ImprimirRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveUDP_Vent_tbPago_ImprimirRow(UDP_Vent_tbPago_ImprimirRow row) {
+            public void RemoveUDP_Vent_tbMovimientoCaja_ImprimirRow(UDP_Vent_tbMovimientoCaja_ImprimirRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -655,7 +758,7 @@ namespace ERP_GMEDINA.Dataset {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsPago ds = new dsPago();
+                ArqueoCaja ds = new ArqueoCaja();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -673,7 +776,7 @@ namespace ERP_GMEDINA.Dataset {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "UDP_Vent_tbPago_ImprimirDataTable";
+                attribute2.FixedValue = "UDP_Vent_tbMovimientoCaja_ImprimirDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -717,69 +820,245 @@ namespace ERP_GMEDINA.Dataset {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class UDP_Vent_tbPago_ImprimirRow : global::System.Data.DataRow {
+        public partial class UDP_Vent_tbMovimientoCaja_ImprimirRow : global::System.Data.DataRow {
             
-            private UDP_Vent_tbPago_ImprimirDataTable tableUDP_Vent_tbPago_Imprimir;
+            private UDP_Vent_tbMovimientoCaja_ImprimirDataTable tableUDP_Vent_tbMovimientoCaja_Imprimir;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal UDP_Vent_tbPago_ImprimirRow(global::System.Data.DataRowBuilder rb) : 
+            internal UDP_Vent_tbMovimientoCaja_ImprimirRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableUDP_Vent_tbPago_Imprimir = ((UDP_Vent_tbPago_ImprimirDataTable)(this.Table));
+                this.tableUDP_Vent_tbMovimientoCaja_Imprimir = ((UDP_Vent_tbMovimientoCaja_ImprimirDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int pago_Id {
+            public int mocja_Id {
                 get {
-                    return ((int)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_IdColumn]));
+                    return ((int)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_IdColumn]));
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public long fact_Id {
-                get {
-                    return ((long)(this[this.tableUDP_Vent_tbPago_Imprimir.fact_IdColumn]));
-                }
-                set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.fact_IdColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_IdColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string fact_Codigo {
+            public System.DateTime mocja_FechaApertura {
                 get {
-                    return ((string)(this[this.tableUDP_Vent_tbPago_Imprimir.fact_CodigoColumn]));
+                    try {
+                        return ((global::System.DateTime)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAperturaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'mocja_FechaApertura\' in table \'UDP_Vent_tbMovimientoCaja_Im" +
+                                "primir\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.fact_CodigoColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAperturaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string clte_Identificacion {
+            public int mocja_UsuarioApertura {
                 get {
-                    return ((string)(this[this.tableUDP_Vent_tbPago_Imprimir.clte_IdentificacionColumn]));
+                    return ((int)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_UsuarioAperturaColumn]));
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.clte_IdentificacionColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_UsuarioAperturaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string clte_Nombres {
+            public System.DateTime mocja_FechaArqueo {
                 get {
-                    return ((string)(this[this.tableUDP_Vent_tbPago_Imprimir.clte_NombresColumn]));
+                    try {
+                        return ((global::System.DateTime)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaArqueoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'mocja_FechaArqueo\' in table \'UDP_Vent_tbMovimientoCaja_Impr" +
+                                "imir\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.clte_NombresColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaArqueoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int mocja_UsuarioArquea {
+                get {
+                    return ((int)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_UsuarioArqueaColumn]));
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_UsuarioArqueaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime mocja_FechaAceptacion {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAceptacionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'mocja_FechaAceptacion\' in table \'UDP_Vent_tbMovimientoCaja_" +
+                                "Imprimir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAceptacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int mocja_UsuarioAceptacion {
+                get {
+                    return ((int)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_UsuarioAceptacionColumn]));
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_UsuarioAceptacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string cja_Descripcion {
+                get {
+                    try {
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.cja_DescripcionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'cja_Descripcion\' in table \'UDP_Vent_tbMovimientoCaja_Imprim" +
+                                "ir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.cja_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string suc_Descripcion {
+                get {
+                    try {
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.suc_DescripcionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'suc_Descripcion\' in table \'UDP_Vent_tbMovimientoCaja_Imprim" +
+                                "ir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.suc_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short arqde_CantidadDenominacion {
+                get {
+                    try {
+                        return ((short)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_CantidadDenominacionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'arqde_CantidadDenominacion\' in table \'UDP_Vent_tbMovimiento" +
+                                "Caja_Imprimir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_CantidadDenominacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal arqde_MontoDenominacion {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_MontoDenominacionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'arqde_MontoDenominacion\' in table \'UDP_Vent_tbMovimientoCaj" +
+                                "a_Imprimir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_MontoDenominacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string deno_Descripcion {
+                get {
+                    try {
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_DescripcionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'deno_Descripcion\' in table \'UDP_Vent_tbMovimientoCaja_Impri" +
+                                "mir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_DescripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal deno_valor {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_valorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'deno_valor\' in table \'UDP_Vent_tbMovimientoCaja_Imprimir\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_valorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal arqpg_PagosSistema {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosSistemaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'arqpg_PagosSistema\' in table \'UDP_Vent_tbMovimientoCaja_Imp" +
+                                "rimir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosSistemaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal arqpg_PagosConteo {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosConteoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'arqpg_PagosConteo\' in table \'UDP_Vent_tbMovimientoCaja_Impr" +
+                                "imir\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosConteoColumn] = value;
                 }
             }
             
@@ -787,160 +1066,248 @@ namespace ERP_GMEDINA.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string tpa_Descripcion {
                 get {
-                    return ((string)(this[this.tableUDP_Vent_tbPago_Imprimir.tpa_DescripcionColumn]));
-                }
-                set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.tpa_DescripcionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime pago_FechaElaboracion {
-                get {
-                    return ((global::System.DateTime)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_FechaElaboracionColumn]));
-                }
-                set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_FechaElaboracionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal pago_SaldoAnterior {
-                get {
-                    return ((decimal)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_SaldoAnteriorColumn]));
-                }
-                set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_SaldoAnteriorColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal pago_TotalPago {
-                get {
-                    return ((decimal)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_TotalPagoColumn]));
-                }
-                set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_TotalPagoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal pago_MontoEfectivo {
-                get {
                     try {
-                        return ((decimal)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_MontoEfectivoColumn]));
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.tpa_DescripcionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pago_MontoEfectivo\' in table \'UDP_Vent_tbPago_Imprimir\' is " +
-                                "DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'tpa_Descripcion\' in table \'UDP_Vent_tbMovimientoCaja_Imprim" +
+                                "ir\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_MontoEfectivoColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.tpa_DescripcionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal pago_TotalCambio {
+            public string Usuario_Apertura {
                 get {
                     try {
-                        return ((decimal)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_TotalCambioColumn]));
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AperturaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pago_TotalCambio\' in table \'UDP_Vent_tbPago_Imprimir\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Usuario Apertura\' in table \'UDP_Vent_tbMovimientoCaja_Impri" +
+                                "mir\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_TotalCambioColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AperturaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string pago_Emisor {
+            public string Usuario_Arquea {
                 get {
                     try {
-                        return ((string)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_EmisorColumn]));
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_ArqueaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pago_Emisor\' in table \'UDP_Vent_tbPago_Imprimir\' is DBNull." +
-                                "", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Usuario Arquea\' in table \'UDP_Vent_tbMovimientoCaja_Imprimi" +
+                                "r\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_EmisorColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_ArqueaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string pago_Titular {
+            public string Usuario_Aceptacion {
                 get {
                     try {
-                        return ((string)(this[this.tableUDP_Vent_tbPago_Imprimir.pago_TitularColumn]));
+                        return ((string)(this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AceptacionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pago_Titular\' in table \'UDP_Vent_tbPago_Imprimir\' is DBNull" +
-                                ".", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Usuario Aceptacion\' in table \'UDP_Vent_tbMovimientoCaja_Imp" +
+                                "rimir\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableUDP_Vent_tbPago_Imprimir.pago_TitularColumn] = value;
+                    this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AceptacionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ispago_MontoEfectivoNull() {
-                return this.IsNull(this.tableUDP_Vent_tbPago_Imprimir.pago_MontoEfectivoColumn);
+            public bool Ismocja_FechaAperturaNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAperturaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setpago_MontoEfectivoNull() {
-                this[this.tableUDP_Vent_tbPago_Imprimir.pago_MontoEfectivoColumn] = global::System.Convert.DBNull;
+            public void Setmocja_FechaAperturaNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAperturaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ispago_TotalCambioNull() {
-                return this.IsNull(this.tableUDP_Vent_tbPago_Imprimir.pago_TotalCambioColumn);
+            public bool Ismocja_FechaArqueoNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaArqueoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setpago_TotalCambioNull() {
-                this[this.tableUDP_Vent_tbPago_Imprimir.pago_TotalCambioColumn] = global::System.Convert.DBNull;
+            public void Setmocja_FechaArqueoNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaArqueoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ispago_EmisorNull() {
-                return this.IsNull(this.tableUDP_Vent_tbPago_Imprimir.pago_EmisorColumn);
+            public bool Ismocja_FechaAceptacionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAceptacionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setpago_EmisorNull() {
-                this[this.tableUDP_Vent_tbPago_Imprimir.pago_EmisorColumn] = global::System.Convert.DBNull;
+            public void Setmocja_FechaAceptacionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.mocja_FechaAceptacionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ispago_TitularNull() {
-                return this.IsNull(this.tableUDP_Vent_tbPago_Imprimir.pago_TitularColumn);
+            public bool Iscja_DescripcionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.cja_DescripcionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setpago_TitularNull() {
-                this[this.tableUDP_Vent_tbPago_Imprimir.pago_TitularColumn] = global::System.Convert.DBNull;
+            public void Setcja_DescripcionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.cja_DescripcionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Issuc_DescripcionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.suc_DescripcionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setsuc_DescripcionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.suc_DescripcionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isarqde_CantidadDenominacionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_CantidadDenominacionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setarqde_CantidadDenominacionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_CantidadDenominacionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isarqde_MontoDenominacionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_MontoDenominacionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setarqde_MontoDenominacionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqde_MontoDenominacionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isdeno_DescripcionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_DescripcionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setdeno_DescripcionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_DescripcionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isdeno_valorNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_valorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setdeno_valorNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.deno_valorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isarqpg_PagosSistemaNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosSistemaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setarqpg_PagosSistemaNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosSistemaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isarqpg_PagosConteoNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosConteoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setarqpg_PagosConteoNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.arqpg_PagosConteoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Istpa_DescripcionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.tpa_DescripcionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Settpa_DescripcionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.tpa_DescripcionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUsuario_AperturaNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AperturaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUsuario_AperturaNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AperturaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUsuario_ArqueaNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_ArqueaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUsuario_ArqueaNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_ArqueaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUsuario_AceptacionNull() {
+                return this.IsNull(this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AceptacionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUsuario_AceptacionNull() {
+                this[this.tableUDP_Vent_tbMovimientoCaja_Imprimir.Usuario_AceptacionColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -948,22 +1315,22 @@ namespace ERP_GMEDINA.Dataset {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class UDP_Vent_tbPago_ImprimirRowChangeEvent : global::System.EventArgs {
+        public class UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent : global::System.EventArgs {
             
-            private UDP_Vent_tbPago_ImprimirRow eventRow;
+            private UDP_Vent_tbMovimientoCaja_ImprimirRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbPago_ImprimirRowChangeEvent(UDP_Vent_tbPago_ImprimirRow row, global::System.Data.DataRowAction action) {
+            public UDP_Vent_tbMovimientoCaja_ImprimirRowChangeEvent(UDP_Vent_tbMovimientoCaja_ImprimirRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UDP_Vent_tbPago_ImprimirRow Row {
+            public UDP_Vent_tbMovimientoCaja_ImprimirRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -979,7 +1346,7 @@ namespace ERP_GMEDINA.Dataset {
         }
     }
 }
-namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
+namespace ERP_GMEDINA.Dataset.ArqueoCajaTableAdapters {
     
     
     /// <summary>
@@ -991,7 +1358,7 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class UDP_Vent_tbPago_ImprimirTableAdapter : global::System.ComponentModel.Component {
+    public partial class UDP_Vent_tbMovimientoCaja_ImprimirTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1005,7 +1372,7 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public UDP_Vent_tbPago_ImprimirTableAdapter() {
+        public UDP_Vent_tbMovimientoCaja_ImprimirTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1102,20 +1469,26 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "UDP_Vent_tbPago_Imprimir";
-            tableMapping.ColumnMappings.Add("pago_Id", "pago_Id");
-            tableMapping.ColumnMappings.Add("fact_Id", "fact_Id");
-            tableMapping.ColumnMappings.Add("fact_Codigo", "fact_Codigo");
-            tableMapping.ColumnMappings.Add("clte_Identificacion", "clte_Identificacion");
-            tableMapping.ColumnMappings.Add("clte_Nombres", "clte_Nombres");
+            tableMapping.DataSetTable = "UDP_Vent_tbMovimientoCaja_Imprimir";
+            tableMapping.ColumnMappings.Add("mocja_Id", "mocja_Id");
+            tableMapping.ColumnMappings.Add("mocja_FechaApertura", "mocja_FechaApertura");
+            tableMapping.ColumnMappings.Add("mocja_UsuarioApertura", "mocja_UsuarioApertura");
+            tableMapping.ColumnMappings.Add("mocja_FechaArqueo", "mocja_FechaArqueo");
+            tableMapping.ColumnMappings.Add("mocja_UsuarioArquea", "mocja_UsuarioArquea");
+            tableMapping.ColumnMappings.Add("mocja_FechaAceptacion", "mocja_FechaAceptacion");
+            tableMapping.ColumnMappings.Add("mocja_UsuarioAceptacion", "mocja_UsuarioAceptacion");
+            tableMapping.ColumnMappings.Add("cja_Descripcion", "cja_Descripcion");
+            tableMapping.ColumnMappings.Add("suc_Descripcion", "suc_Descripcion");
+            tableMapping.ColumnMappings.Add("arqde_CantidadDenominacion", "arqde_CantidadDenominacion");
+            tableMapping.ColumnMappings.Add("arqde_MontoDenominacion", "arqde_MontoDenominacion");
+            tableMapping.ColumnMappings.Add("deno_Descripcion", "deno_Descripcion");
+            tableMapping.ColumnMappings.Add("deno_valor", "deno_valor");
+            tableMapping.ColumnMappings.Add("arqpg_PagosSistema", "arqpg_PagosSistema");
+            tableMapping.ColumnMappings.Add("arqpg_PagosConteo", "arqpg_PagosConteo");
             tableMapping.ColumnMappings.Add("tpa_Descripcion", "tpa_Descripcion");
-            tableMapping.ColumnMappings.Add("pago_FechaElaboracion", "pago_FechaElaboracion");
-            tableMapping.ColumnMappings.Add("pago_SaldoAnterior", "pago_SaldoAnterior");
-            tableMapping.ColumnMappings.Add("pago_TotalPago", "pago_TotalPago");
-            tableMapping.ColumnMappings.Add("pago_MontoEfectivo", "pago_MontoEfectivo");
-            tableMapping.ColumnMappings.Add("pago_TotalCambio", "pago_TotalCambio");
-            tableMapping.ColumnMappings.Add("pago_Emisor", "pago_Emisor");
-            tableMapping.ColumnMappings.Add("pago_Titular", "pago_Titular");
+            tableMapping.ColumnMappings.Add("Usuario Apertura", "Usuario Apertura");
+            tableMapping.ColumnMappings.Add("Usuario Arquea", "Usuario Arquea");
+            tableMapping.ColumnMappings.Add("Usuario Aceptacion", "Usuario Aceptacion");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1132,20 +1505,20 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "Vent.UDP_Vent_tbPago_Imprimir";
+            this._commandCollection[0].CommandText = "Vent.UDP_Vent_tbMovimientoCaja_Imprimir";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pago_Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mocja_Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsPago.UDP_Vent_tbPago_ImprimirDataTable dataTable, global::System.Nullable<int> pago_Id) {
+        public virtual int Fill(ArqueoCaja.UDP_Vent_tbMovimientoCaja_ImprimirDataTable dataTable, global::System.Nullable<int> mocja_Id) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((pago_Id.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(pago_Id.Value));
+            if ((mocja_Id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(mocja_Id.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -1161,15 +1534,15 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsPago.UDP_Vent_tbPago_ImprimirDataTable GetData(global::System.Nullable<int> pago_Id) {
+        public virtual ArqueoCaja.UDP_Vent_tbMovimientoCaja_ImprimirDataTable GetData(global::System.Nullable<int> mocja_Id) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((pago_Id.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(pago_Id.Value));
+            if ((mocja_Id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(mocja_Id.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            dsPago.UDP_Vent_tbPago_ImprimirDataTable dataTable = new dsPago.UDP_Vent_tbPago_ImprimirDataTable();
+            ArqueoCaja.UDP_Vent_tbMovimientoCaja_ImprimirDataTable dataTable = new ArqueoCaja.UDP_Vent_tbMovimientoCaja_ImprimirDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1243,7 +1616,7 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(dsPago dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(ArqueoCaja dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1253,7 +1626,7 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(dsPago dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(ArqueoCaja dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1263,7 +1636,7 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(dsPago dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(ArqueoCaja dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1297,7 +1670,7 @@ namespace ERP_GMEDINA.Dataset.dsPagoTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(dsPago dataSet) {
+        public virtual int UpdateAll(ArqueoCaja dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
