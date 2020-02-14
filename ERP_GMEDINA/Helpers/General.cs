@@ -77,6 +77,7 @@ namespace ERP_GMEDINA.Helpers
                 body = body.Replace("{totalIngresos}", Math.Round(Model.totalIngresos.Value, 2).ToString());
                 body = body.Replace("{TotalDeucciones}", Model.totalDeducciones.ToString());
                 body = body.Replace("{TotalPagar}", Math.Round(Model.NetoPagar.Value, 2).ToString());
+                body = body.Replace("{moneda}", Model.moneda);
                 #endregion
 
                 MailMessage oMailMessage = new MailMessage(EmailOrigen, Model.EmailDestino, Model.EmailAsunto, body);
@@ -150,7 +151,7 @@ namespace ERP_GMEDINA.Helpers
                 {
                     ModelState.ListaPantallas = new
                     {
-                        List = db.tbObjeto.Select(x=> x.obj_Referencia).ToList()
+                        List = db.tbObjeto.Select(x => x.obj_Referencia).ToList()
                     };
                 }
                 else
@@ -238,7 +239,7 @@ namespace ERP_GMEDINA.Helpers
         //	}
         //}
         #endregion
- 
+
         public static DateTime DateTimeNow
         {
             get
