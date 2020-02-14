@@ -210,7 +210,6 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
                             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                             $("#Editar #tde_IdTipoDedu").empty();
                             //LLENAR EL DROPDOWNLIST
-                            $("#Editar #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
                             $.each(data, function (i, iter) {
                                 $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                             });
@@ -229,6 +228,8 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
 });
 
 $('#btnEditarISR').click(function () {
+    $('#btnEditarISR').attr('disabled', false);
+    $('#btnEditISR2').attr('disabled', false);
     var rangoInicial = $("#Editar #isr_RangoInicial").val();
     var rangoFinal = $("#Editar #isr_RangoFinal").val();
     var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
@@ -237,16 +238,20 @@ $('#btnEditarISR').click(function () {
     if (DataAnnotationsEditar(rangoInicial, rangoFinal, tipoDeduccion, porcentaje)) {
         $("#EditarISR").modal('hide');
         $("#EditarISRConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $('#btnEditarISR').attr('disabled', true);
     }
 });
 
 $('#btnRegresar').click(function(){
     $("#EditarISRConfirmacion").modal('hide');
+    $('#btnEditISR2').attr('disabled', false);
+    $('#btnEditarISR').attr('disabled', false);
     $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditISR2").click(function () {
+    $('#btnEditISR2').attr('disabled', true);
     var rangoInicial = $("#Editar #isr_RangoInicial").val();
     var rangoFinal = $("#Editar #isr_RangoFinal").val();
     var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val();
@@ -484,7 +489,7 @@ function Vaciar_ModalCrear() {
     //VACIADO DE INPUTS
     $("#Crear #isr_RangoInicial").val("");
     $("#Crear #isr_RangoFinal").val("");
-    $("#Crear #tde_IdTipoDedu").val(0);
+    $("#Crear #tde_IdTipoDedu").val("0");
     $("#Crear #isr_Porcentaje").val("");
 
     //
@@ -518,7 +523,7 @@ function Vaciar_ModalEditar() {
     //VACIADO DE INPUTS
     $("#Editar #isr_RangoInicial").val("");
     $("#Editar #isr_RangoFinal").val("");
-    $("#Editar #tde_IdTipoDedu").val(0);
+    $("#Editar #tde_IdTipoDedu").val("0");
     $("#Editar #isr_Porcentaje").val("");
 
     //
@@ -625,7 +630,8 @@ function DataAnnotationsCrear(RangoInicial, RangoFinal, TipoDeduccion, Porcentaj
 
     if (TipoDeduccion != "-1") {
         //Telefono
-        if (TipoDeduccion == "" || TipoDeduccion == "0" || TipoDeduccion == 0) {
+        if (TipoDeduccion == "" || TipoDeduccion == "0" || TipoDeduccion == 0 || TipoDeduccion == null) {
+            $("#Crear #tde_IdTipoDedu").val("0");
             //MOSTRAR DATAANNOTATIONS
             $("#Crear #isr_TipoDeduccionValidacion").show();
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
@@ -807,6 +813,23 @@ function DataAnnotationsEditar(RangoInicial, RangoFinal, TipoDeduccion, Porcenta
     //RETURN DEL ESTADO DEL MODELO
     return ModelState;
 }
+
+$('#Crear #tde_IdTipoDedu').blur(function () {
+    let tde_IdTipoDedu = $(this).val();
+    if (tde_IdTipoDedu == "" || tde_IdTipoDedu == 0 || tde_IdTipoDedu == "0") {
+        $("#Crear #tde_IdTipoDedu").val("0");
+        //MOSTRAR DATAANNOTATIONS
+        $("#Crear #isr_TipoDeduccionValidacion").show();
+        //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+        $("#Crear #AsteriscoTipoDeduccion").addClass("text-danger");
+    }
+    else {
+        //OCULTAR DATAANNOTATIONS
+        $("#Crear #isr_TipoDeduccionValidacion").hide();
+        //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+        $("#Crear #AsteriscoTipoDeduccion").removeClass("text-danger");
+    }
+});
 
 //FUNCION: FORMATEAR MONTOS A DECIMAL
 function FormatearMonto(StringValue) {
