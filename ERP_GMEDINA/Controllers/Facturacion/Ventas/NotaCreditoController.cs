@@ -219,8 +219,8 @@ namespace ERP_GMEDINA.Controllers
                         {
                             idUser = Convert.ToInt32(Usuario.emp_Id);
                         }
-                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Descripcion).SingleOrDefault();
-                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.suc_Id).SingleOrDefault();
+                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.FirstOrDefault().suc_Descripcion).SingleOrDefault();
+                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursal.FirstOrDefault().suc_Id).SingleOrDefault();
                         if (id == null)
                         {
                             return RedirectToAction("Index");
