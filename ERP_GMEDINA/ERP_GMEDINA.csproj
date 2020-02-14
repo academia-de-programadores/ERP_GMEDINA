@@ -244,10 +244,11 @@
     <Compile Include="Controllers\Inventario\Catalogos\EstadoInventarioFisicoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\EstadoMovimientoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\ProductoCategoriaController.cs" />
-    <Compile Include="Controllers\Inventario\Catalogos\SalidaController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\TipoDevolucionController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\TipoEntradaController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\UnidadMedidaController.cs" />
+    <Compile Include="Controllers\Inventario\Configuracion\ParametroController.cs" />
+    <Compile Include="Controllers\Inventario\Configuracion\ProveedorController.cs" />
     <Compile Include="Controllers\Inventario\Inventario\EntradaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
@@ -348,6 +349,9 @@
     <Compile Include="Models\cAdelantoSueldo.cs" />
     <Compile Include="Models\cAFP.cs" />
     <Compile Include="Models\cAFPRPT.cs" />
+    <Compile Include="Models\ConteoParametro_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\crud_tbProductoSelect_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1334,6 +1338,12 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbProducto_ValorCodigo_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProveedor_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProveedor_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbSalidaBodegaDestino_Insert_Result.cs">

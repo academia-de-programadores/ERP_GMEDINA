@@ -26968,7 +26968,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="FechaElaboracion" Mode="In" Type="DateTime" />
             <Parameter Name="BodegaDestino" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ConteoParametro" ReturnType="Collection(Int32)">
+          <FunctionImport Name="ConteoParametro" ReturnType="Collection(ERP_GMEDINAModel.ConteoParametro_Result)">
           <Parameter Name="conteo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="crud_tbProductoSelect" ReturnType="Collection(ERP_GMEDINAModel.crud_tbProductoSelect_Result)">
@@ -27485,7 +27485,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="pscat_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="pscat_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProveedor_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProveedor_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProveedor_Insert_Result)">
             <Parameter Name="prov_Nombre" Mode="In" Type="String" />
             <Parameter Name="prov_NombreContacto" Mode="In" Type="String" />
             <Parameter Name="prov_Direccion" Mode="In" Type="String" />
@@ -27496,7 +27496,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             <Parameter Name="prov_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="prov_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProveedor_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Inv_tbProveedor_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Inv_tbProveedor_Update_Result)">
             <Parameter Name="prov_Id" Mode="In" Type="Int32" />
             <Parameter Name="prov_Nombre" Mode="In" Type="String" />
             <Parameter Name="prov_NombreContacto" Mode="In" Type="String" />
@@ -50445,6 +50445,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
         <ComplexType Name="UDP_Inv_tbSalidaDetalle_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="ConteoParametro_Result">
+          <Property Type="Int32" Name="Conteo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProveedor_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProveedor_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52904,7 +52913,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ACtualizar_Cantidad_BOdegaDetalle" FunctionName="ERP_GMEDINAModel.Store.ACtualizar_Cantidad_BOdegaDetalle" />
-          <FunctionImportMapping FunctionImportName="ConteoParametro" FunctionName="ERP_GMEDINAModel.Store.ConteoParametro" />
+          <FunctionImportMapping FunctionImportName="ConteoParametro" FunctionName="ERP_GMEDINAModel.Store.ConteoParametro" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.ConteoParametro_Result">
+                <ScalarProperty Name="Conteo" ColumnName="Conteo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="crud_tbProductoSelect" FunctionName="ERP_GMEDINAModel.Store.crud_tbProductoSelect">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.crud_tbProductoSelect_Result">
@@ -53700,8 +53715,20 @@ warning 6002: The table/view 'ERP_GMEDINA.Vent.UDV_Vent_VentasPorCaja_EntreFecha
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProveedor_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProveedor_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProveedor_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProveedor_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbProveedor_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbProveedor_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbSalida_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Inv_tbSalida_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Inv_tbSalida_Insert_Result">

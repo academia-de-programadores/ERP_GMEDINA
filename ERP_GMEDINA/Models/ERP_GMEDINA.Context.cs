@@ -8591,13 +8591,13 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ACtualizar_Cantidad_BOdegaDetalle", iDBodegaParameter, iDProductoParameter, cantidadSolicitadadParameter, fechaElaboracionParameter, bodegaDestinoParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> ConteoParametro(Nullable<int> conteo)
+        public virtual ObjectResult<ConteoParametro_Result> ConteoParametro(Nullable<int> conteo)
         {
             var conteoParameter = conteo.HasValue ?
                 new ObjectParameter("conteo", conteo) :
                 new ObjectParameter("conteo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ConteoParametro", conteoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConteoParametro_Result>("ConteoParametro", conteoParameter);
         }
     
         public virtual ObjectResult<crud_tbProductoSelect_Result> crud_tbProductoSelect(string prod_Codigo)
@@ -10373,7 +10373,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion_Result>("UDP_Inv_tbProductoSubCategoria_Update_Estado_Validacion", pscat_IdParameter, pscat_EsActivaParameter, pscat_UsuarioModificaParameter, pscat_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbProveedor_Insert(string prov_Nombre, string prov_NombreContacto, string prov_Direccion, string prov_Email, string prov_Telefono, string prov_RTN, Nullable<short> acte_Id, Nullable<int> prov_UsuarioCrea, Nullable<System.DateTime> prov_FechaCrea)
+        public virtual ObjectResult<UDP_Inv_tbProveedor_Insert_Result> UDP_Inv_tbProveedor_Insert(string prov_Nombre, string prov_NombreContacto, string prov_Direccion, string prov_Email, string prov_Telefono, string prov_RTN, Nullable<short> acte_Id, Nullable<int> prov_UsuarioCrea, Nullable<System.DateTime> prov_FechaCrea)
         {
             var prov_NombreParameter = prov_Nombre != null ?
                 new ObjectParameter("prov_Nombre", prov_Nombre) :
@@ -10411,10 +10411,10 @@
                 new ObjectParameter("prov_FechaCrea", prov_FechaCrea) :
                 new ObjectParameter("prov_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbProveedor_Insert", prov_NombreParameter, prov_NombreContactoParameter, prov_DireccionParameter, prov_EmailParameter, prov_TelefonoParameter, prov_RTNParameter, acte_IdParameter, prov_UsuarioCreaParameter, prov_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProveedor_Insert_Result>("UDP_Inv_tbProveedor_Insert", prov_NombreParameter, prov_NombreContactoParameter, prov_DireccionParameter, prov_EmailParameter, prov_TelefonoParameter, prov_RTNParameter, acte_IdParameter, prov_UsuarioCreaParameter, prov_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Inv_tbProveedor_Update(Nullable<int> prov_Id, string prov_Nombre, string prov_NombreContacto, string prov_Direccion, string prov_Email, string prov_Telefono, string prov_RTN, Nullable<short> acte_Id, Nullable<int> prov_UsuarioCrea, Nullable<System.DateTime> prov_FechaCrea, Nullable<int> prov_UsuarioModifica, Nullable<System.DateTime> prov_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbProveedor_Update_Result> UDP_Inv_tbProveedor_Update(Nullable<int> prov_Id, string prov_Nombre, string prov_NombreContacto, string prov_Direccion, string prov_Email, string prov_Telefono, string prov_RTN, Nullable<short> acte_Id, Nullable<int> prov_UsuarioCrea, Nullable<System.DateTime> prov_FechaCrea, Nullable<int> prov_UsuarioModifica, Nullable<System.DateTime> prov_FechaModifica)
         {
             var prov_IdParameter = prov_Id.HasValue ?
                 new ObjectParameter("prov_Id", prov_Id) :
@@ -10464,7 +10464,7 @@
                 new ObjectParameter("prov_FechaModifica", prov_FechaModifica) :
                 new ObjectParameter("prov_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbProveedor_Update", prov_IdParameter, prov_NombreParameter, prov_NombreContactoParameter, prov_DireccionParameter, prov_EmailParameter, prov_TelefonoParameter, prov_RTNParameter, acte_IdParameter, prov_UsuarioCreaParameter, prov_FechaCreaParameter, prov_UsuarioModificaParameter, prov_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProveedor_Update_Result>("UDP_Inv_tbProveedor_Update", prov_IdParameter, prov_NombreParameter, prov_NombreContactoParameter, prov_DireccionParameter, prov_EmailParameter, prov_TelefonoParameter, prov_RTNParameter, acte_IdParameter, prov_UsuarioCreaParameter, prov_FechaCreaParameter, prov_UsuarioModificaParameter, prov_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbSalida_Insert_Result> UDP_Inv_tbSalida_Insert(Nullable<int> bod_Id, Nullable<long> fact_Id, Nullable<System.DateTime> sal_FechaElaboracion, Nullable<byte> estm_Id, Nullable<byte> tsal_Id, Nullable<int> sal_BodDestino, Nullable<bool> sal_EsAnulada, Nullable<int> tdev_Id, string sal_RazonAnulada, Nullable<int> sal_UsuarioCrea, Nullable<System.DateTime> sal_FechaCrea)
