@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Controllers
         Models.Helpers Function = new Models.Helpers();
         public ActionResult Index()
         {
-            var tbpedido = db.tbPedido.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCliente).Include(t => t.tbEstadoPedido).Include(t => t.tbSucursal);
+            var tbpedido = db.tbPedido.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCliente).Include(t => t.tbEstadoPedido).Include(t => t.tbSucursales);
 
             return View(tbpedido.ToList());
         }

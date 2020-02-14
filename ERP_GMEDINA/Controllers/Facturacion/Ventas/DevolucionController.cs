@@ -111,7 +111,7 @@ namespace ERP_ZORZAL.Controllers
             Session["IDCAJA"] = tbDevolucion.cja_Id;
             Session["CAJA"] = tbDevolucion.tbCaja.cja_Descripcion;
             Session["IDSUCURSAL"] = tbDevolucion.tbCaja.suc_Id;
-            Session["SUCURSAL"] = tbDevolucion.tbCaja.tbSucursal.suc_Descripcion;
+            Session["SUCURSAL"] = tbDevolucion.tbCaja.tbSucursales.suc_Descripcion;
 
             Session["RTNCLIENTE"] = tbDevolucion.tbFactura.clte_Identificacion;
             Session["IDCLIENTE"] = tbDevolucion.tbFactura.clte_Id;
@@ -278,7 +278,7 @@ namespace ERP_ZORZAL.Controllers
             Session["IDCAJA"] = tbDevolucion.cja_Id;
             Session["CAJA"] = tbDevolucion.tbCaja.cja_Descripcion;
             Session["IDSUCURSAL"] = tbDevolucion.tbCaja.suc_Id;
-            Session["SUCURSAL"] = tbDevolucion.tbCaja.tbSucursal.suc_Descripcion;
+            Session["SUCURSAL"] = tbDevolucion.tbCaja.tbSucursales.suc_Descripcion;
             Session["RTNCLIENTE"] = tbDevolucion.tbFactura.clte_Identificacion;
             Session["IDCLIENTE"] = tbDevolucion.tbFactura.clte_Id;
             Session["NOMBRE"] = tbDevolucion.tbFactura.clte_Nombres;
