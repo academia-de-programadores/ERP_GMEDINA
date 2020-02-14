@@ -42,13 +42,13 @@
                             @Html.ValidationSummary(true)
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.tbCaja.tbSucursal.suc_Descripcion, "Sucursal", new { @class = "control-label col-md-2 " })
+                                @Html.LabelFor(model => model.tbCaja.tbSucursales.suc_Descripcion, "Sucursal", new { @class = "control-label col-md-2 " })
                                 <div class="col-md-3">
                                     <input class="form-control" readonly value="@ViewBag.suc_Descripcion" name="suc_Descripcion" id="suc_Descripcion" />
                                     <input class="form-control" readonly value="@ViewBag.suc_Id" id="suc_Id" name="suc_Id" type="hidden" />
                                     <input id="usu_Id" name="usu_Id" type="hidden" class="form-control" value="@ViewBag.usu_Id" />
                                    <div id="validationSucursalCreate">
-                                        <p id="SmSuc_Descripcion" style="color:red">@Html.ValidationMessageFor(model => model.tbCaja.tbSucursal.suc_Descripcion)</p>
+                                        <p id="SmSuc_Descripcion" style="color:red">@Html.ValidationMessageFor(model => model.tbCaja.tbSucursales.suc_Descripcion)</p>
                                     </div>
                                     
                                 </div>
