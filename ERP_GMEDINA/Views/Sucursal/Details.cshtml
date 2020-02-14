@@ -1,4 +1,4 @@
-﻿@model ERP_GMEDINA.Models.tbSucursal
+﻿@model ERP_GMEDINA.Models.tbSucursales
 
 @{
     ViewBag.Title = "Details";
@@ -110,16 +110,16 @@
                         <tr>
                             <td>Creado</td>
                             <td>
-                                @Html.DisplayFor(model => model.tbUsuario1.usu_Nombres)
-                                @Html.DisplayFor(model => model.tbUsuario1.usu_Apellidos)
+                                @Html.DisplayFor(model => model.tbUsuario.usu_Nombres)
+                                @Html.DisplayFor(model => model.tbUsuario.usu_Apellidos)
                             </td>
                             <td>@Html.DisplayFor(model => model.suc_FechaCrea)</td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
                             <td>
-                                @Html.DisplayFor(model => model.tbUsuario2.usu_Nombres)
-                                @Html.DisplayFor(model => model.tbUsuario2.usu_Apellidos)
+                                @Html.DisplayFor(model => model.tbUsuario1.usu_Nombres)
+                                @Html.DisplayFor(model => model.tbUsuario1.usu_Apellidos)
                             </td>
                             <td>@Html.DisplayFor(model => model.suc_FechaModifica)</td>
                         </tr>

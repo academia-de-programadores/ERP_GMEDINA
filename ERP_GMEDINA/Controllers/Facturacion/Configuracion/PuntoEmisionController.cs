@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,6 +13,7 @@ using System.IO;
 using ERP_GMEDINA.Dataset.ReportesTableAdapters;
 using ERP_GMEDINA.Dataset;
 using ERP_GMEDINA.Reports;
+using ERP_GMEDINA.Attribute;
 
 namespace ERP_ZORZAL.Controllers
 {
@@ -21,6 +22,7 @@ namespace ERP_ZORZAL.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         Helpers Function = new Helpers();
         // GET: /PuntoEmision/
+        [SessionManager("PuntoEmision/Index")]
         public ActionResult Index()
         {
             var tbpuntoemision = db.tbPuntoEmision.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -33,6 +35,7 @@ namespace ERP_ZORZAL.Controllers
         }
 
         // GET: /PuntoEmision/Details/5
+        [SessionManager("PuntoEmision/Details")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -50,6 +53,7 @@ namespace ERP_ZORZAL.Controllers
         }
 
         // GET: /PuntoEmision/Create
+        [SessionManager("PuntoEmision/Create")]
         public ActionResult Create()
         {
             //PuntoEmision
@@ -76,6 +80,7 @@ namespace ERP_ZORZAL.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("PuntoEmision/Create")]
         public ActionResult Create([Bind(Include="pemi_NumeroCAI,tbUsuario,tbUsuario1")] tbPuntoEmision tbPuntoEmision)
         {
             var list = (List<tbPuntoEmisionDetalle>)Session["PuntoEmision"];
@@ -179,6 +184,7 @@ namespace ERP_ZORZAL.Controllers
         }
 
         // GET: /PuntoEmision/Edit/5
+        [SessionManager("PuntoEmision/Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -213,6 +219,7 @@ namespace ERP_ZORZAL.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionManager("PuntoEmision/Edit")]
         public ActionResult Edit([Bind(Include= "pemi_Id,pemi_NumeroCAI,pemi_UsuarioCrea,pemi_FechaCrea,pemi_UsuarioModifica,pemi_FechaModifica,tbUsuario,tbUsuario1")] tbPuntoEmision PuntoEmision)
         {
             string cas = "dfisc_IdList_";
