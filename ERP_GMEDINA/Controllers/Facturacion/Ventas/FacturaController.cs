@@ -257,7 +257,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             int idUser = Function.GetUser();
-            int IDSucursal = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
+            int IDSucursal = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id == null ? 0 :  x.tbSucursales.suc_Id).DefaultIfEmpty(0).FirstOrDefault();
             short IDCaja = 0;
             ViewBag.usu_Id = idUser;
             var Fact_Id = db.tbFactura.OrderBy(x => x.fact_Id).Select(x => x.fact_Id).ToList().LastOrDefault();
