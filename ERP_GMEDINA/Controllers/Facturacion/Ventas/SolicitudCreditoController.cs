@@ -639,3 +639,12 @@ namespace ERP_GMEDINA.Controllers
 
     }
 }
+
+namespace ERP_GMEDINA.Models
+{
+
+    public class UDP_Vent_tbSolicitudCredito_Update_Result
+    {
+        public string MensajeError { get; set; }
+    }
+}

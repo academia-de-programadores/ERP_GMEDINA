@@ -1,6 +1,7 @@
 ﻿namespace ERP_GMEDINA.Models
 {
     using System;
+    using ERP_GMEDINA.Models;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
@@ -8709,6 +8710,55 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbPedido_Select_Result>("UDP_Vent_tbPedido_Select", ped_IdParameter);
         }
     
+        public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Aprobar(Nullable<int> cred_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaAprobacion, Nullable<decimal> cred_MontoSolicitado, Nullable<decimal> cred_MontoAprobado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_DiasAprobado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea, Nullable<int> cred_UsuarioModifica, Nullable<System.DateTime> cred_FechaModifica)
+        {
+            var cred_IdParameter = cred_Id.HasValue ?
+                new ObjectParameter("cred_Id", cred_Id) :
+                new ObjectParameter("cred_Id", typeof(int));
+    
+            var escre_IdParameter = escre_Id.HasValue ?
+                new ObjectParameter("escre_Id", escre_Id) :
+                new ObjectParameter("escre_Id", typeof(byte));
+    
+            var cred_FechaAprobacionParameter = cred_FechaAprobacion.HasValue ?
+                new ObjectParameter("cred_FechaAprobacion", cred_FechaAprobacion) :
+                new ObjectParameter("cred_FechaAprobacion", typeof(System.DateTime));
+    
+            var cred_MontoSolicitadoParameter = cred_MontoSolicitado.HasValue ?
+                new ObjectParameter("cred_MontoSolicitado", cred_MontoSolicitado) :
+                new ObjectParameter("cred_MontoSolicitado", typeof(decimal));
+    
+            var cred_MontoAprobadoParameter = cred_MontoAprobado.HasValue ?
+                new ObjectParameter("cred_MontoAprobado", cred_MontoAprobado) :
+                new ObjectParameter("cred_MontoAprobado", typeof(decimal));
+    
+            var cred_DiasSolicitadoParameter = cred_DiasSolicitado.HasValue ?
+                new ObjectParameter("cred_DiasSolicitado", cred_DiasSolicitado) :
+                new ObjectParameter("cred_DiasSolicitado", typeof(int));
+    
+            var cred_DiasAprobadoParameter = cred_DiasAprobado.HasValue ?
+                new ObjectParameter("cred_DiasAprobado", cred_DiasAprobado) :
+                new ObjectParameter("cred_DiasAprobado", typeof(int));
+    
+            var cred_UsuarioCreaParameter = cred_UsuarioCrea.HasValue ?
+                new ObjectParameter("cred_UsuarioCrea", cred_UsuarioCrea) :
+                new ObjectParameter("cred_UsuarioCrea", typeof(int));
+    
+            var cred_FechaCreaParameter = cred_FechaCrea.HasValue ?
+                new ObjectParameter("cred_FechaCrea", cred_FechaCrea) :
+                new ObjectParameter("cred_FechaCrea", typeof(System.DateTime));
+    
+            var cred_UsuarioModificaParameter = cred_UsuarioModifica.HasValue ?
+                new ObjectParameter("cred_UsuarioModifica", cred_UsuarioModifica) :
+                new ObjectParameter("cred_UsuarioModifica", typeof(int));
+    
+            var cred_FechaModificaParameter = cred_FechaModifica.HasValue ?
+                new ObjectParameter("cred_FechaModifica", cred_FechaModifica) :
+                new ObjectParameter("cred_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Aprobar", cred_IdParameter, escre_IdParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
+        }
+    
         public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Denegar(Nullable<int> cred_Id, Nullable<byte> escre_Id, string cred_RazonDenegacion)
         {
             var cred_IdParameter = cred_Id.HasValue ?
@@ -8750,63 +8800,6 @@
                 new ObjectParameter("password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("UDP_Vent_tbSolicitudCredito_RolGerenteCreditosCobranza", usuarioIdParameter, passwordParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Update(Nullable<int> cred_Id, Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<System.DateTime> cred_FechaAprobacion, Nullable<decimal> cred_MontoSolicitado, Nullable<decimal> cred_MontoAprobado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_DiasAprobado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea, Nullable<int> cred_UsuarioModifica, Nullable<System.DateTime> cred_FechaModifica)
-        {
-            var cred_IdParameter = cred_Id.HasValue ?
-                new ObjectParameter("cred_Id", cred_Id) :
-                new ObjectParameter("cred_Id", typeof(int));
-    
-            var clte_IdParameter = clte_Id.HasValue ?
-                new ObjectParameter("clte_Id", clte_Id) :
-                new ObjectParameter("clte_Id", typeof(int));
-    
-            var escre_IdParameter = escre_Id.HasValue ?
-                new ObjectParameter("escre_Id", escre_Id) :
-                new ObjectParameter("escre_Id", typeof(byte));
-    
-            var cred_FechaSolicitudParameter = cred_FechaSolicitud.HasValue ?
-                new ObjectParameter("cred_FechaSolicitud", cred_FechaSolicitud) :
-                new ObjectParameter("cred_FechaSolicitud", typeof(System.DateTime));
-    
-            var cred_FechaAprobacionParameter = cred_FechaAprobacion.HasValue ?
-                new ObjectParameter("cred_FechaAprobacion", cred_FechaAprobacion) :
-                new ObjectParameter("cred_FechaAprobacion", typeof(System.DateTime));
-    
-            var cred_MontoSolicitadoParameter = cred_MontoSolicitado.HasValue ?
-                new ObjectParameter("cred_MontoSolicitado", cred_MontoSolicitado) :
-                new ObjectParameter("cred_MontoSolicitado", typeof(decimal));
-    
-            var cred_MontoAprobadoParameter = cred_MontoAprobado.HasValue ?
-                new ObjectParameter("cred_MontoAprobado", cred_MontoAprobado) :
-                new ObjectParameter("cred_MontoAprobado", typeof(decimal));
-    
-            var cred_DiasSolicitadoParameter = cred_DiasSolicitado.HasValue ?
-                new ObjectParameter("cred_DiasSolicitado", cred_DiasSolicitado) :
-                new ObjectParameter("cred_DiasSolicitado", typeof(int));
-    
-            var cred_DiasAprobadoParameter = cred_DiasAprobado.HasValue ?
-                new ObjectParameter("cred_DiasAprobado", cred_DiasAprobado) :
-                new ObjectParameter("cred_DiasAprobado", typeof(int));
-    
-            var cred_UsuarioCreaParameter = cred_UsuarioCrea.HasValue ?
-                new ObjectParameter("cred_UsuarioCrea", cred_UsuarioCrea) :
-                new ObjectParameter("cred_UsuarioCrea", typeof(int));
-    
-            var cred_FechaCreaParameter = cred_FechaCrea.HasValue ?
-                new ObjectParameter("cred_FechaCrea", cred_FechaCrea) :
-                new ObjectParameter("cred_FechaCrea", typeof(System.DateTime));
-    
-            var cred_UsuarioModificaParameter = cred_UsuarioModifica.HasValue ?
-                new ObjectParameter("cred_UsuarioModifica", cred_UsuarioModifica) :
-                new ObjectParameter("cred_UsuarioModifica", typeof(int));
-    
-            var cred_FechaModificaParameter = cred_FechaModifica.HasValue ?
-                new ObjectParameter("cred_FechaModifica", cred_FechaModifica) :
-                new ObjectParameter("cred_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Update", cred_IdParameter, clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
         }
     
         public virtual int UDP_Vent_tbTipoTaller_Estado(Nullable<int> tptal_Id, Nullable<bool> tptal_Es_Activo)
@@ -14332,23 +14325,15 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter, hipa_TotalDeduccionesIndividualesParameter, hipa_TotalIngresosIndividualesParameter, hipa_TotalSueldoBrutoParameter, hipa_CantidadUnidadesHorasExtrasParameter, hipa_CantidadUnidadesBonosParameter, hipa_TotalBonosParameter, hipa_CodigoPlanillaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Update1(Nullable<int> cred_Id, Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<System.DateTime> cred_FechaAprobacion, Nullable<decimal> cred_MontoSolicitado, Nullable<decimal> cred_MontoAprobado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_DiasAprobado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea, Nullable<int> cred_UsuarioModifica, Nullable<System.DateTime> cred_FechaModifica)
+        public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Aprobar1(Nullable<int> cred_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaAprobacion, Nullable<decimal> cred_MontoSolicitado, Nullable<decimal> cred_MontoAprobado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_DiasAprobado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea, Nullable<int> cred_UsuarioModifica, Nullable<System.DateTime> cred_FechaModifica)
         {
             var cred_IdParameter = cred_Id.HasValue ?
                 new ObjectParameter("cred_Id", cred_Id) :
                 new ObjectParameter("cred_Id", typeof(int));
     
-            var clte_IdParameter = clte_Id.HasValue ?
-                new ObjectParameter("clte_Id", clte_Id) :
-                new ObjectParameter("clte_Id", typeof(int));
-    
             var escre_IdParameter = escre_Id.HasValue ?
                 new ObjectParameter("escre_Id", escre_Id) :
                 new ObjectParameter("escre_Id", typeof(byte));
-    
-            var cred_FechaSolicitudParameter = cred_FechaSolicitud.HasValue ?
-                new ObjectParameter("cred_FechaSolicitud", cred_FechaSolicitud) :
-                new ObjectParameter("cred_FechaSolicitud", typeof(System.DateTime));
     
             var cred_FechaAprobacionParameter = cred_FechaAprobacion.HasValue ?
                 new ObjectParameter("cred_FechaAprobacion", cred_FechaAprobacion) :
@@ -14386,7 +14371,7 @@
                 new ObjectParameter("cred_FechaModifica", cred_FechaModifica) :
                 new ObjectParameter("cred_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Update1", cred_IdParameter, clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Aprobar1", cred_IdParameter, escre_IdParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result1> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
@@ -14487,7 +14472,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spGetProducto1", prod_CodigoParameter);
         }
     
-        public virtual ObjectResult<UDP_Vent_tbSolicitudCredito_Insert_Result> UDP_Vent_tbSolicitudCredito_Insert(Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<decimal> cred_MontoSolicitado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea)
+        public virtual ObjectResult<string> UDP_Vent_tbSolicitudCredito_Insert(Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<decimal> cred_MontoSolicitado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea)
         {
             var clte_IdParameter = clte_Id.HasValue ?
                 new ObjectParameter("clte_Id", clte_Id) :
@@ -14517,7 +14502,85 @@
                 new ObjectParameter("cred_FechaCrea", cred_FechaCrea) :
                 new ObjectParameter("cred_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudCredito_Insert_Result>("UDP_Vent_tbSolicitudCredito_Insert", clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_MontoSolicitadoParameter, cred_DiasSolicitadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Vent_tbSolicitudCredito_Insert", clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_MontoSolicitadoParameter, cred_DiasSolicitadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_Insert_Result> UDP_Vent_tbSolicitudEfectivo_Insert(Nullable<int> mocja_Id, Nullable<short> mnda_Id, Nullable<int> solef_UsuarioCrea, Nullable<System.DateTime> solef_FechaCrea)
+        {
+            var mocja_IdParameter = mocja_Id.HasValue ?
+                new ObjectParameter("mocja_Id", mocja_Id) :
+                new ObjectParameter("mocja_Id", typeof(int));
+    
+            var mnda_IdParameter = mnda_Id.HasValue ?
+                new ObjectParameter("mnda_Id", mnda_Id) :
+                new ObjectParameter("mnda_Id", typeof(short));
+    
+            var solef_UsuarioCreaParameter = solef_UsuarioCrea.HasValue ?
+                new ObjectParameter("solef_UsuarioCrea", solef_UsuarioCrea) :
+                new ObjectParameter("solef_UsuarioCrea", typeof(int));
+    
+            var solef_FechaCreaParameter = solef_FechaCrea.HasValue ?
+                new ObjectParameter("solef_FechaCrea", solef_FechaCrea) :
+                new ObjectParameter("solef_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_Insert_Result>("UDP_Vent_tbSolicitudEfectivo_Insert", mocja_IdParameter, mnda_IdParameter, solef_UsuarioCreaParameter, solef_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudCredito_Update_Result> UDP_Vent_tbSolicitudCredito_Update(Nullable<int> cred_Id, Nullable<int> clte_Id, Nullable<byte> escre_Id, Nullable<System.DateTime> cred_FechaSolicitud, Nullable<System.DateTime> cred_FechaAprobacion, Nullable<decimal> cred_MontoSolicitado, Nullable<decimal> cred_MontoAprobado, Nullable<int> cred_DiasSolicitado, Nullable<int> cred_DiasAprobado, Nullable<int> cred_UsuarioCrea, Nullable<System.DateTime> cred_FechaCrea, Nullable<int> cred_UsuarioModifica, Nullable<System.DateTime> cred_FechaModifica)
+        {
+            var cred_IdParameter = cred_Id.HasValue ?
+                new ObjectParameter("cred_Id", cred_Id) :
+                new ObjectParameter("cred_Id", typeof(int));
+    
+            var clte_IdParameter = clte_Id.HasValue ?
+                new ObjectParameter("clte_Id", clte_Id) :
+                new ObjectParameter("clte_Id", typeof(int));
+    
+            var escre_IdParameter = escre_Id.HasValue ?
+                new ObjectParameter("escre_Id", escre_Id) :
+                new ObjectParameter("escre_Id", typeof(byte));
+    
+            var cred_FechaSolicitudParameter = cred_FechaSolicitud.HasValue ?
+                new ObjectParameter("cred_FechaSolicitud", cred_FechaSolicitud) :
+                new ObjectParameter("cred_FechaSolicitud", typeof(System.DateTime));
+    
+            var cred_FechaAprobacionParameter = cred_FechaAprobacion.HasValue ?
+                new ObjectParameter("cred_FechaAprobacion", cred_FechaAprobacion) :
+                new ObjectParameter("cred_FechaAprobacion", typeof(System.DateTime));
+    
+            var cred_MontoSolicitadoParameter = cred_MontoSolicitado.HasValue ?
+                new ObjectParameter("cred_MontoSolicitado", cred_MontoSolicitado) :
+                new ObjectParameter("cred_MontoSolicitado", typeof(decimal));
+    
+            var cred_MontoAprobadoParameter = cred_MontoAprobado.HasValue ?
+                new ObjectParameter("cred_MontoAprobado", cred_MontoAprobado) :
+                new ObjectParameter("cred_MontoAprobado", typeof(decimal));
+    
+            var cred_DiasSolicitadoParameter = cred_DiasSolicitado.HasValue ?
+                new ObjectParameter("cred_DiasSolicitado", cred_DiasSolicitado) :
+                new ObjectParameter("cred_DiasSolicitado", typeof(int));
+    
+            var cred_DiasAprobadoParameter = cred_DiasAprobado.HasValue ?
+                new ObjectParameter("cred_DiasAprobado", cred_DiasAprobado) :
+                new ObjectParameter("cred_DiasAprobado", typeof(int));
+    
+            var cred_UsuarioCreaParameter = cred_UsuarioCrea.HasValue ?
+                new ObjectParameter("cred_UsuarioCrea", cred_UsuarioCrea) :
+                new ObjectParameter("cred_UsuarioCrea", typeof(int));
+    
+            var cred_FechaCreaParameter = cred_FechaCrea.HasValue ?
+                new ObjectParameter("cred_FechaCrea", cred_FechaCrea) :
+                new ObjectParameter("cred_FechaCrea", typeof(System.DateTime));
+    
+            var cred_UsuarioModificaParameter = cred_UsuarioModifica.HasValue ?
+                new ObjectParameter("cred_UsuarioModifica", cred_UsuarioModifica) :
+                new ObjectParameter("cred_UsuarioModifica", typeof(int));
+    
+            var cred_FechaModificaParameter = cred_FechaModifica.HasValue ?
+                new ObjectParameter("cred_FechaModifica", cred_FechaModifica) :
+                new ObjectParameter("cred_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudCredito_Update_Result>("UDP_Vent_tbSolicitudCredito_Update", cred_IdParameter, clte_IdParameter, escre_IdParameter, cred_FechaSolicitudParameter, cred_FechaAprobacionParameter, cred_MontoSolicitadoParameter, cred_MontoAprobadoParameter, cred_DiasSolicitadoParameter, cred_DiasAprobadoParameter, cred_UsuarioCreaParameter, cred_FechaCreaParameter, cred_UsuarioModificaParameter, cred_FechaModificaParameter);
         }
     }
 }
