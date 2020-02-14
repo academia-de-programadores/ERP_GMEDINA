@@ -16,12 +16,14 @@ namespace ERP_GMEDINA.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CuponDescuento : ReportClass {
+    public class FacturasPendienteDePago : ReportClass {
         
+        public FacturasPendienteDePago() {
+        }
         
         public override string ResourceName {
             get {
-                return "CuponDescuento.rpt";
+                return "FacturasPendienteDePago.rpt";
             }
             set {
                 // Do nothing
@@ -39,7 +41,7 @@ namespace ERP_GMEDINA.Reports {
         
         public override string FullResourceName {
             get {
-                return "ERP_GMEDINA.Reports.CuponDescuento.rpt";
+                return "ERP_GMEDINA.Reports.FacturasPendienteDePago.rpt";
             }
             set {
                 // Do nothing
@@ -64,7 +66,7 @@ namespace ERP_GMEDINA.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -72,7 +74,7 @@ namespace ERP_GMEDINA.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -80,7 +82,7 @@ namespace ERP_GMEDINA.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -88,17 +90,41 @@ namespace ERP_GMEDINA.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_usuario {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
             get {
-                return this.DataDefinition.ParameterFields[0];
+                return this.ReportDefinition.Sections[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+            get {
+                return this.ReportDefinition.Sections[6];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+            get {
+                return this.ReportDefinition.Sections[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[8];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCuponDescuento : Component, ICachedReport {
+    public class CachedFacturasPendienteDePago : Component, ICachedReport {
         
-        public CachedCuponDescuento() {
+        public CachedFacturasPendienteDePago() {
         }
         
         [Browsable(false)]
@@ -135,7 +161,7 @@ namespace ERP_GMEDINA.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CuponDescuento rpt = new CuponDescuento();
+            FacturasPendienteDePago rpt = new FacturasPendienteDePago();
             rpt.Site = this.Site;
             return rpt;
         }

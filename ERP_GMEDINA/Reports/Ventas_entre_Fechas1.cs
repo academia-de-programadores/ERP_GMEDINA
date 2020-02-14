@@ -16,12 +16,14 @@ namespace ERP_GMEDINA.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CuponDescuento : ReportClass {
+    public class Ventas_entre_Fechas : ReportClass {
         
+        public Ventas_entre_Fechas() {
+        }
         
         public override string ResourceName {
             get {
-                return "CuponDescuento.rpt";
+                return "Ventas_entre_Fechas.rpt";
             }
             set {
                 // Do nothing
@@ -39,7 +41,7 @@ namespace ERP_GMEDINA.Reports {
         
         public override string FullResourceName {
             get {
-                return "ERP_GMEDINA.Reports.CuponDescuento.rpt";
+                return "ERP_GMEDINA.Reports.Ventas_entre_Fechas.rpt";
             }
             set {
                 // Do nothing
@@ -93,12 +95,28 @@ namespace ERP_GMEDINA.Reports {
                 return this.DataDefinition.ParameterFields[0];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Fecha_Desde {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Fecha_Hasta {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCuponDescuento : Component, ICachedReport {
+    public class CachedVentas_entre_Fechas : Component, ICachedReport {
         
-        public CachedCuponDescuento() {
+        public CachedVentas_entre_Fechas() {
         }
         
         [Browsable(false)]
@@ -135,7 +153,7 @@ namespace ERP_GMEDINA.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CuponDescuento rpt = new CuponDescuento();
+            Ventas_entre_Fechas rpt = new Ventas_entre_Fechas();
             rpt.Site = this.Site;
             return rpt;
         }

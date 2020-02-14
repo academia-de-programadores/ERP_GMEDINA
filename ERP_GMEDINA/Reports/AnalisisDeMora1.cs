@@ -16,12 +16,14 @@ namespace ERP_GMEDINA.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CuponDescuento : ReportClass {
+    public class AnalisisDeMora : ReportClass {
         
+        public AnalisisDeMora() {
+        }
         
         public override string ResourceName {
             get {
-                return "CuponDescuento.rpt";
+                return "AnalisisDeMora.rpt";
             }
             set {
                 // Do nothing
@@ -39,7 +41,7 @@ namespace ERP_GMEDINA.Reports {
         
         public override string FullResourceName {
             get {
-                return "ERP_GMEDINA.Reports.CuponDescuento.rpt";
+                return "ERP_GMEDINA.Reports.AnalisisDeMora.rpt";
             }
             set {
                 // Do nothing
@@ -96,9 +98,9 @@ namespace ERP_GMEDINA.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCuponDescuento : Component, ICachedReport {
+    public class CachedAnalisisDeMora : Component, ICachedReport {
         
-        public CachedCuponDescuento() {
+        public CachedAnalisisDeMora() {
         }
         
         [Browsable(false)]
@@ -135,7 +137,7 @@ namespace ERP_GMEDINA.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CuponDescuento rpt = new CuponDescuento();
+            AnalisisDeMora rpt = new AnalisisDeMora();
             rpt.Site = this.Site;
             return rpt;
         }

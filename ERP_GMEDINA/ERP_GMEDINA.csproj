@@ -2979,10 +2979,49 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reports\AnalisisDeMora.cs" />
+    <Compile Include="Reports\AnalisisDeMora1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnalisisDeMora.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ArqueoCaja.cs" />
+    <Compile Include="Reports\ArqueoCaja1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArqueoCaja.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\CatalogoProducto.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CatalogoProducto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CuponDescuento.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CuponDescuento1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CuponDescuento.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DescuentosPorFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DescuentosPorFecha1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DescuentosPorFecha.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DevolucionesPorFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DevolucionesPorFecha1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DevolucionesPorFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ImprimirConciliacion.cs">
@@ -4769,10 +4808,30 @@
     <EmbeddedResource Include="ReportesPlanilla\ReporteSeptimoDiaRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\ReporteVacacionesRPT.rdlc" />
     <EmbeddedResource Include="Reports\AmonestacionesRPT.rdlc" />
+    <EmbeddedResource Include="Reports\AnalisisDeMora.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AnalisisDeMora1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ArqueoCaja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ArqueoCaja1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\AudienciasDescargo.rdlc" />
     <EmbeddedResource Include="Reports\CatalogoProducto.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CatalogoProducto.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CuponDescuento.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CuponDescuento1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DescuentosPorFecha.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DescuentosPorFecha1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DevolucionesPorFecha.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DevolucionesPorFecha1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\EquipoEmpleadosRPT.rdlc" />
