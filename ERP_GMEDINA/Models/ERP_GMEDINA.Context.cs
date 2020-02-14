@@ -14586,5 +14586,67 @@
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbPuntoEmisionDetalle_Update_Result>("UDP_Vent_tbPuntoEmisionDetalle_Update", pemid_IdParameter, dfisc_IdParameter, pemid_RangoInicioParameter, pemid_RangoFinalParameter, pemid_NumeroActualParameter, pemid_FechaLimiteParameter, pemid_UsuarioCreaParameter, pemid_FechaCreaParameter, pemid_UsuarioModificaParameter, pemid_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_EsAnulada_Result> UDP_Vent_tbSolicitudEfectivo_EsAnulada(Nullable<int> solef_Id, Nullable<bool> solef_EsAnulada, string motivo)
+        {
+            var solef_IdParameter = solef_Id.HasValue ?
+                new ObjectParameter("solef_Id", solef_Id) :
+                new ObjectParameter("solef_Id", typeof(int));
+    
+            var solef_EsAnuladaParameter = solef_EsAnulada.HasValue ?
+                new ObjectParameter("solef_EsAnulada", solef_EsAnulada) :
+                new ObjectParameter("solef_EsAnulada", typeof(bool));
+    
+            var motivoParameter = motivo != null ?
+                new ObjectParameter("Motivo", motivo) :
+                new ObjectParameter("Motivo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_EsAnulada_Result>("UDP_Vent_tbSolicitudEfectivo_EsAnulada", solef_IdParameter, solef_EsAnuladaParameter, motivoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_Details_Result> UDP_Vent_tbSolicitudEfectivo_Details(Nullable<int> iDSOLICITUD)
+        {
+            var iDSOLICITUDParameter = iDSOLICITUD.HasValue ?
+                new ObjectParameter("IDSOLICITUD", iDSOLICITUD) :
+                new ObjectParameter("IDSOLICITUD", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_Details_Result>("UDP_Vent_tbSolicitudEfectivo_Details", iDSOLICITUDParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_EsImpresa_Result> UDP_Vent_tbSolicitudEfectivo_EsImpresa(Nullable<int> solef_Id, Nullable<bool> solef_EsImpresa)
+        {
+            var solef_IdParameter = solef_Id.HasValue ?
+                new ObjectParameter("solef_Id", solef_Id) :
+                new ObjectParameter("solef_Id", typeof(int));
+    
+            var solef_EsImpresaParameter = solef_EsImpresa.HasValue ?
+                new ObjectParameter("solef_EsImpresa", solef_EsImpresa) :
+                new ObjectParameter("solef_EsImpresa", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_EsImpresa_Result>("UDP_Vent_tbSolicitudEfectivo_EsImpresa", solef_IdParameter, solef_EsImpresaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbDenominacionArqueo_Select_Result> UDP_Vent_tbDenominacionArqueo_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbDenominacionArqueo_Select_Result>("UDP_Vent_tbDenominacionArqueo_Select");
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_Imprimir_Result> UDP_Vent_tbSolicitudEfectivo_Imprimir(Nullable<int> sOLEF_ID)
+        {
+            var sOLEF_IDParameter = sOLEF_ID.HasValue ?
+                new ObjectParameter("SOLEF_ID", sOLEF_ID) :
+                new ObjectParameter("SOLEF_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_Imprimir_Result>("UDP_Vent_tbSolicitudEfectivo_Imprimir", sOLEF_IDParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivo_Recargo_Result> UDP_Vent_tbSolicitudEfectivo_Recargo(Nullable<int> uSER_ID)
+        {
+            var uSER_IDParameter = uSER_ID.HasValue ?
+                new ObjectParameter("USER_ID", uSER_ID) :
+                new ObjectParameter("USER_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivo_Recargo_Result>("UDP_Vent_tbSolicitudEfectivo_Recargo", uSER_IDParameter);
+        }
     }
 }

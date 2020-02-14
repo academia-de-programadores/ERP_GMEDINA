@@ -50124,6 +50124,25 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <Parameter Name="pemid_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="pemid_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_EsAnulada" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_EsAnulada_Result)">
+            <Parameter Name="solef_Id" Mode="In" Type="Int32" />
+            <Parameter Name="solef_EsAnulada" Mode="In" Type="Boolean" />
+            <Parameter Name="Motivo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_Details" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Details_Result)">
+            <Parameter Name="IDSOLICITUD" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_EsImpresa" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_EsImpresa_Result)">
+            <Parameter Name="solef_Id" Mode="In" Type="Int32" />
+            <Parameter Name="solef_EsImpresa" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbDenominacionArqueo_Select" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbDenominacionArqueo_Select_Result)" />
+          <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_Imprimir" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Imprimir_Result)">
+            <Parameter Name="SOLEF_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Vent_tbSolicitudEfectivo_Recargo" ReturnType="Collection(ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Recargo_Result)">
+            <Parameter Name="USER_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SDP_Acce_GetObjetos_Result">
           <Property Type="Int32" Name="obj_Id" Nullable="false" />
@@ -51031,14 +51050,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Type="Int16" Name="arqde_CantidadDenominacion" Nullable="false" />
           <Property Type="Decimal" Name="arqde_MontoDenominacion" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
-        <ComplexType Name="UDP_Vent_tbDenominacionArqueo_Select_Result">
-          <Property Type="Int16" Name="deno_Id" Nullable="false" />
-          <Property Type="String" Name="mnda_Abreviatura" Nullable="false" MaxLength="4" />
-          <Property Type="String" Name="TipoDenominacion" Nullable="true" MaxLength="8000" />
-          <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="deno_valor" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="String" Name="mnda_Nombre" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="UDP_Vent_tbDevolucion_GetDetalle_Result">
           <Property Type="Int32" Name="devd_Id" Nullable="false" />
           <Property Type="String" Name="prod_Codigo" Nullable="false" MaxLength="15" />
@@ -51270,44 +51281,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
           <Property Type="DateTime" Name="ped_FechaCrea" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="ped_UsuarioModifica" Nullable="true" />
           <Property Type="DateTime" Name="ped_FechaModifica" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Details_Result">
-          <Property Type="Int32" Name="soled_Id" Nullable="false" />
-          <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Int16" Name="soled_CantidadSolicitada" Nullable="false" />
-          <Property Type="Decimal" Name="MontoSolicitado" Nullable="true" Precision="16" Scale="2" />
-          <Property Type="Int16" Name="soled_CantidadEntregada" Nullable="false" />
-          <Property Type="Decimal" Name="MontoEntregado" Nullable="true" Precision="16" Scale="2" />
-          <Property Type="Int16" Name="deno_Id" Nullable="false" />
-          <Property Type="Decimal" Name="deno_valor" Nullable="false" Precision="10" Scale="2" />
-        </ComplexType>
-        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Imprimir_Result">
-          <Property Type="Int32" Name="solef_Id" Nullable="false" />
-          <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="suc_Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="mocja_Id" Nullable="false" />
-          <Property Type="String" Name="TipoSolicitus" Nullable="true" MaxLength="8000" />
-          <Property Type="DateTime" Name="solef_FechaEntrega" Nullable="true" Precision="23" />
-          <Property Type="String" Name="UsuarioEntrega" Nullable="true" MaxLength="301" />
-          <Property Type="String" Name="Cajero" Nullable="true" MaxLength="301" />
-          <Property Type="String" Name="mnda_Nombre" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="soled_Id" Nullable="false" />
-          <Property Type="Int16" Name="deno_Id" Nullable="false" />
-          <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="deno_valor" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int16" Name="soled_CantidadSolicitada" Nullable="false" />
-          <Property Type="Decimal" Name="MontoSolicitado" Nullable="true" Precision="16" Scale="2" />
-          <Property Type="Int16" Name="soled_CantidadEntregada" Nullable="false" />
-          <Property Type="Decimal" Name="MontoEntregado" Nullable="true" Precision="16" Scale="2" />
-        </ComplexType>
-        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Recargo_Result">
-          <Property Type="Int32" Name="solef_Id" Nullable="false" />
-          <Property Type="Int32" Name="mocja_Id" Nullable="false" />
-          <Property Type="Int32" Name="solef_UsuarioCrea" Nullable="false" />
-          <Property Type="String" Name="suc_Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Int16" Name="cja_Id" Nullable="false" />
-          <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
-          <Property Type="DateTime" Name="mocja_FechaApertura" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="UDP_Vent_tbSolicitudEfectivoDetalle_Detalle_Result">
           <Property Type="Int16" Name="denoId" Nullable="false" />
@@ -51937,6 +51910,58 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
         </ComplexType>
         <ComplexType Name="UDP_Vent_tbPuntoEmisionDetalle_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_EsAnulada_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Details_Result">
+          <Property Type="Int32" Name="soled_Id" Nullable="false" />
+          <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Int16" Name="soled_CantidadSolicitada" Nullable="false" />
+          <Property Type="Decimal" Name="MontoSolicitado" Nullable="true" Precision="16" Scale="2" />
+          <Property Type="Int16" Name="soled_CantidadEntregada" Nullable="false" />
+          <Property Type="Decimal" Name="MontoEntregado" Nullable="true" Precision="16" Scale="2" />
+          <Property Type="Int16" Name="deno_Id" Nullable="false" />
+          <Property Type="Decimal" Name="deno_valor" Nullable="false" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_EsImpresa_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbDenominacionArqueo_Select_Result">
+          <Property Type="Int16" Name="deno_Id" Nullable="false" />
+          <Property Type="String" Name="mnda_Abreviatura" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="TipoDenominacion" Nullable="true" MaxLength="8000" />
+          <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="deno_valor" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="mnda_Nombre" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Imprimir_Result">
+          <Property Type="Int32" Name="solef_Id" Nullable="false" />
+          <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="suc_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="mocja_Id" Nullable="false" />
+          <Property Type="String" Name="TipoSolicitus" Nullable="true" MaxLength="8000" />
+          <Property Type="DateTime" Name="solef_FechaEntrega" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioEntrega" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="Cajero" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="mnda_Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="soled_Id" Nullable="false" />
+          <Property Type="Int16" Name="deno_Id" Nullable="false" />
+          <Property Type="String" Name="deno_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="deno_valor" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int16" Name="soled_CantidadSolicitada" Nullable="false" />
+          <Property Type="Decimal" Name="MontoSolicitado" Nullable="true" Precision="16" Scale="2" />
+          <Property Type="Int16" Name="soled_CantidadEntregada" Nullable="false" />
+          <Property Type="Decimal" Name="MontoEntregado" Nullable="true" Precision="16" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Vent_tbSolicitudEfectivo_Recargo_Result">
+          <Property Type="Int32" Name="solef_Id" Nullable="false" />
+          <Property Type="Int32" Name="mocja_Id" Nullable="false" />
+          <Property Type="Int32" Name="solef_UsuarioCrea" Nullable="false" />
+          <Property Type="String" Name="suc_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Int16" Name="cja_Id" Nullable="false" />
+          <Property Type="String" Name="cja_Descripcion" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="mocja_FechaApertura" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -60440,6 +60465,82 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA2.Vent.UDV_Vent_VentasPorCaja_Ent
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbPuntoEmisionDetalle_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_EsAnulada" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_EsAnulada">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_EsAnulada_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_Details" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_Details">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Details_Result">
+                <ScalarProperty Name="soled_Id" ColumnName="soled_Id" />
+                <ScalarProperty Name="deno_Descripcion" ColumnName="deno_Descripcion" />
+                <ScalarProperty Name="soled_CantidadSolicitada" ColumnName="soled_CantidadSolicitada" />
+                <ScalarProperty Name="MontoSolicitado" ColumnName="MontoSolicitado" />
+                <ScalarProperty Name="soled_CantidadEntregada" ColumnName="soled_CantidadEntregada" />
+                <ScalarProperty Name="MontoEntregado" ColumnName="MontoEntregado" />
+                <ScalarProperty Name="deno_Id" ColumnName="deno_Id" />
+                <ScalarProperty Name="deno_valor" ColumnName="deno_valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_EsImpresa" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_EsImpresa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_EsImpresa_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbDenominacionArqueo_Select" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbDenominacionArqueo_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbDenominacionArqueo_Select_Result">
+                <ScalarProperty Name="deno_Id" ColumnName="deno_Id" />
+                <ScalarProperty Name="mnda_Abreviatura" ColumnName="mnda_Abreviatura" />
+                <ScalarProperty Name="TipoDenominacion" ColumnName="TipoDenominacion" />
+                <ScalarProperty Name="deno_Descripcion" ColumnName="deno_Descripcion" />
+                <ScalarProperty Name="deno_valor" ColumnName="deno_valor" />
+                <ScalarProperty Name="mnda_Nombre" ColumnName="mnda_Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_Imprimir" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_Imprimir">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Imprimir_Result">
+                <ScalarProperty Name="solef_Id" ColumnName="solef_Id" />
+                <ScalarProperty Name="cja_Descripcion" ColumnName="cja_Descripcion" />
+                <ScalarProperty Name="suc_Descripcion" ColumnName="suc_Descripcion" />
+                <ScalarProperty Name="mocja_Id" ColumnName="mocja_Id" />
+                <ScalarProperty Name="TipoSolicitus" ColumnName="TipoSolicitus" />
+                <ScalarProperty Name="solef_FechaEntrega" ColumnName="solef_FechaEntrega" />
+                <ScalarProperty Name="UsuarioEntrega" ColumnName="UsuarioEntrega" />
+                <ScalarProperty Name="Cajero" ColumnName="Cajero" />
+                <ScalarProperty Name="mnda_Nombre" ColumnName="mnda_Nombre" />
+                <ScalarProperty Name="soled_Id" ColumnName="soled_Id" />
+                <ScalarProperty Name="deno_Id" ColumnName="deno_Id" />
+                <ScalarProperty Name="deno_Descripcion" ColumnName="deno_Descripcion" />
+                <ScalarProperty Name="deno_valor" ColumnName="deno_valor" />
+                <ScalarProperty Name="soled_CantidadSolicitada" ColumnName="soled_CantidadSolicitada" />
+                <ScalarProperty Name="MontoSolicitado" ColumnName="MontoSolicitado" />
+                <ScalarProperty Name="soled_CantidadEntregada" ColumnName="soled_CantidadEntregada" />
+                <ScalarProperty Name="MontoEntregado" ColumnName="MontoEntregado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Vent_tbSolicitudEfectivo_Recargo" FunctionName="ERP_GMEDINA2Model.Store.UDP_Vent_tbSolicitudEfectivo_Recargo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINA2Model.UDP_Vent_tbSolicitudEfectivo_Recargo_Result">
+                <ScalarProperty Name="solef_Id" ColumnName="solef_Id" />
+                <ScalarProperty Name="mocja_Id" ColumnName="mocja_Id" />
+                <ScalarProperty Name="solef_UsuarioCrea" ColumnName="solef_UsuarioCrea" />
+                <ScalarProperty Name="suc_Descripcion" ColumnName="suc_Descripcion" />
+                <ScalarProperty Name="cja_Id" ColumnName="cja_Id" />
+                <ScalarProperty Name="cja_Descripcion" ColumnName="cja_Descripcion" />
+                <ScalarProperty Name="mocja_FechaApertura" ColumnName="mocja_FechaApertura" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
