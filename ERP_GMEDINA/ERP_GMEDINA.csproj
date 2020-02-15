@@ -267,7 +267,6 @@
     <Compile Include="Controllers\Facturacion\Ventas\PedidoController.cs" />
     <Compile Include="Controllers\Facturacion\Ventas\SolicitudCreditoController.cs" />
     <Compile Include="Controllers\Facturacion\Ventas\SolicitudEfectivoController.cs" />
-    <Compile Include="Controllers\FechaPlanillaController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\DepartamentoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\EstadoInventarioFisicoController.cs" />
     <Compile Include="Controllers\Inventario\Catalogos\EstadoMovimientoController.cs" />
