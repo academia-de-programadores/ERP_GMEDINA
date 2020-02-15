@@ -11234,9 +11234,9 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivoDetalle_Update_Result>("UDP_Vent_tbSolicitudEfectivoDetalle_Update", soled_IdParameter, deno_IdParameter, soled_CantidadSolicitadaParameter, soled_CantidadEntregadaParameter, soled_MontoEntregadoParameter, soled_UsuarioCreaParameter, soled_FechaCreaParameter, soled_UsuarioModificaParameter, soled_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivoDetalle_Select_Result1> UDP_Vent_tbSolicitudEfectivoDetalle_Select()
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivoDetalle_Select_Result> UDP_Vent_tbSolicitudEfectivoDetalle_Select()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivoDetalle_Select_Result1>("UDP_Vent_tbSolicitudEfectivoDetalle_Select");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivoDetalle_Select_Result>("UDP_Vent_tbSolicitudEfectivoDetalle_Select");
         }
     
         public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivoDetalle_Insert_Result> UDP_Vent_tbSolicitudEfectivoDetalle_Insert(Nullable<int> solef_Id, Nullable<short> deno_Id, Nullable<short> soled_CantidadSolicitada, Nullable<int> soled_UsuarioCrea, Nullable<System.DateTime> soled_FechaCrea)
@@ -11264,13 +11264,13 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivoDetalle_Insert_Result>("UDP_Vent_tbSolicitudEfectivoDetalle_Insert", solef_IdParameter, deno_IdParameter, soled_CantidadSolicitadaParameter, soled_UsuarioCreaParameter, soled_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivoDetalle_Detalle_Result1> UDP_Vent_tbSolicitudEfectivoDetalle_Detalle(Nullable<int> iDSOLICITUD)
+        public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivoDetalle_Detalle_Result> UDP_Vent_tbSolicitudEfectivoDetalle_Detalle(Nullable<int> iDSOLICITUD)
         {
             var iDSOLICITUDParameter = iDSOLICITUD.HasValue ?
                 new ObjectParameter("IDSOLICITUD", iDSOLICITUD) :
                 new ObjectParameter("IDSOLICITUD", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivoDetalle_Detalle_Result1>("UDP_Vent_tbSolicitudEfectivoDetalle_Detalle", iDSOLICITUDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Vent_tbSolicitudEfectivoDetalle_Detalle_Result>("UDP_Vent_tbSolicitudEfectivoDetalle_Detalle", iDSOLICITUDParameter);
         }
     
         public virtual ObjectResult<UDP_Vent_tbSolicitudEfectivoDetalle_CantidadSolicitada_Update_Result> UDP_Vent_tbSolicitudEfectivoDetalle_CantidadSolicitada_Update(Nullable<int> soled_Id, Nullable<short> deno_Id, Nullable<short> soled_CantidadSolicitada, Nullable<short> soled_CantidadEntregada, Nullable<decimal> soled_MontoEntregado)
@@ -14275,7 +14275,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter, hipa_TotalDeduccionesIndividualesParameter, hipa_TotalIngresosIndividualesParameter, hipa_TotalSueldoBrutoParameter, hipa_CantidadUnidadesHorasExtrasParameter, hipa_CantidadUnidadesBonosParameter, hipa_TotalBonosParameter, hipa_CodigoPlanillaParameter);
         }
     
-        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result1> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
+        public virtual ObjectResult<UDP_Acce_tbUsuario_Update_Result> UDP_Acce_tbUsuario_Update(Nullable<int> usu_Id, string usu_NombreUsuario, string usu_Nombres, string usu_Apellidos, string usu_Correo, Nullable<bool> usu_EsActivo, string usu_RazonInactivo, Nullable<bool> usu_EsAdministrador, Nullable<int> suc_Id, Nullable<int> emp_Id)
         {
             var usu_IdParameter = usu_Id.HasValue ?
                 new ObjectParameter("usu_Id", usu_Id) :
@@ -14317,10 +14317,10 @@
                 new ObjectParameter("emp_Id", emp_Id) :
                 new ObjectParameter("emp_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Update_Result1>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_Update_Result>("UDP_Acce_tbUsuario_Update", usu_IdParameter, usu_NombreUsuarioParameter, usu_NombresParameter, usu_ApellidosParameter, usu_CorreoParameter, usu_EsActivoParameter, usu_RazonInactivoParameter, usu_EsAdministradorParameter, suc_IdParameter, emp_IdParameter);
         }
     
-        public virtual ObjectResult<spGetProducto_Result1> spGetProducto(Nullable<int> bod_Id, string prod_CodigoBarras)
+        public virtual ObjectResult<spGetProducto_Result> spGetProducto(Nullable<int> bod_Id, string prod_CodigoBarras)
         {
             var bod_IdParameter = bod_Id.HasValue ?
                 new ObjectParameter("bod_Id", bod_Id) :
@@ -14330,7 +14330,7 @@
                 new ObjectParameter("prod_CodigoBarras", prod_CodigoBarras) :
                 new ObjectParameter("prod_CodigoBarras", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetProducto_Result1>("spGetProducto", bod_IdParameter, prod_CodigoBarrasParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetProducto_Result>("spGetProducto", bod_IdParameter, prod_CodigoBarrasParameter);
         }
     
         public virtual ObjectResult<string> UDP_Inv_tbProducto_ValorCodigo1(Nullable<int> pcat_Id, Nullable<int> pscat_Id, ObjectParameter prod_Codigo)
@@ -14346,22 +14346,22 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Inv_tbProducto_ValorCodigo1", pcat_IdParameter, pscat_IdParameter, prod_Codigo);
         }
     
-        public virtual ObjectResult<spGetMunicipios_Result1> spGetMunicipios(string codDepartamento)
+        public virtual ObjectResult<spGetMunicipios_Result> spGetMunicipios(string codDepartamento)
         {
             var codDepartamentoParameter = codDepartamento != null ?
                 new ObjectParameter("CodDepartamento", codDepartamento) :
                 new ObjectParameter("CodDepartamento", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetMunicipios_Result1>("spGetMunicipios", codDepartamentoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetMunicipios_Result>("spGetMunicipios", codDepartamentoParameter);
         }
     
-        public virtual ObjectResult<spGetMunicipios1_Result1> spGetMunicipios1(string codDepartamento)
+        public virtual ObjectResult<spGetMunicipios1_Result> spGetMunicipios1(string codDepartamento)
         {
             var codDepartamentoParameter = codDepartamento != null ?
                 new ObjectParameter("CodDepartamento", codDepartamento) :
                 new ObjectParameter("CodDepartamento", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetMunicipios1_Result1>("spGetMunicipios1", codDepartamentoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetMunicipios1_Result>("spGetMunicipios1", codDepartamentoParameter);
         }
     
         public virtual ObjectResult<string> spGetProducto1(string prod_Codigo)
