@@ -1052,6 +1052,7 @@
         <AssociationConnector Association="ERP_GMEDINA2Model.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" />
         <AssociationConnector Association="ERP_GMEDINA2Model.FK_tbMunicipio_tbSucursal_mun_Codigo" />
         <AssociationConnector Association="ERP_GMEDINA2Model.FK_tbPuntoEmision_tbSucursal_pemi_Id" />
+        <AssociationConnector Association="ERP_GMEDINA2Model.FK_Vent_tbNotaCredito_tbEmpleados_emp_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
