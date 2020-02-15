@@ -126,7 +126,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         
                         Ex.Message.ToString();
-                        string msj = Function.InsertBitacoraErrores("ProductoCategoria/Create", Ex.Message.ToString(), "Create");
+                        Function.InsertBitacoraErrores("ProductoCategoria/Create", Ex.Message.ToString(), "Create");
                         ModelState.AddModelError("", "2. No se pudo insertar el registro, favor contacte al administrador");
                         return View(tbProductoCategoria);
                     }
@@ -267,7 +267,7 @@ namespace ERP_GMEDINA.Controllers
                                         MensajeError = ProdSubCate.MensajeError;
                                     if (MensajeError.StartsWith("-1"))
                                     {
-                                        string esto = Function.InsertBitacoraErrores("ProductoCategoria/Edit", MensajeError, "Edit");
+                                        Function.InsertBitacoraErrores("ProductoCategoria/Edit", MensajeError, "Edit");
                                         ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
                                         return View(tbProductoCategoria);
                                     }
