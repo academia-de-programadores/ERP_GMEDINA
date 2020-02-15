@@ -1039,6 +1039,13 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbPuntoEmision_tbPuntoEmisionDetalle_pemi_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbPuntoEmisionDetalle_tbPuntoEmision_pemi_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbSolicitudEfectivo_tbSolicitudEfectivoDetalle_solef_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_tbMunicipio_tbSucursal_mun_Codigo" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbBodega_tbSucursal_bod_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_CatalogoDePlanillas_cpla_FrecuenciaEnDias_tbPeriodo_peri_IdPeriodo" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbNotaCredito_tbEmpleados_emp_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_tbPuntoEmision_tbSucursal_pemi_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
