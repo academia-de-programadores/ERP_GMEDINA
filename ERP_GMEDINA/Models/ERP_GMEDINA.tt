@@ -229,6 +229,7 @@ public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFramework
 <#+
     fileManager.EndBlock();
 }
+
 public void BeginNamespace(CodeGenerationTools code)
 {
     var codeNamespace = code.VsNamespaceSuggestion();

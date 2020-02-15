@@ -16,6 +16,6 @@ namespace ERP_GMEDINA.Models
         public bool usu_EsAdministrador { get; set; }
         public Nullable<byte> usu_SesionesValidas { get; set; }
         public Nullable<int> suc_Id { get; set; }
-        public Nullable<short> emp_Id { get; set; }
+        public Nullable<int> emp_Id { get; set; }
     }
 }
