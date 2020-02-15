@@ -7,7 +7,7 @@ $('#btnPlanilla').click(function () {
 
     $('#fechaInicio').val('');
     $('#fechaFin').val('');
-    
+
     $("#configuracionTasasDeCambio").css('display', 'none');
 
     // dropdownlist para la moneda de las deducciones fiscales
@@ -31,7 +31,7 @@ $('#btnPlanilla').click(function () {
             message: 'No se pudieron cargar los tipos de moneda',
         });
     });
-    
+
 
     $('#ConfigurarGenerarPlanilla').modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -269,7 +269,7 @@ $('#btnGenerarPlanilla').click(function () {
         var dateFin = $('#fechaFin').val();
 
         // validar la moneda de las deducciones de planila
-        var monedaDeducciones = $("#tmon_IdMonedaDeduccionesDePlanilla").val();        
+        var monedaDeducciones = $("#tmon_IdMonedaDeduccionesDePlanilla").val();
 
         // validar que sea mayor que 1920
         if (date < '1920-01-01') {
@@ -392,7 +392,7 @@ $('#btnGenerarPlanilla').click(function () {
             var DC = {};
             DC.tmon_Id = parseInt(row.find("TD input[name=tmon_Id]").val());
             DC.tmon_Descripcion = row.find("TD input[name=tmon_Descripcion]").val();
-            DC.tmon_Cambio = parseFloat((row.find("TD input[name=tmon_Cambio]").val()).replace(/,/g,''));
+            DC.tmon_Cambio = parseFloat((row.find("TD input[name=tmon_Cambio]").val()).replace(/,/g, ''));
             monedasArray.push(DC);
         });
 
@@ -417,61 +417,61 @@ $('#btnGenerarPlanilla').click(function () {
                     tmon_IdMonedaDeduccionesDePlanilla: parseInt(monedaDeducciones)
                 }
             }).done(function (data) {
-                
-                    $('#btnPlanilla').css('display', '');
-                    $('#Cargando').css('display', 'none');
-                    $('#Modal').modal('hide');
-                    var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
 
-                    //generar csv
-                    GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
+                $('#btnPlanilla').css('display', '');
+                $('#Cargando').css('display', 'none');
+                $('#Modal').modal('hide');
+                var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
 
-                    //generar excel
-                    if (GenerarExcel == true) {
-                        $("#dvjson").excelexportjs({
-                            containerid: "dvjson"
-                               , datatype: 'json'
-                               , dataset: data.Data
-                               , columns: getColumns(data.Data)
-                        });
-                    }
+                //generar csv
+                GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
 
-
-                    if (data.listaDeErrores != '') {
-                        $("#dvjson").excelexportjs({
-                            containerid: "dvjson"
-                               , datatype: 'json'
-                               , dataset: data.listaDeErrores
-                               , columns: getColumns(data.listaDeErrores)
-                        });
-                    }
+                //generar excel
+                if (GenerarExcel == true) {
+                    $("#dvjson").excelexportjs({
+                        containerid: "dvjson"
+                           , datatype: 'json'
+                           , dataset: data.Data
+                           , columns: getColumns(data.Data)
+                    });
+                }
 
 
+                if (data.listaDeErrores != '') {
+                    $("#dvjson").excelexportjs({
+                        containerid: "dvjson"
+                           , datatype: 'json'
+                           , dataset: data.listaDeErrores
+                           , columns: getColumns(data.listaDeErrores)
+                    });
+                }
 
-                    if (data.Response.Tipo == 'success') {
-                        iziToast.success({
-                            title: data.Response.Encabezado,
-                            message: data.Response.Response,
-                        });
-                    }
-                    else if (data.Response.Tipo == 'error') {
-                        iziToast.error({
-                            title: data.Response.Encabezado,
-                            message: data.Response.Response,
-                        });
-                    }
-                    else if (data.Response.Tipo == 'warning') {
-                        iziToast.warning({
-                            title: data.Response.Encabezado,
-                            message: data.Response.Response,
-                        });
-                    }
 
-                    $('.modal-backdrop').css('display', 'none');
-                    $('.fade').css('display', 'none');
-                    $('.in').css('display', 'none');
-                
-                
+
+                if (data.Response.Tipo == 'success') {
+                    iziToast.success({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+                else if (data.Response.Tipo == 'error') {
+                    iziToast.error({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+                else if (data.Response.Tipo == 'warning') {
+                    iziToast.warning({
+                        title: data.Response.Encabezado,
+                        message: data.Response.Response,
+                    });
+                }
+
+                $('.modal-backdrop').css('display', 'none');
+                $('.fade').css('display', 'none');
+                $('.in').css('display', 'none');
+
+
             });
         }
     }
@@ -590,7 +590,7 @@ $('#fechaFin').on("keyup change", function () {
 $('.cargarPlanilla').click(function () {
 
     $('#btnPlanilla').attr('disabled', true);
-    
+
     var ID = $(this).data('id');
 
     _ajax(null,
@@ -640,12 +640,12 @@ $('.cargarPlanilla').click(function () {
 
 // mostrar div de configuración de tasas de cambio
 $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
-    
+
     if ($("#tmon_IdMonedaDeduccionesDePlanilla").val() != '0') {
 
         //$("#configuracionTasasDeCambio").css('display', 'none');
 
-        $("#cargarSpinner").css('display','');
+        $("#cargarSpinner").css('display', '');
 
         // ocultar mensaje de moneda requerida
         $("#Validation_MonedaDeduccionPlanillaRequerido").css('display', 'none');
@@ -668,15 +668,14 @@ $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
             data: { cpla_IdPlanilla: ID }
         })
             // llendar ddl con la data obtenida
-            .done(function (data) {                
+            .done(function (data) {
 
                 // llenar tbody de la tabla de tasas de cambio
                 $("#tbBodyTasasDeCambio").empty();
                 $.each(data, function (i, iter) {
 
                     // si la moneda del iterador es diferente a la moneda seleccionada para las deducciones fiscales, dibujarla para que se ingrese su respectiva tasa de cambio
-                    if (iter.tmon_Id != idMonedaSeleccionada)
-                    {
+                    if (iter.tmon_Id != idMonedaSeleccionada) {
                         $("#tbBodyTasasDeCambio").append("<tr>" +
                                                      "'<td>" + iter.tmon_Id + "</td>" +
                                                      "'<td>" + iter.tmon_Descripcion + "</td>" +
@@ -687,12 +686,11 @@ $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
                                                      "</td></tr>");
                         contadorTasaDeCambio++;
                     }
-                    
+
                     $("#cargarSpinner").css('display', 'none');
 
                     // si las monedas a las que se les tiene que hacer tasa de cambio es mayor a cero, mostrar el div
-                    if (contadorTasaDeCambio > 0)
-                    {
+                    if (contadorTasaDeCambio > 0) {
                         // mostrar el div donde se configuran los tipos de cambio
                         $("#descripcionMoneda").html($("#tmon_IdMonedaDeduccionesDePlanilla option:selected").text());
                         $("#configuracionTasasDeCambio").css('display', 'block');
@@ -701,7 +699,7 @@ $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
                         $("#configuracionTasasDeCambio").css('display', 'none');
                     }
 
-                    
+
                 });
 
                 // mascara para los inputs del tbody
@@ -725,7 +723,7 @@ $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
             });
             $("#cargarSpinner").css('display', 'none');
         });
-       
+
     }
     else {
         $("#configuracionTasasDeCambio").css('display', 'none');

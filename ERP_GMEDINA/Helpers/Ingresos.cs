@@ -10,7 +10,7 @@ namespace ERP_GMEDINA.Helpers
 {
     public static class Ingresos
     {
-        public static void ProcesarIngresos(int user_Id,DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaIngresosVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, List<tbHistorialDeIngresosPago> lisHistorialIngresos, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
+        public static void ProcesarIngresos(int user_Id, DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaIngresosVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, List<tbHistorialDeIngresosPago> lisHistorialIngresos, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
         {
             #region Procesar ingresos
 
@@ -56,7 +56,7 @@ namespace ERP_GMEDINA.Helpers
             // salario por hora
             try
             {
-                salarioHora = Math.Round(SalarioBase / 240,2);
+                salarioHora = Math.Round(SalarioBase / 240, 2);
             }
             catch (Exception ex)
             {
@@ -475,7 +475,7 @@ namespace ERP_GMEDINA.Helpers
                             //pasar el bono a pagado
                             if (oIngresosIndiColaboradoresIterador.ini_PagaSiempre == false)
                             {
-                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;                                
+                                oIngresosIndiColaboradoresIterador.ini_Pagado = true;
                             }
                             oIngresosIndiColaboradoresIterador.ini_UsuarioModifica = idUser;
                             oIngresosIndiColaboradoresIterador.ini_FechaModifica = objHelpers.DatetimeNow();
@@ -530,7 +530,7 @@ namespace ERP_GMEDINA.Helpers
                 int cantHorasPermiso = 0;
                 int cantidadSeptimosDias = 0;
                 int contadorSeptimosDias = 1;
-                
+
                 try
                 {
                     for (int i = 1; i <= cantidadDiasSeptimo; i++)
@@ -595,12 +595,12 @@ namespace ERP_GMEDINA.Helpers
             #endregion
 
             // total ingresos
-            totalIngresosEmpleado =Math.Round(totalIngresosIndivuales.Value + totalSalario + totalComisiones.Value + totalHorasExtras.Value + totalBonificaciones.Value + totalVacaciones.Value + totalHorasPermiso.Value + resultSeptimoDia,2);
+            totalIngresosEmpleado = Math.Round(totalIngresosIndivuales.Value + totalSalario + totalComisiones.Value + totalHorasExtras.Value + totalBonificaciones.Value + totalVacaciones.Value + totalHorasPermiso.Value + resultSeptimoDia, 2);
 
             #endregion
         }
 
-        public static void PrevisualizarProcesarIngresos(int user_Id, DateTime fechaInicio, DateTime fechaFin,  List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
+        public static void PrevisualizarProcesarIngresos(int user_Id, DateTime fechaInicio, DateTime fechaFin, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, tbEmpleados empleadoActual, ref decimal SalarioBase, out int horasTrabajadas, ref decimal salarioHora, ref decimal totalSalario, ref decimal? totalComisiones, out int horasExtrasTrabajadas, ref int cantidadUnidadesBonos, ref decimal? totalHorasExtras, ref decimal? totalHorasPermiso, ref decimal? totalBonificaciones, ref decimal? totalIngresosIndivuales, ref decimal? totalVacaciones, out decimal? totalIngresosEmpleado, out V_InformacionColaborador InformacionDelEmpleadoActual, out decimal resultSeptimoDia)
         {
             #region Procesar ingresos
 
@@ -713,7 +713,7 @@ namespace ERP_GMEDINA.Helpers
                         }
 
                     }
-                    totalHorasPermiso = Math.Round(totalHorasPermiso.Value,2);
+                    totalHorasPermiso = Math.Round(totalHorasPermiso.Value, 2);
                 }
                 catch (Exception ex)
                 {
@@ -806,7 +806,7 @@ namespace ERP_GMEDINA.Helpers
                 });
                 errores++;
             }
-            
+
 
             // total ingresos horas extras
             List<tbHistorialHorasTrabajadas> oHorasExtras = db.tbHistorialHorasTrabajadas
@@ -1041,7 +1041,7 @@ namespace ERP_GMEDINA.Helpers
                                                 ).FirstOrDefault();
             resultSeptimoDia = 0;
 
-            if(validacionRecibeSeptimoDia == true)
+            if (validacionRecibeSeptimoDia == true)
             {
                 DateTime inicioFecha = fechaInicio;
                 DateTime finFecha = fechaFin;
@@ -1107,7 +1107,7 @@ namespace ERP_GMEDINA.Helpers
             #endregion
 
             // total ingresos
-            totalIngresosEmpleado = Math.Round(totalIngresosIndivuales.Value + totalSalario + totalComisiones.Value + totalHorasExtras.Value + totalBonificaciones.Value + totalVacaciones.Value + totalHorasPermiso.Value + resultSeptimoDia,2);
+            totalIngresosEmpleado = Math.Round(totalIngresosIndivuales.Value + totalSalario + totalComisiones.Value + totalHorasExtras.Value + totalBonificaciones.Value + totalVacaciones.Value + totalHorasPermiso.Value + resultSeptimoDia, 2);
 
             #endregion
         }

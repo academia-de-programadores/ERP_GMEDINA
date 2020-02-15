@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutBasePlanillas.cshtml";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
 
     <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
     int rol_Usuario = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? 1 : 2);
@@ -272,7 +272,7 @@
                                                 <br /><br />
                                             </div>
                                             <div class="col-md-6">
-                                                
+
                                                 <!-- espacio-->
                                             </div>
                                         </div>

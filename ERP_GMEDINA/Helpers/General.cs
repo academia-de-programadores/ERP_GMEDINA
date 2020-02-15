@@ -151,7 +151,7 @@ namespace ERP_GMEDINA.Helpers
                 {
                     ModelState.ListaPantallas = new
                     {
-                        List = db.tbObjeto.Select(x=> x.obj_Referencia).ToList()
+                        List = db.tbObjeto.Select(x => x.obj_Referencia).ToList()
                     };
                 }
                 else
@@ -239,7 +239,7 @@ namespace ERP_GMEDINA.Helpers
         //	}
         //}
         #endregion
- 
+
         public static DateTime DateTimeNow
         {
             get

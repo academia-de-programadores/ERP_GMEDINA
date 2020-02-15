@@ -10,7 +10,7 @@ namespace ERP_GMEDINA.Helpers
 {
     public static class Deducciones
     {
-        public static void ProcesarDeducciones(int monedaDeducciones, List<ViewModelTasasDeCambio> objMonedas, int userId,DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, List<tbHistorialDeduccionPago> lisHistorialDeducciones, V_InformacionColaborador InformacionDelEmpleadoActual)
+        public static void ProcesarDeducciones(int monedaDeducciones, List<ViewModelTasasDeCambio> objMonedas, int userId, DateTime fechaInicio, DateTime fechaFin, List<IngresosDeduccionesVoucher> ListaDeduccionesVoucher, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, List<tbHistorialDeduccionPago> lisHistorialDeducciones, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             #region Procesar deducciones
 
@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Helpers
             Models.Helpers objHelpers = new Models.Helpers();
 
             // id del usuario logueado
-            int idUser = userId; 
+            int idUser = userId;
 
             // validar que la planilla tenga deducciones
             if (oDeducciones.Count > 0)
@@ -77,7 +77,7 @@ namespace ERP_GMEDINA.Helpers
                         // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
                         if (idMonedaColaborador != monedaDeducciones)
                         {
-                            montoDeduccionVoucher = Math.Round((decimal)( ( (montoDeduccionColaborador * porcentajeColaborador /100) ) / tasaDeCambio.tmon_Cambio),2);
+                            montoDeduccionVoucher = Math.Round((decimal)(((montoDeduccionColaborador * porcentajeColaborador / 100)) / tasaDeCambio.tmon_Cambio), 2);
                         }
 
 
@@ -111,7 +111,7 @@ namespace ERP_GMEDINA.Helpers
 
                 // si la moneda de las deducciones es distintas al tipo de moneda del colaborador, convertir a la moneda del colaborador
                 // antes de agregarlo al reporte final
-                
+
                 if (idMonedaColaborador != monedaDeducciones)
                 {
                     colaboradorDeducciones = Math.Round(((decimal)colaboradorDeducciones) / tasaDeCambio.tmon_Cambio, 2);
@@ -350,7 +350,7 @@ namespace ERP_GMEDINA.Helpers
                         oDeduccionesIndiColaboradorIterador.dei_UsuarioModifica = idUser;
                         oDeduccionesIndiColaboradorIterador.dei_FechaModifica = objHelpers.DatetimeNow();
                         db.Entry(oDeduccionesIndiColaboradorIterador).State = EntityState.Modified;
-                                                
+
                     }
                     catch (Exception ex)
                     {
@@ -376,7 +376,7 @@ namespace ERP_GMEDINA.Helpers
         }
 
         // se usa este actualmente
-        public static void PrevisualizarProcesarDeducciones(int monedaDeducciones, List<ViewModelTasasDeCambio> objMonedas, int userId,DateTime fechaInicio, DateTime fechaFin, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
+        public static void PrevisualizarProcesarDeducciones(int monedaDeducciones, List<ViewModelTasasDeCambio> objMonedas, int userId, DateTime fechaInicio, DateTime fechaFin, List<ViewModelListaErrores> listaErrores, ref int errores, ERP_GMEDINAEntities db, List<V_PlanillaDeducciones> oDeducciones, tbEmpleados empleadoActual, decimal SalarioBase, decimal? totalIngresosEmpleado, ref decimal? colaboradorDeducciones, ref decimal totalAFP, ref decimal? totalInstitucionesFinancieras, ref decimal? totalOtrasDeducciones, ref decimal? adelantosSueldo, out decimal? totalDeduccionesEmpleado, ref decimal? totalDeduccionesIndividuales, out decimal? netoAPagarColaborador, V_InformacionColaborador InformacionDelEmpleadoActual)
         {
             #region Procesar deducciones
 
@@ -391,7 +391,7 @@ namespace ERP_GMEDINA.Helpers
             {
                 // obtener id del tipo de moneda del sueldo del colaborador
                 int idMonedaColaborador = db.tbSueldos.Where(x => x.emp_Id == InformacionDelEmpleadoActual.emp_Id && x.sue_Estado == true).Select(x => x.tmon_Id).FirstOrDefault();
-                
+
                 ViewModelTasasDeCambio tasaDeCambio = new ViewModelTasasDeCambio();
 
                 // si el tipo de moneda del colaborador es distinto de la moneda de las deducciones seleccionada en el frontend, hacer la conversion 
@@ -476,7 +476,7 @@ namespace ERP_GMEDINA.Helpers
 
                         //sumar las deducciones
                         colaboradorDeducciones += Math.Round((decimal)(montoDeduccionColaborador * porcentajeColaborador) / 100, 2);
-                        
+
                     }
                     catch (Exception ex)
                     {
