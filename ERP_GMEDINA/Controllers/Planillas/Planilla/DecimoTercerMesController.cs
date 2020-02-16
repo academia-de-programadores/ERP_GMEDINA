@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     public class DecimoTercerMesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+
         private ERP_GMEDINA.Models.Helpers Function = new ERP_GMEDINA.Models.Helpers();
 
         #region GET: INDEX
