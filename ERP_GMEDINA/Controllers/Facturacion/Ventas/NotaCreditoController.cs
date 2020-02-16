@@ -109,8 +109,8 @@ namespace ERP_GMEDINA.Controllers
                             idUser = Convert.ToInt32(Usuario.emp_Id);
                         }
                         ViewBag.usu_Id = idUser;
-                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.FirstOrDefault().suc_Descripcion).SingleOrDefault();
-                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.FirstOrDefault().suc_Id).SingleOrDefault();
+                        ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
+                        ViewBag.suc_Id = db.tbUsuario.Where(x => x.emp_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
                         ViewBag.Devolucion = db.tbDevolucionDetalle.ToList();
                         ViewBag.Cliente = db.tbCliente.ToList();
                         return View();

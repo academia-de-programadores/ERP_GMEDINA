@@ -157,7 +157,7 @@ namespace ERP_GMEDINA.Controllers
                 return RedirectToAction("NotFound", "Login");
             }
             this.AllLists();
-            ResponsableBodega(tbBodega.bod_ResponsableBodega);
+            ResponsableBodega((int)tbBodega.bod_ResponsableBodega);
             ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", tbBodega.dep_Codigo);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_Codigo", "mun_Nombre", tbBodega.mun_Codigo);
             Session["tbBodegaDetalle"] = null;
@@ -196,7 +196,7 @@ namespace ERP_GMEDINA.Controllers
                         if (MsjError.StartsWith("-1"))
                         {
                             this.AllLists();
-                            ResponsableBodega(tbBodega.bod_ResponsableBodega);
+                            ResponsableBodega((int)tbBodega.bod_ResponsableBodega);
                             Function.InsertBitacoraErrores("Bodega/Edit", MsjError, "Edit");
                             ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
                             return RedirectToAction("Edit/" + MsjError);
@@ -224,7 +224,7 @@ namespace ERP_GMEDINA.Controllers
                                         if (MensajeError.StartsWith("-1"))
                                         {
                                             this.AllLists();
-                                            ResponsableBodega(tbBodega.bod_ResponsableBodega);
+                                            ResponsableBodega((int)tbBodega.bod_ResponsableBodega);
                                             ViewBag.deparatamento_Edit = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", tbBodega.dep_Codigo);
                                             ViewBag.municipio_Edit = new SelectList(db.tbMunicipio, "mun_Codigo", "mun_Nombre", tbBodega.mun_Codigo);
                                             Function.InsertBitacoraErrores("Bodega/Edit", MsjError, "Edit");
@@ -241,7 +241,7 @@ namespace ERP_GMEDINA.Controllers
                     catch (Exception Ex)
                     {
                         this.AllLists();
-                        ResponsableBodega(tbBodega.bod_ResponsableBodega);
+                        ResponsableBodega((int)tbBodega.bod_ResponsableBodega);
                         ViewBag.deparatamento_Edit = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", tbBodega.dep_Codigo);
                         ViewBag.municipio_Edit = new SelectList(db.tbMunicipio, "mun_Codigo", "mun_Nombre", tbBodega.mun_Codigo);
                         Function.InsertBitacoraErrores("Bodega/Edit", Ex.Message.ToString(), "Edit");
@@ -251,7 +251,7 @@ namespace ERP_GMEDINA.Controllers
                 }
             }
             this.AllLists();
-            ResponsableBodega(tbBodega.bod_ResponsableBodega);
+            ResponsableBodega((int)tbBodega.bod_ResponsableBodega);
             ViewBag.deparatamento_Edit = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", tbBodega.dep_Codigo);
             ViewBag.municipio_Edit = new SelectList(db.tbMunicipio, "mun_Codigo", "mun_Nombre", tbBodega.mun_Codigo);
             ViewBag.bod_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbBodega.bod_UsuarioCrea);
