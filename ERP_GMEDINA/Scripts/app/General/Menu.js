@@ -23,7 +23,7 @@
             });
         }
         else {
-        	localStorage.setItem("VM_ModelState", JSON.stringify(data));
+            localStorage.setItem("VM_ModelState", JSON.stringify(data));
 
             //CÓDIGO EJEMPLO: IMPLEMENTAR VALIDACIONES DE PERMISOS DE USUARIO
 
@@ -37,7 +37,7 @@
             ///		  if (validacionPermiso.status == true) {
             ///
             ///           // activar
-            ///
+            ///           
             ///           // termina activar
             ///       }
             ///

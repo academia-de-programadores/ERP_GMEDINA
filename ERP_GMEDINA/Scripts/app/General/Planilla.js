@@ -25,12 +25,12 @@ $('#btnPlanilla').click(function () {
                 $("#tmon_IdMonedaDeduccionesDePlanilla").append("<option value='" + iter.tmon_Id + "'>" + iter.tmon_Descripcion + "</option>");
             });
         })
-    .fail(function () {
-        iziToast.error({
-            title: 'Error',
-            message: 'No se pudieron cargar los tipos de moneda',
+        .fail(function () {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudieron cargar los tipos de moneda',
+            });
         });
-    });
 
 
     $('#ConfigurarGenerarPlanilla').modal({ backdrop: 'static', keyboard: false });
@@ -199,51 +199,51 @@ $('#btnPrevisualizarPlanilla').click(function () {
                 monedas: monedasArray,
                 tmon_IdMonedaDeduccionesDePlanilla: parseInt(monedaDeducciones)
             },
-            '/Planilla/PrevisualizarPlanilla/',
-            'POST',
-            (data) => {
-                $('#btnPlanilla').css('display', '');
-                $('#Cargando').css('display', 'none');
-                $('#Modal').modal('hide');
-                var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
+                '/Planilla/PrevisualizarPlanilla/',
+                'POST',
+                (data) => {
+                    $('#btnPlanilla').css('display', '');
+                    $('#Cargando').css('display', 'none');
+                    $('#Modal').modal('hide');
+                    var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
 
-                //generar csv
-                GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
+                    //generar csv
+                    GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
 
-                //generar excel
-                if (GenerarExcel == true) {
-                    $("#dvjson").excelexportjs({
-                        containerid: "dvjson"
-                           , datatype: 'json'
-                           , dataset: data.Data
-                           , columns: getColumns(data.Data)
-                    });
-                }
+                    //generar excel
+                    if (GenerarExcel == true) {
+                        $("#dvjson").excelexportjs({
+                            containerid: "dvjson"
+                            , datatype: 'json'
+                            , dataset: data.Data
+                            , columns: getColumns(data.Data)
+                        });
+                    }
 
-                if (data.Response.Tipo == 'success') {
-                    iziToast.success({
-                        title: data.Response.Encabezado,
-                        message: data.Response.Response,
-                    });
-                }
-                else if (data.Response.Tipo == 'error') {
-                    iziToast.error({
-                        title: data.Response.Encabezado,
-                        message: data.Response.Response,
-                    });
-                }
-                else if (data.Response.Tipo == 'warning') {
-                    iziToast.warning({
-                        title: data.Response.Encabezado,
-                        message: data.Response.Response,
-                    });
-                }
+                    if (data.Response.Tipo == 'success') {
+                        iziToast.success({
+                            title: data.Response.Encabezado,
+                            message: data.Response.Response,
+                        });
+                    }
+                    else if (data.Response.Tipo == 'error') {
+                        iziToast.error({
+                            title: data.Response.Encabezado,
+                            message: data.Response.Response,
+                        });
+                    }
+                    else if (data.Response.Tipo == 'warning') {
+                        iziToast.warning({
+                            title: data.Response.Encabezado,
+                            message: data.Response.Response,
+                        });
+                    }
 
-                $('.modal-backdrop').css('display', 'none');
-                $('.fade').css('display', 'none');
-                $('.in').css('display', 'none');
-            }
-        );
+                    $('.modal-backdrop').css('display', 'none');
+                    $('.fade').css('display', 'none');
+                    $('.in').css('display', 'none');
+                }
+            );
         }
     }
 });
@@ -430,9 +430,9 @@ $('#btnGenerarPlanilla').click(function () {
                 if (GenerarExcel == true) {
                     $("#dvjson").excelexportjs({
                         containerid: "dvjson"
-                           , datatype: 'json'
-                           , dataset: data.Data
-                           , columns: getColumns(data.Data)
+                        , datatype: 'json'
+                        , dataset: data.Data
+                        , columns: getColumns(data.Data)
                     });
                 }
 
@@ -440,9 +440,9 @@ $('#btnGenerarPlanilla').click(function () {
                 if (data.listaDeErrores != '') {
                     $("#dvjson").excelexportjs({
                         containerid: "dvjson"
-                           , datatype: 'json'
-                           , dataset: data.listaDeErrores
-                           , columns: getColumns(data.listaDeErrores)
+                        , datatype: 'json'
+                        , dataset: data.listaDeErrores
+                        , columns: getColumns(data.listaDeErrores)
                     });
                 }
 
@@ -677,13 +677,13 @@ $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
                     // si la moneda del iterador es diferente a la moneda seleccionada para las deducciones fiscales, dibujarla para que se ingrese su respectiva tasa de cambio
                     if (iter.tmon_Id != idMonedaSeleccionada) {
                         $("#tbBodyTasasDeCambio").append("<tr>" +
-                                                     "'<td>" + iter.tmon_Id + "</td>" +
-                                                     "'<td>" + iter.tmon_Descripcion + "</td>" +
-                                                     "<td>" +
-                                                     "<input class='montoTasaCambio soloNumeroPlanilla MascaraCantidadPlanilla text-success text-line' name='tmon_Cambio' id='tmon_Cambio' value='0.00' />" +
-                                                     "<input type='hidden' name='tmon_Id' id='tmon_Id' value='" + iter.tmon_Id + "' />" +
-                                                     "<input type='hidden' name='tmon_Descripcion' id='tmon_Descripcion' value='" + iter.tmon_Descripcion + "' />" +
-                                                     "</td></tr>");
+                            "'<td>" + iter.tmon_Id + "</td>" +
+                            "'<td>" + iter.tmon_Descripcion + "</td>" +
+                            "<td>" +
+                            "<input class='montoTasaCambio soloNumeroPlanilla MascaraCantidadPlanilla text-success text-line' name='tmon_Cambio' id='tmon_Cambio' value='0.00' />" +
+                            "<input type='hidden' name='tmon_Id' id='tmon_Id' value='" + iter.tmon_Id + "' />" +
+                            "<input type='hidden' name='tmon_Descripcion' id='tmon_Descripcion' value='" + iter.tmon_Descripcion + "' />" +
+                            "</td></tr>");
                         contadorTasaDeCambio++;
                     }
 
@@ -716,13 +716,13 @@ $("#tmon_IdMonedaDeduccionesDePlanilla").on("change", function () {
                 $(".soloNumeroPlanilla").ForceNumericOnly();
 
             })
-        .fail(function () {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudieron cargar los tipos de moneda para las tasas de cambio',
+            .fail(function () {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudieron cargar los tipos de moneda para las tasas de cambio',
+                });
+                $("#cargarSpinner").css('display', 'none');
             });
-            $("#cargarSpinner").css('display', 'none');
-        });
 
     }
     else {
@@ -747,34 +747,34 @@ $(document).ready(function () {
     });
 
     $('#datepicker .input-group.date')
-		.datepicker({
-		    todayBtn: 'linked',
-		    keyboardNavigation: false,
-		    forceParse: false,
-		    calendarWeeks: true,
-		    autoclose: true,
-		    format: 'yyyy/mm/dd'
-		})
+        .datepicker({
+            todayBtn: 'linked',
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        })
 
 });
 
 // cargar serialize date 
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
+    .done(function (script, textStatus) {
 
-  })
-  .fail(function (jqxhr, settings, exception) {
+    })
+    .fail(function (jqxhr, settings, exception) {
 
-  });
+    });
 
 // cargar escript para generar excel
 $.getScript("../Scripts/app/General/excelexportjs.js")
-  .done(function (script, textStatus) {
+    .done(function (script, textStatus) {
 
-  })
-  .fail(function (jqxhr, settings, exception) {
+    })
+    .fail(function (jqxhr, settings, exception) {
 
-  });
+    });
 
 // función genérica 
 function _ajax(params, uri, type, callback) {
