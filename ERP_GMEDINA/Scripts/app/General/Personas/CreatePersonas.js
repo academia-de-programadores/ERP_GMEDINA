@@ -124,7 +124,7 @@ $(document).ready(function () {
                 campos.push('teléfono');
             if ($("#per_CorreoElectronico").val() == "")
                 campos.push('correo electrónico');
-            if (campos.length >= 0)
+            if (campos.length > 0)
             {
                 $('#ModalHabilitar').modal('show');
                 $("#ModalHabilitar").find("#campos")["0"].innerText = campos;
