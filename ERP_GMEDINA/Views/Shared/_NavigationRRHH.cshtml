@@ -20,7 +20,7 @@
             @{
                 //var idmenu = Session["sesionIdMenu"];
                 int idmenu = (int)(HttpContext.Current.Session["sesionIdMenu"] ?? -1);
-                if (idmenu == 0)
+                if (true)
                 {
                     <!-- #region Header Recursos Humanos -->
                     <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
@@ -397,24 +397,24 @@
                     @*MENUS DE RRHH*@
                     <!-- #endregion  -->
                     @*SEGURIDAD*@
-                <li>
+                @*<li>
                     <a href="#"><i class="fa fa-lock"></i><span class="nav-label">Seguridad</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse   Seguridad">
-                        @if (Login.GetUserAccesoRol("Usuario/Index"))
+                        @if (Login.GetUserRols("Usuario/Index"))
                         {
                             <li class="@Html.IsSelected(action: "Index")">
                                 <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-users fa-fw"></i>Usuario <span class="nav-label"></span> </a>
                             </li>
                         }
 
-                        @if (Login.GetUserAccesoRol("Rol/Index"))
+                        @if (Login.GetUserRols("Rol/Index"))
                         {
                             <li class="@Html.IsSelected(action: "Index")">
                                 <a href="@Url.Action("Index", "Rol")"><i class="fa fa-ticket fa-fw"></i>Roles<span class="nav-label"></span> </a>
                             </li>
                         }
 
-                        @if (Login.GetUserAccesoRol("Objeto/Index"))
+                        @if (Login.GetUserRols("Objeto/Index"))
                         {
                             <li class="@Html.IsSelected(action: "Index")">
                                 <a href="@Url.Action("Index", "Objeto")"><i class="fa fa-desktop fa-fw"></i><span class="nav-label">Objeto</span> </a>
@@ -422,7 +422,7 @@
                         }
                     </ul>
 
-                </li>
+                </li>*@
                 @*SEGURIDAD*@
                 }
             }

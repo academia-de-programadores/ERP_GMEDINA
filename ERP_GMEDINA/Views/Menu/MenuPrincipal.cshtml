@@ -52,14 +52,14 @@
 
                         @* ------------------------- INVENTARIO  -------------------------*@
                         <div class="col-lg-6">
-                            <div onclick="userModelState('Menu/ModuloInventario').status ? location.href = '@Url.Action("Index","Home",new { idmenu=3})' : ''">
+                            <a onclick="userModelState('Menu/ModuloInventario').status ? location.href = '@Url.Action("Index","Home",new { idmenu=3})' : ''">
                                 <div class="widget navy-bg p-lg text-center animated bounceIn ">
                                     <div class="m-b-md">
                                         <i class="fa fa-book fa-4x"></i>
                                         <h3 class="m-xs"><b>INVENTARIO</b></h3>
                                     </div>
                                 </div>
-                                </a>
+                            </a>
                             </div>
                             @* ------------------------- INVENTARIO  -------------------------*@
 
@@ -78,8 +78,6 @@
                             @* ------------------------- FACTURACION  -------------------------*@
                         </div>
                     </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     @* --------------------------- RRHH  --------------------------*@
@@ -110,8 +108,7 @@
                 </div>
             </div>
         </div>
-        </div>
-    </div>
+     </div>
 
     <!-- Mainly scripts -->
     @Scripts.Render("~/bundles/jquery")
