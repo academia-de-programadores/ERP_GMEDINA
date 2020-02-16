@@ -5700,7 +5700,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbFasesReclutamiento_Update_Result>("UDP_RRHH_tbFasesReclutamiento_Update", fare_IdParameter, fare_DescripcionParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidades_Delete(Nullable<int> habi_id, string habi_razon_Inactivo, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidades_Delete_Result> UDP_RRHH_tbHabilidades_Delete(Nullable<int> habi_id, string habi_razon_Inactivo, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
         {
             var habi_idParameter = habi_id.HasValue ?
                 new ObjectParameter("habi_id", habi_id) :
@@ -5718,10 +5718,10 @@
                 new ObjectParameter("habi_FechaModifica", habi_FechaModifica) :
                 new ObjectParameter("habi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidades_Delete", habi_idParameter, habi_razon_InactivoParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidades_Delete_Result>("UDP_RRHH_tbHabilidades_Delete", habi_idParameter, habi_razon_InactivoParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidades_Insert(string habi_Descripcion, Nullable<int> habi_UsuarioCrea, Nullable<System.DateTime> habi_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidades_Insert_Result> UDP_RRHH_tbHabilidades_Insert(string habi_Descripcion, Nullable<int> habi_UsuarioCrea, Nullable<System.DateTime> habi_FechaCrea)
         {
             var habi_DescripcionParameter = habi_Descripcion != null ?
                 new ObjectParameter("habi_Descripcion", habi_Descripcion) :
@@ -5735,10 +5735,10 @@
                 new ObjectParameter("habi_FechaCrea", habi_FechaCrea) :
                 new ObjectParameter("habi_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidades_Insert", habi_DescripcionParameter, habi_UsuarioCreaParameter, habi_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidades_Insert_Result>("UDP_RRHH_tbHabilidades_Insert", habi_DescripcionParameter, habi_UsuarioCreaParameter, habi_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidades_Restore(Nullable<int> habi_id, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidades_Restore_Result> UDP_RRHH_tbHabilidades_Restore(Nullable<int> habi_id, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
         {
             var habi_idParameter = habi_id.HasValue ?
                 new ObjectParameter("habi_id", habi_id) :
@@ -5752,10 +5752,10 @@
                 new ObjectParameter("habi_FechaModifica", habi_FechaModifica) :
                 new ObjectParameter("habi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidades_Restore", habi_idParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidades_Restore_Result>("UDP_RRHH_tbHabilidades_Restore", habi_idParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidades_Update(Nullable<int> habi_Id, string habi_Descripcion, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidades_Update_Result> UDP_RRHH_tbHabilidades_Update(Nullable<int> habi_Id, string habi_Descripcion, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
         {
             var habi_IdParameter = habi_Id.HasValue ?
                 new ObjectParameter("habi_Id", habi_Id) :
@@ -5773,10 +5773,10 @@
                 new ObjectParameter("habi_FechaModifica", habi_FechaModifica) :
                 new ObjectParameter("habi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidades_Update", habi_IdParameter, habi_DescripcionParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidades_Update_Result>("UDP_RRHH_tbHabilidades_Update", habi_IdParameter, habi_DescripcionParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidadesPersona_Inactivar(Nullable<int> hape_Id, string hape_RazonInactivo, Nullable<int> hape_UsuarioModifica, Nullable<System.DateTime> hape_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidadesPersona_Inactivar_Result> UDP_RRHH_tbHabilidadesPersona_Inactivar(Nullable<int> hape_Id, string hape_RazonInactivo, Nullable<int> hape_UsuarioModifica, Nullable<System.DateTime> hape_FechaModifica)
         {
             var hape_IdParameter = hape_Id.HasValue ?
                 new ObjectParameter("hape_Id", hape_Id) :
@@ -5794,10 +5794,10 @@
                 new ObjectParameter("hape_FechaModifica", hape_FechaModifica) :
                 new ObjectParameter("hape_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidadesPersona_Inactivar", hape_IdParameter, hape_RazonInactivoParameter, hape_UsuarioModificaParameter, hape_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidadesPersona_Inactivar_Result>("UDP_RRHH_tbHabilidadesPersona_Inactivar", hape_IdParameter, hape_RazonInactivoParameter, hape_UsuarioModificaParameter, hape_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidadesPersona_Insert(Nullable<int> per_Id, Nullable<int> habi_Id, Nullable<int> hape_UsuarioCrea, Nullable<System.DateTime> hape_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidadesPersona_Insert_Result> UDP_RRHH_tbHabilidadesPersona_Insert(Nullable<int> per_Id, Nullable<int> habi_Id, Nullable<int> hape_UsuarioCrea, Nullable<System.DateTime> hape_FechaCrea)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -5815,10 +5815,10 @@
                 new ObjectParameter("hape_FechaCrea", hape_FechaCrea) :
                 new ObjectParameter("hape_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidadesPersona_Insert", per_IdParameter, habi_IdParameter, hape_UsuarioCreaParameter, hape_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidadesPersona_Insert_Result>("UDP_RRHH_tbHabilidadesPersona_Insert", per_IdParameter, habi_IdParameter, hape_UsuarioCreaParameter, hape_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHabilidadesPersona_Restore(Nullable<int> hape_Id, Nullable<int> hape_UsuarioModifica, Nullable<System.DateTime> hape_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHabilidadesPersona_Restore_Result> UDP_RRHH_tbHabilidadesPersona_Restore(Nullable<int> hape_Id, Nullable<int> hape_UsuarioModifica, Nullable<System.DateTime> hape_FechaModifica)
         {
             var hape_IdParameter = hape_Id.HasValue ?
                 new ObjectParameter("hape_Id", hape_Id) :
@@ -5832,10 +5832,10 @@
                 new ObjectParameter("hape_FechaModifica", hape_FechaModifica) :
                 new ObjectParameter("hape_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidadesPersona_Restore", hape_IdParameter, hape_UsuarioModificaParameter, hape_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidadesPersona_Restore_Result>("UDP_RRHH_tbHabilidadesPersona_Restore", hape_IdParameter, hape_UsuarioModificaParameter, hape_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAmonestaciones_Delete(Nullable<int> hamo_Id, string hamo_RazonInactivo, Nullable<int> hamo_UsuarioModifica, Nullable<System.DateTime> hamo_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAmonestaciones_Delete_Result> UDP_RRHH_tbHistorialAmonestaciones_Delete(Nullable<int> hamo_Id, string hamo_RazonInactivo, Nullable<int> hamo_UsuarioModifica, Nullable<System.DateTime> hamo_FechaModifica)
         {
             var hamo_IdParameter = hamo_Id.HasValue ?
                 new ObjectParameter("hamo_Id", hamo_Id) :
@@ -5853,10 +5853,10 @@
                 new ObjectParameter("hamo_FechaModifica", hamo_FechaModifica) :
                 new ObjectParameter("hamo_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAmonestaciones_Delete", hamo_IdParameter, hamo_RazonInactivoParameter, hamo_UsuarioModificaParameter, hamo_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAmonestaciones_Delete_Result>("UDP_RRHH_tbHistorialAmonestaciones_Delete", hamo_IdParameter, hamo_RazonInactivoParameter, hamo_UsuarioModificaParameter, hamo_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAmonestaciones_Insert(Nullable<int> emp_Id, Nullable<int> tamo_Id, Nullable<System.DateTime> hamo_Fecha, string hamo_Observacion, Nullable<int> hamo_UsuarioCrea, Nullable<System.DateTime> hamo_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAmonestaciones_Insert_Result> UDP_RRHH_tbHistorialAmonestaciones_Insert(Nullable<int> emp_Id, Nullable<int> tamo_Id, Nullable<System.DateTime> hamo_Fecha, string hamo_Observacion, Nullable<int> hamo_UsuarioCrea, Nullable<System.DateTime> hamo_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -5882,10 +5882,10 @@
                 new ObjectParameter("hamo_FechaCrea", hamo_FechaCrea) :
                 new ObjectParameter("hamo_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAmonestaciones_Insert", emp_IdParameter, tamo_IdParameter, hamo_FechaParameter, hamo_ObservacionParameter, hamo_UsuarioCreaParameter, hamo_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAmonestaciones_Insert_Result>("UDP_RRHH_tbHistorialAmonestaciones_Insert", emp_IdParameter, tamo_IdParameter, hamo_FechaParameter, hamo_ObservacionParameter, hamo_UsuarioCreaParameter, hamo_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAmonestaciones_Restore(Nullable<int> hamo_Id, Nullable<int> hamo_UsuarioModifica, Nullable<System.DateTime> hamo_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAmonestaciones_Restore_Result> UDP_RRHH_tbHistorialAmonestaciones_Restore(Nullable<int> hamo_Id, Nullable<int> hamo_UsuarioModifica, Nullable<System.DateTime> hamo_FechaModifica)
         {
             var hamo_IdParameter = hamo_Id.HasValue ?
                 new ObjectParameter("hamo_Id", hamo_Id) :
@@ -5899,10 +5899,10 @@
                 new ObjectParameter("hamo_FechaModifica", hamo_FechaModifica) :
                 new ObjectParameter("hamo_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAmonestaciones_Restore", hamo_IdParameter, hamo_UsuarioModificaParameter, hamo_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAmonestaciones_Restore_Result>("UDP_RRHH_tbHistorialAmonestaciones_Restore", hamo_IdParameter, hamo_UsuarioModificaParameter, hamo_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAudienciaDescargo_Delete(Nullable<int> aude_Id, string aude_RazonInactivo, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Delete(Nullable<int> aude_Id, string aude_RazonInactivo, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
         {
             var aude_IdParameter = aude_Id.HasValue ?
                 new ObjectParameter("aude_Id", aude_Id) :
@@ -5920,10 +5920,10 @@
                 new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAudienciaDescargo_Delete", aude_IdParameter, aude_RazonInactivoParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Delete", aude_IdParameter, aude_RazonInactivoParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAudienciaDescargo_Insert(Nullable<int> emp_Id, string aude_Descripcion, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<bool> aude_Testigo, string aude_DireccionArchivo, Nullable<int> aude_UsuarioCrea, Nullable<System.DateTime> aude_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Insert(Nullable<int> emp_Id, string aude_Descripcion, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<bool> aude_Testigo, string aude_DireccionArchivo, Nullable<int> aude_UsuarioCrea, Nullable<System.DateTime> aude_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -5953,10 +5953,10 @@
                 new ObjectParameter("aude_FechaCrea", aude_FechaCrea) :
                 new ObjectParameter("aude_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAudienciaDescargo_Insert", emp_IdParameter, aude_DescripcionParameter, aude_FechaAudienciaParameter, aude_TestigoParameter, aude_DireccionArchivoParameter, aude_UsuarioCreaParameter, aude_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Insert", emp_IdParameter, aude_DescripcionParameter, aude_FechaAudienciaParameter, aude_TestigoParameter, aude_DireccionArchivoParameter, aude_UsuarioCreaParameter, aude_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAudienciaDescargo_Restore(Nullable<int> aude_Id, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Restore(Nullable<int> aude_Id, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
         {
             var aude_IdParameter = aude_Id.HasValue ?
                 new ObjectParameter("aude_Id", aude_Id) :
@@ -5970,10 +5970,10 @@
                 new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAudienciaDescargo_Restore", aude_IdParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Restore", aude_IdParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialAudienciaDescargo_Update(Nullable<int> aude_Id, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Update(Nullable<int> aude_Id, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
         {
             var aude_IdParameter = aude_Id.HasValue ?
                 new ObjectParameter("aude_Id", aude_Id) :
@@ -5991,10 +5991,10 @@
                 new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialCargos_Degradar(Nullable<int> hcar_Id, string hcar_RazonPromocion, Nullable<System.DateTime> hcar_Fecha, Nullable<int> hcar_UsuarioModifica, Nullable<System.DateTime> hcar_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialCargos_Degradar_Result> UDP_RRHH_tbHistorialCargos_Degradar(Nullable<int> hcar_Id, string hcar_RazonPromocion, Nullable<System.DateTime> hcar_Fecha, Nullable<int> hcar_UsuarioModifica, Nullable<System.DateTime> hcar_FechaModifica)
         {
             var hcar_IdParameter = hcar_Id.HasValue ?
                 new ObjectParameter("hcar_Id", hcar_Id) :
@@ -6016,10 +6016,10 @@
                 new ObjectParameter("hcar_FechaModifica", hcar_FechaModifica) :
                 new ObjectParameter("hcar_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialCargos_Degradar", hcar_IdParameter, hcar_RazonPromocionParameter, hcar_FechaParameter, hcar_UsuarioModificaParameter, hcar_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialCargos_Degradar_Result>("UDP_RRHH_tbHistorialCargos_Degradar", hcar_IdParameter, hcar_RazonPromocionParameter, hcar_FechaParameter, hcar_UsuarioModificaParameter, hcar_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialCargos_Insert(Nullable<int> emp_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<decimal> sue_Cantidad, string hcar_RazonPromocion, Nullable<System.DateTime> hcar_Fecha, Nullable<int> req_Id, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialCargos_Insert_Result> UDP_RRHH_tbHistorialCargos_Insert(Nullable<int> emp_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<decimal> sue_Cantidad, string hcar_RazonPromocion, Nullable<System.DateTime> hcar_Fecha, Nullable<int> req_Id, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -6065,10 +6065,10 @@
                 new ObjectParameter("emp_FechaModifica", emp_FechaModifica) :
                 new ObjectParameter("emp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialCargos_Insert", emp_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, sue_CantidadParameter, hcar_RazonPromocionParameter, hcar_FechaParameter, req_IdParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialCargos_Insert_Result>("UDP_RRHH_tbHistorialCargos_Insert", emp_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, sue_CantidadParameter, hcar_RazonPromocionParameter, hcar_FechaParameter, req_IdParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Delete(Nullable<int> hcon_Id, string hcon_RazonInactivo, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialContrataciones_Delete_Result> UDP_RRHH_tbHistorialContrataciones_Delete(Nullable<int> hcon_Id, string hcon_RazonInactivo, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
         {
             var hcon_IdParameter = hcon_Id.HasValue ?
                 new ObjectParameter("hcon_Id", hcon_Id) :
@@ -6086,10 +6086,10 @@
                 new ObjectParameter("hcon_FechaModifica", hcon_FechaModifica) :
                 new ObjectParameter("hcon_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Delete", hcon_IdParameter, hcon_RazonInactivoParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialContrataciones_Delete_Result>("UDP_RRHH_tbHistorialContrataciones_Delete", hcon_IdParameter, hcon_RazonInactivoParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Insert(Nullable<int> scan_Id, Nullable<int> depto_Id, Nullable<System.DateTime> hcon_FechaContratado, Nullable<int> hcon_UsuarioCrea, Nullable<System.DateTime> hcon_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialContrataciones_Insert_Result> UDP_RRHH_tbHistorialContrataciones_Insert(Nullable<int> scan_Id, Nullable<int> depto_Id, Nullable<System.DateTime> hcon_FechaContratado, Nullable<int> hcon_UsuarioCrea, Nullable<System.DateTime> hcon_FechaCrea)
         {
             var scan_IdParameter = scan_Id.HasValue ?
                 new ObjectParameter("scan_Id", scan_Id) :
@@ -6111,10 +6111,10 @@
                 new ObjectParameter("hcon_FechaCrea", hcon_FechaCrea) :
                 new ObjectParameter("hcon_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Insert", scan_IdParameter, depto_IdParameter, hcon_FechaContratadoParameter, hcon_UsuarioCreaParameter, hcon_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialContrataciones_Insert_Result>("UDP_RRHH_tbHistorialContrataciones_Insert", scan_IdParameter, depto_IdParameter, hcon_FechaContratadoParameter, hcon_UsuarioCreaParameter, hcon_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Restore(Nullable<int> hcon_Id, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialContrataciones_Restore_Result> UDP_RRHH_tbHistorialContrataciones_Restore(Nullable<int> hcon_Id, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
         {
             var hcon_IdParameter = hcon_Id.HasValue ?
                 new ObjectParameter("hcon_Id", hcon_Id) :
@@ -6128,10 +6128,10 @@
                 new ObjectParameter("hcon_FechaModifica", hcon_FechaModifica) :
                 new ObjectParameter("hcon_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Restore", hcon_IdParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialContrataciones_Restore_Result>("UDP_RRHH_tbHistorialContrataciones_Restore", hcon_IdParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Update(Nullable<int> hcon_Id, Nullable<int> scan_Id, Nullable<int> depto_Id, Nullable<System.DateTime> hcon_FechaContratado, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialContrataciones_Update_Result> UDP_RRHH_tbHistorialContrataciones_Update(Nullable<int> hcon_Id, Nullable<int> scan_Id, Nullable<int> depto_Id, Nullable<System.DateTime> hcon_FechaContratado, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
         {
             var hcon_IdParameter = hcon_Id.HasValue ?
                 new ObjectParameter("hcon_Id", hcon_Id) :
@@ -6157,10 +6157,10 @@
                 new ObjectParameter("hcon_FechaModifica", hcon_FechaModifica) :
                 new ObjectParameter("hcon_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Update", hcon_IdParameter, scan_IdParameter, depto_IdParameter, hcon_FechaContratadoParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialContrataciones_Update_Result>("UDP_RRHH_tbHistorialContrataciones_Update", hcon_IdParameter, scan_IdParameter, depto_IdParameter, hcon_FechaContratadoParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialIncapacidades_Delete(Nullable<int> hinc_Id, string hinc_RazonInactivo, Nullable<int> hinc_UsuarioModifica, Nullable<System.DateTime> hinc_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialIncapacidades_Delete_Result> UDP_RRHH_tbHistorialIncapacidades_Delete(Nullable<int> hinc_Id, string hinc_RazonInactivo, Nullable<int> hinc_UsuarioModifica, Nullable<System.DateTime> hinc_FechaModifica)
         {
             var hinc_IdParameter = hinc_Id.HasValue ?
                 new ObjectParameter("hinc_Id", hinc_Id) :
@@ -6178,10 +6178,10 @@
                 new ObjectParameter("hinc_FechaModifica", hinc_FechaModifica) :
                 new ObjectParameter("hinc_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialIncapacidades_Delete", hinc_IdParameter, hinc_RazonInactivoParameter, hinc_UsuarioModificaParameter, hinc_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialIncapacidades_Delete_Result>("UDP_RRHH_tbHistorialIncapacidades_Delete", hinc_IdParameter, hinc_RazonInactivoParameter, hinc_UsuarioModificaParameter, hinc_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialIncapacidades_Insert(Nullable<int> emp_Id, Nullable<int> ticn_Id, string hinc_CentroMedico, string hinc_Doctor, string hinc_Diagnostico, Nullable<System.DateTime> hinc_FechaInicio, Nullable<System.DateTime> hinc_FechaFin, Nullable<int> hinc_UsuarioCrea, Nullable<System.DateTime> hinc_FechaCrea, Nullable<bool> hinc_Espermanente)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialIncapacidades_Insert_Result> UDP_RRHH_tbHistorialIncapacidades_Insert(Nullable<int> emp_Id, Nullable<int> ticn_Id, string hinc_CentroMedico, string hinc_Doctor, string hinc_Diagnostico, Nullable<System.DateTime> hinc_FechaInicio, Nullable<System.DateTime> hinc_FechaFin, Nullable<int> hinc_UsuarioCrea, Nullable<System.DateTime> hinc_FechaCrea, Nullable<bool> hinc_Espermanente)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("Emp_Id", emp_Id) :
@@ -6223,10 +6223,10 @@
                 new ObjectParameter("hinc_Espermanente", hinc_Espermanente) :
                 new ObjectParameter("hinc_Espermanente", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialIncapacidades_Insert", emp_IdParameter, ticn_IdParameter, hinc_CentroMedicoParameter, hinc_DoctorParameter, hinc_DiagnosticoParameter, hinc_FechaInicioParameter, hinc_FechaFinParameter, hinc_UsuarioCreaParameter, hinc_FechaCreaParameter, hinc_EspermanenteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialIncapacidades_Insert_Result>("UDP_RRHH_tbHistorialIncapacidades_Insert", emp_IdParameter, ticn_IdParameter, hinc_CentroMedicoParameter, hinc_DoctorParameter, hinc_DiagnosticoParameter, hinc_FechaInicioParameter, hinc_FechaFinParameter, hinc_UsuarioCreaParameter, hinc_FechaCreaParameter, hinc_EspermanenteParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialIncapacidades_Restore(Nullable<int> hinc_Id, Nullable<int> hinc_UsuarioModifica, Nullable<System.DateTime> hinc_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialIncapacidades_Restore_Result> UDP_RRHH_tbHistorialIncapacidades_Restore(Nullable<int> hinc_Id, Nullable<int> hinc_UsuarioModifica, Nullable<System.DateTime> hinc_FechaModifica)
         {
             var hinc_IdParameter = hinc_Id.HasValue ?
                 new ObjectParameter("hinc_Id", hinc_Id) :
@@ -6240,10 +6240,10 @@
                 new ObjectParameter("hinc_FechaModifica", hinc_FechaModifica) :
                 new ObjectParameter("hinc_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialIncapacidades_Restore", hinc_IdParameter, hinc_UsuarioModificaParameter, hinc_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialIncapacidades_Restore_Result>("UDP_RRHH_tbHistorialIncapacidades_Restore", hinc_IdParameter, hinc_UsuarioModificaParameter, hinc_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbHistorialPermisos_Delete(Nullable<int> hper_Id, string hper_razon_Inactivo, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Delete_Result> UDP_RRHH_tbHistorialPermisos_Delete(Nullable<int> hper_Id, string hper_razon_Inactivo, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
         {
             var hper_IdParameter = hper_Id.HasValue ?
                 new ObjectParameter("hper_Id", hper_Id) :
@@ -6261,10 +6261,10 @@
                 new ObjectParameter("hper_FechaModifica", hper_FechaModifica) :
                 new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbHistorialPermisos_Delete", hper_IdParameter, hper_razon_InactivoParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Delete_Result>("UDP_RRHH_tbHistorialPermisos_Delete", hper_IdParameter, hper_razon_InactivoParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialPermisos_Insert(Nullable<int> emp_Id, Nullable<int> tper_Id, Nullable<System.DateTime> hper_fechaInicio, Nullable<System.DateTime> hper_fechaFin, string hper_Observacion, Nullable<bool> hper_Justificado, Nullable<int> hper_PorcentajeIndemnizado, Nullable<int> hper_UsuarioCrea, Nullable<System.DateTime> hper_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Insert_Result> UDP_RRHH_tbHistorialPermisos_Insert(Nullable<int> emp_Id, Nullable<int> tper_Id, Nullable<System.DateTime> hper_fechaInicio, Nullable<System.DateTime> hper_fechaFin, string hper_Observacion, Nullable<bool> hper_Justificado, Nullable<int> hper_PorcentajeIndemnizado, Nullable<int> hper_UsuarioCrea, Nullable<System.DateTime> hper_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -6302,10 +6302,10 @@
                 new ObjectParameter("hper_FechaCrea", hper_FechaCrea) :
                 new ObjectParameter("hper_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialPermisos_Insert", emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Insert_Result>("UDP_RRHH_tbHistorialPermisos_Insert", emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialPermisos_Restore(Nullable<int> hper_Id, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Restore_Result> UDP_RRHH_tbHistorialPermisos_Restore(Nullable<int> hper_Id, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
         {
             var hper_IdParameter = hper_Id.HasValue ?
                 new ObjectParameter("hper_Id", hper_Id) :
@@ -6319,10 +6319,10 @@
                 new ObjectParameter("hper_FechaModifica", hper_FechaModifica) :
                 new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialPermisos_Restore", hper_IdParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Restore_Result>("UDP_RRHH_tbHistorialPermisos_Restore", hper_IdParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialPermisos_Update(Nullable<int> hper_Id, string hper_Observacion, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Update_Result> UDP_RRHH_tbHistorialPermisos_Update(Nullable<int> hper_Id, string hper_Observacion, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
         {
             var hper_IdParameter = hper_Id.HasValue ?
                 new ObjectParameter("hper_Id", hper_Id) :
@@ -6340,10 +6340,10 @@
                 new ObjectParameter("hper_FechaModifica", hper_FechaModifica) :
                 new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialPermisos_Update", hper_IdParameter, hper_ObservacionParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Update_Result>("UDP_RRHH_tbHistorialPermisos_Update", hper_IdParameter, hper_ObservacionParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Delete(Nullable<int> hsal_Id, string hsal_RazonInactivo, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Delete_Result> UDP_RRHH_tbHistorialSalidas_Delete(Nullable<int> hsal_Id, string hsal_RazonInactivo, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
         {
             var hsal_IdParameter = hsal_Id.HasValue ?
                 new ObjectParameter("Hsal_Id", hsal_Id) :
@@ -6361,10 +6361,10 @@
                 new ObjectParameter("hsal_FechaModifica", hsal_FechaModifica) :
                 new ObjectParameter("hsal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Delete", hsal_IdParameter, hsal_RazonInactivoParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Delete_Result>("UDP_RRHH_tbHistorialSalidas_Delete", hsal_IdParameter, hsal_RazonInactivoParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Insert(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, string emp_RazonInactivo, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Insert_Result> UDP_RRHH_tbHistorialSalidas_Insert(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, string emp_RazonInactivo, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -6398,10 +6398,10 @@
                 new ObjectParameter("hsal_FechaCrea", hsal_FechaCrea) :
                 new ObjectParameter("hsal_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Insert", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, emp_RazonInactivoParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Insert_Result>("UDP_RRHH_tbHistorialSalidas_Insert", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, emp_RazonInactivoParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Restore(Nullable<int> hsal_Id, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Restore_Result> UDP_RRHH_tbHistorialSalidas_Restore(Nullable<int> hsal_Id, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
         {
             var hsal_IdParameter = hsal_Id.HasValue ?
                 new ObjectParameter("Hsal_Id", hsal_Id) :
@@ -6415,10 +6415,10 @@
                 new ObjectParameter("hsal_FechaModifica", hsal_FechaModifica) :
                 new ObjectParameter("hsal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Restore", hsal_IdParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Restore_Result>("UDP_RRHH_tbHistorialSalidas_Restore", hsal_IdParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Update(Nullable<int> hsal_Id, string hsal_Observacion, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Update_Result> UDP_RRHH_tbHistorialSalidas_Update(Nullable<int> hsal_Id, string hsal_Observacion, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
         {
             var hsal_IdParameter = hsal_Id.HasValue ?
                 new ObjectParameter("hsal_Id", hsal_Id) :
@@ -6436,10 +6436,10 @@
                 new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
                 new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Update", hsal_IdParameter, hsal_ObservacionParameter, hsal_UsuarioModificaParameter, fare_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Update_Result>("UDP_RRHH_tbHistorialSalidas_Update", hsal_IdParameter, hsal_ObservacionParameter, hsal_UsuarioModificaParameter, fare_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialVacaciones_Delete(Nullable<int> hvac_Id, string hvac_RazonInactivo, Nullable<int> hvac_UsuarioModifica, Nullable<System.DateTime> hvac_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialVacaciones_Delete_Result> UDP_RRHH_tbHistorialVacaciones_Delete(Nullable<int> hvac_Id, string hvac_RazonInactivo, Nullable<int> hvac_UsuarioModifica, Nullable<System.DateTime> hvac_FechaModifica)
         {
             var hvac_IdParameter = hvac_Id.HasValue ?
                 new ObjectParameter("hvac_Id", hvac_Id) :
@@ -6457,10 +6457,10 @@
                 new ObjectParameter("hvac_FechaModifica", hvac_FechaModifica) :
                 new ObjectParameter("hvac_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialVacaciones_Delete", hvac_IdParameter, hvac_RazonInactivoParameter, hvac_UsuarioModificaParameter, hvac_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialVacaciones_Delete_Result>("UDP_RRHH_tbHistorialVacaciones_Delete", hvac_IdParameter, hvac_RazonInactivoParameter, hvac_UsuarioModificaParameter, hvac_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialVacaciones_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> hvac_FechaInicio, Nullable<System.DateTime> hvac_FechaFin, Nullable<int> hvac_UsuarioCrea, Nullable<System.DateTime> hvac_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialVacaciones_Insert_Result> UDP_RRHH_tbHistorialVacaciones_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> hvac_FechaInicio, Nullable<System.DateTime> hvac_FechaFin, Nullable<int> hvac_UsuarioCrea, Nullable<System.DateTime> hvac_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -6482,10 +6482,10 @@
                 new ObjectParameter("hvac_FechaCrea", hvac_FechaCrea) :
                 new ObjectParameter("hvac_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialVacaciones_Insert", emp_IdParameter, hvac_FechaInicioParameter, hvac_FechaFinParameter, hvac_UsuarioCreaParameter, hvac_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialVacaciones_Insert_Result>("UDP_RRHH_tbHistorialVacaciones_Insert", emp_IdParameter, hvac_FechaInicioParameter, hvac_FechaFinParameter, hvac_UsuarioCreaParameter, hvac_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialVacaciones_Restore(Nullable<int> hvac_Id, Nullable<int> hvac_UsuarioModifica, Nullable<System.DateTime> hvac_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialVacaciones_Restore_Result> UDP_RRHH_tbHistorialVacaciones_Restore(Nullable<int> hvac_Id, Nullable<int> hvac_UsuarioModifica, Nullable<System.DateTime> hvac_FechaModifica)
         {
             var hvac_IdParameter = hvac_Id.HasValue ?
                 new ObjectParameter("hvac_Id", hvac_Id) :
@@ -6499,7 +6499,7 @@
                 new ObjectParameter("hvac_FechaModifica", hvac_FechaModifica) :
                 new ObjectParameter("hvac_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialVacaciones_Restore", hvac_IdParameter, hvac_UsuarioModificaParameter, hvac_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialVacaciones_Restore_Result>("UDP_RRHH_tbHistorialVacaciones_Restore", hvac_IdParameter, hvac_UsuarioModificaParameter, hvac_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbHistrialVacaciones_Periodos_Result> UDP_RRHH_tbHistrialVacaciones_Periodos(Nullable<int> emp_Id)
@@ -6511,7 +6511,7 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistrialVacaciones_Periodos_Result>("UDP_RRHH_tbHistrialVacaciones_Periodos", emp_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Delete(Nullable<int> hor_id, string hor_razonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHorarios_Delete_Result> UDP_RRHH_tbHorarios_Delete(Nullable<int> hor_id, string hor_razonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
             var hor_idParameter = hor_id.HasValue ?
                 new ObjectParameter("hor_id", hor_id) :
@@ -6529,10 +6529,10 @@
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Delete", hor_idParameter, hor_razonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Delete_Result>("UDP_RRHH_tbHorarios_Delete", hor_idParameter, hor_razonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Insert(Nullable<int> jor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_usuarioCrea, Nullable<System.DateTime> hor_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHorarios_Insert_Result> UDP_RRHH_tbHorarios_Insert(Nullable<int> jor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_usuarioCrea, Nullable<System.DateTime> hor_FechaCrea)
         {
             var jor_IdParameter = jor_Id.HasValue ?
                 new ObjectParameter("jor_Id", jor_Id) :
@@ -6558,10 +6558,10 @@
                 new ObjectParameter("hor_FechaCrea", hor_FechaCrea) :
                 new ObjectParameter("hor_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Insert", jor_IdParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_usuarioCreaParameter, hor_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Insert_Result>("UDP_RRHH_tbHorarios_Insert", jor_IdParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_usuarioCreaParameter, hor_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Restore(Nullable<int> hor_Id, string hor_RazonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHorarios_Restore_Result> UDP_RRHH_tbHorarios_Restore(Nullable<int> hor_Id, string hor_RazonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
             var hor_IdParameter = hor_Id.HasValue ?
                 new ObjectParameter("hor_Id", hor_Id) :
@@ -6579,10 +6579,10 @@
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Restore", hor_IdParameter, hor_RazonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Restore_Result>("UDP_RRHH_tbHorarios_Restore", hor_IdParameter, hor_RazonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHorarios_Update_Result> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
             var hor_idParameter = hor_id.HasValue ?
                 new ObjectParameter("hor_id", hor_id) :
@@ -6608,10 +6608,10 @@
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Update", hor_idParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Update_Result>("UDP_RRHH_tbHorarios_Update", hor_idParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomas_Delete(Nullable<int> idi_Id, string idi_razon_Inactivo, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Delete_Result> UDP_RRHH_tbIdiomas_Delete(Nullable<int> idi_Id, string idi_razon_Inactivo, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
         {
             var idi_IdParameter = idi_Id.HasValue ?
                 new ObjectParameter("idi_Id", idi_Id) :
@@ -6629,10 +6629,10 @@
                 new ObjectParameter("idi_FechaModifica", idi_FechaModifica) :
                 new ObjectParameter("idi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomas_Delete", idi_IdParameter, idi_razon_InactivoParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Delete_Result>("UDP_RRHH_tbIdiomas_Delete", idi_IdParameter, idi_razon_InactivoParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomas_Insert(string idi_Descripcion, Nullable<int> idi_UsuarioCrea, Nullable<System.DateTime> idi_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Insert_Result> UDP_RRHH_tbIdiomas_Insert(string idi_Descripcion, Nullable<int> idi_UsuarioCrea, Nullable<System.DateTime> idi_FechaCrea)
         {
             var idi_DescripcionParameter = idi_Descripcion != null ?
                 new ObjectParameter("idi_Descripcion", idi_Descripcion) :
@@ -6646,10 +6646,10 @@
                 new ObjectParameter("idi_FechaCrea", idi_FechaCrea) :
                 new ObjectParameter("idi_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomas_Insert", idi_DescripcionParameter, idi_UsuarioCreaParameter, idi_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Insert_Result>("UDP_RRHH_tbIdiomas_Insert", idi_DescripcionParameter, idi_UsuarioCreaParameter, idi_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomas_Restore(Nullable<int> idi_Id, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Restore_Result> UDP_RRHH_tbIdiomas_Restore(Nullable<int> idi_Id, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
         {
             var idi_IdParameter = idi_Id.HasValue ?
                 new ObjectParameter("idi_Id", idi_Id) :
@@ -6663,10 +6663,10 @@
                 new ObjectParameter("idi_FechaModifica", idi_FechaModifica) :
                 new ObjectParameter("idi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomas_Restore", idi_IdParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Restore_Result>("UDP_RRHH_tbIdiomas_Restore", idi_IdParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomas_Update(Nullable<int> idi_Id, string idi_Descripcion, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Update_Result> UDP_RRHH_tbIdiomas_Update(Nullable<int> idi_Id, string idi_Descripcion, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
         {
             var idi_IdParameter = idi_Id.HasValue ?
                 new ObjectParameter("idi_Id", idi_Id) :
@@ -6684,10 +6684,10 @@
                 new ObjectParameter("idi_FechaModifica", idi_FechaModifica) :
                 new ObjectParameter("idi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomas_Update", idi_IdParameter, idi_DescripcionParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Update_Result>("UDP_RRHH_tbIdiomas_Update", idi_IdParameter, idi_DescripcionParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomasPersona_Inactivar(Nullable<int> idpe_Id, string idpe_RazonInactivo, Nullable<int> idpe_UsuarioModifica, Nullable<System.DateTime> idpe_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomasPersona_Inactivar_Result> UDP_RRHH_tbIdiomasPersona_Inactivar(Nullable<int> idpe_Id, string idpe_RazonInactivo, Nullable<int> idpe_UsuarioModifica, Nullable<System.DateTime> idpe_FechaModifica)
         {
             var idpe_IdParameter = idpe_Id.HasValue ?
                 new ObjectParameter("idpe_Id", idpe_Id) :
@@ -6705,10 +6705,10 @@
                 new ObjectParameter("idpe_FechaModifica", idpe_FechaModifica) :
                 new ObjectParameter("idpe_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomasPersona_Inactivar", idpe_IdParameter, idpe_RazonInactivoParameter, idpe_UsuarioModificaParameter, idpe_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomasPersona_Inactivar_Result>("UDP_RRHH_tbIdiomasPersona_Inactivar", idpe_IdParameter, idpe_RazonInactivoParameter, idpe_UsuarioModificaParameter, idpe_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomasPersona_Insert(Nullable<int> per_Id, Nullable<int> idi_Id, Nullable<int> idpe_UsuarioCrea, Nullable<System.DateTime> idpe_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomasPersona_Insert_Result> UDP_RRHH_tbIdiomasPersona_Insert(Nullable<int> per_Id, Nullable<int> idi_Id, Nullable<int> idpe_UsuarioCrea, Nullable<System.DateTime> idpe_FechaCrea)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -6726,10 +6726,10 @@
                 new ObjectParameter("idpe_FechaCrea", idpe_FechaCrea) :
                 new ObjectParameter("idpe_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomasPersona_Insert", per_IdParameter, idi_IdParameter, idpe_UsuarioCreaParameter, idpe_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomasPersona_Insert_Result>("UDP_RRHH_tbIdiomasPersona_Insert", per_IdParameter, idi_IdParameter, idpe_UsuarioCreaParameter, idpe_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbIdiomasPersona_Restore(Nullable<int> idpe_Id, Nullable<int> idpe_UsuarioModifica, Nullable<System.DateTime> idpe_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbIdiomasPersona_Restore_Result> UDP_RRHH_tbIdiomasPersona_Restore(Nullable<int> idpe_Id, Nullable<int> idpe_UsuarioModifica, Nullable<System.DateTime> idpe_FechaModifica)
         {
             var idpe_IdParameter = idpe_Id.HasValue ?
                 new ObjectParameter("idpe_Id", idpe_Id) :
@@ -6743,10 +6743,10 @@
                 new ObjectParameter("idpe_FechaModifica", idpe_FechaModifica) :
                 new ObjectParameter("idpe_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbIdiomasPersona_Restore", idpe_IdParameter, idpe_UsuarioModificaParameter, idpe_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomasPersona_Restore_Result>("UDP_RRHH_tbIdiomasPersona_Restore", idpe_IdParameter, idpe_UsuarioModificaParameter, idpe_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbJornadas_Delete(Nullable<int> jor_Id, string jor_razon_Inactivo, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbJornadas_Delete_Result> UDP_RRHH_tbJornadas_Delete(Nullable<int> jor_Id, string jor_razon_Inactivo, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
         {
             var jor_IdParameter = jor_Id.HasValue ?
                 new ObjectParameter("jor_Id", jor_Id) :
@@ -6764,10 +6764,10 @@
                 new ObjectParameter("jor_FechaModifica", jor_FechaModifica) :
                 new ObjectParameter("jor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbJornadas_Delete", jor_IdParameter, jor_razon_InactivoParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbJornadas_Delete_Result>("UDP_RRHH_tbJornadas_Delete", jor_IdParameter, jor_razon_InactivoParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbJornadas_Insert(string jor_Descripcion, Nullable<int> jor_UsuarioCrea, Nullable<System.DateTime> jor_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbJornadas_Insert_Result> UDP_RRHH_tbJornadas_Insert(string jor_Descripcion, Nullable<int> jor_UsuarioCrea, Nullable<System.DateTime> jor_FechaCrea)
         {
             var jor_DescripcionParameter = jor_Descripcion != null ?
                 new ObjectParameter("jor_Descripcion", jor_Descripcion) :
@@ -6781,10 +6781,10 @@
                 new ObjectParameter("jor_FechaCrea", jor_FechaCrea) :
                 new ObjectParameter("jor_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbJornadas_Insert", jor_DescripcionParameter, jor_UsuarioCreaParameter, jor_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbJornadas_Insert_Result>("UDP_RRHH_tbJornadas_Insert", jor_DescripcionParameter, jor_UsuarioCreaParameter, jor_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbJornadas_Restore(Nullable<int> jor_Id, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbJornadas_Restore_Result> UDP_RRHH_tbJornadas_Restore(Nullable<int> jor_Id, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
         {
             var jor_IdParameter = jor_Id.HasValue ?
                 new ObjectParameter("jor_Id", jor_Id) :
@@ -6798,10 +6798,10 @@
                 new ObjectParameter("jor_FechaModifica", jor_FechaModifica) :
                 new ObjectParameter("jor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbJornadas_Restore", jor_IdParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbJornadas_Restore_Result>("UDP_RRHH_tbJornadas_Restore", jor_IdParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbJornadas_Update(Nullable<int> jor_Id, string jor_Descripcion, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbJornadas_Update_Result> UDP_RRHH_tbJornadas_Update(Nullable<int> jor_Id, string jor_Descripcion, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
         {
             var jor_IdParameter = jor_Id.HasValue ?
                 new ObjectParameter("jor_Id", jor_Id) :
@@ -6819,10 +6819,10 @@
                 new ObjectParameter("jor_FechaModifica", jor_FechaModifica) :
                 new ObjectParameter("jor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbJornadas_Update", jor_IdParameter, jor_DescripcionParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbJornadas_Update_Result>("UDP_RRHH_tbJornadas_Update", jor_IdParameter, jor_DescripcionParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbNacionalidades_Delete(Nullable<int> nac_id, string nac_razon_Inactivo, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Delete_Result> UDP_RRHH_tbNacionalidades_Delete(Nullable<int> nac_id, string nac_razon_Inactivo, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
         {
             var nac_idParameter = nac_id.HasValue ?
                 new ObjectParameter("nac_id", nac_id) :
@@ -6840,10 +6840,10 @@
                 new ObjectParameter("nac_FechaModifica", nac_FechaModifica) :
                 new ObjectParameter("nac_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbNacionalidades_Delete", nac_idParameter, nac_razon_InactivoParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Delete_Result>("UDP_RRHH_tbNacionalidades_Delete", nac_idParameter, nac_razon_InactivoParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbNacionalidades_Insert(string nac_Descripcion, Nullable<int> nac_UsuarioCrea, Nullable<System.DateTime> nac_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Insert_Result> UDP_RRHH_tbNacionalidades_Insert(string nac_Descripcion, Nullable<int> nac_UsuarioCrea, Nullable<System.DateTime> nac_FechaCrea)
         {
             var nac_DescripcionParameter = nac_Descripcion != null ?
                 new ObjectParameter("nac_Descripcion", nac_Descripcion) :
@@ -6857,10 +6857,10 @@
                 new ObjectParameter("nac_FechaCrea", nac_FechaCrea) :
                 new ObjectParameter("nac_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbNacionalidades_Insert", nac_DescripcionParameter, nac_UsuarioCreaParameter, nac_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Insert_Result>("UDP_RRHH_tbNacionalidades_Insert", nac_DescripcionParameter, nac_UsuarioCreaParameter, nac_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbNacionalidades_Restore(Nullable<int> nac_id, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Restore_Result> UDP_RRHH_tbNacionalidades_Restore(Nullable<int> nac_id, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
         {
             var nac_idParameter = nac_id.HasValue ?
                 new ObjectParameter("nac_id", nac_id) :
@@ -6874,10 +6874,10 @@
                 new ObjectParameter("nac_FechaModifica", nac_FechaModifica) :
                 new ObjectParameter("nac_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbNacionalidades_Restore", nac_idParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Restore_Result>("UDP_RRHH_tbNacionalidades_Restore", nac_idParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbNacionalidades_Update(Nullable<int> nac_Id, string nac_Descripcion, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Update_Result> UDP_RRHH_tbNacionalidades_Update(Nullable<int> nac_Id, string nac_Descripcion, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
         {
             var nac_IdParameter = nac_Id.HasValue ?
                 new ObjectParameter("nac_Id", nac_Id) :
@@ -6895,10 +6895,10 @@
                 new ObjectParameter("nac_FechaModifica", nac_FechaModifica) :
                 new ObjectParameter("nac_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbNacionalidades_Update", nac_IdParameter, nac_DescripcionParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Update_Result>("UDP_RRHH_tbNacionalidades_Update", nac_IdParameter, nac_DescripcionParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbPermisos_Update(Nullable<int> tper_Id, string tper_Descripcion, Nullable<int> tper_UsuarioModifica, Nullable<System.DateTime> tper_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbPermisos_Update_Result> UDP_RRHH_tbPermisos_Update(Nullable<int> tper_Id, string tper_Descripcion, Nullable<int> tper_UsuarioModifica, Nullable<System.DateTime> tper_FechaModifica)
         {
             var tper_IdParameter = tper_Id.HasValue ?
                 new ObjectParameter("tper_Id", tper_Id) :
@@ -6916,10 +6916,10 @@
                 new ObjectParameter("tper_FechaModifica", tper_FechaModifica) :
                 new ObjectParameter("tper_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbPermisos_Update", tper_IdParameter, tper_DescripcionParameter, tper_UsuarioModificaParameter, tper_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPermisos_Update_Result>("UDP_RRHH_tbPermisos_Update", tper_IdParameter, tper_DescripcionParameter, tper_UsuarioModificaParameter, tper_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbPersonas_Habilitar(Nullable<int> per_Id, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Habilitar_Result> UDP_RRHH_tbPersonas_Habilitar(Nullable<int> per_Id, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -6933,10 +6933,10 @@
                 new ObjectParameter("per_FechaModifica", per_FechaModifica) :
                 new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbPersonas_Habilitar", per_IdParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Habilitar_Result>("UDP_RRHH_tbPersonas_Habilitar", per_IdParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbPersonas_Inactivar(Nullable<int> per_Id, string per_RazonInactivo, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Inactivar_Result> UDP_RRHH_tbPersonas_Inactivar(Nullable<int> per_Id, string per_RazonInactivo, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -6954,10 +6954,10 @@
                 new ObjectParameter("per_FechaModifica", per_FechaModifica) :
                 new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbPersonas_Inactivar", per_IdParameter, per_RazonInactivoParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Inactivar_Result>("UDP_RRHH_tbPersonas_Inactivar", per_IdParameter, per_RazonInactivoParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbPersonas_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Insert_Result> UDP_RRHH_tbPersonas_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea)
         {
             var per_IdentidadParameter = per_Identidad != null ?
                 new ObjectParameter("per_Identidad", per_Identidad) :
@@ -7011,10 +7011,10 @@
                 new ObjectParameter("per_FechaCrea", per_FechaCrea) :
                 new ObjectParameter("per_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbPersonas_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Insert_Result>("UDP_RRHH_tbPersonas_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbPersonas_Update(Nullable<int> per_Id, string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Update_Result> UDP_RRHH_tbPersonas_Update(Nullable<int> per_Id, string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -7072,10 +7072,10 @@
                 new ObjectParameter("per_FechaModifica", per_FechaModifica) :
                 new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbPersonas_Update", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Update_Result>("UDP_RRHH_tbPersonas_Update", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRazonSalida_Update(Nullable<int> rsal_Id, string rsal_Descripcion, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRazonSalida_Update_Result> UDP_RRHH_tbRazonSalida_Update(Nullable<int> rsal_Id, string rsal_Descripcion, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
         {
             var rsal_IdParameter = rsal_Id.HasValue ?
                 new ObjectParameter("rsal_Id", rsal_Id) :
@@ -7093,10 +7093,10 @@
                 new ObjectParameter("rsal_FechaModifica", rsal_FechaModifica) :
                 new ObjectParameter("rsal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRazonSalida_Update", rsal_IdParameter, rsal_DescripcionParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRazonSalida_Update_Result>("UDP_RRHH_tbRazonSalida_Update", rsal_IdParameter, rsal_DescripcionParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRazonSalidas_Delete(Nullable<int> rsal_Id, string rsal_razon_Inactivo, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRazonSalidas_Delete_Result> UDP_RRHH_tbRazonSalidas_Delete(Nullable<int> rsal_Id, string rsal_razon_Inactivo, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
         {
             var rsal_IdParameter = rsal_Id.HasValue ?
                 new ObjectParameter("rsal_Id", rsal_Id) :
@@ -7114,10 +7114,10 @@
                 new ObjectParameter("rsal_FechaModifica", rsal_FechaModifica) :
                 new ObjectParameter("rsal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRazonSalidas_Delete", rsal_IdParameter, rsal_razon_InactivoParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRazonSalidas_Delete_Result>("UDP_RRHH_tbRazonSalidas_Delete", rsal_IdParameter, rsal_razon_InactivoParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRazonSalidas_Insert(string rsal_Descripcion, Nullable<int> rsal_Usuariocrea, Nullable<System.DateTime> rsal_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbRazonSalidas_Insert_Result> UDP_RRHH_tbRazonSalidas_Insert(string rsal_Descripcion, Nullable<int> rsal_Usuariocrea, Nullable<System.DateTime> rsal_FechaCrea)
         {
             var rsal_DescripcionParameter = rsal_Descripcion != null ?
                 new ObjectParameter("rsal_Descripcion", rsal_Descripcion) :
@@ -7131,10 +7131,10 @@
                 new ObjectParameter("rsal_FechaCrea", rsal_FechaCrea) :
                 new ObjectParameter("rsal_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRazonSalidas_Insert", rsal_DescripcionParameter, rsal_UsuariocreaParameter, rsal_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRazonSalidas_Insert_Result>("UDP_RRHH_tbRazonSalidas_Insert", rsal_DescripcionParameter, rsal_UsuariocreaParameter, rsal_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRazonSalidas_Restore(Nullable<int> rsal_Id, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRazonSalidas_Restore_Result> UDP_RRHH_tbRazonSalidas_Restore(Nullable<int> rsal_Id, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
         {
             var rsal_IdParameter = rsal_Id.HasValue ?
                 new ObjectParameter("rsal_Id", rsal_Id) :
@@ -7148,10 +7148,10 @@
                 new ObjectParameter("rsal_FechaModifica", rsal_FechaModifica) :
                 new ObjectParameter("rsal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRazonSalidas_Restore", rsal_IdParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRazonSalidas_Restore_Result>("UDP_RRHH_tbRazonSalidas_Restore", rsal_IdParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspeciales_Delete(Nullable<int> resp_id, string resp_razon_Inactivo, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Delete_Result> UDP_RRHH_tbRequerimientosEspeciales_Delete(Nullable<int> resp_id, string resp_razon_Inactivo, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
         {
             var resp_idParameter = resp_id.HasValue ?
                 new ObjectParameter("resp_id", resp_id) :
@@ -7169,10 +7169,10 @@
                 new ObjectParameter("resp_FechaModifica", resp_FechaModifica) :
                 new ObjectParameter("resp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspeciales_Delete", resp_idParameter, resp_razon_InactivoParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Delete_Result>("UDP_RRHH_tbRequerimientosEspeciales_Delete", resp_idParameter, resp_razon_InactivoParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspeciales_Insert(string resp_Descripcion, Nullable<int> resp_UsuarioCrea, Nullable<System.DateTime> resp_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Insert_Result> UDP_RRHH_tbRequerimientosEspeciales_Insert(string resp_Descripcion, Nullable<int> resp_UsuarioCrea, Nullable<System.DateTime> resp_FechaCrea)
         {
             var resp_DescripcionParameter = resp_Descripcion != null ?
                 new ObjectParameter("resp_Descripcion", resp_Descripcion) :
@@ -7186,10 +7186,10 @@
                 new ObjectParameter("resp_FechaCrea", resp_FechaCrea) :
                 new ObjectParameter("resp_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspeciales_Insert", resp_DescripcionParameter, resp_UsuarioCreaParameter, resp_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Insert_Result>("UDP_RRHH_tbRequerimientosEspeciales_Insert", resp_DescripcionParameter, resp_UsuarioCreaParameter, resp_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspeciales_Restore(Nullable<int> resp_id, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Restore_Result> UDP_RRHH_tbRequerimientosEspeciales_Restore(Nullable<int> resp_id, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
         {
             var resp_idParameter = resp_id.HasValue ?
                 new ObjectParameter("resp_id", resp_id) :
@@ -7203,10 +7203,10 @@
                 new ObjectParameter("resp_FechaModifica", resp_FechaModifica) :
                 new ObjectParameter("resp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspeciales_Restore", resp_idParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Restore_Result>("UDP_RRHH_tbRequerimientosEspeciales_Restore", resp_idParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspeciales_Update(Nullable<int> resp_Id, string resp_Descripcion, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Update_Result> UDP_RRHH_tbRequerimientosEspeciales_Update(Nullable<int> resp_Id, string resp_Descripcion, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
         {
             var resp_IdParameter = resp_Id.HasValue ?
                 new ObjectParameter("resp_Id", resp_Id) :
@@ -7224,10 +7224,10 @@
                 new ObjectParameter("resp_FechaModifica", resp_FechaModifica) :
                 new ObjectParameter("resp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspeciales_Update", resp_IdParameter, resp_DescripcionParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Update_Result>("UDP_RRHH_tbRequerimientosEspeciales_Update", resp_IdParameter, resp_DescripcionParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(Nullable<int> rep_Id, string rep_RazonInactivo, Nullable<int> rep_UsuarioModifica, Nullable<System.DateTime> rep_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result> UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(Nullable<int> rep_Id, string rep_RazonInactivo, Nullable<int> rep_UsuarioModifica, Nullable<System.DateTime> rep_FechaModifica)
         {
             var rep_IdParameter = rep_Id.HasValue ?
                 new ObjectParameter("rep_Id", rep_Id) :
@@ -7245,10 +7245,10 @@
                 new ObjectParameter("rep_FechaModifica", rep_FechaModifica) :
                 new ObjectParameter("rep_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar", rep_IdParameter, rep_RazonInactivoParameter, rep_UsuarioModificaParameter, rep_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result>("UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar", rep_IdParameter, rep_RazonInactivoParameter, rep_UsuarioModificaParameter, rep_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(Nullable<int> per_Id, Nullable<int> resp_Id, Nullable<int> rep_UsuarioCrea, Nullable<System.DateTime> rep_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result> UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(Nullable<int> per_Id, Nullable<int> resp_Id, Nullable<int> rep_UsuarioCrea, Nullable<System.DateTime> rep_FechaCrea)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -7266,10 +7266,10 @@
                 new ObjectParameter("rep_FechaCrea", rep_FechaCrea) :
                 new ObjectParameter("rep_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspecialesPersona_Insert", per_IdParameter, resp_IdParameter, rep_UsuarioCreaParameter, rep_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result>("UDP_RRHH_tbRequerimientosEspecialesPersona_Insert", per_IdParameter, resp_IdParameter, rep_UsuarioCreaParameter, rep_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequerimientosEspecialesPersona_Restore(Nullable<int> rep_Id, Nullable<int> rep_UsuarioModifica, Nullable<System.DateTime> rep_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspecialesPersona_Restore_Result> UDP_RRHH_tbRequerimientosEspecialesPersona_Restore(Nullable<int> rep_Id, Nullable<int> rep_UsuarioModifica, Nullable<System.DateTime> rep_FechaModifica)
         {
             var rep_IdParameter = rep_Id.HasValue ?
                 new ObjectParameter("rep_Id", rep_Id) :
@@ -7283,10 +7283,10 @@
                 new ObjectParameter("rep_FechaModifica", rep_FechaModifica) :
                 new ObjectParameter("rep_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequerimientosEspecialesPersona_Restore", rep_IdParameter, rep_UsuarioModificaParameter, rep_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspecialesPersona_Restore_Result>("UDP_RRHH_tbRequerimientosEspecialesPersona_Restore", rep_IdParameter, rep_UsuarioModificaParameter, rep_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequisiciones_Delete(Nullable<int> req_id, string req_razonInactivo, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Delete_Result> UDP_RRHH_tbRequisiciones_Delete(Nullable<int> req_id, string req_razonInactivo, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
         {
             var req_idParameter = req_id.HasValue ?
                 new ObjectParameter("req_id", req_id) :
@@ -7304,10 +7304,10 @@
                 new ObjectParameter("req_FechaModifica", req_FechaModifica) :
                 new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequisiciones_Delete", req_idParameter, req_razonInactivoParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Delete_Result>("UDP_RRHH_tbRequisiciones_Delete", req_idParameter, req_razonInactivoParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequisiciones_Insert(string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, string req_NivelEducativo, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioCrea, Nullable<System.DateTime> req_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Insert_Result> UDP_RRHH_tbRequisiciones_Insert(string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, string req_NivelEducativo, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioCrea, Nullable<System.DateTime> req_FechaCrea)
         {
             var req_ExperienciaParameter = req_Experiencia != null ?
                 new ObjectParameter("req_Experiencia", req_Experiencia) :
@@ -7369,10 +7369,10 @@
                 new ObjectParameter("req_FechaCrea", req_FechaCrea) :
                 new ObjectParameter("req_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequisiciones_Insert", req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_NivelEducativoParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioCreaParameter, req_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Insert_Result>("UDP_RRHH_tbRequisiciones_Insert", req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_NivelEducativoParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioCreaParameter, req_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequisiciones_Restore(Nullable<int> req_id, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Restore_Result> UDP_RRHH_tbRequisiciones_Restore(Nullable<int> req_id, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
         {
             var req_idParameter = req_id.HasValue ?
                 new ObjectParameter("req_id", req_id) :
@@ -7386,10 +7386,10 @@
                 new ObjectParameter("req_FechaModifica", req_FechaModifica) :
                 new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequisiciones_Restore", req_idParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Restore_Result>("UDP_RRHH_tbRequisiciones_Restore", req_idParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbRequisiciones_Update(Nullable<int> req_Id, string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, string req_NivelEducativo, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Update_Result> UDP_RRHH_tbRequisiciones_Update(Nullable<int> req_Id, string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, string req_NivelEducativo, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
         {
             var req_IdParameter = req_Id.HasValue ?
                 new ObjectParameter("req_Id", req_Id) :
@@ -7455,7 +7455,7 @@
                 new ObjectParameter("req_FechaModifica", req_FechaModifica) :
                 new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbRequisiciones_Update", req_IdParameter, req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_NivelEducativoParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Update_Result>("UDP_RRHH_tbRequisiciones_Update", req_IdParameter, req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_NivelEducativoParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbSeleccionCandidatos_Delete(Nullable<int> scan_Id, string scan_RazonInactivo, Nullable<int> scan_UsuarioModifica, Nullable<System.DateTime> scan_FechaModifica)
