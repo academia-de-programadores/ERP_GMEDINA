@@ -32,7 +32,7 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-                foreach (ConteoParametro_Result contarparametro in conteo)
+                foreach (ERP_GMEDINA.Models.ConteoParametro_Result contarparametro in conteo)
                     par = contarparametro.Conteo;
                 foreach (tbParametro id in parametro)
                     idparametro = id.par_Id;
@@ -327,5 +327,15 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+}
+
+namespace ERP_GMEDINA.Models
+{
+    using System;
+
+    public partial class ConteoParametro_Result
+    {
+        public int Conteo { get; set; }
     }
 }

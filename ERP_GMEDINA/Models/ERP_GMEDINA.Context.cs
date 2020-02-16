@@ -1725,13 +1725,13 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ACtualizar_Cantidad_BOdegaDetalle", iDBodegaParameter, iDProductoParameter, cantidadSolicitadadParameter, fechaElaboracionParameter, bodegaDestinoParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> ConteoParametro(Nullable<int> conteo)
+        public virtual ObjectResult<ConteoParametro_Result> ConteoParametro(Nullable<int> conteo)
         {
             var conteoParameter = conteo.HasValue ?
                 new ObjectParameter("conteo", conteo) :
                 new ObjectParameter("conteo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ConteoParametro", conteoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConteoParametro_Result>("ConteoParametro", conteoParameter);
         }
     
         public virtual ObjectResult<crud_tbProductoSelect_Result> crud_tbProductoSelect(string prod_Codigo)

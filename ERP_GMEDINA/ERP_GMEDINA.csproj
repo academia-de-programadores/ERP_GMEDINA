@@ -434,6 +434,9 @@
     <Compile Include="Models\cDepartamento.cs" />
     <Compile Include="Models\cDropDownList.cs" />
     <Compile Include="Models\cMinorista.cs" />
+    <Compile Include="Models\ConteoParametro_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\crud_tbProductoSelect_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
