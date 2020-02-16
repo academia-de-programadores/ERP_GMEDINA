@@ -367,14 +367,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DatasetVent\Reportes.cs">
-      <DependentUpon>Reportes.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DatasetVent\Reportes1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reportes.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Dataset\ArqueoCaja2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4096,17 +4088,6 @@
     </Content>
     <Content Include="Dataset\ArqueoCaja.xsc">
       <DependentUpon>ArqueoCaja.xsd</DependentUpon>
-    </Content>
-    <Content Include="DatasetVent\Reportes.xsc">
-      <DependentUpon>Reportes.xsd</DependentUpon>
-    </Content>
-    <None Include="DatasetVent\Reportes.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Reportes1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="DatasetVent\Reportes.xss">
-      <DependentUpon>Reportes.xsd</DependentUpon>
     </Content>
     <None Include="Dataset\ArqueoCaja.xsd">
       <Generator>MSDataSetGenerator</Generator>

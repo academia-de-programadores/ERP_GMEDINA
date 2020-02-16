@@ -101,7 +101,7 @@ namespace ERP_GMEDINA.Controllers
             decimal TotalCesantiaEncabezado = (decimal)listadoCesantia.Select(x => x.TotalCesantiaPRO).ToList().Sum();
 
             #region Declaración de variables
-            tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
+            //tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
             string response = "bien";
             DateTime FechaActual = Function.DatetimeNow();
             int idEncabezado = 0;
@@ -184,7 +184,7 @@ namespace ERP_GMEDINA.Controllers
                         command.Parameters.AddWithValue("@idCesantiaEncabezado", idEncabezado);
                         command.Parameters.AddWithValue("@codigoPlanillaCesantia", codigoPlanillaCesantia);
                         command.Parameters.AddWithValue("@totalCesantia", TotalCesantiaEncabezado);
-                        command.Parameters.AddWithValue("@usuarioCrea", sesion.usu_Id);
+                        command.Parameters.AddWithValue("@usuarioCrea", Function.GetUser());
                         command.Parameters.AddWithValue("@fechaCrea", FechaActual);
 
                         int result = command.ExecuteNonQuery();
@@ -214,7 +214,7 @@ namespace ERP_GMEDINA.Controllers
                             command.Parameters.AddWithValue("@idEncabezado", idEncabezado);
                             command.Parameters.AddWithValue("@diasPagados", item.DiasPagados);
                             command.Parameters.AddWithValue("@sueldoBruto", item.SueldoBrutoDiario);
-                            command.Parameters.AddWithValue("@usuarioCrea", sesion.usu_Id);
+                            command.Parameters.AddWithValue("@usuarioCrea", Function.GetUser());
                             command.Parameters.AddWithValue("@fechaCrea", FechaActual);
 
                             int result = command.ExecuteNonQuery();
