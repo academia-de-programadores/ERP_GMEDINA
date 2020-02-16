@@ -1363,6 +1363,9 @@
     <Compile Include="Models\UDP_Inv_Consultar_Existencias_Productos_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Inv_SolicitarProducto_ValidacionPorBodega_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Inv_tbInventarioFisico_ListaProductos_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
