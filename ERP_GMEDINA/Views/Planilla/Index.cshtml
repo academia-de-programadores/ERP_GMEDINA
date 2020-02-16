@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+    Layout = "~/Views/Shared/_LayoutBasePlanillas.cshtml";
 
     <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
     int rol_Usuario = ((bool)(HttpContext.Current.Session["UserLoginEsAdmin"] ?? false) ? 1 : 2);
@@ -11,12 +11,6 @@
     <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
 
     ERP_GMEDINA.Models.Helpers General = new ERP_GMEDINA.Models.Helpers();
-
-    if (!General.GetUserRols("Planilla/Index"))
-    {
-        Response.Redirect("~/Login/SinAcceso");
-    }
-
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -145,25 +139,6 @@
         </div>
     </div>
 </div>
-
-@* Modal de confirmación generar planilla *@
-@*<div class="modal fade" id="confirmarGenerarPlanilla" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title">Generar planilla</h4>
-                </div>
-                <div class="modal-body" id="Inactivar">
-                    ¿Está seguro que desea generar planilla?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger " id="btnConfigurarPlanilla">Confirmar</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
 <div class="modal fade" id="ConfigurarGenerarPlanilla" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
