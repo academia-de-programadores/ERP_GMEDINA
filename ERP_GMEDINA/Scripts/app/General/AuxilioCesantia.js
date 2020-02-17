@@ -95,7 +95,7 @@ $(document).on("click", "#btnModalCrear", function () {
         // mostrar modal
         $("#frmCrearAuxCes").modal({ backdrop: 'static', keyboard: false });
     }
-  
+
 });
 
 // validaciones key up create
@@ -439,42 +439,41 @@ $("#closebutton2").click(function () {
 $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", function () {
     //validar informacion del usuario
     var validacionPermiso = userModelState("AuxilioDeCesantias/Details");
-           if (validacionPermiso.status == true)
-           {
-               var ID = $(this).data('id');
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
 
-               $.ajax({
-                   url: "/AuxilioDeCesantias/Details/" + ID,
-                   method: "GET",
-                   dataType: "json",
-                   contentType: "application/json; charset=utf-8",
-                   data: JSON.stringify({ ID: ID })
-               })
-                   .done(function (data) {
-                       if (data) {
-                           var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
-                           var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
-                           $("#aces_IdAuxilioCesantia").html(data[0].aces_IdAuxilioCesantia);
-                           $("#frmDetallesAuxCess #aces_RangoInicioMeses").html(data[0].aces_RangoInicioMeses);
-                           $("#frmDetallesAuxCess #aces_RangoFinMeses").html(data[0].aces_RangoFinMeses);
-                           $("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").html(data[0].aces_DiasAuxilioCesantia);
-                           $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                           $("#aces_FechaCrea").html(FechaCrea);
-                           data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                           $("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
-                           $("#aces_FechaModifica").html(FechaModifica);
-                           $("#frmDetailAuxCes").modal({ backdrop: 'static', keyboard: false });
-                       }
-                       else {
+        $.ajax({
+            url: "/AuxilioDeCesantias/Details/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                if (data) {
+                    var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
+                    var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
+                    $("#aces_IdAuxilioCesantia").html(data[0].aces_IdAuxilioCesantia);
+                    $("#frmDetallesAuxCess #aces_RangoInicioMeses").html(data[0].aces_RangoInicioMeses);
+                    $("#frmDetallesAuxCess #aces_RangoFinMeses").html(data[0].aces_RangoFinMeses);
+                    $("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").html(data[0].aces_DiasAuxilioCesantia);
+                    $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#aces_FechaCrea").html(FechaCrea);
+                    data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
+                    $("#aces_FechaModifica").html(FechaModifica);
+                    $("#frmDetailAuxCes").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
 
-                           iziToast.error({
-                               title: 'Error',
-                               message: 'No se pudo cargar la información, contacte al administrador',
-                           });
-                       }
-                   });
-           }
-   
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
+                    });
+                }
+            });
+    }
+
 });
 
 
@@ -483,66 +482,66 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", functio
 $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalEdit", function () {
     //validar informacion del usuario
     var validacionPermiso = userModelState("AuxilioDeCesantias/Edit");
-    
-    		  if (validacionPermiso.status == true) {
-    		      var ID = $(this).data('id');
 
-    		      // * rango inicio 
-    		      $('#EditAsteriscoRangoInicio').removeClass('text-danger');
+    if (validacionPermiso.status == true) {
+        var ID = $(this).data('id');
 
-    		      // mesanje rango inicio no puede ser menor a cero
-    		      $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
+        // * rango inicio 
+        $('#EditAsteriscoRangoInicio').removeClass('text-danger');
 
-    		      // mesanje rango inicio requerido
-    		      $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
+        // mesanje rango inicio no puede ser menor a cero
+        $("#Editar #validation_EditRangoInicioMenorACero").css('display', 'none');
 
-    		      // * rango final 
-    		      $('#EditAsteriscoRangoFinal').removeClass('text-danger');
+        // mesanje rango inicio requerido
+        $("#Editar #validation_EditRangoInicioRequerido").css('display', 'none');
 
-    		      // mesanje rango final no puede ser menor a cero
-    		      $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
+        // * rango final 
+        $('#EditAsteriscoRangoFinal').removeClass('text-danger');
 
-    		      // mesanje rango final requerido
-    		      $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
+        // mesanje rango final no puede ser menor a cero
+        $("#Editar #validation_EditRangoFinalMenorACero").css('display', 'none');
 
-    		      // mesanje rango final no puede ser menor a rango inicial
-    		      $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
+        // mesanje rango final requerido
+        $("#Editar #validation_EditRangoFinalRequerido").css('display', 'none');
 
-
-    		      // habilitar boton 
-    		      $('#btnUpdateAuxCes').attr('disabled', false);
-
-    		      EliminarID = ID;
-    		      $.ajax({
-    		          url: "/AuxilioDeCesantias/Edit/" + ID,
-    		          method: "GET",
-    		          dataType: "json",
-    		          contentType: "application/json; charset=utf-8",
-    		          data: JSON.stringify({ ID: ID })
-    		      })
-                      .done(function (data) {
-
-                          if (data != 'error') {
-                              var FechaModifica = FechaFormato(data.aces_FechaModifica);
-                              $("#frmEditarAuxCes #aces_IdAuxilioCesantia").val(data.aces_IdAuxilioCesantia);
-                              $("#frmEditarAuxCes #aces_RangoInicioMeses").val(data.aces_RangoInicioMeses);
-                              $("#frmEditarAuxCes #aces_RangoFinMeses").val(data.aces_RangoFinMeses);
-                              $("#frmEditarAuxCes #aces_DiasAuxilioCesantia").val(data.aces_DiasAuxilioCesantia);
-                              $("#aces_UsuarioModifica").val(data.aces_UsuarioModifica);
-                              $("#aces_FechaModifica").val(FechaModifica);
-                              $("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
-                          }
-                          else {
-                              iziToast.error({
-                                  title: 'Error',
-                                  message: 'No se pudo cargar la información, contacte al administrador',
-                              });
-                          }
-                      });
-        }
+        // mesanje rango final no puede ser menor a rango inicial
+        $("#Editar #validation_EditRangoFinalMayoRangoInicio").css('display', 'none');
 
 
-   
+        // habilitar boton 
+        $('#btnUpdateAuxCes').attr('disabled', false);
+
+        EliminarID = ID;
+        $.ajax({
+            url: "/AuxilioDeCesantias/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+
+                if (data != 'error') {
+                    var FechaModifica = FechaFormato(data.aces_FechaModifica);
+                    $("#frmEditarAuxCes #aces_IdAuxilioCesantia").val(data.aces_IdAuxilioCesantia);
+                    $("#frmEditarAuxCes #aces_RangoInicioMeses").val(data.aces_RangoInicioMeses);
+                    $("#frmEditarAuxCes #aces_RangoFinMeses").val(data.aces_RangoFinMeses);
+                    $("#frmEditarAuxCes #aces_DiasAuxilioCesantia").val(data.aces_DiasAuxilioCesantia);
+                    $("#aces_UsuarioModifica").val(data.aces_UsuarioModifica);
+                    $("#aces_FechaModifica").val(FechaModifica);
+                    $("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
+                    });
+                }
+            });
+    }
+
+
+
 });
 
 
@@ -687,7 +686,7 @@ $('#Editar #aces_DiasAuxilioCesantia').keyup(function () {
 
 
 $("#btnUpdateAuxCes").click(function () {
-
+    $("#btnConfirmarEditar").attr('disabled', false);
     $("#btnUpdateAuxCes").attr('disabled', true);
 
     var modalState = true;
@@ -824,7 +823,7 @@ $("#btnUpdateAuxCes").click(function () {
     if (modalState == true) {
 
         $("#frmEditarAuxCes").modal('hide');
-        $("#btnUpdateAuxCes").attr('disabled', false);
+        $("#btnUpdateAuxCes").attr('disabled', true);
         $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
     }
     else {
@@ -835,6 +834,8 @@ $("#btnUpdateAuxCes").click(function () {
 
 // editar 3 ejecutar
 $("#btnConfirmarEditar").click(function () {
+
+    $("#btnConfirmarEditar").attr('disabled', true);
 
     var data = $("#frmEditarAuxCesan").serializeArray();
 
@@ -863,7 +864,6 @@ $("#btnConfirmarEditar").click(function () {
             $("#ConfirmarEdicion").modal('hide');
         }
         else {
-
             $("#ConfirmarEdicion").modal('hide');
             $("#frmEditarAuxCes").modal('hide');
             cargarGridAuxilioCesantia();
@@ -878,6 +878,8 @@ $("#btnConfirmarEditar").click(function () {
 
 // no confirmar edicion
 $("#btnCerrarConfirmarEditar").click(function () {
+    //Deshabilitar boton Editar
+    $("#btnUpdateAuxCes").attr('disabled', false);
 
     // cerrar modal confirmacion
     $("#ConfirmarEdicion").modal('hide');
@@ -903,15 +905,15 @@ $("#btnModalEliminar").click(function () {
 
     if (validacionPermiso.status == true) {
         $('#btnEliminarAuxCes').attr('disabled', false);
-
         $("#frmEditarAuxCes").modal('hide');
         $("#frmEliminarAuxCes").modal({ backdrop: 'static', keyboard: false });
     }
-   
+
 });
 
 // ejecutar inactivar
 $("#btnEliminarAuxCes").click(function () {
+    $("#btnEliminarAuxCes").attr('disabled', true);
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEliminarAuxCes").serializeArray();
     var ID = EliminarID;
@@ -953,14 +955,15 @@ $(document).on("click", "#btnModalActivarAuxCes", function () {
     if (validacionPermiso.status == true) {
         activarID = $(this).data('id');
         $("#frmActivarAuxCes").modal({ backdrop: 'static', keyboard: false });
+        $("#btnActivarAuxCes").attr('disabled', false);
     }
 
-   
+
 });
 
 //activar ejecutar
 $("#btnActivarAuxCes").click(function () {
-
+    $("#btnActivarAuxCes").attr('disabled', true);
     $.ajax({
         url: "/AuxilioDeCesantias/Activar/" + activarID,
         method: "POST",
