@@ -24,7 +24,7 @@ $(document).ready(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $("#tbSucursales").find("#suc_Id").val(obj[0].suc_Id);
                     $("#tbSucursales").find("#empr_Id").val(obj[0].empr_Id);
-                    $("#tbSucursales").find("#bod_Id").val(obj[0].bod_Id);
+                    $("#tbSucursales").find("#bod_id").val(obj[0].bod_Id);
                     $("#tbSucursales").find("#pemi_Id").val(obj[0].pemi_Id);
                     $("#tbSucursales").find("#suc_Descripcion").val(obj[0].suc_Descripcion);
                     $("#tbSucursales").find("#suc_Correo").val(obj[0].suc_Correo);
