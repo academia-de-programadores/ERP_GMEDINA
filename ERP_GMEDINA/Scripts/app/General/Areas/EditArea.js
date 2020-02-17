@@ -10,10 +10,11 @@ var hablilitar = function () {
 function Add(Areas) {
  ChildTable.row.add(
             {
-             Descripcion: Areas.depto_Descripcion.trim(),
-             Cargo: Areas.car_Descripcion.trim(),
-             car_SalarioMinimo: Areas.car_SalarioMinimo,
-             car_SalarioMaximo: Areas.car_SalarioMaximo
+                Descripcion: Areas.depto_Descripcion.trim(),
+                Cargo: Areas.car_Descripcion.trim(),
+                car_SalarioMinimo: Areas.car_SalarioMinimo,
+                car_SalarioMaximo: Areas.car_SalarioMaximo,
+                Accion:"i"
             }
             ).draw();
  $("#FormDepartamentos").find(".required").val("");
@@ -29,13 +30,12 @@ function getJson() {
   //tbDepartamentos.depto_Descripcion = fila.Descripcion;
   //tbDepartamentos.tbCargos.car_Descripcion = fila.Cargo;
   var tbDepartamentos = {
-   depto_Descripcion: fila.Descripcion,
-   tbCargos:
-    {
+      depto_Id: fila.Id,
+      depto_Descripcion: fila.Descripcion,
+      Accion: fila.Accion,  
      car_Descripcion: fila.Cargo,
      car_SalarioMinimo: fila.car_SalarioMinimo,
      car_SalarioMaximo: fila.car_SalarioMaximo
-    }
   };
   list.push(tbDepartamentos);
  }
@@ -124,7 +124,6 @@ $(document).ready(function () {
  llenarChild();
 });
 $("#add").click(function () {
- var area = { cargo: $("#FormNuevo").find("#car_Descripcion").val() };
  var data = $("#FormDepartamentos").serializeArray();
  data = serializarChild(data, "FormDepartamentos");
 
@@ -155,15 +154,9 @@ $("#add").click(function () {
  if (!valid) {
   return null;
  }
- if (data.car_SalarioMinimo > data.car_SalarioMaximo) {
+ if (parseInt(data.car_SalarioMinimo) > parseInt(data.car_SalarioMaximo)) {
   var input = $("#FormDepartamentos #car_SalarioMaximo")[0];
   $(input).focusout();
-  return null;
- }
- if (area.cargo == data.car_Descripcion) {
-  var span = $("#FormDepartamentos").find("#errorcar_Descripcion")[0];
-  span.innerText = "Cargo reservado, por favor cambiar.";
-  $(span).addClass("text-danger");
   return null;
  }
  if (data == null) {
@@ -369,7 +362,7 @@ $.each(forms, function (value, index) {
  var form = this;
  $(form).find("#car_SalarioMaximo").focusout(function () {
   var valor_minimo = $(form).find("#car_SalarioMinimo").val()
-  if (valor_minimo > $(this).val()) {
+  if (parseInt(valor_minimo) > parseInt($(this).val())) {
    var div = $(this).closest("div")[0];
    var span = $(div).find("span")[0];
    span.innerText = "el sueldo máximo debe se mayor ó igual al sueldo minimo "

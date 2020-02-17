@@ -880,7 +880,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Admin").Include(
               "~/Scripts/app/general/Idiomas/Admin.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/Admin").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Areas/Admin").Include(
                 "~/Scripts/app/general/Areas/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(

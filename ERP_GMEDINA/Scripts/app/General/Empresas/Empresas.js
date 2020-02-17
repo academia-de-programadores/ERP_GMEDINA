@@ -159,14 +159,14 @@ $("#btnInactivar").click(function () {
     }
 });
 $("#FormNuevo").on("submit", function (event) {
- var data = $("#FormNuevo").serializeArray();
+    var data = $("#FormNuevo").find("input").not("input[name='empr_RTN']").serializeArray();
  data = serializar(data);
 
  var modalNuevo = $("#img1")[0].src;
  if (modalNuevo != "http://localhost:51144/Empresas") {
   event.preventDefault();
   if (data != null) {
-   var data = new FormData($("#FormNuevo")[0]);
+      var data = new FormData($("#FormNuevo")[0]);
    data.append('file', $('#empr_Logo')[0].files[0]);
    $.ajax({
     url: '/Empresas/Create/',
@@ -196,6 +196,11 @@ $("#FormNuevo").on("submit", function (event) {
  }
 });
 $("#btnActualizar").click(function () {
+    var data = $("#FormEditar").find("input").not("input[name='empr_RTN']").serializeArray();
+    data = serializar(data);
+    if (data==null) {
+        return null;
+    }
  var img = $("#img2")[0].innerText;
  if (ModalEditar != '') {
   event.preventDefault();
