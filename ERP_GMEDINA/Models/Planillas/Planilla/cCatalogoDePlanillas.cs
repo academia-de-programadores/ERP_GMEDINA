@@ -12,9 +12,6 @@ namespace ERP_GMEDINA.Models
     }
 
     [MetadataType(typeof(cUsuario))]
-    public partial class tbUsuario
-    {
-    }
 
     public class cCatalogoDePlanillas
     {

@@ -12,9 +12,9 @@
     List<tbUsuario> User = Login.getUserInformation();
     foreach (tbUsuario Usuario in User)
     {
-        BodegaDestino = Usuario.tbSucursal.tbBodega.bod_Id;
-        Bodegaactual = Usuario.tbSucursal.tbBodega.bod_Nombre;
-        SucursalActual = Usuario.tbSucursal.suc_Descripcion;
+        BodegaDestino = Usuario.tbSucursales.bod_Id;
+        Bodegaactual = Usuario.tbSucursales.tbBodega.bod_Nombre;
+        SucursalActual = Usuario.tbSucursales.suc_Descripcion;
 
 
     }

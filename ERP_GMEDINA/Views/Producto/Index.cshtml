@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbProducto>
 @using ERP_GMEDINA.Models;
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutBaseInventario.cshtml";
@@ -108,8 +109,8 @@
                                              @Html.ActionLink("Detalles", "Details", new { id = item.prod_Codigo }, new { @class = "btn btn-primary btn-xs" }) 
                                              @*@Html.ActionLink("Editar", "Edit", new { id = item.prod_Codigo }, new { @class = "btn btn-white btn-xs" })*@                                       
                                             @{                                             
-
-                                                FuctionIndexP Function = new FuctionIndexP();
+                                                
+                                                Helpers Function = new Helpers();
                                                 List<tbBodegaDetalle> Listado = Function.getProductoInformation(item.prod_Codigo);
                                                 if (Listado.Count > 0 )
                                                 {
