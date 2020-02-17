@@ -209,22 +209,22 @@ $('#btnImprimirExcel').click(function () {
 	if (Procesando == true) {
 		//LANZAR EL MENSAJE DE ERROR
 		iziToast.warning({
-			title: 'Advertencia!',
-			message: 'Continua siendo procesado, por favor espere...',
+			title: '¡Advertencia!',
+			message: 'Continúa siendo procesado, por favor espere...',
 		});
 	}
 	else if (ProcesadoCompleto == false) {
 		//LANZAR EL MENSAJE DE ERROR
 		iziToast.warning({
-			title: 'Advertencia!',
-			message: 'Debe iniciar el proceso antes de generar las cesantias...',
+			title: '¡Advertencia!',
+			message: 'Debe iniciar el proceso antes de generar las cesantías...',
 		});
 	}
 	else if (listadoCesantia.length == 0) {
 		//LANZAR EL MENSAJE DE ERROR
 		iziToast.warning({
-			title: 'Advertencia!',
-			message: 'Debe procesar las cesantias...',
+			title: '¡Advertencia!',
+			message: 'Debe procesar las cesantías...',
 		});
 	}
 	else {
@@ -240,15 +240,15 @@ $("#btnGenerarCesantia").click(function () {
 	if (Procesando == true) {
 		//LANZAR EL MENSAJE DE ERROR
 		iziToast.warning({
-			title: 'Advertencia!',
-			message: 'Continua siendo procesado, por favor espere...',
+			title: '¡Advertencia!',
+			message: 'Continúa siendo procesado, por favor espere...',
 		});
 	}
 	else if (ProcesadoCompleto == false) {
 		//LANZAR EL MENSAJE DE ERROR
 		iziToast.warning({
-			title: 'Advertencia!',
-			message: 'Debe iniciar el proceso antes de generar las cesantias...',
+			title: '¡Advertencia!',
+			message: 'Debe iniciar el proceso antes de generar las cesantías...',
 		});
 	}
 	else {

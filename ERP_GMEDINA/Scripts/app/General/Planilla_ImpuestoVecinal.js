@@ -211,21 +211,21 @@ $('#btnImprimirExcel').click(function () {
         if (Procesando == true) {
             //LANZAR EL MENSAJE DE ERROR
             iziToast.warning({
-                title: 'Advertencia!',
+                title: '¡Advertencia!',
                 message: 'Continua siendo procesado, por favor espere...',
             });
         }
         else if (ProcesadoCompleto == false) {
             //LANZAR EL MENSAJE DE ERROR
             iziToast.warning({
-                title: 'Advertencia!',
+                title: '¡Advertencia!',
                 message: 'Debe iniciar el proceso antes de imprimir la proyección...',
             });
         }
         else if (ListaImpuestoVecinal.length == 0) {
             //LANZAR EL MENSAJE DE ERROR
             iziToast.warning({
-                title: 'Advertencia!',
+                title: '¡Advertencia!',
                 message: 'Debe iniciar el proceso antes de imprimir la proyección...',
             });
         }
@@ -243,14 +243,14 @@ $("#btnGenerarImpuestoVecinal").click(function () {
         if (Procesando == true) {
             //LANZAR EL MENSAJE DE ERROR
             iziToast.warning({
-                title: 'Advertencia!',
+                title: '¡Advertencia!',
                 message: 'Continua siendo procesado, por favor espere...',
             });
         }
         else if (ProcesadoCompleto == false) {
             //LANZAR EL MENSAJE DE ERROR
             iziToast.warning({
-                title: 'Advertencia!',
+                title: '¡Advertencia!',
                 message: 'Debe iniciar el proceso de proyección antes de generar...',
             });
         }
