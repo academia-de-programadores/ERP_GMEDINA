@@ -7,7 +7,7 @@ namespace ERP_GMEDINA.Models
 {
     public class FuctionIndexP
     {
-        ERP_ZORZALEntities db = new ERP_ZORZALEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         public List<tbBodegaDetalle> getProductoInformation(string Producto)
         {

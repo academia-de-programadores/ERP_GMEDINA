@@ -80,8 +80,9 @@ function cargarGridBonos() {
                 //variable boton editar
                 var botonEditar = ListaBonos[i].cb_Activo == true ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarEmpleadoBonos">Editar</button>' : '';
 
+
                 //variable donde está el boton activar
-                var botonActivar = ListaBonos[i].cb_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnActivarEmpleadoBonos">Activar</button>' : '' : '';
+                var botonActivar = ListaBonos[i].cb_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" style="margin right:3px;" class="btn btn-default btn-xs"  id="btnActivarEmpleadoBonos">Activar</button>' : '' : '';
 
                 //VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
                 var Check = "";
@@ -645,14 +646,14 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({ ID })
-                        }).done(function (data) {
-                            //-----------------------------------------NO ENTRA EN ESTE each
-                            $.each(data, function (i, iter) {
-                                if (iter.Id == SelectedIdCatIngreso) {
-                                    $("#Detalles #cin_IdIngreso").html(iter.Descripcion);
-                                }
-                            });
+                    }).done(function (data) {
+                        //-----------------------------------------NO ENTRA EN ESTE each
+                        $.each(data, function (i, iter) {
+                            if (iter.Id == SelectedIdCatIngreso) {
+                                $("#Detalles #cin_IdIngreso").html(iter.Descripcion);
+                            }
                         });
+                    });
                     //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                     $.ajax({
                         url: "/EmpleadoBonos/EditGetDDLEmpleado",
@@ -822,3 +823,7 @@ function FormatearMonto(StringValue) {
     //RETORNAR MONTO FORMATEADO
     return MontoFormateado;
 }
+
+
+
+

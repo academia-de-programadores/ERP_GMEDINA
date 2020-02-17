@@ -518,6 +518,7 @@
     <Compile Include="Models\Inventario\Configuracion\Empleado.cs" />
     <Compile Include="Models\Inventario\Configuracion\Parametros.cs" />
     <Compile Include="Models\Inventario\Configuracion\proveedor.cs" />
+    <Compile Include="Models\FuctionIndexP.cs" />
     <Compile Include="Models\Inventario\Inventario\Bodega.cs" />
     <Compile Include="Models\Inventario\Inventario\BodegaDetalle.cs" />
     <Compile Include="Models\Inventario\Inventario\Box.cs" />

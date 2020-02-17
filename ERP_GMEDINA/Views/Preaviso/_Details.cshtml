@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsPeriodo" }))
 {
-    <div class="ibox-content">
+    <div class="ibox-content" style="border-top-color: #fff">
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
@@ -75,6 +75,9 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
