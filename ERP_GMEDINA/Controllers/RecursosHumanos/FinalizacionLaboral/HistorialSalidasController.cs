@@ -115,8 +115,9 @@ namespace ERP_GMEDINA.Controllers
                     TipoSalidas.AddRange(db.tbTipoSalidas
                     .Select(tabla => new {
                         Id = tabla.tsal_Id,
-                        Descripcion = tabla.tsal_Descripcion
-                    })
+                        Descripcion = tabla.tsal_Descripcion,
+                        tsal_Estado = tabla.tsal_Estado
+                    }).Where(x=>x.tsal_Estado == true)
                     .ToList());
                 }
                 catch
@@ -145,8 +146,9 @@ namespace ERP_GMEDINA.Controllers
                     RazonSalidas.AddRange(db.tbRazonSalidas
                     .Select(tabla => new {
                         Id = tabla.rsal_Id,
-                        Descripcion = tabla.rsal_Descripcion
-                    })
+                        Descripcion = tabla.rsal_Descripcion,
+                        rsal_Estado  = tabla.rsal_Estado
+                    }).Where(x=> x.rsal_Estado == true)
                     .ToList());
                 }
                 catch(Exception ex)
@@ -174,9 +176,10 @@ namespace ERP_GMEDINA.Controllers
                     });
                     Empleados.AddRange(db.V_Empleados
                     .Select(tabla => new {
-                        Id = tabla.emp_Id,
-                        Descripcion = tabla.per_NombreCompleto
-                    })
+                        Id = tabla.emp_Id
+                        ,Descripcion = tabla.per_NombreCompleto
+                        ,emp_Estado = tabla.emp_Estado
+                    }).Where(x=>x.emp_Estado == true)
                     .ToList());
                 }
                 catch (Exception ex)

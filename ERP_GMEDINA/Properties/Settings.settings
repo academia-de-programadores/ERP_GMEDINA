@@ -5,10 +5,10 @@
     <Setting Name="ERP_GMEDINAConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=tcp:academiaprogramadores2019.database.windows.net,1433;Initial Catalog=ERP_GMEDINA;Persist Security Info=True;User ID=AHMsps;Password=Academy2018;MultipleActiveResultSets=True;Application Name=EntityFramework&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=ahmdb.canbbevbcgld.us-west-2.rds.amazonaws.com;Initial Catalog=ERP_GMEDINA2;Persist Security Info=True;User ID=ahm;Password=AHm%B1DDs9;MultipleActiveResultSets=True;Application Name=EntityFramework&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=tcp:academiaprogramadores2019.database.windows.net,1433;Initial Catalog=ERP_GMEDINA;Persist Security Info=True;User ID=AHMsps;Password=Academy2018;MultipleActiveResultSets=True;Application Name=EntityFramework</Value>
+      <Value Profile="(Default)">Data Source=ahmdb.canbbevbcgld.us-west-2.rds.amazonaws.com;Initial Catalog=ERP_GMEDINA2;Persist Security Info=True;User ID=ahm;Password=AHm%B1DDs9;MultipleActiveResultSets=True;Application Name=EntityFramework</Value>
     </Setting>
   </Settings>
 </SettingsFile>
