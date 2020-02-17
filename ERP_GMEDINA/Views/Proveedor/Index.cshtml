@@ -24,7 +24,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table  class="table table-striped table-responsive table-bordered table-hover" style="width:100%" id="dataTable">
+                    <table class="table table-striped table-responsive table-bordered table-hover" style="width:100%" id="dataTable">
                         <thead>
                             <tr>
                                 <th>
@@ -39,7 +39,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.prov_Direccion)
                                 </th>
-                               
+
                                 <th>
                                     @Html.DisplayNameFor(model => model.prov_Telefono)
                                 </th>
@@ -67,7 +67,7 @@
 
                                         @Html.DisplayFor(modelItem => item.prov_Direccion)
                                     </td>
-                                   
+
                                     <td>
                                         @Html.DisplayFor(modelItem => item.prov_Telefono)
                                     </td>
@@ -88,30 +88,31 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#dataTable').DataTable({
-
-        "searching": true,
-        "oLanguage": {
-            "oPaginate": {
-                "sNext": "Siguiente",
-                "sPrevious": "Anterior",
-            },
-            "sZeroRecords": "No se encontraron resultados",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sEmptyTable": "No hay registros",
-            "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-            "sSearch": "Buscar",
-            "sLengthMenu": "Mostrar _MENU_Registros Por Página",
-            "sInfo": "Mostrando _START_ a _END_ Entradas"
 
 
-        },
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+
+                "searching": true,
+                "oLanguage": {
+                    "oPaginate": {
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior",
+                    },
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sEmptyTable": "No hay registros",
+                    "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+                    "sSearch": "Buscar",
+                    "sLengthMenu": "Mostrar _MENU_Registros Por Página",
+                    "sInfo": "Mostrando _START_ a _END_ Entradas"
+
+
+                },
 
             });
-    });
-</script>
+        });
+    </script>
 
 
