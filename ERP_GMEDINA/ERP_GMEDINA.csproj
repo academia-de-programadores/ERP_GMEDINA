@@ -5221,11 +5221,11 @@
     <Content Include="Views\TipoEntrada\Details.cshtml" />
     <Content Include="Views\TipoEntrada\Edit.cshtml" />
     <Content Include="Views\TipoEntrada\Index.cshtml" />
-    <Content Include="Views\TipoSalida-1\Create.cshtml" />
-    <Content Include="Views\TipoSalida-1\Delete.cshtml" />
-    <Content Include="Views\TipoSalida-1\Details.cshtml" />
-    <Content Include="Views\TipoSalida-1\Edit.cshtml" />
-    <Content Include="Views\TipoSalida-1\Index.cshtml" />
+    <Content Include="Views\TipoSalida\Create.cshtml" />
+    <Content Include="Views\TipoSalida\Delete.cshtml" />
+    <Content Include="Views\TipoSalida\Details.cshtml" />
+    <Content Include="Views\TipoSalida\Edit.cshtml" />
+    <Content Include="Views\TipoSalida\Index.cshtml" />
     <Content Include="Views\UnidadMedida\Create.cshtml" />
     <Content Include="Views\UnidadMedida\Delete.cshtml" />
     <Content Include="Views\UnidadMedida\Details.cshtml" />
