@@ -45,7 +45,7 @@
                                 <label class="control-label col-md-2 AsteriscoRojo">Fecha Inicio Vigencia</label>
                            
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.listp_FechaInicioVigencia, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "FIV", } })
+                                    @Html.EditorFor(model => model.listp_FechaInicioVigencia, "{yy/mm/0:dd}", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "FIV", } })
                                     @Html.ValidationMessageFor(model => model.listp_FechaInicioVigencia)
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2 AsteriscoRojo">Fecha Final Vigencia</label>                            
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.listp_FechaFinalVigencia, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @autocomplete="off",@class = "form-control", @id = "FFV" } })
+                                    @Html.EditorFor(model => model.listp_FechaFinalVigencia, "{yy/mm/0:dd}", new { htmlAttributes = new { @autocomplete="off",@class = "form-control", @id = "FFV" } })
                                     @Html.ValidationMessageFor(model => model.listp_FechaFinalVigencia)
                                 </div>
                             </div>
@@ -202,8 +202,6 @@ $(document).keydown(function (e) {
 
     });
     $(document).ready(function () {
-
-
         //VALIDAR SOLO LETRAS
         $('#listp_Prioridad').on('input', function (e) {
             if (!/^[0-9/ a-z-áéíóúüñ]*$/i.test(this.value)) {

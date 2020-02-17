@@ -23,7 +23,6 @@ $(document).keydown(function (e) {
             console.log(URLactual)
             window.location = URLactual;
         }
-
     }
     //Cancelar Pantalla
     if ((e.key == 'l' || e.key == 'L') && (e.ctrlKey || e.metaKey)) {
@@ -46,9 +45,6 @@ $(document).keydown(function (e) {
             URLactual = ultimo1 + "/Edit" + "/" + id;
             window.location = URLactual;
         }
-
     }
-
-
     return true;
 });
