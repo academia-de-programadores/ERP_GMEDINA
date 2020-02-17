@@ -549,7 +549,7 @@ namespace ERP_GMEDINA.Controllers
                             if (MensajeError == "-1")
                             {
                                 ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                                return PartialView("_AprobarSolicitudCredito");
+                                return RedirectToAction("Edit");
                             }
                             else
                             {
@@ -560,7 +560,7 @@ namespace ERP_GMEDINA.Controllers
                         {
                             Ex.Message.ToString();
                             ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                            return PartialView("_AprobarSolicitudCredito", EditSolicitudCredito);
+                            return RedirectToAction("Edit");
                         }
                         ///////////////////////////////CODIGO
                     }
