@@ -221,7 +221,7 @@ function ValidarCampos(empId, Aporte, AFP) {
             }
     }
     if (empId != "-1") {
-        if (empId == null || emp_Id == "") {
+        if (empId == null || empId == "" || empId == 0) {
             estabueno = false;
             $("#Crear #validatione1d, #Editar #e_validatione1d").css("display", "");
             $("#Crear #Asterisco1, #Editar #e_Asterisco1").css("color", "red");
@@ -445,12 +445,17 @@ function OcultarValidacionesEditar() {
 }
 
 $("#btnEditDeduccionAFP").click(function () {
-    var vale3 = $("#Editar #dafp_AporteLps").val();
+    let vale1 = $("#Editar #emp_Id").val();
+    let vale2 = $("#Editar #dafp_AporteLps").val();
+    let vale3 = $("#Editar #afp_Id").val();
 
-    if (ValidarCampos('-1', vale3, '-1')) {
+    if (ValidarCampos(vale1, vale2, vale3)) {
         $("#EditarDeduccionAFP").modal('hide');
         document.getElementById("btnEditDeduccionAFPConfirmar").disabled = false;
         $("#EditarDeduccionAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+    }
+    else {
+        ValidarCampos(vale1, vale2, vale3);
     }
 
     $("#EditarDeduccionAFP").submit(function (e) {
@@ -463,15 +468,13 @@ $(document).on("click", "#btnRegresar", function () {
     var empId = $("#Editar #emp_Id").val();
     var Aporte = $("#Editar #dafp_AporteLps").val();
     var AFP = $("#Editar #afp_Id").val();
-    if (ValidarCampos(empId, Aporte, AFP)) {
-        $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-        $("#EditarDeduccionAFPConfirmacion").modal('hide');
-    }
+    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("#EditarDeduccionAFPConfirmacion").modal('hide');
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionAFPConfirmar").click(function () {
-    $("btnEditDeduccionAFPConfirmar").disabled = true;
+    document.getElementById("btnEditDeduccionAFPConfirmar").disabled = true;
 
     if ($('#Editar #dafp_DeducirISREdit').is(':checked')) {
         dafp_DeducirISREdit = true;
@@ -502,7 +505,7 @@ $("#btnEditDeduccionAFPConfirmar").click(function () {
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarDeduccionAFPConfirmacion").modal('hide');
             $("#EditarDeduccionAFP").modal('hide');
-            $("btnEditDeduccionAFPConfirmar").disabled = true;
+            document.getElementById("btnEditDeduccionAFPConfirmar").disabled = true;
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //Mensaje de exito de la edicion
@@ -519,6 +522,7 @@ $("#btnEditDeduccionAFPConfirmar").click(function () {
                 title: 'Error',
                 message: 'No se editó el registro, contacte al administrador',
             });
+            document.getElementById("btnEditDeduccionAFPConfirmar").disabled = false;
         }
     });
 
@@ -564,8 +568,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     var FechaCrea = FechaFormato(data[0].dafp_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].dafp_FechaModifica);
                     $("#Detalles #dafp_Id").html(data[0].dafp_Id);
-                    $("#Detalles #emp_Id").html(data[0].emp_Id);
-                    $("#Detalles #per_Nombres + #per_Apellidos").html(data[0].per_Nombres + data[0].per_Apellidos);
+                    $("#Detalles #emp_Id").html(data[0].per_Nombres + ' ' + data[0].per_Apellidos);
                     $("#Detalles #emp_CuentaBancaria").html(data[0].emp_CuentaBancaria);
                     $("#Detalles #dafp_AporteLps").html(data[0].dafp_AporteLps);
                     $("#Detalles #afp_Id").html(data[0].afp_Id);
