@@ -432,7 +432,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 x.arqde_Id,
                 x.tbDenominacion.tbMoneda.mnda_Abreviatura,
-                TipoDenominacion = x.tbDenominacion.deno_Descripcion,
+                TipoDenominacion = x.tbDenominacion.deno_Tipo == 1 ? "Billete" : "Moneda",
                 x.tbDenominacion.deno_Descripcion,
                 x.tbDenominacion.deno_valor,
                 x.arqde_CantidadDenominacion
