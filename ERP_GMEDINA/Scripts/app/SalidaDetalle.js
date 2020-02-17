@@ -25,8 +25,7 @@ function RejectUnload() {
 
 }
 
-
-$(function () {
+function FechaSalidaRdy() {
     $("#sal_FechaElaboracion").datepicker({
         dateFormat: 'dd-mm-yy',
         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -37,7 +36,7 @@ $(function () {
         changeMonth: true,
         changeYear: true
     }).datepicker("setDate", new Date()), { showAnim: "fade-in" };
-});
+};
 //maxDate: '0',
 
 function validateMyForm() {
@@ -399,6 +398,7 @@ $(document).ready(function () {
     $('#sal_RazonDevolucion').bind("cut copy paste", function (e) {
         e.preventDefault();
     });
+    FechaSalidaRdy();
 });
 function check(e) {
     tecla = (document.all) ? e.keyCode : e.which;

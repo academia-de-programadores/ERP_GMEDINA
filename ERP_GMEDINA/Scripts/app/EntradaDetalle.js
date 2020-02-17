@@ -901,13 +901,13 @@ function GetRTNproveedor() {
         if (data.length > 0) {
             $('#Rtn').empty();
             $.each(data, function (key, val) {
-                $('#Rtn').val(val.prov_RTN);
+                $('#Rtn').val(val);
             });
             $('#Rtn').trigger("chosen:updated");
         }
         else {
             $('#Rtn').empty();
-            $('#Rtn').val(val.prov_RTN);
+            $('#Rtn').val(val);
             console.log(val.prov_Id);
         }
     });

@@ -64,7 +64,7 @@
                                     </div>
                                     @Html.LabelFor(model => model.ent_FechaElaboracion, new { @class = "control-label col-md-2 , required" })
                                     <div class="col-md-4">
-                                        @Html.EditorFor(model => model.ent_FechaElaboracion, "{0:MM-dd-yyyy}", new { htmlAttributes = new { @class = "form-control", @id = "FechaElaboracion", @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.ent_FechaElaboracion, "{0:MM-dd-yyyy}", new { htmlAttributes = new { @class = "form-control", @id = "FechaElaboracion", @type="date"} })
                                         <div class="col-md-10">
                                             <p style="color:red">@Html.ValidationMessageFor(model => model.ent_FechaElaboracion)</p>
                                         </div>
