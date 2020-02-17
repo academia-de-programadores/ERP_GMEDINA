@@ -49,7 +49,7 @@ namespace ERP_GMEDINA.Controllers
                         while (reader.Read())
                         {
                             UDV_Vent_Busqueda_Clientes tbclientes = new UDV_Vent_Busqueda_Clientes();
-                            if (!reader.IsDBNull(reader.GetOrdinal("clte_Id")))
+                                if (!reader.IsDBNull(reader.GetOrdinal("clte_Id")))
                                 tbclientes.clte_Id = Convert.ToInt16(reader["clte_Id"]);
 
                             if (!reader.IsDBNull(reader.GetOrdinal("tpi_Id")))
