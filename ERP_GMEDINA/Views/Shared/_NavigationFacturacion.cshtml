@@ -205,12 +205,12 @@
             <li>
                 <a href="#"><i class="fa fa-cogs fa-fw"></i><span class="nav-label">Configuración</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    @if (Login.GetUserRols("Sucursal/Index"))
+                    @*@if (Login.GetUserRols("Sucursal/Index"))
                     {
                         <li class="@Html.IsSelected(action: "Index")">
                             <a href="@Url.Action("Index", "Sucursal")"><i class="fa fa-ticket fa-fw"></i>Sucursal<span class="nav-label"></span> </a>
                         </li>
-                    }
+                    }*@
                     @if (Login.GetUserRols("Caja/Index"))
                     {
                         <li class="@Html.IsSelected(action: "Index")">
