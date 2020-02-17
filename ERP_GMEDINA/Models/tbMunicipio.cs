@@ -96,7 +96,6 @@ namespace ERP_GMEDINA.Models
             this.tbTechoImpuestoVecinal = new HashSet<tbTechoImpuestoVecinal>();
             this.tbBodega = new HashSet<tbBodega>();
             this.tbSucursales = new HashSet<tbSucursales>();
-            this.tbSucursal = new HashSet<tbSucursal>();
             this.tbCliente = new HashSet<tbCliente>();
         }
     
@@ -285,8 +284,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbBodega> tbBodega { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSucursales> tbSucursales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSucursal> tbSucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbCliente> tbCliente { get; set; }
     }

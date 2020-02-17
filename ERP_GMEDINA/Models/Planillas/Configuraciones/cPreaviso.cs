@@ -20,14 +20,14 @@ namespace ERP_GMEDINA.Models
        
         [Display(Name = "Rango de Inicio del Mes")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
-        [Range(0, 36, ErrorMessage = "El rango inicio meses debe estar entre {1} y {2}")]
+        [Range(0, 100, ErrorMessage = "El rango inicio meses debe estar entre {1} y {2}")]
         public string prea_RangoInicioMeses { get; set; }
 
         
       
         [Display(Name = "Rango de Fin de Mes")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
-        [Range(1, 36, ErrorMessage = "El rango fin meses debe estar entre {1} y {2}")]
+        [Range(0, 999999999, ErrorMessage = "El rango inicio meses debe estar entre {1} y {2}")]
         public string prea_RangoFinMeses { get; set; }
 
         [RegularExpression("^[0-9]*$", ErrorMessage = "Solo se permiten caracteres entre 0 y 9")]

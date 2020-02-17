@@ -164,7 +164,7 @@ namespace ERP_GMEDINA.Controllers
 				clte_Nombres = s.clte_Nombres + " " + s.clte_Apellidos,
 				clte_EsActivo = s.clte_EsActivo
 			}).Where(x => x.clte_EsActivo == true).ToList();
-			var listSucursal = db.tbSucursal.ToList();
+			var listSucursal = db.tbSucursales.ToList();
 			var listCajeros = db.tbUsuario.Select(s => new
 			{
 				usu_Id = s.usu_Id,

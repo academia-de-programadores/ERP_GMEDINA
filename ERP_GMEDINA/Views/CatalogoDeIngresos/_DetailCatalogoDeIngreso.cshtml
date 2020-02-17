@@ -64,19 +64,21 @@
                                 <tr>
                                     <td>Creado</td>
                                     @Html.HiddenFor(model => model.cin_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                    <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                    <td>@Html.EditorFor(model => model.cin_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                    <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    <td><span id="cin_FechaCrea">@Html.DisplayFor(model => model.cin_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                                 </tr>
                                 <tr>
                                     <td>Modificado</td>
                                     @Html.HiddenFor(model => model.cin_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                    <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                    <td>@Html.EditorFor(model => model.cin_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                    <td><span id="tbUsuario1_usu_NombreUsuario">@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    <td><span id="cin_FechaModifica">@Html.EditorFor(model => model.cin_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="footer">
+                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
 }

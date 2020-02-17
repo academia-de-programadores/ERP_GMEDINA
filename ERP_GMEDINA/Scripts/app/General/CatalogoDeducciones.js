@@ -194,7 +194,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
     //FORMATEAR A DECIMAL
     MontoporcentajeEmpFormateado = parseFloat(MontoporcentajeEmpFormateado);
 
-    if (ValidarCrearyEditar(cde_DescripcionDeduccionA, tde_IdTipoDeduc, MontoporcentajecolFormateado, MontoporcentajeEmpFormateado))
+    if (ValidarCrear(cde_DescripcionDeduccionA, tde_IdTipoDeduc, MontoporcentajecolFormateado, MontoporcentajeEmpFormateado))
     {
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
@@ -228,7 +228,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
         });
     }
     else {
-        ValidarCrearyEditar(cde_DescripcionDeduccionA, tde_IdTipoDeduc, MontoporcentajecolFormateado, MontoporcentajeEmpFormateado);
+        ValidarCrear(cde_DescripcionDeduccionA, tde_IdTipoDeduc, MontoporcentajecolFormateado, MontoporcentajeEmpFormateado);
     }
 });
 
@@ -347,51 +347,16 @@ $('#btnUpdateDeduccion').click(function () {
     var cde_DescripcionDeduccionE2 = $("#Editar #cde_DescripcionDeduccion").val();
     var cde_PorcentajeColaboradorE2 = $("#Editar #cde_PorcentajeColaborador").val();
     var cde_PorcentajeEmpresaE2 = $("#Editar #cde_PorcentajeEmpresa").val();
-    var CorrectoEdit = true;
-    var CorrectoEdit2 = true;
-    var CorrectoEdit3 = true;
 
-    if (cde_DescripcionDeduccionE2 == "") {
-        $("#Editar #validareditar1").css("display", "block");
-        $("#Editar #AsteriscoDescripcionDeduEdit").addClass("text-danger");
-        CorrectoEdit = false;
-    } else {
-        $("#Editar #validareditar1").css("display", "none");
-        $("#Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
-    }
-
-    if (cde_PorcentajeColaboradorE2 == "" || cde_PorcentajeColaboradorE2 == null) {
-        $("#Editar #validareditar2").html('Campo Porcentaje Colaborador requerido.');
-        $("#Editar #validareditar2").css("display", "block");
-        $("#Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
-        CorrectoEdit2 = false;
-    } else {
-        $("#Editar #validareditar2").html('');
-        $("#Editar #validareditar2").css("display", "none");
-        $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
-
-        if (cde_PorcentajeColaboradorE2 < "0" || cde_PorcentajeColaboradorE2 < 0) {
-            $("#Editar #validareditar2").html('Campo Porcentaje Colaborador no puede ser menor a cero.');
-            $("#Editar #validareditar2").css("display", "block");
-            $("#Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
-            CorrectoEdit3 = false;
-        } else {
-            $("#Editar #validareditar2").html('');
-            $("#Editar #validareditar2").css("display", "none");
-            $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
-        }
-    }
-
-    if (CorrectoEdit == false || CorrectoEdit2 == false || CorrectoEdit3 == false) {
-        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-        $('#btnUpdateDeduccion2').attr('disabled', false);
-    } else {
+    if (ValidarEditar(cde_DescripcionDeduccionE2, cde_PorcentajeColaboradorE2, cde_PorcentajeEmpresaE2)) {
         $("#EditarCatalogoDeducciones").modal('hide');
         $("#EditarCatalogoDeduccionesConfirmacion").modal({
             backdrop: 'static',
             keyboard: false
         });
         $('#btnUpdateDeduccion2').attr('disabled', false);
+    } else {
+        ValidarEditar(cde_DescripcionDeduccionE2, cde_PorcentajeColaboradorE2, cde_PorcentajeEmpresaE2);
     }
 });
 
@@ -637,14 +602,9 @@ $("#btnActivarRegistroDeduccion").click(function () {
     });
 });
 
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
 
 //Region Keyup
-function ValidarCrearyEditar(Descripcion, tde_IdTipoDedu, PorcentajeColaborador, PorcentajeEmpresa) {
+function ValidarCrear(Descripcion, tde_IdTipoDedu, PorcentajeColaborador, PorcentajeEmpresa) {
     hayAlgo = true;
 
     //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
@@ -707,14 +667,14 @@ function ValidarCrearyEditar(Descripcion, tde_IdTipoDedu, PorcentajeColaborador,
     }
 
     if (PorcentajeColaborador != '-1') {
-        if (MontoporcentajecolFormateado == "" || MontoporcentajecolFormateado == null || MontoporcentajecolFormateado == undefined || MontoporcentajecolFormateado == 0 || MontoporcentajecolFormateado == "0" || MontoporcentajecolFormateado == 0.0 || MontoporcentajecolFormateado == "0.0") {
+        if (MontoporcentajecolFormateado == "" || MontoporcentajecolFormateado == null || MontoporcentajecolFormateado == undefined || isNaN(MontoporcentajecolFormateado)) {
             $("#Crear #Validation_descipcion3AR").css("display", "block");
             $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
             hayAlgo = false;
         } else {
             $("#Crear #Validation_descipcion3AR").css("display", "none");
             $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
-            if (MontoporcentajecolFormateado <= 0 || MontoporcentajecolFormateado <= "0") {
+            if (MontoporcentajecolFormateado < 0 || MontoporcentajecolFormateado < 0.00) {
                 $("#Crear #Validation_descipcion3AR").html('Campo Porcentaje Colaborador no puede ser menor a cero.');
                 $("#Crear #Validation_descipcion3AR").css("display", "block");
                 $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
@@ -728,7 +688,7 @@ function ValidarCrearyEditar(Descripcion, tde_IdTipoDedu, PorcentajeColaborador,
     }
 
     if (PorcentajeEmpresa != '-1') {
-        if (MontoporcentajeEmpFormateado == "" || MontoporcentajeEmpFormateado == null) {
+        if (MontoporcentajeEmpFormateado == "" || MontoporcentajeEmpFormateado == null || MontoporcentajeEmpFormateado == undefined || isNaN(MontoporcentajeEmpFormateado)) {
             $("#Crear #Validation_descipcion4AR").html('Campo Porcentaje Empresa requerido.');
             $("#Crear #Validation_descipcion4AR").css("display", "block");
             $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
@@ -737,6 +697,17 @@ function ValidarCrearyEditar(Descripcion, tde_IdTipoDedu, PorcentajeColaborador,
             $("#Crear #Validation_descipcion4AR").html('');
             $("#Crear #Validation_descipcion4AR").css("display", "none");
             $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
+            if (MontoporcentajeEmpFormateado < 0 || MontoporcentajeEmpFormateado < 0.00) {
+                $("#Crear #Validation_descipcion4AR").html('Campo Porcentaje Empresa no puede ser menor a cero.');
+                $("#Crear #Validation_descipcion4AR").css("display", "block");
+                $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
+                hayAlgo = false;
+            }
+            else {
+                $("#Crear #Validation_descipcion4AR").html('');
+                $("#Crear #Validation_descipcion4AR").css("display", "none");
+                $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
+            }
         }
     }
 
@@ -745,104 +716,101 @@ function ValidarCrearyEditar(Descripcion, tde_IdTipoDedu, PorcentajeColaborador,
 
 
 
-//function ValidarCrearyEditar(Descripcion, tde_IdTipoDedu, valor, valor2) {
-//    hayAlgo = true;
+function ValidarEditar(Descripcion, PorcentajeColaborador, PorcentajeEmpresa) {
+    hayAlgo = true;
 
-//    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-//    var indices = $("#Crear #cde_PorcentajeColaborador").val().split(",");
-//    //VARIABLE CONTENEDORA DEL MONTO
-//    var MontoporcentajecolFormateado = "";
-//    //ITERAR LOS INDICES DEL ARRAY MONTO
-//    for (var i = 0; i < indices.length; i++) {
-//        //SETEAR LA VARIABLE DE MONTO
-//        MontoporcentajecolFormateado += indices[i];
-//    }
-//    //FORMATEAR A DECIMAL
-//    MontoporcentajecolFormateado = parseFloat(MontoporcentajecolFormateado);
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Editar #cde_PorcentajeColaborador").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoporcentajecolFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoporcentajecolFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoporcentajecolFormateado = parseFloat(MontoporcentajecolFormateado);
 
 
-//    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
-//    var indices = $("#Crear #cde_PorcentajeEmpresa").val().split(",");
-//    //VARIABLE CONTENEDORA DEL MONTO
-//    var MontoporcentajeEmpFormateado = "";
-//    //ITERAR LOS INDICES DEL ARRAY MONTO
-//    for (var i = 0; i < indices.length; i++) {
-//        //SETEAR LA VARIABLE DE MONTO
-//        MontoporcentajeEmpFormateado += indices[i];
-//    }
-//    //FORMATEAR A DECIMAL
-//    MontoporcentajeEmpFormateado = parseFloat(MontoporcentajeEmpFormateado);
+    //CONVERTIR EN ARRAY EL MONTO A PARTIR DEL SEPARADOR DE MILLARES
+    var indices = $("#Editar #cde_PorcentajeEmpresa").val().split(",");
+    //VARIABLE CONTENEDORA DEL MONTO
+    var MontoporcentajeEmpFormateado = "";
+    //ITERAR LOS INDICES DEL ARRAY MONTO
+    for (var i = 0; i < indices.length; i++) {
+        //SETEAR LA VARIABLE DE MONTO
+        MontoporcentajeEmpFormateado += indices[i];
+    }
+    //FORMATEAR A DECIMAL
+    MontoporcentajeEmpFormateado = parseFloat(MontoporcentajeEmpFormateado);
 
-//    if (Descripcion != '-1') {
-//        var LengthString = Descripcion.length;
-//        if (LengthString > 1) {
-//            var FirstChar = LengthString - 2;
-//            var LastChar = Descripcion.substring(FirstChar, LengthString);
-//        }
-//        if (LastChar == "  ") {
-//            $("#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion").val(Descripcion.substring(0, FirstChar + 1));
-//        }
-//        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
-//            if (Descripcion == ' ')
-//                $("#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion").val("");
-//            hayAlgo = false;
-//            $("#Crear #Validation_descipcionA, #Editar #validareditar1").css("display", "block");
-//            $("#Crear #AsteriscoDescripcionDedu, #Editar #AsteriscoDescripcionDeduEdit").addClass("text-danger");
-//        } else {
-//            $("#Crear #Validation_descipcionA, #Editar #validareditar1").css("display", "none");
-//            $("#Crear #AsteriscoDescripcionDedu, #Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
-//        }
-//    }
+    if (Descripcion != '-1') {
+        var LengthString = Descripcion.length;
+        if (LengthString > 1) {
+            var FirstChar = LengthString - 2;
+            var LastChar = Descripcion.substring(FirstChar, LengthString);
+        }
+        if (LastChar == "  ") {
+            $("#Editar #cde_DescripcionDeduccion").val(Descripcion.substring(0, FirstChar + 1));
+        }
+        if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+            if (Descripcion == ' ')
+                $("#Editar #cde_DescripcionDeduccion").val("");
+            hayAlgo = false;
+            $("#Editar #validareditar1").css("display", "block");
+            $("#Editar #AsteriscoDescripcionDeduEdit").addClass("text-danger");
+        } else {
+            $("#Editar #validareditar1").css("display", "none");
+            $("#Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
+        }
+    }
 
-//    if (tde_IdTipoDedu != '-1') {
-//        if (tde_IdTipoDedu == "" || tde_IdTipoDedu == 0 || tde_IdTipoDedu == "0") {
-//            hayAlgo = false;
-//            $("#Crear #Validation_descipcion2A").css("display", "block");
-//            $("#Crear #AsteriscoTipoDedu").addClass("text-danger");
+    if (PorcentajeColaborador != '-1') {
+        if (MontoporcentajecolFormateado == "" || MontoporcentajecolFormateado == null || MontoporcentajecolFormateado == undefined || isNaN(MontoporcentajecolFormateado)) {
+            $("#Editar #Validation_descipcion3AR, #Editar #validareditar2").html('Campo Porcentaje Colaborador requerido.');
+            $("#Editar #Validation_descipcion3AR, #Editar #validareditar2").css("display", "block");
+            $("#Editar #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
+            hayAlgo = false;
+        } else {
+            $("#Editar #validareditar2").html('');
+            $("#Editar #validareditar2").css("display", "none");
+            $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
+            if (MontoporcentajecolFormateado < 0) {
+                $("#Editar #validareditar2").html('Campo Porcentaje Colaborador no puede ser menor a cero.');
+                $("#Editar #validareditar2").css("display", "block");
+                $("#Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
+                hayAlgo = false;
+            } else {
+                $("#Editar #validareditar2").html('');
+                $("#Editar #validareditar2").css("display", "none");
+                $("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
+            }
+        }
+    };
 
-//        } else {
-//            $("#Crear #Validation_descipcion2A").css("display", "none");
-//            $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-//        }
-//    };
+    if (PorcentajeEmpresa != '-1') {
+        if (MontoporcentajeEmpFormateado == "" || MontoporcentajeEmpFormateado == null) {
+            $("#Editar #validareditar3").html('Campo Porcentaje Empresa requerido.');
+            $("#Editar #validareditar3").css("display", "block");
+            $("#Editar #AsteriscoPorcentajeEmpresaEdit").addClass("text-danger");
+            hayAlgo = false;
+        } else {
+            $("#Editar #validareditar3").html('');
+            $("#Editar #validareditar3").css("display", "none");
+            $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
+            if (MontoporcentajeEmpFormateado < 0) {
+                $("#Editar #validareditar3").html('Campo Porcentaje Empresa no puede ser menor a cero.');
+                $("#Editar #validareditar3").css("display", "block");
+                $("#Editar #AsteriscoPorcentajeEmpresaEdit").addClass("text-danger");
+                hayAlgo = false;
+            }
+            else {
+                $("#Editar #validareditar3").html('');
+                $("#Editar #validareditar3").css("display", "none");
+                $("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
+            }
+        }
+    };
 
-//    if (valor != '-1') {
-//        if (MontoporcentajecolFormateado == "" || MontoporcentajecolFormateado == null || MontoporcentajecolFormateado == undefined || MontoporcentajecolFormateado == 0 || MontoporcentajecolFormateado == "0" || MontoporcentajecolFormateado == 0.0 || MontoporcentajecolFormateado == "0.0") {
-//            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('Campo Porcentaje Colaborador requerido.');
-//            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "block");
-//            $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
-//            hayAlgo = false;
-//        } else {
-//            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('');
-//            $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "none");
-//            $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
-//        }
-//        if (hayAlgo) {
-//            if (MontoporcentajecolFormateado <= 0 || MontoporcentajecolFormateado <= "0") {
-//                $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('Campo Porcentaje Colaborador no puede ser menor a cero.');
-//                $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "block");
-//                $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").addClass("text-danger");
-//                let hayAlgo = false;
-//            } else {
-//                $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").html('');
-//                $("#Crear #Validation_descipcion3AR, #Editar #validareditar2").css("display", "none");
-//                $("#Crear #AsteriscoPorcentajeColaborador, #Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
-//            }
-//        }
-//    };
-
-//    if (valor2 != '-1') {
-//        if (MontoporcentajeEmpFormateado == "" || MontoporcentajeEmpFormateado == null) {
-//            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").html('Campo Porcentaje Empresa requerido.');
-//            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").css("display", "block");
-//            $("#Crear #AsteriscoPorcentajeEmpresa, #Editar #AsteriscoPorcentajeEmpresaEdit").addClass("text-danger");
-//            hayAlgo = false;
-//        } else {
-//            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").html('');
-//            $("#Crear #Validation_descipcion4AR, #Editar #validareditar3").css("display", "none");
-//            $("#Crear #AsteriscoPorcentajeEmpresa, #Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
-//        }
-//    };
-
-//    return hayAlgo;
-//}
+    return hayAlgo;
+}

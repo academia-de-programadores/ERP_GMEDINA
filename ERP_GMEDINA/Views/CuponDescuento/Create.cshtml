@@ -122,7 +122,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $('#cdto_FechaEmision').datepicker({
-            dateFormat: 'mm/dd/yy',
+            dateFormat: 'yy-mm-dd',
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
             prevText: 'Ant',
@@ -131,14 +131,28 @@
 
         //-------------Fecha Actual-----------------------
         $(function () {
-            $("#cdto_FechaEmision").datepicker({ dateFormat: 'mm/dd/yy' }).datepicker('setDate', new Date()).datepicker("destroy");
+            $("#cdto_FechaEmision").datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', new Date()).datepicker("destroy");
 
         });
 
         //-----------Fecha Vencimiento (1 año)--------------------
         var d = new Date();
-        var strDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + (d.getFullYear() + 1);
-        $("#cdto_FechaVencimiento").val(strDate);
+        //var strDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + (d.getFullYear() + 1);
+        //$("#cdto_FechaVencimiento").val(strDate);
+
+        $('#cdto_FechaVencimiento').datepicker({
+            dateFormat: 'yy-mm-dd',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            prevText: 'Ant',
+            nextText: 'Sig'
+        }).datepicker('setDate', new Date());
+
+
+        $(function () {
+            $("#cdto_FechaVencimiento").datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', new Date(d.getFullYear() + 1, d.getMonth(), d.getDate())).datepicker("destroy");
+
+        });
 
         //------------------------CantidadMinima > MontoDescuento------------------
         $('#cdto_CantidadCompraMinimaH').blur(function () {
@@ -246,7 +260,7 @@
             var value = $(this).val();
             $('#cdto_MaximoMontoDescuento').val(value);
         });
-
+        
         $('#cdto_MontoDescuentoH').keydown(function () {
             var value = $(this).val();
             $('#cdto_MontoDescuento').val(value);

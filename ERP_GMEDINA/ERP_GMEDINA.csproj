@@ -254,7 +254,6 @@
     <Compile Include="Controllers\Facturacion\Catalogos\TipoPagoController.cs" />
     <Compile Include="Controllers\Facturacion\Configuracion\CajaController.cs" />
     <Compile Include="Controllers\Facturacion\Configuracion\PuntoEmisionController.cs" />
-    <Compile Include="Controllers\Facturacion\Configuracion\SucursalController.cs" />
     <Compile Include="Controllers\Facturacion\Ventas\ClienteController.cs" />
     <Compile Include="Controllers\Facturacion\Ventas\CuponDescuentoController.cs" />
     <Compile Include="Controllers\Facturacion\Ventas\DevolucionController.cs" />
@@ -1234,9 +1233,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSolicitudEfectivoDetalle.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbSucursal.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSucursales.cs">
@@ -5581,10 +5577,6 @@
     <Content Include="Views\SolicitudEfectivo\IndexOriginal.cshtml" />
     <Content Include="Views\SolicitudEfectivo\_EntregaEfectivoDetalle.cshtml" />
     <Content Include="Views\SolicitudEfectivo\_ListaDenominaciones.cshtml" />
-    <Content Include="Views\Sucursal\Create.cshtml" />
-    <Content Include="Views\Sucursal\Details.cshtml" />
-    <Content Include="Views\Sucursal\Edit.cshtml" />
-    <Content Include="Views\Sucursal\Index.cshtml" />
     <Content Include="Views\TipoIdentificacion\Create.cshtml" />
     <Content Include="Views\TipoIdentificacion\Details.cshtml" />
     <Content Include="Views\TipoIdentificacion\Edit.cshtml" />
@@ -5810,7 +5802,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51144</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

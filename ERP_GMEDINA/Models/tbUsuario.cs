@@ -170,8 +170,6 @@ namespace ERP_GMEDINA.Models
             this.tbSolicitudEfectivo2 = new HashSet<tbSolicitudEfectivo>();
             this.tbSolicitudEfectivoDetalle = new HashSet<tbSolicitudEfectivoDetalle>();
             this.tbSolicitudEfectivoDetalle1 = new HashSet<tbSolicitudEfectivoDetalle>();
-            this.tbSucursal = new HashSet<tbSucursal>();
-            this.tbSucursal1 = new HashSet<tbSucursal>();
             this.tbTechoImpuestoVecinal = new HashSet<tbTechoImpuestoVecinal>();
             this.tbTechoImpuestoVecinal1 = new HashSet<tbTechoImpuestoVecinal>();
             this.tbTechosComisiones = new HashSet<tbTechosComisiones>();
@@ -738,10 +736,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSolicitudEfectivoDetalle> tbSolicitudEfectivoDetalle { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSolicitudEfectivoDetalle> tbSolicitudEfectivoDetalle1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSucursal> tbSucursal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSucursal> tbSucursal1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTechoImpuestoVecinal> tbTechoImpuestoVecinal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
