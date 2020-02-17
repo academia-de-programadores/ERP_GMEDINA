@@ -77,7 +77,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.sal_FechaElaboracion, "Fecha de Elaboración", new { @class = "control-label col-md-2 required" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.sal_FechaElaboracion, new { @autocomplete = "off", @readonly = "readonly", @style = "position:absolute; z-index:3" })
+                                    @Html.EditorFor(model => model.sal_FechaElaboracion, new { @autocomplete = "off", @style = "position:absolute; z-index:3", @type="date"})
                                     <div id="validationsal_FechaElaboracion" class="validation-error">
                                         <p style="color:red">
                                             @Html.ValidationMessageFor(model => model.sal_FechaElaboracion)
