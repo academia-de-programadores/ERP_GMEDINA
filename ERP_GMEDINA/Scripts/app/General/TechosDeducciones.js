@@ -643,6 +643,7 @@ $('#btnEditarTecho').click(function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnConfirmarEditar").click(function () {
+    $('#btnConfirmarEditar').attr('disabled', true);
     var deduccionE = $("#Editar #cde_IdDeducciones").val();
     var techoE = $("#Editar #tddu_Techo").val();
     var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
@@ -702,13 +703,15 @@ $('#btnNoInactivar').click(function () {
 $(document).on("click", "#btnInactivarTechoDeducciones", function () {
     var validacionPermiso = userModelState("TechosDeducciones/Inactivar");
     if (validacionPermiso.status == true) {
-            $("#EditarTechosDeducciones").modal('hide');
+        $('#btnInactivarTechosDeducciones').attr('disabled', false);
+            $("#btnInactivarTechosDeducciones").modal('hide');
             $("#InactivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
     }
 });
 
 //Inactivar registro Techos Deducciones
 $("#btnInactivarTechosDeducciones").click(function () {
+    $('#btnInactivarTechosDeducciones').attr('disabled', true);
     var data = $("#frmInactivarTechosDeducciones").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -808,12 +811,13 @@ $(document).on("click", "#btnActivarTechosDeducciones", function () {
     if (validacionPermiso.status == true) {
         activarID = $(this).data('id');
         $("#ActivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+        $('#btnActivarTechosDeduccionesEjecutar').attr('disabled', false);
     }
 });
 
 //activar ejecutar
 $("#btnActivarTechosDeduccionesEjecutar").click(function () {
-
+    $('#btnActivarTechosDeduccionesEjecutar').attr('disabled', true);
     $.ajax({
         url: "/TechosDeducciones/Activar/" + activarID,
         method: "POST",
