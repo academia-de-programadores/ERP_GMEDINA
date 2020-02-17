@@ -432,10 +432,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 x.arqde_Id,
                 x.tbDenominacion.tbMoneda.mnda_Abreviatura,
-                x.tbDenominacion.deno_Tipo,
+                TipoDenominacion = x.tbDenominacion.deno_Tipo,
                 x.tbDenominacion.deno_Descripcion,
                 x.tbDenominacion.deno_valor,
-                x.arqde_MontoDenominacion
+                x.arqde_CantidadDenominacion
             }), JsonRequestBehavior.AllowGet);
         }
 
