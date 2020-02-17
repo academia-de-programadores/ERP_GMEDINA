@@ -1,20 +1,18 @@
 ﻿@model ERP_GMEDINA.Models.tbFormaPago
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesFormaPago" }))
 {
-        <div class="ibox-content" style="border-color:#fff;">
-
-            <div class="form-horizontal">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.LabelFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                    </div>
-                    <div class="col-md-6">
-                        <span id="fpa_Descripcion">@Html.DisplayFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
-                    </div>
+    <div class="ibox-content" style="border-color:#fff;">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                </div>
+                <div class="col-md-6">
+                    <span id="fpa_Descripcion">@Html.DisplayFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                 </div>
             </div>
         </div>
+    </div>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h4>Auditoría</h4>
@@ -45,7 +43,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
-            </div>
+        </div>
 }
-
