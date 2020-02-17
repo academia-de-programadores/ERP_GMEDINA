@@ -170,7 +170,6 @@
         public virtual DbSet<tbSolicitudCredito> tbSolicitudCredito { get; set; }
         public virtual DbSet<tbSolicitudEfectivo> tbSolicitudEfectivo { get; set; }
         public virtual DbSet<tbSolicitudEfectivoDetalle> tbSolicitudEfectivoDetalle { get; set; }
-        public virtual DbSet<tbSucursal> tbSucursal { get; set; }
         public virtual DbSet<tbTipoPago> tbTipoPago { get; set; }
         public virtual DbSet<UDV_Acce_Usuario_Roles> UDV_Acce_Usuario_Roles { get; set; }
         public virtual DbSet<V_Objetos> V_Objetos { get; set; }

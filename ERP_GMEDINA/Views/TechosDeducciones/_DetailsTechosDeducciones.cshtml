@@ -2,19 +2,6 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsTechosDeducciones" }))
 {
     @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-6">
-                    <label class="control-label" style="margin-left:20px;">Número</label>
-                </div>
-                <div class="col-md-6">
-                    <span id="cde_IdDeducciones" name="cde_IdDeducciones">Código</span>
-                </div>
-            </div>
-        </div>
-        <hr class="col-md-11" style="margin:0px 15px 0px 0px;"/>
-
         <div class="ibox-content" style="border-color:#fff;">
             <div class="form-horizontal">
 
@@ -89,4 +76,4 @@
                 </div>
             </div>
         </div>
-        }
+}
