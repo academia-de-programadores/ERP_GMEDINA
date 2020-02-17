@@ -466,10 +466,11 @@ $('#btnGenerarPlanilla').click(function () {
                         message: data.Response.Response,
                     });
                 }
-
+                window.reload.href = "/Planilla/Index";
                 $('.modal-backdrop').css('display', 'none');
                 $('.fade').css('display', 'none');
                 $('.in').css('display', 'none');
+             
 
 
             });

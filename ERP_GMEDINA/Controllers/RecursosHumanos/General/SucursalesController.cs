@@ -115,7 +115,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id, "0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
+                    var list = db.UDP_RRHH_tbSucursales_Insert(tbSucursales.empr_Id,tbSucursales.mun_Codigo, tbSucursales.bod_Id, tbSucursales.pemi_Id, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -265,7 +265,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id,"0501", tbSucursales.bod_Id, 1, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
+                    var list = db.UDP_RRHH_tbSucursales_Update(tbSucursales.suc_Id,tbSucursales.empr_Id,tbSucursales.mun_Codigo, tbSucursales.bod_Id, tbSucursales.pemi_Id, tbSucursales.suc_Descripcion, tbSucursales.suc_Correo, tbSucursales.suc_Direccion, tbSucursales.suc_Telefono, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbSucursales_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";

@@ -126,6 +126,10 @@ namespace ERP_GMEDINA.Controllers
                     //////////Aqui va la lista//////////////
                     string MensajeError = "";
                     IEnumerable<object> list = null;
+
+                    tbEstadoSolicitudCredito.escre_UsuarioModifica = Function.GetUser();
+                    tbEstadoSolicitudCredito.escre_FechaModifica = Function.DatetimeNow();
+
                     list = db.UDP_Vent_tbEstadoSolicitudCredito_Update(tbEstadoSolicitudCredito.escre_Id,
                         tbEstadoSolicitudCredito.escre_Descripcion,
                         tbEstadoSolicitudCredito.escre_UsuarioCrea,

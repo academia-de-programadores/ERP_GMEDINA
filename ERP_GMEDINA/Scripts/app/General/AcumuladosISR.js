@@ -599,7 +599,7 @@ $("#btnUpdateAISR2").click(function () {
             $("#EditarAISRConfirmacion").modal('hide');
         }
     });
-    $('#btnUpdateAISR2').attr('disabled', false);
+
 });
 
 // no confirmar edicion
