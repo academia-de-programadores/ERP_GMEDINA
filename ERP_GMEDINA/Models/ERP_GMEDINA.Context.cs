@@ -511,81 +511,6 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbBitacoraErrores_Insert", bite_PantallaParameter, bite_UsuarioParameter, bite_FechaParameter, bite_MensajeErrorParameter, bite_AccionParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbObjeto_Insert(string obj_Pantalla, string obj_Referencia, Nullable<int> obj_UsuarioCrea, Nullable<System.DateTime> obj_FechaCrea)
-        {
-            var obj_PantallaParameter = obj_Pantalla != null ?
-                new ObjectParameter("obj_Pantalla", obj_Pantalla) :
-                new ObjectParameter("obj_Pantalla", typeof(string));
-    
-            var obj_ReferenciaParameter = obj_Referencia != null ?
-                new ObjectParameter("obj_Referencia", obj_Referencia) :
-                new ObjectParameter("obj_Referencia", typeof(string));
-    
-            var obj_UsuarioCreaParameter = obj_UsuarioCrea.HasValue ?
-                new ObjectParameter("obj_UsuarioCrea", obj_UsuarioCrea) :
-                new ObjectParameter("obj_UsuarioCrea", typeof(int));
-    
-            var obj_FechaCreaParameter = obj_FechaCrea.HasValue ?
-                new ObjectParameter("obj_FechaCrea", obj_FechaCrea) :
-                new ObjectParameter("obj_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbObjeto_Insert", obj_PantallaParameter, obj_ReferenciaParameter, obj_UsuarioCreaParameter, obj_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Acce_tbObjeto_Update(Nullable<int> obj_Id, string obj_Pantalla, string obj_Referencia, Nullable<int> obj_UsuarioCrea, Nullable<System.DateTime> obj_FechaCrea, Nullable<int> obj_UsuarioModifica, Nullable<System.DateTime> obj_FechaModifica)
-        {
-            var obj_IdParameter = obj_Id.HasValue ?
-                new ObjectParameter("obj_Id", obj_Id) :
-                new ObjectParameter("obj_Id", typeof(int));
-    
-            var obj_PantallaParameter = obj_Pantalla != null ?
-                new ObjectParameter("obj_Pantalla", obj_Pantalla) :
-                new ObjectParameter("obj_Pantalla", typeof(string));
-    
-            var obj_ReferenciaParameter = obj_Referencia != null ?
-                new ObjectParameter("obj_Referencia", obj_Referencia) :
-                new ObjectParameter("obj_Referencia", typeof(string));
-    
-            var obj_UsuarioCreaParameter = obj_UsuarioCrea.HasValue ?
-                new ObjectParameter("obj_UsuarioCrea", obj_UsuarioCrea) :
-                new ObjectParameter("obj_UsuarioCrea", typeof(int));
-    
-            var obj_FechaCreaParameter = obj_FechaCrea.HasValue ?
-                new ObjectParameter("obj_FechaCrea", obj_FechaCrea) :
-                new ObjectParameter("obj_FechaCrea", typeof(System.DateTime));
-    
-            var obj_UsuarioModificaParameter = obj_UsuarioModifica.HasValue ?
-                new ObjectParameter("obj_UsuarioModifica", obj_UsuarioModifica) :
-                new ObjectParameter("obj_UsuarioModifica", typeof(int));
-    
-            var obj_FechaModificaParameter = obj_FechaModifica.HasValue ?
-                new ObjectParameter("obj_FechaModifica", obj_FechaModifica) :
-                new ObjectParameter("obj_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbObjeto_Update", obj_IdParameter, obj_PantallaParameter, obj_ReferenciaParameter, obj_UsuarioCreaParameter, obj_FechaCreaParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Acce_tbObjeto_Update_Estado(Nullable<int> obj_Id, Nullable<bool> obj_Estado, Nullable<int> obj_UsuarioModifica, Nullable<System.DateTime> obj_FechaModifica)
-        {
-            var obj_IdParameter = obj_Id.HasValue ?
-                new ObjectParameter("obj_Id", obj_Id) :
-                new ObjectParameter("obj_Id", typeof(int));
-    
-            var obj_EstadoParameter = obj_Estado.HasValue ?
-                new ObjectParameter("obj_Estado", obj_Estado) :
-                new ObjectParameter("obj_Estado", typeof(bool));
-    
-            var obj_UsuarioModificaParameter = obj_UsuarioModifica.HasValue ?
-                new ObjectParameter("obj_UsuarioModifica", obj_UsuarioModifica) :
-                new ObjectParameter("obj_UsuarioModifica", typeof(int));
-    
-            var obj_FechaModificaParameter = obj_FechaModifica.HasValue ?
-                new ObjectParameter("obj_FechaModifica", obj_FechaModifica) :
-                new ObjectParameter("obj_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbObjeto_Update_Estado", obj_IdParameter, obj_EstadoParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
-        }
-    
         public virtual ObjectResult<string> UDP_Acce_tbRol_Inactivar(Nullable<int> iDRol, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
         {
             var iDRolParameter = iDRol.HasValue ?
@@ -14773,6 +14698,81 @@
                 new ObjectParameter("usu_Password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbUsuario_PasswordRestore_Result>("UDP_Acce_tbUsuario_PasswordRestore", usu_IdParameter, usu_PasswordParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbObjeto_Insert_Result> UDP_Acce_tbObjeto_Insert(string obj_Pantalla, string obj_Referencia, Nullable<int> obj_UsuarioCrea, Nullable<System.DateTime> obj_FechaCrea)
+        {
+            var obj_PantallaParameter = obj_Pantalla != null ?
+                new ObjectParameter("obj_Pantalla", obj_Pantalla) :
+                new ObjectParameter("obj_Pantalla", typeof(string));
+    
+            var obj_ReferenciaParameter = obj_Referencia != null ?
+                new ObjectParameter("obj_Referencia", obj_Referencia) :
+                new ObjectParameter("obj_Referencia", typeof(string));
+    
+            var obj_UsuarioCreaParameter = obj_UsuarioCrea.HasValue ?
+                new ObjectParameter("obj_UsuarioCrea", obj_UsuarioCrea) :
+                new ObjectParameter("obj_UsuarioCrea", typeof(int));
+    
+            var obj_FechaCreaParameter = obj_FechaCrea.HasValue ?
+                new ObjectParameter("obj_FechaCrea", obj_FechaCrea) :
+                new ObjectParameter("obj_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbObjeto_Insert_Result>("UDP_Acce_tbObjeto_Insert", obj_PantallaParameter, obj_ReferenciaParameter, obj_UsuarioCreaParameter, obj_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbObjeto_Update_Result> UDP_Acce_tbObjeto_Update(Nullable<int> obj_Id, string obj_Pantalla, string obj_Referencia, Nullable<int> obj_UsuarioCrea, Nullable<System.DateTime> obj_FechaCrea, Nullable<int> obj_UsuarioModifica, Nullable<System.DateTime> obj_FechaModifica)
+        {
+            var obj_IdParameter = obj_Id.HasValue ?
+                new ObjectParameter("obj_Id", obj_Id) :
+                new ObjectParameter("obj_Id", typeof(int));
+    
+            var obj_PantallaParameter = obj_Pantalla != null ?
+                new ObjectParameter("obj_Pantalla", obj_Pantalla) :
+                new ObjectParameter("obj_Pantalla", typeof(string));
+    
+            var obj_ReferenciaParameter = obj_Referencia != null ?
+                new ObjectParameter("obj_Referencia", obj_Referencia) :
+                new ObjectParameter("obj_Referencia", typeof(string));
+    
+            var obj_UsuarioCreaParameter = obj_UsuarioCrea.HasValue ?
+                new ObjectParameter("obj_UsuarioCrea", obj_UsuarioCrea) :
+                new ObjectParameter("obj_UsuarioCrea", typeof(int));
+    
+            var obj_FechaCreaParameter = obj_FechaCrea.HasValue ?
+                new ObjectParameter("obj_FechaCrea", obj_FechaCrea) :
+                new ObjectParameter("obj_FechaCrea", typeof(System.DateTime));
+    
+            var obj_UsuarioModificaParameter = obj_UsuarioModifica.HasValue ?
+                new ObjectParameter("obj_UsuarioModifica", obj_UsuarioModifica) :
+                new ObjectParameter("obj_UsuarioModifica", typeof(int));
+    
+            var obj_FechaModificaParameter = obj_FechaModifica.HasValue ?
+                new ObjectParameter("obj_FechaModifica", obj_FechaModifica) :
+                new ObjectParameter("obj_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbObjeto_Update_Result>("UDP_Acce_tbObjeto_Update", obj_IdParameter, obj_PantallaParameter, obj_ReferenciaParameter, obj_UsuarioCreaParameter, obj_FechaCreaParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbObjeto_Update_Estado_Result> UDP_Acce_tbObjeto_Update_Estado(Nullable<int> obj_Id, Nullable<bool> obj_Estado, Nullable<int> obj_UsuarioModifica, Nullable<System.DateTime> obj_FechaModifica)
+        {
+            var obj_IdParameter = obj_Id.HasValue ?
+                new ObjectParameter("obj_Id", obj_Id) :
+                new ObjectParameter("obj_Id", typeof(int));
+    
+            var obj_EstadoParameter = obj_Estado.HasValue ?
+                new ObjectParameter("obj_Estado", obj_Estado) :
+                new ObjectParameter("obj_Estado", typeof(bool));
+    
+            var obj_UsuarioModificaParameter = obj_UsuarioModifica.HasValue ?
+                new ObjectParameter("obj_UsuarioModifica", obj_UsuarioModifica) :
+                new ObjectParameter("obj_UsuarioModifica", typeof(int));
+    
+            var obj_FechaModificaParameter = obj_FechaModifica.HasValue ?
+                new ObjectParameter("obj_FechaModifica", obj_FechaModifica) :
+                new ObjectParameter("obj_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbObjeto_Update_Estado_Result>("UDP_Acce_tbObjeto_Update_Estado", obj_IdParameter, obj_EstadoParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
         }
     }
 }
