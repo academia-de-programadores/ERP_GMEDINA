@@ -39,16 +39,21 @@
 
 function LlenaMunicipios(sel) {
     ///var select = document.getElementById("dep_Codigo");
+    var select = document.getElementById("mun_Codigo");
+    var i;
+    for (i = select.options.length - 1 ; i >= 0 ; i--) {
+        select.remove(i);
+    }
     id = sel.value.toString();
     console.log(id);
     _ajax(null,
         '/Sucursales/MunicipiosDDl/' + id,
         'GET',
         function (result) {
-            if (result != "-1" && result != "-2" && result != "-3") {
+            if (result != "-1" && result != "-2" && result != "-3") 
+                $("#mun_Codigo").append('<option value="0">' + '**Seleccione una opción**' + '</option>');
                 $.each(result, function (value, index) {
                     $("#mun_Codigo").append('<option value="' + index.mun_Codigo + '">' + index.mun_Nombre.toString() + '</option>');
                 });
-            }
-        });
+       });
 };

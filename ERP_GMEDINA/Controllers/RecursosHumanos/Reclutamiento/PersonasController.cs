@@ -666,7 +666,7 @@ namespace ERP_GMEDINA.Controllers
                                         var RepV = db.tbRequerimientosEspecialesPersona.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, per_Id = r.per_Id, rep_Id = r.rep_Id , Estado = r.rep_Estado }).Where(r => r.per_Id == tbPersonas.per_Id && r.Estado == true && r.resp_Id == X.Id).ToList();
                                         if (DatosProfesionalesArray.ReqEspeciales != null)
                                         {
-                                            foreach (var x in DatosProfesionalesArray.Titulos)
+                                            foreach (var x in DatosProfesionalesArray.ReqEspeciales)
                                             {
                                                 if (x == X.Id)
                                                     Nuevo = "1";

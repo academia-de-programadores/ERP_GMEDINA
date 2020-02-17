@@ -555,7 +555,7 @@ function validarEmail(valor) {
  }
 }
 function alphanumeric(e) {
- var regex = new RegExp("[A-Za-z��������������������������������������������� ]");
+ var regex = new RegExp("[A-Za-z��������������������������������������������� ñ]");
  var key = e.keyCode || e.which;
  key = String.fromCharCode(key);
  if (!regex.test(key)) {

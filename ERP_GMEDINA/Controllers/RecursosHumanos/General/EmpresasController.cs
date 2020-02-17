@@ -265,17 +265,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        //POST: Empresas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            db.tbEmpresas.Remove(tbEmpresas);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)
