@@ -101,6 +101,7 @@ namespace ERP_GMEDINA.Controllers
                 using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
                 {
                     List<tbCatalogoDePlanillas> oIDSPlanillas = new List<tbCatalogoDePlanillas>();
+                    List<int> planillasConColaboradores = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).Select(x => x.cpla_IdPlanilla).ToList();
 
                     // seleccionar las planillas que se van a generar
                     if (ID != null)
@@ -109,7 +110,7 @@ namespace ERP_GMEDINA.Controllers
                                           .ToList();
                     else
                         oIDSPlanillas = db.tbCatalogoDePlanillas
-                                          .Where(x => x.cpla_Activo == true)
+                                          .Where(x => x.cpla_Activo == true && planillasConColaboradores.Contains(x.cpla_IdPlanilla))
                                           .ToList();
 
                     if (oIDSPlanillas != null)
@@ -435,6 +436,7 @@ namespace ERP_GMEDINA.Controllers
                 using (ERP_GMEDINAEntities db = new ERP_GMEDINAEntities())
                 {
                     List<tbCatalogoDePlanillas> oIDSPlanillas = new List<tbCatalogoDePlanillas>();
+                    List<int> planillasConColaboradores = db.V_ColaboradoresPorPlanilla.Where(x => x.CantidadColaboradores > 0).Select(x => x.cpla_IdPlanilla).ToList();
 
                     // seleccionar las planillas que se van a generar
                     if (ID != null)
@@ -443,7 +445,7 @@ namespace ERP_GMEDINA.Controllers
                                           .ToList();
                     else
                         oIDSPlanillas = db.tbCatalogoDePlanillas
-                                          .Where(x => x.cpla_Activo == true)
+                                          .Where(x => x.cpla_Activo == true && planillasConColaboradores.Contains(x.cpla_IdPlanilla))
                                           .ToList();
 
                     // procesar todas las planillas seleccionadas
