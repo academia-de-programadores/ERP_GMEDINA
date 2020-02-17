@@ -15,7 +15,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.tsal_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.tsal_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", maxlength = 50, @onkeypress = "return alphanumeric(event)" } })
+                                        @Html.EditorFor(model => model.tsal_Descripcion, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return alphanumeric(event)" } })
                                         @Html.ValidationMessageFor(model => model.tsal_Descripcion, "", new { @class = "text-danger", @id = "errortsal_Descripcion" })
                                     </div>
                                 </div>
