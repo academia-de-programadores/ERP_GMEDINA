@@ -79,6 +79,15 @@ $(document).on("click", "#btnAgregarPreaviso", function () {
         // mesanje rango final no puede ser menor a rango inicial
         $("#Crear #validation_RangoFinalMayoRangoInicio").css('display', 'none');
 
+        // * cantidad de dias 
+        $('#AsteriscoCantidadDia').removeClass('text-danger');
+
+        // mesanje cantidad de dias no puede ser menor a cero
+        $("#Crear #validation_CantidadDiasMenorACero").css('display', 'none');
+
+        // mesanje cantidad de dias requerido
+        $("#Crear #validation_CantidadDiasRequerido").css('display', 'none');
+
         // vaciar cajas de texto
         $('#Crear input[type=text], input[type=number]').val('');
 
@@ -838,7 +847,7 @@ $(document).on("click", "#btnCerrarConfirmarEditar", function () {
     $("#ConfirmarEdicion").modal('hide');
 
     // mostrar modal de edicion
-    $("#EditarPreaviso").modal();
+    $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
 });
 
 //DESPLEGAR EL MODAL DE INACTIVAR
@@ -851,6 +860,8 @@ $(document).on("click", "#btnInactivarPreaviso", function () {
         $("#EditarPreaviso").modal('hide');
         //MOSTRAR MODAL DE INACTIVACION
         $("#InactivarPreaviso").modal({ backdrop: 'static', keyboard: false });
+        //habilitar boton de confirmacion de inactivar
+        $("#btnInactivarPreavisoConfirmar").attr("disabled", false);
     }
 });
 
@@ -859,11 +870,13 @@ $(document).on("click", "#btnCerrarInactivar", function () {
     //OCULTAR EL MODAL DE INACTIVACION
     $("#InactivarPreaviso").modal('hide');
     //MOSTRAR MODAL DE EDICION
-    $("#EditarPreaviso").modal();
+    $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
 });
 
 //CONFIRMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarPreavisoConfirmar").click(function () {
+    //deshabilitar boton de confirmacion de inactivar
+    $("#btnInactivarPreavisoConfirmar").attr("disabled", true);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/Preaviso/Inactivar/" + IDInactivar,
@@ -903,11 +916,15 @@ $(document).on("click", "#btnActivarPreaviso", function () {
     if (validacionPermiso.status == true) {
         activarID = $(this).data('id');
         $("#frmActivarPreavis").modal({ backdrop: 'static', keyboard: false });
+        //habilitar boton de confirmacion de inactivar
+        $("#btnActivarPreavis").attr("disabled", false);
     }
 });
 
 //activar ejecutar
 $("#btnActivarPreavis").click(function () {
+    //deshabilitar boton de confirmacion de inactivar
+    $("#btnActivarPreavis").attr("disabled", true);
 
     $.ajax({
         url: "/Preaviso/Activar/" + activarID,
