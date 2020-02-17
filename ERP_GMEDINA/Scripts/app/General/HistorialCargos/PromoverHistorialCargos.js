@@ -99,7 +99,7 @@ $("#btnGuardar").click(function () {
             if ($("#emp_Fechaingreso").val() > '01/01/1900') {
         data = JSON.stringify({
             tbEmpleados: tbEmpleados,
-            sue_Cantidad: sue_Cantidad,
+            sue_Cantidad: sue_Cantidad + ' ',
             hcar_RazonPromocion: hcar_RazonPromocion,
             tbRequisiciones: tbRequisiciones
         });
@@ -111,7 +111,9 @@ $("#btnGuardar").click(function () {
         function (result) {
             var sueldoMin = result.sueldoMin;
             var sueldoMax = result.sueldoMax;
-            if ($("#sue_Cantidad").val() >= sueldoMin || sueldoMin == null) {
+            var sue_Cantidad1 = 0.01;
+            sue_Cantidad = $("#sue_Cantidad").val();
+            if (sue_Cantidad >= sueldoMin || sueldoMin == null) {
                 if ($("#sue_Cantidad").val() <= sueldoMax || sueldoMax == null) {
 
                     _ajax(data,

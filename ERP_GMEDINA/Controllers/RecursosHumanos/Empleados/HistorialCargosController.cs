@@ -206,7 +206,7 @@ namespace ERP_GMEDINA.Controllers
         }
         [HttpPost]
         [SessionManager("HistorialCargos/Promover")]
-        public JsonResult Promover(tbEmpleados tbEmpleados, decimal sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
+        public JsonResult Promover(tbEmpleados tbEmpleados, string sue_Cantidad, string hcar_RazonPromocion, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
@@ -215,7 +215,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                         var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
-                        tbEmpleados.jor_Id, sue_Cantidad, hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, (int)Session["UserLogin"], Function.DatetimeNow());
+                        tbEmpleados.jor_Id, Convert.ToDecimal(sue_Cantidad), hcar_RazonPromocion, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
                         {
                             msj = item.MensajeError + " ";
