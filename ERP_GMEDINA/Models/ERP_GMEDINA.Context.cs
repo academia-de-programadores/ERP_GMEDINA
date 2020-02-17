@@ -14774,5 +14774,42 @@
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbRol_Update_Result>("UDP_Acce_tbRol_Update", rol_IdParameter, rol_DescripcionParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Update1(Nullable<int> insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica, Nullable<bool> insf_Activo)
+        {
+            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
+                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
+                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+    
+            var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
+                new ObjectParameter("insf_DescInstitucionFinanc", insf_DescInstitucionFinanc) :
+                new ObjectParameter("insf_DescInstitucionFinanc", typeof(string));
+    
+            var insf_ContactoParameter = insf_Contacto != null ?
+                new ObjectParameter("insf_Contacto", insf_Contacto) :
+                new ObjectParameter("insf_Contacto", typeof(string));
+    
+            var insf_TelefonoParameter = insf_Telefono != null ?
+                new ObjectParameter("insf_Telefono", insf_Telefono) :
+                new ObjectParameter("insf_Telefono", typeof(string));
+    
+            var insf_CorreoParameter = insf_Correo != null ?
+                new ObjectParameter("insf_Correo", insf_Correo) :
+                new ObjectParameter("insf_Correo", typeof(string));
+    
+            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
+                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
+                new ObjectParameter("insf_UsuarioModifica", typeof(int));
+    
+            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
+                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
+                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
+    
+            var insf_ActivoParameter = insf_Activo.HasValue ?
+                new ObjectParameter("insf_Activo", insf_Activo) :
+                new ObjectParameter("insf_Activo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Update1", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter, insf_ActivoParameter);
+        }
     }
 }

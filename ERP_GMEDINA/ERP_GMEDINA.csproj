@@ -800,6 +800,7 @@
     <Compile Include="Models\Seguridad\Objeto.cs" />
     <Compile Include="Models\Seguridad\rol.cs" />
     <Compile Include="Models\Seguridad\RolesUsuario.cs" />
+    <Compile Include="Models\Seguridad\Usuario.cs" />
     <Compile Include="Models\spGetActividadEconomica_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
