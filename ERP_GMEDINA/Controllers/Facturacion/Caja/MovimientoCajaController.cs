@@ -83,7 +83,7 @@ namespace ERP_GMEDINA.Controllers
 
 
                     ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
-                    ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id == null ? 0 : x.tbSucursales.suc_Id).DefaultIfEmpty(0).FirstOrDefault();
+                    ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id == null ? 0 : x.tbSucursales.suc_Id).SingleOrDefault();
 
                     var suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id == null ? 0 : x.tbSucursales.suc_Id).SingleOrDefault();
                     ViewBag.UsuarioApertura = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.usu_NombreUsuario).SingleOrDefault();
@@ -116,7 +116,7 @@ namespace ERP_GMEDINA.Controllers
             List<tbUsuario> User = Function.getUserInformation();
             foreach (tbUsuario Usuario in User)
             {
-                idUser = Convert.ToInt32(Usuario.emp_Id);
+                idUser = Convert.ToInt32(Usuario.usu_Id);
             }
 
             tbSolicitudEfectivo tbSolicitudEfectivo = new tbSolicitudEfectivo();
@@ -276,7 +276,7 @@ namespace ERP_GMEDINA.Controllers
                     }
 
                     ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
-                    var suc_ID = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).Take(1).SingleOrDefault();
+                    var suc_ID = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).Take(1).FirstOrDefault();
                     ViewBag.UsuarioApertura = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.usu_NombreUsuario).SingleOrDefault();
                     ViewBag.mocja_UsuarioApertura = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.usu_Id).SingleOrDefault();
 
@@ -425,6 +425,20 @@ namespace ERP_GMEDINA.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult DenominacionArqueo(int ArqueoCajaId)
+        {
+            var data = db.tbDenominacionArqueo.Where(x => x.arqde_Id == ArqueoCajaId).Select(x => new {
+                x.arqde_Id,
+                x.tbDenominacion.tbMoneda.mnda_Abreviatura,
+                x.tbDenominacion.deno_Tipo,
+                x.tbDenominacion.deno_Descripcion,
+                x.tbDenominacion.deno_valor,
+                x.arqde_MontoDenominacion
+            });
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: /MovimientoCaja/Create
         public ActionResult Create()
