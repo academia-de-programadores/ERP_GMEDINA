@@ -20,8 +20,11 @@
                     </a>
                 </div>
             </li>
+            <li class="">
+                <a href="@Url.Action("MenuPrincipal", "Menu")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Menú Principal</span></a>
+            </li>
             <li>
-                <a href="#"><i class="fa fa-shopping-bag fa-fw"></i><span class="nav-label">Ventas</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-shopping-cart"></i><span class="nav-label">Ventas</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @if (Login.GetUserRols("Factura/Index"))
                     {
