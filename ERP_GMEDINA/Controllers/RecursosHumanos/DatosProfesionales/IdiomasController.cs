@@ -95,7 +95,7 @@ namespace ERP_GMEDINA.Controllers
                                                             Function.DatetimeNow());
                     foreach (UDP_RRHH_tbIdiomas_Insert_Result item in list)
                     {
-                        msj = item.MensajeError + "";
+                        msj = item.MensajeError +  " ";
                     }
                 }
                 catch (Exception ex)

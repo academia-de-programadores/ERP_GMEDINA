@@ -159,7 +159,7 @@ namespace ERP_GMEDINA.Controllers
                                 suc_FechaCrea = t.suc_FechaCrea,
                                 suc_FechaModifica = t.suc_FechaModifica,
                                 suc_UsuarioCrea = t.tbUsuario1.usu_Nombres + " " + t.tbUsuario1.usu_Apellidos,
-                                suc_UsuarioModifica = t.tbUsuario1.usu_Nombres + " " + t.tbUsuario1.usu_Apellidos
+                                suc_UsuarioModifica = t.tbUsuario2.usu_Nombres + " " + t.tbUsuario2.usu_Apellidos
                             }
                         )
                         .Where(x => x.suc_Id == id).ToList();
@@ -270,7 +270,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         msj = item.MensajeError + " ";
                     }
-                    return Json(msj, JsonRequestBehavior.AllowGet);
+                    return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
