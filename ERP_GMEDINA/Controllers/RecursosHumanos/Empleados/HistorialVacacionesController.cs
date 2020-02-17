@@ -220,6 +220,22 @@ namespace ERP_GMEDINA.Controllers
 
                         })
                         .Where(x => x.hvac_Id == id).Where(x => x.hvac_Annio == annio).ToList();
+
+                    if (tbHistorialVacaciones.Count == 0)
+                    {
+                        var tbHistorialVacaciones2 = db.V_HVacacionesEmpleados
+                            .Select(
+                            p => new
+                            {
+                                hvac_Id = p.emp_Id,
+                                hvac_DiasRestantes = p.DiasTotales,
+                                hvac_Annio = p.Annio
+
+                            })
+                            .Where(x => x.hvac_Id == id && x.hvac_DiasRestantes == 0).ToList();
+                        return Json(tbHistorialVacaciones2, JsonRequestBehavior.AllowGet);
+
+                    }
                     return Json(tbHistorialVacaciones, JsonRequestBehavior.AllowGet);
                 }
             }

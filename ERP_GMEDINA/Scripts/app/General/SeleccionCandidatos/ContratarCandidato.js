@@ -131,7 +131,7 @@ $("#btnGuardar").click(function () {
                         tbSeleccionCandidatos: tbSeleccionCandidatos,
                         tbEmpleados: tbEmpleados,
                         emp_Temporal: emp_Temporal,
-                        sue_Cantidad: sue_Cantidad,
+                        sue_Cantidad: sue_Cantidad + ' ',
                         tmon_Id: tmon_Id,
                         tbRequisiciones: tbRequisiciones
                     });
@@ -142,8 +142,10 @@ $("#btnGuardar").click(function () {
             function (result) {
                 var sueldoMin = result.sueldoMin;
                 var sueldoMax = result.sueldoMax;
-                if ($("#sue_Cantidad").val() >= sueldoMin || sueldoMin == null) {
-                    if ($("#sue_Cantidad").val() <= sueldoMax || sueldoMax == null) {
+                var sue_Cantidad1 = 0.01;
+                sue_Cantidad = $("#sue_Cantidad").val();
+                if (sue_Cantidad >= sueldoMin || sueldoMin == null) {
+                    if (sue_Cantidad <= sueldoMax || sueldoMax == null) {
                         _ajax(data,
                        '/SeleccionCandidatos/Contratar',
                        'POST',

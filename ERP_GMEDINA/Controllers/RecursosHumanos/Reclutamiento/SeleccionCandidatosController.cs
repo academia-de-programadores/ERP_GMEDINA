@@ -394,7 +394,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [SessionManager("SeleccionCandidatos/Contratar")]
-        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados,bool emp_Temporal, Decimal sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
+        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados,bool emp_Temporal, string sue_Cantidad, int tmon_Id, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
@@ -416,7 +416,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, false, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
+                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, false, tbRequisiciones.req_Id, tmon_Id, Convert.ToDecimal(sue_Cantidad), tbEmpleados.emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -427,7 +427,7 @@ namespace ERP_GMEDINA.Controllers
                         //Si el candidato ah sido empleado se recontratara
                         var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, true, tbRequisiciones.req_Id, tmon_Id, sue_Cantidad, tbEmpleados.emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
+                        tbEmpleados.emp_CuentaBancaria, emp_Temporal, true, tbRequisiciones.req_Id, tmon_Id, Convert.ToDecimal(sue_Cantidad), tbEmpleados.emp_Fechaingreso, (int)Session["UserLogin"], Function.DatetimeNow());
 
                         foreach (UDP_RRHH_tbEmpleados_Recontratar_Result item in list)
                         {

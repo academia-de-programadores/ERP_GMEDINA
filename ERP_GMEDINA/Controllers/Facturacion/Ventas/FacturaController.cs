@@ -447,7 +447,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Producto = db.tbProducto.ToList();
             ViewBag.usu_Id = idUser;
             ViewBag.suc_Descripcion = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Descripcion).SingleOrDefault();
-            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id).SingleOrDefault();
+            ViewBag.suc_Id = db.tbUsuario.Where(x => x.usu_Id == idUser).Select(x => x.tbSucursales.suc_Id == null ? 0 : x.tbSucursales.suc_Id).SingleOrDefault();
             Session["IDCLIENTE"] = null;
             Session["IDENTIFICACION"] = null;
             Session["NOMBRES"] = null;
