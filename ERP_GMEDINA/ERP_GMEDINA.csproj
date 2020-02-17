@@ -356,6 +356,9 @@
     <Compile Include="Controllers\RecursosHumanos\FinalizacionLaboral\TipoSalidasController.cs" />
     <Compile Include="Controllers\RecursosHumanos\DatosProfesionales\TitulosController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
+    <Compile Include="Controllers\Seguridad\ObjetoController.cs" />
+    <Compile Include="Controllers\Seguridad\RolController.cs" />
+    <Compile Include="Controllers\Seguridad\UsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -5625,7 +5628,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Inventario\Seguridad\" />
-    <Folder Include="Controllers\Seguridad\" />
     <Folder Include="Downloadable files\" />
     <Folder Include="Expedientes\Expediente_2\Constancia\" />
     <Folder Include="fonts\font-awesome\less\" />
