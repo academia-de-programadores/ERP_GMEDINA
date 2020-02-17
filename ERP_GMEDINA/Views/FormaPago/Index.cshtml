@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbFormaPago>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutBasePlanillas.cshtml";
@@ -15,7 +14,6 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
                         var oUsuario = (ERP_GMEDINA.Models.UDP_Acce_Login_Result)HttpContext.Current.Session["sesionUsuario"];
@@ -26,52 +24,51 @@
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
                     }
-
-                  <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting_asc col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
-                            <th class="sorting_asc  col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
-                            <th class="sorting_asc  col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Activo)</th>
-                            <th class="sorting_asc  col-md-4">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyFormaPago">
-                      @foreach (var item in Model) {
-                          var EsActivo = (item.fpa_Activo) ? "Activo" : "Inactivo";
-                        <tr class="gradeA odd" role="row" data-id="@item.fpa_IdFormaPago">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fpa_IdFormaPago)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fpa_Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => EsActivo)
-                            </td>
-                            <td>
-                                @if (item.fpa_Activo == true)
-                                {
-                                    <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
-                                    <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
-                                }
-                                @if (rol_Usuario == 1 && item.fpa_Activo == false)
-                                {
-                                    <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
+                    <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
+                                <th class="sorting_asc  col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
+                                <th class="sorting_asc  col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Activo)</th>
+                                <th class="sorting_asc  col-md-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyFormaPago">
+                            @foreach (var item in Model)
+                            {
+                                var EsActivo = (item.fpa_Activo) ? "Activo" : "Inactivo";
+                                <tr class="gradeA odd" role="row" data-id="@item.fpa_IdFormaPago">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fpa_IdFormaPago)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fpa_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => EsActivo)
+                                    </td>
+                                    <td>
+                                        @if (item.fpa_Activo == true)
+                                        {
+                                            <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
+                                            <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
+                                        }
+                                        @if (rol_Usuario == 1 && item.fpa_Activo == false)
+                                        {
+                                            <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
                                     <!-- ACTIVAR -->
-                                    <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-default btn-xs" id="btnActivarFormaPago">Activar</button>
-                                }
-                            </td>
-                        </tr>
-                      }
-                    </tbody>
-                  </table>
+                                            <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-default btn-xs" id="btnActivarFormaPago">Activar</button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
- </div>
-
+</div>
 
 <div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -83,7 +80,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="EditarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -94,7 +90,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -107,12 +102,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnConfirmarEditar2">Si</button>
                 <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
-
             </div>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="frmDetailFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -122,13 +115,9 @@
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_Details", new ERP_GMEDINA.Models.tbFormaPago())
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-            </div>
         </div>
     </div>
 </div>
-
 @*INACTIVAR*@
 <div class="modal fade" id="InactivarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -146,7 +135,6 @@
         </div>
     </div>
 </div>
-
 @*ACTIVAR*@
 <div class="modal fade" id="ActivarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -164,15 +152,12 @@
         </div>
     </div>
 </div>
-
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
     @Scripts.Render("~/Scripts/plugins/iziToast/iziToast.min")
 }
-
 @section Scripts {
-
-  @Scripts.Render("~/plugins/dataTables")
-  @Scripts.Render("~/Scripts/app/General/FormaPago")
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General/FormaPago")
 }
