@@ -466,7 +466,7 @@ $('#btnGenerarPlanilla').click(function () {
                         message: data.Response.Response,
                     });
                 }
-                window.location.href = "/Planilla/Index";
+                window.reload.href = "/Planilla/Index";
                 $('.modal-backdrop').css('display', 'none');
                 $('.fade').css('display', 'none');
                 $('.in').css('display', 'none');
