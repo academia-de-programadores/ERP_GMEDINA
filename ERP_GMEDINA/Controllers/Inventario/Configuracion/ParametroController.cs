@@ -96,7 +96,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 TempData["smserror"] = "Imagen requerida.";
                 ViewBag.smserror = TempData["smserror"];
-                ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
+                ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
                 ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioModifica);
                 ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioCrea);
                 ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Abreviatura", tbParametro.mnda_Id);
@@ -142,7 +142,7 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MsjError.StartsWith("-1"))
                     {
-                        ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
+                        ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
                         ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioModifica);
                         ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioCrea);
                         ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Abreviatura", tbParametro.mnda_Id);
@@ -178,7 +178,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
+                    ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
                     ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioModifica);
                     ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioCrea);
                     ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Abreviatura", tbParametro.mnda_Id);
@@ -197,7 +197,7 @@ namespace ERP_GMEDINA.Controllers
                     var errors = ModelState.Values.SelectMany(v => v.Errors);
                 }
             }
-            ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
+            ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
             ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioModifica);
             ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioCrea);
             ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Abreviatura", tbParametro.mnda_Id);
@@ -223,7 +223,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 return RedirectToAction("NotFound", "Login");
             }
-            ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
+            ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
             ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioModifica);
             ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioCrea);
             ViewBag.Id_Rol = new SelectList(db.tbRol, "rol_Id", "rol_Descripcion", tbParametro.par_RolAuditor);
@@ -304,7 +304,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
+            ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion",tbParametro.par_SucursalPrincipal);
             ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioModifica);
             ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbParametro.par_UsuarioCrea);
             ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Abreviatura", tbParametro.mnda_Id);
