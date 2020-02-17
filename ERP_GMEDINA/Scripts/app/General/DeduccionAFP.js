@@ -189,6 +189,7 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
         $("#dafp_AporteLps").val('');
         $("#Crear #afp_Id").val("0");
         $('#Crear #dafp_DeducirISR').prop('checked', false);
+        document.getElementById("btnCreateRegistroDeduccionAFP").disabled = false;
     }
    
 });
@@ -269,6 +270,7 @@ function OcultarValidacionesEdit() {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionAFP').click(function () {
+    document.getElementById("btnCreateRegistroDeduccionAFP").disabled = true;
     var empId = $("#Crear #emp_IdCrear").val();
     var Aporte = $("#Crear #dafp_AporteLps").val();
     var AFP = $("#Crear #afp_Id").val();
@@ -326,6 +328,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
                 });
+                document.getElementById("btnCreateRegistroDeduccionAFP").disabled = false;
             }
         });
     }
