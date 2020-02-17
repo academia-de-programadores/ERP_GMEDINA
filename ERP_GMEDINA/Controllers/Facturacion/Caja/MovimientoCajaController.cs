@@ -68,7 +68,7 @@ namespace ERP_GMEDINA.Controllers
                 if (Function.GetUserRols("MovimientoCaja/CreateApertura"))
                 {
                     int idUser = 0;
-                    
+
                     List<tbUsuario> User = Function.getUserInformation();
                     foreach (tbUsuario Usuario in User)
                     {
@@ -428,16 +428,21 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult DenominacionArqueo(int ArqueoCajaId)
         {
-            var data = db.tbDenominacionArqueo.Where(x => x.arqde_Id == ArqueoCajaId).Select(x => new {
+            return Json(db.tbDenominacionArqueo.Where(x => x.arqde_Id == ArqueoCajaId).Select(x => new
+            {
                 x.arqde_Id,
                 x.tbDenominacion.tbMoneda.mnda_Abreviatura,
                 x.tbDenominacion.deno_Tipo,
                 x.tbDenominacion.deno_Descripcion,
                 x.tbDenominacion.deno_valor,
                 x.arqde_MontoDenominacion
-            });
+            }), JsonRequestBehavior.AllowGet);
+        }
 
-            return Json(data, JsonRequestBehavior.AllowGet);
+        [HttpPost]
+        public JsonResult PagosArqueo(int ArqueoCajaId)
+        {
+            return Json(db.tbDenominacionArqueo.Where(x => x.arqde_Id == ArqueoCajaId).Select(x => new { TipoPago = x.tbDenominacion.deno_Tipo }), JsonRequestBehavior.AllowGet);
         }
 
         // GET: /MovimientoCaja/Create
@@ -476,7 +481,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     ViewBag.PagoEfectivo = 00.0;
                 }
-                var PagoTC = db.tbPago.Where(x => x.tpa_Id == 2  && x.pago_FechaElaboracion == Date).ToList();
+                var PagoTC = db.tbPago.Where(x => x.tpa_Id == 2 && x.pago_FechaElaboracion == Date).ToList();
                 if (PagoTC.Count() > 0)
                 {
                     ViewBag.PagoTC = db.tbPago.Where(x => x.tpa_Id == 2 && x.pago_FechaElaboracion == Date && x.pago_EstaAnulado == false).Select(x => x.pago_TotalPago).Sum();
@@ -486,7 +491,7 @@ namespace ERP_GMEDINA.Controllers
                     ViewBag.PagoTC = 00.0;
                 }
 
-                var PagoCheque = db.tbPago.Where(x => x.tpa_Id == 3 &&x.pago_FechaElaboracion == Date).ToList();
+                var PagoCheque = db.tbPago.Where(x => x.tpa_Id == 3 && x.pago_FechaElaboracion == Date).ToList();
                 if (PagoCheque.Count() > 0)
                 {
                     ViewBag.PagoCheque = db.tbPago.Where(x => x.tpa_Id == 3 && x.pago_FechaElaboracion == Date && x.pago_EstaAnulado == false).Select(x => x.pago_TotalPago).Sum();
@@ -537,7 +542,7 @@ namespace ERP_GMEDINA.Controllers
                 }
 
                 var TotalPagos = db.tbPago.Where(x => x.pago_FechaElaboracion == Date).ToList();
-                if (TotalPagos.Count() > 0 )
+                if (TotalPagos.Count() > 0)
                 {
                     ViewBag.TotalPagos = db.tbPago.Where(x => x.pago_FechaElaboracion == Date).Select(x => x.pago_TotalPago).Sum();
                 }
