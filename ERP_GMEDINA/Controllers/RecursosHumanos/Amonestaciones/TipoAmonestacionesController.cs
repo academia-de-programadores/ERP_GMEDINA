@@ -130,14 +130,14 @@ namespace ERP_GMEDINA.Controllers
         {
             string msj = "";
             tbTipoAmonestaciones tbTipoAmonestacion = new tbTipoAmonestaciones();
-            if (tbTipoAmonestacion.tamo_Id != 0 && tbTipoAmonestacion.tamo_Descripcion != "")
+            if (tbTipoAmonestaciones.tamo_Id != 0 && tbTipoAmonestaciones.tamo_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbTipoAmonestaciones_Update(id, tbTipoAmonestacion.tamo_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
+                    var list = db.UDP_RRHH_tbTipoAmonestaciones_Update(id, tbTipoAmonestaciones.tamo_Descripcion, (int)Session["UserLogin"],Function.DatetimeNow());
                     foreach (UDP_RRHH_tbTipoAmonestaciones_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
