@@ -5,7 +5,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
     })
     .fail(function (jqxhr, settings, exception) {
-        
+
     });
 
 // funcion generica ajax
@@ -79,14 +79,14 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
     var validacionPermiso = userModelState("Periodos/Create");
 
     if (validacionPermiso.status == true) {
-    // habilitar boton
-    $("#btnCrearPeriodoConfirmar").attr("disabled", false);
+        // habilitar boton
+        $("#btnCrearPeriodoConfirmar").attr("disabled", false);
 
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesCrear();
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesCrear();
 
-    // modal crear
-    $("#CrearPeriodo").modal({ backdrop: 'static', keyboard: false });
+        // modal crear
+        $("#CrearPeriodo").modal({ backdrop: 'static', keyboard: false });
     }
 });
 
@@ -159,39 +159,39 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
     var validacionPermiso = userModelState("Periodos/Edit");
 
     if (validacionPermiso.status == true) {
-    //OCULTAR VALIDACIONES
-    OcultarValidacionesEditar();
+        //OCULTAR VALIDACIONES
+        OcultarValidacionesEditar();
 
-    var ID = $(this).data('id');
-    IDInactivar = ID;
+        var ID = $(this).data('id');
+        IDInactivar = ID;
 
-    $.ajax({
-        url: "/Periodos/Edit/" + ID,
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            if (data) {
-                $.each(data, function (i, iter) {
-                    $("#Editar #peri_IdPeriodo").val(iter.peri_IdPeriodo);
-                    $("#Editar #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
-                    $("#Editar #peri_CantidadDias").val(iter.peri_CantidadDias);
-                    if (iter.peri_RecibeSeptimoDia)
-                        $("#Editar #peri_RecibeSeptimoDia").prop('checked', true);
-                    else
-                        $("#Editar #peri_RecibeSeptimoDia").prop('checked', false);
-                });
-                $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
+        $.ajax({
+            url: "/Periodos/Edit/" + ID,
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: ID })
+        })
+            .done(function (data) {
+                if (data) {
+                    $.each(data, function (i, iter) {
+                        $("#Editar #peri_IdPeriodo").val(iter.peri_IdPeriodo);
+                        $("#Editar #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
+                        $("#Editar #peri_CantidadDias").val(iter.peri_CantidadDias);
+                        if (iter.peri_RecibeSeptimoDia)
+                            $("#Editar #peri_RecibeSeptimoDia").prop('checked', true);
+                        else
+                            $("#Editar #peri_RecibeSeptimoDia").prop('checked', false);
+                    });
+                    $("#EditarPeriodo").modal({ backdrop: 'static', keyboard: false });
+                }
+                else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
+                    });
+                }
+            });
     }
 });
 
@@ -229,8 +229,8 @@ $("#btnCerrarConfirmarEditar").click(function () {
 
 //editar 3 ejecutar 
 $(document).on("click", "#btnConfirmarEditar", function () {
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
-    $("#btnConfirmarEditar").attr("disabled", false);
+    //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
+    $("#btnConfirmarEditar").attr("disabled", true);
 
     var recibe = ($('#Editar #peri_RecibeSeptimoDia').is(':checked')) ? true : false;
 
@@ -240,7 +240,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
         peri_CantidadDias: $("#Editar #peri_CantidadDias").val(),
         peri_RecibeSeptimoDia: RecibeEdit
     };
-    
+
     //var data = $("#frmEditPeriodo").serializeArray();
     $.ajax({
         url: "/Periodos/Editar",
@@ -281,13 +281,13 @@ $(document).on("click", "#btnInactivarPeriodo", function () {
     var validacionPermiso = userModelState("Periodos/Inactivar");
 
     if (validacionPermiso.status == true) {
-    
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnInactivarPeriodoConfirmar").attr("disabled", false);
-    //OCULTAR MODAL DE EDICION
-    $("#EditarPeriodo").modal('hide');
-    //MOSTRAR MODAL DE INACTIVACION
-    $("#InactivarPeriodo").modal({ backdrop: 'static', keyboard: false });
+
+        //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+        $("#btnInactivarPeriodoConfirmar").attr("disabled", false);
+        //OCULTAR MODAL DE EDICION
+        $("#EditarPeriodo").modal('hide');
+        //MOSTRAR MODAL DE INACTIVACION
+        $("#InactivarPeriodo").modal({ backdrop: 'static', keyboard: false });
     }
 });
 
@@ -342,12 +342,12 @@ $(document).on("click", "#btnActivarPeriodos", function () {
     // validar informacion del usuario
     var validacionPermiso = userModelState("Periodos/Activar");
 
-    if (validacionPermiso.status == true) { 
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnActivarPeriodoConfirm").attr("disabled", false);
-    ActivarID = $(this).data('id');
-    //DESPLEGAR EL MODAL DE ACTIVAR
-    $("#ActivarPeriodo").modal({ backdrop: 'static', keyboard: false });
+    if (validacionPermiso.status == true) {
+        //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
+        $("#btnActivarPeriodoConfirm").attr("disabled", false);
+        ActivarID = $(this).data('id');
+        //DESPLEGAR EL MODAL DE ACTIVAR
+        $("#ActivarPeriodo").modal({ backdrop: 'static', keyboard: false });
     }
 });
 
