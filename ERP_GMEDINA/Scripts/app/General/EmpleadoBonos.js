@@ -824,6 +824,19 @@ function FormatearMonto(StringValue) {
     return MontoFormateado;
 }
 
-
-
-
+$('#Crear #cin_IdIngreso').blur(function () {
+    let cin_IdIngreso = $(this).val();
+    if (cin_IdIngreso == "" || cin_IdIngreso == 0 || cin_IdIngreso == "0") {
+        $("#Crear #cin_IdIngreso").val("0");
+        //MOSTRAR DATAANNOTATIONS
+        $("#Crear #Validation_IdIngreso").show();
+        //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+        $("#Crear #AsteriscoBono").addClass("text-danger");
+    }
+    else {
+        //OCULTAR DATAANNOTATIONS
+        $("#Crear #Validation_IdIngreso").hide();
+        //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+        $("#Crear #AsteriscoBono").removeClass("text-danger");
+    }
+});

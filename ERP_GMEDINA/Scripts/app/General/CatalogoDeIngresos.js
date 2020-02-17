@@ -174,13 +174,13 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                     var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
                     $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
                     $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
-                    $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
-                    $("#Detallar #cin_FechaCrea").val(FechaCrea);
+                    $("#Detallar #cin_UsuarioCrea").html(data[0].cin_UsuarioCrea);
+                    $("#Detallar #cin_FechaCrea").html(FechaCrea);
                     $("#Detallar #tipoDeIngresoDetalle").html(tipoIngreso);
-                    data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                    $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                    $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
-                    $("#Detallar #cin_FechaModifica").val(FechaModifica);
+                    data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detallar #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detallar #cin_UsuarioModifica").html(data[0].cin_UsuarioModifica);
+                    $("#Detallar #cin_FechaModifica").html(FechaModifica);
                     $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
 
                 }
@@ -514,6 +514,8 @@ function OcultarValidacionesCrear() {
     $('#Crear #asteriscoTipoIngreso').removeClass('text-danger');
     //REMOVER EL TEXT DANGER DEL ASTERISCO
     $('#asteriscoCreate').removeClass('text-danger');
+
+    $("#Crear #idTipoIngreso").val("0");
 }
 
 //OCULTAR LAS VALIDACIONES DE EDITAR
@@ -527,3 +529,20 @@ function OcultarValidacionesEditar() {
     $('#Editar #asteriscoEdit').removeClass('text-danger');
     $('#Editar #asteriscoTipoIngreso').removeClass('text-danger');
 }
+
+$('#Crear #idTipoIngreso').blur(function () {
+    let idTipoIngreso = $(this).val();
+    if (idTipoIngreso == "" || idTipoIngreso == 0 || idTipoIngreso == "0") {
+        $("#Crear #idTipoIngreso").val("0");
+        //MOSTRAR DATAANNOTATIONS
+        $("#Crear #valTipoIngreso").show();
+        //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+        $("#Crear #asteriscoTipoIngreso").addClass("text-danger");
+    }
+    else {
+        //OCULTAR DATAANNOTATIONS
+        $("#Crear #valTipoIngreso").hide();
+        //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+        $("#Crear #asteriscoTipoIngreso").removeClass("text-danger");
+    }
+});

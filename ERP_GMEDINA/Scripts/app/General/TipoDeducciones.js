@@ -356,8 +356,8 @@ $("#btnEditarTipoDedu").click(function () {
 
             $("#EditarTipoDeduccionConfirmacion").modal('hide');
             $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
-
-            iziToast.success({
+            $("#btnUpdateTipoDeducciones").attr('disabled', false);
+            iziToast.error({
                 title: 'Error',
                 message: 'El registro no se editó, contacte al administrador',
             });

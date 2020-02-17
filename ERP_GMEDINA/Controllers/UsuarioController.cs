@@ -135,7 +135,7 @@ namespace ERP_GMEDINA.Controllers
         {
             Session["tbRolesUsuario"] = null;
             ViewBag.Empleado = db.SDP_tbEmpleado_Select().ToList();
-            ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+            ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
 
@@ -167,7 +167,7 @@ namespace ERP_GMEDINA.Controllers
                         if (MsjError.StartsWith("-1"))
                         {
                             ViewBag.Empleado = db.SDP_tbEmpleado_Select().ToList();
-                            ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                            ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                             ModelState.AddModelError("", "No se guardó el registro , contacte al Administrador");
                             return View(tbUsuario);
                         }
@@ -185,7 +185,7 @@ namespace ERP_GMEDINA.Controllers
                                         if (MsjError.StartsWith("-1"))
                                         {
                                             ViewBag.Empleado = db.SDP_tbEmpleado_Select().ToList();
-                                            ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                                            ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                                             ModelState.AddModelError("", "No se guardó el registro , contacte al Administrador");
                                             return View(tbUsuario);
                                         }
@@ -201,7 +201,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         Ex.Message.ToString();
                         ViewBag.Empleado = db.SDP_tbEmpleado_Select().ToList();
-                        ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                        ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                         ModelState.AddModelError("", "No se guardó el registro , contacte al Administrador");
                         return View(tbUsuario);
                     }
@@ -212,7 +212,7 @@ namespace ERP_GMEDINA.Controllers
                 ModelState.AddModelError("ConfirmarPassword", "El campo Password es requerido");
                 ModelState.AddModelError("usu_Password", "El campo Password es requerido");
                 ViewBag.Empleado = db.SDP_tbEmpleado_Select().ToList();
-                ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             }
             return View(tbUsuario);
         }
@@ -286,7 +286,7 @@ namespace ERP_GMEDINA.Controllers
             tbUsuario tbUsuario = db.tbUsuario.Find(id);
             ViewBag.User_ID = id;
             ViewBag.ConfirmarPassword = "Password";
-            ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+            ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             if (tbUsuario == null)
             {
                 return RedirectToAction("NotFound", "Login");
@@ -316,7 +316,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MsjError.StartsWith("-1"))
                     {
                         ViewBag.ConfirmarPassword = "Password";
-                        ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                        ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                         ModelState.AddModelError("", "No se guardó el registro , contacte al Administrador");
                         return View(tbUsuario);
                     }
@@ -330,7 +330,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Ex.Message.ToString();
                     ViewBag.ConfirmarPassword = "Password";
-                    ViewBag.Sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+                    ViewBag.Sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
                     ModelState.AddModelError("", "No se guardó el registro , contacte al Administrador");
                     return View(tbUsuario);
                 }

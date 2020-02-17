@@ -1043,3 +1043,37 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
     .fail(function (jqxhr, settings, exception) {
 
     });
+
+$('#Crear #mun_Codigo').blur(function () {
+    let mun_Codigo = $(this).val();
+    if (mun_Codigo == "" || mun_Codigo == 0 || mun_Codigo == "0") {
+        $("#Crear #mun_Codigo").val("0");
+        //MOSTRAR DATAANNOTATIONS
+        $("#Crear #Validation_MunicipioRequerida").show();
+        //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+        $("#Crear #AsteriscoMunicipio").addClass("text-danger");
+    }
+    else {
+        //OCULTAR DATAANNOTATIONS
+        $("#Crear #Validation_MunicipioRequerida").hide();
+        //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+        $("#Crear #AsteriscoMunicipio").removeClass("text-danger");
+    }
+});
+
+$('#Crear #tde_IdTipoDedu').blur(function () {
+    let tde_IdTipoDedu = $(this).val();
+    if (tde_IdTipoDedu == "" || tde_IdTipoDedu == 0 || tde_IdTipoDedu == "0") {
+        $("#Crear #tde_IdTipoDedu").val("0");
+        //MOSTRAR DATAANNOTATIONS
+        $("#Crear #Validation_TipoDeduccionRequerida").show();
+        //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
+        $("#Crear #AsteriscoTipoDeduccion").addClass("text-danger");
+    }
+    else {
+        //OCULTAR DATAANNOTATIONS
+        $("#Crear #Validation_TipoDeduccionRequerida").hide();
+        //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+        $("#Crear #AsteriscoTipoDeduccion").removeClass("text-danger");
+    }
+});

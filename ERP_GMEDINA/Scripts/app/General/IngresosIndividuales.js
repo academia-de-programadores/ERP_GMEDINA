@@ -503,16 +503,17 @@ $("#btnEditIngresoIndividual").click(function () {
     if (ValidarCamposEditar(Motivo, IdColaborador, Monto)) {
         $("#EditarIngresosIndividuales").modal('hide');
         $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        document.getElementById("btnEditIngresoIndividual2").disabled = false;
+        $('#btnEditIngresoIndividual2').attr('disabled', false);
     }  
     else {
         ValidarCamposEditar(Motivo, IdColaborador, Monto);
-        document.getElementById("btnEditIngresoIndividual").disabled = false;
+        $('#btnEditIngresoIndividual').attr('disabled', true);
     }
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditIngresoIndividual2").click(function () {
+    $('#btnEditIngresoIndividual2').attr('disabled', true);
     var ini_PagaSiempre = false;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var ini_IdIngresosIndividuales = $("#Editar #ini_IdIngresosIndividuales").val();

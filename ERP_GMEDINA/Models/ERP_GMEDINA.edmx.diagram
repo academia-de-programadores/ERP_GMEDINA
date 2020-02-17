@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="168af9d8cb074cd18320e04d657f653f" Name="Diagram1" ZoomLevel="29">
+      <Diagram DiagramId="168af9d8cb074cd18320e04d657f653f" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="314.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbBitacoraErrores" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="245.875" IsExpanded="true" />
@@ -157,7 +157,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbSolicitudCredito" Width="1.5" PointX="15.75" PointY="417.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbSolicitudEfectivo" Width="1.5" PointX="24.5" PointY="327.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbSolicitudEfectivoDetalle" Width="1.5" PointX="30.75" PointY="340.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbSucursal" Width="1.5" PointX="13.5" PointY="451.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoPago" Width="1.5" PointX="3" PointY="604.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Acce_Usuario_Roles" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Objetos" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
@@ -488,8 +487,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSolicitudEfectivo_solef_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSolicitudEfectivoDetalle_soled_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSolicitudEfectivoDetalle_soled_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbSucursal_Suc_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechoImpuestoVecinal_timv_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_tbTechosComisiones_tc_UsuarioCrea" ManuallyRouted="false" />
@@ -817,7 +814,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbMunicipio_tbTechoImpuestoVecinal_mun_Codigo" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbBodega_tbMunicipio_mun_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSucursales_mun_Codigo_Gral_tbMunicipio_mun_Codigo" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_tbMunicipio_tbSucursal_mun_Codigo" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbMunicipio_tbCliente_mun_Codigo" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbParametro_tbCliente_clte_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Gral_tbParametro_tbSucursales_suc_Id" ManuallyRouted="false" />
@@ -908,7 +904,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbTipoIdentificacion_tbCliente_tpi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbInventarioFisicoDetalle_tbUnidadesMedida_uni_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbProducto_Gral_tbUnidadesMedida_uni_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbBodega_tbSucursal_bod_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbBodegaDetalle_tbBodega_bod_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbBox_tbBodega_bod_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbEntrada_ent_BodegaDestino" ManuallyRouted="false" />
@@ -1175,7 +1170,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbTipoPago_tbPago_tpa_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbTipoPago_tbPagosArqueo_tpa_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Inv_tbPedidoDetalle_tbPedido_ped_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_tbPuntoEmision_tbSucursal_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbPuntoEmision_tbPuntoEmisionDetalle_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbPuntoEmisionDetalle_tbPuntoEmision_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbSolicitudEfectivo_tbSolicitudEfectivoDetalle_solef_Id" ManuallyRouted="false" />
