@@ -5442,6 +5442,7 @@
     <Content Include="Views\Shared\_NavigationFacturacion.cshtml" />
     <Content Include="Views\Shared\_NavigationPlanillas.cshtml" />
     <Content Include="Views\Shared\_LayoutBasePlanillas.cshtml" />
+    <Content Include="Views\Home\Inventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

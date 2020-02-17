@@ -16,19 +16,6 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
-
-            @{
-                //var idmenu = Session["sesionIdMenu"];
-                int idmenu = (int)(HttpContext.Current.Session["sesionIdMenu"] ?? -1);
-                if (idmenu == -1)
-                {
-                    <script>
-                        location.href = '/';
-                    </script>
-                }
-          if (idmenu == 3)
-              {
-
                         <!-- #region Header Inventario -->
                      <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
                                                         <div class="dropdown profile-element">
@@ -217,9 +204,6 @@
                     </ul>
 
                 </li>
-                }
-              }
-
         </ul>
     </div>
 </nav>

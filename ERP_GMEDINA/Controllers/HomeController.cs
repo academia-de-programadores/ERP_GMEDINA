@@ -25,5 +25,11 @@ namespace ERP_GMEDINA.Controllers
         {
             return View();
         }
+
+        [SessionManager("Home/Index")]
+        public ActionResult Inventario()
+        {
+            return View();
+        }
     }
 }
