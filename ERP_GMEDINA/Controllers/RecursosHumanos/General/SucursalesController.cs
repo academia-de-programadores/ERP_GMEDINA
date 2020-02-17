@@ -65,18 +65,42 @@ namespace ERP_GMEDINA.Controllers
             db = new ERP_GMEDINAEntities();
             ViewBag.suc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.suc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            var Departamentos = new List<object> { };
+            Departamentos.Add(new
+            { dep_Codigo = 0, dep_Nombre = "**Seleccione una opción**" });
+            Departamentos.AddRange(db.tbDepartamento.Select(tabla => new { dep_Codigo = tabla.dep_Codigo, dep_Nombre = tabla.dep_Nombre}).ToList());
+            ViewBag.dep_codigo = new SelectList(Departamentos, "dep_Codigo", "dep_Nombre");
+            var Municipio = new List<object> { };
+            Municipio.Add(new{ mun_Codigo = 0, mun_Nombre = "**Seleccione una opción**" });
+            ViewBag.mun_codigo = new SelectList(Municipio, "mun_Codigo", "mun_Nombre");
+            var Bodega = new List<object> { };
+            Bodega.Add(new{ bod_Id = 0, bod_Nombre = "**Seleccione una opción**" });
+            Bodega.AddRange(db.tbBodega.Select(tabla => new { bod_Id = tabla.bod_Id, bod_Nombre = tabla.bod_Nombre }).ToList());
+            ViewBag.bod_Id = new SelectList(Bodega, "bod_Id", "bod_Nombre");
+            var PuntoE = new List<object> { };
+            PuntoE.Add(new{ pemi_Id = 0, pemi_NumeroCAI = "**Seleccione una opción**" });
+            Bodega.AddRange(db.tbPuntoEmision.Select(tabla => new { pemi_Id = tabla.pemi_Id, pemi_NumeroCAI = tabla.pemi_NumeroCAI}).ToList());
+            ViewBag.pemi_Id = new SelectList(Bodega, "pemi_Id", "pemi_NumeroCAI");
             var Empresas = new List<object> { };
-            Empresas.Add(new
-            {
-                empr_Id = 0,
-                empr_Nombre = "**Seleccione una opción**"
-            });
-            Empresas.AddRange(db.tbEmpresas
-                    .Select(tabla => new { empr_Id = tabla.empr_Id, empr_Nombre = tabla.empr_Nombre })
-                    .ToList());
+            Empresas.Add(new{ empr_Id = 0, empr_Nombre = "**Seleccione una opción**" });
+            Empresas.AddRange(db.tbEmpresas.Select(tabla => new { empr_Id = tabla.empr_Id, empr_Nombre = tabla.empr_Nombre }).ToList());
             ViewBag.empr_Id = new SelectList(Empresas, "empr_Id", "empr_Nombre");
             return View();
         }
+        [HttpGet]
+        public JsonResult MunicipiosDDl (string id)
+        {
+            using (db = new ERP_GMEDINAEntities())
+            {
+                var Municipios = new List<object> { };
+                Municipios.AddRange(db.tbMunicipio
+                        .Select(tabla => new { mun_Codigo = tabla.mun_Codigo, mun_Nombre = tabla.mun_Nombre , dep_Codigo = tabla.dep_Codigo})
+                        .Where(x => x.dep_Codigo == id).ToList());
+                return Json(Municipios, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
 
         // POST: Sucursales/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -178,8 +202,27 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Edit(int? id)
         {
             db = new ERP_GMEDINAEntities();
-            //Nacionalidades
-            List<tbEmpresas> Empresas = new List<tbEmpresas> { };
+            ViewBag.suc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.suc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            var Departamentos = new List<object> { };
+            Departamentos.Add(new
+            { dep_Codigo = 0, dep_Nombre = "**Seleccione una opción**" });
+            Departamentos.AddRange(db.tbDepartamento.Select(tabla => new { dep_Codigo = tabla.dep_Codigo, dep_Nombre = tabla.dep_Nombre }).ToList());
+            ViewBag.dep_codigo = new SelectList(Departamentos, "dep_Codigo", "dep_Nombre");
+            var Municipio = new List<object> { };
+            Municipio.Add(new { mun_Codigo = 0, mun_Nombre = "**Seleccione una opción**" });
+            ViewBag.mun_codigo = new SelectList(Municipio, "mun_Codigo", "mun_Nombre");
+            var Bodega = new List<object> { };
+            Bodega.Add(new { bod_Id = 0, bod_Nombre = "**Seleccione una opción**" });
+            Bodega.AddRange(db.tbBodega.Select(tabla => new { bod_Id = tabla.bod_Id, bod_Nombre = tabla.bod_Nombre }).ToList());
+            ViewBag.bod_Id = new SelectList(Bodega, "bod_Id", "bod_Nombre");
+            var PuntoE = new List<object> { };
+            PuntoE.Add(new { pemi_Id = 0, pemi_NumeroCAI = "**Seleccione una opción**" });
+            Bodega.AddRange(db.tbPuntoEmision.Select(tabla => new { pemi_Id = tabla.pemi_Id, pemi_NumeroCAI = tabla.pemi_NumeroCAI }).ToList());
+            ViewBag.pemi_Id = new SelectList(Bodega, "pemi_Id", "pemi_NumeroCAI");
+            var Empresas = new List<object> { };
+            Empresas.Add(new { empr_Id = 0, empr_Nombre = "**Seleccione una opción**" });
+            Empresas.AddRange(db.tbEmpresas.Select(tabla => new { empr_Id = tabla.empr_Id, empr_Nombre = tabla.empr_Nombre }).ToList());
             ViewBag.empr_Id = new SelectList(Empresas, "empr_Id", "empr_Nombre");
 
             if (id == null)
@@ -194,6 +237,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     suc_Id = s.suc_Id,
                     empr_Id = s.empr_Id,
+                    dep_Codigo = s.tbMunicipio.tbDepartamento.dep_Codigo,
                     mun_Codigo = s.mun_Codigo,
                     bod_Id = s.bod_Id,
                     pemi_Id = s.pemi_Id,

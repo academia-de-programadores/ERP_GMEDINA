@@ -29,35 +29,35 @@
                 @Html.ValidationMessageFor(model => model.empr_Id, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(model => model.tbMunicipio.tbDepartamento.dep_Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("dep_Codigo", null, htmlAttributes: new { @class = "form-control required", @onchange ="LlenaMunicipios(this);" })
+                @Html.ValidationMessageFor(model => model.tbMunicipio.tbDepartamento.dep_Codigo, "", new { @class = "text-danger", @id = "errormun_Codigo" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.mun_Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenrFor(model => model.mun_Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("mun_Codigo", null, htmlAttributes: new { @class = "form-control required" })
                 @Html.ValidationMessageFor(model => model.mun_Codigo, "", new { @class = "text-danger", @id = "errormun_Codigo" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.bod_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control required valid" id="bod_Id" name="bod_Id">
-                    <option value="">*Seleccione una opción*</option>
-                    <option value="26">Bodega A</option>
-                    <option value="31">Bodega B</option>
-                    <option value="32">Bodega C</option>
-                </select>
-                @Html.ValidationMessageFor(model => model.bod_Id, "", new { @class = "text-danger" })
+                <select name="bod_Id" class="form-control required" id="bod_Id"></select>
+                @Html.ValidationMessageFor(model => model.bod_Id, "", new { @class = "text-danger", @id = "errorbod_Id" })
             </div>
         </div>
-
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.pemi_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.pemi_Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.pemi_Id, "", new { @class = "text-danger" })
+                <select name="pemi_Id" class="form-control required" id="pemi_Id"></select>
+                @Html.ValidationMessageFor(model => model.pemi_Id, "", new { @class = "text-danger", @id = "errorpemi_Id" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.suc_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
