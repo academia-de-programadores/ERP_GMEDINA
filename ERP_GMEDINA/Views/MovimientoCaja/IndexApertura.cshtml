@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.UDV_Vent_MovimientoCaja_Apertura>
-
+@{
+    ViewBag.Title = "Index Apertura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 @{
@@ -23,7 +26,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <table id="DataTable" class="table table-striped table-responsive table-bordered table-hover" >
+                    <table id="DataTable" class="table table-striped table-responsive table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>
@@ -36,10 +39,10 @@
                                     Descripción
                                 </th>
                                 <th>
-                                   Sucursal
+                                    Sucursal
                                 </th>
                                 <th class="hidden">
-                                 Id Solicitud
+                                    Id Solicitud
                                 </th>
                                 <th>Acciones</th>
                             </tr>
@@ -76,7 +79,7 @@
             </div>
         </div>
     </div>
- </div>
+</div>
 
 
 

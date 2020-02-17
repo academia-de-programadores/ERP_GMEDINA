@@ -99,6 +99,7 @@ function validarPermisoUsuario(sPantalla, arreglo) {
     return status;
 }
 
+$.getScript("SerializeDate.js");
 
 function userModelState(sPantalla) {
     var response = {
@@ -107,7 +108,7 @@ function userModelState(sPantalla) {
     }
 
     // recuperar view model con la información del usuario
-    var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
+    var VM_ModelState = JSON.parse(localStorage.getItem("VM_ModelState"));
 
     // validar si el usuario es administrador
     if (VM_ModelState.EsAdmin == true) {
@@ -182,7 +183,7 @@ function userModelStateNoTzt(sPantalla) {
     }
 
     // recuperar view model con la información del usuario
-    var VM_ModelState = JSON.parse(sessionStorage.getItem("VM_ModelState"));
+    var VM_ModelState = JSON.parse(localStorage.getItem("VM_ModelState"));
 
     // validar si el usuario tiene acceso a la accion o pantalla
     if (validarPermisoUsuario(sPantalla, VM_ModelState.ListaPantallas.List) == false) {
