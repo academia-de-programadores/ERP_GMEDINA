@@ -315,7 +315,6 @@ $("#btnActualizar").click(function () {
 
 function tablaEditar(ID) {
     id = ID;
-    useModelState
     var validacionPermiso = userModelState("Requisiciones/Edit");
     if (validacionPermiso.status == true) {
         sessionStorage.setItem("IdRequisicion", id);
