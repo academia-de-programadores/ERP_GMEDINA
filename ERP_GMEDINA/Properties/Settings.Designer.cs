@@ -26,9 +26,9 @@ namespace ERP_GMEDINA.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tcp:academiaprogramadores2019.database.windows.net,1433;Initial Catal" +
-            "og=ERP_GMEDINA;Persist Security Info=True;User ID=AHMsps;Password=Academy2018;Mu" +
-            "ltipleActiveResultSets=True;Application Name=EntityFramework")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ahmdb.canbbevbcgld.us-west-2.rds.amazonaws.com;Initial Catalog=ERP_GM" +
+            "EDINA2;Persist Security Info=True;User ID=ahm;Password=AHm%B1DDs9;MultipleActive" +
+            "ResultSets=True;Application Name=EntityFramework")]
         public string ERP_GMEDINAConnectionString {
             get {
                 return ((string)(this["ERP_GMEDINAConnectionString"]));

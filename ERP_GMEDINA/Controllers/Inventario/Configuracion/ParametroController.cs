@@ -67,7 +67,7 @@ namespace ERP_GMEDINA.Controllers
         [SessionManager("Parametro/Create")]
         public ActionResult Create()
         {
-            ViewBag.sucursal = new SelectList(db.tbSucursal, "suc_Id", "suc_Descripcion");
+            ViewBag.sucursal = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             ViewBag.par_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.par_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.mnda_Id = new SelectList(db.tbMoneda, "mnda_Id", "mnda_Abreviatura");
