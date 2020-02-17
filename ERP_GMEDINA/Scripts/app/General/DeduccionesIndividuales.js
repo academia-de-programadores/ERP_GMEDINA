@@ -518,10 +518,10 @@ function ValidarEditarDeduccionIndividual(Motivo, IdEmp, Monto, NumeroCuotas, Mo
     if (IdEmp != "-1") {
         if (IdEmp == 0 || IdEmp == null) {
             pasoValidacionCrear = false;
-            $("#Editar #valEmpId").css("display", "");
+            $("#Editar #valEmpledoRequerido").css("display", "");
             $("#Editar #astEmpId").css("color", "red");
         } else {
-            $("#Editar #valEmpId").css("display", "none");
+            $("#Editar #valEmpledoRequerido").css("display", "none");
             $("#Editar #astEmpId").css("color", "black");
         }
     }
@@ -751,6 +751,12 @@ $("#btnCerrarEditar").click(function () {
     limpiarAsteriscos("Editar");
     limpiarSpan("Editar");
     $("#EditarDeduccionesIndividuales").modal('hide');
+    $("#Editar #dei_Monto").removeAttr("readonly");
+    $("#Editar #dei_Monto").removeClass("readOnly");
+    $("#Editar #dei_NumeroCuotas").removeAttr("readonly");
+    $("#Editar #dei_NumeroCuotas").removeClass("readOnly");
+    $("#Editar #dei_MontoCuota").attr("readonly", "readonly");
+    $("#Editar #dei_MontoCuota").addClass("readOnly");
 });
 
 

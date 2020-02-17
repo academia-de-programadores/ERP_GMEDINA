@@ -630,8 +630,20 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
     }
 });
 
+
+$('#btnEditarTecho').click(function () {
+    $('#btnEditarTecho').attr('disabled', false);
+    $('#btnConfirmarEditar').attr('disabled', false);
+
+    if (validacionEditar()) {
+        $("#EditarTechosDeducciones").modal('hide');
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+    }
+});
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditarTecho").click(function () {
+$("#btnConfirmarEditar").click(function () {
+    $('#btnConfirmarEditar').attr('disabled', true);
     var deduccionE = $("#Editar #cde_IdDeducciones").val();
     var techoE = $("#Editar #tddu_Techo").val();
     var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
@@ -658,7 +670,7 @@ $("#btnEditarTecho").click(function () {
             else {
                 cargarGridTechosDeducciones();
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarTechosDeducciones").modal('hide');
+                $("#ConfirmarEdicion").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
@@ -675,6 +687,11 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarTechosDeducciones").modal('hide');
 });
 
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+    $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+});
+
 //quitar Confirmacion
 $('#btnNoInactivar').click(function () {
     $("#InactivarTechosDeducciones").modal('hide');
@@ -686,13 +703,15 @@ $('#btnNoInactivar').click(function () {
 $(document).on("click", "#btnInactivarTechoDeducciones", function () {
     var validacionPermiso = userModelState("TechosDeducciones/Inactivar");
     if (validacionPermiso.status == true) {
-            $("#EditarTechosDeducciones").modal('hide');
+        $('#btnInactivarTechosDeducciones').attr('disabled', false);
+            $("#btnInactivarTechosDeducciones").modal('hide');
             $("#InactivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
     }
 });
 
 //Inactivar registro Techos Deducciones
 $("#btnInactivarTechosDeducciones").click(function () {
+    $('#btnInactivarTechosDeducciones').attr('disabled', true);
     var data = $("#frmInactivarTechosDeducciones").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -792,12 +811,13 @@ $(document).on("click", "#btnActivarTechosDeducciones", function () {
     if (validacionPermiso.status == true) {
         activarID = $(this).data('id');
         $("#ActivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+        $('#btnActivarTechosDeduccionesEjecutar').attr('disabled', false);
     }
 });
 
 //activar ejecutar
 $("#btnActivarTechosDeduccionesEjecutar").click(function () {
-
+    $('#btnActivarTechosDeduccionesEjecutar').attr('disabled', true);
     $.ajax({
         url: "/TechosDeducciones/Activar/" + activarID,
         method: "POST",
