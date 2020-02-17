@@ -514,8 +514,6 @@ function OcultarValidacionesCrear() {
     $('#Crear #asteriscoTipoIngreso').removeClass('text-danger');
     //REMOVER EL TEXT DANGER DEL ASTERISCO
     $('#asteriscoCreate').removeClass('text-danger');
-    
-    $("#Crear #idTipoIngreso").val("0");
 }
 
 //OCULTAR LAS VALIDACIONES DE EDITAR
@@ -529,20 +527,3 @@ function OcultarValidacionesEditar() {
     $('#Editar #asteriscoEdit').removeClass('text-danger');
     $('#Editar #asteriscoTipoIngreso').removeClass('text-danger');
 }
-
-$('#Crear #idTipoIngreso').blur(function () {
-    let idTipoIngreso = $(this).val();
-    if (idTipoIngreso == "" || idTipoIngreso == 0 || idTipoIngreso == "0") {
-        $("#Crear #idTipoIngreso").val("0");
-        //MOSTRAR DATAANNOTATIONS
-        $("#Crear #valTipoIngreso").show();
-        //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
-        $("#Crear #asteriscoTipoIngreso").addClass("text-danger");
-    }
-    else {
-        //OCULTAR DATAANNOTATIONS
-        $("#Crear #valTipoIngreso").hide();
-        //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-        $("#Crear #asteriscoTipoIngreso").removeClass("text-danger");
-    }
-});
