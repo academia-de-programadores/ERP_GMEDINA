@@ -6,7 +6,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
         //
     })
     .fail(function (jqxhr, settings, exception) {
-        
+
     });
 
 
@@ -88,7 +88,7 @@ $(document).on("click", "#btnAgregarInstitucion", function () {
         Vaciar_ModalCrear();
         //MOSTRAR EL MODAL DE AGREGAR
         $("#CrearInstitucion").modal({ backdrop: 'static', keyboard: false });
-    }  
+    }
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
@@ -195,7 +195,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnModalEditarINFS", function 
         }).fail(function (jqxhr, settings, exception) {
 
         }); // activar
-        
+
         // termina activar
     }
 });
@@ -321,7 +321,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnModalDetallesINFS", functio
 
                     /* AUDITORIA */
                     $("#frmDetallesInstitucionFinanciera #tbUsuario_usu_NombreUsuario").html(data[0].insf_UsuarioCrea_Nombres);
-                    $("#frmDetallesInstitucionFinanciera #fpa_FechaCrea").html(FechaCrea);
+                    $("#frmDetallesInstitucionFinanciera #insf_FechaCrea").html(FechaCrea);
 
                     $("#frmDetallesInstitucionFinanciera #tbUsuario1_usu_NombreUsuario").html((data[0].insf_UsuarioModifica_Nombres == null) ? "Sin modificaciones" : data[0].insf_UsuarioModifica_Nombres);
                     $("#frmDetallesInstitucionFinanciera #insf_FechaModifica").html(FechaModifica);
@@ -338,7 +338,7 @@ $(document).on("click", "#IndexTabla tbody tr td #btnModalDetallesINFS", functio
                     });
                 }
             });
-    }  
+    }
 });
 
 
@@ -419,7 +419,7 @@ $(document).on("click", "#btnModalActivarINFS", function () {
         activarID = $(this).data('id');
         //DESPLEGAR EL MODAL DE ACTIVAR
         $("#frmActivarINFS").modal({ backdrop: 'static', keyboard: false });
-    }  
+    }
 });
 
 //CONFIRMAR ACTIVAR
@@ -495,6 +495,7 @@ function Vaciar_ModalCrear() {
     //
     //OCULTAR DATAANNOTATIONS
     $("#Crear #Span_insf_Correo").hide();
+    $("#Crear #Span_insf_Correo_Validar").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
 
@@ -529,6 +530,7 @@ function Vaciar_ModalEditar() {
     //
     //OCULTAR DATAANNOTATIONS
     $("#Editar #Span_insf_Correo").hide();
+    $("#Editar #Span_insf_Correo_Validar").hide();
     //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
     $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
 
@@ -638,18 +640,6 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
         //FORMATO DE LA MASCARA
         emailRegex = /^[-\w.%+]{1,50}@(?:[A-Z0-9-]{1,50}\.){1,100}[A-Z]{2,50}$/i;
 
-        //VALIDAR
-        if (!emailRegex.test(insf_Correo)) {
-            //MOSTRAR LA VALIDACIÓN DE CORREO
-            $("#Crear #Span_insf_Correo").hide();
-            $("#Crear #Span_insf_Correo_Validar").show();
-            $("#Crear #Asterisco_insf_Correo").addClass("text-danger");
-        } else {
-            //MOSTRAR LA VALIDACIÓN DE CORREO
-            $("#Crear #Span_insf_Correo_Validar").hide();
-            $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
-        }
-
         //VALIDAR ESPACIOS EN BLANCO
         var LengthString = insf_Correo.length;
         if (LengthString > 1) {
@@ -672,12 +662,26 @@ function DataAnnotationsCrear(insf_DescInstitucionFinanc, insf_Contacto, insf_Te
             //CAMBIAR EL COLOR DEL ASTERISCO A ROJO
             $("#Crear #Asterisco_insf_Correo").addClass("text-danger");
             ModelState = false;
+
         }
         else {
             //OCULTAR DATAANNOTATIONS
             $("#Crear #Span_insf_Correo").hide();
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
+
+            //VALIDAR
+            if (!emailRegex.test(insf_Correo)) {
+                //MOSTRAR LA VALIDACIÓN DE CORREO
+                $("#Crear #Span_insf_Correo").hide();
+                $("#Crear #Span_insf_Correo_Validar").show();
+                $("#Crear #Asterisco_insf_Correo").addClass("text-danger");
+                ModelState = false;
+            } else {
+                //MOSTRAR LA VALIDACIÓN DE CORREO
+                $("#Crear #Span_insf_Correo_Validar").hide();
+                $("#Crear #Asterisco_insf_Correo").removeClass("text-danger");
+            }
         }
     }
 
@@ -789,18 +793,6 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
         //FORMATO DE LA MASCARA
         emailRegex = /^[-\w.%+]{1,50}@(?:[A-Z0-9-]{1,50}\.){1,100}[A-Z]{2,50}$/i;
 
-        //VALIDAR
-        if (!emailRegex.test(insf_Correo)) {
-            //MOSTRAR LA VALIDACIÓN DE CORREO
-            $("#Editar #Span_insf_Correo").hide();
-            $("#Editar #Span_insf_Correo_Validar").show();
-            $("#Editar #Asterisco_insf_Correo").addClass("text-danger");
-        } else {
-            //MOSTRAR LA VALIDACIÓN DE CORREO
-            $("#Editar #Span_insf_Correo_Validar").hide();
-            $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
-        }
-
         //VALIDAR ESPACIOS EN BLANCO
         var LengthString = insf_Correo.length;
         if (LengthString > 1) {
@@ -828,6 +820,19 @@ function DataAnnotationsEditar(insf_DescInstitucionFinanc, insf_Contacto, insf_T
             $("#Editar #Span_insf_Correo").hide();
             //CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
             $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
+
+            //VALIDAR
+            if (!emailRegex.test(insf_Correo)) {
+                //MOSTRAR LA VALIDACIÓN DE CORREO
+                $("#Editar #Span_insf_Correo").hide();
+                $("#Editar #Span_insf_Correo_Validar").show();
+                $("#Editar #Asterisco_insf_Correo").addClass("text-danger");
+                ModelState = false;
+            } else {
+                //MOSTRAR LA VALIDACIÓN DE CORREO
+                $("#Editar #Span_insf_Correo_Validar").hide();
+                $("#Editar #Asterisco_insf_Correo").removeClass("text-danger");
+            }
         }
     }
 

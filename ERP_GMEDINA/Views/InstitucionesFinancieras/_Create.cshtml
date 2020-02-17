@@ -1,5 +1,4 @@
 ﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateInstitucionFinanciera" }))
 {
     <div class="modal-body" id="Crear">
@@ -8,7 +7,6 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.insf_UsuarioCrea)
             @Html.HiddenFor(model => model.insf_FechaCrea)
-
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label" })
@@ -19,7 +17,6 @@
                     <span class="text-danger" style="display:none;" id="Span_insf_DescInstitucionFinanc">El campo Descripción es requerido.</span>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label" })
@@ -30,7 +27,6 @@
                     <span class="text-danger" style="display:none;" id="Span_insf_Contacto">El campo Contacto es requerido.</span>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label" })
@@ -41,19 +37,17 @@
                     <span class="text-danger" style="display:none;" id="Span_insf_Telefono">El campo Teléfono es requerido.</span>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label" })
                     <label class="" id="Asterisco_insf_Correo">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control Email", @type = "email", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value)", @autocomplete = "off" } })
+                    @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control Email", @onkeyup = "DataAnnotationsCrear('-1', '-1', '-1', this.value)", @autocomplete = "off" } })
                     <span class="text-danger" style="display:none;" id="Span_insf_Correo">El campo correo es requerido.</span>
                     <span class="text-danger" style="display:none;" id="Span_insf_Correo_Validar">Ingrese un correo válido.</span>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="modal-footer">
