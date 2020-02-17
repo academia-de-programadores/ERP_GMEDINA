@@ -435,7 +435,8 @@ namespace ERP_GMEDINA.Controllers
                 TipoDenominacion = x.tbDenominacion.deno_Tipo == 1 ? "Billete" : "Moneda",
                 x.tbDenominacion.deno_Descripcion,
                 x.tbDenominacion.deno_valor,
-                x.arqde_CantidadDenominacion
+                x.arqde_CantidadDenominacion,
+                x.arqde_MontoDenominacion
             }), JsonRequestBehavior.AllowGet);
         }
 

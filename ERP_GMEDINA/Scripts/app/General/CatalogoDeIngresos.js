@@ -174,13 +174,13 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                     var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
                     $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
                     $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
-                    $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
-                    $("#Detallar #cin_FechaCrea").val(FechaCrea);
+                    $("#Detallar #cin_UsuarioCrea").html(data[0].cin_UsuarioCrea);
+                    $("#Detallar #cin_FechaCrea").html(FechaCrea);
                     $("#Detallar #tipoDeIngresoDetalle").html(tipoIngreso);
-                    data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                    $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                    $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
-                    $("#Detallar #cin_FechaModifica").val(FechaModifica);
+                    data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detallar #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detallar #cin_UsuarioModifica").html(data[0].cin_UsuarioModifica);
+                    $("#Detallar #cin_FechaModifica").html(FechaModifica);
                     $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
 
                 }
