@@ -630,8 +630,19 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
     }
 });
 
+
+$('#btnEditarTecho').click(function () {
+    $('#btnEditarTecho').attr('disabled', false);
+    $('#btnConfirmarEditar').attr('disabled', false);
+
+    if (validacionEditar()) {
+        $("#EditarTechosDeducciones").modal('hide');
+        $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+    }
+});
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditarTecho").click(function () {
+$("#btnConfirmarEditar").click(function () {
     var deduccionE = $("#Editar #cde_IdDeducciones").val();
     var techoE = $("#Editar #tddu_Techo").val();
     var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
@@ -658,7 +669,7 @@ $("#btnEditarTecho").click(function () {
             else {
                 cargarGridTechosDeducciones();
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarTechosDeducciones").modal('hide');
+                $("#ConfirmarEdicion").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
@@ -673,6 +684,11 @@ $("#btnEditarTecho").click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarTechosDeducciones").modal('hide');
+});
+
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+    $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
 });
 
 //quitar Confirmacion
