@@ -5,30 +5,35 @@
 
 		<div class="form-group">
 			<div class="row">
-				<div class="col-md-6">
-                    Comisión<label id="ComisionAsterisco">*</label>                         
-                    <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control" onchange = "ValidarCamposCrear(this.value, '-1', '-1', '-1')" ></select>
-                    <span class="field-validation-valid text-danger" style="display: none;" id="Validation_IdIngreso">Campo Comisión requerido</span>
-            	</div>
-                <div class="col-md-6">
-                    Porcentaje Comision<label id="PorcentajeAsterisco">*</label>
-                    @Html.EditorFor(model => model.tc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', '-1', '-1', this.value)" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="Porcentaje_Validation">Campo Porcentaje Comisión requerido</span>
-                    <span class="field-validation-valid text-danger" style="display: none;" id="Porcentaje_Validation2">El campo Porcentaje Comisión debe ser mayor que cero</span>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        Comisión<label id="ComisionAsterisco">*</label>
+                        <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control" onchange="ValidarCamposCrear(this.value, '-1', '-1', '-1')"></select>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="Validation_IdIngreso">Campo Comisión requerido</span>
+                    </div>
+                    <div class="col-md-6">
+                        Porcentaje Comision<label id="PorcentajeAsterisco">*</label>
+                        @Html.EditorFor(model => model.tc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', '-1', '-1', this.value)" } })
+                        <span class="field-validation-valid text-danger" style="display: none;" id="Porcentaje_Validation">Campo Porcentaje Comisión requerido</span>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="Porcentaje_Validation2">El campo Porcentaje Comisión debe ser mayor que cero</span>
+                    </div>
                 </div>
 			</div>
+            <br />
             <div class="row">
-                <div class="col-md-6">
-                    Rango Inicio<label id="InicioAsterisco">*</label>
-                    @Html.EditorFor(model => model.tc_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', this.value, '-1', '-1')" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="RangoInicio_Validation">Campo Rango Inicio requerido</span>
-                    <span class="field-validation-valid text-danger" style="display: none;" id="RangoInicio_Validation2">El campo Rango Inicio debe ser mayor que cero</span>
-                </div>
-                <div class="col-md-6">
-                    Rango Fin<label id="FinAsterisco">*</label>
-                    @Html.EditorFor(model => model.tc_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', '-1', this.value, '-1')" } })
-                    <span class="field-validation-valid text-danger" style="display: none;" id="RangoFin_Validation">Campo Rango Fin requerido</span>
-                    <span class="field-validation-valid text-danger" style="display: none;" id="RangoFin_Validation2">El campo Rango Fin debe ser mayor que cero</span>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        Rango Inicio<label id="InicioAsterisco">*</label>
+                        @Html.EditorFor(model => model.tc_RangoInicio, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', this.value, '-1', '-1')" } })
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoInicio_Validation">Campo Rango Inicio requerido</span>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoInicio_Validation2">El campo Rango Inicio debe ser mayor que cero</span>
+                    </div>
+                    <div class="col-md-6">
+                        Rango Fin<label id="FinAsterisco">*</label>
+                        @Html.EditorFor(model => model.tc_RangoFin, new { htmlAttributes = new { @class = "form-control MascaraCantidad soloNumero", @autocomplete = "off", @onkeyup = "ValidarCamposCrear('-1', '-1', this.value, '-1')" } })
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoFin_Validation">Campo Rango Fin requerido</span>
+                        <span class="field-validation-valid text-danger" style="display: none;" id="RangoFin_Validation2">El campo Rango Fin debe ser mayor que cero</span>
+                    </div>
                 </div>
             </div>
 		</div>
