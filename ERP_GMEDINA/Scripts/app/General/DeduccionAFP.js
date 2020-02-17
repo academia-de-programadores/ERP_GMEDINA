@@ -332,6 +332,10 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
             }
         });
     }
+    else {
+        document.getElementById("btnCreateRegistroDeduccionAFP").disabled = false;
+        ValidarCampos(empId, Aporte, AFP);
+    }
 });
 // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
 $("#frmCreateDeduccionAFP").submit(function (e) {
