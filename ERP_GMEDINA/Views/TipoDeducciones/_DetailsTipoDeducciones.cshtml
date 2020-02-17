@@ -3,15 +3,14 @@
 {
     @Html.AntiForgeryToken()
     <!-- Nuevo diseño -->
-    <div class="ibox-content">
+    <div class="ibox-content" style="border-color:#fff;">
         <div class="form-horizontal">
-            
             <div class="row">
                 <div class="col-md-6">
-                    Descripción
+                    @Html.LabelFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                 </div>
                 <div class="col-md-6">
-                    <span id="tde_Descripcion">@Html.DisplayFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "text-box single-line" } })</span>
+                    <span id="tde_Descripcion">@Html.DisplayFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                 </div>
             </div>
         </div>
