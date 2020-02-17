@@ -692,22 +692,30 @@ function ocultarCargandoCrear() {
 }
 
 //Region Blur
-$('#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion').blur(function () {
-    if (
-        $(this)
-            .val()
-            .trim() == ''
-    ) {
+$('#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion').keyup(function () {
+    let Descripcion = $("#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion").val();
+    let hayAlgo = true;
+    var LengthString = Descripcion.length;
+    if (LengthString > 1) {
+        var FirstChar = LengthString - 2;
+        var LastChar = Descripcion.substring(FirstChar, LengthString);
+    }
+    if (LastChar == "  ") {
+        $("#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion").val(Descripcion.substring(0, FirstChar + 1));
+    }
+    if (Descripcion == "" || Descripcion == " " || Descripcion == "  " || Descripcion == null || Descripcion == undefined) {
+        if (Descripcion == ' ')
+            $("#Crear #cde_DescripcionDeduccionA, #Editar #cde_DescripcionDeduccion").val("");
+        hayAlgo = false;
         $("#Crear #Validation_descipcionA, #Editar #validareditar1").css("display", "block");
         $("#Crear #AsteriscoDescripcionDedu, #Editar #AsteriscoDescripcionDeduEdit").addClass("text-danger");
-
     } else {
         $("#Crear #Validation_descipcionA, #Editar #validareditar1").css("display", "none");
         $("#Crear #AsteriscoDescripcionDedu, #Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
     }
 });
 
-$('#Crear #tde_IdTipoDedu').blur(function () {
+$('#Crear #tde_IdTipoDedu').keyup(function () {
     let tde_IdTipoDedu = $(this).val();
     if (tde_IdTipoDedu == "" || tde_IdTipoDedu == 0 || tde_IdTipoDedu == "0") {
         $("#Crear #Validation_descipcion2A").css("display", "block");
@@ -719,7 +727,7 @@ $('#Crear #tde_IdTipoDedu').blur(function () {
     }
 });
 
-$('#Crear #cde_PorcentajeColaboradorA, #Editar #cde_PorcentajeColaborador').blur(function () {
+$('#Crear #cde_PorcentajeColaboradorA, #Editar #cde_PorcentajeColaborador').keyup(function () {
     let valor = $(this).val();
     let hayAlgo = true;
     if (valor == "" || valor == null || valor == undefined || valor == 0 || valor == "0" || valor == 0.0 || valor == "0.0") {
@@ -745,7 +753,7 @@ $('#Crear #cde_PorcentajeColaboradorA, #Editar #cde_PorcentajeColaborador').blur
     }
 });
 
-$('#Crear #cde_PorcentajeEmpresaA, #Editar #cde_PorcentajeEmpresa').blur(function () {
+$('#Crear #cde_PorcentajeEmpresaA, #Editar #cde_PorcentajeEmpresa').keyup(function () {
     let valor = $(this).val();
     let hayAlgo = true;
     if (valor == "" || valor == null) {
