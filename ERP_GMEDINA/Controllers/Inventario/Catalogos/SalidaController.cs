@@ -39,8 +39,16 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult GetLastRecord()
         {
             //var lastRecord = db.Set<tbSalida>().OrderByDescending(x => x.sal_Id).First().sal_Id;
-            var lastRecord = db.tbSalida.OrderByDescending(x => x.sal_Id).First().sal_Id;
-            return Json(lastRecord, JsonRequestBehavior.AllowGet);
+            try
+            { 
+                var lastRecord = db.tbSalida.OrderByDescending(x => x.sal_Id).First().sal_Id;
+                return Json(lastRecord, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                tbSalida Err = new tbSalida();
+                return Json(Err, JsonRequestBehavior.AllowGet);
+            }
         }
         //[WebMethod]
         //public static object GetProductoList(int bod_Id)
