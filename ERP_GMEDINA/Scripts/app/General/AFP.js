@@ -70,14 +70,14 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
         //mostrar el Modal activar
         $("#ActivarAFP").modal();
     }
-    
+
 });
 
 // activar 2
 $("#btnActivarRegistroAFP").click(function () {
 
     // inhabilitar el boton
-    $("#btnActivarRegistroAFP").attr('disabled', false);
+    $("#btnActivarRegistroAFP").attr('disabled', true);
     let ID = activarID;
 
 
@@ -202,7 +202,7 @@ $(document).on("click", "#btnAgregarAFP", function () {
         //mostrar modal
         $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
     }
-    
+
 
 });
 
@@ -235,7 +235,7 @@ $('#btnCreateRegistroAFP').click(function () {
         $("#Crear #validation_DescripcionNumerico").css('display', '');
         modalState = false;
     }
-    // si no es un número
+        // si no es un número
     else if (isNaN(descripcion) == true) {
 
         $('#asiteriscoDescripcion').removeClass('text-danger');
@@ -263,7 +263,7 @@ $('#btnCreateRegistroAFP').click(function () {
     // validar interes aporte
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAporte").val()) > 0) {
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
 
         $('#astericoInteresAporte').removeClass('text-danger');
         $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
@@ -412,7 +412,7 @@ $('#Crear #afp_Descripcion').keyup(function () {
         $('#asiteriscoDescripcion').addClass("text-danger");
         $("#Crear #validation_DescripcionNumerico").css('display', '');
     }
-    // si es un número
+        // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#asiteriscoDescripcion').removeClass('text-danger');
@@ -441,7 +441,7 @@ $('#Crear #afp_AporteMinimoLps').keyup(function () {
 $('#Crear #afp_InteresAporte').keyup(function () {
 
     // si es menor que cero
-    if (parseInt($("#Crear #afp_InteresAporte").val()) > 0) {
+    if (parseInt($("#Crear #afp_InteresAporte").val()) >= 0) {
 
         $('#astericoInteresAporte').removeClass('text-danger');
         $("#Crear #validation_InteresAporteMenorACero").css('display', 'none');
@@ -566,7 +566,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({ ID })
-                        })
+                    })
                         .done(function (data) {
 
                             // limipiar ddl
@@ -639,7 +639,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                 }
             });
     }
-  
+
 });
 
 // editar 2
@@ -672,7 +672,7 @@ $("#btnEditAFP").click(function () {
         $("#Editar #validation_EditarDescripcionNumerico").css('display', '');
         modalState = false;
     }
-    // si es un número
+        // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#EditarasiteriscoDescripcion').removeClass('text-danger');
@@ -700,7 +700,7 @@ $("#btnEditAFP").click(function () {
     // validar interes aporte
 
     // si es menor que cero
-    if (parseInt($("#Editar #afp_InteresAporte").val()) > 0) {
+    if (parseInt($("#Editar #afp_InteresAporte").val()) >= 0) {
 
         $('#EditarastericoInteresAporte').removeClass('text-danger');
         $("#Editar #validation_EditarInteresAporteMenorACero").css('display', 'none');
@@ -786,7 +786,7 @@ $("#btnEditAFP").click(function () {
     }
     else {
         $("#btnEditAFP").attr('disabled', false);
-       
+
     }
 
 
@@ -816,7 +816,7 @@ $('#Editar #afp_Descripcion').keyup(function () {
         $('#EditarasiteriscoDescripcion').addClass("text-danger");
         $("#Editar #validation_EditarDescripcionNumerico").css('display', '');
     }
-    // si es un número
+        // si es un número
     else if (isNaN(descripcion) == true) {
 
         $('#EditarasiteriscoDescripcion').removeClass('text-danger');
@@ -873,7 +873,7 @@ $('#Editar #afp_InteresAporte').keyup(function () {
 $('#Editar #afp_InteresAnual').keyup(function () {
 
     // si es menor que cero
-    if (parseInt($("#Editar #afp_InteresAnual").val()) >= 0) {
+    if (parseInt($("#Editar #afp_InteresAnual").val()) > 0) {
 
         $('#EditarastericosInteresAnual').removeClass('text-danger');
         $("#Editar #validation_EditarInteresAnualMenorACero").css('display', 'none');
@@ -1048,7 +1048,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
             });
     }
 
-   
+
 });
 
 
@@ -1081,7 +1081,7 @@ $(document).on("click", "#btnInactivarAFP", function () {
         $("#EditarAFP").modal('hide');
         $("#InactivarAFP").modal({ backdrop: 'static', keyboard: false });
     }
-    
+
 
 });
 
@@ -1139,9 +1139,9 @@ function _ajax(params, uri, type, callback) {
         url: uri,
         type: type,
         data: { params },
-        success: function (data) {
-            callback(data);
-        }
+                success: function (data) {
+                    callback(data);
+                }
     });
 }
 
