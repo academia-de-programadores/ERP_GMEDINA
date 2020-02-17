@@ -447,9 +447,9 @@ namespace ERP_GMEDINA.Controllers
 
 
             DateTime Date = DateTime.Today;
-            ViewBag.FechaApertura = db.tbMovimientoCaja.Where(x => x.usu_Id == idUser && x.mocja_FechaApertura == Date).Select(x => x.mocja_FechaApertura).SingleOrDefault();
+            ViewBag.FechaApertura = db.tbMovimientoCaja.Where(x => x.usu_Id == idUser && x.mocja_FechaApertura.Value.Day == Date.Day).Select(x => x.mocja_FechaApertura).FirstOrDefault();
 
-            var CajaAperturada = db.tbMovimientoCaja.Where(x => x.usu_Id == idUser && x.mocja_FechaApertura == Date).ToList();
+            var CajaAperturada = db.tbMovimientoCaja.Where(x => x.usu_Id == idUser && x.mocja_FechaApertura.Value.Day == Date.Day).ToList();
             if (CajaAperturada.Count() > 0)
             {
                 ///Cantidad para cada tipo de pago registrado en el dia
