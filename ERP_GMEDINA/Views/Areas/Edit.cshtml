@@ -92,10 +92,8 @@
 @Scripts.Render("~/Scripts/plugins/iziToast/iziToast")
  @Scripts.Render("~/plugins/customdataTables")
  @Scripts.Render("~/Scripts/app/general")
-
-@Scripts.Render("~/Scripts/app/general/Areas/Admin")
- 
-    @Scripts.Render("~/Scripts/app/general/EditArea")
+@Scripts.Render("~/Scripts/app/general/EditArea")
+@Scripts.Render("~/Scripts/app/general/Areas/Admin") 
  <script>
   var area_Id=@Html.DisplayFor(model => model.area_Id);
  </script>
