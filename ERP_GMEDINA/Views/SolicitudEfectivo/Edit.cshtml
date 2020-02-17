@@ -79,7 +79,7 @@
                                 @Html.LabelFor(model => model.mnda_Id, new { @class = "control-label col-md-2" })
                                 <div class="col-md-3">
                                     @Html.DropDownList("mnda_Id", null, "Seleccione la Moneda", new { @class = "form-control" })
-                                    @Html.TextBoxFor(model => model.mnda_Id, new { style = "display:none" })
+                         
                                     @Html.ValidationMessageFor(model => model.mnda_Id, "", new { style = "Color:red" })
                                 </div>
                             </div>
@@ -476,7 +476,6 @@
     @* ___________________________________________Guardar mas Detalle Denominación________________________________ *@
     <script>
         $('#guardaencabezado').click(function () {
-            $('#mnda_Id').attr("readOnly", "False");
             var obj = document.getElementById('mnda_Id');
             if (obj.getAttribute("readonly") == "readonly")
                 alert('Moneda es Nula');
@@ -517,15 +516,16 @@
                     })
                     .done(function (data) {
                         if (data == 'Error') {
-                            alert('No Enviado');
+                            alert('No Enviado');                            
                         }
                         else {
                             console.log(procesoData);
-                            console.log(cantisoli);
-                        }
+                            console.log(cantisoli);                            
+                        }                       
                     });
                 }
-            }
+                
+            }            
         });
     </script>
     @* ______________________Mas Detalle______________________________________ *@
