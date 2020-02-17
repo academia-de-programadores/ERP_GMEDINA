@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-group">@* TODO: Descomentar esta linea cuando este la relacion*@\
-                                @*@Html.LabelFor(model => model.tbEmpleado.emp_Nombres, "Cajero", new { @class = "control-label col-md-2" })*@
+                                @Html.LabelFor(model => model.tbEmpleado.tbPersonas.per_Nombres, "Cajero", new { @class = "control-label col-md-2" })
                                 <div class="col-md-3">
                                     <input class="form-control" readonly value="@UserName" />
                                 </div>

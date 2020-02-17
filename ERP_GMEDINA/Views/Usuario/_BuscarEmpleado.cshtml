@@ -31,15 +31,15 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr tr data-id="@item.emp_Id" data-name="@item.emp_Nombres " data-apellidos="@item.emp_Apellidos" data-email="@item.emp_Correoelectronico">
+                                    <tr tr data-id="@item.emp_Id" data-name="@item. " data-apellidos="@item.per_Id" data-email="@item.per_Id">
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.emp_Nombres)
+                                            @Html.DisplayFor(modelItem => item.per_Id)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.emp_Apellidos)
+                                            @Html.DisplayFor(modelItem => item.per_Id)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.emp_Correoelectronico)
+                                            @Html.DisplayFor(modelItem => item.per_Id)
                                         </td>
                                         <td>
                                             <button class="btn btn-primary btn-xs" value="@item.emp_Id" onclick="Seleccionar(@item.emp_Id)">Seleccionar</button>
