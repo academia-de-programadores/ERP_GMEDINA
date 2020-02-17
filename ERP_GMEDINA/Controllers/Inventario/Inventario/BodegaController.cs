@@ -546,11 +546,11 @@ namespace ERP_GMEDINA.Controllers
                 mun_Nombre = string.Concat(s.mun_Codigo + " - " + s.mun_Nombre)
             }).ToList();
 
-            var _EncargadoBodega = db.tbEmpleado.Select(s => new
+            var _EncargadoBodega = db.tbEmpleados.Select(s => new
             {
                 emp_Id = s.emp_Id,
-                emp_Nombres = s.emp_Nombres,
-                emp_Apellidos = string.Concat(s.emp_Nombres + " " + s.emp_Apellidos)
+                emp_Nombres = s.tbPersonas.per_Nombres,
+                emp_Apellidos = string.Concat(s.tbPersonas.per_Nombres + " " + s.tbPersonas.per_Apellidos)
             }).ToList();
 
             var _Empleado = db.tbBodega.Select(s=> new {
@@ -565,11 +565,11 @@ namespace ERP_GMEDINA.Controllers
 
         private void ResponsableBodega(int ID)
         {
-            var _EncargadoBodega = db.tbEmpleado.Select(s => new
+            var _EncargadoBodega = db.tbEmpleados.Select(s => new
             {
                 emp_Id = s.emp_Id,
-                emp_Nombres = s.emp_Nombres,
-                emp_Apellidos = string.Concat(s.emp_Nombres + " " + s.emp_Apellidos)
+                emp_Nombres = s.tbPersonas.per_Nombres,
+                emp_Apellidos = string.Concat(s.tbPersonas.per_Nombres + " " + s.tbPersonas.per_Apellidos)
             }).ToList();
 
             var _Empleado = db.tbBodega.Select(s => new {
@@ -578,11 +578,11 @@ namespace ERP_GMEDINA.Controllers
 
             var NotInRecord = _EncargadoBodega.Where(p => !_Empleado.Any(p2 => p2.bod_ResponsableBodega == p.emp_Id)).ToList();
 
-            var Actual = db.tbEmpleado.Select(s => new
+            var Actual = db.tbEmpleados.Select(s => new
             {
                 emp_Id = s.emp_Id,
-                emp_Nombres = s.emp_Nombres,
-                emp_Apellidos = string.Concat(s.emp_Nombres + " " + s.emp_Apellidos)
+                emp_Nombres = s.tbPersonas.per_Nombres,
+                emp_Apellidos = string.Concat(s.tbPersonas.per_Nombres + " " + s.tbPersonas.per_Apellidos)
             }).Where(s => s.emp_Id == ID).First();
 
             NotInRecord.Add(Actual);

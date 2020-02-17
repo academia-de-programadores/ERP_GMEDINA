@@ -5127,11 +5127,6 @@
     <Content Include="Views\Entrada\_IndexDetalleEntrada.cshtml" />
     <Content Include="Views\Entrada\_IndexEditar.cshtml" />
     <Content Include="Views\Entrada\_SeleccionaBox.cshtml" />
-    <Content Include="Views\Empleado-1\Create.cshtml" />
-    <Content Include="Views\Empleado-1\Delete.cshtml" />
-    <Content Include="Views\Empleado-1\Details.cshtml" />
-    <Content Include="Views\Empleado-1\Edit.cshtml" />
-    <Content Include="Views\Empleado-1\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Minor.cshtml" />
     <Content Include="Views\InventarioFisico\Create.cshtml" />
