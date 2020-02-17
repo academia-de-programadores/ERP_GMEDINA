@@ -119,7 +119,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#sue_Cantidad")["0"].innerText = obj[0].Sueldo;
                 //$("#ModalDetalles").find("#sue_UsuarioCrea")["0"].innerText = obj[0].Usuario_Crea;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].Usuario_Nombre;
-                $("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj[0].Fecha_Modifica);
+                $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj[0].Fecha_Crea);
                 $('#ModalDetalles').modal('show');
             }
         });
