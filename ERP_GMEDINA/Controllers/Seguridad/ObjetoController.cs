@@ -180,7 +180,7 @@ namespace ERP_GMEDINA.Controllers
                 tbObjeto obj = db.tbObjeto.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Acce_tbObjeto_Update_Estado(id, Helpers.ObjetoInactivo, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Acce_tbObjeto_Update_Estado(id, Models.Helpers.ObjetoInactivo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Acce_tbObjeto_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 
@@ -211,7 +211,7 @@ namespace ERP_GMEDINA.Controllers
                 tbObjeto obj = db.tbObjeto.Find(id);
                 IEnumerable<object> list = null;
                 var MsjError = "";
-                list = db.UDP_Acce_tbObjeto_Update_Estado(id, Helpers.ObjetoActivo, Function.GetUser(), Function.DatetimeNow());
+                list = db.UDP_Acce_tbObjeto_Update_Estado(id, Models.Helpers.ObjetoActivo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Acce_tbObjeto_Update_Estado_Result obje in list)
                     MsjError = obje.MensajeError;
 

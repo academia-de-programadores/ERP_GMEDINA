@@ -440,52 +440,6 @@
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Acce_tbAccesoRol_Delete", rol_IdParameter, obj_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Acce_tbAccesoRol_Insert(Nullable<int> rol_Id, Nullable<int> obj_Id, Nullable<int> usuarioCrea, Nullable<System.DateTime> fechaCrea)
-        {
-            var rol_IdParameter = rol_Id.HasValue ?
-                new ObjectParameter("rol_Id", rol_Id) :
-                new ObjectParameter("rol_Id", typeof(int));
-    
-            var obj_IdParameter = obj_Id.HasValue ?
-                new ObjectParameter("obj_Id", obj_Id) :
-                new ObjectParameter("obj_Id", typeof(int));
-    
-            var usuarioCreaParameter = usuarioCrea.HasValue ?
-                new ObjectParameter("UsuarioCrea", usuarioCrea) :
-                new ObjectParameter("UsuarioCrea", typeof(int));
-    
-            var fechaCreaParameter = fechaCrea.HasValue ?
-                new ObjectParameter("FechaCrea", fechaCrea) :
-                new ObjectParameter("FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbAccesoRol_Insert", rol_IdParameter, obj_IdParameter, usuarioCreaParameter, fechaCreaParameter);
-        }
-    
-        public virtual int UDP_Acce_tbAccesoRol_Update(Nullable<int> acrol_Id, Nullable<int> rol_Id, Nullable<int> obj_Id, Nullable<int> acrol_UsuarioCrea, Nullable<System.DateTime> acrol_FechaCrea)
-        {
-            var acrol_IdParameter = acrol_Id.HasValue ?
-                new ObjectParameter("acrol_Id", acrol_Id) :
-                new ObjectParameter("acrol_Id", typeof(int));
-    
-            var rol_IdParameter = rol_Id.HasValue ?
-                new ObjectParameter("rol_Id", rol_Id) :
-                new ObjectParameter("rol_Id", typeof(int));
-    
-            var obj_IdParameter = obj_Id.HasValue ?
-                new ObjectParameter("obj_Id", obj_Id) :
-                new ObjectParameter("obj_Id", typeof(int));
-    
-            var acrol_UsuarioCreaParameter = acrol_UsuarioCrea.HasValue ?
-                new ObjectParameter("acrol_UsuarioCrea", acrol_UsuarioCrea) :
-                new ObjectParameter("acrol_UsuarioCrea", typeof(int));
-    
-            var acrol_FechaCreaParameter = acrol_FechaCrea.HasValue ?
-                new ObjectParameter("acrol_FechaCrea", acrol_FechaCrea) :
-                new ObjectParameter("acrol_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Acce_tbAccesoRol_Update", acrol_IdParameter, rol_IdParameter, obj_IdParameter, acrol_UsuarioCreaParameter, acrol_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<string> UDP_Acce_tbBitacoraErrores_Insert(string bite_Pantalla, string bite_Usuario, Nullable<System.DateTime> bite_Fecha, string bite_MensajeError, string bite_Accion)
         {
             var bite_PantallaParameter = bite_Pantalla != null ?
@@ -509,86 +463,6 @@
                 new ObjectParameter("bite_Accion", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbBitacoraErrores_Insert", bite_PantallaParameter, bite_UsuarioParameter, bite_FechaParameter, bite_MensajeErrorParameter, bite_AccionParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Acce_tbRol_Inactivar(Nullable<int> iDRol, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
-        {
-            var iDRolParameter = iDRol.HasValue ?
-                new ObjectParameter("IDRol", iDRol) :
-                new ObjectParameter("IDRol", typeof(int));
-    
-            var rol_UsuarioModificaParameter = rol_UsuarioModifica.HasValue ?
-                new ObjectParameter("rol_UsuarioModifica", rol_UsuarioModifica) :
-                new ObjectParameter("rol_UsuarioModifica", typeof(int));
-    
-            var rol_FechaModificaParameter = rol_FechaModifica.HasValue ?
-                new ObjectParameter("rol_FechaModifica", rol_FechaModifica) :
-                new ObjectParameter("rol_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbRol_Inactivar", iDRolParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Acce_tbRol_Insert(string rol_Descripcion, Nullable<bool> rol_Estado, Nullable<int> rol_UsuarioCrea, Nullable<System.DateTime> rol_FechaCrea)
-        {
-            var rol_DescripcionParameter = rol_Descripcion != null ?
-                new ObjectParameter("rol_Descripcion", rol_Descripcion) :
-                new ObjectParameter("rol_Descripcion", typeof(string));
-    
-            var rol_EstadoParameter = rol_Estado.HasValue ?
-                new ObjectParameter("rol_Estado", rol_Estado) :
-                new ObjectParameter("rol_Estado", typeof(bool));
-    
-            var rol_UsuarioCreaParameter = rol_UsuarioCrea.HasValue ?
-                new ObjectParameter("rol_UsuarioCrea", rol_UsuarioCrea) :
-                new ObjectParameter("rol_UsuarioCrea", typeof(int));
-    
-            var rol_FechaCreaParameter = rol_FechaCrea.HasValue ?
-                new ObjectParameter("rol_FechaCrea", rol_FechaCrea) :
-                new ObjectParameter("rol_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbRol_Insert", rol_DescripcionParameter, rol_EstadoParameter, rol_UsuarioCreaParameter, rol_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Acce_tbRol_Update(Nullable<int> rol_Id, string rol_Descripcion, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
-        {
-            var rol_IdParameter = rol_Id.HasValue ?
-                new ObjectParameter("rol_Id", rol_Id) :
-                new ObjectParameter("rol_Id", typeof(int));
-    
-            var rol_DescripcionParameter = rol_Descripcion != null ?
-                new ObjectParameter("rol_Descripcion", rol_Descripcion) :
-                new ObjectParameter("rol_Descripcion", typeof(string));
-    
-            var rol_UsuarioModificaParameter = rol_UsuarioModifica.HasValue ?
-                new ObjectParameter("rol_UsuarioModifica", rol_UsuarioModifica) :
-                new ObjectParameter("rol_UsuarioModifica", typeof(int));
-    
-            var rol_FechaModificaParameter = rol_FechaModifica.HasValue ?
-                new ObjectParameter("rol_FechaModifica", rol_FechaModifica) :
-                new ObjectParameter("rol_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbRol_Update", rol_IdParameter, rol_DescripcionParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Acce_tbRolEstado_Update(Nullable<int> rol_Id, Nullable<bool> rol_Estado, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
-        {
-            var rol_IdParameter = rol_Id.HasValue ?
-                new ObjectParameter("rol_Id", rol_Id) :
-                new ObjectParameter("rol_Id", typeof(int));
-    
-            var rol_EstadoParameter = rol_Estado.HasValue ?
-                new ObjectParameter("rol_Estado", rol_Estado) :
-                new ObjectParameter("rol_Estado", typeof(bool));
-    
-            var rol_UsuarioModificaParameter = rol_UsuarioModifica.HasValue ?
-                new ObjectParameter("rol_UsuarioModifica", rol_UsuarioModifica) :
-                new ObjectParameter("rol_UsuarioModifica", typeof(int));
-    
-            var rol_FechaModificaParameter = rol_FechaModifica.HasValue ?
-                new ObjectParameter("rol_FechaModifica", rol_FechaModifica) :
-                new ObjectParameter("rol_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Acce_tbRolEstado_Update", rol_IdParameter, rol_EstadoParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
         }
     
         public virtual int UDP_Acce_tbRolesUsuario_Delete(Nullable<int> usu_Id, Nullable<int> rol_Id)
@@ -14773,6 +14647,132 @@
                 new ObjectParameter("obj_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbObjeto_Update_Estado_Result>("UDP_Acce_tbObjeto_Update_Estado", obj_IdParameter, obj_EstadoParameter, obj_UsuarioModificaParameter, obj_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbRolEstado_Update_Result> UDP_Acce_tbRolEstado_Update(Nullable<int> rol_Id, Nullable<bool> rol_Estado, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
+        {
+            var rol_IdParameter = rol_Id.HasValue ?
+                new ObjectParameter("rol_Id", rol_Id) :
+                new ObjectParameter("rol_Id", typeof(int));
+    
+            var rol_EstadoParameter = rol_Estado.HasValue ?
+                new ObjectParameter("rol_Estado", rol_Estado) :
+                new ObjectParameter("rol_Estado", typeof(bool));
+    
+            var rol_UsuarioModificaParameter = rol_UsuarioModifica.HasValue ?
+                new ObjectParameter("rol_UsuarioModifica", rol_UsuarioModifica) :
+                new ObjectParameter("rol_UsuarioModifica", typeof(int));
+    
+            var rol_FechaModificaParameter = rol_FechaModifica.HasValue ?
+                new ObjectParameter("rol_FechaModifica", rol_FechaModifica) :
+                new ObjectParameter("rol_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbRolEstado_Update_Result>("UDP_Acce_tbRolEstado_Update", rol_IdParameter, rol_EstadoParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbRol_Inactivar_Result> UDP_Acce_tbRol_Inactivar(Nullable<int> iDRol, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
+        {
+            var iDRolParameter = iDRol.HasValue ?
+                new ObjectParameter("IDRol", iDRol) :
+                new ObjectParameter("IDRol", typeof(int));
+    
+            var rol_UsuarioModificaParameter = rol_UsuarioModifica.HasValue ?
+                new ObjectParameter("rol_UsuarioModifica", rol_UsuarioModifica) :
+                new ObjectParameter("rol_UsuarioModifica", typeof(int));
+    
+            var rol_FechaModificaParameter = rol_FechaModifica.HasValue ?
+                new ObjectParameter("rol_FechaModifica", rol_FechaModifica) :
+                new ObjectParameter("rol_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbRol_Inactivar_Result>("UDP_Acce_tbRol_Inactivar", iDRolParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbAccesoRol_Insert_Result> UDP_Acce_tbAccesoRol_Insert(Nullable<int> rol_Id, Nullable<int> obj_Id, Nullable<int> usuarioCrea, Nullable<System.DateTime> fechaCrea)
+        {
+            var rol_IdParameter = rol_Id.HasValue ?
+                new ObjectParameter("rol_Id", rol_Id) :
+                new ObjectParameter("rol_Id", typeof(int));
+    
+            var obj_IdParameter = obj_Id.HasValue ?
+                new ObjectParameter("obj_Id", obj_Id) :
+                new ObjectParameter("obj_Id", typeof(int));
+    
+            var usuarioCreaParameter = usuarioCrea.HasValue ?
+                new ObjectParameter("UsuarioCrea", usuarioCrea) :
+                new ObjectParameter("UsuarioCrea", typeof(int));
+    
+            var fechaCreaParameter = fechaCrea.HasValue ?
+                new ObjectParameter("FechaCrea", fechaCrea) :
+                new ObjectParameter("FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbAccesoRol_Insert_Result>("UDP_Acce_tbAccesoRol_Insert", rol_IdParameter, obj_IdParameter, usuarioCreaParameter, fechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbRol_Insert_Result> UDP_Acce_tbRol_Insert(string rol_Descripcion, Nullable<bool> rol_Estado, Nullable<int> rol_UsuarioCrea, Nullable<System.DateTime> rol_FechaCrea)
+        {
+            var rol_DescripcionParameter = rol_Descripcion != null ?
+                new ObjectParameter("rol_Descripcion", rol_Descripcion) :
+                new ObjectParameter("rol_Descripcion", typeof(string));
+    
+            var rol_EstadoParameter = rol_Estado.HasValue ?
+                new ObjectParameter("rol_Estado", rol_Estado) :
+                new ObjectParameter("rol_Estado", typeof(bool));
+    
+            var rol_UsuarioCreaParameter = rol_UsuarioCrea.HasValue ?
+                new ObjectParameter("rol_UsuarioCrea", rol_UsuarioCrea) :
+                new ObjectParameter("rol_UsuarioCrea", typeof(int));
+    
+            var rol_FechaCreaParameter = rol_FechaCrea.HasValue ?
+                new ObjectParameter("rol_FechaCrea", rol_FechaCrea) :
+                new ObjectParameter("rol_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbRol_Insert_Result>("UDP_Acce_tbRol_Insert", rol_DescripcionParameter, rol_EstadoParameter, rol_UsuarioCreaParameter, rol_FechaCreaParameter);
+        }
+    
+        public virtual int UDP_Acce_tbAccesoRol_Update(Nullable<int> acrol_Id, Nullable<int> rol_Id, Nullable<int> obj_Id, Nullable<int> acrol_UsuarioCrea, Nullable<System.DateTime> acrol_FechaCrea)
+        {
+            var acrol_IdParameter = acrol_Id.HasValue ?
+                new ObjectParameter("acrol_Id", acrol_Id) :
+                new ObjectParameter("acrol_Id", typeof(int));
+    
+            var rol_IdParameter = rol_Id.HasValue ?
+                new ObjectParameter("rol_Id", rol_Id) :
+                new ObjectParameter("rol_Id", typeof(int));
+    
+            var obj_IdParameter = obj_Id.HasValue ?
+                new ObjectParameter("obj_Id", obj_Id) :
+                new ObjectParameter("obj_Id", typeof(int));
+    
+            var acrol_UsuarioCreaParameter = acrol_UsuarioCrea.HasValue ?
+                new ObjectParameter("acrol_UsuarioCrea", acrol_UsuarioCrea) :
+                new ObjectParameter("acrol_UsuarioCrea", typeof(int));
+    
+            var acrol_FechaCreaParameter = acrol_FechaCrea.HasValue ?
+                new ObjectParameter("acrol_FechaCrea", acrol_FechaCrea) :
+                new ObjectParameter("acrol_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Acce_tbAccesoRol_Update", acrol_IdParameter, rol_IdParameter, obj_IdParameter, acrol_UsuarioCreaParameter, acrol_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Acce_tbRol_Update_Result> UDP_Acce_tbRol_Update(Nullable<int> rol_Id, string rol_Descripcion, Nullable<int> rol_UsuarioModifica, Nullable<System.DateTime> rol_FechaModifica)
+        {
+            var rol_IdParameter = rol_Id.HasValue ?
+                new ObjectParameter("rol_Id", rol_Id) :
+                new ObjectParameter("rol_Id", typeof(int));
+    
+            var rol_DescripcionParameter = rol_Descripcion != null ?
+                new ObjectParameter("rol_Descripcion", rol_Descripcion) :
+                new ObjectParameter("rol_Descripcion", typeof(string));
+    
+            var rol_UsuarioModificaParameter = rol_UsuarioModifica.HasValue ?
+                new ObjectParameter("rol_UsuarioModifica", rol_UsuarioModifica) :
+                new ObjectParameter("rol_UsuarioModifica", typeof(int));
+    
+            var rol_FechaModificaParameter = rol_FechaModifica.HasValue ?
+                new ObjectParameter("rol_FechaModifica", rol_FechaModifica) :
+                new ObjectParameter("rol_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Acce_tbRol_Update_Result>("UDP_Acce_tbRol_Update", rol_IdParameter, rol_DescripcionParameter, rol_UsuarioModificaParameter, rol_FechaModificaParameter);
         }
     }
 }

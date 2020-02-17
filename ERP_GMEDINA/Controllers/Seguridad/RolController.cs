@@ -91,7 +91,7 @@ namespace ERP_GMEDINA.Controllers
                 IEnumerable<Object> List = null;
                 var Msj = "";
                 tbRol tbRol = db.tbRol.Find(id);
-                List = db.UDP_Acce_tbRolEstado_Update(id, Helpers.RolInactivo, Function.GetUser(), Function.DatetimeNow());
+                List = db.UDP_Acce_tbRolEstado_Update(id, Models.Helpers.RolInactivo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Acce_tbRolEstado_Update_Result Rol in List)
                     Msj = Rol.MensajeError;
             }
@@ -109,7 +109,7 @@ namespace ERP_GMEDINA.Controllers
                 IEnumerable<Object> List = null;
                 var Msj = "";
                 tbRol tbRol = db.tbRol.Find(id);
-                List = db.UDP_Acce_tbRolEstado_Update(id, Helpers.RolActivo, Function.GetUser(), Function.DatetimeNow());
+                List = db.UDP_Acce_tbRolEstado_Update(id, Models.Helpers.RolActivo, Function.GetUser(), Function.DatetimeNow());
                 foreach (UDP_Acce_tbRolEstado_Update_Result Rol in List)
                     Msj = Rol.MensajeError;
             }
@@ -207,7 +207,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         if (DescripcionRol != "")
                         {
-                            Rol = db.UDP_Acce_tbRol_Insert(DescripcionRol, Helpers.RolActivo, Function.GetUser(), Function.DatetimeNow());
+                            Rol = db.UDP_Acce_tbRol_Insert(DescripcionRol, Models.Helpers.RolActivo, Function.GetUser(), Function.DatetimeNow());
                             foreach (UDP_Acce_tbRol_Insert_Result vRol in Rol)
                                 Msj1 = vRol.MensajeError;
                             if (!Msj1.StartsWith("-1"))
