@@ -358,7 +358,6 @@
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\Seguridad\ObjetoController.cs" />
     <Compile Include="Controllers\Seguridad\RolController.cs" />
-    <Compile Include="Controllers\Seguridad\UsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
