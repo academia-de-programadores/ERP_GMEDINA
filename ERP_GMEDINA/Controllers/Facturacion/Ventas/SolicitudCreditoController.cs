@@ -172,6 +172,7 @@ namespace ERP_GMEDINA.Controllers
                         /////////////////////////////CODIGO
                         ViewBag.escre_Id = new SelectList(db.tbEstadoSolicitudCredito, "escre_Id", "escre_Descripcion", tbSolicitudCredito.escre_Id);
                         ViewBag.Cliente = db.tbCliente.ToList();
+                        tbSolicitudCredito.cred_FechaSolicitud = DateTime.Now;
                         if (ModelState.IsValid)
                         {
                             try
@@ -183,7 +184,7 @@ namespace ERP_GMEDINA.Controllers
                                 list = db.UDP_Vent_tbSolicitudCredito_Insert(
                                     tbSolicitudCredito.clte_Id,
                                     tbSolicitudCredito.escre_Id,
-                                    tbSolicitudCredito.cred_FechaSolicitud,
+                                    DateTime.Now,
                                            tbSolicitudCredito.cred_MontoSolicitado,
                                     tbSolicitudCredito.cred_DiasSolicitado,
                                     Function.GetUser(),
