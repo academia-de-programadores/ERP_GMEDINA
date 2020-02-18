@@ -52,6 +52,7 @@ $(document).on("click", "#tbCliente tbody tr td button#seleccionar", function ()
 
 
 
+
 //Validacion campos Caracteres especiales
 
 
@@ -87,6 +88,40 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+    $("#btnGuardar").click(function () {
+        var Inicio = $('#exo_FechaInicialVigencia').val();
+        //var montoint = parseInt(monto);
+
+        if (Inicio == '') {
+            valido = document.getElementById('cc');
+            valido.innerText = "El campo Fecha Inicio es Requerido";
+            return false;
+        }
+        else {
+
+        }
+
+    });
+});
+
+
+$(document).ready(function () {
+    $("#btnGuardar").click(function () {
+        var Cliente = $('#clte_Identificacion').val();
+        //var montoint = parseInt(monto);
+
+        if (Cliente == '') {
+            valido = document.getElementById('ctl');
+            valido.innerText = "El campo Cliente es Requerido";
+            return false;
+        }
+        else {
+
+        }
+
+    });
+});
 //Documento fiscal
 
 
@@ -173,8 +208,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('Departamento');
-            valido.innerText = "";
+            //valido = document.getElementById('Departamento');
+            //valido.innerText = "";
         }
 
     });
@@ -194,8 +229,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('Municipio');
-            valido.innerText = "";
+            //valido = document.getElementById('Municipio');
+            //valido.innerText = "";
         }
 
     });
@@ -213,8 +248,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('direccion');
-            valido.innerText = "";
+            //valido = document.getElementById('direccion');
+            //valido.innerText = "";
         }
 
     });
@@ -232,8 +267,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('bod');
-            valido.innerText = "";
+            //valido = document.getElementById('bod');
+            //valido.innerText = "";
         }
 
     });
@@ -252,8 +287,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('pemi');
-            valido.innerText = "";
+            //valido = document.getElementById('pemi');
+            //valido.innerText = "";
         }
 
     });
@@ -272,8 +307,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('telefono');
-            valido.innerText = "";
+            //valido = document.getElementById('telefono');
+            //valido.innerText = "";
         }
 
     });
@@ -293,8 +328,8 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('correo');
-            valido.innerText = "";
+            //valido = document.getElementById('correo');
+            //valido.innerText = "";
         }
 
     });
