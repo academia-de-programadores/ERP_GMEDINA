@@ -173,8 +173,8 @@ namespace ERP_GMEDINA.Controllers
                         ViewBag.escre_Id = new SelectList(db.tbEstadoSolicitudCredito, "escre_Id", "escre_Descripcion", tbSolicitudCredito.escre_Id);
                         ViewBag.Cliente = db.tbCliente.ToList();
                         tbSolicitudCredito.cred_FechaSolicitud = DateTime.Now;
-                        if (ModelState.IsValid)
-                        {
+                        //if (ModelState.IsValid)
+                        //{
                             try
                             {
 
@@ -208,9 +208,9 @@ namespace ERP_GMEDINA.Controllers
 
                             return View(tbSolicitudCredito);
                         }
-                        return View(tbSolicitudCredito);
-                        ///////////////////////////////CODIGO
-                    }
+                    //    return View(tbSolicitudCredito);
+                    //    ///////////////////////////////CODIGO
+                    //}
                     catch (Exception Ex)
                     {
                         Ex.Message.ToString();
