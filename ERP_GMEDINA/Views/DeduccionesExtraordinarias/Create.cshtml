@@ -24,7 +24,7 @@
 									@Html.LabelFor(model => model.eqem_Id)<span id="asteriscoEquipoEmpleado">*</span>
 								</div>
 								<div class="col-md-6">
-									<select id="eqem_Id" name="eqem_Id" class="form-control"></select>
+                                    <select id="eqem_Id" name="eqem_Id" class="form-control" onchange="validaciones(equipoEmpId, montoInicial, montoRestante, observaciones, idDeduccion, cuota)"></select>
 									<label class="text-danger" id="validacionEquipoEmpleado" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Equipo Empleado Requerido</label>
 								</div>
 							</div>
