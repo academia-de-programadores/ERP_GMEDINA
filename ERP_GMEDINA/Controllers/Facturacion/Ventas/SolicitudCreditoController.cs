@@ -359,8 +359,8 @@ namespace ERP_GMEDINA.Controllers
                         try
                         {
                             //TODO: No pasa de aqui
-                            if (ModelState.IsValid)
-                            {
+                           //if (ModelState.IsValid)
+                            //{
                                 //////////Aqui va la lista//////////////
 
                                 var MensajeError = "";
@@ -387,7 +387,7 @@ namespace ERP_GMEDINA.Controllers
                                 {
                                     return RedirectToAction("Index");
                                 }
-                            }
+                            //}
                         }
                         catch (Exception Ex)
                         {
@@ -397,7 +397,7 @@ namespace ERP_GMEDINA.Controllers
 
 
                         ViewBag.Cliente = db.tbCliente.ToList();
-                        return View(tbSolicitudCredito);
+                        return RedirectToAction("Index");
                         ///////////////////////////////CODIGO
                     }
                     catch (Exception Ex)
