@@ -18,13 +18,13 @@ namespace ERP_GMEDINA.Controllers
         Models.Helpers Function = new Models.Helpers();
 
         // GET: Areas
-        [SessionManager("HistorialPermisoss/Index")]
+        [SessionManager("HistorialPermisos/Index")]
         public ActionResult Index()
         {
                 tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos { hper_Estado = true };
                 return View(tbHistorialPermisos);
         }
-        [SessionManager("HistorialPermisoss/index")]
+        [SessionManager("HistorialPermisos/index")]
         public ActionResult llenarTabla()
         {
             //string estado =
@@ -67,7 +67,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        [SessionManager("HistorialPermisoss/hablilitar")]
+        [SessionManager("HistorialPermisos/hablilitar")]
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -92,7 +92,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [SessionManager("HistorialPermisoss/index")]
+        [SessionManager("HistorialPermisos/index")]
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -131,8 +131,9 @@ namespace ERP_GMEDINA.Controllers
                     TipoPermisos.AddRange(db.tbTipoPermisos
                     .Select(tabla => new {
                         Id = tabla.tper_Id,
-                        Descripcion = tabla.tper_Descripcion
-                    })
+                        Descripcion = tabla.tper_Descripcion,
+                        tper_Estado=tabla.tper_Estado
+                    }).Where(x => x.tper_Estado == true)
                     .ToList());
                 }
                 catch
@@ -302,7 +303,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     db = new ERP_GMEDINAEntities();
 
-                    var list = db.UDP_RRHH_tbHistorialPermisos_Update(id, tbHistorialPermisos.hper_Observacion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialPermisos_Update(id, tbHistorialPermisos.hper_Observacion, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialPermisos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -339,7 +340,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbHistorialPermisos_Delete(id, tbHistorialPermisos.hper_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialPermisos_Delete(id, tbHistorialPermisos.hper_RazonInactivo, (int)Session["UserLogin"], Function.DatetimeNow());
                     foreach (UDP_RRHH_tbHistorialPermisos_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

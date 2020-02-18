@@ -62,6 +62,9 @@ function llenarTabla() {
         function (Lista) {
             tabla.clear();
             tabla.draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
                 var Acciones = value.hper_Estado == 1
                 ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
