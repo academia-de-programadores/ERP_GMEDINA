@@ -195,7 +195,7 @@ namespace ERP_GMEDINA.Controllers
                 Usuario_Crea = x.Usuario_Crea,
                 Fecha_Crea = x.Usuario_Modifica,
                 Usuario_Modifica = x.Usuario_Modifica,
-                sue_FechaCrea = x.Fecha_Modifica,
+                Fecha_Modifica = x.Fecha_Modifica,
                 Sueldo_Maximo = x.Sueldo_Maximo,
                 Sueldo_Minimo = x.Sueldo_Minimo,
 

@@ -54,7 +54,7 @@ function format(obj) {
                 '<td>' + index.Identidad + '</td>' +
                 '<td>' + index.Cuenta + '</td>' +
                 '<td>' + index.Cargo + '</td>' +
-                '<td>' + FechaFormato(index.Fecha_Crea).substring(0, 10) + '</td>' +
+                '<td>' + FechaFormato(index.Fecha_Modifica).substring(0, 10) + '</td>' +
 
 
                 '</tr>' +
@@ -118,7 +118,7 @@ function tablaDetalles(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#sue_Cantidad")["0"].innerText = obj[0].Sueldo;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].Usuario_Nombre;
-                $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj[0].sue_FechaCrea);
+                $("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj[0].Fecha_Modifica);
                 $('#ModalDetalles').modal('show');
             }
         });
