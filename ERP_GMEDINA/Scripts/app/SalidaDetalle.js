@@ -81,6 +81,11 @@ function validateMyForm() {
 
     //    vBodega = true
     //}|| !vBodega
+    var vBodega = false;
+    var vBodDestino = false;
+    var vFactura = false;
+    var vDevolucion = false;
+    var vSalidaDetalle = false;
     if (TipoSalida.startsWith("SELECCIONAR")) {
         $('#NombreError').text('');
         $('#validationtsal_Id').after('<ul id="NombreError" class="validation-summary-errors text-danger">Seleccione un tipo de salida</ul>');
