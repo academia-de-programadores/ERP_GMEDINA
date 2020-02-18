@@ -108,11 +108,28 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#btnGuardar").click(function () {
-        var Cliente = $('#clte_Identificacion').val();
+        var Cliente = $('#clte_Id').val();
         //var montoint = parseInt(monto);
 
         if (Cliente == '') {
             valido = document.getElementById('ctl');
+            valido.innerText = "El campo Identificación es Requerido";
+            return false;
+        }
+        else {
+
+        }
+
+    });
+});
+
+$(document).ready(function () {
+    $("#btnGuardar").click(function () {
+        var Cliente = $('#clte_Id').val();
+        //var montoint = parseInt(monto);
+
+        if (Cliente == '') {
+            valido = document.getElementById('Ident');
             valido.innerText = "El campo Cliente es Requerido";
             return false;
         }

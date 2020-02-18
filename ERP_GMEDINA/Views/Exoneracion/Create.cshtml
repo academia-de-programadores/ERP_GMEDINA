@@ -47,8 +47,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.tbCliente.clte_Identificacion, new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.tbCliente.clte_Identificacion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                <p style="color:red">@Html.ValidationMessageFor(model => model.clte_Id)
+                @Html.EditorFor(model => model.tbCliente.clte_Identificacion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })   
                 <p id="ctl" style="color:red">@Html.ValidationMessageFor(model => model.clte_Id)
 </div>
             <div class="col-md-1">
@@ -59,8 +58,8 @@
             <label class="control-label col-md-2">Cliente</label>
             <div class="col-md-4">
                 @Html.EditorFor(model => model.tbCliente.clte_NombreComercial, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.tbCliente.clte_NombreComercial)
-            </div>
+                <p id="Ident" style="color:red"> @Html.ValidationMessageFor(model => model.clte_Id)              
+</div>
         </div>
 
        
