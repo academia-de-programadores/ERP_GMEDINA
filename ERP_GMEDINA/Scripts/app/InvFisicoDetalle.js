@@ -283,13 +283,13 @@ function GetResponsableBodega() {
         if (data.length > 0) {
             $('#invf_ResponsableBodega').empty();
             $.each(data, function (key, val) {
-                $('#invf_ResponsableBodega').val(val.emp_Nombres + " " + val.emp_Apellidos);
+                $('#invf_ResponsableBodega').val(val.per_Nombres + " " + val.per_Apellidos);
             });
             $('#invf_ResponsableBodega').trigger("chosen:updated");
         }
         else {
             $('#invf_ResponsableBodega').empty();
-            $('#invf_ResponsableBodega').val(val.emp_Nombres + " " + val.emp_Apellidos);
+            $('#invf_ResponsableBodega').val(val.per_Nombres + " " + val.per_Apellidos);
         }
     });
 }
