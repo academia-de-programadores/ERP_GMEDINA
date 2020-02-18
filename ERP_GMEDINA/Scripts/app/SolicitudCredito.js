@@ -45,22 +45,22 @@ $('#AceptarAprobacion').click(function () {
 
 
     if (MSF <= 0) {
-       // alert('El valor Monto Aprobado no puede ser cero');
+        // alert('El valor Monto Aprobado no puede ser cero');
         document.getElementById('AceptarAprobacion').disabled = true;
         valido = document.getElementById('AcepSolicitud2');
         valido.innerText = "El valor Monto Aprobado no puede ser cero";
         $('#cred_MontoAprobado').val(MontoAprobado);
-        
+
         //if (document.getElementById('AceptarAprobacion').disabled = true /*&& MSF > 0*/)
         //{
         //    document.getElementById('AceptarAprobacion').disabled = false;
         //    $('#cred_MontoAprobado').val(MontoAprobado);
         //}
-        
-    }    else if (MSstring == '') {
+
+    } else if (MSstring == '') {
         {
             // alert('El valor Monto Aprobado no puede ser cero');
-           document.getElementById('AceptarAprobacion').disabled = true
+            document.getElementById('AceptarAprobacion').disabled = true
             valido = document.getElementById('AcepSolicitud2');
             valido.innerText = "El valor Monto Aprobado no puede ser vacio";
         }
@@ -90,7 +90,7 @@ $("#cred_MontoAprobado").blur(function () {
         //}
 
     } else {
-        document.getElementById('AceptarAprobacion').disabled =false;
+        document.getElementById('AceptarAprobacion').disabled = false;
     }
     if (MSstring == '') {
         {
@@ -117,7 +117,7 @@ function soloNumeros(e) {
 $(document).ready(function () {
     $("#btnGuardar").click(function () {
         var monto = $('#cred_MontoSolicitado').val();
-        
+
         if (monto == '') {
             valido = document.getElementById('Monto');
             valido.innerText = "El campo Monto Solicitado es requerido";
@@ -135,7 +135,7 @@ $(document).ready(function () {
     $("#btnGuardar").click(function () {
         var dias = $('#cred_DiasSolicitado').val();
 
-       
+
 
         if (dias == '') {
             valido = document.getElementById('Dias');
@@ -145,7 +145,7 @@ $(document).ready(function () {
         else {
             valido = document.getElementById('Dias');
             valido.innerText = "";
-  
+
         }
 
     });
@@ -237,7 +237,7 @@ function AprobarCredito() {
     })
     .done(function (data) {
         console.log(data)
-        if (data == true) {
+        if (data.RESULTADO == true) {
             $('#AprobarSolicitud').modal('show');
             $('#AutorizarDescuento').modal('hide');
         }
