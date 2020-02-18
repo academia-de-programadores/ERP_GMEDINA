@@ -179,7 +179,11 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult GenerarReporte(tbSalida tbSalida, string FechaElaboracion)
         {
-            var vFechaElaboracion = Convert.ToDateTime(FechaElaboracion);
+            var mes = FechaElaboracion.Substring(0, 2);
+            var dia = FechaElaboracion.Substring(3, 2);
+            var ano = FechaElaboracion.Substring(6,4);
+            var fecha1 = dia + "/" + mes + "/" + ano;
+            var vFechaElaboracion = Convert.ToDateTime(fecha1);
             Reports.Salida SalidaRV = new Reports.Salida();
 
             Reportes SalidaDST = new Reportes();
