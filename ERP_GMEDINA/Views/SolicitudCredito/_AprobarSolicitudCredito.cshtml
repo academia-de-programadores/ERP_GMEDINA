@@ -1,17 +1,18 @@
 ﻿@model ERP_GMEDINA.Models.tbSolicitudCredito
-@using (Ajax.BeginForm("UpdateSolicitudCredito", "SolicitudCredito", new AjaxOptions {
+@using (Ajax.BeginForm("UpdateSolicitudCredito", "SolicitudCredito", new AjaxOptions
+{
     HttpMethod = "POST",
     UpdateTargetId = "EditSolicitudCredito"
 }))
 {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+    <div class="form-horizontal">
 
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.cred_Id)
         @Html.HiddenFor(model => model.escre_Id)
-         @**Auditoria*@
+        @**Auditoria*@
         @Html.HiddenFor(model => model.cred_UsuarioCrea)
         @Html.HiddenFor(model => model.cred_FechaCrea)
         @Html.HiddenFor(model => model.cred_UsuarioModifica)
@@ -47,7 +48,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.cred_DiasAprobado, new { htmlAttributes = new { @onkeypress = "return validar(event)" } })
                 <p id="AcepSolicitud" style="color:red"> @Html.ValidationMessageFor(model => model.cred_DiasAprobado)
-</div>
+            </div>
         </div>
 
         <div class="form-group">
@@ -64,11 +65,4 @@
         tecla = String.fromCharCode(tecla)
         return /^[0-9\-]+$/.test(tecla);
     }
-</script>   
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-
-}
+</script>

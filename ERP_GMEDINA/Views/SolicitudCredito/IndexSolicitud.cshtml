@@ -48,35 +48,35 @@
                                     @Html.DisplayNameFor(model => model.cred_DiasSolicitado)
                                 </th>
 
-                                
+
                                 <th>
                                     @Html.DisplayNameFor(model => model.tbEstadoSolicitudCredito.escre_Descripcion)
                                 </th>
                                 <th>Acciones</th>
                             </tr>
-                            </thead>
+                        </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 if (item.escre_Id == 1)
-                                     {
+                                {
                                     <tr>
                                         <td hidden id="cred_Id">@Html.DisplayFor(modelItem => item.cred_Id)</td>
-                                        
-                                            @{ if (item.tbCliente.clte_EsPersonaNatural)
-                                             {
+
+                                        @{ if (item.tbCliente.clte_EsPersonaNatural)
+                                            {
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.tbCliente.clte_Nombres)
                                                     @Html.DisplayFor(modelItem => item.tbCliente.clte_Apellidos)
                                                 </td>
-                                                }
-                                                else
-                                                {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.tbCliente.clte_NombreComercial)
-                                                    </td>
-                                                }
                                             }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.tbCliente.clte_NombreComercial)
+                                                </td>
+                                            }
+                                        }
 
                                         <td>
                                             @Html.DisplayFor(modelItem => item.tbCliente.clte_Identificacion)
@@ -100,10 +100,10 @@
                                         <td>
                                             @Html.ActionLink("Detalles", "Details", new { id = item.cred_Id }, new { @class = "btn btn-primary btn-xs" })
                                             @*<button type="button"  id="autorizar" name="autorizar" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ModalAutorizar_@item.cred_Id">
-                                                Autorizar Crédito
-                                            </button>*@
+                                                    Autorizar Crédito
+                                                </button>*@
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#AprobarSolicitud_@item.cred_Id">Aprobar</button>
-                                          
+
                                         </td>
                                     </tr>
                                     //modal Aprobar
@@ -139,24 +139,24 @@
                                         </div>
                                     </div>
                                     @*<div class="modal fade" id="ModalAutorizar_@item.cred_Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Autorizar Credito</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Esta seguro de Autorizar el Crédito?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" name="Si" id="Si" data-dismiss="modal" onclick="AceptarSolicitud(@item.cred_Id, 2);">Guardar</button>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Autorizar Credito</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        ¿Esta seguro de Autorizar el Crédito?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" name="Si" id="Si" data-dismiss="modal" onclick="AceptarSolicitud(@item.cred_Id, 2);">Guardar</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                 }
 
                             }
@@ -167,7 +167,7 @@
             </div>
         </div>
     </div>
- </div>
+</div>
 
 <div>
     <div class="modal fade" id="AutorizarDescuentoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
