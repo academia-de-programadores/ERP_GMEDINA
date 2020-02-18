@@ -26,11 +26,11 @@ namespace ERP_GMEDINA.Models
         public bool exo_ExoneracionActiva { get; set; }
 
         [Display(Name = "Fecha Inicio")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime exo_FechaInicialVigencia { get; set; }
 
         [Display(Name = "Fecha Vencimiento")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime exo_FechaIFinalVigencia { get; set; }
 
         [Display(Name = "Cliente")]

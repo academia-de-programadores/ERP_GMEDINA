@@ -80,8 +80,7 @@ $(document).ready(function () {
             return false;
         }
         else {
-            valido = document.getElementById('Departamento');
-            valido.innerText = "";
+            
         }
 
     });
@@ -120,7 +119,7 @@ $('#dfisc_Descripcion').on('input', function (e) {
 
 
 
-onload = function () {
+function onload () {
     var ele = document.querySelectorAll('.validanumericos')[0];
     ele.onkeypress = function (e) {
         if (isNaN(this.value + String.fromCharCode(e.charCode)))
