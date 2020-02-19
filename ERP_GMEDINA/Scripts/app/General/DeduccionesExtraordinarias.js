@@ -748,14 +748,7 @@ $("#btnCerrarCreate").click(function () {
 
 $("#btnAgregar").click(function () {
     var data2 = $("#frmCreate").serializeArray();
-    if (validaciones(equipoEmpId,
-		montoInicial,
-		montoRestante,
-		observaciones,
-		idDeduccion,
-		cuota
-
-	)) {
+    if (validaciones(equipoEmpId, montoInicial, montoRestante, observaciones, idDeduccion, cuota)) {
 
         if ($('#dex_DeducirISR').is(':checked')) {
             dex_DeducirISR = true;
@@ -798,9 +791,13 @@ $("#btnAgregar").click(function () {
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
+                $("#btnAgregar").attr('disabled', false);
             }
         });
 
+    }
+    else {
+        validaciones(equipoEmpId, montoInicial, montoRestante, observaciones, idDeduccion, cuota);
     }
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreate").submit(function (e) {
