@@ -70,14 +70,14 @@ namespace ERP_GMEDINA.Controllers
 
             
             if (ModelState.IsValid)
-            {                
+            {
                 try
                 {
                     if (db.tbListaPrecio.Any(a => a.listp_Nombre == tbListaPrecio.listp_Nombre))
                     {
                         ModelState.AddModelError("", "Ya existe una Lista Precio con este mismo nombre.");
                     }
-                   else if (db.tbListaPrecio.Any(a => a.listp_Prioridad == tbListaPrecio.listp_Prioridad && a.listp_FechaFinalVigencia == tbListaPrecio.listp_FechaFinalVigencia))
+                    else if (db.tbListaPrecio.Any(a => a.listp_Prioridad == tbListaPrecio.listp_Prioridad && a.listp_FechaFinalVigencia == tbListaPrecio.listp_FechaFinalVigencia))
                     {
                         ModelState.AddModelError("", "Ya existe una Lista Precio con esta prioridad en estas fechas.");
                     }
@@ -141,6 +141,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch (Exception Ex)
                 {
+                    Session["ListadoPrecio"] = null;
                     Function.InsertBitacoraErrores("ListaPrecios/Create", Ex.Message, "Create");
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     ViewBag.Producto = db.tbProducto.ToList();

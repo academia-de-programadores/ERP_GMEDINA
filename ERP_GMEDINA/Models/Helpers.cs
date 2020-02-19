@@ -126,10 +126,10 @@ namespace ERP_GMEDINA.Models
         public void InsertBitacoraErrores(string sPantalla, string biteMensajeError, string biteAccion)
         {
             IEnumerable<object> List = null;
-            string UserName = (string)HttpContext.Current.Session["UserLogin"];
+            int UserName = (int)HttpContext.Current.Session["UserLogin"];
             try
             {
-                List = db.UDP_Acce_tbBitacoraErrores_Insert(sPantalla, UserName, DatetimeNow(), biteMensajeError, biteAccion);
+                List = db.UDP_Acce_tbBitacoraErrores_Insert(sPantalla, UserName.ToString(), DatetimeNow(), biteMensajeError, biteAccion);
             }
             catch (Exception Ex)
             {
