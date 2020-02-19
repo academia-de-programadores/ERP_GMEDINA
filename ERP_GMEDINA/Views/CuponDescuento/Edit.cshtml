@@ -214,6 +214,36 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+        $('#cdto_FechaEmision').datepicker({
+            dateFormat: 'yy-mm-dd',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            prevText: 'Ant',
+            nextText: 'Sig'
+        }).datepicker('setDate', new Date());
+
+        //-------------Fecha Actual-----------------------
+        $(function () {
+            $("#cdto_FechaEmision").datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', new Date()).datepicker("destroy");
+
+        });
+
+        //-----------Fecha Vencimiento (1 año)--------------------
+        var d = new Date();
+
+        $('#cdto_FechaVencimiento').datepicker({
+            dateFormat: 'yy-mm-dd',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            prevText: 'Ant',
+            nextText: 'Sig'
+        }).datepicker('setDate', new Date());
+
+
+        $(function () {
+            $("#cdto_FechaVencimiento").datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', new Date(d.getFullYear() + 1, d.getMonth(), d.getDate())).datepicker("destroy");
+
+        });
 
         //-----------------caracteres especiales-----------------------
         $('#cdto_RazonAnulado').on('input', function (e) {
