@@ -121,6 +121,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+
         $('#cdto_FechaEmision').datepicker({
             dateFormat: 'yy-mm-dd',
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -137,9 +138,7 @@
 
         //-----------Fecha Vencimiento (1 año)--------------------
         var d = new Date();
-        //var strDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + (d.getFullYear() + 1);
-        //$("#cdto_FechaVencimiento").val(strDate);
-
+        
         $('#cdto_FechaVencimiento').datepicker({
             dateFormat: 'yy-mm-dd',
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
