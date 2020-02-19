@@ -87,9 +87,9 @@ namespace ERP_GMEDINA.Controllers
                             listPrecio = db.UDP_Vent_tbListaPrecio_Insert(
                                                      tbListaPrecio.listp_Nombre,
                                                                        tbListaPrecio.listp_EsActivo = true,
-                                                                     tbListaPrecio.listp_FechaInicioVigencia,
-                                                                     tbListaPrecio.listp_FechaFinalVigencia,
-                                                                    tbListaPrecio.listp_Prioridad,
+                                                                       Function.DatetimeNow(),
+                                                                       tbListaPrecio.listp_FechaFinalVigencia,
+                                                                        tbListaPrecio.listp_Prioridad,
                                                                     Function.GetUser(),
                                                                     Function.DatetimeNow());
 

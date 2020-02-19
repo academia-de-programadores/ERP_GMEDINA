@@ -116,7 +116,7 @@
 
         //Lista Precio
     $("#listp_FechaInicioVigencia").datepicker({
-        dateFormat: 'mm/dd/yy',
+        dateFormat: 'yy/mm/dd',
         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
         changeMonth: true,
@@ -125,14 +125,14 @@
 
 
     $("#FIV").datepicker({
-        dateFormat: 'mm/dd/yy',
+        dateFormat: 'yy/mm/dd',
         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá']
     }).datepicker('setDate', new Date()).datepicker("destroy");
 
     var FechaInicio = new Date();
     $("#FFV").datepicker({
-        dateFormat: 'mm/dd/yy',
+        dateFormat: 'yy/mm/dd',
         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
         minDate: FechaInicio,
