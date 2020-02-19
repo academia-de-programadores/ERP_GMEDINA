@@ -1,6 +1,6 @@
 ﻿function AnularSolictud() {
     var credID = $('#cred_Id').val();
-    var Denegado = 3
+    var Denegado = 3;
     $.ajax({
         url: "/SolicitudCredito/DenegarSolCredito",
         method: "POST",

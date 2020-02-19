@@ -345,7 +345,7 @@ namespace ERP_GMEDINA.Controllers
             //INICIO DEL EDIT COMENTNTADO
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cred_Id,clte_Id,escre_Id,cred_FechaSolicitud,cred_FechaAprobacion,cred_MontoSolicitado,cred_MontoAprobado,cred_DiasSolicitado,cred_DiasAprobado,cred_UsuarioCrea,cred_FechaCrea,cred_UsuarioModifica,cred_FechaModifica, tbUsuario, tbUsuario1")] tbSolicitudCredito tbSolicitudCredito)
+        public ActionResult Edit([Bind(Include = "cred_Id,clte_Id,escre_Id,cred_FechaSolicitud,cred_FechaAprobacion,cred_MontoSolicitado,cred_MontoAprobado,cred_DiasSolicitado,cred_DiasAprobado,cred_UsuarioCrea,cred_FechaCrea,cred_UsuarioModifica,cred_FechaModifica")] tbSolicitudCredito tbSolicitudCredito)
         {
             if (Function.GetUserLogin())
             {
@@ -359,8 +359,8 @@ namespace ERP_GMEDINA.Controllers
                         try
                         {
                             //TODO: No pasa de aqui
-                           //if (ModelState.IsValid)
-                            //{
+                            if (ModelState.IsValid)
+                            {
                                 //////////Aqui va la lista//////////////
 
                                 var MensajeError = "";
@@ -376,8 +376,8 @@ namespace ERP_GMEDINA.Controllers
                                     tbSolicitudCredito.cred_DiasAprobado,
                                     tbSolicitudCredito.cred_UsuarioCrea,
                                     tbSolicitudCredito.cred_FechaCrea,
-                                    tbSolicitudCredito.cred_UsuarioModifica,
-                                    tbSolicitudCredito.cred_FechaModifica);
+                                    Function.GetUser(),
+                                    Function.DatetimeNow());
                                 foreach (UDP_Vent_tbSolicitudCredito_Update_Result SolicitudCredito in list)
                                     MensajeError = SolicitudCredito.MensajeError;
                                 if (MensajeError == "-1")
@@ -387,7 +387,7 @@ namespace ERP_GMEDINA.Controllers
                                 {
                                     return RedirectToAction("Index");
                                 }
-                            //}
+                            }
                         }
                         catch (Exception Ex)
                         {
@@ -534,7 +534,9 @@ namespace ERP_GMEDINA.Controllers
                         {
                             var MensajeError = "";
                             IEnumerable<object> list = null;
-                            list = db.UDP_Vent_tbSolicitudCredito_Aprobar(
+                            if (ModelState.IsValid)
+                            {
+                                list = db.UDP_Vent_tbSolicitudCredito_Aprobar(
                                         EditSolicitudCredito.cred_Id,
                                         EditSolicitudCredito.escre_Id,
                                         EditSolicitudCredito.cred_FechaAprobacion,
@@ -544,10 +546,11 @@ namespace ERP_GMEDINA.Controllers
                                         EditSolicitudCredito.cred_DiasAprobado,
                                         EditSolicitudCredito.cred_UsuarioCrea,
                                         EditSolicitudCredito.cred_FechaCrea,
-                                        EditSolicitudCredito.cred_UsuarioModifica,
-                                        EditSolicitudCredito.cred_FechaModifica);
-                            foreach (UDP_Vent_tbSolicitudCredito_Aprobar_Result SolicitudAprobada in list)
-                                MensajeError = SolicitudAprobada.MensajeError;
+                                        Function.GetUser(),
+                                        Function.DatetimeNow());
+                                foreach (UDP_Vent_tbSolicitudCredito_Aprobar_Result SolicitudAprobada in list)
+                                    MensajeError = SolicitudAprobada.MensajeError;                                
+                            }
                             if (MensajeError == "-1")
                             {
                                 ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
@@ -557,6 +560,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 return RedirectToAction("Index");
                             }
+
                         }
                         catch (Exception Ex)
                         {

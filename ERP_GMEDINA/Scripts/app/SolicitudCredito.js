@@ -250,10 +250,9 @@ function AprobarCredito() {
 
 
 function DenegarCredito() {
+    debugger;
     var User = $("#Username").val();
     var Password = $("#txtPassword").val();
-    console.log(User)
-    console.log(Password)
     $.ajax({
         url: "/SolicitudCredito/DenegarCredito",
         method: "POST",
@@ -262,8 +261,7 @@ function DenegarCredito() {
         data: JSON.stringify({ User: User, Password: Password }),
     })
     .done(function (data) {
-        console.log(data)
-        if (data == true) {
+        if (data.RESULTADO == true) {
             AnularSolictud()
         }
         else {
