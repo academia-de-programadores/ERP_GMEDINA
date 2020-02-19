@@ -38,27 +38,27 @@
                             <label class="control-label col-md-2 AsteriscoRojo">Nombre Lista</label>                       
                             <div class="col-md-5">
                                 @Html.EditorFor(model => model.listp_Nombre, new { htmlAttributes = new { @autocomplete = "off", @style = "text-transform:uppercase;" } })
-                                @Html.ValidationMessageFor(model => model.listp_Nombre)
+                                <p style="color:red">@Html.ValidationMessageFor(model => model.listp_Nombre)</p>
                             </div>
-                            <br /><br /><br />
+                            <br /><br /><br /><br />
                             <div class="form-group">
                                 <label class="control-label col-md-2 AsteriscoRojo">Fecha Inicio Vigencia</label>
                            
                                 <div class="col-md-5">
                                     @Html.EditorFor(model => model.listp_FechaInicioVigencia, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "FIV", } })
-                                    @Html.ValidationMessageFor(model => model.listp_FechaInicioVigencia)
+                                    <p style="color:red">@Html.ValidationMessageFor(model => model.listp_FechaInicioVigencia)</p>
                                 </div>
                             </div>
-                            <br /><br />
+                            <br /><br /><br /><br />
                             <div class="form-group">
                                 <label class="control-label col-md-2 AsteriscoRojo">Fecha Final Vigencia</label>                            
                                 <div class="col-md-5">
                                     @Html.EditorFor(model => model.listp_FechaFinalVigencia, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @autocomplete="off",@class = "form-control", @id = "FFV" } })
-                                    @Html.ValidationMessageFor(model => model.listp_FechaFinalVigencia)
+                                    <p style="color:red">@Html.ValidationMessageFor(model => model.listp_FechaFinalVigencia)</p>
                                 </div>
                             </div>
 
-                            <br /><br />
+                            <br /><br /><br /><br />
                             <div class="form-group">
                                 <label class="control-label col-md-2 AsteriscoRojo">Prioridad</label>                        
                                 <div class="col-md-5">
