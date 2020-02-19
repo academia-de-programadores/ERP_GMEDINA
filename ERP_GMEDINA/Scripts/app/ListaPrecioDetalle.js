@@ -127,7 +127,7 @@ function GetListaPrecioDetalle() {
         lispd_PrecioMinorista: $('#lispd_PrecioMinorista').val(),
         lispd_DescCaja: $('#lispd_DescCaja').val(),
         lispd_DescGerente: $('#lispd_DescGerente').val(),
-        listpd_Id: contador
+        lispd_Id: contador
         //Fecha: $('#fechaCreate').val(),
     };
     console.log(ListaDetalle)
@@ -135,17 +135,17 @@ function GetListaPrecioDetalle() {
 }
 
 $(document).on("click", "#tbListaPrecioDetalle tbody tr td button#removeListaPrecioDetalle", function () {
-    $(this).closest('tr').remove();
     idItem = $(this).closest('tr').data('id');
+    $(this).closest('tr').remove();
     var PrecioDetalle = {
-        listpd_Id: idItem,
+        lispd_Id: idItem,
     };
     $.ajax({
         url: "/ListaPrecios/QuitarPrecioDetalle",
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ListaDetalle: PrecioDetalle }),
+        data: JSON.stringify({ lispd_Id: idItem }),
 
 
 

@@ -177,13 +177,13 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
-        public JsonResult QuitarPrecioDetalle(tbListadoPrecioDetalle ListadoPrecioDetalle)
+        public JsonResult QuitarPrecioDetalle(int lispd_Id)
         {
             var list = (List<tbListadoPrecioDetalle>)Session["ListadoPrecio"];
 
             if (list != null)
             {
-                var itemToRemove = list.Single(r => r.lispd_UsuarioCrea == ListadoPrecioDetalle.lispd_UsuarioCrea);
+                var itemToRemove = list.Single(r => r.lispd_Id == lispd_Id);
                 list.Remove(itemToRemove);
                 Session["ListadoPrecio"] = list;
             }
