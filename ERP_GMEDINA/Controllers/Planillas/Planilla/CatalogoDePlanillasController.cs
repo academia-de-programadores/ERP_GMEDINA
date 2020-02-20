@@ -18,21 +18,11 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: CatalogoDePlanillas
         [SessionManager("CatalogoDePlanillas/Index")]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         [HttpGet]
-        public JsonResult getPlanilla()
-        {
-            //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
-            UDP_Acce_Login_Result sesion = Session["sesionUsuario"] as UDP_Acce_Login_Result;
-
-            IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = GetPlanilla(sesion?.usu_EsAdministrador);
-            object json = new { data = tbCatalogoDePlanillas };
-            return Json(json, JsonRequestBehavior.AllowGet);
-        }
+        //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
+        public JsonResult getPlanilla() => Json(new { data = (IQueryable<CatalogoDePlanillasViewModel>)GetPlanilla((Session["sesionUsuario"] as UDP_Acce_Login_Result)?.usu_EsAdministrador) }, JsonRequestBehavior.AllowGet);
 
         [HttpGet]
         public JsonResult getPeriodos()
@@ -57,11 +47,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(json, JsonRequestBehavior.AllowGet);
         }
 
-        private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla(bool? usuario = false)
-        {
-            return db.tbCatalogoDePlanillas
-                            .OrderByDescending(x => x.cpla_FechaCrea)
-                            .OrderByDescending(x => x.cpla_Activo)
+        private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla(bool? usuario = false) => db.tbCatalogoDePlanillas.OrderByDescending(x => x.cpla_FechaCrea).OrderByDescending(x => x.cpla_Activo)
                             .Select(x => new CatalogoDePlanillasViewModel
                             {
                                 idPlanilla = x.cpla_IdPlanilla,
@@ -70,7 +56,7 @@ namespace ERP_GMEDINA.Controllers
                                 recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"),
                                 activoAdmin = new ActivoAdmin { activo = x.cpla_Activo, esAdmin = usuario ?? false }
                             });
-        }
+
 
         [HttpGet]
         //Enviar los ingresos y deducciones de la planilla
@@ -124,42 +110,36 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: CatalogoDePlanillas/Create
         [SessionManager("CatalogoDePlanillas/Create")]
-        public ActionResult Create()
-        {
-            return View();
-        }
+        public ActionResult Create() => View();
 
         [HttpGet]
-
         public async Task<JsonResult> GetIngresosDeducciones(bool esCrear = true, int id = 0, bool esIngreso = true)
         {
             object json = null;
-
-
             if (esCrear)
             {
                 if (esIngreso)
                 {
                     //Obtener la lista de ingresos de la base de datos
                     var ingresos = await (from catalogoIngresos in db.tbCatalogoDeIngresos
-                                    where catalogoIngresos.cin_Activo == true
-                                    select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
-                                    {
-                                        id = catalogoIngresos.cin_IdIngreso,
-                                        descripcion = catalogoIngresos.cin_DescripcionIngreso
-                                    }).ToListAsync();
+                                          where catalogoIngresos.cin_Activo == true
+                                          select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
+                                          {
+                                              id = catalogoIngresos.cin_IdIngreso,
+                                              descripcion = catalogoIngresos.cin_DescripcionIngreso
+                                          }).ToListAsync();
 
                     json = new { data = ingresos };
                 }
                 else
                 {
                     var deducciones = await (from catalogoDeducciones in db.tbCatalogoDeDeducciones
-                                       where catalogoDeducciones.cde_Activo == true
-                                       select new CatalogoDeIngresosDeduccionesViewModel
-                                       {
-                                           id = catalogoDeducciones.cde_IdDeducciones,
-                                           descripcion = catalogoDeducciones.cde_DescripcionDeduccion
-                                       }).ToListAsync();
+                                             where catalogoDeducciones.cde_Activo == true
+                                             select new CatalogoDeIngresosDeduccionesViewModel
+                                             {
+                                                 id = catalogoDeducciones.cde_IdDeducciones,
+                                                 descripcion = catalogoDeducciones.cde_DescripcionDeduccion
+                                             }).ToListAsync();
                     json = new { data = deducciones };
                 }
             }
@@ -303,15 +283,12 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Insertar una nueva planilla
-        private IEnumerable<object> InsertarPlanilla(int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias, bool checkRecibeComision)
-        {
-            //Retorna la planilla insertada
-            return db.UDP_Plani_tbCatalogoDePlanillas_Insert(cpla_DescripcionPlanilla,
+        private IEnumerable<object> InsertarPlanilla(int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias, bool checkRecibeComision) =>
+            db.UDP_Plani_tbCatalogoDePlanillas_Insert(cpla_DescripcionPlanilla,
                 cpla_FrecuenciaEnDias,
                 cpla_UsuarioCreaModifica,
                 cpla_FechaCreaModifica,
                 checkRecibeComision);
-        }
 
         //Editar una planilla
         private string EditarPlanilla(int? idPlanillaEdit, ref string MensajeError, int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias, bool checkRecibeComision)
@@ -492,7 +469,7 @@ namespace ERP_GMEDINA.Controllers
                 cpla_DescripcionPlanilla = catalogoDePlanillas[0], //Descripción de la planilla
                 response = "bien" //Si no hay nada que falle, entonces recibira un mensaje de que todo se hizo bien el cliente
                 , MensajeErrorCatalogoDeDeducciones = ""; //Si hay error al guardar las deduccioenes se le notifica
-            int cpla_UsuarioModifica = idUser, 
+            int cpla_UsuarioModifica = idUser,
                 cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //Frecuencia en días para generar la planilla
             DateTime cpla_FechaModifica = Function.DatetimeNow();
             #endregion
@@ -596,7 +573,7 @@ namespace ERP_GMEDINA.Controllers
                                 borrarDeduccion = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(id, i); //Eliminar la deducción de la base de datos
 
                                 foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeduccion)
-                                    mensajeErrorDeduccion = result.MensajeError; 
+                                    mensajeErrorDeduccion = result.MensajeError;
                             }
                         }
 
@@ -607,7 +584,7 @@ namespace ERP_GMEDINA.Controllers
                             {
                                 borrarIngresos = db.UDP_tbTipoPlanillaDetalleIngreso_Update(id, i);
                                 foreach (UDP_tbTipoPlanillaDetalleIngreso_Update_Result result in borrarIngresos)
-                                    mensajeErrorIngreso = result.MensajeError; 
+                                    mensajeErrorIngreso = result.MensajeError;
                             }
                         }
                         #endregion

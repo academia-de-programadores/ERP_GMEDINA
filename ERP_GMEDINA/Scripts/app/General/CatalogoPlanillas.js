@@ -552,7 +552,7 @@ function listarCatalogos() {
                     validacionCatalogoIngresos.hide();
                     if (listaCatalogoIngresosFalse()) {
                         if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
-                            $('#checkSeleccionarTodosIngresos').click();
+                            //$('#checkSeleccionarTodosIngresos').click();
                         }
                     }
                 }
@@ -615,8 +615,8 @@ function listarCatalogos() {
                 $(catalogoDeduccionesInputs).on('ifChecked', () => {
                     $('#noAplica').iCheck('uncheck');
                     if (listaCatalogoDeduccionesFalse()) {
-                        if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
-                            checkSeleccionarTodasLasDeducciones.click();
+                        // if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
+                        //     checkSeleccionarTodasLasDeducciones.click();
                     }
                 }
                 );
@@ -703,7 +703,7 @@ function listarCatalogos() {
                     validacionCatalogoIngresos.hide();
                     if (listaCatalogoIngresosFalse()) {
                         if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
-                            $('#checkSeleccionarTodosIngresos').click();
+                            //$('#checkSeleccionarTodosIngresos').click();
                         }
                     }
                 }
@@ -711,7 +711,7 @@ function listarCatalogos() {
 
                 //Activar switch seleccionar todos en ingresos
                 if (listaCatalogoIngresosFalse()) {
-                    $('#checkSeleccionarTodosIngresos').click();
+                    //$('#checkSeleccionarTodosIngresos').click();
                 }
 
             }
@@ -766,8 +766,8 @@ function listarCatalogos() {
                     validacionCatalogoDeducciones.hide();
                     $('#noAplica').iCheck('uncheck');
                     if (listaCatalogoDeduccionesFalse()) {
-                        if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
-                            checkSeleccionarTodasLasDeducciones.click();
+                        // if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
+                        //     checkSeleccionarTodasLasDeducciones.click();
                     }
                 }
                 );
@@ -816,8 +816,8 @@ function listarCatalogos() {
         //Se activara el switch, si esta desactivado
         $(catalogoIngresosInputs).on('ifChecked', () => {
             if (listaCatalogoIngresosFalse()) {
-                if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
-                    $('#checkSeleccionarTodosIngresos').prop("checked", true);
+                // if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
+                //     $('#checkSeleccionarTodosIngresos').prop("checked", true);
             }
         }
         );
