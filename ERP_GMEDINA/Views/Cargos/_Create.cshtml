@@ -24,7 +24,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.car_SueldoMinimo, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                <input type="text" id="car_SueldoMinimo" name="car_SueldoMinimo" class="form-control required valid" , onkeypress="return Numericos(event)" autocomplete="off" maxlength="16">
+                                @Html.EditorFor(model => model.car_SueldoMinimo, new { htmlAttributes = new { @class = "form-control required valid", @onkeypress = "return Numericos(event)", @autocomplete = "off", @maxlength = "16" } })
+                                
                                 @Html.ValidationMessageFor(model => model.car_SueldoMinimo, "", new { @class = "text-danger", @id = "errorcar_SueldoMinimo" })
                             </div>
                             </div>

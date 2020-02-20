@@ -132,7 +132,7 @@ $("#btnGuardar").click(function () {
         else {
 
 
-            if (a >= b) {
+            if (a > b) {
 
                 MsgError("Error", "Sueldo máximo debe ser mayor al sueldo mínimo");
 
@@ -199,7 +199,7 @@ $("#btnActualizar").click(function () {
         else {
 
 
-            if (a >= b) {
+            if (a > b) {
 
                 MsgError("Error", "Sueldo máximo debe ser mayor al sueldo mínimo");
 
