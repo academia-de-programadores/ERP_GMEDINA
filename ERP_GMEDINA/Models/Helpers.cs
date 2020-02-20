@@ -49,7 +49,7 @@ namespace ERP_GMEDINA.Models
         public const int rptVentasConsumidorFinal = 198;
         public const int rptNotasCreditoEntreFechas = 199;
         public const int rptAnalisisMora = 200;
-        public const int rptSolicitudesCreditoAprobar = 202;
+        public const int rptSolicitudesCreditoAprobar = 412;
         public const int rptCuponesDescuentoFechas = 205;
 
         ///ESTADO ENTRADA

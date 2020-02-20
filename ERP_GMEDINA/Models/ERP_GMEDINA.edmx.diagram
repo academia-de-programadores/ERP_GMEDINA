@@ -308,7 +308,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_PagosPorFechas" Width="1.5" PointX="36.75" PointY="37.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_Pedido_EntreFechas" Width="1.5" PointX="38.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_prueba" Width="1.5" PointX="38.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_SolicitudCredito_SolicitudesPorAprobarReporte" Width="1.5" PointX="38.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_SolicituEfectivo_Index" Width="1.5" PointX="38.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_tbSolicituEfectivo_EntreFechas" Width="1.5" PointX="38.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_VentasConsumidorFinal" Width="1.5" PointX="38.75" PointY="21.75" IsExpanded="true" />
@@ -1173,6 +1172,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbPuntoEmision_tbPuntoEmisionDetalle_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbPuntoEmisionDetalle_tbPuntoEmision_pemi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Vent_tbSolicitudEfectivo_tbSolicitudEfectivoDetalle_solef_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.UDV_Vent_SolicitudCredito_SolicitudesPorAprobarReporte" Width="1.5" PointX="39.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

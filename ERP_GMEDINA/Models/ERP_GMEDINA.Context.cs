@@ -321,12 +321,12 @@
         public virtual DbSet<UDV_Vent_PagosPorFechas> UDV_Vent_PagosPorFechas { get; set; }
         public virtual DbSet<UDV_Vent_Pedido_EntreFechas> UDV_Vent_Pedido_EntreFechas { get; set; }
         public virtual DbSet<UDV_Vent_prueba> UDV_Vent_prueba { get; set; }
-        public virtual DbSet<UDV_Vent_SolicitudCredito_SolicitudesPorAprobarReporte> UDV_Vent_SolicitudCredito_SolicitudesPorAprobarReporte { get; set; }
         public virtual DbSet<UDV_Vent_SolicituEfectivo_Index> UDV_Vent_SolicituEfectivo_Index { get; set; }
         public virtual DbSet<UDV_Vent_tbSolicituEfectivo_EntreFechas> UDV_Vent_tbSolicituEfectivo_EntreFechas { get; set; }
         public virtual DbSet<UDV_Vent_VentasConsumidorFinal> UDV_Vent_VentasConsumidorFinal { get; set; }
         public virtual DbSet<UDV_Vent_VentasExoneradas> UDV_Vent_VentasExoneradas { get; set; }
         public virtual DbSet<UDV_Vent_VentasPorCaja_EntreFechas> UDV_Vent_VentasPorCaja_EntreFechas { get; set; }
+        public virtual DbSet<UDV_Vent_SolicitudCredito_SolicitudesPorAprobarReporte> UDV_Vent_SolicitudCredito_SolicitudesPorAprobarReporte { get; set; }
     
         public virtual ObjectResult<SDP_Acce_GetObjetos_Result> SDP_Acce_GetObjetos()
         {
